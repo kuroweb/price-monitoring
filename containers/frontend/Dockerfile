@@ -8,4 +8,4 @@ COPY volumes/frontend/package-lock.json .
 RUN npm i
 
 CMD ["npm", "run", "dev"]
-EXPOSE 3001
+EXPOSE 3000
