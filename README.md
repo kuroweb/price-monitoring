@@ -6,17 +6,17 @@ Web上にある欲しい物の価格監視を行うことができる (予定)
 
 ## 技術スタック (予定)
 
-### フロントエンド
+### Frontend
 
 - Next.js
 - TypeScript
 - TailwindCSS
 
-### バックエンド
+### Backend
 
 - Rails7
 
-### GraphQLサーバ
+### GraphQL Server
 
 - Go
 - gqlgen
@@ -32,20 +32,23 @@ Web上にある欲しい物の価格監視を行うことができる (予定)
 ## アーキテクチャ (予定)
 
 ```mermaid
-flowchart
-subgraph Architecture
-  direction LR
+flowchart LR
+subgraph Kubernetest Node
+  subgraph Frontend
+    direction LR
 
-  subgraph frontend
+    Nginx
     Next.js
+
+    Nginx--proxy-->Next.js
   end
 
-  subgraph backend
+  subgraph Backend
     Rails7
   end
 
-  subgraph graphql
-    direction TB
+  subgraph GraphQL Server
+    direction LR
 
     Go
     GraphQL[(GraphQL)]
@@ -53,8 +56,10 @@ subgraph Architecture
     Go-->GraphQL
   end
 
-  frontend-->backend-->graphql
+  Next.js-->Rails7-->Go
 end
+
+client-->Nginx
 ```
 
 ## 備考

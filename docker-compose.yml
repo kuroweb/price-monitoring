@@ -1,0 +1,93 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: containers/frontend/Dockerfile
+    ports:
+      - 8080:3000
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./volumes/frontend:/app
+      - frontend-node-modules:/app/node_modules
+
+  # TODO: Nginxコンテナを追加する
+  # apache:
+  #   build:
+  #     context: .
+  #     dockerfile: containers/apache/Dockerfile
+  #   ports:
+  #     - 80:80
+  #   stdin_open: true
+  #   tty: true
+  #   volumes:
+  #     - ./volumes/apache/conf:/usr/local/apache2/conf
+
+  # TODO: backendコンテナを追加する
+  # backend:
+  #   build:
+  #     context: .
+  #     dockerfile: containers/backend/Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   environment:
+  #     DB_HOST_NAME: 'db'
+  #     DB_DATABASE_NAME: 'rails'
+  #     DB_USER_NAME: 'root'
+  #     DB_PASSWORD: ''
+  #   stdin_open: true
+  #   tty: true
+  #   volumes:
+  #     - ./volumes/backend:/app
+  #     - backend-node-modules:/app/node_modules
+  #     - backend-bundle:/usr/local/bundle
+
+  # TODO: GraphQLコンテナを追加する
+  # graphql:
+  #   build:
+  #     context: .
+  #     dockerfile: containers/backend/Dockerfile
+  #   ports:
+  #     - 3001:3001
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+
+  # TODO: dbコンテナを追加する
+  # db:
+  #   image: mysql/mysql-server:8.0
+  #   ports:
+  #     - 3306:3306
+  #   healthcheck:
+  #     test: [ "CMD", "mysqladmin", "ping" ]
+  #     interval: 5s
+  #     timeout: 5s
+  #     retries: 5
+  #   environment:
+  #     MYSQL_ROOT_HOST: "%"
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  #   stdin_open: true
+  #   tty: true
+  #   volumes:
+  #     - mysql-data:/var/lib/mysql
+
+volumes:
+  frontend-node-modules:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PWD}/volumes/frontend/node_modules
+      o: bind
+  # backend-bundle:
+  # backend-node-modules:
+  #   driver: local
+  #   driver_opts:
+  #     type: none
+  #     device: ${PWD}/volumes/backend/node_modules
+  #     o: bind
+  # mysql-data:
