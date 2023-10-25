@@ -65,6 +65,7 @@ client-->Nginx
 ## 備考
 
 - プロキシサーバの構成（自分用ならそもそも不要だが、学習用としてNginxを挟むのが良いかも）
+- スクレイピングサーバは別で立てても良いかも (NestJS + Fastify + Puppeteer)
 
 ## TODO
 
