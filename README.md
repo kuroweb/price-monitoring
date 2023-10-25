@@ -44,7 +44,13 @@ subgraph Kubernetest Node
   end
 
   subgraph Backend
-    Rails7
+    Rails
+  end
+
+  subgraph Scraping Server
+    direction LR
+
+    NestJS
   end
 
   subgraph GraphQL Server
@@ -56,7 +62,9 @@ subgraph Kubernetest Node
     Go-->GraphQL
   end
 
-  Next.js-->Rails7-->Go
+  Next.js-->Rails
+  Rails-->NestJS
+  Rails-->Go
 end
 
 client-->Nginx
