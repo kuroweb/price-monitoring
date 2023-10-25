@@ -43,7 +43,7 @@ subgraph Kubernetest Node
     Nginx--proxy-->Next.js
   end
 
-  subgraph Backend
+  subgraph BFF
     Rails
   end
 
@@ -57,9 +57,9 @@ subgraph Kubernetest Node
     direction LR
 
     Go
-    GraphQL[(GraphQL)]
+    MySQL[(MySQL)]
 
-    Go-->GraphQL
+    Go-->MySQL
   end
 
   Next.js-->Rails
