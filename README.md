@@ -65,3 +65,24 @@ client-->Nginx
 ## 備考
 
 - プロキシサーバの構成（自分用ならそもそも不要だが、学習用としてNginxを挟むのが良いかも）
+
+## TODO
+
+- 各コンテナの初期構築
+  - ✅ frontend
+  - ✅ backend
+  - 🏃‍ graphql
+  - ✅ db
+- 各コンテナの疎通
+  - frontend <-> backend
+  - backend <-> db
+  - backend <-> graphql
+  - graphql <-> db
+- 実装
+  - frontend
+    - 管理画面
+  - backend
+    - スクレイピングロジック
+  - graphql
+    - ユーザー情報を保持
+    - スクレイピング結果を保持
