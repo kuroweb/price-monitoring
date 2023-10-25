@@ -25,7 +25,6 @@ services:
   #   volumes:
   #     - ./volumes/apache/conf:/usr/local/apache2/conf
 
-  # TODO: backendコンテナを追加する
   backend:
     build:
       context: .
