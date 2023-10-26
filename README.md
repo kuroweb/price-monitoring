@@ -87,7 +87,7 @@ client-->Nginx
   - ✅ db
 - 各コンテナの疎通
   - frontend <-> backend
-  - backend <-> backend_db
+  - ✅ backend <-> backend_db
   - backend <-> graphql
   - ✅ graphql <-> graphql_db
 - 実装
