@@ -43,14 +43,8 @@ subgraph Kubernetest Node
     Nginx--proxy-->Next.js
   end
 
-  subgraph BFF
+  subgraph Backend & Scraping Service
     Rails
-  end
-
-  subgraph Scraping Server
-    direction LR
-
-    NestJS
   end
 
   subgraph GraphQL Server
@@ -62,9 +56,13 @@ subgraph Kubernetest Node
     Go-->MySQL
   end
 
-  Next.js-->Rails
-  Rails-->NestJS
-  Rails-->Go
+  subgraph "Scraping Service (気が向いたら分離)"
+    NestJS
+  end
+
+  Next.js--->Rails
+  Rails---->NestJS
+  Rails---->Go
 end
 
 client-->Nginx
@@ -80,13 +78,12 @@ client-->Nginx
 - 各コンテナの初期構築
   - ✅ frontend
   - ✅ backend
-  - 🏃‍ graphql
+  - ✅ graphql
   - ✅ db
 - 各コンテナの疎通
   - frontend <-> backend
-  - backend <-> db
   - backend <-> graphql
-  - graphql <-> db
+  - ✅ graphql <-> db
 - 実装
   - frontend
     - 管理画面
