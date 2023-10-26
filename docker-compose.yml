@@ -47,18 +47,20 @@ services:
       # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
       # - backend-node-modules:/app/node_modules
 
-  # TODO: GraphQLコンテナを追加する
-  # graphql:
-  #   build:
-  #     context: .
-  #     dockerfile: containers/backend/Dockerfile
-  #   ports:
-  #     - 3001:3001
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
+  graphql:
+    build:
+      context: .
+      dockerfile: containers/graphql/Dockerfile
+    ports:
+      - 3001:8080
+    depends_on:
+      db:
+        condition: service_healthy
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./volumes/graphql:/app
 
-  # TODO: dbコンテナを追加する
   db:
     image: mysql/mysql-server:8.0
     ports:
