@@ -44,23 +44,28 @@ subgraph Kubernetest Node
   end
 
   subgraph Backend & Scraping Service
+    direction LR
+
     Rails
+    rails_mysql[(MySQL)]
+
+    Rails--GraphQLで十分なら撤去-->rails_mysql
   end
 
   subgraph GraphQL Server
     direction LR
 
     Go
-    MySQL[(MySQL)]
+    go_mysql[(MySQL)]
 
-    Go-->MySQL
+    Go-->go_mysql
   end
 
   subgraph "Scraping Service (気が向いたら分離)"
     NestJS
   end
 
-  Next.js--->Rails
+  Next.js-->Rails
   Rails---->NestJS
   Rails---->Go
 end
