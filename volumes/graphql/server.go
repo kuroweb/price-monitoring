@@ -13,7 +13,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-const dataSource = "root:@tcp(db:3306)/graphql?charset=utf8&parseTime=True&loc=Local"
+const dataSource = "root:@tcp(graphql_db:3306)/graphql?charset=utf8&parseTime=True&loc=Local"
 const defaultPort = "8080"
 
 func main() {

@@ -13,18 +13,6 @@ services:
       - ./volumes/frontend:/app
       - frontend-node-modules:/app/node_modules
 
-  # TODO: Nginxコンテナを追加する
-  # apache:
-  #   build:
-  #     context: .
-  #     dockerfile: containers/apache/Dockerfile
-  #   ports:
-  #     - 80:80
-  #   stdin_open: true
-  #   tty: true
-  #   volumes:
-  #     - ./volumes/apache/conf:/usr/local/apache2/conf
-
   backend:
     build:
       context: .
@@ -32,10 +20,10 @@ services:
     ports:
       - 3000:3000
     depends_on:
-      db:
+      backend_db:
         condition: service_healthy
     environment:
-      DB_HOST_NAME: 'db'
+      DB_HOST_NAME: 'backend_db'
       DB_DATABASE_NAME: 'rails'
       DB_USER_NAME: 'root'
       DB_PASSWORD: ''
@@ -54,17 +42,15 @@ services:
     ports:
       - 3001:8080
     depends_on:
-      db:
+      graphql_db:
         condition: service_healthy
     stdin_open: true
     tty: true
     volumes:
       - ./volumes/graphql:/app
 
-  db:
+  mysql: &mysql
     image: mysql/mysql-server:8.0
-    ports:
-      - 3306:3306
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping" ]
       interval: 5s
@@ -75,8 +61,16 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     stdin_open: true
     tty: true
+
+  backend_db:
+    <<: *mysql
     volumes:
-      - mysql-data:/var/lib/mysql
+      - backend-db:/var/lib/mysql
+
+  graphql_db:
+    <<: *mysql
+    volumes:
+      - graphql-db:/var/lib/mysql
 
 volumes:
   frontend-node-modules:
@@ -93,4 +87,5 @@ volumes:
   #     type: none
   #     device: ${PWD}/volumes/backend/node_modules
   #     o: bind
-  mysql-data:
+  backend-db:
+  graphql-db:
