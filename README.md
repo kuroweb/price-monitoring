@@ -34,7 +34,7 @@ Web上にある欲しい物の価格監視を行うことができる (予定)
 ```mermaid
 flowchart LR
 subgraph Kubernetest Node
-  subgraph Frontend
+  subgraph frontend [Frontend]
     direction LR
 
     Nginx
@@ -43,34 +43,23 @@ subgraph Kubernetest Node
     Nginx--proxy-->Next.js
   end
 
-  subgraph Backend & Scraping Service
+  subgraph bff [BFF]
+    direction LR
+
+    Go
+  end
+
+  subgraph price ["Backend (Price Monitoring Domain)"]
     direction LR
 
     Rails
     rails_mysql[(MySQL)]
 
-    Rails--GraphQLで十分なら撤去-->rails_mysql
+    Rails-->rails_mysql
   end
-
-  subgraph GraphQL Server
-    direction LR
-
-    Go
-    go_mysql[(MySQL)]
-
-    Go-->go_mysql
-  end
-
-  subgraph "Scraping Service (気が向いたら分離)"
-    NestJS
-  end
-
-  Next.js-->Rails
-  Rails---->NestJS
-  Rails---->Go
 end
 
-client-->Nginx
+client-->frontend--GraphQL-->bff--REST API-->price
 ```
 
 ## 備考
@@ -82,21 +71,22 @@ client-->Nginx
 
 - 各コンテナの初期構築
   - ✅ frontend
+  - ✅ bff
   - ✅ backend
-  - ✅ graphql
-  - ✅ db
+  - ✅ backend_db
 - 各コンテナの疎通
-  - frontend <-> backend
+  - frontend <-> bff
+  - bff <-> backend
   - ✅ backend <-> backend_db
-  - backend <-> graphql
-  - ✅ graphql <-> graphql_db
 - 実装
   - frontend
     - 管理画面
+  - bff
+    - GraphQLでfrontendとbackendを繋ぐ
   - backend
-    - スクレイピングロジック
-  - graphql
-    - ユーザー情報を保持
-    - スクレイピング結果を保持
+    - REST APIでのCRUD操作を実装
+    - 価格監視のドメインロジックを実装
+      - ユーザー情報を保持（暫定対応、将来的には切り出すかも）
+      - スクレイピング結果を保持
 - デプロイ
   - 簡単なハッピーパスがクリアできた時点でk8sにデプロイ
