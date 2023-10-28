@@ -52,14 +52,25 @@ subgraph Kubernetest Node
   subgraph price ["Backend (Price Monitoring Domain)"]
     direction LR
 
-    Rails
-    rails_mysql[(MySQL)]
+    price_rails[Rails]
+    price_rails_mysql[(MySQL)]
 
-    Rails-->rails_mysql
+    price_rails-->price_rails_mysql
+  end
+
+  subgraph user ["Backend (User Domain)"]
+    direction LR
+
+    user_rails[Rails]
+    user_rails_mysql[(MySQL)]
+
+    user_rails-->user_rails_mysql
   end
 end
 
-client-->frontend--GraphQL-->bff--REST API-->price
+client-->frontend--GraphQL-->bff
+bff--REST API-->price
+bff--REST API-->user
 ```
 
 ## 備考
