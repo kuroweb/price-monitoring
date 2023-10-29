@@ -46,7 +46,7 @@ subgraph Kubernetest Node
   subgraph bff [BFF]
     direction LR
 
-    Go
+    bff_go[Go]
   end
 
   subgraph price ["Backend (Price Monitoring Domain)"]
@@ -58,19 +58,19 @@ subgraph Kubernetest Node
     price_rails-->price_rails_mysql
   end
 
-  subgraph user ["Backend (User Domain)"]
+  subgraph hoge ["Backend (Hoge Domain)"]
     direction LR
 
-    user_rails[Rails]
-    user_rails_mysql[(MySQL)]
+    hoge_go[Go]
+    hoge_go_mysql[(MySQL)]
 
-    user_rails-->user_rails_mysql
+    hoge_go-->hoge_go_mysql
   end
 end
 
 client-->frontend--GraphQL-->bff
 bff--REST API-->price
-bff--REST API-->user
+bff--gRPC-->hoge
 ```
 
 ## 備考
