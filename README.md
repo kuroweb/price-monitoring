@@ -12,14 +12,14 @@ Web上にある欲しい物の価格監視を行うことができる (予定)
 - TypeScript
 - TailwindCSS
 
-### Backend
-
-- Rails7
-
-### GraphQL Server
+### BFF
 
 - Go
 - gqlgen
+
+### Backend (Price Monitoring Domain)
+
+- Rails
 
 ### 開発インフラ
 
