@@ -8,4 +8,6 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
+RUN go install github.com/99designs/gqlgen@v0.17.40
+
 CMD ["go", "run", "server.go"]
