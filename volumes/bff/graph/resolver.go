@@ -1,6 +1,6 @@
 package graph
 
-import "github.com/kuroweb/price-monitoring/volumes/graphql/graph/model"
+import "github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 
 // This file will not be regenerated automatically.
 //

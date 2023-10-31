@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/kuroweb/price-monitoring/volumes/graphql/graph/model"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
 // CreateTodo is the resolver for the createTodo field.

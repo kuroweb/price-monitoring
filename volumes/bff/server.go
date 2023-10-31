@@ -7,7 +7,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/kuroweb/price-monitoring/volumes/graphql/graph"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph"
 	"github.com/rs/cors"
 )
 

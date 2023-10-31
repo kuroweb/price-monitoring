@@ -11,7 +11,7 @@ services:
     tty: true
     volumes:
       - ./volumes/frontend:/app
-      - ./volumes/graphql/graph/schema.graphqls:/app/graphql/schema.graphql
+      - ./volumes/bff/graph/schema.graphqls:/app/graphql/schema.graphql
       - frontend-node-modules:/app/node_modules
 
   backend:
@@ -36,19 +36,19 @@ services:
       # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
       # - backend-node-modules:/app/node_modules
 
-  graphql:
+  bff:
     build:
       context: .
-      dockerfile: containers/graphql/Dockerfile
+      dockerfile: containers/bff/Dockerfile
     ports:
       - 3001:8080
     depends_on:
-      graphql_db:
+      bff_db:
         condition: service_healthy
     stdin_open: true
     tty: true
     volumes:
-      - ./volumes/graphql:/app
+      - ./volumes/bff:/app
 
   mysql: &mysql
     image: mysql/mysql-server:8.0
@@ -68,11 +68,6 @@ services:
     volumes:
       - backend-db:/var/lib/mysql
 
-  graphql_db:
-    <<: *mysql
-    volumes:
-      - graphql-db:/var/lib/mysql
-
 volumes:
   frontend-node-modules:
     driver: local
@@ -89,4 +84,3 @@ volumes:
   #     device: ${PWD}/volumes/backend/node_modules
   #     o: bind
   backend-db:
-  graphql-db:

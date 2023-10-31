@@ -1,4 +1,4 @@
-module github.com/kuroweb/price-monitoring/volumes/graphql
+module github.com/kuroweb/price-monitoring/volumes/bff
 
 go 1.21.3
 
