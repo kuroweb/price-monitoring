@@ -42,9 +42,6 @@ services:
       dockerfile: containers/bff/Dockerfile
     ports:
       - 3001:8080
-    depends_on:
-      bff_db:
-        condition: service_healthy
     stdin_open: true
     tty: true
     volumes:
