@@ -33,3 +33,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# graphql-codegen
+/graphql/schema.graphql
+/graphql/dist/*
+!/graphql/dist/client.ts
