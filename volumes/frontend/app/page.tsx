@@ -2,19 +2,20 @@
 
 import Layout from '@/components/layouts/Layout'
 
-import { useSuspenseQuery } from "@apollo/experimental-nextjs-app-support/ssr";
+import { useQuery } from "@apollo/client";
 import { GetTodoDocument } from '@/graphql/dist/client'
-import { GetTodoQuery } from "../graphql/dist/client";
+import { GetTodoQuery } from "../graphql/dist/client"
 
 const Page = () => {
-  const { error, data } = useSuspenseQuery<GetTodoQuery>(GetTodoDocument)
+  const { data, loading, error } = useQuery<GetTodoQuery>(GetTodoDocument)
 
-  if (error) return <p>{error.message}</p>;
+  if (loading) return <div>LOADING...</div>;
+  if (error) return <div>{error.message}</div>;
 
   return (
     <Layout>
       <p>Dashboard</p>
-      {data.todos.map(todo => (
+      {data?.todos.map(todo => (
         <p key={todo.id}>{todo.id}: {todo.text}</p>
       ))}
     </Layout>
