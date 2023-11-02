@@ -98,7 +98,7 @@ erDiagram
   price_versions {
     bigint id PK
     bigint product_id FK "UNIQUE"
-    bigint crawl_result_id FK "UNIQUE"
+    bigint crawl_history_id FK "UNIQUE"
     int price "default: 0, NOT_NULL"
   }
   crawl_histories {
