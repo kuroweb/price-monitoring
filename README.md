@@ -113,3 +113,9 @@ erDiagram
   products ||--o{ crawl_histories : "1:N"
   price_versions ||--|| crawl_histories : "1:1"
 ```
+
+## TODO
+
+- 🏃‍usersのCRUDを暫定実装
+- productsのCRUDを実装
+- products画面を実装
