@@ -21,10 +21,10 @@ logs:
 	docker compose logs -f
 
 attach-frontend:
-  docker attach $(docker compose ps -q frontend)
+	docker attach $(docker compose ps -q frontend)
 
 attach-bff:
-  docker attach $(docker compose ps -q bff)
+	docker attach $(docker compose ps -q bff)
 
 attach-backend:
-  docker attach $(docker compose ps -q backend)
+	docker attach $(docker compose ps -q backend)
