@@ -35,6 +35,10 @@ RUN bundle install
 # RUN chmod 755 /entrypoint.sh
 # CMD ["/entrypoint.sh"]
 
-CMD ["rails", "s", "-p", "3000", "-b", "0.0.0.0"]
+# entrypoint
+COPY containers/backend/scripts/entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
+
+CMD ["/entrypoint.sh"]
 
 EXPOSE 3000
