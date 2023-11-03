@@ -114,8 +114,18 @@ erDiagram
   price_versions ||--|| crawl_histories : "1:1"
 ```
 
-## TODO
+## Docs
 
-- 🏃‍usersのCRUDを暫定実装
-- productsのCRUDを実装
-- products画面を実装
+### seedファイル
+
+すべてのSeedを投入する
+
+```bash
+rails db:seed -e {environment}
+```
+
+特定のSeedを投入する([rakeタスク拡張](/volumes/backend/lib/tasks/seed.rake))
+
+```bash
+rails db:seed:{seed_name} -e {environment}
+```
