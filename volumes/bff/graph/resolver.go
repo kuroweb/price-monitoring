@@ -8,4 +8,5 @@ import "github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 
 type Resolver struct {
 	todos []*model.Todo
+	users []*model.User
 }
