@@ -15,6 +15,9 @@ gem "turbo-rails"
 gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-rails"
   gem "debug", platforms: %i[mri windows]
   gem "rspec"
   gem "rspec-queue"
