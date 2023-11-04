@@ -7,8 +7,13 @@ package graph
 import (
 	"context"
 	"crypto/rand"
+	"encoding/json"
 	"fmt"
+	"io"
 	"math/big"
+	"net/http"
+	"strconv"
+	"strings"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
@@ -27,13 +32,58 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	return todo, nil
 }
 
+// Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.todos, nil
 }
 
 // Users is the resolver for the users field.
-func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	return r.users, nil
+func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*model.User, error) {
+	params := []string{}
+
+	if id != nil {
+		params = append(params, fmt.Sprintf("user[id]=%d", *id))
+	}
+
+	if name != nil {
+		params = append(params, fmt.Sprintf("user[name]=%s", *name))
+	}
+
+	paramsStr := strings.Join(params, "&")
+
+	url := "http://backend:3000/api/v1/users?" + paramsStr
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var response struct {
+		Users []struct {
+			ID   int    `json:"id"`
+			Name string `json:"name"`
+		} `json:"users"`
+	}
+
+	if err := json.Unmarshal(body, &response); err != nil {
+		return nil, err
+	}
+
+	var users []*model.User
+	for _, user := range response.Users {
+		users = append(users, &model.User{
+			ID:   strconv.Itoa(user.ID),
+			Name: user.Name,
+		})
+	}
+
+	return users, nil
 }
 
 // Mutation returns MutationResolver implementation.
