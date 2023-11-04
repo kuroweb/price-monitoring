@@ -2,7 +2,8 @@ module Api
   module V1
     class UsersController < ApplicationController
       def index
-        render json: { status: 200 }, status: 200
+        users = UserFinder.new(params: user_params).execute
+        render json: { users: users.as_json }, status: 200
       end
 
       def create; end
@@ -10,6 +11,16 @@ module Api
       def update; end
 
       def destroy; end
+
+      private
+
+      def user_params_attributes
+        %i[id name]
+      end
+
+      def user_params
+        @user_params ||= params.require(:user).permit(user_params_attributes)
+      end
     end
   end
 end
