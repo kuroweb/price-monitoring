@@ -86,6 +86,68 @@ func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*mo
 	return users, nil
 }
 
+// Products is the resolver for the products field.
+func (r *queryResolver) Products(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error) {
+	params := []string{}
+
+	if id != nil {
+		params = append(params, fmt.Sprintf("product[id]=%d", *id))
+	}
+
+	if userID != nil {
+		params = append(params, fmt.Sprintf("product[user_id]=%d", *userID))
+	}
+
+	if name != nil {
+		params = append(params, fmt.Sprintf("product[name]=%s", *name))
+	}
+
+	if price != nil {
+		params = append(params, fmt.Sprintf("product[price]=%d", *price))
+	}
+
+	paramsStr := strings.Join(params, "&")
+
+	url := "http://backend:3000/api/v1/products?" + paramsStr
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var response struct {
+		Products []struct {
+			ID     int    `json:"id"`
+			UserID int    `json:"user_id"`
+			Name   string `json:"name"`
+			Price  int    `json:"price"`
+		} `json:"products"`
+	}
+
+	if err := json.Unmarshal(body, &response); err != nil {
+		return nil, err
+	}
+
+	var products []*model.Product
+
+	for _, product := range response.Products {
+		products = append(products, &model.Product{
+			ID:     strconv.Itoa(product.ID),
+			UserID: strconv.Itoa(product.UserID),
+			Name:   product.Name,
+			Price:  product.Price,
+		})
+	}
+
+	return products, nil
+}
+
 // Mutation returns MutationResolver implementation.
 func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
 

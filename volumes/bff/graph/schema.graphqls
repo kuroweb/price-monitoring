@@ -14,9 +14,17 @@ type User {
   name: String!
 }
 
+type Product {
+  id: ID!
+  user_id: ID!
+  name: String!
+  price: Int!
+}
+
 type Query {
   todos: [Todo!]!
   users(id: Int, name: String): [User!]!
+  products(id: Int, user_id: Int, name: String, price: Int): [Product!]!
 }
 
 input NewTodo {
