@@ -6,12 +6,10 @@ package graph
 
 import (
 	"context"
-	"crypto/rand"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
-	"math/big"
 	"net/http"
 	"net/url"
 	"strconv"
@@ -19,25 +17,6 @@ import (
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
-
-// CreateTodo is the resolver for the createTodo field.
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	//ランダムな数字の生成
-	rand, _ := rand.Int(rand.Reader, big.NewInt(100))
-	todo := &model.Todo{
-		Text: input.Text,
-		ID:   fmt.Sprintf("T%d", rand),
-		User: &model.User{ID: input.UserID, Name: "user " + input.UserID},
-	}
-	//ここでのrはresolver.goで宣言したResolver型を示しているそのため、t.todosはresolver.goで先ほど記述したもの
-	r.todos = append(r.todos, todo)
-	return todo, nil
-}
-
-// Todos is the resolver for the todos field.
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	return r.todos, nil
-}
 
 // Users is the resolver for the users field.
 func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*model.User, error) {
@@ -183,11 +162,7 @@ func (r *queryResolver) GetProducts(ctx context.Context, id *int, userID *int, n
 	return products, nil
 }
 
-// Mutation returns MutationResolver implementation.
-func (r *Resolver) Mutation() MutationResolver { return &mutationResolver{r} }
-
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
-type mutationResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
