@@ -6,6 +6,11 @@ module Api
         render json: { products: products.as_json }, status: 200
       end
 
+      def show
+        products = ProductFinder.new(params: { id: params[:id] }).execute
+        render json: products.first.as_json, status: 200
+      end
+
       def create; end
 
       def update; end

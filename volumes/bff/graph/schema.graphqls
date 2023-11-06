@@ -24,6 +24,7 @@ type Product {
 type Query {
   todos: [Todo!]!
   users(id: Int, name: String): [User!]!
+  getProduct(id: Int!): Product!
   products(id: Int, user_id: Int, name: String, price: Int): [Product!]!
 }
 

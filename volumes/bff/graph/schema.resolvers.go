@@ -83,6 +83,42 @@ func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*mo
 	return users, nil
 }
 
+// GetProduct is the resolver for the getProduct field.
+func (r *queryResolver) GetProduct(ctx context.Context, id int) (*model.Product, error) {
+	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch product data")
+	}
+
+	var response struct {
+		ID     int    `json:"id"`
+		UserID int    `json:"user_id"`
+		Name   string `json:"name"`
+		Price  int    `json:"price"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	product := &model.Product{
+		ID:     strconv.Itoa(response.ID),
+		UserID: strconv.Itoa(response.UserID),
+		Name:   response.Name,
+		Price:  response.Price,
+	}
+
+	return product, nil
+}
+
 // Products is the resolver for the products field.
 func (r *queryResolver) Products(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error) {
 	params := []string{}
