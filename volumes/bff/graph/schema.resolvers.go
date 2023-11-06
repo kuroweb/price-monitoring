@@ -18,7 +18,6 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-// CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	//ランダムな数字の生成
 	rand, _ := rand.Int(rand.Reader, big.NewInt(100))
@@ -32,12 +31,10 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	return todo, nil
 }
 
-// Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.todos, nil
 }
 
-// Users is the resolver for the users field.
 func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*model.User, error) {
 	params := []string{}
 
