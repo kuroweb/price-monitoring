@@ -59,10 +59,10 @@ type ComplexityRoot struct {
 	}
 
 	Query struct {
-		GetProduct func(childComplexity int, id int) int
-		Products   func(childComplexity int, id *int, userID *int, name *string, price *int) int
-		Todos      func(childComplexity int) int
-		Users      func(childComplexity int, id *int, name *string) int
+		GetProduct  func(childComplexity int, id int) int
+		GetProducts func(childComplexity int, id *int, userID *int, name *string, price *int) int
+		Todos       func(childComplexity int) int
+		Users       func(childComplexity int, id *int, name *string) int
 	}
 
 	Todo struct {
@@ -85,7 +85,7 @@ type QueryResolver interface {
 	Todos(ctx context.Context) ([]*model.Todo, error)
 	Users(ctx context.Context, id *int, name *string) ([]*model.User, error)
 	GetProduct(ctx context.Context, id int) (*model.Product, error)
-	Products(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error)
+	GetProducts(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error)
 }
 
 type executableSchema struct {
@@ -159,17 +159,17 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Query.GetProduct(childComplexity, args["id"].(int)), true
 
-	case "Query.products":
-		if e.complexity.Query.Products == nil {
+	case "Query.getProducts":
+		if e.complexity.Query.GetProducts == nil {
 			break
 		}
 
-		args, err := ec.field_Query_products_args(context.TODO(), rawArgs)
+		args, err := ec.field_Query_getProducts_args(context.TODO(), rawArgs)
 		if err != nil {
 			return 0, false
 		}
 
-		return e.complexity.Query.Products(childComplexity, args["id"].(*int), args["user_id"].(*int), args["name"].(*string), args["price"].(*int)), true
+		return e.complexity.Query.GetProducts(childComplexity, args["id"].(*int), args["user_id"].(*int), args["name"].(*string), args["price"].(*int)), true
 
 	case "Query.todos":
 		if e.complexity.Query.Todos == nil {
@@ -402,7 +402,7 @@ func (ec *executionContext) field_Query_getProduct_args(ctx context.Context, raw
 	return args, nil
 }
 
-func (ec *executionContext) field_Query_products_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+func (ec *executionContext) field_Query_getProducts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 *int
@@ -927,8 +927,8 @@ func (ec *executionContext) fieldContext_Query_getProduct(ctx context.Context, f
 	return fc, nil
 }
 
-func (ec *executionContext) _Query_products(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Query_products(ctx, field)
+func (ec *executionContext) _Query_getProducts(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Query_getProducts(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -941,7 +941,7 @@ func (ec *executionContext) _Query_products(ctx context.Context, field graphql.C
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Products(rctx, fc.Args["id"].(*int), fc.Args["user_id"].(*int), fc.Args["name"].(*string), fc.Args["price"].(*int))
+		return ec.resolvers.Query().GetProducts(rctx, fc.Args["id"].(*int), fc.Args["user_id"].(*int), fc.Args["name"].(*string), fc.Args["price"].(*int))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -958,7 +958,7 @@ func (ec *executionContext) _Query_products(ctx context.Context, field graphql.C
 	return ec.marshalNProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐProductᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Query_products(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Query_getProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Query",
 		Field:      field,
@@ -985,7 +985,7 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 		}
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
-	if fc.Args, err = ec.field_Query_products_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+	if fc.Args, err = ec.field_Query_getProducts_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return fc, err
 	}
@@ -3398,7 +3398,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return rrm(innerCtx) })
-		case "products":
+		case "getProducts":
 			field := field
 
 			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
@@ -3407,7 +3407,7 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Query_products(ctx, field)
+				res = ec._Query_getProducts(ctx, field)
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}

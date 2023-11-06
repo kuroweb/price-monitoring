@@ -8,16 +8,19 @@ import (
 	"context"
 	"crypto/rand"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"math/big"
 	"net/http"
+	"net/url"
 	"strconv"
 	"strings"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
+// CreateTodo is the resolver for the createTodo field.
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
 	//ランダムな数字の生成
 	rand, _ := rand.Int(rand.Reader, big.NewInt(100))
@@ -31,10 +34,12 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	return todo, nil
 }
 
+// Todos is the resolver for the todos field.
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	return r.todos, nil
 }
 
+// Users is the resolver for the users field.
 func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*model.User, error) {
 	params := []string{}
 
@@ -119,29 +124,27 @@ func (r *queryResolver) GetProduct(ctx context.Context, id int) (*model.Product,
 	return product, nil
 }
 
-// Products is the resolver for the products field.
-func (r *queryResolver) Products(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error) {
-	params := []string{}
+// GetProducts is the resolver for the getProducts field.
+func (r *queryResolver) GetProducts(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error) {
+	params := make(url.Values)
 
 	if id != nil {
-		params = append(params, fmt.Sprintf("product[id]=%d", *id))
+		params.Set("product[id]", strconv.Itoa(*id))
 	}
 
 	if userID != nil {
-		params = append(params, fmt.Sprintf("product[user_id]=%d", *userID))
+		params.Set("product[user_id]", strconv.Itoa(*userID))
 	}
 
 	if name != nil {
-		params = append(params, fmt.Sprintf("product[name]=%s", *name))
+		params.Set("product[name]", *name)
 	}
 
 	if price != nil {
-		params = append(params, fmt.Sprintf("product[price]=%d", *price))
+		params.Set("product[price]", strconv.Itoa(*price))
 	}
 
-	paramsStr := strings.Join(params, "&")
-
-	url := "http://backend:3000/api/v1/products?" + paramsStr
+	url := "http://backend:3000/api/v1/products?" + params.Encode()
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -149,9 +152,8 @@ func (r *queryResolver) Products(ctx context.Context, id *int, userID *int, name
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch product data")
 	}
 
 	var response struct {
@@ -163,19 +165,19 @@ func (r *queryResolver) Products(ctx context.Context, id *int, userID *int, name
 		} `json:"products"`
 	}
 
-	if err := json.Unmarshal(body, &response); err != nil {
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
 		return nil, err
 	}
 
-	var products []*model.Product
-
-	for _, product := range response.Products {
-		products = append(products, &model.Product{
+	products := make([]*model.Product, len(response.Products))
+	for i, product := range response.Products {
+		products[i] = &model.Product{
 			ID:     strconv.Itoa(product.ID),
 			UserID: strconv.Itoa(product.UserID),
 			Name:   product.Name,
 			Price:  product.Price,
-		})
+		}
 	}
 
 	return products, nil
