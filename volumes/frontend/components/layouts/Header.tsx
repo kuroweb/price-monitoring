@@ -11,7 +11,7 @@ const Header = () => {
             {/* Header: Left side */}
             <div className='flex'>
               <Link href={'/'}>
-                <p className=''>Header</p>
+                <p className=''>Price Monitoring</p>
               </Link>
             </div>
           </div>
