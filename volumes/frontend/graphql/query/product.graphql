@@ -1,5 +1,5 @@
-query getProducts($id: Int!) {
-  products(id: $id) {
+query getProducts($id: Int, $user_id: Int, $name: String, $price: Int) {
+  getProducts(id: $id, user_id: $user_id, name: $name, price: $price) {
     id
     user_id
     name

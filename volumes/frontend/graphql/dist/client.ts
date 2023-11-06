@@ -17,21 +17,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Mutation = {
-  __typename?: 'Mutation';
-  createTodo: Todo;
-};
-
-
-export type MutationCreateTodoArgs = {
-  input: NewTodo;
-};
-
-export type NewTodo = {
-  text: Scalars['String']['input'];
-  userId: Scalars['String']['input'];
-};
-
 export type Product = {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
@@ -42,13 +27,18 @@ export type Product = {
 
 export type Query = {
   __typename?: 'Query';
-  products: Array<Product>;
-  todos: Array<Todo>;
+  getProduct: Product;
+  getProducts: Array<Product>;
   users: Array<User>;
 };
 
 
-export type QueryProductsArgs = {
+export type QueryGetProductArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryGetProductsArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
   price?: InputMaybe<Scalars['Int']['input']>;
@@ -61,14 +51,6 @@ export type QueryUsersArgs = {
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Todo = {
-  __typename?: 'Todo';
-  done: Scalars['Boolean']['output'];
-  id: Scalars['ID']['output'];
-  text: Scalars['String']['output'];
-  user: User;
-};
-
 export type User = {
   __typename?: 'User';
   id: Scalars['ID']['output'];
@@ -76,49 +58,23 @@ export type User = {
 };
 
 export type GetProductsQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
+  id?: InputMaybe<Scalars['Int']['input']>;
+  user_id?: InputMaybe<Scalars['Int']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, user_id: string, name: string, price: number }> };
-
-export type GetTodoQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetTodoQuery = { __typename?: 'Query', todos: Array<{ __typename?: 'Todo', id: string, text: string }> };
-
-export type CreateTodoMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CreateTodoMutation = { __typename?: 'Mutation', createTodo: { __typename?: 'Todo', text: string, done: boolean, user: { __typename?: 'User', id: string } } };
+export type GetProductsQuery = { __typename?: 'Query', getProducts: Array<{ __typename?: 'Product', id: string, user_id: string, name: string, price: number }> };
 
 
 export const GetProductsDocument = gql`
-    query getProducts($id: Int!) {
-  products(id: $id) {
+    query getProducts($id: Int, $user_id: Int, $name: String, $price: Int) {
+  getProducts(id: $id, user_id: $user_id, name: $name, price: $price) {
     id
     user_id
     name
     price
-  }
-}
-    `;
-export const GetTodoDocument = gql`
-    query getTodo {
-  todos {
-    id
-    text
-  }
-}
-    `;
-export const CreateTodoDocument = gql`
-    mutation createTodo {
-  createTodo(input: {text: "todo", userId: "1"}) {
-    user {
-      id
-    }
-    text
-    done
   }
 }
     `;
@@ -130,14 +86,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getProducts(variables: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
+    getProducts(variables?: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProducts', 'query');
-    },
-    getTodo(variables?: GetTodoQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetTodoQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetTodoQuery>(GetTodoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTodo', 'query');
-    },
-    createTodo(variables?: CreateTodoMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateTodoMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateTodoMutation>(CreateTodoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createTodo', 'mutation');
     }
   };
 }
