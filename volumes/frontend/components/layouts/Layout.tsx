@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
     <>
       <div className='flex flex-col h-screen'>
         <Header />
-        <main className='container h-full bg-gray-200'>
+        <main className='h-full bg-gray-200'>
           <div className='grid grid-cols-12'>
             <div className='col-span-3'>
               <Sidebar />
