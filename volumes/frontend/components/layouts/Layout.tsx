@@ -15,11 +15,11 @@ const Layout = ({ children }: Props) => {
       <div className='flex flex-col h-screen'>
         <Header />
         <main className='h-full bg-gray-200'>
-          <div className='grid grid-cols-12'>
-            <div className='col-span-3'>
+          <div className='h-full grid grid-cols-12'>
+            <div className='h-full col-span-3'>
               <Sidebar />
             </div>
-            <div className='col-span-9'>{children}</div>
+            <div className='h-full col-span-9'>{children}</div>
           </div>
         </main>
       </div>
