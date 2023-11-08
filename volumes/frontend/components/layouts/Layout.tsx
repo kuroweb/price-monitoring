@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 // components
 import Header from './Header'
 import Sidebar from './Sidebar'
+import Footer from './Footer'
 
 type Props = {
   children?: ReactNode
@@ -14,14 +15,13 @@ const Layout = ({ children }: Props) => {
     <>
       <div className='flex flex-col h-screen'>
         <Header />
-        <main className='h-full bg-gray-200'>
-          <div className='h-full grid grid-cols-12'>
-            <div className='h-full col-span-3'>
-              <Sidebar />
-            </div>
-            <div className='h-full col-span-9'>{children}</div>
-          </div>
-        </main>
+        <div className='flex flex-1 overflow-hidden'>
+          <Sidebar />
+          <main className='flex flex-1 bg-blue-300 overflow-y-auto px-4'>
+            <div className='container'>{children}</div>
+          </main>
+        </div>
+        <Footer />
       </div>
     </>
   )
