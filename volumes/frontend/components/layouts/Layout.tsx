@@ -17,9 +17,7 @@ const Layout = ({ children }: Props) => {
         <Header />
         <div className='flex flex-1 overflow-hidden'>
           <Sidebar />
-          <main className='flex flex-1 bg-gray-200 overflow-y-auto px-4'>
-            <div className='w-full'>{children}</div>
-          </main>
+          <main className='w-full p-4 overflow-scroll bg-gray-200'>{children}</main>
         </div>
         <Footer />
       </div>
