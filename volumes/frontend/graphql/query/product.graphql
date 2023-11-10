@@ -6,3 +6,12 @@ query getProducts($id: Int, $user_id: Int, $name: String, $price: Int) {
     price
   }
 }
+
+query getProduct($id: Int!) {
+  getProduct(id: $id) {
+    id
+    user_id
+    name
+    price
+  }
+}
