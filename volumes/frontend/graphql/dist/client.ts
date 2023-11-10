@@ -67,10 +67,27 @@ export type GetProductsQueryVariables = Exact<{
 
 export type GetProductsQuery = { __typename?: 'Query', getProducts: Array<{ __typename?: 'Product', id: string, user_id: string, name: string, price: number }> };
 
+export type GetProductQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetProductQuery = { __typename?: 'Query', getProduct: { __typename?: 'Product', id: string, user_id: string, name: string, price: number } };
+
 
 export const GetProductsDocument = gql`
     query getProducts($id: Int, $user_id: Int, $name: String, $price: Int) {
   getProducts(id: $id, user_id: $user_id, name: $name, price: $price) {
+    id
+    user_id
+    name
+    price
+  }
+}
+    `;
+export const GetProductDocument = gql`
+    query getProduct($id: Int!) {
+  getProduct(id: $id) {
     id
     user_id
     name
@@ -88,6 +105,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     getProducts(variables?: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProducts', 'query');
+    },
+    getProduct(variables: GetProductQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductQuery>(GetProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProduct', 'query');
     }
   };
 }
