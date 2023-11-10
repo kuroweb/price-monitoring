@@ -9,7 +9,7 @@ ApplicationRecord.transaction do
     100.times.map do |i|
       {
         user_id: user.id,
-        name: "test_product_#{i}",
+        name: "test_product_#{i + 1}",
         price: 1000
       }
     end
