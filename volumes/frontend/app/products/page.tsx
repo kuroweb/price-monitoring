@@ -1,11 +1,16 @@
 'use client'
 
-import { useQuery } from '@apollo/client'
-import Layout from '@/components/layouts/Layout'
+// common
+import { useRouter } from 'next/navigation'
 
+// package
+import { useQuery } from '@apollo/client'
+
+// graphql
 import { GetProductsDocument, GetProductsQuery } from '@/graphql/dist/client'
 
-import { useRouter } from 'next/navigation'
+// component
+import Layout from '@/components/layouts/Layout'
 
 const Page = () => {
   const router = useRouter()
