@@ -5,10 +5,19 @@ import Layout from '@/components/layouts/Layout'
 
 import { GetProductsDocument, GetProductsQuery } from '@/graphql/dist/client'
 
+import { useRouter } from 'next/navigation'
+
 const Page = () => {
+  const router = useRouter()
+
   const { data, loading, error } = useQuery<GetProductsQuery>(GetProductsDocument, {
     variables: { user_id: 1 },
   })
+
+  const handleRowClick = (productId: String) => {
+    // router.push(`/products/${productId}`)
+    router.push(`/products`)
+  }
 
   return (
     <Layout>
@@ -67,7 +76,11 @@ const Page = () => {
             </thead>
             <tbody>
               {data.getProducts.map((product) => (
-                <tr className='bg-white border-b' key={product.id}>
+                <tr
+                  onClick={() => handleRowClick(product.id)}
+                  className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
+                  key={product.id}
+                >
                   <td className='px-6 py-4'>{product.id}</td>
                   <td className='px-6 py-4'>{product.user_id}</td>
                   <td className='px-6 py-4'>{product.name}</td>

@@ -6,7 +6,7 @@ ApplicationRecord.transaction do
   users = User.all
 
   product_params = users.map do |user|
-    10.times.map do |i|
+    100.times.map do |i|
       {
         user_id: user.id,
         name: "test_product_#{i}",
