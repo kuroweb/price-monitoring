@@ -15,8 +15,7 @@ const Page = () => {
   })
 
   const handleRowClick = (productId: String) => {
-    // router.push(`/products/${productId}`)
-    router.push(`/products`)
+    router.push(`/products/${productId}`)
   }
 
   return (
