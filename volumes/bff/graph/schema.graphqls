@@ -15,7 +15,8 @@ type Product {
 }
 
 type Query {
-  users(id: Int, name: String): [User!]!
+  getUser(id: Int!): User!
+  getUsers(id: Int, name: String): [User!]!
   getProduct(id: Int!): Product!
   getProducts(id: Int, user_id: Int, name: String, price: Int): [Product!]!
 }

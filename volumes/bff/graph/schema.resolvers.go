@@ -13,26 +13,55 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
-	"strings"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-// Users is the resolver for the users field.
-func (r *queryResolver) Users(ctx context.Context, id *int, name *string) ([]*model.User, error) {
-	params := []string{}
+// GetUser is the resolver for the getUser field.
+func (r *queryResolver) GetUser(ctx context.Context, id int) (*model.User, error) {
+	url := fmt.Sprintf("http://backend:3000/api/v1/users/%d", id)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch product data")
+	}
+
+	var response struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	user := &model.User{
+		ID:   strconv.Itoa(response.ID),
+		Name: response.Name,
+	}
+
+	return user, nil
+}
+
+// GetUsers is the resolver for the getUsers field.
+func (r *queryResolver) GetUsers(ctx context.Context, id *int, name *string) ([]*model.User, error) {
+	params := make(url.Values)
 
 	if id != nil {
-		params = append(params, fmt.Sprintf("user[id]=%d", *id))
+		params.Set("user[id]", strconv.Itoa(*id))
 	}
 
 	if name != nil {
-		params = append(params, fmt.Sprintf("user[name]=%s", *name))
+		params.Set("user[name]", *name)
 	}
 
-	paramsStr := strings.Join(params, "&")
-
-	url := "http://backend:3000/api/v1/users?" + paramsStr
+	url := "http://backend:3000/api/v1/users?" + params.Encode()
 
 	resp, err := http.Get(url)
 	if err != nil {

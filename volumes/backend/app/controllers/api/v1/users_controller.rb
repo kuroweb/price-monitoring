@@ -6,6 +6,11 @@ module Api
         render json: { users: users.as_json }, status: 200
       end
 
+      def show
+        users = UserFinder.new(params: { id: params[:id] }).execute
+        render json: users.first.as_json, status: 200
+      end
+
       def create; end
 
       def update; end
