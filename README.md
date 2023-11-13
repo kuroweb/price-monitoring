@@ -104,7 +104,7 @@ erDiagram
   crawl_histories {
     bigint id PK
     bigint product_id FK
-    jsonb json
+    text html
   }
 
   users ||--o{ products : "1:N"
