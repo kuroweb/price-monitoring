@@ -29,12 +29,6 @@ RUN bundle install
 # COPY volumes/backend/package-lock.json .
 # RUN npm i
 
-# TODO: 起動方法をentrypoint.shにまとめるタイミングで有効化
-# entrypoint
-# COPY containers/backend/scripts/entrypoint.sh /entrypoint.sh
-# RUN chmod 755 /entrypoint.sh
-# CMD ["/entrypoint.sh"]
-
 # entrypoint
 COPY containers/backend/scripts/entrypoint.sh /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
