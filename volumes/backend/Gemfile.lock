@@ -137,6 +137,9 @@ GEM
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
+    mime-types (3.5.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2023.1003)
     mini_mime (1.1.5)
     minitest (5.20.0)
     msgpack (1.7.2)
@@ -160,6 +163,9 @@ GEM
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
+    playwright-ruby-client (1.39.1)
+      concurrent-ruby (>= 1.1.6)
+      mime-types (>= 3.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -328,6 +334,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   mysql2 (~> 0.5)
+  playwright-ruby-client
   pry-byebug
   pry-doc
   pry-rails

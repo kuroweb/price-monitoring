@@ -65,6 +65,13 @@ services:
     volumes:
       - backend-db:/var/lib/mysql
 
+  playwright:
+    build:
+      context: .
+      dockerfile: containers/playwright/Dockerfile
+    ports:
+      - 8888:8888
+
 volumes:
   frontend-node-modules:
     driver: local
