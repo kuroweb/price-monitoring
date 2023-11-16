@@ -15,6 +15,7 @@ class CrawlService
         page = browser.new_page
         page.goto("https://github.com/microsoft/playwright")
         page.screenshot(path: "github-microsoft-playwright.png")
+        page.eval_on_selector("link[rel=dns-prefetch]", "el => el.href")
       end
     end
   end
