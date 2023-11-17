@@ -83,7 +83,7 @@ erDiagram
     bigint id PK
     text name
   }
-  products　{
+  products {
     bigint id PK
     bigint user_id FK
     string name
@@ -92,7 +92,10 @@ erDiagram
   crawl_settings {
     bigint id PK
     bigint product_id FK
-    int interval "NOT_NULL"
+  }
+  yahoo_auction_crawl_settings {
+    bigint id PK
+    bigint crawl_setting_id FK
     boolean enabled "default: false, NOT_NULL"
   }
   price_versions {
@@ -109,6 +112,7 @@ erDiagram
 
   users ||--o{ products : "1:N"
   products ||--|| crawl_settings : "1:1"
+  crawl_settings ||--|| yahoo_auction_crawl_settings : "1:1"
   products ||--o{ price_versions : "1:N"
   products ||--o{ crawl_histories : "1:N"
   price_versions ||--|| crawl_histories : "1:1"
