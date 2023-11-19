@@ -6,3 +6,5 @@ Style/StringLiterals:
   EnforcedStyle: double_quotes
 Style/FrozenStringLiteralComment:
   Enabled: false
+Style/RedundantAssignment:
+  Enabled: false
