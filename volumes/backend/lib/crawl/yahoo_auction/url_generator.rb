@@ -14,12 +14,13 @@ module Crawl
       POSTAGE_MODE = "is_postage_mode=0".freeze
       DESTINATION_CODE = "dest_pref_code=0".freeze
       DISPLAY_MODE = "mode=2".freeze
-      DISPLAY_START = "b=1".freeze
+      DISPLAY_START = "b=".freeze
       DISPLAY_RANGE = "n=100".freeze
       DISPLAY_ORDER = "s1=new&o1=d".freeze
 
-      def initialize(product:)
+      def initialize(product:, start: 1)
         @product = product
+        @start = start
       end
 
       def generate # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
@@ -42,7 +43,7 @@ module Crawl
 
       private
 
-      attr_reader :product
+      attr_reader :product, :start
 
       def crawl_setting
         @crawl_setting ||= product.yahoo_auction_crawl_setting
@@ -89,7 +90,7 @@ module Crawl
       end
 
       def display_start(str)
-        "#{str}#{DISPLAY_START}&"
+        "#{str}#{DISPLAY_START}#{start}&"
       end
 
       def display_range(str)

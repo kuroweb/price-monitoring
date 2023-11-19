@@ -10,19 +10,22 @@ module Crawl
       end
 
       def call
-        return if crawl_setting.disabled?
+        return unless crawl_setting.enabled?
 
-        Crawl::Client.execute do |browser|
-          page = browser.new_page
-          page.goto("https://auctions.yahoo.co.jp/search/search?auccat=&tab_ex=commerce&ei=utf-8&aq=-1&oq=&sc_i=&fr=auc_top&p=m2+macbook+air&x=0&y=0")
-          page.eval_on_selector("a[data-auction-id=m1112815697]", "el => el.href")
-        end
+        results = Crawl::YahooAuction::Crawler.new(product:).execute
+        save(results)
       end
 
-      private :product
+      private
+
+      attr_reader :product
 
       def crawl_setting
-        @crawl_setting ||= product.crawl_setting.yahoo_auction_crawl_setting
+        @crawl_setting ||= product.yahoo_auction_crawl_setting
+      end
+
+      def save(results)
+        # TODO: 結果をDBに格納する
       end
     end
   end
