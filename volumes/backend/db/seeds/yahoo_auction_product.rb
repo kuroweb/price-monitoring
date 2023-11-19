@@ -7,6 +7,7 @@ ApplicationRecord.transaction do
 
   YahooAuctionCrawlSetting.create!(
     product_id: product.id,
+    category_id: 2_084_286_828,
     enabled: true
   )
 end
