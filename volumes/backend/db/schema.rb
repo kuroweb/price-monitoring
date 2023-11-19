@@ -25,6 +25,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_19_073916) do
 
   create_table "yahoo_auction_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
+    t.integer "category_id", default: 0
+    t.integer "min_price", default: 0, null: false
+    t.integer "max_price", default: 0, null: false
     t.boolean "enabled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
