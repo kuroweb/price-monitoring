@@ -85,37 +85,43 @@ erDiagram
   }
   products {
     bigint id PK
-    bigint user_id FK
+    bigint product_cateogory_id FK
     string name
-    int price
   }
-  crawl_settings {
+  product_categories {
     bigint id PK
-    bigint product_id FK
+    string name "NOT_NULL"
   }
   yahoo_auction_crawl_settings {
     bigint id PK
-    bigint crawl_setting_id FK
-    boolean enabled "default: false, NOT_NULL"
+    bigint product_id FK
+    boolean enabled "default: false"
   }
-  price_versions {
-    bigint id PK
-    bigint product_id FK "UNIQUE"
-    bigint crawl_history_id FK "UNIQUE"
-    int price "default: 0, NOT_NULL"
-  }
-  crawl_histories {
+  mercari_crawl_settings {
     bigint id PK
     bigint product_id FK
-    text html
+    boolean enabled "default: false"
+  }
+  yahoo_auction_products {
+    bigint id PK
+    bigint yahoo_auction_id "NOT_NULL"
+    string name "NOT_NULL"
+    int price "NOT_NULL"
+    boolean published "default: false"
+  }
+  mercari_products {
+    bigint id PK
+    bigint mercari_id "NOT_NULL"
+    string name "NOT_NULL"
+    int price "NOT_NULL"
+    boolean published "default: false"
   }
 
-  users ||--o{ products : "1:N"
-  products ||--|| crawl_settings : "1:1"
-  crawl_settings ||--|| yahoo_auction_crawl_settings : "1:1"
-  products ||--o{ price_versions : "1:N"
-  products ||--o{ crawl_histories : "1:N"
-  price_versions ||--|| crawl_histories : "1:1"
+  products ||--|| product_categories : "1:1"
+  products ||--|| yahoo_auction_crawl_settings : "1:1"
+  products ||--|| mercari_crawl_settings : "1:1"
+  products ||--o{ yahoo_auction_products : "1:N"
+  products ||--o{ mercari_products : "1:N"
 ```
 
 ## Docs
