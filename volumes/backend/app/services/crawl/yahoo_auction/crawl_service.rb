@@ -25,7 +25,7 @@ module Crawl
       end
 
       def save(results)
-        # TODO: 結果をDBに格納する
+        YahooAuctionProduct.upsert_all(results, record_timestamps: true)
       end
     end
   end
