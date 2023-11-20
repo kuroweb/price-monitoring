@@ -5,6 +5,7 @@ class CreateYahooAuctionProducts < ActiveRecord::Migration[7.1]
 
       t.integer :yahoo_auction_id, null: false
       t.string :name, null: false
+      t.string :thumbnail_url, null: true
       t.boolean :published, null: false, default: false
 
       t.timestamps
