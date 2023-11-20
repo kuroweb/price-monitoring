@@ -53,9 +53,11 @@ subgraph Kubernetest Node
     direction LR
 
     price_rails[Rails]
+    price_rails_batch[Sidekiq]
     price_rails_mysql[(MySQL)]
 
     price_rails-->price_rails_mysql
+    price_rails_batch-->price_rails_mysql
   end
 
   subgraph hoge ["Backend (Hoge Domain)"]
