@@ -45,6 +45,7 @@ module Crawl
 
       def parse_product(dom)
         {
+          product_id: product.id,
           yahoo_auction_id: dom.query_selector(".Product__titleLink").get_attribute("data-auction-id"),
           name: dom.query_selector(".Product__titleLink").inner_text,
           price: dom.query_selector(".Product__priceValue").inner_text.gsub(/,|円/, ""),
