@@ -8,3 +8,5 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 Style/RedundantAssignment:
   Enabled: false
+Metrics/MethodLength:
+  Max: 15
