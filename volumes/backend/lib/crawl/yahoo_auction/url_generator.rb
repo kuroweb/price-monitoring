@@ -23,7 +23,7 @@ module Crawl
         @start = start
       end
 
-      def generate # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
+      def generate # rubocop:disable Metrics/AbcSize
         url = base_url("")
         url = category(url)
         url = keyword(url)
