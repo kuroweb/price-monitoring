@@ -1,4 +1,37 @@
-version: '3.8'
+version: "3.8"
+
+x-mysql: &mysql
+  image: mysql/mysql-server:8.0
+  healthcheck:
+    test: ["CMD", "mysqladmin", "ping"]
+    interval: 5s
+    timeout: 5s
+    retries: 5
+  environment:
+    MYSQL_ROOT_HOST: "%"
+    MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  stdin_open: true
+  tty: true
+
+x-backend: &backend
+  build:
+    context: .
+    dockerfile: containers/backend/Dockerfile
+  depends_on:
+    backend_db:
+      condition: service_healthy
+  environment:
+    DB_HOST_NAME: "backend_db"
+    DB_DATABASE_NAME: "rails"
+    DB_USER_NAME: "root"
+    DB_PASSWORD: ""
+  stdin_open: true
+  tty: true
+  volumes:
+    - ./volumes/backend:/app
+    - backend-bundle:/usr/local/bundle
+    # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
+    # - backend-node-modules:/app/node_modules
 
 services:
   frontend:
@@ -15,26 +48,9 @@ services:
       - frontend-node-modules:/app/node_modules
 
   backend:
-    build:
-      context: .
-      dockerfile: containers/backend/Dockerfile
+    <<: *backend
     ports:
       - 3000:3000
-    depends_on:
-      backend_db:
-        condition: service_healthy
-    environment:
-      DB_HOST_NAME: 'backend_db'
-      DB_DATABASE_NAME: 'rails'
-      DB_USER_NAME: 'root'
-      DB_PASSWORD: ''
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./volumes/backend:/app
-      - backend-bundle:/usr/local/bundle
-      # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
-      # - backend-node-modules:/app/node_modules
 
   bff:
     build:
@@ -46,19 +62,6 @@ services:
     tty: true
     volumes:
       - ./volumes/bff:/app
-
-  mysql: &mysql
-    image: mysql/mysql-server:8.0
-    healthcheck:
-      test: [ "CMD", "mysqladmin", "ping" ]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    environment:
-      MYSQL_ROOT_HOST: "%"
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-    stdin_open: true
-    tty: true
 
   backend_db:
     <<: *mysql
