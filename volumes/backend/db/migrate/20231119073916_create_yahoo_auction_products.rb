@@ -1,11 +1,12 @@
 class CreateYahooAuctionProducts < ActiveRecord::Migration[7.1]
   def change
     create_table :yahoo_auction_products do |t|
-      t.references :product, index: true
+      t.references :product, foreign_key: true
 
-      t.integer :yahoo_auction_id, null: false
+      t.string :yahoo_auction_id, null: false, index: { unique: true }
       t.string :name, null: false
-      t.string :thumbnail_url, null: true
+      t.text :thumbnail_url, null: true
+      t.integer :price, null: false, default: 0
       t.boolean :published, null: false, default: false
 
       t.timestamps

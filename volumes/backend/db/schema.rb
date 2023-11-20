@@ -36,12 +36,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_19_073916) do
 
   create_table "yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.integer "yahoo_auction_id", null: false
+    t.string "yahoo_auction_id", null: false
     t.string "name", null: false
+    t.text "thumbnail_url"
+    t.integer "price", default: 0, null: false
     t.boolean "published", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
+    t.index ["yahoo_auction_id"], name: "index_yahoo_auction_products_on_yahoo_auction_id", unique: true
   end
 
+  add_foreign_key "yahoo_auction_crawl_settings", "products"
+  add_foreign_key "yahoo_auction_products", "products"
 end
