@@ -1,7 +1,7 @@
 class CreateYahooAuctionCrawlSettings < ActiveRecord::Migration[7.1]
   def change
     create_table :yahoo_auction_crawl_settings do |t|
-      t.references :product, index: true
+      t.references :product, foreign_key: true
 
       t.integer :category_id, null: true, default: 0
       t.integer :min_price, null: false, default: 0
