@@ -1,5 +1,17 @@
 version: "3.8"
 
+x-backend: &backend
+  build:
+    context: .
+    dockerfile: containers/backend/Dockerfile
+  environment:
+    DB_HOST_NAME: "backend_db"
+    DB_DATABASE_NAME: "rails"
+    DB_USER_NAME: "root"
+    DB_PASSWORD: ""
+  stdin_open: true
+  tty: true
+
 x-mysql: &mysql
   image: mysql/mysql-server:8.0
   healthcheck:
@@ -13,25 +25,13 @@ x-mysql: &mysql
   stdin_open: true
   tty: true
 
-x-backend: &backend
-  build:
-    context: .
-    dockerfile: containers/backend/Dockerfile
-  depends_on:
-    backend_db:
-      condition: service_healthy
-  environment:
-    DB_HOST_NAME: "backend_db"
-    DB_DATABASE_NAME: "rails"
-    DB_USER_NAME: "root"
-    DB_PASSWORD: ""
-  stdin_open: true
-  tty: true
-  volumes:
-    - ./volumes/backend:/app
-    - backend-bundle:/usr/local/bundle
-    # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
-    # - backend-node-modules:/app/node_modules
+x-redis: &redis
+  image: "redis:latest"
+  healthcheck:
+    test: ["CMD", "redis-cli", "ping"]
+    interval: 5s
+    timeout: 5s
+    retries: 5
 
 services:
   frontend:
@@ -49,8 +49,31 @@ services:
 
   backend:
     <<: *backend
+    depends_on:
+      backend_db:
+        condition: service_healthy
+      backend_redis:
+        condition: service_healthy
+    volumes:
+      - ./volumes/backend:/app
+      - backend-bundle:/usr/local/bundle
+      # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
+      # - backend-node-modules:/app/node_modules
     ports:
       - 3000:3000
+
+  backend_db:
+    <<: *mysql
+    volumes:
+      - backend-db:/var/lib/mysql
+
+  backend_redis:
+    <<: *redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "backend-redis:/data"
+    command: ["--appendonly", "yes"]
 
   bff:
     build:
@@ -62,11 +85,6 @@ services:
     tty: true
     volumes:
       - ./volumes/bff:/app
-
-  backend_db:
-    <<: *mysql
-    volumes:
-      - backend-db:/var/lib/mysql
 
   playwright:
     build:
@@ -91,3 +109,4 @@ volumes:
   #     device: ${PWD}/volumes/backend/node_modules
   #     o: bind
   backend-db:
+  backend-redis:
