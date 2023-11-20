@@ -62,6 +62,18 @@ services:
     ports:
       - 3000:3000
 
+  backend_batch:
+    <<: *backend
+    depends_on:
+      backend_db:
+        condition: service_healthy
+      backend_redis:
+        condition: service_healthy
+    volumes:
+      - ./volumes/backend:/app
+      - backend-bundle:/usr/local/bundle
+    command: ["sidekiq", "-C", "config/sidekiq.yml"]
+
   backend_db:
     <<: *mysql
     volumes:
