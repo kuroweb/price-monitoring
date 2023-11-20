@@ -10,4 +10,14 @@ ApplicationRecord.transaction do
     category_id: 2_084_286_828,
     enabled: true
   )
+
+  product = Product.create!(
+    name: "M1 Macbook Air"
+  )
+
+  YahooAuctionCrawlSetting.create!(
+    product_id: product.id,
+    category_id: 2_084_286_828,
+    enabled: true
+  )
 end
