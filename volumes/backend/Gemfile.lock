@@ -105,11 +105,16 @@ GEM
     drb (2.1.1)
       ruby2_keywords
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
     factory_bot (6.2.1)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
+    fugit (1.9.0)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.1)
@@ -182,6 +187,7 @@ GEM
     public_suffix (5.0.3)
     puma (6.4.0)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.7.1)
     rack (3.0.8)
     rack-cors (2.0.1)
@@ -299,6 +305,10 @@ GEM
       connection_pool (>= 2.3.0)
       rack (>= 2.2.4)
       redis-client (>= 0.14.0)
+    sidekiq-cron (1.11.0)
+      fugit (~> 1.8)
+      globalid (>= 1.0.1)
+      sidekiq (>= 6)
     sinatra (1.0)
       rack (>= 1.0)
     sprockets (4.2.1)
@@ -364,6 +374,7 @@ DEPENDENCIES
   rubocop-rspec
   selenium-webdriver
   sidekiq
+  sidekiq-cron
   sinatra
   sprockets-rails
   stimulus-rails

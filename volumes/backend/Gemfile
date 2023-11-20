@@ -12,6 +12,7 @@ gem "rack-cors"
 gem "rails", "~> 7.1.1"
 gem "redis-namespace"
 gem "sidekiq"
+gem "sidekiq-cron"
 gem "sinatra", require: false
 gem "sprockets-rails"
 gem "stimulus-rails"
