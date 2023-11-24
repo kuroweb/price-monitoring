@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :products
+      resources :yahoo_auction_products
     end
   end
 
