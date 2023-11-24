@@ -2,7 +2,7 @@ module Api
   module V1
     class YahooAuctionProductsController < ApplicationController
       def index
-        products = YahooAuctionProductFinder.new(params: product_params).execute
+        products = YahooAuctionProductFinder.new(params: yahoo_auction_product_params).execute
         render json: { products: products.as_json }, status: 200
       end
 
@@ -23,8 +23,8 @@ module Api
         %i[id yahoo_auction_id name price published]
       end
 
-      def product_params
-        @product_params ||= params.require(:yahoo_auction_product).permit(yahoo_auction_product_params_attributes)
+      def yahoo_auction_product_params
+        @yahoo_auction_product_params ||= params.permit(yahoo_auction_product_params_attributes)
       end
     end
   end
