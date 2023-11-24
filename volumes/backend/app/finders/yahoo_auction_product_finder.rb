@@ -8,6 +8,7 @@ class YahooAuctionProductFinder
   def execute
     products = base_scope
     products = by_id(products)
+    products = by_product_id(products)
     products = by_yahoo_auction_id(products)
     products = by_name(products)
     products = by_price(products)
@@ -26,6 +27,12 @@ class YahooAuctionProductFinder
     return products unless params[:id]
 
     products.where(id: params[:id])
+  end
+
+  def by_product_id(products)
+    return products unless params[:product_id]
+
+    products.where(product_id: params[:product_id])
   end
 
   def by_yahoo_auction_id(products)
