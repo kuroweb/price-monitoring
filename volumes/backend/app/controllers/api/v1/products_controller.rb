@@ -24,7 +24,7 @@ module Api
       end
 
       def product_params
-        @product_params ||= params.require(:product).permit(product_params_attributes)
+        @product_params ||= params.permit(product_params_attributes)
       end
     end
   end

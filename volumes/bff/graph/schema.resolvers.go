@@ -111,10 +111,8 @@ func (r *queryResolver) GetProduct(ctx context.Context, id int) (*model.Product,
 	}
 
 	var response struct {
-		ID     int    `json:"id"`
-		UserID int    `json:"user_id"`
-		Name   string `json:"name"`
-		Price  int    `json:"price"`
+		ID   int    `json:"id"`
+		Name string `json:"name"`
 	}
 
 	decoder := json.NewDecoder(resp.Body)
@@ -123,33 +121,23 @@ func (r *queryResolver) GetProduct(ctx context.Context, id int) (*model.Product,
 	}
 
 	product := &model.Product{
-		ID:     strconv.Itoa(response.ID),
-		UserID: strconv.Itoa(response.UserID),
-		Name:   response.Name,
-		Price:  response.Price,
+		ID:   strconv.Itoa(response.ID),
+		Name: response.Name,
 	}
 
 	return product, nil
 }
 
 // GetProducts is the resolver for the getProducts field.
-func (r *queryResolver) GetProducts(ctx context.Context, id *int, userID *int, name *string, price *int) ([]*model.Product, error) {
+func (r *queryResolver) GetProducts(ctx context.Context, id *int, name *string) ([]*model.Product, error) {
 	params := make(url.Values)
 
 	if id != nil {
 		params.Set("product[id]", strconv.Itoa(*id))
 	}
 
-	if userID != nil {
-		params.Set("product[user_id]", strconv.Itoa(*userID))
-	}
-
 	if name != nil {
 		params.Set("product[name]", *name)
-	}
-
-	if price != nil {
-		params.Set("product[price]", strconv.Itoa(*price))
 	}
 
 	url := "http://backend:3000/api/v1/products?" + params.Encode()
@@ -166,10 +154,8 @@ func (r *queryResolver) GetProducts(ctx context.Context, id *int, userID *int, n
 
 	var response struct {
 		Products []struct {
-			ID     int    `json:"id"`
-			UserID int    `json:"user_id"`
-			Name   string `json:"name"`
-			Price  int    `json:"price"`
+			ID   int    `json:"id"`
+			Name string `json:"name"`
 		} `json:"products"`
 	}
 
@@ -181,10 +167,8 @@ func (r *queryResolver) GetProducts(ctx context.Context, id *int, userID *int, n
 	products := make([]*model.Product, len(response.Products))
 	for i, product := range response.Products {
 		products[i] = &model.Product{
-			ID:     strconv.Itoa(product.ID),
-			UserID: strconv.Itoa(product.UserID),
-			Name:   product.Name,
-			Price:  product.Price,
+			ID:   strconv.Itoa(product.ID),
+			Name: product.Name,
 		}
 	}
 
