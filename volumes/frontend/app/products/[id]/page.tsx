@@ -64,22 +64,14 @@ const Page = () => {
                   id
                 </th>
                 <th scope='col' className='px-6 py-3'>
-                  user_id
-                </th>
-                <th scope='col' className='px-6 py-3'>
                   name
-                </th>
-                <th scope='col' className='px-6 py-3'>
-                  price
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr className='bg-white border-'>
                 <td className='px-6 py-4'>{data.getProduct.id}</td>
-                <td className='px-6 py-4'>{data.getProduct.user_id}</td>
                 <td className='px-6 py-4'>{data.getProduct.name}</td>
-                <td className='px-6 py-4'>{data.getProduct.price}</td>
               </tr>
             </tbody>
           </table>
