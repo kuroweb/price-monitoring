@@ -1,3 +1,4 @@
+# TODO: 新仕様にあわせてリプレースする
 class UserFinder
   attr_reader :params
 

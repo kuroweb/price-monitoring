@@ -1,3 +1,4 @@
+# TODO: 各サービス横断のFinderクラスとして作り直す
 class ProductFinder
   attr_reader :params
 
