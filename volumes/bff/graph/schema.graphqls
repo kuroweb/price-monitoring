@@ -12,9 +12,19 @@ type Product {
   name: String!
 }
 
+type YahooAuctionProduct {
+  id: Int!
+  yahooAuctionId: String!
+  name: String!
+  price: Int!
+  published: Boolean!
+}
+
 type Query {
   getUser(id: Int!): User!
   getUsers(id: Int, name: String): [User!]!
   getProduct(id: Int!): Product!
   getProducts(id: Int, name: String): [Product!]!
+  getYahooAuctionProduct(yahooAuctionId: String!): YahooAuctionProduct!
+  getYahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
 }

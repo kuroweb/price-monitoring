@@ -2,8 +2,8 @@ module Api
   module V1
     class YahooAuctionProductsController < ApplicationController
       def index
-        products = YahooAuctionProductFinder.new(params: yahoo_auction_product_params).execute
-        render json: { products: products.as_json }, status: 200
+        yahoo_auction_products = YahooAuctionProductFinder.new(params: yahoo_auction_product_params).execute
+        render json: { yahoo_auction_products: yahoo_auction_products.as_json }, status: 200
       end
 
       def show

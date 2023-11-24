@@ -175,6 +175,109 @@ func (r *queryResolver) GetProducts(ctx context.Context, id *int, name *string) 
 	return products, nil
 }
 
+// GetYahooAuctionProduct is the resolver for the getYahooAuctionProduct field.
+func (r *queryResolver) GetYahooAuctionProduct(ctx context.Context, yahooAuctionID string) (*model.YahooAuctionProduct, error) {
+	url := fmt.Sprintf("http://backend:3000/api/v1/products/%s", yahooAuctionID)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch yahoo_auction_product data")
+	}
+
+	var response struct {
+		ID             int    `json:"id"`
+		YahooAuctionId string `json:"yahoo_auction_id"`
+		Name           string `json:"name"`
+		Price          int    `json:"price"`
+		Published      bool   `json:"published"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	yahooAuctionProduct := &model.YahooAuctionProduct{
+		ID:             response.ID,
+		YahooAuctionID: response.YahooAuctionId,
+		Name:           response.Name,
+		Price:          response.Price,
+		Published:      response.Published,
+	}
+
+	return yahooAuctionProduct, nil
+}
+
+// GetYahooAuctionProducts is the resolver for the getYahooAuctionProducts field.
+func (r *queryResolver) GetYahooAuctionProducts(ctx context.Context, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+	params := make(url.Values)
+
+	if id != nil {
+		params.Set("id", strconv.Itoa(*id))
+	}
+
+	if yahooAuctionID != nil {
+		params.Set("yahoo_auction_id", *yahooAuctionID)
+	}
+
+	if name != nil {
+		params.Set("name", *name)
+	}
+
+	if price != nil {
+		params.Set("price", strconv.Itoa(*price))
+	}
+
+	if published != nil {
+		params.Set("published", strconv.FormatBool(*published))
+	}
+
+	url := "http://backend:3000/api/v1/yahoo_auction_products?" + params.Encode()
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch yahoo_auction_product data")
+	}
+
+	var response struct {
+		YahooAuctionProducts []struct {
+			ID             int    `json:"id"`
+			YahooAuctionId string `json:"yahoo_auction_id"`
+			Name           string `json:"name"`
+			Price          int    `json:"price"`
+			Published      bool   `json:"published"`
+		} `json:"yahoo_auction_products"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	yahoo_auction_products := make([]*model.YahooAuctionProduct, len(response.YahooAuctionProducts))
+	for i, yahoo_auction_product := range response.YahooAuctionProducts {
+		yahoo_auction_products[i] = &model.YahooAuctionProduct{
+			ID:             yahoo_auction_product.ID,
+			YahooAuctionID: yahoo_auction_product.YahooAuctionId,
+			Name:           yahoo_auction_product.Name,
+			Price:          yahoo_auction_product.Price,
+			Published:      yahoo_auction_product.Published,
+		}
+	}
+
+	return yahoo_auction_products, nil
+}
+
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 

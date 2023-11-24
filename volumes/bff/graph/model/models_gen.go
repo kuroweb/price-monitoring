@@ -11,3 +11,11 @@ type User struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
+
+type YahooAuctionProduct struct {
+	ID             int    `json:"id"`
+	YahooAuctionID string `json:"yahooAuctionId"`
+	Name           string `json:"name"`
+	Price          int    `json:"price"`
+	Published      bool   `json:"published"`
+}
