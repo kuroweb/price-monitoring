@@ -21,15 +21,14 @@ export type Product = {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
-  price: Scalars['Int']['output'];
-  user_id: Scalars['ID']['output'];
 };
 
 export type Query = {
   __typename?: 'Query';
   getProduct: Product;
   getProducts: Array<Product>;
-  users: Array<User>;
+  getUser: User;
+  getUsers: Array<User>;
 };
 
 
@@ -41,12 +40,15 @@ export type QueryGetProductArgs = {
 export type QueryGetProductsArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  price?: InputMaybe<Scalars['Int']['input']>;
-  user_id?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryUsersArgs = {
+export type QueryGetUserArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type QueryGetUsersArgs = {
   id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
@@ -59,29 +61,25 @@ export type User = {
 
 export type GetProductsQueryVariables = Exact<{
   id?: InputMaybe<Scalars['Int']['input']>;
-  user_id?: InputMaybe<Scalars['Int']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-  price?: InputMaybe<Scalars['Int']['input']>;
 }>;
 
 
-export type GetProductsQuery = { __typename?: 'Query', getProducts: Array<{ __typename?: 'Product', id: string, user_id: string, name: string, price: number }> };
+export type GetProductsQuery = { __typename?: 'Query', getProducts: Array<{ __typename?: 'Product', id: string, name: string }> };
 
 export type GetProductQueryVariables = Exact<{
   id: Scalars['Int']['input'];
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct: { __typename?: 'Product', id: string, user_id: string, name: string, price: number } };
+export type GetProductQuery = { __typename?: 'Query', getProduct: { __typename?: 'Product', id: string, name: string } };
 
 
 export const GetProductsDocument = gql`
-    query getProducts($id: Int, $user_id: Int, $name: String, $price: Int) {
-  getProducts(id: $id, user_id: $user_id, name: $name, price: $price) {
+    query getProducts($id: Int, $name: String) {
+  getProducts(id: $id, name: $name) {
     id
-    user_id
     name
-    price
   }
 }
     `;
@@ -89,9 +87,7 @@ export const GetProductDocument = gql`
     query getProduct($id: Int!) {
   getProduct(id: $id) {
     id
-    user_id
     name
-    price
   }
 }
     `;

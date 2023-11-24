@@ -1,17 +1,13 @@
-query getProducts($id: Int, $user_id: Int, $name: String, $price: Int) {
-  getProducts(id: $id, user_id: $user_id, name: $name, price: $price) {
+query getProducts($id: Int, $name: String) {
+  getProducts(id: $id, name: $name) {
     id
-    user_id
     name
-    price
   }
 }
 
 query getProduct($id: Int!) {
   getProduct(id: $id) {
     id
-    user_id
     name
-    price
   }
 }

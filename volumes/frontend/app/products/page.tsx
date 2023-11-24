@@ -68,13 +68,7 @@ const Page = () => {
                   id
                 </th>
                 <th scope='col' className='px-6 py-3'>
-                  user_id
-                </th>
-                <th scope='col' className='px-6 py-3'>
                   name
-                </th>
-                <th scope='col' className='px-6 py-3'>
-                  price
                 </th>
               </tr>
             </thead>
@@ -86,9 +80,7 @@ const Page = () => {
                   key={product.id}
                 >
                   <td className='px-6 py-4'>{product.id}</td>
-                  <td className='px-6 py-4'>{product.user_id}</td>
                   <td className='px-6 py-4'>{product.name}</td>
-                  <td className='px-6 py-4'>{product.price}</td>
                 </tr>
               ))}
             </tbody>
