@@ -14,6 +14,7 @@ type Product {
 
 type YahooAuctionProduct {
   id: Int!
+  productId: Int!
   yahooAuctionId: String!
   name: String!
   price: Int!
@@ -25,6 +26,6 @@ type Query {
   getUsers(id: Int, name: String): [User!]!
   getProduct(id: Int!): Product!
   getProducts(id: Int, name: String): [Product!]!
-  getYahooAuctionProduct(yahooAuctionId: String!): YahooAuctionProduct!
+  getYahooAuctionProduct(id: Int!): YahooAuctionProduct!
   getYahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
 }

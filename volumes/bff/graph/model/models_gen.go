@@ -14,6 +14,7 @@ type User struct {
 
 type YahooAuctionProduct struct {
 	ID             int    `json:"id"`
+	ProductID      int    `json:"productId"`
 	YahooAuctionID string `json:"yahooAuctionId"`
 	Name           string `json:"name"`
 	Price          int    `json:"price"`

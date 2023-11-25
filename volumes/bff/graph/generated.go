@@ -56,7 +56,7 @@ type ComplexityRoot struct {
 		GetProducts             func(childComplexity int, id *int, name *string) int
 		GetUser                 func(childComplexity int, id int) int
 		GetUsers                func(childComplexity int, id *int, name *string) int
-		GetYahooAuctionProduct  func(childComplexity int, yahooAuctionID string) int
+		GetYahooAuctionProduct  func(childComplexity int, id int) int
 		GetYahooAuctionProducts func(childComplexity int, id *int, yahooAuctionID *string, name *string, price *int, published *bool) int
 	}
 
@@ -69,6 +69,7 @@ type ComplexityRoot struct {
 		ID             func(childComplexity int) int
 		Name           func(childComplexity int) int
 		Price          func(childComplexity int) int
+		ProductID      func(childComplexity int) int
 		Published      func(childComplexity int) int
 		YahooAuctionID func(childComplexity int) int
 	}
@@ -79,7 +80,7 @@ type QueryResolver interface {
 	GetUsers(ctx context.Context, id *int, name *string) ([]*model.User, error)
 	GetProduct(ctx context.Context, id int) (*model.Product, error)
 	GetProducts(ctx context.Context, id *int, name *string) ([]*model.Product, error)
-	GetYahooAuctionProduct(ctx context.Context, yahooAuctionID string) (*model.YahooAuctionProduct, error)
+	GetYahooAuctionProduct(ctx context.Context, id int) (*model.YahooAuctionProduct, error)
 	GetYahooAuctionProducts(ctx context.Context, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 
@@ -174,7 +175,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.GetYahooAuctionProduct(childComplexity, args["yahooAuctionId"].(string)), true
+		return e.complexity.Query.GetYahooAuctionProduct(childComplexity, args["id"].(int)), true
 
 	case "Query.getYahooAuctionProducts":
 		if e.complexity.Query.GetYahooAuctionProducts == nil {
@@ -222,6 +223,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.YahooAuctionProduct.Price(childComplexity), true
+
+	case "YahooAuctionProduct.productId":
+		if e.complexity.YahooAuctionProduct.ProductID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionProduct.ProductID(childComplexity), true
 
 	case "YahooAuctionProduct.published":
 		if e.complexity.YahooAuctionProduct.Published == nil {
@@ -441,15 +449,15 @@ func (ec *executionContext) field_Query_getUsers_args(ctx context.Context, rawAr
 func (ec *executionContext) field_Query_getYahooAuctionProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 string
-	if tmp, ok := rawArgs["yahooAuctionId"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("yahooAuctionId"))
-		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+	var arg0 int
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["yahooAuctionId"] = arg0
+	args["id"] = arg0
 	return args, nil
 }
 
@@ -888,7 +896,7 @@ func (ec *executionContext) _Query_getYahooAuctionProduct(ctx context.Context, f
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().GetYahooAuctionProduct(rctx, fc.Args["yahooAuctionId"].(string))
+		return ec.resolvers.Query().GetYahooAuctionProduct(rctx, fc.Args["id"].(int))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -915,6 +923,8 @@ func (ec *executionContext) fieldContext_Query_getYahooAuctionProduct(ctx contex
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_YahooAuctionProduct_id(ctx, field)
+			case "productId":
+				return ec.fieldContext_YahooAuctionProduct_productId(ctx, field)
 			case "yahooAuctionId":
 				return ec.fieldContext_YahooAuctionProduct_yahooAuctionId(ctx, field)
 			case "name":
@@ -982,6 +992,8 @@ func (ec *executionContext) fieldContext_Query_getYahooAuctionProducts(ctx conte
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_YahooAuctionProduct_id(ctx, field)
+			case "productId":
+				return ec.fieldContext_YahooAuctionProduct_productId(ctx, field)
 			case "yahooAuctionId":
 				return ec.fieldContext_YahooAuctionProduct_yahooAuctionId(ctx, field)
 			case "name":
@@ -1257,6 +1269,50 @@ func (ec *executionContext) _YahooAuctionProduct_id(ctx context.Context, field g
 }
 
 func (ec *executionContext) fieldContext_YahooAuctionProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionProduct_productId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ProductID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionProduct",
 		Field:      field,
@@ -3509,6 +3565,11 @@ func (ec *executionContext) _YahooAuctionProduct(ctx context.Context, sel ast.Se
 			out.Values[i] = graphql.MarshalString("YahooAuctionProduct")
 		case "id":
 			out.Values[i] = ec._YahooAuctionProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "productId":
+			out.Values[i] = ec._YahooAuctionProduct_productId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}

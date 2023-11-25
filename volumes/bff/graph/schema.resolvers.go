@@ -176,8 +176,8 @@ func (r *queryResolver) GetProducts(ctx context.Context, id *int, name *string) 
 }
 
 // GetYahooAuctionProduct is the resolver for the getYahooAuctionProduct field.
-func (r *queryResolver) GetYahooAuctionProduct(ctx context.Context, yahooAuctionID string) (*model.YahooAuctionProduct, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/products/%s", yahooAuctionID)
+func (r *queryResolver) GetYahooAuctionProduct(ctx context.Context, id int) (*model.YahooAuctionProduct, error) {
+	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
 
 	resp, err := http.Get(url)
 	if err != nil {
