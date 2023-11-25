@@ -8,9 +8,13 @@ type Node interface {
 }
 
 type Product struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID                   string                 `json:"id"`
+	Name                 string                 `json:"name"`
+	YahooAuctionProducts []*YahooAuctionProduct `json:"yahooAuctionProducts"`
 }
+
+func (Product) IsNode()            {}
+func (this Product) GetID() string { return this.ID }
 
 type YahooAuctionProduct struct {
 	ID             string `json:"id"`
@@ -20,3 +24,6 @@ type YahooAuctionProduct struct {
 	Price          int    `json:"price"`
 	Published      bool   `json:"published"`
 }
+
+func (YahooAuctionProduct) IsNode()            {}
+func (this YahooAuctionProduct) GetID() string { return this.ID }

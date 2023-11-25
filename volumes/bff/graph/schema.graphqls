@@ -2,12 +2,13 @@ interface Node {
   id: ID!
 }
 
-type Product {
+type Product implements Node {
   id: ID!
   name: String!
+  yahooAuctionProducts(id: Int, yahooAuctionID: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
 }
 
-type YahooAuctionProduct {
+type YahooAuctionProduct implements Node {
   id: ID!
   productId: Int!
   yahooAuctionId: String!
@@ -17,8 +18,9 @@ type YahooAuctionProduct {
 }
 
 type Query {
-  getProduct(id: Int!): Product!
-  getProducts(id: Int, name: String): [Product!]!
-  getYahooAuctionProduct(id: Int!): YahooAuctionProduct!
-  getYahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
+  product(id: Int!): Product!
+  products(id: Int, name: String): [Product!]!
+  yahooAuctionProduct(id: Int!): YahooAuctionProduct!
+  yahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
+  node(id: ID!): Node
 }

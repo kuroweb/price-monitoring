@@ -16,126 +16,11 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-// GetProduct is the resolver for the getProduct field.
-func (r *queryResolver) GetProduct(ctx context.Context, id int) (*model.Product, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
-	}
-
-	var response struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	product := &model.Product{
-		ID:   strconv.Itoa(response.ID),
-		Name: response.Name,
-	}
-
-	return product, nil
-}
-
-// GetProducts is the resolver for the getProducts field.
-func (r *queryResolver) GetProducts(ctx context.Context, id *int, name *string) ([]*model.Product, error) {
+// YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
+func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
 
-	if id != nil {
-		params.Set("product[id]", strconv.Itoa(*id))
-	}
-
-	if name != nil {
-		params.Set("product[name]", *name)
-	}
-
-	url := "http://backend:3000/api/v1/products?" + params.Encode()
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
-	}
-
-	var response struct {
-		Products []struct {
-			ID   int    `json:"id"`
-			Name string `json:"name"`
-		} `json:"products"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	products := make([]*model.Product, len(response.Products))
-	for i, product := range response.Products {
-		products[i] = &model.Product{
-			ID:   strconv.Itoa(product.ID),
-			Name: product.Name,
-		}
-	}
-
-	return products, nil
-}
-
-// GetYahooAuctionProduct is the resolver for the getYahooAuctionProduct field.
-func (r *queryResolver) GetYahooAuctionProduct(ctx context.Context, id int) (*model.YahooAuctionProduct, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch yahoo_auction_product data")
-	}
-
-	var response struct {
-		ID             int    `json:"id"`
-		YahooAuctionId string `json:"yahoo_auction_id"`
-		Name           string `json:"name"`
-		Price          int    `json:"price"`
-		Published      bool   `json:"published"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	yahooAuctionProduct := &model.YahooAuctionProduct{
-		ID:             strconv.Itoa(response.ID),
-		YahooAuctionID: response.YahooAuctionId,
-		Name:           response.Name,
-		Price:          response.Price,
-		Published:      response.Published,
-	}
-
-	return yahooAuctionProduct, nil
-}
-
-// GetYahooAuctionProducts is the resolver for the getYahooAuctionProducts field.
-func (r *queryResolver) GetYahooAuctionProducts(ctx context.Context, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
-	params := make(url.Values)
+	params.Set("product_id", obj.ID)
 
 	if id != nil {
 		params.Set("id", strconv.Itoa(*id))
@@ -198,7 +83,138 @@ func (r *queryResolver) GetYahooAuctionProducts(ctx context.Context, id *int, ya
 	return yahoo_auction_products, nil
 }
 
+// Product is the resolver for the product field.
+func (r *queryResolver) Product(ctx context.Context, id int) (*model.Product, error) {
+	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch product data")
+	}
+
+	var response struct {
+		ID   int    `json:"id"`
+		Name string `json:"name"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	product := &model.Product{
+		ID:   strconv.Itoa(response.ID),
+		Name: response.Name,
+	}
+
+	return product, nil
+}
+
+// Products is the resolver for the products field.
+func (r *queryResolver) Products(ctx context.Context, id *int, name *string) ([]*model.Product, error) {
+	params := make(url.Values)
+
+	if id != nil {
+		params.Set("product[id]", strconv.Itoa(*id))
+	}
+
+	if name != nil {
+		params.Set("product[name]", *name)
+	}
+
+	url := "http://backend:3000/api/v1/products?" + params.Encode()
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch product data")
+	}
+
+	var response struct {
+		Products []struct {
+			ID   int    `json:"id"`
+			Name string `json:"name"`
+		} `json:"products"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	products := make([]*model.Product, len(response.Products))
+	for i, product := range response.Products {
+		products[i] = &model.Product{
+			ID:   strconv.Itoa(product.ID),
+			Name: product.Name,
+		}
+	}
+
+	return products, nil
+}
+
+// YahooAuctionProduct is the resolver for the yahooAuctionProduct field.
+func (r *queryResolver) YahooAuctionProduct(ctx context.Context, id int) (*model.YahooAuctionProduct, error) {
+	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
+
+	resp, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, errors.New("Failed to fetch yahoo_auction_product data")
+	}
+
+	var response struct {
+		ID             int    `json:"id"`
+		YahooAuctionId string `json:"yahoo_auction_id"`
+		Name           string `json:"name"`
+		Price          int    `json:"price"`
+		Published      bool   `json:"published"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&response); err != nil {
+		return nil, err
+	}
+
+	yahooAuctionProduct := &model.YahooAuctionProduct{
+		ID:             strconv.Itoa(response.ID),
+		YahooAuctionID: response.YahooAuctionId,
+		Name:           response.Name,
+		Price:          response.Price,
+		Published:      response.Published,
+	}
+
+	return yahooAuctionProduct, nil
+}
+
+// YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
+func (r *queryResolver) YahooAuctionProducts(ctx context.Context, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+	panic(fmt.Errorf("not implemented: YahooAuctionProducts - yahooAuctionProducts"))
+}
+
+// Node is the resolver for the node field.
+func (r *queryResolver) Node(ctx context.Context, id string) (model.Node, error) {
+	panic(fmt.Errorf("not implemented: Node - node"))
+}
+
+// Product returns ProductResolver implementation.
+func (r *Resolver) Product() ProductResolver { return &productResolver{r} }
+
 // Query returns QueryResolver implementation.
 func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
 
+type productResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
