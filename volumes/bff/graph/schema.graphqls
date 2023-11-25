@@ -1,10 +1,5 @@
-# GraphQL schema example
-#
-# https://gqlgen.com/getting-started/
-
-type User {
+interface Node {
   id: ID!
-  name: String!
 }
 
 type Product {
@@ -13,7 +8,7 @@ type Product {
 }
 
 type YahooAuctionProduct {
-  id: Int!
+  id: ID!
   productId: Int!
   yahooAuctionId: String!
   name: String!
@@ -22,8 +17,6 @@ type YahooAuctionProduct {
 }
 
 type Query {
-  getUser(id: Int!): User!
-  getUsers(id: Int, name: String): [User!]!
   getProduct(id: Int!): Product!
   getProducts(id: Int, name: String): [Product!]!
   getYahooAuctionProduct(id: Int!): YahooAuctionProduct!

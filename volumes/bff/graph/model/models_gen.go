@@ -2,18 +2,18 @@
 
 package model
 
+type Node interface {
+	IsNode()
+	GetID() string
+}
+
 type Product struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
 }
 
-type User struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-}
-
 type YahooAuctionProduct struct {
-	ID             int    `json:"id"`
+	ID             string `json:"id"`
 	ProductID      int    `json:"productId"`
 	YahooAuctionID string `json:"yahooAuctionId"`
 	Name           string `json:"name"`

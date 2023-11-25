@@ -9,92 +9,12 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"strconv"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
-
-// GetUser is the resolver for the getUser field.
-func (r *queryResolver) GetUser(ctx context.Context, id int) (*model.User, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/users/%d", id)
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
-	}
-
-	var response struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	user := &model.User{
-		ID:   strconv.Itoa(response.ID),
-		Name: response.Name,
-	}
-
-	return user, nil
-}
-
-// GetUsers is the resolver for the getUsers field.
-func (r *queryResolver) GetUsers(ctx context.Context, id *int, name *string) ([]*model.User, error) {
-	params := make(url.Values)
-
-	if id != nil {
-		params.Set("user[id]", strconv.Itoa(*id))
-	}
-
-	if name != nil {
-		params.Set("user[name]", *name)
-	}
-
-	url := "http://backend:3000/api/v1/users?" + params.Encode()
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	var response struct {
-		Users []struct {
-			ID   int    `json:"id"`
-			Name string `json:"name"`
-		} `json:"users"`
-	}
-
-	if err := json.Unmarshal(body, &response); err != nil {
-		return nil, err
-	}
-
-	var users []*model.User
-	for _, user := range response.Users {
-		users = append(users, &model.User{
-			ID:   strconv.Itoa(user.ID),
-			Name: user.Name,
-		})
-	}
-
-	return users, nil
-}
 
 // GetProduct is the resolver for the getProduct field.
 func (r *queryResolver) GetProduct(ctx context.Context, id int) (*model.Product, error) {
@@ -203,7 +123,7 @@ func (r *queryResolver) GetYahooAuctionProduct(ctx context.Context, id int) (*mo
 	}
 
 	yahooAuctionProduct := &model.YahooAuctionProduct{
-		ID:             response.ID,
+		ID:             strconv.Itoa(response.ID),
 		YahooAuctionID: response.YahooAuctionId,
 		Name:           response.Name,
 		Price:          response.Price,
@@ -267,7 +187,7 @@ func (r *queryResolver) GetYahooAuctionProducts(ctx context.Context, id *int, ya
 	yahoo_auction_products := make([]*model.YahooAuctionProduct, len(response.YahooAuctionProducts))
 	for i, yahoo_auction_product := range response.YahooAuctionProducts {
 		yahoo_auction_products[i] = &model.YahooAuctionProduct{
-			ID:             yahoo_auction_product.ID,
+			ID:             strconv.Itoa(yahoo_auction_product.ID),
 			YahooAuctionID: yahoo_auction_product.YahooAuctionId,
 			Name:           yahoo_auction_product.Name,
 			Price:          yahoo_auction_product.Price,
