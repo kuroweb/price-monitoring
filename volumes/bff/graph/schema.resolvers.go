@@ -14,6 +14,7 @@ import (
 	"strconv"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
+	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
 )
 
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
@@ -210,11 +211,11 @@ func (r *queryResolver) Node(ctx context.Context, id string) (model.Node, error)
 	panic(fmt.Errorf("not implemented: Node - node"))
 }
 
-// Product returns ProductResolver implementation.
-func (r *Resolver) Product() ProductResolver { return &productResolver{r} }
+// Product returns internal.ProductResolver implementation.
+func (r *Resolver) Product() internal.ProductResolver { return &productResolver{r} }
 
-// Query returns QueryResolver implementation.
-func (r *Resolver) Query() QueryResolver { return &queryResolver{r} }
+// Query returns internal.QueryResolver implementation.
+func (r *Resolver) Query() internal.QueryResolver { return &queryResolver{r} }
 
 type productResolver struct{ *Resolver }
 type queryResolver struct{ *Resolver }
