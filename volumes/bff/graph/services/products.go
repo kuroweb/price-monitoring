@@ -12,7 +12,9 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-func GetProductByID(ctx context.Context, id string) (*model.Product, error) {
+type productService struct{}
+
+func (p *productService) GetProductByID(ctx context.Context, id string) (*model.Product, error) {
 	url := fmt.Sprintf("http://backend:3000/api/v1/products/%s", id)
 
 	resp, err := http.Get(url)
@@ -43,15 +45,15 @@ func GetProductByID(ctx context.Context, id string) (*model.Product, error) {
 	return product, nil
 }
 
-func GetProductsByParams(id *string, name *string) ([]*model.Product, error) {
+func (p *productService) GetProductsByParams(ctx context.Context, id *string, name *string) ([]*model.Product, error) {
 	params := make(url.Values)
 
 	if id != nil {
-		params.Set("product[id]", *id)
+		params.Set("id", *id)
 	}
 
 	if name != nil {
-		params.Set("product[name]", *name)
+		params.Set("name", *name)
 	}
 
 	url := "http://backend:3000/api/v1/products?" + params.Encode()

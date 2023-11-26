@@ -85,82 +85,13 @@ func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.P
 }
 
 // Product is the resolver for the product field.
-func (r *queryResolver) Product(ctx context.Context, id int) (*model.Product, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/products/%d", id)
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
-	}
-
-	var response struct {
-		ID   int    `json:"id"`
-		Name string `json:"name"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	product := &model.Product{
-		ID:   strconv.Itoa(response.ID),
-		Name: response.Name,
-	}
-
-	return product, nil
+func (r *queryResolver) Product(ctx context.Context, id string) (*model.Product, error) {
+	return r.Srv.GetProductByID(ctx, id)
 }
 
 // Products is the resolver for the products field.
-func (r *queryResolver) Products(ctx context.Context, id *int, name *string) ([]*model.Product, error) {
-	params := make(url.Values)
-
-	if id != nil {
-		params.Set("product[id]", strconv.Itoa(*id))
-	}
-
-	if name != nil {
-		params.Set("product[name]", *name)
-	}
-
-	url := "http://backend:3000/api/v1/products?" + params.Encode()
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
-	}
-
-	var response struct {
-		Products []struct {
-			ID   int    `json:"id"`
-			Name string `json:"name"`
-		} `json:"products"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	products := make([]*model.Product, len(response.Products))
-	for i, product := range response.Products {
-		products[i] = &model.Product{
-			ID:   strconv.Itoa(product.ID),
-			Name: product.Name,
-		}
-	}
-
-	return products, nil
+func (r *queryResolver) Products(ctx context.Context, id *string, name *string) ([]*model.Product, error) {
+	return r.Srv.GetProductsByParams(ctx, id, name)
 }
 
 // YahooAuctionProduct is the resolver for the yahooAuctionProduct field.

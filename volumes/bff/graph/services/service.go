@@ -14,3 +14,13 @@ type ProductService interface {
 	GetProductByID(ctx context.Context, id string) (*model.Product, error)
 	GetProductsByParams(ctx context.Context, id *string, name *string) ([]*model.Product, error)
 }
+
+type services struct {
+	*productService
+}
+
+func New() Services {
+	return &services{
+		productService: &productService{},
+	}
+}

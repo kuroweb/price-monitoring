@@ -18,8 +18,8 @@ type YahooAuctionProduct implements Node {
 }
 
 type Query {
-  product(id: Int!): Product!
-  products(id: Int, name: String): [Product!]!
+  product(id: ID!): Product!
+  products(id: ID, name: String): [Product!]!
   yahooAuctionProduct(id: Int!): YahooAuctionProduct!
   yahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
   node(id: ID!): Node

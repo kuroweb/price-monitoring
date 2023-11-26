@@ -54,8 +54,8 @@ type ComplexityRoot struct {
 
 	Query struct {
 		Node                 func(childComplexity int, id string) int
-		Product              func(childComplexity int, id int) int
-		Products             func(childComplexity int, id *int, name *string) int
+		Product              func(childComplexity int, id string) int
+		Products             func(childComplexity int, id *string, name *string) int
 		YahooAuctionProduct  func(childComplexity int, id int) int
 		YahooAuctionProducts func(childComplexity int, id *int, yahooAuctionID *string, name *string, price *int, published *bool) int
 	}
@@ -74,8 +74,8 @@ type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 type QueryResolver interface {
-	Product(ctx context.Context, id int) (*model.Product, error)
-	Products(ctx context.Context, id *int, name *string) ([]*model.Product, error)
+	Product(ctx context.Context, id string) (*model.Product, error)
+	Products(ctx context.Context, id *string, name *string) ([]*model.Product, error)
 	YahooAuctionProduct(ctx context.Context, id int) (*model.YahooAuctionProduct, error)
 	YahooAuctionProducts(ctx context.Context, id *int, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 	Node(ctx context.Context, id string) (model.Node, error)
@@ -148,7 +148,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Product(childComplexity, args["id"].(int)), true
+		return e.complexity.Query.Product(childComplexity, args["id"].(string)), true
 
 	case "Query.products":
 		if e.complexity.Query.Products == nil {
@@ -160,7 +160,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Query.Products(childComplexity, args["id"].(*int), args["name"].(*string)), true
+		return e.complexity.Query.Products(childComplexity, args["id"].(*string), args["name"].(*string)), true
 
 	case "Query.yahooAuctionProduct":
 		if e.complexity.Query.YahooAuctionProduct == nil {
@@ -337,8 +337,8 @@ type YahooAuctionProduct implements Node {
 }
 
 type Query {
-  product(id: Int!): Product!
-  products(id: Int, name: String): [Product!]!
+  product(id: ID!): Product!
+  products(id: ID, name: String): [Product!]!
   yahooAuctionProduct(id: Int!): YahooAuctionProduct!
   yahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
   node(id: ID!): Node
@@ -435,10 +435,10 @@ func (ec *executionContext) field_Query_node_args(ctx context.Context, rawArgs m
 func (ec *executionContext) field_Query_product_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 int
+	var arg0 string
 	if tmp, ok := rawArgs["id"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
-		arg0, err = ec.unmarshalNInt2int(ctx, tmp)
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -450,10 +450,10 @@ func (ec *executionContext) field_Query_product_args(ctx context.Context, rawArg
 func (ec *executionContext) field_Query_products_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *int
+	var arg0 *string
 	if tmp, ok := rawArgs["id"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
-		arg0, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg0, err = ec.unmarshalOID2ᚖstring(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -746,7 +746,7 @@ func (ec *executionContext) _Query_product(ctx context.Context, field graphql.Co
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Product(rctx, fc.Args["id"].(int))
+		return ec.resolvers.Query().Product(rctx, fc.Args["id"].(string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -809,7 +809,7 @@ func (ec *executionContext) _Query_products(ctx context.Context, field graphql.C
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Query().Products(rctx, fc.Args["id"].(*int), fc.Args["name"].(*string))
+		return ec.resolvers.Query().Products(rctx, fc.Args["id"].(*string), fc.Args["name"].(*string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -4324,6 +4324,22 @@ func (ec *executionContext) marshalOBoolean2ᚖbool(ctx context.Context, sel ast
 		return graphql.Null
 	}
 	res := graphql.MarshalBoolean(*v)
+	return res
+}
+
+func (ec *executionContext) unmarshalOID2ᚖstring(ctx context.Context, v interface{}) (*string, error) {
+	if v == nil {
+		return nil, nil
+	}
+	res, err := graphql.UnmarshalID(v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalOID2ᚖstring(ctx context.Context, sel ast.SelectionSet, v *string) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	res := graphql.MarshalID(*v)
 	return res
 }
 

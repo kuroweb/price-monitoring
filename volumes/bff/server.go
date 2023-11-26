@@ -8,6 +8,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services"
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
 	"github.com/rs/cors"
 )
@@ -20,7 +21,9 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(internal.NewExecutableSchema(internal.Config{Resolvers: &graph.Resolver{}}))
+	srv := handler.NewDefaultServer(internal.NewExecutableSchema(internal.Config{Resolvers: &graph.Resolver{
+		Srv: services.New(),
+	}}))
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"http://localhost:8080"},
 		AllowCredentials: true,
