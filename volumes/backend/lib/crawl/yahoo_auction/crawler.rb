@@ -45,12 +45,28 @@ module Crawl
       def parse_product(dom)
         {
           product_id: product.id,
-          yahoo_auction_id: dom.query_selector(".Product__titleLink").get_attribute("data-auction-id"),
-          name: dom.query_selector(".Product__titleLink").inner_text,
-          price: dom.query_selector(".Product__priceValue").inner_text.gsub(/,|円/, ""),
-          thumbnail_url: dom.eval_on_selector(".Product__imageData", "el => el.src"),
+          yahoo_auction_id: yahoo_auction_id(dom),
+          name: name(dom),
+          price: price(dom),
+          thumbnail_url: thumbnail_url(dom),
           published: true
         }
+      end
+
+      def yahoo_auction_id(dom)
+        dom.query_selector(".Product__titleLink").get_attribute("data-auction-id")
+      end
+
+      def name(dom)
+        dom.query_selector(".Product__titleLink").inner_text
+      end
+
+      def price(dom)
+        dom.query_selector(".Product__priceValue").inner_text.gsub(/,|円/, "")
+      end
+
+      def thumbnail_url(dom)
+        dom.eval_on_selector(".Product__imageData", "el => el.src")
       end
 
       def yahoo_auction_products
