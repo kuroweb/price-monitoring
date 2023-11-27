@@ -21,6 +21,7 @@ type YahooAuctionProduct struct {
 	ProductID      int    `json:"productId"`
 	YahooAuctionID string `json:"yahooAuctionId"`
 	Name           string `json:"name"`
+	ThumbnailURL   string `json:"thumbnailUrl"`
 	Price          int    `json:"price"`
 	Published      bool   `json:"published"`
 }

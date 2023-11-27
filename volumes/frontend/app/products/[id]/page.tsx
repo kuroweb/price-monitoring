@@ -125,6 +125,9 @@ const Page = () => {
                 <th scope='col' className='px-6 py-3'>
                   price
                 </th>
+                <th scope='col' className='px-6 py-3'>
+                  thumbnail
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -136,6 +139,7 @@ const Page = () => {
                   <td className='px-6 py-4'>{product.id}</td>
                   <td className='px-6 py-4'>{product.name}</td>
                   <td className='px-6 py-4'>{product.price}</td>
+                  <td className='px-6 py-4'>{product.thumbnailUrl}</td>
                 </tr>
               ))}
             </tbody>

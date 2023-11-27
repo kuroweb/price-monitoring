@@ -73,6 +73,7 @@ export type YahooAuctionProduct = Node & {
   price: Scalars['Int']['output'];
   productId: Scalars['Int']['output'];
   published: Scalars['Boolean']['output'];
+  thumbnailUrl: Scalars['String']['output'];
   yahooAuctionId: Scalars['String']['output'];
 };
 
@@ -89,7 +90,7 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, price: number, published: boolean }> } };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }> } };
 
 
 export const ProductsDocument = gql`
@@ -118,6 +119,7 @@ export const ProductDocument = gql`
       productId
       yahooAuctionId
       name
+      thumbnailUrl
       price
       published
     }

@@ -22,6 +22,7 @@ query product($id: ID!) {
       productId
       yahooAuctionId
       name
+      thumbnailUrl
       price
       published
     }

@@ -31,6 +31,7 @@ func (y *yahooAuctionProductService) GetYahooAuctionProductByID(ctx context.Cont
 		ID             int    `json:"id"`
 		YahooAuctionId string `json:"yahoo_auction_id"`
 		Name           string `json:"name"`
+		ThumbnailURL   string `json:"thumbnail_url"`
 		Price          int    `json:"price"`
 		Published      bool   `json:"published"`
 	}
@@ -44,6 +45,7 @@ func (y *yahooAuctionProductService) GetYahooAuctionProductByID(ctx context.Cont
 		ID:             strconv.Itoa(response.ID),
 		YahooAuctionID: response.YahooAuctionId,
 		Name:           response.Name,
+		ThumbnailURL:   response.ThumbnailURL,
 		Price:          response.Price,
 		Published:      response.Published,
 	}
@@ -93,6 +95,7 @@ func (y *yahooAuctionProductService) GetYahooAuctionProductsByParams(ctx context
 			ID             int    `json:"id"`
 			YahooAuctionId string `json:"yahoo_auction_id"`
 			Name           string `json:"name"`
+			ThumbnailURL   string `json:"thumbnail_url"`
 			Price          int    `json:"price"`
 			Published      bool   `json:"published"`
 		} `json:"yahoo_auction_products"`
@@ -109,6 +112,7 @@ func (y *yahooAuctionProductService) GetYahooAuctionProductsByParams(ctx context
 			ID:             strconv.Itoa(yahoo_auction_product.ID),
 			YahooAuctionID: yahoo_auction_product.YahooAuctionId,
 			Name:           yahoo_auction_product.Name,
+			ThumbnailURL:   yahoo_auction_product.ThumbnailURL,
 			Price:          yahoo_auction_product.Price,
 			Published:      yahoo_auction_product.Published,
 		}
