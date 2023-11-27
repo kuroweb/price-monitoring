@@ -5,7 +5,7 @@ interface Node {
 type Product implements Node {
   id: ID!
   name: String!
-  yahooAuctionProducts(id: Int, yahooAuctionID: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
+  yahooAuctionProducts(id: ID, yahooAuctionID: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
 }
 
 type YahooAuctionProduct implements Node {
@@ -20,7 +20,6 @@ type YahooAuctionProduct implements Node {
 type Query {
   product(id: ID!): Product!
   products(id: ID, name: String): [Product!]!
-  yahooAuctionProduct(id: Int!): YahooAuctionProduct!
-  yahooAuctionProducts(id: Int, yahooAuctionId: String, name: String, price: Int, published: Boolean): [YahooAuctionProduct!]!
+  yahooAuctionProduct(id: ID!): YahooAuctionProduct!
   node(id: ID!): Node
 }
