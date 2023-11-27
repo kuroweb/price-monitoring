@@ -80,6 +80,7 @@ export type YahooAuctionProduct = Node & {
 export type ProductsQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -87,6 +88,7 @@ export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename
 
 export type ProductQueryVariables = Exact<{
   id: Scalars['ID']['input'];
+  published?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
@@ -94,11 +96,11 @@ export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Prod
 
 
 export const ProductsDocument = gql`
-    query products($id: ID, $name: String) {
+    query products($id: ID, $name: String, $published: Boolean) {
   products(id: $id, name: $name) {
     id
     name
-    yahooAuctionProducts {
+    yahooAuctionProducts(published: $published) {
       id
       productId
       yahooAuctionId
@@ -110,11 +112,11 @@ export const ProductsDocument = gql`
 }
     `;
 export const ProductDocument = gql`
-    query product($id: ID!) {
+    query product($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
-    yahooAuctionProducts {
+    yahooAuctionProducts(published: $published) {
       id
       productId
       yahooAuctionId

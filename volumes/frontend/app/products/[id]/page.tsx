@@ -17,8 +17,12 @@ const Page = () => {
   const params = useParams()
 
   const { data, loading, error } = useQuery<ProductQuery>(ProductDocument, {
-    variables: { id: params.id },
+    variables: { id: params.id, published: true },
   })
+
+  const handleRowClick = (yahooAuctionId: String) => {
+    window.open(`https://page.auctions.yahoo.co.jp/jp/auction/${yahooAuctionId}`, '_blank')
+  }
 
   return (
     <Layout>
@@ -134,6 +138,7 @@ const Page = () => {
             <tbody>
               {data.product.yahooAuctionProducts.map((product) => (
                 <tr
+                  onClick={() => handleRowClick(product.yahooAuctionId)}
                   className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
                   key={product.id}
                 >

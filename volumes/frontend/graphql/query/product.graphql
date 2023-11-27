@@ -1,8 +1,8 @@
-query products($id: ID, $name: String) {
+query products($id: ID, $name: String, $published: Boolean) {
   products(id: $id, name: $name) {
     id
     name
-    yahooAuctionProducts {
+    yahooAuctionProducts(published: $published) {
       id
       productId
       yahooAuctionId
@@ -13,11 +13,11 @@ query products($id: ID, $name: String) {
   }
 }
 
-query product($id: ID!) {
+query product($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
-    yahooAuctionProducts {
+    yahooAuctionProducts(published: $published) {
       id
       productId
       yahooAuctionId
