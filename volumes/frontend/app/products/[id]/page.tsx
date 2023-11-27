@@ -2,6 +2,7 @@
 
 // common
 import { useParams } from 'next/navigation'
+import NextImage from 'next/image'
 
 // package
 import { useQuery } from '@apollo/client'
@@ -139,7 +140,17 @@ const Page = () => {
                   <td className='px-6 py-4'>{product.id}</td>
                   <td className='px-6 py-4'>{product.name}</td>
                   <td className='px-6 py-4'>{product.price}</td>
-                  <td className='px-6 py-4'>{product.thumbnailUrl}</td>
+                  <td className='px-6 py-4'>
+                    {/* TODO: 別コンポーネントに切り出す */}
+                    <div className='relative aspect-square'>
+                      <NextImage
+                        className='object-contain'
+                        src={product.thumbnailUrl}
+                        alt={''}
+                        fill
+                      />
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
