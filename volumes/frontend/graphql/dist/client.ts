@@ -17,77 +17,110 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Product = {
+export type Node = {
+  id: Scalars['ID']['output'];
+};
+
+export type Product = Node & {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  yahooAuctionProducts: Array<YahooAuctionProduct>;
+};
+
+
+export type ProductYahooAuctionProductsArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  price?: InputMaybe<Scalars['Int']['input']>;
+  published?: InputMaybe<Scalars['Boolean']['input']>;
+  yahooAuctionID?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  getProduct: Product;
-  getProducts: Array<Product>;
-  getUser: User;
-  getUsers: Array<User>;
+  node?: Maybe<Node>;
+  product: Product;
+  products: Array<Product>;
+  yahooAuctionProduct: YahooAuctionProduct;
 };
 
 
-export type QueryGetProductArgs = {
-  id: Scalars['Int']['input'];
+export type QueryNodeArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
-export type QueryGetProductsArgs = {
-  id?: InputMaybe<Scalars['Int']['input']>;
+export type QueryProductArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type QueryProductsArgs = {
+  id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type QueryGetUserArgs = {
-  id: Scalars['Int']['input'];
+export type QueryYahooAuctionProductArgs = {
+  id: Scalars['ID']['input'];
 };
 
-
-export type QueryGetUsersArgs = {
-  id?: InputMaybe<Scalars['Int']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type User = {
-  __typename?: 'User';
+export type YahooAuctionProduct = Node & {
+  __typename?: 'YahooAuctionProduct';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  price: Scalars['Int']['output'];
+  productId: Scalars['Int']['output'];
+  published: Scalars['Boolean']['output'];
+  yahooAuctionId: Scalars['String']['output'];
 };
 
-export type GetProductsQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['Int']['input']>;
+export type ProductsQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetProductsQuery = { __typename?: 'Query', getProducts: Array<{ __typename?: 'Product', id: string, name: string }> };
+export type ProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, price: number, published: boolean }> }> };
 
-export type GetProductQueryVariables = Exact<{
-  id: Scalars['Int']['input'];
+export type ProductQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
 }>;
 
 
-export type GetProductQuery = { __typename?: 'Query', getProduct: { __typename?: 'Product', id: string, name: string } };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, price: number, published: boolean }> } };
 
 
-export const GetProductsDocument = gql`
-    query getProducts($id: Int, $name: String) {
-  getProducts(id: $id, name: $name) {
+export const ProductsDocument = gql`
+    query products($id: ID, $name: String) {
+  products(id: $id, name: $name) {
     id
     name
+    yahooAuctionProducts {
+      id
+      productId
+      yahooAuctionId
+      name
+      price
+      published
+    }
   }
 }
     `;
-export const GetProductDocument = gql`
-    query getProduct($id: Int!) {
-  getProduct(id: $id) {
+export const ProductDocument = gql`
+    query product($id: ID!) {
+  product(id: $id) {
     id
     name
+    yahooAuctionProducts {
+      id
+      productId
+      yahooAuctionId
+      name
+      price
+      published
+    }
   }
 }
     `;
@@ -99,11 +132,11 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getProducts(variables?: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProducts', 'query');
+    products(variables?: ProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ProductsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ProductsQuery>(ProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'products', 'query');
     },
-    getProduct(variables: GetProductQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductQuery>(GetProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProduct', 'query');
+    product(variables: ProductQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ProductQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<ProductQuery>(ProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'product', 'query');
     }
   };
 }

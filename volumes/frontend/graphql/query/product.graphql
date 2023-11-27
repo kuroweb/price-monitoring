@@ -1,13 +1,29 @@
-query getProducts($id: Int, $name: String) {
-  getProducts(id: $id, name: $name) {
+query products($id: ID, $name: String) {
+  products(id: $id, name: $name) {
     id
     name
+    yahooAuctionProducts {
+      id
+      productId
+      yahooAuctionId
+      name
+      price
+      published
+    }
   }
 }
 
-query getProduct($id: Int!) {
-  getProduct(id: $id) {
+query product($id: ID!) {
+  product(id: $id) {
     id
     name
+    yahooAuctionProducts {
+      id
+      productId
+      yahooAuctionId
+      name
+      price
+      published
+    }
   }
 }

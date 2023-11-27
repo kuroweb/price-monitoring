@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation'
 import { useQuery } from '@apollo/client'
 
 // graphql
-import { GetProductDocument, GetProductQuery } from '@/graphql/dist/client'
+import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
 
 // component
 import Layout from '@/components/layouts/Layout'
@@ -15,7 +15,7 @@ import Layout from '@/components/layouts/Layout'
 const Page = () => {
   const params = useParams()
 
-  const { data, loading, error } = useQuery<GetProductQuery>(GetProductDocument, {
+  const { data, loading, error } = useQuery<ProductQuery>(ProductDocument, {
     variables: { id: params.id },
   })
 
@@ -70,8 +70,8 @@ const Page = () => {
             </thead>
             <tbody>
               <tr className='bg-white border-'>
-                <td className='px-6 py-4'>{data.getProduct.id}</td>
-                <td className='px-6 py-4'>{data.getProduct.name}</td>
+                <td className='px-6 py-4'>{data.product.id}</td>
+                <td className='px-6 py-4'>{data.product.name}</td>
               </tr>
             </tbody>
           </table>

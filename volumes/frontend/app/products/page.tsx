@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import { useQuery } from '@apollo/client'
 
 // graphql
-import { GetProductsDocument, GetProductsQuery } from '@/graphql/dist/client'
+import { ProductsDocument, ProductsQuery } from '@/graphql/dist/client'
 
 // component
 import Layout from '@/components/layouts/Layout'
@@ -15,7 +15,7 @@ import Layout from '@/components/layouts/Layout'
 const Page = () => {
   const router = useRouter()
 
-  const { data, loading, error } = useQuery<GetProductsQuery>(GetProductsDocument, {
+  const { data, loading, error } = useQuery<ProductsQuery>(ProductsDocument, {
     variables: { user_id: 1 },
   })
 
@@ -73,7 +73,7 @@ const Page = () => {
               </tr>
             </thead>
             <tbody>
-              {data.getProducts.map((product) => (
+              {data.products.map((product) => (
                 <tr
                   onClick={() => handleRowClick(product.id)}
                   className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
