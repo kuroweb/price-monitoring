@@ -35,8 +35,7 @@ module Crawl
       end
 
       def exists_next_page?(page)
-        dom = page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
-        !dom.nil?
+        page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
       end
 
       def loop_safe(start)
