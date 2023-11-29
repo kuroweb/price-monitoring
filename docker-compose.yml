@@ -105,6 +105,13 @@ services:
     ports:
       - 8888:8888
 
+  tor:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    ports:
+      - 9050:9050
+
 volumes:
   frontend-node-modules:
     driver: local
