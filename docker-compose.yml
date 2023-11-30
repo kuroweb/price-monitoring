@@ -69,6 +69,7 @@ services:
         condition: service_healthy
       backend_redis:
         condition: service_healthy
+      # TODO: torコンテナの実行後に起動するようにしたい
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
@@ -109,8 +110,11 @@ services:
     build:
       context: .
       dockerfile: containers/tor/Dockerfile
+    # TODO: healthcheckコマンドを追加する
     ports:
       - 9050:9050
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
 
 volumes:
   frontend-node-modules:
