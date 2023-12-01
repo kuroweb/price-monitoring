@@ -192,4 +192,5 @@
 
 # country settings
 StrictNodes 1
+EntryNodes {jp}
 ExitNodes {jp}
