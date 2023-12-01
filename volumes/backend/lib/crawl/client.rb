@@ -4,7 +4,7 @@ module Crawl
       Playwright.connect_to_playwright_server("ws://playwright:8888/ws") do |playwright|
         playwright.chromium.launch(
           headless: true,
-          proxy: { server: "socks5://tor:9050" },
+          proxy: { server: "socks5://tor#{rand(1..10)}:9050" },
           &block
         )
       end

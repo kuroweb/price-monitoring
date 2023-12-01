@@ -106,13 +106,73 @@ services:
     ports:
       - 8888:8888
 
-  tor:
+  tor1:
     build:
       context: .
       dockerfile: containers/tor/Dockerfile
-    # TODO: healthcheckコマンドを追加する
-    ports:
-      - 9050:9050
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor2:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor3:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor4:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor5:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor6:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor7:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor8:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor9:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
+    volumes:
+      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  tor10:
+    build:
+      context: .
+      dockerfile: containers/tor/Dockerfile
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
 
