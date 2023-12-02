@@ -75,4 +75,7 @@ Rails.application.configure do
   config.action_controller.raise_on_missing_callback_actions = true
 
   config.hosts << "backend"
+  config.hosts << "k8s-master.local"
+  config.hosts << "k8s-worker-1.local"
+  config.hosts << "k8s-worker-2.local"
 end
