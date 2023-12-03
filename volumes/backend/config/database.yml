@@ -57,5 +57,6 @@ test:
 production:
   <<: *default
   database: backend_production
-  username: backend
-  password: <%= ENV["HOGE_DATABASE_PASSWORD"] %>
+  username: <%= ENV.fetch("DB_USER_NAME") %>
+  password: <%= ENV.fetch("DB_PASSWORD") %>
+  host: <%= ENV.fetch("DB_HOST_NAME") %>
