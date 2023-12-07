@@ -62,7 +62,7 @@ services:
     ports:
       - 3000:3000
 
-  backend_batch:
+  backend-batch:
     <<: *backend
     depends_on:
       backend-db:
