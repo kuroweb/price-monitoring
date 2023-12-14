@@ -1,7 +1,7 @@
 # Production用のDockerイメージをビルドする.
 
 project := price-monitoring
-registry := localhost:5000
+registry := registry.local:5000
 
 #
 # backendコンテナのビルド

@@ -26,4 +26,7 @@ COPY . .
 RUN bundle install
 
 EXPOSE 3000
-CMD ["./bin/rails", "server", "-e", "production"]
+
+# NOTE: k8sでDB疎通できるまでの暫定実装
+# CMD ["./bin/rails", "server", "-e", "production"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0", "-p", "3000"]
