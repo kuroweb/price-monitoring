@@ -9,6 +9,7 @@ x-backend: &backend
     DB_DATABASE_NAME: "rails"
     DB_USER_NAME: "root"
     DB_PASSWORD: ""
+    REDIS_URL: "redis://backend-redis:6379"
   stdin_open: true
   tty: true
 
