@@ -10,6 +10,7 @@ x-backend: &backend
     DB_USER_NAME: "root"
     DB_PASSWORD: ""
     REDIS_URL: "redis://backend-redis:6379"
+    PLAYWRIGHT_URL: "ws://playwright:8888/ws"
   stdin_open: true
   tty: true
 
