@@ -34,3 +34,18 @@ build-tor:
 
 push-tor:
 	docker push $(tor_tag):latest
+
+#
+# playwrightコンテナ
+#
+
+playwright_dockerfile_dir := containers/playwright/Dockerfile
+playwright_tag := $(registry)/$(project)-backend-playwright
+
+build-playwright:
+	docker build \
+	-t $(playwright_tag) \
+	-f $(playwright_dockerfile_dir) .
+
+push-playwright:
+	docker push $(playwright_tag):latest
