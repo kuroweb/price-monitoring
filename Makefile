@@ -25,7 +25,7 @@ push-backend:
 
 tor_dockerfile_dir := containers/tor/Dockerfile
 tor_project_dir := volumes/tor
-tor_tag := $(registry)/$(project)-tor
+tor_tag := $(registry)/$(project)-backend-tor
 
 build-tor:
 	docker build \
