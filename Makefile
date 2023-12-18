@@ -4,6 +4,14 @@ project := price-monitoring
 registry := registry.local:5000
 
 #
+# util
+#
+
+all: build-all push-all
+build-all: build-backend build-tor build-playwright
+push-all: push-backend push-tor push-playwright
+
+#
 # backendコンテナ
 #
 
@@ -23,7 +31,7 @@ push-backend:
 # torコンテナ
 #
 
-tor_dockerfile_dir := containers/tor/Dockerfile
+tor_dockerfile_dir := containers/tor/Dockerfile.prod
 tor_project_dir := volumes/tor
 tor_tag := $(registry)/$(project)-backend-tor
 

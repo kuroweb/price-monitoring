@@ -1,0 +1,19 @@
+FROM debian:bullseye
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    tor \
+    tor-geoipdb \
+ && rm -rf /var/lib/apt/lists
+
+RUN useradd -m user
+USER user
+
+# TODO: tor設定の問題でproductionで疎通できない仮説のもと、設定ファイルをコピー中
+
+# config
+COPY ./etc/tor/torrc /etc/tor/torrc
+
+EXPOSE 9050/tcp
+
+CMD ["tor", "--SocksPort", "0.0.0.0:9050"]
