@@ -113,52 +113,27 @@ services:
     ports:
       - 8888:8888
 
-  tor1:
+  backend-tor-1:
     <<: *tor
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
 
-  tor2:
+  backend-tor-2:
     <<: *tor
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
 
-  tor3:
+  backend-tor-3:
     <<: *tor
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
 
-  tor4:
+  backend-tor-4:
     <<: *tor
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
 
-  tor5:
-    <<: *tor
-    volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
-
-  tor6:
-    <<: *tor
-    volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
-
-  tor7:
-    <<: *tor
-    volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
-
-  tor8:
-    <<: *tor
-    volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
-
-  tor9:
-    <<: *tor
-    volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
-
-  tor10:
+  backend-tor-5:
     <<: *tor
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
