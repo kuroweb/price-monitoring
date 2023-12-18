@@ -10,7 +10,7 @@ x-backend: &backend
     DB_USER_NAME: "root"
     DB_PASSWORD: ""
     REDIS_URL: "redis://backend-redis:6379"
-    PLAYWRIGHT_URL: "ws://playwright:8888/ws"
+    PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
   stdin_open: true
   tty: true
 
@@ -95,18 +95,7 @@ services:
       - "backend-redis:/data"
     command: ["--appendonly", "yes"]
 
-  bff:
-    build:
-      context: .
-      dockerfile: containers/bff/Dockerfile
-    ports:
-      - 3001:8080
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./volumes/bff:/app
-
-  playwright:
+  backend-playwright:
     build:
       context: .
       dockerfile: containers/playwright/Dockerfile
@@ -137,6 +126,17 @@ services:
     <<: *tor
     volumes:
       - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+
+  bff:
+    build:
+      context: .
+      dockerfile: containers/bff/Dockerfile
+    ports:
+      - 3001:8080
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./volumes/bff:/app
 
 volumes:
   frontend-node-modules:
