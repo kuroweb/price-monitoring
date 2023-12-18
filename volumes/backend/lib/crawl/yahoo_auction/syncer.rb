@@ -22,16 +22,32 @@ module Crawl
         "https://page.auctions.yahoo.co.jp/jp/auction/#{yahoo_auction_id}"
       end
 
-      def parse_product(dom)
-        {
-          id: yahoo_auction_product.id,
-          product_id: yahoo_auction_product.product_id,
-          yahoo_auction_id: yahoo_auction_product.yahoo_auction_id,
-          name: name(dom),
-          price: price(dom),
-          thumbnail_url: thumbnail_url(dom),
-          published: published?(dom)
-        }
+      def parse_product(dom) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+        if page_not_found?(dom)
+          {
+            id: yahoo_auction_product.id,
+            product_id: yahoo_auction_product.product_id,
+            yahoo_auction_id: yahoo_auction_product.yahoo_auction_id,
+            name: yahoo_auction_product.name,
+            price: yahoo_auction_product.price,
+            thumbnail_url: yahoo_auction_product.thumbnail_url,
+            published: false
+          }
+        else
+          {
+            id: yahoo_auction_product.id,
+            product_id: yahoo_auction_product.product_id,
+            yahoo_auction_id: yahoo_auction_product.yahoo_auction_id,
+            name: name(dom),
+            price: price(dom),
+            thumbnail_url: thumbnail_url(dom),
+            published: published?(dom)
+          }
+        end
+      end
+
+      def page_not_found?(dom)
+        dom.query_selector("#modAlertBox").present?
       end
 
       def name(dom)
