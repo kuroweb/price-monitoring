@@ -9,13 +9,15 @@ import (
 	"net/url"
 	"strconv"
 
+	"github.com/kuroweb/price-monitoring/volumes/bff/config"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
 type yahooAuctionProductService struct{}
 
 func (y *yahooAuctionProductService) GetYahooAuctionProductByID(ctx context.Context, id string) (*model.YahooAuctionProduct, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/yahoo_auction_products/%s", id)
+	cfg := config.NewConfig()
+	url := fmt.Sprintf("%s/api/v1/yahoo_auction_products/%s", cfg.BackendUrl, id)
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -78,7 +80,8 @@ func (y *yahooAuctionProductService) GetYahooAuctionProductsByParams(ctx context
 		params.Set("published", strconv.FormatBool(*published))
 	}
 
-	url := "http://backend:3000/api/v1/yahoo_auction_products?" + params.Encode()
+	cfg := config.NewConfig()
+	url := fmt.Sprintf("%s/api/v1/yahoo_auction_products?%s", cfg.BackendUrl, params.Encode())
 
 	resp, err := http.Get(url)
 	if err != nil {

@@ -9,13 +9,15 @@ import (
 	"net/url"
 	"strconv"
 
+	"github.com/kuroweb/price-monitoring/volumes/bff/config"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
 type productService struct{}
 
 func (p *productService) GetProductByID(ctx context.Context, id string) (*model.Product, error) {
-	url := fmt.Sprintf("http://backend:3000/api/v1/products/%s", id)
+	cfg := config.NewConfig()
+	url := fmt.Sprintf("%s/api/v1/products/%s", cfg.BackendUrl, id)
 
 	resp, err := http.Get(url)
 	if err != nil {
@@ -56,7 +58,8 @@ func (p *productService) GetProductsByParams(ctx context.Context, id *string, na
 		params.Set("name", *name)
 	}
 
-	url := "http://backend:3000/api/v1/products?" + params.Encode()
+	cfg := config.NewConfig()
+	url := fmt.Sprintf("%s/api/v1/products?%s", cfg.BackendUrl, params.Encode())
 
 	resp, err := http.Get(url)
 	if err != nil {

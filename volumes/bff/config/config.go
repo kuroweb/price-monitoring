@@ -5,12 +5,14 @@ import "os"
 type Config struct {
 	Port          string
 	AllowedOrigin string
+	BackendUrl    string
 }
 
 func NewConfig() Config {
 	return Config{
 		Port:          port(),
 		AllowedOrigin: allowedOrigin(),
+		BackendUrl:    backendUrl(),
 	}
 }
 
@@ -32,3 +34,11 @@ func allowedOrigin() string {
 	return allowedOrigin
 }
 
+func backendUrl() string {
+	backendUrl := os.Getenv("BACKEND_URL")
+	if backendUrl == "" {
+		backendUrl = "http://backend:3000"
+	}
+
+	return backendUrl
+}
