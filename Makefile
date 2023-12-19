@@ -9,7 +9,7 @@ registry := registry.local:5000
 
 all: build-all push-all
 build-all: build-backend build-tor build-playwright build-bff
-push-all: push-backend push-tor push-playwright build-bff
+push-all: push-backend push-tor push-playwright push-bff
 
 #
 # backendコンテナ
