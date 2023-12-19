@@ -28,7 +28,7 @@ func port() string {
 func allowedOrigin() string {
 	allowedOrigin := os.Getenv("ALLOWED_ORIGIN")
 	if allowedOrigin == "" {
-		allowedOrigin = "http://localhost:8080"
+		allowedOrigin = "localhost"
 	}
 
 	return allowedOrigin
