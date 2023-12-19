@@ -8,8 +8,8 @@ registry := registry.local:5000
 #
 
 all: build-all push-all
-build-all: build-backend build-tor build-playwright
-push-all: push-backend push-tor push-playwright
+build-all: build-backend build-tor build-playwright build-bff
+push-all: push-backend push-tor push-playwright build-bff
 
 #
 # backendコンテナ
@@ -57,3 +57,19 @@ build-playwright:
 
 push-playwright:
 	docker push $(playwright_tag):latest
+
+#
+# bff
+#
+
+bff_dockerfile_dir := containers/bff/Dockerfile
+bff_project_dir := volumes/bff
+bff_tag := $(registry)/$(project)-bff
+
+build-bff:
+	docker build \
+	-t $(bff_tag) \
+	-f $(bff_dockerfile_dir) $(bff_project_dir)
+
+push-bff:
+	docker push $(bff_tag):latest
