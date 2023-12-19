@@ -47,7 +47,7 @@ push-tor:
 # playwrightコンテナ
 #
 
-playwright_dockerfile_dir := containers/playwright/Dockerfile
+playwright_dockerfile_dir := containers/playwright/Dockerfile.prod
 playwright_tag := $(registry)/$(project)-backend-playwright
 
 build-playwright:
