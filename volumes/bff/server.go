@@ -14,6 +14,7 @@ import (
 )
 
 const defaultPort = "8080"
+const defaultAllowedOrigin = "http://localhost:8080"
 
 func main() {
 	port := os.Getenv("PORT")
@@ -21,11 +22,16 @@ func main() {
 		port = defaultPort
 	}
 
+	allowedOrigin := os.Getenv("ALLOWED_ORIGIN")
+	if allowedOrigin == "" {
+		allowedOrigin = defaultAllowedOrigin
+	}
+
 	srv := handler.NewDefaultServer(internal.NewExecutableSchema(internal.Config{Resolvers: &graph.Resolver{
 		Srv: services.New(),
 	}}))
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:8080"},
+		AllowedOrigins:   []string{allowedOrigin},
 		AllowCredentials: true,
 	})
 

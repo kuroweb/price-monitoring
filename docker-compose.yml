@@ -133,6 +133,9 @@ services:
       dockerfile: containers/bff/Dockerfile
     ports:
       - 3001:8080
+    environment:
+      PORT: "8080"
+      ALLOWED_ORIGIN: "http://localhost:8080"
     stdin_open: true
     tty: true
     volumes:
