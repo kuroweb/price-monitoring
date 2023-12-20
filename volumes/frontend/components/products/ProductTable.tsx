@@ -1,10 +1,8 @@
 'use client'
 
-// lib
-import { ProductQuery } from '@/graphql/dist/client'
-
-// types
 import { ApolloError } from '@apollo/client'
+
+import { ProductQuery } from '@/graphql/dist/client'
 
 const ProductTable = ({ data, error }: { data: ProductQuery; error: ApolloError | undefined }) => {
   return (

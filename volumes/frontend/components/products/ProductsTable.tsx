@@ -1,11 +1,9 @@
 'use client'
 
-// common
+import { ApolloError } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 
-// types
 import { ProductsQuery } from '@/graphql/dist/client'
-import { ApolloError } from '@apollo/client'
 
 const ProductsTable = ({
   data,

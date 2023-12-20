@@ -1,13 +1,9 @@
 'use client'
 
-// common
+import { ApolloError } from '@apollo/client'
 import NextImage from 'next/image'
 
-// lib
 import { ProductQuery } from '@/graphql/dist/client'
-
-// types
-import { ApolloError } from '@apollo/client'
 
 const YahooAuctionProductsTable = ({
   data,

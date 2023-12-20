@@ -1,13 +1,8 @@
-// graphql
-import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
-
-// lib
-import { getClient } from '@/lib/rsc-client'
-
-// component
 import Layout from '@/components/layouts/Layout'
 import ProductTable from '@/components/products/ProductTable'
 import YahooAuctionProductsTable from '@/components/products/YahooAuctionProductsTable'
+import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
+import { getClient } from '@/lib/rsc-client'
 
 const Page = async ({
   params,

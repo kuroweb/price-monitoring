@@ -1,12 +1,7 @@
-// graphql
-import { ProductsDocument, ProductsQuery } from '@/graphql/dist/client'
-
-// lib
-import { getClient } from '@/lib/rsc-client'
-
-// component
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/components/products/ProductsTable'
+import { ProductsDocument, ProductsQuery } from '@/graphql/dist/client'
+import { getClient } from '@/lib/rsc-client'
 
 const Page = async () => {
   const { data, error } = await getClient().query<ProductsQuery>({
