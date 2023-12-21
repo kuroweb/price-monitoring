@@ -59,20 +59,10 @@ subgraph Kubernetest Node
     price_rails-->price_rails_mysql
     price_rails_batch-->price_rails_mysql
   end
-
-  subgraph hoge ["Backend (Hoge Domain)"]
-    direction LR
-
-    hoge_go[Go]
-    hoge_go_mysql[(MySQL)]
-
-    hoge_go-->hoge_go_mysql
-  end
 end
 
 client-->frontend--GraphQL-->bff
 bff--REST API-->price
-bff--gRPC-->hoge
 ```
 
 ## ER
@@ -81,10 +71,6 @@ bff--gRPC-->hoge
 
 ```mermaid
 erDiagram
-  users {
-    bigint id PK
-    text name
-  }
   products {
     bigint id PK
     bigint product_cateogory_id FK
