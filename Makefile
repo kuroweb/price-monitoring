@@ -59,7 +59,7 @@ push-playwright:
 	docker push $(playwright_tag):latest
 
 #
-# bff
+# bffコンテナ
 #
 
 bff_dockerfile_dir := containers/bff/Dockerfile.prod
