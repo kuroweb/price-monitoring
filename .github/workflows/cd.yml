@@ -7,6 +7,22 @@ jobs:
   deploy:
     runs-on: ubuntu-20.04
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Docker Registry config
+        run: |
+          echo "${{ secrets.REGISTRY_IP }} registry.local" | sudo tee -a /etc/hosts
+          echo "${{ secrets.REGISTRY_CRT }}" > ~/registry.crt
+          echo "${{ secrets.REGISTRY_KEY }}" > ~/registry.key
+          sudo cp ~/registry.* /usr/local/share/ca-certificates/
+          sudo update-ca-certificates
+          sudo systemctl restart docker
+
+      - name: Build Docker Image
+        run: |
+          make build-bff
+
       - name: Install OpenVPN
         run: |
           sudo apt-get update
@@ -15,18 +31,21 @@ jobs:
       - name: Setup VPN config
         run: |
           echo "${{ secrets.CA_CRT }}" > ca.crt
-          echo "${{ secrets.CLIENT_CRT }}" > user.crt
-          echo "${{ secrets.CLIENT_KEY }}" > user.key
+          echo "${{ secrets.CLIENT_CRT }}" > client.crt
+          echo "${{ secrets.CLIENT_KEY }}" > client.key
           echo "${{ secrets.SECRET_TEXT }}" > secret.txt
           echo "${{ secrets.VPN_OVPN }}" > vpn.ovpn
 
       - name: Connect VPN
-        run: |
-          sudo openvpn --config .github/workspace/vpn.ovpn --log "vpn.log" --daemon
+        run: sudo openvpn --config vpn.ovpn --log "vpn.log" --daemon
 
       - name: Wait for a VPN connection
         timeout-minutes: 1
         run: until ping -c1 192.168.0.10; do sleep 2; done
+
+      - name: Push Docker Image
+        run: |
+          make push-bff
 
       - name: Kill VPN connection
         if: always()
@@ -34,6 +53,7 @@ jobs:
           sudo chmod 777 vpn.log
           sudo killall openvpn
 
+      # NOTE: デバッグ時のみ有効にする
       - name: Upload VPN logs
         uses: actions/upload-artifact@v2
         if: always()
