@@ -22,7 +22,7 @@ jobs:
 
       - name: Connect VPN
         run: |
-          sudo openvpn --config .github/workflows/vpn.ovpn --log "vpn.log" --daemon
+          sudo openvpn --config .github/workspace/vpn.ovpn --log "vpn.log" --daemon
 
       - name: Wait for a VPN connection
         timeout-minutes: 1
