@@ -9,7 +9,7 @@ commit_sha := $(shell git rev-parse --short HEAD)
 #
 
 # すべて実行する
-all: build-all push-all
+all: build-all push-all apply-all
 
 # Dockerイメージをビルドする
 build-all: build-backend build-tor build-playwright build-bff build-frontend
