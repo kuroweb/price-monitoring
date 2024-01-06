@@ -54,9 +54,9 @@ jobs:
           sudo killall openvpn
 
       # NOTE: デバッグ時のみ有効にする
-      - name: Upload VPN logs
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: VPN logs
-          path: vpn.log
+      # - name: Upload VPN logs
+      #   uses: actions/upload-artifact@v2
+      #   if: always()
+      #   with:
+      #     name: VPN logs
+      #     path: vpn.log
