@@ -1,5 +1,7 @@
-name: build-image-actions
-run-name: ${{ github.actor }} is Build Image Actions
+name: Deployment
+
+concurrency: production
+
 on:
   push:
     branches: [master]
