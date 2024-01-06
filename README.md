@@ -1,5 +1,7 @@
 # price-monitoring
 
+[![build-image-actions](https://github.com/kuroweb/price-monitoring/actions/workflows/cd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cd.yml)
+
 価格監視ツール
 
 Web上にある欲しい物の価格監視を行うことができる
