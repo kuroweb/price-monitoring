@@ -1,6 +1,6 @@
 # price-monitoring
 
-[![build-image-actions](https://github.com/kuroweb/price-monitoring/actions/workflows/cd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cd.yml)
+[![Deployment](https://github.com/kuroweb/price-monitoring/actions/workflows/deployment.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/deployment.yml)
 
 価格監視ツール
 
