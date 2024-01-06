@@ -46,6 +46,7 @@ jobs:
         run: until ping -c1 192.168.0.10; do sleep 2; done
 
       - name: Push Docker Image
+        timeout-minutes: 60
         run: |
           make push-bff
 
