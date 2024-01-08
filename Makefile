@@ -23,7 +23,7 @@ build-all: build-backend build-tor build-playwright build-bff build-frontend
 push-all: push-backend push-tor push-playwright push-bff push-frontend
 
 #
-# backendコンテナ
+# backend
 #
 
 backend_dockerfile_dir := containers/backend/Dockerfile.prod
@@ -39,7 +39,7 @@ push-backend:
 	docker push $(backend_tag)
 
 #
-# torコンテナ
+# tor
 #
 
 tor_dockerfile_dir := containers/tor/Dockerfile.prod
@@ -55,7 +55,7 @@ push-tor:
 	docker push $(tor_tag)
 
 #
-# playwrightコンテナ
+# playwright
 #
 
 playwright_dockerfile_dir := containers/playwright/Dockerfile
@@ -70,7 +70,7 @@ push-playwright:
 	docker push $(playwright_tag)
 
 #
-# bffコンテナ
+# bff
 #
 
 bff_dockerfile_dir := containers/bff/Dockerfile.prod
@@ -86,7 +86,7 @@ push-bff:
 	docker push $(bff_tag)
 
 #
-# frontendコンテナ
+# frontend
 #
 
 frontend_dockerfile_dir := containers/frontend/Dockerfile.prod
