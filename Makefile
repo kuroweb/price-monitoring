@@ -5,7 +5,6 @@
 #
 
 registry := registry.local:5000
-
 tag_prefix := price-monitoring
 tag_suffix := $(shell git rev-parse --short HEAD)
 
