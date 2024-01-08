@@ -4,6 +4,7 @@
 # config
 #
 
+project := price-monitoring
 registry := registry.local:5000
 tag_suffix := $(shell git rev-parse --short HEAD)
 
@@ -24,7 +25,7 @@ push-all: push-backend push-tor push-playwright push-bff push-frontend
 # backend
 #
 
-backend_tag := $(registry)/price-monitoring-backend:$(tag_suffix)
+backend_tag := $(registry)/$(project)-backend:$(tag_suffix)
 
 build-backend:
 	docker build \
@@ -38,7 +39,7 @@ push-backend:
 # tor
 #
 
-tor_tag := $(registry)/price-monitoring-backend-tor:$(tag_suffix)
+tor_tag := $(registry)/$(project)-backend-tor:$(tag_suffix)
 
 build-tor:
 	docker build \
@@ -52,7 +53,7 @@ push-tor:
 # playwright
 #
 
-playwright_tag := $(registry)/price-monitoring-backend-playwright:$(tag_suffix)
+playwright_tag := $(registry)/$(project)-backend-playwright:$(tag_suffix)
 
 build-playwright:
 	docker build \
@@ -66,7 +67,7 @@ push-playwright:
 # bff
 #
 
-bff_tag := $(registry)/price-monitoring-bff:$(tag_suffix)
+bff_tag := $(registry)/$(project)-bff:$(tag_suffix)
 
 build-bff:
 	docker build \
@@ -80,7 +81,7 @@ push-bff:
 # frontend
 #
 
-frontend_tag := $(registry)/price-monitoring-frontend:$(tag_suffix)
+frontend_tag := $(registry)/$(project)-frontend:$(tag_suffix)
 
 build-frontend:
 	docker build \
