@@ -2,7 +2,16 @@
 
 project := price-monitoring
 registry := registry.local:5000
-commit_sha := $(shell git rev-parse --short HEAD)
+
+#
+# optional
+#
+
+# NOTE: argsで上書き可能
+# make <command> tag_suffix=<tag_name> release_branch=<branch_name>
+
+tag_suffix := $(shell git rev-parse --short HEAD)
+release_branch := master
 
 #
 # util
@@ -30,11 +39,11 @@ backend_tag := $(registry)/$(project)-backend
 
 build-backend:
 	docker build \
-	-t $(backend_tag):$(commit_sha) \
+	-t $(backend_tag):$(tag_suffix) \
 	-f $(backend_dockerfile_dir) $(backend_project_dir)
 
 push-backend:
-	docker push $(backend_tag):$(commit_sha)
+	docker push $(backend_tag):$(tag_suffix)
 
 apply-backend:
 	# TODO
@@ -49,11 +58,11 @@ tor_tag := $(registry)/$(project)-backend-tor
 
 build-tor:
 	docker build \
-	-t $(tor_tag):$(commit_sha) \
+	-t $(tor_tag):$(tag_suffix) \
 	-f $(tor_dockerfile_dir) $(tor_project_dir)
 
 push-tor:
-	docker push $(tor_tag):$(commit_sha)
+	docker push $(tor_tag):$(tag_suffix)
 
 apply-tor:
 	# TODO
@@ -67,11 +76,11 @@ playwright_tag := $(registry)/$(project)-backend-playwright
 
 build-playwright:
 	docker build \
-	-t $(playwright_tag):$(commit_sha) \
+	-t $(playwright_tag):$(tag_suffix) \
 	-f $(playwright_dockerfile_dir) .
 
 push-playwright:
-	docker push $(playwright_tag):$(commit_sha)
+	docker push $(playwright_tag):$(tag_suffix)
 
 apply-playwright:
 	# TODO
@@ -86,11 +95,11 @@ bff_tag := $(registry)/$(project)-bff
 
 build-bff:
 	docker build \
-	-t $(bff_tag):$(commit_sha) \
+	-t $(bff_tag):$(tag_suffix) \
 	-f $(bff_dockerfile_dir) $(bff_project_dir)
 
 push-bff:
-	docker push $(bff_tag):$(commit_sha)
+	docker push $(bff_tag):$(tag_suffix)
 
 apply-bff:
 	# TODO
@@ -105,11 +114,11 @@ frontend_tag := $(registry)/$(project)-frontend
 
 build-frontend:
 	docker build \
-	-t $(frontend_tag):$(commit_sha) \
+	-t $(frontend_tag):$(tag_suffix) \
 	-f $(frontend_dockerfile_dir) $(frontend_project_dir)
 
 push-frontend:
-	docker push $(frontend_tag):$(commit_sha)
+	docker push $(frontend_tag):$(tag_suffix)
 
 apply-frontend:
 	# TODO
