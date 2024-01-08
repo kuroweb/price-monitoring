@@ -4,8 +4,8 @@
 # config
 #
 
-project := price-monitoring
 registry := registry.local:5000
+project := price-monitoring
 tag_suffix := $(shell git rev-parse --short HEAD)
 
 #
