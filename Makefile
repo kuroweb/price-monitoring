@@ -5,7 +5,6 @@
 #
 
 registry := registry.local:5000
-tag_prefix := price-monitoring
 tag_suffix := $(shell git rev-parse --short HEAD)
 
 #
@@ -27,7 +26,7 @@ push-all: push-backend push-tor push-playwright push-bff push-frontend
 
 backend_dockerfile_dir := containers/backend/Dockerfile.prod
 backend_project_dir := volumes/backend
-backend_tag := $(registry)/$(tag_prefix)-backend:$(tag_suffix)
+backend_tag := $(registry)/price-monitoring-backend:$(tag_suffix)
 
 build-backend:
 	docker build \
@@ -43,7 +42,7 @@ push-backend:
 
 tor_dockerfile_dir := containers/tor/Dockerfile.prod
 tor_project_dir := volumes/tor
-tor_tag := $(registry)/$(tag_prefix)-backend-tor:$(tag_suffix)
+tor_tag := $(registry)/price-monitoring-backend-tor:$(tag_suffix)
 
 build-tor:
 	docker build \
@@ -58,7 +57,7 @@ push-tor:
 #
 
 playwright_dockerfile_dir := containers/playwright/Dockerfile
-playwright_tag := $(registry)/$(tag_prefix)-backend-playwright:$(tag_suffix)
+playwright_tag := $(registry)/price-monitoring-backend-playwright:$(tag_suffix)
 
 build-playwright:
 	docker build \
@@ -74,7 +73,7 @@ push-playwright:
 
 bff_dockerfile_dir := containers/bff/Dockerfile.prod
 bff_project_dir := volumes/bff
-bff_tag := $(registry)/$(tag_prefix)-bff:$(tag_suffix)
+bff_tag := $(registry)/price-monitoring-bff:$(tag_suffix)
 
 build-bff:
 	docker build \
@@ -90,7 +89,7 @@ push-bff:
 
 frontend_dockerfile_dir := containers/frontend/Dockerfile.prod
 frontend_project_dir := volumes/frontend
-frontend_tag := $(registry)/$(tag_prefix)-frontend:$(tag_suffix)
+frontend_tag := $(registry)/price-monitoring-frontend:$(tag_suffix)
 
 build-frontend:
 	docker build \
