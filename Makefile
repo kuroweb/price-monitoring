@@ -1,24 +1,20 @@
 # ArgoCDによるGitOps用のMakefile
 
-project := price-monitoring
+#
+# config
+#
+
 registry := registry.local:5000
 
-#
-# optional
-#
-
-# NOTE: argsで上書き可能
-# make <command> tag_suffix=<tag_name> release_branch=<branch_name>
-
+tag_prefix := price-monitoring
 tag_suffix := $(shell git rev-parse --short HEAD)
-release_branch := master
 
 #
 # util
 #
 
 # すべて実行する
-all: build-all push-all apply-all
+all: build-all push-all
 
 # Dockerイメージをビルドする
 build-all: build-backend build-tor build-playwright build-bff build-frontend
@@ -26,27 +22,21 @@ build-all: build-backend build-tor build-playwright build-bff build-frontend
 # Dockerイメージをプッシュする
 push-all: push-backend push-tor push-playwright push-bff push-frontend
 
-# k8sマニフェストのイメージタグを書き換える
-apply-all: apply-backend apply-tor apply-playwright apply-bff apply-frontend
-
 #
 # backendコンテナ
 #
 
 backend_dockerfile_dir := containers/backend/Dockerfile.prod
 backend_project_dir := volumes/backend
-backend_tag := $(registry)/$(project)-backend
+backend_tag := $(registry)/$(tag_prefix)-backend:$(tag_suffix)
 
 build-backend:
 	docker build \
-	-t $(backend_tag):$(tag_suffix) \
+	-t $(backend_tag) \
 	-f $(backend_dockerfile_dir) $(backend_project_dir)
 
 push-backend:
-	docker push $(backend_tag):$(tag_suffix)
-
-apply-backend:
-	# TODO
+	docker push $(backend_tag)
 
 #
 # torコンテナ
@@ -54,36 +44,30 @@ apply-backend:
 
 tor_dockerfile_dir := containers/tor/Dockerfile.prod
 tor_project_dir := volumes/tor
-tor_tag := $(registry)/$(project)-backend-tor
+tor_tag := $(registry)/$(tag_prefix)-backend-tor:$(tag_suffix)
 
 build-tor:
 	docker build \
-	-t $(tor_tag):$(tag_suffix) \
+	-t $(tor_tag) \
 	-f $(tor_dockerfile_dir) $(tor_project_dir)
 
 push-tor:
-	docker push $(tor_tag):$(tag_suffix)
-
-apply-tor:
-	# TODO
+	docker push $(tor_tag)
 
 #
 # playwrightコンテナ
 #
 
 playwright_dockerfile_dir := containers/playwright/Dockerfile
-playwright_tag := $(registry)/$(project)-backend-playwright
+playwright_tag := $(registry)/$(tag_prefix)-backend-playwright:$(tag_suffix)
 
 build-playwright:
 	docker build \
-	-t $(playwright_tag):$(tag_suffix) \
+	-t $(playwright_tag) \
 	-f $(playwright_dockerfile_dir) .
 
 push-playwright:
-	docker push $(playwright_tag):$(tag_suffix)
-
-apply-playwright:
-	# TODO
+	docker push $(playwright_tag)
 
 #
 # bffコンテナ
@@ -91,18 +75,15 @@ apply-playwright:
 
 bff_dockerfile_dir := containers/bff/Dockerfile.prod
 bff_project_dir := volumes/bff
-bff_tag := $(registry)/$(project)-bff
+bff_tag := $(registry)/$(tag_prefix)-bff:$(tag_suffix)
 
 build-bff:
 	docker build \
-	-t $(bff_tag):$(tag_suffix) \
+	-t $(bff_tag) \
 	-f $(bff_dockerfile_dir) $(bff_project_dir)
 
 push-bff:
-	docker push $(bff_tag):$(tag_suffix)
-
-apply-bff:
-	# TODO
+	docker push $(bff_tag)
 
 #
 # frontendコンテナ
@@ -110,15 +91,12 @@ apply-bff:
 
 frontend_dockerfile_dir := containers/frontend/Dockerfile.prod
 frontend_project_dir := volumes/frontend
-frontend_tag := $(registry)/$(project)-frontend
+frontend_tag := $(registry)/$(tag_prefix)-frontend:$(tag_suffix)
 
 build-frontend:
 	docker build \
-	-t $(frontend_tag):$(tag_suffix) \
+	-t $(frontend_tag) \
 	-f $(frontend_dockerfile_dir) $(frontend_project_dir)
 
 push-frontend:
-	docker push $(frontend_tag):$(tag_suffix)
-
-apply-frontend:
-	# TODO
+	docker push $(frontend_tag)
