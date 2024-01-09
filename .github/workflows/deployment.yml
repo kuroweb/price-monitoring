@@ -56,7 +56,7 @@ jobs:
         run: |
           sudo killall openvpn
 
-      - name: Apply Kubernetes manifests
+      - name: Update Kubernetes Manifest
         run: |
           git config --global user.name {{ secrets.GIT_USER }}
           git config --global user.email {{ secrets.GIT_EMAIL }}
