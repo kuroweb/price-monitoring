@@ -16,10 +16,10 @@ tag_suffix := $(shell git rev-parse --short HEAD)
 all: build-all push-all
 
 # Dockerイメージをビルドする
-build-all: build-backend build-tor build-playwright build-bff build-frontend
+build-all: build-backend build-backend-tor build-backend-playwright build-bff build-frontend
 
 # Dockerイメージをプッシュする
-push-all: push-backend push-tor push-playwright push-bff push-frontend
+push-all: push-backend push-backend-tor push-backend-playwright push-bff push-frontend
 
 #
 # backend
@@ -36,32 +36,32 @@ push-backend:
 	docker push $(backend_tag)
 
 #
-# tor
+# backend-tor
 #
 
-tor_tag := $(registry)/$(project)-backend-tor:$(tag_suffix)
+backend_tor_tag := $(registry)/$(project)-backend-tor:$(tag_suffix)
 
-build-tor:
+build-backend-tor:
 	docker build \
-	-t $(tor_tag) \
-	-f containers/tor/Dockerfile.prod volumes/tor
+	-t $(backend_tor_tag) \
+	-f containers/backend_tor/Dockerfile.prod volumes/backend_tor
 
-push-tor:
-	docker push $(tor_tag)
+push-backend-tor:
+	docker push $(backend_tor_tag)
 
 #
 # playwright
 #
 
-playwright_tag := $(registry)/$(project)-backend-playwright:$(tag_suffix)
+backend_playwright_tag := $(registry)/$(project)-backend-playwright:$(tag_suffix)
 
-build-playwright:
+build-backend-playwright:
 	docker build \
-	-t $(playwright_tag) \
-	-f containers/playwright/Dockerfile .
+	-t $(backend_playwright_tag) \
+	-f containers/backend_playwright/Dockerfile .
 
-push-playwright:
-	docker push $(playwright_tag)
+push-backend-playwright:
+	docker push $(backend_playwright_tag)
 
 #
 # bff

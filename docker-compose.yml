@@ -39,7 +39,7 @@ x-redis: &redis
 x-tor: &tor
   build:
     context: .
-    dockerfile: containers/tor/Dockerfile
+    dockerfile: containers/backend_tor/Dockerfile
 
 services:
   frontend:
@@ -102,34 +102,34 @@ services:
   backend-playwright:
     build:
       context: .
-      dockerfile: containers/playwright/Dockerfile
+      dockerfile: containers/backend_playwright/Dockerfile
     ports:
       - 8888:8888
 
   backend-tor-1:
     <<: *tor
     volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
 
   backend-tor-2:
     <<: *tor
     volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
 
   backend-tor-3:
     <<: *tor
     volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
 
   backend-tor-4:
     <<: *tor
     volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
 
   backend-tor-5:
     <<: *tor
     volumes:
-      - ./volumes/tor/etc/tor/torrc:/etc/tor/torrc
+      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
 
   bff:
     build:
