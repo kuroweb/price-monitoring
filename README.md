@@ -19,18 +19,19 @@ Web上にある欲しい物の価格監視を行うことができる
 - Go
 - gqlgen
 
-### Backend (Price Monitoring Domain)
+### Backend
 
 - Rails
 
-### 開発インフラ
+## 　Infra
+
+### Development
 
 - Docker Compose
 
-### デプロイ
+### Production
 
 - 自宅Kubernetes (Master Node x 1, Worker Node x 2構成)
-- ArgoCDで自動デプロイ
 
 ## アーキテクチャ
 
@@ -69,8 +70,6 @@ bff--REST API-->price
 ```
 
 ## ER
-
-### Price Monitoring
 
 ```mermaid
 erDiagram
@@ -113,6 +112,41 @@ erDiagram
   products ||--|| mercari_crawl_settings : "1:1"
   products ||--o{ yahoo_auction_products : "1:N"
   products ||--o{ mercari_products : "1:N"
+```
+
+## 自動デプロイ
+
+- ArgoCDによるGitOps
+- [k8sマニフェスト](https://github.com/kuroweb/k8s)
+
+```mermaid
+sequenceDiagram
+  participant repo_pm as Repository - price-monitoring
+  participant repo_k8s as Repository - k8s
+  participant deploy as GitHub Actions - Deployment
+  participant vpn as 自宅サーバ - OpenVPN
+  participant kp_registry as Kubernetes Pod - Docker Registry
+  participant kp_argocd as Kubernetes Pod - ArgoCD
+  participant kp_pm as Kubernetes Pod - price-monitoring
+
+  repo_pm->>repo_pm : commit
+  repo_pm->>deploy : execute
+  activate deploy
+  deploy->>deploy : docker build
+  deploy->>vpn : connect vpn
+  vpn-->>deploy :  
+  deploy->>kp_registry : push
+  kp_registry-->>deploy :  
+  deploy->>repo_k8s : update manifest
+  repo_k8s-->>deploy :  
+  deploy-->>repo_pm :  
+  deactivate deploy
+  kp_argocd->>repo_k8s : Auto Sync
+  activate kp_argocd
+  repo_k8s-->>kp_argocd :  
+  kp_argocd->>kp_pm : apply manifest
+  kp_pm-->>kp_argocd :  
+  deactivate kp_argocd
 ```
 
 ## Docs
