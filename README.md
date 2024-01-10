@@ -135,7 +135,7 @@ sequenceDiagram
   deploy->>deploy : docker build
   deploy->>vpn : connect vpn
   vpn-->>deploy :  
-  deploy->>kp_registry : push
+  deploy->>kp_registry : docker push
   kp_registry-->>deploy :  
   deploy->>repo_k8s : update manifest
   repo_k8s-->>deploy :  
