@@ -30,6 +30,7 @@ Web上にある欲しい物の価格監視を行うことができる
 ### デプロイ
 
 - 自宅Kubernetes (Master Node x 1, Worker Node x 2構成)
+- ArgoCDで自動デプロイ
 
 ## アーキテクチャ
 
