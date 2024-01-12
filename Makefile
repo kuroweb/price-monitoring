@@ -25,18 +25,15 @@ push-all: push-backend push-backend-tor push-backend-playwright push-bff push-fr
 # backend
 #
 
-backend_cache_tag := $(registry)/$(project)-backend:latest
-backend_build_tag := $(registry)/$(project)-backend:$(tag_suffix)
+backend_tag := $(registry)/$(project)-backend:$(tag_suffix)
 
 build-backend:
 	docker build \
-	--cache-from=$(backend_cache_tag) \
-	--build-arg BUILDKIT_INLINE_CACHE=1 \
-	-t $(backend_build_tag) \
+	-t $(backend_tag) \
 	-f containers/backend/Dockerfile.prod volumes/backend
 
 push-backend:
-	docker push $(backend_build_tag)
+	docker push $(backend_tag)
 
 #
 # backend-tor
