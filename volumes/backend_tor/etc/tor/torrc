@@ -193,4 +193,4 @@
 # country settings
 StrictNodes 1
 EntryNodes {jp}
-ExitNodes {jp}
+ExitNodes {jp},{kr},{tw},{hk},{sg}
