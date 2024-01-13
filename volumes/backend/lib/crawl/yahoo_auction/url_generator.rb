@@ -58,7 +58,8 @@ module Crawl
       end
 
       def keyword(str)
-        "#{str}#{KEYWORD_1}#{product.crawlable_name}&#{KEYWORD_2}#{product.crawlable_name}&"
+        "#{str}#{KEYWORD_1}#{product.yahoo_auction_crawl_setting.crawlable_keyword}&" \
+        "#{KEYWORD_2}#{product.yahoo_auction_crawl_setting.crawlable_keyword}&"
       end
 
       def min_price(str)
