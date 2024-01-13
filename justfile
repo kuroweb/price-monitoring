@@ -1,6 +1,10 @@
 @_list:
 	just -l
 
+#
+# Launch
+#
+
 up:
 	docker compose up
 
@@ -10,21 +14,58 @@ up-d:
 down:
 	docker compose down
 
-down-up:
-	docker compose down
-	docker compose up
+#
+# Restart
+#
 
 restart:
 	docker compose restart
 
-logs:
-	docker compose logs -f
+restart-f: down up
 
-attach-frontend:
-	docker attach $(docker compose ps -q frontend)
+restart-backend:
+	docker compose restart backend
+
+restart-backend-batch:
+	docker compose restart backend-batch
+
+restart-backend-playwright:
+	docker compose restart backend-playwright
+
+restart-backend-tor:
+	docker compose restart backend-tor
+
+restart-bff:
+	docker compose restart bff
+
+restart-frontend:
+	docker compose restart frontend
+
+#
+# Attach
+#
+
+attach-backend:
+	docker attach $(docker compose ps -q backend)
+
+attach-backend-batch:
+	docker attach $(docker compose ps -q backend-batch)
+
+attach-backend-playwright:
+	docker attach $(docker compose ps -q backend-playwright)
+
+attach-backend-tor:
+	docker attach $(docker compose ps -q backend-tor)
 
 attach-bff:
 	docker attach $(docker compose ps -q bff)
 
-attach-backend:
-	docker attach $(docker compose ps -q backend)
+attach-frontend:
+	docker attach $(docker compose ps -q frontend)
+
+#
+# Log
+#
+
+logs:
+	docker compose logs -f
