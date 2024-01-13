@@ -12,9 +12,7 @@ module Crawl
           start = 1
           loop do
             page.goto(url(start))
-
-            product_doms = page.query_selector_all("li.Product")
-            product_doms.each { |p| yahoo_auction_products.push(parse_product(p)) }
+            append_results(page)
 
             break unless exists_next_page?(page)
             break if loop_safe(start)
@@ -23,12 +21,27 @@ module Crawl
           end
         end
 
-        yahoo_auction_products
+        crawl_results
       end
 
       private
 
       attr_reader :product
+
+      def append_results(page)
+        product_doms = page.query_selector_all("li.Product")
+        results = product_doms.map do |dom|
+          CrawlResult.new(
+            yahoo_auction_id: yahoo_auction_id(dom),
+            name: name(dom),
+            price: price(dom),
+            thumbnail_url: thumbnail_url(dom),
+            published: true
+          )
+        end
+
+        @crawl_results = CrawlResults.new(crawl_results.results + results)
+      end
 
       def url(start)
         Crawl::YahooAuction::UrlGenerator.new(product:, start:).generate
@@ -40,17 +53,6 @@ module Crawl
 
       def loop_safe(start)
         start > 100_000
-      end
-
-      def parse_product(dom)
-        {
-          product_id: product.id,
-          yahoo_auction_id: yahoo_auction_id(dom),
-          name: name(dom),
-          price: price(dom),
-          thumbnail_url: thumbnail_url(dom),
-          published: true
-        }
       end
 
       def yahoo_auction_id(dom)
@@ -69,8 +71,8 @@ module Crawl
         dom.eval_on_selector(".Product__imageData", "el => el.src")
       end
 
-      def yahoo_auction_products
-        @yahoo_auction_products ||= []
+      def crawl_results
+        @crawl_results ||= CrawlResults.new
       end
     end
   end
