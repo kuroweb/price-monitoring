@@ -10,3 +10,5 @@ Style/RedundantAssignment:
   Enabled: false
 Metrics/MethodLength:
   Max: 15
+Layout/IndentationStyle:
+  Enabled: false
