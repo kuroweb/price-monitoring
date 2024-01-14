@@ -27,9 +27,6 @@ const ProductsTable = ({
             <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
               <tr>
                 <th scope='col' className='px-6 py-3'>
-                  id
-                </th>
-                <th scope='col' className='px-6 py-3'>
                   name
                 </th>
               </tr>
@@ -41,7 +38,6 @@ const ProductsTable = ({
                   className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
                   key={product.id}
                 >
-                  <td className='px-6 py-4'>{product.id}</td>
                   <td className='px-6 py-4'>{product.name}</td>
                 </tr>
               ))}
