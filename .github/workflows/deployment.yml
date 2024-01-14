@@ -238,6 +238,8 @@ jobs:
           git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_USER }}/k8s
           cd k8s/manifests/price-monitoring
           make apply-bff tag_suffix=${{ github.sha }}
+          make commit
+          make push
   frontend:
     runs-on: ubuntu-20.04
     steps:
@@ -294,3 +296,5 @@ jobs:
           git clone https://${{ secrets.GIT_USER }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_USER }}/k8s
           cd k8s/manifests/price-monitoring
           make apply-frontend tag_suffix=${{ github.sha }}
+          make commit
+          make push
