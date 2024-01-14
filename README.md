@@ -75,21 +75,15 @@ bff--REST API-->price
 erDiagram
   products {
     bigint id PK
-    bigint product_cateogory_id FK
     string name
-  }
-  product_categories {
-    bigint id PK
-    string name "NOT_NULL"
   }
   yahoo_auction_crawl_settings {
     bigint id PK
     bigint product_id FK
-    boolean enabled "default: false"
-  }
-  mercari_crawl_settings {
-    bigint id PK
-    bigint product_id FK
+    string keyword "NOT_NULL"
+    int category_id "default: 0"
+    int min_price "default: 0"
+    int max_price "default: 0"
     boolean enabled "default: false"
   }
   yahoo_auction_products {
@@ -99,19 +93,9 @@ erDiagram
     int price "NOT_NULL"
     boolean published "default: false"
   }
-  mercari_products {
-    bigint id PK
-    bigint mercari_id "NOT_NULL"
-    string name "NOT_NULL"
-    int price "NOT_NULL"
-    boolean published "default: false"
-  }
 
-  products ||--|| product_categories : "1:1"
   products ||--|| yahoo_auction_crawl_settings : "1:1"
-  products ||--|| mercari_crawl_settings : "1:1"
   products ||--o{ yahoo_auction_products : "1:N"
-  products ||--o{ mercari_products : "1:N"
 ```
 
 ## 自動デプロイ
