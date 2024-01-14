@@ -22,7 +22,7 @@ const Page = async ({
       <ol className='flex items-center whitespace-nowrap min-w-0' aria-label='Breadcrumb'>
         <li className='text-sm text-gray-500'>
           <div className='flex items-center'>
-            <span className='font-semibold'>Product</span>
+            <span className='font-semibold'>Products</span>
           </div>
         </li>
       </ol>
