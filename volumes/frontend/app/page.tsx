@@ -1,5 +1,5 @@
 import Layout from '@/components/layouts/Layout'
-import ProductsTable from '@/components/products/ProductsTable'
+import ProductsTable from '@/features/products/ProductsTable'
 import { ProductsDocument, ProductsQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 

@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
-import ProductTable from '@/components/products/ProductTable'
-import YahooAuctionProductsTable from '@/components/products/YahooAuctionProductsTable'
+import ProductTable from '@/features/products/ProductTable'
+import YahooAuctionProductsTable from '@/features/products/YahooAuctionProductsTable'
 import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
