@@ -23,7 +23,7 @@ Web上にある欲しい物の価格監視を行うことができる
 
 - Rails
 
-## 　Infra
+## Infra
 
 ### Development
 
