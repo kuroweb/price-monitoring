@@ -14,7 +14,7 @@ const Layout = ({ children }: Props) => {
       <div className='flex flex-col h-screen'>
         <Header />
         <div className='flex flex-1 overflow-hidden'>
-          <Sidebar />
+          <Sidebar isOpen={false} />
           <main className='w-full p-4 overflow-scroll bg-gray-200'>{children}</main>
         </div>
         <Footer />

@@ -1,8 +1,6 @@
-const Sidebar = () => {
+const Sidebar = ({ isOpen }: { isOpen: boolean }) => {
   return (
-    <>
-      <aside className='bg-blue-800 text-white w-48 overflow-y-auto'>Sidebar</aside>
-    </>
+    <>{isOpen && <aside className='bg-blue-800 text-white w-48 overflow-y-auto'>Sidebar</aside>}</>
   )
 }
 
