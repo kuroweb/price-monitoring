@@ -1,4 +1,5 @@
 import Layout from '@/components/layouts/Layout'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import ProductsTable from '@/features/products/ProductsTable'
 import { ProductsDocument, ProductsQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
@@ -10,13 +11,7 @@ const Page = async () => {
 
   return (
     <Layout>
-      <ol className='flex items-center whitespace-nowrap min-w-0' aria-label='Breadcrumb'>
-        <li className='text-sm text-gray-500'>
-          <div className='flex items-center'>
-            <span className='font-semibold'>Products</span>
-          </div>
-        </li>
-      </ol>
+      <Breadcrumbs text={'Products'} />
       <ProductsTable data={data} error={error} />
     </Layout>
   )

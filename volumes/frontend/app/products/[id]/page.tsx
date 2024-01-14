@@ -1,4 +1,5 @@
 import Layout from '@/components/layouts/Layout'
+import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import ProductTable from '@/features/products/ProductTable'
 import YahooAuctionProductsTable from '@/features/products/YahooAuctionProductsTable'
 import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
@@ -18,23 +19,9 @@ const Page = async ({
 
   return (
     <Layout>
-      {/* TODO: 別コンポーネントに切り出す */}
-      <ol className='flex items-center whitespace-nowrap min-w-0' aria-label='Breadcrumb'>
-        <li className='text-sm text-gray-500'>
-          <div className='flex items-center'>
-            <span className='font-semibold'>Products</span>
-          </div>
-        </li>
-      </ol>
+      <Breadcrumbs text={'Products'} />
       <ProductTable data={data} error={error} />
-      {/* TODO: 別コンポーネントに切り出す */}
-      <ol className='flex items-center whitespace-nowrap min-w-0 pt-4' aria-label='Breadcrumb'>
-        <li className='text-sm text-gray-500'>
-          <div className='flex items-center'>
-            <span className='font-semibold'>ヤフオク</span>
-          </div>
-        </li>
-      </ol>
+      <Breadcrumbs text={'ヤフオク'} className='pt-4' />
       <YahooAuctionProductsTable data={data} error={error} />
     </Layout>
   )
