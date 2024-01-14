@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 // SSG disabled
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
