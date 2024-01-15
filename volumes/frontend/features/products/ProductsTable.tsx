@@ -38,7 +38,7 @@ const ProductsTable = ({
                   className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
                   key={product.id}
                 >
-                  <td className='px-6 py-4'>{product.name}</td>
+                  <td className='px-6 py-4 select-none'>{product.name}</td>
                 </tr>
               ))}
             </tbody>
