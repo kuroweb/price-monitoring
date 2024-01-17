@@ -1,7 +1,7 @@
 import Layout from '@/components/layouts/Layout'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
-import ProductTable from '@/features/products/ProductTable'
-import YahooAuctionProductsTable from '@/features/products/YahooAuctionProductsTable'
+import ProductTable from '@/features/products/components/ProductTable'
+import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
