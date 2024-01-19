@@ -11,7 +11,15 @@ module Api
         render json: products.first.as_json, status: 200
       end
 
-      def create; end
+      def create
+        result = Products::CreateService.call(params: product_params)
+
+        if result.success?
+          render json: { product: result.payload[:product].as_json }, status: 200
+        else
+          render json: { message: result.message }, status: result.status
+        end
+      end
 
       def update; end
 
@@ -20,7 +28,7 @@ module Api
       private
 
       def product_params_attributes
-        %i[id user_id name price]
+        %i[id name]
       end
 
       def product_params
