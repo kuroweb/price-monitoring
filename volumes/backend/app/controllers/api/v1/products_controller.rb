@@ -17,7 +17,7 @@ module Api
         if result.success?
           render json: { product: result.payload[:product].as_json }, status: 200
         else
-          render json: { message: result.message }, status: result.status
+          render json: { message: result.message }, status: 400
         end
       end
 

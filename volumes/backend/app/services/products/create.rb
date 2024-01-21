@@ -14,7 +14,7 @@ module Products
       if product.save
         ServiceResponse.success(payload: { product: })
       else
-        ServiceResponse.error(message: "#{self.class.name} is failed.", status: 400)
+        ServiceResponse.error(message: "#{self.class.name} is failed.")
       end
     end
 
