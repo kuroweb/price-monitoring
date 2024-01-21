@@ -9,17 +9,32 @@ module Products
     end
 
     def call
-      product = Product.new(params)
+      ApplicationRecord.transaction do
+        product = Product.create!(product_params)
+        product.create_yahoo_auction_crawl_setting!(yahoo_auction_crawl_setting_params)
 
-      if product.save
         ServiceResponse.success(payload: { product: })
-      else
-        ServiceResponse.error(message: "#{self.class.name} is failed.")
       end
+    rescue StandardError => e
+      ServiceResponse.error(message: e.message)
     end
 
     private
 
     attr_reader :params
+
+    def product_params
+      { name: params[:name] }
+    end
+
+    def yahoo_auction_crawl_setting_params
+      {
+        keyword: params.dig(:yahoo_auction_crawl_setting, :keyword),
+        category_id: params.dig(:yahoo_auction_crawl_setting, :category_id),
+        min_price: params.dig(:yahoo_auction_crawl_setting, :min_price),
+        max_price: params.dig(:yahoo_auction_crawl_setting, :max_price),
+        enabled: params.dig(:yahoo_auction_crawl_setting, :enabled)
+      }
+    end
   end
 end

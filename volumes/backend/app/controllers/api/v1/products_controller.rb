@@ -27,12 +27,19 @@ module Api
 
       private
 
-      def product_params_attributes
+      def product_attributes
         %i[id name]
       end
 
+      def yahoo_auction_crawl_setting_attributes
+        %i[keyword category_id min_price max_price enabled]
+      end
+
       def product_params
-        @product_params ||= params.permit(product_params_attributes)
+        @product_params ||= params.permit(
+          product_attributes,
+          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes
+        )
       end
     end
   end
