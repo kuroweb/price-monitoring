@@ -1,6 +1,6 @@
 module Crawl
   module YahooAuction
-    class CrawlService
+    class Syncer
       def self.call(...)
         new(...).call
       end
