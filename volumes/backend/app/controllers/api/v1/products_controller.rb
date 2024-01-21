@@ -12,7 +12,7 @@ module Api
       end
 
       def create
-        result = Products::CreateService.call(params: product_params)
+        result = Products::Create.call(params: product_params)
 
         if result.success?
           render json: { product: result.payload[:product].as_json }, status: 200

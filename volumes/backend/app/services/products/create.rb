@@ -1,5 +1,5 @@
 module Products
-  class CreateService
+  class Create
     def self.call(...)
       new(...).call
     end
