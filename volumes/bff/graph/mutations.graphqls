@@ -1,0 +1,12 @@
+type Mutation {
+  createProduct(input: createProductInput!): Product!
+}
+
+input createProductInput {
+  name: String!
+  keyword: String!
+  categoryId: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+}

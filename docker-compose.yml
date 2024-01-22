@@ -55,7 +55,7 @@ services:
     tty: true
     volumes:
       - ./volumes/frontend:/app
-      - ./volumes/bff/graph/schema.graphqls:/app/graphql/schema.graphql
+      - ./volumes/bff/graph:/app/graphql/schema
       - frontend-node-modules:/app/node_modules
 
   backend:

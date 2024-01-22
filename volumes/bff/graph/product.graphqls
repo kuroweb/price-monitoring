@@ -1,0 +1,21 @@
+type Product implements Node {
+  id: ID!
+  name: String!
+  yahooAuctionProducts(
+    id: ID
+    yahooAuctionID: String
+    name: String
+    price: Int
+    published: Boolean
+  ): [YahooAuctionProduct!]!
+}
+
+type YahooAuctionProduct implements Node {
+  id: ID!
+  productId: Int!
+  yahooAuctionId: String!
+  name: String!
+  thumbnailUrl: String!
+  price: Int!
+  published: Boolean!
+}

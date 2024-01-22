@@ -17,6 +17,16 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  createProduct: Product;
+};
+
+
+export type MutationCreateProductArgs = {
+  input: CreateProductInput;
+};
+
 export type Node = {
   id: Scalars['ID']['output'];
 };
@@ -75,6 +85,15 @@ export type YahooAuctionProduct = Node & {
   published: Scalars['Boolean']['output'];
   thumbnailUrl: Scalars['String']['output'];
   yahooAuctionId: Scalars['String']['output'];
+};
+
+export type CreateProductInput = {
+  categoryId: Scalars['String']['input'];
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  maxPrice: Scalars['Int']['input'];
+  minPrice: Scalars['Int']['input'];
+  name: Scalars['String']['input'];
 };
 
 export type ProductsQueryVariables = Exact<{

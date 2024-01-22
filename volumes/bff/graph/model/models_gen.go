@@ -28,3 +28,12 @@ type YahooAuctionProduct struct {
 
 func (YahooAuctionProduct) IsNode()            {}
 func (this YahooAuctionProduct) GetID() string { return this.ID }
+
+type CreateProductInput struct {
+	Name       string `json:"name"`
+	Keyword    string `json:"keyword"`
+	CategoryID string `json:"categoryId"`
+	MinPrice   int    `json:"minPrice"`
+	MaxPrice   int    `json:"maxPrice"`
+	Enabled    bool   `json:"enabled"`
+}
