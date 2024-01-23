@@ -19,7 +19,7 @@ export type Scalars = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createProduct: Product;
+  createProduct: CreateProductResult;
 };
 
 
@@ -76,6 +76,19 @@ export type QueryYahooAuctionProductArgs = {
   id: Scalars['ID']['input'];
 };
 
+export type YahooAuctionCrawlSetting = Node & {
+  __typename?: 'YahooAuctionCrawlSetting';
+  categoryId: Scalars['Int']['output'];
+  createdAt: Scalars['String']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  keyword: Scalars['String']['output'];
+  maxPrice: Scalars['Int']['output'];
+  minPrice: Scalars['Int']['output'];
+  productId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type YahooAuctionProduct = Node & {
   __typename?: 'YahooAuctionProduct';
   id: Scalars['ID']['output'];
@@ -88,12 +101,22 @@ export type YahooAuctionProduct = Node & {
 };
 
 export type CreateProductInput = {
-  categoryId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+  yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
+};
+
+export type CreateProductResult = {
+  __typename?: 'createProductResult';
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type CreateYahooAuctionCrawlSettingInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
   enabled: Scalars['Boolean']['input'];
   keyword: Scalars['String']['input'];
-  maxPrice: Scalars['Int']['input'];
-  minPrice: Scalars['Int']['input'];
-  name: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
 };
 
 export type ProductsQueryVariables = Exact<{
