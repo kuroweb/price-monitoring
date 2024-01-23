@@ -12,10 +12,11 @@ module Api
       end
 
       def create
+        # TODO: シリアライザの導入
         result = Products::Create.call(params: product_params)
 
         if result.success?
-          render json: { product: result.payload[:product].as_json }, status: 200
+          render json: result.payload[:product].as_json, status: 200
         else
           render json: { message: result.message }, status: 400
         end
