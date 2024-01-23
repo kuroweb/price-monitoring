@@ -16,6 +16,21 @@ type Product struct {
 func (Product) IsNode()            {}
 func (this Product) GetID() string { return this.ID }
 
+type YahooAuctionCrawlSetting struct {
+	ID         string `json:"id"`
+	ProductID  int    `json:"productId"`
+	Keyword    string `json:"keyword"`
+	MinPrice   int    `json:"minPrice"`
+	MaxPrice   int    `json:"maxPrice"`
+	CategoryID int    `json:"categoryId"`
+	Enabled    bool   `json:"enabled"`
+	CreatedAt  string `json:"createdAt"`
+	UpdatedAt  string `json:"updatedAt"`
+}
+
+func (YahooAuctionCrawlSetting) IsNode()            {}
+func (this YahooAuctionCrawlSetting) GetID() string { return this.ID }
+
 type YahooAuctionProduct struct {
 	ID             string `json:"id"`
 	ProductID      int    `json:"productId"`
@@ -30,10 +45,19 @@ func (YahooAuctionProduct) IsNode()            {}
 func (this YahooAuctionProduct) GetID() string { return this.ID }
 
 type CreateProductInput struct {
-	Name       string `json:"name"`
+	Name                     string                               `json:"name"`
+	YahooAuctionCrawlSetting *CreateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
+}
+
+type CreateProductResult struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
+type CreateYahooAuctionCrawlSettingInput struct {
 	Keyword    string `json:"keyword"`
-	CategoryID string `json:"categoryId"`
-	MinPrice   int    `json:"minPrice"`
-	MaxPrice   int    `json:"maxPrice"`
+	CategoryID *int   `json:"category_id,omitempty"`
+	MinPrice   int    `json:"min_price"`
+	MaxPrice   int    `json:"max_price"`
 	Enabled    bool   `json:"enabled"`
 }

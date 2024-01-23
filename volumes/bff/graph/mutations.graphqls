@@ -1,12 +1,29 @@
 type Mutation {
-  createProduct(input: createProductInput!): Product!
+  createProduct(input: createProductInput!): createProductResult!
 }
+
+#
+# Inputs
+#
 
 input createProductInput {
   name: String!
+  yahoo_auction_crawl_setting: createYahooAuctionCrawlSettingInput!
+}
+
+input createYahooAuctionCrawlSettingInput {
   keyword: String!
-  categoryId: String!
-  minPrice: Int!
-  maxPrice: Int!
+  category_id: Int
+  min_price: Int!
+  max_price: Int!
   enabled: Boolean!
+}
+
+#
+# Custom Results
+#
+
+type createProductResult {
+  id: ID!
+  name: String!
 }

@@ -19,3 +19,15 @@ type YahooAuctionProduct implements Node {
   price: Int!
   published: Boolean!
 }
+
+type YahooAuctionCrawlSetting implements Node {
+  id: ID!
+  productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  categoryId: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+}
