@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
   ## associations ##
-  has_one :yahoo_auction_crawl_setting
+  has_one :yahoo_auction_crawl_setting, dependent: :destroy
 
-  has_many :yahoo_auction_products
+  has_many :yahoo_auction_products, dependent: :destroy
 
   ## validations ##
 
