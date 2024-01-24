@@ -24,7 +24,17 @@ module Api
 
       def update; end
 
-      def destroy; end
+      def destroy
+        products = ProductFinder.new(params: { id: params[:id] }).execute
+        return head 404 if products.blank?
+
+        result = Products::DeleteService.call(product: products.first)
+        if result.success?
+          head 200
+        else
+          render json: { message: result.message }, status: 400
+        end
+      end
 
       private
 
