@@ -28,3 +28,10 @@ query product($id: ID!, $published: Boolean) {
     }
   }
 }
+
+mutation createProduct($input: createProductInput!) {
+  createProduct(input: $input) {
+    id
+    name
+  }
+}

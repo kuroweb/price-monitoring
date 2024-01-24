@@ -1,29 +1,25 @@
 'use client'
 
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { create } from '../actions/submit'
-
-export type CreateFormType = {
-  name: string
-  keyword: string
-  min_price: number
-  max_price: number
-  enabled: boolean
-}
+import { createProduct } from '../actions/submit'
+import { CreateProductInput } from '@/graphql/dist/client'
 
 const CreateForm = () => {
-  const { register, handleSubmit } = useForm<CreateFormType>({
+  const { register, handleSubmit } = useForm<CreateProductInput>({
     defaultValues: {
       name: '',
-      keyword: '',
-      min_price: 0,
-      max_price: 0,
-      enabled: true,
+      yahoo_auction_crawl_setting: {
+        keyword: '',
+        category_id: undefined,
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
+      },
     },
   })
 
-  const onSubmit: SubmitHandler<CreateFormType> = async (data) => {
-    await create(data)
+  const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
+    await createProduct(data)
   }
 
   return (
@@ -34,18 +30,39 @@ const CreateForm = () => {
       </label>
       <label className='block pt-4 text-sm font-medium text-gray-700'>
         keyword
-        <input {...register('keyword')} className='p-2 border rounded-md w-full' />
+        <input
+          {...register('yahoo_auction_crawl_setting.keyword')}
+          className='p-2 border rounded-md w-full'
+        />
+      </label>
+      <label className='block pt-4 text-sm font-medium text-gray-700'>
+        category_id
+        <input
+          {...register('yahoo_auction_crawl_setting.category_id')}
+          className='p-2 border rounded-md w-full'
+        />
       </label>
       <label className='block pt-4 text-sm font-medium text-gray-700'>
         min_price
-        <input {...register('min_price')} className='p-2 border rounded-md w-full' />
+        <input
+          {...register('yahoo_auction_crawl_setting.min_price')}
+          className='p-2 border rounded-md w-full'
+        />
       </label>
       <label className='block pt-4 text-sm font-medium text-gray-700'>
         max_price
-        <input {...register('max_price')} className='p-2 border rounded-md w-full' />
+        <input
+          {...register('yahoo_auction_crawl_setting.max_price')}
+          className='p-2 border rounded-md w-full'
+        />
       </label>
       <label className='relative inline-flex mt-4 items-center cursor-pointer'>
-        <input {...register('enabled')} type='checkbox' value='' className='sr-only peer' />
+        <input
+          {...register('yahoo_auction_crawl_setting.enabled')}
+          type='checkbox'
+          value=''
+          className='sr-only peer'
+        />
         <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
         <span className='ms-3 text-sm font-medium text-gray-900 dark:text-gray-700'>enabled</span>
       </label>
