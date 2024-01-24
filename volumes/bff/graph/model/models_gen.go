@@ -2,9 +2,64 @@
 
 package model
 
+type DeleteProductResult interface {
+	IsDeleteProductResult()
+}
+
+type DeleteProductResultErrors interface {
+	IsDeleteProductResultErrors()
+}
+
 type Node interface {
 	IsNode()
 	GetID() string
+}
+
+type ResultBase interface {
+	IsResultBase()
+	GetOk() bool
+}
+
+type UserError interface {
+	IsUserError()
+	GetCode() string
+	GetMessage() string
+}
+
+type DeleteProductResultError struct {
+	Ok    bool                      `json:"ok"`
+	Error DeleteProductResultErrors `json:"error"`
+}
+
+func (DeleteProductResultError) IsDeleteProductResult() {}
+
+func (DeleteProductResultError) IsResultBase()    {}
+func (this DeleteProductResultError) GetOk() bool { return this.Ok }
+
+type DeleteProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteProductResultSuccess) IsDeleteProductResult() {}
+
+func (DeleteProductResultSuccess) IsResultBase()    {}
+func (this DeleteProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteProductResultValidationFailed) IsDeleteProductResultErrors() {}
+
+func (DeleteProductResultValidationFailed) IsUserError()            {}
+func (this DeleteProductResultValidationFailed) GetCode() string    { return this.Code }
+func (this DeleteProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type ErrorDetail struct {
+	Field   string `json:"field"`
+	Message string `json:"message"`
 }
 
 type Product struct {
