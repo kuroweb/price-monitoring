@@ -2,7 +2,7 @@ module Api
   module V1
     class ProductsController < ApplicationController
       def index
-        products = ProductFinder.new(params: product_params).execute
+        products = ProductFinder.new(params: find_product_params).execute
         render json: { products: products.as_json }, status: 200
       end
 
@@ -13,7 +13,7 @@ module Api
 
       def create
         # TODO: シリアライザの導入
-        result = Products::Create.call(params: product_params)
+        result = Products::CreateService.call(params: create_product_params)
 
         if result.success?
           render json: result.payload[:product].as_json, status: 200
@@ -24,7 +24,17 @@ module Api
 
       def update; end
 
-      def destroy; end
+      def destroy
+        products = ProductFinder.new(params: { id: params[:id] }).execute
+        return head 404 if products.blank?
+
+        result = Products::DeleteService.call(product: products.first)
+        if result.success?
+          head 200
+        else
+          render json: { message: result.message }, status: 400
+        end
+      end
 
       private
 
@@ -36,8 +46,12 @@ module Api
         %i[keyword category_id min_price max_price enabled]
       end
 
-      def product_params
-        @product_params ||= params.permit(
+      def find_product_params
+        @find_product_params ||= params.permit(product_attributes)
+      end
+
+      def create_product_params
+        @create_product_params ||= params.permit(
           product_attributes,
           yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes
         )
