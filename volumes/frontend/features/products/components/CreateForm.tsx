@@ -20,6 +20,7 @@ const CreateForm = () => {
 
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
     await createProduct(data)
+    // TODO: 作成成功時に画面をリロードする
   }
 
   return (
