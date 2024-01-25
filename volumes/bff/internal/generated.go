@@ -548,6 +548,8 @@ var sources = []*ast.Source{
 
 ## createProduct ##
 
+# TODO: アッパーキャメルケースに修正する
+
 input createProductInput {
   name: String!
   yahoo_auction_crawl_setting: createYahooAuctionCrawlSettingInput!
