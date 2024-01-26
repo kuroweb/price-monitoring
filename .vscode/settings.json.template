@@ -1,4 +1,5 @@
 {
     "ruby.rubocop.configFilePath": "/Users/user/environment/price-monitoring/volumes/backend/.rubocop.yml",
-    "ruby.rubocop.executePath": "/Users/user/.rbenv/versions/3.2.2/bin/"
+    "ruby.rubocop.executePath": "/Users/user/.rbenv/versions/3.2.2/bin/",
+    "eslint.workingDirectories": [{ "mode": "auto" }]
 }
