@@ -1,8 +1,7 @@
 'use server'
 
+import { CreateProductInput , CreateProductDocument, CreateProductMutation } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
-import { CreateProductInput } from '@/graphql/dist/client'
-import { CreateProductDocument, CreateProductMutation } from '@/graphql/dist/client'
 
 export const createProduct = async (input: CreateProductInput) => {
   if (input.yahoo_auction_crawl_setting.category_id == 0) {
