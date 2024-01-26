@@ -13,6 +13,8 @@ import (
 	// "github.com/rs/cors"
 )
 
+// TODO: ロギングを行う
+
 func main() {
 	cfg := config.NewConfig()
 
