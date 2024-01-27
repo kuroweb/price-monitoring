@@ -103,6 +103,17 @@ func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.
 	}
 }
 
+// Mutation returns internal.MutationResolver implementation.
+func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
+
+type mutationResolver struct{ *Resolver }
+
+// !!! WARNING !!!
+// The code below was going to be deleted when updating resolvers. It has been copied here so you have
+// one last chance to move it out of harms way if you want. There are two reasons this happens:
+//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
+//     it when you're done.
+//   - You have helper methods in this file. Move them out to keep these resolver files clean.
 func handleServerError() model.DeleteProductResultError {
 	return model.DeleteProductResultError{
 		Ok: false,
@@ -113,8 +124,3 @@ func handleServerError() model.DeleteProductResultError {
 		},
 	}
 }
-
-// Mutation returns internal.MutationResolver implementation.
-func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
-
-type mutationResolver struct{ *Resolver }

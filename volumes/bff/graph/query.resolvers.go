@@ -14,17 +14,17 @@ import (
 
 // Product is the resolver for the product field.
 func (r *queryResolver) Product(ctx context.Context, id string) (*model.Product, error) {
-	return r.Srv.GetProductByID(ctx, id)
+	return r.ProductService.FindById(ctx, id)
 }
 
 // Products is the resolver for the products field.
 func (r *queryResolver) Products(ctx context.Context, id *string, name *string) ([]*model.Product, error) {
-	return r.Srv.GetProductsByParams(ctx, id, name)
+	return r.ProductService.FindByParams(ctx, id, name)
 }
 
 // YahooAuctionProduct is the resolver for the yahooAuctionProduct field.
 func (r *queryResolver) YahooAuctionProduct(ctx context.Context, id string) (*model.YahooAuctionProduct, error) {
-	return r.Srv.GetYahooAuctionProductByID(ctx, id)
+	return r.YahooAuctionProductService.FindById(ctx, id)
 }
 
 // Node is the resolver for the node field.

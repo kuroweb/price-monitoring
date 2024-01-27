@@ -8,7 +8,8 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/kuroweb/price-monitoring/volumes/bff/config"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph"
-	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/yahoo_auction_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
 	// "github.com/rs/cors"
 )
@@ -19,7 +20,8 @@ func main() {
 	cfg := config.NewConfig()
 
 	srv := handler.NewDefaultServer(internal.NewExecutableSchema(internal.Config{Resolvers: &graph.Resolver{
-		Srv: services.New(),
+		ProductService:             products.New(),
+		YahooAuctionProductService: yahoo_auction_products.New(),
 	}}))
 	// TODO: CORSが動作していなさそうなので後で修正する
 	// c := cors.New(cors.Options{

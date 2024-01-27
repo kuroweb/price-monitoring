@@ -1,4 +1,4 @@
-package services
+package yahoo_auction_products
 
 import (
 	"context"
@@ -13,9 +13,14 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-type yahooAuctionProductService struct{}
+type IFindService interface {
+	FindById(ctx context.Context, id string) (*model.YahooAuctionProduct, error)
+	FindByParams(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
+}
 
-func (y *yahooAuctionProductService) GetYahooAuctionProductByID(ctx context.Context, id string) (*model.YahooAuctionProduct, error) {
+type FindService struct{}
+
+func (f *FindService) FindById(ctx context.Context, id string) (*model.YahooAuctionProduct, error) {
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/yahoo_auction_products/%s", cfg.BackendUrl, id)
 
@@ -55,7 +60,7 @@ func (y *yahooAuctionProductService) GetYahooAuctionProductByID(ctx context.Cont
 	return yahooAuctionProduct, nil
 }
 
-func (y *yahooAuctionProductService) GetYahooAuctionProductsByParams(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+func (f *FindService) FindByParams(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
 
 	params.Set("product_id", obj.ID)
