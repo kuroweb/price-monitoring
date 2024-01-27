@@ -62,65 +62,10 @@ func (r *mutationResolver) CreateProduct(ctx context.Context, input model.Create
 
 // DeleteProduct is the resolver for the deleteProduct field.
 func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error) {
-	cfg := config.NewConfig()
-	url := fmt.Sprintf("%s/api/v1/products/%s", cfg.BackendUrl, id)
-	client := &http.Client{}
-
-	req, err := http.NewRequest("DELETE", url, nil)
-	if err != nil {
-		result := model.DeleteProductResultError{
-			Ok: false,
-			Error: model.DeleteProductResultValidationFailed{
-				Code:    "503",
-				Message: "Service is currently unavailable.",
-				Details: []*model.ErrorDetail{},
-			},
-		}
-
-		return result, nil
-	}
-
-	resp, err := client.Do(req)
-	if err != nil {
-		return handleServerError(), nil
-	}
-	defer resp.Body.Close()
-
-	switch resp.StatusCode {
-	case http.StatusOK:
-		return model.DeleteProductResultSuccess{Ok: true}, nil
-	case http.StatusNotFound:
-		return model.DeleteProductResultError{
-			Ok: false,
-			Error: model.DeleteProductResultValidationFailed{
-				Code:    "404",
-				Message: "Requested resource was not found.",
-				Details: []*model.ErrorDetail{},
-			},
-		}, nil
-	default:
-		return handleServerError(), nil
-	}
+	return r.ProductService.DeleteById(ctx, id)
 }
 
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 
 type mutationResolver struct{ *Resolver }
-
-// !!! WARNING !!!
-// The code below was going to be deleted when updating resolvers. It has been copied here so you have
-// one last chance to move it out of harms way if you want. There are two reasons this happens:
-//   - When renaming or deleting a resolver the old code will be put in here. You can safely delete
-//     it when you're done.
-//   - You have helper methods in this file. Move them out to keep these resolver files clean.
-func handleServerError() model.DeleteProductResultError {
-	return model.DeleteProductResultError{
-		Ok: false,
-		Error: model.DeleteProductResultValidationFailed{
-			Code:    "503",
-			Message: "Service is currently unavailable.",
-			Details: []*model.ErrorDetail{},
-		},
-	}
-}
