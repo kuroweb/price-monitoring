@@ -15,7 +15,7 @@ import (
 
 type IFindService interface {
 	FindById(ctx context.Context, id string) (*model.YahooAuctionProduct, error)
-	FindByParams(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
+	FindByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 
 type FindService struct{}
@@ -60,10 +60,10 @@ func (f *FindService) FindById(ctx context.Context, id string) (*model.YahooAuct
 	return yahooAuctionProduct, nil
 }
 
-func (f *FindService) FindByParams(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+func (f *FindService) FindByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
 
-	params.Set("product_id", obj.ID)
+	params.Set("product_id", *productID)
 
 	if id != nil {
 		params.Set("id", *id)
