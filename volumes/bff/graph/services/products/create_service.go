@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -14,32 +13,30 @@ import (
 )
 
 type ICreateService interface {
-	Create(ctx context.Context, input model.CreateProductInput) (*model.CreateProductResult, error)
+	Create(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error)
 }
 
 type CreateService struct{}
 
-func (c *CreateService) Create(ctx context.Context, input model.CreateProductInput) (*model.CreateProductResult, error) {
+func (c *CreateService) Create(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error) {
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products", cfg.BackendUrl)
 
 	// NewProduct 構造体をJSONに変換
 	requestBody, err := json.Marshal(input)
 	if err != nil {
-		fmt.Println("JSON変換エラー:", err)
-		return nil, err
+		return c.handleServerError(), nil
 	}
 
 	// POSTリクエストの作成
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(requestBody))
 	if err != nil {
-		fmt.Println("POSTリクエストの送信に失敗しました:", err)
-		return nil, err
+		return c.handleServerError(), nil
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to post product data")
+		return c.handleServerError(), nil
 	}
 
 	var response struct {
@@ -49,13 +46,27 @@ func (c *CreateService) Create(ctx context.Context, input model.CreateProductInp
 
 	decoder := json.NewDecoder(resp.Body)
 	if err := decoder.Decode(&response); err != nil {
-		return nil, err
+		return c.handleServerError(), nil
 	}
 
-	result := &model.CreateProductResult{
-		ID:   strconv.Itoa(response.ID),
-		Name: response.Name,
+	result := model.CreateProductResultSuccess{
+		Ok: true,
+		Product: &model.Product{
+			ID:   strconv.Itoa(response.ID),
+			Name: response.Name,
+		},
 	}
 
 	return result, nil
+}
+
+func (c *CreateService) handleServerError() model.CreateProductResultError {
+	return model.CreateProductResultError{
+		Ok: false,
+		Error: model.CreateProductResultValidationFailed{
+			Code:    "503",
+			Message: "Service is currently unavailable.",
+			Details: []*model.ErrorDetail{},
+		},
+	}
 }

@@ -2,6 +2,14 @@
 
 package model
 
+type CreateProductResult interface {
+	IsCreateProductResult()
+}
+
+type CreateProductResultErrors interface {
+	IsCreateProductResultErrors()
+}
+
 type DeleteProductResult interface {
 	IsDeleteProductResult()
 }
@@ -24,6 +32,51 @@ type UserError interface {
 	IsUserError()
 	GetCode() string
 	GetMessage() string
+}
+
+type CreateProductInput struct {
+	Name                     string                               `json:"name"`
+	YahooAuctionCrawlSetting *CreateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
+}
+
+type CreateProductResultError struct {
+	Ok    bool                      `json:"ok"`
+	Error CreateProductResultErrors `json:"error"`
+}
+
+func (CreateProductResultError) IsCreateProductResult() {}
+
+func (CreateProductResultError) IsResultBase()    {}
+func (this CreateProductResultError) GetOk() bool { return this.Ok }
+
+type CreateProductResultSuccess struct {
+	Ok      bool     `json:"ok"`
+	Product *Product `json:"product"`
+}
+
+func (CreateProductResultSuccess) IsCreateProductResult() {}
+
+func (CreateProductResultSuccess) IsResultBase()    {}
+func (this CreateProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateProductResultValidationFailed) IsCreateProductResultErrors() {}
+
+func (CreateProductResultValidationFailed) IsUserError()            {}
+func (this CreateProductResultValidationFailed) GetCode() string    { return this.Code }
+func (this CreateProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type CreateYahooAuctionCrawlSettingInput struct {
+	Keyword    string `json:"keyword"`
+	CategoryID *int   `json:"category_id,omitempty"`
+	MinPrice   int    `json:"min_price"`
+	MaxPrice   int    `json:"max_price"`
+	Enabled    bool   `json:"enabled"`
 }
 
 type DeleteProductResultError struct {
@@ -98,21 +151,3 @@ type YahooAuctionProduct struct {
 
 func (YahooAuctionProduct) IsNode()            {}
 func (this YahooAuctionProduct) GetID() string { return this.ID }
-
-type CreateProductInput struct {
-	Name                     string                               `json:"name"`
-	YahooAuctionCrawlSetting *CreateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
-}
-
-type CreateProductResult struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
-}
-
-type CreateYahooAuctionCrawlSettingInput struct {
-	Keyword    string `json:"keyword"`
-	CategoryID *int   `json:"category_id,omitempty"`
-	MinPrice   int    `json:"min_price"`
-	MaxPrice   int    `json:"max_price"`
-	Enabled    bool   `json:"enabled"`
-}

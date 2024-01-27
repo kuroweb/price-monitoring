@@ -36,7 +36,7 @@ func (d *DeleteService) DeleteById(ctx context.Context, id string) (model.Delete
 
 	resp, err := client.Do(req)
 	if err != nil {
-		return handleServerError(), nil
+		return d.handleServerError(), nil
 	}
 	defer resp.Body.Close()
 
@@ -53,11 +53,11 @@ func (d *DeleteService) DeleteById(ctx context.Context, id string) (model.Delete
 			},
 		}, nil
 	default:
-		return handleServerError(), nil
+		return d.handleServerError(), nil
 	}
 }
 
-func handleServerError() model.DeleteProductResultError {
+func (d *DeleteService) handleServerError() model.DeleteProductResultError {
 	return model.DeleteProductResultError{
 		Ok: false,
 		Error: model.DeleteProductResultValidationFailed{

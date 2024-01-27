@@ -1,22 +1,20 @@
 type Mutation {
-  createProduct(input: createProductInput!): createProductResult!
-  DeleteProduct(id: ID!): DeleteProductResult!
+  createProduct(input: CreateProductInput!): CreateProductResult!
+  deleteProduct(id: ID!): DeleteProductResult!
 }
 
 #
 # Inputs
 #
 
-## createProduct ##
+## CreateProduct ##
 
-# TODO: アッパーキャメルケースに修正する
-
-input createProductInput {
+input CreateProductInput {
   name: String!
-  yahoo_auction_crawl_setting: createYahooAuctionCrawlSettingInput!
+  yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput!
 }
 
-input createYahooAuctionCrawlSettingInput {
+input CreateYahooAuctionCrawlSettingInput {
   keyword: String!
   category_id: Int
   min_price: Int!
@@ -49,12 +47,32 @@ type ErrorDetail {
 #   message: String!
 # }
 
-## createProduct ##
+## CreateProduct ##
 
-type createProductResult {
-  id: ID!
-  name: String!
+union CreateProductResult =
+    CreateProductResultSuccess
+  | CreateProductResultError
+
+type CreateProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  product: Product!
 }
+
+type CreateProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateProductResultErrors!
+}
+
+union CreateProductResultErrors =
+    CreateProductResultValidationFailed
+  # | errorUnauthorized
+
+type CreateProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 
 ## DeleteProduct ##
 
