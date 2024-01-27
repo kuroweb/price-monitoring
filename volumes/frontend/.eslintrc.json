@@ -29,5 +29,6 @@
         "newlines-between": "always"
       }
     ]
-  }
+  },
+  "ignorePatterns": ["graphql/dist/*"]
 }
