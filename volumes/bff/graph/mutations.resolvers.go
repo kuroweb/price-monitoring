@@ -62,7 +62,6 @@ func (r *mutationResolver) CreateProduct(ctx context.Context, input model.Create
 
 // DeleteProduct is the resolver for the deleteProduct field.
 func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error) {
-	// TODO: 後でリファクタする
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products/%s", cfg.BackendUrl, id)
 	client := &http.Client{}
@@ -81,18 +80,9 @@ func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.
 		return result, nil
 	}
 
-	serverErrorResult := model.DeleteProductResultError{
-		Ok: false,
-		Error: model.DeleteProductResultValidationFailed{
-			Code:    "503",
-			Message: "Service is currently unavailable.",
-			Details: []*model.ErrorDetail{},
-		},
-	}
-
 	resp, err := client.Do(req)
 	if err != nil {
-		return serverErrorResult, nil
+		return handleServerError(), nil
 	}
 	defer resp.Body.Close()
 
@@ -109,7 +99,18 @@ func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.
 			},
 		}, nil
 	default:
-		return serverErrorResult, nil
+		return handleServerError(), nil
+	}
+}
+
+func handleServerError() model.DeleteProductResultError {
+	return model.DeleteProductResultError{
+		Ok: false,
+		Error: model.DeleteProductResultValidationFailed{
+			Code:    "503",
+			Message: "Service is currently unavailable.",
+			Details: []*model.ErrorDetail{},
+		},
 	}
 }
 
