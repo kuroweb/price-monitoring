@@ -17,14 +17,84 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type CreateProductInput = {
+  name: Scalars['String']['input'];
+  yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
+};
+
+export type CreateProductResult = CreateProductResultError | CreateProductResultSuccess;
+
+export type CreateProductResultError = ResultBase & {
+  __typename?: 'CreateProductResultError';
+  error: CreateProductResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateProductResultErrors = CreateProductResultValidationFailed;
+
+export type CreateProductResultSuccess = ResultBase & {
+  __typename?: 'CreateProductResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  product: Product;
+};
+
+export type CreateProductResultValidationFailed = UserError & {
+  __typename?: 'CreateProductResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type CreateYahooAuctionCrawlSettingInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type DeleteProductResult = DeleteProductResultError | DeleteProductResultSuccess;
+
+export type DeleteProductResultError = ResultBase & {
+  __typename?: 'DeleteProductResultError';
+  error: DeleteProductResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteProductResultErrors = DeleteProductResultValidationFailed;
+
+export type DeleteProductResultSuccess = ResultBase & {
+  __typename?: 'DeleteProductResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteProductResultValidationFailed = UserError & {
+  __typename?: 'DeleteProductResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type ErrorDetail = {
+  __typename?: 'ErrorDetail';
+  field: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createProduct: CreateProductResult;
+  deleteProduct: DeleteProductResult;
 };
 
 
 export type MutationCreateProductArgs = {
   input: CreateProductInput;
+};
+
+
+export type MutationDeleteProductArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Node = {
@@ -76,6 +146,15 @@ export type QueryYahooAuctionProductArgs = {
   id: Scalars['ID']['input'];
 };
 
+export type ResultBase = {
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UserError = {
+  code: Scalars['String']['output'];
+  message: Scalars['String']['output'];
+};
+
 export type YahooAuctionCrawlSetting = Node & {
   __typename?: 'YahooAuctionCrawlSetting';
   categoryId: Scalars['Int']['output'];
@@ -100,25 +179,6 @@ export type YahooAuctionProduct = Node & {
   yahooAuctionId: Scalars['String']['output'];
 };
 
-export type CreateProductInput = {
-  name: Scalars['String']['input'];
-  yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
-};
-
-export type CreateProductResult = {
-  __typename?: 'createProductResult';
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
-};
-
-export type CreateYahooAuctionCrawlSettingInput = {
-  category_id?: InputMaybe<Scalars['Int']['input']>;
-  enabled: Scalars['Boolean']['input'];
-  keyword: Scalars['String']['input'];
-  max_price: Scalars['Int']['input'];
-  min_price: Scalars['Int']['input'];
-};
-
 export type ProductsQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -141,7 +201,7 @@ export type CreateProductMutationVariables = Exact<{
 }>;
 
 
-export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'createProductResult', id: string, name: string } };
+export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'CreateProductResultError', ok: boolean, error: { __typename?: 'CreateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string }> } } };
 
 
 export const ProductsDocument = gql`
@@ -178,10 +238,31 @@ export const ProductDocument = gql`
 }
     `;
 export const CreateProductDocument = gql`
-    mutation createProduct($input: createProductInput!) {
+    mutation createProduct($input: CreateProductInput!) {
   createProduct(input: $input) {
-    id
-    name
+    ... on CreateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+        yahooAuctionProducts {
+          id
+        }
+      }
+    }
+    ... on CreateProductResultError {
+      ok
+      error {
+        ... on CreateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
   }
 }
     `;

@@ -1,6 +1,7 @@
 'use client'
 
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { createProduct } from '../actions/submit'
 
@@ -21,7 +22,13 @@ const CreateForm = () => {
   })
 
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
-    await createProduct(data)
+    const result = await createProduct(data)
+
+    if (result.data?.createProduct.ok) {
+      toast.success('success')
+    } else {
+      toast.error('error')
+    }
   }
 
   return (
