@@ -29,9 +29,30 @@ query product($id: ID!, $published: Boolean) {
   }
 }
 
-mutation createProduct($input: createProductInput!) {
+mutation createProduct($input: CreateProductInput!) {
   createProduct(input: $input) {
-    id
-    name
+    ... on CreateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+        yahooAuctionProducts {
+          id
+        }
+      }
+    }
+    ... on CreateProductResultError {
+      ok
+      error {
+        ... on CreateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
   }
 }
