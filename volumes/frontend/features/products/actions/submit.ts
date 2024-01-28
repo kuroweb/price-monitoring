@@ -8,7 +8,7 @@ export const createProduct = async (input: CreateProductInput) => {
     delete input.yahoo_auction_crawl_setting.category_id
   }
 
-  await getClient().mutate<CreateProductMutation>({
+  return await getClient().mutate<CreateProductMutation>({
     mutation: CreateProductDocument,
     variables: { input: input },
   })
