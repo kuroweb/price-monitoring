@@ -36,9 +36,6 @@ mutation createProduct($input: CreateProductInput!) {
       product {
         id
         name
-        yahooAuctionProducts {
-          id
-        }
       }
     }
     ... on CreateProductResultError {
