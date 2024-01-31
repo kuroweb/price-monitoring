@@ -6,10 +6,10 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :users
       resources :products
-      resources :yahoo_auction_products
 
       namespace :products do
         scope path: ":product_id" do
+          resources :yahoo_auction_products, only: [:index, :show]
           resources :yahoo_auction_crawl_settings, only: [:index]
         end
       end
