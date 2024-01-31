@@ -3,13 +3,13 @@
 import { ApolloError } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 
-import { ProductsQuery } from '@/graphql/dist/client'
+import { GetProductsQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({
   data,
   error,
 }: {
-  data: ProductsQuery
+  data: GetProductsQuery
   error: ApolloError | undefined
 }) => {
   const router = useRouter()
