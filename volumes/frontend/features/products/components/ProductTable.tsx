@@ -4,7 +4,13 @@ import { ApolloError } from '@apollo/client'
 
 import { GetProductWithYahooAuctionProductsQuery } from '@/graphql/dist/client'
 
-const ProductTable = ({ data, error }: { data: GetProductWithYahooAuctionProductsQuery; error: ApolloError | undefined }) => {
+const ProductTable = ({
+  data,
+  error,
+}: {
+  data: GetProductWithYahooAuctionProductsQuery
+  error: ApolloError | undefined
+}) => {
   return (
     <>
       {error && <div>{error.message}</div>}

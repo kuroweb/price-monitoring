@@ -2,7 +2,10 @@ import Layout from '@/components/layouts/Layout'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import ProductTable from '@/features/products/components/ProductTable'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
-import { GetProductWithYahooAuctionProductsDocument, GetProductWithYahooAuctionProductsQuery } from '@/graphql/dist/client'
+import {
+  GetProductWithYahooAuctionProductsDocument,
+  GetProductWithYahooAuctionProductsQuery,
+} from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
 const Page = async ({

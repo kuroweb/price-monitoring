@@ -1,6 +1,10 @@
 'use server'
 
-import { CreateProductInput , CreateProductDocument, CreateProductMutation } from '@/graphql/dist/client'
+import {
+  CreateProductInput,
+  CreateProductDocument,
+  CreateProductMutation,
+} from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
 export const createProduct = async (input: CreateProductInput) => {
