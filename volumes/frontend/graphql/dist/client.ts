@@ -183,13 +183,13 @@ export type GetProductsQueryVariables = Exact<{
 
 export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string }> };
 
-export type Product_With_Yahoo_Auction_ProductsQueryVariables = Exact<{
+export type GetProductWithYahooAuctionProductsQueryVariables = Exact<{
   id: Scalars['ID']['input'];
   published?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type Product_With_Yahoo_Auction_ProductsQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }> } };
+export type GetProductWithYahooAuctionProductsQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }> } };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -207,8 +207,8 @@ export const GetProductsDocument = gql`
   }
 }
     `;
-export const Product_With_Yahoo_Auction_ProductsDocument = gql`
-    query product_with_yahoo_auction_products($id: ID!, $published: Boolean) {
+export const GetProductWithYahooAuctionProductsDocument = gql`
+    query getProductWithYahooAuctionProducts($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
@@ -261,8 +261,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getProducts(variables?: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProducts', 'query', variables);
     },
-    product_with_yahoo_auction_products(variables: Product_With_Yahoo_Auction_ProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<Product_With_Yahoo_Auction_ProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<Product_With_Yahoo_Auction_ProductsQuery>(Product_With_Yahoo_Auction_ProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'product_with_yahoo_auction_products', 'query', variables);
+    getProductWithYahooAuctionProducts(variables: GetProductWithYahooAuctionProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductWithYahooAuctionProductsQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductWithYahooAuctionProductsQuery>(GetProductWithYahooAuctionProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductWithYahooAuctionProducts', 'query', variables);
     },
     createProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createProduct', 'mutation', variables);

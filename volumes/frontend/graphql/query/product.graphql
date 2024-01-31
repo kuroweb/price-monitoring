@@ -5,7 +5,7 @@ query getProducts($id: ID, $name: String) {
   }
 }
 
-query product($id: ID!, $published: Boolean) {
+query getProductWithYahooAuctionProducts($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name

@@ -2,7 +2,7 @@ import Layout from '@/components/layouts/Layout'
 import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import ProductTable from '@/features/products/components/ProductTable'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
-import { ProductDocument, ProductQuery } from '@/graphql/dist/client'
+import { GetProductWithYahooAuctionProductsDocument, GetProductWithYahooAuctionProductsQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
 const Page = async ({
@@ -12,8 +12,8 @@ const Page = async ({
   params: { id: string }
   searchParams: { [key: string]: string | string[] | undefined }
 }) => {
-  const { data, error } = await getClient().query<ProductQuery>({
-    query: ProductDocument,
+  const { data, error } = await getClient().query<GetProductWithYahooAuctionProductsQuery>({
+    query: GetProductWithYahooAuctionProductsDocument,
     variables: { id: params.id, published: true },
   })
 

@@ -1,0 +1,3 @@
+# query yahooAuctionProducts($productId: Int, $published: Boolean) {
+#   yahoo_auction_products
+# }
