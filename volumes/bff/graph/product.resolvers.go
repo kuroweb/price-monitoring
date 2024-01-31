@@ -12,8 +12,8 @@ import (
 )
 
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
-func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
-	return r.YahooAuctionProductService.FindByParams(ctx, id, &obj.ID, yahooAuctionID, name, price, published)
+func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error) {
+	return r.YahooAuctionProductService.FindByParams(ctx, nil, &obj.ID, nil, nil, nil, published)
 }
 
 // Product returns internal.ProductResolver implementation.

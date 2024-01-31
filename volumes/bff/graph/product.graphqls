@@ -1,13 +1,7 @@
 type Product implements Node {
   id: ID!
   name: String!
-  yahooAuctionProducts(
-    id: ID
-    yahooAuctionID: String
-    name: String
-    price: Int
-    published: Boolean
-  ): [YahooAuctionProduct!]!
+  yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
 }
 
 type YahooAuctionProduct implements Node {

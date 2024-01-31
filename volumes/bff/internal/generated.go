@@ -91,7 +91,7 @@ type ComplexityRoot struct {
 	Product struct {
 		ID                   func(childComplexity int) int
 		Name                 func(childComplexity int) int
-		YahooAuctionProducts func(childComplexity int, id *string, yahooAuctionID *string, name *string, price *int, published *bool) int
+		YahooAuctionProducts func(childComplexity int, published *bool) int
 	}
 
 	Query struct {
@@ -129,7 +129,7 @@ type MutationResolver interface {
 	DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error)
 }
 type ProductResolver interface {
-	YahooAuctionProducts(ctx context.Context, obj *model.Product, id *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
+	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 type QueryResolver interface {
 	Product(ctx context.Context, id string) (*model.Product, error)
@@ -310,7 +310,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Product.YahooAuctionProducts(childComplexity, args["id"].(*string), args["yahooAuctionID"].(*string), args["name"].(*string), args["price"].(*int), args["published"].(*bool)), true
+		return e.complexity.Product.YahooAuctionProducts(childComplexity, args["published"].(*bool)), true
 
 	case "Query.node":
 		if e.complexity.Query.Node == nil {
@@ -687,13 +687,7 @@ type DeleteProductResultValidationFailed implements UserError {
 	{Name: "../graph/product.graphqls", Input: `type Product implements Node {
   id: ID!
   name: String!
-  yahooAuctionProducts(
-    id: ID
-    yahooAuctionID: String
-    name: String
-    price: Int
-    published: Boolean
-  ): [YahooAuctionProduct!]!
+  yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
 }
 
 type YahooAuctionProduct implements Node {
@@ -765,51 +759,15 @@ func (ec *executionContext) field_Mutation_deleteProduct_args(ctx context.Contex
 func (ec *executionContext) field_Product_yahooAuctionProducts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *string
-	if tmp, ok := rawArgs["id"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
-		arg0, err = ec.unmarshalOID2ᚖstring(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["id"] = arg0
-	var arg1 *string
-	if tmp, ok := rawArgs["yahooAuctionID"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("yahooAuctionID"))
-		arg1, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["yahooAuctionID"] = arg1
-	var arg2 *string
-	if tmp, ok := rawArgs["name"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("name"))
-		arg2, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["name"] = arg2
-	var arg3 *int
-	if tmp, ok := rawArgs["price"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("price"))
-		arg3, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["price"] = arg3
-	var arg4 *bool
+	var arg0 *bool
 	if tmp, ok := rawArgs["published"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("published"))
-		arg4, err = ec.unmarshalOBoolean2ᚖbool(ctx, tmp)
+		arg0, err = ec.unmarshalOBoolean2ᚖbool(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["published"] = arg4
+	args["published"] = arg0
 	return args, nil
 }
 
@@ -1827,7 +1785,7 @@ func (ec *executionContext) _Product_yahooAuctionProducts(ctx context.Context, f
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().YahooAuctionProducts(rctx, obj, fc.Args["id"].(*string), fc.Args["yahooAuctionID"].(*string), fc.Args["name"].(*string), fc.Args["price"].(*int), fc.Args["published"].(*bool))
+		return ec.resolvers.Product().YahooAuctionProducts(rctx, obj, fc.Args["published"].(*bool))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
