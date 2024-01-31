@@ -1,15 +1,7 @@
-query products($id: ID, $name: String, $published: Boolean) {
+query getProducts($id: ID, $name: String) {
   products(id: $id, name: $name) {
     id
     name
-    yahooAuctionProducts(published: $published) {
-      id
-      productId
-      yahooAuctionId
-      name
-      price
-      published
-    }
   }
 }
 
