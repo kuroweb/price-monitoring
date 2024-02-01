@@ -105,6 +105,7 @@ export type Product = Node & {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting;
   yahooAuctionProducts: Array<YahooAuctionProduct>;
 };
 
@@ -118,7 +119,6 @@ export type Query = {
   node?: Maybe<Node>;
   product: Product;
   products: Array<Product>;
-  yahooAuctionProduct: YahooAuctionProduct;
 };
 
 
@@ -135,11 +135,6 @@ export type QueryProductArgs = {
 export type QueryProductsArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryYahooAuctionProductArgs = {
-  id: Scalars['ID']['input'];
 };
 
 export type ResultBase = {
