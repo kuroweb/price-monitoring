@@ -14,7 +14,7 @@ const ProductsTable = ({
 }) => {
   const router = useRouter()
 
-  const handleRowClick = (productId: String) => {
+  const moveToDetailPage = (productId: String) => {
     router.push(`/products/${productId}`)
   }
 
@@ -34,7 +34,7 @@ const ProductsTable = ({
             <tbody>
               {data.products.map((product) => (
                 <tr
-                  onClick={() => handleRowClick(product.id)}
+                  onClick={() => moveToDetailPage(product.id)}
                   className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
                   key={product.id}
                 >
