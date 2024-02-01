@@ -28,7 +28,7 @@ module Api
         products = ProductFinder.new(params: { id: params[:id] }).execute
         return head 404 if products.blank?
 
-        result = Products::DeleteService.call(product: products.first)
+        result = ::Products::DeleteService.call(product: products.first)
         if result.success?
           head 200
         else
