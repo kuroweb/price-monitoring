@@ -13,7 +13,7 @@ module Api
 
       def create
         # TODO: シリアライザの導入
-        result = Products::CreateService.call(params: create_product_params)
+        result = ::Products::CreateService.call(params: create_product_params)
 
         if result.success?
           render json: result.payload[:product].as_json, status: 200
