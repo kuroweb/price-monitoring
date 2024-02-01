@@ -14,56 +14,13 @@ import (
 )
 
 type IFindService interface {
-	FindById(ctx context.Context, id string) (*model.YahooAuctionProduct, error)
 	FindByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 
 type FindService struct{}
 
-func (f *FindService) FindById(ctx context.Context, id string) (*model.YahooAuctionProduct, error) {
-	cfg := config.NewConfig()
-	url := fmt.Sprintf("%s/api/v1/yahoo_auction_products/%s", cfg.BackendUrl, id)
-
-	resp, err := http.Get(url)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch yahoo_auction_product data")
-	}
-
-	var response struct {
-		ID             int    `json:"id"`
-		YahooAuctionId string `json:"yahoo_auction_id"`
-		Name           string `json:"name"`
-		ThumbnailURL   string `json:"thumbnail_url"`
-		Price          int    `json:"price"`
-		Published      bool   `json:"published"`
-	}
-
-	decoder := json.NewDecoder(resp.Body)
-	if err := decoder.Decode(&response); err != nil {
-		return nil, err
-	}
-
-	yahooAuctionProduct := &model.YahooAuctionProduct{
-		ID:             strconv.Itoa(response.ID),
-		YahooAuctionID: response.YahooAuctionId,
-		Name:           response.Name,
-		ThumbnailURL:   response.ThumbnailURL,
-		Price:          response.Price,
-		Published:      response.Published,
-	}
-
-	return yahooAuctionProduct, nil
-}
-
 func (f *FindService) FindByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
-
-	params.Set("product_id", *productID)
 
 	if id != nil {
 		params.Set("id", *id)
@@ -86,7 +43,7 @@ func (f *FindService) FindByParams(ctx context.Context, id *string, productID *s
 	}
 
 	cfg := config.NewConfig()
-	url := fmt.Sprintf("%s/api/v1/yahoo_auction_products?%s", cfg.BackendUrl, params.Encode())
+	url := fmt.Sprintf("%s/api/v1/products/%s/yahoo_auction_products?%s", cfg.BackendUrl, *productID, params.Encode())
 
 	resp, err := http.Get(url)
 	if err != nil {
