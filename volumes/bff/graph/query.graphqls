@@ -1,6 +1,5 @@
 type Query {
   product(id: ID!): Product!
   products(id: ID, name: String): [Product!]!
-  yahooAuctionProduct(id: ID!): YahooAuctionProduct!
   node(id: ID!): Node
 }

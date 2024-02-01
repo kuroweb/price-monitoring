@@ -22,11 +22,6 @@ func (r *queryResolver) Products(ctx context.Context, id *string, name *string) 
 	return r.ProductService.FindByParams(ctx, id, name)
 }
 
-// YahooAuctionProduct is the resolver for the yahooAuctionProduct field.
-func (r *queryResolver) YahooAuctionProduct(ctx context.Context, id string) (*model.YahooAuctionProduct, error) {
-	return r.YahooAuctionProductService.FindById(ctx, id)
-}
-
 // Node is the resolver for the node field.
 func (r *queryResolver) Node(ctx context.Context, id string) (model.Node, error) {
 	panic(fmt.Errorf("not implemented: Node - node"))
