@@ -4,6 +4,8 @@ import {
   CreateProductInput,
   CreateProductDocument,
   CreateProductMutation,
+  DeleteProductDocument,
+  DeleteProductMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -22,6 +24,9 @@ export const updateProduct = async (data: any) => {
   console.log(data)
 }
 
-export const destroyProduct = async (data: any) => {
-  console.log(data)
+export const deleteProduct = async (id: String) => {
+  return await getClient().mutate<DeleteProductMutation>({
+    mutation: DeleteProductDocument,
+    variables: { id: id },
+  })
 }

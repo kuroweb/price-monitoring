@@ -45,3 +45,24 @@ mutation createProduct($input: CreateProductInput!) {
     }
   }
 }
+
+mutation deleteProduct($id: ID!) {
+  deleteProduct(id: $id) {
+    ... on DeleteProductResultSuccess {
+      ok
+    }
+    ... on DeleteProductResultError {
+      ok
+      error {
+        ... on DeleteProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
