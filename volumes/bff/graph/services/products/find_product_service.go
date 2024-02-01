@@ -13,14 +13,14 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-type IFindService interface {
-	FindById(ctx context.Context, id string) (*model.Product, error)
-	FindByParams(ctx context.Context, id *string, name *string) ([]*model.Product, error)
+type IFindProductService interface {
+	FindProductById(ctx context.Context, id string) (*model.Product, error)
+	FindProductByParams(ctx context.Context, id *string, name *string) ([]*model.Product, error)
 }
 
-type FindService struct{}
+type FindProductService struct{}
 
-func (f *FindService) FindById(ctx context.Context, id string) (*model.Product, error) {
+func (f *FindProductService) FindProductById(ctx context.Context, id string) (*model.Product, error) {
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products/%s", cfg.BackendUrl, id)
 
@@ -52,7 +52,7 @@ func (f *FindService) FindById(ctx context.Context, id string) (*model.Product, 
 	return product, nil
 }
 
-func (f *FindService) FindByParams(ctx context.Context, id *string, name *string) ([]*model.Product, error) {
+func (f *FindProductService) FindProductByParams(ctx context.Context, id *string, name *string) ([]*model.Product, error) {
 	params := make(url.Values)
 
 	if id != nil {

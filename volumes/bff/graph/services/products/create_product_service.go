@@ -12,13 +12,13 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-type ICreateService interface {
-	Create(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error)
+type ICreateProductService interface {
+	CreateProduct(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error)
 }
 
-type CreateService struct{}
+type CreateProductService struct{}
 
-func (c *CreateService) Create(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error) {
+func (c *CreateProductService) CreateProduct(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error) {
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products", cfg.BackendUrl)
 
@@ -60,7 +60,7 @@ func (c *CreateService) Create(ctx context.Context, input model.CreateProductInp
 	return result, nil
 }
 
-func (c *CreateService) handleServerError() model.CreateProductResultError {
+func (c *CreateProductService) handleServerError() model.CreateProductResultError {
 	return model.CreateProductResultError{
 		Ok: false,
 		Error: model.CreateProductResultValidationFailed{

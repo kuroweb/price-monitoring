@@ -13,12 +13,12 @@ import (
 
 // CreateProduct is the resolver for the createProduct field.
 func (r *mutationResolver) CreateProduct(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error) {
-	return r.ProductService.Create(ctx, input)
+	return r.ProductService.CreateProduct(ctx, input)
 }
 
 // DeleteProduct is the resolver for the deleteProduct field.
 func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error) {
-	return r.ProductService.DeleteById(ctx, id)
+	return r.ProductService.DeleteProductById(ctx, id)
 }
 
 // Mutation returns internal.MutationResolver implementation.

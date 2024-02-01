@@ -13,13 +13,13 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-type IFindService interface {
-	FindByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
+type IFindYahooAuctionProductService interface {
+	FindYahooAuctionProductByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 
-type FindService struct{}
+type FindYahooAuctionProductService struct{}
 
-func (f *FindService) FindByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+func (f *FindYahooAuctionProductService) FindYahooAuctionProductByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
 
 	if id != nil {

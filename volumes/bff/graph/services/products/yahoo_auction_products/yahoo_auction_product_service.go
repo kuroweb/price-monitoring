@@ -1,15 +1,15 @@
 package yahoo_auction_products
 
 type IYahooAuctionProductService interface {
-	IFindService
+	IFindYahooAuctionProductService
 }
 
 type YahooAuctionProductService struct {
-	*FindService
+	*FindYahooAuctionProductService
 }
 
 func New() IYahooAuctionProductService {
 	return &YahooAuctionProductService{
-		FindService: &FindService{},
+		FindYahooAuctionProductService: &FindYahooAuctionProductService{},
 	}
 }

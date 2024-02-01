@@ -9,13 +9,13 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-type IDeleteService interface {
-	DeleteById(ctx context.Context, id string) (model.DeleteProductResult, error)
+type IDeleteProductService interface {
+	DeleteProductById(ctx context.Context, id string) (model.DeleteProductResult, error)
 }
 
-type DeleteService struct{}
+type DeleteProductService struct{}
 
-func (d *DeleteService) DeleteById(ctx context.Context, id string) (model.DeleteProductResult, error) {
+func (d *DeleteProductService) DeleteProductById(ctx context.Context, id string) (model.DeleteProductResult, error) {
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products/%s", cfg.BackendUrl, id)
 	client := &http.Client{}
@@ -57,7 +57,7 @@ func (d *DeleteService) DeleteById(ctx context.Context, id string) (model.Delete
 	}
 }
 
-func (d *DeleteService) handleServerError() model.DeleteProductResultError {
+func (d *DeleteProductService) handleServerError() model.DeleteProductResultError {
 	return model.DeleteProductResultError{
 		Ok: false,
 		Error: model.DeleteProductResultValidationFailed{

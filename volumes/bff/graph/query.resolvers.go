@@ -14,12 +14,12 @@ import (
 
 // Product is the resolver for the product field.
 func (r *queryResolver) Product(ctx context.Context, id string) (*model.Product, error) {
-	return r.ProductService.FindById(ctx, id)
+	return r.ProductService.FindProductById(ctx, id)
 }
 
 // Products is the resolver for the products field.
 func (r *queryResolver) Products(ctx context.Context, id *string, name *string) ([]*model.Product, error) {
-	return r.ProductService.FindByParams(ctx, id, name)
+	return r.ProductService.FindProductByParams(ctx, id, name)
 }
 
 // Node is the resolver for the node field.
