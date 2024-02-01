@@ -116,9 +116,10 @@ type ErrorDetail struct {
 }
 
 type Product struct {
-	ID                   string                 `json:"id"`
-	Name                 string                 `json:"name"`
-	YahooAuctionProducts []*YahooAuctionProduct `json:"yahooAuctionProducts"`
+	ID                       string                    `json:"id"`
+	Name                     string                    `json:"name"`
+	YahooAuctionProducts     []*YahooAuctionProduct    `json:"yahooAuctionProducts"`
+	YahooAuctionCrawlSetting *YahooAuctionCrawlSetting `json:"yahooAuctionCrawlSetting"`
 }
 
 func (Product) IsNode()            {}

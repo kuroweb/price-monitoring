@@ -2,6 +2,7 @@ type Product implements Node {
   id: ID!
   name: String!
   yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
+  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
 }
 
 type YahooAuctionProduct implements Node {

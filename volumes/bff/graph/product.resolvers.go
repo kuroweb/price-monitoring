@@ -16,6 +16,11 @@ func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.P
 	return r.ProductService.FindYahooAuctionProductByParams(ctx, nil, &obj.ID, nil, nil, nil, published)
 }
 
+// YahooAuctionCrawlSetting is the resolver for the yahooAuctionCrawlSetting field.
+func (r *productResolver) YahooAuctionCrawlSetting(ctx context.Context, obj *model.Product) (*model.YahooAuctionCrawlSetting, error) {
+	return r.ProductService.FindYahooAuctionCrawlSetting(ctx, obj.ID)
+}
+
 // Product returns internal.ProductResolver implementation.
 func (r *Resolver) Product() internal.ProductResolver { return &productResolver{r} }
 
