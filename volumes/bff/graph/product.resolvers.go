@@ -13,7 +13,7 @@ import (
 
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
 func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error) {
-	return r.ProductService.FindYahooAuctionProductByParams(ctx, nil, &obj.ID, nil, nil, nil, published)
+	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published)
 }
 
 // YahooAuctionCrawlSetting is the resolver for the yahooAuctionCrawlSetting field.

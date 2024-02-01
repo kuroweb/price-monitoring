@@ -14,12 +14,12 @@ import (
 )
 
 type IFindYahooAuctionProductService interface {
-	FindYahooAuctionProductByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
+	FindYahooAuctionProduct(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
 }
 
 type FindYahooAuctionProductService struct{}
 
-func (f *FindYahooAuctionProductService) FindYahooAuctionProductByParams(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
 
 	if id != nil {
