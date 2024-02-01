@@ -18,6 +18,10 @@ const ProductsTable = ({
     router.push(`/products/${productId}`)
   }
 
+  const deleteProduct = (productId: String) => {
+    console.log('run')
+  }
+
   return (
     <>
       {error && <div>{error.message}</div>}
@@ -26,7 +30,7 @@ const ProductsTable = ({
           <table className='w-full text-sm text-left text-gray-500'>
             <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
               <tr>
-                <th scope='col' className='px-6 py-3'>
+                <th className='px-6 py-3'>
                   name
                 </th>
               </tr>
@@ -34,11 +38,28 @@ const ProductsTable = ({
             <tbody>
               {data.products.map((product) => (
                 <tr
-                  onClick={() => moveToDetailPage(product.id)}
-                  className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
                   key={product.id}
+                  className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
                 >
-                  <td className='px-6 py-4 select-none'>{product.name}</td>
+                  <td>
+                    <div className='flex items-center'>
+                      <div
+                        className='flex-auto px-6 py-4'
+                        onClick={() => moveToDetailPage(product.id)}
+                      >
+                        {product.name}
+                      </div>
+                      <div className='pr-4'>
+                        <button
+                          type='button'
+                          className='text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-red-300 rounded-md px-4 py-2'
+                          onClick={() => deleteProduct(product.id)}
+                        >
+                          削除
+                        </button>
+                      </div>
+                    </div>
+                  </td>
                 </tr>
               ))}
             </tbody>
