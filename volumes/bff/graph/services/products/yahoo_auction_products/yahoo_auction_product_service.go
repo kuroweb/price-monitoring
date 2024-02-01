@@ -7,9 +7,3 @@ type IYahooAuctionProductService interface {
 type YahooAuctionProductService struct {
 	*FindYahooAuctionProductService
 }
-
-func New() IYahooAuctionProductService {
-	return &YahooAuctionProductService{
-		FindYahooAuctionProductService: &FindYahooAuctionProductService{},
-	}
-}
