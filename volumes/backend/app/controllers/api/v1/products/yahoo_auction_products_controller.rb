@@ -4,7 +4,7 @@ module Api
       class YahooAuctionProductsController < ApplicationController
         def index
           yahoo_auction_products = YahooAuctionProductFinder.new(params: yahoo_auction_product_params).execute
-          render json: yahoo_auction_products, status: 200
+          render json: { yahoo_auction_products: }, status: 200
         end
 
         def show
