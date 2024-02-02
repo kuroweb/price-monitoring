@@ -6,8 +6,16 @@ import {
   CreateProductMutation,
   DeleteProductDocument,
   DeleteProductMutation,
+  GetProductsDocument,
+  GetProductsQuery,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
+
+export const getProducts = async () => {
+  return await getClient().query<GetProductsQuery>({
+    query: GetProductsDocument,
+  })
+}
 
 export const createProduct = async (input: CreateProductInput) => {
   if (input.yahoo_auction_crawl_setting.category_id == 0) {
