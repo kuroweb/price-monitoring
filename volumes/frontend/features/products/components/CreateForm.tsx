@@ -3,7 +3,7 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { createProduct } from '../actions/submit'
+import { createProduct } from '../server-actions/product-query'
 
 import { CreateProductInput } from '@/graphql/dist/client'
 
