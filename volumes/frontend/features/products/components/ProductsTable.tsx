@@ -28,6 +28,7 @@ const ProductsTable = ({
   const refetchProducts = async () => {
     const result = await getProducts()
     setProducts(result.data.products)
+    setErrorMessage(result.error?.message)
   }
 
   const submitDeleteProduct = async (productId: String) => {
