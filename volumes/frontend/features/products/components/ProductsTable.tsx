@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { ApolloError } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
@@ -10,25 +9,23 @@ import { deleteProduct, getProducts } from '../server-actions/product-query'
 
 import { GetProductsQuery } from '@/graphql/dist/client'
 
-const ProductsTable = ({
-  data,
-  error,
-}: {
-  data: GetProductsQuery
-  error: ApolloError | undefined
-}) => {
-  const [products, setProducts] = useState(data.products)
-  const [errorMessage, setErrorMessage] = useState(error?.message)
+const ProductsTable = () => {
+  useEffect(() => {
+    fetchProducts()
+  }, [])
+
+  const [products, setProducts] = useState<GetProductsQuery['products']>([])
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
+
+  const fetchProducts = async () => {
+    const result = await getProducts()
+    setProducts(result.data.products)
+    setErrorMessage(result.error?.message)
+  }
 
   const router = useRouter()
   const moveToDetailPage = (productId: String) => {
     router.push(`/products/${productId}`)
-  }
-
-  const refetchProducts = async () => {
-    const result = await getProducts()
-    setProducts(result.data.products)
-    setErrorMessage(result.error?.message)
   }
 
   const submitDeleteProduct = async (productId: String) => {
@@ -39,7 +36,7 @@ const ProductsTable = ({
     } else {
       toast.error('error')
     }
-    refetchProducts()
+    fetchProducts()
   }
 
   return (
