@@ -10,10 +10,6 @@ import { deleteProduct, getProducts } from '../server-actions/product-query'
 import { GetProductsQuery } from '@/graphql/dist/client'
 
 const ProductsTable = () => {
-  useEffect(() => {
-    fetchProducts()
-  }, [])
-
   const [products, setProducts] = useState<GetProductsQuery['products']>([])
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
 
@@ -38,6 +34,10 @@ const ProductsTable = () => {
     }
     fetchProducts()
   }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [router])
 
   return (
     <>
