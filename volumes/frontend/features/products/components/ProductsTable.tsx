@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { deleteProduct, getProducts } from '../server-actions/product-query'
@@ -20,6 +20,9 @@ const ProductsTable = () => {
   }
 
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
   const moveToDetailPage = (productId: String) => {
     router.push(`/products/${productId}`)
   }
@@ -35,9 +38,10 @@ const ProductsTable = () => {
     fetchProducts()
   }
 
+  // MEMO: そもそもuseEffect内でAPIを叩いて初期化するのがよくない？
   useEffect(() => {
     fetchProducts()
-  }, [router])
+  }, [pathname, searchParams])
 
   return (
     <>
