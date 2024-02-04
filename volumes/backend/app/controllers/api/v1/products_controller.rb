@@ -25,10 +25,10 @@ module Api
       def update; end
 
       def destroy
-        products = ProductFinder.new(params: { id: params[:id] }).execute
-        return head 404 if products.blank?
+        product = Product.find_by(id: params[:id])
+        return head 404 if product.blank?
 
-        result = ::Products::DeleteService.call(product: products.first)
+        result = ::Products::DeleteService.call(product:)
         if result.success?
           head 200
         else
