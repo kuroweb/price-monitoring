@@ -20,8 +20,6 @@ const ProductsTable = () => {
   }
 
   const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
 
   const moveToDetailPage = (productId: String) => {
     router.push(`/products/${productId}`)
@@ -38,10 +36,11 @@ const ProductsTable = () => {
     fetchProducts()
   }
 
-  // MEMO: そもそもuseEffect内でAPIを叩いて初期化するのがよくない？
   useEffect(() => {
+    // NOTE: キャッシュを無効化する暫定実装
+    router.refresh()
     fetchProducts()
-  }, [pathname, searchParams])
+  }, [router])
 
   return (
     <>
