@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
       namespace :products do
         scope path: ":product_id" do
-          resources :yahoo_auction_products, only: [:index, :show]
+          resources :yahoo_auction_products, only: %i[index show]
           resources :yahoo_auction_crawl_settings, only: [:index]
         end
       end
