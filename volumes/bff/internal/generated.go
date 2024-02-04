@@ -583,29 +583,6 @@ var sources = []*ast.Source{
   deleteProduct(id: ID!): DeleteProductResult!
 }
 
-#
-# Inputs
-#
-
-## CreateProduct ##
-
-input CreateProductInput {
-  name: String!
-  yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput!
-}
-
-input CreateYahooAuctionCrawlSettingInput {
-  keyword: String!
-  category_id: Int
-  min_price: Int!
-  max_price: Int!
-  enabled: Boolean!
-}
-
-#
-# Results
-#
-
 ## common ##
 
 interface ResultBase {
@@ -622,12 +599,20 @@ type ErrorDetail {
   message: String!
 }
 
-# type errorUnauthorized implements UserError {
-#   code: String!
-#   message: String!
-# }
-
 ## CreateProduct ##
+
+input CreateProductInput {
+  name: String!
+  yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput!
+}
+
+input CreateYahooAuctionCrawlSettingInput {
+  keyword: String!
+  category_id: Int
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
 
 union CreateProductResult =
     CreateProductResultSuccess
@@ -643,9 +628,7 @@ type CreateProductResultError implements ResultBase {
   error: CreateProductResultErrors!
 }
 
-union CreateProductResultErrors =
-    CreateProductResultValidationFailed
-  # | errorUnauthorized
+union CreateProductResultErrors = CreateProductResultValidationFailed
 
 type CreateProductResultValidationFailed implements UserError {
   code: String!
@@ -653,6 +636,20 @@ type CreateProductResultValidationFailed implements UserError {
   details: [ErrorDetail!]!
 }
 
+## UpdateProduct ##
+
+# input UpdateProductInput {
+#   name: String
+#   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput
+# }
+
+# input UpdateYahooAuctionCrawlSettingInput {
+#   keyword: String
+#   category_id: Int
+#   min_price: Int
+#   max_price: Int
+#   enabled: Boolean
+# }
 
 ## DeleteProduct ##
 
@@ -669,9 +666,7 @@ type DeleteProductResultError implements ResultBase {
   error: DeleteProductResultErrors!
 }
 
-union DeleteProductResultErrors =
-    DeleteProductResultValidationFailed
-  # | errorUnauthorized
+union DeleteProductResultErrors = DeleteProductResultValidationFailed
 
 type DeleteProductResultValidationFailed implements UserError {
   code: String!
