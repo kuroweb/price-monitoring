@@ -28,6 +28,14 @@ type ResultBase interface {
 	GetOk() bool
 }
 
+type UpdateProductResult interface {
+	IsUpdateProductResult()
+}
+
+type UpdateProductResultErrors interface {
+	IsUpdateProductResultErrors()
+}
+
 type UserError interface {
 	IsUserError()
 	GetCode() string
@@ -124,6 +132,51 @@ type Product struct {
 
 func (Product) IsNode()            {}
 func (this Product) GetID() string { return this.ID }
+
+type UpdateProductInput struct {
+	Name                     *string                              `json:"name,omitempty"`
+	YahooAuctionCrawlSetting *UpdateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting,omitempty"`
+}
+
+type UpdateProductResultError struct {
+	Ok    bool                      `json:"ok"`
+	Error UpdateProductResultErrors `json:"error"`
+}
+
+func (UpdateProductResultError) IsUpdateProductResult() {}
+
+func (UpdateProductResultError) IsResultBase()    {}
+func (this UpdateProductResultError) GetOk() bool { return this.Ok }
+
+type UpdateProductResultSuccess struct {
+	Ok      bool     `json:"ok"`
+	Product *Product `json:"product"`
+}
+
+func (UpdateProductResultSuccess) IsUpdateProductResult() {}
+
+func (UpdateProductResultSuccess) IsResultBase()    {}
+func (this UpdateProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateProductResultValidationFailed) IsUpdateProductResultErrors() {}
+
+func (UpdateProductResultValidationFailed) IsUserError()            {}
+func (this UpdateProductResultValidationFailed) GetCode() string    { return this.Code }
+func (this UpdateProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type UpdateYahooAuctionCrawlSettingInput struct {
+	Keyword    *string `json:"keyword,omitempty"`
+	CategoryID *int    `json:"category_id,omitempty"`
+	MinPrice   *int    `json:"min_price,omitempty"`
+	MaxPrice   *int    `json:"max_price,omitempty"`
+	Enabled    *bool   `json:"enabled,omitempty"`
+}
 
 type YahooAuctionCrawlSetting struct {
 	ID         string `json:"id"`

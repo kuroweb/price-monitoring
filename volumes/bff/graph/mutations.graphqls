@@ -1,5 +1,6 @@
 type Mutation {
   createProduct(input: CreateProductInput!): CreateProductResult!
+  updateProduct(id: ID!, input: UpdateProductInput): UpdateProductResult!
   deleteProduct(id: ID!): DeleteProductResult!
 }
 
@@ -51,6 +52,43 @@ type CreateProductResultError implements ResultBase {
 union CreateProductResultErrors = CreateProductResultValidationFailed
 
 type CreateProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateProduct ##
+
+input UpdateProductInput {
+  name: String
+  yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput
+}
+
+input UpdateYahooAuctionCrawlSettingInput {
+  keyword: String
+  category_id: Int
+  min_price: Int
+  max_price: Int
+  enabled: Boolean
+}
+
+union UpdateProductResult =
+    UpdateProductResultSuccess
+  | UpdateProductResultError
+
+type UpdateProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  product: Product!
+}
+
+type UpdateProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateProductResultErrors!
+}
+
+union UpdateProductResultErrors = UpdateProductResultValidationFailed
+
+type UpdateProductResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

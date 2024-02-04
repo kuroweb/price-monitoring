@@ -16,6 +16,11 @@ func (r *mutationResolver) CreateProduct(ctx context.Context, input model.Create
 	return r.ProductService.CreateProduct(ctx, input)
 }
 
+// UpdateProduct is the resolver for the updateProduct field.
+func (r *mutationResolver) UpdateProduct(ctx context.Context, id string, input *model.UpdateProductInput) (model.UpdateProductResult, error) {
+	return r.ProductService.UpdateProduct(ctx, id, input)
+}
+
 // DeleteProduct is the resolver for the deleteProduct field.
 func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error) {
 	return r.ProductService.DeleteProductById(ctx, id)
