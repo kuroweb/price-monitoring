@@ -1,24 +1,20 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
-import { useRouter, usePathname, useSearchParams } from 'next/navigation'
+import { ApolloError } from '@apollo/client'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { deleteProduct, getProducts } from '../server-actions/product-query'
+import { deleteProduct } from '../server-actions/product-query'
 
 import { GetProductsQuery } from '@/graphql/dist/client'
 
-const ProductsTable = () => {
-  const [products, setProducts] = useState<GetProductsQuery['products']>([])
-  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
-
-  const fetchProducts = async () => {
-    const result = await getProducts()
-    setProducts(result.data.products)
-    setErrorMessage(result.error?.message)
-  }
-
+const ProductsTable = ({
+  data,
+  error,
+}: {
+  data: GetProductsQuery
+  error: ApolloError | undefined
+}) => {
   const router = useRouter()
 
   const moveToDetailPage = (productId: String) => {
@@ -33,18 +29,12 @@ const ProductsTable = () => {
     } else {
       toast.error('error')
     }
-    fetchProducts()
-  }
-
-  useEffect(() => {
-    // NOTE: キャッシュを無効化する暫定実装
     router.refresh()
-    fetchProducts()
-  }, [router])
+  }
 
   return (
     <>
-      {errorMessage && <div>{errorMessage}</div>}
+      {error?.message && <div>{error.message}</div>}
       <div className='relative overflow-x-auto shadow-md rounded-lg'>
         <table className='w-full text-sm text-left text-gray-500'>
           <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
@@ -53,7 +43,7 @@ const ProductsTable = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
+            {data.products.map((product) => (
               <tr
                 key={product.id}
                 className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
