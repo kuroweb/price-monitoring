@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -8,6 +9,8 @@ import { createProduct } from '../server-actions/product-query'
 import { CreateProductInput } from '@/graphql/dist/client'
 
 const CreateForm = () => {
+  const router = useRouter()
+
   const { register, handleSubmit } = useForm<CreateProductInput>({
     defaultValues: {
       name: '',
@@ -29,6 +32,7 @@ const CreateForm = () => {
     } else {
       toast.error('error')
     }
+    router.refresh()
   }
 
   return (
