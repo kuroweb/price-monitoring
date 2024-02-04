@@ -28,7 +28,7 @@ module Api
 
         result = ::Products::UpdateService.call(product:, params: update_product_params)
         if result.success?
-          head 200
+          render json: result.payload[:product].as_json, status: 200
         else
           render json: { message: result.message }, status: 400
         end
