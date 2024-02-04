@@ -22,7 +22,17 @@ module Api
         end
       end
 
-      def update; end
+      def update
+        product = Product.find_by(id: params[:id])
+        return head 404 if product.blank?
+
+        result = ::Products::UpdateService.call(product:, params: update_product_params)
+        if result.success?
+          head 200
+        else
+          render json: { message: result.message }, status: 400
+        end
+      end
 
       def destroy
         product = Product.find_by(id: params[:id])
@@ -52,6 +62,13 @@ module Api
 
       def create_product_params
         @create_product_params ||= params.permit(
+          product_attributes,
+          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes
+        )
+      end
+
+      def update_product_params
+        @update_product_params ||= params.permit(
           product_attributes,
           yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes
         )
