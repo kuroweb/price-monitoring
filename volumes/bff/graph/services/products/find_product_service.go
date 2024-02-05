@@ -31,7 +31,7 @@ func (f *FindProductService) FindProductById(ctx context.Context, id string) (*m
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
+		return nil, errors.New("failed to fetch product data")
 	}
 
 	var response struct {
@@ -73,7 +73,7 @@ func (f *FindProductService) FindProductByParams(ctx context.Context, id *string
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch product data")
+		return nil, errors.New("failed to fetch product data")
 	}
 
 	var response struct {

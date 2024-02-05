@@ -29,7 +29,7 @@ func (f *FindYahooAuctionCrawlSettingService) FindYahooAuctionCrawlSetting(ctx c
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch yahoo_auction_crawl_setting data")
+		return nil, errors.New("failed to fetch yahoo_auction_crawl_setting data")
 	}
 
 	var response struct {
