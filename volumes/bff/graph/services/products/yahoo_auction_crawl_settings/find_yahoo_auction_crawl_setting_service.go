@@ -38,7 +38,7 @@ func (f *FindYahooAuctionCrawlSettingService) FindYahooAuctionCrawlSetting(ctx c
 		Keyword    string `json:"keyword"`
 		MinPrice   int    `json:"min_price"`
 		MaxPrice   int    `json:"max_price"`
-		CategoryId int    `json:"category_id"`
+		CategoryId *int   `json:"category_id"`
 		Enabled    bool   `json:"enabled"`
 		CreatedAt  string `json:"created_at"`
 		UpdatedAt  string `json:"updated_at"`

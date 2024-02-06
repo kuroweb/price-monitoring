@@ -21,7 +21,7 @@ type YahooAuctionCrawlSetting implements Node {
   keyword: String!
   minPrice: Int!
   maxPrice: Int!
-  categoryId: Int!
+  categoryId: Int
   enabled: Boolean!
   createdAt: String!
   updatedAt: String!

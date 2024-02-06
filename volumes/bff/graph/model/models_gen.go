@@ -184,7 +184,7 @@ type YahooAuctionCrawlSetting struct {
 	Keyword    string `json:"keyword"`
 	MinPrice   int    `json:"minPrice"`
 	MaxPrice   int    `json:"maxPrice"`
-	CategoryID int    `json:"categoryId"`
+	CategoryID *int   `json:"categoryId,omitempty"`
 	Enabled    bool   `json:"enabled"`
 	CreatedAt  string `json:"createdAt"`
 	UpdatedAt  string `json:"updatedAt"`

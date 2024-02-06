@@ -86,7 +86,7 @@ type ComplexityRoot struct {
 	Mutation struct {
 		CreateProduct func(childComplexity int, input model.CreateProductInput) int
 		DeleteProduct func(childComplexity int, id string) int
-		UpdateProduct func(childComplexity int, id string, input *model.UpdateProductInput) int
+		UpdateProduct func(childComplexity int, id string, input model.UpdateProductInput) int
 	}
 
 	Product struct {
@@ -143,7 +143,7 @@ type ComplexityRoot struct {
 
 type MutationResolver interface {
 	CreateProduct(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error)
-	UpdateProduct(ctx context.Context, id string, input *model.UpdateProductInput) (model.UpdateProductResult, error)
+	UpdateProduct(ctx context.Context, id string, input model.UpdateProductInput) (model.UpdateProductResult, error)
 	DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error)
 }
 type ProductResolver interface {
@@ -314,7 +314,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Mutation.UpdateProduct(childComplexity, args["id"].(string), args["input"].(*model.UpdateProductInput)), true
+		return e.complexity.Mutation.UpdateProduct(childComplexity, args["id"].(string), args["input"].(model.UpdateProductInput)), true
 
 	case "Product.id":
 		if e.complexity.Product.ID == nil {
@@ -661,7 +661,7 @@ var sources = []*ast.Source{
 `, BuiltIn: false},
 	{Name: "../graph/mutations.graphqls", Input: `type Mutation {
   createProduct(input: CreateProductInput!): CreateProductResult!
-  updateProduct(id: ID!, input: UpdateProductInput): UpdateProductResult!
+  updateProduct(id: ID!, input: UpdateProductInput!): UpdateProductResult!
   deleteProduct(id: ID!): DeleteProductResult!
 }
 
@@ -755,7 +755,6 @@ type UpdateProductResultValidationFailed implements UserError {
   details: [ErrorDetail!]!
 }
 
-
 ## DeleteProduct ##
 
 union DeleteProductResult =
@@ -802,7 +801,7 @@ type YahooAuctionCrawlSetting implements Node {
   keyword: String!
   minPrice: Int!
   maxPrice: Int!
-  categoryId: Int!
+  categoryId: Int
   enabled: Boolean!
   createdAt: String!
   updatedAt: String!
@@ -863,10 +862,10 @@ func (ec *executionContext) field_Mutation_updateProduct_args(ctx context.Contex
 		}
 	}
 	args["id"] = arg0
-	var arg1 *model.UpdateProductInput
+	var arg1 model.UpdateProductInput
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
-		arg1, err = ec.unmarshalOUpdateProductInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductInput(ctx, tmp)
+		arg1, err = ec.unmarshalNUpdateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -1748,7 +1747,7 @@ func (ec *executionContext) _Mutation_updateProduct(ctx context.Context, field g
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Mutation().UpdateProduct(rctx, fc.Args["id"].(string), fc.Args["input"].(*model.UpdateProductInput))
+		return ec.resolvers.Mutation().UpdateProduct(rctx, fc.Args["id"].(string), fc.Args["input"].(model.UpdateProductInput))
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -2943,14 +2942,11 @@ func (ec *executionContext) _YahooAuctionCrawlSetting_categoryId(ctx context.Con
 		return graphql.Null
 	}
 	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
 		return graphql.Null
 	}
-	res := resTmp.(int)
+	res := resTmp.(*int)
 	fc.Result = res
-	return ec.marshalNInt2int(ctx, field.Selections, res)
+	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_categoryId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -6401,9 +6397,6 @@ func (ec *executionContext) _YahooAuctionCrawlSetting(ctx context.Context, sel a
 			}
 		case "categoryId":
 			out.Values[i] = ec._YahooAuctionCrawlSetting_categoryId(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
 		case "enabled":
 			out.Values[i] = ec._YahooAuctionCrawlSetting_enabled(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -7059,6 +7052,11 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 	return res
 }
 
+func (ec *executionContext) unmarshalNUpdateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductInput(ctx context.Context, v interface{}) (model.UpdateProductInput, error) {
+	res, err := ec.unmarshalInputUpdateProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
 func (ec *executionContext) marshalNUpdateProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateProductResult) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
@@ -7479,14 +7477,6 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	}
 	res := graphql.MarshalString(*v)
 	return res
-}
-
-func (ec *executionContext) unmarshalOUpdateProductInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductInput(ctx context.Context, v interface{}) (*model.UpdateProductInput, error) {
-	if v == nil {
-		return nil, nil
-	}
-	res, err := ec.unmarshalInputUpdateProductInput(ctx, v)
-	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
 func (ec *executionContext) unmarshalOUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateYahooAuctionCrawlSettingInput, error) {
