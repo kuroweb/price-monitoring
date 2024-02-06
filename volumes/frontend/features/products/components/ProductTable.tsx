@@ -2,13 +2,13 @@
 
 import { ApolloError } from '@apollo/client'
 
-import { GetProductWithYahooAuctionProductsQuery } from '@/graphql/dist/client'
+import { GetProductWithAssociationQuery } from '@/graphql/dist/client'
 
 const ProductTable = ({
   data,
   error,
 }: {
-  data: GetProductWithYahooAuctionProductsQuery
+  data: GetProductWithAssociationQuery
   error: ApolloError | undefined
 }) => {
   return (

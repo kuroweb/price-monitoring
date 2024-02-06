@@ -134,8 +134,8 @@ func (Product) IsNode()            {}
 func (this Product) GetID() string { return this.ID }
 
 type UpdateProductInput struct {
-	Name                     *string                              `json:"name,omitempty"`
-	YahooAuctionCrawlSetting *UpdateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting,omitempty"`
+	Name                     string                               `json:"name"`
+	YahooAuctionCrawlSetting *UpdateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
 }
 
 type UpdateProductResultError struct {
@@ -171,11 +171,11 @@ func (this UpdateProductResultValidationFailed) GetCode() string    { return thi
 func (this UpdateProductResultValidationFailed) GetMessage() string { return this.Message }
 
 type UpdateYahooAuctionCrawlSettingInput struct {
-	Keyword    *string `json:"keyword,omitempty"`
-	CategoryID *int    `json:"category_id,omitempty"`
-	MinPrice   *int    `json:"min_price,omitempty"`
-	MaxPrice   *int    `json:"max_price,omitempty"`
-	Enabled    *bool   `json:"enabled,omitempty"`
+	Keyword    string `json:"keyword"`
+	CategoryID *int   `json:"category_id,omitempty"`
+	MinPrice   int    `json:"min_price"`
+	MaxPrice   int    `json:"max_price"`
+	Enabled    bool   `json:"enabled"`
 }
 
 type YahooAuctionCrawlSetting struct {

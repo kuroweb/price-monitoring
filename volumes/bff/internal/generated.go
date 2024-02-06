@@ -721,16 +721,16 @@ type CreateProductResultValidationFailed implements UserError {
 ## UpdateProduct ##
 
 input UpdateProductInput {
-  name: String
-  yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput
+  name: String!
+  yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
-  keyword: String
+  keyword: String!
   category_id: Int
-  min_price: Int
-  max_price: Int
-  enabled: Boolean
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
 }
 
 union UpdateProductResult =
@@ -5296,7 +5296,7 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("name"))
-			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			data, err := ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -5305,7 +5305,7 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("yahoo_auction_crawl_setting"))
-			data, err := ec.unmarshalOUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx, v)
+			data, err := ec.unmarshalNUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -5334,7 +5334,7 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingInput(ct
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
-			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			data, err := ec.unmarshalNString2string(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -5352,7 +5352,7 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingInput(ct
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
-			data, err := ec.unmarshalOInt2ᚖint(ctx, v)
+			data, err := ec.unmarshalNInt2int(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -5361,7 +5361,7 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingInput(ct
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
-			data, err := ec.unmarshalOInt2ᚖint(ctx, v)
+			data, err := ec.unmarshalNInt2int(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -5370,7 +5370,7 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingInput(ct
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
-			data, err := ec.unmarshalOBoolean2ᚖbool(ctx, v)
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
 			if err != nil {
 				return it, err
 			}
@@ -7077,6 +7077,11 @@ func (ec *executionContext) marshalNUpdateProductResultErrors2githubᚗcomᚋkur
 	return ec._UpdateProductResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateYahooAuctionCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
 func (ec *executionContext) marshalNYahooAuctionCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.YahooAuctionCrawlSetting) graphql.Marshaler {
 	return ec._YahooAuctionCrawlSetting(ctx, sel, &v)
 }
@@ -7477,14 +7482,6 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	}
 	res := graphql.MarshalString(*v)
 	return res
-}
-
-func (ec *executionContext) unmarshalOUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateYahooAuctionCrawlSettingInput, error) {
-	if v == nil {
-		return nil, nil
-	}
-	res, err := ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput(ctx, v)
-	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
 func (ec *executionContext) marshalO__EnumValue2ᚕgithubᚗcomᚋ99designsᚋgqlgenᚋgraphqlᚋintrospectionᚐEnumValueᚄ(ctx context.Context, sel ast.SelectionSet, v []introspection.EnumValue) graphql.Marshaler {

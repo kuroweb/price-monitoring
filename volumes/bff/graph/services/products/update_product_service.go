@@ -13,16 +13,28 @@ import (
 )
 
 type IUpdateProductService interface {
-	UpdateProduct(ctx context.Context, id string, input *model.UpdateProductInput) (model.UpdateProductResult, error)
+	UpdateProduct(ctx context.Context, id string, input model.UpdateProductInput) (model.UpdateProductResult, error)
 }
 
 type UpdateProductService struct{}
 
-func (u *UpdateProductService) UpdateProduct(ctx context.Context, id string, input *model.UpdateProductInput) (model.UpdateProductResult, error) {
+func (u *UpdateProductService) UpdateProduct(ctx context.Context, id string, input model.UpdateProductInput) (model.UpdateProductResult, error) {
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products/%s", cfg.BackendUrl, id)
 
-	requestBody, err := json.Marshal(input)
+	// NOTE: ネストした構造体の構築がstructだと辛かったので代替案として実施
+	body := map[string]interface{}{
+		"name": input.Name,
+		"yahoo_auction_crawl_setting": map[string]interface{}{
+			"keyword":     input.YahooAuctionCrawlSetting.Keyword,
+			"category_id": input.YahooAuctionCrawlSetting.CategoryID,
+			"min_price":   input.YahooAuctionCrawlSetting.MinPrice,
+			"max_price":   input.YahooAuctionCrawlSetting.MaxPrice,
+			"enabled":     input.YahooAuctionCrawlSetting.Enabled,
+		},
+	}
+
+	requestBody, err := json.Marshal(body)
 	if err != nil {
 		return u.handleServerError(), nil
 	}

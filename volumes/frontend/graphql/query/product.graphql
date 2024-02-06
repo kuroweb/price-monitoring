@@ -5,7 +5,7 @@ query getProducts($id: ID, $name: String) {
   }
 }
 
-query getProductWithYahooAuctionProducts($id: ID!, $published: Boolean) {
+query getProductWithAssociation($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
@@ -17,6 +17,14 @@ query getProductWithYahooAuctionProducts($id: ID!, $published: Boolean) {
       thumbnailUrl
       price
       published
+    }
+    yahooAuctionCrawlSetting {
+      id
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
     }
   }
 }
@@ -34,6 +42,31 @@ mutation createProduct($input: CreateProductInput!) {
       ok
       error {
         ... on CreateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateProduct($id: ID!, $input: UpdateProductInput!) {
+  updateProduct(id: $id, input: $input) {
+    ... on UpdateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+      }
+    }
+    ... on UpdateProductResultError {
+      ok
+      error {
+        ... on UpdateProductResultValidationFailed {
           code
           message
           details {

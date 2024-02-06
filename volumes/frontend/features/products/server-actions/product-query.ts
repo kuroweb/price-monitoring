@@ -8,6 +8,9 @@ import {
   DeleteProductMutation,
   GetProductsDocument,
   GetProductsQuery,
+  UpdateProductDocument,
+  UpdateProductMutation,
+  UpdateProductInput,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -28,8 +31,11 @@ export const createProduct = async (input: CreateProductInput) => {
   })
 }
 
-export const updateProduct = async (data: any) => {
-  console.log(data)
+export const updateProduct = async (id: String, input: UpdateProductInput) => {
+  return await getClient().mutate<UpdateProductMutation>({
+    mutation: UpdateProductDocument,
+    variables: { id: id, input: input },
+  })
 }
 
 export const deleteProduct = async (id: String) => {

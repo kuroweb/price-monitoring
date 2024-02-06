@@ -85,6 +85,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   createProduct: CreateProductResult;
   deleteProduct: DeleteProductResult;
+  updateProduct: UpdateProductResult;
 };
 
 
@@ -95,6 +96,12 @@ export type MutationCreateProductArgs = {
 
 export type MutationDeleteProductArgs = {
   id: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateProductArgs = {
+  id: Scalars['ID']['input'];
+  input: UpdateProductInput;
 };
 
 export type Node = {
@@ -141,6 +148,42 @@ export type ResultBase = {
   ok: Scalars['Boolean']['output'];
 };
 
+export type UpdateProductInput = {
+  name: Scalars['String']['input'];
+  yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput;
+};
+
+export type UpdateProductResult = UpdateProductResultError | UpdateProductResultSuccess;
+
+export type UpdateProductResultError = ResultBase & {
+  __typename?: 'UpdateProductResultError';
+  error: UpdateProductResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateProductResultErrors = UpdateProductResultValidationFailed;
+
+export type UpdateProductResultSuccess = ResultBase & {
+  __typename?: 'UpdateProductResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  product: Product;
+};
+
+export type UpdateProductResultValidationFailed = UserError & {
+  __typename?: 'UpdateProductResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type UpdateYahooAuctionCrawlSettingInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
 export type UserError = {
   code: Scalars['String']['output'];
   message: Scalars['String']['output'];
@@ -148,7 +191,7 @@ export type UserError = {
 
 export type YahooAuctionCrawlSetting = Node & {
   __typename?: 'YahooAuctionCrawlSetting';
-  categoryId: Scalars['Int']['output'];
+  categoryId?: Maybe<Scalars['Int']['output']>;
   createdAt: Scalars['String']['output'];
   enabled: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
@@ -178,13 +221,13 @@ export type GetProductsQueryVariables = Exact<{
 
 export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string }> };
 
-export type GetProductWithYahooAuctionProductsQueryVariables = Exact<{
+export type GetProductWithAssociationQueryVariables = Exact<{
   id: Scalars['ID']['input'];
   published?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type GetProductWithYahooAuctionProductsQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }> } };
+export type GetProductWithAssociationQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean } } };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -192,6 +235,14 @@ export type CreateProductMutationVariables = Exact<{
 
 
 export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'CreateProductResultError', ok: boolean, error: { __typename?: 'CreateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string } } };
+
+export type UpdateProductMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  input: UpdateProductInput;
+}>;
+
+
+export type UpdateProductMutation = { __typename?: 'Mutation', updateProduct: { __typename?: 'UpdateProductResultError', ok: boolean, error: { __typename?: 'UpdateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string } } };
 
 export type DeleteProductMutationVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -209,8 +260,8 @@ export const GetProductsDocument = gql`
   }
 }
     `;
-export const GetProductWithYahooAuctionProductsDocument = gql`
-    query getProductWithYahooAuctionProducts($id: ID!, $published: Boolean) {
+export const GetProductWithAssociationDocument = gql`
+    query getProductWithAssociation($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
@@ -222,6 +273,14 @@ export const GetProductWithYahooAuctionProductsDocument = gql`
       thumbnailUrl
       price
       published
+    }
+    yahooAuctionCrawlSetting {
+      id
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
     }
   }
 }
@@ -240,6 +299,32 @@ export const CreateProductDocument = gql`
       ok
       error {
         ... on CreateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateProductDocument = gql`
+    mutation updateProduct($id: ID!, $input: UpdateProductInput!) {
+  updateProduct(id: $id, input: $input) {
+    ... on UpdateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+      }
+    }
+    ... on UpdateProductResultError {
+      ok
+      error {
+        ... on UpdateProductResultValidationFailed {
           code
           message
           details {
@@ -285,11 +370,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getProducts(variables?: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProducts', 'query', variables);
     },
-    getProductWithYahooAuctionProducts(variables: GetProductWithYahooAuctionProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductWithYahooAuctionProductsQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductWithYahooAuctionProductsQuery>(GetProductWithYahooAuctionProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductWithYahooAuctionProducts', 'query', variables);
+    getProductWithAssociation(variables: GetProductWithAssociationQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductWithAssociationQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductWithAssociationQuery>(GetProductWithAssociationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductWithAssociation', 'query', variables);
     },
     createProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createProduct', 'mutation', variables);
+    },
+    updateProduct(variables: UpdateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateProductMutation>(UpdateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateProduct', 'mutation', variables);
     },
     deleteProduct(variables: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteProduct', 'mutation', variables);

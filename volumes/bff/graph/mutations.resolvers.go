@@ -17,7 +17,7 @@ func (r *mutationResolver) CreateProduct(ctx context.Context, input model.Create
 }
 
 // UpdateProduct is the resolver for the updateProduct field.
-func (r *mutationResolver) UpdateProduct(ctx context.Context, id string, input *model.UpdateProductInput) (model.UpdateProductResult, error) {
+func (r *mutationResolver) UpdateProduct(ctx context.Context, id string, input model.UpdateProductInput) (model.UpdateProductResult, error) {
 	return r.ProductService.UpdateProduct(ctx, id, input)
 }
 
