@@ -10,19 +10,17 @@ module Crawl
       end
 
       def call
-        return unless crawl_setting.enabled?
+        return unless yahoo_auction_crawl_setting.enabled?
 
         crawl_results = Crawl::YahooAuction::Crawler.new(product:).execute
+        crawl_results = Crawl::YahooAuction::InspectCrawlResults.new(yahoo_auction_crawl_setting:,
+                                                                     crawl_results:).execute
         save(crawl_results)
       end
 
       private
 
       attr_reader :product
-
-      def crawl_setting
-        @crawl_setting ||= product.yahoo_auction_crawl_setting
-      end
 
       def save(crawl_results)
         YahooAuctionProduct.transaction do
@@ -44,6 +42,10 @@ module Crawl
           .where(product_id: product.id, published: true)
           .where.not(yahoo_auction_id: crawl_results.yahoo_auction_ids)
           .update_all(published: false)
+      end
+
+      def yahoo_auction_crawl_setting
+        @yahoo_auction_crawl_setting ||= product.yahoo_auction_crawl_setting
       end
     end
   end
