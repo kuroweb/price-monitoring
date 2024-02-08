@@ -35,7 +35,7 @@ const ProductsTable = ({
   return (
     <>
       {error?.message && <div>{error.message}</div>}
-      <div className='relative overflow-x-auto shadow-md rounded-lg'>
+      <div className='relative overflow-x-auto shadow-md rounded-lg select-none'>
         <table className='w-full text-sm text-left text-gray-500'>
           <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
             <tr>
