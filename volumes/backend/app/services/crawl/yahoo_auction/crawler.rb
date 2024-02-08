@@ -42,10 +42,6 @@ module Crawl
         end
       end
 
-      def crawl_results
-        @crawl_results ||= CrawlResults.new
-      end
-
       def url(start)
         Crawl::YahooAuction::UrlGenerator.new(product:, start:).generate
       end
