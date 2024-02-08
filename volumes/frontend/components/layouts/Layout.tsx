@@ -1,6 +1,7 @@
-import { ReactNode } from 'react'
+'use client'
 
-import Footer from './Footer'
+import { ReactNode, useState } from 'react'
+
 import Header from './Header'
 import Sidebar from './Sidebar'
 
@@ -9,15 +10,23 @@ type Props = {
 }
 
 const Layout = ({ children }: Props) => {
+  const [open, setOpen] = useState<boolean>(false)
+
   return (
     <>
-      <div className='flex flex-col h-screen'>
+      <div className='h-dvh'>
         <Header />
-        <div className='flex flex-1 overflow-hidden'>
-          <Sidebar isOpen={false} />
-          <main className='w-full p-4 overflow-scroll bg-gray-200'>{children}</main>
+        <div className='flex h-full overflow-hidden bg-gray-200 pt-16'>
+          <Sidebar isOpen={open} />
+          <div className='bg-gray-900 opacity-50 hidden fixed inset-0 z-10'></div>
+          <div className={`h-full w-full overflow-y-auto ${open && 'md:pl-64'}`}>
+            <main>
+              <div className='p-4'>
+                <main>{children}</main>
+              </div>
+            </main>
+          </div>
         </div>
-        <Footer />
       </div>
     </>
   )
