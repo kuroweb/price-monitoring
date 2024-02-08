@@ -9,7 +9,7 @@ module Crawl
       end
 
       def add(result)
-        @results.push(result)
+        results.push(result)
       end
 
       def yahoo_auction_ids
