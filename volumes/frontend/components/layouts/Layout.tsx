@@ -14,8 +14,8 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <div className='h-dvh'>
-        <Header />
+      <div className='h-svh'>
+        <Header open={open} setOpen={setOpen} />
         <div className='flex h-full overflow-hidden bg-gray-200 pt-16'>
           <Sidebar isOpen={open} />
           <div className='bg-gray-900 opacity-50 hidden fixed inset-0 z-10'></div>
