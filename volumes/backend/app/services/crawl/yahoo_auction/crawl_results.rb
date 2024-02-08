@@ -8,6 +8,10 @@ module Crawl
         @results = results
       end
 
+      def add(result)
+        @results.push(result)
+      end
+
       def yahoo_auction_ids
         results.map(&:yahoo_auction_id)
       end

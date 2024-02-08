@@ -30,17 +30,20 @@ module Crawl
 
       def append_results(page)
         product_doms = page.query_selector_all("li.Product")
-        results = product_doms.map do |dom|
-          CrawlResult.new(
+        product_doms.each do |dom|
+          result = CrawlResult.new(
             yahoo_auction_id: yahoo_auction_id(dom),
             name: name(dom),
             price: price(dom),
             thumbnail_url: thumbnail_url(dom),
             published: true
           )
+          crawl_results.add(result)
         end
+      end
 
-        @crawl_results = CrawlResults.new(crawl_results.results + results)
+      def crawl_results
+        @crawl_results ||= CrawlResults.new
       end
 
       def url(start)
