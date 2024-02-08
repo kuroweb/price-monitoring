@@ -49,8 +49,9 @@ const YahooAuctionProductsTable = ({
                       <NextImage
                         className='object-contain'
                         src={product.thumbnailUrl}
-                        alt={''}
+                        alt=''
                         fill
+                        sizes='100vw, 100vw'
                       />
                     </div>
                   </td>
