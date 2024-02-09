@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_13_023218) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_09_174953) do
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -21,6 +21,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_023218) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "yahoo_auction_crawl_setting_exclude_conditions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "yahoo_auction_crawl_setting_id"
+    t.string "keyword"
+    t.string "seller_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_f5bceade03"
   end
 
   create_table "yahoo_auction_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -48,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_13_023218) do
     t.index ["yahoo_auction_id"], name: "index_yahoo_auction_products_on_yahoo_auction_id", unique: true
   end
 
+  add_foreign_key "yahoo_auction_crawl_setting_exclude_conditions", "yahoo_auction_crawl_settings"
   add_foreign_key "yahoo_auction_crawl_settings", "products"
   add_foreign_key "yahoo_auction_products", "products"
 end
