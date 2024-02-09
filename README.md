@@ -86,6 +86,12 @@ erDiagram
     int max_price "default: 0"
     boolean enabled "default: false"
   }
+  yahoo_auction_crawl_setting_exclude_conditions {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string keyword
+    string seller_id
+  }
   yahoo_auction_products {
     bigint id PK
     bigint yahoo_auction_id "NOT_NULL"
@@ -95,6 +101,7 @@ erDiagram
   }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_conditions : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
 ```
 
