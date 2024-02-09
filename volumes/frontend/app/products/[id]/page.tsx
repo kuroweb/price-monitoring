@@ -17,10 +17,8 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <Layout>
-      <Breadcrumbs text={'Update Form'} />
+      <Breadcrumbs text={'監視設定'} />
       <UpdateForm data={data} />
-      <Breadcrumbs text={'Products'} className='pt-4' />
-      <ProductTable data={data} error={error} />
       <Breadcrumbs text={'ヤフオク'} className='pt-4' />
       <YahooAuctionProductsTable data={data} error={error} />
     </Layout>

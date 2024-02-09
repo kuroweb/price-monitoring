@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 
 import { updateProduct } from '../server-actions/product-query'
 
+import DivideBorder from '@/components/ui/DivideBorder'
 import { GetProductWithAssociationQuery, UpdateProductInput } from '@/graphql/dist/client'
 
 const UpdateForm = ({ data }: { data: GetProductWithAssociationQuery }) => {
@@ -42,10 +43,13 @@ const UpdateForm = ({ data }: { data: GetProductWithAssociationQuery }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='mx-auto p-4 bg-white shadow-md rounded-lg'>
-      <label className='block text-sm font-medium text-gray-700'>
+      <label className='text-sm font-medium text-gray-700'>共通</label>
+      <label className='block pt-4 text-sm font-medium text-gray-700'>
         name
         <input {...register('name')} className='p-2 border rounded-md w-full' />
       </label>
+      <DivideBorder />
+      <label className='text-sm font-medium text-gray-700'>ヤフオク</label>
       <label className='block pt-4 text-sm font-medium text-gray-700'>
         keyword
         <input
