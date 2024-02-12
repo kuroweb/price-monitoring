@@ -12,17 +12,30 @@ module Crawl
       def call
         return unless yahoo_auction_crawl_setting.enabled?
 
-        crawl_results = Crawl::YahooAuction::Crawler.new(product:).execute
-        crawl_results = Crawl::YahooAuction::InspectCrawlResults.new(yahoo_auction_crawl_setting:,
-                                                                     crawl_results:).execute
-        save(crawl_results)
+        published_crawl_results = crawl_published
+
+        save(published_crawl_results)
       end
 
       private
 
       attr_reader :product
 
+      def crawl_published
+        crawl_results = Crawl::YahooAuction::Published::Crawler.new(product:).execute
+        inspect(crawl_results)
+      end
+
+      def crawl_unpublished
+        # TODO: 後で実装する
+      end
+
+      def inspect(crawl_results)
+        Crawl::YahooAuction::InspectCrawlResults.new(yahoo_auction_crawl_setting:, crawl_results:).execute
+      end
+
       def save(crawl_results)
+        # TODO: published, unpublishedを比較してsaveする処理に変更する
         YahooAuctionProduct.transaction do
           update_published_products(crawl_results)
           update_unpublished_products(crawl_results)
