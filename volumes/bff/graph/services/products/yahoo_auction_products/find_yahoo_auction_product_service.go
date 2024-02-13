@@ -63,6 +63,7 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 			ThumbnailURL   string `json:"thumbnail_url"`
 			Price          int    `json:"price"`
 			Published      bool   `json:"published"`
+			Canceled       bool   `json:"canceled"`
 		} `json:"yahoo_auction_products"`
 	}
 
@@ -80,6 +81,7 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 			ThumbnailURL:   yahoo_auction_product.ThumbnailURL,
 			Price:          yahoo_auction_product.Price,
 			Published:      yahoo_auction_product.Published,
+			Canceled:       yahoo_auction_product.Canceled,
 		}
 	}
 

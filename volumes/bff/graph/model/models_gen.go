@@ -201,6 +201,7 @@ type YahooAuctionProduct struct {
 	ThumbnailURL   string `json:"thumbnailUrl"`
 	Price          int    `json:"price"`
 	Published      bool   `json:"published"`
+	Canceled       bool   `json:"canceled"`
 }
 
 func (YahooAuctionProduct) IsNode()            {}
