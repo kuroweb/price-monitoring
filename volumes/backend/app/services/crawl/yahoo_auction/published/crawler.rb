@@ -1,3 +1,4 @@
+# 開催中のオークション画面のクローラ
 module Crawl
   module YahooAuction
     module Published
