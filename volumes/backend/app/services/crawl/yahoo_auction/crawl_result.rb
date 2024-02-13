@@ -2,7 +2,7 @@
 module Crawl
   module YahooAuction
     class CrawlResult
-      attr_reader :yahoo_auction_id, :name, :price, :thumbnail_url, :published
+      attr_reader :yahoo_auction_id, :name, :price, :thumbnail_url, :published, :canceled
 
       def initialize(attributes = {})
         attributes.each do |key, value|
