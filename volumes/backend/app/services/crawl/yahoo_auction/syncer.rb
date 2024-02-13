@@ -29,12 +29,12 @@ module Crawl
 
       def save(crawl_results)
         YahooAuctionProduct.transaction do
-          update_published_products(crawl_results)
-          update_unpublished_products(crawl_results)
+          update_products(crawl_results)
+          update_canceled_products(crawl_results)
         end
       end
 
-      def update_published_products(crawl_results)
+      def update_products(crawl_results)
         upsert_params = crawl_results.results.map do |result|
           result.as_json.merge("product_id" => @product.id)
         end
@@ -42,9 +42,9 @@ module Crawl
         YahooAuctionProduct.upsert_all(upsert_params, record_timestamps: true)
       end
 
-      def update_unpublished_products(crawl_results)
+      def update_canceled_products(crawl_results)
         YahooAuctionProduct
-          .where(product_id: @product.id, published: true)
+          .where(product_id: @product.id)
           .where.not(yahoo_auction_id: crawl_results.yahoo_auction_ids)
           .update_all(published: false, canceled: true)
       end
