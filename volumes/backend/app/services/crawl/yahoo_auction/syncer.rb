@@ -44,7 +44,7 @@ module Crawl
 
       def update_canceled_products(crawl_results)
         YahooAuctionProduct
-          .where(product_id: @product.id)
+          .where(product_id: @product.id, published: true)
           .where.not(yahoo_auction_id: crawl_results.yahoo_auction_ids)
           .update_all(published: false, canceled: true)
       end
