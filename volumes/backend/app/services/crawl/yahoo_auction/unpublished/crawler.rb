@@ -60,7 +60,7 @@ module Crawl
         end
 
         def yahoo_auction_id(dom)
-          dom.query_selector(".Product__titleLink").get_attribute("data-auction-id")
+          dom.query_selector(".Product__titleLink").get_attribute("href").split("/")[-1]
         end
 
         def name(dom)
