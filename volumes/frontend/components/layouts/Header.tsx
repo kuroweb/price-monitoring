@@ -10,20 +10,47 @@ type Props = {
 const Header = (props: Props) => {
   return (
     <>
-      <header className='fixed z-30 w-full bg-blue-600'>
-        <div className='px-6'>
-          <div className='flex justify-between items-center -mb-px h-16'>
-            <div className='flex'>
-              <button
-                className='flex md:hidden bg-white rounded-md px-2 mr-4'
-                onClick={() => props.setOpen(!props.open)}
+      <header>
+        <div className='navbar fixed z-30 bg-base-100'>
+          <div className='flex-none'>
+            <button
+              className='btn btn-square btn-ghost flex md:hidden'
+              onClick={() => props.setOpen(!props.open)}
+            >
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='inline-block w-5 h-5 stroke-current'
               >
-                =
-              </button>
-              <Link href={'/'}>
-                <p className='text-white'>Price Monitoring</p>
-              </Link>
-            </div>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M4 6h16M4 12h16M4 18h16'
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <div className='flex-1'>
+            <a className='btn btn-ghost text-xl'>Price Monitoring</a>
+          </div>
+          <div className='flex-none'>
+            <button className='btn btn-square btn-ghost'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='inline-block w-5 h-5 stroke-current'
+              >
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
+                ></path>
+              </svg>
+            </button>
           </div>
         </div>
       </header>
