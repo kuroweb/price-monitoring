@@ -14,14 +14,13 @@ const Layout = ({ children }: Props) => {
 
   return (
     <>
-      <div className='h-svh' data-theme="dark">
-        <Header open={open} setOpen={setOpen} />
-        <div className='flex h-full overflow-hidden bg-gray-200 pt-16'>
-          <Sidebar isOpen={open} />
-          <div className='bg-gray-900 opacity-50 hidden fixed inset-0 z-10'></div>
+      <div className='h-svh' data-theme='dark'>
+        <div className='flex h-full overflow-hidden'>
+          <Header open={open} setOpen={setOpen} />
+          <Sidebar open={open} setOpen={setOpen} />
           <div className='h-full w-full overflow-y-auto md:pl-64'>
             <main>
-              <div className='p-4'>
+              <div className='pt-20 p-4'>
                 <main>{children}</main>
               </div>
             </main>
