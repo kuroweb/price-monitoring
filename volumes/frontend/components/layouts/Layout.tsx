@@ -19,7 +19,7 @@ const Layout = ({ children }: Props) => {
         <div className='flex h-full overflow-hidden bg-gray-200 pt-16'>
           <Sidebar isOpen={open} />
           <div className='bg-gray-900 opacity-50 hidden fixed inset-0 z-10'></div>
-          <div className={`h-full w-full overflow-y-auto ${open && 'md:pl-64'}`}>
+          <div className='h-full w-full overflow-y-auto md:pl-64'>
             <main>
               <div className='p-4'>
                 <main>{children}</main>

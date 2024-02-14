@@ -11,11 +11,11 @@ const Header = (props: Props) => {
   return (
     <>
       <header className='fixed z-30 w-full bg-blue-600'>
-        <div className='px-4 sm:px-6 lg:px-8'>
+        <div className='px-6'>
           <div className='flex justify-between items-center -mb-px h-16'>
             <div className='flex'>
               <button
-                className='bg-white rounded-md px-2 mr-4'
+                className='flex md:hidden bg-white rounded-md px-2 mr-4'
                 onClick={() => props.setOpen(!props.open)}
               >
                 =
