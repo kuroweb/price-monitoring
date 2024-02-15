@@ -17,10 +17,20 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <Layout>
-      <Breadcrumbs text={'監視設定'} />
-      <UpdateForm data={data} />
-      <Breadcrumbs text={'ヤフオク'} className='pt-4' />
-      <YahooAuctionProductsTable data={data} error={error} />
+      <div className='grid sm:grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title'>更新フォーム</h2>
+            <UpdateForm data={data} />
+          </div>
+        </div>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title'>ヤフオク</h2>
+            <YahooAuctionProductsTable data={data} error={error} />
+          </div>
+        </div>
+      </div>
     </Layout>
   )
 }
