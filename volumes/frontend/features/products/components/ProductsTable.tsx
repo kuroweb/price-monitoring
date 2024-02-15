@@ -35,8 +35,8 @@ const ProductsTable = ({
   return (
     <>
       {error?.message && <div>{error.message}</div>}
-      <div className='relative overflow-x-auto shadow-md rounded-lg select-none'>
-        <table className='w-full text-left'>
+      {data && (
+        <table className='w-full text-left select-none'>
           <thead className='uppercase'>
             <tr>
               <th className='p-4'>管理コード</th>
@@ -77,7 +77,7 @@ const ProductsTable = ({
             ))}
           </tbody>
         </table>
-      </div>
+      )}
     </>
   )
 }
