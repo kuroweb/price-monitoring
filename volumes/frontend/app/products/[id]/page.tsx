@@ -17,14 +17,14 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <Layout>
-      <div className='grid sm:grid-cols-1 lg:grid-cols-2 gap-4'>
-        <div className='card w-full bg-neutral'>
+      <div className='grid sm:grid-cols-1 lg:grid-cols-4 gap-4'>
+        <div className='sm:col-span-4 lg:col-span-2 2xl:col-span-1 card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title'>更新フォーム</h2>
             <UpdateForm data={data} />
           </div>
         </div>
-        <div className='card w-full bg-neutral'>
+        <div className='sm:col-span-4 lg:col-span-2 2xl:col-span-3 card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title'>ヤフオク</h2>
             <YahooAuctionProductsTable data={data} error={error} />

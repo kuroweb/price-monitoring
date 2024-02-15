@@ -13,13 +13,13 @@ const Page = async () => {
   return (
     <Layout>
       <div className='grid sm:grid-cols-1 lg:grid-cols-2 gap-4'>
-        <div className='card w-full bg-neutral'>
+        <div className='sm:col-span-4 lg:col-span-2 2xl:col-span-1 card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title'>登録フォーム</h2>
             <CreateForm />
           </div>
         </div>
-        <div className='card w-full bg-neutral'>
+        <div className='sm:col-span-4 lg:col-span-2 2xl:col-span-3 card w-full bg-neutral'>
           <div className='card-body'>
             <ProductsTable data={data} error={error} />
           </div>
