@@ -12,10 +12,15 @@ const Page = async () => {
 
   return (
     <Layout>
-      <Breadcrumbs text={'Create Form'} />
-      <CreateForm />
-      <Breadcrumbs text={'Products'} className='pt-4' />
-      <ProductsTable data={data} error={error} />
+      <div className='grid sm:grid-cols-1 lg:grid-cols-2 gap-4'>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title'>登録フォーム</h2>
+            <CreateForm />
+          </div>
+        </div>
+        <ProductsTable data={data} error={error} />
+      </div>
     </Layout>
   )
 }
