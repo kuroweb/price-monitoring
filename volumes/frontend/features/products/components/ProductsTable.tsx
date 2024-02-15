@@ -36,35 +36,27 @@ const ProductsTable = ({
     <>
       {error?.message && <div>{error.message}</div>}
       <div className='relative overflow-x-auto shadow-md rounded-lg select-none'>
-        <table className='w-full text-sm text-left text-gray-500'>
-          <thead className='text-xs text-gray-700 uppercase bg-gray-50'>
+        <table className='w-full text-left'>
+          <thead className='uppercase'>
             <tr>
-              <th className='px-6 py-3'>name</th>
+              <th className='p-4'>管理コード</th>
+              <th className='p-4 flex justify-center'>アクション</th>
             </tr>
           </thead>
           <tbody>
             {data.products.map((product) => (
-              <tr
-                key={product.id}
-                className='bg-white border-b hover: cursor-pointer hover:bg-gray-100'
-              >
-                <td>
-                  <div className='flex items-center'>
-                    <div
-                      className='flex-auto px-6 py-4'
-                      onClick={() => moveToDetailPage(product.id)}
+              <tr key={product.id} className='border-b cursor-pointer hover:bg-base-100'>
+                <td className='px-4 w-4/5' onClick={() => moveToDetailPage(product.id)}>
+                  {product.name}
+                </td>
+                <td className='p-2 w-1/5'>
+                  <div className='flex justify-center'>
+                    <button
+                      onClick={() => submitDeleteProduct(product.id)}
+                      className='btn btn-error'
                     >
-                      {product.name}
-                    </div>
-                    <div className='pr-4'>
-                      <button
-                        type='button'
-                        className='text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:ring-red-300 rounded-md px-4 py-2'
-                        onClick={() => submitDeleteProduct(product.id)}
-                      >
-                        削除
-                      </button>
-                    </div>
+                      削除
+                    </button>
                   </div>
                 </td>
               </tr>

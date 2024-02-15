@@ -19,7 +19,11 @@ const Page = async () => {
             <CreateForm />
           </div>
         </div>
-        <ProductsTable data={data} error={error} />
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <ProductsTable data={data} error={error} />
+          </div>
+        </div>
       </div>
     </Layout>
   )
