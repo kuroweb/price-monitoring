@@ -37,7 +37,7 @@ const ProductsTable = ({
       {error?.message && <div>{error.message}</div>}
       {data && (
         <table className='w-full text-left select-none'>
-          <thead className='uppercase'>
+          <thead className='border-b border-base-200 uppercase'>
             <tr>
               <th className='p-4'>管理コード</th>
               <th className='p-4 flex justify-center'>
@@ -59,7 +59,10 @@ const ProductsTable = ({
           </thead>
           <tbody>
             {data.products.map((product) => (
-              <tr key={product.id} className='border-b cursor-pointer hover:bg-base-100'>
+              <tr
+                key={product.id}
+                className='border-b border-base-200 cursor-pointer hover:bg-base-100'
+              >
                 <td className='px-4 w-4/5' onClick={() => moveToDetailPage(product.id)}>
                   {product.name}
                 </td>
