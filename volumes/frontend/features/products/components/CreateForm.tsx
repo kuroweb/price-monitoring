@@ -44,7 +44,12 @@ const CreateForm = () => {
       <div onClick={() => setModal(true)} className='btn'>
         計測対象を追加する
       </div>
-      <input type='checkbox' className='modal-toggle' defaultChecked={modal} />
+      <input
+        type='checkbox'
+        className='modal-toggle'
+        checked={modal}
+        onChange={(e) => setModal(e.target.checked)}
+      />
       <div className='modal' role='dialog'>
         <div className='modal-box'>
           <div
