@@ -1,6 +1,4 @@
 import Layout from '@/components/layouts/Layout'
-import Breadcrumbs from '@/components/ui/Breadcrumbs'
-import ProductTable from '@/features/products/components/ProductTable'
 import UpdateForm from '@/features/products/components/UpdateForm'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {
@@ -17,16 +15,11 @@ const Page = async ({ params }: { params: { id: string } }) => {
 
   return (
     <Layout>
-      <div className='grid sm:grid-cols-1 lg:grid-cols-4 gap-4'>
-        <div className='sm:col-span-4 lg:col-span-2 2xl:col-span-1 card w-full bg-neutral'>
+      <div className='grid grid-cols-1 gap-4'>
+        <div className='card w-full bg-neutral'>
           <div className='card-body'>
-            <h2 className='card-title'>更新フォーム</h2>
             <UpdateForm data={data} />
-          </div>
-        </div>
-        <div className='sm:col-span-4 lg:col-span-2 2xl:col-span-3 card w-full bg-neutral'>
-          <div className='card-body'>
-            <h2 className='card-title'>ヤフオク</h2>
+            <h2 className='card-title py-4'>ヤフオク</h2>
             <YahooAuctionProductsTable data={data} error={error} />
           </div>
         </div>

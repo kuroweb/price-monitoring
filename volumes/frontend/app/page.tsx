@@ -1,5 +1,4 @@
 import Layout from '@/components/layouts/Layout'
-import Breadcrumbs from '@/components/ui/Breadcrumbs'
 import CreateForm from '@/features/products/components/CreateForm'
 import ProductsTable from '@/features/products/components/ProductsTable'
 import { GetProductsDocument, GetProductsQuery } from '@/graphql/dist/client'
