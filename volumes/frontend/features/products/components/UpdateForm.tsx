@@ -46,7 +46,7 @@ const UpdateForm = ({ data }: { data: GetProductWithAssociationQuery }) => {
 
   return (
     <>
-      <div onClick={() => setModal(true)} className='btn'>
+      <div onClick={() => setModal(true)} className='btn no-animation'>
         計測対象を更新する
       </div>
       <input

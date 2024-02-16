@@ -41,7 +41,7 @@ const CreateForm = () => {
 
   return (
     <>
-      <div onClick={() => setModal(true)} className='btn'>
+      <div onClick={() => setModal(true)} className='btn no-animation'>
         計測対象を追加する
       </div>
       <input
