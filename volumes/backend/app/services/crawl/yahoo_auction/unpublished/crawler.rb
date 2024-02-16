@@ -41,8 +41,7 @@ module Crawl
               name: name(dom),
               price: price(dom),
               thumbnail_url: thumbnail_url(dom),
-              published: false,
-              canceled: false
+              published: false
             )
             crawl_results.add(result)
           end
