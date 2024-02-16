@@ -52,7 +52,7 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, errors.New("Failed to fetch yahoo_auction_product data")
+		return nil, errors.New("failed to fetch yahoo_auction_product data")
 	}
 
 	var response struct {
