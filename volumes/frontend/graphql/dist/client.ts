@@ -204,7 +204,6 @@ export type YahooAuctionCrawlSetting = Node & {
 
 export type YahooAuctionProduct = Node & {
   __typename?: 'YahooAuctionProduct';
-  canceled: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   price: Scalars['Int']['output'];
