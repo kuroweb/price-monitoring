@@ -14,6 +14,9 @@ module Crawl
             start = 1
             loop do
               page.goto(url(start))
+
+              break if no_results?(page)
+
               append_results(page)
 
               break unless exists_next_page?(page)
@@ -49,6 +52,10 @@ module Crawl
           Crawl::YahooAuction::Published::UrlGenerator.new(
             yahoo_auction_crawl_setting: product.yahoo_auction_crawl_setting, start:
           ).generate
+        end
+
+        def no_results?(page)
+          page.query_selector(".Notice__wandQuery")
         end
 
         def exists_next_page?(page)
