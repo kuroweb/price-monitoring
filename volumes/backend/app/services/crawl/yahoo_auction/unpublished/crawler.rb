@@ -41,7 +41,8 @@ module Crawl
               name: name(dom),
               price: price(dom),
               thumbnail_url: thumbnail_url(dom),
-              published: false
+              published: false,
+              bought_date: bought_date(dom)
             )
             crawl_results.add(result)
           end
@@ -79,6 +80,11 @@ module Crawl
 
         def thumbnail_url(dom)
           dom.eval_on_selector(".Product__imageData", "el => el.src")
+        end
+
+        def bought_date(dom)
+          date_str = dom.query_selector(".Product__time").inner_text
+          date_str.to_datetime
         end
 
         def crawl_results

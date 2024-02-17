@@ -41,7 +41,8 @@ module Crawl
               name: name(dom),
               price: price(dom),
               thumbnail_url: thumbnail_url(dom),
-              published: true
+              published: true,
+              bought_date: nil
             )
             crawl_results.add(result)
           end
