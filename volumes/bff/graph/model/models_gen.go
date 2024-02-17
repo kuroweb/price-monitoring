@@ -194,13 +194,14 @@ func (YahooAuctionCrawlSetting) IsNode()            {}
 func (this YahooAuctionCrawlSetting) GetID() string { return this.ID }
 
 type YahooAuctionProduct struct {
-	ID             string `json:"id"`
-	ProductID      int    `json:"productId"`
-	YahooAuctionID string `json:"yahooAuctionId"`
-	Name           string `json:"name"`
-	ThumbnailURL   string `json:"thumbnailUrl"`
-	Price          int    `json:"price"`
-	Published      bool   `json:"published"`
+	ID             string  `json:"id"`
+	ProductID      int     `json:"productId"`
+	YahooAuctionID string  `json:"yahooAuctionId"`
+	Name           string  `json:"name"`
+	ThumbnailURL   string  `json:"thumbnailUrl"`
+	Price          int     `json:"price"`
+	Published      bool    `json:"published"`
+	BoughtDate     *string `json:"boughtDate,omitempty"`
 }
 
 func (YahooAuctionProduct) IsNode()            {}

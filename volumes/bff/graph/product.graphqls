@@ -13,6 +13,7 @@ type YahooAuctionProduct implements Node {
   thumbnailUrl: String!
   price: Int!
   published: Boolean!
+  boughtDate: String
 }
 
 type YahooAuctionCrawlSetting implements Node {

@@ -57,12 +57,13 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 
 	var response struct {
 		YahooAuctionProducts []struct {
-			ID             int    `json:"id"`
-			YahooAuctionId string `json:"yahoo_auction_id"`
-			Name           string `json:"name"`
-			ThumbnailURL   string `json:"thumbnail_url"`
-			Price          int    `json:"price"`
-			Published      bool   `json:"published"`
+			ID             int     `json:"id"`
+			YahooAuctionId string  `json:"yahoo_auction_id"`
+			Name           string  `json:"name"`
+			ThumbnailURL   string  `json:"thumbnail_url"`
+			Price          int     `json:"price"`
+			Published      bool    `json:"published"`
+			BoughtDate     *string `json:"bought_date"`
 		} `json:"yahoo_auction_products"`
 	}
 
@@ -80,6 +81,7 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 			ThumbnailURL:   yahoo_auction_product.ThumbnailURL,
 			Price:          yahoo_auction_product.Price,
 			Published:      yahoo_auction_product.Published,
+			BoughtDate:     yahoo_auction_product.BoughtDate,
 		}
 	}
 
