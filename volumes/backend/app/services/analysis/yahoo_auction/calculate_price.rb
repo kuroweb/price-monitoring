@@ -42,7 +42,7 @@ module Analysis
       end
 
       def save(calculate_results)
-        ApplicationRecord.transaction do
+        CalculateDailyYahooAuctionProduct.transaction do
           CalculateDailyYahooAuctionProduct.upsert_all(calculate_results)
         end
       end
