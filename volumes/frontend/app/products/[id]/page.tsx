@@ -1,5 +1,6 @@
 import Layout from '@/components/layouts/Layout'
 import UpdateForm from '@/features/products/components/UpdateForm'
+import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {
   GetProductDetailPageDataDocument,
@@ -20,6 +21,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           <div className='card-body'>
             <UpdateForm data={data} />
             <h2 className='card-title py-4'>ヤフオク</h2>
+            <CalculateDailyYahooAuctionProductChart data={data} />
             <YahooAuctionProductsTable data={data} error={error} />
           </div>
         </div>
