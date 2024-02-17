@@ -6,6 +6,7 @@ class YahooAuctionProduct < ApplicationRecord
 
   ## scopes ##
   scope :published, -> { where(published: true) }
+  scope :bought, -> { where.not(bought_date: nil) }
 
   ## methods ##
 end

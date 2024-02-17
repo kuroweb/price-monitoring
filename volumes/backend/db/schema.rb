@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_17_044120) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_17_064732) do
   create_table "calculate_daily_yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.integer "price"
     t.date "target_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id", "target_date"], name: "idx_on_product_id_target_date_cf1660df56", unique: true
     t.index ["product_id"], name: "index_calculate_daily_yahoo_auction_products_on_product_id"
   end
 
