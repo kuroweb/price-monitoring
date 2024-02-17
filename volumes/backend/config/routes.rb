@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         scope path: ":product_id" do
           resources :yahoo_auction_products, only: %i[index show]
           resources :yahoo_auction_crawl_settings, only: [:index]
+          resources :calculate_daily_yahoo_auction_products, only: [:index]
         end
       end
     end
