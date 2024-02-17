@@ -98,6 +98,7 @@ erDiagram
     string name "NOT_NULL"
     int price "NOT_NULL"
     boolean published "default: false"
+    datetime bought_date
   }
   calculate_daily_yahoo_auction_products {
     bigint id PK
