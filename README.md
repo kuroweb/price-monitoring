@@ -41,7 +41,7 @@ subgraph Kubernetest Node
   subgraph frontend [Frontend]
     direction LR
 
-    Nginx
+    Nginx["Nginx(未実装)"]
     Next.js
 
     Nginx--proxy-->Next.js
@@ -81,7 +81,7 @@ erDiagram
     bigint id PK
     bigint product_id FK
     string keyword "NOT_NULL"
-    int category_id "default: 0"
+    int category_id "default: null"
     int min_price "default: 0"
     int max_price "default: 0"
     boolean enabled "default: false"
@@ -99,10 +99,17 @@ erDiagram
     int price "NOT_NULL"
     boolean published "default: false"
   }
+  calculate_daily_yahoo_auction_products {
+    bigint id PK
+    bigint product_id FK
+    int price "default: null"
+    date target_date "NOT_NULL"
+  }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_conditions : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
+  products ||--o{ calculate_daily_yahoo_auction_products : "1:N"
 ```
 
 ## 自動デプロイ
