@@ -5,7 +5,7 @@ query getProducts($id: ID, $name: String) {
   }
 }
 
-query getProductWithAssociation($id: ID!, $published: Boolean) {
+query getProductDetailPageData($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
@@ -25,6 +25,14 @@ query getProductWithAssociation($id: ID!, $published: Boolean) {
       minPrice
       maxPrice
       enabled
+    }
+    calculateDailyYahooAuctionProducts {
+      id
+      productId
+      price
+      targetDate
+      createdAt
+      updatedAt
     }
   }
 }

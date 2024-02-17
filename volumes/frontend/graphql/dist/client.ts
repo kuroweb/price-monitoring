@@ -17,6 +17,16 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type CalculateDailyYahooAuctionProduct = Node & {
+  __typename?: 'CalculateDailyYahooAuctionProduct';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  price?: Maybe<Scalars['Int']['output']>;
+  productId: Scalars['Int']['output'];
+  targetDate: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type CreateProductInput = {
   name: Scalars['String']['input'];
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
@@ -110,6 +120,7 @@ export type Node = {
 
 export type Product = Node & {
   __typename?: 'Product';
+  calculateDailyYahooAuctionProducts: Array<CalculateDailyYahooAuctionProduct>;
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting;
@@ -222,13 +233,13 @@ export type GetProductsQueryVariables = Exact<{
 
 export type GetProductsQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string }> };
 
-export type GetProductWithAssociationQueryVariables = Exact<{
+export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
   published?: InputMaybe<Scalars['Boolean']['input']>;
 }>;
 
 
-export type GetProductWithAssociationQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean } } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }> } };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -261,8 +272,8 @@ export const GetProductsDocument = gql`
   }
 }
     `;
-export const GetProductWithAssociationDocument = gql`
-    query getProductWithAssociation($id: ID!, $published: Boolean) {
+export const GetProductDetailPageDataDocument = gql`
+    query getProductDetailPageData($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
@@ -282,6 +293,14 @@ export const GetProductWithAssociationDocument = gql`
       minPrice
       maxPrice
       enabled
+    }
+    calculateDailyYahooAuctionProducts {
+      id
+      productId
+      price
+      targetDate
+      createdAt
+      updatedAt
     }
   }
 }
@@ -371,8 +390,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     getProducts(variables?: GetProductsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductsQuery>(GetProductsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProducts', 'query', variables);
     },
-    getProductWithAssociation(variables: GetProductWithAssociationQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductWithAssociationQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductWithAssociationQuery>(GetProductWithAssociationDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductWithAssociation', 'query', variables);
+    getProductDetailPageData(variables: GetProductDetailPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductDetailPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductDetailPageDataQuery>(GetProductDetailPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductDetailPageData', 'query', variables);
     },
     createProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createProduct', 'mutation', variables);

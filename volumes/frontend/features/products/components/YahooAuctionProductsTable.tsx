@@ -3,13 +3,13 @@
 import { ApolloError } from '@apollo/client'
 import NextImage from 'next/image'
 
-import { GetProductWithAssociationQuery } from '@/graphql/dist/client'
+import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const YahooAuctionProductsTable = ({
   data,
   error,
 }: {
-  data: GetProductWithAssociationQuery
+  data: GetProductDetailPageDataQuery
   error: ApolloError | undefined
 }) => {
   const handleRowClick = (yahooAuctionId: String) => {

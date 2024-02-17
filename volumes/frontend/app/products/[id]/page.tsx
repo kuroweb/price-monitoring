@@ -2,14 +2,14 @@ import Layout from '@/components/layouts/Layout'
 import UpdateForm from '@/features/products/components/UpdateForm'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {
-  GetProductWithAssociationDocument,
-  GetProductWithAssociationQuery,
+  GetProductDetailPageDataDocument,
+  GetProductDetailPageDataQuery,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  const { data, error } = await getClient().query<GetProductWithAssociationQuery>({
-    query: GetProductWithAssociationDocument,
+  const { data, error } = await getClient().query<GetProductDetailPageDataQuery>({
+    query: GetProductDetailPageDataDocument,
     variables: { id: params.id, published: true },
   })
 

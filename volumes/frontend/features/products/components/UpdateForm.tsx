@@ -8,9 +8,9 @@ import { toast } from 'react-toastify'
 
 import { updateProduct } from '../server-actions/product-query'
 
-import { GetProductWithAssociationQuery, UpdateProductInput } from '@/graphql/dist/client'
+import { GetProductDetailPageDataQuery, UpdateProductInput } from '@/graphql/dist/client'
 
-const UpdateForm = ({ data }: { data: GetProductWithAssociationQuery }) => {
+const UpdateForm = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const router = useRouter()
   const params = useParams()
   const [modal, setModal] = useState<boolean>(false)
