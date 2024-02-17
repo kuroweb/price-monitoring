@@ -3,6 +3,7 @@ type Product implements Node {
   name: String!
   yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
+  calculateDailyYahooAuctionProducts: [CalculateDailyYahooAuctionProduct!]!
 }
 
 type YahooAuctionProduct implements Node {
@@ -24,6 +25,15 @@ type YahooAuctionCrawlSetting implements Node {
   maxPrice: Int!
   categoryId: Int
   enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type CalculateDailyYahooAuctionProduct implements Node {
+  id: ID!
+  productId: Int!
+  price: Int
+  targetDate: String!
   createdAt: String!
   updatedAt: String!
 }

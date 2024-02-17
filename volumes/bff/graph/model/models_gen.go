@@ -42,6 +42,18 @@ type UserError interface {
 	GetMessage() string
 }
 
+type CalculateDailyYahooAuctionProduct struct {
+	ID         string `json:"id"`
+	ProductID  int    `json:"productId"`
+	Price      *int   `json:"price,omitempty"`
+	TargetDate string `json:"targetDate"`
+	CreatedAt  string `json:"createdAt"`
+	UpdatedAt  string `json:"updatedAt"`
+}
+
+func (CalculateDailyYahooAuctionProduct) IsNode()            {}
+func (this CalculateDailyYahooAuctionProduct) GetID() string { return this.ID }
+
 type CreateProductInput struct {
 	Name                     string                               `json:"name"`
 	YahooAuctionCrawlSetting *CreateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
@@ -124,10 +136,11 @@ type ErrorDetail struct {
 }
 
 type Product struct {
-	ID                       string                    `json:"id"`
-	Name                     string                    `json:"name"`
-	YahooAuctionProducts     []*YahooAuctionProduct    `json:"yahooAuctionProducts"`
-	YahooAuctionCrawlSetting *YahooAuctionCrawlSetting `json:"yahooAuctionCrawlSetting"`
+	ID                                 string                               `json:"id"`
+	Name                               string                               `json:"name"`
+	YahooAuctionProducts               []*YahooAuctionProduct               `json:"yahooAuctionProducts"`
+	YahooAuctionCrawlSetting           *YahooAuctionCrawlSetting            `json:"yahooAuctionCrawlSetting"`
+	CalculateDailyYahooAuctionProducts []*CalculateDailyYahooAuctionProduct `json:"calculateDailyYahooAuctionProducts"`
 }
 
 func (Product) IsNode()            {}

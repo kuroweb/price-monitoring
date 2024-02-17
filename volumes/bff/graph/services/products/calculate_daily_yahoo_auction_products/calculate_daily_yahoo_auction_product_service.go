@@ -1,0 +1,9 @@
+package calculate_daily_yahoo_auction_products
+
+type ICaluculateDailyYahooAuctionProductService interface {
+	IFindCaluculateDailyYahooAuctionProductService
+}
+
+type CaluculateDailyYahooAuctionProductService struct {
+	*FindCaluculateDailyYahooAuctionProductService
+}

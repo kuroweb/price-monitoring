@@ -91,3 +91,5 @@ models:
         resolver: true
       yahooAuctionCrawlSetting:
         resolver: true
+      calculateDailyYahooAuctionProducts:
+        resolver: true

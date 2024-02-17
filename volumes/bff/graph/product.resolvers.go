@@ -21,6 +21,11 @@ func (r *productResolver) YahooAuctionCrawlSetting(ctx context.Context, obj *mod
 	return r.ProductService.FindYahooAuctionCrawlSetting(ctx, obj.ID)
 }
 
+// CalculateDailyYahooAuctionProducts is the resolver for the calculateDailyYahooAuctionProducts field.
+func (r *productResolver) CalculateDailyYahooAuctionProducts(ctx context.Context, obj *model.Product) ([]*model.CalculateDailyYahooAuctionProduct, error) {
+	return r.ProductService.FindCalculateDailyYahooAuctionProduct(ctx, obj.ID)
+}
+
 // Product returns internal.ProductResolver implementation.
 func (r *Resolver) Product() internal.ProductResolver { return &productResolver{r} }
 
