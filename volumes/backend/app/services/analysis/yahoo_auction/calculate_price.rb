@@ -1,3 +1,4 @@
+# ヤフオク落札価格集計クラス
 module Analysis
   module YahooAuction
     class CalculatePrice
@@ -36,8 +37,7 @@ module Analysis
           .yahoo_auction_products.bought
           .where(bought_date: start_date.to_datetime.beginning_of_day..end_date.to_datetime.end_of_day)
           .group("target_date")
-          .select("DATE(yahoo_auction_products.bought_date) AS target_date, " \
-                         "AVG(yahoo_auction_products.price) AS price")
+          .select("DATE(yahoo_auction_products.bought_date) AS target_date, AVG(yahoo_auction_products.price) AS price")
           .index_by { |result| result.target_date.to_s }
       end
 
