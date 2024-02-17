@@ -51,9 +51,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_16_213455) do
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
     t.boolean "published", default: false, null: false
+    t.datetime "bought_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "bought_date"
     t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
     t.index ["yahoo_auction_id"], name: "index_yahoo_auction_products_on_yahoo_auction_id", unique: true
   end
