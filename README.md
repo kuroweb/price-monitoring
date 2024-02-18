@@ -89,12 +89,13 @@ erDiagram
   yahoo_auction_crawl_setting_exclude_conditions {
     bigint id PK
     bigint yahoo_auction_crawl_setting_id FK
+    string yahoo_auction_id
     string keyword
     string seller_id
   }
   yahoo_auction_products {
     bigint id PK
-    bigint yahoo_auction_id "NOT_NULL"
+    string yahoo_auction_id "NOT_NULL"
     string name "NOT_NULL"
     int price "NOT_NULL"
     boolean published "default: false"
