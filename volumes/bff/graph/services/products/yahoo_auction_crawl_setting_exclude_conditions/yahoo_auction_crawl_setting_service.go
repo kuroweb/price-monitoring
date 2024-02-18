@@ -1,0 +1,9 @@
+package yahoo_auction_crawl_setting_exclude_conditions
+
+type IYahooAuctionCrawlSettingExcludeConditionService interface {
+	IFindYahooAuctionCrawlSettingExcludeConditionService
+}
+
+type YahooAuctionCrawlSettingExcludeConditionService struct {
+	*FindYahooAuctionCrawlSettingExcludeConditionService
+}

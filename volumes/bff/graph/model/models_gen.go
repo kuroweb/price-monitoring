@@ -44,7 +44,7 @@ type UserError interface {
 
 type CalculateDailyYahooAuctionProduct struct {
 	ID         string `json:"id"`
-	ProductID  int    `json:"productId"`
+	ProductID  int    `json:"productID"`
 	Price      *int   `json:"price,omitempty"`
 	TargetDate string `json:"targetDate"`
 	CreatedAt  string `json:"createdAt"`
@@ -192,24 +192,38 @@ type UpdateYahooAuctionCrawlSettingInput struct {
 }
 
 type YahooAuctionCrawlSetting struct {
-	ID         string `json:"id"`
-	ProductID  int    `json:"productId"`
-	Keyword    string `json:"keyword"`
-	MinPrice   int    `json:"minPrice"`
-	MaxPrice   int    `json:"maxPrice"`
-	CategoryID *int   `json:"categoryId,omitempty"`
-	Enabled    bool   `json:"enabled"`
-	CreatedAt  string `json:"createdAt"`
-	UpdatedAt  string `json:"updatedAt"`
+	ID                                        string                                      `json:"id"`
+	ProductID                                 int                                         `json:"productID"`
+	Keyword                                   string                                      `json:"keyword"`
+	MinPrice                                  int                                         `json:"minPrice"`
+	MaxPrice                                  int                                         `json:"maxPrice"`
+	CategoryID                                *int                                        `json:"categoryID,omitempty"`
+	Enabled                                   bool                                        `json:"enabled"`
+	CreatedAt                                 string                                      `json:"createdAt"`
+	UpdatedAt                                 string                                      `json:"updatedAt"`
+	YahooAuctionCrawlSettingExcludeConditions []*YahooAuctionCrawlSettingExcludeCondition `json:"yahooAuctionCrawlSettingExcludeConditions"`
 }
 
 func (YahooAuctionCrawlSetting) IsNode()            {}
 func (this YahooAuctionCrawlSetting) GetID() string { return this.ID }
 
+type YahooAuctionCrawlSettingExcludeCondition struct {
+	ID                         string  `json:"id"`
+	YahooAuctionCrawlSettingID int     `json:"yahooAuctionCrawlSettingID"`
+	YahooAuctionID             *string `json:"yahooAuctionID,omitempty"`
+	Keyword                    *string `json:"keyword,omitempty"`
+	SellerID                   *string `json:"sellerID,omitempty"`
+	CreatedAt                  string  `json:"createdAt"`
+	UpdatedAt                  string  `json:"updatedAt"`
+}
+
+func (YahooAuctionCrawlSettingExcludeCondition) IsNode()            {}
+func (this YahooAuctionCrawlSettingExcludeCondition) GetID() string { return this.ID }
+
 type YahooAuctionProduct struct {
 	ID             string  `json:"id"`
-	ProductID      int     `json:"productId"`
-	YahooAuctionID string  `json:"yahooAuctionId"`
+	ProductID      int     `json:"productID"`
+	YahooAuctionID string  `json:"yahooAuctionID"`
 	Name           string  `json:"name"`
 	ThumbnailURL   string  `json:"thumbnailUrl"`
 	Price          int     `json:"price"`
