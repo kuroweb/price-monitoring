@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_17_064732) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_18_081921) do
   create_table "calculate_daily_yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.integer "price"
@@ -35,6 +35,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_17_064732) do
 
   create_table "yahoo_auction_crawl_setting_exclude_conditions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "yahoo_auction_crawl_setting_id"
+    t.string "yahoo_auction_id"
     t.string "keyword"
     t.string "seller_id"
     t.datetime "created_at", null: false
