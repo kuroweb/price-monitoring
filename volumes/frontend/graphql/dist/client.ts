@@ -211,6 +211,18 @@ export type YahooAuctionCrawlSetting = Node & {
   minPrice: Scalars['Int']['output'];
   productId: Scalars['Int']['output'];
   updatedAt: Scalars['String']['output'];
+  yahooAuctionCrawlSettingExcludeConditions: Array<YahooAuctionCrawlSettingExcludeCondition>;
+};
+
+export type YahooAuctionCrawlSettingExcludeCondition = Node & {
+  __typename?: 'YahooAuctionCrawlSettingExcludeCondition';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  sellerId?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['String']['output'];
+  yahooAuctionCrawlSettingId: Scalars['Int']['output'];
+  yahooAuctionId?: Maybe<Scalars['String']['output']>;
 };
 
 export type YahooAuctionProduct = Node & {
@@ -239,7 +251,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }> } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeConditions: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeCondition', id: string, yahooAuctionCrawlSettingId: number, yahooAuctionId?: string | null, keyword?: string | null, sellerId?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }> } };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -293,6 +305,15 @@ export const GetProductDetailPageDataDocument = gql`
       minPrice
       maxPrice
       enabled
+      yahooAuctionCrawlSettingExcludeConditions {
+        id
+        yahooAuctionCrawlSettingId
+        yahooAuctionId
+        keyword
+        sellerId
+        createdAt
+        updatedAt
+      }
     }
     calculateDailyYahooAuctionProducts {
       id

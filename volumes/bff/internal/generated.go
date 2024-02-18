@@ -223,7 +223,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CalculateDailyYahooAuctionProduct.Price(childComplexity), true
 
-	case "CalculateDailyYahooAuctionProduct.productID":
+	case "CalculateDailyYahooAuctionProduct.productId":
 		if e.complexity.CalculateDailyYahooAuctionProduct.ProductID == nil {
 			break
 		}
@@ -510,7 +510,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateProductResultValidationFailed.Message(childComplexity), true
 
-	case "YahooAuctionCrawlSetting.categoryID":
+	case "YahooAuctionCrawlSetting.categoryId":
 		if e.complexity.YahooAuctionCrawlSetting.CategoryID == nil {
 			break
 		}
@@ -559,7 +559,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionCrawlSetting.MinPrice(childComplexity), true
 
-	case "YahooAuctionCrawlSetting.productID":
+	case "YahooAuctionCrawlSetting.productId":
 		if e.complexity.YahooAuctionCrawlSetting.ProductID == nil {
 			break
 		}
@@ -601,7 +601,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionCrawlSettingExcludeCondition.Keyword(childComplexity), true
 
-	case "YahooAuctionCrawlSettingExcludeCondition.sellerID":
+	case "YahooAuctionCrawlSettingExcludeCondition.sellerId":
 		if e.complexity.YahooAuctionCrawlSettingExcludeCondition.SellerID == nil {
 			break
 		}
@@ -615,14 +615,14 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionCrawlSettingExcludeCondition.UpdatedAt(childComplexity), true
 
-	case "YahooAuctionCrawlSettingExcludeCondition.yahooAuctionCrawlSettingID":
+	case "YahooAuctionCrawlSettingExcludeCondition.yahooAuctionCrawlSettingId":
 		if e.complexity.YahooAuctionCrawlSettingExcludeCondition.YahooAuctionCrawlSettingID == nil {
 			break
 		}
 
 		return e.complexity.YahooAuctionCrawlSettingExcludeCondition.YahooAuctionCrawlSettingID(childComplexity), true
 
-	case "YahooAuctionCrawlSettingExcludeCondition.yahooAuctionID":
+	case "YahooAuctionCrawlSettingExcludeCondition.yahooAuctionId":
 		if e.complexity.YahooAuctionCrawlSettingExcludeCondition.YahooAuctionID == nil {
 			break
 		}
@@ -657,7 +657,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionProduct.Price(childComplexity), true
 
-	case "YahooAuctionProduct.productID":
+	case "YahooAuctionProduct.productId":
 		if e.complexity.YahooAuctionProduct.ProductID == nil {
 			break
 		}
@@ -678,7 +678,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionProduct.ThumbnailURL(childComplexity), true
 
-	case "YahooAuctionProduct.yahooAuctionID":
+	case "YahooAuctionProduct.yahooAuctionId":
 		if e.complexity.YahooAuctionProduct.YahooAuctionID == nil {
 			break
 		}
@@ -927,8 +927,8 @@ type DeleteProductResultValidationFailed implements UserError {
 
 type YahooAuctionProduct implements Node {
   id: ID!
-  productID: Int!
-  yahooAuctionID: String!
+  productId: Int!
+  yahooAuctionId: String!
   name: String!
   thumbnailUrl: String!
   price: Int!
@@ -938,11 +938,11 @@ type YahooAuctionProduct implements Node {
 
 type YahooAuctionCrawlSetting implements Node {
   id: ID!
-  productID: Int!
+  productId: Int!
   keyword: String!
   minPrice: Int!
   maxPrice: Int!
-  categoryID: Int
+  categoryId: Int
   enabled: Boolean!
   createdAt: String!
   updatedAt: String!
@@ -951,17 +951,17 @@ type YahooAuctionCrawlSetting implements Node {
 
 type YahooAuctionCrawlSettingExcludeCondition implements Node {
   id: ID!
-  yahooAuctionCrawlSettingID: Int!
-  yahooAuctionID: String
+  yahooAuctionCrawlSettingId: Int!
+  yahooAuctionId: String
   keyword: String
-  sellerID: String
+  sellerId: String
   createdAt: String!
   updatedAt: String!
 }
 
 type CalculateDailyYahooAuctionProduct implements Node {
   id: ID!
-  productID: Int!
+  productId: Int!
   price: Int
   targetDate: String!
   createdAt: String!
@@ -1201,8 +1201,8 @@ func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_id(ct
 	return fc, nil
 }
 
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_productID(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_productID(ctx, field)
+func (ec *executionContext) _CalculateDailyYahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_productId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -1232,7 +1232,7 @@ func (ec *executionContext) _CalculateDailyYahooAuctionProduct_productID(ctx con
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_productID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CalculateDailyYahooAuctionProduct",
 		Field:      field,
@@ -2396,10 +2396,10 @@ func (ec *executionContext) fieldContext_Product_yahooAuctionProducts(ctx contex
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_YahooAuctionProduct_id(ctx, field)
-			case "productID":
-				return ec.fieldContext_YahooAuctionProduct_productID(ctx, field)
-			case "yahooAuctionID":
-				return ec.fieldContext_YahooAuctionProduct_yahooAuctionID(ctx, field)
+			case "productId":
+				return ec.fieldContext_YahooAuctionProduct_productId(ctx, field)
+			case "yahooAuctionId":
+				return ec.fieldContext_YahooAuctionProduct_yahooAuctionId(ctx, field)
 			case "name":
 				return ec.fieldContext_YahooAuctionProduct_name(ctx, field)
 			case "thumbnailUrl":
@@ -2469,16 +2469,16 @@ func (ec *executionContext) fieldContext_Product_yahooAuctionCrawlSetting(ctx co
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_YahooAuctionCrawlSetting_id(ctx, field)
-			case "productID":
-				return ec.fieldContext_YahooAuctionCrawlSetting_productID(ctx, field)
+			case "productId":
+				return ec.fieldContext_YahooAuctionCrawlSetting_productId(ctx, field)
 			case "keyword":
 				return ec.fieldContext_YahooAuctionCrawlSetting_keyword(ctx, field)
 			case "minPrice":
 				return ec.fieldContext_YahooAuctionCrawlSetting_minPrice(ctx, field)
 			case "maxPrice":
 				return ec.fieldContext_YahooAuctionCrawlSetting_maxPrice(ctx, field)
-			case "categoryID":
-				return ec.fieldContext_YahooAuctionCrawlSetting_categoryID(ctx, field)
+			case "categoryId":
+				return ec.fieldContext_YahooAuctionCrawlSetting_categoryId(ctx, field)
 			case "enabled":
 				return ec.fieldContext_YahooAuctionCrawlSetting_enabled(ctx, field)
 			case "createdAt":
@@ -2535,8 +2535,8 @@ func (ec *executionContext) fieldContext_Product_calculateDailyYahooAuctionProdu
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_CalculateDailyYahooAuctionProduct_id(ctx, field)
-			case "productID":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_productID(ctx, field)
+			case "productId":
+				return ec.fieldContext_CalculateDailyYahooAuctionProduct_productId(ctx, field)
 			case "price":
 				return ec.fieldContext_CalculateDailyYahooAuctionProduct_price(ctx, field)
 			case "targetDate":
@@ -3237,8 +3237,8 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_id(ctx context
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionCrawlSetting_productID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_productID(ctx, field)
+func (ec *executionContext) _YahooAuctionCrawlSetting_productId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_productId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3268,7 +3268,7 @@ func (ec *executionContext) _YahooAuctionCrawlSetting_productID(ctx context.Cont
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_productID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSetting",
 		Field:      field,
@@ -3413,8 +3413,8 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_maxPrice(ctx c
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionCrawlSetting_categoryID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_categoryID(ctx, field)
+func (ec *executionContext) _YahooAuctionCrawlSetting_categoryId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_categoryId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3441,7 +3441,7 @@ func (ec *executionContext) _YahooAuctionCrawlSetting_categoryID(ctx context.Con
 	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_categoryID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_categoryId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSetting",
 		Field:      field,
@@ -3627,14 +3627,14 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_yahooAuctionCr
 			switch field.Name {
 			case "id":
 				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_id(ctx, field)
-			case "yahooAuctionCrawlSettingID":
-				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingID(ctx, field)
-			case "yahooAuctionID":
-				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionID(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingId(ctx, field)
+			case "yahooAuctionId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionId(ctx, field)
 			case "keyword":
 				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_keyword(ctx, field)
-			case "sellerID":
-				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerID(ctx, field)
+			case "sellerId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerId(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_createdAt(ctx, field)
 			case "updatedAt":
@@ -3690,8 +3690,8 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeConditio
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeCondition) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingID(ctx, field)
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeCondition) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3721,7 +3721,7 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_yahooAucti
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSettingExcludeCondition",
 		Field:      field,
@@ -3734,8 +3734,8 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeConditio
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_yahooAuctionID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeCondition) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionID(ctx, field)
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_yahooAuctionId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeCondition) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3762,7 +3762,7 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_yahooAucti
 	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSettingExcludeCondition",
 		Field:      field,
@@ -3816,8 +3816,8 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeConditio
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_sellerID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeCondition) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerID(ctx, field)
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_sellerId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeCondition) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -3844,7 +3844,7 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition_sellerID(c
 	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSettingExcludeCondition",
 		Field:      field,
@@ -3989,8 +3989,8 @@ func (ec *executionContext) fieldContext_YahooAuctionProduct_id(ctx context.Cont
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionProduct_productID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionProduct_productID(ctx, field)
+func (ec *executionContext) _YahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionProduct_productId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -4020,7 +4020,7 @@ func (ec *executionContext) _YahooAuctionProduct_productID(ctx context.Context, 
 	return ec.marshalNInt2int(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionProduct_productID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionProduct",
 		Field:      field,
@@ -4033,8 +4033,8 @@ func (ec *executionContext) fieldContext_YahooAuctionProduct_productID(ctx conte
 	return fc, nil
 }
 
-func (ec *executionContext) _YahooAuctionProduct_yahooAuctionID(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_YahooAuctionProduct_yahooAuctionID(ctx, field)
+func (ec *executionContext) _YahooAuctionProduct_yahooAuctionId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionProduct_yahooAuctionId(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -4064,7 +4064,7 @@ func (ec *executionContext) _YahooAuctionProduct_yahooAuctionID(ctx context.Cont
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_YahooAuctionProduct_yahooAuctionID(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_YahooAuctionProduct_yahooAuctionId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionProduct",
 		Field:      field,
@@ -6539,8 +6539,8 @@ func (ec *executionContext) _CalculateDailyYahooAuctionProduct(ctx context.Conte
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "productID":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_productID(ctx, field, obj)
+		case "productId":
+			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_productId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -7378,8 +7378,8 @@ func (ec *executionContext) _YahooAuctionCrawlSetting(ctx context.Context, sel a
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&out.Invalids, 1)
 			}
-		case "productID":
-			out.Values[i] = ec._YahooAuctionCrawlSetting_productID(ctx, field, obj)
+		case "productId":
+			out.Values[i] = ec._YahooAuctionCrawlSetting_productId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&out.Invalids, 1)
 			}
@@ -7398,8 +7398,8 @@ func (ec *executionContext) _YahooAuctionCrawlSetting(ctx context.Context, sel a
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&out.Invalids, 1)
 			}
-		case "categoryID":
-			out.Values[i] = ec._YahooAuctionCrawlSetting_categoryID(ctx, field, obj)
+		case "categoryId":
+			out.Values[i] = ec._YahooAuctionCrawlSetting_categoryId(ctx, field, obj)
 		case "enabled":
 			out.Values[i] = ec._YahooAuctionCrawlSetting_enabled(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -7490,17 +7490,17 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeCondition(ctx contex
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "yahooAuctionCrawlSettingID":
-			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingID(ctx, field, obj)
+		case "yahooAuctionCrawlSettingId":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "yahooAuctionID":
-			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_yahooAuctionID(ctx, field, obj)
+		case "yahooAuctionId":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_yahooAuctionId(ctx, field, obj)
 		case "keyword":
 			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_keyword(ctx, field, obj)
-		case "sellerID":
-			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_sellerID(ctx, field, obj)
+		case "sellerId":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_sellerId(ctx, field, obj)
 		case "createdAt":
 			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeCondition_createdAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -7550,13 +7550,13 @@ func (ec *executionContext) _YahooAuctionProduct(ctx context.Context, sel ast.Se
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "productID":
-			out.Values[i] = ec._YahooAuctionProduct_productID(ctx, field, obj)
+		case "productId":
+			out.Values[i] = ec._YahooAuctionProduct_productId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "yahooAuctionID":
-			out.Values[i] = ec._YahooAuctionProduct_yahooAuctionID(ctx, field, obj)
+		case "yahooAuctionId":
+			out.Values[i] = ec._YahooAuctionProduct_yahooAuctionId(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}

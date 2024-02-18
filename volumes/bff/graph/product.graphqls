@@ -8,10 +8,10 @@ type Product implements Node {
 
 type YahooAuctionProduct implements Node {
   id: ID!
-  productID: Int!
-  yahooAuctionID: String!
+  productId: Int!
+  yahooAuctionId: String!
   name: String!
-  thumbnailURL: String!
+  thumbnailUrl: String!
   price: Int!
   published: Boolean!
   boughtDate: String
@@ -19,11 +19,11 @@ type YahooAuctionProduct implements Node {
 
 type YahooAuctionCrawlSetting implements Node {
   id: ID!
-  productID: Int!
+  productId: Int!
   keyword: String!
   minPrice: Int!
   maxPrice: Int!
-  categoryID: Int
+  categoryId: Int
   enabled: Boolean!
   createdAt: String!
   updatedAt: String!
@@ -32,17 +32,17 @@ type YahooAuctionCrawlSetting implements Node {
 
 type YahooAuctionCrawlSettingExcludeCondition implements Node {
   id: ID!
-  yahooAuctionCrawlSettingID: Int!
-  yahooAuctionID: String
+  yahooAuctionCrawlSettingId: Int!
+  yahooAuctionId: String
   keyword: String
-  sellerID: String
+  sellerId: String
   createdAt: String!
   updatedAt: String!
 }
 
 type CalculateDailyYahooAuctionProduct implements Node {
   id: ID!
-  productID: Int!
+  productId: Int!
   price: Int
   targetDate: String!
   createdAt: String!

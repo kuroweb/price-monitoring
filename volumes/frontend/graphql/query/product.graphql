@@ -25,6 +25,15 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
       minPrice
       maxPrice
       enabled
+      yahooAuctionCrawlSettingExcludeConditions {
+        id
+        yahooAuctionCrawlSettingId
+        yahooAuctionId
+        keyword
+        sellerId
+        createdAt
+        updatedAt
+      }
     }
     calculateDailyYahooAuctionProducts {
       id

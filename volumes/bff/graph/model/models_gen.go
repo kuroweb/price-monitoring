@@ -44,7 +44,7 @@ type UserError interface {
 
 type CalculateDailyYahooAuctionProduct struct {
 	ID         string `json:"id"`
-	ProductID  int    `json:"productID"`
+	ProductID  int    `json:"productId"`
 	Price      *int   `json:"price,omitempty"`
 	TargetDate string `json:"targetDate"`
 	CreatedAt  string `json:"createdAt"`
@@ -193,11 +193,11 @@ type UpdateYahooAuctionCrawlSettingInput struct {
 
 type YahooAuctionCrawlSetting struct {
 	ID                                        string                                      `json:"id"`
-	ProductID                                 int                                         `json:"productID"`
+	ProductID                                 int                                         `json:"productId"`
 	Keyword                                   string                                      `json:"keyword"`
 	MinPrice                                  int                                         `json:"minPrice"`
 	MaxPrice                                  int                                         `json:"maxPrice"`
-	CategoryID                                *int                                        `json:"categoryID,omitempty"`
+	CategoryID                                *int                                        `json:"categoryId,omitempty"`
 	Enabled                                   bool                                        `json:"enabled"`
 	CreatedAt                                 string                                      `json:"createdAt"`
 	UpdatedAt                                 string                                      `json:"updatedAt"`
@@ -209,10 +209,10 @@ func (this YahooAuctionCrawlSetting) GetID() string { return this.ID }
 
 type YahooAuctionCrawlSettingExcludeCondition struct {
 	ID                         string  `json:"id"`
-	YahooAuctionCrawlSettingID int     `json:"yahooAuctionCrawlSettingID"`
-	YahooAuctionID             *string `json:"yahooAuctionID,omitempty"`
+	YahooAuctionCrawlSettingID int     `json:"yahooAuctionCrawlSettingId"`
+	YahooAuctionID             *string `json:"yahooAuctionId,omitempty"`
 	Keyword                    *string `json:"keyword,omitempty"`
-	SellerID                   *string `json:"sellerID,omitempty"`
+	SellerID                   *string `json:"sellerId,omitempty"`
 	CreatedAt                  string  `json:"createdAt"`
 	UpdatedAt                  string  `json:"updatedAt"`
 }
@@ -222,8 +222,8 @@ func (this YahooAuctionCrawlSettingExcludeCondition) GetID() string { return thi
 
 type YahooAuctionProduct struct {
 	ID             string  `json:"id"`
-	ProductID      int     `json:"productID"`
-	YahooAuctionID string  `json:"yahooAuctionID"`
+	ProductID      int     `json:"productId"`
+	YahooAuctionID string  `json:"yahooAuctionId"`
 	Name           string  `json:"name"`
 	ThumbnailURL   string  `json:"thumbnailUrl"`
 	Price          int     `json:"price"`
