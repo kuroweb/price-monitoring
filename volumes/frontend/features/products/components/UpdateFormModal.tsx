@@ -65,6 +65,17 @@ const UpdateFormModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
             ✕
           </div>
           <h3 className='font-bold text-lg'>更新フォーム</h3>
+          <Tabs className='tabs-boxed'>
+            <Tabs.RadioTab name='hoge' label='Tab' contentClassName='p-10' defaultChecked={true}>
+              Tab content 1
+            </Tabs.RadioTab>
+            <Tabs.RadioTab name='hoge' label='Tab' contentClassName='p-10'>
+              Tab content 2
+            </Tabs.RadioTab>
+            <Tabs.RadioTab name='hoge' label='Tab' contentClassName='p-10'>
+              Tab content 3
+            </Tabs.RadioTab>
+          </Tabs>
           <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2'>
             <div className='divider py-6'>共通設定</div>
             <label className='form-control'>

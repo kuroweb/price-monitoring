@@ -13,6 +13,7 @@ const nextConfig = {
     //       allowedOrigins: ['my-proxy.com', '*.my-proxy.com'],
     serverActions: true,
   },
+  transpilePackages: ['react-daisyui'],
 }
 
 module.exports = nextConfig
