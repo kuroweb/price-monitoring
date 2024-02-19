@@ -1,5 +1,5 @@
 import Layout from '@/components/layouts/Layout'
-import UpdateFormModal from '@/features/products/components/UpdateFormModal'
+import UpdateFormModal from '@/features/products/components/UpdateSettingModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {
