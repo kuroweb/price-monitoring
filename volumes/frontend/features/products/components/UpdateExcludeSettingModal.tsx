@@ -16,7 +16,9 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
 
   return (
     <>
-      <Button onClick={showModal}>除外条件</Button>
+      <Button onClick={showModal} className='no-animation'>
+        除外条件
+      </Button>
       <Modal ref={ref} backdrop={true}>
         <Modal.Header className='font-bold'>Hello!</Modal.Header>
         <Modal.Body>
