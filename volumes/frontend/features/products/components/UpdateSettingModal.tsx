@@ -48,7 +48,7 @@ const UpdateSettingModal = ({ data }: { data: GetProductDetailPageDataQuery }) =
   return (
     <>
       <div onClick={() => setModal(true)} className='btn no-animation'>
-        計測設定を更新
+        計測条件
       </div>
       <input
         type='checkbox'
@@ -64,7 +64,7 @@ const UpdateSettingModal = ({ data }: { data: GetProductDetailPageDataQuery }) =
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>計測設定を更新</h3>
+          <h3 className='font-bold text-lg'>計測条件</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='divider pt-6'>共通設定</div>
             <label className='form-control'>
