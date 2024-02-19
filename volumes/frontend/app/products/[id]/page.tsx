@@ -1,5 +1,5 @@
 import Layout from '@/components/layouts/Layout'
-import UpdateForm from '@/features/products/components/UpdateForm'
+import UpdateFormModal from '@/features/products/components/UpdateFormModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {
@@ -19,8 +19,15 @@ const Page = async ({ params }: { params: { id: string } }) => {
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
-            <UpdateForm data={data} />
-            <h2 className='card-title py-4'>ヤフオク</h2>
+            <h2 className='card-title pb-4'>計測設定</h2>
+            <div className='grid grid-cols-2 gap-4'>
+              <UpdateFormModal data={data} />
+            </div>
+          </div>
+        </div>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title pb-4'>ヤフオク</h2>
             <CalculateDailyYahooAuctionProductChart data={data} />
             <YahooAuctionProductsTable data={data} error={error} />
           </div>

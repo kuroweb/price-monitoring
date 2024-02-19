@@ -3,6 +3,7 @@
 import { useState } from 'react'
 
 import { useRouter, useParams } from 'next/navigation'
+import { Tabs } from 'react-daisyui'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -10,7 +11,7 @@ import { updateProduct } from '../server-actions/product-query'
 
 import { GetProductDetailPageDataQuery, UpdateProductInput } from '@/graphql/dist/client'
 
-const UpdateForm = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const UpdateFormModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const router = useRouter()
   const params = useParams()
   const [modal, setModal] = useState<boolean>(false)
@@ -47,7 +48,7 @@ const UpdateForm = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   return (
     <>
       <div onClick={() => setModal(true)} className='btn no-animation'>
-        計測対象を更新する
+        計測設定を更新
       </div>
       <input
         type='checkbox'
@@ -131,4 +132,4 @@ const UpdateForm = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   )
 }
 
-export default UpdateForm
+export default UpdateFormModal
