@@ -1,34 +1,25 @@
 'use client'
 
-import { useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 
-import { Join, Table } from 'react-daisyui'
+import { Button, Join, Modal, Table } from 'react-daisyui'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
-  const [modal, setModal] = useState<boolean>(false)
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
+
+  const ref = useRef<HTMLDialogElement>(null)
+  const showModal = useCallback(() => {
+    ref.current?.showModal()
+  }, [ref])
 
   return (
     <>
-      <div onClick={() => setModal(true)} className='btn no-animation'>
-        除外条件
-      </div>
-      <input
-        type='checkbox'
-        className='modal-toggle'
-        checked={modal}
-        onChange={(e) => setModal(e.target.checked)}
-      />
-      <div className='modal' role='dialog'>
-        <div className='modal-box'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
-          >
-            ✕
-          </div>
+      <Button onClick={showModal}>除外条件</Button>
+      <Modal ref={ref} backdrop={true}>
+        <Modal.Header className='font-bold'>Hello!</Modal.Header>
+        <Modal.Body>
           <h3 className='font-bold text-lg'>除外条件</h3>
           <div className='py-6'>
             <Join className='flex'>
@@ -59,6 +50,7 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
             </Join>
           </div>
           <div className=''>
+            {/* TODO: 一覧表示を作成したところ。今後、追加・更新・削除ができるようにしていく */}
             {tab == 'ヤフオク' && (
               <div>
                 <Table>
@@ -84,9 +76,8 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
             {tab == 'メルカリ' && <div>メルカリ</div>}
             {tab == 'ペイペイ' && <div>ペイペイ</div>}
           </div>
-        </div>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
-      </div>
+        </Modal.Body>
+      </Modal>
     </>
   )
 }
