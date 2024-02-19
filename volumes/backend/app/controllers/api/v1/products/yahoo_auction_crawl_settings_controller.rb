@@ -3,7 +3,6 @@ module Api
     module Products
       class YahooAuctionCrawlSettingsController < ApplicationController
         def index
-          # TODO: GraphQLで
           yahoo_auction_crawl_setting = YahooAuctionCrawlSetting.find_by(product_id: params[:product_id])
 
           if yahoo_auction_crawl_setting
