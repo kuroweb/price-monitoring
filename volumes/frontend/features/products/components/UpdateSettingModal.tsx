@@ -11,7 +11,7 @@ import { updateProduct } from '../server-actions/product-query'
 
 import { GetProductDetailPageDataQuery, UpdateProductInput } from '@/graphql/dist/client'
 
-const UpdateFormModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const UpdateSettingModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const router = useRouter()
   const params = useParams()
   const [modal, setModal] = useState<boolean>(false)
@@ -147,4 +147,4 @@ const UpdateFormModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   )
 }
 
-export default UpdateFormModal
+export default UpdateSettingModal
