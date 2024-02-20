@@ -20,7 +20,7 @@ type FindYahooAuctionCrawlSettingExcludeConditionService struct{}
 
 func (f *FindYahooAuctionCrawlSettingExcludeConditionService) FindYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, productID int, yahooAuctionCrawlSettingID string) ([]*model.YahooAuctionCrawlSettingExcludeCondition, error) {
 	cfg := config.NewConfig()
-	url := fmt.Sprintf("%s/api/v1/products/%s/yahoo_auction_crawl_settings/%s/yahoo_auction_crawl_setting_exclude_conditions", cfg.BackendUrl, strconv.Itoa(productID), yahooAuctionCrawlSettingID)
+	url := fmt.Sprintf("%s/api/v1/products/%s/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_conditions", cfg.BackendUrl, strconv.Itoa(productID))
 
 	resp, err := http.Get(url)
 	if err != nil {
