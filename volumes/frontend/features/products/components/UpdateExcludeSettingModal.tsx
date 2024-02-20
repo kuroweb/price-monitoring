@@ -10,20 +10,28 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
   const ref = useRef<HTMLDialogElement>(null)
-  const showModal = useCallback(() => {
+  const showListModal = useCallback(() => {
+    ref.current?.showModal()
+  }, [ref])
     ref.current?.showModal()
   }, [ref])
 
   return (
     <>
-      <Button onClick={showModal} className='no-animation'>
+      <Button onClick={showListModal} className='no-animation'>
         除外条件
       </Button>
       <Modal ref={ref} backdrop={true}>
-        <Modal.Header className='font-bold'>Hello!</Modal.Header>
+        <Modal.Header className='font-bold'>
+          除外条件
+          <form method='dialog'>
+            <Button size='sm' color='ghost' shape='circle' className='absolute right-2 top-2'>
+              ✕
+            </Button>
+          </form>
+        </Modal.Header>
         <Modal.Body>
-          <h3 className='font-bold text-lg'>除外条件</h3>
-          <div className='py-6'>
+          <div className='pb-6'>
             <Join className='flex'>
               <input
                 className='join-item btn btn-sm w-1/3'
