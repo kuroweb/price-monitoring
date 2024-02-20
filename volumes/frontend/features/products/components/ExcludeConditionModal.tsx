@@ -4,27 +4,24 @@ import { useCallback, useRef, useState } from 'react'
 
 import { Button, Join, Modal, Table } from 'react-daisyui'
 
+import CreateExcludeConditionModal from './CreateExcludeConditionModal'
+
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
-  const listModalRef = useRef<HTMLDialogElement>(null)
-  const showListModal = useCallback(() => {
-    listModalRef.current?.showModal()
-  }, [listModalRef])
-
-  const createModalRef = useRef<HTMLDialogElement>(null)
-  const showCreateModal = useCallback(() => {
-    createModalRef.current?.showModal()
-  }, [createModalRef])
+  const ref = useRef<HTMLDialogElement>(null)
+  const showModal = useCallback(() => {
+    ref.current?.showModal()
+  }, [ref])
 
   return (
     <>
-      <Button onClick={showListModal} className='no-animation'>
+      <Button onClick={showModal} className='no-animation'>
         除外条件
       </Button>
-      <Modal ref={listModalRef} backdrop={true}>
+      <Modal ref={ref} backdrop={true}>
         <Modal.Header className='font-bold'>
           除外条件
           <form method='dialog'>
@@ -66,9 +63,7 @@ const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }
             {/* TODO: 一覧表示を作成したところ。今後、追加・更新・削除ができるようにしていく */}
             {tab == 'ヤフオク' && (
               <div className='space-y-4'>
-                <Button onClick={showCreateModal} color='neutral' size='md' className='w-full'>
-                  ＋ 除外条件を追加
-                </Button>
+                <CreateExcludeConditionModal />
                 <Table>
                   <Table.Head>
                     <span>キーワード</span>
