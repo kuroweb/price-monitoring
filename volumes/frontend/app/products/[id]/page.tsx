@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
+import CrawlSettingModal from '@/features/products/components/CrawlSettingModal'
 import UpdateExcludeConditionModal from '@/features/products/components/UpdateExcludeSettingModal'
-import UpdateSettingModal from '@/features/products/components/UpdateSettingModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {
@@ -22,7 +22,7 @@ const Page = async ({ params }: { params: { id: string } }) => {
           <div className='card-body'>
             <h2 className='card-title pb-4'>設定</h2>
             <div className='grid grid-cols-2 gap-4'>
-              <UpdateSettingModal data={data} />
+              <CrawlSettingModal data={data} />
               <UpdateExcludeConditionModal data={data} />
             </div>
           </div>

@@ -6,7 +6,7 @@ import { Button, Join, Modal, Table } from 'react-daisyui'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
-const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
   const listModalRef = useRef<HTMLDialogElement>(null)
@@ -98,4 +98,4 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
   )
 }
 
-export default UpdateExcludeConditionModal
+export default ExcludeConditionModal
