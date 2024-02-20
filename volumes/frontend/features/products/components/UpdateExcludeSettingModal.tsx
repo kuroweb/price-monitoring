@@ -9,19 +9,22 @@ import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
-  const ref = useRef<HTMLDialogElement>(null)
+  const listModalRef = useRef<HTMLDialogElement>(null)
   const showListModal = useCallback(() => {
-    ref.current?.showModal()
-  }, [ref])
-    ref.current?.showModal()
-  }, [ref])
+    listModalRef.current?.showModal()
+  }, [listModalRef])
+
+  const createModalRef = useRef<HTMLDialogElement>(null)
+  const showCreateModal = useCallback(() => {
+    createModalRef.current?.showModal()
+  }, [createModalRef])
 
   return (
     <>
       <Button onClick={showListModal} className='no-animation'>
         除外条件
       </Button>
-      <Modal ref={ref} backdrop={true}>
+      <Modal ref={listModalRef} backdrop={true}>
         <Modal.Header className='font-bold'>
           除外条件
           <form method='dialog'>
@@ -34,7 +37,7 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
           <div className='pb-6'>
             <Join className='flex'>
               <input
-                className='join-item btn btn-sm w-1/3'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -42,7 +45,7 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-sm w-1/3'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -50,7 +53,7 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
                 onChange={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-sm w-1/3'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='ペイペイ'
@@ -62,7 +65,10 @@ const UpdateExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQ
           <div className=''>
             {/* TODO: 一覧表示を作成したところ。今後、追加・更新・削除ができるようにしていく */}
             {tab == 'ヤフオク' && (
-              <div>
+              <div className='space-y-4'>
+                <Button onClick={showCreateModal} color='neutral' size='md' className='w-full'>
+                  ＋ 除外条件を追加
+                </Button>
                 <Table>
                   <Table.Head>
                     <span>キーワード</span>
