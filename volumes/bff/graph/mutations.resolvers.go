@@ -26,6 +26,11 @@ func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.
 	return r.ProductService.DeleteProductById(ctx, id)
 }
 
+// CreateYahooAuctionCrawlSettingExcludeCondition is the resolver for the createYahooAuctionCrawlSettingExcludeCondition field.
+func (r *mutationResolver) CreateYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeConditionInput) (model.CreateYahooAuctionCrawlSettingExcludeConditionResult, error) {
+	return r.ProductService.CreateYahooAuctionCrawlSettingExcludeCondition(ctx, input)
+}
+
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 

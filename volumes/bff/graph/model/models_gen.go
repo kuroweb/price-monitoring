@@ -10,6 +10,14 @@ type CreateProductResultErrors interface {
 	IsCreateProductResultErrors()
 }
 
+type CreateYahooAuctionCrawlSettingExcludeConditionResult interface {
+	IsCreateYahooAuctionCrawlSettingExcludeConditionResult()
+}
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultErrors interface {
+	IsCreateYahooAuctionCrawlSettingExcludeConditionResultErrors()
+}
+
 type DeleteProductResult interface {
 	IsDeleteProductResult()
 }
@@ -90,6 +98,52 @@ func (CreateProductResultValidationFailed) IsCreateProductResultErrors() {}
 func (CreateProductResultValidationFailed) IsUserError()            {}
 func (this CreateProductResultValidationFailed) GetCode() string    { return this.Code }
 func (this CreateProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type CreateYahooAuctionCrawlSettingExcludeConditionInput struct {
+	ProductID      string  `json:"productId"`
+	Keyword        *string `json:"keyword,omitempty"`
+	YahooAuctionID *string `json:"yahoo_auction_id,omitempty"`
+	SellerID       *string `json:"seller_id,omitempty"`
+}
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultError struct {
+	Ok    bool                                                       `json:"ok"`
+	Error CreateYahooAuctionCrawlSettingExcludeConditionResultErrors `json:"error"`
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeConditionResultError) IsCreateYahooAuctionCrawlSettingExcludeConditionResult() {
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeConditionResultError) IsResultBase()    {}
+func (this CreateYahooAuctionCrawlSettingExcludeConditionResultError) GetOk() bool { return this.Ok }
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess struct {
+	Ok      bool                                      `json:"ok"`
+	Product *YahooAuctionCrawlSettingExcludeCondition `json:"product"`
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) IsCreateYahooAuctionCrawlSettingExcludeConditionResult() {
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) IsResultBase()    {}
+func (this CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) IsCreateYahooAuctionCrawlSettingExcludeConditionResultErrors() {
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) IsUserError() {}
+func (this CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) GetMessage() string {
+	return this.Message
+}
 
 type CreateYahooAuctionCrawlSettingInput struct {
 	Keyword    string `json:"keyword"`

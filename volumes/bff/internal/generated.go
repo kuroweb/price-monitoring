@@ -73,6 +73,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	CreateYahooAuctionCrawlSettingExcludeConditionResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess struct {
+		Ok      func(childComplexity int) int
+		Product func(childComplexity int) int
+	}
+
+	CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	DeleteProductResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -94,9 +110,10 @@ type ComplexityRoot struct {
 	}
 
 	Mutation struct {
-		CreateProduct func(childComplexity int, input model.CreateProductInput) int
-		DeleteProduct func(childComplexity int, id string) int
-		UpdateProduct func(childComplexity int, id string, input model.UpdateProductInput) int
+		CreateProduct                                  func(childComplexity int, input model.CreateProductInput) int
+		CreateYahooAuctionCrawlSettingExcludeCondition func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeConditionInput) int
+		DeleteProduct                                  func(childComplexity int, id string) int
+		UpdateProduct                                  func(childComplexity int, id string, input model.UpdateProductInput) int
 	}
 
 	Product struct {
@@ -168,6 +185,7 @@ type MutationResolver interface {
 	CreateProduct(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error)
 	UpdateProduct(ctx context.Context, id string, input model.UpdateProductInput) (model.UpdateProductResult, error)
 	DeleteProduct(ctx context.Context, id string) (model.DeleteProductResult, error)
+	CreateYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeConditionInput) (model.CreateYahooAuctionCrawlSettingExcludeConditionResult, error)
 }
 type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error)
@@ -293,6 +311,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateProductResultValidationFailed.Message(childComplexity), true
 
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultError.error":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultError.Error(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultError.ok":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultError.Ok(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.ok":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Ok(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.product":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Product == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Product(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.code":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Code(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.details":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Details(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.message":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Message(childComplexity), true
+
 	case "DeleteProductResultError.error":
 		if e.complexity.DeleteProductResultError.Error == nil {
 			break
@@ -360,6 +427,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.CreateProduct(childComplexity, args["input"].(model.CreateProductInput)), true
+
+	case "Mutation.createYahooAuctionCrawlSettingExcludeCondition":
+		if e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeCondition == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createYahooAuctionCrawlSettingExcludeCondition_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeCondition(childComplexity, args["input"].(model.CreateYahooAuctionCrawlSettingExcludeConditionInput)), true
 
 	case "Mutation.deleteProduct":
 		if e.complexity.Mutation.DeleteProduct == nil {
@@ -694,6 +773,7 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 	ec := executionContext{rc, e, 0, 0, make(chan graphql.DeferredResult)}
 	inputUnmarshalMap := graphql.BuildUnmarshalerMap(
 		ec.unmarshalInputCreateProductInput,
+		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeConditionInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingInput,
 		ec.unmarshalInputUpdateProductInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput,
@@ -802,6 +882,9 @@ var sources = []*ast.Source{
   createProduct(input: CreateProductInput!): CreateProductResult!
   updateProduct(id: ID!, input: UpdateProductInput!): UpdateProductResult!
   deleteProduct(id: ID!): DeleteProductResult!
+  createYahooAuctionCrawlSettingExcludeCondition(
+    input: CreateYahooAuctionCrawlSettingExcludeConditionInput!
+  ): CreateYahooAuctionCrawlSettingExcludeConditionResult!
 }
 
 ## common ##
@@ -916,6 +999,38 @@ type DeleteProductResultValidationFailed implements UserError {
   message: String!
   details: [ErrorDetail!]!
 }
+
+## CreateYahooAuctionCrawlSettingExcludeCondition ##
+
+input CreateYahooAuctionCrawlSettingExcludeConditionInput {
+  productId: ID!
+  keyword: String
+  yahoo_auction_id: String
+  seller_id: String
+}
+
+union CreateYahooAuctionCrawlSettingExcludeConditionResult =
+    CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess
+  | CreateYahooAuctionCrawlSettingExcludeConditionResultError
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
+  ok: Boolean!
+  product: YahooAuctionCrawlSettingExcludeCondition!
+}
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateYahooAuctionCrawlSettingExcludeConditionResultErrors!
+}
+
+union CreateYahooAuctionCrawlSettingExcludeConditionResultErrors =
+    CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed
+
+type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
 `, BuiltIn: false},
 	{Name: "../graph/product.graphqls", Input: `type Product implements Node {
   id: ID!
@@ -988,6 +1103,21 @@ func (ec *executionContext) field_Mutation_createProduct_args(ctx context.Contex
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNCreateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingExcludeCondition_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateYahooAuctionCrawlSettingExcludeConditionInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateYahooAuctionCrawlSettingExcludeConditionInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeConditionInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -1744,6 +1874,336 @@ func (ec *executionContext) fieldContext_CreateProductResultValidationFailed_det
 	return fc, nil
 }
 
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateYahooAuctionCrawlSettingExcludeConditionResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateYahooAuctionCrawlSettingExcludeConditionResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeConditionResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateYahooAuctionCrawlSettingExcludeConditionResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Product, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.YahooAuctionCrawlSettingExcludeCondition)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingExcludeCondition2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeCondition(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionCrawlSettingId(ctx, field)
+			case "yahooAuctionId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_yahooAuctionId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_keyword(ctx, field)
+			case "sellerId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_sellerId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeCondition_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingExcludeCondition", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _DeleteProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteProductResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_DeleteProductResultError_ok(ctx, field)
 	if err != nil {
@@ -2261,6 +2721,61 @@ func (ec *executionContext) fieldContext_Mutation_deleteProduct(ctx context.Cont
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
 	if fc.Args, err = ec.field_Mutation_deleteProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createYahooAuctionCrawlSettingExcludeCondition(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateYahooAuctionCrawlSettingExcludeCondition(rctx, fc.Args["input"].(model.CreateYahooAuctionCrawlSettingExcludeConditionInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateYahooAuctionCrawlSettingExcludeConditionResult)
+	fc.Result = res
+	return ec.marshalNCreateYahooAuctionCrawlSettingExcludeConditionResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeConditionResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateYahooAuctionCrawlSettingExcludeConditionResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createYahooAuctionCrawlSettingExcludeCondition_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return fc, err
 	}
@@ -6105,6 +6620,62 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingExcludeConditionInput(ctx context.Context, obj interface{}) (model.CreateYahooAuctionCrawlSettingExcludeConditionInput, error) {
+	var it model.CreateYahooAuctionCrawlSettingExcludeConditionInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword", "yahoo_auction_id", "seller_id"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "yahoo_auction_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("yahoo_auction_id"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.YahooAuctionID = data
+		case "seller_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("seller_id"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.SellerID = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreateYahooAuctionCrawlSettingInput, error) {
 	var it model.CreateYahooAuctionCrawlSettingInput
 	asMap := map[string]interface{}{}
@@ -6316,6 +6887,45 @@ func (ec *executionContext) _CreateProductResultErrors(ctx context.Context, sel 
 	}
 }
 
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingExcludeConditionResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess:
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeConditionResultError:
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultError(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeConditionResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingExcludeConditionResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed:
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteProductResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -6445,6 +7055,20 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteProductResultError(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess:
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeConditionResultError:
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultError(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeConditionResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultError(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -6514,6 +7138,13 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteProductResultValidationFailed(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed:
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -6695,6 +7326,143 @@ func (ec *executionContext) _CreateProductResultValidationFailed(ctx context.Con
 			}
 		case "details":
 			out.Values[i] = ec._CreateProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingExcludeConditionResultErrorImplementors = []string{"CreateYahooAuctionCrawlSettingExcludeConditionResultError", "CreateYahooAuctionCrawlSettingExcludeConditionResult", "ResultBase"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingExcludeConditionResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingExcludeConditionResultError")
+		case "ok":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingExcludeConditionResultSuccessImplementors = []string{"CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess", "CreateYahooAuctionCrawlSettingExcludeConditionResult", "ResultBase"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingExcludeConditionResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "product":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingExcludeConditionResultValidationFailedImplementors = []string{"CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed", "CreateYahooAuctionCrawlSettingExcludeConditionResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingExcludeConditionResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -6933,6 +7701,13 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 		case "deleteProduct":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_deleteProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createYahooAuctionCrawlSettingExcludeCondition":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createYahooAuctionCrawlSettingExcludeCondition(ctx, field)
 			})
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
@@ -8023,6 +8798,31 @@ func (ec *executionContext) marshalNCreateProductResultErrors2githubᚗcomᚋkur
 		return graphql.Null
 	}
 	return ec._CreateProductResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingExcludeConditionInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeConditionInput(ctx context.Context, v interface{}) (model.CreateYahooAuctionCrawlSettingExcludeConditionInput, error) {
+	res, err := ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeConditionInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingExcludeConditionResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeConditionResult(ctx context.Context, sel ast.SelectionSet, v model.CreateYahooAuctionCrawlSettingExcludeConditionResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateYahooAuctionCrawlSettingExcludeConditionResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingExcludeConditionResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeConditionResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateYahooAuctionCrawlSettingExcludeConditionResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateYahooAuctionCrawlSettingExcludeConditionResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateYahooAuctionCrawlSettingInput, error) {
