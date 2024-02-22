@@ -2,36 +2,40 @@
 
 import { useCallback, useRef, useState } from 'react'
 
-import { Button, Join, Modal, Table } from 'react-daisyui'
+import { Button, Join, Modal } from 'react-daisyui'
 
-import CreateExcludeConditionModal from './CreateExcludeConditionModal'
+import CreateYahooAuctionForm from './CreateYahooAuctionForm'
+import YahooAuctionListTable from './YahooAuctionListTable'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+  const [modal, setModal] = useState<boolean>(false)
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
-  const ref = useRef<HTMLDialogElement>(null)
-  const showModal = useCallback(() => {
-    ref.current?.showModal()
-  }, [ref])
-
+  // TODO: 複数モーダルは煩雑になりそう && 実現に時間がかかりそうなので撤退
+  //       モーダル内の表示を「登録モード・編集モード」に切り替えるパターンで対応中
   return (
     <>
-      <Button onClick={showModal} className='no-animation'>
+      <div onClick={() => setModal(true)} className='btn no-animation'>
         除外条件
-      </Button>
-      <Modal ref={ref} backdrop={true}>
-        <Modal.Header className='font-bold'>
-          除外条件
-          <form method='dialog'>
-            <Button size='sm' color='ghost' shape='circle' className='absolute right-2 top-2'>
-              ✕
-            </Button>
-          </form>
-        </Modal.Header>
-        <Modal.Body>
-          <div className='pb-6'>
+      </div>
+      <input
+        type='checkbox'
+        className='modal-toggle'
+        checked={modal}
+        onChange={(e) => setModal(e.target.checked)}
+      />
+      <div className='modal' role='dialog'>
+        <div className='modal-box'>
+          <div
+            onClick={() => setModal(false)}
+            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
+          >
+            ✕
+          </div>
+          <h3 className='font-bold text-lg'>除外条件</h3>
+          <div className='py-6'>
             <Join className='flex'>
               <input
                 className='join-item btn btn-md w-1/3'
@@ -63,32 +67,20 @@ const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }
             {/* TODO: 一覧表示を作成したところ。今後、追加・更新・削除ができるようにしていく */}
             {tab == 'ヤフオク' && (
               <div className='space-y-4'>
-                <CreateExcludeConditionModal />
-                <Table>
-                  <Table.Head>
-                    <span>キーワード</span>
-                    <span>商品ID</span>
-                    <span>出品者ID</span>
-                  </Table.Head>
-                  <Table.Body>
-                    {data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeConditions.map(
-                      (row) => (
-                        <Table.Row key={row.id}>
-                          <span>{row.keyword}</span>
-                          <span>{row.yahooAuctionId}</span>
-                          <span>{row.sellerId}</span>
-                        </Table.Row>
-                      ),
-                    )}
-                  </Table.Body>
-                </Table>
+                <Button color='neutral' size='md' className='w-full'>
+                  ＋ 除外条件を追加
+                </Button>
+                <CreateYahooAuctionForm />
+                <YahooAuctionListTable data={data} />
               </div>
             )}
             {tab == 'メルカリ' && <div>メルカリ</div>}
             {tab == 'ペイペイ' && <div>ペイペイ</div>}
           </div>
-        </Modal.Body>
-      </Modal>
+        </div>
+
+        <div onClick={() => setModal(false)} className='modal-backdrop' />
+      </div>
     </>
   )
 }

@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
 import CrawlSettingModal from '@/features/products/components/CrawlSettingModal'
-import ExcludeConditionModal from '@/features/products/components/ExcludeConditionModal'
+import ExcludeConditionModal from '@/features/products/components/ExcludeConditionModals/ExcludeConditionModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import {

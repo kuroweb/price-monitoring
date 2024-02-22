@@ -1,5 +1,4 @@
-import { GraphQLClient } from 'graphql-request';
-import { GraphQLClientRequestHeaders } from 'graphql-request/build/cjs/types';
+import { GraphQLClient, RequestOptions } from 'graphql-request';
 import gql from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -8,6 +7,7 @@ export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: 
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
 export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
+type GraphQLClientRequestHeaders = RequestOptions['requestHeaders'];
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: { input: string; output: string; }
@@ -55,6 +55,36 @@ export type CreateProductResultValidationFailed = UserError & {
   message: Scalars['String']['output'];
 };
 
+export type CreateYahooAuctionCrawlSettingExcludeConditionInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+  seller_id?: InputMaybe<Scalars['String']['input']>;
+  yahoo_auction_id?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type CreateYahooAuctionCrawlSettingExcludeConditionResult = CreateYahooAuctionCrawlSettingExcludeConditionResultError | CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess;
+
+export type CreateYahooAuctionCrawlSettingExcludeConditionResultError = ResultBase & {
+  __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultError';
+  error: CreateYahooAuctionCrawlSettingExcludeConditionResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateYahooAuctionCrawlSettingExcludeConditionResultErrors = CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed;
+
+export type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess = ResultBase & {
+  __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  product: YahooAuctionCrawlSettingExcludeCondition;
+};
+
+export type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed = UserError & {
+  __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type CreateYahooAuctionCrawlSettingInput = {
   category_id?: InputMaybe<Scalars['Int']['input']>;
   enabled: Scalars['Boolean']['input'];
@@ -94,6 +124,7 @@ export type ErrorDetail = {
 export type Mutation = {
   __typename?: 'Mutation';
   createProduct: CreateProductResult;
+  createYahooAuctionCrawlSettingExcludeCondition: CreateYahooAuctionCrawlSettingExcludeConditionResult;
   deleteProduct: DeleteProductResult;
   updateProduct: UpdateProductResult;
 };
@@ -101,6 +132,11 @@ export type Mutation = {
 
 export type MutationCreateProductArgs = {
   input: CreateProductInput;
+};
+
+
+export type MutationCreateYahooAuctionCrawlSettingExcludeConditionArgs = {
+  input: CreateYahooAuctionCrawlSettingExcludeConditionInput;
 };
 
 
@@ -404,7 +440,7 @@ export const DeleteProductDocument = gql`
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, variables) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType, _variables) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
