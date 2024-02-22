@@ -116,3 +116,32 @@ mutation deleteProduct($id: ID!) {
     }
   }
 }
+
+mutation createYahooAuctionCrawlSettingExcludeCondition($input: CreateYahooAuctionCrawlSettingExcludeConditionInput!) {
+  createYahooAuctionCrawlSettingExcludeCondition(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeCondition {
+        id
+        keyword
+        yahooAuctionId
+        sellerId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

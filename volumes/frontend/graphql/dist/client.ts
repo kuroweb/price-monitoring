@@ -75,7 +75,7 @@ export type CreateYahooAuctionCrawlSettingExcludeConditionResultErrors = CreateY
 export type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess = ResultBase & {
   __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess';
   ok: Scalars['Boolean']['output'];
-  product: YahooAuctionCrawlSettingExcludeCondition;
+  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition;
 };
 
 export type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed = UserError & {
@@ -311,6 +311,13 @@ export type DeleteProductMutationVariables = Exact<{
 
 export type DeleteProductMutation = { __typename?: 'Mutation', deleteProduct: { __typename?: 'DeleteProductResultError', ok: boolean, error: { __typename?: 'DeleteProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteProductResultSuccess', ok: boolean } };
 
+export type CreateYahooAuctionCrawlSettingExcludeConditionMutationVariables = Exact<{
+  input: CreateYahooAuctionCrawlSettingExcludeConditionInput;
+}>;
+
+
+export type CreateYahooAuctionCrawlSettingExcludeConditionMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeCondition: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeCondition: { __typename?: 'YahooAuctionCrawlSettingExcludeCondition', id: string, keyword?: string | null, yahooAuctionId?: string | null, sellerId?: string | null, createdAt: string, updatedAt: string } } };
+
 
 export const GetProductsDocument = gql`
     query getProducts($id: ID, $name: String) {
@@ -436,6 +443,36 @@ export const DeleteProductDocument = gql`
   }
 }
     `;
+export const CreateYahooAuctionCrawlSettingExcludeConditionDocument = gql`
+    mutation createYahooAuctionCrawlSettingExcludeCondition($input: CreateYahooAuctionCrawlSettingExcludeConditionInput!) {
+  createYahooAuctionCrawlSettingExcludeCondition(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeCondition {
+        id
+        keyword
+        yahooAuctionId
+        sellerId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string, variables?: any) => Promise<T>;
 
@@ -458,6 +495,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     deleteProduct(variables: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteProduct', 'mutation', variables);
+    },
+    createYahooAuctionCrawlSettingExcludeCondition(variables: CreateYahooAuctionCrawlSettingExcludeConditionMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeConditionMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeConditionMutation>(CreateYahooAuctionCrawlSettingExcludeConditionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createYahooAuctionCrawlSettingExcludeCondition', 'mutation', variables);
     }
   };
 }

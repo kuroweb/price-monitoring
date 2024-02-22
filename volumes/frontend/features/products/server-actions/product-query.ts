@@ -11,8 +11,13 @@ import {
   UpdateProductDocument,
   UpdateProductMutation,
   UpdateProductInput,
+  CreateYahooAuctionCrawlSettingExcludeConditionDocument,
+  CreateYahooAuctionCrawlSettingExcludeConditionInput,
+  CreateYahooAuctionCrawlSettingExcludeConditionMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
+
+/* Product */
 
 export const getProducts = async () => {
   return await getClient().query<GetProductsQuery>({
@@ -42,5 +47,16 @@ export const deleteProduct = async (id: String) => {
   return await getClient().mutate<DeleteProductMutation>({
     mutation: DeleteProductDocument,
     variables: { id: id },
+  })
+}
+
+/* YahooAuctionCrawlSettingExcludeCondition */
+
+export const createYahooAuctionCrawlSettingExcludeCondition = async (
+  input: CreateYahooAuctionCrawlSettingExcludeConditionInput,
+) => {
+  return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeConditionMutation>({
+    mutation: CreateYahooAuctionCrawlSettingExcludeConditionDocument,
+    variables: { input: input },
   })
 }

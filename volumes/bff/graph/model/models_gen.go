@@ -118,8 +118,8 @@ func (CreateYahooAuctionCrawlSettingExcludeConditionResultError) IsResultBase() 
 func (this CreateYahooAuctionCrawlSettingExcludeConditionResultError) GetOk() bool { return this.Ok }
 
 type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess struct {
-	Ok      bool                                      `json:"ok"`
-	Product *YahooAuctionCrawlSettingExcludeCondition `json:"product"`
+	Ok                                       bool                                      `json:"ok"`
+	YahooAuctionCrawlSettingExcludeCondition *YahooAuctionCrawlSettingExcludeCondition `json:"yahooAuctionCrawlSettingExcludeCondition"`
 }
 
 func (CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) IsCreateYahooAuctionCrawlSettingExcludeConditionResult() {

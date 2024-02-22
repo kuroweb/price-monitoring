@@ -79,8 +79,8 @@ type ComplexityRoot struct {
 	}
 
 	CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess struct {
-		Ok      func(childComplexity int) int
-		Product func(childComplexity int) int
+		Ok                                       func(childComplexity int) int
+		YahooAuctionCrawlSettingExcludeCondition func(childComplexity int) int
 	}
 
 	CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed struct {
@@ -332,12 +332,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Ok(childComplexity), true
 
-	case "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.product":
-		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Product == nil {
+	case "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.yahooAuctionCrawlSettingExcludeCondition":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.YahooAuctionCrawlSettingExcludeCondition == nil {
 			break
 		}
 
-		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.Product(childComplexity), true
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess.YahooAuctionCrawlSettingExcludeCondition(childComplexity), true
 
 	case "CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.code":
 		if e.complexity.CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed.Code == nil {
@@ -1015,7 +1015,7 @@ union CreateYahooAuctionCrawlSettingExcludeConditionResult =
 
 type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
   ok: Boolean!
-  product: YahooAuctionCrawlSettingExcludeCondition!
+  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition!
 }
 
 type CreateYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {
@@ -2006,8 +2006,8 @@ func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeCo
 	return fc, nil
 }
 
-func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx, field)
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_yahooAuctionCrawlSettingExcludeCondition(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_yahooAuctionCrawlSettingExcludeCondition(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -2020,7 +2020,7 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResul
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.Product, nil
+		return obj.YahooAuctionCrawlSettingExcludeCondition, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -2037,7 +2037,7 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResul
 	return ec.marshalNYahooAuctionCrawlSettingExcludeCondition2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeCondition(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_yahooAuctionCrawlSettingExcludeCondition(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess",
 		Field:      field,
@@ -7412,8 +7412,8 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeConditionResul
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
-		case "product":
-			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_product(ctx, field, obj)
+		case "yahooAuctionCrawlSettingExcludeCondition":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess_yahooAuctionCrawlSettingExcludeCondition(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}

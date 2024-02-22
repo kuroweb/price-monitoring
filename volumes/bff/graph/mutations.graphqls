@@ -135,7 +135,7 @@ union CreateYahooAuctionCrawlSettingExcludeConditionResult =
 
 type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
   ok: Boolean!
-  product: YahooAuctionCrawlSettingExcludeCondition!
+  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition!
 }
 
 type CreateYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {

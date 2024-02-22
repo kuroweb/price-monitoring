@@ -57,7 +57,7 @@ func (c *CreateYahooAuctionCrawlSettingExcludeConditionService) CreateYahooAucti
 
 	result := model.CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess{
 		Ok: true,
-		Product: &model.YahooAuctionCrawlSettingExcludeCondition{
+		YahooAuctionCrawlSettingExcludeCondition: &model.YahooAuctionCrawlSettingExcludeCondition{
 			ID:             strconv.Itoa(response.ID),
 			Keyword:        &response.Keyword,
 			YahooAuctionID: &response.YahooAuctionID,

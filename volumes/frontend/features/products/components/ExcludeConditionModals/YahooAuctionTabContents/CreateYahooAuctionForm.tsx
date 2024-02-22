@@ -1,16 +1,24 @@
-import { useCallback, useRef } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
-import { useRouter } from 'next/navigation'
-import { Button, Modal } from 'react-daisyui'
+import { useRouter, useParams } from 'next/navigation'
+import { Button } from 'react-daisyui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { createYahooAuctionCrawlSettingExcludeCondition } from '@/features/products/server-actions/product-query'
 import { CreateYahooAuctionCrawlSettingExcludeConditionInput } from '@/graphql/dist/client'
 
-const CreateYahooAuctionForm = () => {
+const CreateYahooAuctionForm = ({
+  setMode,
+}: {
+  setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
+}) => {
   const router = useRouter()
+  const params = useParams()
+
   const { register, handleSubmit } = useForm<CreateYahooAuctionCrawlSettingExcludeConditionInput>({
     defaultValues: {
+      productId: String(params.id),
       keyword: undefined,
       yahoo_auction_id: undefined,
       seller_id: undefined,
@@ -20,26 +28,15 @@ const CreateYahooAuctionForm = () => {
   const onSubmit: SubmitHandler<CreateYahooAuctionCrawlSettingExcludeConditionInput> = async (
     data,
   ) => {
-    // TODO: Submit後にモーダルを閉じる。みたいなことがやりづらそう（調査中）
-    // const result = await createProduct(data)
-    // if (result.data?.createProduct.ok) {
-    if (true) {
+    const result = await createYahooAuctionCrawlSettingExcludeCondition(data)
+    if (result.data?.createYahooAuctionCrawlSettingExcludeCondition.ok) {
       toast.success('success')
-      closeModal()
+      setMode('list')
     } else {
       toast.error('error')
     }
     router.refresh()
   }
-
-  // モーダルの表示コントロール
-  const ref = useRef<HTMLDialogElement>(null)
-  const showModal = useCallback(() => {
-    ref.current?.showModal()
-  }, [ref])
-  const closeModal = useCallback(() => {
-    ref.current?.close()
-  }, [ref])
 
   return (
     <>

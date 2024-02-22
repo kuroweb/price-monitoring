@@ -1,11 +1,10 @@
 'use client'
 
-import { useCallback, useRef, useState } from 'react'
+import { useState } from 'react'
 
-import { Button, Join, Modal } from 'react-daisyui'
+import { Join } from 'react-daisyui'
 
-import CreateYahooAuctionForm from './CreateYahooAuctionForm'
-import YahooAuctionListTable from './YahooAuctionListTable'
+import YahooAuctionTabContent from './YahooAuctionTabContents/YahooAuctionTabContent'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -13,8 +12,6 @@ const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }
   const [modal, setModal] = useState<boolean>(false)
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
-  // TODO: 複数モーダルは煩雑になりそう && 実現に時間がかかりそうなので撤退
-  //       モーダル内の表示を「登録モード・編集モード」に切り替えるパターンで対応中
   return (
     <>
       <div onClick={() => setModal(true)} className='btn no-animation'>
@@ -63,17 +60,8 @@ const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }
               />
             </Join>
           </div>
-          <div className=''>
-            {/* TODO: 一覧表示を作成したところ。今後、追加・更新・削除ができるようにしていく */}
-            {tab == 'ヤフオク' && (
-              <div className='space-y-4'>
-                <Button color='neutral' size='md' className='w-full'>
-                  ＋ 除外条件を追加
-                </Button>
-                <CreateYahooAuctionForm />
-                <YahooAuctionListTable data={data} />
-              </div>
-            )}
+          <div>
+            {tab == 'ヤフオク' && <YahooAuctionTabContent data={data} />}
             {tab == 'メルカリ' && <div>メルカリ</div>}
             {tab == 'ペイペイ' && <div>ペイペイ</div>}
           </div>
