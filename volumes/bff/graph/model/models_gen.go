@@ -26,6 +26,14 @@ type DeleteProductResultErrors interface {
 	IsDeleteProductResultErrors()
 }
 
+type DeleteYahooAuctionCrawlSettingExcludeConditionResult interface {
+	IsDeleteYahooAuctionCrawlSettingExcludeConditionResult()
+}
+
+type DeleteYahooAuctionCrawlSettingExcludeConditionResultErrors interface {
+	IsDeleteYahooAuctionCrawlSettingExcludeConditionResultErrors()
+}
+
 type Node interface {
 	IsNode()
 	GetID() string
@@ -183,6 +191,44 @@ func (DeleteProductResultValidationFailed) IsDeleteProductResultErrors() {}
 func (DeleteProductResultValidationFailed) IsUserError()            {}
 func (this DeleteProductResultValidationFailed) GetCode() string    { return this.Code }
 func (this DeleteProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type DeleteYahooAuctionCrawlSettingExcludeConditionResultError struct {
+	Ok    bool                                                       `json:"ok"`
+	Error DeleteYahooAuctionCrawlSettingExcludeConditionResultErrors `json:"error"`
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeConditionResultError) IsDeleteYahooAuctionCrawlSettingExcludeConditionResult() {
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeConditionResultError) IsResultBase()    {}
+func (this DeleteYahooAuctionCrawlSettingExcludeConditionResultError) GetOk() bool { return this.Ok }
+
+type DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess) IsDeleteYahooAuctionCrawlSettingExcludeConditionResult() {
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess) IsResultBase()    {}
+func (this DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) IsDeleteYahooAuctionCrawlSettingExcludeConditionResultErrors() {
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) IsUserError() {}
+func (this DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed) GetMessage() string {
+	return this.Message
+}
 
 type ErrorDetail struct {
 	Field   string `json:"field"`

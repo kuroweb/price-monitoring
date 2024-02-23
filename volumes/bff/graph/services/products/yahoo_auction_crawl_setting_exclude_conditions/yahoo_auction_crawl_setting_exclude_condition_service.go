@@ -3,9 +3,11 @@ package yahoo_auction_crawl_setting_exclude_conditions
 type IYahooAuctionCrawlSettingExcludeConditionService interface {
 	IFindYahooAuctionCrawlSettingExcludeConditionService
 	ICreateYahooAuctionCrawlSettingExcludeConditionService
+	IDeleteYahooAuctionCrawlSettingExcludeConditionService
 }
 
 type YahooAuctionCrawlSettingExcludeConditionService struct {
 	*FindYahooAuctionCrawlSettingExcludeConditionService
 	*CreateYahooAuctionCrawlSettingExcludeConditionService
+	*DeleteYahooAuctionCrawlSettingExcludeConditionService
 }
