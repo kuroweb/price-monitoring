@@ -5,6 +5,9 @@ type Mutation {
   createYahooAuctionCrawlSettingExcludeCondition(
     input: CreateYahooAuctionCrawlSettingExcludeConditionInput!
   ): CreateYahooAuctionCrawlSettingExcludeConditionResult!
+  updateYahooAuctionCrawlSettingExcludeCondition(
+    input: UpdateYahooAuctionCrawlSettingExcludeConditionInput!
+  ): UpdateYahooAuctionCrawlSettingExcludeConditionResult!
   deleteYahooAuctionCrawlSettingExcludeCondition(
     id: ID!
     productId: ID!
@@ -151,6 +154,39 @@ union CreateYahooAuctionCrawlSettingExcludeConditionResultErrors =
     CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed
 
 type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateYahooAuctionCrawlSettingExcludeCondition ##
+
+input UpdateYahooAuctionCrawlSettingExcludeConditionInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+  yahoo_auction_id: String
+  seller_id: String
+}
+
+union UpdateYahooAuctionCrawlSettingExcludeConditionResult =
+    UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess
+  | UpdateYahooAuctionCrawlSettingExcludeConditionResultError
+
+type UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition!
+}
+
+type UpdateYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateYahooAuctionCrawlSettingExcludeConditionResultErrors!
+}
+
+union UpdateYahooAuctionCrawlSettingExcludeConditionResultErrors =
+    UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed
+
+type UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!
