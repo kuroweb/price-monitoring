@@ -2,8 +2,9 @@ import { useState } from 'react'
 
 import { Button } from 'react-daisyui'
 
-import CreateYahooAuctionForm from './CreateYahooAuctionForm'
-import YahooAuctionListTable from './YahooAuctionListTable'
+import ConditionTable from './ConditionTable'
+import CreateForm from './CreateForm'
+import EditForm from './EditForm'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -18,7 +19,7 @@ const YahooAuctionTabContent = ({ data }: { data: GetProductDetailPageDataQuery 
             <Button onClick={() => setMode('create')} color='neutral' size='md' className='w-full'>
               ＋ 除外条件を追加
             </Button>
-            <YahooAuctionListTable data={data} />
+            <ConditionTable data={data} setMode={setMode} />
           </>
         )}
         {mode == 'create' && (
@@ -26,7 +27,15 @@ const YahooAuctionTabContent = ({ data }: { data: GetProductDetailPageDataQuery 
             <Button onClick={() => setMode('list')} color='neutral' size='md' className='w-full'>
               ＜ 一覧に戻る
             </Button>
-            <CreateYahooAuctionForm setMode={setMode} />
+            <CreateForm setMode={setMode} />
+          </>
+        )}
+        {mode == 'edit' && (
+          <>
+            <Button onClick={() => setMode('list')} color='neutral' size='md' className='w-full'>
+              ＜ 一覧に戻る
+            </Button>
+            {/* <EditForm /> */}
           </>
         )}
       </div>

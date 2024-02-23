@@ -1,12 +1,20 @@
 'use client'
 
+import { Dispatch, SetStateAction } from 'react'
+
 import { useRouter, useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { deleteYahooAuctionCrawlSettingExcludeCondition } from '@/features/products/server-actions/product-query'
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
-const YahooAuctionListTable = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const ConditionTable = ({
+  data,
+  setMode,
+}: {
+  data: GetProductDetailPageDataQuery
+  setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
+}) => {
   const params = useParams()
   const router = useRouter()
 
@@ -60,7 +68,13 @@ const YahooAuctionListTable = ({ data }: { data: GetProductDetailPageDataQuery }
                       className='dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-20'
                     >
                       <li>
-                        <a>編集</a>
+                        <a
+                          onClick={() => {
+                            setMode('edit')
+                          }}
+                        >
+                          編集
+                        </a>
                       </li>
                       <li>
                         <a onClick={() => destroy(condition.id, String(params.id))}>削除</a>
@@ -77,4 +91,4 @@ const YahooAuctionListTable = ({ data }: { data: GetProductDetailPageDataQuery }
   )
 }
 
-export default YahooAuctionListTable
+export default ConditionTable

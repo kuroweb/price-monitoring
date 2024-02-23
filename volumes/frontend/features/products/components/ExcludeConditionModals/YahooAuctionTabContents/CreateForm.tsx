@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { createYahooAuctionCrawlSettingExcludeCondition } from '@/features/products/server-actions/product-query'
 import { CreateYahooAuctionCrawlSettingExcludeConditionInput } from '@/graphql/dist/client'
 
-const CreateYahooAuctionForm = ({
+const CreateForm = ({
   setMode,
 }: {
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
@@ -69,4 +69,4 @@ const CreateYahooAuctionForm = ({
   )
 }
 
-export default CreateYahooAuctionForm
+export default CreateForm
