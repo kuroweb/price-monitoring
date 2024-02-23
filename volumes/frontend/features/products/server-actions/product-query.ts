@@ -14,6 +14,8 @@ import {
   CreateYahooAuctionCrawlSettingExcludeConditionDocument,
   CreateYahooAuctionCrawlSettingExcludeConditionInput,
   CreateYahooAuctionCrawlSettingExcludeConditionMutation,
+  DeleteYahooAuctionCrawlSettingExcludeConditionMutation,
+  DeleteYahooAuctionCrawlSettingExcludeConditionDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -58,5 +60,15 @@ export const createYahooAuctionCrawlSettingExcludeCondition = async (
   return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeConditionMutation>({
     mutation: CreateYahooAuctionCrawlSettingExcludeConditionDocument,
     variables: { input: input },
+  })
+}
+
+export const deleteYahooAuctionCrawlSettingExcludeCondition = async (
+  id: String,
+  productId: String,
+) => {
+  return await getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeConditionMutation>({
+    mutation: DeleteYahooAuctionCrawlSettingExcludeConditionDocument,
+    variables: { id: id, productId: productId },
   })
 }

@@ -1,8 +1,25 @@
 'use client'
 
+import { useRouter, useParams } from 'next/navigation'
+import { toast } from 'react-toastify'
+
+import { deleteYahooAuctionCrawlSettingExcludeCondition } from '@/features/products/server-actions/product-query'
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const YahooAuctionListTable = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+  const params = useParams()
+  const router = useRouter()
+
+  const destroy = async (id: string, productId: string) => {
+    const result = await deleteYahooAuctionCrawlSettingExcludeCondition(id, productId)
+    if (result.data?.deleteYahooAuctionCrawlSettingExcludeCondition.ok) {
+      toast.success('success')
+    } else {
+      toast.error('error')
+    }
+    router.refresh()
+  }
+
   return (
     <>
       <table className='table'>
@@ -16,11 +33,11 @@ const YahooAuctionListTable = ({ data }: { data: GetProductDetailPageDataQuery }
         </thead>
         <tbody>
           {data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeConditions.map(
-            (row) => (
-              <tr key={row.id}>
-                <td>{row.keyword}</td>
-                <td>{row.yahooAuctionId}</td>
-                <td>{row.sellerId}</td>
+            (condition) => (
+              <tr key={condition.id}>
+                <td>{condition.keyword}</td>
+                <td>{condition.yahooAuctionId}</td>
+                <td>{condition.sellerId}</td>
                 <td className='w-1/12'>
                   <div className='dropdown dropdown-left'>
                     <div tabIndex={0} role='button' className='btn btn-square btn-sm'>
@@ -46,7 +63,7 @@ const YahooAuctionListTable = ({ data }: { data: GetProductDetailPageDataQuery }
                         <a>編集</a>
                       </li>
                       <li>
-                        <a>削除</a>
+                        <a onClick={() => destroy(condition.id, String(params.id))}>削除</a>
                       </li>
                     </ul>
                   </div>

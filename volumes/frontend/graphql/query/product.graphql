@@ -1,3 +1,5 @@
+## Product ##
+
 query getProducts($id: ID, $name: String) {
   products(id: $id, name: $name) {
     id
@@ -117,7 +119,11 @@ mutation deleteProduct($id: ID!) {
   }
 }
 
-mutation createYahooAuctionCrawlSettingExcludeCondition($input: CreateYahooAuctionCrawlSettingExcludeConditionInput!) {
+## YahooAuctionCrawlSettingExcludeCondition ##
+
+mutation createYahooAuctionCrawlSettingExcludeCondition(
+  $input: CreateYahooAuctionCrawlSettingExcludeConditionInput!
+) {
   createYahooAuctionCrawlSettingExcludeCondition(input: $input) {
     ... on CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
       ok
@@ -134,6 +140,27 @@ mutation createYahooAuctionCrawlSettingExcludeCondition($input: CreateYahooAucti
       ok
       error {
         ... on CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteYahooAuctionCrawlSettingExcludeCondition($id: ID!, $productId: ID!) {
+  deleteYahooAuctionCrawlSettingExcludeCondition(id: $id, productId: $productId) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
           code
           message
           details {
