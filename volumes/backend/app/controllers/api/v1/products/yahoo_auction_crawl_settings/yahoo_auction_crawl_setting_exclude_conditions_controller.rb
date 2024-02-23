@@ -15,7 +15,26 @@ module Api
               product
               .yahoo_auction_crawl_setting
               .yahoo_auction_crawl_setting_exclude_conditions
-              .build(create_yahoo_auction_crawl_setting_exclude_condition_params)
+              .build(yahoo_auction_crawl_setting_exclude_condition_params)
+
+            if yahoo_auction_crawl_setting_exclude_condition.save
+              render json: yahoo_auction_crawl_setting_exclude_condition.as_json, status: 200
+            else
+              render json: { message: yahoo_auction_crawl_setting_exclude_condition.errors.full_messages }, status: 400
+            end
+          end
+
+          def update
+            binding.pry
+            yahoo_auction_crawl_setting_exclude_condition =
+              product
+              .yahoo_auction_crawl_setting
+              .yahoo_auction_crawl_setting_exclude_conditions
+              .find(params[:id])
+
+            yahoo_auction_crawl_setting_exclude_condition.assign_attributes(
+              yahoo_auction_crawl_setting_exclude_condition_params
+            )
 
             if yahoo_auction_crawl_setting_exclude_condition.save
               render json: yahoo_auction_crawl_setting_exclude_condition.as_json, status: 200
@@ -48,7 +67,7 @@ module Api
             %i[keyword yahoo_auction_id seller_id]
           end
 
-          def create_yahoo_auction_crawl_setting_exclude_condition_params
+          def yahoo_auction_crawl_setting_exclude_condition_params
             params.permit(yahoo_auction_crawl_setting_exclude_condition_attributes)
           end
         end

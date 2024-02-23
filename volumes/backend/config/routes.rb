@@ -12,7 +12,7 @@ Rails.application.routes.draw do
           resources :yahoo_auction_products, only: %i[index show]
           resources :yahoo_auction_crawl_settings, only: [:index]
           namespace :yahoo_auction_crawl_settings do
-            resources :yahoo_auction_crawl_setting_exclude_conditions, only: %i[index create destroy]
+            resources :yahoo_auction_crawl_setting_exclude_conditions, only: %i[index create update destroy]
           end
           resources :calculate_daily_yahoo_auction_products, only: [:index]
         end
