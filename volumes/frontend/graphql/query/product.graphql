@@ -152,6 +152,37 @@ mutation createYahooAuctionCrawlSettingExcludeCondition(
   }
 }
 
+mutation updateYahooAuctionCrawlSettingExcludeCondition(
+  $input: UpdateYahooAuctionCrawlSettingExcludeConditionInput!
+) {
+  updateYahooAuctionCrawlSettingExcludeCondition(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeCondition {
+        id
+        keyword
+        yahooAuctionId
+        sellerId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
 mutation deleteYahooAuctionCrawlSettingExcludeCondition($id: ID!, $productId: ID!) {
   deleteYahooAuctionCrawlSettingExcludeCondition(id: $id, productId: $productId) {
     ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess {
