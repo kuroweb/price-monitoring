@@ -25,7 +25,6 @@ module Api
           end
 
           def update
-            binding.pry
             yahoo_auction_crawl_setting_exclude_condition =
               product
               .yahoo_auction_crawl_setting
