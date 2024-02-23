@@ -24,6 +24,20 @@ module Api
             end
           end
 
+          def destroy
+            yahoo_auction_crawl_setting_exclude_condition =
+              product
+              .yahoo_auction_crawl_setting
+              .yahoo_auction_crawl_setting_exclude_conditions
+              .find(params[:id])
+
+            if yahoo_auction_crawl_setting_exclude_condition.destroy
+              head 200
+            else
+              render json: { message: result.message }, status: 400
+            end
+          end
+
           private
 
           def product
