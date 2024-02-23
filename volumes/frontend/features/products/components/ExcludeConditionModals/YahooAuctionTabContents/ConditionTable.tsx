@@ -6,14 +6,19 @@ import { useRouter, useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { deleteYahooAuctionCrawlSettingExcludeCondition } from '@/features/products/server-actions/product-query'
-import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import {
+  GetProductDetailPageDataQuery,
+  YahooAuctionCrawlSettingExcludeCondition,
+} from '@/graphql/dist/client'
 
 const ConditionTable = ({
   data,
   setMode,
+  setCondition,
 }: {
   data: GetProductDetailPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
+  setCondition: Dispatch<SetStateAction<YahooAuctionCrawlSettingExcludeCondition | undefined>>
 }) => {
   const params = useParams()
   const router = useRouter()
@@ -70,6 +75,7 @@ const ConditionTable = ({
                       <li>
                         <a
                           onClick={() => {
+                            setCondition(condition)
                             setMode('edit')
                           }}
                         >

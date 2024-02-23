@@ -6,10 +6,16 @@ import ConditionTable from './ConditionTable'
 import CreateForm from './CreateForm'
 import EditForm from './EditForm'
 
-import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import {
+  GetProductDetailPageDataQuery,
+  YahooAuctionCrawlSettingExcludeCondition,
+} from '@/graphql/dist/client'
 
 const YahooAuctionTabContent = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
+  const [condition, setCondition] = useState<YahooAuctionCrawlSettingExcludeCondition | undefined>(
+    undefined,
+  )
 
   return (
     <>
@@ -19,7 +25,7 @@ const YahooAuctionTabContent = ({ data }: { data: GetProductDetailPageDataQuery 
             <Button onClick={() => setMode('create')} color='neutral' size='md' className='w-full'>
               ＋ 除外条件を追加
             </Button>
-            <ConditionTable data={data} setMode={setMode} />
+            <ConditionTable data={data} setMode={setMode} setCondition={setCondition} />
           </>
         )}
         {mode == 'create' && (
@@ -35,7 +41,7 @@ const YahooAuctionTabContent = ({ data }: { data: GetProductDetailPageDataQuery 
             <Button onClick={() => setMode('list')} color='neutral' size='md' className='w-full'>
               ＜ 一覧に戻る
             </Button>
-            {/* <EditForm /> */}
+            <EditForm condition={condition} />
           </>
         )}
       </div>
