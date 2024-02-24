@@ -26,7 +26,6 @@ function EditForm({
   const onSubmit: SubmitHandler<UpdateYahooAuctionCrawlSettingExcludeConditionInput> = async (
     data,
   ) => {
-    console.log(data)
     const result = await updateYahooAuctionCrawlSettingExcludeCondition(data)
     if (result.data?.updateYahooAuctionCrawlSettingExcludeCondition.ok) {
       toast.success('success')
