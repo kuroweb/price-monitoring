@@ -38,6 +38,7 @@ module Crawl
           product_doms.each do |dom|
             result = Crawl::YahooAuction::CrawlResult.new(
               yahoo_auction_id: yahoo_auction_id(dom),
+              seller_id: seller_id(dom),
               name: name(dom),
               price: price(dom),
               thumbnail_url: thumbnail_url(dom),
@@ -68,6 +69,10 @@ module Crawl
 
         def yahoo_auction_id(dom)
           dom.query_selector(".Product__titleLink").get_attribute("href").split("/")[-1]
+        end
+
+        def seller_id(dom)
+          dom.query_selector(".Product__sellerLink").get_attribute("title")
         end
 
         def name(dom)
