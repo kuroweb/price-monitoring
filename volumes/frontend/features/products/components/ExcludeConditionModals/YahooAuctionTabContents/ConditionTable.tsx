@@ -53,7 +53,7 @@ const ConditionTable = ({
                 <td>{condition.sellerId}</td>
                 <td className='w-1/12'>
                   <div className='dropdown dropdown-left'>
-                    <div tabIndex={0} role='button' className='btn btn-square btn-sm'>
+                    <div tabIndex={0} role='button' className='btn btn-square btn-md'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
@@ -70,20 +70,26 @@ const ConditionTable = ({
                     </div>
                     <ul
                       tabIndex={0}
-                      className='dropdown-content z-[1] menu p-2 shadow bg-base-200 rounded-box w-20'
+                      className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
                     >
                       <li>
-                        <a
+                        <button
+                          className='btn btn-primary'
                           onClick={() => {
                             setCondition(condition)
                             setMode('edit')
                           }}
                         >
                           編集
-                        </a>
+                        </button>
                       </li>
                       <li>
-                        <a onClick={() => destroy(condition.id, String(params.id))}>削除</a>
+                        <button
+                          className='btn btn-error'
+                          onClick={() => destroy(condition.id, String(params.id))}
+                        >
+                          削除
+                        </button>
                       </li>
                     </ul>
                   </div>

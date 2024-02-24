@@ -39,7 +39,7 @@ const YahooAuctionTabContent = ({ data }: { data: GetProductDetailPageDataQuery 
         {mode == 'edit' && (
           <>
             <Button onClick={() => setMode('list')} color='neutral' size='md' className='w-full'>
-              ＜ 一覧に戻る
+              ＜ 編集をキャンセルする
             </Button>
             <EditForm setMode={setMode} condition={condition} />
           </>
