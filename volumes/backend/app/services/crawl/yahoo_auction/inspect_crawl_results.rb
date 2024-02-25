@@ -34,9 +34,8 @@ module Crawl
       end
 
       def exclude_keywords
-        @exclude_keywords ||=
-          yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_exclude_keywords
-                                     .where.not(keyword: nil).pluck(:keyword)
+        @exclude_keywords ||= yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_exclude_keywords
+                                                         .where.not(keyword: nil).pluck(:keyword)
       end
     end
   end
