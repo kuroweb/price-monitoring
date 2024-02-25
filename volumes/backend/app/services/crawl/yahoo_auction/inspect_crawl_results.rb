@@ -8,7 +8,6 @@ module Crawl
       end
 
       def execute
-        binding.pry
         inspected_crawl_results = crawl_results.results.select { |crawl_result| inspect(crawl_result) }
         Crawl::YahooAuction::CrawlResults.new(inspected_crawl_results)
       end
