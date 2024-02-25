@@ -70,7 +70,7 @@ const ProductsTable = ({
                   <div className='flex justify-center'>
                     <button
                       onClick={() => submitDeleteProduct(product.id)}
-                      className='btn btn-sm btn-error'
+                      className='btn btn-md btn-error'
                     >
                       削除
                     </button>
