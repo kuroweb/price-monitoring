@@ -11,8 +11,7 @@ module Products
       end
 
       def call
-        deletable
-        # deletable.delete_all
+        deletable.delete_all
       end
 
       private
