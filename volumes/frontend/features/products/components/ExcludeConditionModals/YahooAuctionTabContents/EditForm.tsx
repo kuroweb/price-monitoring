@@ -53,19 +53,28 @@ function EditForm({
           <div className='label'>
             <span className='label-text'>キーワード</span>
           </div>
-          <input {...register('keyword')} className='input input-bordered' />
+          <input
+            {...register('keyword', { setValueAs: (v) => (v === '' ? null : v) })}
+            className='input input-bordered'
+          />
         </label>
         <label className='form-control'>
           <div className='label'>
             <span className='label-text'>ヤフオクID</span>
           </div>
-          <input {...register('yahoo_auction_id')} className='input input-bordered' />
+          <input
+            {...register('yahoo_auction_id', { setValueAs: (v) => (v === '' ? null : v) })}
+            className='input input-bordered'
+          />
         </label>
         <label className='form-control'>
           <div className='label'>
             <span className='label-text'>出品者ID</span>
           </div>
-          <input {...register('seller_id')} className='input input-bordered' />
+          <input
+            {...register('seller_id', { setValueAs: (v) => (v === '' ? null : v) })}
+            className='input input-bordered'
+          />
         </label>
         <div className='pt-4'>
           <Button type='submit' color='primary' size='md' className='w-full'>
