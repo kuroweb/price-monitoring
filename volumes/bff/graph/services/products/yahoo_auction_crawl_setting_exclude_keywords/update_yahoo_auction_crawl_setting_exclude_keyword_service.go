@@ -1,4 +1,4 @@
-package yahoo_auction_crawl_setting_exclude_conditions
+package yahoo_auction_crawl_setting_exclude_keywords
 
 import (
 	"bytes"
@@ -12,20 +12,18 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 )
 
-type IUpdateYahooAuctionCrawlSettingExcludeConditionService interface {
-	UpdateYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeConditionInput) (model.UpdateYahooAuctionCrawlSettingExcludeConditionResult, error)
+type IUpdateYahooAuctionCrawlSettingExcludeKeywordService interface {
+	UpdateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) (model.UpdateYahooAuctionCrawlSettingExcludeKeywordResult, error)
 }
 
-type UpdateYahooAuctionCrawlSettingExcludeConditionService struct{}
+type UpdateYahooAuctionCrawlSettingExcludeKeywordService struct{}
 
-func (u *UpdateYahooAuctionCrawlSettingExcludeConditionService) UpdateYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeConditionInput) (model.UpdateYahooAuctionCrawlSettingExcludeConditionResult, error) {
+func (u *UpdateYahooAuctionCrawlSettingExcludeKeywordService) UpdateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) (model.UpdateYahooAuctionCrawlSettingExcludeKeywordResult, error) {
 	cfg := config.NewConfig()
-	url := fmt.Sprintf("%s/api/v1/products/%s/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_conditions/%s", cfg.BackendUrl, input.ProductID, input.ID)
+	url := fmt.Sprintf("%s/api/v1/products/%s/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_keywords/%s", cfg.BackendUrl, input.ProductID, input.ID)
 
 	body := map[string]interface{}{
-		"keyword":          input.Keyword,
-		"yahoo_auction_id": input.YahooAuctionID,
-		"seller_id":        input.SellerID,
+		"keyword": input.Keyword,
 	}
 
 	requestBody, err := json.Marshal(body)
@@ -54,9 +52,7 @@ func (u *UpdateYahooAuctionCrawlSettingExcludeConditionService) UpdateYahooAucti
 	var response struct {
 		ID                         int     `json:"id"`
 		YahooAuctionCrawlSettingID int     `json:"yahoo_auction_crawl_setting_id"`
-		YahooAuctionID             *string `json:"yahoo_auction_id"`
 		Keyword                    *string `json:"keyword"`
-		SellerID                   *string `json:"seller_id"`
 		CreatedAt                  string  `json:"created_at"`
 		UpdatedAt                  string  `json:"updated_at"`
 	}
@@ -66,14 +62,12 @@ func (u *UpdateYahooAuctionCrawlSettingExcludeConditionService) UpdateYahooAucti
 		return u.handleServerError(), nil
 	}
 
-	result := model.UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess{
+	result := model.UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess{
 		Ok: true,
-		YahooAuctionCrawlSettingExcludeCondition: &model.YahooAuctionCrawlSettingExcludeCondition{
+		YahooAuctionCrawlSettingExcludeKeyword: &model.YahooAuctionCrawlSettingExcludeKeyword{
 			ID:                         strconv.Itoa(response.ID),
 			YahooAuctionCrawlSettingID: response.YahooAuctionCrawlSettingID,
-			YahooAuctionID:             response.YahooAuctionID,
 			Keyword:                    response.Keyword,
-			SellerID:                   response.SellerID,
 			CreatedAt:                  response.CreatedAt,
 			UpdatedAt:                  response.UpdatedAt,
 		},
@@ -82,10 +76,10 @@ func (u *UpdateYahooAuctionCrawlSettingExcludeConditionService) UpdateYahooAucti
 	return result, nil
 }
 
-func (u *UpdateYahooAuctionCrawlSettingExcludeConditionService) handleServerError() model.UpdateYahooAuctionCrawlSettingExcludeConditionResultError {
-	return model.UpdateYahooAuctionCrawlSettingExcludeConditionResultError{
+func (u *UpdateYahooAuctionCrawlSettingExcludeKeywordService) handleServerError() model.UpdateYahooAuctionCrawlSettingExcludeKeywordResultError {
+	return model.UpdateYahooAuctionCrawlSettingExcludeKeywordResultError{
 		Ok: false,
-		Error: model.UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed{
+		Error: model.UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed{
 			Code:    "503",
 			Message: "Service is currently unavailable.",
 			Details: []*model.ErrorDetail{},

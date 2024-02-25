@@ -8,14 +8,14 @@ import YahooAuctionTabContent from './YahooAuctionTabContents/YahooAuctionTabCon
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
-const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const ExcludeKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [modal, setModal] = useState<boolean>(false)
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
 
   return (
     <>
       <div onClick={() => setModal(true)} className='btn no-animation'>
-        除外条件
+        除外キーワード
       </div>
       <input
         type='checkbox'
@@ -31,7 +31,7 @@ const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>除外条件</h3>
+          <h3 className='font-bold text-lg'>除外キーワード</h3>
           <div className='py-6'>
             <Join className='flex'>
               <input
@@ -73,4 +73,4 @@ const ExcludeConditionModal = ({ data }: { data: GetProductDetailPageDataQuery }
   )
 }
 
-export default ExcludeConditionModal
+export default ExcludeKeywordModal

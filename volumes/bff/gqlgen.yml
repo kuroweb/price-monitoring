@@ -95,5 +95,5 @@ models:
         resolver: true
   YahooAuctionCrawlSetting:
     fields:
-      yahooAuctionCrawlSettingExcludeConditions:
+      yahooAuctionCrawlSettingExcludeKeywords:
         resolver: true

@@ -1,0 +1,15 @@
+package yahoo_auction_crawl_setting_exclude_keywords
+
+type IYahooAuctionCrawlSettingExcludeKeywordService interface {
+	IFindYahooAuctionCrawlSettingExcludeKeywordService
+	ICreateYahooAuctionCrawlSettingExcludeKeywordService
+	IUpdateYahooAuctionCrawlSettingExcludeKeywordService
+	IDeleteYahooAuctionCrawlSettingExcludeKeywordService
+}
+
+type YahooAuctionCrawlSettingExcludeKeywordService struct {
+	*FindYahooAuctionCrawlSettingExcludeKeywordService
+	*CreateYahooAuctionCrawlSettingExcludeKeywordService
+	*UpdateYahooAuctionCrawlSettingExcludeKeywordService
+	*DeleteYahooAuctionCrawlSettingExcludeKeywordService
+}

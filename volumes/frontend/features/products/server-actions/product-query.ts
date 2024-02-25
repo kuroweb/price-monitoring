@@ -11,14 +11,14 @@ import {
   UpdateProductDocument,
   UpdateProductMutation,
   UpdateProductInput,
-  CreateYahooAuctionCrawlSettingExcludeConditionDocument,
-  CreateYahooAuctionCrawlSettingExcludeConditionInput,
-  CreateYahooAuctionCrawlSettingExcludeConditionMutation,
-  DeleteYahooAuctionCrawlSettingExcludeConditionMutation,
-  DeleteYahooAuctionCrawlSettingExcludeConditionDocument,
-  UpdateYahooAuctionCrawlSettingExcludeConditionInput,
-  UpdateYahooAuctionCrawlSettingExcludeConditionDocument,
-  UpdateYahooAuctionCrawlSettingExcludeConditionMutation,
+  CreateYahooAuctionCrawlSettingExcludeKeywordDocument,
+  CreateYahooAuctionCrawlSettingExcludeKeywordInput,
+  CreateYahooAuctionCrawlSettingExcludeKeywordMutation,
+  DeleteYahooAuctionCrawlSettingExcludeKeywordMutation,
+  DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
+  UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
+  UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
+  UpdateYahooAuctionCrawlSettingExcludeKeywordMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -55,32 +55,32 @@ export const deleteProduct = async (id: String) => {
   })
 }
 
-/* YahooAuctionCrawlSettingExcludeCondition */
+/* YahooAuctionCrawlSettingExcludeKeyword */
 
-export const createYahooAuctionCrawlSettingExcludeCondition = async (
-  input: CreateYahooAuctionCrawlSettingExcludeConditionInput,
+export const createYahooAuctionCrawlSettingExcludeKeyword = async (
+  input: CreateYahooAuctionCrawlSettingExcludeKeywordInput,
 ) => {
-  return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeConditionMutation>({
-    mutation: CreateYahooAuctionCrawlSettingExcludeConditionDocument,
+  return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeKeywordMutation>({
+    mutation: CreateYahooAuctionCrawlSettingExcludeKeywordDocument,
     variables: { input: input },
   })
 }
 
-export const updateYahooAuctionCrawlSettingExcludeCondition = async (
-  input: UpdateYahooAuctionCrawlSettingExcludeConditionInput,
+export const updateYahooAuctionCrawlSettingExcludeKeyword = async (
+  input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
 ) => {
-  return await getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeConditionMutation>({
-    mutation: UpdateYahooAuctionCrawlSettingExcludeConditionDocument,
+  return await getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation>({
+    mutation: UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
     variables: { input: input },
   })
 }
 
-export const deleteYahooAuctionCrawlSettingExcludeCondition = async (
+export const deleteYahooAuctionCrawlSettingExcludeKeyword = async (
   id: String,
   productId: String,
 ) => {
-  return await getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeConditionMutation>({
-    mutation: DeleteYahooAuctionCrawlSettingExcludeConditionDocument,
+  return await getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>({
+    mutation: DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
     variables: { id: id, productId: productId },
   })
 }

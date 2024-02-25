@@ -26,9 +26,9 @@ func (r *productResolver) CalculateDailyYahooAuctionProducts(ctx context.Context
 	return r.ProductService.FindCalculateDailyYahooAuctionProduct(ctx, obj.ID)
 }
 
-// YahooAuctionCrawlSettingExcludeConditions is the resolver for the yahooAuctionCrawlSettingExcludeConditions field.
-func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeConditions(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeCondition, error) {
-	return r.ProductService.FindYahooAuctionCrawlSettingExcludeCondition(ctx, obj.ProductID, obj.ID)
+// YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
+func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error) {
+	return r.ProductService.FindYahooAuctionCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
 }
 
 // Product returns internal.ProductResolver implementation.

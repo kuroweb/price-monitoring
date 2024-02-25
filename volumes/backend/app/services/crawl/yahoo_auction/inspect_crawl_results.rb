@@ -46,21 +46,21 @@ module Crawl
       def exclude_keywords
         @exclude_keywords ||=
           yahoo_auction_crawl_setting
-          .yahoo_auction_crawl_setting_exclude_conditions.where.not(keyword: nil)
+          .yahoo_auction_crawl_setting_exclude_keywords.where.not(keyword: nil)
           .pluck(:keyword).map(&:downcase)
       end
 
       def exclude_yahoo_auction_ids
         @exclude_yahoo_auction_ids ||=
           yahoo_auction_crawl_setting
-          .yahoo_auction_crawl_setting_exclude_conditions.where.not(yahoo_auction_id: nil)
+          .yahoo_auction_crawl_setting_exclude_keywords.where.not(yahoo_auction_id: nil)
           .pluck(:yahoo_auction_id)
       end
 
       def exclude_seller_ids
         @exclude_seller_ids ||=
           yahoo_auction_crawl_setting
-          .yahoo_auction_crawl_setting_exclude_conditions.where.not(seller_id: nil)
+          .yahoo_auction_crawl_setting_exclude_keywords.where.not(seller_id: nil)
           .pluck(:seller_id)
       end
     end

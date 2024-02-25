@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_24_081454) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_25_081656) do
   create_table "calculate_daily_yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.integer "price"
@@ -33,14 +33,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_081454) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "yahoo_auction_crawl_setting_exclude_conditions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "yahoo_auction_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "yahoo_auction_crawl_setting_id"
-    t.string "yahoo_auction_id"
     t.string "keyword"
-    t.string "seller_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_f5bceade03"
+    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_fb93459e66"
   end
 
   create_table "yahoo_auction_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -71,7 +69,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_24_081454) do
   end
 
   add_foreign_key "calculate_daily_yahoo_auction_products", "products"
-  add_foreign_key "yahoo_auction_crawl_setting_exclude_conditions", "yahoo_auction_crawl_settings"
+  add_foreign_key "yahoo_auction_crawl_setting_exclude_keywords", "yahoo_auction_crawl_settings"
   add_foreign_key "yahoo_auction_crawl_settings", "products"
   add_foreign_key "yahoo_auction_products", "products"
 end

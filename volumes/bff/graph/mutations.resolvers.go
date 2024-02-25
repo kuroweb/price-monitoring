@@ -26,19 +26,19 @@ func (r *mutationResolver) DeleteProduct(ctx context.Context, id string) (model.
 	return r.ProductService.DeleteProductById(ctx, id)
 }
 
-// CreateYahooAuctionCrawlSettingExcludeCondition is the resolver for the createYahooAuctionCrawlSettingExcludeCondition field.
-func (r *mutationResolver) CreateYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeConditionInput) (model.CreateYahooAuctionCrawlSettingExcludeConditionResult, error) {
-	return r.ProductService.CreateYahooAuctionCrawlSettingExcludeCondition(ctx, input)
+// CreateYahooAuctionCrawlSettingExcludeKeyword is the resolver for the createYahooAuctionCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) CreateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) (model.CreateYahooAuctionCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.CreateYahooAuctionCrawlSettingExcludeKeyword(ctx, input)
 }
 
-// UpdateYahooAuctionCrawlSettingExcludeCondition is the resolver for the updateYahooAuctionCrawlSettingExcludeCondition field.
-func (r *mutationResolver) UpdateYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeConditionInput) (model.UpdateYahooAuctionCrawlSettingExcludeConditionResult, error) {
-	return r.ProductService.UpdateYahooAuctionCrawlSettingExcludeCondition(ctx, input)
+// UpdateYahooAuctionCrawlSettingExcludeKeyword is the resolver for the updateYahooAuctionCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) UpdateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) (model.UpdateYahooAuctionCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.UpdateYahooAuctionCrawlSettingExcludeKeyword(ctx, input)
 }
 
-// DeleteYahooAuctionCrawlSettingExcludeCondition is the resolver for the DeleteYahooAuctionCrawlSettingExcludeCondition field.
-func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeCondition(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeConditionResult, error) {
-	return r.ProductService.DeleteYahooAuctionCrawlSettingExcludeCondition(ctx, id, productID)
+// DeleteYahooAuctionCrawlSettingExcludeKeyword is the resolver for the DeleteYahooAuctionCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx, id, productID)
 }
 
 // Mutation returns internal.MutationResolver implementation.

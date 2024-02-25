@@ -27,15 +27,13 @@ type YahooAuctionCrawlSetting implements Node {
   enabled: Boolean!
   createdAt: String!
   updatedAt: String!
-  yahooAuctionCrawlSettingExcludeConditions: [YahooAuctionCrawlSettingExcludeCondition!]!
+  yahooAuctionCrawlSettingExcludeKeywords: [YahooAuctionCrawlSettingExcludeKeyword!]!
 }
 
-type YahooAuctionCrawlSettingExcludeCondition implements Node {
+type YahooAuctionCrawlSettingExcludeKeyword implements Node {
   id: ID!
   yahooAuctionCrawlSettingId: Int!
-  yahooAuctionId: String
   keyword: String
-  sellerId: String
   createdAt: String!
   updatedAt: String!
 }

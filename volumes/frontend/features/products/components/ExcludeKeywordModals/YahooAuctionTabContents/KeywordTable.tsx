@@ -5,27 +5,27 @@ import { Dispatch, SetStateAction } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { deleteYahooAuctionCrawlSettingExcludeCondition } from '@/features/products/server-actions/product-query'
+import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/product-query'
 import {
   GetProductDetailPageDataQuery,
-  YahooAuctionCrawlSettingExcludeCondition,
+  YahooAuctionCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-const ConditionTable = ({
+const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
   data: GetProductDetailPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
-  setCondition: Dispatch<SetStateAction<YahooAuctionCrawlSettingExcludeCondition | undefined>>
+  setCondition: Dispatch<SetStateAction<YahooAuctionCrawlSettingExcludeKeyword | undefined>>
 }) => {
   const params = useParams()
   const router = useRouter()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteYahooAuctionCrawlSettingExcludeCondition(id, productId)
-    if (result.data?.deleteYahooAuctionCrawlSettingExcludeCondition.ok) {
+    const result = await deleteYahooAuctionCrawlSettingExcludeKeyword(id, productId)
+    if (result.data?.deleteYahooAuctionCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {
       toast.error('error')
@@ -39,18 +39,14 @@ const ConditionTable = ({
         <thead>
           <tr>
             <td>キーワード</td>
-            <td>商品ID</td>
-            <td>出品者ID</td>
             <td></td>
           </tr>
         </thead>
         <tbody>
-          {data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeConditions.map(
+          {data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords.map(
             (condition) => (
               <tr key={condition.id}>
                 <td>{condition.keyword}</td>
-                <td>{condition.yahooAuctionId}</td>
-                <td>{condition.sellerId}</td>
                 <td className='w-1/12'>
                   <div className='dropdown dropdown-left'>
                     <div tabIndex={0} role='button' className='btn btn-square btn-md'>
@@ -103,4 +99,4 @@ const ConditionTable = ({
   )
 }
 
-export default ConditionTable
+export default KeywordTable

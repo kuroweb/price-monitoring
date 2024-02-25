@@ -1,4 +1,4 @@
-class YahooAuctionCrawlSettingExcludeCondition < ApplicationRecord
+class YahooAuctionCrawlSettingExcludeKeyword < ApplicationRecord
   ## associations ##
   belongs_to :yahoo_auction_crawl_setting
 

@@ -2,16 +2,16 @@ type Mutation {
   createProduct(input: CreateProductInput!): CreateProductResult!
   updateProduct(id: ID!, input: UpdateProductInput!): UpdateProductResult!
   deleteProduct(id: ID!): DeleteProductResult!
-  createYahooAuctionCrawlSettingExcludeCondition(
-    input: CreateYahooAuctionCrawlSettingExcludeConditionInput!
-  ): CreateYahooAuctionCrawlSettingExcludeConditionResult!
-  updateYahooAuctionCrawlSettingExcludeCondition(
-    input: UpdateYahooAuctionCrawlSettingExcludeConditionInput!
-  ): UpdateYahooAuctionCrawlSettingExcludeConditionResult!
-  deleteYahooAuctionCrawlSettingExcludeCondition(
+  createYahooAuctionCrawlSettingExcludeKeyword(
+    input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!
+  ): CreateYahooAuctionCrawlSettingExcludeKeywordResult!
+  updateYahooAuctionCrawlSettingExcludeKeyword(
+    input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!
+  ): UpdateYahooAuctionCrawlSettingExcludeKeywordResult!
+  deleteYahooAuctionCrawlSettingExcludeKeyword(
     id: ID!
     productId: ID!
-  ): DeleteYahooAuctionCrawlSettingExcludeConditionResult!
+  ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
 }
 
 ## common ##
@@ -127,90 +127,86 @@ type DeleteProductResultValidationFailed implements UserError {
   details: [ErrorDetail!]!
 }
 
-## CreateYahooAuctionCrawlSettingExcludeCondition ##
+## CreateYahooAuctionCrawlSettingExcludeKeyword ##
 
-input CreateYahooAuctionCrawlSettingExcludeConditionInput {
+input CreateYahooAuctionCrawlSettingExcludeKeywordInput {
   productId: ID!
   keyword: String
-  yahoo_auction_id: String
-  seller_id: String
 }
 
-union CreateYahooAuctionCrawlSettingExcludeConditionResult =
-    CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess
-  | CreateYahooAuctionCrawlSettingExcludeConditionResultError
+union CreateYahooAuctionCrawlSettingExcludeKeywordResult =
+    CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess
+  | CreateYahooAuctionCrawlSettingExcludeKeywordResultError
 
-type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
+type CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
   ok: Boolean!
-  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition!
+  yahooAuctionCrawlSettingExcludeKeyword: YahooAuctionCrawlSettingExcludeKeyword!
 }
 
-type CreateYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {
+type CreateYahooAuctionCrawlSettingExcludeKeywordResultError implements ResultBase {
   ok: Boolean!
-  error: CreateYahooAuctionCrawlSettingExcludeConditionResultErrors!
+  error: CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors!
 }
 
-union CreateYahooAuctionCrawlSettingExcludeConditionResultErrors =
-    CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed
+union CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors =
+    CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed
 
-type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed implements UserError {
+type CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!
 }
 
-## UpdateYahooAuctionCrawlSettingExcludeCondition ##
+## UpdateYahooAuctionCrawlSettingExcludeKeyword ##
 
-input UpdateYahooAuctionCrawlSettingExcludeConditionInput {
+input UpdateYahooAuctionCrawlSettingExcludeKeywordInput {
   id: ID!
   productId: ID!
   keyword: String
-  yahoo_auction_id: String
-  seller_id: String
 }
 
-union UpdateYahooAuctionCrawlSettingExcludeConditionResult =
-    UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess
-  | UpdateYahooAuctionCrawlSettingExcludeConditionResultError
+union UpdateYahooAuctionCrawlSettingExcludeKeywordResult =
+    UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess
+  | UpdateYahooAuctionCrawlSettingExcludeKeywordResultError
 
-type UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
+type UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
   ok: Boolean!
-  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition!
+  yahooAuctionCrawlSettingExcludeKeyword: YahooAuctionCrawlSettingExcludeKeyword!
 }
 
-type UpdateYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {
+type UpdateYahooAuctionCrawlSettingExcludeKeywordResultError implements ResultBase {
   ok: Boolean!
-  error: UpdateYahooAuctionCrawlSettingExcludeConditionResultErrors!
+  error: UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors!
 }
 
-union UpdateYahooAuctionCrawlSettingExcludeConditionResultErrors =
-    UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed
+union UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors =
+    UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed
 
-type UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed implements UserError {
+type UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!
 }
 
-## DeleteYahooAuctionCrawlSettingExcludeCondition ##
+## DeleteYahooAuctionCrawlSettingExcludeKeyword ##
 
-union DeleteYahooAuctionCrawlSettingExcludeConditionResult =
-    DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess
-  | DeleteYahooAuctionCrawlSettingExcludeConditionResultError
+union DeleteYahooAuctionCrawlSettingExcludeKeywordResult =
+    DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess
+  | DeleteYahooAuctionCrawlSettingExcludeKeywordResultError
 
-type DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess implements ResultBase {
+type DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
   ok: Boolean!
 }
 
-type DeleteYahooAuctionCrawlSettingExcludeConditionResultError implements ResultBase {
+type DeleteYahooAuctionCrawlSettingExcludeKeywordResultError implements ResultBase {
   ok: Boolean!
-  error: DeleteYahooAuctionCrawlSettingExcludeConditionResultErrors!
+  error: DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors!
 }
 
-union DeleteYahooAuctionCrawlSettingExcludeConditionResultErrors =
-    DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed
+union DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors =
+    DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed
 
-type DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed implements UserError {
+type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

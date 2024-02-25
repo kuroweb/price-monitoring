@@ -27,12 +27,10 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
       minPrice
       maxPrice
       enabled
-      yahooAuctionCrawlSettingExcludeConditions {
+      yahooAuctionCrawlSettingExcludeKeywords {
         id
         yahooAuctionCrawlSettingId
-        yahooAuctionId
         keyword
-        sellerId
         createdAt
         updatedAt
       }
@@ -119,27 +117,25 @@ mutation deleteProduct($id: ID!) {
   }
 }
 
-## YahooAuctionCrawlSettingExcludeCondition ##
+## YahooAuctionCrawlSettingExcludeKeyword ##
 
-mutation createYahooAuctionCrawlSettingExcludeCondition(
-  $input: CreateYahooAuctionCrawlSettingExcludeConditionInput!
+mutation createYahooAuctionCrawlSettingExcludeKeyword(
+  $input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!
 ) {
-  createYahooAuctionCrawlSettingExcludeCondition(input: $input) {
-    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+  createYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
-      yahooAuctionCrawlSettingExcludeCondition {
+      yahooAuctionCrawlSettingExcludeKeyword {
         id
         keyword
-        yahooAuctionId
-        sellerId
         createdAt
         updatedAt
       }
     }
-    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultError {
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultError {
       ok
       error {
-        ... on CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+        ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
           code
           message
           details {
@@ -152,25 +148,23 @@ mutation createYahooAuctionCrawlSettingExcludeCondition(
   }
 }
 
-mutation updateYahooAuctionCrawlSettingExcludeCondition(
-  $input: UpdateYahooAuctionCrawlSettingExcludeConditionInput!
+mutation updateYahooAuctionCrawlSettingExcludeKeyword(
+  $input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!
 ) {
-  updateYahooAuctionCrawlSettingExcludeCondition(input: $input) {
-    ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+  updateYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
-      yahooAuctionCrawlSettingExcludeCondition {
+      yahooAuctionCrawlSettingExcludeKeyword {
         id
         keyword
-        yahooAuctionId
-        sellerId
         createdAt
         updatedAt
       }
     }
-    ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultError {
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultError {
       ok
       error {
-        ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+        ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
           code
           message
           details {
@@ -183,15 +177,15 @@ mutation updateYahooAuctionCrawlSettingExcludeCondition(
   }
 }
 
-mutation deleteYahooAuctionCrawlSettingExcludeCondition($id: ID!, $productId: ID!) {
-  deleteYahooAuctionCrawlSettingExcludeCondition(id: $id, productId: $productId) {
-    ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+mutation deleteYahooAuctionCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteYahooAuctionCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
-    ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultError {
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultError {
       ok
       error {
-        ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+        ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
           code
           message
           details {

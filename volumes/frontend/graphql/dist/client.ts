@@ -55,31 +55,29 @@ export type CreateProductResultValidationFailed = UserError & {
   message: Scalars['String']['output'];
 };
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionInput = {
+export type CreateYahooAuctionCrawlSettingExcludeKeywordInput = {
   keyword?: InputMaybe<Scalars['String']['input']>;
   productId: Scalars['ID']['input'];
-  seller_id?: InputMaybe<Scalars['String']['input']>;
-  yahoo_auction_id?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionResult = CreateYahooAuctionCrawlSettingExcludeConditionResultError | CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess;
+export type CreateYahooAuctionCrawlSettingExcludeKeywordResult = CreateYahooAuctionCrawlSettingExcludeKeywordResultError | CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess;
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionResultError = ResultBase & {
-  __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultError';
-  error: CreateYahooAuctionCrawlSettingExcludeConditionResultErrors;
+export type CreateYahooAuctionCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultError';
+  error: CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors;
   ok: Scalars['Boolean']['output'];
 };
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionResultErrors = CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed;
+export type CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors = CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed;
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess = ResultBase & {
-  __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess';
+export type CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition;
+  yahooAuctionCrawlSettingExcludeKeyword: YahooAuctionCrawlSettingExcludeKeyword;
 };
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed = UserError & {
-  __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed';
+export type CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed';
   code: Scalars['String']['output'];
   details: Array<ErrorDetail>;
   message: Scalars['String']['output'];
@@ -115,23 +113,23 @@ export type DeleteProductResultValidationFailed = UserError & {
   message: Scalars['String']['output'];
 };
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionResult = DeleteYahooAuctionCrawlSettingExcludeConditionResultError | DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess;
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordResult = DeleteYahooAuctionCrawlSettingExcludeKeywordResultError | DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess;
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionResultError = ResultBase & {
-  __typename?: 'DeleteYahooAuctionCrawlSettingExcludeConditionResultError';
-  error: DeleteYahooAuctionCrawlSettingExcludeConditionResultErrors;
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultError';
+  error: DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors;
   ok: Scalars['Boolean']['output'];
 };
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionResultErrors = DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed;
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors = DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed;
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess = ResultBase & {
-  __typename?: 'DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess';
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
 };
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed = UserError & {
-  __typename?: 'DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed';
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed';
   code: Scalars['String']['output'];
   details: Array<ErrorDetail>;
   message: Scalars['String']['output'];
@@ -146,11 +144,11 @@ export type ErrorDetail = {
 export type Mutation = {
   __typename?: 'Mutation';
   createProduct: CreateProductResult;
-  createYahooAuctionCrawlSettingExcludeCondition: CreateYahooAuctionCrawlSettingExcludeConditionResult;
+  createYahooAuctionCrawlSettingExcludeKeyword: CreateYahooAuctionCrawlSettingExcludeKeywordResult;
   deleteProduct: DeleteProductResult;
-  deleteYahooAuctionCrawlSettingExcludeCondition: DeleteYahooAuctionCrawlSettingExcludeConditionResult;
+  deleteYahooAuctionCrawlSettingExcludeKeyword: DeleteYahooAuctionCrawlSettingExcludeKeywordResult;
   updateProduct: UpdateProductResult;
-  updateYahooAuctionCrawlSettingExcludeCondition: UpdateYahooAuctionCrawlSettingExcludeConditionResult;
+  updateYahooAuctionCrawlSettingExcludeKeyword: UpdateYahooAuctionCrawlSettingExcludeKeywordResult;
 };
 
 
@@ -159,8 +157,8 @@ export type MutationCreateProductArgs = {
 };
 
 
-export type MutationCreateYahooAuctionCrawlSettingExcludeConditionArgs = {
-  input: CreateYahooAuctionCrawlSettingExcludeConditionInput;
+export type MutationCreateYahooAuctionCrawlSettingExcludeKeywordArgs = {
+  input: CreateYahooAuctionCrawlSettingExcludeKeywordInput;
 };
 
 
@@ -169,7 +167,7 @@ export type MutationDeleteProductArgs = {
 };
 
 
-export type MutationDeleteYahooAuctionCrawlSettingExcludeConditionArgs = {
+export type MutationDeleteYahooAuctionCrawlSettingExcludeKeywordArgs = {
   id: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
 };
@@ -181,8 +179,8 @@ export type MutationUpdateProductArgs = {
 };
 
 
-export type MutationUpdateYahooAuctionCrawlSettingExcludeConditionArgs = {
-  input: UpdateYahooAuctionCrawlSettingExcludeConditionInput;
+export type MutationUpdateYahooAuctionCrawlSettingExcludeKeywordArgs = {
+  input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput;
 };
 
 export type Node = {
@@ -258,32 +256,30 @@ export type UpdateProductResultValidationFailed = UserError & {
   message: Scalars['String']['output'];
 };
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionInput = {
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordInput = {
   id: Scalars['ID']['input'];
   keyword?: InputMaybe<Scalars['String']['input']>;
   productId: Scalars['ID']['input'];
-  seller_id?: InputMaybe<Scalars['String']['input']>;
-  yahoo_auction_id?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionResult = UpdateYahooAuctionCrawlSettingExcludeConditionResultError | UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess;
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordResult = UpdateYahooAuctionCrawlSettingExcludeKeywordResultError | UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess;
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionResultError = ResultBase & {
-  __typename?: 'UpdateYahooAuctionCrawlSettingExcludeConditionResultError';
-  error: UpdateYahooAuctionCrawlSettingExcludeConditionResultErrors;
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultError';
+  error: UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors;
   ok: Scalars['Boolean']['output'];
 };
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionResultErrors = UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed;
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors = UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed;
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess = ResultBase & {
-  __typename?: 'UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess';
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  yahooAuctionCrawlSettingExcludeCondition: YahooAuctionCrawlSettingExcludeCondition;
+  yahooAuctionCrawlSettingExcludeKeyword: YahooAuctionCrawlSettingExcludeKeyword;
 };
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed = UserError & {
-  __typename?: 'UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed';
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed';
   code: Scalars['String']['output'];
   details: Array<ErrorDetail>;
   message: Scalars['String']['output'];
@@ -313,18 +309,16 @@ export type YahooAuctionCrawlSetting = Node & {
   minPrice: Scalars['Int']['output'];
   productId: Scalars['Int']['output'];
   updatedAt: Scalars['String']['output'];
-  yahooAuctionCrawlSettingExcludeConditions: Array<YahooAuctionCrawlSettingExcludeCondition>;
+  yahooAuctionCrawlSettingExcludeKeywords: Array<YahooAuctionCrawlSettingExcludeKeyword>;
 };
 
-export type YahooAuctionCrawlSettingExcludeCondition = Node & {
-  __typename?: 'YahooAuctionCrawlSettingExcludeCondition';
+export type YahooAuctionCrawlSettingExcludeKeyword = Node & {
+  __typename?: 'YahooAuctionCrawlSettingExcludeKeyword';
   createdAt: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   keyword?: Maybe<Scalars['String']['output']>;
-  sellerId?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['String']['output'];
   yahooAuctionCrawlSettingId: Scalars['Int']['output'];
-  yahooAuctionId?: Maybe<Scalars['String']['output']>;
 };
 
 export type YahooAuctionProduct = Node & {
@@ -353,7 +347,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeConditions: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeCondition', id: string, yahooAuctionCrawlSettingId: number, yahooAuctionId?: string | null, keyword?: string | null, sellerId?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }> } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }> } };
 
 export type CreateProductMutationVariables = Exact<{
   input: CreateProductInput;
@@ -377,27 +371,27 @@ export type DeleteProductMutationVariables = Exact<{
 
 export type DeleteProductMutation = { __typename?: 'Mutation', deleteProduct: { __typename?: 'DeleteProductResultError', ok: boolean, error: { __typename?: 'DeleteProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteProductResultSuccess', ok: boolean } };
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionMutationVariables = Exact<{
-  input: CreateYahooAuctionCrawlSettingExcludeConditionInput;
+export type CreateYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateYahooAuctionCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type CreateYahooAuctionCrawlSettingExcludeConditionMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeCondition: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeCondition: { __typename?: 'YahooAuctionCrawlSettingExcludeCondition', id: string, keyword?: string | null, yahooAuctionId?: string | null, sellerId?: string | null, createdAt: string, updatedAt: string } } };
+export type CreateYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionMutationVariables = Exact<{
-  input: UpdateYahooAuctionCrawlSettingExcludeConditionInput;
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type UpdateYahooAuctionCrawlSettingExcludeConditionMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingExcludeCondition: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeConditionResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeCondition: { __typename?: 'YahooAuctionCrawlSettingExcludeCondition', id: string, keyword?: string | null, yahooAuctionId?: string | null, sellerId?: string | null, createdAt: string, updatedAt: string } } };
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionMutationVariables = Exact<{
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
   id: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
 }>;
 
 
-export type DeleteYahooAuctionCrawlSettingExcludeConditionMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeCondition: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeConditionResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess', ok: boolean } };
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
 
 
 export const GetProductsDocument = gql`
@@ -429,12 +423,10 @@ export const GetProductDetailPageDataDocument = gql`
       minPrice
       maxPrice
       enabled
-      yahooAuctionCrawlSettingExcludeConditions {
+      yahooAuctionCrawlSettingExcludeKeywords {
         id
         yahooAuctionCrawlSettingId
-        yahooAuctionId
         keyword
-        sellerId
         createdAt
         updatedAt
       }
@@ -524,24 +516,22 @@ export const DeleteProductDocument = gql`
   }
 }
     `;
-export const CreateYahooAuctionCrawlSettingExcludeConditionDocument = gql`
-    mutation createYahooAuctionCrawlSettingExcludeCondition($input: CreateYahooAuctionCrawlSettingExcludeConditionInput!) {
-  createYahooAuctionCrawlSettingExcludeCondition(input: $input) {
-    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+export const CreateYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
+    mutation createYahooAuctionCrawlSettingExcludeKeyword($input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!) {
+  createYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
-      yahooAuctionCrawlSettingExcludeCondition {
+      yahooAuctionCrawlSettingExcludeKeyword {
         id
         keyword
-        yahooAuctionId
-        sellerId
         createdAt
         updatedAt
       }
     }
-    ... on CreateYahooAuctionCrawlSettingExcludeConditionResultError {
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultError {
       ok
       error {
-        ... on CreateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+        ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
           code
           message
           details {
@@ -554,24 +544,22 @@ export const CreateYahooAuctionCrawlSettingExcludeConditionDocument = gql`
   }
 }
     `;
-export const UpdateYahooAuctionCrawlSettingExcludeConditionDocument = gql`
-    mutation updateYahooAuctionCrawlSettingExcludeCondition($input: UpdateYahooAuctionCrawlSettingExcludeConditionInput!) {
-  updateYahooAuctionCrawlSettingExcludeCondition(input: $input) {
-    ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+export const UpdateYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
+    mutation updateYahooAuctionCrawlSettingExcludeKeyword($input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!) {
+  updateYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
-      yahooAuctionCrawlSettingExcludeCondition {
+      yahooAuctionCrawlSettingExcludeKeyword {
         id
         keyword
-        yahooAuctionId
-        sellerId
         createdAt
         updatedAt
       }
     }
-    ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultError {
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultError {
       ok
       error {
-        ... on UpdateYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+        ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
           code
           message
           details {
@@ -584,16 +572,16 @@ export const UpdateYahooAuctionCrawlSettingExcludeConditionDocument = gql`
   }
 }
     `;
-export const DeleteYahooAuctionCrawlSettingExcludeConditionDocument = gql`
-    mutation deleteYahooAuctionCrawlSettingExcludeCondition($id: ID!, $productId: ID!) {
-  deleteYahooAuctionCrawlSettingExcludeCondition(id: $id, productId: $productId) {
-    ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultSuccess {
+export const DeleteYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
+    mutation deleteYahooAuctionCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteYahooAuctionCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
-    ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultError {
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultError {
       ok
       error {
-        ... on DeleteYahooAuctionCrawlSettingExcludeConditionResultValidationFailed {
+        ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
           code
           message
           details {
@@ -629,14 +617,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     deleteProduct(variables: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteProduct', 'mutation', variables);
     },
-    createYahooAuctionCrawlSettingExcludeCondition(variables: CreateYahooAuctionCrawlSettingExcludeConditionMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeConditionMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeConditionMutation>(CreateYahooAuctionCrawlSettingExcludeConditionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createYahooAuctionCrawlSettingExcludeCondition', 'mutation', variables);
+    createYahooAuctionCrawlSettingExcludeKeyword(variables: CreateYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeKeywordMutation>(CreateYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updateYahooAuctionCrawlSettingExcludeCondition(variables: UpdateYahooAuctionCrawlSettingExcludeConditionMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingExcludeConditionMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingExcludeConditionMutation>(UpdateYahooAuctionCrawlSettingExcludeConditionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateYahooAuctionCrawlSettingExcludeCondition', 'mutation', variables);
+    updateYahooAuctionCrawlSettingExcludeKeyword(variables: UpdateYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation>(UpdateYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deleteYahooAuctionCrawlSettingExcludeCondition(variables: DeleteYahooAuctionCrawlSettingExcludeConditionMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeConditionMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeConditionMutation>(DeleteYahooAuctionCrawlSettingExcludeConditionDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteYahooAuctionCrawlSettingExcludeCondition', 'mutation', variables);
+    deleteYahooAuctionCrawlSettingExcludeKeyword(variables: DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>(DeleteYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
     }
   };
 }
