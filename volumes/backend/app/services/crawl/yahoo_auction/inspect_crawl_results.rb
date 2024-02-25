@@ -8,6 +8,7 @@ module Crawl
       end
 
       def execute
+        binding.pry
         inspected_crawl_results = crawl_results.results.select { |crawl_result| inspect(crawl_result) }
         Crawl::YahooAuction::CrawlResults.new(inspected_crawl_results)
       end
@@ -34,7 +35,7 @@ module Crawl
 
       def exclude_keywords
         @exclude_keywords ||=
-          yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_exclude_keywords.where.not(keyword: nil)
+          yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_exclude_keywords.where.not(keyword: nil).pluck(:keyword)
       end
     end
   end
