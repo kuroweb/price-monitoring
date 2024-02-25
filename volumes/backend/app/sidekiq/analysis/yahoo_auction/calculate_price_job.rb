@@ -8,6 +8,7 @@ module Analysis
         start_date = start_date.to_date
         end_date = end_date.to_date
 
+        Products::YahooAuctionProducts::DeleteByExcludeKeyword.call(product:)
         Analysis::YahooAuction::CalculatePrice.call(product:, start_date:, end_date:)
       end
     end
