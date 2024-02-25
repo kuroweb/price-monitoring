@@ -10,7 +10,7 @@ import { createProduct } from '../server-actions/product-query'
 
 import { CreateProductInput } from '@/graphql/dist/client'
 
-const CreateForm = () => {
+const CreateProductModal = () => {
   const router = useRouter()
   const [modal, setModal] = useState<boolean>(false)
 
@@ -126,4 +126,4 @@ const CreateForm = () => {
   )
 }
 
-export default CreateForm
+export default CreateProductModal

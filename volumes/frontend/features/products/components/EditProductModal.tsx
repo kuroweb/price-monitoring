@@ -1,5 +1,7 @@
 'use client'
 
+// TODO: 複数サイトに対応するときにコンポーネントを分割する
+
 import { useState } from 'react'
 
 import { useRouter, useParams } from 'next/navigation'
@@ -11,7 +13,7 @@ import { updateProduct } from '../server-actions/product-query'
 
 import { GetProductDetailPageDataQuery, UpdateProductInput } from '@/graphql/dist/client'
 
-const CrawlSettingModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const EditProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const router = useRouter()
   const params = useParams()
   const [modal, setModal] = useState<boolean>(false)
@@ -147,4 +149,4 @@ const CrawlSettingModal = ({ data }: { data: GetProductDetailPageDataQuery }) =>
   )
 }
 
-export default CrawlSettingModal
+export default EditProductModal
