@@ -35,6 +35,7 @@ module Products
 
       def include_keywords_condition
         include_keywords = product.yahoo_auction_crawl_setting.keyword.split(" ")
+        return YahooAuctionProduct.none if include_keywords.blank?
 
         include_keywords.map do |include_keyword|
           YahooAuctionProduct.where.not("name LIKE ?", "%#{include_keyword}%")
@@ -46,6 +47,7 @@ module Products
                                   .yahoo_auction_crawl_setting_exclude_keywords
                                   .where.not(keyword: nil)
                                   .pluck(:keyword)
+        return YahooAuctionProduct.none if exclude_keywords.blank?
 
         exclude_keywords.map do |exclude_keyword|
           YahooAuctionProduct.where("name LIKE ?", "%#{exclude_keyword}%")
