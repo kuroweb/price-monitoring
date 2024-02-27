@@ -36,44 +36,49 @@ const ProductsTable = ({
     <>
       {error?.message && <div>{error.message}</div>}
       {data && (
-        <table className='w-full text-left select-none'>
-          <thead className='border-b border-base-200 uppercase'>
+        <table className='table select-none'>
+          <thead>
             <tr>
-              <th className='p-4'>管理コード</th>
-              <th className='p-4 flex justify-center'>
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  className='inline-block w-5 h-5 stroke-current'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    strokeWidth='2'
-                    d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
-                  ></path>
-                </svg>
-              </th>
+              <th>管理コード</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {data.products.map((product) => (
-              <tr
-                key={product.id}
-                className='border-b border-base-200 cursor-pointer hover:bg-base-100'
-              >
-                <td className='px-4 w-4/5' onClick={() => moveToDetailPage(product.id)}>
+              <tr key={product.id} className='cursor-pointer hover:bg-base-100'>
+                <td className='' onClick={() => moveToDetailPage(product.id)}>
                   {product.name}
                 </td>
-                <td className='p-2 w-1/5'>
-                  <div className='flex justify-center'>
-                    <button
-                      onClick={() => submitDeleteProduct(product.id)}
-                      className='btn btn-md btn-error'
+                <td className='w-1/12'>
+                  <div className='dropdown dropdown-left'>
+                    <div tabIndex={0} role='button' className='btn btn-square btn-md'>
+                      <svg
+                        xmlns='http://www.w3.org/2000/svg'
+                        fill='none'
+                        viewBox='0 0 24 24'
+                        className='inline-block w-5 h-5 stroke-current'
+                      >
+                        <path
+                          strokeLinecap='round'
+                          strokeLinejoin='round'
+                          strokeWidth='2'
+                          d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
+                        ></path>
+                      </svg>
+                    </div>
+                    <ul
+                      tabIndex={0}
+                      className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
                     >
-                      削除
-                    </button>
+                      <li>
+                        <button
+                          className='btn btn-error'
+                          onClick={() => submitDeleteProduct(product.id)}
+                        >
+                          削除
+                        </button>
+                      </li>
+                    </ul>
                   </div>
                 </td>
               </tr>
