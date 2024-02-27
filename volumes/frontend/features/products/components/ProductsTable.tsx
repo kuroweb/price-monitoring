@@ -71,6 +71,11 @@ const ProductsTable = ({
                       className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
                     >
                       <li>
+                        <button className='btn btn-primary' onClick={() => {}}>
+                          編集
+                        </button>
+                      </li>
+                      <li>
                         <button
                           className='btn btn-error'
                           onClick={() => submitDeleteProduct(product.id)}
