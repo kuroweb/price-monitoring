@@ -20,7 +20,7 @@ const Page = async ({
     query: GetProductDetailPageDataDocument,
     variables: {
       id: params.id,
-      published: searchParams['published'] ? searchParams['published'] === 'true' : true,
+      published: searchParams.published ? searchParams.published === 'true' : true,
     },
   })
 
