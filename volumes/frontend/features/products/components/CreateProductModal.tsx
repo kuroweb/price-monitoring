@@ -41,9 +41,9 @@ const CreateProductModal = () => {
 
   return (
     <>
-      <div onClick={() => setModal(true)} className='btn no-animation'>
-        計測対象を追加する
-      </div>
+      <button onClick={() => setModal(true)} className='btn no-animation'>
+        計測対象を追加
+      </button>
       <input
         type='checkbox'
         className='modal-toggle'
