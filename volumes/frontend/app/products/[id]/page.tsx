@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Layout from '@/components/layouts/Layout'
 import EditProductModal from '@/features/products/components/EditProductModal'
 import ExcludeKeywordModal from '@/features/products/components/ExcludeKeywordModals/ExcludeKeywordModal'
@@ -16,11 +18,13 @@ const Page = async ({
   params: { [key: string]: string | undefined }
   searchParams: { [key: string]: string | undefined }
 }) => {
+  const published = searchParams.published ? searchParams.published === 'true' : true
+
   const { data, error } = await getClient().query<GetProductDetailPageDataQuery>({
     query: GetProductDetailPageDataDocument,
     variables: {
       id: params.id,
-      published: searchParams.published ? searchParams.published === 'true' : true,
+      published: published,
     },
   })
 
@@ -45,6 +49,21 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>ヤフオク</h2>
+            <div className='flex justify-end'>
+              {published ? (
+                <>
+                  <Link href={`/products/${params.id}?published=false`} className='btn btn-link'>
+                    落札一覧に切り替え
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href={`/products/${params.id}?published=true`} className='btn btn-link'>
+                    出品一覧に切り替え
+                  </Link>
+                </>
+              )}
+            </div>
             <YahooAuctionProductsTable data={data} error={error} />
           </div>
         </div>
