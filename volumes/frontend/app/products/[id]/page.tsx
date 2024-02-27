@@ -9,10 +9,19 @@ import {
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
-const Page = async ({ params }: { params: { id: string } }) => {
+const Page = async ({
+  params,
+  searchParams,
+}: {
+  params: { [key: string]: string | undefined }
+  searchParams: { [key: string]: string | undefined }
+}) => {
   const { data, error } = await getClient().query<GetProductDetailPageDataQuery>({
     query: GetProductDetailPageDataDocument,
-    variables: { id: params.id, published: true },
+    variables: {
+      id: params.id,
+      published: searchParams['published'] ? searchParams['published'] === 'true' : true,
+    },
   })
 
   return (
@@ -29,8 +38,13 @@ const Page = async ({ params }: { params: { id: string } }) => {
         </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
-            <h2 className='card-title pb-4'>ヤフオク</h2>
+            <h2 className='card-title pb-4'>相場グラフ</h2>
             <CalculateDailyYahooAuctionProductChart data={data} />
+          </div>
+        </div>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title pb-4'>ヤフオク</h2>
             <YahooAuctionProductsTable data={data} error={error} />
           </div>
         </div>
