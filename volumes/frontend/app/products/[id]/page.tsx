@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import Layout from '@/components/layouts/Layout'
 import EditProductModal from '@/features/products/components/EditProductModal'
 import ExcludeKeywordModal from '@/features/products/components/ExcludeKeywordModals/ExcludeKeywordModal'
@@ -9,10 +11,21 @@ import {
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
-const Page = async ({ params }: { params: { id: string } }) => {
+const Page = async ({
+  params,
+  searchParams,
+}: {
+  params: { [key: string]: string | undefined }
+  searchParams: { [key: string]: string | undefined }
+}) => {
+  const published = searchParams.published ? searchParams.published === 'true' : true
+
   const { data, error } = await getClient().query<GetProductDetailPageDataQuery>({
     query: GetProductDetailPageDataDocument,
-    variables: { id: params.id, published: true },
+    variables: {
+      id: params.id,
+      published: published,
+    },
   })
 
   return (
@@ -29,8 +42,28 @@ const Page = async ({ params }: { params: { id: string } }) => {
         </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
-            <h2 className='card-title pb-4'>ヤフオク</h2>
+            <h2 className='card-title pb-4'>相場グラフ</h2>
             <CalculateDailyYahooAuctionProductChart data={data} />
+          </div>
+        </div>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title pb-4'>ヤフオク</h2>
+            <div className='flex justify-end'>
+              {published ? (
+                <>
+                  <Link href={`/products/${params.id}?published=false`} className='btn btn-link'>
+                    落札一覧に切り替え
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href={`/products/${params.id}?published=true`} className='btn btn-link'>
+                    出品一覧に切り替え
+                  </Link>
+                </>
+              )}
+            </div>
             <YahooAuctionProductsTable data={data} error={error} />
           </div>
         </div>
