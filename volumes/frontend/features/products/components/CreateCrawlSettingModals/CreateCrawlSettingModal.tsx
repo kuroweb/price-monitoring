@@ -24,7 +24,7 @@ const CreateCrawlSettingModal = () => {
       name: '',
       yahoo_auction_crawl_setting: {
         keyword: '',
-        category_id: undefined,
+        category_id: null,
         min_price: 0,
         max_price: 0,
         enabled: true,
