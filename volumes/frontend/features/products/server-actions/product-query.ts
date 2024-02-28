@@ -31,10 +31,6 @@ export const getProducts = async () => {
 }
 
 export const createProduct = async (input: CreateProductInput) => {
-  if (input.yahoo_auction_crawl_setting.category_id == 0) {
-    delete input.yahoo_auction_crawl_setting.category_id
-  }
-
   return await getClient().mutate<CreateProductMutation>({
     mutation: CreateProductDocument,
     variables: { input: input },
