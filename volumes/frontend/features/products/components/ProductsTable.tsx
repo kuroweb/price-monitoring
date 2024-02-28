@@ -1,6 +1,5 @@
 'use client'
 
-import { ApolloError } from '@apollo/client'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
@@ -8,13 +7,7 @@ import { deleteProduct } from '../server-actions/product-query'
 
 import { GetProductsQuery } from '@/graphql/dist/client'
 
-const ProductsTable = ({
-  data,
-  error,
-}: {
-  data: GetProductsQuery
-  error: ApolloError | undefined
-}) => {
+const ProductsTable = ({ data }: { data: GetProductsQuery }) => {
   const router = useRouter()
 
   const moveToDetailPage = (productId: String) => {
@@ -34,7 +27,6 @@ const ProductsTable = ({
 
   return (
     <>
-      {error?.message && <div>{error.message}</div>}
       {data && (
         <table className='table select-none'>
           <thead>

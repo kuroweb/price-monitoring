@@ -1,8 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-
 import { useRouter } from 'next/navigation'
+import { useQueryState } from 'nuqs'
 import { Join } from 'react-daisyui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -15,9 +14,8 @@ import { CreateProductInput } from '@/graphql/dist/client'
 
 const CreateCrawlSettingModal = () => {
   const router = useRouter()
-
-  const [modal, setModal] = useState<boolean>(false)
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
+  const [modal, setModal] = useQueryState('create_crawl_setting_modal')
+  const [tab, setTab] = useQueryState('create_crawl_setting_tab')
 
   const { register, handleSubmit } = useForm<CreateProductInput>({
     defaultValues: {
@@ -37,7 +35,7 @@ const CreateCrawlSettingModal = () => {
 
     if (result.data?.createProduct.ok) {
       toast.success('success')
-      setModal(false)
+      setModal('close')
     } else {
       toast.error('error')
     }
@@ -46,19 +44,16 @@ const CreateCrawlSettingModal = () => {
 
   return (
     <>
-      <button onClick={() => setModal(true)} className='btn no-animation'>
-        計測設定を追加
-      </button>
       <input
         type='checkbox'
         className='modal-toggle'
-        checked={modal}
-        onChange={(e) => setModal(e.target.checked)}
+        checked={modal ? modal === 'open' : false}
+        onChange={(e) => setModal(e.target.checked ? 'open' : 'close')}
       />
       <div className='modal' role='dialog'>
         <div className='modal-box h-3/4 md:h-1/2'>
           <div
-            onClick={() => setModal(false)}
+            onClick={() => setModal('close')}
             className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
           >
             ✕
@@ -79,41 +74,41 @@ const CreateCrawlSettingModal = () => {
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
-                checked={tab == 'ヤフオク'}
-                onChange={() => setTab('ヤフオク')}
+                defaultChecked={tab === null || tab === 'ヤフオク'}
+                onClick={() => setTab('ヤフオク')}
               />
               <input
                 className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
-                checked={tab == 'メルカリ'}
-                onChange={() => setTab('メルカリ')}
+                defaultChecked={tab === 'メルカリ'}
+                onClick={() => setTab('メルカリ')}
               />
               <input
                 className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='ペイペイ'
-                checked={tab == 'ペイペイ'}
-                onChange={() => setTab('ペイペイ')}
+                defaultChecked={tab === 'ペイペイ'}
+                onClick={() => setTab('ペイペイ')}
               />
             </Join>
             <div>
-              {tab == 'ヤフオク' && (
+              {(tab === null || tab === 'ヤフオク') && (
                 <div className='py-4'>
                   <YahooAuctionForm register={register} />
                 </div>
               )}
-              {tab == 'メルカリ' && <div>メルカリ</div>}
-              {tab == 'ペイペイ' && <div>ペイペイ</div>}
+              {tab === 'メルカリ' && <div>メルカリ</div>}
+              {tab === 'ペイペイ' && <div>ペイペイ</div>}
             </div>
             <button type='submit' className='btn btn-primary w-full'>
               登録
             </button>
           </form>
         </div>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
+        <div onClick={() => setModal('close')} className='modal-backdrop' />
       </div>
     </>
   )
