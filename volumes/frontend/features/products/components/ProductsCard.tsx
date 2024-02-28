@@ -1,6 +1,6 @@
 'use client'
 
-import CreateCrawlSettingModal from './CreateCrawlSettingModals/CreateCrawlSettingModal'
+import CreateCrawlSettingModal from './CreateCrawlSettingModal/Index'
 import ProductsTable from './ProductsTable'
 
 import { GetProductsQuery } from '@/graphql/dist/client'

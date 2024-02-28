@@ -1,9 +1,9 @@
 'use client'
 
-import { useQueryState } from 'nuqs'
+import { useCreateCrawlSettingModal } from '../hooks/useCreateCrawlSettingModal'
 
 const ConfigCard = () => {
-  const [_, setModal] = useQueryState('create_crawl_setting_modal')
+  const [_, setModal] = useCreateCrawlSettingModal()
 
   return (
     <>

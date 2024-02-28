@@ -6,6 +6,7 @@ import { Join } from 'react-daisyui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { useCreateCrawlSettingModal } from '../../hooks/useCreateCrawlSettingModal'
 import { createProduct } from '../../server-actions/product-query'
 
 import YahooAuctionForm from './YahooAuctionForm'
@@ -14,7 +15,7 @@ import { CreateProductInput } from '@/graphql/dist/client'
 
 const CreateCrawlSettingModal = () => {
   const router = useRouter()
-  const [modal, setModal] = useQueryState('create_crawl_setting_modal')
+  const [modal, setModal] = useCreateCrawlSettingModal()
   const [tab, setTab] = useQueryState('create_crawl_setting_tab')
 
   const { register, handleSubmit } = useForm<CreateProductInput>({
