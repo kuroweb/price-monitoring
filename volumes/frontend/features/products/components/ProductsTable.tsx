@@ -3,12 +3,14 @@
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
+import { useEditCrawlSettingModal } from '../hooks/useEditCrawlSettingModal'
 import { deleteProduct } from '../server-actions/product-query'
 
 import { GetProductsQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({ data }: { data: GetProductsQuery }) => {
   const router = useRouter()
+  const [_, setModal] = useEditCrawlSettingModal()
 
   const moveToDetailPage = (productId: String) => {
     router.push(`/products/${productId}`)
@@ -63,7 +65,7 @@ const ProductsTable = ({ data }: { data: GetProductsQuery }) => {
                       className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
                     >
                       <li>
-                        <button className='btn btn-primary' onClick={() => {}}>
+                        <button className='btn btn-primary' onClick={() => setModal(true)}>
                           編集
                         </button>
                       </li>
