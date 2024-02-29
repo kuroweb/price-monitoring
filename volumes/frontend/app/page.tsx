@@ -1,7 +1,7 @@
 import Layout from '@/components/layouts/Layout'
-import CreateCrawlSettingModal from '@/features/products/components/CreateCrawlSettingModal/Index'
-import EditCrawlSettingModal from '@/features/products/components/EditCrawlSettingModal/Index'
 import ProductsCard from '@/features/products/components/ProductsCard'
+import CreateCrawlSettingModal from '@/features/products/components/create-crawl-setting-modal/CreateCrawlSettingModal'
+import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import { GetProductsDocument, GetProductsQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 

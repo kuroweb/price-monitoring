@@ -2,9 +2,9 @@ import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
 import EditProductModal from '@/features/products/components/EditProductModal'
-import ExcludeKeywordModal from '@/features/products/components/ExcludeKeywordModals/ExcludeKeywordModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
+import ExcludeKeywordModal from '@/features/products/components/exclude-keyword-modal/ExcludeKeywordModal'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,

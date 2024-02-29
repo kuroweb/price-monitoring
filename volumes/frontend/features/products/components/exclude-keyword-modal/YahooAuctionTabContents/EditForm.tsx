@@ -7,7 +7,7 @@ import { Button } from 'react-daisyui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { updateYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/product-query'
+import { updateYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
 import {
   UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
   YahooAuctionCrawlSettingExcludeKeyword,
