@@ -14,6 +14,7 @@ const Page = async () => {
       <div className='grid grid-cols-1 gap-4'>
         <ConfigCard />
         <ProductsCard data={data} />
+        <CreateCrawlSettingModal />
       </div>
     </Layout>
   )

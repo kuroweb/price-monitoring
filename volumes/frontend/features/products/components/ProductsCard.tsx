@@ -1,6 +1,5 @@
 'use client'
 
-import CreateCrawlSettingModal from './CreateCrawlSettingModal/Index'
 import ProductsTable from './ProductsTable'
 
 import { GetProductsQuery } from '@/graphql/dist/client'
@@ -14,7 +13,6 @@ const ProductsCard = ({ data }: { data: GetProductsQuery }) => {
           <ProductsTable data={data} />
         </div>
       </div>
-      <CreateCrawlSettingModal />
     </>
   )
 }
