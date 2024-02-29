@@ -36,7 +36,7 @@ const CreateCrawlSettingModal = () => {
 
     if (result.data?.createProduct.ok) {
       toast.success('success')
-      setModal('close')
+      setModal(false)
     } else {
       toast.error('error')
     }
@@ -48,13 +48,13 @@ const CreateCrawlSettingModal = () => {
       <input
         type='checkbox'
         className='modal-toggle'
-        checked={modal ? modal === 'open' : false}
-        onChange={(e) => setModal(e.target.checked ? 'open' : 'close')}
+        checked={modal}
+        onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
         <div className='modal-box h-3/4 md:h-1/2'>
           <div
-            onClick={() => setModal('close')}
+            onClick={() => setModal(false)}
             className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
           >
             ✕
@@ -109,7 +109,7 @@ const CreateCrawlSettingModal = () => {
             </button>
           </form>
         </div>
-        <div onClick={() => setModal('close')} className='modal-backdrop' />
+        <div onClick={() => setModal(false)} className='modal-backdrop' />
       </div>
     </>
   )

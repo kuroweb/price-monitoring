@@ -8,7 +8,7 @@ const ConfigCard = () => {
   return (
     <>
       <div className='flex justify-end'>
-        <button onClick={() => setModal('open')} className='btn btn-neutral no-animation'>
+        <button onClick={() => setModal(true)} className='btn btn-neutral no-animation'>
           計測設定を追加
         </button>
       </div>
