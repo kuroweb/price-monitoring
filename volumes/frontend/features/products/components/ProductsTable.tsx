@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { useEditCrawlSettingModal } from '../hooks/useEditCrawlSettingModal'
-import { deleteProduct } from '../server-actions/product-query'
+import { deleteProduct } from '../server-actions/productQuery'
 
 import { GetProductsQuery } from '@/graphql/dist/client'
 

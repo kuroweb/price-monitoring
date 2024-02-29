@@ -7,7 +7,7 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useCreateCrawlSettingModal } from '../../hooks/useCreateCrawlSettingModal'
-import { createProduct } from '../../server-actions/product-query'
+import { createProduct } from '../../server-actions/productQuery'
 
 import YahooAuctionForm from './YahooAuctionForm'
 

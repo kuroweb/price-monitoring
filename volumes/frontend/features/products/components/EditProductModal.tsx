@@ -9,7 +9,7 @@ import { Tabs } from 'react-daisyui'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { updateProduct } from '../server-actions/product-query'
+import { updateProduct } from '../server-actions/productQuery'
 
 import { GetProductDetailPageDataQuery, UpdateProductInput } from '@/graphql/dist/client'
 

@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction } from 'react'
 import { useRouter, useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/product-query'
+import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
 import {
   GetProductDetailPageDataQuery,
   YahooAuctionCrawlSettingExcludeKeyword,
