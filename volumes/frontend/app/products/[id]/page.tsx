@@ -1,10 +1,12 @@
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
-import EditProductModal from '@/features/products/components/EditProductModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
-import ExcludeKeywordModal from '@/features/products/components/exclude-keyword-modal/ExcludeKeywordModal'
+import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
+import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
+import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModal'
+import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModal'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -35,8 +37,19 @@ const Page = async ({
           <div className='card-body'>
             <h2 className='card-title pb-4'>設定</h2>
             <div className='grid grid-cols-2 gap-4'>
-              <EditProductModal data={data} />
-              <ExcludeKeywordModal data={data} />
+              <Link
+                className='btn'
+                href={`/products/${params.id}?${useEditCrawlSettingModalQuery}=true`}
+              >
+                計測設定
+              </Link>
+              <Link
+                className='btn'
+                href={`/products/${params.id}?${useEditExcludeKeywordModalQuery}=true`}
+              >
+                除外キーワード
+              </Link>
+              <EditExcludeKeywordModal data={data} />
             </div>
           </div>
         </div>
@@ -68,6 +81,19 @@ const Page = async ({
           </div>
         </div>
       </div>
+      <EditCrawlSettingModal
+        productId={params.id}
+        defaultValues={{
+          name: data.product.name,
+          yahoo_auction_crawl_setting: {
+            keyword: data.product.yahooAuctionCrawlSetting?.keyword,
+            category_id: data.product.yahooAuctionCrawlSetting?.categoryId,
+            min_price: data.product.yahooAuctionCrawlSetting?.minPrice,
+            max_price: data.product.yahooAuctionCrawlSetting?.maxPrice,
+            enabled: data.product.yahooAuctionCrawlSetting?.enabled,
+          },
+        }}
+      />
     </Layout>
   )
 }
