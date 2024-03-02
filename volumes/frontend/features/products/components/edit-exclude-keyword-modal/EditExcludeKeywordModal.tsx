@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { Join } from 'react-daisyui'
 
-import YahooAuctionTabContent from './YahooAuctionTabContents/YahooAuctionTabContent'
+import YahooAuctionTab from './yahoo-auction-tab/YahooAuctionTab'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -61,7 +61,7 @@ const ExcludeKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
             </Join>
           </div>
           <div>
-            {tab == 'ヤフオク' && <YahooAuctionTabContent data={data} />}
+            {tab == 'ヤフオク' && <YahooAuctionTab data={data} />}
             {tab == 'メルカリ' && <div>メルカリ</div>}
             {tab == 'ペイペイ' && <div>ペイペイ</div>}
           </div>

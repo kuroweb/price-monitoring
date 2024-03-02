@@ -4,7 +4,7 @@ import Layout from '@/components/layouts/Layout'
 import EditProductModal from '@/features/products/components/EditProductModal'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
-import ExcludeKeywordModal from '@/features/products/components/exclude-keyword-modal/ExcludeKeywordModal'
+import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -36,7 +36,7 @@ const Page = async ({
             <h2 className='card-title pb-4'>設定</h2>
             <div className='grid grid-cols-2 gap-4'>
               <EditProductModal data={data} />
-              <ExcludeKeywordModal data={data} />
+              <EditExcludeKeywordModal data={data} />
             </div>
           </div>
         </div>
