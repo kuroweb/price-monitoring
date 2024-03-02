@@ -2,12 +2,15 @@
 
 import { useState } from 'react'
 
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Join } from 'react-daisyui'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useEditCrawlSettingModal } from '../../hooks/useEditCrawlSettingModal'
+import {
+  useEditCrawlSettingModalState,
+  useEditCrawlSettingModalQuery,
+} from '../../hooks/useEditCrawlSettingModalState'
 import { updateProduct } from '../../server-actions/productQuery'
 
 import YahooAuctionForm from './YahooAuctionForm'
@@ -22,8 +25,18 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput
 }) => {
   const router = useRouter()
-  const [modal, setModal] = useEditCrawlSettingModal()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const urlSearchParams = new URLSearchParams(searchParams)
+
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
+  const [modal, setModal] = useEditCrawlSettingModalState()
+
+  const closeModal = () => {
+    setModal(false)
+    urlSearchParams.set(useEditCrawlSettingModalQuery, 'false')
+    router.replace(`${pathname}?${urlSearchParams.toString()}`)
+  }
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
     defaultValues: {
@@ -52,6 +65,8 @@ const EditCrawlSettingModal = ({
     } else {
       toast.error('error')
     }
+
+    closeModal()
     router.refresh()
   }
 
@@ -66,7 +81,7 @@ const EditCrawlSettingModal = ({
       <div className='modal' role='dialog'>
         <div className='modal-box h-3/4 md:h-1/2'>
           <div
-            onClick={() => setModal(false)}
+            onClick={closeModal}
             className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
           >
             ✕
@@ -121,7 +136,7 @@ const EditCrawlSettingModal = ({
             </button>
           </form>
         </div>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
+        <div onClick={closeModal} className='modal-backdrop' />
       </div>
     </>
   )

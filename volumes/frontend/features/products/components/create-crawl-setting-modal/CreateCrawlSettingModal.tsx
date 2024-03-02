@@ -1,12 +1,15 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useQueryState } from 'nuqs'
 import { Join } from 'react-daisyui'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useCreateCrawlSettingModal } from '../../hooks/useCreateCrawlSettingModal'
+import {
+  useCreateCrawlSettingModalState,
+  useCreateCrawlSettingModalQuery,
+} from '../../hooks/useCreateCrawlSettingModalState'
 import { createProduct } from '../../server-actions/productQuery'
 
 import YahooAuctionForm from './YahooAuctionForm'
@@ -15,8 +18,18 @@ import { CreateProductInput } from '@/graphql/dist/client'
 
 const CreateCrawlSettingModal = () => {
   const router = useRouter()
-  const [modal, setModal] = useCreateCrawlSettingModal()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const urlSearchParams = new URLSearchParams(searchParams)
+
+  const [modal, setModal] = useCreateCrawlSettingModalState()
   const [tab, setTab] = useQueryState('create_crawl_setting_tab')
+
+  const closeModal = () => {
+    setModal(false)
+    urlSearchParams.set(useCreateCrawlSettingModalQuery, 'false')
+    router.replace(`${pathname}?${urlSearchParams.toString()}`)
+  }
 
   const { register, handleSubmit } = useForm<CreateProductInput>({
     defaultValues: {
@@ -54,7 +67,7 @@ const CreateCrawlSettingModal = () => {
       <div className='modal' role='dialog'>
         <div className='modal-box h-3/4 md:h-1/2'>
           <div
-            onClick={() => setModal(false)}
+            onClick={closeModal}
             className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
           >
             ✕
@@ -109,7 +122,7 @@ const CreateCrawlSettingModal = () => {
             </button>
           </form>
         </div>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
+        <div onClick={closeModal} className='modal-backdrop' />
       </div>
     </>
   )
