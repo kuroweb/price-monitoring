@@ -1,9 +1,18 @@
 ## Product ##
 
-query getProducts($id: ID, $name: String) {
+query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
     id
     name
+    yahooAuctionCrawlSetting {
+      id
+      productId
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+    }
   }
 }
 

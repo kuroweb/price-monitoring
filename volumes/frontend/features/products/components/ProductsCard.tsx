@@ -4,9 +4,9 @@ import { useCreateCrawlSettingModal } from '../hooks/useCreateCrawlSettingModal'
 
 import ProductsTable from './ProductsTable'
 
-import { GetProductsQuery } from '@/graphql/dist/client'
+import { GetProductPageDataQuery } from '@/graphql/dist/client'
 
-const ProductsCard = ({ data }: { data: GetProductsQuery }) => {
+const ProductsCard = ({ data }: { data: GetProductPageDataQuery }) => {
   const [_, setModal] = useCreateCrawlSettingModal()
 
   return (

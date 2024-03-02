@@ -6,8 +6,6 @@ import {
   CreateProductMutation,
   DeleteProductDocument,
   DeleteProductMutation,
-  GetProductsDocument,
-  GetProductsQuery,
   UpdateProductDocument,
   UpdateProductMutation,
   UpdateProductInput,
@@ -23,12 +21,6 @@ import {
 import { getClient } from '@/lib/rsc-client'
 
 /* Product */
-
-export const getProducts = async () => {
-  return await getClient().query<GetProductsQuery>({
-    query: GetProductsDocument,
-  })
-}
 
 export const createProduct = async (input: CreateProductInput) => {
   return await getClient().mutate<CreateProductMutation>({
