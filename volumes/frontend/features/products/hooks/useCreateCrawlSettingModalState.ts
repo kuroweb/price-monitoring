@@ -2,6 +2,6 @@ import { parseAsBoolean, useQueryState } from 'nuqs'
 
 export const useCreateCrawlSettingModalQuery = 'create_crawl_setting_modal'
 
-export const useCreateCrawlSettingModal = () => {
+export const useCreateCrawlSettingModalState = () => {
   return useQueryState(useCreateCrawlSettingModalQuery, parseAsBoolean.withDefault(false))
 }

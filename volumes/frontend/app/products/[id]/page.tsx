@@ -5,8 +5,8 @@ import CalculateDailyYahooAuctionProductChart from '@/features/products/componen
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
-import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModal'
-import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModal'
+import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
+import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -39,13 +39,25 @@ const Page = async ({
             <div className='grid grid-cols-2 gap-4'>
               <Link
                 className='btn'
-                href={`/products/${params.id}?${useEditCrawlSettingModalQuery}=true`}
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useEditCrawlSettingModalQuery]: 'true',
+                  },
+                }}
               >
                 計測設定
               </Link>
               <Link
                 className='btn'
-                href={`/products/${params.id}?${useEditExcludeKeywordModalQuery}=true`}
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useEditExcludeKeywordModalQuery]: 'true',
+                  },
+                }}
               >
                 除外キーワード
               </Link>
