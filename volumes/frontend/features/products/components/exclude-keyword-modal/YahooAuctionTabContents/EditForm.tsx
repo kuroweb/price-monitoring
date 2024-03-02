@@ -51,10 +51,7 @@ function EditForm({
           <div className='label'>
             <span className='label-text'>キーワード</span>
           </div>
-          <input
-            {...register('keyword', { setValueAs: (v) => (v === '' ? null : v) })}
-            className='input input-bordered'
-          />
+          <input {...register('keyword')} className='input input-bordered' />
         </label>
         <div className='pt-4'>
           <Button type='submit' color='primary' size='md' className='w-full'>

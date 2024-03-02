@@ -336,14 +336,28 @@ export type YahooAuctionProduct = Node & {
   yahooAuctionId: Scalars['String']['output']
 }
 
-export type GetProductsQueryVariables = Exact<{
+export type GetProductPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>
   name?: InputMaybe<Scalars['String']['input']>
 }>
 
-export type GetProductsQuery = {
+export type GetProductPageDataQuery = {
   __typename?: 'Query'
-  products: Array<{ __typename?: 'Product'; id: string; name: string }>
+  products: Array<{
+    __typename?: 'Product'
+    id: string
+    name: string
+    yahooAuctionCrawlSetting: {
+      __typename?: 'YahooAuctionCrawlSetting'
+      id: string
+      productId: number
+      keyword: string
+      categoryId?: number | null
+      minPrice: number
+      maxPrice: number
+      enabled: boolean
+    }
+  }>
 }
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
@@ -546,11 +560,20 @@ export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutation = {
     | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess'; ok: boolean }
 }
 
-export const GetProductsDocument = gql`
-  query getProducts($id: ID, $name: String) {
+export const GetProductPageDataDocument = gql`
+  query getProductPageData($id: ID, $name: String) {
     products(id: $id, name: $name) {
       id
       name
+      yahooAuctionCrawlSetting {
+        id
+        productId
+        keyword
+        categoryId
+        minPrice
+        maxPrice
+        enabled
+      }
     }
   }
 `
@@ -763,17 +786,17 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    getProducts(
-      variables?: GetProductsQueryVariables,
+    getProductPageData(
+      variables?: GetProductPageDataQueryVariables,
       requestHeaders?: GraphQLClientRequestHeaders,
-    ): Promise<GetProductsQuery> {
+    ): Promise<GetProductPageDataQuery> {
       return withWrapper(
         (wrappedRequestHeaders) =>
-          client.request<GetProductsQuery>(GetProductsDocument, variables, {
+          client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {
             ...requestHeaders,
             ...wrappedRequestHeaders,
           }),
-        'getProducts',
+        'getProductPageData',
         'query',
         variables,
       )
