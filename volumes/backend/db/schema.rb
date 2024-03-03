@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_25_081656) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_03_225609) do
   create_table "calculate_daily_yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.integer "price"
@@ -19,6 +19,40 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_081656) do
     t.datetime "updated_at", null: false
     t.index ["product_id", "target_date"], name: "idx_on_product_id_target_date_cf1660df56", unique: true
     t.index ["product_id"], name: "index_calculate_daily_yahoo_auction_products_on_product_id"
+  end
+
+  create_table "mercari_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "keyword", null: false
+    t.integer "min_price", default: 0, null: false
+    t.integer "max_price", default: 0, null: false
+    t.boolean "enabled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_mercari_crawl_settings_on_product_id"
+  end
+
+  create_table "mercari_product_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "mercari_crawl_setting_id"
+    t.string "keyword", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mercari_crawl_setting_id"], name: "idx_on_mercari_crawl_setting_id_6ad1361339"
+  end
+
+  create_table "mercari_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "mercari_id", null: false
+    t.string "seller_id", null: false
+    t.string "name", null: false
+    t.text "thumbnail_url"
+    t.integer "price", default: 0, null: false
+    t.boolean "published", default: false, null: false
+    t.datetime "bought_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mercari_id"], name: "index_mercari_products_on_mercari_id", unique: true
+    t.index ["product_id"], name: "index_mercari_products_on_product_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -69,6 +103,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_25_081656) do
   end
 
   add_foreign_key "calculate_daily_yahoo_auction_products", "products"
+  add_foreign_key "mercari_crawl_settings", "products"
+  add_foreign_key "mercari_product_exclude_keywords", "mercari_crawl_settings"
+  add_foreign_key "mercari_products", "products"
   add_foreign_key "yahoo_auction_crawl_setting_exclude_keywords", "yahoo_auction_crawl_settings"
   add_foreign_key "yahoo_auction_crawl_settings", "products"
   add_foreign_key "yahoo_auction_products", "products"
