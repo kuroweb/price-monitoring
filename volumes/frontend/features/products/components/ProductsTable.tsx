@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 
+import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
@@ -27,10 +28,6 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | null }) => {
   )
   const [productId, setProductId] = useState<string | undefined>(undefined)
 
-  const moveToDetailPage = (productId: String) => {
-    router.push(`/products/${productId}`)
-  }
-
   const openModal = () => {
     setModal(true)
     urlSearchParams.set(useEditCrawlSettingModalQuery, 'true')
@@ -50,7 +47,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | null }) => {
 
   return (
     <>
-      <table className='table select-none'>
+      <table className='table'>
         <thead>
           <tr>
             <th>管理コード</th>
@@ -59,9 +56,14 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | null }) => {
         </thead>
         <tbody>
           {data?.products.map((product) => (
-            <tr key={product.id} className='cursor-pointer hover:bg-base-100'>
-              <td className='' onClick={() => moveToDetailPage(product.id)}>
-                {product.name}
+            <tr key={product.id} className=''>
+              <td>
+                <Link
+                  className='w-full justify-start btn btn-ghost'
+                  href={`/products/${product.id}`}
+                >
+                  {product.name}
+                </Link>
               </td>
               <td className='w-1/12'>
                 <div className='dropdown dropdown-left'>
