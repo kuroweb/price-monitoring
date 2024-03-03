@@ -71,6 +71,8 @@ bff--REST API-->price
 
 ## ER
 
+### ヤフオク関連
+
 ```mermaid
 erDiagram
   products {
@@ -80,11 +82,11 @@ erDiagram
   yahoo_auction_crawl_settings {
     bigint id PK
     bigint product_id FK
-    string keyword "NOT_NULL"
-    int category_id "default: null"
-    int min_price "default: 0"
-    int max_price "default: 0"
-    boolean enabled "default: false"
+    string keyword
+    int category_id
+    int min_price
+    int max_price
+    boolean enabled
   }
   yahoo_auction_crawl_setting_exclude_keywords {
     bigint id PK
@@ -93,23 +95,68 @@ erDiagram
   }
   yahoo_auction_products {
     bigint id PK
-    string yahoo_auction_id "NOT_NULL"
-    string name "NOT_NULL"
-    int price "NOT_NULL"
-    boolean published "default: false"
+    string yahoo_auction_id
+    string seller_id
+    string name
+    int price
+    boolean published
     datetime bought_date
   }
   calculate_daily_yahoo_auction_products {
     bigint id PK
     bigint product_id FK
-    int price "default: null"
-    date target_date "NOT_NULL"
+    int price
+    date target_date
   }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
   products ||--o{ calculate_daily_yahoo_auction_products : "1:N"
+```
+
+### メルカリ関連
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  mercari_crawl_settings {
+    bigint id PK
+    bigint product_id FK
+    string keyword
+    int category_id
+    int min_price
+    int max_price
+    boolean enabled
+  }
+  mercari_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint mercari_crawl_setting_id FK
+    string keyword
+  }
+  mercari_products {
+    bigint id PK
+    string mercari_id
+    string seller_id
+    string name
+    int price
+    boolean published
+    datetime bought_date
+  }
+  calculate_daily_mercari_products {
+    bigint id PK
+    bigint product_id FK
+    int price
+    date target_date
+  }
+
+  products ||--|| mercari_crawl_settings : "1:1"
+  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
+  products ||--o{ mercari_products : "1:N"
+  products ||--o{ calculate_daily_mercari_products : "1:N"
 ```
 
 ## 自動デプロイ
