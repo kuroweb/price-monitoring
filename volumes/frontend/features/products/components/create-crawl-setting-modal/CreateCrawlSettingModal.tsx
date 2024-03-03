@@ -49,7 +49,7 @@ const CreateCrawlSettingModal = () => {
 
     if (result.data?.createProduct.ok) {
       toast.success('success')
-      setModal(false)
+      closeModal()
     } else {
       toast.error('error')
     }
