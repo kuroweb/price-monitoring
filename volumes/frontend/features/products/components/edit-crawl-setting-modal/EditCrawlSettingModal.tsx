@@ -61,12 +61,10 @@ const EditCrawlSettingModal = ({
 
     if (result.data?.updateProduct.ok) {
       toast.success('success')
-      setModal(false)
+      closeModal()
     } else {
       toast.error('error')
     }
-
-    closeModal()
     router.refresh()
   }
 
