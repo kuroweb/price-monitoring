@@ -22,7 +22,7 @@ const EditCrawlSettingModal = ({
   defaultValues,
 }: {
   productId: string | undefined
-  defaultValues: UpdateProductInput
+  defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
   const pathname = usePathname()
@@ -40,13 +40,13 @@ const EditCrawlSettingModal = ({
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
     defaultValues: {
-      name: defaultValues?.name,
+      name: defaultValues?.name || '',
       yahoo_auction_crawl_setting: {
-        keyword: defaultValues?.yahoo_auction_crawl_setting?.keyword,
-        category_id: defaultValues?.yahoo_auction_crawl_setting?.category_id,
-        min_price: defaultValues?.yahoo_auction_crawl_setting?.min_price,
-        max_price: defaultValues?.yahoo_auction_crawl_setting?.max_price,
-        enabled: defaultValues?.yahoo_auction_crawl_setting?.enabled,
+        keyword: defaultValues?.yahoo_auction_crawl_setting?.keyword || '',
+        category_id: defaultValues?.yahoo_auction_crawl_setting?.category_id || null,
+        min_price: defaultValues?.yahoo_auction_crawl_setting?.min_price || 0,
+        max_price: defaultValues?.yahoo_auction_crawl_setting?.max_price || 0,
+        enabled: defaultValues?.yahoo_auction_crawl_setting?.enabled || false,
       },
     },
     values: defaultValues,

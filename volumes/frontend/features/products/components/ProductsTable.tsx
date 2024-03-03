@@ -115,16 +115,18 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | null }) => {
       </table>
       <EditCrawlSettingModal
         productId={productId}
-        defaultValues={{
-          name: product?.name || '',
-          yahoo_auction_crawl_setting: {
-            keyword: product?.yahooAuctionCrawlSetting?.keyword || '',
-            category_id: product?.yahooAuctionCrawlSetting?.categoryId || null,
-            min_price: product?.yahooAuctionCrawlSetting?.minPrice || 0,
-            max_price: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
-            enabled: product?.yahooAuctionCrawlSetting?.enabled || false,
-          },
-        }}
+        defaultValues={
+          product && {
+            name: product?.name,
+            yahoo_auction_crawl_setting: {
+              keyword: product?.yahooAuctionCrawlSetting?.keyword,
+              category_id: product?.yahooAuctionCrawlSetting?.categoryId,
+              min_price: product?.yahooAuctionCrawlSetting?.minPrice,
+              max_price: product?.yahooAuctionCrawlSetting?.maxPrice,
+              enabled: product?.yahooAuctionCrawlSetting?.enabled,
+            },
+          }
+        }
       />
     </>
   )
