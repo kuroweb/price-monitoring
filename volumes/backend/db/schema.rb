@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_225609) do
   create_table "mercari_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.string "keyword", null: false
+    t.integer "category_id"
     t.integer "min_price", default: 0, null: false
     t.integer "max_price", default: 0, null: false
     t.boolean "enabled", default: false, null: false
