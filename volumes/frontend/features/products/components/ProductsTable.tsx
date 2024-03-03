@@ -59,7 +59,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | null }) => {
             <tr key={product.id} className=''>
               <td>
                 <Link
-                  className='w-full justify-start btn btn-ghost'
+                  className='w-full justify-start btn btn-ghost no-animation'
                   href={`/products/${product.id}`}
                 >
                   {product.name}
