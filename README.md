@@ -41,10 +41,7 @@ subgraph Kubernetest Node
   subgraph frontend [Frontend]
     direction LR
 
-    Nginx["Nginx(未実装)"]
     Next.js
-
-    Nginx--proxy-->Next.js
   end
 
   subgraph bff [BFF]
@@ -65,8 +62,13 @@ subgraph Kubernetest Node
   end
 end
 
+subgraph VPS
+  proxy-1
+end
+
 client-->frontend--GraphQL-->bff
 bff--REST API-->price
+price--proxy-->VPS
 ```
 
 ## ER
