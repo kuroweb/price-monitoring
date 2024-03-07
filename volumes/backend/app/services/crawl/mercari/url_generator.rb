@@ -36,11 +36,11 @@ module Crawl
       end
 
       def price_min(url)
-        "#{url}#{PRICE_MIN}#{mercari_crawl_setting.min_price}"
+        "#{url}#{PRICE_MIN}#{mercari_crawl_setting.min_price}&"
       end
 
       def price_max(url)
-        "#{url}#{PRICE_MAX}#{mercari_crawl_setting.max_price}"
+        "#{url}#{PRICE_MAX}#{mercari_crawl_setting.max_price}&"
       end
 
       def order(url)
