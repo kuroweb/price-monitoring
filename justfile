@@ -35,9 +35,6 @@ restart-backend-batch:
 restart-backend-playwright:
 	docker compose restart backend-playwright
 
-restart-backend-tor:
-	docker compose restart backend-tor
-
 restart-bff:
 	docker compose restart bff
 
@@ -56,9 +53,6 @@ attach-backend-batch:
 
 attach-backend-playwright:
 	docker attach $(docker compose ps -q backend-playwright)
-
-attach-backend-tor:
-	docker attach $(docker compose ps -q backend-tor)
 
 attach-bff:
 	docker attach $(docker compose ps -q bff)
