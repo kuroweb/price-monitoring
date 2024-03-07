@@ -12,6 +12,9 @@ x-backend: &backend
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
     ALLOWED_ORIGIN: "backend"
+    PROXY_HOST: ${PROXY_HOST}
+    PROXY_USERNAME: ${PROXY_USERNAME}
+    PROXY_PASSWORD: ${PROXY_PASSWORD}
   stdin_open: true
   tty: true
 
@@ -35,11 +38,6 @@ x-redis: &redis
     interval: 5s
     timeout: 5s
     retries: 5
-
-x-tor: &tor
-  build:
-    context: .
-    dockerfile: containers/backend_tor/Dockerfile
 
 services:
   frontend:
@@ -80,7 +78,6 @@ services:
         condition: service_healthy
       backend-redis:
         condition: service_healthy
-      # TODO: torコンテナの実行後に起動するようにしたい
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
@@ -105,31 +102,6 @@ services:
       dockerfile: containers/backend_playwright/Dockerfile
     ports:
       - 8888:8888
-
-  backend-tor-1:
-    <<: *tor
-    volumes:
-      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
-
-  backend-tor-2:
-    <<: *tor
-    volumes:
-      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
-
-  backend-tor-3:
-    <<: *tor
-    volumes:
-      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
-
-  backend-tor-4:
-    <<: *tor
-    volumes:
-      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
-
-  backend-tor-5:
-    <<: *tor
-    volumes:
-      - ./volumes/backend_tor/etc/tor/torrc:/etc/tor/torrc
 
   bff:
     build:
