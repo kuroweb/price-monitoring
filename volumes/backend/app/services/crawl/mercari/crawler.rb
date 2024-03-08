@@ -52,7 +52,7 @@ module Crawl
           break if count > 30
 
           page.mouse.wheel(0, 200)
-          sleep(0.001)
+          sleep(0.005)
 
           count += 1
         end
@@ -74,11 +74,12 @@ module Crawl
 
       def product_doms(page)
         page.query_selector_all("li[data-testid='item-cell']")
+            .reject { |dom| dom.query_selector(".merSkeleton") }
       end
 
       def mercari_id(dom)
         href = dom.query_selector("a").get_attribute("href")
-        href[%r{item/([^/]+)}, 1]
+        href[%r{item/([^/]+)}, 1] || href[%r{product/([^/]+)}, 1]
       end
 
       def name(dom)
