@@ -11,7 +11,7 @@ module Crawl
 
           start = 0
           loop do
-            break if start > 1
+            break if start > 50
 
             page.goto(url(start))
 
