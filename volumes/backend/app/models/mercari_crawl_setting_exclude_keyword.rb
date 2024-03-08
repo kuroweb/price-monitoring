@@ -1,4 +1,4 @@
-class MercariProductExcludeKeyword < ApplicationRecord
+class MercariCrawlSettingExcludeKeyword < ApplicationRecord
   ## associations ##
   belongs_to :mercari_crawl_setting
 
