@@ -44,7 +44,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_225609) do
   create_table "mercari_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.string "mercari_id", null: false
-    t.string "seller_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
