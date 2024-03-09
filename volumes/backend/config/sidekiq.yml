@@ -3,4 +3,6 @@ development:
 production:
   :concurrency: 5
 :queues:
-  - default
+  - ['high_priority', 3]
+  - ['default', 2]
+  - ['low_priority', 1]
