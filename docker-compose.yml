@@ -71,7 +71,7 @@ services:
     ports:
       - 3000:3000
 
-  backend-batch:
+  backend-batch-1:
     <<: *backend
     depends_on:
       backend-db:
@@ -81,7 +81,19 @@ services:
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
-    command: ["sidekiq", "-C", "config/sidekiq.yml"]
+    command: ["sidekiq", "-C", "config/sidekiq/crawl_process.yml"]
+
+  backend-batch-2:
+    <<: *backend
+    depends_on:
+      backend-db:
+        condition: service_healthy
+      backend-redis:
+        condition: service_healthy
+    volumes:
+      - ./volumes/backend:/app
+      - backend-bundle:/usr/local/bundle
+    command: ["sidekiq", "-C", "config/sidekiq/sync_bought_date_process.yml"]
 
   backend-db:
     <<: *mysql

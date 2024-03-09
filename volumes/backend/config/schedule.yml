@@ -4,7 +4,6 @@ crawl_yahoo_auction_enqueue_sync_job:
 crawl_mercari_enqueue_sync_job:
   cron: "*/10 * * * *"
   class: "Crawl::Mercari::SyncProducts::EnqueueSyncJob"
-  queue: default
 analysis_yahoo_auction_enqueue_calculate_price_job:
   cron: "0 0 * * *"
   class: "Analysis::YahooAuction::EnqueueCalculatePriceJob"
