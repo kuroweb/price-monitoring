@@ -31,6 +31,8 @@ module Crawl
             upsert(crawl_results)
             delete(crawl_results)
           end
+
+          enqueue_sync_bought_date_job(crawl_results)
         end
 
         def upsert(crawl_results)
@@ -46,6 +48,12 @@ module Crawl
             .where(product_id: @product.id, published: true)
             .where.not(mercari_id: crawl_results.mercari_ids)
             .delete_all
+        end
+
+        def enqueue_sync_bought_date_job(crawl_results)
+          job_params = crawl_results.unpublished_results
+                                    .map { |result| [result.mercari_id] }
+          Crawl::Mercari::SyncBoughtDateJob.perform_bulk(job_params)
         end
 
         def mercari_crawl_setting
