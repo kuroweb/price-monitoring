@@ -9,6 +9,7 @@ module Crawl
             username: ENV.fetch("PROXY_USERNAME"),
             password: ENV.fetch("PROXY_PASSWORD")
           },
+          args: ["--blink-settings=imagesEnabled=false", "--disable-remote-fonts"],
           &block
         )
       end
