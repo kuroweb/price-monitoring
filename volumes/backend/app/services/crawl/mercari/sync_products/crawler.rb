@@ -75,12 +75,20 @@ module Crawl
 
         def product_doms(page)
           page.query_selector_all("li[data-testid='item-cell']")
-              .reject { |dom| dom.query_selector(".merSkeleton") }
+              .reject { |dom| not_crawlable?(dom) }
+        end
+
+        def not_crawlable?(dom)
+          href = dom.query_selector("a").get_attribute("href")
+          key = href[%r{product/([^/]+)}, 1]
+          skeleton = dom.query_selector(".merSkeleton")
+
+          key.present? || skeleton.present?
         end
 
         def mercari_id(dom)
           href = dom.query_selector("a").get_attribute("href")
-          href[%r{item/([^/]+)}, 1] || href[%r{product/([^/]+)}, 1]
+          href[%r{item/([^/]+)}, 1]
         end
 
         def name(dom)
