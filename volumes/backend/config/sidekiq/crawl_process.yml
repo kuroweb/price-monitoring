@@ -1,7 +1,7 @@
 development:
-  :concurrency: 3
+  :concurrency: 5
 production:
-  :concurrency: 3
+  :concurrency: 5
 :queues:
   - ['crawl_yahoo_auction', 1]
   - ['crawl_mercari', 1]
