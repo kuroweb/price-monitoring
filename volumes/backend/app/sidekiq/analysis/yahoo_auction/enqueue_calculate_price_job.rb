@@ -3,6 +3,8 @@ module Analysis
     class EnqueueCalculatePriceJob
       include Sidekiq::Job
 
+      sidekiq_options queue: :analysis_yahoo_auction
+
       def perform
         start_date = "2024-01-01"
         end_date = Time.current.to_date.to_s

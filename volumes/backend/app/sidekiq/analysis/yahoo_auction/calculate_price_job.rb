@@ -3,6 +3,8 @@ module Analysis
     class CalculatePriceJob
       include Sidekiq::Job
 
+      sidekiq_options queue: :analysis_yahoo_auction
+
       def perform(product_id, start_date, end_date)
         product = Product.find(product_id)
         start_date = start_date.to_date
