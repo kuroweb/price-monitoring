@@ -1,8 +1,8 @@
 crawl_yahoo_auction_enqueue_sync_job:
-  cron: "*/10 * * * *"
+  cron: "*/30 * * * *"
   class: "Crawl::YahooAuction::EnqueueSyncJob"
 crawl_mercari_enqueue_sync_job:
-  cron: "*/10 * * * *"
+  cron: "*/30 * * * *"
   class: "Crawl::Mercari::SyncProducts::EnqueueSyncJob"
 analysis_yahoo_auction_enqueue_calculate_price_job:
   cron: "0 0 * * *"
