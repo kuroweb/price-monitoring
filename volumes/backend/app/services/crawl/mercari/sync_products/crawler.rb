@@ -15,7 +15,14 @@ module Crawl
               break if start > 20
 
               Retryable.retryable(tries: 3) do
+                # TODO: デバッグコードを追加
+                Rails.logger.info("Execute mercari crawl process. product_id: #{product.id} page: #{start}")
+
                 page.goto(url(start))
+
+                # TODO: デバッグコードを追加
+                Rails.logger.info("product_id: #{product.id} page: #{start} html: #{page.inner_html('*')}")
+
                 break if no_results?(page)
 
                 load(page)
