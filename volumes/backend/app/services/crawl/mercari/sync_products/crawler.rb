@@ -6,20 +6,21 @@ module Crawl
           @product = product
         end
 
-        def execute
+        def execute # rubocop:disable Metrics/MethodLength
           Crawl::Client.execute do |browser|
             page = browser.new_page
 
             start = 0
             loop do
-              break if start > 50
+              break if start > 20
 
-              page.goto(url(start))
+              Retryable.retryable(tries: 3) do
+                page.goto(url(start))
+                break if no_results?(page)
 
-              break if no_results?(page)
-
-              load(page)
-              append_results(page)
+                load(page)
+                append_results(page)
+              end
 
               break unless exists_next_page?(page)
 

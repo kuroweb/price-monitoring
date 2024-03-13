@@ -11,6 +11,7 @@ gem "puma", ">= 5.0"
 gem "rack-cors"
 gem "rails", "~> 7.1.1"
 gem "redis-namespace"
+gem "retryable"
 gem "sidekiq"
 gem "sidekiq-cron"
 gem "sinatra", require: false
