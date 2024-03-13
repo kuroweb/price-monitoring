@@ -4,6 +4,8 @@ module Crawl
       class SyncJob
         include Sidekiq::Job
 
+        JOB_TIMEOUT = 30.minutes
+
         sidekiq_options queue: :crawl_mercari, retry: 5
 
         def perform(product_id)
@@ -12,7 +14,7 @@ module Crawl
         end
 
         def handle_timeout(&block)
-          Timeout.timeout(10.minutes, &block)
+          Timeout.timeout(JOB_TIMEOUT, &block)
         rescue Timeout::Error => e
           Rails.logger.error("This worker has reached timeout. product_id: #{product.id}")
           raise e
