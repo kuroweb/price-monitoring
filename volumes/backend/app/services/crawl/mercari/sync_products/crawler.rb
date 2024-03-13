@@ -3,6 +3,7 @@ module Crawl
     module SyncProducts
       class Crawler
         RETRY_COUNT = 5
+        MAX_PAGE = 10
 
         def initialize(product:)
           @product = product
@@ -14,7 +15,7 @@ module Crawl
 
             start = 0
             loop do
-              break if start > 30
+              break if start > MAX_PAGE
 
               Retryable.retryable(tries: RETRY_COUNT) do
                 Rails.logger.info("Execute mercari crawl process. product_id: #{product.id} page: #{start}")
