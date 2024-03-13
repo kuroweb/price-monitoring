@@ -2,6 +2,8 @@ module Crawl
   module Mercari
     module SyncProducts
       class Crawler
+        RETRY_COUNT = 5
+
         def initialize(product:)
           @product = product
         end
@@ -12,20 +14,16 @@ module Crawl
 
             start = 0
             loop do
-              break if start > 20
+              break if start > 30
 
-              Retryable.retryable(tries: 3) do
-                # TODO: デバッグコードを追加
+              Retryable.retryable(tries: RETRY_COUNT) do
                 Rails.logger.info("Execute mercari crawl process. product_id: #{product.id} page: #{start}")
 
                 page.goto(url(start))
-
-                # TODO: デバッグコードを追加
-                Rails.logger.info("product_id: #{product.id} page: #{start} html: #{page.inner_html('*')}")
+                load(page)
 
                 break if no_results?(page)
 
-                load(page)
                 append_results(page)
               end
 
@@ -55,7 +53,7 @@ module Crawl
         end
 
         def load(page)
-          sleep(0.5)
+          sleep(2)
           count = 0
           loop do
             break if count > 30
@@ -87,11 +85,16 @@ module Crawl
         end
 
         def not_crawlable?(dom)
-          href = dom.query_selector("a").get_attribute("href")
-          key = href[%r{product/([^/]+)}, 1]
-          skeleton = dom.query_selector(".merSkeleton")
+          skeleton?(dom) || shop_item?(dom)
+        end
 
-          key.present? || skeleton.present?
+        def skeleton?(dom)
+          dom.query_selector(".merSkeleton").present?
+        end
+
+        def shop_item?(dom)
+          href = dom.query_selector("a").get_attribute("href")
+          href[%r{product/([^/]+)}, 1].present?
         end
 
         def mercari_id(dom)
