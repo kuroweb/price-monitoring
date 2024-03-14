@@ -2,6 +2,7 @@ package products
 
 import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/calculate_daily_yahoo_auction_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_products"
@@ -16,6 +17,7 @@ type IProductService interface {
 	yahoo_auction_crawl_settings.IYahooAuctionCrawlSettingService
 	yahoo_auction_crawl_setting_exclude_keywords.IYahooAuctionCrawlSettingExcludeKeywordService
 	calculate_daily_yahoo_auction_products.ICaluculateDailyYahooAuctionProductService
+	mercari_products.IMercariProductService
 }
 
 type ProductService struct {
@@ -27,6 +29,7 @@ type ProductService struct {
 	*yahoo_auction_crawl_settings.YahooAuctionCrawlSettingService
 	*yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService
 	*calculate_daily_yahoo_auction_products.CaluculateDailyYahooAuctionProductService
+	*mercari_products.MercariProductService
 }
 
 func New() IProductService {
@@ -39,5 +42,6 @@ func New() IProductService {
 		YahooAuctionCrawlSettingService:               &yahoo_auction_crawl_settings.YahooAuctionCrawlSettingService{},
 		YahooAuctionCrawlSettingExcludeKeywordService: &yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService{},
 		CaluculateDailyYahooAuctionProductService:     &calculate_daily_yahoo_auction_products.CaluculateDailyYahooAuctionProductService{},
+		MercariProductService:                         &mercari_products.MercariProductService{},
 	}
 }

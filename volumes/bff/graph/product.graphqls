@@ -4,6 +4,7 @@ type Product implements Node {
   yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
   calculateDailyYahooAuctionProducts: [CalculateDailyYahooAuctionProduct!]!
+  mercariProducts(published: Boolean): [MercariProduct!]!
 }
 
 type YahooAuctionProduct implements Node {
@@ -43,6 +44,19 @@ type CalculateDailyYahooAuctionProduct implements Node {
   productId: Int!
   price: Int
   targetDate: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type MercariProduct implements Node {
+  id: ID!
+  productId: Int!
+  mercariId: String!
+  name: String!
+  thumbnailUrl: String!
+  price: Int!
+  published: Boolean!
+  boughtDate: String
   createdAt: String!
   updatedAt: String!
 }

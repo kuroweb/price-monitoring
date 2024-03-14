@@ -241,12 +241,29 @@ type ErrorDetail struct {
 	Message string `json:"message"`
 }
 
+type MercariProduct struct {
+	ID           string  `json:"id"`
+	ProductID    int     `json:"productId"`
+	MercariID    string  `json:"mercariId"`
+	Name         string  `json:"name"`
+	ThumbnailURL string  `json:"thumbnailUrl"`
+	Price        int     `json:"price"`
+	Published    bool    `json:"published"`
+	BoughtDate   *string `json:"boughtDate,omitempty"`
+	CreatedAt    string  `json:"createdAt"`
+	UpdatedAt    string  `json:"updatedAt"`
+}
+
+func (MercariProduct) IsNode()            {}
+func (this MercariProduct) GetID() string { return this.ID }
+
 type Product struct {
 	ID                                 string                               `json:"id"`
 	Name                               string                               `json:"name"`
 	YahooAuctionProducts               []*YahooAuctionProduct               `json:"yahooAuctionProducts"`
 	YahooAuctionCrawlSetting           *YahooAuctionCrawlSetting            `json:"yahooAuctionCrawlSetting"`
 	CalculateDailyYahooAuctionProducts []*CalculateDailyYahooAuctionProduct `json:"calculateDailyYahooAuctionProducts"`
+	MercariProducts                    []*MercariProduct                    `json:"mercariProducts"`
 }
 
 func (Product) IsNode()            {}

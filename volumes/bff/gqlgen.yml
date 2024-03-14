@@ -93,6 +93,8 @@ models:
         resolver: true
       calculateDailyYahooAuctionProducts:
         resolver: true
+      mercariProducts:
+        resolver: true
   YahooAuctionCrawlSetting:
     fields:
       yahooAuctionCrawlSettingExcludeKeywords:
