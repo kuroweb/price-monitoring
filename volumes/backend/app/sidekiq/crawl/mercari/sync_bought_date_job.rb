@@ -3,13 +3,14 @@ module Crawl
     class SyncBoughtDateJob
       include Sidekiq::Job
 
-      sidekiq_options queue: :crawl_mercari_sync_bought_date
+      BATCH_SIZE = 500
 
-      def perform(mercari_id)
-        mercari_product = MercariProduct.find_by(mercari_id:)
-        return if mercari_product.nil?
+      sidekiq_options queue: :crawl_mercari_sync_bought_date, retry: 0
 
-        Crawl::Mercari::SyncBoughtDate.call(mercari_product:)
+      def perform
+        MercariProduct.where(published: false, bought_date: nil).find_each(batch_size: BATCH_SIZE) do |mercari_product|
+          Crawl::Mercari::SyncBoughtDate.call(mercari_product: mercari_product.reload)
+        end
       end
     end
   end
