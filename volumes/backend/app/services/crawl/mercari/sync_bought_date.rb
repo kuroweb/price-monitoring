@@ -1,6 +1,8 @@
 module Crawl
   module Mercari
     class SyncBoughtDate
+      RETRY_COUNT = 3
+
       MINUTE = "分前".freeze
       HOUR = "時間前".freeze
       DATE = "日前".freeze
@@ -32,11 +34,13 @@ module Crawl
 
       def fetch_bought_date
         Crawl::Client.execute do |browser|
-          page = browser.new_page
-          page.goto("https://jp.mercari.com/item/#{mercari_product.mercari_id}")
+          Retryable.retryable(tries: RETRY_COUNT) do
+            page = browser.new_page
+            page.goto("https://jp.mercari.com/item/#{mercari_product.mercari_id}")
 
-          sleep(2)
-          deleted?(page) ? nil : parse_bought_date(bought_date(page))
+            sleep(2)
+            deleted?(page) ? nil : parse_bought_date(bought_date(page))
+          end
         end
       end
 

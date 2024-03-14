@@ -10,6 +10,8 @@ module Crawl
       def perform
         MercariProduct.where(published: false, bought_date: nil).find_each(batch_size: BATCH_SIZE) do |mercari_product|
           Crawl::Mercari::SyncBoughtDate.call(mercari_product: mercari_product.reload)
+        rescue StandardError
+          Rails.logger.info("Skipping... mercari_id: #{mercari_product.mercari_id}")
         end
       end
     end
