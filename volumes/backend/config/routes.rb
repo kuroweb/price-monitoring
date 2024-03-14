@@ -9,12 +9,16 @@ Rails.application.routes.draw do
 
       namespace :products do
         scope path: ":product_id" do
+          ## yahoo_auction ##
           resources :yahoo_auction_products, only: %i[index show]
           resources :yahoo_auction_crawl_settings, only: [:index]
           namespace :yahoo_auction_crawl_settings do
             resources :yahoo_auction_crawl_setting_exclude_keywords, only: %i[index create update destroy]
           end
           resources :calculate_daily_yahoo_auction_products, only: [:index]
+
+          ## mercari ##
+          resources :mercari_products, only: %i[index show]
         end
       end
     end
