@@ -39,9 +39,10 @@ const MercariProductsTable = () => {
           <table className='table'>
             <thead>
               <tr>
-                <th>name</th>
-                <th>price</th>
-                <th>thumbnail</th>
+                <th>商品名</th>
+                <th>価格</th>
+                {!published && <th>購入日</th>}
+                <th className='w-28'></th>
               </tr>
             </thead>
             <tbody>
@@ -53,6 +54,7 @@ const MercariProductsTable = () => {
                 >
                   <td className='p-2'>{product.name}</td>
                   <td className='p-2'>{product.price}</td>
+                  {!published && <td className='p-2'>{product.boughtDate}</td>}
                   <td className='p-2'>
                     <div className='relative aspect-square'>
                       <NextImage
