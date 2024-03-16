@@ -1,6 +1,7 @@
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
+import MercariProductsTable from '@/features/products/components/MercariProductsTable'
 import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
@@ -69,6 +70,27 @@ const Page = async ({
           <div className='card-body'>
             <h2 className='card-title pb-4'>相場グラフ</h2>
             <CalculateDailyYahooAuctionProductChart data={data} />
+          </div>
+        </div>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title pb-4'>メルカリ</h2>
+            <div className='flex justify-end'>
+              {published ? (
+                <>
+                  <Link href={`/products/${params.id}?published=false`} className='btn btn-link'>
+                    落札一覧に切り替え
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link href={`/products/${params.id}?published=true`} className='btn btn-link'>
+                    出品一覧に切り替え
+                  </Link>
+                </>
+              )}
+            </div>
+            <MercariProductsTable />
           </div>
         </div>
         <div className='card w-full bg-neutral'>
