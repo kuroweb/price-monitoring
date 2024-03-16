@@ -1,5 +1,7 @@
 schema: ./graphql/schema
-documents: ./graphql/query/*.graphql
+documents:
+  - ./graphql/queries/*.graphql
+  - ./graphql/mutations/*.graphql
 generates:
   ./graphql/dist/client.ts:
     plugins:

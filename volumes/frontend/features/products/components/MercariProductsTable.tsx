@@ -1,35 +1,21 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 import NextImage from 'next/image'
-import { useParams, useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 
-import {
-  fetchMercariProductsTableData,
-  mercariProductsTableResponse,
-} from '../server-actions/query'
+import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
-const MercariProductsTable = () => {
-  // params
-  const params = useParams()
+const MercariProductsTable = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const searchParams = useSearchParams()
-  const productId = String(params.id)
   const published = searchParams.get('published') ? searchParams.get('published') === 'true' : true
-
-  // state
-  const [data, setData] = useState<mercariProductsTableResponse | null>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await fetchMercariProductsTableData(productId, published)
-      setData(data)
-    }
-    fetchData()
-  }, [productId, published])
 
   const handleRowClick = (mercariId: String) => {
     window.open(`https://jp.mercari.com/item/${mercariId}`, '_blank')
+  }
+
+  const parseDate = (date: string | null | undefined) => {
+    // 暫定実装
+    return date ? date.substring(0, 10) : ''
   }
 
   return (
@@ -54,7 +40,7 @@ const MercariProductsTable = () => {
                 >
                   <td className='p-2'>{product.name}</td>
                   <td className='p-2'>{product.price}</td>
-                  {!published && <td className='p-2'>{product.boughtDate}</td>}
+                  {!published && <td className='p-2'>{parseDate(product.boughtDate)}</td>}
                   <td className='p-2'>
                     <div className='relative aspect-square'>
                       <NextImage

@@ -90,7 +90,7 @@ const Page = async ({
                 </>
               )}
             </div>
-            <MercariProductsTable />
+            <MercariProductsTable data={data} />
           </div>
         </div>
         <div className='card w-full bg-neutral'>

@@ -16,17 +16,25 @@ import EditCrawlSettingModal from './edit-crawl-setting-modal/EditCrawlSettingMo
 
 import { GetProductPageDataQuery } from '@/graphql/dist/client'
 
-const ProductsTable = ({ data }: { data: GetProductPageDataQuery | null }) => {
+const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const urlSearchParams = new URLSearchParams(searchParams)
+
+  //
+  // state
+  //
 
   const [_, setModal] = useEditCrawlSettingModalState()
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
     undefined,
   )
   const [productId, setProductId] = useState<string | undefined>(undefined)
+
+  //
+  // function
+  //
 
   const openModal = () => {
     setModal(true)

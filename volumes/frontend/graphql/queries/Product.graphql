@@ -1,0 +1,66 @@
+query getProductPageData($id: ID, $name: String) {
+  products(id: $id, name: $name) {
+    id
+    name
+    yahooAuctionCrawlSetting {
+      id
+      productId
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+    }
+  }
+}
+
+query getProductDetailPageData($id: ID!, $published: Boolean) {
+  product(id: $id) {
+    id
+    name
+    yahooAuctionProducts(published: $published) {
+      id
+      productId
+      yahooAuctionId
+      name
+      thumbnailUrl
+      price
+      published
+    }
+    yahooAuctionCrawlSetting {
+      id
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+      yahooAuctionCrawlSettingExcludeKeywords {
+        id
+        yahooAuctionCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    calculateDailyYahooAuctionProducts {
+      id
+      productId
+      price
+      targetDate
+      createdAt
+      updatedAt
+    }
+    mercariProducts(published: $published) {
+      id
+      productId
+      mercariId
+      name
+      thumbnailUrl
+      price
+      published
+      boughtDate
+      createdAt
+      updatedAt
+    }
+  }
+}
