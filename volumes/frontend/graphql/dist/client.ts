@@ -141,6 +141,20 @@ export type ErrorDetail = {
   message: Scalars['String']['output'];
 };
 
+export type MercariProduct = Node & {
+  __typename?: 'MercariProduct';
+  boughtDate?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  mercariId: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  price: Scalars['Int']['output'];
+  productId: Scalars['Int']['output'];
+  published: Scalars['Boolean']['output'];
+  thumbnailUrl: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createProduct: CreateProductResult;
@@ -191,9 +205,15 @@ export type Product = Node & {
   __typename?: 'Product';
   calculateDailyYahooAuctionProducts: Array<CalculateDailyYahooAuctionProduct>;
   id: Scalars['ID']['output'];
+  mercariProducts: Array<MercariProduct>;
   name: Scalars['String']['output'];
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting;
   yahooAuctionProducts: Array<YahooAuctionProduct>;
+};
+
+
+export type ProductMercariProductsArgs = {
+  published?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
