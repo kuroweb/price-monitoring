@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*.yimg.jp',
       },
+      {
+        protocol: 'https',
+        hostname: 'static.mercdn.net',
+      }
     ],
   },
   experimental: {
