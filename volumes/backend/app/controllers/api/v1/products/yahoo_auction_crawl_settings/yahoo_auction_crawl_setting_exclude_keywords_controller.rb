@@ -63,7 +63,7 @@ module Api
           end
 
           def yahoo_auction_crawl_setting_exclude_keyword_attributes
-            %i[keyword yahoo_auction_id seller_id]
+            %i[keyword]
           end
 
           def yahoo_auction_crawl_setting_exclude_keyword_params
