@@ -24,8 +24,13 @@ module Api
           %i[id product_id mercari_id name price published]
         end
 
+        def external_params_attributes
+          %i[sort order]
+        end
+
         def mercari_product_params
-          @mercari_product_params ||= params.permit(mercari_product_params_attributes)
+          @mercari_product_params ||=
+            params.permit(mercari_product_params_attributes + external_params_attributes)
         end
       end
     end

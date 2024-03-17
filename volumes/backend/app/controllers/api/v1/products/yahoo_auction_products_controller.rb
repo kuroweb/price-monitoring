@@ -29,8 +29,13 @@ module Api
           %i[id product_id yahoo_auction_id name price published]
         end
 
+        def external_params_attributes
+          %i[sort order]
+        end
+
         def yahoo_auction_product_params
-          @yahoo_auction_product_params ||= params.permit(yahoo_auction_product_params_attributes)
+          @yahoo_auction_product_params ||=
+            params.permit(yahoo_auction_product_params_attributes + external_params_attributes)
         end
       end
     end

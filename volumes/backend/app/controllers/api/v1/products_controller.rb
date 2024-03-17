@@ -56,8 +56,12 @@ module Api
         %i[keyword category_id min_price max_price enabled]
       end
 
+      def external_params_attributes
+        %i[sort order]
+      end
+
       def find_product_params
-        @find_product_params ||= params.permit(product_attributes)
+        @find_product_params ||= params.permit(product_attributes + external_params_attributes)
       end
 
       def create_product_params
