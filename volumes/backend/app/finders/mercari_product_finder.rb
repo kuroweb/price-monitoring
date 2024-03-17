@@ -1,6 +1,9 @@
 class MercariProductFinder
   attr_reader :params
 
+  SORT_OPTIONS = %w[bought_date created_at updated_at].freeze
+  ORDER_OPTIONS = %w[desc asc].freeze
+
   def initialize(params: {})
     @params = params
   end
@@ -60,8 +63,9 @@ class MercariProductFinder
   end
 
   def order(products)
-    return products unless params[:sort]
+    return products if SORT_OPTIONS.exclude?(params[:sort]) ||
+                       ORDER_OPTIONS.exclude?(params[:order])
 
-    products.order_by(params[:sort])
+    products.order("#{params[:sort]} #{params[:order]}")
   end
 end

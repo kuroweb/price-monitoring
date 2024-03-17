@@ -1,6 +1,9 @@
 class ProductFinder
   attr_reader :params
 
+  SORT_OPTIONS = %w[created_at updated_at].freeze
+  ORDER_OPTIONS = %w[desc asc].freeze
+
   def initialize(params: {})
     @params = params
   end
@@ -32,8 +35,9 @@ class ProductFinder
   end
 
   def order(products)
-    return products unless params[:sort]
+    return products if SORT_OPTIONS.exclude?(params[:sort]) ||
+                       ORDER_OPTIONS.exclude?(params[:order])
 
-    products.order_by(params[:sort])
+    products.order("#{params[:sort]} #{params[:order]}")
   end
 end
