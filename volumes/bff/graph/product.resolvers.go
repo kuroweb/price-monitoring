@@ -27,8 +27,8 @@ func (r *productResolver) CalculateDailyYahooAuctionProducts(ctx context.Context
 }
 
 // MercariProducts is the resolver for the mercariProducts field.
-func (r *productResolver) MercariProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.MercariProduct, error) {
-	return r.ProductService.FindMercariProduct(ctx, nil, &obj.ID, nil, nil, nil, published)
+func (r *productResolver) MercariProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.MercariProduct, error) {
+	return r.ProductService.FindMercariProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)
 }
 
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.

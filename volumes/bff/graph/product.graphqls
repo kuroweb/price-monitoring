@@ -4,7 +4,11 @@ type Product implements Node {
   yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
   calculateDailyYahooAuctionProducts: [CalculateDailyYahooAuctionProduct!]!
-  mercariProducts(published: Boolean): [MercariProduct!]!
+  mercariProducts(
+    published: Boolean
+    sort: String
+    order: String
+  ): [MercariProduct!]!
 }
 
 type YahooAuctionProduct implements Node {

@@ -149,7 +149,7 @@ type ComplexityRoot struct {
 	Product struct {
 		CalculateDailyYahooAuctionProducts func(childComplexity int) int
 		ID                                 func(childComplexity int) int
-		MercariProducts                    func(childComplexity int, published *bool) int
+		MercariProducts                    func(childComplexity int, published *bool, sort *string, order *string) int
 		Name                               func(childComplexity int) int
 		YahooAuctionCrawlSetting           func(childComplexity int) int
 		YahooAuctionProducts               func(childComplexity int, published *bool) int
@@ -238,7 +238,7 @@ type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error)
 	YahooAuctionCrawlSetting(ctx context.Context, obj *model.Product) (*model.YahooAuctionCrawlSetting, error)
 	CalculateDailyYahooAuctionProducts(ctx context.Context, obj *model.Product) ([]*model.CalculateDailyYahooAuctionProduct, error)
-	MercariProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.MercariProduct, error)
+	MercariProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.MercariProduct, error)
 }
 type QueryResolver interface {
 	Product(ctx context.Context, id string) (*model.Product, error)
@@ -672,7 +672,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Product.MercariProducts(childComplexity, args["published"].(*bool)), true
+		return e.complexity.Product.MercariProducts(childComplexity, args["published"].(*bool), args["sort"].(*string), args["order"].(*string)), true
 
 	case "Product.name":
 		if e.complexity.Product.Name == nil {
@@ -1330,7 +1330,11 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implemen
   yahooAuctionProducts(published: Boolean): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
   calculateDailyYahooAuctionProducts: [CalculateDailyYahooAuctionProduct!]!
-  mercariProducts(published: Boolean): [MercariProduct!]!
+  mercariProducts(
+    published: Boolean
+    sort: String
+    order: String
+  ): [MercariProduct!]!
 }
 
 type YahooAuctionProduct implements Node {
@@ -1520,6 +1524,24 @@ func (ec *executionContext) field_Product_mercariProducts_args(ctx context.Conte
 		}
 	}
 	args["published"] = arg0
+	var arg1 *string
+	if tmp, ok := rawArgs["sort"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("sort"))
+		arg1, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["sort"] = arg1
+	var arg2 *string
+	if tmp, ok := rawArgs["order"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("order"))
+		arg2, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["order"] = arg2
 	return args, nil
 }
 
@@ -4254,7 +4276,7 @@ func (ec *executionContext) _Product_mercariProducts(ctx context.Context, field 
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().MercariProducts(rctx, obj, fc.Args["published"].(*bool))
+		return ec.resolvers.Product().MercariProducts(rctx, obj, fc.Args["published"].(*bool), fc.Args["sort"].(*string), fc.Args["order"].(*string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

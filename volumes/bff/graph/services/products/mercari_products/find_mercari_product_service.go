@@ -14,12 +14,12 @@ import (
 )
 
 type IFindMercariProductService interface {
-	FindMercariProduct(ctx context.Context, id *string, productID *string, mercariID *string, name *string, price *int, published *bool) ([]*model.MercariProduct, error)
+	FindMercariProduct(ctx context.Context, id *string, productID *string, mercariID *string, name *string, price *int, published *bool, sort *string, order *string) ([]*model.MercariProduct, error)
 }
 
 type FindMercariProductService struct{}
 
-func (f *FindMercariProductService) FindMercariProduct(ctx context.Context, id *string, productID *string, mercariID *string, name *string, price *int, published *bool) ([]*model.MercariProduct, error) {
+func (f *FindMercariProductService) FindMercariProduct(ctx context.Context, id *string, productID *string, mercariID *string, name *string, price *int, published *bool, sort *string, order *string) ([]*model.MercariProduct, error) {
 	params := make(url.Values)
 
 	if id != nil {
@@ -40,6 +40,14 @@ func (f *FindMercariProductService) FindMercariProduct(ctx context.Context, id *
 
 	if published != nil {
 		params.Set("published", strconv.FormatBool(*published))
+	}
+
+	if sort != nil {
+		params.Set("sort", *sort)
+	}
+
+	if order != nil {
+		params.Set("order", *order)
 	}
 
 	cfg := config.NewConfig()

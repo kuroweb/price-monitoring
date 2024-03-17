@@ -50,7 +50,7 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
       createdAt
       updatedAt
     }
-    mercariProducts(published: $published) {
+    mercariProducts(published: $published, sort: "bought_date", order: "desc") {
       id
       productId
       mercariId
