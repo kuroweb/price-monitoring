@@ -3,13 +3,10 @@
 import { useState } from 'react'
 
 import Link from 'next/link'
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import {
-  useEditCrawlSettingModalQuery,
-  useEditCrawlSettingModalState,
-} from '../hooks/useEditCrawlSettingModalState'
+import { useEditCrawlSettingModalState } from '../hooks/useEditCrawlSettingModalState'
 import { deleteProduct } from '../server-actions/productQuery'
 
 import EditCrawlSettingModal from './edit-crawl-setting-modal/EditCrawlSettingModal'
@@ -18,29 +15,11 @@ import { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
   const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const urlSearchParams = new URLSearchParams(searchParams)
-
-  //
-  // state
-  //
-
   const [_, setModal] = useEditCrawlSettingModalState()
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
     undefined,
   )
   const [productId, setProductId] = useState<string | undefined>(undefined)
-
-  //
-  // function
-  //
-
-  const openModal = () => {
-    setModal(true)
-    urlSearchParams.set(useEditCrawlSettingModalQuery, 'true')
-    router.replace(`${pathname}?${urlSearchParams.toString()}`)
-  }
 
   const submitDeleteProduct = async (productId: String) => {
     const result = await deleteProduct(productId)
@@ -100,7 +79,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
                         onClick={() => {
                           setProductId(product.id)
                           setProduct(product)
-                          openModal()
+                          setModal(true)
                         }}
                       >
                         編集

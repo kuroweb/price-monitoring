@@ -7,10 +7,7 @@ import { Join } from 'react-daisyui'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import {
-  useEditCrawlSettingModalState,
-  useEditCrawlSettingModalQuery,
-} from '../../hooks/useEditCrawlSettingModalState'
+import { useEditCrawlSettingModalState } from '../../hooks/useEditCrawlSettingModalState'
 import { updateProduct } from '../../server-actions/productQuery'
 
 import YahooAuctionForm from './YahooAuctionForm'
@@ -25,18 +22,8 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const urlSearchParams = new URLSearchParams(searchParams)
-
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
-
-  const closeModal = () => {
-    setModal(false)
-    urlSearchParams.set(useEditCrawlSettingModalQuery, 'false')
-    router.replace(`${pathname}?${urlSearchParams.toString()}`)
-  }
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
     defaultValues: {
@@ -61,7 +48,7 @@ const EditCrawlSettingModal = ({
 
     if (result.data?.updateProduct.ok) {
       toast.success('success')
-      closeModal()
+      setModal(false)
     } else {
       toast.error('error')
     }
@@ -79,7 +66,7 @@ const EditCrawlSettingModal = ({
       <div className='modal' role='dialog'>
         <div className='modal-box h-3/4 md:h-1/2'>
           <div
-            onClick={closeModal}
+            onClick={() => setModal(false)}
             className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
           >
             ✕
@@ -134,7 +121,7 @@ const EditCrawlSettingModal = ({
             </button>
           </form>
         </div>
-        <div onClick={closeModal} className='modal-backdrop' />
+        <div onClick={() => setModal(false)} className='modal-backdrop' />
       </div>
     </>
   )
