@@ -18,6 +18,10 @@ Rails.application.routes.draw do
 
           ## mercari ##
           resources :mercari_products, only: %i[index show]
+          resources :mercari_crawl_settings, only: [:index]
+          namespace :mercari_crawl_settings do
+            resources :mercari_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+          end
         end
       end
     end

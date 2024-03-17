@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useCreateCrawlSettingModalState } from '../../hooks/useCreateCrawlSettingModalState'
 import { createProduct } from '../../server-actions/productQuery'
 
+import MercariForm from './MercariForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
 import { CreateProductInput } from '@/graphql/dist/client'
@@ -24,6 +25,12 @@ const CreateCrawlSettingModal = () => {
       yahoo_auction_crawl_setting: {
         keyword: '',
         category_id: null,
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
+      },
+      mercari_crawl_setting: {
+        keyword: '',
         min_price: 0,
         max_price: 0,
         enabled: true,
@@ -71,7 +78,7 @@ const CreateCrawlSettingModal = () => {
             <div className='divider py-8'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/2'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -79,20 +86,12 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/2'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
                 defaultChecked={tab === 'メルカリ'}
                 onClick={() => setTab('メルカリ')}
-              />
-              <input
-                className='join-item btn btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='ペイペイ'
-                defaultChecked={tab === 'ペイペイ'}
-                onClick={() => setTab('ペイペイ')}
               />
             </Join>
             <div>
@@ -101,8 +100,11 @@ const CreateCrawlSettingModal = () => {
                   <YahooAuctionForm register={register} />
                 </div>
               )}
-              {tab === 'メルカリ' && <div>メルカリ</div>}
-              {tab === 'ペイペイ' && <div>ペイペイ</div>}
+              {tab === 'メルカリ' && (
+                <div className='py-4'>
+                  <MercariForm register={register} />
+                </div>
+              )}
             </div>
             <button type='submit' className='btn btn-primary w-full'>
               登録

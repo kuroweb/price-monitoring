@@ -41,6 +41,21 @@ func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx cont
 	return r.ProductService.DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx, id, productID)
 }
 
+// CreateMercariCrawlSettingExcludeKeyword is the resolver for the createMercariCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) CreateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateMercariCrawlSettingExcludeKeywordInput) (model.CreateMercariCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.CreateMercariCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// UpdateMercariCrawlSettingExcludeKeyword is the resolver for the updateMercariCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) UpdateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingExcludeKeywordInput) (model.UpdateMercariCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.UpdateMercariCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// DeleteMercariCrawlSettingExcludeKeyword is the resolver for the deleteMercariCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) DeleteMercariCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.DeleteMercariCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 

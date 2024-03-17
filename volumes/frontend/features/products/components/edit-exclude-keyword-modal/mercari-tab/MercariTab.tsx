@@ -8,12 +8,12 @@ import KeywordTable from './KeywordTable'
 
 import {
   GetProductDetailPageDataQuery,
-  YahooAuctionCrawlSettingExcludeKeyword,
+  MercariCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-const YahooAuctionTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const MercariTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
-  const [condition, setCondition] = useState<YahooAuctionCrawlSettingExcludeKeyword | undefined>(
+  const [condition, setCondition] = useState<MercariCrawlSettingExcludeKeyword | undefined>(
     undefined,
   )
 
@@ -49,4 +49,4 @@ const YahooAuctionTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   )
 }
 
-export default YahooAuctionTab
+export default MercariTab

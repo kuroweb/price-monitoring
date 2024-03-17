@@ -149,3 +149,84 @@ mutation deleteYahooAuctionCrawlSettingExcludeKeyword($id: ID!, $productId: ID!)
     }
   }
 }
+
+## MercariCrawlSettingExcludeKeyword ##
+
+mutation createMercariCrawlSettingExcludeKeyword(
+  $input: CreateMercariCrawlSettingExcludeKeywordInput!
+) {
+  createMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateMercariCrawlSettingExcludeKeyword(
+  $input: UpdateMercariCrawlSettingExcludeKeywordInput!
+) {
+  updateMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteMercariCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteMercariCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

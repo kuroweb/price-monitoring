@@ -32,6 +32,12 @@ func (u *UpdateProductService) UpdateProduct(ctx context.Context, id string, inp
 			"max_price":   input.YahooAuctionCrawlSetting.MaxPrice,
 			"enabled":     input.YahooAuctionCrawlSetting.Enabled,
 		},
+		"mercari_crawl_setting": map[string]interface{}{
+			"keyword":   input.MercariCrawlSetting.Keyword,
+			"min_price": input.MercariCrawlSetting.MinPrice,
+			"max_price": input.MercariCrawlSetting.MaxPrice,
+			"enabled":   input.MercariCrawlSetting.Enabled,
+		},
 	}
 
 	requestBody, err := json.Marshal(body)

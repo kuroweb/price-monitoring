@@ -112,6 +112,12 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
               max_price: product?.yahooAuctionCrawlSetting?.maxPrice,
               enabled: product?.yahooAuctionCrawlSetting?.enabled,
             },
+            mercari_crawl_setting: {
+              keyword: product?.mercariCrawlSetting?.keyword,
+              min_price: product?.mercariCrawlSetting?.minPrice,
+              max_price: product?.mercariCrawlSetting?.maxPrice,
+              enabled: product?.mercariCrawlSetting?.enabled,
+            },
           }
         }
       />

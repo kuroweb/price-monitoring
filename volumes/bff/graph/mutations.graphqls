@@ -12,6 +12,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
+  createMercariCrawlSettingExcludeKeyword(
+    input: CreateMercariCrawlSettingExcludeKeywordInput!
+  ): CreateMercariCrawlSettingExcludeKeywordResult!
+  updateMercariCrawlSettingExcludeKeyword(
+    input: UpdateMercariCrawlSettingExcludeKeywordInput!
+  ): UpdateMercariCrawlSettingExcludeKeywordResult!
+  deleteMercariCrawlSettingExcludeKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteMercariCrawlSettingExcludeKeywordResult!
 }
 
 ## common ##
@@ -35,11 +45,19 @@ type ErrorDetail {
 input CreateProductInput {
   name: String!
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput!
+  mercari_crawl_setting: CreateMercariCrawlSettingInput!
 }
 
 input CreateYahooAuctionCrawlSettingInput {
   keyword: String!
   category_id: Int
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input CreateMercariCrawlSettingInput {
+  keyword: String!
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -72,11 +90,19 @@ type CreateProductResultValidationFailed implements UserError {
 input UpdateProductInput {
   name: String!
   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput!
+  mercari_crawl_setting: UpdateMercariCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
   keyword: String!
   category_id: Int
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input UpdateMercariCrawlSettingInput {
+  keyword: String!
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -207,6 +233,91 @@ union DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors =
     DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed
 
 type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateMercariCrawlSettingExcludeKeyword ##
+
+input CreateMercariCrawlSettingExcludeKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateMercariCrawlSettingExcludeKeywordResult =
+    CreateMercariCrawlSettingExcludeKeywordResultSuccess
+  | CreateMercariCrawlSettingExcludeKeywordResultError
+
+type CreateMercariCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingExcludeKeyword: MercariCrawlSettingExcludeKeyword!
+}
+
+type CreateMercariCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateMercariCrawlSettingExcludeKeywordResultErrors!
+}
+
+union CreateMercariCrawlSettingExcludeKeywordResultErrors =
+    CreateMercariCrawlSettingExcludeKeywordResultValidationFailed
+
+type CreateMercariCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateMercariCrawlSettingExcludeKeyword ##
+
+input UpdateMercariCrawlSettingExcludeKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateMercariCrawlSettingExcludeKeywordResult =
+    UpdateMercariCrawlSettingExcludeKeywordResultSuccess
+  | UpdateMercariCrawlSettingExcludeKeywordResultError
+
+type UpdateMercariCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingExcludeKeyword: MercariCrawlSettingExcludeKeyword!
+}
+
+type UpdateMercariCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateMercariCrawlSettingExcludeKeywordResultErrors!
+}
+
+union UpdateMercariCrawlSettingExcludeKeywordResultErrors =
+    UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed
+
+type UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteMercariCrawlSettingExcludeKeyword ##
+
+union DeleteMercariCrawlSettingExcludeKeywordResult =
+    DeleteMercariCrawlSettingExcludeKeywordResultSuccess
+  | DeleteMercariCrawlSettingExcludeKeywordResultError
+
+type DeleteMercariCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteMercariCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteMercariCrawlSettingExcludeKeywordResultErrors!
+}
+
+union DeleteMercariCrawlSettingExcludeKeywordResultErrors =
+    DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed
+
+type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

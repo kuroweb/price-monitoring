@@ -11,6 +11,11 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
 )
 
+// MercariCrawlSettingExcludeKeywords is the resolver for the mercariCrawlSettingExcludeKeywords field.
+func (r *mercariCrawlSettingResolver) MercariCrawlSettingExcludeKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingExcludeKeyword, error) {
+	return r.ProductService.FindMercariCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
 func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error) {
 	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published)
@@ -31,9 +36,19 @@ func (r *productResolver) MercariProducts(ctx context.Context, obj *model.Produc
 	return r.ProductService.FindMercariProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)
 }
 
+// MercariCrawlSetting is the resolver for the mercariCrawlSetting field.
+func (r *productResolver) MercariCrawlSetting(ctx context.Context, obj *model.Product) (*model.MercariCrawlSetting, error) {
+	return r.ProductService.FindMercariCrawlSetting(ctx, obj.ID)
+}
+
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
 func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindYahooAuctionCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// MercariCrawlSetting returns internal.MercariCrawlSettingResolver implementation.
+func (r *Resolver) MercariCrawlSetting() internal.MercariCrawlSettingResolver {
+	return &mercariCrawlSettingResolver{r}
 }
 
 // Product returns internal.ProductResolver implementation.
@@ -44,5 +59,6 @@ func (r *Resolver) YahooAuctionCrawlSetting() internal.YahooAuctionCrawlSettingR
 	return &yahooAuctionCrawlSettingResolver{r}
 }
 
+type mercariCrawlSettingResolver struct{ *Resolver }
 type productResolver struct{ *Resolver }
 type yahooAuctionCrawlSettingResolver struct{ *Resolver }

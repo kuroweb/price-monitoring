@@ -27,7 +27,43 @@ export type CalculateDailyYahooAuctionProduct = Node & {
   updatedAt: Scalars['String']['output'];
 };
 
+export type CreateMercariCrawlSettingExcludeKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreateMercariCrawlSettingExcludeKeywordResult = CreateMercariCrawlSettingExcludeKeywordResultError | CreateMercariCrawlSettingExcludeKeywordResultSuccess;
+
+export type CreateMercariCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultError';
+  error: CreateMercariCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateMercariCrawlSettingExcludeKeywordResultErrors = CreateMercariCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type CreateMercariCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultSuccess';
+  mercariCrawlSettingExcludeKeyword: MercariCrawlSettingExcludeKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateMercariCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type CreateMercariCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
 export type CreateProductInput = {
+  mercari_crawl_setting: CreateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
 };
@@ -91,6 +127,28 @@ export type CreateYahooAuctionCrawlSettingInput = {
   min_price: Scalars['Int']['input'];
 };
 
+export type DeleteMercariCrawlSettingExcludeKeywordResult = DeleteMercariCrawlSettingExcludeKeywordResultError | DeleteMercariCrawlSettingExcludeKeywordResultSuccess;
+
+export type DeleteMercariCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultError';
+  error: DeleteMercariCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteMercariCrawlSettingExcludeKeywordResultErrors = DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type DeleteMercariCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type DeleteProductResult = DeleteProductResultError | DeleteProductResultSuccess;
 
 export type DeleteProductResultError = ResultBase & {
@@ -141,6 +199,28 @@ export type ErrorDetail = {
   message: Scalars['String']['output'];
 };
 
+export type MercariCrawlSetting = Node & {
+  __typename?: 'MercariCrawlSetting';
+  createdAt: Scalars['String']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  keyword: Scalars['String']['output'];
+  maxPrice: Scalars['Int']['output'];
+  mercariCrawlSettingExcludeKeywords: Array<MercariCrawlSettingExcludeKeyword>;
+  minPrice: Scalars['Int']['output'];
+  productId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
+export type MercariCrawlSettingExcludeKeyword = Node & {
+  __typename?: 'MercariCrawlSettingExcludeKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  mercariCrawlSettingId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type MercariProduct = Node & {
   __typename?: 'MercariProduct';
   boughtDate?: Maybe<Scalars['String']['output']>;
@@ -157,12 +237,20 @@ export type MercariProduct = Node & {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createMercariCrawlSettingExcludeKeyword: CreateMercariCrawlSettingExcludeKeywordResult;
   createProduct: CreateProductResult;
   createYahooAuctionCrawlSettingExcludeKeyword: CreateYahooAuctionCrawlSettingExcludeKeywordResult;
+  deleteMercariCrawlSettingExcludeKeyword: DeleteMercariCrawlSettingExcludeKeywordResult;
   deleteProduct: DeleteProductResult;
   deleteYahooAuctionCrawlSettingExcludeKeyword: DeleteYahooAuctionCrawlSettingExcludeKeywordResult;
+  updateMercariCrawlSettingExcludeKeyword: UpdateMercariCrawlSettingExcludeKeywordResult;
   updateProduct: UpdateProductResult;
   updateYahooAuctionCrawlSettingExcludeKeyword: UpdateYahooAuctionCrawlSettingExcludeKeywordResult;
+};
+
+
+export type MutationCreateMercariCrawlSettingExcludeKeywordArgs = {
+  input: CreateMercariCrawlSettingExcludeKeywordInput;
 };
 
 
@@ -176,6 +264,12 @@ export type MutationCreateYahooAuctionCrawlSettingExcludeKeywordArgs = {
 };
 
 
+export type MutationDeleteMercariCrawlSettingExcludeKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+};
+
+
 export type MutationDeleteProductArgs = {
   id: Scalars['ID']['input'];
 };
@@ -184,6 +278,11 @@ export type MutationDeleteProductArgs = {
 export type MutationDeleteYahooAuctionCrawlSettingExcludeKeywordArgs = {
   id: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateMercariCrawlSettingExcludeKeywordArgs = {
+  input: UpdateMercariCrawlSettingExcludeKeywordInput;
 };
 
 
@@ -205,6 +304,7 @@ export type Product = Node & {
   __typename?: 'Product';
   calculateDailyYahooAuctionProducts: Array<CalculateDailyYahooAuctionProduct>;
   id: Scalars['ID']['output'];
+  mercariCrawlSetting: MercariCrawlSetting;
   mercariProducts: Array<MercariProduct>;
   name: Scalars['String']['output'];
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting;
@@ -250,7 +350,44 @@ export type ResultBase = {
   ok: Scalars['Boolean']['output'];
 };
 
+export type UpdateMercariCrawlSettingExcludeKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdateMercariCrawlSettingExcludeKeywordResult = UpdateMercariCrawlSettingExcludeKeywordResultError | UpdateMercariCrawlSettingExcludeKeywordResultSuccess;
+
+export type UpdateMercariCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultError';
+  error: UpdateMercariCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateMercariCrawlSettingExcludeKeywordResultErrors = UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type UpdateMercariCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultSuccess';
+  mercariCrawlSettingExcludeKeyword: MercariCrawlSettingExcludeKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type UpdateMercariCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
 export type UpdateProductInput = {
+  mercari_crawl_setting: UpdateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput;
 };
@@ -399,13 +536,35 @@ export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exac
 
 export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
 
+export type CreateMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateMercariCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type CreateMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createMercariCrawlSettingExcludeKeyword: { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean, mercariCrawlSettingExcludeKeyword: { __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdateMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateMercariCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type UpdateMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateMercariCrawlSettingExcludeKeyword: { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean, mercariCrawlSettingExcludeKeyword: { __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeleteMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingExcludeKeyword: { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+
 export type GetProductPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean } }> };
+export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -413,7 +572,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }> } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
 
 
 export const CreateProductDocument = gql`
@@ -568,6 +727,84 @@ export const DeleteYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
   }
 }
     `;
+export const CreateMercariCrawlSettingExcludeKeywordDocument = gql`
+    mutation createMercariCrawlSettingExcludeKeyword($input: CreateMercariCrawlSettingExcludeKeywordInput!) {
+  createMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateMercariCrawlSettingExcludeKeywordDocument = gql`
+    mutation updateMercariCrawlSettingExcludeKeyword($input: UpdateMercariCrawlSettingExcludeKeywordInput!) {
+  updateMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteMercariCrawlSettingExcludeKeywordDocument = gql`
+    mutation deleteMercariCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteMercariCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetProductPageDataDocument = gql`
     query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -578,6 +815,14 @@ export const GetProductPageDataDocument = gql`
       productId
       keyword
       categoryId
+      minPrice
+      maxPrice
+      enabled
+    }
+    mercariCrawlSetting {
+      id
+      productId
+      keyword
       minPrice
       maxPrice
       enabled
@@ -634,6 +879,21 @@ export const GetProductDetailPageDataDocument = gql`
       createdAt
       updatedAt
     }
+    mercariCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      mercariCrawlSettingExcludeKeywords {
+        id
+        mercariCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
   }
 }
     `;
@@ -662,6 +922,15 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     deleteYahooAuctionCrawlSettingExcludeKeyword(variables: DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>(DeleteYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    createMercariCrawlSettingExcludeKeyword(variables: CreateMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingExcludeKeywordMutation>(CreateMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMercariCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    updateMercariCrawlSettingExcludeKeyword(variables: UpdateMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingExcludeKeywordMutation>(UpdateMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateMercariCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    deleteMercariCrawlSettingExcludeKeyword(variables: DeleteMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingExcludeKeywordMutation>(DeleteMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteMercariCrawlSettingExcludeKeyword', 'mutation', variables);
     },
     getProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductPageData', 'query', variables);

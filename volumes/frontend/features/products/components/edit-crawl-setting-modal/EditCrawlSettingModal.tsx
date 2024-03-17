@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useEditCrawlSettingModalState } from '../../hooks/useEditCrawlSettingModalState'
 import { updateProduct } from '../../server-actions/productQuery'
 
+import MercariForm from './MercariForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
 import { UpdateProductInput } from '@/graphql/dist/client'
@@ -22,7 +23,7 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'ペイペイ'>('ヤフオク')
+  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ'>('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
@@ -34,6 +35,12 @@ const EditCrawlSettingModal = ({
         min_price: defaultValues?.yahoo_auction_crawl_setting?.min_price || 0,
         max_price: defaultValues?.yahoo_auction_crawl_setting?.max_price || 0,
         enabled: defaultValues?.yahoo_auction_crawl_setting?.enabled || false,
+      },
+      mercari_crawl_setting: {
+        keyword: defaultValues?.mercari_crawl_setting?.keyword || '',
+        min_price: defaultValues?.mercari_crawl_setting?.min_price || 0,
+        max_price: defaultValues?.mercari_crawl_setting?.max_price || 0,
+        enabled: defaultValues?.mercari_crawl_setting?.enabled || false,
       },
     },
     values: defaultValues,
@@ -83,7 +90,7 @@ const EditCrawlSettingModal = ({
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/2'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -91,20 +98,12 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/2'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
                 checked={tab == 'メルカリ'}
                 onChange={() => setTab('メルカリ')}
-              />
-              <input
-                className='join-item btn btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='ペイペイ'
-                checked={tab == 'ペイペイ'}
-                onChange={() => setTab('ペイペイ')}
               />
             </Join>
             <div>
@@ -113,8 +112,11 @@ const EditCrawlSettingModal = ({
                   <YahooAuctionForm register={register} />
                 </div>
               )}
-              {tab == 'メルカリ' && <div>メルカリ</div>}
-              {tab == 'ペイペイ' && <div>ペイペイ</div>}
+              {tab == 'メルカリ' && (
+                <div className='py-4'>
+                  <MercariForm register={register} />
+                </div>
+              )}
             </div>
             <button type='submit' className='btn btn-primary w-full'>
               更新

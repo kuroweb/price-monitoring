@@ -2,6 +2,8 @@ package products
 
 import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/calculate_daily_yahoo_auction_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_setting_exclude_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_settings"
@@ -18,6 +20,8 @@ type IProductService interface {
 	yahoo_auction_crawl_setting_exclude_keywords.IYahooAuctionCrawlSettingExcludeKeywordService
 	calculate_daily_yahoo_auction_products.ICaluculateDailyYahooAuctionProductService
 	mercari_products.IMercariProductService
+	mercari_crawl_settings.IMercariCrawlSettingService
+	mercari_crawl_setting_exclude_keywords.IMercariCrawlSettingExcludeKeywordService
 }
 
 type ProductService struct {
@@ -30,6 +34,8 @@ type ProductService struct {
 	*yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService
 	*calculate_daily_yahoo_auction_products.CaluculateDailyYahooAuctionProductService
 	*mercari_products.MercariProductService
+	*mercari_crawl_settings.MercariCrawlSettingService
+	*mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService
 }
 
 func New() IProductService {
@@ -43,5 +49,7 @@ func New() IProductService {
 		YahooAuctionCrawlSettingExcludeKeywordService: &yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService{},
 		CaluculateDailyYahooAuctionProductService:     &calculate_daily_yahoo_auction_products.CaluculateDailyYahooAuctionProductService{},
 		MercariProductService:                         &mercari_products.MercariProductService{},
+		MercariCrawlSettingService:                    &mercari_crawl_settings.MercariCrawlSettingService{},
+		MercariCrawlSettingExcludeKeywordService:      &mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService{},
 	}
 }

@@ -126,6 +126,12 @@ const Page = async ({
             max_price: data.product.yahooAuctionCrawlSetting?.maxPrice,
             enabled: data.product.yahooAuctionCrawlSetting?.enabled,
           },
+          mercari_crawl_setting: {
+            keyword: data.product.mercariCrawlSetting?.keyword,
+            min_price: data.product.mercariCrawlSetting?.minPrice,
+            max_price: data.product.mercariCrawlSetting?.maxPrice,
+            enabled: data.product.mercariCrawlSetting?.enabled,
+          },
         }}
       />
     </Layout>

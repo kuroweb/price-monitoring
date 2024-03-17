@@ -22,8 +22,24 @@ func (c *CreateProductService) CreateProduct(ctx context.Context, input model.Cr
 	cfg := config.NewConfig()
 	url := fmt.Sprintf("%s/api/v1/products", cfg.BackendUrl)
 
-	// NewProduct 構造体をJSONに変換
-	requestBody, err := json.Marshal(input)
+	body := map[string]interface{}{
+		"name": input.Name,
+		"yahoo_auction_crawl_setting": map[string]interface{}{
+			"keyword":     input.YahooAuctionCrawlSetting.Keyword,
+			"category_id": input.YahooAuctionCrawlSetting.CategoryID,
+			"min_price":   input.YahooAuctionCrawlSetting.MinPrice,
+			"max_price":   input.YahooAuctionCrawlSetting.MaxPrice,
+			"enabled":     input.YahooAuctionCrawlSetting.Enabled,
+		},
+		"mercari_crawl_setting": map[string]interface{}{
+			"keyword":   input.MercariCrawlSetting.Keyword,
+			"min_price": input.MercariCrawlSetting.MinPrice,
+			"max_price": input.MercariCrawlSetting.MaxPrice,
+			"enabled":   input.MercariCrawlSetting.Enabled,
+		},
+	}
+
+	requestBody, err := json.Marshal(body)
 	if err != nil {
 		return c.handleServerError(), nil
 	}

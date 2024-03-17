@@ -9,6 +9,7 @@ type Product implements Node {
     sort: String
     order: String
   ): [MercariProduct!]!
+  mercariCrawlSetting: MercariCrawlSetting!
 }
 
 type YahooAuctionProduct implements Node {
@@ -61,6 +62,26 @@ type MercariProduct implements Node {
   price: Int!
   published: Boolean!
   boughtDate: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type MercariCrawlSetting implements Node {
+  id: ID!
+  productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  mercariCrawlSettingExcludeKeywords: [MercariCrawlSettingExcludeKeyword!]!
+}
+
+type MercariCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  mercariCrawlSettingId: Int!
+  keyword: String
   createdAt: String!
   updatedAt: String!
 }

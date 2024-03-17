@@ -95,7 +95,13 @@ models:
         resolver: true
       mercariProducts:
         resolver: true
+      mercariCrawlSetting:
+        resolver: true
   YahooAuctionCrawlSetting:
     fields:
       yahooAuctionCrawlSettingExcludeKeywords:
+        resolver: true
+  MercariCrawlSetting:
+    fields:
+      mercariCrawlSettingExcludeKeywords:
         resolver: true
