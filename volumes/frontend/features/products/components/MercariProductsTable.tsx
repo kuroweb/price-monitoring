@@ -27,8 +27,8 @@ const MercariProductsTable = ({ data }: { data: GetProductDetailPageDataQuery })
               <tr>
                 <th>商品名</th>
                 <th>価格</th>
-                {!published && <th>購入日</th>}
-                <th className='w-28'></th>
+                {!published && <th className="w-28">購入日</th>}
+                <th className='w-24'></th>
               </tr>
             </thead>
             <tbody>
