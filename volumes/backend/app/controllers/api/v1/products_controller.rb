@@ -12,8 +12,7 @@ module Api
       end
 
       def create
-        # TODO: シリアライザの導入
-        result = ::Products::CreateService.call(params: create_product_params)
+        result = ::Products::Create.call(params: create_product_params)
 
         if result.success?
           render json: result.payload[:product].as_json, status: 200
@@ -56,6 +55,10 @@ module Api
         %i[keyword category_id min_price max_price enabled]
       end
 
+      def mercari_crawl_setting_attributes
+        %i[keyword min_price max_price enabled]
+      end
+
       def external_params_attributes
         %i[sort order]
       end
@@ -67,14 +70,16 @@ module Api
       def create_product_params
         @create_product_params ||= params.permit(
           product_attributes,
-          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes
+          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
+          mercari_crawl_setting: mercari_crawl_setting_attributes
         )
       end
 
       def update_product_params
         @update_product_params ||= params.permit(
           product_attributes,
-          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes
+          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
+          mercari_crawl_setting: mercari_crawl_setting_attributes
         )
       end
     end
