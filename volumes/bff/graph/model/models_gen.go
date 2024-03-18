@@ -147,10 +147,11 @@ func (this CreateMercariCrawlSettingExcludeKeywordResultValidationFailed) GetMes
 }
 
 type CreateMercariCrawlSettingInput struct {
-	Keyword  string `json:"keyword"`
-	MinPrice int    `json:"min_price"`
-	MaxPrice int    `json:"max_price"`
-	Enabled  bool   `json:"enabled"`
+	Keyword    string `json:"keyword"`
+	CategoryID *int   `json:"category_id,omitempty"`
+	MinPrice   int    `json:"min_price"`
+	MaxPrice   int    `json:"max_price"`
+	Enabled    bool   `json:"enabled"`
 }
 
 type CreateProductInput struct {
@@ -361,6 +362,7 @@ type MercariCrawlSetting struct {
 	Keyword                            string                               `json:"keyword"`
 	MinPrice                           int                                  `json:"minPrice"`
 	MaxPrice                           int                                  `json:"maxPrice"`
+	CategoryID                         *int                                 `json:"categoryId,omitempty"`
 	Enabled                            bool                                 `json:"enabled"`
 	CreatedAt                          string                               `json:"createdAt"`
 	UpdatedAt                          string                               `json:"updatedAt"`
@@ -456,10 +458,11 @@ func (this UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed) GetMes
 }
 
 type UpdateMercariCrawlSettingInput struct {
-	Keyword  string `json:"keyword"`
-	MinPrice int    `json:"min_price"`
-	MaxPrice int    `json:"max_price"`
-	Enabled  bool   `json:"enabled"`
+	Keyword    string `json:"keyword"`
+	CategoryID *int   `json:"category_id,omitempty"`
+	MinPrice   int    `json:"min_price"`
+	MaxPrice   int    `json:"max_price"`
+	Enabled    bool   `json:"enabled"`
 }
 
 type UpdateProductInput struct {

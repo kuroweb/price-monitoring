@@ -157,6 +157,7 @@ type ComplexityRoot struct {
 	}
 
 	MercariCrawlSetting struct {
+		CategoryID                         func(childComplexity int) int
 		CreatedAt                          func(childComplexity int) int
 		Enabled                            func(childComplexity int) int
 		ID                                 func(childComplexity int) int
@@ -675,6 +676,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.ErrorDetail.Message(childComplexity), true
+
+	case "MercariCrawlSetting.categoryId":
+		if e.complexity.MercariCrawlSetting.CategoryID == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSetting.CategoryID(childComplexity), true
 
 	case "MercariCrawlSetting.createdAt":
 		if e.complexity.MercariCrawlSetting.CreatedAt == nil {
@@ -1534,6 +1542,7 @@ input CreateYahooAuctionCrawlSettingInput {
 
 input CreateMercariCrawlSettingInput {
   keyword: String!
+  category_id: Int
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -1579,6 +1588,7 @@ input UpdateYahooAuctionCrawlSettingInput {
 
 input UpdateMercariCrawlSettingInput {
   keyword: String!
+  category_id: Int
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -1873,6 +1883,7 @@ type MercariCrawlSetting implements Node {
   keyword: String!
   minPrice: Int!
   maxPrice: Int!
+  categoryId: Int
   enabled: Boolean!
   createdAt: String!
   updatedAt: String!
@@ -4578,6 +4589,47 @@ func (ec *executionContext) fieldContext_MercariCrawlSetting_maxPrice(ctx contex
 	return fc, nil
 }
 
+func (ec *executionContext) _MercariCrawlSetting_categoryId(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSetting_categoryId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CategoryID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*int)
+	fc.Result = res
+	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSetting_categoryId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _MercariCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_MercariCrawlSetting_enabled(ctx, field)
 	if err != nil {
@@ -6326,6 +6378,8 @@ func (ec *executionContext) fieldContext_Product_mercariCrawlSetting(ctx context
 				return ec.fieldContext_MercariCrawlSetting_minPrice(ctx, field)
 			case "maxPrice":
 				return ec.fieldContext_MercariCrawlSetting_maxPrice(ctx, field)
+			case "categoryId":
+				return ec.fieldContext_MercariCrawlSetting_categoryId(ctx, field)
 			case "enabled":
 				return ec.fieldContext_MercariCrawlSetting_enabled(ctx, field)
 			case "createdAt":
@@ -10479,7 +10533,7 @@ func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingInput(ctx con
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	fieldsInOrder := [...]string{"keyword", "category_id", "min_price", "max_price", "enabled"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -10495,6 +10549,15 @@ func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingInput(ctx con
 				return it, err
 			}
 			it.Keyword = data
+		case "category_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("category_id"))
+			data, err := ec.unmarshalOInt2ᚖint(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.CategoryID = data
 		case "min_price":
 			var err error
 
@@ -10732,7 +10795,7 @@ func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingInput(ctx con
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	fieldsInOrder := [...]string{"keyword", "category_id", "min_price", "max_price", "enabled"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -10748,6 +10811,15 @@ func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingInput(ctx con
 				return it, err
 			}
 			it.Keyword = data
+		case "category_id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("category_id"))
+			data, err := ec.unmarshalOInt2ᚖint(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.CategoryID = data
 		case "min_price":
 			var err error
 
@@ -12519,6 +12591,8 @@ func (ec *executionContext) _MercariCrawlSetting(ctx context.Context, sel ast.Se
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&out.Invalids, 1)
 			}
+		case "categoryId":
+			out.Values[i] = ec._MercariCrawlSetting_categoryId(ctx, field, obj)
 		case "enabled":
 			out.Values[i] = ec._MercariCrawlSetting_enabled(ctx, field, obj)
 			if out.Values[i] == graphql.Null {

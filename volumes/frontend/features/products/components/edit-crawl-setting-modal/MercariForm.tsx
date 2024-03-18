@@ -20,6 +20,17 @@ const MercariForm = ({
       </label>
       <label className='form-control'>
         <div className='label'>
+          <span className='label-text'>カテゴリID</span>
+        </div>
+        <input
+          {...register('mercari_crawl_setting.category_id', {
+            setValueAs: (v) => (v === '' ? null : v),
+          })}
+          className='input input-bordered'
+        />
+      </label>
+      <label className='form-control'>
+        <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
         <input

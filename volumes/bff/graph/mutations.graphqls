@@ -58,6 +58,7 @@ input CreateYahooAuctionCrawlSettingInput {
 
 input CreateMercariCrawlSettingInput {
   keyword: String!
+  category_id: Int
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -103,6 +104,7 @@ input UpdateYahooAuctionCrawlSettingInput {
 
 input UpdateMercariCrawlSettingInput {
   keyword: String!
+  category_id: Int
   min_price: Int!
   max_price: Int!
   enabled: Boolean!

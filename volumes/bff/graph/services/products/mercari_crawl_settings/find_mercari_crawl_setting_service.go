@@ -33,14 +33,15 @@ func (f *FindMercariCrawlSettingService) FindMercariCrawlSetting(ctx context.Con
 	}
 
 	var response struct {
-		ID        int    `json:"id"`
-		ProductId int    `json:"product_id"`
-		Keyword   string `json:"keyword"`
-		MinPrice  int    `json:"min_price"`
-		MaxPrice  int    `json:"max_price"`
-		Enabled   bool   `json:"enabled"`
-		CreatedAt string `json:"created_at"`
-		UpdatedAt string `json:"updated_at"`
+		ID         int    `json:"id"`
+		ProductId  int    `json:"product_id"`
+		Keyword    string `json:"keyword"`
+		MinPrice   int    `json:"min_price"`
+		MaxPrice   int    `json:"max_price"`
+		CategoryId *int   `json:"category_id"`
+		Enabled    bool   `json:"enabled"`
+		CreatedAt  string `json:"created_at"`
+		UpdatedAt  string `json:"updated_at"`
 	}
 
 	decoder := json.NewDecoder(resp.Body)
@@ -49,14 +50,15 @@ func (f *FindMercariCrawlSettingService) FindMercariCrawlSetting(ctx context.Con
 	}
 
 	mercariCrawlSetting := &model.MercariCrawlSetting{
-		ID:        strconv.Itoa(response.ID),
-		ProductID: response.ProductId,
-		Keyword:   response.Keyword,
-		MinPrice:  response.MinPrice,
-		MaxPrice:  response.MaxPrice,
-		Enabled:   response.Enabled,
-		CreatedAt: response.CreatedAt,
-		UpdatedAt: response.UpdatedAt,
+		ID:         strconv.Itoa(response.ID),
+		ProductID:  response.ProductId,
+		Keyword:    response.Keyword,
+		MinPrice:   response.MinPrice,
+		MaxPrice:   response.MaxPrice,
+		CategoryID: response.CategoryId,
+		Enabled:    response.Enabled,
+		CreatedAt:  response.CreatedAt,
+		UpdatedAt:  response.UpdatedAt,
 	}
 
 	return mercariCrawlSetting, nil

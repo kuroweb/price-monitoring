@@ -56,6 +56,7 @@ export type CreateMercariCrawlSettingExcludeKeywordResultValidationFailed = User
 };
 
 export type CreateMercariCrawlSettingInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
   enabled: Scalars['Boolean']['input'];
   keyword: Scalars['String']['input'];
   max_price: Scalars['Int']['input'];
@@ -201,6 +202,7 @@ export type ErrorDetail = {
 
 export type MercariCrawlSetting = Node & {
   __typename?: 'MercariCrawlSetting';
+  categoryId?: Maybe<Scalars['Int']['output']>;
   createdAt: Scalars['String']['output'];
   enabled: Scalars['Boolean']['output'];
   id: Scalars['ID']['output'];
@@ -380,6 +382,7 @@ export type UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed = User
 };
 
 export type UpdateMercariCrawlSettingInput = {
+  category_id?: InputMaybe<Scalars['Int']['input']>;
   enabled: Scalars['Boolean']['input'];
   keyword: Scalars['String']['input'];
   max_price: Scalars['Int']['input'];
@@ -564,7 +567,7 @@ export type GetProductPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
+export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean } }> };
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -572,7 +575,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
 
 
 export const CreateProductDocument = gql`
@@ -823,6 +826,7 @@ export const GetProductPageDataDocument = gql`
       id
       productId
       keyword
+      categoryId
       minPrice
       maxPrice
       enabled
@@ -883,6 +887,7 @@ export const GetProductDetailPageDataDocument = gql`
       id
       productId
       keyword
+      categoryId
       minPrice
       maxPrice
       enabled

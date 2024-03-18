@@ -31,6 +31,7 @@ const CreateCrawlSettingModal = () => {
       },
       mercari_crawl_setting: {
         keyword: '',
+        category_id: null,
         min_price: 0,
         max_price: 0,
         enabled: true,
