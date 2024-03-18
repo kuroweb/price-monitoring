@@ -26,9 +26,9 @@ const YahooAuctionProductsTable = ({ data }: { data: GetProductDetailPageDataQue
             <thead>
               <tr>
                 <th>商品名</th>
-                <th>価格</th>
-                {!published && <th className='w-28'>購入日</th>}
-                <th className='w-24'></th>
+                <th className='min-w-18 w-18'>価格</th>
+                {!published && <th className='min-w-24 w-24 md:min-w-28 md:w-28'>購入日</th>}
+                <th className='min-w-24 w-24'></th>
               </tr>
             </thead>
             <tbody>
@@ -41,10 +41,10 @@ const YahooAuctionProductsTable = ({ data }: { data: GetProductDetailPageDataQue
                   <td className='p-2'>{product.name}</td>
                   <td className='p-2'>{product.price}</td>
                   {!published && <td className='p-2'>{parseDate(product.boughtDate)}</td>}
-                  <td className='p-0 md:p-2'>
+                  <td className='p-2'>
                     <div className='relative aspect-square'>
                       <NextImage
-                        className='object-contain'
+                        className='object-cover rounded-lg'
                         src={product.thumbnailUrl}
                         alt=''
                         fill
