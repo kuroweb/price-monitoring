@@ -8,6 +8,7 @@ import EditCrawlSettingModal from '@/features/products/components/edit-crawl-set
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
+import { publishedStateCache } from '@/features/products/hooks/usePublishedState'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -21,9 +22,9 @@ const Page = async ({
   params: { [key: string]: string | undefined }
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const published = searchParams.published ? searchParams.published === 'true' : true
+  const { published: published } = publishedStateCache.parse(searchParams)
 
-  const { data, error } = await getClient().query<GetProductDetailPageDataQuery>({
+  const { data } = await getClient().query<GetProductDetailPageDataQuery>({
     query: GetProductDetailPageDataDocument,
     variables: {
       id: params.id,
@@ -111,7 +112,7 @@ const Page = async ({
                 </>
               )}
             </div>
-            <YahooAuctionProductsTable data={data} error={error} />
+            <YahooAuctionProductsTable data={data} />
           </div>
         </div>
       </div>

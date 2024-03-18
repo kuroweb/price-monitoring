@@ -1,13 +1,13 @@
 'use client'
 
 import NextImage from 'next/image'
-import { useSearchParams } from 'next/navigation'
+
+import { usePublishedState } from '../hooks/usePublishedState'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const MercariProductsTable = ({ data }: { data: GetProductDetailPageDataQuery }) => {
-  const searchParams = useSearchParams()
-  const published = searchParams.get('published') ? searchParams.get('published') === 'true' : true
+  const [published, _] = usePublishedState()
 
   const handleRowClick = (mercariId: String) => {
     window.open(`https://jp.mercari.com/item/${mercariId}`, '_blank')
