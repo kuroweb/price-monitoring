@@ -322,7 +322,9 @@ export type ProductMercariProductsArgs = {
 
 
 export type ProductYahooAuctionProductsArgs = {
+  order?: InputMaybe<Scalars['String']['input']>;
   published?: InputMaybe<Scalars['Boolean']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type Query = {
@@ -486,12 +488,14 @@ export type YahooAuctionCrawlSettingExcludeKeyword = Node & {
 export type YahooAuctionProduct = Node & {
   __typename?: 'YahooAuctionProduct';
   boughtDate?: Maybe<Scalars['String']['output']>;
+  createdAt: Scalars['String']['output'];
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
   price: Scalars['Int']['output'];
   productId: Scalars['Int']['output'];
   published: Scalars['Boolean']['output'];
   thumbnailUrl: Scalars['String']['output'];
+  updatedAt: Scalars['String']['output'];
   yahooAuctionId: Scalars['String']['output'];
 };
 
@@ -575,7 +579,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
 
 
 export const CreateProductDocument = gql`
@@ -839,7 +843,7 @@ export const GetProductDetailPageDataDocument = gql`
   product(id: $id) {
     id
     name
-    yahooAuctionProducts(published: $published) {
+    yahooAuctionProducts(published: $published, sort: "bought_date", order: "desc") {
       id
       productId
       yahooAuctionId
@@ -847,6 +851,9 @@ export const GetProductDetailPageDataDocument = gql`
       thumbnailUrl
       price
       published
+      boughtDate
+      createdAt
+      updatedAt
     }
     yahooAuctionCrawlSetting {
       id
