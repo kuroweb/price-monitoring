@@ -25,10 +25,10 @@ const YahooAuctionProductsTable = ({ data }: { data: GetProductDetailPageDataQue
           <table className='table'>
             <thead>
               <tr>
-                <th>商品名</th>
-                <th className='min-w-18 w-18'>価格</th>
-                {!published && <th className='min-w-24 w-24 md:min-w-28 md:w-28'>購入日</th>}
-                <th className='min-w-24 w-24'></th>
+                <th className='w-42 md:w-auto'>商品名</th>
+                <th className='w-18'>価格</th>
+                {!published && <th className='w-24 md:w-28'>購入日</th>}
+                <th className='w-24'></th>
               </tr>
             </thead>
             <tbody>
