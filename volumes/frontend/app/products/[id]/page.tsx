@@ -8,7 +8,10 @@ import EditCrawlSettingModal from '@/features/products/components/edit-crawl-set
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
-import { publishedStateCache } from '@/features/products/hooks/usePublishedState'
+import {
+  publishedStateCache,
+  usePublishedStateQuery,
+} from '@/features/products/hooks/usePublishedState'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -22,7 +25,7 @@ const Page = async ({
   params: { [key: string]: string | undefined }
   searchParams: { [key: string]: string | undefined }
 }) => {
-  const { published: published } = publishedStateCache.parse(searchParams)
+  const { [usePublishedStateQuery]: published } = publishedStateCache.parse(searchParams)
 
   const { data } = await getClient().query<GetProductDetailPageDataQuery>({
     query: GetProductDetailPageDataDocument,
@@ -73,45 +76,48 @@ const Page = async ({
             <CalculateDailyYahooAuctionProductChart data={data} />
           </div>
         </div>
+        <div className='flex justify-end'>
+          {published ? (
+            <>
+              <Link
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [usePublishedStateQuery]: false,
+                  },
+                }}
+                className='btn btn-link'
+              >
+                落札一覧に切り替え
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [usePublishedStateQuery]: true,
+                  },
+                }}
+                className='btn btn-link'
+              >
+                出品一覧に切り替え
+              </Link>
+            </>
+          )}
+        </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>メルカリ</h2>
-            <div className='flex justify-end'>
-              {published ? (
-                <>
-                  <Link href={`/products/${params.id}?published=false`} className='btn btn-link'>
-                    落札一覧に切り替え
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href={`/products/${params.id}?published=true`} className='btn btn-link'>
-                    出品一覧に切り替え
-                  </Link>
-                </>
-              )}
-            </div>
             <MercariProductsTable data={data} />
           </div>
         </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>ヤフオク</h2>
-            <div className='flex justify-end'>
-              {published ? (
-                <>
-                  <Link href={`/products/${params.id}?published=false`} className='btn btn-link'>
-                    落札一覧に切り替え
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <Link href={`/products/${params.id}?published=true`} className='btn btn-link'>
-                    出品一覧に切り替え
-                  </Link>
-                </>
-              )}
-            </div>
             <YahooAuctionProductsTable data={data} />
           </div>
         </div>
