@@ -41,7 +41,7 @@ const MercariProductsTable = ({ data }: { data: GetProductDetailPageDataQuery })
                   <td className='p-2'>{product.name}</td>
                   <td className='p-2'>{product.price}</td>
                   {!published && <td className='p-2'>{parseDate(product.boughtDate)}</td>}
-                  <td className='p-2'>
+                  <td className='p-0 md:p-2'>
                     <div className='relative aspect-square'>
                       <NextImage
                         className='object-contain'
