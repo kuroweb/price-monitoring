@@ -9,7 +9,7 @@ module Crawl
 
       def execute
         inspected_crawl_results = crawl_results.results.select { |crawl_result| inspect(crawl_result) }
-        Crawl::YahooAuction::CrawlResults.new(inspected_crawl_results)
+        CrawlResults.new(inspected_crawl_results)
       end
 
       private
