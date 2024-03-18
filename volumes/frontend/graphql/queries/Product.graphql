@@ -27,7 +27,7 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
   product(id: $id) {
     id
     name
-    yahooAuctionProducts(published: $published) {
+    yahooAuctionProducts(published: $published, sort: "bought_date", order: "desc") {
       id
       productId
       yahooAuctionId
@@ -35,6 +35,9 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
       thumbnailUrl
       price
       published
+      boughtDate
+      createdAt
+      updatedAt
     }
     yahooAuctionCrawlSetting {
       id

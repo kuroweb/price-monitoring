@@ -17,8 +17,8 @@ func (r *mercariCrawlSettingResolver) MercariCrawlSettingExcludeKeywords(ctx con
 }
 
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
-func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool) ([]*model.YahooAuctionProduct, error) {
-	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published)
+func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error) {
+	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)
 }
 
 // YahooAuctionCrawlSetting is the resolver for the yahooAuctionCrawlSetting field.

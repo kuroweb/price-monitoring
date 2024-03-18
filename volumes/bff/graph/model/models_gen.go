@@ -592,6 +592,8 @@ type YahooAuctionProduct struct {
 	Price          int     `json:"price"`
 	Published      bool    `json:"published"`
 	BoughtDate     *string `json:"boughtDate,omitempty"`
+	CreatedAt      string  `json:"createdAt"`
+	UpdatedAt      string  `json:"updatedAt"`
 }
 
 func (YahooAuctionProduct) IsNode()            {}

@@ -14,12 +14,12 @@ import (
 )
 
 type IFindYahooAuctionProductService interface {
-	FindYahooAuctionProduct(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error)
+	FindYahooAuctionProduct(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error)
 }
 
 type FindYahooAuctionProductService struct{}
 
-func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool) ([]*model.YahooAuctionProduct, error) {
+func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Context, id *string, productID *string, yahooAuctionID *string, name *string, price *int, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error) {
 	params := make(url.Values)
 
 	if id != nil {
@@ -40,6 +40,14 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 
 	if published != nil {
 		params.Set("published", strconv.FormatBool(*published))
+	}
+
+	if sort != nil {
+		params.Set("sort", *sort)
+	}
+
+	if order != nil {
+		params.Set("order", *order)
 	}
 
 	cfg := config.NewConfig()
@@ -64,6 +72,8 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 			Price          int     `json:"price"`
 			Published      bool    `json:"published"`
 			BoughtDate     *string `json:"bought_date"`
+			CreatedAt      string  `json:"created_at"`
+			UpdatedAt      string  `json:"updated_at"`
 		} `json:"yahoo_auction_products"`
 	}
 
@@ -82,6 +92,8 @@ func (f *FindYahooAuctionProductService) FindYahooAuctionProduct(ctx context.Con
 			Price:          yahoo_auction_product.Price,
 			Published:      yahoo_auction_product.Published,
 			BoughtDate:     yahoo_auction_product.BoughtDate,
+			CreatedAt:      yahoo_auction_product.CreatedAt,
+			UpdatedAt:      yahoo_auction_product.UpdatedAt,
 		}
 	}
 
