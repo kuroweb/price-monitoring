@@ -21,10 +21,10 @@ module Crawl
       attr_reader :product
 
       def fetch_crawl_results
-        published_results = Crawl::YahooAuction::Published::Crawler.new(product:).execute
-        unpublished_results = Crawl::YahooAuction::Unpublished::Crawler.new(product:).execute
-        all_results = Crawl::YahooAuction::CrawlResults.new(published_results.results + unpublished_results.results)
-        Crawl::YahooAuction::InspectCrawlResults.new(yahoo_auction_crawl_setting:, crawl_results: all_results).execute
+        published_results = Published::Crawler.new(product:).execute
+        unpublished_results = Unpublished::Crawler.new(product:).execute
+        all_results = CrawlResults.new(published_results.results + unpublished_results.results)
+        InspectCrawlResults.new(yahoo_auction_crawl_setting:, crawl_results: all_results).execute
       end
 
       def save(crawl_results)
