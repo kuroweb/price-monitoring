@@ -90,7 +90,8 @@ module Crawl
 
         def bought_date(dom)
           date_str = dom.query_selector(".Product__time").inner_text
-          date_str.to_datetime
+          datetime = date_str.to_datetime
+          datetime > Time.current ? datetime.ago(1.year) : datetime
         end
 
         def crawl_results
