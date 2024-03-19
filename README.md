@@ -104,7 +104,7 @@ erDiagram
     boolean published
     datetime bought_date
   }
-  yahoo_auction_price_analysises {
+  yahoo_auction_price_analyses {
     bigint id PK
     bigint product_id FK
     int averate_price
@@ -115,7 +115,7 @@ erDiagram
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
-  products ||--o{ yahoo_auction_price_analysises : "1:N"
+  products ||--o{ yahoo_auction_price_analyses : "1:N"
 ```
 
 ### メルカリ関連
@@ -149,7 +149,7 @@ erDiagram
     boolean published
     datetime bought_date
   }
-  mercari_price_analysises {
+  mercari_price_analyses {
     bigint id PK
     bigint product_id FK
     int averate_price
@@ -160,7 +160,7 @@ erDiagram
   products ||--|| mercari_crawl_settings : "1:1"
   mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
   products ||--o{ mercari_products : "1:N"
-  products ||--o{ mercari_price_analysises : "1:N"
+  products ||--o{ mercari_price_analyses : "1:N"
 ```
 
 ## 自動デプロイ
