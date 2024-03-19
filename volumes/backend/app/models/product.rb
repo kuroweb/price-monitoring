@@ -5,7 +5,6 @@ class Product < ApplicationRecord
 
   has_many :yahoo_auction_products, dependent: :destroy
   has_many :mercari_products, dependent: :destroy
-  has_many :calculate_daily_yahoo_auction_products, dependent: :destroy
 
   ## validations ##
 

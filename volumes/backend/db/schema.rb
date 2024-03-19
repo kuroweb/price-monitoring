@@ -10,17 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_03_225609) do
-  create_table "calculate_daily_yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.integer "price"
-    t.date "target_date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "target_date"], name: "idx_on_product_id_target_date_cf1660df56", unique: true
-    t.index ["product_id"], name: "index_calculate_daily_yahoo_auction_products_on_product_id"
-  end
-
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_133422) do
   create_table "mercari_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "mercari_crawl_setting_id"
     t.string "keyword", null: false
@@ -102,7 +92,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_03_225609) do
     t.index ["yahoo_auction_id"], name: "index_yahoo_auction_products_on_yahoo_auction_id", unique: true
   end
 
-  add_foreign_key "calculate_daily_yahoo_auction_products", "products"
   add_foreign_key "mercari_crawl_setting_exclude_keywords", "mercari_crawl_settings"
   add_foreign_key "mercari_crawl_settings", "products"
   add_foreign_key "mercari_products", "products"
