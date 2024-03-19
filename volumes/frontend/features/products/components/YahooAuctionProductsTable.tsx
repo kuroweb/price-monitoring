@@ -25,10 +25,10 @@ const YahooAuctionProductsTable = ({ data }: { data: GetProductDetailPageDataQue
           <table className='table'>
             <thead>
               <tr>
-                <th className='w-42 md:w-auto'>商品名</th>
-                <th className='w-18'>価格</th>
-                {!published && <th className='w-24 md:w-28'>購入日</th>}
-                <th className='w-24'></th>
+                <th>商品名</th>
+                <th>価格</th>
+                {!published && <th>購入日</th>}
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -38,10 +38,14 @@ const YahooAuctionProductsTable = ({ data }: { data: GetProductDetailPageDataQue
                   onClick={() => handleRowClick(product.yahooAuctionId)}
                   className='border-b border-base-200 cursor-pointer hover:bg-base-100'
                 >
-                  <td className='p-2'>{product.name}</td>
-                  <td className='p-2'>{product.price}</td>
-                  {!published && <td className='p-2'>{parseDate(product.boughtDate)}</td>}
-                  <td className='p-2'>
+                  <td className='p-2 w-36 max-w-36 md:w-full md:max-w-full'>{product.name}</td>
+                  <td className='p-2 w-16 min-w-16'>{product.price}</td>
+                  {!published && (
+                    <td className='p-2 w-24 min-w-24 md:w-28 md:min-w-28'>
+                      {parseDate(product.boughtDate)}
+                    </td>
+                  )}
+                  <td className='p-2 w-20 min-w-20 md:w-24 md:min-w-24'>
                     <div className='relative aspect-square'>
                       <NextImage
                         className='object-cover rounded-lg'
