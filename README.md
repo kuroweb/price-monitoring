@@ -107,7 +107,7 @@ erDiagram
   yahoo_auction_price_analyses {
     bigint id PK
     bigint product_id FK
-    int averate_price
+    int average_price
     int bought_count
     date bought_date
   }
@@ -152,7 +152,7 @@ erDiagram
   mercari_price_analyses {
     bigint id PK
     bigint product_id FK
-    int averate_price
+    int average_price
     int bought_count
     date bought_date
   }
