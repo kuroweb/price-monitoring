@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   has_one :mercari_crawl_setting, dependent: :destroy
 
   has_many :yahoo_auction_products, dependent: :destroy
+  has_many :yahoo_auction_daily_purchase_summaries, dependent: :destroy
   has_many :mercari_products, dependent: :destroy
 
   ## validations ##

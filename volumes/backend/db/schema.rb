@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_19_133422) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_19_221414) do
   create_table "mercari_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "mercari_crawl_setting_id"
     t.string "keyword", null: false
@@ -77,6 +77,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_133422) do
     t.index ["product_id"], name: "index_yahoo_auction_crawl_settings_on_product_id"
   end
 
+  create_table "yahoo_auction_daily_purchase_summaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id"
+    t.integer "average_purchase_price"
+    t.integer "purchase_count", default: 0
+    t.date "date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "date"], name: "idx_on_product_id_date_d63712c38b", unique: true
+    t.index ["product_id"], name: "index_yahoo_auction_daily_purchase_summaries_on_product_id"
+  end
+
   create_table "yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.string "yahoo_auction_id", null: false
@@ -97,5 +108,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_19_133422) do
   add_foreign_key "mercari_products", "products"
   add_foreign_key "yahoo_auction_crawl_setting_exclude_keywords", "yahoo_auction_crawl_settings"
   add_foreign_key "yahoo_auction_crawl_settings", "products"
+  add_foreign_key "yahoo_auction_daily_purchase_summaries", "products"
   add_foreign_key "yahoo_auction_products", "products"
 end
