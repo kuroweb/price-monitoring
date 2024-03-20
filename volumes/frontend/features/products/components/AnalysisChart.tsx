@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -9,21 +8,21 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  ComposedChart,
+  Bar,
 } from 'recharts'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const AnalysisChart = ({
   yahooAuctionData,
-  // mercariData
 }: {
   yahooAuctionData: GetProductDetailPageDataQuery['product']['yahooAuctionDailyPurchaseSummaries']
-  // mercariData: GetProductDetailPageDataQuery['product']['calculateDailyMercariProducts']
 }) => {
   return (
     <>
       <ResponsiveContainer width='100%' height={300}>
-        <LineChart
+        <ComposedChart
           data={yahooAuctionData}
           margin={{
             top: 5,
@@ -34,26 +33,28 @@ const AnalysisChart = ({
         >
           <CartesianGrid strokeDasharray='3 3' />
           <XAxis dataKey='date' />
-          <YAxis />
+          <YAxis yAxisId={1} orientation='left' />
+          <YAxis yAxisId={2} orientation='right' />
           <Tooltip />
           <Legend />
           <Line
+            yAxisId={1}
             type='monotone'
             dataKey='averagePurchasePrice'
-            name='ヤフオク'
+            name='ヤフオク(価格)'
             stroke='orange'
             activeDot={{ r: 8 }}
             animationDuration={100}
           />
-          {/* <Line
+          <Bar
+            yAxisId={2}
             type='monotone'
-            dataKey='id'
-            name='メルカリ'
-            stroke='red'
-            activeDot={{ r: 8 }}
+            dataKey='purchaseCount'
+            name='ヤフオク(購入数)'
+            fill='orange'
             animationDuration={100}
-          /> */}
-        </LineChart>
+          />
+        </ComposedChart>
       </ResponsiveContainer>
     </>
   )
