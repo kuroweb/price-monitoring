@@ -7,6 +7,6 @@ crawl_mercari_enqueue_sync_job:
 crawl_mercari_sync_bought_date_job:
   cron: "0 * * * *"
   class: "Crawl::Mercari::SyncBoughtDateJob"
-analysis_yahoo_auction_enqueue_calculate_price_job:
+analysis_yahoo_auction_calculate_daily_purchase_summary_job:
   cron: "0 0 * * *"
-  class: "Analysis::YahooAuction::EnqueueCalculatePriceJob"
+  class: "Analysis::YahooAuction::CalculateDailyPurchaseSummaryJob"

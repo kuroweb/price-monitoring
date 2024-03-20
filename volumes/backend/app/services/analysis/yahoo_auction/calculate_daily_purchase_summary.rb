@@ -1,7 +1,7 @@
 # ヤフオク落札価格集計クラス
 module Analysis
   module YahooAuction
-    class CalculatePrice
+    class CalculateDailyPurchaseSummary
       def self.call(...)
         new(...).call
       end
@@ -25,8 +25,8 @@ module Analysis
         (start_date.to_date..end_date.to_date).to_a.map do |date|
           {
             product_id: product.id,
-            target_date: date,
-            price: calculate_result_map[date.to_s]&.price
+            date:,
+            average_purchase_price: calculate_result_map[date.to_s]&.price
           }
         end
       end
@@ -34,16 +34,16 @@ module Analysis
       def calculate_result_map
         @calculate_result_map ||=
           product
-          .yahoo_auction_products.bought
+          .yahoo_auction_products
           .where(bought_date: start_date.to_datetime.beginning_of_day..end_date.to_datetime.end_of_day)
-          .group("target_date")
-          .select("DATE(yahoo_auction_products.bought_date) AS target_date, AVG(yahoo_auction_products.price) AS price")
-          .index_by { |result| result.target_date.to_s }
+          .group("date")
+          .select("DATE(yahoo_auction_products.bought_date) AS date, AVG(yahoo_auction_products.price) AS price")
+          .index_by { |result| result.date.to_s }
       end
 
       def save(calculate_results)
-        CalculateDailyYahooAuctionProduct.transaction do
-          CalculateDailyYahooAuctionProduct.upsert_all(calculate_results)
+        YahooAuctionDailyPurchaseSummary.transaction do
+          YahooAuctionDailyPurchaseSummary.upsert_all(calculate_results)
         end
       end
     end
