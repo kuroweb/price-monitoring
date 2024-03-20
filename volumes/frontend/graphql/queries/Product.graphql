@@ -54,11 +54,12 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
         updatedAt
       }
     }
-    calculateDailyYahooAuctionProducts {
+    yahooAuctionDailyPurchaseSummaries {
       id
       productId
-      price
-      targetDate
+      averagePurchasePrice
+      purchaseCount
+      date
       createdAt
       updatedAt
     }

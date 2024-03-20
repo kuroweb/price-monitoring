@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
+import AnalysisChart from '@/features/products/components/AnalysisChart'
 import MercariProductsTable from '@/features/products/components/MercariProductsTable'
-import CalculateDailyYahooAuctionProductChart from '@/features/products/components/YahooAuctionProductChart'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
@@ -73,7 +73,7 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>相場グラフ</h2>
-            <CalculateDailyYahooAuctionProductChart data={data} />
+            <AnalysisChart yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries} />
           </div>
         </div>
         <div className='flex justify-end'>

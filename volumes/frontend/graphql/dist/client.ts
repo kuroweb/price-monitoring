@@ -17,16 +17,6 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type CalculateDailyYahooAuctionProduct = Node & {
-  __typename?: 'CalculateDailyYahooAuctionProduct';
-  createdAt: Scalars['String']['output'];
-  id: Scalars['ID']['output'];
-  price?: Maybe<Scalars['Int']['output']>;
-  productId: Scalars['Int']['output'];
-  targetDate: Scalars['String']['output'];
-  updatedAt: Scalars['String']['output'];
-};
-
 export type CreateMercariCrawlSettingExcludeKeywordInput = {
   keyword?: InputMaybe<Scalars['String']['input']>;
   productId: Scalars['ID']['input'];
@@ -304,12 +294,12 @@ export type Node = {
 
 export type Product = Node & {
   __typename?: 'Product';
-  calculateDailyYahooAuctionProducts: Array<CalculateDailyYahooAuctionProduct>;
   id: Scalars['ID']['output'];
   mercariCrawlSetting: MercariCrawlSetting;
   mercariProducts: Array<MercariProduct>;
   name: Scalars['String']['output'];
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting;
+  yahooAuctionDailyPurchaseSummaries: Array<YahooAuctionDailyPurchaseSummary>;
   yahooAuctionProducts: Array<YahooAuctionProduct>;
 };
 
@@ -485,6 +475,17 @@ export type YahooAuctionCrawlSettingExcludeKeyword = Node & {
   yahooAuctionCrawlSettingId: Scalars['Int']['output'];
 };
 
+export type YahooAuctionDailyPurchaseSummary = Node & {
+  __typename?: 'YahooAuctionDailyPurchaseSummary';
+  averagePurchasePrice?: Maybe<Scalars['Int']['output']>;
+  createdAt: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  productId: Scalars['Int']['output'];
+  purchaseCount: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type YahooAuctionProduct = Node & {
   __typename?: 'YahooAuctionProduct';
   boughtDate?: Maybe<Scalars['String']['output']>;
@@ -579,7 +580,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, calculateDailyYahooAuctionProducts: Array<{ __typename?: 'CalculateDailyYahooAuctionProduct', id: string, productId: number, price?: number | null, targetDate: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionProducts: Array<{ __typename?: 'YahooAuctionProduct', id: string, productId: number, yahooAuctionId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariProducts: Array<{ __typename?: 'MercariProduct', id: string, productId: number, mercariId: string, name: string, thumbnailUrl: string, price: number, published: boolean, boughtDate?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> } } };
 
 
 export const CreateProductDocument = gql`
@@ -870,11 +871,12 @@ export const GetProductDetailPageDataDocument = gql`
         updatedAt
       }
     }
-    calculateDailyYahooAuctionProducts {
+    yahooAuctionDailyPurchaseSummaries {
       id
       productId
-      price
-      targetDate
+      averagePurchasePrice
+      purchaseCount
+      date
       createdAt
       updatedAt
     }
