@@ -1,0 +1,9 @@
+package yahoo_auction_daily_purchase_summaries
+
+type IYahooAuctionDailyPurchaseSummaryService interface {
+	IFindYahooAuctionDailyPurchaseSummaryService
+}
+
+type YahooAuctionDailyPurchaseSummaryService struct {
+	*FindYahooAuctionDailyPurchaseSummaryService
+}

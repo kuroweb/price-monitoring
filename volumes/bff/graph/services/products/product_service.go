@@ -1,12 +1,12 @@
 package products
 
 import (
-	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/calculate_daily_yahoo_auction_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_settings"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_daily_purchase_summaries"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_products"
 )
 
@@ -18,7 +18,7 @@ type IProductService interface {
 	yahoo_auction_products.IYahooAuctionProductService
 	yahoo_auction_crawl_settings.IYahooAuctionCrawlSettingService
 	yahoo_auction_crawl_setting_exclude_keywords.IYahooAuctionCrawlSettingExcludeKeywordService
-	calculate_daily_yahoo_auction_products.ICaluculateDailyYahooAuctionProductService
+	yahoo_auction_daily_purchase_summaries.IFindYahooAuctionDailyPurchaseSummaryService
 	mercari_products.IMercariProductService
 	mercari_crawl_settings.IMercariCrawlSettingService
 	mercari_crawl_setting_exclude_keywords.IMercariCrawlSettingExcludeKeywordService
@@ -32,7 +32,7 @@ type ProductService struct {
 	*yahoo_auction_products.YahooAuctionProductService
 	*yahoo_auction_crawl_settings.YahooAuctionCrawlSettingService
 	*yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService
-	*calculate_daily_yahoo_auction_products.CaluculateDailyYahooAuctionProductService
+	*yahoo_auction_daily_purchase_summaries.FindYahooAuctionDailyPurchaseSummaryService
 	*mercari_products.MercariProductService
 	*mercari_crawl_settings.MercariCrawlSettingService
 	*mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService
@@ -47,7 +47,7 @@ func New() IProductService {
 		YahooAuctionProductService:                    &yahoo_auction_products.YahooAuctionProductService{},
 		YahooAuctionCrawlSettingService:               &yahoo_auction_crawl_settings.YahooAuctionCrawlSettingService{},
 		YahooAuctionCrawlSettingExcludeKeywordService: &yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService{},
-		CaluculateDailyYahooAuctionProductService:     &calculate_daily_yahoo_auction_products.CaluculateDailyYahooAuctionProductService{},
+		FindYahooAuctionDailyPurchaseSummaryService:   &yahoo_auction_daily_purchase_summaries.FindYahooAuctionDailyPurchaseSummaryService{},
 		MercariProductService:                         &mercari_products.MercariProductService{},
 		MercariCrawlSettingService:                    &mercari_crawl_settings.MercariCrawlSettingService{},
 		MercariCrawlSettingExcludeKeywordService:      &mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService{},

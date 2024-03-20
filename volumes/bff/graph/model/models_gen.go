@@ -90,18 +90,6 @@ type UserError interface {
 	GetMessage() string
 }
 
-type CalculateDailyYahooAuctionProduct struct {
-	ID         string `json:"id"`
-	ProductID  int    `json:"productId"`
-	Price      *int   `json:"price,omitempty"`
-	TargetDate string `json:"targetDate"`
-	CreatedAt  string `json:"createdAt"`
-	UpdatedAt  string `json:"updatedAt"`
-}
-
-func (CalculateDailyYahooAuctionProduct) IsNode()            {}
-func (this CalculateDailyYahooAuctionProduct) GetID() string { return this.ID }
-
 type CreateMercariCrawlSettingExcludeKeywordInput struct {
 	ProductID string  `json:"productId"`
 	Keyword   *string `json:"keyword,omitempty"`
@@ -400,13 +388,13 @@ func (MercariProduct) IsNode()            {}
 func (this MercariProduct) GetID() string { return this.ID }
 
 type Product struct {
-	ID                                 string                               `json:"id"`
-	Name                               string                               `json:"name"`
-	YahooAuctionProducts               []*YahooAuctionProduct               `json:"yahooAuctionProducts"`
-	YahooAuctionCrawlSetting           *YahooAuctionCrawlSetting            `json:"yahooAuctionCrawlSetting"`
-	CalculateDailyYahooAuctionProducts []*CalculateDailyYahooAuctionProduct `json:"calculateDailyYahooAuctionProducts"`
-	MercariProducts                    []*MercariProduct                    `json:"mercariProducts"`
-	MercariCrawlSetting                *MercariCrawlSetting                 `json:"mercariCrawlSetting"`
+	ID                                 string                              `json:"id"`
+	Name                               string                              `json:"name"`
+	YahooAuctionProducts               []*YahooAuctionProduct              `json:"yahooAuctionProducts"`
+	YahooAuctionCrawlSetting           *YahooAuctionCrawlSetting           `json:"yahooAuctionCrawlSetting"`
+	YahooAuctionDailyPurchaseSummaries []*YahooAuctionDailyPurchaseSummary `json:"yahooAuctionDailyPurchaseSummaries"`
+	MercariProducts                    []*MercariProduct                   `json:"mercariProducts"`
+	MercariCrawlSetting                *MercariCrawlSetting                `json:"mercariCrawlSetting"`
 }
 
 func (Product) IsNode()            {}
@@ -582,6 +570,19 @@ type YahooAuctionCrawlSettingExcludeKeyword struct {
 
 func (YahooAuctionCrawlSettingExcludeKeyword) IsNode()            {}
 func (this YahooAuctionCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type YahooAuctionDailyPurchaseSummary struct {
+	ID                   string `json:"id"`
+	ProductID            int    `json:"productId"`
+	AveragePurchasePrice *int   `json:"averagePurchasePrice,omitempty"`
+	PurchaseCount        int    `json:"purchaseCount"`
+	Date                 string `json:"date"`
+	CreatedAt            string `json:"createdAt"`
+	UpdatedAt            string `json:"updatedAt"`
+}
+
+func (YahooAuctionDailyPurchaseSummary) IsNode()            {}
+func (this YahooAuctionDailyPurchaseSummary) GetID() string { return this.ID }
 
 type YahooAuctionProduct struct {
 	ID             string  `json:"id"`

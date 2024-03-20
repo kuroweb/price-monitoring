@@ -7,7 +7,7 @@ type Product implements Node {
     order: String
   ): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
-  calculateDailyYahooAuctionProducts: [CalculateDailyYahooAuctionProduct!]!
+  yahooAuctionDailyPurchaseSummaries: [YahooAuctionDailyPurchaseSummary!]!
   mercariProducts(
     published: Boolean
     sort: String
@@ -50,11 +50,12 @@ type YahooAuctionCrawlSettingExcludeKeyword implements Node {
   updatedAt: String!
 }
 
-type CalculateDailyYahooAuctionProduct implements Node {
+type YahooAuctionDailyPurchaseSummary implements Node {
   id: ID!
   productId: Int!
-  price: Int
-  targetDate: String!
+  averagePurchasePrice: Int
+  purchaseCount: Int!
+  date: String!
   createdAt: String!
   updatedAt: String!
 }

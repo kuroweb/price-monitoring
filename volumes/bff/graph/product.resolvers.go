@@ -26,9 +26,9 @@ func (r *productResolver) YahooAuctionCrawlSetting(ctx context.Context, obj *mod
 	return r.ProductService.FindYahooAuctionCrawlSetting(ctx, obj.ID)
 }
 
-// CalculateDailyYahooAuctionProducts is the resolver for the calculateDailyYahooAuctionProducts field.
-func (r *productResolver) CalculateDailyYahooAuctionProducts(ctx context.Context, obj *model.Product) ([]*model.CalculateDailyYahooAuctionProduct, error) {
-	return r.ProductService.FindCalculateDailyYahooAuctionProduct(ctx, obj.ID)
+// YahooAuctionDailyPurchaseSummaries is the resolver for the yahooAuctionDailyPurchaseSummaries field.
+func (r *productResolver) YahooAuctionDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.YahooAuctionDailyPurchaseSummary, error) {
+	return r.ProductService.FindYahooAuctionDailyPurchaseSummary(ctx, obj.ID)
 }
 
 // MercariProducts is the resolver for the mercariProducts field.

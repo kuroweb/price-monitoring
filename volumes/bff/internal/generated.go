@@ -49,15 +49,6 @@ type DirectiveRoot struct {
 }
 
 type ComplexityRoot struct {
-	CalculateDailyYahooAuctionProduct struct {
-		CreatedAt  func(childComplexity int) int
-		ID         func(childComplexity int) int
-		Price      func(childComplexity int) int
-		ProductID  func(childComplexity int) int
-		TargetDate func(childComplexity int) int
-		UpdatedAt  func(childComplexity int) int
-	}
-
 	CreateMercariCrawlSettingExcludeKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -203,12 +194,12 @@ type ComplexityRoot struct {
 	}
 
 	Product struct {
-		CalculateDailyYahooAuctionProducts func(childComplexity int) int
 		ID                                 func(childComplexity int) int
 		MercariCrawlSetting                func(childComplexity int) int
 		MercariProducts                    func(childComplexity int, published *bool, sort *string, order *string) int
 		Name                               func(childComplexity int) int
 		YahooAuctionCrawlSetting           func(childComplexity int) int
+		YahooAuctionDailyPurchaseSummaries func(childComplexity int) int
 		YahooAuctionProducts               func(childComplexity int, published *bool, sort *string, order *string) int
 	}
 
@@ -287,6 +278,16 @@ type ComplexityRoot struct {
 		YahooAuctionCrawlSettingID func(childComplexity int) int
 	}
 
+	YahooAuctionDailyPurchaseSummary struct {
+		AveragePurchasePrice func(childComplexity int) int
+		CreatedAt            func(childComplexity int) int
+		Date                 func(childComplexity int) int
+		ID                   func(childComplexity int) int
+		ProductID            func(childComplexity int) int
+		PurchaseCount        func(childComplexity int) int
+		UpdatedAt            func(childComplexity int) int
+	}
+
 	YahooAuctionProduct struct {
 		BoughtDate     func(childComplexity int) int
 		CreatedAt      func(childComplexity int) int
@@ -318,7 +319,7 @@ type MutationResolver interface {
 type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error)
 	YahooAuctionCrawlSetting(ctx context.Context, obj *model.Product) (*model.YahooAuctionCrawlSetting, error)
-	CalculateDailyYahooAuctionProducts(ctx context.Context, obj *model.Product) ([]*model.CalculateDailyYahooAuctionProduct, error)
+	YahooAuctionDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.YahooAuctionDailyPurchaseSummary, error)
 	MercariProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.MercariProduct, error)
 	MercariCrawlSetting(ctx context.Context, obj *model.Product) (*model.MercariCrawlSetting, error)
 }
@@ -349,48 +350,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	ec := executionContext{nil, e, 0, 0, nil}
 	_ = ec
 	switch typeName + "." + field {
-
-	case "CalculateDailyYahooAuctionProduct.createdAt":
-		if e.complexity.CalculateDailyYahooAuctionProduct.CreatedAt == nil {
-			break
-		}
-
-		return e.complexity.CalculateDailyYahooAuctionProduct.CreatedAt(childComplexity), true
-
-	case "CalculateDailyYahooAuctionProduct.id":
-		if e.complexity.CalculateDailyYahooAuctionProduct.ID == nil {
-			break
-		}
-
-		return e.complexity.CalculateDailyYahooAuctionProduct.ID(childComplexity), true
-
-	case "CalculateDailyYahooAuctionProduct.price":
-		if e.complexity.CalculateDailyYahooAuctionProduct.Price == nil {
-			break
-		}
-
-		return e.complexity.CalculateDailyYahooAuctionProduct.Price(childComplexity), true
-
-	case "CalculateDailyYahooAuctionProduct.productId":
-		if e.complexity.CalculateDailyYahooAuctionProduct.ProductID == nil {
-			break
-		}
-
-		return e.complexity.CalculateDailyYahooAuctionProduct.ProductID(childComplexity), true
-
-	case "CalculateDailyYahooAuctionProduct.targetDate":
-		if e.complexity.CalculateDailyYahooAuctionProduct.TargetDate == nil {
-			break
-		}
-
-		return e.complexity.CalculateDailyYahooAuctionProduct.TargetDate(childComplexity), true
-
-	case "CalculateDailyYahooAuctionProduct.updatedAt":
-		if e.complexity.CalculateDailyYahooAuctionProduct.UpdatedAt == nil {
-			break
-		}
-
-		return e.complexity.CalculateDailyYahooAuctionProduct.UpdatedAt(childComplexity), true
 
 	case "CreateMercariCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.CreateMercariCrawlSettingExcludeKeywordResultError.Error == nil {
@@ -962,13 +921,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.UpdateYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput)), true
 
-	case "Product.calculateDailyYahooAuctionProducts":
-		if e.complexity.Product.CalculateDailyYahooAuctionProducts == nil {
-			break
-		}
-
-		return e.complexity.Product.CalculateDailyYahooAuctionProducts(childComplexity), true
-
 	case "Product.id":
 		if e.complexity.Product.ID == nil {
 			break
@@ -1008,6 +960,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.YahooAuctionCrawlSetting(childComplexity), true
+
+	case "Product.yahooAuctionDailyPurchaseSummaries":
+		if e.complexity.Product.YahooAuctionDailyPurchaseSummaries == nil {
+			break
+		}
+
+		return e.complexity.Product.YahooAuctionDailyPurchaseSummaries(childComplexity), true
 
 	case "Product.yahooAuctionProducts":
 		if e.complexity.Product.YahooAuctionProducts == nil {
@@ -1308,6 +1267,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.YahooAuctionCrawlSettingExcludeKeyword.YahooAuctionCrawlSettingID(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.averagePurchasePrice":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.AveragePurchasePrice == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.AveragePurchasePrice(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.createdAt":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.CreatedAt(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.date":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.Date == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.Date(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.id":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.ID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.ID(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.productId":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.ProductID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.ProductID(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.purchaseCount":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.PurchaseCount == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.PurchaseCount(childComplexity), true
+
+	case "YahooAuctionDailyPurchaseSummary.updatedAt":
+		if e.complexity.YahooAuctionDailyPurchaseSummary.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionDailyPurchaseSummary.UpdatedAt(childComplexity), true
 
 	case "YahooAuctionProduct.boughtDate":
 		if e.complexity.YahooAuctionProduct.BoughtDate == nil {
@@ -1834,7 +1842,7 @@ type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements Us
     order: String
   ): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
-  calculateDailyYahooAuctionProducts: [CalculateDailyYahooAuctionProduct!]!
+  yahooAuctionDailyPurchaseSummaries: [YahooAuctionDailyPurchaseSummary!]!
   mercariProducts(
     published: Boolean
     sort: String
@@ -1877,11 +1885,12 @@ type YahooAuctionCrawlSettingExcludeKeyword implements Node {
   updatedAt: String!
 }
 
-type CalculateDailyYahooAuctionProduct implements Node {
+type YahooAuctionDailyPurchaseSummary implements Node {
   id: ID!
   productId: Int!
-  price: Int
-  targetDate: String!
+  averagePurchasePrice: Int
+  purchaseCount: Int!
+  date: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -2267,267 +2276,6 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 // endregion ************************** directives.gotpl **************************
 
 // region    **************************** field.gotpl *****************************
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_id(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.ID, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNID2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "CalculateDailyYahooAuctionProduct",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_productId(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.ProductID, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(int)
-	fc.Result = res
-	return ec.marshalNInt2int(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "CalculateDailyYahooAuctionProduct",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_price(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_price(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Price, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*int)
-	fc.Result = res
-	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_price(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "CalculateDailyYahooAuctionProduct",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_targetDate(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_targetDate(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.TargetDate, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_targetDate(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "CalculateDailyYahooAuctionProduct",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_createdAt(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.CreatedAt, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "CalculateDailyYahooAuctionProduct",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.CalculateDailyYahooAuctionProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_CalculateDailyYahooAuctionProduct_updatedAt(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.UpdatedAt, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_CalculateDailyYahooAuctionProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "CalculateDailyYahooAuctionProduct",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
 
 func (ec *executionContext) _CreateMercariCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeKeywordResultError_ok(ctx, field)
@@ -3034,8 +2782,8 @@ func (ec *executionContext) fieldContext_CreateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
 				return ec.fieldContext_Product_yahooAuctionCrawlSetting(ctx, field)
-			case "calculateDailyYahooAuctionProducts":
-				return ec.fieldContext_Product_calculateDailyYahooAuctionProducts(ctx, field)
+			case "yahooAuctionDailyPurchaseSummaries":
+				return ec.fieldContext_Product_yahooAuctionDailyPurchaseSummaries(ctx, field)
 			case "mercariProducts":
 				return ec.fieldContext_Product_mercariProducts(ctx, field)
 			case "mercariCrawlSetting":
@@ -6238,8 +5986,8 @@ func (ec *executionContext) fieldContext_Product_yahooAuctionCrawlSetting(ctx co
 	return fc, nil
 }
 
-func (ec *executionContext) _Product_calculateDailyYahooAuctionProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Product_calculateDailyYahooAuctionProducts(ctx, field)
+func (ec *executionContext) _Product_yahooAuctionDailyPurchaseSummaries(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_yahooAuctionDailyPurchaseSummaries(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -6252,7 +6000,7 @@ func (ec *executionContext) _Product_calculateDailyYahooAuctionProducts(ctx cont
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().CalculateDailyYahooAuctionProducts(rctx, obj)
+		return ec.resolvers.Product().YahooAuctionDailyPurchaseSummaries(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -6264,12 +6012,12 @@ func (ec *executionContext) _Product_calculateDailyYahooAuctionProducts(ctx cont
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.CalculateDailyYahooAuctionProduct)
+	res := resTmp.([]*model.YahooAuctionDailyPurchaseSummary)
 	fc.Result = res
-	return ec.marshalNCalculateDailyYahooAuctionProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCalculateDailyYahooAuctionProductᚄ(ctx, field.Selections, res)
+	return ec.marshalNYahooAuctionDailyPurchaseSummary2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionDailyPurchaseSummaryᚄ(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Product_calculateDailyYahooAuctionProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Product_yahooAuctionDailyPurchaseSummaries(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Product",
 		Field:      field,
@@ -6278,19 +6026,21 @@ func (ec *executionContext) fieldContext_Product_calculateDailyYahooAuctionProdu
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
 			case "id":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_id(ctx, field)
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_id(ctx, field)
 			case "productId":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_productId(ctx, field)
-			case "price":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_price(ctx, field)
-			case "targetDate":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_targetDate(ctx, field)
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_productId(ctx, field)
+			case "averagePurchasePrice":
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_averagePurchasePrice(ctx, field)
+			case "purchaseCount":
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_purchaseCount(ctx, field)
+			case "date":
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_date(ctx, field)
 			case "createdAt":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_createdAt(ctx, field)
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_createdAt(ctx, field)
 			case "updatedAt":
-				return ec.fieldContext_CalculateDailyYahooAuctionProduct_updatedAt(ctx, field)
+				return ec.fieldContext_YahooAuctionDailyPurchaseSummary_updatedAt(ctx, field)
 			}
-			return nil, fmt.Errorf("no field named %q was found under type CalculateDailyYahooAuctionProduct", field.Name)
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionDailyPurchaseSummary", field.Name)
 		},
 	}
 	return fc, nil
@@ -6486,8 +6236,8 @@ func (ec *executionContext) fieldContext_Query_product(ctx context.Context, fiel
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
 				return ec.fieldContext_Product_yahooAuctionCrawlSetting(ctx, field)
-			case "calculateDailyYahooAuctionProducts":
-				return ec.fieldContext_Product_calculateDailyYahooAuctionProducts(ctx, field)
+			case "yahooAuctionDailyPurchaseSummaries":
+				return ec.fieldContext_Product_yahooAuctionDailyPurchaseSummaries(ctx, field)
 			case "mercariProducts":
 				return ec.fieldContext_Product_mercariProducts(ctx, field)
 			case "mercariCrawlSetting":
@@ -6557,8 +6307,8 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
 				return ec.fieldContext_Product_yahooAuctionCrawlSetting(ctx, field)
-			case "calculateDailyYahooAuctionProducts":
-				return ec.fieldContext_Product_calculateDailyYahooAuctionProducts(ctx, field)
+			case "yahooAuctionDailyPurchaseSummaries":
+				return ec.fieldContext_Product_yahooAuctionDailyPurchaseSummaries(ctx, field)
 			case "mercariProducts":
 				return ec.fieldContext_Product_mercariProducts(ctx, field)
 			case "mercariCrawlSetting":
@@ -7267,8 +7017,8 @@ func (ec *executionContext) fieldContext_UpdateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
 				return ec.fieldContext_Product_yahooAuctionCrawlSetting(ctx, field)
-			case "calculateDailyYahooAuctionProducts":
-				return ec.fieldContext_Product_calculateDailyYahooAuctionProducts(ctx, field)
+			case "yahooAuctionDailyPurchaseSummaries":
+				return ec.fieldContext_Product_yahooAuctionDailyPurchaseSummaries(ctx, field)
 			case "mercariProducts":
 				return ec.fieldContext_Product_mercariProducts(ctx, field)
 			case "mercariCrawlSetting":
@@ -8400,6 +8150,311 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ct
 func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_id(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_productId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_productId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ProductID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_averagePurchasePrice(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_averagePurchasePrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.AveragePurchasePrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*int)
+	fc.Result = res
+	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_averagePurchasePrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_purchaseCount(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_purchaseCount(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PurchaseCount, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_purchaseCount(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_date(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_date(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Date, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_date(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionDailyPurchaseSummary) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionDailyPurchaseSummary_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionDailyPurchaseSummary_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionDailyPurchaseSummary",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -11414,13 +11469,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._YahooAuctionCrawlSettingExcludeKeyword(ctx, sel, obj)
-	case model.CalculateDailyYahooAuctionProduct:
-		return ec._CalculateDailyYahooAuctionProduct(ctx, sel, &obj)
-	case *model.CalculateDailyYahooAuctionProduct:
+	case model.YahooAuctionDailyPurchaseSummary:
+		return ec._YahooAuctionDailyPurchaseSummary(ctx, sel, &obj)
+	case *model.YahooAuctionDailyPurchaseSummary:
 		if obj == nil {
 			return graphql.Null
 		}
-		return ec._CalculateDailyYahooAuctionProduct(ctx, sel, obj)
+		return ec._YahooAuctionDailyPurchaseSummary(ctx, sel, obj)
 	case model.MercariProduct:
 		return ec._MercariProduct(ctx, sel, &obj)
 	case *model.MercariProduct:
@@ -11774,67 +11829,6 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 // endregion ************************** interface.gotpl ***************************
 
 // region    **************************** object.gotpl ****************************
-
-var calculateDailyYahooAuctionProductImplementors = []string{"CalculateDailyYahooAuctionProduct", "Node"}
-
-func (ec *executionContext) _CalculateDailyYahooAuctionProduct(ctx context.Context, sel ast.SelectionSet, obj *model.CalculateDailyYahooAuctionProduct) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, calculateDailyYahooAuctionProductImplementors)
-
-	out := graphql.NewFieldSet(fields)
-	deferred := make(map[string]*graphql.FieldSet)
-	for i, field := range fields {
-		switch field.Name {
-		case "__typename":
-			out.Values[i] = graphql.MarshalString("CalculateDailyYahooAuctionProduct")
-		case "id":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_id(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "productId":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_productId(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "price":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_price(ctx, field, obj)
-		case "targetDate":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_targetDate(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "createdAt":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_createdAt(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "updatedAt":
-			out.Values[i] = ec._CalculateDailyYahooAuctionProduct_updatedAt(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		default:
-			panic("unknown field " + strconv.Quote(field.Name))
-		}
-	}
-	out.Dispatch(ctx)
-	if out.Invalids > 0 {
-		return graphql.Null
-	}
-
-	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
-
-	for label, dfs := range deferred {
-		ec.processDeferredGroup(graphql.DeferredGroup{
-			Label:    label,
-			Path:     graphql.GetPath(ctx),
-			FieldSet: dfs,
-			Context:  ctx,
-		})
-	}
-
-	return out
-}
 
 var createMercariCrawlSettingExcludeKeywordResultErrorImplementors = []string{"CreateMercariCrawlSettingExcludeKeywordResultError", "CreateMercariCrawlSettingExcludeKeywordResult", "ResultBase"}
 
@@ -13134,7 +13128,7 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
-		case "calculateDailyYahooAuctionProducts":
+		case "yahooAuctionDailyPurchaseSummaries":
 			field := field
 
 			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
@@ -13143,7 +13137,7 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Product_calculateDailyYahooAuctionProducts(ctx, field, obj)
+				res = ec._Product_yahooAuctionDailyPurchaseSummaries(ctx, field, obj)
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}
@@ -13957,6 +13951,72 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword(ctx context.
 	return out
 }
 
+var yahooAuctionDailyPurchaseSummaryImplementors = []string{"YahooAuctionDailyPurchaseSummary", "Node"}
+
+func (ec *executionContext) _YahooAuctionDailyPurchaseSummary(ctx context.Context, sel ast.SelectionSet, obj *model.YahooAuctionDailyPurchaseSummary) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, yahooAuctionDailyPurchaseSummaryImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("YahooAuctionDailyPurchaseSummary")
+		case "id":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "productId":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_productId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "averagePurchasePrice":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_averagePurchasePrice(ctx, field, obj)
+		case "purchaseCount":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_purchaseCount(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "date":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_date(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._YahooAuctionDailyPurchaseSummary_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var yahooAuctionProductImplementors = []string{"YahooAuctionProduct", "Node"}
 
 func (ec *executionContext) _YahooAuctionProduct(ctx context.Context, sel ast.SelectionSet, obj *model.YahooAuctionProduct) graphql.Marshaler {
@@ -14377,60 +14437,6 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 		}
 	}
 	return res
-}
-
-func (ec *executionContext) marshalNCalculateDailyYahooAuctionProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCalculateDailyYahooAuctionProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.CalculateDailyYahooAuctionProduct) graphql.Marshaler {
-	ret := make(graphql.Array, len(v))
-	var wg sync.WaitGroup
-	isLen1 := len(v) == 1
-	if !isLen1 {
-		wg.Add(len(v))
-	}
-	for i := range v {
-		i := i
-		fc := &graphql.FieldContext{
-			Index:  &i,
-			Result: &v[i],
-		}
-		ctx := graphql.WithFieldContext(ctx, fc)
-		f := func(i int) {
-			defer func() {
-				if r := recover(); r != nil {
-					ec.Error(ctx, ec.Recover(ctx, r))
-					ret = nil
-				}
-			}()
-			if !isLen1 {
-				defer wg.Done()
-			}
-			ret[i] = ec.marshalNCalculateDailyYahooAuctionProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCalculateDailyYahooAuctionProduct(ctx, sel, v[i])
-		}
-		if isLen1 {
-			f(i)
-		} else {
-			go f(i)
-		}
-
-	}
-	wg.Wait()
-
-	for _, e := range ret {
-		if e == graphql.Null {
-			return graphql.Null
-		}
-	}
-
-	return ret
-}
-
-func (ec *executionContext) marshalNCalculateDailyYahooAuctionProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCalculateDailyYahooAuctionProduct(ctx context.Context, sel ast.SelectionSet, v *model.CalculateDailyYahooAuctionProduct) graphql.Marshaler {
-	if v == nil {
-		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
-			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
-		}
-		return graphql.Null
-	}
-	return ec._CalculateDailyYahooAuctionProduct(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNCreateMercariCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.CreateMercariCrawlSettingExcludeKeywordInput, error) {
@@ -15008,6 +15014,60 @@ func (ec *executionContext) marshalNYahooAuctionCrawlSettingExcludeKeyword2ᚖgi
 		return graphql.Null
 	}
 	return ec._YahooAuctionCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNYahooAuctionDailyPurchaseSummary2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionDailyPurchaseSummaryᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.YahooAuctionDailyPurchaseSummary) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNYahooAuctionDailyPurchaseSummary2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionDailyPurchaseSummary(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNYahooAuctionDailyPurchaseSummary2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionDailyPurchaseSummary(ctx context.Context, sel ast.SelectionSet, v *model.YahooAuctionDailyPurchaseSummary) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._YahooAuctionDailyPurchaseSummary(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNYahooAuctionProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.YahooAuctionProduct) graphql.Marshaler {
