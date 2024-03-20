@@ -14,7 +14,7 @@ Rails.application.routes.draw do
           namespace :yahoo_auction_crawl_settings do
             resources :yahoo_auction_crawl_setting_exclude_keywords, only: %i[index create update destroy]
           end
-          resources :calculate_daily_yahoo_auction_products, only: [:index]
+          resources :yahoo_auction_daily_purchase_summaries, only: [:index]
 
           ## mercari ##
           resources :mercari_products, only: %i[index show]
