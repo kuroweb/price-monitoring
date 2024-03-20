@@ -8,11 +8,23 @@ module Crawl
       sidekiq_options queue: :crawl_mercari_sync_bought_date, retry: 0
 
       def perform
-        MercariProduct.where(published: false, bought_date: nil).find_each(batch_size: BATCH_SIZE) do |mercari_product|
-          Crawl::Mercari::SyncBoughtDate.call(mercari_product: mercari_product.reload)
-        rescue StandardError
-          Rails.logger.info("Skipping... mercari_id: #{mercari_product.mercari_id}")
+        handle_timeout do
+          MercariProduct.where(
+            published: false,
+            bought_date: nil
+          ).find_each(batch_size: BATCH_SIZE) do |mercari_product|
+            Crawl::Mercari::SyncBoughtDate.call(mercari_product: mercari_product.reload)
+          rescue StandardError
+            Rails.logger.info("Skipping... mercari_id: #{mercari_product.mercari_id}")
+          end
         end
+      end
+
+      def handle_timeout(&block)
+        Timeout.timeout(JOB_TIMEOUT, &block)
+      rescue Timeout::Error => e
+        Rails.logger.error("This worker has reached timeout.")
+        raise e
       end
     end
   end
