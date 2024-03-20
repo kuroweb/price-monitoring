@@ -13,10 +13,7 @@ const MercariForm = ({
         <div className='label'>
           <span className='label-text'>計測キーワード</span>
         </div>
-        <input
-          {...register('mercari_crawl_setting.keyword')}
-          className='input input-bordered'
-        />
+        <input {...register('mercari_crawl_setting.keyword')} className='input input-bordered' />
       </label>
       <label className='form-control'>
         <div className='label'>
@@ -33,19 +30,13 @@ const MercariForm = ({
         <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
-        <input
-          {...register('mercari_crawl_setting.min_price')}
-          className='input input-bordered'
-        />
+        <input {...register('mercari_crawl_setting.min_price')} className='input input-bordered' />
       </label>
       <label className='form-control'>
         <div className='label'>
           <span className='label-text'>最高価格</span>
         </div>
-        <input
-          {...register('mercari_crawl_setting.max_price')}
-          className='input input-bordered'
-        />
+        <input {...register('mercari_crawl_setting.max_price')} className='input input-bordered' />
       </label>
       <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>

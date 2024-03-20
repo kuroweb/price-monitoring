@@ -101,10 +101,7 @@ export const updateMercariCrawlSettingExcludeKeyword = async (
   })
 }
 
-export const deleteMercariCrawlSettingExcludeKeyword = async (
-  id: String,
-  productId: String,
-) => {
+export const deleteMercariCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteMercariCrawlSettingExcludeKeywordDocument,
     variables: { id: id, productId: productId },
