@@ -7,7 +7,14 @@ module Crawl
 
       def perform(product_id)
         product = Product.find(product_id)
-        Crawl::YahooAuction::Syncer.call(product:)
+        handle_timeout { Crawl::YahooAuction::Syncer.call(product:) }
+      end
+
+      def handle_timeout(&block)
+        Timeout.timeout(JOB_TIMEOUT, &block)
+      rescue Timeout::Error => e
+        Rails.logger.error("This worker has reached timeout.")
+        raise e
       end
     end
   end

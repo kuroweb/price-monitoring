@@ -16,7 +16,7 @@ module Crawl
         def handle_timeout(&block)
           Timeout.timeout(JOB_TIMEOUT, &block)
         rescue Timeout::Error => e
-          Rails.logger.error("This worker has reached timeout. product_id: #{product.id}")
+          Rails.logger.error("This worker has reached timeout.")
           raise e
         end
       end
