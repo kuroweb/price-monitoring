@@ -26,7 +26,8 @@ module Analysis
           {
             product_id: product.id,
             date:,
-            average_purchase_price: calculate_result_map[date.to_s]&.price
+            average_purchase_price: calculate_result_map[date.to_s]&.average_purchase_price,
+            purchase_count: calculate_result_map[date.to_s]&.purchase_count || 0
           }
         end
       end
@@ -37,7 +38,13 @@ module Analysis
           .yahoo_auction_products
           .where(bought_date: start_date.to_datetime.beginning_of_day..end_date.to_datetime.end_of_day)
           .group("date")
-          .select("DATE(yahoo_auction_products.bought_date) AS date, AVG(yahoo_auction_products.price) AS price")
+          .select(
+            <<~SQL
+              DATE(yahoo_auction_products.bought_date) AS date,
+              AVG(yahoo_auction_products.price) AS average_purchase_price,
+              COUNT(yahoo_auction_products.id) AS purchase_count
+            SQL
+          )
           .index_by { |result| result.date.to_s }
       end
 
