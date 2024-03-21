@@ -4,6 +4,7 @@ module Crawl
       include Sidekiq::Job
 
       BATCH_SIZE = 500
+      JOB_TIMEOUT = 30.minutes
 
       sidekiq_options queue: :crawl_mercari_sync_bought_date, retry: 0
 

@@ -3,6 +3,8 @@ module Crawl
     class SyncJob
       include Sidekiq::Job
 
+      JOB_TIMEOUT = 15.minutes
+
       sidekiq_options queue: :crawl_yahoo_auction
 
       def perform(product_id)
