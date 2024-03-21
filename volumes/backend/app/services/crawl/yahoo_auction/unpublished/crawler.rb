@@ -3,6 +3,9 @@ module Crawl
   module YahooAuction
     module Unpublished
       class Crawler
+        RETRY_COUNT = 5
+        MAX_SIZE = 1000
+
         def initialize(product:)
           @product = product
         end
@@ -13,14 +16,16 @@ module Crawl
 
             start = 1
             loop do
-              page.goto(url(start))
+              break if start > MAX_SIZE
 
-              break if no_results?(page)
+              Retryable.retryable(tries: RETRY_COUNT) do
+                page.goto(url(start))
+                break if no_results?(page)
 
-              append_results(page)
+                append_results(page)
+              end
 
               break unless exists_next_page?(page)
-              break if loop_safe(start)
 
               start += 100
             end
@@ -61,10 +66,6 @@ module Crawl
 
         def exists_next_page?(page)
           page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
-        end
-
-        def loop_safe(start)
-          start > 100_000
         end
 
         def yahoo_auction_id(dom)
