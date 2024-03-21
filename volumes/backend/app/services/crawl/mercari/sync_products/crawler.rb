@@ -3,7 +3,7 @@ module Crawl
     module SyncProducts
       class Crawler
         RETRY_COUNT = 5
-        MAX_PAGE = 10
+        MAX_PAGE = 5
 
         def initialize(product:)
           @product = product
