@@ -91,5 +91,14 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
         updatedAt
       }
     }
+    mercariDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
   }
 }

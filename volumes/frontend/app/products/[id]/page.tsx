@@ -73,7 +73,10 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>相場グラフ</h2>
-            <AnalysisChart yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries} />
+            <AnalysisChart
+              yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries}
+              mercariData={data.product.mercariDailyPurchaseSummaries}
+            />
           </div>
         </div>
         <div className='flex justify-end'>

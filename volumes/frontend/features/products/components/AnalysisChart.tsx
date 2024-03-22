@@ -15,14 +15,36 @@ import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const AnalysisChart = ({
   yahooAuctionData,
+  mercariData,
 }: {
   yahooAuctionData: GetProductDetailPageDataQuery['product']['yahooAuctionDailyPurchaseSummaries']
+  mercariData: GetProductDetailPageDataQuery['product']['mercariDailyPurchaseSummaries']
 }) => {
+  const yahooAuctionDataMap = yahooAuctionData.reduce<{
+    [date: string]: { yahooAuctionAveragePurchasePrice: number }
+  }>((acc, data) => {
+    acc[data.date] = { yahooAuctionAveragePurchasePrice: data.averagePurchasePrice! }
+    return acc
+  }, {})
+
+  const mercariDataMap = mercariData.reduce<{
+    [date: string]: { mercariAveragePurchasePrice: number }
+  }>((acc, data) => {
+    acc[data.date] = { mercariAveragePurchasePrice: data.averagePurchasePrice! }
+    return acc
+  }, {})
+
+  const mergedData = Object.keys({ ...yahooAuctionDataMap, ...mercariDataMap }).map((date) => ({
+    date,
+    ...yahooAuctionDataMap[date],
+    ...mercariDataMap[date],
+  }))
+
   return (
     <>
       <ResponsiveContainer width='100%' height={300}>
         <ComposedChart
-          data={yahooAuctionData}
+          data={mergedData}
           margin={{
             top: 5,
             right: 30,
@@ -38,10 +60,20 @@ const AnalysisChart = ({
           <Line
             yAxisId={1}
             type='monotone'
-            dataKey='averagePurchasePrice'
+            dataKey='yahooAuctionAveragePurchasePrice'
             name='ヤフオク'
             stroke='orange'
             fill='orange'
+            activeDot={{ r: 8 }}
+            animationDuration={100}
+          />
+          <Line
+            yAxisId={1}
+            type='monotone'
+            dataKey='mercariAveragePurchasePrice'
+            name='メルカリ'
+            stroke='red'
+            fill='red'
             activeDot={{ r: 8 }}
             animationDuration={100}
           />
