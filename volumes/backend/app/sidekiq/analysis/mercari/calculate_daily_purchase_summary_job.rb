@@ -1,5 +1,5 @@
 module Analysis
-  module YahooAuction
+  module Mercari
     class CalculateDailyPurchaseSummaryJob
       include Sidekiq::Job
 
@@ -13,7 +13,7 @@ module Analysis
         end_date = Time.current.to_date.to_s
 
         Product.find_each(batch_size: BATCH_SIZE) do |product|
-          Analysis::YahooAuction::CalculateDailyPurchaseSummary.call(product:, start_date:, end_date:)
+          Analysis::Mercari::CalculateDailyPurchaseSummary.call(product:, start_date:, end_date:)
         rescue StandardError
           Rails.logger.info("Skipping... id: #{product.id}")
         end
