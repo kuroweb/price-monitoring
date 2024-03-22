@@ -371,6 +371,19 @@ type MercariCrawlSettingExcludeKeyword struct {
 func (MercariCrawlSettingExcludeKeyword) IsNode()            {}
 func (this MercariCrawlSettingExcludeKeyword) GetID() string { return this.ID }
 
+type MercariDailyPurchaseSummary struct {
+	ID                   string `json:"id"`
+	ProductID            int    `json:"productId"`
+	AveragePurchasePrice *int   `json:"averagePurchasePrice,omitempty"`
+	PurchaseCount        int    `json:"purchaseCount"`
+	Date                 string `json:"date"`
+	CreatedAt            string `json:"createdAt"`
+	UpdatedAt            string `json:"updatedAt"`
+}
+
+func (MercariDailyPurchaseSummary) IsNode()            {}
+func (this MercariDailyPurchaseSummary) GetID() string { return this.ID }
+
 type MercariProduct struct {
 	ID           string  `json:"id"`
 	ProductID    int     `json:"productId"`
@@ -395,6 +408,7 @@ type Product struct {
 	YahooAuctionDailyPurchaseSummaries []*YahooAuctionDailyPurchaseSummary `json:"yahooAuctionDailyPurchaseSummaries"`
 	MercariProducts                    []*MercariProduct                   `json:"mercariProducts"`
 	MercariCrawlSetting                *MercariCrawlSetting                `json:"mercariCrawlSetting"`
+	MercariDailyPurchaseSummaries      []*MercariDailyPurchaseSummary      `json:"mercariDailyPurchaseSummaries"`
 }
 
 func (Product) IsNode()            {}

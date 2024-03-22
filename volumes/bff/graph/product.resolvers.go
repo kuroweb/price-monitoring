@@ -41,6 +41,11 @@ func (r *productResolver) MercariCrawlSetting(ctx context.Context, obj *model.Pr
 	return r.ProductService.FindMercariCrawlSetting(ctx, obj.ID)
 }
 
+// MercariDailyPurchaseSummaries is the resolver for the mercariDailyPurchaseSummaries field.
+func (r *productResolver) MercariDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.MercariDailyPurchaseSummary, error) {
+	return r.ProductService.FindMercariDailyPurchaseSummary(ctx, obj.ID)
+}
+
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
 func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindYahooAuctionCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
