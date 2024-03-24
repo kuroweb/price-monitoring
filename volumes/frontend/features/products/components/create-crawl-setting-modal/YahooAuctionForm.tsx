@@ -23,7 +23,9 @@ const YahooAuctionForm = ({
           <span className='label-text'>カテゴリID</span>
         </div>
         <input
-          {...register('yahoo_auction_crawl_setting.category_id')}
+          {...register('yahoo_auction_crawl_setting.category_id', {
+            setValueAs: (v) => (v === '' ? null : v),
+          })}
           className='input input-bordered'
         />
       </label>

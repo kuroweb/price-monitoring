@@ -20,7 +20,9 @@ const MercariForm = ({
           <span className='label-text'>カテゴリID</span>
         </div>
         <input
-          {...register('mercari_crawl_setting.category_id')}
+          {...register('mercari_crawl_setting.category_id', {
+            setValueAs: (v) => (v === '' ? null : v),
+          })}
           className='input input-bordered'
         />
       </label>
