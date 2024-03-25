@@ -93,7 +93,7 @@ services:
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
-    command: ["sidekiq", "-C", "config/sidekiq/sync_bought_date_process.yml"]
+    command: ["sidekiq", "-C", "config/sidekiq/general_process.yml"]
 
   backend-db:
     <<: *mysql

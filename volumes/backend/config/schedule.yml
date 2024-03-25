@@ -13,3 +13,6 @@ analysis_yahoo_auction_calculate_daily_purchase_summary_job:
 analysis_mercari_calculate_daily_purchase_summary_job:
   cron: "0 0 * * *"
   class: "Analysis::Mercari::CalculateDailyPurchaseSummaryJob"
+products_enqueue_refresh_product_job:
+  cron: "0 * * * *"
+  class: "Products::EnqueueRefreshProductJob"
