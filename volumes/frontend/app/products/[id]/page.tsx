@@ -4,6 +4,7 @@ import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
 import MercariProductsTable from '@/features/products/components/MercariProductsTable'
 import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
+import DetailPageSidebarContent from '@/features/products/components/detail-page-sidebar-content/DetailPageSidebarContent'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
@@ -36,7 +37,7 @@ const Page = async ({
   })
 
   return (
-    <Layout>
+    <Layout sidebarChildren={<DetailPageSidebarContent />}>
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
