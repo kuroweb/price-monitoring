@@ -9,6 +9,7 @@ class Product < ApplicationRecord
   has_many :mercari_daily_purchase_summaries, dependent: :destroy
 
   ## validations ##
+  validates :name, presence: true
 
   ## methods ##
 end
