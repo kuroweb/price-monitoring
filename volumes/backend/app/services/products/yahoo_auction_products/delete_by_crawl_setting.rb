@@ -23,7 +23,6 @@ module Products
           .where(product_id: product.id)
           .merge(
             price_condition
-              .or(include_keywords_condition)
               .or(exclude_keywords_conditon)
           )
       end
@@ -31,15 +30,6 @@ module Products
       def price_condition
         price_range = product.yahoo_auction_crawl_setting.min_price..product.yahoo_auction_crawl_setting.max_price
         YahooAuctionProduct.where.not(price: price_range)
-      end
-
-      def include_keywords_condition
-        include_keywords = product.yahoo_auction_crawl_setting.keyword.split(" ")
-        return YahooAuctionProduct.none if include_keywords.blank?
-
-        include_keywords.map do |include_keyword|
-          YahooAuctionProduct.where.not("name LIKE ?", "%#{include_keyword}%")
-        end.reduce(&:or)
       end
 
       def exclude_keywords_conditon
