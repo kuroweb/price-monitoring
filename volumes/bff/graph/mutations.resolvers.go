@@ -53,7 +53,7 @@ func (r *mutationResolver) UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx con
 }
 
 // DeleteYahooAuctionCrawlSettingRequiredKeyword is the resolver for the deleteYahooAuctionCrawlSettingRequiredKeyword field.
-func (r *mutationResolver) DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error) {
+func (r *mutationResolver) DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult, error) {
 	panic(fmt.Errorf("not implemented: DeleteYahooAuctionCrawlSettingRequiredKeyword - deleteYahooAuctionCrawlSettingRequiredKeyword"))
 }
 

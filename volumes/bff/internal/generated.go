@@ -444,7 +444,7 @@ type MutationResolver interface {
 	DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error)
 	CreateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) (model.CreateYahooAuctionCrawlSettingRequiredKeywordResult, error)
 	UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult, error)
-	DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error)
+	DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult, error)
 	CreateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateMercariCrawlSettingExcludeKeywordInput) (model.CreateMercariCrawlSettingExcludeKeywordResult, error)
 	UpdateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingExcludeKeywordInput) (model.UpdateMercariCrawlSettingExcludeKeywordResult, error)
 	DeleteMercariCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeKeywordResult, error)
@@ -2163,7 +2163,7 @@ var sources = []*ast.Source{
   deleteYahooAuctionCrawlSettingRequiredKeyword(
     id: ID!
     productId: ID!
-  ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
+  ): DeleteYahooAuctionCrawlSettingRequiredKeywordResult!
   createMercariCrawlSettingExcludeKeyword(
     input: CreateMercariCrawlSettingExcludeKeywordInput!
   ): CreateMercariCrawlSettingExcludeKeywordResult!
@@ -8460,9 +8460,9 @@ func (ec *executionContext) _Mutation_deleteYahooAuctionCrawlSettingRequiredKeyw
 		}
 		return graphql.Null
 	}
-	res := resTmp.(model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult)
+	res := resTmp.(model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult)
 	fc.Result = res
-	return ec.marshalNDeleteYahooAuctionCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+	return ec.marshalNDeleteYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
 }
 
 func (ec *executionContext) fieldContext_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
@@ -8472,7 +8472,7 @@ func (ec *executionContext) fieldContext_Mutation_deleteYahooAuctionCrawlSetting
 		IsMethod:   true,
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type DeleteYahooAuctionCrawlSettingExcludeKeywordResult does not have child fields")
+			return nil, errors.New("field of type DeleteYahooAuctionCrawlSettingRequiredKeywordResult does not have child fields")
 		},
 	}
 	defer func() {
@@ -20402,6 +20402,16 @@ func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingExcludeKeyword
 		return graphql.Null
 	}
 	return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResult(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
