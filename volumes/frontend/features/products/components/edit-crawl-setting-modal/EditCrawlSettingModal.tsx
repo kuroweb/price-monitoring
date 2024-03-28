@@ -38,6 +38,7 @@ const EditCrawlSettingModal = ({
       },
       mercari_crawl_setting: {
         keyword: defaultValues?.mercari_crawl_setting?.keyword || '',
+        category_id: defaultValues?.mercari_crawl_setting?.category_id || null,
         min_price: defaultValues?.mercari_crawl_setting?.min_price || 0,
         max_price: defaultValues?.mercari_crawl_setting?.max_price || 0,
         enabled: defaultValues?.mercari_crawl_setting?.enabled || false,

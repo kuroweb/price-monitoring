@@ -114,6 +114,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
             },
             mercari_crawl_setting: {
               keyword: product?.mercariCrawlSetting?.keyword,
+              category_id: product?.mercariCrawlSetting?.categoryId,
               min_price: product?.mercariCrawlSetting?.minPrice,
               max_price: product?.mercariCrawlSetting?.maxPrice,
               enabled: product?.mercariCrawlSetting?.enabled,

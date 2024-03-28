@@ -152,6 +152,7 @@ const Page = async ({
           },
           mercari_crawl_setting: {
             keyword: data.product.mercariCrawlSetting?.keyword,
+            category_id: data.product.mercariCrawlSetting?.categoryId,
             min_price: data.product.mercariCrawlSetting?.minPrice,
             max_price: data.product.mercariCrawlSetting?.maxPrice,
             enabled: data.product.mercariCrawlSetting?.enabled,
