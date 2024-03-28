@@ -34,7 +34,7 @@ func (u *UpdateProductService) UpdateProduct(ctx context.Context, id string, inp
 		},
 		"mercari_crawl_setting": map[string]interface{}{
 			"keyword":     input.MercariCrawlSetting.Keyword,
-			"category_id": input.YahooAuctionCrawlSetting.CategoryID,
+			"category_id": input.MercariCrawlSetting.CategoryID,
 			"min_price":   input.MercariCrawlSetting.MinPrice,
 			"max_price":   input.MercariCrawlSetting.MaxPrice,
 			"enabled":     input.MercariCrawlSetting.Enabled,
