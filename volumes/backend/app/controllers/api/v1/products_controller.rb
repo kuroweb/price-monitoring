@@ -56,7 +56,7 @@ module Api
       end
 
       def mercari_crawl_setting_attributes
-        %i[keyword min_price max_price enabled]
+        %i[keyword category_id min_price max_price enabled]
       end
 
       def external_params_attributes
