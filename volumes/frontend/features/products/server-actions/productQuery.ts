@@ -25,6 +25,22 @@ import {
   DeleteMercariCrawlSettingExcludeKeywordMutation,
   UpdateMercariCrawlSettingExcludeKeywordDocument,
   UpdateMercariCrawlSettingExcludeKeywordMutation,
+  CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
+  CreateYahooAuctionCrawlSettingRequiredKeywordInput,
+  CreateYahooAuctionCrawlSettingRequiredKeywordMutation,
+  DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
+  DeleteYahooAuctionCrawlSettingRequiredKeywordMutation,
+  UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
+  UpdateYahooAuctionCrawlSettingRequiredKeywordInput,
+  UpdateYahooAuctionCrawlSettingRequiredKeywordMutation,
+  CreateMercariCrawlSettingRequiredKeywordInput,
+  CreateMercariCrawlSettingRequiredKeywordDocument,
+  CreateMercariCrawlSettingRequiredKeywordMutation,
+  DeleteMercariCrawlSettingRequiredKeywordDocument,
+  DeleteMercariCrawlSettingRequiredKeywordMutation,
+  UpdateMercariCrawlSettingRequiredKeywordDocument,
+  UpdateMercariCrawlSettingRequiredKeywordInput,
+  UpdateMercariCrawlSettingRequiredKeywordMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -81,6 +97,36 @@ export const deleteYahooAuctionCrawlSettingExcludeKeyword = async (
   })
 }
 
+/* YahooAuctionCrawlSettingRequiredKeyword */
+
+export const createYahooAuctionCrawlSettingRequiredKeyword = async (
+  input: CreateYahooAuctionCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<CreateYahooAuctionCrawlSettingRequiredKeywordMutation>({
+    mutation: CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateYahooAuctionCrawlSettingRequiredKeyword = async (
+  input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation>({
+    mutation: UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteYahooAuctionCrawlSettingRequiredKeyword = async (
+  id: String,
+  productId: String,
+) => {
+  return await getClient().mutate<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>({
+    mutation: DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
 /* MercariCrawlSettingExcludeKeyword */
 
 export const createMercariCrawlSettingExcludeKeyword = async (
@@ -104,6 +150,33 @@ export const updateMercariCrawlSettingExcludeKeyword = async (
 export const deleteMercariCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteMercariCrawlSettingExcludeKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/* MercariCrawlSettingRequiredKeyword */
+
+export const createMercariCrawlSettingRequiredKeyword = async (
+  input: CreateMercariCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<CreateMercariCrawlSettingRequiredKeywordMutation>({
+    mutation: CreateMercariCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateMercariCrawlSettingRequiredKeyword = async (
+  input: UpdateMercariCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<UpdateMercariCrawlSettingRequiredKeywordMutation>({
+    mutation: UpdateMercariCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteMercariCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteMercariCrawlSettingRequiredKeywordMutation>({
+    mutation: DeleteMercariCrawlSettingRequiredKeywordDocument,
     variables: { id: id, productId: productId },
   })
 }

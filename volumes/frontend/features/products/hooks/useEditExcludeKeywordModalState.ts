@@ -1,6 +1,6 @@
 import { parseAsBoolean, useQueryState } from 'nuqs'
 
-export const useEditExcludeKeywordModalQuery = 'create_crawl_setting_modal'
+export const useEditExcludeKeywordModalQuery = 'edit_exclude_keyword_modal'
 
 export const useEditExcludeKeywordModalState = () => {
   return useQueryState(

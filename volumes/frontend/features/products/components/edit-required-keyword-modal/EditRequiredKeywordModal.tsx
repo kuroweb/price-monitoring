@@ -4,16 +4,16 @@ import { useState } from 'react'
 
 import { Join } from 'react-daisyui'
 
-import { useEditExcludeKeywordModalState } from '../../hooks/useEditExcludeKeywordModalState'
+import { useEditRequiredKeywordModalState } from '../../hooks/useEditRequiredKeywordModalState'
 
 import MercariTab from './mercari-tab/MercariTab'
 import YahooAuctionTab from './yahoo-auction-tab/YahooAuctionTab'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
-const ExcludeKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [tab, setTab] = useState<'ヤフオク' | 'メルカリ'>('ヤフオク')
-  const [modal, setModal] = useEditExcludeKeywordModalState()
+  const [modal, setModal] = useEditRequiredKeywordModalState()
 
   return (
     <>
@@ -31,13 +31,13 @@ const ExcludeKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>除外キーワード</h3>
+          <h3 className='font-bold text-lg'>必須キーワード</h3>
           <div className='py-6'>
             <Join className='flex'>
               <input
                 className='join-item btn btn-md w-1/2'
                 type='radio'
-                name='exclude_keyword'
+                name='required_keyword'
                 aria-label='ヤフオク'
                 checked={tab == 'ヤフオク'}
                 onChange={() => setTab('ヤフオク')}
@@ -45,7 +45,7 @@ const ExcludeKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
               <input
                 className='join-item btn btn-md w-1/2'
                 type='radio'
-                name='exclude_keyword'
+                name='required_keyword'
                 aria-label='メルカリ'
                 checked={tab == 'メルカリ'}
                 onChange={() => setTab('メルカリ')}
@@ -64,4 +64,4 @@ const ExcludeKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
   )
 }
 
-export default ExcludeKeywordModal
+export default RequiredKeywordModal

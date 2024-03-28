@@ -7,8 +7,10 @@ import YahooAuctionProductsTable from '@/features/products/components/YahooAucti
 import DetailPageSidebarContent from '@/features/products/components/detail-page-sidebar-content/DetailPageSidebarContent'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
+import EditRequiredKeywordModal from '@/features/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
+import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useEditRequiredKeywordModalState'
 import {
   publishedStateCache,
   usePublishedStateQuery,
@@ -67,7 +69,18 @@ const Page = async ({
               >
                 除外キーワード
               </Link>
-              <EditExcludeKeywordModal data={data} />
+              <Link
+                className='btn'
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useEditRequiredKeywordModalQuery]: 'true',
+                  },
+                }}
+              >
+                必須キーワード
+              </Link>
             </div>
           </div>
         </div>
@@ -145,6 +158,8 @@ const Page = async ({
           },
         }}
       />
+      <EditExcludeKeywordModal data={data} />
+      <EditRequiredKeywordModal data={data} />
     </Layout>
   )
 }

@@ -150,6 +150,87 @@ mutation deleteYahooAuctionCrawlSettingExcludeKeyword($id: ID!, $productId: ID!)
   }
 }
 
+## YahooAuctionCrawlSettingRequiredKeyword ##
+
+mutation createYahooAuctionCrawlSettingRequiredKeyword(
+  $input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
+) {
+  createYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateYahooAuctionCrawlSettingRequiredKeyword(
+  $input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!
+) {
+  updateYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteYahooAuctionCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deleteYahooAuctionCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
 ## MercariCrawlSettingExcludeKeyword ##
 
 mutation createMercariCrawlSettingExcludeKeyword(
@@ -219,6 +300,87 @@ mutation deleteMercariCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
       ok
       error {
         ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## MercariCrawlSettingRequiredKeyword ##
+
+mutation createMercariCrawlSettingRequiredKeyword(
+  $input: CreateMercariCrawlSettingRequiredKeywordInput!
+) {
+  createMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      mercariCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateMercariCrawlSettingRequiredKeyword(
+  $input: UpdateMercariCrawlSettingRequiredKeywordInput!
+) {
+  updateMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      mercariCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteMercariCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deleteMercariCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeleteMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed {
           code
           message
           details {

@@ -53,6 +53,13 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
         createdAt
         updatedAt
       }
+      yahooAuctionCrawlSettingRequiredKeywords {
+        id
+        yahooAuctionCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
     }
     yahooAuctionDailyPurchaseSummaries {
       id
@@ -84,6 +91,13 @@ query getProductDetailPageData($id: ID!, $published: Boolean) {
       maxPrice
       enabled
       mercariCrawlSettingExcludeKeywords {
+        id
+        mercariCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      mercariCrawlSettingRequiredKeywords {
         id
         mercariCrawlSettingId
         keyword
