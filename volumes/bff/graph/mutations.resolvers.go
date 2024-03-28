@@ -6,7 +6,6 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
@@ -44,17 +43,17 @@ func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx cont
 
 // CreateYahooAuctionCrawlSettingRequiredKeyword is the resolver for the createYahooAuctionCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) CreateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) (model.CreateYahooAuctionCrawlSettingRequiredKeywordResult, error) {
-	panic(fmt.Errorf("not implemented: CreateYahooAuctionCrawlSettingRequiredKeyword - createYahooAuctionCrawlSettingRequiredKeyword"))
+	return r.ProductService.CreateYahooAuctionCrawlSettingRequiredKeyword(ctx, input)
 }
 
 // UpdateYahooAuctionCrawlSettingRequiredKeyword is the resolver for the updateYahooAuctionCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult, error) {
-	panic(fmt.Errorf("not implemented: UpdateYahooAuctionCrawlSettingRequiredKeyword - updateYahooAuctionCrawlSettingRequiredKeyword"))
+	return r.ProductService.UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx, input)
 }
 
 // DeleteYahooAuctionCrawlSettingRequiredKeyword is the resolver for the deleteYahooAuctionCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult, error) {
-	panic(fmt.Errorf("not implemented: DeleteYahooAuctionCrawlSettingRequiredKeyword - deleteYahooAuctionCrawlSettingRequiredKeyword"))
+	return r.ProductService.DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx, id, productID)
 }
 
 // CreateMercariCrawlSettingExcludeKeyword is the resolver for the createMercariCrawlSettingExcludeKeyword field.
@@ -74,17 +73,17 @@ func (r *mutationResolver) DeleteMercariCrawlSettingExcludeKeyword(ctx context.C
 
 // CreateMercariCrawlSettingRequiredKeyword is the resolver for the createMercariCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) CreateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateMercariCrawlSettingRequiredKeywordInput) (model.CreateMercariCrawlSettingRequiredKeywordResult, error) {
-	panic(fmt.Errorf("not implemented: CreateMercariCrawlSettingRequiredKeyword - createMercariCrawlSettingRequiredKeyword"))
+	return r.ProductService.CreateMercariCrawlSettingRequiredKeyword(ctx, input)
 }
 
 // UpdateMercariCrawlSettingRequiredKeyword is the resolver for the updateMercariCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) UpdateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingRequiredKeywordInput) (model.UpdateMercariCrawlSettingRequiredKeywordResult, error) {
-	panic(fmt.Errorf("not implemented: UpdateMercariCrawlSettingRequiredKeyword - updateMercariCrawlSettingRequiredKeyword"))
+	return r.ProductService.UpdateMercariCrawlSettingRequiredKeyword(ctx, input)
 }
 
 // DeleteMercariCrawlSettingRequiredKeyword is the resolver for the deleteMercariCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) DeleteMercariCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingRequiredKeywordResult, error) {
-	panic(fmt.Errorf("not implemented: DeleteMercariCrawlSettingRequiredKeyword - deleteMercariCrawlSettingRequiredKeyword"))
+	return r.ProductService.DeleteMercariCrawlSettingRequiredKeyword(ctx, id, productID)
 }
 
 // Mutation returns internal.MutationResolver implementation.
