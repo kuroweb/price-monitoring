@@ -1,0 +1,15 @@
+package mercari_crawl_setting_required_keywords
+
+type IMercariCrawlSettingRequiredKeywordService interface {
+	IFindMercariCrawlSettingRequiredKeywordService
+	ICreateMercariCrawlSettingRequiredKeywordService
+	IUpdateMercariCrawlSettingRequiredKeywordService
+	IDeleteMercariCrawlSettingRequiredKeywordService
+}
+
+type MercariCrawlSettingRequiredKeywordService struct {
+	*FindMercariCrawlSettingRequiredKeywordService
+	*CreateMercariCrawlSettingRequiredKeywordService
+	*UpdateMercariCrawlSettingRequiredKeywordService
+	*DeleteMercariCrawlSettingRequiredKeywordService
+}

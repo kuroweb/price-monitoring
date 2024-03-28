@@ -65,6 +65,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	CreateMercariCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateMercariCrawlSettingRequiredKeywordResultSuccess struct {
+		MercariCrawlSettingRequiredKeyword func(childComplexity int) int
+		Ok                                 func(childComplexity int) int
+	}
+
+	CreateMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	CreateProductResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -97,6 +113,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	CreateYahooAuctionCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok                                      func(childComplexity int) int
+		YahooAuctionCrawlSettingRequiredKeyword func(childComplexity int) int
+	}
+
+	CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	DeleteMercariCrawlSettingExcludeKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -107,6 +139,21 @@ type ComplexityRoot struct {
 	}
 
 	DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeleteMercariCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteMercariCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -142,25 +189,49 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	DeleteYahooAuctionCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	ErrorDetail struct {
 		Field   func(childComplexity int) int
 		Message func(childComplexity int) int
 	}
 
 	MercariCrawlSetting struct {
-		CategoryID                         func(childComplexity int) int
-		CreatedAt                          func(childComplexity int) int
-		Enabled                            func(childComplexity int) int
-		ID                                 func(childComplexity int) int
-		Keyword                            func(childComplexity int) int
-		MaxPrice                           func(childComplexity int) int
-		MercariCrawlSettingExcludeKeywords func(childComplexity int) int
-		MinPrice                           func(childComplexity int) int
-		ProductID                          func(childComplexity int) int
-		UpdatedAt                          func(childComplexity int) int
+		CategoryID                          func(childComplexity int) int
+		CreatedAt                           func(childComplexity int) int
+		Enabled                             func(childComplexity int) int
+		ID                                  func(childComplexity int) int
+		Keyword                             func(childComplexity int) int
+		MaxPrice                            func(childComplexity int) int
+		MercariCrawlSettingExcludeKeywords  func(childComplexity int) int
+		MercariCrawlSettingRequiredKeywords func(childComplexity int) int
+		MinPrice                            func(childComplexity int) int
+		ProductID                           func(childComplexity int) int
+		UpdatedAt                           func(childComplexity int) int
 	}
 
 	MercariCrawlSettingExcludeKeyword struct {
+		CreatedAt             func(childComplexity int) int
+		ID                    func(childComplexity int) int
+		Keyword               func(childComplexity int) int
+		MercariCrawlSettingID func(childComplexity int) int
+		UpdatedAt             func(childComplexity int) int
+	}
+
+	MercariCrawlSettingRequiredKeyword struct {
 		CreatedAt             func(childComplexity int) int
 		ID                    func(childComplexity int) int
 		Keyword               func(childComplexity int) int
@@ -192,15 +263,21 @@ type ComplexityRoot struct {
 	}
 
 	Mutation struct {
-		CreateMercariCrawlSettingExcludeKeyword      func(childComplexity int, input model.CreateMercariCrawlSettingExcludeKeywordInput) int
-		CreateProduct                                func(childComplexity int, input model.CreateProductInput) int
-		CreateYahooAuctionCrawlSettingExcludeKeyword func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) int
-		DeleteMercariCrawlSettingExcludeKeyword      func(childComplexity int, id string, productID string) int
-		DeleteProduct                                func(childComplexity int, id string) int
-		DeleteYahooAuctionCrawlSettingExcludeKeyword func(childComplexity int, id string, productID string) int
-		UpdateMercariCrawlSettingExcludeKeyword      func(childComplexity int, input model.UpdateMercariCrawlSettingExcludeKeywordInput) int
-		UpdateProduct                                func(childComplexity int, id string, input model.UpdateProductInput) int
-		UpdateYahooAuctionCrawlSettingExcludeKeyword func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) int
+		CreateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.CreateMercariCrawlSettingExcludeKeywordInput) int
+		CreateMercariCrawlSettingRequiredKeyword      func(childComplexity int, input model.CreateMercariCrawlSettingRequiredKeywordInput) int
+		CreateProduct                                 func(childComplexity int, input model.CreateProductInput) int
+		CreateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) int
+		CreateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) int
+		DeleteMercariCrawlSettingExcludeKeyword       func(childComplexity int, id string, productID string) int
+		DeleteMercariCrawlSettingRequiredKeyword      func(childComplexity int, id string, productID string) int
+		DeleteProduct                                 func(childComplexity int, id string) int
+		DeleteYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, id string, productID string) int
+		DeleteYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, id string, productID string) int
+		UpdateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.UpdateMercariCrawlSettingExcludeKeywordInput) int
+		UpdateMercariCrawlSettingRequiredKeyword      func(childComplexity int, input model.UpdateMercariCrawlSettingRequiredKeywordInput) int
+		UpdateProduct                                 func(childComplexity int, id string, input model.UpdateProductInput) int
+		UpdateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) int
+		UpdateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) int
 	}
 
 	Product struct {
@@ -231,6 +308,22 @@ type ComplexityRoot struct {
 	}
 
 	UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdateMercariCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateMercariCrawlSettingRequiredKeywordResultSuccess struct {
+		MercariCrawlSettingRequiredKeyword func(childComplexity int) int
+		Ok                                 func(childComplexity int) int
+	}
+
+	UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -268,20 +361,45 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	UpdateYahooAuctionCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok                                      func(childComplexity int) int
+		YahooAuctionCrawlSettingRequiredKeyword func(childComplexity int) int
+	}
+
+	UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	YahooAuctionCrawlSetting struct {
-		CategoryID                              func(childComplexity int) int
-		CreatedAt                               func(childComplexity int) int
-		Enabled                                 func(childComplexity int) int
-		ID                                      func(childComplexity int) int
-		Keyword                                 func(childComplexity int) int
-		MaxPrice                                func(childComplexity int) int
-		MinPrice                                func(childComplexity int) int
-		ProductID                               func(childComplexity int) int
-		UpdatedAt                               func(childComplexity int) int
-		YahooAuctionCrawlSettingExcludeKeywords func(childComplexity int) int
+		CategoryID                               func(childComplexity int) int
+		CreatedAt                                func(childComplexity int) int
+		Enabled                                  func(childComplexity int) int
+		ID                                       func(childComplexity int) int
+		Keyword                                  func(childComplexity int) int
+		MaxPrice                                 func(childComplexity int) int
+		MinPrice                                 func(childComplexity int) int
+		ProductID                                func(childComplexity int) int
+		UpdatedAt                                func(childComplexity int) int
+		YahooAuctionCrawlSettingExcludeKeywords  func(childComplexity int) int
+		YahooAuctionCrawlSettingRequiredKeywords func(childComplexity int) int
 	}
 
 	YahooAuctionCrawlSettingExcludeKeyword struct {
+		CreatedAt                  func(childComplexity int) int
+		ID                         func(childComplexity int) int
+		Keyword                    func(childComplexity int) int
+		UpdatedAt                  func(childComplexity int) int
+		YahooAuctionCrawlSettingID func(childComplexity int) int
+	}
+
+	YahooAuctionCrawlSettingRequiredKeyword struct {
 		CreatedAt                  func(childComplexity int) int
 		ID                         func(childComplexity int) int
 		Keyword                    func(childComplexity int) int
@@ -315,6 +433,7 @@ type ComplexityRoot struct {
 
 type MercariCrawlSettingResolver interface {
 	MercariCrawlSettingExcludeKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingExcludeKeyword, error)
+	MercariCrawlSettingRequiredKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingRequiredKeyword, error)
 }
 type MutationResolver interface {
 	CreateProduct(ctx context.Context, input model.CreateProductInput) (model.CreateProductResult, error)
@@ -323,9 +442,15 @@ type MutationResolver interface {
 	CreateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) (model.CreateYahooAuctionCrawlSettingExcludeKeywordResult, error)
 	UpdateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) (model.UpdateYahooAuctionCrawlSettingExcludeKeywordResult, error)
 	DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error)
+	CreateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) (model.CreateYahooAuctionCrawlSettingRequiredKeywordResult, error)
+	UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult, error)
+	DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error)
 	CreateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateMercariCrawlSettingExcludeKeywordInput) (model.CreateMercariCrawlSettingExcludeKeywordResult, error)
 	UpdateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingExcludeKeywordInput) (model.UpdateMercariCrawlSettingExcludeKeywordResult, error)
 	DeleteMercariCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeKeywordResult, error)
+	CreateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateMercariCrawlSettingRequiredKeywordInput) (model.CreateMercariCrawlSettingRequiredKeywordResult, error)
+	UpdateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingRequiredKeywordInput) (model.UpdateMercariCrawlSettingRequiredKeywordResult, error)
+	DeleteMercariCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingRequiredKeywordResult, error)
 }
 type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error)
@@ -342,6 +467,7 @@ type QueryResolver interface {
 }
 type YahooAuctionCrawlSettingResolver interface {
 	YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error)
+	YahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingRequiredKeyword, error)
 }
 
 type executableSchema struct {
@@ -411,6 +537,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.CreateMercariCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultSuccess.mercariCrawlSettingRequiredKeyword":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultSuccess.MercariCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultSuccess.MercariCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "CreateProductResultError.error":
 		if e.complexity.CreateProductResultError.Error == nil {
@@ -510,6 +685,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.yahooAuctionCrawlSettingRequiredKeyword":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.YahooAuctionCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.YahooAuctionCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
 	case "DeleteMercariCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.DeleteMercariCrawlSettingExcludeKeywordResultError.Error == nil {
 			break
@@ -551,6 +775,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeleteMercariCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "DeleteMercariCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "DeleteMercariCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "DeleteProductResultError.error":
 		if e.complexity.DeleteProductResultError.Error == nil {
@@ -636,6 +902,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
 	case "ErrorDetail.field":
 		if e.complexity.ErrorDetail.Field == nil {
 			break
@@ -699,6 +1007,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.MercariCrawlSetting.MercariCrawlSettingExcludeKeywords(childComplexity), true
 
+	case "MercariCrawlSetting.mercariCrawlSettingRequiredKeywords":
+		if e.complexity.MercariCrawlSetting.MercariCrawlSettingRequiredKeywords == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSetting.MercariCrawlSettingRequiredKeywords(childComplexity), true
+
 	case "MercariCrawlSetting.minPrice":
 		if e.complexity.MercariCrawlSetting.MinPrice == nil {
 			break
@@ -754,6 +1069,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.MercariCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "MercariCrawlSettingRequiredKeyword.createdAt":
+		if e.complexity.MercariCrawlSettingRequiredKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingRequiredKeyword.CreatedAt(childComplexity), true
+
+	case "MercariCrawlSettingRequiredKeyword.id":
+		if e.complexity.MercariCrawlSettingRequiredKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingRequiredKeyword.ID(childComplexity), true
+
+	case "MercariCrawlSettingRequiredKeyword.keyword":
+		if e.complexity.MercariCrawlSettingRequiredKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingRequiredKeyword.Keyword(childComplexity), true
+
+	case "MercariCrawlSettingRequiredKeyword.mercariCrawlSettingId":
+		if e.complexity.MercariCrawlSettingRequiredKeyword.MercariCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingRequiredKeyword.MercariCrawlSettingID(childComplexity), true
+
+	case "MercariCrawlSettingRequiredKeyword.updatedAt":
+		if e.complexity.MercariCrawlSettingRequiredKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingRequiredKeyword.UpdatedAt(childComplexity), true
 
 	case "MercariDailyPurchaseSummary.averagePurchasePrice":
 		if e.complexity.MercariDailyPurchaseSummary.AveragePurchasePrice == nil {
@@ -886,6 +1236,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateMercariCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateMercariCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.createMercariCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.CreateMercariCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createMercariCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateMercariCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreateMercariCrawlSettingRequiredKeywordInput)), true
+
 	case "Mutation.createProduct":
 		if e.complexity.Mutation.CreateProduct == nil {
 			break
@@ -910,6 +1272,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateYahooAuctionCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.createYahooAuctionCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.CreateYahooAuctionCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createYahooAuctionCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateYahooAuctionCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreateYahooAuctionCrawlSettingRequiredKeywordInput)), true
+
 	case "Mutation.deleteMercariCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.DeleteMercariCrawlSettingExcludeKeyword == nil {
 			break
@@ -921,6 +1295,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.DeleteMercariCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deleteMercariCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.DeleteMercariCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteMercariCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteMercariCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
 
 	case "Mutation.deleteProduct":
 		if e.complexity.Mutation.DeleteProduct == nil {
@@ -946,6 +1332,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.DeleteYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
 
+	case "Mutation.deleteYahooAuctionCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.DeleteYahooAuctionCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteYahooAuctionCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
 	case "Mutation.updateMercariCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.UpdateMercariCrawlSettingExcludeKeyword == nil {
 			break
@@ -957,6 +1355,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdateMercariCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateMercariCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updateMercariCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.UpdateMercariCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateMercariCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateMercariCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdateMercariCrawlSettingRequiredKeywordInput)), true
 
 	case "Mutation.updateProduct":
 		if e.complexity.Mutation.UpdateProduct == nil {
@@ -981,6 +1391,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdateYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updateYahooAuctionCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.UpdateYahooAuctionCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateYahooAuctionCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateYahooAuctionCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput)), true
 
 	case "Product.id":
 		if e.complexity.Product.ID == nil {
@@ -1133,6 +1555,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "UpdateMercariCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "UpdateMercariCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "UpdateMercariCrawlSettingRequiredKeywordResultSuccess.mercariCrawlSettingRequiredKeyword":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultSuccess.MercariCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultSuccess.MercariCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "UpdateMercariCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
 	case "UpdateProductResultError.error":
 		if e.complexity.UpdateProductResultError.Error == nil {
 			break
@@ -1231,6 +1702,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.yahooAuctionCrawlSettingRequiredKeyword":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.YahooAuctionCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess.YahooAuctionCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
 	case "YahooAuctionCrawlSetting.categoryId":
 		if e.complexity.YahooAuctionCrawlSetting.CategoryID == nil {
 			break
@@ -1301,6 +1821,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingExcludeKeywords(childComplexity), true
 
+	case "YahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords":
+		if e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingRequiredKeywords == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingRequiredKeywords(childComplexity), true
+
 	case "YahooAuctionCrawlSettingExcludeKeyword.createdAt":
 		if e.complexity.YahooAuctionCrawlSettingExcludeKeyword.CreatedAt == nil {
 			break
@@ -1335,6 +1862,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.YahooAuctionCrawlSettingExcludeKeyword.YahooAuctionCrawlSettingID(childComplexity), true
+
+	case "YahooAuctionCrawlSettingRequiredKeyword.createdAt":
+		if e.complexity.YahooAuctionCrawlSettingRequiredKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingRequiredKeyword.CreatedAt(childComplexity), true
+
+	case "YahooAuctionCrawlSettingRequiredKeyword.id":
+		if e.complexity.YahooAuctionCrawlSettingRequiredKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingRequiredKeyword.ID(childComplexity), true
+
+	case "YahooAuctionCrawlSettingRequiredKeyword.keyword":
+		if e.complexity.YahooAuctionCrawlSettingRequiredKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingRequiredKeyword.Keyword(childComplexity), true
+
+	case "YahooAuctionCrawlSettingRequiredKeyword.updatedAt":
+		if e.complexity.YahooAuctionCrawlSettingRequiredKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingRequiredKeyword.UpdatedAt(childComplexity), true
+
+	case "YahooAuctionCrawlSettingRequiredKeyword.yahooAuctionCrawlSettingId":
+		if e.complexity.YahooAuctionCrawlSettingRequiredKeyword.YahooAuctionCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingRequiredKeyword.YahooAuctionCrawlSettingID(childComplexity), true
 
 	case "YahooAuctionDailyPurchaseSummary.averagePurchasePrice":
 		if e.complexity.YahooAuctionDailyPurchaseSummary.AveragePurchasePrice == nil {
@@ -1465,14 +2027,18 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 	inputUnmarshalMap := graphql.BuildUnmarshalerMap(
 		ec.unmarshalInputCreateMercariCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateMercariCrawlSettingInput,
+		ec.unmarshalInputCreateMercariCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateProductInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingInput,
+		ec.unmarshalInputCreateYahooAuctionCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingInput,
+		ec.unmarshalInputUpdateMercariCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateProductInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput,
+		ec.unmarshalInputUpdateYahooAuctionCrawlSettingRequiredKeywordInput,
 	)
 	first := true
 
@@ -1588,6 +2154,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
+  createYahooAuctionCrawlSettingRequiredKeyword(
+    input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
+  ): CreateYahooAuctionCrawlSettingRequiredKeywordResult!
+  updateYahooAuctionCrawlSettingRequiredKeyword(
+    input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!
+  ): UpdateYahooAuctionCrawlSettingRequiredKeywordResult!
+  deleteYahooAuctionCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
   createMercariCrawlSettingExcludeKeyword(
     input: CreateMercariCrawlSettingExcludeKeywordInput!
   ): CreateMercariCrawlSettingExcludeKeywordResult!
@@ -1598,6 +2174,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteMercariCrawlSettingExcludeKeywordResult!
+  createMercariCrawlSettingRequiredKeyword(
+    input: CreateMercariCrawlSettingRequiredKeywordInput!
+  ): CreateMercariCrawlSettingRequiredKeywordResult!
+  updateMercariCrawlSettingRequiredKeyword(
+    input: UpdateMercariCrawlSettingRequiredKeywordInput!
+  ): UpdateMercariCrawlSettingRequiredKeywordResult!
+  deleteMercariCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteMercariCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -1816,6 +2402,91 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implemen
   details: [ErrorDetail!]!
 }
 
+## CreateYahooAuctionCrawlSettingRequiredKeyword ##
+
+input CreateYahooAuctionCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateYahooAuctionCrawlSettingRequiredKeywordResult =
+    CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess
+  | CreateYahooAuctionCrawlSettingRequiredKeywordResultError
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingRequiredKeyword: YahooAuctionCrawlSettingRequiredKeyword!
+}
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors =
+    CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateYahooAuctionCrawlSettingRequiredKeyword ##
+
+input UpdateYahooAuctionCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateYahooAuctionCrawlSettingRequiredKeywordResult =
+    UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess
+  | UpdateYahooAuctionCrawlSettingRequiredKeywordResultError
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingRequiredKeyword: YahooAuctionCrawlSettingRequiredKeyword!
+}
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors =
+    UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteYahooAuctionCrawlSettingRequiredKeyword ##
+
+union DeleteYahooAuctionCrawlSettingRequiredKeywordResult =
+    DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess
+  | DeleteYahooAuctionCrawlSettingRequiredKeywordResultError
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors =
+    DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateMercariCrawlSettingExcludeKeyword ##
 
 input CreateMercariCrawlSettingExcludeKeywordInput {
@@ -1900,6 +2571,92 @@ type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements Us
   message: String!
   details: [ErrorDetail!]!
 }
+
+
+## CreateMercariCrawlSettingRequiredKeyword ##
+
+input CreateMercariCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateMercariCrawlSettingRequiredKeywordResult =
+    CreateMercariCrawlSettingRequiredKeywordResultSuccess
+  | CreateMercariCrawlSettingRequiredKeywordResultError
+
+type CreateMercariCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingRequiredKeyword: MercariCrawlSettingRequiredKeyword!
+}
+
+type CreateMercariCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateMercariCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateMercariCrawlSettingRequiredKeywordResultErrors =
+    CreateMercariCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateMercariCrawlSettingRequiredKeyword ##
+
+input UpdateMercariCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateMercariCrawlSettingRequiredKeywordResult =
+    UpdateMercariCrawlSettingRequiredKeywordResultSuccess
+  | UpdateMercariCrawlSettingRequiredKeywordResultError
+
+type UpdateMercariCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingRequiredKeyword: MercariCrawlSettingRequiredKeyword!
+}
+
+type UpdateMercariCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateMercariCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateMercariCrawlSettingRequiredKeywordResultErrors =
+    UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteMercariCrawlSettingRequiredKeyword ##
+
+union DeleteMercariCrawlSettingRequiredKeywordResult =
+    DeleteMercariCrawlSettingRequiredKeywordResultSuccess
+  | DeleteMercariCrawlSettingRequiredKeywordResultError
+
+type DeleteMercariCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteMercariCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteMercariCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteMercariCrawlSettingRequiredKeywordResultErrors =
+    DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
 `, BuiltIn: false},
 	{Name: "../graph/product.graphqls", Input: `type Product implements Node {
   id: ID!
@@ -1944,9 +2701,18 @@ type YahooAuctionCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   yahooAuctionCrawlSettingExcludeKeywords: [YahooAuctionCrawlSettingExcludeKeyword!]!
+  yahooAuctionCrawlSettingRequiredKeywords: [YahooAuctionCrawlSettingRequiredKeyword!]!
 }
 
 type YahooAuctionCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  yahooAuctionCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type YahooAuctionCrawlSettingRequiredKeyword implements Node {
   id: ID!
   yahooAuctionCrawlSettingId: Int!
   keyword: String
@@ -1998,9 +2764,18 @@ type MercariCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   mercariCrawlSettingExcludeKeywords: [MercariCrawlSettingExcludeKeyword!]!
+  mercariCrawlSettingRequiredKeywords: [MercariCrawlSettingRequiredKeyword!]!
 }
 
 type MercariCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  mercariCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type MercariCrawlSettingRequiredKeyword implements Node {
   id: ID!
   mercariCrawlSettingId: Int!
   keyword: String
@@ -2028,6 +2803,21 @@ func (ec *executionContext) field_Mutation_createMercariCrawlSettingExcludeKeywo
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNCreateMercariCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createMercariCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateMercariCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateMercariCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2066,7 +2856,46 @@ func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingExclude
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateYahooAuctionCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateYahooAuctionCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingRequiredKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 string
@@ -2129,6 +2958,30 @@ func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingExclude
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_updateMercariCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -2136,6 +2989,21 @@ func (ec *executionContext) field_Mutation_updateMercariCrawlSettingExcludeKeywo
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNUpdateMercariCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateMercariCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateMercariCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateMercariCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2175,6 +3043,21 @@ func (ec *executionContext) field_Mutation_updateYahooAuctionCrawlSettingExclude
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNUpdateYahooAuctionCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateYahooAuctionCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateYahooAuctionCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingRequiredKeywordInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -2666,6 +3549,332 @@ func (ec *executionContext) _CreateMercariCrawlSettingExcludeKeywordResultValida
 func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CreateMercariCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateMercariCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateMercariCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateMercariCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MercariCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.MercariCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNMercariCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_id(ctx, field)
+			case "mercariCrawlSettingId":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -3340,6 +4549,332 @@ func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeKe
 	return fc, nil
 }
 
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.YahooAuctionCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.YahooAuctionCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -3594,6 +5129,276 @@ func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultValida
 func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteMercariCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteMercariCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteMercariCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -4150,6 +5955,276 @@ func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeKe
 	return fc, nil
 }
 
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _ErrorDetail_field(ctx context.Context, field graphql.CollectedField, obj *model.ErrorDetail) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_ErrorDetail_field(ctx, field)
 	if err != nil {
@@ -4687,6 +6762,62 @@ func (ec *executionContext) fieldContext_MercariCrawlSetting_mercariCrawlSetting
 	return fc, nil
 }
 
+func (ec *executionContext) _MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.MercariCrawlSetting().MercariCrawlSettingRequiredKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.MercariCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNMercariCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_id(ctx, field)
+			case "mercariCrawlSettingId":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _MercariCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_MercariCrawlSettingExcludeKeyword_id(ctx, field)
 	if err != nil {
@@ -4894,6 +7025,223 @@ func (ec *executionContext) _MercariCrawlSettingExcludeKeyword_updatedAt(ctx con
 func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "MercariCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingRequiredKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MercariCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingRequiredKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingRequiredKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingRequiredKeyword",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -5976,6 +8324,171 @@ func (ec *executionContext) fieldContext_Mutation_deleteYahooAuctionCrawlSetting
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateYahooAuctionCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.CreateYahooAuctionCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateYahooAuctionCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreateYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateYahooAuctionCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createYahooAuctionCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateYahooAuctionCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdateYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateYahooAuctionCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateYahooAuctionCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteYahooAuctionCrawlSettingRequiredKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeleteYahooAuctionCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteYahooAuctionCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Mutation_createMercariCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Mutation_createMercariCrawlSettingExcludeKeyword(ctx, field)
 	if err != nil {
@@ -6135,6 +8648,171 @@ func (ec *executionContext) fieldContext_Mutation_deleteMercariCrawlSettingExclu
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
 	if fc.Args, err = ec.field_Mutation_deleteMercariCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createMercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createMercariCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateMercariCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.CreateMercariCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateMercariCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreateMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createMercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateMercariCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createMercariCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateMercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateMercariCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateMercariCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.UpdateMercariCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateMercariCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdateMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateMercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateMercariCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateMercariCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteMercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteMercariCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteMercariCrawlSettingRequiredKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteMercariCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeleteMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteMercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteMercariCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteMercariCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return fc, err
 	}
@@ -6365,6 +9043,8 @@ func (ec *executionContext) fieldContext_Product_yahooAuctionCrawlSetting(ctx co
 				return ec.fieldContext_YahooAuctionCrawlSetting_updatedAt(ctx, field)
 			case "yahooAuctionCrawlSettingExcludeKeywords":
 				return ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeKeywords(ctx, field)
+			case "yahooAuctionCrawlSettingRequiredKeywords":
+				return ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSetting", field.Name)
 		},
@@ -6568,6 +9248,8 @@ func (ec *executionContext) fieldContext_Product_mercariCrawlSetting(ctx context
 				return ec.fieldContext_MercariCrawlSetting_updatedAt(ctx, field)
 			case "mercariCrawlSettingExcludeKeywords":
 				return ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingExcludeKeywords(ctx, field)
+			case "mercariCrawlSettingRequiredKeywords":
+				return ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSetting", field.Name)
 		},
@@ -7288,6 +9970,332 @@ func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeKeyword
 	return fc, nil
 }
 
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateMercariCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateMercariCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateMercariCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MercariCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.MercariCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNMercariCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_id(ctx, field)
+			case "mercariCrawlSettingId":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_MercariCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _UpdateProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateProductResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_UpdateProductResultError_ok(ctx, field)
 	if err != nil {
@@ -7946,6 +10954,332 @@ func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeKe
 	return fc, nil
 }
 
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.YahooAuctionCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.YahooAuctionCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _YahooAuctionCrawlSetting_id(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_id(ctx, field)
 	if err != nil {
@@ -8395,6 +11729,62 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_yahooAuctionCr
 	return fc, nil
 }
 
+func (ec *executionContext) _YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.YahooAuctionCrawlSetting().YahooAuctionCrawlSettingRequiredKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.YahooAuctionCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeKeyword_id(ctx, field)
 	if err != nil {
@@ -8602,6 +11992,223 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ct
 func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.YahooAuctionCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingRequiredKeyword",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -11230,6 +14837,44 @@ func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingInput(ctx con
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.CreateMercariCrawlSettingRequiredKeywordInput, error) {
+	var it model.CreateMercariCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context, obj interface{}) (model.CreateProductInput, error) {
 	var it model.CreateProductInput
 	asMap := map[string]interface{}{}
@@ -11380,6 +15025,44 @@ func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingInput(ct
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.CreateYahooAuctionCrawlSettingRequiredKeywordInput, error) {
+	var it model.CreateYahooAuctionCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.UpdateMercariCrawlSettingExcludeKeywordInput, error) {
 	var it model.UpdateMercariCrawlSettingExcludeKeywordInput
 	asMap := map[string]interface{}{}
@@ -11486,6 +15169,53 @@ func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingInput(ctx con
 				return it, err
 			}
 			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.UpdateMercariCrawlSettingRequiredKeywordInput, error) {
+	var it model.UpdateMercariCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
 		}
 	}
 
@@ -11651,6 +15381,53 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingInput(ct
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput, error) {
+	var it model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
 // endregion **************************** input.gotpl *****************************
 
 // region    ************************** interface.gotpl ***************************
@@ -11689,6 +15466,45 @@ func (ec *executionContext) _CreateMercariCrawlSettingExcludeKeywordResultErrors
 			return graphql.Null
 		}
 		return ec._CreateMercariCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateMercariCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingRequiredKeywordResultError:
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateMercariCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -11772,6 +15588,45 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeKeywordResultE
 	}
 }
 
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteMercariCrawlSettingExcludeKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -11806,6 +15661,45 @@ func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultErrors
 			return graphql.Null
 		}
 		return ec._DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteMercariCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteMercariCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -11889,6 +15783,45 @@ func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeKeywordResultE
 	}
 }
 
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj model.Node) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -11921,6 +15854,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._YahooAuctionCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.YahooAuctionCrawlSettingRequiredKeyword:
+		return ec._YahooAuctionCrawlSettingRequiredKeyword(ctx, sel, &obj)
+	case *model.YahooAuctionCrawlSettingRequiredKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._YahooAuctionCrawlSettingRequiredKeyword(ctx, sel, obj)
 	case model.YahooAuctionDailyPurchaseSummary:
 		return ec._YahooAuctionDailyPurchaseSummary(ctx, sel, &obj)
 	case *model.YahooAuctionDailyPurchaseSummary:
@@ -11956,6 +15896,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._MercariCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.MercariCrawlSettingRequiredKeyword:
+		return ec._MercariCrawlSettingRequiredKeyword(ctx, sel, &obj)
+	case *model.MercariCrawlSettingRequiredKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._MercariCrawlSettingRequiredKeyword(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -12049,6 +15996,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
 	case model.CreateMercariCrawlSettingExcludeKeywordResultSuccess:
 		return ec._CreateMercariCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
 	case *model.CreateMercariCrawlSettingExcludeKeywordResultSuccess:
@@ -12091,6 +16080,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteMercariCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingRequiredKeywordResultError:
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -12130,6 +16161,45 @@ func (ec *executionContext) _UpdateMercariCrawlSettingExcludeKeywordResultErrors
 			return graphql.Null
 		}
 		return ec._UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateMercariCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -12213,6 +16283,45 @@ func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeKeywordResultE
 	}
 }
 
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet, obj model.UserError) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -12259,6 +16368,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	case model.CreateMercariCrawlSettingExcludeKeywordResultValidationFailed:
 		return ec._CreateMercariCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
 	case *model.CreateMercariCrawlSettingExcludeKeywordResultValidationFailed:
@@ -12280,6 +16410,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -12400,6 +16551,143 @@ func (ec *executionContext) _CreateMercariCrawlSettingExcludeKeywordResultValida
 			}
 		case "details":
 			out.Values[i] = ec._CreateMercariCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createMercariCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateMercariCrawlSettingRequiredKeywordResultError", "CreateMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createMercariCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateMercariCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createMercariCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"CreateMercariCrawlSettingRequiredKeywordResultSuccess", "CreateMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createMercariCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateMercariCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "mercariCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createMercariCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"CreateMercariCrawlSettingRequiredKeywordResultValidationFailed", "CreateMercariCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createMercariCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateMercariCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -12700,6 +16988,143 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeKeywordResultV
 	return out
 }
 
+var createYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateYahooAuctionCrawlSettingRequiredKeywordResultError", "CreateYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess", "CreateYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "yahooAuctionCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed", "CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var deleteMercariCrawlSettingExcludeKeywordResultErrorImplementors = []string{"DeleteMercariCrawlSettingExcludeKeywordResultError", "DeleteMercariCrawlSettingExcludeKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
@@ -12806,6 +17231,138 @@ func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultValida
 			}
 		case "details":
 			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteMercariCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteMercariCrawlSettingRequiredKeywordResultError", "DeleteMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteMercariCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteMercariCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteMercariCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"DeleteMercariCrawlSettingRequiredKeywordResultSuccess", "DeleteMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteMercariCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteMercariCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteMercariCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed", "DeleteMercariCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteMercariCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -13096,6 +17653,138 @@ func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeKeywordResultV
 	return out
 }
 
+var deleteYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteYahooAuctionCrawlSettingRequiredKeywordResultError", "DeleteYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteYahooAuctionCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteYahooAuctionCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess", "DeleteYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteYahooAuctionCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed", "DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var errorDetailImplementors = []string{"ErrorDetail"}
 
 func (ec *executionContext) _ErrorDetail(ctx context.Context, sel ast.SelectionSet, obj *model.ErrorDetail) graphql.Marshaler {
@@ -13229,6 +17918,42 @@ func (ec *executionContext) _MercariCrawlSetting(ctx context.Context, sel ast.Se
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "mercariCrawlSettingRequiredKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -13282,6 +18007,62 @@ func (ec *executionContext) _MercariCrawlSettingExcludeKeyword(ctx context.Conte
 			}
 		case "updatedAt":
 			out.Values[i] = ec._MercariCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var mercariCrawlSettingRequiredKeywordImplementors = []string{"MercariCrawlSettingRequiredKeyword", "Node"}
+
+func (ec *executionContext) _MercariCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.MercariCrawlSettingRequiredKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, mercariCrawlSettingRequiredKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("MercariCrawlSettingRequiredKeyword")
+		case "id":
+			out.Values[i] = ec._MercariCrawlSettingRequiredKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "mercariCrawlSettingId":
+			out.Values[i] = ec._MercariCrawlSettingRequiredKeyword_mercariCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._MercariCrawlSettingRequiredKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._MercariCrawlSettingRequiredKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._MercariCrawlSettingRequiredKeyword_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -13516,6 +18297,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createYahooAuctionCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateYahooAuctionCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteYahooAuctionCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		case "createMercariCrawlSettingExcludeKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_createMercariCrawlSettingExcludeKeyword(ctx, field)
@@ -13533,6 +18335,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 		case "deleteMercariCrawlSettingExcludeKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_deleteMercariCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createMercariCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createMercariCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateMercariCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateMercariCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteMercariCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteMercariCrawlSettingRequiredKeyword(ctx, field)
 			})
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
@@ -14070,6 +18893,143 @@ func (ec *executionContext) _UpdateMercariCrawlSettingExcludeKeywordResultValida
 	return out
 }
 
+var updateMercariCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateMercariCrawlSettingRequiredKeywordResultError", "UpdateMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateMercariCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateMercariCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateMercariCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"UpdateMercariCrawlSettingRequiredKeywordResultSuccess", "UpdateMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateMercariCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateMercariCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "mercariCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultSuccess_mercariCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateMercariCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed", "UpdateMercariCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateMercariCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var updateProductResultErrorImplementors = []string{"UpdateProductResultError", "UpdateProductResult", "ResultBase"}
 
 func (ec *executionContext) _UpdateProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateProductResultError) graphql.Marshaler {
@@ -14344,6 +19304,143 @@ func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeKeywordResultV
 	return out
 }
 
+var updateYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateYahooAuctionCrawlSettingRequiredKeywordResultError", "UpdateYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateYahooAuctionCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateYahooAuctionCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess", "UpdateYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateYahooAuctionCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "yahooAuctionCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess_yahooAuctionCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed", "UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var yahooAuctionCrawlSettingImplementors = []string{"YahooAuctionCrawlSetting", "Node"}
 
 func (ec *executionContext) _YahooAuctionCrawlSetting(ctx context.Context, sel ast.SelectionSet, obj *model.YahooAuctionCrawlSetting) graphql.Marshaler {
@@ -14433,6 +19530,42 @@ func (ec *executionContext) _YahooAuctionCrawlSetting(ctx context.Context, sel a
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "yahooAuctionCrawlSettingRequiredKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -14486,6 +19619,62 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword(ctx context.
 			}
 		case "updatedAt":
 			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var yahooAuctionCrawlSettingRequiredKeywordImplementors = []string{"YahooAuctionCrawlSettingRequiredKeyword", "Node"}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.YahooAuctionCrawlSettingRequiredKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, yahooAuctionCrawlSettingRequiredKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("YahooAuctionCrawlSettingRequiredKeyword")
+		case "id":
+			out.Values[i] = ec._YahooAuctionCrawlSettingRequiredKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "yahooAuctionCrawlSettingId":
+			out.Values[i] = ec._YahooAuctionCrawlSettingRequiredKeyword_yahooAuctionCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._YahooAuctionCrawlSettingRequiredKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._YahooAuctionCrawlSettingRequiredKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._YahooAuctionCrawlSettingRequiredKeyword_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -15030,6 +20219,31 @@ func (ec *executionContext) unmarshalNCreateMercariCrawlSettingInput2ᚖgithub�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
+func (ec *executionContext) unmarshalNCreateMercariCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.CreateMercariCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputCreateMercariCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreateMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateMercariCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateMercariCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateMercariCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateMercariCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateProductInput(ctx context.Context, v interface{}) (model.CreateProductInput, error) {
 	res, err := ec.unmarshalInputCreateProductInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -15085,6 +20299,31 @@ func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingInput2ᚖgit
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
+func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.CreateYahooAuctionCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputCreateYahooAuctionCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreateYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNDeleteMercariCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteMercariCrawlSettingExcludeKeywordResult) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
@@ -15103,6 +20342,26 @@ func (ec *executionContext) marshalNDeleteMercariCrawlSettingExcludeKeywordResul
 		return graphql.Null
 	}
 	return ec._DeleteMercariCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteMercariCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteMercariCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteMercariCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteMercariCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteProductResult) graphql.Marshaler {
@@ -15143,6 +20402,16 @@ func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingExcludeKeyword
 		return graphql.Null
 	}
 	return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.ErrorDetail) graphql.Marshaler {
@@ -15295,6 +20564,60 @@ func (ec *executionContext) marshalNMercariCrawlSettingExcludeKeyword2ᚖgithub�
 		return graphql.Null
 	}
 	return ec._MercariCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNMercariCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.MercariCrawlSettingRequiredKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNMercariCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNMercariCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, v *model.MercariCrawlSettingRequiredKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._MercariCrawlSettingRequiredKeyword(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNMercariDailyPurchaseSummary2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariDailyPurchaseSummaryᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.MercariDailyPurchaseSummary) graphql.Marshaler {
@@ -15508,6 +20831,31 @@ func (ec *executionContext) unmarshalNUpdateMercariCrawlSettingInput2ᚖgithub�
 	return &res, graphql.ErrorOnPath(ctx, err)
 }
 
+func (ec *executionContext) unmarshalNUpdateMercariCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.UpdateMercariCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdateMercariCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateMercariCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateMercariCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateMercariCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateMercariCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNUpdateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductInput(ctx context.Context, v interface{}) (model.UpdateProductInput, error) {
 	res, err := ec.unmarshalInputUpdateProductInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -15561,6 +20909,31 @@ func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingExcludeKeyword
 func (ec *executionContext) unmarshalNUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateYahooAuctionCrawlSettingInput, error) {
 	res, err := ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNUpdateYahooAuctionCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdateYahooAuctionCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNYahooAuctionCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.YahooAuctionCrawlSetting) graphql.Marshaler {
@@ -15629,6 +21002,60 @@ func (ec *executionContext) marshalNYahooAuctionCrawlSettingExcludeKeyword2ᚖgi
 		return graphql.Null
 	}
 	return ec._YahooAuctionCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.YahooAuctionCrawlSettingRequiredKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, v *model.YahooAuctionCrawlSettingRequiredKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._YahooAuctionCrawlSettingRequiredKeyword(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNYahooAuctionDailyPurchaseSummary2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionDailyPurchaseSummaryᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.YahooAuctionDailyPurchaseSummary) graphql.Marshaler {

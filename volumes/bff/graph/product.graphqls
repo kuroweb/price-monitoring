@@ -41,9 +41,18 @@ type YahooAuctionCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   yahooAuctionCrawlSettingExcludeKeywords: [YahooAuctionCrawlSettingExcludeKeyword!]!
+  yahooAuctionCrawlSettingRequiredKeywords: [YahooAuctionCrawlSettingRequiredKeyword!]!
 }
 
 type YahooAuctionCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  yahooAuctionCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type YahooAuctionCrawlSettingRequiredKeyword implements Node {
   id: ID!
   yahooAuctionCrawlSettingId: Int!
   keyword: String
@@ -95,9 +104,18 @@ type MercariCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   mercariCrawlSettingExcludeKeywords: [MercariCrawlSettingExcludeKeyword!]!
+  mercariCrawlSettingRequiredKeywords: [MercariCrawlSettingRequiredKeyword!]!
 }
 
 type MercariCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  mercariCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type MercariCrawlSettingRequiredKeyword implements Node {
   id: ID!
   mercariCrawlSettingId: Int!
   keyword: String

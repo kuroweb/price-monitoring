@@ -16,6 +16,11 @@ func (r *mercariCrawlSettingResolver) MercariCrawlSettingExcludeKeywords(ctx con
 	return r.ProductService.FindMercariCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
 }
 
+// MercariCrawlSettingRequiredKeywords is the resolver for the mercariCrawlSettingRequiredKeywords field.
+func (r *mercariCrawlSettingResolver) MercariCrawlSettingRequiredKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingRequiredKeyword, error) {
+	return r.ProductService.FindMercariCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
+}
+
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
 func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error) {
 	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)
@@ -49,6 +54,11 @@ func (r *productResolver) MercariDailyPurchaseSummaries(ctx context.Context, obj
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
 func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindYahooAuctionCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// YahooAuctionCrawlSettingRequiredKeywords is the resolver for the yahooAuctionCrawlSettingRequiredKeywords field.
+func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingRequiredKeyword, error) {
+	return r.ProductService.FindYahooAuctionCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
 }
 
 // MercariCrawlSetting returns internal.MercariCrawlSettingResolver implementation.

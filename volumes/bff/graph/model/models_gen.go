@@ -10,6 +10,14 @@ type CreateMercariCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreateMercariCrawlSettingExcludeKeywordResultErrors()
 }
 
+type CreateMercariCrawlSettingRequiredKeywordResult interface {
+	IsCreateMercariCrawlSettingRequiredKeywordResult()
+}
+
+type CreateMercariCrawlSettingRequiredKeywordResultErrors interface {
+	IsCreateMercariCrawlSettingRequiredKeywordResultErrors()
+}
+
 type CreateProductResult interface {
 	IsCreateProductResult()
 }
@@ -26,12 +34,28 @@ type CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreateYahooAuctionCrawlSettingExcludeKeywordResultErrors()
 }
 
+type CreateYahooAuctionCrawlSettingRequiredKeywordResult interface {
+	IsCreateYahooAuctionCrawlSettingRequiredKeywordResult()
+}
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors interface {
+	IsCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors()
+}
+
 type DeleteMercariCrawlSettingExcludeKeywordResult interface {
 	IsDeleteMercariCrawlSettingExcludeKeywordResult()
 }
 
 type DeleteMercariCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeleteMercariCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeleteMercariCrawlSettingRequiredKeywordResult interface {
+	IsDeleteMercariCrawlSettingRequiredKeywordResult()
+}
+
+type DeleteMercariCrawlSettingRequiredKeywordResultErrors interface {
+	IsDeleteMercariCrawlSettingRequiredKeywordResultErrors()
 }
 
 type DeleteProductResult interface {
@@ -48,6 +72,14 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResult interface {
 
 type DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResult interface {
+	IsDeleteYahooAuctionCrawlSettingRequiredKeywordResult()
+}
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors interface {
+	IsDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors()
 }
 
 type Node interface {
@@ -68,6 +100,14 @@ type UpdateMercariCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdateMercariCrawlSettingExcludeKeywordResultErrors()
 }
 
+type UpdateMercariCrawlSettingRequiredKeywordResult interface {
+	IsUpdateMercariCrawlSettingRequiredKeywordResult()
+}
+
+type UpdateMercariCrawlSettingRequiredKeywordResultErrors interface {
+	IsUpdateMercariCrawlSettingRequiredKeywordResultErrors()
+}
+
 type UpdateProductResult interface {
 	IsUpdateProductResult()
 }
@@ -82,6 +122,14 @@ type UpdateYahooAuctionCrawlSettingExcludeKeywordResult interface {
 
 type UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResult interface {
+	IsUpdateYahooAuctionCrawlSettingRequiredKeywordResult()
+}
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors interface {
+	IsUpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors()
 }
 
 type UserError interface {
@@ -140,6 +188,50 @@ type CreateMercariCrawlSettingInput struct {
 	MinPrice   int    `json:"min_price"`
 	MaxPrice   int    `json:"max_price"`
 	Enabled    bool   `json:"enabled"`
+}
+
+type CreateMercariCrawlSettingRequiredKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreateMercariCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error CreateMercariCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (CreateMercariCrawlSettingRequiredKeywordResultError) IsCreateMercariCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateMercariCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this CreateMercariCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreateMercariCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	MercariCrawlSettingRequiredKeyword *MercariCrawlSettingRequiredKeyword `json:"mercariCrawlSettingRequiredKeyword"`
+}
+
+func (CreateMercariCrawlSettingRequiredKeywordResultSuccess) IsCreateMercariCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateMercariCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this CreateMercariCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) IsCreateMercariCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
 }
 
 type CreateProductInput struct {
@@ -232,6 +324,50 @@ type CreateYahooAuctionCrawlSettingInput struct {
 	Enabled    bool   `json:"enabled"`
 }
 
+type CreateYahooAuctionCrawlSettingRequiredKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                      `json:"ok"`
+	Error CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (CreateYahooAuctionCrawlSettingRequiredKeywordResultError) IsCreateYahooAuctionCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateYahooAuctionCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this CreateYahooAuctionCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                      bool                                     `json:"ok"`
+	YahooAuctionCrawlSettingRequiredKeyword *YahooAuctionCrawlSettingRequiredKeyword `json:"yahooAuctionCrawlSettingRequiredKeyword"`
+}
+
+func (CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) IsCreateYahooAuctionCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) IsCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type DeleteMercariCrawlSettingExcludeKeywordResultError struct {
 	Ok    bool                                                `json:"ok"`
 	Error DeleteMercariCrawlSettingExcludeKeywordResultErrors `json:"error"`
@@ -267,6 +403,44 @@ func (this DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed) GetCod
 	return this.Code
 }
 func (this DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeleteMercariCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error DeleteMercariCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (DeleteMercariCrawlSettingRequiredKeywordResultError) IsDeleteMercariCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteMercariCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this DeleteMercariCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeleteMercariCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteMercariCrawlSettingRequiredKeywordResultSuccess) IsDeleteMercariCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteMercariCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this DeleteMercariCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) IsDeleteMercariCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -339,22 +513,61 @@ func (this DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed) G
 	return this.Message
 }
 
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                      `json:"ok"`
+	Error DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) IsDeleteYahooAuctionCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess) IsDeleteYahooAuctionCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) IsDeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type ErrorDetail struct {
 	Field   string `json:"field"`
 	Message string `json:"message"`
 }
 
 type MercariCrawlSetting struct {
-	ID                                 string                               `json:"id"`
-	ProductID                          int                                  `json:"productId"`
-	Keyword                            string                               `json:"keyword"`
-	MinPrice                           int                                  `json:"minPrice"`
-	MaxPrice                           int                                  `json:"maxPrice"`
-	CategoryID                         *int                                 `json:"categoryId,omitempty"`
-	Enabled                            bool                                 `json:"enabled"`
-	CreatedAt                          string                               `json:"createdAt"`
-	UpdatedAt                          string                               `json:"updatedAt"`
-	MercariCrawlSettingExcludeKeywords []*MercariCrawlSettingExcludeKeyword `json:"mercariCrawlSettingExcludeKeywords"`
+	ID                                  string                                `json:"id"`
+	ProductID                           int                                   `json:"productId"`
+	Keyword                             string                                `json:"keyword"`
+	MinPrice                            int                                   `json:"minPrice"`
+	MaxPrice                            int                                   `json:"maxPrice"`
+	CategoryID                          *int                                  `json:"categoryId,omitempty"`
+	Enabled                             bool                                  `json:"enabled"`
+	CreatedAt                           string                                `json:"createdAt"`
+	UpdatedAt                           string                                `json:"updatedAt"`
+	MercariCrawlSettingExcludeKeywords  []*MercariCrawlSettingExcludeKeyword  `json:"mercariCrawlSettingExcludeKeywords"`
+	MercariCrawlSettingRequiredKeywords []*MercariCrawlSettingRequiredKeyword `json:"mercariCrawlSettingRequiredKeywords"`
 }
 
 func (MercariCrawlSetting) IsNode()            {}
@@ -370,6 +583,17 @@ type MercariCrawlSettingExcludeKeyword struct {
 
 func (MercariCrawlSettingExcludeKeyword) IsNode()            {}
 func (this MercariCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type MercariCrawlSettingRequiredKeyword struct {
+	ID                    string  `json:"id"`
+	MercariCrawlSettingID int     `json:"mercariCrawlSettingId"`
+	Keyword               *string `json:"keyword,omitempty"`
+	CreatedAt             string  `json:"createdAt"`
+	UpdatedAt             string  `json:"updatedAt"`
+}
+
+func (MercariCrawlSettingRequiredKeyword) IsNode()            {}
+func (this MercariCrawlSettingRequiredKeyword) GetID() string { return this.ID }
 
 type MercariDailyPurchaseSummary struct {
 	ID                   string `json:"id"`
@@ -467,6 +691,51 @@ type UpdateMercariCrawlSettingInput struct {
 	Enabled    bool   `json:"enabled"`
 }
 
+type UpdateMercariCrawlSettingRequiredKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdateMercariCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error UpdateMercariCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (UpdateMercariCrawlSettingRequiredKeywordResultError) IsUpdateMercariCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateMercariCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this UpdateMercariCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdateMercariCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	MercariCrawlSettingRequiredKeyword *MercariCrawlSettingRequiredKeyword `json:"mercariCrawlSettingRequiredKeyword"`
+}
+
+func (UpdateMercariCrawlSettingRequiredKeywordResultSuccess) IsUpdateMercariCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateMercariCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this UpdateMercariCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) IsUpdateMercariCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type UpdateProductInput struct {
 	Name                     string                               `json:"name"`
 	YahooAuctionCrawlSetting *UpdateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
@@ -558,17 +827,63 @@ type UpdateYahooAuctionCrawlSettingInput struct {
 	Enabled    bool   `json:"enabled"`
 }
 
+type UpdateYahooAuctionCrawlSettingRequiredKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                      `json:"ok"`
+	Error UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) IsUpdateYahooAuctionCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                      bool                                     `json:"ok"`
+	YahooAuctionCrawlSettingRequiredKeyword *YahooAuctionCrawlSettingRequiredKeyword `json:"yahooAuctionCrawlSettingRequiredKeyword"`
+}
+
+func (UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) IsUpdateYahooAuctionCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) IsUpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type YahooAuctionCrawlSetting struct {
-	ID                                      string                                    `json:"id"`
-	ProductID                               int                                       `json:"productId"`
-	Keyword                                 string                                    `json:"keyword"`
-	MinPrice                                int                                       `json:"minPrice"`
-	MaxPrice                                int                                       `json:"maxPrice"`
-	CategoryID                              *int                                      `json:"categoryId,omitempty"`
-	Enabled                                 bool                                      `json:"enabled"`
-	CreatedAt                               string                                    `json:"createdAt"`
-	UpdatedAt                               string                                    `json:"updatedAt"`
-	YahooAuctionCrawlSettingExcludeKeywords []*YahooAuctionCrawlSettingExcludeKeyword `json:"yahooAuctionCrawlSettingExcludeKeywords"`
+	ID                                       string                                     `json:"id"`
+	ProductID                                int                                        `json:"productId"`
+	Keyword                                  string                                     `json:"keyword"`
+	MinPrice                                 int                                        `json:"minPrice"`
+	MaxPrice                                 int                                        `json:"maxPrice"`
+	CategoryID                               *int                                       `json:"categoryId,omitempty"`
+	Enabled                                  bool                                       `json:"enabled"`
+	CreatedAt                                string                                     `json:"createdAt"`
+	UpdatedAt                                string                                     `json:"updatedAt"`
+	YahooAuctionCrawlSettingExcludeKeywords  []*YahooAuctionCrawlSettingExcludeKeyword  `json:"yahooAuctionCrawlSettingExcludeKeywords"`
+	YahooAuctionCrawlSettingRequiredKeywords []*YahooAuctionCrawlSettingRequiredKeyword `json:"yahooAuctionCrawlSettingRequiredKeywords"`
 }
 
 func (YahooAuctionCrawlSetting) IsNode()            {}
@@ -584,6 +899,17 @@ type YahooAuctionCrawlSettingExcludeKeyword struct {
 
 func (YahooAuctionCrawlSettingExcludeKeyword) IsNode()            {}
 func (this YahooAuctionCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type YahooAuctionCrawlSettingRequiredKeyword struct {
+	ID                         string  `json:"id"`
+	YahooAuctionCrawlSettingID int     `json:"yahooAuctionCrawlSettingId"`
+	Keyword                    *string `json:"keyword,omitempty"`
+	CreatedAt                  string  `json:"createdAt"`
+	UpdatedAt                  string  `json:"updatedAt"`
+}
+
+func (YahooAuctionCrawlSettingRequiredKeyword) IsNode()            {}
+func (this YahooAuctionCrawlSettingRequiredKeyword) GetID() string { return this.ID }
 
 type YahooAuctionDailyPurchaseSummary struct {
 	ID                   string `json:"id"`

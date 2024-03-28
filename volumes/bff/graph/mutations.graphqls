@@ -12,6 +12,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
+  createYahooAuctionCrawlSettingRequiredKeyword(
+    input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
+  ): CreateYahooAuctionCrawlSettingRequiredKeywordResult!
+  updateYahooAuctionCrawlSettingRequiredKeyword(
+    input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!
+  ): UpdateYahooAuctionCrawlSettingRequiredKeywordResult!
+  deleteYahooAuctionCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
   createMercariCrawlSettingExcludeKeyword(
     input: CreateMercariCrawlSettingExcludeKeywordInput!
   ): CreateMercariCrawlSettingExcludeKeywordResult!
@@ -22,6 +32,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteMercariCrawlSettingExcludeKeywordResult!
+  createMercariCrawlSettingRequiredKeyword(
+    input: CreateMercariCrawlSettingRequiredKeywordInput!
+  ): CreateMercariCrawlSettingRequiredKeywordResult!
+  updateMercariCrawlSettingRequiredKeyword(
+    input: UpdateMercariCrawlSettingRequiredKeywordInput!
+  ): UpdateMercariCrawlSettingRequiredKeywordResult!
+  deleteMercariCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteMercariCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -240,6 +260,91 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implemen
   details: [ErrorDetail!]!
 }
 
+## CreateYahooAuctionCrawlSettingRequiredKeyword ##
+
+input CreateYahooAuctionCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateYahooAuctionCrawlSettingRequiredKeywordResult =
+    CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess
+  | CreateYahooAuctionCrawlSettingRequiredKeywordResultError
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingRequiredKeyword: YahooAuctionCrawlSettingRequiredKeyword!
+}
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors =
+    CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateYahooAuctionCrawlSettingRequiredKeyword ##
+
+input UpdateYahooAuctionCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateYahooAuctionCrawlSettingRequiredKeywordResult =
+    UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess
+  | UpdateYahooAuctionCrawlSettingRequiredKeywordResultError
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingRequiredKeyword: YahooAuctionCrawlSettingRequiredKeyword!
+}
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors =
+    UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteYahooAuctionCrawlSettingRequiredKeyword ##
+
+union DeleteYahooAuctionCrawlSettingRequiredKeywordResult =
+    DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess
+  | DeleteYahooAuctionCrawlSettingRequiredKeywordResultError
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors =
+    DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateMercariCrawlSettingExcludeKeyword ##
 
 input CreateMercariCrawlSettingExcludeKeywordInput {
@@ -320,6 +425,92 @@ union DeleteMercariCrawlSettingExcludeKeywordResultErrors =
     DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed
 
 type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+
+## CreateMercariCrawlSettingRequiredKeyword ##
+
+input CreateMercariCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateMercariCrawlSettingRequiredKeywordResult =
+    CreateMercariCrawlSettingRequiredKeywordResultSuccess
+  | CreateMercariCrawlSettingRequiredKeywordResultError
+
+type CreateMercariCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingRequiredKeyword: MercariCrawlSettingRequiredKeyword!
+}
+
+type CreateMercariCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateMercariCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateMercariCrawlSettingRequiredKeywordResultErrors =
+    CreateMercariCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateMercariCrawlSettingRequiredKeyword ##
+
+input UpdateMercariCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateMercariCrawlSettingRequiredKeywordResult =
+    UpdateMercariCrawlSettingRequiredKeywordResultSuccess
+  | UpdateMercariCrawlSettingRequiredKeywordResultError
+
+type UpdateMercariCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingRequiredKeyword: MercariCrawlSettingRequiredKeyword!
+}
+
+type UpdateMercariCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateMercariCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateMercariCrawlSettingRequiredKeywordResultErrors =
+    UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteMercariCrawlSettingRequiredKeyword ##
+
+union DeleteMercariCrawlSettingRequiredKeywordResult =
+    DeleteMercariCrawlSettingRequiredKeywordResultSuccess
+  | DeleteMercariCrawlSettingRequiredKeywordResultError
+
+type DeleteMercariCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteMercariCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteMercariCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteMercariCrawlSettingRequiredKeywordResultErrors =
+    DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

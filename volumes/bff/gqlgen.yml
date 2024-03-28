@@ -103,7 +103,11 @@ models:
     fields:
       yahooAuctionCrawlSettingExcludeKeywords:
         resolver: true
+      yahooAuctionCrawlSettingRequiredKeywords:
+        resolver: true
   MercariCrawlSetting:
     fields:
       mercariCrawlSettingExcludeKeywords:
+        resolver: true
+      mercariCrawlSettingRequiredKeywords:
         resolver: true

@@ -6,6 +6,7 @@ package graph
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
@@ -41,6 +42,21 @@ func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx cont
 	return r.ProductService.DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx, id, productID)
 }
 
+// CreateYahooAuctionCrawlSettingRequiredKeyword is the resolver for the createYahooAuctionCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) CreateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) (model.CreateYahooAuctionCrawlSettingRequiredKeywordResult, error) {
+	panic(fmt.Errorf("not implemented: CreateYahooAuctionCrawlSettingRequiredKeyword - createYahooAuctionCrawlSettingRequiredKeyword"))
+}
+
+// UpdateYahooAuctionCrawlSettingRequiredKeyword is the resolver for the updateYahooAuctionCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult, error) {
+	panic(fmt.Errorf("not implemented: UpdateYahooAuctionCrawlSettingRequiredKeyword - updateYahooAuctionCrawlSettingRequiredKeyword"))
+}
+
+// DeleteYahooAuctionCrawlSettingRequiredKeyword is the resolver for the deleteYahooAuctionCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error) {
+	panic(fmt.Errorf("not implemented: DeleteYahooAuctionCrawlSettingRequiredKeyword - deleteYahooAuctionCrawlSettingRequiredKeyword"))
+}
+
 // CreateMercariCrawlSettingExcludeKeyword is the resolver for the createMercariCrawlSettingExcludeKeyword field.
 func (r *mutationResolver) CreateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateMercariCrawlSettingExcludeKeywordInput) (model.CreateMercariCrawlSettingExcludeKeywordResult, error) {
 	return r.ProductService.CreateMercariCrawlSettingExcludeKeyword(ctx, input)
@@ -54,6 +70,21 @@ func (r *mutationResolver) UpdateMercariCrawlSettingExcludeKeyword(ctx context.C
 // DeleteMercariCrawlSettingExcludeKeyword is the resolver for the deleteMercariCrawlSettingExcludeKeyword field.
 func (r *mutationResolver) DeleteMercariCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeKeywordResult, error) {
 	return r.ProductService.DeleteMercariCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreateMercariCrawlSettingRequiredKeyword is the resolver for the createMercariCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) CreateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateMercariCrawlSettingRequiredKeywordInput) (model.CreateMercariCrawlSettingRequiredKeywordResult, error) {
+	panic(fmt.Errorf("not implemented: CreateMercariCrawlSettingRequiredKeyword - createMercariCrawlSettingRequiredKeyword"))
+}
+
+// UpdateMercariCrawlSettingRequiredKeyword is the resolver for the updateMercariCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) UpdateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingRequiredKeywordInput) (model.UpdateMercariCrawlSettingRequiredKeywordResult, error) {
+	panic(fmt.Errorf("not implemented: UpdateMercariCrawlSettingRequiredKeyword - updateMercariCrawlSettingRequiredKeyword"))
+}
+
+// DeleteMercariCrawlSettingRequiredKeyword is the resolver for the deleteMercariCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) DeleteMercariCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingRequiredKeywordResult, error) {
+	panic(fmt.Errorf("not implemented: DeleteMercariCrawlSettingRequiredKeyword - deleteMercariCrawlSettingRequiredKeyword"))
 }
 
 // Mutation returns internal.MutationResolver implementation.
