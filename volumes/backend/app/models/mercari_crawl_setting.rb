@@ -3,6 +3,7 @@ class MercariCrawlSetting < ApplicationRecord
   belongs_to :product
 
   has_many :mercari_crawl_setting_exclude_keywords
+  has_many :mercari_crawl_setting_required_keywords
 
   ## validations ##
   validates :keyword, presence: true

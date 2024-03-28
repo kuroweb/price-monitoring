@@ -95,6 +95,11 @@ erDiagram
     bigint yahoo_auction_crawl_setting_id FK
     string keyword
   }
+  yahoo_auction_crawl_setting_required_keywords {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string keyword
+  }
   yahoo_auction_products {
     bigint id PK
     string yahoo_auction_id
@@ -114,6 +119,7 @@ erDiagram
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
   products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
 ```
@@ -140,6 +146,11 @@ erDiagram
     bigint mercari_crawl_setting_id FK
     string keyword
   }
+  mercari_crawl_setting_required_keywords {
+    bigint id PK
+    bigint mercari_crawl_setting_id FK
+    string keyword
+  }
   mercari_products {
     bigint id PK
     string mercari_id
@@ -159,6 +170,7 @@ erDiagram
 
   products ||--|| mercari_crawl_settings : "1:1"
   mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
+  mercari_crawl_settings ||--o{ mercari_crawl_setting_required_keywords : "1:N"
   products ||--o{ mercari_products : "1:N"
   products ||--o{ mercari_daily_purchase_summaries : "1:N"
 ```

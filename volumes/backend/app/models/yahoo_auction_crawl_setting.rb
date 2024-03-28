@@ -3,6 +3,7 @@ class YahooAuctionCrawlSetting < ApplicationRecord
   belongs_to :product
 
   has_many :yahoo_auction_crawl_setting_exclude_keywords
+  has_many :yahoo_auction_crawl_setting_required_keywords
 
   ## validations ##
   validates :keyword, presence: true
