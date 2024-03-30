@@ -1,5 +1,5 @@
 module Products
-  class DeleteService
+  class Delete
     def self.call(...)
       new(...).call
     end

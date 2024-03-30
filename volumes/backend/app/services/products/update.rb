@@ -1,5 +1,5 @@
 module Products
-  class UpdateService
+  class Update
     PRODUCT_ATTRIBUTES = %i[name].freeze
     YAHOO_AUCTION_CRAWL_SETTING_ATTRIBUTES = %i[keyword category_id min_price max_price enabled].freeze
     MERCARI_CRAWL_SETTING_ATTRIBUTES = %i[keyword category_id min_price max_price enabled].freeze

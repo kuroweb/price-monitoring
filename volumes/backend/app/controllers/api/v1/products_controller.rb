@@ -25,7 +25,7 @@ module Api
         product = Product.find_by(id: params[:id])
         return head 404 if product.blank?
 
-        result = ::Products::UpdateService.call(product:, params: update_product_params)
+        result = ::Products::Update.call(product:, params: update_product_params)
         if result.success?
           render json: result.payload[:product].as_json, status: 200
         else
@@ -37,7 +37,7 @@ module Api
         product = Product.find_by(id: params[:id])
         return head 404 if product.blank?
 
-        result = ::Products::DeleteService.call(product:)
+        result = ::Products::Delete.call(product:)
         if result.success?
           head 200
         else
