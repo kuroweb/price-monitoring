@@ -7,12 +7,12 @@ crawl_mercari_enqueue_sync_job:
 crawl_mercari_sync_bought_date_job:
   cron: "0 * * * *"
   class: "Crawl::Mercari::SyncBoughtDateJob"
-analysis_yahoo_auction_calculate_daily_purchase_summary_job:
+analysis_calculate_yahoo_auction_daily_purchase_summary_job:
   cron: "0 0 * * *"
-  class: "Analysis::YahooAuction::CalculateDailyPurchaseSummaryJob"
-analysis_mercari_calculate_daily_purchase_summary_job:
+  class: "Analysis::CalculateYahooAuctionDailyPurchaseSummaryJob"
+analysis_calculate_mercari_daily_purchase_summary_job:
   cron: "0 0 * * *"
-  class: "Analysis::Mercari::CalculateDailyPurchaseSummaryJob"
+  class: "Analysis::CalculateMercariDailyPurchaseSummaryJob"
 products_enqueue_refresh_product_job:
   cron: "0 * * * *"
   class: "Products::EnqueueRefreshProductJob"
