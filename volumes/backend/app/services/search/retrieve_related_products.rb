@@ -1,4 +1,5 @@
-# 検索して商品情報を取得する
+# Productに紐づく関連商品を取得する
+# 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProducts
     COMMON_COLUMNS = %w[name price thumbnail_url published bought_date created_at updated_at].freeze
