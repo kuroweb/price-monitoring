@@ -33,7 +33,7 @@ func (c *CreateProductService) CreateProduct(ctx context.Context, input model.Cr
 		},
 		"mercari_crawl_setting": map[string]interface{}{
 			"keyword":     input.MercariCrawlSetting.Keyword,
-			"category_id": input.YahooAuctionCrawlSetting.CategoryID,
+			"category_id": input.MercariCrawlSetting.CategoryID,
 			"min_price":   input.MercariCrawlSetting.MinPrice,
 			"max_price":   input.MercariCrawlSetting.MaxPrice,
 			"enabled":     input.MercariCrawlSetting.Enabled,
