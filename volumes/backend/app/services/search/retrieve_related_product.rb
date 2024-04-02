@@ -1,7 +1,7 @@
 # Productに紐づく関連商品を取得する
 # 一覧表示用の検索クラス
 module Search
-  class RetrieveRelatedProducts
+  class RetrieveRelatedProduct
     COMMON_COLUMNS = %w[name price thumbnail_url published bought_date created_at updated_at].freeze
 
     def self.call(...)
@@ -11,8 +11,8 @@ module Search
     def initialize(params: {})
       @product_id = params[:product_id]
       @published = params[:published] || [true, false]
-      @page = params[:page] || 1
-      @per = params[:per] || 10
+      @page = params[:page].to_i.nonzero? || 1
+      @per = params[:per].to_i.nonzero? || 10
       @offset = (page - 1) * per
     end
 
