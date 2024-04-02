@@ -14,6 +14,8 @@ module Search
       @page = params[:page].to_i.nonzero? || 1
       @per = params[:per].to_i.nonzero? || 10
       @offset = (page - 1) * per
+      @sort = params[:sort] || "updated_at"
+      @order = params[:order] || "desc"
     end
 
     def call
@@ -24,7 +26,7 @@ module Search
 
     private
 
-    attr_reader :product_id, :published, :page, :per, :offset
+    attr_reader :product_id, :published, :page, :per, :offset, :sort, :order
 
     def query
       ActiveRecord::Base.connection.exec_query(sql)
@@ -36,7 +38,7 @@ module Search
         UNION
         #{build_sql_for('yahoo_auction')}
         ORDER BY
-          updated_at DESC
+          #{sort} #{order}
         LIMIT
           #{per} OFFSET #{offset}
       SQL

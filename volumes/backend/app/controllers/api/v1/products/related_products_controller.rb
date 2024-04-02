@@ -14,7 +14,7 @@ module Api
         end
 
         def search_params
-          params.permit(:product_id, :published, :page, :per)
+          params.permit(:product_id, :published, :page, :per, :sort, :order)
         end
       end
     end
