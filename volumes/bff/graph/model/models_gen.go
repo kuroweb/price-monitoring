@@ -633,10 +633,23 @@ type Product struct {
 	MercariProducts                    []*MercariProduct                   `json:"mercariProducts"`
 	MercariCrawlSetting                *MercariCrawlSetting                `json:"mercariCrawlSetting"`
 	MercariDailyPurchaseSummaries      []*MercariDailyPurchaseSummary      `json:"mercariDailyPurchaseSummaries"`
+	RelatedProducts                    []*RelatedProduct                   `json:"relatedProducts"`
 }
 
 func (Product) IsNode()            {}
 func (this Product) GetID() string { return this.ID }
+
+type RelatedProduct struct {
+	ProductID    int     `json:"productId"`
+	ExternalID   string  `json:"externalId"`
+	Name         string  `json:"name"`
+	ThumbnailURL string  `json:"thumbnailUrl"`
+	Price        int     `json:"price"`
+	Published    bool    `json:"published"`
+	BoughtDate   *string `json:"boughtDate,omitempty"`
+	CreatedAt    string  `json:"createdAt"`
+	UpdatedAt    string  `json:"updatedAt"`
+}
 
 type UpdateMercariCrawlSettingExcludeKeywordInput struct {
 	ID        string  `json:"id"`

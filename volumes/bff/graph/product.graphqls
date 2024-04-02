@@ -15,6 +15,11 @@ type Product implements Node {
   ): [MercariProduct!]!
   mercariCrawlSetting: MercariCrawlSetting!
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
+  relatedProducts(
+    published: Boolean
+    sort: String
+    order: String
+  ): [RelatedProduct!]!
 }
 
 type YahooAuctionProduct implements Node {
@@ -119,6 +124,18 @@ type MercariCrawlSettingRequiredKeyword implements Node {
   id: ID!
   mercariCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type RelatedProduct {
+  productId: Int!
+  externalId: String!
+  name: String!
+  thumbnailUrl: String!
+  price: Int!
+  published: Boolean!
+  boughtDate: String
   createdAt: String!
   updatedAt: String!
 }

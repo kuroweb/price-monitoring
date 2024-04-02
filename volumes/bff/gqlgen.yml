@@ -99,6 +99,8 @@ models:
         resolver: true
       mercariDailyPurchaseSummaries:
         resolver: true
+      relatedProducts:
+        resolver: true
   YahooAuctionCrawlSetting:
     fields:
       yahooAuctionCrawlSettingExcludeKeywords:

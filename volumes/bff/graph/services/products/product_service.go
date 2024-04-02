@@ -6,6 +6,7 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_daily_purchase_summaries"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/related_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_required_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_settings"
@@ -28,6 +29,7 @@ type IProductService interface {
 	mercari_crawl_setting_exclude_keywords.IMercariCrawlSettingExcludeKeywordService
 	mercari_crawl_setting_required_keywords.IMercariCrawlSettingRequiredKeywordService
 	mercari_daily_purchase_summaries.IMercariDailyPurchaseSummaryService
+	related_products.IRelatedProductService
 }
 
 type ProductService struct {
@@ -45,6 +47,7 @@ type ProductService struct {
 	*mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService
 	*mercari_crawl_setting_required_keywords.MercariCrawlSettingRequiredKeywordService
 	*mercari_daily_purchase_summaries.MercariDailyPurchaseSummaryService
+	*related_products.RelatedProductService
 }
 
 func New() IProductService {
@@ -63,5 +66,6 @@ func New() IProductService {
 		MercariCrawlSettingExcludeKeywordService:       &mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService{},
 		MercariCrawlSettingRequiredKeywordService:      &mercari_crawl_setting_required_keywords.MercariCrawlSettingRequiredKeywordService{},
 		MercariDailyPurchaseSummaryService:             &mercari_daily_purchase_summaries.MercariDailyPurchaseSummaryService{},
+		RelatedProductService:                          &related_products.RelatedProductService{},
 	}
 }
