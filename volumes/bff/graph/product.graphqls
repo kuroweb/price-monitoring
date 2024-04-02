@@ -17,6 +17,8 @@ type Product implements Node {
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   relatedProducts(
     published: Boolean
+    page: Int
+    per: Int
     sort: String
     order: String
   ): [RelatedProduct!]!

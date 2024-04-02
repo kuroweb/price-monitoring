@@ -14,12 +14,12 @@ import (
 )
 
 type IFindRelatedProductService interface {
-	FindRelatedProduct(ctx context.Context, productID *string, externalID *string, name *string, price *int, published *bool, sort *string, order *string) ([]*model.RelatedProduct, error)
+	FindRelatedProduct(ctx context.Context, productID *string, externalID *string, name *string, price *int, published *bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 
 type FindRelatedProductService struct{}
 
-func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, productID *string, externalID *string, name *string, price *int, published *bool, sort *string, order *string) ([]*model.RelatedProduct, error) {
+func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, productID *string, externalID *string, name *string, price *int, published *bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	params := make(url.Values)
 
 	if externalID != nil {
@@ -36,6 +36,14 @@ func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, prod
 
 	if published != nil {
 		params.Set("published", strconv.FormatBool(*published))
+	}
+
+	if page != nil {
+		params.Set("page", strconv.Itoa(*page))
+	}
+
+	if per != nil {
+		params.Set("per", strconv.Itoa(*per))
 	}
 
 	if sort != nil {

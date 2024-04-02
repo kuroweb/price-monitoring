@@ -52,8 +52,8 @@ func (r *productResolver) MercariDailyPurchaseSummaries(ctx context.Context, obj
 }
 
 // RelatedProducts is the resolver for the relatedProducts field.
-func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.RelatedProduct, error) {
-	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, nil, nil, nil, published, sort, order)
+func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, published *bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
+	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, nil, nil, nil, published, page, per, sort, order)
 }
 
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
