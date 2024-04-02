@@ -2,7 +2,7 @@
 # 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProduct
-    COMMON_COLUMNS = %w[name price thumbnail_url published bought_date created_at updated_at].freeze
+    COMMON_COLUMNS = %w[product_id name price thumbnail_url published bought_date created_at updated_at].freeze
 
     def self.call(...)
       new(...).call
