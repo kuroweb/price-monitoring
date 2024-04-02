@@ -17,21 +17,20 @@ module Search
     end
 
     def call
-      execute
-      related_products
+      records = query
+
+      RelatedProducts.new(records.map { |record| RelatedProduct.new(normalize(record)) })
     end
 
     private
 
     attr_reader :product_id, :published, :page, :per, :offset
 
-    def execute
-      results = ActiveRecord::Base.connection.exec_query(build_sql_query)
-
-      results.each { |result| related_products.add(RelatedProduct.new(normalize(result))) }
+    def query
+      ActiveRecord::Base.connection.exec_query(sql)
     end
 
-    def build_sql_query
+    def sql
       <<~SQL.squish
         #{build_sql_for('mercari')}
         UNION
@@ -57,10 +56,6 @@ module Search
 
     def product
       @product ||= Product.find(product_id)
-    end
-
-    def related_products
-      @related_products ||= RelatedProducts.new
     end
   end
 end
