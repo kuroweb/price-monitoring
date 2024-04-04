@@ -47,8 +47,12 @@ module Search
     def build_sql_for(platform)
       product.send("#{platform}_products")
              .where(published:)
-             .select(["#{platform}_id AS external_id"] + COMMON_COLUMNS)
+             .select(custom_columns(platform) + COMMON_COLUMNS)
              .to_sql
+    end
+
+    def custom_columns(platform)
+      ["'#{platform}' AS related_type", "#{platform}_id AS external_id"]
     end
 
     def normalize(result)
