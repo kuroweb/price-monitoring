@@ -69,6 +69,7 @@ func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, prod
 
 	var response struct {
 		RelatedProducts []struct {
+			RelatedType  string  `json:"related_type"`
 			ProductID    int     `json:"product_id"`
 			ExternalID   string  `json:"external_id"`
 			Name         string  `json:"name"`
@@ -89,6 +90,7 @@ func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, prod
 	related_products := make([]*model.RelatedProduct, len(response.RelatedProducts))
 	for i, related_product := range response.RelatedProducts {
 		related_products[i] = &model.RelatedProduct{
+			RelatedType:  related_product.RelatedType,
 			ProductID:    related_product.ProductID,
 			ExternalID:   related_product.ExternalID,
 			Name:         related_product.Name,

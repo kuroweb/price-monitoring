@@ -640,6 +640,7 @@ func (Product) IsNode()            {}
 func (this Product) GetID() string { return this.ID }
 
 type RelatedProduct struct {
+	RelatedType  string  `json:"relatedType"`
 	ProductID    int     `json:"productId"`
 	ExternalID   string  `json:"externalId"`
 	Name         string  `json:"name"`

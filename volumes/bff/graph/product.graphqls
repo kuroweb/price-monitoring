@@ -131,6 +131,7 @@ type MercariCrawlSettingRequiredKeyword implements Node {
 }
 
 type RelatedProduct {
+  relatedType: String!
   productId: Int!
   externalId: String!
   name: String!
