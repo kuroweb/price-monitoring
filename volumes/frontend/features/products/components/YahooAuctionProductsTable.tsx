@@ -9,7 +9,7 @@ import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 const YahooAuctionProductsTable = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [published, _] = usePublishedState()
 
-  const handleRowClick = (yahooAuctionId: String) => {
+  const handleRowClick = (yahooAuctionId: string) => {
     window.open(`https://page.auctions.yahoo.co.jp/jp/auction/${yahooAuctionId}`, '_blank')
   }
 

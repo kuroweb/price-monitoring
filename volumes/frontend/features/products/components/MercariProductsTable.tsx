@@ -9,7 +9,7 @@ import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 const MercariProductsTable = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [published, _] = usePublishedState()
 
-  const handleRowClick = (mercariId: String) => {
+  const handleRowClick = (mercariId: string) => {
     window.open(`https://jp.mercari.com/item/${mercariId}`, '_blank')
   }
 
