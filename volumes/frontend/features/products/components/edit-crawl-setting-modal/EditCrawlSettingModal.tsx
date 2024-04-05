@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { Join } from 'react-daisyui'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
