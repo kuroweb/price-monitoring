@@ -3,6 +3,8 @@
 module Search
   class RetrieveRelatedProduct
     COMMON_COLUMNS = %w[product_id name price thumbnail_url published bought_date created_at updated_at].freeze
+    SORT_OPTIONS = %w[bought_date created_at updated_at].freeze
+    ORDER_OPTIONS = %w[desc asc].freeze
 
     def self.call(...)
       new(...).call
@@ -38,7 +40,7 @@ module Search
         UNION
         #{build_sql_for('yahoo_auction')}
         ORDER BY
-          #{sort} #{order}
+          #{build_order_sql}
         LIMIT
           #{per} OFFSET #{offset}
       SQL
@@ -49,6 +51,13 @@ module Search
              .where(published:)
              .select(custom_columns(platform) + COMMON_COLUMNS)
              .to_sql
+    end
+
+    def build_order_sql
+      return "updated_at asc" if SORT_OPTIONS.exclude?(sort) ||
+                                 ORDER_OPTIONS.exclude?(order)
+
+      "#{sort} #{order}"
     end
 
     def custom_columns(platform)

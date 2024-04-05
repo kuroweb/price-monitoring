@@ -42,7 +42,7 @@ const Page = async ({
       published: published,
       page: page,
       per: per,
-      sort: 'updated_at',
+      sort: published ? 'updated_at' : 'bought_date',
       order: 'desc',
     },
   })
