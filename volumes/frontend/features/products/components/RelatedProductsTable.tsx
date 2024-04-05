@@ -40,7 +40,7 @@ const RelatedProductsTable = ({
             <th></th>
             <th>商品名</th>
             <th>価格</th>
-            {!published && <th>購入日</th>}
+            {!published && <th>売却日</th>}
             <th></th>
           </tr>
         </thead>
