@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
 import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
+import SearchForm from '@/features/products/components/SearchForm'
 import DetailPageSidebarContent from '@/features/products/components/detail-page-sidebar-content/DetailPageSidebarContent'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
@@ -10,10 +11,14 @@ import EditRequiredKeywordModal from '@/features/products/components/edit-requir
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useEditRequiredKeywordModalState'
+import { useOrderStateQuery, orderStateCache } from '@/features/products/hooks/useOrderState'
+import { pageStateCache, usePageStateQuery } from '@/features/products/hooks/usePageState'
+import { usePerStateQuery, perStateCache } from '@/features/products/hooks/usePerState'
 import {
   publishedStateCache,
   usePublishedStateQuery,
 } from '@/features/products/hooks/usePublishedState'
+import { useSortStateQuery, sortStateCache } from '@/features/products/hooks/useSortState'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -28,14 +33,18 @@ const Page = async ({
   searchParams: { [key: string]: string | undefined }
 }) => {
   const { [usePublishedStateQuery]: published } = publishedStateCache.parse(searchParams)
+  const { [usePageStateQuery]: page } = pageStateCache.parse(searchParams)
+  const { [usePerStateQuery]: per } = perStateCache.parse(searchParams)
 
   const { data } = await getClient().query<GetProductDetailPageDataQuery>({
     query: GetProductDetailPageDataDocument,
     variables: {
       id: params.id,
       published: published,
-      page: 1,
-      per: 100,
+      page: page,
+      per: per,
+      sort: 'updated_at',
+      order: 'desc',
     },
   })
 
@@ -94,43 +103,12 @@ const Page = async ({
             />
           </div>
         </div>
-        <div className='flex justify-end'>
-          {published ? (
-            <>
-              <Link
-                href={{
-                  pathname: `/products/${params.id}`,
-                  query: {
-                    ...searchParams,
-                    [usePublishedStateQuery]: false,
-                  },
-                }}
-                className='btn btn-link'
-              >
-                落札一覧に切り替え
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                href={{
-                  pathname: `/products/${params.id}`,
-                  query: {
-                    ...searchParams,
-                    [usePublishedStateQuery]: true,
-                  },
-                }}
-                className='btn btn-link'
-              >
-                出品一覧に切り替え
-              </Link>
-            </>
-          )}
-        </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>商品一覧</h2>
+            <SearchForm />
             <RelatedProductsTable relatedProducts={data.product.relatedProducts} />
+            {/* TODO: ページネーションを実装する */}
           </div>
         </div>
       </div>
