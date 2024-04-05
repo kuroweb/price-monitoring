@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
+import Pagination from '@/features/products/components/Pagination'
 import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
 import SearchForm from '@/features/products/components/SearchForm'
 import DetailPageSidebarContent from '@/features/products/components/detail-page-sidebar-content/DetailPageSidebarContent'
@@ -11,14 +12,12 @@ import EditRequiredKeywordModal from '@/features/products/components/edit-requir
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useEditRequiredKeywordModalState'
-import { useOrderStateQuery, orderStateCache } from '@/features/products/hooks/useOrderState'
 import { pageStateCache, usePageStateQuery } from '@/features/products/hooks/usePageState'
 import { usePerStateQuery, perStateCache } from '@/features/products/hooks/usePerState'
 import {
   publishedStateCache,
   usePublishedStateQuery,
 } from '@/features/products/hooks/usePublishedState'
-import { useSortStateQuery, sortStateCache } from '@/features/products/hooks/useSortState'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -108,7 +107,7 @@ const Page = async ({
             <h2 className='card-title pb-4'>商品一覧</h2>
             <SearchForm />
             <RelatedProductsTable relatedProducts={data.product.relatedProducts} />
-            {/* TODO: ページネーションを実装する */}
+            <Pagination />
           </div>
         </div>
       </div>
