@@ -2,8 +2,7 @@ import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
-import MercariProductsTable from '@/features/products/components/MercariProductsTable'
-import YahooAuctionProductsTable from '@/features/products/components/YahooAuctionProductsTable'
+import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
 import DetailPageSidebarContent from '@/features/products/components/detail-page-sidebar-content/DetailPageSidebarContent'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
@@ -35,6 +34,8 @@ const Page = async ({
     variables: {
       id: params.id,
       published: published,
+      page: 1,
+      per: 100,
     },
   })
 
@@ -128,14 +129,8 @@ const Page = async ({
         </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
-            <h2 className='card-title pb-4'>メルカリ</h2>
-            <MercariProductsTable data={data} />
-          </div>
-        </div>
-        <div className='card w-full bg-neutral'>
-          <div className='card-body'>
-            <h2 className='card-title pb-4'>ヤフオク</h2>
-            <YahooAuctionProductsTable data={data} />
+            <h2 className='card-title pb-4'>商品一覧</h2>
+            <RelatedProductsTable relatedProducts={data.product.relatedProducts} />
           </div>
         </div>
       </div>

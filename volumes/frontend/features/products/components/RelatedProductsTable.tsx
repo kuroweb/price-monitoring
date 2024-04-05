@@ -1,0 +1,76 @@
+'use client'
+
+import NextImage from 'next/image'
+
+import { usePublishedState } from '../hooks/usePublishedState'
+
+import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+
+const RelatedProductsTable = ({
+  relatedProducts,
+}: {
+  relatedProducts: GetProductDetailPageDataQuery['product']['relatedProducts']
+}) => {
+  const [published, _] = usePublishedState()
+
+  const serviceMap: { [key: string]: string } = {
+    mercari: 'jp.mercari.com/item/',
+    yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
+  }
+
+  const handleRowClick = (relatedType: string, externalId: string) => {
+    window.open(`https://${serviceMap[relatedType]}${externalId}`, '_blank')
+  }
+
+  const parseDate = (date: string | null | undefined) => {
+    // 暫定実装
+    return date ? date.substring(0, 10) : ''
+  }
+
+  return (
+    <>
+      <table className='table'>
+        <thead>
+          <tr>
+            <th>サービス名</th>
+            <th>商品名</th>
+            <th>価格</th>
+            {!published && <th>購入日</th>}
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {relatedProducts.map((relatedProduct) => (
+            <tr
+              key={relatedProduct.externalId}
+              onClick={() => handleRowClick(relatedProduct.relatedType, relatedProduct.externalId)}
+              className='border-b border-base-200 cursor-pointer hover:bg-base-100'
+            >
+              <td className='p-2 w-16 min-w-16'>{relatedProduct.relatedType}</td>
+              <td className='p-2 w-36 max-w-36 md:w-full md:max-w-full'>{relatedProduct.name}</td>
+              <td className='p-2 w-16 min-w-16'>{relatedProduct.price}</td>
+              {!published && (
+                <td className='p-2 w-24 min-w-24 md:w-28 md:min-w-28'>
+                  {parseDate(relatedProduct.boughtDate)}
+                </td>
+              )}
+              <td className='p-2 w-20 min-w-20 md:w-24 md:min-w-24'>
+                <div className='relative aspect-square'>
+                  <NextImage
+                    className='object-cover rounded-lg'
+                    src={relatedProduct.thumbnailUrl}
+                    alt=''
+                    fill
+                    sizes='100vw, 100vw'
+                  />
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+export default RelatedProductsTable
