@@ -23,7 +23,14 @@ query getProductPageData($id: ID, $name: String) {
   }
 }
 
-query getProductDetailPageData($id: ID!, $published: Boolean, $page: Int, $per: Int) {
+query getProductDetailPageData(
+  $id: ID!
+  $published: Boolean
+  $page: Int
+  $per: Int
+  $sort: String
+  $order: String
+) {
   product(id: $id) {
     id
     name
@@ -118,8 +125,8 @@ query getProductDetailPageData($id: ID!, $published: Boolean, $page: Int, $per: 
       published: $published
       page: $page
       per: $per
-      sort: "bought_date"
-      order: "desc"
+      sort: $sort
+      order: $order
     ) {
       relatedType
       productId
