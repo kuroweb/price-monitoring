@@ -13,13 +13,18 @@ const RelatedProductsTable = ({
 }) => {
   const [published, _] = usePublishedState()
 
-  const serviceMap: { [key: string]: string } = {
+  const serviceDomainMap: { [key: string]: string } = {
     mercari: 'jp.mercari.com/item/',
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
   }
 
+  const serviceNameMap: { [key: string]: string } = {
+    mercari: 'メルカリ',
+    yahoo_auction: 'ヤフオク',
+  }
+
   const handleRowClick = (relatedType: string, externalId: string) => {
-    window.open(`https://${serviceMap[relatedType]}${externalId}`, '_blank')
+    window.open(`https://${serviceDomainMap[relatedType]}${externalId}`, '_blank')
   }
 
   const parseDate = (date: string | null | undefined) => {
@@ -32,7 +37,7 @@ const RelatedProductsTable = ({
       <table className='table'>
         <thead>
           <tr>
-            <th>サービス名</th>
+            <th></th>
             <th>商品名</th>
             <th>価格</th>
             {!published && <th>購入日</th>}
@@ -46,11 +51,11 @@ const RelatedProductsTable = ({
               onClick={() => handleRowClick(relatedProduct.relatedType, relatedProduct.externalId)}
               className='border-b border-base-200 cursor-pointer hover:bg-base-100'
             >
-              <td className='p-2 w-16 min-w-16'>{relatedProduct.relatedType}</td>
-              <td className='p-2 w-36 max-w-36 md:w-full md:max-w-full'>{relatedProduct.name}</td>
-              <td className='p-2 w-16 min-w-16'>{relatedProduct.price}</td>
+              <td className='p-0 w-16 min-w-16'>{serviceNameMap[relatedProduct.relatedType]}</td>
+              <td className='w-36 max-w-36 md:w-full md:max-w-full'>{relatedProduct.name}</td>
+              <td className='w-16 min-w-16'>{relatedProduct.price}</td>
               {!published && (
-                <td className='p-2 w-24 min-w-24 md:w-28 md:min-w-28'>
+                <td className='w-24 min-w-24 md:w-28 md:min-w-28'>
                   {parseDate(relatedProduct.boughtDate)}
                 </td>
               )}
