@@ -1,3 +1,7 @@
+#
+# products
+#
+
 query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
     id
@@ -97,13 +101,30 @@ query getProductDetailPageData(
       createdAt
       updatedAt
     }
-    relatedProducts(
-      published: $published
-      page: $page
-      per: $per
-      sort: $sort
-      order: $order
-    ) {
+    relatedProducts(published: $published, page: $page, per: $per, sort: $sort, order: $order) {
+      relatedType
+      productId
+      externalId
+      name
+      thumbnailUrl
+      price
+      published
+      boughtDate
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+#
+# recommends
+#
+
+query getRecommendsPageData($id: ID, $name: String) {
+  products(id: $id, name: $name) {
+    id
+    name
+    relatedProducts(published: true, page: 1, per: 10, sort: "updated_at", order: "desc") {
       relatedType
       productId
       externalId

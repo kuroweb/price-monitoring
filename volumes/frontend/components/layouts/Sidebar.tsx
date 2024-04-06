@@ -37,6 +37,40 @@ const Sidebar = ({ open, setOpen }: Props) => {
                   <span className='ml-3'>計測管理</span>
                 </Link>
               </li>
+              <li>
+                <Link
+                  href='/recommends'
+                  className='text-base font-normal rounded-lg flex items-center py-2 px-4 hover:bg-base-100 group'
+                >
+                  <svg
+                    className='w-6 h-6 text-gray-500 group-hover transition duration-75'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='1em'
+                    height='1em'
+                    viewBox='0 0 48 48'
+                  >
+                    <defs>
+                      <mask id='ipSTrend0'>
+                        <g fill='none' stroke-linejoin='round' stroke-width='4'>
+                          <path
+                            fill='#fff'
+                            stroke='#fff'
+                            d='M39 6H9a3 3 0 0 0-3 3v30a3 3 0 0 0 3 3h30a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3Z'
+                          />
+                          <path
+                            stroke='#000'
+                            stroke-linecap='round'
+                            d='m13.44 29.835l5.657-5.657l4.388 4.377L34 18'
+                          />
+                          <path stroke='#000' stroke-linecap='round' d='M26 18h8v8' />
+                        </g>
+                      </mask>
+                    </defs>
+                    <path fill='currentColor' d='M0 0h48v48H0z' mask='url(#ipSTrend0)' />
+                  </svg>
+                  <span className='ml-3'>レコメンド</span>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
