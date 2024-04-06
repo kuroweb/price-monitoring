@@ -7,10 +7,9 @@ import Sidebar from './Sidebar'
 
 type Props = {
   children?: ReactNode
-  sidebarChildren?: ReactNode
 }
 
-const Layout = ({ children, sidebarChildren }: Props) => {
+const Layout = ({ children }: Props) => {
   const [open, setOpen] = useState<boolean>(false)
 
   return (
@@ -18,9 +17,7 @@ const Layout = ({ children, sidebarChildren }: Props) => {
       <div className='h-svh' data-theme='dark'>
         <div className='flex h-full overflow-hidden'>
           <Header open={open} setOpen={setOpen} />
-          <Sidebar open={open} setOpen={setOpen}>
-            {sidebarChildren}
-          </Sidebar>
+          <Sidebar open={open} setOpen={setOpen} />
           <div className='h-full w-full overflow-y-auto md:pl-64'>
             <main>
               <div className='pt-20 p-4'>

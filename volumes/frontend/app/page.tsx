@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/products/components/ProductsTable'
 import CreateCrawlSettingModal from '@/features/products/components/create-crawl-setting-modal/CreateCrawlSettingModal'
-import IndexPageSidebarContent from '@/features/products/components/index-page-sidebar-content/IndexPageSidebarContent'
 import { useCreateCrawlSettingModalQuery } from '@/features/products/hooks/useCreateCrawlSettingModalState'
 import { GetProductPageDataDocument, GetProductPageDataQuery } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
@@ -14,7 +13,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
   })
 
   return (
-    <Layout sidebarChildren={<IndexPageSidebarContent />}>
+    <Layout>
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>

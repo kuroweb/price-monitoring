@@ -5,7 +5,6 @@ import AnalysisChart from '@/features/products/components/AnalysisChart'
 import Pagination from '@/features/products/components/Pagination'
 import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
 import SearchForm from '@/features/products/components/SearchForm'
-import DetailPageSidebarContent from '@/features/products/components/detail-page-sidebar-content/DetailPageSidebarContent'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import EditRequiredKeywordModal from '@/features/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
@@ -48,7 +47,7 @@ const Page = async ({
   })
 
   return (
-    <Layout sidebarChildren={<DetailPageSidebarContent />}>
+    <Layout>
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
