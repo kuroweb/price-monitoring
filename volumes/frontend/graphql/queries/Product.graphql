@@ -34,18 +34,6 @@ query getProductDetailPageData(
   product(id: $id) {
     id
     name
-    yahooAuctionProducts(published: $published, sort: "bought_date", order: "desc") {
-      id
-      productId
-      yahooAuctionId
-      name
-      thumbnailUrl
-      price
-      published
-      boughtDate
-      createdAt
-      updatedAt
-    }
     yahooAuctionCrawlSetting {
       id
       keyword
@@ -74,18 +62,6 @@ query getProductDetailPageData(
       averagePurchasePrice
       purchaseCount
       date
-      createdAt
-      updatedAt
-    }
-    mercariProducts(published: $published, sort: "bought_date", order: "desc") {
-      id
-      productId
-      mercariId
-      name
-      thumbnailUrl
-      price
-      published
-      boughtDate
       createdAt
       updatedAt
     }
