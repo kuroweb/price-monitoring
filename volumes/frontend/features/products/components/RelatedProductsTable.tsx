@@ -16,11 +16,13 @@ const RelatedProductsTable = ({
   const serviceDomainMap: { [key: string]: string } = {
     mercari: 'jp.mercari.com/item/',
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
+    yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
   }
 
   const serviceNameMap: { [key: string]: string } = {
     mercari: 'メルカリ',
     yahoo_auction: 'ヤフオク',
+    yahoo_fleamarket: 'ペイペイ',
   }
 
   const handleRowClick = (relatedType: string, externalId: string) => {

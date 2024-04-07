@@ -39,6 +39,8 @@ module Search
         #{build_sql_for('mercari')}
         UNION
         #{build_sql_for('yahoo_auction')}
+        UNION
+        #{build_sql_for('yahoo_fleamarket')}
         ORDER BY
           #{build_order_sql}
         LIMIT
