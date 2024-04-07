@@ -1,12 +1,12 @@
 module Products
-  class EnqueueRefreshProductJob
+  class EnqueueRefreshRelatedProductsJob
     include Sidekiq::Job
 
-    sidekiq_options queue: :refresh_product, retry: 0
+    sidekiq_options queue: :refresh_related_products, retry: 0
 
     def perform
       job_params = Product.all.pluck(:id).map { |p| [p] }
-      Products::RefreshProductJob.perform_bulk(job_params)
+      Products::RefreshRelatedProductsJob.perform_bulk(job_params)
     end
   end
 end

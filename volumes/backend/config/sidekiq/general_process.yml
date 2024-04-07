@@ -3,5 +3,5 @@ development:
 production:
   :concurrency: 1
 :queues:
-  - ['refresh_product', 1]
+  - ['refresh_related_products', 1]
   - ['crawl_mercari_sync_bought_date', 1]
