@@ -51,16 +51,16 @@ module Products
 
       def required_keywords
         @required_keywords ||=
-          product.mercari_crawl_setting
-                 .mercari_crawl_setting_required_keywords
+          product.yahoo_auction_crawl_setting
+                 .yahoo_auction_crawl_setting_required_keywords
                  .pluck(:keyword)
                  .map { |keyword| normalize_keyword(keyword) }
       end
 
       def exclude_keywords
         @exclude_keywords ||=
-          product.mercari_crawl_setting
-                 .mercari_crawl_setting_exclude_keywords
+          product.yahoo_auction_crawl_setting
+                 .yahoo_auction_crawl_setting_exclude_keywords
                  .pluck(:keyword)
                  .map { |keyword| normalize_keyword(keyword) }
       end
