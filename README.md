@@ -105,6 +105,17 @@ erDiagram
     string yahoo_auction_id
     string seller_id
     string name
+    text thumbnail_url
+    int price
+    boolean published
+    datetime bought_date
+  }
+  yahoo_fleamarket_products {
+    bigint id PK
+    string yahoo_fleamarket_id
+    string seller_id
+    string name
+    text thumbnail_url
     int price
     boolean published
     datetime bought_date
@@ -121,6 +132,7 @@ erDiagram
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
+  products ||--o{ yahoo_fleamarket_products : "1:N"
   products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
 ```
 
@@ -156,6 +168,7 @@ erDiagram
     string mercari_id
     string seller_id
     string name
+    text thumbnail_url
     int price
     boolean published
     datetime bought_date

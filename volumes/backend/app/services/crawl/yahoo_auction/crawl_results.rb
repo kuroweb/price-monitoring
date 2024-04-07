@@ -12,8 +12,16 @@ module Crawl
         results.push(result)
       end
 
-      def yahoo_auction_ids
-        results.map(&:yahoo_auction_id)
+      def external_ids
+        results.map(&:external_id)
+      end
+
+      def yahoo_auction_crawl_results
+        self.class.new(results.select { |result| result.platform == "yahoo_auction" })
+      end
+
+      def yahoo_fleamarket_crawl_results
+        self.class.new(results.select { |result| result.platform == "yahoo_fleamarket" })
       end
     end
   end

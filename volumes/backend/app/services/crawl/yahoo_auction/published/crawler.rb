@@ -4,13 +4,13 @@ module Crawl
     module Published
       class Crawler
         RETRY_COUNT = 5
-        MAX_SIZE = 1000
+        MAX_SIZE = 500
 
         def initialize(product:)
           @product = product
         end
 
-        def execute
+        def execute # rubocop:disable Metrics/MethodLength
           Crawl::Client.execute do |browser|
             page = browser.new_page
 
@@ -20,6 +20,7 @@ module Crawl
 
               Retryable.retryable(tries: RETRY_COUNT) do
                 page.goto(url(start))
+                page.reload # NOTE: リロードしないとフリマ商品が取得できない
                 break if no_results?(page)
 
                 append_results(page)
@@ -42,7 +43,8 @@ module Crawl
           product_doms = page.query_selector_all("li.Product")
           product_doms.each do |dom|
             result = Crawl::YahooAuction::CrawlResult.new(
-              yahoo_auction_id: yahoo_auction_id(dom),
+              platform: platform(dom),
+              external_id: external_id(dom),
               seller_id: seller_id(dom),
               name: name(dom),
               price: price(dom),
@@ -68,7 +70,7 @@ module Crawl
           page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
         end
 
-        def yahoo_auction_id(dom)
+        def external_id(dom)
           dom.query_selector(".Product__titleLink").get_attribute("data-auction-id")
         end
 
@@ -87,6 +89,14 @@ module Crawl
 
         def thumbnail_url(dom)
           dom.eval_on_selector(".Product__imageData", "el => el.src")
+        end
+
+        def platform(dom)
+          yahoo_auction_product?(dom) ? "yahoo_auction" : "yahoo_fleamarket"
+        end
+
+        def yahoo_auction_product?(dom)
+          dom.query_selector("text=Yahoo!フリマ").nil?
         end
 
         def crawl_results
