@@ -12,6 +12,7 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_daily_purchase_summaries"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_fleamarket_daily_purchase_summaries"
 )
 
 type IProductService interface {
@@ -24,6 +25,7 @@ type IProductService interface {
 	yahoo_auction_crawl_setting_exclude_keywords.IYahooAuctionCrawlSettingExcludeKeywordService
 	yahoo_auction_crawl_setting_required_keywords.IYahooAuctionCrawlSettingRequiredKeywordService
 	yahoo_auction_daily_purchase_summaries.IFindYahooAuctionDailyPurchaseSummaryService
+	yahoo_fleamarket_daily_purchase_summaries.IFindYahooFleamarketDailyPurchaseSummaryService
 	mercari_products.IMercariProductService
 	mercari_crawl_settings.IMercariCrawlSettingService
 	mercari_crawl_setting_exclude_keywords.IMercariCrawlSettingExcludeKeywordService
@@ -42,6 +44,7 @@ type ProductService struct {
 	*yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService
 	*yahoo_auction_crawl_setting_required_keywords.YahooAuctionCrawlSettingRequiredKeywordService
 	*yahoo_auction_daily_purchase_summaries.FindYahooAuctionDailyPurchaseSummaryService
+	*yahoo_fleamarket_daily_purchase_summaries.FindYahooFleamarketDailyPurchaseSummaryService
 	*mercari_products.MercariProductService
 	*mercari_crawl_settings.MercariCrawlSettingService
 	*mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService
@@ -61,6 +64,7 @@ func New() IProductService {
 		YahooAuctionCrawlSettingExcludeKeywordService:  &yahoo_auction_crawl_setting_exclude_keywords.YahooAuctionCrawlSettingExcludeKeywordService{},
 		YahooAuctionCrawlSettingRequiredKeywordService: &yahoo_auction_crawl_setting_required_keywords.YahooAuctionCrawlSettingRequiredKeywordService{},
 		FindYahooAuctionDailyPurchaseSummaryService:    &yahoo_auction_daily_purchase_summaries.FindYahooAuctionDailyPurchaseSummaryService{},
+		FindYahooFleamarketDailyPurchaseSummaryService: &yahoo_fleamarket_daily_purchase_summaries.FindYahooFleamarketDailyPurchaseSummaryService{},
 		MercariProductService:                          &mercari_products.MercariProductService{},
 		MercariCrawlSettingService:                     &mercari_crawl_settings.MercariCrawlSettingService{},
 		MercariCrawlSettingExcludeKeywordService:       &mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService{},

@@ -36,6 +36,11 @@ func (r *productResolver) YahooAuctionDailyPurchaseSummaries(ctx context.Context
 	return r.ProductService.FindYahooAuctionDailyPurchaseSummary(ctx, obj.ID)
 }
 
+// YahooFleamarketDailyPurchaseSummaries is the resolver for the yahooFleamarketDailyPurchaseSummaries field.
+func (r *productResolver) YahooFleamarketDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.YahooFleamarketDailyPurchaseSummary, error) {
+	return r.ProductService.FindYahooFleamarketDailyPurchaseSummary(ctx, obj.ID)
+}
+
 // MercariProducts is the resolver for the mercariProducts field.
 func (r *productResolver) MercariProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.MercariProduct, error) {
 	return r.ProductService.FindMercariProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)

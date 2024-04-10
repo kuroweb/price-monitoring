@@ -8,6 +8,7 @@ type Product implements Node {
   ): [YahooAuctionProduct!]!
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting!
   yahooAuctionDailyPurchaseSummaries: [YahooAuctionDailyPurchaseSummary!]!
+  yahooFleamarketDailyPurchaseSummaries: [YahooFleamarketDailyPurchaseSummary!]!
   mercariProducts(
     published: Boolean
     sort: String
@@ -68,6 +69,16 @@ type YahooAuctionCrawlSettingRequiredKeyword implements Node {
 }
 
 type YahooAuctionDailyPurchaseSummary implements Node {
+  id: ID!
+  productId: Int!
+  averagePurchasePrice: Int
+  purchaseCount: Int!
+  date: String!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type YahooFleamarketDailyPurchaseSummary implements Node {
   id: ID!
   productId: Int!
   averagePurchasePrice: Int

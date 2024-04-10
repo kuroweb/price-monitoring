@@ -93,6 +93,8 @@ models:
         resolver: true
       yahooAuctionDailyPurchaseSummaries:
         resolver: true
+      yahooFleamarketDailyPurchaseSummaries:
+        resolver: true
       mercariProducts:
         resolver: true
       mercariCrawlSetting:

@@ -625,15 +625,16 @@ func (MercariProduct) IsNode()            {}
 func (this MercariProduct) GetID() string { return this.ID }
 
 type Product struct {
-	ID                                 string                              `json:"id"`
-	Name                               string                              `json:"name"`
-	YahooAuctionProducts               []*YahooAuctionProduct              `json:"yahooAuctionProducts"`
-	YahooAuctionCrawlSetting           *YahooAuctionCrawlSetting           `json:"yahooAuctionCrawlSetting"`
-	YahooAuctionDailyPurchaseSummaries []*YahooAuctionDailyPurchaseSummary `json:"yahooAuctionDailyPurchaseSummaries"`
-	MercariProducts                    []*MercariProduct                   `json:"mercariProducts"`
-	MercariCrawlSetting                *MercariCrawlSetting                `json:"mercariCrawlSetting"`
-	MercariDailyPurchaseSummaries      []*MercariDailyPurchaseSummary      `json:"mercariDailyPurchaseSummaries"`
-	RelatedProducts                    []*RelatedProduct                   `json:"relatedProducts"`
+	ID                                    string                                 `json:"id"`
+	Name                                  string                                 `json:"name"`
+	YahooAuctionProducts                  []*YahooAuctionProduct                 `json:"yahooAuctionProducts"`
+	YahooAuctionCrawlSetting              *YahooAuctionCrawlSetting              `json:"yahooAuctionCrawlSetting"`
+	YahooAuctionDailyPurchaseSummaries    []*YahooAuctionDailyPurchaseSummary    `json:"yahooAuctionDailyPurchaseSummaries"`
+	YahooFleamarketDailyPurchaseSummaries []*YahooFleamarketDailyPurchaseSummary `json:"yahooFleamarketDailyPurchaseSummaries"`
+	MercariProducts                       []*MercariProduct                      `json:"mercariProducts"`
+	MercariCrawlSetting                   *MercariCrawlSetting                   `json:"mercariCrawlSetting"`
+	MercariDailyPurchaseSummaries         []*MercariDailyPurchaseSummary         `json:"mercariDailyPurchaseSummaries"`
+	RelatedProducts                       []*RelatedProduct                      `json:"relatedProducts"`
 }
 
 func (Product) IsNode()            {}
@@ -953,3 +954,16 @@ type YahooAuctionProduct struct {
 
 func (YahooAuctionProduct) IsNode()            {}
 func (this YahooAuctionProduct) GetID() string { return this.ID }
+
+type YahooFleamarketDailyPurchaseSummary struct {
+	ID                   string `json:"id"`
+	ProductID            int    `json:"productId"`
+	AveragePurchasePrice *int   `json:"averagePurchasePrice,omitempty"`
+	PurchaseCount        int    `json:"purchaseCount"`
+	Date                 string `json:"date"`
+	CreatedAt            string `json:"createdAt"`
+	UpdatedAt            string `json:"updatedAt"`
+}
+
+func (YahooFleamarketDailyPurchaseSummary) IsNode()            {}
+func (this YahooFleamarketDailyPurchaseSummary) GetID() string { return this.ID }
