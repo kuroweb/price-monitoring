@@ -1,7 +1,7 @@
-# NOTE: 除外設定とマッチするレコードを撤去する
+# 現在の計測設定とマッチしないレコードを削除する
 module Products
-  module YahooAuctionProducts
-    class DeleteByCrawlSetting
+  module RefreshRelatedProduct
+    class RefreshYahooFleamarketProduct
       def self.call(...)
         new(...).call
       end
@@ -19,7 +19,7 @@ module Products
       attr_reader :product
 
       def deletable
-        YahooAuctionProduct
+        YahooFleamarketProduct
           .where(product_id: product.id)
           .merge(
             price_condition
@@ -30,22 +30,22 @@ module Products
 
       def price_condition
         price_range = product.yahoo_auction_crawl_setting.min_price..product.yahoo_auction_crawl_setting.max_price
-        YahooAuctionProduct.where.not(price: price_range)
+        YahooFleamarketProduct.where.not(price: price_range)
       end
 
       def required_keywords_condition
-        return YahooAuctionProduct.none if required_keywords.blank?
+        return YahooFleamarketProduct.none if required_keywords.blank?
 
         required_keywords.map do |required_keyword|
-          YahooAuctionProduct.where.not("name LIKE ?", "%#{required_keyword}%")
+          YahooFleamarketProduct.where.not("name LIKE ?", "%#{required_keyword}%")
         end.reduce(&:or)
       end
 
       def exclude_keywords_conditon
-        return YahooAuctionProduct.none if exclude_keywords.blank?
+        return YahooFleamarketProduct.none if exclude_keywords.blank?
 
         exclude_keywords.map do |exclude_keyword|
-          YahooAuctionProduct.where("name LIKE ?", "%#{exclude_keyword}%")
+          YahooFleamarketProduct.where("name LIKE ?", "%#{exclude_keyword}%")
         end.reduce(&:or)
       end
 

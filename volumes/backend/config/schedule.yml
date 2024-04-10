@@ -7,9 +7,9 @@ crawl_mercari_enqueue_sync_job:
 crawl_mercari_sync_bought_date_job:
   cron: "0 * * * *"
   class: "Crawl::Mercari::SyncBoughtDateJob"
-calculate_daily_purchase_summary_calculator_job:
+products_calculate_daily_purchase_summary_calculator_job:
   cron: "0 0 * * *"
-  class: "CalculateDailyPurchaseSummary::CalculatorJob"
-products_enqueue_refresh_related_products_job:
+  class: "Products::CalculateDailyPurchaseSummary::CalculatorJob"
+products_refresh_related_product_enqueue_refresh_job:
   cron: "0 * * * *"
-  class: "Products::EnqueueRefreshRelatedProductsJob"
+  class: "Products::RefreshRelatedProduct::EnqueueRefreshJob"

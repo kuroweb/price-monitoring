@@ -1,7 +1,7 @@
-# NOTE: 除外設定とマッチするレコードを撤去する
+# 現在の計測設定とマッチしないレコードを削除する
 module Products
-  module YahooFleamarketProducts
-    class DeleteByCrawlSetting
+  module RefreshRelatedProduct
+    class RefreshMercariProduct
       def self.call(...)
         new(...).call
       end
@@ -19,7 +19,7 @@ module Products
       attr_reader :product
 
       def deletable
-        YahooFleamarketProduct
+        MercariProduct
           .where(product_id: product.id)
           .merge(
             price_condition
@@ -29,38 +29,38 @@ module Products
       end
 
       def price_condition
-        price_range = product.yahoo_auction_crawl_setting.min_price..product.yahoo_auction_crawl_setting.max_price
-        YahooFleamarketProduct.where.not(price: price_range)
+        price_range = product.mercari_crawl_setting.min_price..product.mercari_crawl_setting.max_price
+        MercariProduct.where.not(price: price_range)
       end
 
       def required_keywords_condition
-        return YahooFleamarketProduct.none if required_keywords.blank?
+        return MercariProduct.none if required_keywords.blank?
 
         required_keywords.map do |required_keyword|
-          YahooFleamarketProduct.where.not("name LIKE ?", "%#{required_keyword}%")
+          MercariProduct.where.not("name LIKE ?", "%#{required_keyword}%")
         end.reduce(&:or)
       end
 
       def exclude_keywords_conditon
-        return YahooFleamarketProduct.none if exclude_keywords.blank?
+        return MercariProduct.none if exclude_keywords.blank?
 
         exclude_keywords.map do |exclude_keyword|
-          YahooFleamarketProduct.where("name LIKE ?", "%#{exclude_keyword}%")
+          MercariProduct.where("name LIKE ?", "%#{exclude_keyword}%")
         end.reduce(&:or)
       end
 
       def required_keywords
         @required_keywords ||=
-          product.yahoo_auction_crawl_setting
-                 .yahoo_auction_crawl_setting_required_keywords
+          product.mercari_crawl_setting
+                 .mercari_crawl_setting_required_keywords
                  .pluck(:keyword)
                  .map { |keyword| normalize_keyword(keyword) }
       end
 
       def exclude_keywords
         @exclude_keywords ||=
-          product.yahoo_auction_crawl_setting
-                 .yahoo_auction_crawl_setting_exclude_keywords
+          product.mercari_crawl_setting
+                 .mercari_crawl_setting_exclude_keywords
                  .pluck(:keyword)
                  .map { |keyword| normalize_keyword(keyword) }
       end
