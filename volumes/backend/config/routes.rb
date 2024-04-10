@@ -17,6 +17,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           end
           resources :yahoo_auction_daily_purchase_summaries, only: [:index]
 
+          ## yahoo_fleamarket ##
+          resources :yahoo_fleamarket_daily_purchase_summaries, only: [:index]
+
           ## mercari ##
           resources :mercari_products, only: %i[index show]
           resources :mercari_crawl_settings, only: [:index]
