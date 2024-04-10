@@ -15,15 +15,24 @@ import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const AnalysisChart = ({
   yahooAuctionData,
+  yahooFleamarketData,
   mercariData,
 }: {
   yahooAuctionData: GetProductDetailPageDataQuery['product']['yahooAuctionDailyPurchaseSummaries']
+  yahooFleamarketData: GetProductDetailPageDataQuery['product']['yahooFleamarketDailyPurchaseSummaries']
   mercariData: GetProductDetailPageDataQuery['product']['mercariDailyPurchaseSummaries']
 }) => {
   const yahooAuctionDataMap = yahooAuctionData.reduce<{
     [date: string]: { yahooAuctionAveragePurchasePrice: number }
   }>((acc, data) => {
     acc[data.date] = { yahooAuctionAveragePurchasePrice: data.averagePurchasePrice! }
+    return acc
+  }, {})
+
+  const yahooFleamarketDataMap = yahooFleamarketData.reduce<{
+    [date: string]: { yahooFleamarketAveragePurchasePrice: number }
+  }>((acc, data) => {
+    acc[data.date] = { yahooFleamarketAveragePurchasePrice: data.averagePurchasePrice! }
     return acc
   }, {})
 
@@ -37,6 +46,7 @@ const AnalysisChart = ({
   const mergedData = Object.keys({ ...yahooAuctionDataMap, ...mercariDataMap }).map((date) => ({
     date,
     ...yahooAuctionDataMap[date],
+    ...yahooFleamarketDataMap[date],
     ...mercariDataMap[date],
   }))
 
@@ -64,6 +74,16 @@ const AnalysisChart = ({
             name='ヤフオク'
             stroke='orange'
             fill='orange'
+            activeDot={{ r: 8 }}
+            animationDuration={100}
+          />
+          <Line
+            yAxisId={1}
+            type='monotone'
+            dataKey='yahooFleamarketAveragePurchasePrice'
+            name='ヤフーフリマ'
+            stroke='yellowgreen'
+            fill='yellowgreen'
             activeDot={{ r: 8 }}
             animationDuration={100}
           />

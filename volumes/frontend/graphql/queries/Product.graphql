@@ -69,6 +69,15 @@ query getProductDetailPageData(
       createdAt
       updatedAt
     }
+    yahooFleamarketDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
     mercariCrawlSetting {
       id
       productId

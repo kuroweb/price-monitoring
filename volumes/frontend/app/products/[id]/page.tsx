@@ -97,6 +97,7 @@ const Page = async ({
             <h2 className='card-title pb-4'>相場グラフ</h2>
             <AnalysisChart
               yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries}
+              yahooFleamarketData={data.product.yahooFleamarketDailyPurchaseSummaries}
               mercariData={data.product.mercariDailyPurchaseSummaries}
             />
           </div>
