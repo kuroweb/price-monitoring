@@ -1,6 +1,6 @@
 # ヤフオク落札価格集計クラス
-module Analysis
-  class CalculateYahooAuctionDailyPurchaseSummary
+module CalculateDailyPurchaseSummary
+  class CalculateYahooAuctionProduct
     def self.call(...)
       new(...).call
     end

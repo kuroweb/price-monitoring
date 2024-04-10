@@ -1,6 +1,6 @@
 # ヤフオク落札価格集計クラス
-module Analysis
-  class CalculateMercariDailyPurchaseSummary
+module CalculateDailyPurchaseSummary
+  class CalculateMercariProduct
     def self.call(...)
       new(...).call
     end

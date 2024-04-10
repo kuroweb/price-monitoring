@@ -4,4 +4,4 @@ production:
   :concurrency: 1
 :queues:
   - ['refresh_related_products', 1]
-  - ['crawl_mercari_sync_bought_date', 1]
+  - ['calculate_daily_purchase_summary', 1]
