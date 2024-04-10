@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   has_many :yahoo_auction_products, dependent: :destroy
   has_many :yahoo_auction_daily_purchase_summaries, dependent: :destroy
   has_many :yahoo_fleamarket_products, dependent: :destroy
+  has_many :yahoo_fleamarket_daily_purchase_summaries, dependent: :destroy
   has_many :mercari_products, dependent: :destroy
   has_many :mercari_daily_purchase_summaries, dependent: :destroy
 
