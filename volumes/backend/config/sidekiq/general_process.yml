@@ -1,7 +1,8 @@
 development:
-  :concurrency: 1
+  :concurrency: 3
 production:
-  :concurrency: 1
+  :concurrency: 3
 :queues:
   - ['refresh_related_products', 1]
   - ['calculate_daily_purchase_summary', 1]
+  - ['crawl_mercari_sync_bought_date', 1]
