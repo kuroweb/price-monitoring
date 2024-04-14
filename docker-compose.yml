@@ -95,6 +95,18 @@ services:
       - backend-bundle:/usr/local/bundle
     command: ["sidekiq", "-C", "config/sidekiq/general_process.yml"]
 
+  backend-batch-3:
+    <<: *backend
+    depends_on:
+      backend-db:
+        condition: service_healthy
+      backend-redis:
+        condition: service_healthy
+    volumes:
+      - ./volumes/backend:/app
+      - backend-bundle:/usr/local/bundle
+    command: ["sidekiq", "-C", "config/sidekiq/crawl_process_2.yml"]
+
   backend-db:
     <<: *mysql
     volumes:

@@ -5,4 +5,3 @@ production:
 :queues:
   - ['crawl_yahoo_auction', 1]
   - ['crawl_mercari', 1]
-  - ['analysis', 1]
