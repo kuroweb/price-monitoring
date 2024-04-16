@@ -107,8 +107,10 @@ erDiagram
     string name
     text thumbnail_url
     int price
+    int buyout_price
     boolean published
     datetime bought_date
+    datetime end_date
   }
   yahoo_fleamarket_products {
     bigint id PK

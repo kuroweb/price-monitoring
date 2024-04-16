@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_10_145316) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_14_040827) do
   create_table "mercari_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "mercari_crawl_setting_id"
     t.string "keyword", null: false
@@ -122,8 +122,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_145316) do
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
+    t.integer "buyout_price"
     t.boolean "published", default: false, null: false
     t.datetime "bought_date"
+    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
