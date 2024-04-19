@@ -1,12 +1,22 @@
 module Search
   class RelatedProduct
-    attr_reader :related_type, :product_id, :external_id, :name, :price, :thumbnail_url,
-                :published, :bought_date, :created_at, :updated_at
+    include ActiveModel::Model
+    include ActiveModel::Attributes
 
-    def initialize(attributes = {})
-      attributes.each do |key, value|
-        instance_variable_set("@#{key}", value) if respond_to?(key)
-      end
-    end
+    attribute :platform, :string
+    attribute :product_id, :string
+    attribute :external_id, :string
+    attribute :name, :string
+    attribute :price, :integer
+    attribute :buyout_price, :integer
+    attribute :thumbnail_url, :string
+    attribute :published, :boolean
+    attribute :bought_date, :datetime
+    attribute :end_date, :datetime
+    attribute :created_at, :datetime
+    attribute :updated_at, :datetime
+
+    validates :published, inclusion: { in: [true, false] }
+    validates_presence_of :platform, :external_id, :name, :price, :thumbnail_url, :created_at, :updated_at
   end
 end

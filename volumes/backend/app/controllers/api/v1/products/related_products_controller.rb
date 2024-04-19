@@ -4,7 +4,7 @@ module Api
       class RelatedProductsController < ApplicationController
         def index
           related_products = Search::RetrieveRelatedProduct.call(params: search_params)
-          render json: { related_products: related_products.products },
+          render json: { related_products: related_products.products.map(&:attributes) },
                  status: 200
         end
 

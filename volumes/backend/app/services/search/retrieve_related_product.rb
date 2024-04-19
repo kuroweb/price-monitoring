@@ -2,7 +2,6 @@
 # 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProduct
-    COMMON_COLUMNS = %w[product_id name price thumbnail_url published bought_date created_at updated_at].freeze
     SORT_OPTIONS = %w[bought_date created_at updated_at].freeze
     ORDER_OPTIONS = %w[desc asc].freeze
 
@@ -22,8 +21,11 @@ module Search
 
     def call
       records = query
+      related_products = RelatedProducts.new(records.map { |record| RelatedProduct.new(normalize(record)) })
 
-      RelatedProducts.new(records.map { |record| RelatedProduct.new(normalize(record)) })
+      raise StandardError, related_products.errors unless related_products.valid?
+
+      related_products
     end
 
     private
@@ -51,19 +53,30 @@ module Search
     def build_sql_for(platform)
       product.send("#{platform}_products")
              .where(published:)
-             .select(custom_columns(platform) + COMMON_COLUMNS)
+             .select(common_columns(platform) + additional_columns(platform))
              .to_sql
     end
 
     def build_order_sql
-      return "updated_at asc" if SORT_OPTIONS.exclude?(sort) ||
-                                 ORDER_OPTIONS.exclude?(order)
+      return "updated_at asc" if SORT_OPTIONS.exclude?(sort) || ORDER_OPTIONS.exclude?(order)
 
       "#{sort} #{order}"
     end
 
-    def custom_columns(platform)
-      ["'#{platform}' AS related_type", "#{platform}_id AS external_id"]
+    def common_columns(platform)
+      [
+        "'#{platform}' AS platform", "#{platform}_id AS external_id",
+        "product_id", "name", "price", "thumbnail_url", "published",
+        "bought_date", "created_at", "updated_at"
+      ]
+    end
+
+    def additional_columns(platform)
+      if platform == "yahoo_auction"
+        %w[buyout_price end_date]
+      else
+        ["NULL AS buyout_price", "NULL AS end_date"]
+      end
     end
 
     def normalize(result)
