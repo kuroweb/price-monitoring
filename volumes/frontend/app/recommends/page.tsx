@@ -10,8 +10,6 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
     query: GetRecommendsPageDataDocument,
   })
 
-  console.log(data)
-
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>

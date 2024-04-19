@@ -51,7 +51,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
                   >
                     <defs>
                       <mask id='ipSTrend0'>
-                        <g fill='none' stroke-linejoin='round' stroke-width='4'>
+                        <g fill='none' strokeLinejoin='round' strokeWidth='4'>
                           <path
                             fill='#fff'
                             stroke='#fff'
@@ -59,10 +59,10 @@ const Sidebar = ({ open, setOpen }: Props) => {
                           />
                           <path
                             stroke='#000'
-                            stroke-linecap='round'
+                            strokeLinecap='round'
                             d='m13.44 29.835l5.657-5.657l4.388 4.377L34 18'
                           />
-                          <path stroke='#000' stroke-linecap='round' d='M26 18h8v8' />
+                          <path stroke='#000' strokeLinecap='round' d='M26 18h8v8' />
                         </g>
                       </mask>
                     </defs>
