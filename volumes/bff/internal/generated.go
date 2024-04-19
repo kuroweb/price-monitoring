@@ -301,13 +301,15 @@ type ComplexityRoot struct {
 
 	RelatedProduct struct {
 		BoughtDate   func(childComplexity int) int
+		BuyoutPrice  func(childComplexity int) int
 		CreatedAt    func(childComplexity int) int
+		EndDate      func(childComplexity int) int
 		ExternalID   func(childComplexity int) int
 		Name         func(childComplexity int) int
+		Platform     func(childComplexity int) int
 		Price        func(childComplexity int) int
 		ProductID    func(childComplexity int) int
 		Published    func(childComplexity int) int
-		RelatedType  func(childComplexity int) int
 		ThumbnailURL func(childComplexity int) int
 		UpdatedAt    func(childComplexity int) int
 	}
@@ -1559,12 +1561,26 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.RelatedProduct.BoughtDate(childComplexity), true
 
+	case "RelatedProduct.buyoutPrice":
+		if e.complexity.RelatedProduct.BuyoutPrice == nil {
+			break
+		}
+
+		return e.complexity.RelatedProduct.BuyoutPrice(childComplexity), true
+
 	case "RelatedProduct.createdAt":
 		if e.complexity.RelatedProduct.CreatedAt == nil {
 			break
 		}
 
 		return e.complexity.RelatedProduct.CreatedAt(childComplexity), true
+
+	case "RelatedProduct.endDate":
+		if e.complexity.RelatedProduct.EndDate == nil {
+			break
+		}
+
+		return e.complexity.RelatedProduct.EndDate(childComplexity), true
 
 	case "RelatedProduct.externalId":
 		if e.complexity.RelatedProduct.ExternalID == nil {
@@ -1579,6 +1595,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.RelatedProduct.Name(childComplexity), true
+
+	case "RelatedProduct.platform":
+		if e.complexity.RelatedProduct.Platform == nil {
+			break
+		}
+
+		return e.complexity.RelatedProduct.Platform(childComplexity), true
 
 	case "RelatedProduct.price":
 		if e.complexity.RelatedProduct.Price == nil {
@@ -1600,13 +1623,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.RelatedProduct.Published(childComplexity), true
-
-	case "RelatedProduct.relatedType":
-		if e.complexity.RelatedProduct.RelatedType == nil {
-			break
-		}
-
-		return e.complexity.RelatedProduct.RelatedType(childComplexity), true
 
 	case "RelatedProduct.thumbnailUrl":
 		if e.complexity.RelatedProduct.ThumbnailURL == nil {
@@ -2967,14 +2983,16 @@ type MercariCrawlSettingRequiredKeyword implements Node {
 }
 
 type RelatedProduct {
-  relatedType: String!
+  platform: String!
   productId: Int!
   externalId: String!
   name: String!
   thumbnailUrl: String!
   price: Int!
+  buyoutPrice: Int
   published: Boolean!
   boughtDate: String
+  endDate: String
   createdAt: String!
   updatedAt: String!
 }
@@ -9667,8 +9685,8 @@ func (ec *executionContext) fieldContext_Product_relatedProducts(ctx context.Con
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "relatedType":
-				return ec.fieldContext_RelatedProduct_relatedType(ctx, field)
+			case "platform":
+				return ec.fieldContext_RelatedProduct_platform(ctx, field)
 			case "productId":
 				return ec.fieldContext_RelatedProduct_productId(ctx, field)
 			case "externalId":
@@ -9679,10 +9697,14 @@ func (ec *executionContext) fieldContext_Product_relatedProducts(ctx context.Con
 				return ec.fieldContext_RelatedProduct_thumbnailUrl(ctx, field)
 			case "price":
 				return ec.fieldContext_RelatedProduct_price(ctx, field)
+			case "buyoutPrice":
+				return ec.fieldContext_RelatedProduct_buyoutPrice(ctx, field)
 			case "published":
 				return ec.fieldContext_RelatedProduct_published(ctx, field)
 			case "boughtDate":
 				return ec.fieldContext_RelatedProduct_boughtDate(ctx, field)
+			case "endDate":
+				return ec.fieldContext_RelatedProduct_endDate(ctx, field)
 			case "createdAt":
 				return ec.fieldContext_RelatedProduct_createdAt(ctx, field)
 			case "updatedAt":
@@ -10040,8 +10062,8 @@ func (ec *executionContext) fieldContext_Query___schema(ctx context.Context, fie
 	return fc, nil
 }
 
-func (ec *executionContext) _RelatedProduct_relatedType(ctx context.Context, field graphql.CollectedField, obj *model.RelatedProduct) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_RelatedProduct_relatedType(ctx, field)
+func (ec *executionContext) _RelatedProduct_platform(ctx context.Context, field graphql.CollectedField, obj *model.RelatedProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_RelatedProduct_platform(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -10054,7 +10076,7 @@ func (ec *executionContext) _RelatedProduct_relatedType(ctx context.Context, fie
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.RelatedType, nil
+		return obj.Platform, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -10071,7 +10093,7 @@ func (ec *executionContext) _RelatedProduct_relatedType(ctx context.Context, fie
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_RelatedProduct_relatedType(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_RelatedProduct_platform(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "RelatedProduct",
 		Field:      field,
@@ -10304,6 +10326,47 @@ func (ec *executionContext) fieldContext_RelatedProduct_price(ctx context.Contex
 	return fc, nil
 }
 
+func (ec *executionContext) _RelatedProduct_buyoutPrice(ctx context.Context, field graphql.CollectedField, obj *model.RelatedProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_RelatedProduct_buyoutPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.BuyoutPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*int)
+	fc.Result = res
+	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_RelatedProduct_buyoutPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "RelatedProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _RelatedProduct_published(ctx context.Context, field graphql.CollectedField, obj *model.RelatedProduct) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_RelatedProduct_published(ctx, field)
 	if err != nil {
@@ -10377,6 +10440,47 @@ func (ec *executionContext) _RelatedProduct_boughtDate(ctx context.Context, fiel
 }
 
 func (ec *executionContext) fieldContext_RelatedProduct_boughtDate(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "RelatedProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _RelatedProduct_endDate(ctx context.Context, field graphql.CollectedField, obj *model.RelatedProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_RelatedProduct_endDate(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.EndDate, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_RelatedProduct_endDate(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "RelatedProduct",
 		Field:      field,
@@ -19988,8 +20092,8 @@ func (ec *executionContext) _RelatedProduct(ctx context.Context, sel ast.Selecti
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("RelatedProduct")
-		case "relatedType":
-			out.Values[i] = ec._RelatedProduct_relatedType(ctx, field, obj)
+		case "platform":
+			out.Values[i] = ec._RelatedProduct_platform(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -20018,6 +20122,8 @@ func (ec *executionContext) _RelatedProduct(ctx context.Context, sel ast.Selecti
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "buyoutPrice":
+			out.Values[i] = ec._RelatedProduct_buyoutPrice(ctx, field, obj)
 		case "published":
 			out.Values[i] = ec._RelatedProduct_published(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
@@ -20025,6 +20131,8 @@ func (ec *executionContext) _RelatedProduct(ctx context.Context, sel ast.Selecti
 			}
 		case "boughtDate":
 			out.Values[i] = ec._RelatedProduct_boughtDate(ctx, field, obj)
+		case "endDate":
+			out.Values[i] = ec._RelatedProduct_endDate(ctx, field, obj)
 		case "createdAt":
 			out.Values[i] = ec._RelatedProduct_createdAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {

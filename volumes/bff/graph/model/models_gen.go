@@ -641,14 +641,16 @@ func (Product) IsNode()            {}
 func (this Product) GetID() string { return this.ID }
 
 type RelatedProduct struct {
-	RelatedType  string  `json:"relatedType"`
+	Platform     string  `json:"platform"`
 	ProductID    int     `json:"productId"`
 	ExternalID   string  `json:"externalId"`
 	Name         string  `json:"name"`
 	ThumbnailURL string  `json:"thumbnailUrl"`
 	Price        int     `json:"price"`
+	BuyoutPrice  *int    `json:"buyoutPrice,omitempty"`
 	Published    bool    `json:"published"`
 	BoughtDate   *string `json:"boughtDate,omitempty"`
+	EndDate      *string `json:"endDate,omitempty"`
 	CreatedAt    string  `json:"createdAt"`
 	UpdatedAt    string  `json:"updatedAt"`
 }

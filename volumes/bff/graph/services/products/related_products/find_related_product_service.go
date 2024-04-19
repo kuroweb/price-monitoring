@@ -23,7 +23,7 @@ func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, prod
 	params := make(url.Values)
 
 	if externalID != nil {
-		params.Set("related_id", *externalID)
+		params.Set("external_id", *externalID)
 	}
 
 	if name != nil {
@@ -69,14 +69,16 @@ func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, prod
 
 	var response struct {
 		RelatedProducts []struct {
-			RelatedType  string  `json:"related_type"`
+			Platform     string  `json:"platform"`
 			ProductID    int     `json:"product_id"`
 			ExternalID   string  `json:"external_id"`
 			Name         string  `json:"name"`
 			ThumbnailURL string  `json:"thumbnail_url"`
 			Price        int     `json:"price"`
+			BuyoutPrice  *int    `json:"buyout_price"`
 			Published    bool    `json:"published"`
 			BoughtDate   *string `json:"bought_date"`
+			EndDate      *string `json:"end_date"`
 			CreatedAt    string  `json:"created_at"`
 			UpdatedAt    string  `json:"updated_at"`
 		} `json:"related_products"`
@@ -90,14 +92,16 @@ func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, prod
 	related_products := make([]*model.RelatedProduct, len(response.RelatedProducts))
 	for i, related_product := range response.RelatedProducts {
 		related_products[i] = &model.RelatedProduct{
-			RelatedType:  related_product.RelatedType,
+			Platform:     related_product.Platform,
 			ProductID:    related_product.ProductID,
 			ExternalID:   related_product.ExternalID,
 			Name:         related_product.Name,
 			ThumbnailURL: related_product.ThumbnailURL,
 			Price:        related_product.Price,
+			BuyoutPrice:  related_product.BuyoutPrice,
 			Published:    related_product.Published,
 			BoughtDate:   related_product.BoughtDate,
+			EndDate:      related_product.EndDate,
 			CreatedAt:    related_product.CreatedAt,
 			UpdatedAt:    related_product.UpdatedAt,
 		}
