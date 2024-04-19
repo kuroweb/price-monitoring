@@ -35,34 +35,37 @@ module Crawl
 
       def save(crawl_results)
         ApplicationRecord.transaction do
-          save_yahoo_auction_products(crawl_results)
-          save_yahoo_fleamarket_products(crawl_results)
+          save_products("yahoo_auction", crawl_results)
+          save_products("yahoo_fleamarket", crawl_results)
         end
       end
 
-      def save_yahoo_auction_products(crawl_results)
-        upsert(YahooAuctionProduct, "yahoo_auction_id", crawl_results.yahoo_auction_crawl_results)
-        delete(YahooAuctionProduct, "yahoo_auction_id", crawl_results.yahoo_auction_crawl_results)
+      def save_products(platform, crawl_results)
+        upsert(platform, crawl_results)
+        delete(platform, crawl_results)
       end
 
-      def save_yahoo_fleamarket_products(crawl_results)
-        upsert(YahooFleamarketProduct, "yahoo_fleamarket_id", crawl_results.yahoo_fleamarket_crawl_results)
-        delete(YahooFleamarketProduct, "yahoo_fleamarket_id", crawl_results.yahoo_fleamarket_crawl_results)
-      end
+      def upsert(platform, crawl_results)
+        model = "#{platform}_product".camelize.constantize
+        external_id = "#{platform}_id"
+        results = crawl_results.send("#{platform}_results")
 
-      def upsert(model, external_id_name, crawl_results)
-        upsert_params = crawl_results.results.map do |result|
-          result.as_json
-                .merge("product_id" => product.id, external_id_name => result.external_id)
-                .except("platform", "external_id")
+        upsert_params = results.map do |result|
+          result.attributes
+                .merge("product_id" => product.id, external_id => result.external_id)
+                .slice(*model.column_names)
         end
 
         model.upsert_all(upsert_params, record_timestamps: true)
       end
 
-      def delete(model, external_id_name, crawl_results)
+      def delete(platform, crawl_results)
+        model = "#{platform}_product".camelize.constantize
+        external_id = "#{platform}_id"
+        external_ids = crawl_results.send("#{platform}_results").map(&:external_id)
+
         model.where(product_id: product.id, published: true)
-             .where.not(external_id_name => crawl_results.external_ids)
+             .where.not(external_id => external_ids)
              .delete_all
       end
 

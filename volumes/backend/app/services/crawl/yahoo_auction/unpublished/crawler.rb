@@ -10,7 +10,7 @@ module Crawl
           @product = product
         end
 
-        def execute # rubocop:disable Metrics/MethodLength
+        def execute # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           Crawl::Client.execute do |browser|
             page = browser.new_page
 
@@ -32,6 +32,8 @@ module Crawl
             end
           end
 
+          raise StandardError, crawl_results.errors unless crawl_results.valid?
+
           crawl_results
         end
 
@@ -39,7 +41,7 @@ module Crawl
 
         attr_reader :product
 
-        def append_results(page)
+        def append_results(page) # rubocop:disable Metrics/MethodLength
           product_doms = page.query_selector_all("li.Product")
           product_doms.each do |dom|
             result = Crawl::YahooAuction::CrawlResult.new(
@@ -48,9 +50,11 @@ module Crawl
               seller_id: seller_id(dom),
               name: name(dom),
               price: price(dom),
+              buyout_price: nil,
               thumbnail_url: thumbnail_url(dom),
               published: false,
-              bought_date: bought_date(dom)
+              bought_date: bought_date(dom),
+              end_date: end_date(dom)
             )
             crawl_results.add(result)
           end
@@ -95,6 +99,10 @@ module Crawl
           date_str = dom.query_selector(".Product__time").inner_text
           datetime = date_str.to_datetime
           datetime > Time.current ? datetime.ago(1.year) : datetime
+        end
+
+        def end_date(dom)
+          bought_date(dom)
         end
 
         def platform(dom)

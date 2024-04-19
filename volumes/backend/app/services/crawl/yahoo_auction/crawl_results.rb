@@ -12,16 +12,22 @@ module Crawl
         results.push(result)
       end
 
-      def external_ids
-        results.map(&:external_id)
+      def yahoo_auction_results
+        results.select { |result| result.platform == "yahoo_auction" }
       end
 
-      def yahoo_auction_crawl_results
-        self.class.new(results.select { |result| result.platform == "yahoo_auction" })
+      def yahoo_fleamarket_results
+        results.select { |result| result.platform == "yahoo_fleamarket" }
       end
 
-      def yahoo_fleamarket_crawl_results
-        self.class.new(results.select { |result| result.platform == "yahoo_fleamarket" })
+      def valid?
+        results.all?(&:valid?)
+      end
+
+      def errors
+        results.map.with_index do |result, index|
+          "CrawlResult #{index + 1}: #{result.errors.full_messages.join(', ')}" if result.invalid?
+        end.compact
       end
     end
   end

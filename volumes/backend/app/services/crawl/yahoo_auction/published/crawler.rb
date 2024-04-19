@@ -10,7 +10,7 @@ module Crawl
           @product = product
         end
 
-        def execute # rubocop:disable Metrics/MethodLength
+        def execute # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           Crawl::Client.execute do |browser|
             page = browser.new_page
 
@@ -32,6 +32,8 @@ module Crawl
             end
           end
 
+          raise StandardError, crawl_results.errors unless crawl_results.valid?
+
           crawl_results
         end
 
@@ -39,7 +41,7 @@ module Crawl
 
         attr_reader :product
 
-        def append_results(page)
+        def append_results(page) # rubocop:disable Metrics/MethodLength
           product_doms = page.query_selector_all("li.Product")
           product_doms.each do |dom|
             result = Crawl::YahooAuction::CrawlResult.new(
@@ -48,9 +50,11 @@ module Crawl
               seller_id: seller_id(dom),
               name: name(dom),
               price: price(dom),
+              buyout_price: buyout_price(dom),
               thumbnail_url: thumbnail_url(dom),
               published: true,
-              bought_date: nil
+              bought_date: nil,
+              end_date: end_date(dom)
             )
             crawl_results.add(result)
           end
@@ -84,11 +88,19 @@ module Crawl
         end
 
         def price(dom)
-          dom.query_selector(".Product__priceValue").inner_text.gsub(/,|円/, "")
+          dom.query_selector_all(".Product__priceValue")[0].inner_text.gsub(/,|円/, "")
+        end
+
+        def buyout_price(dom)
+          dom.query_selector_all(".Product__priceValue")[1]&.inner_text&.gsub(/,|円/, "")
         end
 
         def thumbnail_url(dom)
           dom.eval_on_selector(".Product__imageData", "el => el.src")
+        end
+
+        def end_date(dom)
+          dom.query_selector(".Product__data >> :has-text('終了')")&.inner_text&.to_datetime
         end
 
         def platform(dom)
