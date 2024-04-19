@@ -4,7 +4,7 @@ module Search
     include ActiveModel::Attributes
 
     attribute :platform, :string
-    attribute :product_id, :string
+    attribute :product_id, :integer
     attribute :external_id, :string
     attribute :name, :string
     attribute :price, :integer
@@ -17,6 +17,6 @@ module Search
     attribute :updated_at, :datetime
 
     validates :published, inclusion: { in: [true, false] }
-    validates_presence_of :platform, :external_id, :name, :price, :thumbnail_url, :created_at, :updated_at
+    validates_presence_of :platform, :product_id, :external_id, :name, :price, :thumbnail_url, :created_at, :updated_at
   end
 end
