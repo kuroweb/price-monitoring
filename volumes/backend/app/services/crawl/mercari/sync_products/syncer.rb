@@ -35,7 +35,7 @@ module Crawl
 
         def upsert(crawl_results)
           upsert_params = crawl_results.results.map do |result|
-            result.as_json.merge("product_id" => @product.id)
+            result.as_json.merge("product_id" => product.id)
           end
 
           MercariProduct.upsert_all(upsert_params, record_timestamps: true)
@@ -43,8 +43,8 @@ module Crawl
 
         def delete(crawl_results)
           MercariProduct
-            .where(product_id: @product.id, published: true)
-            .where.not(mercari_id: crawl_results.mercari_ids)
+            .where(product_id: product.id, published: true)
+            .where.not(mercari_id: crawl_results.results.map(&:mercari_id))
             .delete_all
         end
 

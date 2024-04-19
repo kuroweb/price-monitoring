@@ -13,10 +13,6 @@ module Crawl
           results.push(result)
         end
 
-        def mercari_ids
-          results.map(&:mercari_id)
-        end
-
         def unpublished_results
           results.reject(&:published)
         end
