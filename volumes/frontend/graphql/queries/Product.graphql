@@ -111,14 +111,16 @@ query getProductDetailPageData(
       updatedAt
     }
     relatedProducts(published: $published, page: $page, per: $per, sort: $sort, order: $order) {
-      relatedType
+      platform
       productId
       externalId
       name
       thumbnailUrl
       price
+      buyoutPrice
       published
       boughtDate
+      endDate
       createdAt
       updatedAt
     }
@@ -134,14 +136,16 @@ query getRecommendsPageData($id: ID, $name: String) {
     id
     name
     relatedProducts(published: true, page: 1, per: 10, sort: "updated_at", order: "desc") {
-      relatedType
+      platform
       productId
       externalId
       name
       thumbnailUrl
       price
+      buyoutPrice
       published
       boughtDate
+      endDate
       createdAt
       updatedAt
     }

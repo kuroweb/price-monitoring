@@ -25,8 +25,8 @@ const RelatedProductsTable = ({
     yahoo_fleamarket: 'ペイペイ',
   }
 
-  const handleRowClick = (relatedType: string, externalId: string) => {
-    window.open(`https://${serviceDomainMap[relatedType]}${externalId}`, '_blank')
+  const handleRowClick = (platform: string, externalId: string) => {
+    window.open(`https://${serviceDomainMap[platform]}${externalId}`, '_blank')
   }
 
   const parseDate = (date: string | null | undefined) => {
@@ -42,7 +42,7 @@ const RelatedProductsTable = ({
             <th></th>
             <th>商品名</th>
             <th>価格</th>
-            {!published && <th>売却日</th>}
+            <th>{published ? '終了日' : '売却日'}</th>
             <th></th>
           </tr>
         </thead>
@@ -50,17 +50,28 @@ const RelatedProductsTable = ({
           {relatedProducts.map((relatedProduct) => (
             <tr
               key={relatedProduct.externalId}
-              onClick={() => handleRowClick(relatedProduct.relatedType, relatedProduct.externalId)}
+              onClick={() => handleRowClick(relatedProduct.platform, relatedProduct.externalId)}
               className='border-b border-base-200 cursor-pointer hover:bg-base-100'
             >
-              <td className='p-0 w-16 min-w-16'>{serviceNameMap[relatedProduct.relatedType]}</td>
+              <td className='p-0 w-16 min-w-16'>{serviceNameMap[relatedProduct.platform]}</td>
               <td className='w-36 max-w-36 md:w-full md:max-w-full'>{relatedProduct.name}</td>
-              <td className='w-16 min-w-16'>{relatedProduct.price}</td>
-              {!published && (
-                <td className='w-24 min-w-24 md:w-28 md:min-w-28'>
-                  {parseDate(relatedProduct.boughtDate)}
-                </td>
-              )}
+              <td className='w-16 min-w-16'>
+                <div>
+                  <p className='text-xs text-gray-500'>現在</p>
+                  <p>{relatedProduct.price}</p>
+                </div>
+                <div className="pt-1">
+                  <p className='text-xs text-gray-500'>即決</p>
+                  <p>{relatedProduct.buyoutPrice ? relatedProduct.buyoutPrice : '-'}</p>
+                </div>
+              </td>
+              <td className='w-24 min-w-24 md:w-28 md:min-w-28'>
+                {published
+                  ? relatedProduct.endDate
+                    ? parseDate(relatedProduct.endDate)
+                    : '-'
+                  : parseDate(relatedProduct.boughtDate)}
+              </td>
               <td className='p-2 w-20 min-w-20 md:w-24 md:min-w-24'>
                 <div className='relative aspect-square'>
                   <NextImage
