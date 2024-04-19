@@ -35,7 +35,7 @@ module Crawl
 
         def upsert(crawl_results)
           upsert_params = crawl_results.results.map do |result|
-            result.as_json.merge("product_id" => product.id)
+            result.attributes.merge("product_id" => product.id)
           end
 
           MercariProduct.upsert_all(upsert_params, record_timestamps: true)

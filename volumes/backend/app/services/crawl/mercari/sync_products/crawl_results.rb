@@ -16,6 +16,16 @@ module Crawl
         def unpublished_results
           results.reject(&:published)
         end
+
+        def valid?
+          results.all?(&:valid?)
+        end
+
+        def errors
+          results.map.with_index do |result, index|
+            "CrawlResult #{index + 1}: #{result.errors.full_messages.join(', ')}" if result.invalid?
+          end.compact
+        end
       end
     end
   end

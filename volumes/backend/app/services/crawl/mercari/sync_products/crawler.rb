@@ -9,7 +9,7 @@ module Crawl
           @product = product
         end
 
-        def execute # rubocop:disable Metrics/MethodLength
+        def execute # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
           Crawl::Client.execute do |browser|
             page = browser.new_page
 
@@ -33,6 +33,8 @@ module Crawl
               start += 1
             end
           end
+
+          raise StandardError, crawl_results.errors unless crawl_results.valid?
 
           crawl_results
         end

@@ -3,13 +3,17 @@ module Crawl
   module Mercari
     module SyncProducts
       class CrawlResult
-        attr_reader :mercari_id, :name, :price, :thumbnail_url, :published
+        include ActiveModel::Model
+        include ActiveModel::Attributes
 
-        def initialize(attributes = {})
-          attributes.each do |key, value|
-            instance_variable_set("@#{key}", value) if respond_to?(key)
-          end
-        end
+        attribute :mercari_id, :string
+        attribute :name, :string
+        attribute :price, :integer
+        attribute :thumbnail_url, :string
+        attribute :published, :boolean
+
+        validates :published, inclusion: { in: [true, false] }
+        validates_presence_of :mercari_id, :name, :price, :thumbnail_url
       end
     end
   end
