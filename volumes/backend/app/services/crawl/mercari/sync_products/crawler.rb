@@ -23,6 +23,8 @@ module Crawl
                 page.goto(url(start))
                 load(page)
 
+                raise StandardError, "merEmptyState is exists. Execute retry..." if exist_skeleton?(page)
+
                 break if no_results?(page)
 
                 append_results(page)
@@ -68,6 +70,10 @@ module Crawl
           end
         end
 
+        def exist_skeleton?(page)
+          page.query_selector_all(".merSkeleton").present?
+        end
+
         def append_results(page)
           doms = product_doms(page)
           doms.each do |dom|
@@ -84,15 +90,7 @@ module Crawl
 
         def product_doms(page)
           page.query_selector_all("li[data-testid='item-cell']")
-              .reject { |dom| not_crawlable?(dom) }
-        end
-
-        def not_crawlable?(dom)
-          skeleton?(dom) || shop_item?(dom)
-        end
-
-        def skeleton?(dom)
-          dom.query_selector(".merSkeleton").present?
+              .reject { |dom| shop_item?(dom) }
         end
 
         def shop_item?(dom)
