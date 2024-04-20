@@ -29,8 +29,8 @@ const SearchForm = () => {
 
   return (
     <>
-      <div className='flex flex-wrap space-x-4'>
-        <label className='form-control w-32'>
+      <div className='flex flex-wrap'>
+        <label className='form-control w-32 pr-2'>
           <div className='label'>
             <span className='label-text'>プラットフォーム</span>
           </div>
@@ -45,7 +45,7 @@ const SearchForm = () => {
             <option value='mercari'>メルカリ</option>
           </select>
         </label>
-        <label className='form-control w-32'>
+        <label className='form-control w-32 pr-2'>
           <div className='label'>
             <span className='label-text'>ステータス</span>
           </div>
@@ -61,7 +61,7 @@ const SearchForm = () => {
         {(platformMask == 'yahoo_auction,yahoo_fleamarket,mercari' ||
           platformMask == 'yahoo_auction') &&
           published && (
-            <label className='form-control w-32'>
+            <label className='form-control w-32 pr-2'>
               <div className='label'>
                 <span className='label-text'>ヤフオク表示</span>
               </div>
@@ -75,12 +75,12 @@ const SearchForm = () => {
               </select>
             </label>
           )}
-        <label className='form-control w-32'>
+        <label className='form-control w-32 pr-2'>
           <div className='label'>
             <span className='label-text'>表示数</span>
           </div>
           <select
-            className='select select-bordered w-32'
+            className='select select-bordered'
             onChange={handlePerChange}
             value={per.toString()}
           >

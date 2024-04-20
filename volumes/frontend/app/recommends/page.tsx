@@ -19,7 +19,9 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
             <>
               <div className='card w-full bg-neutral'>
                 <div className='card-body'>
-                  <h2 className='card-title'>{product.name}</h2>
+                  <Link className='card-title' href={`/products/${product.id}`}>
+                    {product.name}
+                  </Link>
                   <RelatedProductsTable relatedProducts={product.relatedProducts} />
                 </div>
               </div>
