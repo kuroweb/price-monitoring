@@ -17,7 +17,9 @@ type Product implements Node {
   mercariCrawlSetting: MercariCrawlSetting!
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   relatedProducts(
-    published: Boolean
+    platformMask: String!
+    published: Boolean!
+    yahooAuctionBuyable: Boolean!
     page: Int
     per: Int
     sort: String

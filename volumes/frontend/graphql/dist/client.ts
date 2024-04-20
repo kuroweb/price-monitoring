@@ -477,8 +477,10 @@ export type ProductRelatedProductsArgs = {
   order?: InputMaybe<Scalars['String']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
   per?: InputMaybe<Scalars['Int']['input']>;
-  published?: InputMaybe<Scalars['Boolean']['input']>;
+  platformMask: Scalars['String']['input'];
+  published: Scalars['Boolean']['input'];
   sort?: InputMaybe<Scalars['String']['input']>;
+  yahooAuctionBuyable: Scalars['Boolean']['input'];
 };
 
 
@@ -886,7 +888,9 @@ export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ 
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
-  published?: InputMaybe<Scalars['Boolean']['input']>;
+  platformMask: Scalars['String']['input'];
+  published: Scalars['Boolean']['input'];
+  yahooAuctionBuyable: Scalars['Boolean']['input'];
   page?: InputMaybe<Scalars['Int']['input']>;
   per?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
@@ -1318,7 +1322,7 @@ export const GetProductPageDataDocument = gql`
 }
     `;
 export const GetProductDetailPageDataDocument = gql`
-    query getProductDetailPageData($id: ID!, $published: Boolean, $page: Int, $per: Int, $sort: String, $order: String) {
+    query getProductDetailPageData($id: ID!, $platformMask: String!, $published: Boolean!, $yahooAuctionBuyable: Boolean!, $page: Int, $per: Int, $sort: String, $order: String) {
   product(id: $id) {
     id
     name
@@ -1395,7 +1399,9 @@ export const GetProductDetailPageDataDocument = gql`
       updatedAt
     }
     relatedProducts(
+      platformMask: $platformMask
       published: $published
+      yahooAuctionBuyable: $yahooAuctionBuyable
       page: $page
       per: $per
       sort: $sort
@@ -1423,7 +1429,9 @@ export const GetRecommendsPageDataDocument = gql`
     id
     name
     relatedProducts(
+      platformMask: "yahoo_auction,yahoo_fleamarket,mercari"
       published: true
+      yahooAuctionBuyable: true
       page: 1
       per: 10
       sort: "updated_at"

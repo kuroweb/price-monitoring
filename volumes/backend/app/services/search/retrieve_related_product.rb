@@ -2,16 +2,19 @@
 # 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProduct
-    SORT_OPTIONS = %w[bought_date created_at updated_at].freeze
-    ORDER_OPTIONS = %w[desc asc].freeze
+    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari].freeze
+    SORT_TYPES = %w[bought_date created_at updated_at].freeze
+    ORDER_TYPES = %w[desc asc].freeze
 
     def self.call(...)
       new(...).call
     end
 
-    def initialize(params: {})
+    def initialize(params: {}) # rubocop:disable Metrics/AbcSize
       @product_id = params[:product_id]
-      @published = params[:published] || [true, false]
+      @platform_mask = params[:platform_mask]
+      @published = params[:published]
+      @yahoo_auction_buyable = params[:yahoo_auction_buyable]
       @page = params[:page].to_i.nonzero? || 1
       @per = params[:per].to_i.nonzero? || 10
       @offset = (page - 1) * per
@@ -30,7 +33,7 @@ module Search
 
     private
 
-    attr_reader :product_id, :published, :page, :per, :offset, :sort, :order
+    attr_reader :product_id, :published, :page, :per, :offset, :sort, :order, :platform_mask, :yahoo_auction_buyable
 
     def query
       ActiveRecord::Base.connection.exec_query(sql)
@@ -38,11 +41,7 @@ module Search
 
     def sql
       <<~SQL.squish
-        #{build_sql_for('mercari')}
-        UNION
-        #{build_sql_for('yahoo_auction')}
-        UNION
-        #{build_sql_for('yahoo_fleamarket')}
+        #{build_platform_sql}
         ORDER BY
           #{build_order_sql}
         LIMIT
@@ -50,17 +49,21 @@ module Search
       SQL
     end
 
-    def build_sql_for(platform)
-      product.send("#{platform}_products")
-             .where(published:)
-             .select(common_columns(platform) + additional_columns(platform))
-             .to_sql
+    def build_platform_sql
+      masks = platform_mask.split(",").select { |mask| PLATFORM_MASK_TYPES.include?(mask) }
+      masks.map { |mask| build_sql_for(mask) }.join(" UNION ")
     end
 
-    def build_order_sql
-      return "updated_at asc" if SORT_OPTIONS.exclude?(sort) || ORDER_OPTIONS.exclude?(order)
+    def build_sql_for(platform)
+      condition = base_condition(platform)
+      condition = published_condition(condition)
+      condition = yahoo_auction_buyable_condition(platform, condition)
+      condition.to_sql
+    end
 
-      "#{sort} #{order}"
+    def base_condition(platform)
+      product.send("#{platform}_products")
+             .select(common_columns(platform) + additional_columns(platform))
     end
 
     def common_columns(platform)
@@ -77,6 +80,25 @@ module Search
       else
         ["NULL AS buyout_price", "NULL AS end_date"]
       end
+    end
+
+    def published_condition(condition)
+      condition.where(published:)
+    end
+
+    def yahoo_auction_buyable_condition(platform, condition)
+      return condition unless platform == "yahoo_auction" && yahoo_auction_buyable && published
+
+      condition.where(
+        "(end_date <= ?) OR (buyout_price IS NOT NULL AND buyout_price <= ?)",
+        Time.current.since(1.day), product.yahoo_auction_crawl_setting.max_price
+      )
+    end
+
+    def build_order_sql
+      return "updated_at asc" if SORT_TYPES.exclude?(sort) || ORDER_TYPES.exclude?(order)
+
+      "#{sort} #{order}"
     end
 
     def normalize(result)

@@ -29,7 +29,9 @@ query getProductPageData($id: ID, $name: String) {
 
 query getProductDetailPageData(
   $id: ID!
-  $published: Boolean
+  $platformMask: String!
+  $published: Boolean!
+  $yahooAuctionBuyable: Boolean!
   $page: Int
   $per: Int
   $sort: String
@@ -110,7 +112,15 @@ query getProductDetailPageData(
       createdAt
       updatedAt
     }
-    relatedProducts(published: $published, page: $page, per: $per, sort: $sort, order: $order) {
+    relatedProducts(
+      platformMask: $platformMask
+      published: $published
+      yahooAuctionBuyable: $yahooAuctionBuyable
+      page: $page
+      per: $per
+      sort: $sort
+      order: $order
+    ) {
       platform
       productId
       externalId
@@ -135,7 +145,15 @@ query getRecommendsPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
     id
     name
-    relatedProducts(published: true, page: 1, per: 10, sort: "updated_at", order: "desc") {
+    relatedProducts(
+      platformMask: "yahoo_auction,yahoo_fleamarket,mercari"
+      published: true
+      yahooAuctionBuyable: true
+      page: 1
+      per: 10
+      sort: "updated_at"
+      order: "desc"
+    ) {
       platform
       productId
       externalId

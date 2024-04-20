@@ -286,7 +286,7 @@ type ComplexityRoot struct {
 		MercariDailyPurchaseSummaries         func(childComplexity int) int
 		MercariProducts                       func(childComplexity int, published *bool, sort *string, order *string) int
 		Name                                  func(childComplexity int) int
-		RelatedProducts                       func(childComplexity int, published *bool, page *int, per *int, sort *string, order *string) int
+		RelatedProducts                       func(childComplexity int, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) int
 		YahooAuctionCrawlSetting              func(childComplexity int) int
 		YahooAuctionDailyPurchaseSummaries    func(childComplexity int) int
 		YahooAuctionProducts                  func(childComplexity int, published *bool, sort *string, order *string) int
@@ -487,7 +487,7 @@ type ProductResolver interface {
 	MercariProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.MercariProduct, error)
 	MercariCrawlSetting(ctx context.Context, obj *model.Product) (*model.MercariCrawlSetting, error)
 	MercariDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.MercariDailyPurchaseSummary, error)
-	RelatedProducts(ctx context.Context, obj *model.Product, published *bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
+	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 type QueryResolver interface {
 	Product(ctx context.Context, id string) (*model.Product, error)
@@ -1483,7 +1483,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Product.RelatedProducts(childComplexity, args["published"].(*bool), args["page"].(*int), args["per"].(*int), args["sort"].(*string), args["order"].(*string)), true
+		return e.complexity.Product.RelatedProducts(childComplexity, args["platformMask"].(string), args["published"].(bool), args["yahooAuctionBuyable"].(bool), args["page"].(*int), args["per"].(*int), args["sort"].(*string), args["order"].(*string)), true
 
 	case "Product.yahooAuctionCrawlSetting":
 		if e.complexity.Product.YahooAuctionCrawlSetting == nil {
@@ -2858,7 +2858,9 @@ type DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed implements U
   mercariCrawlSetting: MercariCrawlSetting!
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   relatedProducts(
-    published: Boolean
+    platformMask: String!
+    published: Boolean!
+    yahooAuctionBuyable: Boolean!
     page: Int
     per: Int
     sort: String
@@ -3316,51 +3318,69 @@ func (ec *executionContext) field_Product_mercariProducts_args(ctx context.Conte
 func (ec *executionContext) field_Product_relatedProducts_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
-	var arg0 *bool
+	var arg0 string
+	if tmp, ok := rawArgs["platformMask"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("platformMask"))
+		arg0, err = ec.unmarshalNString2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["platformMask"] = arg0
+	var arg1 bool
 	if tmp, ok := rawArgs["published"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("published"))
-		arg0, err = ec.unmarshalOBoolean2ᚖbool(ctx, tmp)
+		arg1, err = ec.unmarshalNBoolean2bool(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["published"] = arg0
-	var arg1 *int
+	args["published"] = arg1
+	var arg2 bool
+	if tmp, ok := rawArgs["yahooAuctionBuyable"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("yahooAuctionBuyable"))
+		arg2, err = ec.unmarshalNBoolean2bool(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["yahooAuctionBuyable"] = arg2
+	var arg3 *int
 	if tmp, ok := rawArgs["page"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("page"))
-		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg3, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["page"] = arg1
-	var arg2 *int
+	args["page"] = arg3
+	var arg4 *int
 	if tmp, ok := rawArgs["per"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("per"))
-		arg2, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg4, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["per"] = arg2
-	var arg3 *string
+	args["per"] = arg4
+	var arg5 *string
 	if tmp, ok := rawArgs["sort"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("sort"))
-		arg3, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		arg5, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["sort"] = arg3
-	var arg4 *string
+	args["sort"] = arg5
+	var arg6 *string
 	if tmp, ok := rawArgs["order"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("order"))
-		arg4, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		arg6, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["order"] = arg4
+	args["order"] = arg6
 	return args, nil
 }
 
@@ -9660,7 +9680,7 @@ func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field 
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().RelatedProducts(rctx, obj, fc.Args["published"].(*bool), fc.Args["page"].(*int), fc.Args["per"].(*int), fc.Args["sort"].(*string), fc.Args["order"].(*string))
+		return ec.resolvers.Product().RelatedProducts(rctx, obj, fc.Args["platformMask"].(string), fc.Args["published"].(bool), fc.Args["yahooAuctionBuyable"].(bool), fc.Args["page"].(*int), fc.Args["per"].(*int), fc.Args["sort"].(*string), fc.Args["order"].(*string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

@@ -14,29 +14,17 @@ import (
 )
 
 type IFindRelatedProductService interface {
-	FindRelatedProduct(ctx context.Context, productID *string, externalID *string, name *string, price *int, published *bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
+	FindRelatedProduct(ctx context.Context, productID *string, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 
 type FindRelatedProductService struct{}
 
-func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, productID *string, externalID *string, name *string, price *int, published *bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
+func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, productID *string, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	params := make(url.Values)
 
-	if externalID != nil {
-		params.Set("external_id", *externalID)
-	}
-
-	if name != nil {
-		params.Set("name", *name)
-	}
-
-	if price != nil {
-		params.Set("price", strconv.Itoa(*price))
-	}
-
-	if published != nil {
-		params.Set("published", strconv.FormatBool(*published))
-	}
+	params.Set("platform_mask", platformMask)
+	params.Set("published", strconv.FormatBool(published))
+	params.Set("yahoo_auction_buyable", strconv.FormatBool(yahooAuctionBuyable))
 
 	if page != nil {
 		params.Set("page", strconv.Itoa(*page))

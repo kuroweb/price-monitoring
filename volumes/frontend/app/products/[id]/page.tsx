@@ -14,9 +14,17 @@ import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useE
 import { pageStateCache, usePageStateQuery } from '@/features/products/hooks/usePageState'
 import { usePerStateQuery, perStateCache } from '@/features/products/hooks/usePerState'
 import {
+  platformMaskStateCache,
+  usePlatformMaskStateQuery,
+} from '@/features/products/hooks/usePlatformMaskState'
+import {
   publishedStateCache,
   usePublishedStateQuery,
 } from '@/features/products/hooks/usePublishedState'
+import {
+  useYahooAuctionBuyableStateQuery,
+  yahooAuctionBuyableStateCache,
+} from '@/features/products/hooks/useYahooAuctionBuyableState'
 import {
   GetProductDetailPageDataDocument,
   GetProductDetailPageDataQuery,
@@ -30,7 +38,10 @@ const Page = async ({
   params: { [key: string]: string | undefined }
   searchParams: { [key: string]: string | undefined }
 }) => {
+  const { [usePlatformMaskStateQuery]: platformMask } = platformMaskStateCache.parse(searchParams)
   const { [usePublishedStateQuery]: published } = publishedStateCache.parse(searchParams)
+  const { [useYahooAuctionBuyableStateQuery]: yahooAuctionBuyable } =
+    yahooAuctionBuyableStateCache.parse(searchParams)
   const { [usePageStateQuery]: page } = pageStateCache.parse(searchParams)
   const { [usePerStateQuery]: per } = perStateCache.parse(searchParams)
 
@@ -38,7 +49,9 @@ const Page = async ({
     query: GetProductDetailPageDataDocument,
     variables: {
       id: params.id,
+      platformMask: platformMask,
       published: published,
+      yahooAuctionBuyable: yahooAuctionBuyable,
       page: page,
       per: per,
       sort: published ? 'updated_at' : 'bought_date',
