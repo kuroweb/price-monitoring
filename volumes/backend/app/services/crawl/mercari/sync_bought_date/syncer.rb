@@ -38,10 +38,23 @@ module Crawl
             Retryable.retryable(tries: RETRY_COUNT) do
               page = browser.new_page
               page.goto("https://jp.mercari.com/item/#{mercari_product.mercari_id}")
+              load(page)
 
-              sleep(2)
               deleted?(page) ? nil : parse_bought_date(bought_date(page))
             end
+          end
+        end
+
+        def load(page)
+          sleep(2)
+          count = 0
+          loop do
+            break if count > 30
+
+            page.mouse.wheel(0, 200)
+            sleep(0.005)
+
+            count += 1
           end
         end
 
