@@ -10,7 +10,7 @@ module Crawl
 
         def perform(mercari_product_id)
           mercari_product = MercariProduct.find_by(id: mercari_product_id)
-          return if mercari_product.nil
+          return if mercari_product.nil?
 
           handle_timeout { Crawl::Mercari::SyncProduct::Syncer.call(mercari_product:) }
         end
