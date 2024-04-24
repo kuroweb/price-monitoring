@@ -16,8 +16,8 @@ module Crawl
           MercariProduct.transaction do
             upsert
             inspect
-            enqueue_sync_job
-            enqueue_sync_bought_date_job
+            enqueue_for_existence
+            enqueue_for_bought_date
           end
         end
 
@@ -40,7 +40,7 @@ module Crawl
         end
 
         # 今回の計測結果に含まれなかった過去の計測結果を個別同期する
-        def enqueue_sync_job
+        def enqueue_for_existence
           job_params =
             MercariProduct
             .where(product_id: product.id, published: true)
@@ -51,13 +51,13 @@ module Crawl
         end
 
         # 計測結果の売り切れ日時を個別同期する
-        def enqueue_sync_bought_date_job
+        def enqueue_for_bought_date
           job_params =
             MercariProduct
             .where(product_id: product.id, published: false, bought_date: nil)
             .map { |mercari_product| [mercari_product.id] }
 
-          Crawl::Mercari::SyncProduct::SyncBoughtDateJob.perform_bulk(job_params)
+          Crawl::Mercari::SyncProduct::SyncJob.perform_bulk(job_params)
         end
 
         def mercari_crawl_setting

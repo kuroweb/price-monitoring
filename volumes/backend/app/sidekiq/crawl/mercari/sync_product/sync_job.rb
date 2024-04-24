@@ -9,14 +9,10 @@ module Crawl
         sidekiq_options queue: :crawl_mercari_sync_product_sync_job, retry: 0
 
         def perform(mercari_product_id)
-          mercari_product = MercariProduct.find(mercari_product_id)
-          return unless executable?(mercari_product)
+          mercari_product = MercariProduct.find_by(id: mercari_product_id)
+          return if mercari_product.nil
 
           handle_timeout { Crawl::Mercari::SyncProduct::Syncer.call(mercari_product:) }
-        end
-
-        def executable?(mercari_product)
-          mercari_product.product.mercari_crawl_setting.enabled? && mercari_product.published
         end
 
         def handle_timeout(&block)
