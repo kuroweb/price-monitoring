@@ -29,7 +29,7 @@ module Crawl
         def save(crawl_results)
           MercariProduct.transaction do
             upsert(crawl_results)
-            delete(crawl_results)
+            enqueue_part_sync(crawl_results)
           end
         end
 
@@ -41,11 +41,14 @@ module Crawl
           MercariProduct.upsert_all(upsert_params, record_timestamps: true)
         end
 
-        def delete(crawl_results)
-          MercariProduct
+        def enqueue_part_sync(crawl_results)
+          not_exist_mercari_products =
+            MercariProduct
             .where(product_id: product.id, published: true)
             .where.not(mercari_id: crawl_results.results.map(&:mercari_id))
-            .delete_all
+
+          job_params = not_exist_mercari_products.map { |mercari_product| [mercari_product.id] }
+          Crawl::Mercari::SyncProduct::SyncJob.perform_bulk(job_params)
         end
 
         def mercari_crawl_setting

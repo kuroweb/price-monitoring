@@ -3,5 +3,4 @@ development:
 production:
   :concurrency: 1
 :queues:
-  - ['crawl_mercari_sync_bought_date_enqueue_sync_job', 1]
-  - ['crawl_mercari_sync_bought_date_sync_job', 1]
+  - ['crawl_mercari_sync_product_sync_job', 1]
