@@ -3,5 +3,7 @@ development:
 production:
   :concurrency: 3
 :queues:
-  - ['crawl_yahoo_auction', 1]
-  - ['crawl_mercari', 1]
+  - ['crawl_yahoo_auction_sync_products_enqueue_sync_job', 1]
+  - ['crawl_yahoo_auction_sync_products_sync_job', 1]
+  - ['crawl_mercari_sync_products_enqueue_sync_job', 1]
+  - ['crawl_mercari_sync_products_sync_job', 1]

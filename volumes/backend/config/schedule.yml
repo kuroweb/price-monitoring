@@ -1,7 +1,7 @@
-crawl_yahoo_auction_enqueue_sync_job:
+crawl_yahoo_auction_sync_products_enqueue_sync_job:
   cron: "*/20 * * * *"
-  class: "Crawl::YahooAuction::EnqueueSyncJob"
-crawl_mercari_enqueue_sync_job:
+  class: "Crawl::YahooAuction::SyncProducts::EnqueueSyncJob"
+crawl_mercari_sync_products_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::Mercari::SyncProducts::EnqueueSyncJob"
 products_calculate_daily_purchase_summary_calculator_job:

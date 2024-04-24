@@ -1,16 +1,16 @@
 module Crawl
-  module Mercari
+  module YahooAuction
     module SyncProducts
       class SyncJob
         include Sidekiq::Job
 
-        JOB_TIMEOUT = 30.minutes
+        JOB_TIMEOUT = 15.minutes
 
-        sidekiq_options queue: :crawl_mercari_sync_products_sync_job, retry: 0
+        sidekiq_options queue: :crawl_yahoo_auction_sync_products_sync_job
 
         def perform(product_id)
           product = Product.find(product_id)
-          handle_timeout { Crawl::Mercari::SyncProducts::Syncer.call(product:) }
+          handle_timeout { Crawl::YahooAuction::SyncProducts::Syncer.call(product:) }
         end
 
         def handle_timeout(&block)
