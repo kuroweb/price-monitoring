@@ -1,12 +1,12 @@
 module Crawl
   module Mercari
     module SyncProduct
-      class SyncJob
+      class SyncBoughtDateJob
         include Sidekiq::Job
 
         JOB_TIMEOUT = 30.minutes
 
-        sidekiq_options queue: :crawl_mercari_sync_product_sync_job, retry: 0
+        sidekiq_options queue: :crawl_mercari_sync_product_sync_bought_date_job, retry: 0
 
         def perform(mercari_product_id)
           mercari_product = MercariProduct.find(mercari_product_id)
@@ -16,7 +16,9 @@ module Crawl
         end
 
         def executable?(mercari_product)
-          mercari_product.product.mercari_crawl_setting.enabled? && mercari_product.published
+          mercari_product.product.mercari_crawl_setting.enabled? \
+            && !mercari_product.published \
+            && mercari_product.bought_date.nil?
         end
 
         def handle_timeout(&block)

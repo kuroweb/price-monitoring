@@ -13,24 +13,27 @@ module Crawl
         def call
           return unless mercari_crawl_setting.enabled?
 
-          crawl_result = Crawler.call(mercari_product:)
-          save(crawl_result)
+          crawl_result.deleted ? delete : update
         end
 
         private
 
         attr_reader :mercari_product
 
-        def save(crawl_result)
-          if crawl_result.deleted
-            mercari_product.destroy
-          else
-            mercari_product.update(crawl_result.attributes.except("deleted"))
-          end
+        def update
+          mercari_product.update(crawl_result.attributes.except("deleted"))
+        end
+
+        def delete
+          mercari_product.destroy
         end
 
         def mercari_crawl_setting
           @mercari_crawl_setting ||= mercari_product.product.mercari_crawl_setting
+        end
+
+        def crawl_result
+          @crawl_result ||= Crawler.call(mercari_product:)
         end
       end
     end

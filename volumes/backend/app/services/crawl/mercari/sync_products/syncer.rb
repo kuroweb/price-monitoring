@@ -13,27 +13,20 @@ module Crawl
         def call
           return unless mercari_crawl_setting.enabled?
 
-          crawl_results = fetch_crawl_results
-          save(crawl_results)
+          MercariProduct.transaction do
+            upsert
+            inspect
+            enqueue_sync_job
+            enqueue_sync_bought_date_job
+          end
         end
 
         private
 
         attr_reader :product
 
-        def fetch_crawl_results
-          crawl_results = Crawler.new(product:).execute
-          InspectCrawlResults.new(mercari_crawl_setting:, crawl_results:).execute
-        end
-
-        def save(crawl_results)
-          MercariProduct.transaction do
-            upsert(crawl_results)
-            enqueue_part_sync(crawl_results)
-          end
-        end
-
-        def upsert(crawl_results)
+        # 計測結果を保存する
+        def upsert
           upsert_params = crawl_results.results.map do |result|
             result.attributes.merge("product_id" => product.id)
           end
@@ -41,18 +34,38 @@ module Crawl
           MercariProduct.upsert_all(upsert_params, record_timestamps: true)
         end
 
-        def enqueue_part_sync(crawl_results)
-          not_exist_mercari_products =
+        # 計測設定とマッチしないレコードを削除する
+        def inspect
+          Crawl::Mercari::Inspect.call(product:)
+        end
+
+        # 今回の計測結果に含まれなかった過去の計測結果を個別同期する
+        def enqueue_sync_job
+          job_params =
             MercariProduct
             .where(product_id: product.id, published: true)
             .where.not(mercari_id: crawl_results.results.map(&:mercari_id))
+            .map { |mercari_product| [mercari_product.id] }
 
-          job_params = not_exist_mercari_products.map { |mercari_product| [mercari_product.id] }
           Crawl::Mercari::SyncProduct::SyncJob.perform_bulk(job_params)
+        end
+
+        # 計測結果の売り切れ日時を個別同期する
+        def enqueue_sync_bought_date_job
+          job_params =
+            MercariProduct
+            .where(product_id: product.id, published: false, bought_date: nil)
+            .map { |mercari_product| [mercari_product.id] }
+
+          Crawl::Mercari::SyncProduct::SyncBoughtDateJob.perform_bulk(job_params)
         end
 
         def mercari_crawl_setting
           @mercari_crawl_setting ||= product.mercari_crawl_setting
+        end
+
+        def crawl_results
+          @crawl_results ||= Crawler.new(product:).execute
         end
       end
     end
