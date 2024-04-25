@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_14_040827) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_101146) do
   create_table "mercari_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "mercari_crawl_setting_id"
     t.string "keyword", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_040827) do
     t.datetime "bought_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["mercari_id"], name: "index_mercari_products_on_mercari_id", unique: true
+    t.index ["product_id", "mercari_id"], name: "index_mercari_products_on_product_id_and_mercari_id", unique: true
     t.index ["product_id"], name: "index_mercari_products_on_product_id"
   end
 
@@ -128,8 +128,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_040827) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id", "yahoo_auction_id"], name: "idx_on_product_id_yahoo_auction_id_770761a83e", unique: true
     t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
-    t.index ["yahoo_auction_id"], name: "index_yahoo_auction_products_on_yahoo_auction_id", unique: true
   end
 
   create_table "yahoo_fleamarket_daily_purchase_summaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -154,8 +154,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_14_040827) do
     t.datetime "bought_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["product_id", "yahoo_fleamarket_id"], name: "idx_on_product_id_yahoo_fleamarket_id_2d476d7a24", unique: true
     t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
-    t.index ["yahoo_fleamarket_id"], name: "index_yahoo_fleamarket_products_on_yahoo_fleamarket_id", unique: true
   end
 
   add_foreign_key "mercari_crawl_setting_exclude_keywords", "mercari_crawl_settings"
