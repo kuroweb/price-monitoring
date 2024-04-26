@@ -13,14 +13,6 @@ module Crawl
           results.push(result)
         end
 
-        def yahoo_auction_results
-          results.select { |result| result.platform == "yahoo_auction" }
-        end
-
-        def yahoo_fleamarket_results
-          results.select { |result| result.platform == "yahoo_fleamarket" }
-        end
-
         def valid?
           results.all?(&:valid?)
         end
