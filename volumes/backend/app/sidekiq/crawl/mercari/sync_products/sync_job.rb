@@ -6,7 +6,8 @@ module Crawl
 
         JOB_TIMEOUT = 30.minutes
 
-        sidekiq_options queue: :crawl_mercari_sync_products_sync_job, retry: 0
+        sidekiq_options queue: :crawl_mercari_sync_products_sync_job,
+                        retry: 0, lock: :until_executed
 
         def perform(product_id)
           product = Product.find(product_id)

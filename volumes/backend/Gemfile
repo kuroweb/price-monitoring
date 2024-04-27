@@ -14,6 +14,7 @@ gem "redis-namespace"
 gem "retryable"
 gem "sidekiq"
 gem "sidekiq-cron"
+gem "sidekiq-unique-jobs"
 gem "sinatra", require: false
 gem "sprockets-rails"
 gem "stimulus-rails"

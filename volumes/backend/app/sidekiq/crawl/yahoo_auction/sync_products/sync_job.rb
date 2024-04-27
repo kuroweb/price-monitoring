@@ -6,7 +6,8 @@ module Crawl
 
         JOB_TIMEOUT = 15.minutes
 
-        sidekiq_options queue: :crawl_yahoo_auction_sync_products_sync_job
+        sidekiq_options queue: :crawl_yahoo_auction_sync_products_sync_job,
+                        retry: 0, lock: :until_executed
 
         def perform(product_id)
           product = Product.find(product_id)
