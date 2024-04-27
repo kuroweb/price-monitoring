@@ -1,8 +1,8 @@
-# 開催中のオークション画面のクローラ
+# 落札相場画面のクローラ
 module Crawl
-  module YahooAuction
+  module YahooFleamarket
     module SyncProducts
-      module Published
+      module Unpublished
         class Crawler
           RETRY_COUNT = 5
           MAX_SIZE = 500
@@ -11,7 +11,7 @@ module Crawl
             @product = product
           end
 
-          def execute # rubocop:disable Metrics/MethodLength
+          def execute # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
             Crawl::Client.execute do |browser|
               page = browser.new_page
 
@@ -21,6 +21,7 @@ module Crawl
 
                 Retryable.retryable(tries: RETRY_COUNT) do
                   page.goto(url(start))
+                  page.reload
                   break if no_results?(page)
 
                   append_results(page)
@@ -44,16 +45,14 @@ module Crawl
           def append_results(page)
             product_doms = page.query_selector_all("li.Product")
             product_doms.each do |dom|
-              result = Crawl::YahooAuction::SyncProducts::CrawlResult.new(
-                yahoo_auction_id: yahoo_auction_id(dom),
+              result = Crawl::YahooFleamarket::SyncProducts::CrawlResult.new(
+                yahoo_fleamarket_id: yahoo_fleamarket_id(dom),
                 seller_id: seller_id(dom),
                 name: name(dom),
                 price: price(dom),
-                buyout_price: buyout_price(dom),
                 thumbnail_url: thumbnail_url(dom),
-                published: true,
-                bought_date: nil,
-                end_date: end_date(dom)
+                published: false,
+                bought_date: bought_date(dom)
               )
 
               crawl_results.add(result)
@@ -65,20 +64,20 @@ module Crawl
           end
 
           def no_results?(page)
-            page.query_selector(".Notice__wandQuery")
+            page.query_selector(".Empty__title")
           end
 
           def exists_next_page?(page)
             page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
           end
 
-          def yahoo_auction_id(dom)
-            dom.query_selector(".Product__titleLink").get_attribute("data-auction-id")
+          def yahoo_fleamarket_id(dom)
+            dom.query_selector(".Product__titleLink").get_attribute("href").split("/")[-1]
           end
 
           def seller_id(dom)
             href = dom.query_selector(".Product__sellerLink").get_attribute("href")
-            href[%r{seller/([^/]+)}, 1]
+            href[%r{user/([^/]+)}, 1]
           end
 
           def name(dom)
@@ -86,23 +85,21 @@ module Crawl
           end
 
           def price(dom)
-            dom.query_selector_all(".Product__priceValue")[0].inner_text.gsub(/,|円/, "")
-          end
-
-          def buyout_price(dom)
-            dom.query_selector_all(".Product__priceValue")[1]&.inner_text&.gsub(/,|円/, "")
+            dom.query_selector(".Product__priceValue").inner_text.gsub(/,|円/, "")
           end
 
           def thumbnail_url(dom)
             dom.eval_on_selector(".Product__imageData", "el => el.src")
           end
 
-          def end_date(dom)
-            dom.query_selector(".Product__data >> :has-text('終了')")&.inner_text&.to_datetime
+          def bought_date(dom)
+            date_str = dom.query_selector(".Product__time").inner_text
+            datetime = date_str.to_datetime
+            datetime > Time.current ? datetime.ago(1.year) : datetime
           end
 
           def crawl_results
-            @crawl_results ||= Crawl::YahooAuction::SyncProducts::CrawlResults.new
+            @crawl_results ||= Crawl::YahooFleamarket::SyncProducts::CrawlResults.new
           end
         end
       end

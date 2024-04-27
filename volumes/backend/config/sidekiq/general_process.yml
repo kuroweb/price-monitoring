@@ -3,5 +3,4 @@ development:
 production:
   :concurrency: 1
 :queues:
-  - ['refresh_related_products', 1]
   - ['calculate_daily_purchase_summary', 1]

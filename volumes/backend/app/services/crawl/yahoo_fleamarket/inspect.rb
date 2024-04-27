@@ -1,7 +1,7 @@
 # 現在の計測設定とマッチしないレコードを削除する
-module Products
-  module RefreshRelatedProduct
-    class RefreshYahooFleamarketProduct
+module Crawl
+  module YahooFleamarket
+    class Inspect
       def self.call(...)
         new(...).call
       end

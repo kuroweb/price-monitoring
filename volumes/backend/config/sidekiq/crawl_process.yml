@@ -5,5 +5,7 @@ production:
 :queues:
   - ['crawl_yahoo_auction_sync_products_enqueue_sync_job', 1]
   - ['crawl_yahoo_auction_sync_products_sync_job', 1]
+  - ['crawl_yahoo_fleamarket_sync_products_enqueue_sync_job', 1]
+  - ['crawl_yahoo_fleamarket_sync_products_sync_job', 1]
   - ['crawl_mercari_sync_products_enqueue_sync_job', 1]
   - ['crawl_mercari_sync_products_sync_job', 1]

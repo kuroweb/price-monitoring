@@ -1,12 +1,12 @@
 crawl_yahoo_auction_sync_products_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::YahooAuction::SyncProducts::EnqueueSyncJob"
+crawl_yahoo_fleamarket_sync_products_enqueue_sync_job:
+  cron: "*/20 * * * *"
+  class: "Crawl::YahooFleamarket::SyncProducts::EnqueueSyncJob"
 crawl_mercari_sync_products_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::Mercari::SyncProducts::EnqueueSyncJob"
 products_calculate_daily_purchase_summary_calculator_job:
   cron: "0 0 * * *"
   class: "Products::CalculateDailyPurchaseSummary::CalculatorJob"
-products_refresh_related_product_enqueue_refresh_job:
-  cron: "0 * * * *"
-  class: "Products::RefreshRelatedProduct::EnqueueRefreshJob"

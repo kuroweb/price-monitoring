@@ -41,10 +41,8 @@ module Crawl
 
           attr_reader :product
 
-          def append_results(page) # rubocop:disable Metrics/MethodLength
+          def append_results(page)
             product_doms = page.query_selector_all("li.Product")
-                               .select { |dom| yahoo_auction_product?(dom) }
-
             product_doms.each do |dom|
               result = Crawl::YahooAuction::SyncProducts::CrawlResult.new(
                 yahoo_auction_id: yahoo_auction_id(dom),
@@ -72,10 +70,6 @@ module Crawl
 
           def exists_next_page?(page)
             page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
-          end
-
-          def yahoo_auction_product?(dom)
-            dom.query_selector("text=Yahoo!フリマ").nil?
           end
 
           def yahoo_auction_id(dom)

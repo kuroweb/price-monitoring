@@ -15,6 +15,7 @@ module Crawl
           PRODUCT_STATUS = "istatus=0".freeze
           DISPLAY_START = "b=".freeze
           DISPLAY_RANGE = "n=100".freeze
+          ABATCH = "abatch=1,2".freeze
 
           def initialize(yahoo_auction_crawl_setting:, start: 1)
             @yahoo_auction_crawl_setting = yahoo_auction_crawl_setting
@@ -30,6 +31,7 @@ module Crawl
             url = product_status(url)
             url = display_start(url)
             url = display_range(url)
+            url = abatch(url)
             url
           end
 
@@ -66,6 +68,10 @@ module Crawl
 
           def display_range(url)
             "#{url}#{DISPLAY_RANGE}&"
+          end
+
+          def abatch(url)
+            "#{url}#{ABATCH}"
           end
         end
       end

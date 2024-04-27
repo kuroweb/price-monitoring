@@ -1,6 +1,6 @@
 # 開催中のオークション画面のクローラ用のURLジェネレータ
 module Crawl
-  module YahooAuction
+  module YahooFleamarket
     module SyncProducts
       module Published
         class UrlGenerator
@@ -20,7 +20,7 @@ module Crawl
           DISPLAY_START = "b=".freeze
           DISPLAY_RANGE = "n=100".freeze
           DISPLAY_ORDER = "s1=new&o1=d".freeze
-          ABATCH = "abatch=1,2".freeze
+          ABATCH = "abatch=3".freeze
 
           def initialize(yahoo_auction_crawl_setting:, start: 1)
             @yahoo_auction_crawl_setting = yahoo_auction_crawl_setting
