@@ -1,7 +1,7 @@
 module Crawl
   module YahooFleamarket
     module SyncProduct
-      class Crawler # rubocop:disable Metrics/ClassLength
+      class Crawler
         RETRY_COUNT = 3
 
         MINUTE = "分前に更新".freeze
@@ -19,9 +19,7 @@ module Crawl
         end
 
         def call
-          Crawl::Client.execute do |browser|
-            page = browser.new_page
-
+          Crawl::Client.execute do |page|
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
               load(page)

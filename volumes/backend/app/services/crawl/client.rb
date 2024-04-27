@@ -9,9 +9,12 @@ module Crawl
             username: ENV.fetch("PROXY_USERNAME"),
             password: ENV.fetch("PROXY_PASSWORD")
           },
-          args: ["--blink-settings=imagesEnabled=false", "--disable-remote-fonts"],
-          &block
-        )
+          args: ["--blink-settings=imagesEnabled=false", "--disable-remote-fonts"]
+        ) do |browser|
+          page = browser.new_page
+          page.route(/(\.css.*)/, ->(route, _) { route.abort })
+          block.call(page)
+        end
       end
     end
   end

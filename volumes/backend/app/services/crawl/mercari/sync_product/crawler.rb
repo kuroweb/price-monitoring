@@ -20,9 +20,7 @@ module Crawl
         end
 
         def call
-          Crawl::Client.execute do |browser|
-            page = browser.new_page
-
+          Crawl::Client.execute do |page|
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
               load(page)

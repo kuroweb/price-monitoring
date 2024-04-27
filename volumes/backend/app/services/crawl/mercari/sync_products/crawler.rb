@@ -10,9 +10,7 @@ module Crawl
         end
 
         def execute # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-          Crawl::Client.execute do |browser|
-            page = browser.new_page
-
+          Crawl::Client.execute do |page|
             start = 0
             loop do
               break if start > MAX_PAGE
