@@ -3,4 +3,5 @@ development:
 production:
   :concurrency: 1
 :queues:
+  - ['crawl_yahoo_auction_sync_product_sync_job', 1]
   - ['crawl_mercari_sync_product_sync_job', 1]

@@ -13,17 +13,45 @@ module Crawl
         def call
           return unless yahoo_auction_crawl_setting.enabled?
 
-          crawl_results = fetch_crawl_results
-          save(crawl_results)
+          YahooAuctionProduct.transaction do
+            upsert
+            inspect
+            enqueue_for_existence
+          end
         end
 
         private
 
         attr_reader :product
 
-        def fetch_crawl_results
-          all_results = CrawlResults.new(published_results + unpublished_results)
-          InspectCrawlResults.new(yahoo_auction_crawl_setting:, crawl_results: all_results).execute
+        def upsert
+          upsert_params = crawl_results.results.map do |result|
+            result.attributes.merge("product_id" => product.id)
+          end
+
+          YahooAuctionProduct.upsert_all(upsert_params, record_timestamps: true)
+        end
+
+        def inspect
+          Crawl::YahooAuction::Inspect.call(product:)
+        end
+
+        def enqueue_for_existence
+          job_params =
+            YahooAuctionProduct
+            .where(product_id: product.id, published: true)
+            .where.not(yahoo_auction_id: crawl_results.results.map(&:yahoo_auction_id))
+            .map { |yahoo_auction_product| [yahoo_auction_product.id] }
+
+          Crawl::YahooAuction::SyncProduct::SyncJob.perform_bulk(job_params)
+        end
+
+        def yahoo_auction_crawl_setting
+          @yahoo_auction_crawl_setting ||= product.yahoo_auction_crawl_setting
+        end
+
+        def crawl_results
+          @crawl_results ||= CrawlResults.new(published_results + unpublished_results)
         end
 
         def published_results
@@ -32,46 +60,6 @@ module Crawl
 
         def unpublished_results
           Unpublished::Crawler.new(product:).execute.results
-        end
-
-        def save(crawl_results)
-          ApplicationRecord.transaction do
-            save_products("yahoo_auction", crawl_results)
-            save_products("yahoo_fleamarket", crawl_results)
-          end
-        end
-
-        def save_products(platform, crawl_results)
-          upsert(platform, crawl_results)
-          delete(platform, crawl_results)
-        end
-
-        def upsert(platform, crawl_results)
-          model = "#{platform}_product".camelize.constantize
-          external_id = "#{platform}_id"
-          results = crawl_results.send("#{platform}_results")
-
-          upsert_params = results.map do |result|
-            result.attributes
-                  .merge("product_id" => product.id, external_id => result.external_id)
-                  .slice(*model.column_names)
-          end
-
-          model.upsert_all(upsert_params, record_timestamps: true)
-        end
-
-        def delete(platform, crawl_results)
-          model = "#{platform}_product".camelize.constantize
-          external_id = "#{platform}_id"
-          external_ids = crawl_results.send("#{platform}_results").map(&:external_id)
-
-          model.where(product_id: product.id, published: true)
-               .where.not(external_id => external_ids)
-               .delete_all
-        end
-
-        def yahoo_auction_crawl_setting
-          @yahoo_auction_crawl_setting ||= product.yahoo_auction_crawl_setting
         end
       end
     end

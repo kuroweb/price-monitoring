@@ -26,7 +26,7 @@ module Crawl
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
               load(page)
-              deleted?(page) ? deleted_crawl_result(page) : exist_crawl_result(page)
+              deleted?(page) ? deleted_crawl_result : exist_crawl_result(page)
             end
           end
         end
@@ -51,7 +51,7 @@ module Crawl
           page.query_selector(".merEmptyState").present?
         end
 
-        def deleted_crawl_result(_page)
+        def deleted_crawl_result
           crawl_result = CrawlResult.new(
             mercari_id: mercari_product.mercari_id,
             name: mercari_product.name,

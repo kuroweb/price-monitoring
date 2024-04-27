@@ -84,7 +84,7 @@ module Crawl
 
           def seller_id(dom)
             href = dom.query_selector(".Product__sellerLink").get_attribute("href")
-            href[%r{user/([^/]+)}, 1] || href[%r{seller/([^/]+)}, 1]
+            href[%r{seller/([^/]+)}, 1]
           end
 
           def name(dom)
@@ -106,7 +106,6 @@ module Crawl
           def end_date(dom)
             dom.query_selector(".Product__data >> :has-text('終了')")&.inner_text&.to_datetime
           end
-
 
           def crawl_results
             @crawl_results ||= Crawl::YahooAuction::SyncProducts::CrawlResults.new
