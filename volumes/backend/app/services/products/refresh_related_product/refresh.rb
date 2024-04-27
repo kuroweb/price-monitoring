@@ -11,7 +11,6 @@ module Products
       end
 
       def call
-        RefreshYahooAuctionProduct.call(product:)
         RefreshYahooFleamarketProduct.call(product:)
       end
 
