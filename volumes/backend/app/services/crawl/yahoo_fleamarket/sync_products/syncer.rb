@@ -16,7 +16,7 @@ module Crawl
           YahooFleamarketProduct.transaction do
             upsert
             inspect
-            # enqueue_for_existence
+            enqueue_for_existence
           end
         end
 
