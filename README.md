@@ -31,7 +31,7 @@ Web上にある欲しい物の価格監視を行うことができる
 
 ### Production
 
-- 自宅Kubernetes (Master Node x 1, Worker Node x 2構成)
+- 自宅Kubernetes (Master Node x 1, Worker Node x 3構成)
 
 ## アーキテクチャ
 
@@ -129,6 +129,13 @@ erDiagram
     int purchase_count
     date date
   }
+  yahoo_fleamarket_daily_purchase_summaries {
+    bigint id PK
+    bigint product_id FK
+    int average_purchase_price
+    int purchase_count
+    date date
+  }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
@@ -136,6 +143,7 @@ erDiagram
   products ||--o{ yahoo_auction_products : "1:N"
   products ||--o{ yahoo_fleamarket_products : "1:N"
   products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
+  products ||--o{ yahoo_fleamarket_daily_purchase_summaries : "1:N"
 ```
 
 ### メルカリ関連
@@ -188,6 +196,57 @@ erDiagram
   mercari_crawl_settings ||--o{ mercari_crawl_setting_required_keywords : "1:N"
   products ||--o{ mercari_products : "1:N"
   products ||--o{ mercari_daily_purchase_summaries : "1:N"
+```
+
+### じゃんぱら
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  janpara_crawl_settings {
+    bigint id PK
+    bigint product_id FK
+    string keyword
+    int category_id
+    int min_price
+    int max_price
+    boolean enabled
+  }
+  janpara_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint janpara_crawl_setting_id FK
+    string keyword
+  }
+  janpara_crawl_setting_required_keywords {
+    bigint id PK
+    bigint janpara_crawl_setting_id FK
+    string keyword
+  }
+  janpara_products {
+    bigint id PK
+    string external_id
+    string name
+    text thumbnail_url
+    int price
+    boolean published
+    datetime bought_date
+  }
+  janpara_daily_purchase_summaries {
+    bigint id PK
+    bigint product_id FK
+    int average_purchase_price
+    int purchase_count
+    date date
+  }
+
+  products ||--|| janpara_crawl_settings : "1:1"
+  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : "1:N"
+  janpara_crawl_settings ||--o{ janpara_crawl_setting_required_keywords : "1:N"
+  products ||--o{ janpara_products : "1:N"
+  products ||--o{ janpara_daily_purchase_summaries : "1:N"
 ```
 
 ## 自動デプロイ
