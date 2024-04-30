@@ -13,10 +13,6 @@ module Crawl
           results.push(result)
         end
 
-        def unpublished_results
-          results.reject(&:published)
-        end
-
         def valid?
           results.all?(&:valid?)
         end
