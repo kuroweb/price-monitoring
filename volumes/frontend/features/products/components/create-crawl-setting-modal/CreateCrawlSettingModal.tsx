@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useCreateCrawlSettingModalState } from '../../hooks/useCreateCrawlSettingModalState'
 import { createProduct } from '../../server-actions/productQuery'
 
+import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
@@ -32,6 +33,12 @@ const CreateCrawlSettingModal = () => {
       mercari_crawl_setting: {
         keyword: '',
         category_id: null,
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
+      },
+      janpara_crawl_setting: {
+        keyword: '',
         min_price: 0,
         max_price: 0,
         enabled: true,
@@ -79,7 +86,7 @@ const CreateCrawlSettingModal = () => {
             <div className='divider py-8'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/2'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -87,12 +94,20 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/2'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
                 defaultChecked={tab === 'メルカリ'}
                 onClick={() => setTab('メルカリ')}
+              />
+              <input
+                className='join-item btn btn-md w-1/3'
+                type='radio'
+                name='options'
+                aria-label='じゃんぱら'
+                defaultChecked={tab === 'じゃんぱら'}
+                onClick={() => setTab('じゃんぱら')}
               />
             </Join>
             <div>
@@ -104,6 +119,11 @@ const CreateCrawlSettingModal = () => {
               {tab === 'メルカリ' && (
                 <div className='py-4'>
                   <MercariForm register={register} />
+                </div>
+              )}
+              {tab === 'じゃんぱら' && (
+                <div className='py-4'>
+                  <JanparaForm register={register} />
                 </div>
               )}
             </div>

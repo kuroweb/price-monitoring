@@ -2,6 +2,22 @@
 
 package model
 
+type CreateJanparaCrawlSettingExcludeKeywordResult interface {
+	IsCreateJanparaCrawlSettingExcludeKeywordResult()
+}
+
+type CreateJanparaCrawlSettingExcludeKeywordResultErrors interface {
+	IsCreateJanparaCrawlSettingExcludeKeywordResultErrors()
+}
+
+type CreateJanparaCrawlSettingRequiredKeywordResult interface {
+	IsCreateJanparaCrawlSettingRequiredKeywordResult()
+}
+
+type CreateJanparaCrawlSettingRequiredKeywordResultErrors interface {
+	IsCreateJanparaCrawlSettingRequiredKeywordResultErrors()
+}
+
 type CreateMercariCrawlSettingExcludeKeywordResult interface {
 	IsCreateMercariCrawlSettingExcludeKeywordResult()
 }
@@ -40,6 +56,22 @@ type CreateYahooAuctionCrawlSettingRequiredKeywordResult interface {
 
 type CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors interface {
 	IsCreateYahooAuctionCrawlSettingRequiredKeywordResultErrors()
+}
+
+type DeleteJanparaCrawlSettingExcludeKeywordResult interface {
+	IsDeleteJanparaCrawlSettingExcludeKeywordResult()
+}
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultErrors interface {
+	IsDeleteJanparaCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeleteJanparaCrawlSettingRequiredKeywordResult interface {
+	IsDeleteJanparaCrawlSettingRequiredKeywordResult()
+}
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultErrors interface {
+	IsDeleteJanparaCrawlSettingRequiredKeywordResultErrors()
 }
 
 type DeleteMercariCrawlSettingExcludeKeywordResult interface {
@@ -92,6 +124,22 @@ type ResultBase interface {
 	GetOk() bool
 }
 
+type UpdateJanparaCrawlSettingExcludeKeywordResult interface {
+	IsUpdateJanparaCrawlSettingExcludeKeywordResult()
+}
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultErrors interface {
+	IsUpdateJanparaCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdateJanparaCrawlSettingRequiredKeywordResult interface {
+	IsUpdateJanparaCrawlSettingRequiredKeywordResult()
+}
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultErrors interface {
+	IsUpdateJanparaCrawlSettingRequiredKeywordResultErrors()
+}
+
 type UpdateMercariCrawlSettingExcludeKeywordResult interface {
 	IsUpdateMercariCrawlSettingExcludeKeywordResult()
 }
@@ -136,6 +184,101 @@ type UserError interface {
 	IsUserError()
 	GetCode() string
 	GetMessage() string
+}
+
+type CreateJanparaCrawlSettingExcludeKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreateJanparaCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error CreateJanparaCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (CreateJanparaCrawlSettingExcludeKeywordResultError) IsCreateJanparaCrawlSettingExcludeKeywordResult() {
+}
+
+func (CreateJanparaCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this CreateJanparaCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreateJanparaCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok                                bool                               `json:"ok"`
+	JanparaCrawlSettingExcludeKeyword *JanparaCrawlSettingExcludeKeyword `json:"janparaCrawlSettingExcludeKeyword"`
+}
+
+func (CreateJanparaCrawlSettingExcludeKeywordResultSuccess) IsCreateJanparaCrawlSettingExcludeKeywordResult() {
+}
+
+func (CreateJanparaCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this CreateJanparaCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed) IsCreateJanparaCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreateJanparaCrawlSettingInput struct {
+	Keyword  string `json:"keyword"`
+	MinPrice int    `json:"min_price"`
+	MaxPrice int    `json:"max_price"`
+	Enabled  bool   `json:"enabled"`
+}
+
+type CreateJanparaCrawlSettingRequiredKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreateJanparaCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error CreateJanparaCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (CreateJanparaCrawlSettingRequiredKeywordResultError) IsCreateJanparaCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateJanparaCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this CreateJanparaCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreateJanparaCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	JanparaCrawlSettingRequiredKeyword *JanparaCrawlSettingRequiredKeyword `json:"janparaCrawlSettingRequiredKeyword"`
+}
+
+func (CreateJanparaCrawlSettingRequiredKeywordResultSuccess) IsCreateJanparaCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateJanparaCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this CreateJanparaCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed) IsCreateJanparaCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
 }
 
 type CreateMercariCrawlSettingExcludeKeywordInput struct {
@@ -238,6 +381,7 @@ type CreateProductInput struct {
 	Name                     string                               `json:"name"`
 	YahooAuctionCrawlSetting *CreateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
 	MercariCrawlSetting      *CreateMercariCrawlSettingInput      `json:"mercari_crawl_setting"`
+	JanparaCrawlSetting      *CreateJanparaCrawlSettingInput      `json:"janpara_crawl_setting"`
 }
 
 type CreateProductResultError struct {
@@ -365,6 +509,82 @@ func (this CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) 
 	return this.Code
 }
 func (this CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error DeleteJanparaCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (DeleteJanparaCrawlSettingExcludeKeywordResultError) IsDeleteJanparaCrawlSettingExcludeKeywordResult() {
+}
+
+func (DeleteJanparaCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this DeleteJanparaCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteJanparaCrawlSettingExcludeKeywordResultSuccess) IsDeleteJanparaCrawlSettingExcludeKeywordResult() {
+}
+
+func (DeleteJanparaCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this DeleteJanparaCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed) IsDeleteJanparaCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error DeleteJanparaCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (DeleteJanparaCrawlSettingRequiredKeywordResultError) IsDeleteJanparaCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteJanparaCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this DeleteJanparaCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteJanparaCrawlSettingRequiredKeywordResultSuccess) IsDeleteJanparaCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteJanparaCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this DeleteJanparaCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed) IsDeleteJanparaCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -556,6 +776,57 @@ type ErrorDetail struct {
 	Message string `json:"message"`
 }
 
+type JanparaCrawlSetting struct {
+	ID                                  string                                `json:"id"`
+	ProductID                           int                                   `json:"productId"`
+	Keyword                             string                                `json:"keyword"`
+	MinPrice                            int                                   `json:"minPrice"`
+	MaxPrice                            int                                   `json:"maxPrice"`
+	Enabled                             bool                                  `json:"enabled"`
+	CreatedAt                           string                                `json:"createdAt"`
+	UpdatedAt                           string                                `json:"updatedAt"`
+	JanparaCrawlSettingExcludeKeywords  []*JanparaCrawlSettingExcludeKeyword  `json:"janparaCrawlSettingExcludeKeywords"`
+	JanparaCrawlSettingRequiredKeywords []*JanparaCrawlSettingRequiredKeyword `json:"janparaCrawlSettingRequiredKeywords"`
+}
+
+func (JanparaCrawlSetting) IsNode()            {}
+func (this JanparaCrawlSetting) GetID() string { return this.ID }
+
+type JanparaCrawlSettingExcludeKeyword struct {
+	ID                    string  `json:"id"`
+	JanparaCrawlSettingID int     `json:"janparaCrawlSettingId"`
+	Keyword               *string `json:"keyword,omitempty"`
+	CreatedAt             string  `json:"createdAt"`
+	UpdatedAt             string  `json:"updatedAt"`
+}
+
+func (JanparaCrawlSettingExcludeKeyword) IsNode()            {}
+func (this JanparaCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type JanparaCrawlSettingRequiredKeyword struct {
+	ID                    string  `json:"id"`
+	JanparaCrawlSettingID int     `json:"janparaCrawlSettingId"`
+	Keyword               *string `json:"keyword,omitempty"`
+	CreatedAt             string  `json:"createdAt"`
+	UpdatedAt             string  `json:"updatedAt"`
+}
+
+func (JanparaCrawlSettingRequiredKeyword) IsNode()            {}
+func (this JanparaCrawlSettingRequiredKeyword) GetID() string { return this.ID }
+
+type JanparaDailyPurchaseSummary struct {
+	ID                   string `json:"id"`
+	ProductID            int    `json:"productId"`
+	AveragePurchasePrice *int   `json:"averagePurchasePrice,omitempty"`
+	PurchaseCount        int    `json:"purchaseCount"`
+	Date                 string `json:"date"`
+	CreatedAt            string `json:"createdAt"`
+	UpdatedAt            string `json:"updatedAt"`
+}
+
+func (JanparaDailyPurchaseSummary) IsNode()            {}
+func (this JanparaDailyPurchaseSummary) GetID() string { return this.ID }
+
 type MercariCrawlSetting struct {
 	ID                                  string                                `json:"id"`
 	ProductID                           int                                   `json:"productId"`
@@ -634,6 +905,8 @@ type Product struct {
 	MercariProducts                       []*MercariProduct                      `json:"mercariProducts"`
 	MercariCrawlSetting                   *MercariCrawlSetting                   `json:"mercariCrawlSetting"`
 	MercariDailyPurchaseSummaries         []*MercariDailyPurchaseSummary         `json:"mercariDailyPurchaseSummaries"`
+	JanparaCrawlSetting                   *JanparaCrawlSetting                   `json:"janparaCrawlSetting"`
+	JanparaDailyPurchaseSummaries         []*JanparaDailyPurchaseSummary         `json:"janparaDailyPurchaseSummaries"`
 	RelatedProducts                       []*RelatedProduct                      `json:"relatedProducts"`
 }
 
@@ -653,6 +926,103 @@ type RelatedProduct struct {
 	EndDate      *string `json:"endDate,omitempty"`
 	CreatedAt    string  `json:"createdAt"`
 	UpdatedAt    string  `json:"updatedAt"`
+}
+
+type UpdateJanparaCrawlSettingExcludeKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error UpdateJanparaCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (UpdateJanparaCrawlSettingExcludeKeywordResultError) IsUpdateJanparaCrawlSettingExcludeKeywordResult() {
+}
+
+func (UpdateJanparaCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this UpdateJanparaCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok                                bool                               `json:"ok"`
+	JanparaCrawlSettingExcludeKeyword *JanparaCrawlSettingExcludeKeyword `json:"janparaCrawlSettingExcludeKeyword"`
+}
+
+func (UpdateJanparaCrawlSettingExcludeKeywordResultSuccess) IsUpdateJanparaCrawlSettingExcludeKeywordResult() {
+}
+
+func (UpdateJanparaCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this UpdateJanparaCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed) IsUpdateJanparaCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdateJanparaCrawlSettingInput struct {
+	Keyword  string `json:"keyword"`
+	MinPrice int    `json:"min_price"`
+	MaxPrice int    `json:"max_price"`
+	Enabled  bool   `json:"enabled"`
+}
+
+type UpdateJanparaCrawlSettingRequiredKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error UpdateJanparaCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (UpdateJanparaCrawlSettingRequiredKeywordResultError) IsUpdateJanparaCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateJanparaCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this UpdateJanparaCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	JanparaCrawlSettingRequiredKeyword *JanparaCrawlSettingRequiredKeyword `json:"janparaCrawlSettingRequiredKeyword"`
+}
+
+func (UpdateJanparaCrawlSettingRequiredKeywordResultSuccess) IsUpdateJanparaCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateJanparaCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this UpdateJanparaCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed) IsUpdateJanparaCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
 }
 
 type UpdateMercariCrawlSettingExcludeKeywordInput struct {
@@ -757,6 +1127,7 @@ type UpdateProductInput struct {
 	Name                     string                               `json:"name"`
 	YahooAuctionCrawlSetting *UpdateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
 	MercariCrawlSetting      *UpdateMercariCrawlSettingInput      `json:"mercari_crawl_setting"`
+	JanparaCrawlSetting      *UpdateJanparaCrawlSettingInput      `json:"janpara_crawl_setting"`
 }
 
 type UpdateProductResultError struct {

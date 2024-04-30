@@ -1,6 +1,10 @@
 package products
 
 import (
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_crawl_setting_exclude_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_crawl_setting_required_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_crawl_settings"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_daily_purchase_summaries"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_setting_required_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_settings"
@@ -31,6 +35,10 @@ type IProductService interface {
 	mercari_crawl_setting_exclude_keywords.IMercariCrawlSettingExcludeKeywordService
 	mercari_crawl_setting_required_keywords.IMercariCrawlSettingRequiredKeywordService
 	mercari_daily_purchase_summaries.IMercariDailyPurchaseSummaryService
+	janpara_crawl_settings.IJanparaCrawlSettingService
+	janpara_crawl_setting_exclude_keywords.IJanparaCrawlSettingExcludeKeywordService
+	janpara_crawl_setting_required_keywords.IJanparaCrawlSettingRequiredKeywordService
+	janpara_daily_purchase_summaries.IJanparaDailyPurchaseSummaryService
 	related_products.IRelatedProductService
 }
 
@@ -50,6 +58,10 @@ type ProductService struct {
 	*mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService
 	*mercari_crawl_setting_required_keywords.MercariCrawlSettingRequiredKeywordService
 	*mercari_daily_purchase_summaries.MercariDailyPurchaseSummaryService
+	*janpara_crawl_settings.JanparaCrawlSettingService
+	*janpara_crawl_setting_exclude_keywords.JanparaCrawlSettingExcludeKeywordService
+	*janpara_crawl_setting_required_keywords.JanparaCrawlSettingRequiredKeywordService
+	*janpara_daily_purchase_summaries.JanparaDailyPurchaseSummaryService
 	*related_products.RelatedProductService
 }
 
@@ -70,6 +82,10 @@ func New() IProductService {
 		MercariCrawlSettingExcludeKeywordService:       &mercari_crawl_setting_exclude_keywords.MercariCrawlSettingExcludeKeywordService{},
 		MercariCrawlSettingRequiredKeywordService:      &mercari_crawl_setting_required_keywords.MercariCrawlSettingRequiredKeywordService{},
 		MercariDailyPurchaseSummaryService:             &mercari_daily_purchase_summaries.MercariDailyPurchaseSummaryService{},
+		JanparaCrawlSettingService:                     &janpara_crawl_settings.JanparaCrawlSettingService{},
+		JanparaCrawlSettingExcludeKeywordService:       &janpara_crawl_setting_exclude_keywords.JanparaCrawlSettingExcludeKeywordService{},
+		JanparaCrawlSettingRequiredKeywordService:      &janpara_crawl_setting_required_keywords.JanparaCrawlSettingRequiredKeywordService{},
+		JanparaDailyPurchaseSummaryService:             &janpara_daily_purchase_summaries.JanparaDailyPurchaseSummaryService{},
 		RelatedProductService:                          &related_products.RelatedProductService{},
 	}
 }

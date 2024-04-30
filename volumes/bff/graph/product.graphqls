@@ -16,6 +16,8 @@ type Product implements Node {
   ): [MercariProduct!]!
   mercariCrawlSetting: MercariCrawlSetting!
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
+  janparaCrawlSetting: JanparaCrawlSetting!
+  janparaDailyPurchaseSummaries: [JanparaDailyPurchaseSummary!]!
   relatedProducts(
     platformMask: String!
     published: Boolean!
@@ -139,6 +141,45 @@ type MercariCrawlSettingRequiredKeyword implements Node {
   id: ID!
   mercariCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type JanparaCrawlSetting implements Node {
+  id: ID!
+  productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  janparaCrawlSettingExcludeKeywords: [JanparaCrawlSettingExcludeKeyword!]!
+  janparaCrawlSettingRequiredKeywords: [JanparaCrawlSettingRequiredKeyword!]!
+}
+
+type JanparaCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  janparaCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type JanparaCrawlSettingRequiredKeyword implements Node {
+  id: ID!
+  janparaCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type JanparaDailyPurchaseSummary implements Node {
+  id: ID!
+  productId: Int!
+  averagePurchasePrice: Int
+  purchaseCount: Int!
+  date: String!
   createdAt: String!
   updatedAt: String!
 }

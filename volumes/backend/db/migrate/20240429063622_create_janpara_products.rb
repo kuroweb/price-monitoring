@@ -1,0 +1,18 @@
+class CreateJanparaProducts < ActiveRecord::Migration[7.1]
+  def change
+    create_table :janpara_products do |t|
+      t.references :product, foreign_key: true
+
+      t.string :external_id, null: false, index: { unique: true }
+      t.string :name, null: false
+      t.text :thumbnail_url, null: true
+      t.integer :price, null: false, default: 0
+      t.boolean :published, null: false, default: false
+      t.datetime :bought_date
+
+      t.timestamps
+    end
+
+    add_index :janpara_products, %i[product_id external_id], unique: true
+  end
+end

@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useEditCrawlSettingModalState } from '../../hooks/useEditCrawlSettingModalState'
 import { updateProduct } from '../../server-actions/productQuery'
 
+import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
@@ -23,7 +24,7 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ'>('ヤフオク')
+  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら'>('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
@@ -43,11 +44,18 @@ const EditCrawlSettingModal = ({
         max_price: defaultValues?.mercari_crawl_setting?.max_price || 0,
         enabled: defaultValues?.mercari_crawl_setting?.enabled || false,
       },
+      janpara_crawl_setting: {
+        keyword: defaultValues?.janpara_crawl_setting?.keyword || '',
+        min_price: defaultValues?.janpara_crawl_setting?.min_price || 0,
+        max_price: defaultValues?.janpara_crawl_setting?.max_price || 0,
+        enabled: defaultValues?.janpara_crawl_setting?.enabled || false,
+      },
     },
     values: defaultValues,
   })
 
   const onSubmit: SubmitHandler<UpdateProductInput> = async (input) => {
+    console.log(input)
     if (productId === undefined) {
       return toast.error('更新対象が見つかりませんでした。')
     }
@@ -91,7 +99,7 @@ const EditCrawlSettingModal = ({
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/2'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -99,12 +107,20 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/2'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
                 checked={tab == 'メルカリ'}
                 onChange={() => setTab('メルカリ')}
+              />
+              <input
+                className='join-item btn btn-md w-1/3'
+                type='radio'
+                name='options'
+                aria-label='じゃんぱら'
+                checked={tab == 'じゃんぱら'}
+                onChange={() => setTab('じゃんぱら')}
               />
             </Join>
             <div>
@@ -116,6 +132,11 @@ const EditCrawlSettingModal = ({
               {tab == 'メルカリ' && (
                 <div className='py-4'>
                   <MercariForm register={register} />
+                </div>
+              )}
+              {tab == 'じゃんぱら' && (
+                <div className='py-4'>
+                  <JanparaForm register={register} />
                 </div>
               )}
             </div>

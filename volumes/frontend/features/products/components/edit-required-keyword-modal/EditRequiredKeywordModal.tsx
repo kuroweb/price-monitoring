@@ -6,13 +6,14 @@ import { Join } from 'react-daisyui'
 
 import { useEditRequiredKeywordModalState } from '../../hooks/useEditRequiredKeywordModalState'
 
+import JanparaTab from './janpara-tab/JanparaTab'
 import MercariTab from './mercari-tab/MercariTab'
 import YahooAuctionTab from './yahoo-auction-tab/YahooAuctionTab'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ'>('ヤフオク')
+  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら'>('ヤフオク')
   const [modal, setModal] = useEditRequiredKeywordModalState()
 
   return (
@@ -35,7 +36,7 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
           <div className='py-6'>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/2'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='ヤフオク'
@@ -43,18 +44,27 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/2'
+                className='join-item btn btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='メルカリ'
                 checked={tab == 'メルカリ'}
                 onChange={() => setTab('メルカリ')}
               />
+              <input
+                className='join-item btn btn-md w-1/3'
+                type='radio'
+                name='required_keyword'
+                aria-label='じゃんぱら'
+                checked={tab == 'じゃんぱら'}
+                onChange={() => setTab('じゃんぱら')}
+              />
             </Join>
           </div>
           <div>
             {tab == 'ヤフオク' && <YahooAuctionTab data={data} />}
             {tab == 'メルカリ' && <MercariTab data={data} />}
+            {tab == 'じゃんぱら' && <JanparaTab data={data} />}
           </div>
         </div>
 

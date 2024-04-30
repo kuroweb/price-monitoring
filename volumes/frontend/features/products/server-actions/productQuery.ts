@@ -17,14 +17,6 @@ import {
   UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
   UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
   UpdateYahooAuctionCrawlSettingExcludeKeywordMutation,
-  CreateMercariCrawlSettingExcludeKeywordInput,
-  UpdateMercariCrawlSettingExcludeKeywordInput,
-  CreateMercariCrawlSettingExcludeKeywordDocument,
-  CreateMercariCrawlSettingExcludeKeywordMutation,
-  DeleteMercariCrawlSettingExcludeKeywordDocument,
-  DeleteMercariCrawlSettingExcludeKeywordMutation,
-  UpdateMercariCrawlSettingExcludeKeywordDocument,
-  UpdateMercariCrawlSettingExcludeKeywordMutation,
   CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
   CreateYahooAuctionCrawlSettingRequiredKeywordInput,
   CreateYahooAuctionCrawlSettingRequiredKeywordMutation,
@@ -33,6 +25,14 @@ import {
   UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
   UpdateYahooAuctionCrawlSettingRequiredKeywordInput,
   UpdateYahooAuctionCrawlSettingRequiredKeywordMutation,
+  CreateMercariCrawlSettingExcludeKeywordInput,
+  UpdateMercariCrawlSettingExcludeKeywordInput,
+  CreateMercariCrawlSettingExcludeKeywordDocument,
+  CreateMercariCrawlSettingExcludeKeywordMutation,
+  DeleteMercariCrawlSettingExcludeKeywordDocument,
+  DeleteMercariCrawlSettingExcludeKeywordMutation,
+  UpdateMercariCrawlSettingExcludeKeywordDocument,
+  UpdateMercariCrawlSettingExcludeKeywordMutation,
   CreateMercariCrawlSettingRequiredKeywordInput,
   CreateMercariCrawlSettingRequiredKeywordDocument,
   CreateMercariCrawlSettingRequiredKeywordMutation,
@@ -41,10 +41,28 @@ import {
   UpdateMercariCrawlSettingRequiredKeywordDocument,
   UpdateMercariCrawlSettingRequiredKeywordInput,
   UpdateMercariCrawlSettingRequiredKeywordMutation,
+  CreateJanparaCrawlSettingExcludeKeywordInput,
+  UpdateJanparaCrawlSettingExcludeKeywordInput,
+  CreateJanparaCrawlSettingExcludeKeywordDocument,
+  CreateJanparaCrawlSettingExcludeKeywordMutation,
+  DeleteJanparaCrawlSettingExcludeKeywordDocument,
+  DeleteJanparaCrawlSettingExcludeKeywordMutation,
+  UpdateJanparaCrawlSettingExcludeKeywordDocument,
+  UpdateJanparaCrawlSettingExcludeKeywordMutation,
+  CreateJanparaCrawlSettingRequiredKeywordInput,
+  CreateJanparaCrawlSettingRequiredKeywordDocument,
+  CreateJanparaCrawlSettingRequiredKeywordMutation,
+  DeleteJanparaCrawlSettingRequiredKeywordDocument,
+  DeleteJanparaCrawlSettingRequiredKeywordMutation,
+  UpdateJanparaCrawlSettingRequiredKeywordDocument,
+  UpdateJanparaCrawlSettingRequiredKeywordInput,
+  UpdateJanparaCrawlSettingRequiredKeywordMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
-/* Product */
+/*
+  Product
+*/
 
 export const createProduct = async (input: CreateProductInput) => {
   return await getClient().mutate<CreateProductMutation>({
@@ -66,6 +84,10 @@ export const deleteProduct = async (id: String) => {
     variables: { id: id },
   })
 }
+
+/*
+  YahooAuction
+*/
 
 /* YahooAuctionCrawlSettingExcludeKeyword */
 
@@ -127,6 +149,10 @@ export const deleteYahooAuctionCrawlSettingRequiredKeyword = async (
   })
 }
 
+/*
+  Mercari
+*/
+
 /* MercariCrawlSettingExcludeKeyword */
 
 export const createMercariCrawlSettingExcludeKeyword = async (
@@ -177,6 +203,64 @@ export const updateMercariCrawlSettingRequiredKeyword = async (
 export const deleteMercariCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeleteMercariCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteMercariCrawlSettingRequiredKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/*
+  Janpara
+*/
+
+/* JanparaCrawlSettingExcludeKeyword */
+
+export const createJanparaCrawlSettingExcludeKeyword = async (
+  input: CreateJanparaCrawlSettingExcludeKeywordInput,
+) => {
+  return await getClient().mutate<CreateJanparaCrawlSettingExcludeKeywordMutation>({
+    mutation: CreateJanparaCrawlSettingExcludeKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateJanparaCrawlSettingExcludeKeyword = async (
+  input: UpdateJanparaCrawlSettingExcludeKeywordInput,
+) => {
+  return await getClient().mutate<UpdateJanparaCrawlSettingExcludeKeywordMutation>({
+    mutation: UpdateJanparaCrawlSettingExcludeKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteJanparaCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteJanparaCrawlSettingExcludeKeywordMutation>({
+    mutation: DeleteJanparaCrawlSettingExcludeKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/* JanparaCrawlSettingRequiredKeyword */
+
+export const createJanparaCrawlSettingRequiredKeyword = async (
+  input: CreateJanparaCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<CreateJanparaCrawlSettingRequiredKeywordMutation>({
+    mutation: CreateJanparaCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateJanparaCrawlSettingRequiredKeyword = async (
+  input: UpdateJanparaCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<UpdateJanparaCrawlSettingRequiredKeywordMutation>({
+    mutation: UpdateJanparaCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteJanparaCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteJanparaCrawlSettingRequiredKeywordMutation>({
+    mutation: DeleteJanparaCrawlSettingRequiredKeywordDocument,
     variables: { id: id, productId: productId },
   })
 }

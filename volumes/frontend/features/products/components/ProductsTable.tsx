@@ -119,6 +119,12 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
               max_price: product?.mercariCrawlSetting?.maxPrice,
               enabled: product?.mercariCrawlSetting?.enabled,
             },
+            janpara_crawl_setting: {
+              keyword: product?.janparaCrawlSetting?.keyword,
+              min_price: product?.janparaCrawlSetting?.minPrice,
+              max_price: product?.janparaCrawlSetting?.maxPrice,
+              enabled: product?.janparaCrawlSetting?.enabled,
+            },
           }
         }
       />

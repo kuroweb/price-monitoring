@@ -1,0 +1,15 @@
+package janpara_crawl_setting_required_keywords
+
+type IJanparaCrawlSettingRequiredKeywordService interface {
+	IFindJanparaCrawlSettingRequiredKeywordService
+	ICreateJanparaCrawlSettingRequiredKeywordService
+	IUpdateJanparaCrawlSettingRequiredKeywordService
+	IDeleteJanparaCrawlSettingRequiredKeywordService
+}
+
+type JanparaCrawlSettingRequiredKeywordService struct {
+	*FindJanparaCrawlSettingRequiredKeywordService
+	*CreateJanparaCrawlSettingRequiredKeywordService
+	*UpdateJanparaCrawlSettingRequiredKeywordService
+	*DeleteJanparaCrawlSettingRequiredKeywordService
+}

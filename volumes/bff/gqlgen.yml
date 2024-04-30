@@ -101,6 +101,10 @@ models:
         resolver: true
       mercariDailyPurchaseSummaries:
         resolver: true
+      janparaCrawlSetting:
+        resolver: true
+      janparaDailyPurchaseSummaries:
+        resolver: true
       relatedProducts:
         resolver: true
   YahooAuctionCrawlSetting:
@@ -114,4 +118,10 @@ models:
       mercariCrawlSettingExcludeKeywords:
         resolver: true
       mercariCrawlSettingRequiredKeywords:
+        resolver: true
+  JanparaCrawlSetting:
+    fields:
+      janparaCrawlSettingExcludeKeywords:
+        resolver: true
+      janparaCrawlSettingRequiredKeywords:
         resolver: true

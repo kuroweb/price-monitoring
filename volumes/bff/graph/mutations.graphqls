@@ -42,6 +42,26 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteMercariCrawlSettingRequiredKeywordResult!
+  createJanparaCrawlSettingExcludeKeyword(
+    input: CreateJanparaCrawlSettingExcludeKeywordInput!
+  ): CreateJanparaCrawlSettingExcludeKeywordResult!
+  updateJanparaCrawlSettingExcludeKeyword(
+    input: UpdateJanparaCrawlSettingExcludeKeywordInput!
+  ): UpdateJanparaCrawlSettingExcludeKeywordResult!
+  deleteJanparaCrawlSettingExcludeKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteJanparaCrawlSettingExcludeKeywordResult!
+  createJanparaCrawlSettingRequiredKeyword(
+    input: CreateJanparaCrawlSettingRequiredKeywordInput!
+  ): CreateJanparaCrawlSettingRequiredKeywordResult!
+  updateJanparaCrawlSettingRequiredKeyword(
+    input: UpdateJanparaCrawlSettingRequiredKeywordInput!
+  ): UpdateJanparaCrawlSettingRequiredKeywordResult!
+  deleteJanparaCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteJanparaCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -66,6 +86,7 @@ input CreateProductInput {
   name: String!
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput!
   mercari_crawl_setting: CreateMercariCrawlSettingInput!
+  janpara_crawl_setting: CreateJanparaCrawlSettingInput!
 }
 
 input CreateYahooAuctionCrawlSettingInput {
@@ -79,6 +100,13 @@ input CreateYahooAuctionCrawlSettingInput {
 input CreateMercariCrawlSettingInput {
   keyword: String!
   category_id: Int
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input CreateJanparaCrawlSettingInput {
+  keyword: String!
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -112,6 +140,7 @@ input UpdateProductInput {
   name: String!
   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput!
   mercari_crawl_setting: UpdateMercariCrawlSettingInput!
+  janpara_crawl_setting: UpdateJanparaCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
@@ -125,6 +154,13 @@ input UpdateYahooAuctionCrawlSettingInput {
 input UpdateMercariCrawlSettingInput {
   keyword: String!
   category_id: Int
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input UpdateJanparaCrawlSettingInput {
+  keyword: String!
   min_price: Int!
   max_price: Int!
   enabled: Boolean!
@@ -430,7 +466,6 @@ type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements Us
   details: [ErrorDetail!]!
 }
 
-
 ## CreateMercariCrawlSettingRequiredKeyword ##
 
 input CreateMercariCrawlSettingRequiredKeywordInput {
@@ -511,6 +546,176 @@ union DeleteMercariCrawlSettingRequiredKeywordResultErrors =
     DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed
 
 type DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateJanparaCrawlSettingExcludeKeyword ##
+
+input CreateJanparaCrawlSettingExcludeKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateJanparaCrawlSettingExcludeKeywordResult =
+    CreateJanparaCrawlSettingExcludeKeywordResultSuccess
+  | CreateJanparaCrawlSettingExcludeKeywordResultError
+
+type CreateJanparaCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingExcludeKeyword: JanparaCrawlSettingExcludeKeyword!
+}
+
+type CreateJanparaCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateJanparaCrawlSettingExcludeKeywordResultErrors!
+}
+
+union CreateJanparaCrawlSettingExcludeKeywordResultErrors =
+    CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed
+
+type CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateJanparaCrawlSettingExcludeKeyword ##
+
+input UpdateJanparaCrawlSettingExcludeKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateJanparaCrawlSettingExcludeKeywordResult =
+    UpdateJanparaCrawlSettingExcludeKeywordResultSuccess
+  | UpdateJanparaCrawlSettingExcludeKeywordResultError
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingExcludeKeyword: JanparaCrawlSettingExcludeKeyword!
+}
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateJanparaCrawlSettingExcludeKeywordResultErrors!
+}
+
+union UpdateJanparaCrawlSettingExcludeKeywordResultErrors =
+    UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed
+
+type UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteJanparaCrawlSettingExcludeKeyword ##
+
+union DeleteJanparaCrawlSettingExcludeKeywordResult =
+    DeleteJanparaCrawlSettingExcludeKeywordResultSuccess
+  | DeleteJanparaCrawlSettingExcludeKeywordResultError
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteJanparaCrawlSettingExcludeKeywordResultErrors!
+}
+
+union DeleteJanparaCrawlSettingExcludeKeywordResultErrors =
+    DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed
+
+type DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateJanparaCrawlSettingRequiredKeyword ##
+
+input CreateJanparaCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateJanparaCrawlSettingRequiredKeywordResult =
+    CreateJanparaCrawlSettingRequiredKeywordResultSuccess
+  | CreateJanparaCrawlSettingRequiredKeywordResultError
+
+type CreateJanparaCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingRequiredKeyword: JanparaCrawlSettingRequiredKeyword!
+}
+
+type CreateJanparaCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateJanparaCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateJanparaCrawlSettingRequiredKeywordResultErrors =
+    CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateJanparaCrawlSettingRequiredKeyword ##
+
+input UpdateJanparaCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateJanparaCrawlSettingRequiredKeywordResult =
+    UpdateJanparaCrawlSettingRequiredKeywordResultSuccess
+  | UpdateJanparaCrawlSettingRequiredKeywordResultError
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingRequiredKeyword: JanparaCrawlSettingRequiredKeyword!
+}
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateJanparaCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateJanparaCrawlSettingRequiredKeywordResultErrors =
+    UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteJanparaCrawlSettingRequiredKeyword ##
+
+union DeleteJanparaCrawlSettingRequiredKeywordResult =
+    DeleteJanparaCrawlSettingRequiredKeywordResultSuccess
+  | DeleteJanparaCrawlSettingRequiredKeywordResultError
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteJanparaCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteJanparaCrawlSettingRequiredKeywordResultErrors =
+    DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

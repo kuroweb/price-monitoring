@@ -11,6 +11,16 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
 )
 
+// JanparaCrawlSettingExcludeKeywords is the resolver for the janparaCrawlSettingExcludeKeywords field.
+func (r *janparaCrawlSettingResolver) JanparaCrawlSettingExcludeKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeKeyword, error) {
+	return r.ProductService.FindJanparaCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// JanparaCrawlSettingRequiredKeywords is the resolver for the janparaCrawlSettingRequiredKeywords field.
+func (r *janparaCrawlSettingResolver) JanparaCrawlSettingRequiredKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingRequiredKeyword, error) {
+	return r.ProductService.FindJanparaCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
+}
+
 // MercariCrawlSettingExcludeKeywords is the resolver for the mercariCrawlSettingExcludeKeywords field.
 func (r *mercariCrawlSettingResolver) MercariCrawlSettingExcludeKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindMercariCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
@@ -56,6 +66,16 @@ func (r *productResolver) MercariDailyPurchaseSummaries(ctx context.Context, obj
 	return r.ProductService.FindMercariDailyPurchaseSummary(ctx, obj.ID)
 }
 
+// JanparaCrawlSetting is the resolver for the janparaCrawlSetting field.
+func (r *productResolver) JanparaCrawlSetting(ctx context.Context, obj *model.Product) (*model.JanparaCrawlSetting, error) {
+	return r.ProductService.FindJanparaCrawlSetting(ctx, obj.ID)
+}
+
+// JanparaDailyPurchaseSummaries is the resolver for the janparaDailyPurchaseSummaries field.
+func (r *productResolver) JanparaDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.JanparaDailyPurchaseSummary, error) {
+	return r.ProductService.FindJanparaDailyPurchaseSummary(ctx, obj.ID)
+}
+
 // RelatedProducts is the resolver for the relatedProducts field.
 func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, published, yahooAuctionBuyable, page, per, sort, order)
@@ -71,6 +91,11 @@ func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingRequiredKeywo
 	return r.ProductService.FindYahooAuctionCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
 }
 
+// JanparaCrawlSetting returns internal.JanparaCrawlSettingResolver implementation.
+func (r *Resolver) JanparaCrawlSetting() internal.JanparaCrawlSettingResolver {
+	return &janparaCrawlSettingResolver{r}
+}
+
 // MercariCrawlSetting returns internal.MercariCrawlSettingResolver implementation.
 func (r *Resolver) MercariCrawlSetting() internal.MercariCrawlSettingResolver {
 	return &mercariCrawlSettingResolver{r}
@@ -84,6 +109,7 @@ func (r *Resolver) YahooAuctionCrawlSetting() internal.YahooAuctionCrawlSettingR
 	return &yahooAuctionCrawlSettingResolver{r}
 }
 
+type janparaCrawlSettingResolver struct{ *Resolver }
 type mercariCrawlSettingResolver struct{ *Resolver }
 type productResolver struct{ *Resolver }
 type yahooAuctionCrawlSettingResolver struct{ *Resolver }

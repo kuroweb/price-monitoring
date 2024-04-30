@@ -86,6 +86,36 @@ func (r *mutationResolver) DeleteMercariCrawlSettingRequiredKeyword(ctx context.
 	return r.ProductService.DeleteMercariCrawlSettingRequiredKeyword(ctx, id, productID)
 }
 
+// CreateJanparaCrawlSettingExcludeKeyword is the resolver for the createJanparaCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) CreateJanparaCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateJanparaCrawlSettingExcludeKeywordInput) (model.CreateJanparaCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.CreateJanparaCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// UpdateJanparaCrawlSettingExcludeKeyword is the resolver for the updateJanparaCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) UpdateJanparaCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateJanparaCrawlSettingExcludeKeywordInput) (model.UpdateJanparaCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.UpdateJanparaCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// DeleteJanparaCrawlSettingExcludeKeyword is the resolver for the deleteJanparaCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) DeleteJanparaCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.DeleteJanparaCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreateJanparaCrawlSettingRequiredKeyword is the resolver for the createJanparaCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) CreateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateJanparaCrawlSettingRequiredKeywordInput) (model.CreateJanparaCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.CreateJanparaCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// UpdateJanparaCrawlSettingRequiredKeyword is the resolver for the updateJanparaCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) UpdateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateJanparaCrawlSettingRequiredKeywordInput) (model.UpdateJanparaCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.UpdateJanparaCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// DeleteJanparaCrawlSettingRequiredKeyword is the resolver for the deleteJanparaCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) DeleteJanparaCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.DeleteJanparaCrawlSettingRequiredKeyword(ctx, id, productID)
+}
+
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 

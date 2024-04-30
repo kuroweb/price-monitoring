@@ -1,0 +1,15 @@
+package janpara_crawl_setting_exclude_keywords
+
+type IJanparaCrawlSettingExcludeKeywordService interface {
+	IFindJanparaCrawlSettingExcludeKeywordService
+	ICreateJanparaCrawlSettingExcludeKeywordService
+	IUpdateJanparaCrawlSettingExcludeKeywordService
+	IDeleteJanparaCrawlSettingExcludeKeywordService
+}
+
+type JanparaCrawlSettingExcludeKeywordService struct {
+	*FindJanparaCrawlSettingExcludeKeywordService
+	*CreateJanparaCrawlSettingExcludeKeywordService
+	*UpdateJanparaCrawlSettingExcludeKeywordService
+	*DeleteJanparaCrawlSettingExcludeKeywordService
+}

@@ -17,6 +17,69 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type CreateJanparaCrawlSettingExcludeKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreateJanparaCrawlSettingExcludeKeywordResult = CreateJanparaCrawlSettingExcludeKeywordResultError | CreateJanparaCrawlSettingExcludeKeywordResultSuccess;
+
+export type CreateJanparaCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'CreateJanparaCrawlSettingExcludeKeywordResultError';
+  error: CreateJanparaCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateJanparaCrawlSettingExcludeKeywordResultErrors = CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type CreateJanparaCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreateJanparaCrawlSettingExcludeKeywordResultSuccess';
+  janparaCrawlSettingExcludeKeyword: JanparaCrawlSettingExcludeKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type CreateJanparaCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type CreateJanparaCrawlSettingRequiredKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreateJanparaCrawlSettingRequiredKeywordResult = CreateJanparaCrawlSettingRequiredKeywordResultError | CreateJanparaCrawlSettingRequiredKeywordResultSuccess;
+
+export type CreateJanparaCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'CreateJanparaCrawlSettingRequiredKeywordResultError';
+  error: CreateJanparaCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateJanparaCrawlSettingRequiredKeywordResultErrors = CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type CreateJanparaCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreateJanparaCrawlSettingRequiredKeywordResultSuccess';
+  janparaCrawlSettingRequiredKeyword: JanparaCrawlSettingRequiredKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type CreateMercariCrawlSettingExcludeKeywordInput = {
   keyword?: InputMaybe<Scalars['String']['input']>;
   productId: Scalars['ID']['input'];
@@ -82,6 +145,7 @@ export type CreateMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
 };
 
 export type CreateProductInput = {
+  janpara_crawl_setting: CreateJanparaCrawlSettingInput;
   mercari_crawl_setting: CreateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
@@ -169,6 +233,50 @@ export type CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess = ResultB
 
 export type CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
   __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type DeleteJanparaCrawlSettingExcludeKeywordResult = DeleteJanparaCrawlSettingExcludeKeywordResultError | DeleteJanparaCrawlSettingExcludeKeywordResultSuccess;
+
+export type DeleteJanparaCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultError';
+  error: DeleteJanparaCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteJanparaCrawlSettingExcludeKeywordResultErrors = DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type DeleteJanparaCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type DeleteJanparaCrawlSettingRequiredKeywordResult = DeleteJanparaCrawlSettingRequiredKeywordResultError | DeleteJanparaCrawlSettingRequiredKeywordResultSuccess;
+
+export type DeleteJanparaCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultError';
+  error: DeleteJanparaCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteJanparaCrawlSettingRequiredKeywordResultErrors = DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type DeleteJanparaCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed';
   code: Scalars['String']['output'];
   details: Array<ErrorDetail>;
   message: Scalars['String']['output'];
@@ -290,6 +398,49 @@ export type ErrorDetail = {
   message: Scalars['String']['output'];
 };
 
+export type JanparaCrawlSetting = Node & {
+  __typename?: 'JanparaCrawlSetting';
+  createdAt: Scalars['String']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  janparaCrawlSettingExcludeKeywords: Array<JanparaCrawlSettingExcludeKeyword>;
+  janparaCrawlSettingRequiredKeywords: Array<JanparaCrawlSettingRequiredKeyword>;
+  keyword: Scalars['String']['output'];
+  maxPrice: Scalars['Int']['output'];
+  minPrice: Scalars['Int']['output'];
+  productId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
+export type JanparaCrawlSettingExcludeKeyword = Node & {
+  __typename?: 'JanparaCrawlSettingExcludeKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  janparaCrawlSettingId: Scalars['Int']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['String']['output'];
+};
+
+export type JanparaCrawlSettingRequiredKeyword = Node & {
+  __typename?: 'JanparaCrawlSettingRequiredKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  janparaCrawlSettingId: Scalars['Int']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['String']['output'];
+};
+
+export type JanparaDailyPurchaseSummary = Node & {
+  __typename?: 'JanparaDailyPurchaseSummary';
+  averagePurchasePrice?: Maybe<Scalars['Int']['output']>;
+  createdAt: Scalars['String']['output'];
+  date: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  productId: Scalars['Int']['output'];
+  purchaseCount: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type MercariCrawlSetting = Node & {
   __typename?: 'MercariCrawlSetting';
   categoryId?: Maybe<Scalars['Int']['output']>;
@@ -350,21 +501,37 @@ export type MercariProduct = Node & {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createJanparaCrawlSettingExcludeKeyword: CreateJanparaCrawlSettingExcludeKeywordResult;
+  createJanparaCrawlSettingRequiredKeyword: CreateJanparaCrawlSettingRequiredKeywordResult;
   createMercariCrawlSettingExcludeKeyword: CreateMercariCrawlSettingExcludeKeywordResult;
   createMercariCrawlSettingRequiredKeyword: CreateMercariCrawlSettingRequiredKeywordResult;
   createProduct: CreateProductResult;
   createYahooAuctionCrawlSettingExcludeKeyword: CreateYahooAuctionCrawlSettingExcludeKeywordResult;
   createYahooAuctionCrawlSettingRequiredKeyword: CreateYahooAuctionCrawlSettingRequiredKeywordResult;
+  deleteJanparaCrawlSettingExcludeKeyword: DeleteJanparaCrawlSettingExcludeKeywordResult;
+  deleteJanparaCrawlSettingRequiredKeyword: DeleteJanparaCrawlSettingRequiredKeywordResult;
   deleteMercariCrawlSettingExcludeKeyword: DeleteMercariCrawlSettingExcludeKeywordResult;
   deleteMercariCrawlSettingRequiredKeyword: DeleteMercariCrawlSettingRequiredKeywordResult;
   deleteProduct: DeleteProductResult;
   deleteYahooAuctionCrawlSettingExcludeKeyword: DeleteYahooAuctionCrawlSettingExcludeKeywordResult;
   deleteYahooAuctionCrawlSettingRequiredKeyword: DeleteYahooAuctionCrawlSettingRequiredKeywordResult;
+  updateJanparaCrawlSettingExcludeKeyword: UpdateJanparaCrawlSettingExcludeKeywordResult;
+  updateJanparaCrawlSettingRequiredKeyword: UpdateJanparaCrawlSettingRequiredKeywordResult;
   updateMercariCrawlSettingExcludeKeyword: UpdateMercariCrawlSettingExcludeKeywordResult;
   updateMercariCrawlSettingRequiredKeyword: UpdateMercariCrawlSettingRequiredKeywordResult;
   updateProduct: UpdateProductResult;
   updateYahooAuctionCrawlSettingExcludeKeyword: UpdateYahooAuctionCrawlSettingExcludeKeywordResult;
   updateYahooAuctionCrawlSettingRequiredKeyword: UpdateYahooAuctionCrawlSettingRequiredKeywordResult;
+};
+
+
+export type MutationCreateJanparaCrawlSettingExcludeKeywordArgs = {
+  input: CreateJanparaCrawlSettingExcludeKeywordInput;
+};
+
+
+export type MutationCreateJanparaCrawlSettingRequiredKeywordArgs = {
+  input: CreateJanparaCrawlSettingRequiredKeywordInput;
 };
 
 
@@ -390,6 +557,18 @@ export type MutationCreateYahooAuctionCrawlSettingExcludeKeywordArgs = {
 
 export type MutationCreateYahooAuctionCrawlSettingRequiredKeywordArgs = {
   input: CreateYahooAuctionCrawlSettingRequiredKeywordInput;
+};
+
+
+export type MutationDeleteJanparaCrawlSettingExcludeKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteJanparaCrawlSettingRequiredKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
 };
 
 
@@ -419,6 +598,16 @@ export type MutationDeleteYahooAuctionCrawlSettingExcludeKeywordArgs = {
 export type MutationDeleteYahooAuctionCrawlSettingRequiredKeywordArgs = {
   id: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateJanparaCrawlSettingExcludeKeywordArgs = {
+  input: UpdateJanparaCrawlSettingExcludeKeywordInput;
+};
+
+
+export type MutationUpdateJanparaCrawlSettingRequiredKeywordArgs = {
+  input: UpdateJanparaCrawlSettingRequiredKeywordInput;
 };
 
 
@@ -454,6 +643,8 @@ export type Node = {
 export type Product = Node & {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
+  janparaCrawlSetting: JanparaCrawlSetting;
+  janparaDailyPurchaseSummaries: Array<JanparaDailyPurchaseSummary>;
   mercariCrawlSetting: MercariCrawlSetting;
   mercariDailyPurchaseSummaries: Array<MercariDailyPurchaseSummary>;
   mercariProducts: Array<MercariProduct>;
@@ -533,6 +724,71 @@ export type ResultBase = {
   ok: Scalars['Boolean']['output'];
 };
 
+export type UpdateJanparaCrawlSettingExcludeKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdateJanparaCrawlSettingExcludeKeywordResult = UpdateJanparaCrawlSettingExcludeKeywordResultError | UpdateJanparaCrawlSettingExcludeKeywordResultSuccess;
+
+export type UpdateJanparaCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'UpdateJanparaCrawlSettingExcludeKeywordResultError';
+  error: UpdateJanparaCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateJanparaCrawlSettingExcludeKeywordResultErrors = UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type UpdateJanparaCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdateJanparaCrawlSettingExcludeKeywordResultSuccess';
+  janparaCrawlSettingExcludeKeyword: JanparaCrawlSettingExcludeKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type UpdateJanparaCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type UpdateJanparaCrawlSettingRequiredKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdateJanparaCrawlSettingRequiredKeywordResult = UpdateJanparaCrawlSettingRequiredKeywordResultError | UpdateJanparaCrawlSettingRequiredKeywordResultSuccess;
+
+export type UpdateJanparaCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'UpdateJanparaCrawlSettingRequiredKeywordResultError';
+  error: UpdateJanparaCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateJanparaCrawlSettingRequiredKeywordResultErrors = UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type UpdateJanparaCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdateJanparaCrawlSettingRequiredKeywordResultSuccess';
+  janparaCrawlSettingRequiredKeyword: JanparaCrawlSettingRequiredKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type UpdateMercariCrawlSettingExcludeKeywordInput = {
   id: Scalars['ID']['input'];
   keyword?: InputMaybe<Scalars['String']['input']>;
@@ -600,6 +856,7 @@ export type UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
 };
 
 export type UpdateProductInput = {
+  janpara_crawl_setting: UpdateJanparaCrawlSettingInput;
   mercari_crawl_setting: UpdateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput;
@@ -878,13 +1135,57 @@ export type DeleteMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
 
 export type DeleteMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingRequiredKeyword: { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
+export type CreateJanparaCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateJanparaCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type CreateJanparaCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createJanparaCrawlSettingExcludeKeyword: { __typename?: 'CreateJanparaCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateJanparaCrawlSettingExcludeKeywordResultSuccess', ok: boolean, janparaCrawlSettingExcludeKeyword: { __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdateJanparaCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateJanparaCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type UpdateJanparaCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateJanparaCrawlSettingExcludeKeyword: { __typename?: 'UpdateJanparaCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateJanparaCrawlSettingExcludeKeywordResultSuccess', ok: boolean, janparaCrawlSettingExcludeKeyword: { __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeleteJanparaCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteJanparaCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteJanparaCrawlSettingExcludeKeyword: { __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+
+export type CreateJanparaCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: CreateJanparaCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type CreateJanparaCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createJanparaCrawlSettingRequiredKeyword: { __typename?: 'CreateJanparaCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateJanparaCrawlSettingRequiredKeywordResultSuccess', ok: boolean, janparaCrawlSettingRequiredKeyword: { __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdateJanparaCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: UpdateJanparaCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type UpdateJanparaCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateJanparaCrawlSettingRequiredKeyword: { __typename?: 'UpdateJanparaCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateJanparaCrawlSettingRequiredKeywordResultSuccess', ok: boolean, janparaCrawlSettingRequiredKeyword: { __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeleteJanparaCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteJanparaCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteJanparaCrawlSettingRequiredKeyword: { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
+
 export type GetProductPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean } }> };
+export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -898,7 +1199,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: string | null, endDate?: string | null, createdAt: string, updatedAt: string }> } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, janparaDailyPurchaseSummaries: Array<{ __typename?: 'JanparaDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: string | null, endDate?: string | null, createdAt: string, updatedAt: string }> } };
 
 export type GetRecommendsPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -1295,6 +1596,162 @@ export const DeleteMercariCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
+export const CreateJanparaCrawlSettingExcludeKeywordDocument = gql`
+    mutation createJanparaCrawlSettingExcludeKeyword($input: CreateJanparaCrawlSettingExcludeKeywordInput!) {
+  createJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateJanparaCrawlSettingExcludeKeywordDocument = gql`
+    mutation updateJanparaCrawlSettingExcludeKeyword($input: UpdateJanparaCrawlSettingExcludeKeywordInput!) {
+  updateJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteJanparaCrawlSettingExcludeKeywordDocument = gql`
+    mutation deleteJanparaCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteJanparaCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateJanparaCrawlSettingRequiredKeywordDocument = gql`
+    mutation createJanparaCrawlSettingRequiredKeyword($input: CreateJanparaCrawlSettingRequiredKeywordInput!) {
+  createJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateJanparaCrawlSettingRequiredKeywordDocument = gql`
+    mutation updateJanparaCrawlSettingRequiredKeyword($input: UpdateJanparaCrawlSettingRequiredKeywordInput!) {
+  updateJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteJanparaCrawlSettingRequiredKeywordDocument = gql`
+    mutation deleteJanparaCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deleteJanparaCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetProductPageDataDocument = gql`
     query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -1314,6 +1771,14 @@ export const GetProductPageDataDocument = gql`
       productId
       keyword
       categoryId
+      minPrice
+      maxPrice
+      enabled
+    }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
       minPrice
       maxPrice
       enabled
@@ -1390,6 +1855,37 @@ export const GetProductDetailPageDataDocument = gql`
       }
     }
     mercariDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      janparaCrawlSettingExcludeKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      janparaCrawlSettingRequiredKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    janparaDailyPurchaseSummaries {
       id
       productId
       averagePurchasePrice
@@ -1505,6 +2001,24 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     deleteMercariCrawlSettingRequiredKeyword(variables: DeleteMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingRequiredKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingRequiredKeywordMutation>(DeleteMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteMercariCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    createJanparaCrawlSettingExcludeKeyword(variables: CreateJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingExcludeKeywordMutation>(CreateJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    updateJanparaCrawlSettingExcludeKeyword(variables: UpdateJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingExcludeKeywordMutation>(UpdateJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    deleteJanparaCrawlSettingExcludeKeyword(variables: DeleteJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingExcludeKeywordMutation>(DeleteJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    createJanparaCrawlSettingRequiredKeyword(variables: CreateJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingRequiredKeywordMutation>(CreateJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    updateJanparaCrawlSettingRequiredKeyword(variables: UpdateJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingRequiredKeywordMutation>(UpdateJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    deleteJanparaCrawlSettingRequiredKeyword(variables: DeleteJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingRequiredKeywordMutation>(DeleteJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
     },
     getProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductPageData', 'query', variables);

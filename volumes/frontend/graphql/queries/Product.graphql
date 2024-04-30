@@ -24,6 +24,14 @@ query getProductPageData($id: ID, $name: String) {
       maxPrice
       enabled
     }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
   }
 }
 
@@ -104,6 +112,37 @@ query getProductDetailPageData(
       }
     }
     mercariDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      janparaCrawlSettingExcludeKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      janparaCrawlSettingRequiredKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    janparaDailyPurchaseSummaries {
       id
       productId
       averagePurchasePrice

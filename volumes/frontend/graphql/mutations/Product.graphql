@@ -1,3 +1,7 @@
+#
+# Product
+#
+
 mutation createProduct($input: CreateProductInput!) {
   createProduct(input: $input) {
     ... on CreateProductResultSuccess {
@@ -68,6 +72,10 @@ mutation deleteProduct($id: ID!) {
     }
   }
 }
+
+#
+# YahooAuction
+#
 
 ## YahooAuctionCrawlSettingExcludeKeyword ##
 
@@ -231,6 +239,10 @@ mutation deleteYahooAuctionCrawlSettingRequiredKeyword($id: ID!, $productId: ID!
   }
 }
 
+#
+# Mercari
+#
+
 ## MercariCrawlSettingExcludeKeyword ##
 
 mutation createMercariCrawlSettingExcludeKeyword(
@@ -381,6 +393,172 @@ mutation deleteMercariCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
       ok
       error {
         ... on DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+#
+# Janpara
+#
+
+## JanparaCrawlSettingExcludeKeyword ##
+
+mutation createJanparaCrawlSettingExcludeKeyword(
+  $input: CreateJanparaCrawlSettingExcludeKeywordInput!
+) {
+  createJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateJanparaCrawlSettingExcludeKeyword(
+  $input: UpdateJanparaCrawlSettingExcludeKeywordInput!
+) {
+  updateJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteJanparaCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteJanparaCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## JanparaCrawlSettingRequiredKeyword ##
+
+mutation createJanparaCrawlSettingRequiredKeyword(
+  $input: CreateJanparaCrawlSettingRequiredKeywordInput!
+) {
+  createJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateJanparaCrawlSettingRequiredKeyword(
+  $input: UpdateJanparaCrawlSettingRequiredKeywordInput!
+) {
+  updateJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteJanparaCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deleteJanparaCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed {
           code
           message
           details {

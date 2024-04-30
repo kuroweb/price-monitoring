@@ -112,6 +112,7 @@ const Page = async ({
               yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries}
               yahooFleamarketData={data.product.yahooFleamarketDailyPurchaseSummaries}
               mercariData={data.product.mercariDailyPurchaseSummaries}
+              janparaData={data.product.janparaDailyPurchaseSummaries}
             />
           </div>
         </div>
@@ -141,6 +142,12 @@ const Page = async ({
             min_price: data.product.mercariCrawlSetting?.minPrice,
             max_price: data.product.mercariCrawlSetting?.maxPrice,
             enabled: data.product.mercariCrawlSetting?.enabled,
+          },
+          janpara_crawl_setting: {
+            keyword: data.product.janparaCrawlSetting?.keyword,
+            min_price: data.product.janparaCrawlSetting?.minPrice,
+            max_price: data.product.janparaCrawlSetting?.maxPrice,
+            enabled: data.product.janparaCrawlSetting?.enabled,
           },
         }}
       />
