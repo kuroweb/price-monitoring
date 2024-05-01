@@ -230,7 +230,6 @@ erDiagram
     string name
     text thumbnail_url
     int price
-    boolean published
   }
 
   products ||--|| janpara_crawl_settings : "1:1"
