@@ -35,7 +35,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
             resources :janpara_crawl_setting_exclude_keywords, only: %i[index create update destroy]
             resources :janpara_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
-          resources :janpara_daily_purchase_summaries, only: [:index]
 
           ## related_product ##
           resources :related_products, only: %i[index]

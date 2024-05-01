@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_063638) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_29_063622) do
   create_table "janpara_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "janpara_crawl_setting_id"
     t.string "keyword", null: false
@@ -38,25 +38,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_063638) do
     t.index ["product_id"], name: "index_janpara_crawl_settings_on_product_id"
   end
 
-  create_table "janpara_daily_purchase_summaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.integer "average_purchase_price"
-    t.integer "purchase_count", default: 0
-    t.date "date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "date"], name: "index_janpara_daily_purchase_summaries_on_product_id_and_date", unique: true
-    t.index ["product_id"], name: "index_janpara_daily_purchase_summaries_on_product_id"
-  end
-
   create_table "janpara_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
     t.string "external_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
-    t.boolean "published", default: false, null: false
-    t.datetime "bought_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_janpara_products_on_external_id", unique: true
@@ -214,7 +201,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_063638) do
   add_foreign_key "janpara_crawl_setting_exclude_keywords", "janpara_crawl_settings"
   add_foreign_key "janpara_crawl_setting_required_keywords", "janpara_crawl_settings"
   add_foreign_key "janpara_crawl_settings", "products"
-  add_foreign_key "janpara_daily_purchase_summaries", "products"
   add_foreign_key "janpara_products", "products"
   add_foreign_key "mercari_crawl_setting_exclude_keywords", "mercari_crawl_settings"
   add_foreign_key "mercari_crawl_setting_required_keywords", "mercari_crawl_settings"

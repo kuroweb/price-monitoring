@@ -112,7 +112,6 @@ const Page = async ({
               yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries}
               yahooFleamarketData={data.product.yahooFleamarketDailyPurchaseSummaries}
               mercariData={data.product.mercariDailyPurchaseSummaries}
-              janparaData={data.product.janparaDailyPurchaseSummaries}
             />
           </div>
         </div>

@@ -11,7 +11,6 @@ class Product < ApplicationRecord
   has_many :mercari_products, dependent: :destroy
   has_many :mercari_daily_purchase_summaries, dependent: :destroy
   has_many :janpara_products, dependent: :destroy
-  has_many :janpara_daily_purchase_summaries, dependent: :destroy
 
   ## validations ##
   validates :name, presence: true

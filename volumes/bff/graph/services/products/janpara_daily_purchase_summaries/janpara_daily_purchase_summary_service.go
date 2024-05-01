@@ -1,9 +1,0 @@
-package janpara_daily_purchase_summaries
-
-type IJanparaDailyPurchaseSummaryService interface {
-	IFindJanparaDailyPurchaseSummaryService
-}
-
-type JanparaDailyPurchaseSummaryService struct {
-	*FindJanparaDailyPurchaseSummaryService
-}

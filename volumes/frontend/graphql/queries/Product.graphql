@@ -142,15 +142,6 @@ query getProductDetailPageData(
         updatedAt
       }
     }
-    janparaDailyPurchaseSummaries {
-      id
-      productId
-      averagePurchasePrice
-      purchaseCount
-      date
-      createdAt
-      updatedAt
-    }
     relatedProducts(
       platformMask: $platformMask
       published: $published

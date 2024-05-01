@@ -301,16 +301,6 @@ type ComplexityRoot struct {
 		UpdatedAt             func(childComplexity int) int
 	}
 
-	JanparaDailyPurchaseSummary struct {
-		AveragePurchasePrice func(childComplexity int) int
-		CreatedAt            func(childComplexity int) int
-		Date                 func(childComplexity int) int
-		ID                   func(childComplexity int) int
-		ProductID            func(childComplexity int) int
-		PurchaseCount        func(childComplexity int) int
-		UpdatedAt            func(childComplexity int) int
-	}
-
 	MercariCrawlSetting struct {
 		CategoryID                          func(childComplexity int) int
 		CreatedAt                           func(childComplexity int) int
@@ -391,7 +381,6 @@ type ComplexityRoot struct {
 	Product struct {
 		ID                                    func(childComplexity int) int
 		JanparaCrawlSetting                   func(childComplexity int) int
-		JanparaDailyPurchaseSummaries         func(childComplexity int) int
 		MercariCrawlSetting                   func(childComplexity int) int
 		MercariDailyPurchaseSummaries         func(childComplexity int) int
 		MercariProducts                       func(childComplexity int, published *bool, sort *string, order *string) int
@@ -640,7 +629,6 @@ type ProductResolver interface {
 	MercariCrawlSetting(ctx context.Context, obj *model.Product) (*model.MercariCrawlSetting, error)
 	MercariDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.MercariDailyPurchaseSummary, error)
 	JanparaCrawlSetting(ctx context.Context, obj *model.Product) (*model.JanparaCrawlSetting, error)
-	JanparaDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.JanparaDailyPurchaseSummary, error)
 	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 type QueryResolver interface {
@@ -1463,55 +1451,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.JanparaCrawlSettingRequiredKeyword.UpdatedAt(childComplexity), true
 
-	case "JanparaDailyPurchaseSummary.averagePurchasePrice":
-		if e.complexity.JanparaDailyPurchaseSummary.AveragePurchasePrice == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.AveragePurchasePrice(childComplexity), true
-
-	case "JanparaDailyPurchaseSummary.createdAt":
-		if e.complexity.JanparaDailyPurchaseSummary.CreatedAt == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.CreatedAt(childComplexity), true
-
-	case "JanparaDailyPurchaseSummary.date":
-		if e.complexity.JanparaDailyPurchaseSummary.Date == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.Date(childComplexity), true
-
-	case "JanparaDailyPurchaseSummary.id":
-		if e.complexity.JanparaDailyPurchaseSummary.ID == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.ID(childComplexity), true
-
-	case "JanparaDailyPurchaseSummary.productId":
-		if e.complexity.JanparaDailyPurchaseSummary.ProductID == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.ProductID(childComplexity), true
-
-	case "JanparaDailyPurchaseSummary.purchaseCount":
-		if e.complexity.JanparaDailyPurchaseSummary.PurchaseCount == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.PurchaseCount(childComplexity), true
-
-	case "JanparaDailyPurchaseSummary.updatedAt":
-		if e.complexity.JanparaDailyPurchaseSummary.UpdatedAt == nil {
-			break
-		}
-
-		return e.complexity.JanparaDailyPurchaseSummary.UpdatedAt(childComplexity), true
-
 	case "MercariCrawlSetting.categoryId":
 		if e.complexity.MercariCrawlSetting.CategoryID == nil {
 			break
@@ -2043,13 +1982,6 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.JanparaCrawlSetting(childComplexity), true
-
-	case "Product.janparaDailyPurchaseSummaries":
-		if e.complexity.Product.JanparaDailyPurchaseSummaries == nil {
-			break
-		}
-
-		return e.complexity.Product.JanparaDailyPurchaseSummaries(childComplexity), true
 
 	case "Product.mercariCrawlSetting":
 		if e.complexity.Product.MercariCrawlSetting == nil {
@@ -3778,7 +3710,6 @@ type DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed implements U
   mercariCrawlSetting: MercariCrawlSetting!
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   janparaCrawlSetting: JanparaCrawlSetting!
-  janparaDailyPurchaseSummaries: [JanparaDailyPurchaseSummary!]!
   relatedProducts(
     platformMask: String!
     published: Boolean!
@@ -3931,16 +3862,6 @@ type JanparaCrawlSettingRequiredKeyword implements Node {
   id: ID!
   janparaCrawlSettingId: Int!
   keyword: String
-  createdAt: String!
-  updatedAt: String!
-}
-
-type JanparaDailyPurchaseSummary implements Node {
-  id: ID!
-  productId: Int!
-  averagePurchasePrice: Int
-  purchaseCount: Int!
-  date: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -6088,8 +6009,6 @@ func (ec *executionContext) fieldContext_CreateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
-			case "janparaDailyPurchaseSummaries":
-				return ec.fieldContext_Product_janparaDailyPurchaseSummaries(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -9765,311 +9684,6 @@ func (ec *executionContext) fieldContext_JanparaCrawlSettingRequiredKeyword_upda
 	return fc, nil
 }
 
-func (ec *executionContext) _JanparaDailyPurchaseSummary_id(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_id(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.ID, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNID2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type ID does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary_productId(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_productId(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.ProductID, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(int)
-	fc.Result = res
-	return ec.marshalNInt2int(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary_averagePurchasePrice(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_averagePurchasePrice(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.AveragePurchasePrice, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		return graphql.Null
-	}
-	res := resTmp.(*int)
-	fc.Result = res
-	return ec.marshalOInt2ᚖint(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_averagePurchasePrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary_purchaseCount(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_purchaseCount(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.PurchaseCount, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(int)
-	fc.Result = res
-	return ec.marshalNInt2int(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_purchaseCount(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type Int does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary_date(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_date(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.Date, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_date(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_createdAt(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.CreatedAt, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.JanparaDailyPurchaseSummary) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_JanparaDailyPurchaseSummary_updatedAt(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return obj.UpdatedAt, nil
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.(string)
-	fc.Result = res
-	return ec.marshalNString2string(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_JanparaDailyPurchaseSummary_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "JanparaDailyPurchaseSummary",
-		Field:      field,
-		IsMethod:   false,
-		IsResolver: false,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			return nil, errors.New("field of type String does not have child fields")
-		},
-	}
-	return fc, nil
-}
-
 func (ec *executionContext) _MercariCrawlSetting_id(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_MercariCrawlSetting_id(ctx, field)
 	if err != nil {
@@ -13530,66 +13144,6 @@ func (ec *executionContext) fieldContext_Product_janparaCrawlSetting(ctx context
 	return fc, nil
 }
 
-func (ec *executionContext) _Product_janparaDailyPurchaseSummaries(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Product_janparaDailyPurchaseSummaries(ctx, field)
-	if err != nil {
-		return graphql.Null
-	}
-	ctx = graphql.WithFieldContext(ctx, fc)
-	defer func() {
-		if r := recover(); r != nil {
-			ec.Error(ctx, ec.Recover(ctx, r))
-			ret = graphql.Null
-		}
-	}()
-	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
-		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().JanparaDailyPurchaseSummaries(rctx, obj)
-	})
-	if err != nil {
-		ec.Error(ctx, err)
-		return graphql.Null
-	}
-	if resTmp == nil {
-		if !graphql.HasFieldError(ctx, fc) {
-			ec.Errorf(ctx, "must not be null")
-		}
-		return graphql.Null
-	}
-	res := resTmp.([]*model.JanparaDailyPurchaseSummary)
-	fc.Result = res
-	return ec.marshalNJanparaDailyPurchaseSummary2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaDailyPurchaseSummaryᚄ(ctx, field.Selections, res)
-}
-
-func (ec *executionContext) fieldContext_Product_janparaDailyPurchaseSummaries(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
-	fc = &graphql.FieldContext{
-		Object:     "Product",
-		Field:      field,
-		IsMethod:   true,
-		IsResolver: true,
-		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
-			switch field.Name {
-			case "id":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_id(ctx, field)
-			case "productId":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_productId(ctx, field)
-			case "averagePurchasePrice":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_averagePurchasePrice(ctx, field)
-			case "purchaseCount":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_purchaseCount(ctx, field)
-			case "date":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_date(ctx, field)
-			case "createdAt":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_createdAt(ctx, field)
-			case "updatedAt":
-				return ec.fieldContext_JanparaDailyPurchaseSummary_updatedAt(ctx, field)
-			}
-			return nil, fmt.Errorf("no field named %q was found under type JanparaDailyPurchaseSummary", field.Name)
-		},
-	}
-	return fc, nil
-}
-
 func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Product_relatedProducts(ctx, field)
 	if err != nil {
@@ -13730,8 +13284,6 @@ func (ec *executionContext) fieldContext_Query_product(ctx context.Context, fiel
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
-			case "janparaDailyPurchaseSummaries":
-				return ec.fieldContext_Product_janparaDailyPurchaseSummaries(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -13811,8 +13363,6 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
-			case "janparaDailyPurchaseSummaries":
-				return ec.fieldContext_Product_janparaDailyPurchaseSummaries(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -16028,8 +15578,6 @@ func (ec *executionContext) fieldContext_UpdateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
-			case "janparaDailyPurchaseSummaries":
-				return ec.fieldContext_Product_janparaDailyPurchaseSummaries(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -22241,13 +21789,6 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._JanparaCrawlSettingRequiredKeyword(ctx, sel, obj)
-	case model.JanparaDailyPurchaseSummary:
-		return ec._JanparaDailyPurchaseSummary(ctx, sel, &obj)
-	case *model.JanparaDailyPurchaseSummary:
-		if obj == nil {
-			return graphql.Null
-		}
-		return ec._JanparaDailyPurchaseSummary(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -25174,72 +24715,6 @@ func (ec *executionContext) _JanparaCrawlSettingRequiredKeyword(ctx context.Cont
 	return out
 }
 
-var janparaDailyPurchaseSummaryImplementors = []string{"JanparaDailyPurchaseSummary", "Node"}
-
-func (ec *executionContext) _JanparaDailyPurchaseSummary(ctx context.Context, sel ast.SelectionSet, obj *model.JanparaDailyPurchaseSummary) graphql.Marshaler {
-	fields := graphql.CollectFields(ec.OperationContext, sel, janparaDailyPurchaseSummaryImplementors)
-
-	out := graphql.NewFieldSet(fields)
-	deferred := make(map[string]*graphql.FieldSet)
-	for i, field := range fields {
-		switch field.Name {
-		case "__typename":
-			out.Values[i] = graphql.MarshalString("JanparaDailyPurchaseSummary")
-		case "id":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_id(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "productId":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_productId(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "averagePurchasePrice":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_averagePurchasePrice(ctx, field, obj)
-		case "purchaseCount":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_purchaseCount(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "date":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_date(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "createdAt":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_createdAt(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		case "updatedAt":
-			out.Values[i] = ec._JanparaDailyPurchaseSummary_updatedAt(ctx, field, obj)
-			if out.Values[i] == graphql.Null {
-				out.Invalids++
-			}
-		default:
-			panic("unknown field " + strconv.Quote(field.Name))
-		}
-	}
-	out.Dispatch(ctx)
-	if out.Invalids > 0 {
-		return graphql.Null
-	}
-
-	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
-
-	for label, dfs := range deferred {
-		ec.processDeferredGroup(graphql.DeferredGroup{
-			Label:    label,
-			Path:     graphql.GetPath(ctx),
-			FieldSet: dfs,
-			Context:  ctx,
-		})
-	}
-
-	return out
-}
-
 var mercariCrawlSettingImplementors = []string{"MercariCrawlSetting", "Node"}
 
 func (ec *executionContext) _MercariCrawlSetting(ctx context.Context, sel ast.SelectionSet, obj *model.MercariCrawlSetting) graphql.Marshaler {
@@ -26119,42 +25594,6 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 					}
 				}()
 				res = ec._Product_janparaCrawlSetting(ctx, field, obj)
-				if res == graphql.Null {
-					atomic.AddUint32(&fs.Invalids, 1)
-				}
-				return res
-			}
-
-			if field.Deferrable != nil {
-				dfs, ok := deferred[field.Deferrable.Label]
-				di := 0
-				if ok {
-					dfs.AddField(field)
-					di = len(dfs.Values) - 1
-				} else {
-					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
-					deferred[field.Deferrable.Label] = dfs
-				}
-				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
-					return innerFunc(ctx, dfs)
-				})
-
-				// don't run the out.Concurrently() call below
-				out.Values[i] = graphql.Null
-				continue
-			}
-
-			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
-		case "janparaDailyPurchaseSummaries":
-			field := field
-
-			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
-				defer func() {
-					if r := recover(); r != nil {
-						ec.Error(ctx, ec.Recover(ctx, r))
-					}
-				}()
-				res = ec._Product_janparaDailyPurchaseSummaries(ctx, field, obj)
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}
@@ -28745,60 +28184,6 @@ func (ec *executionContext) marshalNJanparaCrawlSettingRequiredKeyword2ᚖgithub
 		return graphql.Null
 	}
 	return ec._JanparaCrawlSettingRequiredKeyword(ctx, sel, v)
-}
-
-func (ec *executionContext) marshalNJanparaDailyPurchaseSummary2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaDailyPurchaseSummaryᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.JanparaDailyPurchaseSummary) graphql.Marshaler {
-	ret := make(graphql.Array, len(v))
-	var wg sync.WaitGroup
-	isLen1 := len(v) == 1
-	if !isLen1 {
-		wg.Add(len(v))
-	}
-	for i := range v {
-		i := i
-		fc := &graphql.FieldContext{
-			Index:  &i,
-			Result: &v[i],
-		}
-		ctx := graphql.WithFieldContext(ctx, fc)
-		f := func(i int) {
-			defer func() {
-				if r := recover(); r != nil {
-					ec.Error(ctx, ec.Recover(ctx, r))
-					ret = nil
-				}
-			}()
-			if !isLen1 {
-				defer wg.Done()
-			}
-			ret[i] = ec.marshalNJanparaDailyPurchaseSummary2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaDailyPurchaseSummary(ctx, sel, v[i])
-		}
-		if isLen1 {
-			f(i)
-		} else {
-			go f(i)
-		}
-
-	}
-	wg.Wait()
-
-	for _, e := range ret {
-		if e == graphql.Null {
-			return graphql.Null
-		}
-	}
-
-	return ret
-}
-
-func (ec *executionContext) marshalNJanparaDailyPurchaseSummary2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaDailyPurchaseSummary(ctx context.Context, sel ast.SelectionSet, v *model.JanparaDailyPurchaseSummary) graphql.Marshaler {
-	if v == nil {
-		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
-			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
-		}
-		return graphql.Null
-	}
-	return ec._JanparaDailyPurchaseSummary(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNMercariCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.MercariCrawlSetting) graphql.Marshaler {

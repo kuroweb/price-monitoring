@@ -71,11 +71,6 @@ func (r *productResolver) JanparaCrawlSetting(ctx context.Context, obj *model.Pr
 	return r.ProductService.FindJanparaCrawlSetting(ctx, obj.ID)
 }
 
-// JanparaDailyPurchaseSummaries is the resolver for the janparaDailyPurchaseSummaries field.
-func (r *productResolver) JanparaDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.JanparaDailyPurchaseSummary, error) {
-	return r.ProductService.FindJanparaDailyPurchaseSummary(ctx, obj.ID)
-}
-
 // RelatedProducts is the resolver for the relatedProducts field.
 func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, published, yahooAuctionBuyable, page, per, sort, order)

@@ -814,19 +814,6 @@ type JanparaCrawlSettingRequiredKeyword struct {
 func (JanparaCrawlSettingRequiredKeyword) IsNode()            {}
 func (this JanparaCrawlSettingRequiredKeyword) GetID() string { return this.ID }
 
-type JanparaDailyPurchaseSummary struct {
-	ID                   string `json:"id"`
-	ProductID            int    `json:"productId"`
-	AveragePurchasePrice *int   `json:"averagePurchasePrice,omitempty"`
-	PurchaseCount        int    `json:"purchaseCount"`
-	Date                 string `json:"date"`
-	CreatedAt            string `json:"createdAt"`
-	UpdatedAt            string `json:"updatedAt"`
-}
-
-func (JanparaDailyPurchaseSummary) IsNode()            {}
-func (this JanparaDailyPurchaseSummary) GetID() string { return this.ID }
-
 type MercariCrawlSetting struct {
 	ID                                  string                                `json:"id"`
 	ProductID                           int                                   `json:"productId"`
@@ -906,7 +893,6 @@ type Product struct {
 	MercariCrawlSetting                   *MercariCrawlSetting                   `json:"mercariCrawlSetting"`
 	MercariDailyPurchaseSummaries         []*MercariDailyPurchaseSummary         `json:"mercariDailyPurchaseSummaries"`
 	JanparaCrawlSetting                   *JanparaCrawlSetting                   `json:"janparaCrawlSetting"`
-	JanparaDailyPurchaseSummaries         []*JanparaDailyPurchaseSummary         `json:"janparaDailyPurchaseSummaries"`
 	RelatedProducts                       []*RelatedProduct                      `json:"relatedProducts"`
 }
 
