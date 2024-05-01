@@ -40,14 +40,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_063622) do
 
   create_table "janpara_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "external_id", null: false
+    t.string "janpara_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["external_id"], name: "index_janpara_products_on_external_id", unique: true
-    t.index ["product_id", "external_id"], name: "index_janpara_products_on_product_id_and_external_id", unique: true
+    t.index ["janpara_id"], name: "index_janpara_products_on_janpara_id", unique: true
+    t.index ["product_id", "janpara_id"], name: "index_janpara_products_on_product_id_and_janpara_id", unique: true
     t.index ["product_id"], name: "index_janpara_products_on_product_id"
   end
 

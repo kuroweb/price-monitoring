@@ -7,6 +7,9 @@ crawl_yahoo_fleamarket_sync_products_enqueue_sync_job:
 crawl_mercari_sync_products_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::Mercari::SyncProducts::EnqueueSyncJob"
+crawl_janpara_enqueue_sync_job:
+  cron: "*/20 * * * *"
+  class: "Crawl::Janpara::EnqueueSyncJob"
 products_calculate_daily_purchase_summary_calculator_job:
   cron: "0 0 * * *"
   class: "Products::CalculateDailyPurchaseSummary::CalculatorJob"

@@ -9,3 +9,5 @@ production:
   - ['crawl_yahoo_fleamarket_sync_products_sync_job', 1]
   - ['crawl_mercari_sync_products_enqueue_sync_job', 1]
   - ['crawl_mercari_sync_products_sync_job', 1]
+  - ['crawl_janpara_enqueue_sync_job', 1]
+  - ['crawl_janpara_sync_job', 1]
