@@ -2,7 +2,7 @@
 # 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProduct
-    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari].freeze
+    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara].freeze
     SORT_TYPES = %w[bought_date created_at updated_at].freeze
     ORDER_TYPES = %w[desc asc].freeze
 
@@ -23,7 +23,7 @@ module Search
     end
 
     def call
-      records = query
+      records = exec_query
       related_products = RelatedProducts.new(records.map { |record| RelatedProduct.new(normalize(record)) })
 
       raise StandardError, related_products.errors unless related_products.valid?
@@ -35,7 +35,7 @@ module Search
 
     attr_reader :product_id, :published, :page, :per, :offset, :sort, :order, :platform_mask, :yahoo_auction_buyable
 
-    def query
+    def exec_query
       ActiveRecord::Base.connection.exec_query(sql)
     end
 
@@ -56,7 +56,7 @@ module Search
 
     def build_sql_for(platform)
       condition = base_condition(platform)
-      condition = published_condition(condition)
+      condition = published_condition(platform, condition)
       condition = yahoo_auction_buyable_condition(platform, condition)
       condition.to_sql
     end
@@ -69,20 +69,34 @@ module Search
     def common_columns(platform)
       [
         "'#{platform}' AS platform", "#{platform}_id AS external_id",
-        "product_id", "name", "price", "thumbnail_url", "published",
-        "bought_date", "created_at", "updated_at"
+        "product_id", "name", "price", "thumbnail_url", "created_at", "updated_at"
       ]
     end
 
     def additional_columns(platform)
-      if platform == "yahoo_auction"
-        %w[buyout_price end_date]
-      else
-        ["NULL AS buyout_price", "NULL AS end_date"]
-      end
+      columns = []
+
+      columns <<
+        if platform == "yahoo_auction"
+          %w[buyout_price end_date]
+        else
+          ["NULL AS buyout_price", "NULL AS end_date"]
+        end
+
+      columns <<
+        if platform == "janpara"
+          ["TRUE AS published", "NULL AS bought_date"]
+        else
+          %w[published bought_date]
+        end
+
+      columns.flatten
     end
 
-    def published_condition(condition)
+    def published_condition(platform, condition)
+      return condition if platform == "janpara" && published == true
+      return condition.where(id: nil) if platform == "janpara" && published == false
+
       condition.where(published:)
     end
 

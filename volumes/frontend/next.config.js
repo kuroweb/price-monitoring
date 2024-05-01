@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'static.mercdn.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.janpara.co.jp',
+      },
     ],
   },
   experimental: {
