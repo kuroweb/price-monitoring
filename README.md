@@ -198,7 +198,7 @@ erDiagram
   products ||--o{ mercari_daily_purchase_summaries : "1:N"
 ```
 
-### じゃんぱら
+### じゃんぱら関連
 
 ```mermaid
 erDiagram
@@ -210,7 +210,6 @@ erDiagram
     bigint id PK
     bigint product_id FK
     string keyword
-    int category_id
     int min_price
     int max_price
     boolean enabled
@@ -232,21 +231,12 @@ erDiagram
     text thumbnail_url
     int price
     boolean published
-    datetime bought_date
-  }
-  janpara_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
   }
 
   products ||--|| janpara_crawl_settings : "1:1"
   janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : "1:N"
   janpara_crawl_settings ||--o{ janpara_crawl_setting_required_keywords : "1:N"
   products ||--o{ janpara_products : "1:N"
-  products ||--o{ janpara_daily_purchase_summaries : "1:N"
 ```
 
 ## 自動デプロイ
