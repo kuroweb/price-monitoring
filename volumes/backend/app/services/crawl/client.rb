@@ -49,16 +49,7 @@ module Crawl
           playwright.chromium.launch(**launch_options) do |browser|
             browser.new_context(**context_options) do |context|
               page = context.new_page
-
-              page.route(
-                "**/*",
-                lambda do |route, request|
-                  return route.abort if blocked_request?(request.url)
-
-                  route.fallback
-                end
-              )
-
+              page.route("**/*", ->(route, request) { blocked_request?(request.url) ? route.abort : route.fallback })
               block.call(page)
             end
           end
