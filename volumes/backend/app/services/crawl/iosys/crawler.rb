@@ -97,9 +97,13 @@ module Crawl
 
       def thumbnail_url(dom)
         href = dom.query_selector("img").get_attribute("src")
-        return "" if href == "/common_img/dummy/dummy.gif"
 
-        href
+        case href
+        when "/common_img/dummy/dummy.gif", "/photos/no_photo_S.jpg"
+          "https://iosys.co.jp/photos/no_photo_L.webp"
+        else
+          href
+        end
       end
 
       def iosys_crawl_setting
