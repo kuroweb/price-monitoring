@@ -226,7 +226,7 @@ erDiagram
   }
   janpara_products {
     bigint id PK
-    string external_id
+    string janpara_id
     string name
     text thumbnail_url
     int price
@@ -236,6 +236,46 @@ erDiagram
   janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : "1:N"
   janpara_crawl_settings ||--o{ janpara_crawl_setting_required_keywords : "1:N"
   products ||--o{ janpara_products : "1:N"
+```
+
+### イオシス関連
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  iosys_crawl_settings {
+    bigint id PK
+    bigint product_id FK
+    string keyword
+    int min_price
+    int max_price
+    boolean enabled
+  }
+  iosys_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint iosys_crawl_setting_id FK
+    string keyword
+  }
+  iosys_crawl_setting_required_keywords {
+    bigint id PK
+    bigint iosys_crawl_setting_id FK
+    string keyword
+  }
+  iosys_products {
+    bigint id PK
+    string iosys_id
+    string name
+    text thumbnail_url
+    int price
+  }
+
+  products ||--|| iosys_crawl_settings : "1:1"
+  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_keywords : "1:N"
+  iosys_crawl_settings ||--o{ iosys_crawl_setting_required_keywords : "1:N"
+  products ||--o{ iosys_products : "1:N"
 ```
 
 ## 自動デプロイ
