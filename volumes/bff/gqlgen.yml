@@ -103,8 +103,6 @@ models:
         resolver: true
       janparaCrawlSetting:
         resolver: true
-      janparaDailyPurchaseSummaries:
-        resolver: true
       relatedProducts:
         resolver: true
   YahooAuctionCrawlSetting:
