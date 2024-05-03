@@ -11,3 +11,5 @@ production:
   - ['crawl_mercari_sync_products_sync_job', 1]
   - ['crawl_janpara_enqueue_sync_job', 1]
   - ['crawl_janpara_sync_job', 1]
+  - ['crawl_iosys_enqueue_sync_job', 1]
+  - ['crawl_iosys_sync_job', 1]
