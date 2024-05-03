@@ -44,6 +44,12 @@ func (c *CreateProductService) CreateProduct(ctx context.Context, input model.Cr
 			"max_price": input.JanparaCrawlSetting.MaxPrice,
 			"enabled":   input.JanparaCrawlSetting.Enabled,
 		},
+		"iosys_crawl_setting": map[string]interface{}{
+			"keyword":   input.IosysCrawlSetting.Keyword,
+			"min_price": input.IosysCrawlSetting.MinPrice,
+			"max_price": input.IosysCrawlSetting.MaxPrice,
+			"enabled":   input.IosysCrawlSetting.Enabled,
+		},
 	}
 
 	requestBody, err := json.Marshal(body)

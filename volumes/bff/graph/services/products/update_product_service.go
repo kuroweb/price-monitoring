@@ -45,6 +45,12 @@ func (u *UpdateProductService) UpdateProduct(ctx context.Context, id string, inp
 			"max_price": input.JanparaCrawlSetting.MaxPrice,
 			"enabled":   input.JanparaCrawlSetting.Enabled,
 		},
+		"iosys_crawl_setting": map[string]interface{}{
+			"keyword":   input.IosysCrawlSetting.Keyword,
+			"min_price": input.IosysCrawlSetting.MinPrice,
+			"max_price": input.IosysCrawlSetting.MaxPrice,
+			"enabled":   input.IosysCrawlSetting.Enabled,
+		},
 	}
 
 	requestBody, err := json.Marshal(body)

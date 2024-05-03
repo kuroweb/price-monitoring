@@ -10,7 +10,47 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_29_063622) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_03_084920) do
+  create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "iosys_crawl_setting_id"
+    t.string "keyword", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iosys_crawl_setting_id"], name: "idx_on_iosys_crawl_setting_id_889c2c2e88"
+  end
+
+  create_table "iosys_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "iosys_crawl_setting_id"
+    t.string "keyword", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iosys_crawl_setting_id"], name: "idx_on_iosys_crawl_setting_id_abd2c33544"
+  end
+
+  create_table "iosys_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "keyword", null: false
+    t.integer "min_price", default: 0, null: false
+    t.integer "max_price", default: 0, null: false
+    t.boolean "enabled", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_iosys_crawl_settings_on_product_id"
+  end
+
+  create_table "iosys_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id"
+    t.string "iosys_id", null: false
+    t.string "name", null: false
+    t.text "thumbnail_url"
+    t.integer "price", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iosys_id"], name: "index_iosys_products_on_iosys_id", unique: true
+    t.index ["product_id", "iosys_id"], name: "index_iosys_products_on_product_id_and_iosys_id", unique: true
+    t.index ["product_id"], name: "index_iosys_products_on_product_id"
+  end
+
   create_table "janpara_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "janpara_crawl_setting_id"
     t.string "keyword", null: false
@@ -198,6 +238,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_29_063622) do
     t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
   end
 
+  add_foreign_key "iosys_crawl_setting_exclude_keywords", "iosys_crawl_settings"
+  add_foreign_key "iosys_crawl_setting_required_keywords", "iosys_crawl_settings"
+  add_foreign_key "iosys_crawl_settings", "products"
+  add_foreign_key "iosys_products", "products"
   add_foreign_key "janpara_crawl_setting_exclude_keywords", "janpara_crawl_settings"
   add_foreign_key "janpara_crawl_setting_required_keywords", "janpara_crawl_settings"
   add_foreign_key "janpara_crawl_settings", "products"

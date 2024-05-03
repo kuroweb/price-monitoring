@@ -9,6 +9,7 @@ import { toast } from 'react-toastify'
 import { useCreateCrawlSettingModalState } from '../../hooks/useCreateCrawlSettingModalState'
 import { createProduct } from '../../server-actions/productQuery'
 
+import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
 import YahooAuctionForm from './YahooAuctionForm'
@@ -38,6 +39,12 @@ const CreateCrawlSettingModal = () => {
         enabled: true,
       },
       janpara_crawl_setting: {
+        keyword: '',
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
+      },
+      iosys_crawl_setting: {
         keyword: '',
         min_price: 0,
         max_price: 0,
@@ -86,7 +93,7 @@ const CreateCrawlSettingModal = () => {
             <div className='divider py-8'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/4'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -94,7 +101,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/4'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -102,12 +109,20 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/4'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
                 defaultChecked={tab === 'じゃんぱら'}
                 onClick={() => setTab('じゃんぱら')}
+              />
+              <input
+                className='join-item btn btn-md w-1/4'
+                type='radio'
+                name='options'
+                aria-label='イオシス'
+                defaultChecked={tab === 'イオシス'}
+                onClick={() => setTab('イオシス')}
               />
             </Join>
             <div>
@@ -124,6 +139,11 @@ const CreateCrawlSettingModal = () => {
               {tab === 'じゃんぱら' && (
                 <div className='py-4'>
                   <JanparaForm register={register} />
+                </div>
+              )}
+              {tab === 'イオシス' && (
+                <div className='py-4'>
+                  <IosysForm register={register} />
                 </div>
               )}
             </div>

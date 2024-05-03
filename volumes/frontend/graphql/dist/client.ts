@@ -17,6 +17,69 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
+export type CreateIosysCrawlSettingExcludeKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreateIosysCrawlSettingExcludeKeywordResult = CreateIosysCrawlSettingExcludeKeywordResultError | CreateIosysCrawlSettingExcludeKeywordResultSuccess;
+
+export type CreateIosysCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultError';
+  error: CreateIosysCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateIosysCrawlSettingExcludeKeywordResultErrors = CreateIosysCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type CreateIosysCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultSuccess';
+  iosysCrawlSettingExcludeKeyword: IosysCrawlSettingExcludeKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateIosysCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type CreateIosysCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type CreateIosysCrawlSettingRequiredKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreateIosysCrawlSettingRequiredKeywordResult = CreateIosysCrawlSettingRequiredKeywordResultError | CreateIosysCrawlSettingRequiredKeywordResultSuccess;
+
+export type CreateIosysCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultError';
+  error: CreateIosysCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateIosysCrawlSettingRequiredKeywordResultErrors = CreateIosysCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type CreateIosysCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultSuccess';
+  iosysCrawlSettingRequiredKeyword: IosysCrawlSettingRequiredKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreateIosysCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type CreateJanparaCrawlSettingExcludeKeywordInput = {
   keyword?: InputMaybe<Scalars['String']['input']>;
   productId: Scalars['ID']['input'];
@@ -145,6 +208,7 @@ export type CreateMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
 };
 
 export type CreateProductInput = {
+  iosys_crawl_setting: CreateIosysCrawlSettingInput;
   janpara_crawl_setting: CreateJanparaCrawlSettingInput;
   mercari_crawl_setting: CreateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
@@ -233,6 +297,50 @@ export type CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess = ResultB
 
 export type CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
   __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type DeleteIosysCrawlSettingExcludeKeywordResult = DeleteIosysCrawlSettingExcludeKeywordResultError | DeleteIosysCrawlSettingExcludeKeywordResultSuccess;
+
+export type DeleteIosysCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultError';
+  error: DeleteIosysCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteIosysCrawlSettingExcludeKeywordResultErrors = DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type DeleteIosysCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type DeleteIosysCrawlSettingRequiredKeywordResult = DeleteIosysCrawlSettingRequiredKeywordResultError | DeleteIosysCrawlSettingRequiredKeywordResultSuccess;
+
+export type DeleteIosysCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultError';
+  error: DeleteIosysCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteIosysCrawlSettingRequiredKeywordResultErrors = DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type DeleteIosysCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed';
   code: Scalars['String']['output'];
   details: Array<ErrorDetail>;
   message: Scalars['String']['output'];
@@ -398,6 +506,38 @@ export type ErrorDetail = {
   message: Scalars['String']['output'];
 };
 
+export type IosysCrawlSetting = Node & {
+  __typename?: 'IosysCrawlSetting';
+  createdAt: Scalars['String']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  iosysCrawlSettingExcludeKeywords: Array<IosysCrawlSettingExcludeKeyword>;
+  iosysCrawlSettingRequiredKeywords: Array<IosysCrawlSettingRequiredKeyword>;
+  keyword: Scalars['String']['output'];
+  maxPrice: Scalars['Int']['output'];
+  minPrice: Scalars['Int']['output'];
+  productId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
+export type IosysCrawlSettingExcludeKeyword = Node & {
+  __typename?: 'IosysCrawlSettingExcludeKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  iosysCrawlSettingId: Scalars['Int']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['String']['output'];
+};
+
+export type IosysCrawlSettingRequiredKeyword = Node & {
+  __typename?: 'IosysCrawlSettingRequiredKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  iosysCrawlSettingId: Scalars['Int']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['String']['output'];
+};
+
 export type JanparaCrawlSetting = Node & {
   __typename?: 'JanparaCrawlSetting';
   createdAt: Scalars['String']['output'];
@@ -490,6 +630,8 @@ export type MercariProduct = Node & {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createIosysCrawlSettingExcludeKeyword: CreateIosysCrawlSettingExcludeKeywordResult;
+  createIosysCrawlSettingRequiredKeyword: CreateIosysCrawlSettingRequiredKeywordResult;
   createJanparaCrawlSettingExcludeKeyword: CreateJanparaCrawlSettingExcludeKeywordResult;
   createJanparaCrawlSettingRequiredKeyword: CreateJanparaCrawlSettingRequiredKeywordResult;
   createMercariCrawlSettingExcludeKeyword: CreateMercariCrawlSettingExcludeKeywordResult;
@@ -497,6 +639,8 @@ export type Mutation = {
   createProduct: CreateProductResult;
   createYahooAuctionCrawlSettingExcludeKeyword: CreateYahooAuctionCrawlSettingExcludeKeywordResult;
   createYahooAuctionCrawlSettingRequiredKeyword: CreateYahooAuctionCrawlSettingRequiredKeywordResult;
+  deleteIosysCrawlSettingExcludeKeyword: DeleteIosysCrawlSettingExcludeKeywordResult;
+  deleteIosysCrawlSettingRequiredKeyword: DeleteIosysCrawlSettingRequiredKeywordResult;
   deleteJanparaCrawlSettingExcludeKeyword: DeleteJanparaCrawlSettingExcludeKeywordResult;
   deleteJanparaCrawlSettingRequiredKeyword: DeleteJanparaCrawlSettingRequiredKeywordResult;
   deleteMercariCrawlSettingExcludeKeyword: DeleteMercariCrawlSettingExcludeKeywordResult;
@@ -504,6 +648,8 @@ export type Mutation = {
   deleteProduct: DeleteProductResult;
   deleteYahooAuctionCrawlSettingExcludeKeyword: DeleteYahooAuctionCrawlSettingExcludeKeywordResult;
   deleteYahooAuctionCrawlSettingRequiredKeyword: DeleteYahooAuctionCrawlSettingRequiredKeywordResult;
+  updateIosysCrawlSettingExcludeKeyword: UpdateIosysCrawlSettingExcludeKeywordResult;
+  updateIosysCrawlSettingRequiredKeyword: UpdateIosysCrawlSettingRequiredKeywordResult;
   updateJanparaCrawlSettingExcludeKeyword: UpdateJanparaCrawlSettingExcludeKeywordResult;
   updateJanparaCrawlSettingRequiredKeyword: UpdateJanparaCrawlSettingRequiredKeywordResult;
   updateMercariCrawlSettingExcludeKeyword: UpdateMercariCrawlSettingExcludeKeywordResult;
@@ -511,6 +657,16 @@ export type Mutation = {
   updateProduct: UpdateProductResult;
   updateYahooAuctionCrawlSettingExcludeKeyword: UpdateYahooAuctionCrawlSettingExcludeKeywordResult;
   updateYahooAuctionCrawlSettingRequiredKeyword: UpdateYahooAuctionCrawlSettingRequiredKeywordResult;
+};
+
+
+export type MutationCreateIosysCrawlSettingExcludeKeywordArgs = {
+  input: CreateIosysCrawlSettingExcludeKeywordInput;
+};
+
+
+export type MutationCreateIosysCrawlSettingRequiredKeywordArgs = {
+  input: CreateIosysCrawlSettingRequiredKeywordInput;
 };
 
 
@@ -546,6 +702,18 @@ export type MutationCreateYahooAuctionCrawlSettingExcludeKeywordArgs = {
 
 export type MutationCreateYahooAuctionCrawlSettingRequiredKeywordArgs = {
   input: CreateYahooAuctionCrawlSettingRequiredKeywordInput;
+};
+
+
+export type MutationDeleteIosysCrawlSettingExcludeKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeleteIosysCrawlSettingRequiredKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
 };
 
 
@@ -587,6 +755,16 @@ export type MutationDeleteYahooAuctionCrawlSettingExcludeKeywordArgs = {
 export type MutationDeleteYahooAuctionCrawlSettingRequiredKeywordArgs = {
   id: Scalars['ID']['input'];
   productId: Scalars['ID']['input'];
+};
+
+
+export type MutationUpdateIosysCrawlSettingExcludeKeywordArgs = {
+  input: UpdateIosysCrawlSettingExcludeKeywordInput;
+};
+
+
+export type MutationUpdateIosysCrawlSettingRequiredKeywordArgs = {
+  input: UpdateIosysCrawlSettingRequiredKeywordInput;
 };
 
 
@@ -632,6 +810,7 @@ export type Node = {
 export type Product = Node & {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
+  iosysCrawlSetting: IosysCrawlSetting;
   janparaCrawlSetting: JanparaCrawlSetting;
   mercariCrawlSetting: MercariCrawlSetting;
   mercariDailyPurchaseSummaries: Array<MercariDailyPurchaseSummary>;
@@ -710,6 +889,71 @@ export type RelatedProduct = {
 
 export type ResultBase = {
   ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateIosysCrawlSettingExcludeKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdateIosysCrawlSettingExcludeKeywordResult = UpdateIosysCrawlSettingExcludeKeywordResultError | UpdateIosysCrawlSettingExcludeKeywordResultSuccess;
+
+export type UpdateIosysCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultError';
+  error: UpdateIosysCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateIosysCrawlSettingExcludeKeywordResultErrors = UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type UpdateIosysCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultSuccess';
+  iosysCrawlSettingExcludeKeyword: IosysCrawlSettingExcludeKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type UpdateIosysCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type UpdateIosysCrawlSettingRequiredKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdateIosysCrawlSettingRequiredKeywordResult = UpdateIosysCrawlSettingRequiredKeywordResultError | UpdateIosysCrawlSettingRequiredKeywordResultSuccess;
+
+export type UpdateIosysCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultError';
+  error: UpdateIosysCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateIosysCrawlSettingRequiredKeywordResultErrors = UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type UpdateIosysCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultSuccess';
+  iosysCrawlSettingRequiredKeyword: IosysCrawlSettingRequiredKeyword;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
 };
 
 export type UpdateJanparaCrawlSettingExcludeKeywordInput = {
@@ -844,6 +1088,7 @@ export type UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
 };
 
 export type UpdateProductInput = {
+  iosys_crawl_setting: UpdateIosysCrawlSettingInput;
   janpara_crawl_setting: UpdateJanparaCrawlSettingInput;
   mercari_crawl_setting: UpdateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
@@ -1167,13 +1412,57 @@ export type DeleteJanparaCrawlSettingRequiredKeywordMutationVariables = Exact<{
 
 export type DeleteJanparaCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteJanparaCrawlSettingRequiredKeyword: { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
+export type CreateIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateIosysCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type CreateIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createIosysCrawlSettingExcludeKeyword: { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean, iosysCrawlSettingExcludeKeyword: { __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdateIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateIosysCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type UpdateIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateIosysCrawlSettingExcludeKeyword: { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean, iosysCrawlSettingExcludeKeyword: { __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeleteIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingExcludeKeyword: { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+
+export type CreateIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: CreateIosysCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type CreateIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createIosysCrawlSettingRequiredKeyword: { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean, iosysCrawlSettingRequiredKeyword: { __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdateIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: UpdateIosysCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type UpdateIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateIosysCrawlSettingRequiredKeyword: { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean, iosysCrawlSettingRequiredKeyword: { __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeleteIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeleteIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingRequiredKeyword: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
+
 export type GetProductPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
+export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1187,7 +1476,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: string | null, endDate?: string | null, createdAt: string, updatedAt: string }> } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: string | null, endDate?: string | null, createdAt: string, updatedAt: string }> } };
 
 export type GetRecommendsPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -1740,6 +2029,162 @@ export const DeleteJanparaCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
+export const CreateIosysCrawlSettingExcludeKeywordDocument = gql`
+    mutation createIosysCrawlSettingExcludeKeyword($input: CreateIosysCrawlSettingExcludeKeywordInput!) {
+  createIosysCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateIosysCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      iosysCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateIosysCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateIosysCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateIosysCrawlSettingExcludeKeywordDocument = gql`
+    mutation updateIosysCrawlSettingExcludeKeyword($input: UpdateIosysCrawlSettingExcludeKeywordInput!) {
+  updateIosysCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateIosysCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      iosysCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateIosysCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteIosysCrawlSettingExcludeKeywordDocument = gql`
+    mutation deleteIosysCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deleteIosysCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeleteIosysCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteIosysCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateIosysCrawlSettingRequiredKeywordDocument = gql`
+    mutation createIosysCrawlSettingRequiredKeyword($input: CreateIosysCrawlSettingRequiredKeywordInput!) {
+  createIosysCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateIosysCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      iosysCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateIosysCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateIosysCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateIosysCrawlSettingRequiredKeywordDocument = gql`
+    mutation updateIosysCrawlSettingRequiredKeyword($input: UpdateIosysCrawlSettingRequiredKeywordInput!) {
+  updateIosysCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateIosysCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      iosysCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateIosysCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteIosysCrawlSettingRequiredKeywordDocument = gql`
+    mutation deleteIosysCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deleteIosysCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeleteIosysCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteIosysCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetProductPageDataDocument = gql`
     query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -1764,6 +2209,14 @@ export const GetProductPageDataDocument = gql`
       enabled
     }
     janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
+    iosysCrawlSetting {
       id
       productId
       keyword
@@ -1868,6 +2321,28 @@ export const GetProductDetailPageDataDocument = gql`
       janparaCrawlSettingRequiredKeywords {
         id
         janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      iosysCrawlSettingExcludeKeywords {
+        id
+        iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      iosysCrawlSettingRequiredKeywords {
+        id
+        iosysCrawlSettingId
         keyword
         createdAt
         updatedAt
@@ -1998,6 +2473,24 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     deleteJanparaCrawlSettingRequiredKeyword(variables: DeleteJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingRequiredKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingRequiredKeywordMutation>(DeleteJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    createIosysCrawlSettingExcludeKeyword(variables: CreateIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingExcludeKeywordMutation>(CreateIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createIosysCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    updateIosysCrawlSettingExcludeKeyword(variables: UpdateIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingExcludeKeywordMutation>(UpdateIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateIosysCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    deleteIosysCrawlSettingExcludeKeyword(variables: DeleteIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingExcludeKeywordMutation>(DeleteIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteIosysCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    createIosysCrawlSettingRequiredKeyword(variables: CreateIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingRequiredKeywordMutation>(CreateIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createIosysCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    updateIosysCrawlSettingRequiredKeyword(variables: UpdateIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingRequiredKeywordMutation>(UpdateIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateIosysCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    deleteIosysCrawlSettingRequiredKeyword(variables: DeleteIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingRequiredKeywordMutation>(DeleteIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteIosysCrawlSettingRequiredKeyword', 'mutation', variables);
     },
     getProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductPageData', 'query', variables);

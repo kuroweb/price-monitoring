@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { useEditCrawlSettingModalState } from '../../hooks/useEditCrawlSettingModalState'
 import { updateProduct } from '../../server-actions/productQuery'
 
+import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
 import YahooAuctionForm from './YahooAuctionForm'
@@ -24,7 +25,7 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら'>('ヤフオク')
+  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス'>('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
@@ -49,6 +50,12 @@ const EditCrawlSettingModal = ({
         min_price: defaultValues?.janpara_crawl_setting?.min_price || 0,
         max_price: defaultValues?.janpara_crawl_setting?.max_price || 0,
         enabled: defaultValues?.janpara_crawl_setting?.enabled || false,
+      },
+      iosys_crawl_setting: {
+        keyword: defaultValues?.iosys_crawl_setting?.keyword || '',
+        min_price: defaultValues?.iosys_crawl_setting?.min_price || 0,
+        max_price: defaultValues?.iosys_crawl_setting?.max_price || 0,
+        enabled: defaultValues?.iosys_crawl_setting?.enabled || false,
       },
     },
     values: defaultValues,
@@ -99,7 +106,7 @@ const EditCrawlSettingModal = ({
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/4'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -107,7 +114,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/4'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -115,12 +122,20 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/3'
+                className='join-item btn btn-md w-1/4'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
                 checked={tab == 'じゃんぱら'}
                 onChange={() => setTab('じゃんぱら')}
+              />
+              <input
+                className='join-item btn btn-md w-1/4'
+                type='radio'
+                name='options'
+                aria-label='イオシス'
+                checked={tab == 'イオシス'}
+                onChange={() => setTab('イオシス')}
               />
             </Join>
             <div>
@@ -137,6 +152,11 @@ const EditCrawlSettingModal = ({
               {tab == 'じゃんぱら' && (
                 <div className='py-4'>
                   <JanparaForm register={register} />
+                </div>
+              )}
+              {tab == 'イオシス' && (
+                <div className='py-4'>
+                  <IosysForm register={register} />
                 </div>
               )}
             </div>

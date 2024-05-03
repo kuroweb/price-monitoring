@@ -63,6 +63,10 @@ module Api
         %i[keyword min_price max_price enabled]
       end
 
+      def iosys_crawl_setting_attributes
+        %i[keyword min_price max_price enabled]
+      end
+
       def external_params_attributes
         %i[sort order]
       end
@@ -76,6 +80,7 @@ module Api
           product_attributes,
           yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
           mercari_crawl_setting: mercari_crawl_setting_attributes,
+          iosys_crawl_setting: iosys_crawl_setting_attributes,
           janpara_crawl_setting: janpara_crawl_setting_attributes
         )
       end
@@ -85,7 +90,8 @@ module Api
           product_attributes,
           yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
           mercari_crawl_setting: mercari_crawl_setting_attributes,
-          janpara_crawl_setting: janpara_crawl_setting_attributes
+          janpara_crawl_setting: janpara_crawl_setting_attributes,
+          iosys_crawl_setting: iosys_crawl_setting_attributes
         )
       end
     end

@@ -57,6 +57,22 @@ import {
   UpdateJanparaCrawlSettingRequiredKeywordDocument,
   UpdateJanparaCrawlSettingRequiredKeywordInput,
   UpdateJanparaCrawlSettingRequiredKeywordMutation,
+  CreateIosysCrawlSettingExcludeKeywordInput,
+  UpdateIosysCrawlSettingExcludeKeywordInput,
+  CreateIosysCrawlSettingExcludeKeywordDocument,
+  CreateIosysCrawlSettingExcludeKeywordMutation,
+  DeleteIosysCrawlSettingExcludeKeywordDocument,
+  DeleteIosysCrawlSettingExcludeKeywordMutation,
+  UpdateIosysCrawlSettingExcludeKeywordDocument,
+  UpdateIosysCrawlSettingExcludeKeywordMutation,
+  CreateIosysCrawlSettingRequiredKeywordInput,
+  CreateIosysCrawlSettingRequiredKeywordDocument,
+  CreateIosysCrawlSettingRequiredKeywordMutation,
+  DeleteIosysCrawlSettingRequiredKeywordDocument,
+  DeleteIosysCrawlSettingRequiredKeywordMutation,
+  UpdateIosysCrawlSettingRequiredKeywordDocument,
+  UpdateIosysCrawlSettingRequiredKeywordInput,
+  UpdateIosysCrawlSettingRequiredKeywordMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -261,6 +277,64 @@ export const updateJanparaCrawlSettingRequiredKeyword = async (
 export const deleteJanparaCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeleteJanparaCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteJanparaCrawlSettingRequiredKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/*
+  Iosys
+*/
+
+/* IosysCrawlSettingExcludeKeyword */
+
+export const createIosysCrawlSettingExcludeKeyword = async (
+  input: CreateIosysCrawlSettingExcludeKeywordInput,
+) => {
+  return await getClient().mutate<CreateIosysCrawlSettingExcludeKeywordMutation>({
+    mutation: CreateIosysCrawlSettingExcludeKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateIosysCrawlSettingExcludeKeyword = async (
+  input: UpdateIosysCrawlSettingExcludeKeywordInput,
+) => {
+  return await getClient().mutate<UpdateIosysCrawlSettingExcludeKeywordMutation>({
+    mutation: UpdateIosysCrawlSettingExcludeKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteIosysCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteIosysCrawlSettingExcludeKeywordMutation>({
+    mutation: DeleteIosysCrawlSettingExcludeKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/* IosysCrawlSettingRequiredKeyword */
+
+export const createIosysCrawlSettingRequiredKeyword = async (
+  input: CreateIosysCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<CreateIosysCrawlSettingRequiredKeywordMutation>({
+    mutation: CreateIosysCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateIosysCrawlSettingRequiredKeyword = async (
+  input: UpdateIosysCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<UpdateIosysCrawlSettingRequiredKeywordMutation>({
+    mutation: UpdateIosysCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteIosysCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteIosysCrawlSettingRequiredKeywordMutation>({
+    mutation: DeleteIosysCrawlSettingRequiredKeywordDocument,
     variables: { id: id, productId: productId },
   })
 }

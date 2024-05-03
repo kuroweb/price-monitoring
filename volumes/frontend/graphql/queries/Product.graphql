@@ -32,6 +32,14 @@ query getProductPageData($id: ID, $name: String) {
       maxPrice
       enabled
     }
+    iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
   }
 }
 
@@ -137,6 +145,28 @@ query getProductDetailPageData(
       janparaCrawlSettingRequiredKeywords {
         id
         janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      iosysCrawlSettingExcludeKeywords {
+        id
+        iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      iosysCrawlSettingRequiredKeywords {
+        id
+        iosysCrawlSettingId
         keyword
         createdAt
         updatedAt

@@ -1,6 +1,9 @@
 package products
 
 import (
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/iosys_crawl_setting_exclude_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/iosys_crawl_setting_required_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/iosys_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_crawl_setting_required_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/janpara_crawl_settings"
@@ -37,6 +40,9 @@ type IProductService interface {
 	janpara_crawl_settings.IJanparaCrawlSettingService
 	janpara_crawl_setting_exclude_keywords.IJanparaCrawlSettingExcludeKeywordService
 	janpara_crawl_setting_required_keywords.IJanparaCrawlSettingRequiredKeywordService
+	iosys_crawl_settings.IIosysCrawlSettingService
+	iosys_crawl_setting_exclude_keywords.IIosysCrawlSettingExcludeKeywordService
+	iosys_crawl_setting_required_keywords.IIosysCrawlSettingRequiredKeywordService
 	related_products.IRelatedProductService
 }
 
@@ -59,6 +65,9 @@ type ProductService struct {
 	*janpara_crawl_settings.JanparaCrawlSettingService
 	*janpara_crawl_setting_exclude_keywords.JanparaCrawlSettingExcludeKeywordService
 	*janpara_crawl_setting_required_keywords.JanparaCrawlSettingRequiredKeywordService
+	*iosys_crawl_settings.IosysCrawlSettingService
+	*iosys_crawl_setting_exclude_keywords.IosysCrawlSettingExcludeKeywordService
+	*iosys_crawl_setting_required_keywords.IosysCrawlSettingRequiredKeywordService
 	*related_products.RelatedProductService
 }
 
@@ -82,6 +91,9 @@ func New() IProductService {
 		JanparaCrawlSettingService:                     &janpara_crawl_settings.JanparaCrawlSettingService{},
 		JanparaCrawlSettingExcludeKeywordService:       &janpara_crawl_setting_exclude_keywords.JanparaCrawlSettingExcludeKeywordService{},
 		JanparaCrawlSettingRequiredKeywordService:      &janpara_crawl_setting_required_keywords.JanparaCrawlSettingRequiredKeywordService{},
+		IosysCrawlSettingService:                       &iosys_crawl_settings.IosysCrawlSettingService{},
+		IosysCrawlSettingExcludeKeywordService:         &iosys_crawl_setting_exclude_keywords.IosysCrawlSettingExcludeKeywordService{},
+		IosysCrawlSettingRequiredKeywordService:        &iosys_crawl_setting_required_keywords.IosysCrawlSettingRequiredKeywordService{},
 		RelatedProductService:                          &related_products.RelatedProductService{},
 	}
 }

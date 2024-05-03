@@ -1,0 +1,15 @@
+package iosys_crawl_setting_exclude_keywords
+
+type IIosysCrawlSettingExcludeKeywordService interface {
+	IFindIosysCrawlSettingExcludeKeywordService
+	ICreateIosysCrawlSettingExcludeKeywordService
+	IUpdateIosysCrawlSettingExcludeKeywordService
+	IDeleteIosysCrawlSettingExcludeKeywordService
+}
+
+type IosysCrawlSettingExcludeKeywordService struct {
+	*FindIosysCrawlSettingExcludeKeywordService
+	*CreateIosysCrawlSettingExcludeKeywordService
+	*UpdateIosysCrawlSettingExcludeKeywordService
+	*DeleteIosysCrawlSettingExcludeKeywordService
+}

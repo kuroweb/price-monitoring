@@ -148,6 +148,12 @@ const Page = async ({
             max_price: data.product.janparaCrawlSetting?.maxPrice,
             enabled: data.product.janparaCrawlSetting?.enabled,
           },
+          iosys_crawl_setting: {
+            keyword: data.product.iosysCrawlSetting?.keyword,
+            min_price: data.product.iosysCrawlSetting?.minPrice,
+            max_price: data.product.iosysCrawlSetting?.maxPrice,
+            enabled: data.product.iosysCrawlSetting?.enabled,
+          },
         }}
       />
       <EditExcludeKeywordModal data={data} />

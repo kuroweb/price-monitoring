@@ -11,6 +11,16 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/internal"
 )
 
+// IosysCrawlSettingExcludeKeywords is the resolver for the iosysCrawlSettingExcludeKeywords field.
+func (r *iosysCrawlSettingResolver) IosysCrawlSettingExcludeKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingExcludeKeyword, error) {
+	return r.ProductService.FindIosysCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// IosysCrawlSettingRequiredKeywords is the resolver for the iosysCrawlSettingRequiredKeywords field.
+func (r *iosysCrawlSettingResolver) IosysCrawlSettingRequiredKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingRequiredKeyword, error) {
+	return r.ProductService.FindIosysCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
+}
+
 // JanparaCrawlSettingExcludeKeywords is the resolver for the janparaCrawlSettingExcludeKeywords field.
 func (r *janparaCrawlSettingResolver) JanparaCrawlSettingExcludeKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindJanparaCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
@@ -71,6 +81,11 @@ func (r *productResolver) JanparaCrawlSetting(ctx context.Context, obj *model.Pr
 	return r.ProductService.FindJanparaCrawlSetting(ctx, obj.ID)
 }
 
+// IosysCrawlSetting is the resolver for the iosysCrawlSetting field.
+func (r *productResolver) IosysCrawlSetting(ctx context.Context, obj *model.Product) (*model.IosysCrawlSetting, error) {
+	return r.ProductService.FindIosysCrawlSetting(ctx, obj.ID)
+}
+
 // RelatedProducts is the resolver for the relatedProducts field.
 func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, published, yahooAuctionBuyable, page, per, sort, order)
@@ -84,6 +99,11 @@ func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeKeywor
 // YahooAuctionCrawlSettingRequiredKeywords is the resolver for the yahooAuctionCrawlSettingRequiredKeywords field.
 func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingRequiredKeyword, error) {
 	return r.ProductService.FindYahooAuctionCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// IosysCrawlSetting returns internal.IosysCrawlSettingResolver implementation.
+func (r *Resolver) IosysCrawlSetting() internal.IosysCrawlSettingResolver {
+	return &iosysCrawlSettingResolver{r}
 }
 
 // JanparaCrawlSetting returns internal.JanparaCrawlSettingResolver implementation.
@@ -104,6 +124,7 @@ func (r *Resolver) YahooAuctionCrawlSetting() internal.YahooAuctionCrawlSettingR
 	return &yahooAuctionCrawlSettingResolver{r}
 }
 
+type iosysCrawlSettingResolver struct{ *Resolver }
 type janparaCrawlSettingResolver struct{ *Resolver }
 type mercariCrawlSettingResolver struct{ *Resolver }
 type productResolver struct{ *Resolver }

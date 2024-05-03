@@ -1,9 +1,10 @@
 require "sidekiq/web"
 require "sidekiq/cron/web"
 
-Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
-  namespace :api do # rubocop:disable Metrics/BlockLength
-    namespace :v1 do # rubocop:disable Metrics/BlockLength
+# rubocop:disable Metrics/BlockLength
+Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
       resources :products
 
       namespace :products do
@@ -36,6 +37,13 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
             resources :janpara_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
 
+          ## iosys ##
+          resources :iosys_crawl_settings, only: [:index]
+          namespace :iosys_crawl_settings do
+            resources :iosys_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :iosys_crawl_setting_required_keywords, only: %i[index create update destroy]
+          end
+
           ## related_product ##
           resources :related_products, only: %i[index]
         end
@@ -48,3 +56,4 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   # TODO: ProductionでBasic認証をかける
   mount Sidekiq::Web, at: "/sidekiq"
 end
+# rubocop:enable Metrics/BlockLength

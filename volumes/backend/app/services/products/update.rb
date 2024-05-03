@@ -4,6 +4,7 @@ module Products
     YAHOO_AUCTION_CRAWL_SETTING_ATTRIBUTES = %i[keyword category_id min_price max_price enabled].freeze
     MERCARI_CRAWL_SETTING_ATTRIBUTES = %i[keyword category_id min_price max_price enabled].freeze
     JANPARA_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
+    IOSYS_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
 
     def self.call(...)
       new(...).call
@@ -20,6 +21,7 @@ module Products
         update_yahoo_auction_crawl_setting
         update_mercari_crawl_setting
         update_janpara_crawl_setting
+        update_iosys_crawl_setting
 
         ServiceResponse.success(payload: { product: })
       end
@@ -47,6 +49,10 @@ module Products
       product.janpara_crawl_setting.update(janpara_crawl_setting_params)
     end
 
+    def update_iosys_crawl_setting
+      product.iosys_crawl_setting.update(iosys_crawl_setting_params)
+    end
+
     def product_params
       params.slice(*PRODUCT_ATTRIBUTES) || {}
     end
@@ -62,6 +68,9 @@ module Products
     def janpara_crawl_setting_params
       params[:janpara_crawl_setting]&.slice(*JANPARA_CRAWL_SETTING_ATTRIBUTES) || {}
     end
+
+    def iosys_crawl_setting_params
+      params[:iosys_crawl_setting]&.slice(*IOSYS_CRAWL_SETTING_ATTRIBUTES) || {}
     end
   end
 end

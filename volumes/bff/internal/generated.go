@@ -38,6 +38,7 @@ type Config struct {
 }
 
 type ResolverRoot interface {
+	IosysCrawlSetting() IosysCrawlSettingResolver
 	JanparaCrawlSetting() JanparaCrawlSettingResolver
 	MercariCrawlSetting() MercariCrawlSettingResolver
 	Mutation() MutationResolver
@@ -50,6 +51,38 @@ type DirectiveRoot struct {
 }
 
 type ComplexityRoot struct {
+	CreateIosysCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingExcludeKeywordResultSuccess struct {
+		IosysCrawlSettingExcludeKeyword func(childComplexity int) int
+		Ok                              func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingRequiredKeywordResultSuccess struct {
+		IosysCrawlSettingRequiredKeyword func(childComplexity int) int
+		Ok                               func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	CreateJanparaCrawlSettingExcludeKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -157,6 +190,36 @@ type ComplexityRoot struct {
 	}
 
 	CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -272,6 +335,35 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	IosysCrawlSetting struct {
+		CreatedAt                         func(childComplexity int) int
+		Enabled                           func(childComplexity int) int
+		ID                                func(childComplexity int) int
+		IosysCrawlSettingExcludeKeywords  func(childComplexity int) int
+		IosysCrawlSettingRequiredKeywords func(childComplexity int) int
+		Keyword                           func(childComplexity int) int
+		MaxPrice                          func(childComplexity int) int
+		MinPrice                          func(childComplexity int) int
+		ProductID                         func(childComplexity int) int
+		UpdatedAt                         func(childComplexity int) int
+	}
+
+	IosysCrawlSettingExcludeKeyword struct {
+		CreatedAt           func(childComplexity int) int
+		ID                  func(childComplexity int) int
+		IosysCrawlSettingID func(childComplexity int) int
+		Keyword             func(childComplexity int) int
+		UpdatedAt           func(childComplexity int) int
+	}
+
+	IosysCrawlSettingRequiredKeyword struct {
+		CreatedAt           func(childComplexity int) int
+		ID                  func(childComplexity int) int
+		IosysCrawlSettingID func(childComplexity int) int
+		Keyword             func(childComplexity int) int
+		UpdatedAt           func(childComplexity int) int
+	}
+
 	JanparaCrawlSetting struct {
 		CreatedAt                           func(childComplexity int) int
 		Enabled                             func(childComplexity int) int
@@ -355,6 +447,8 @@ type ComplexityRoot struct {
 	}
 
 	Mutation struct {
+		CreateIosysCrawlSettingExcludeKeyword         func(childComplexity int, input model.CreateIosysCrawlSettingExcludeKeywordInput) int
+		CreateIosysCrawlSettingRequiredKeyword        func(childComplexity int, input model.CreateIosysCrawlSettingRequiredKeywordInput) int
 		CreateJanparaCrawlSettingExcludeKeyword       func(childComplexity int, input model.CreateJanparaCrawlSettingExcludeKeywordInput) int
 		CreateJanparaCrawlSettingRequiredKeyword      func(childComplexity int, input model.CreateJanparaCrawlSettingRequiredKeywordInput) int
 		CreateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.CreateMercariCrawlSettingExcludeKeywordInput) int
@@ -362,6 +456,8 @@ type ComplexityRoot struct {
 		CreateProduct                                 func(childComplexity int, input model.CreateProductInput) int
 		CreateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) int
 		CreateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) int
+		DeleteIosysCrawlSettingExcludeKeyword         func(childComplexity int, id string, productID string) int
+		DeleteIosysCrawlSettingRequiredKeyword        func(childComplexity int, id string, productID string) int
 		DeleteJanparaCrawlSettingExcludeKeyword       func(childComplexity int, id string, productID string) int
 		DeleteJanparaCrawlSettingRequiredKeyword      func(childComplexity int, id string, productID string) int
 		DeleteMercariCrawlSettingExcludeKeyword       func(childComplexity int, id string, productID string) int
@@ -369,6 +465,8 @@ type ComplexityRoot struct {
 		DeleteProduct                                 func(childComplexity int, id string) int
 		DeleteYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, id string, productID string) int
 		DeleteYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, id string, productID string) int
+		UpdateIosysCrawlSettingExcludeKeyword         func(childComplexity int, input model.UpdateIosysCrawlSettingExcludeKeywordInput) int
+		UpdateIosysCrawlSettingRequiredKeyword        func(childComplexity int, input model.UpdateIosysCrawlSettingRequiredKeywordInput) int
 		UpdateJanparaCrawlSettingExcludeKeyword       func(childComplexity int, input model.UpdateJanparaCrawlSettingExcludeKeywordInput) int
 		UpdateJanparaCrawlSettingRequiredKeyword      func(childComplexity int, input model.UpdateJanparaCrawlSettingRequiredKeywordInput) int
 		UpdateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.UpdateMercariCrawlSettingExcludeKeywordInput) int
@@ -380,6 +478,7 @@ type ComplexityRoot struct {
 
 	Product struct {
 		ID                                    func(childComplexity int) int
+		IosysCrawlSetting                     func(childComplexity int) int
 		JanparaCrawlSetting                   func(childComplexity int) int
 		MercariCrawlSetting                   func(childComplexity int) int
 		MercariDailyPurchaseSummaries         func(childComplexity int) int
@@ -411,6 +510,38 @@ type ComplexityRoot struct {
 		Published    func(childComplexity int) int
 		ThumbnailURL func(childComplexity int) int
 		UpdatedAt    func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingExcludeKeywordResultSuccess struct {
+		IosysCrawlSettingExcludeKeyword func(childComplexity int) int
+		Ok                              func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingRequiredKeywordResultSuccess struct {
+		IosysCrawlSettingRequiredKeyword func(childComplexity int) int
+		Ok                               func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
 	}
 
 	UpdateJanparaCrawlSettingExcludeKeywordResultError struct {
@@ -589,6 +720,10 @@ type ComplexityRoot struct {
 	}
 }
 
+type IosysCrawlSettingResolver interface {
+	IosysCrawlSettingExcludeKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingExcludeKeyword, error)
+	IosysCrawlSettingRequiredKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingRequiredKeyword, error)
+}
 type JanparaCrawlSettingResolver interface {
 	JanparaCrawlSettingExcludeKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeKeyword, error)
 	JanparaCrawlSettingRequiredKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingRequiredKeyword, error)
@@ -619,6 +754,12 @@ type MutationResolver interface {
 	CreateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateJanparaCrawlSettingRequiredKeywordInput) (model.CreateJanparaCrawlSettingRequiredKeywordResult, error)
 	UpdateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateJanparaCrawlSettingRequiredKeywordInput) (model.UpdateJanparaCrawlSettingRequiredKeywordResult, error)
 	DeleteJanparaCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingRequiredKeywordResult, error)
+	CreateIosysCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateIosysCrawlSettingExcludeKeywordInput) (model.CreateIosysCrawlSettingExcludeKeywordResult, error)
+	UpdateIosysCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingExcludeKeywordInput) (model.UpdateIosysCrawlSettingExcludeKeywordResult, error)
+	DeleteIosysCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingExcludeKeywordResult, error)
+	CreateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateIosysCrawlSettingRequiredKeywordInput) (model.CreateIosysCrawlSettingRequiredKeywordResult, error)
+	UpdateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingRequiredKeywordInput) (model.UpdateIosysCrawlSettingRequiredKeywordResult, error)
+	DeleteIosysCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingRequiredKeywordResult, error)
 }
 type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error)
@@ -629,6 +770,7 @@ type ProductResolver interface {
 	MercariCrawlSetting(ctx context.Context, obj *model.Product) (*model.MercariCrawlSetting, error)
 	MercariDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.MercariDailyPurchaseSummary, error)
 	JanparaCrawlSetting(ctx context.Context, obj *model.Product) (*model.JanparaCrawlSetting, error)
+	IosysCrawlSetting(ctx context.Context, obj *model.Product) (*model.IosysCrawlSetting, error)
 	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 type QueryResolver interface {
@@ -659,6 +801,104 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 	ec := executionContext{nil, e, 0, 0, nil}
 	_ = ec
 	switch typeName + "." + field {
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultSuccess.iosysCrawlSettingExcludeKeyword":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultSuccess.IosysCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultSuccess.IosysCrawlSettingExcludeKeyword(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultSuccess.iosysCrawlSettingRequiredKeyword":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultSuccess.IosysCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultSuccess.IosysCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "CreateJanparaCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.CreateJanparaCrawlSettingExcludeKeywordResultError.Error == nil {
@@ -1003,6 +1243,90 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "DeleteIosysCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeleteIosysCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "DeleteIosysCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "DeleteIosysCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
 	case "DeleteJanparaCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.DeleteJanparaCrawlSettingExcludeKeywordResultError.Error == nil {
 			break
@@ -1310,6 +1634,146 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.ErrorDetail.Message(childComplexity), true
+
+	case "IosysCrawlSetting.createdAt":
+		if e.complexity.IosysCrawlSetting.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.CreatedAt(childComplexity), true
+
+	case "IosysCrawlSetting.enabled":
+		if e.complexity.IosysCrawlSetting.Enabled == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.Enabled(childComplexity), true
+
+	case "IosysCrawlSetting.id":
+		if e.complexity.IosysCrawlSetting.ID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.ID(childComplexity), true
+
+	case "IosysCrawlSetting.iosysCrawlSettingExcludeKeywords":
+		if e.complexity.IosysCrawlSetting.IosysCrawlSettingExcludeKeywords == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.IosysCrawlSettingExcludeKeywords(childComplexity), true
+
+	case "IosysCrawlSetting.iosysCrawlSettingRequiredKeywords":
+		if e.complexity.IosysCrawlSetting.IosysCrawlSettingRequiredKeywords == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.IosysCrawlSettingRequiredKeywords(childComplexity), true
+
+	case "IosysCrawlSetting.keyword":
+		if e.complexity.IosysCrawlSetting.Keyword == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.Keyword(childComplexity), true
+
+	case "IosysCrawlSetting.maxPrice":
+		if e.complexity.IosysCrawlSetting.MaxPrice == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.MaxPrice(childComplexity), true
+
+	case "IosysCrawlSetting.minPrice":
+		if e.complexity.IosysCrawlSetting.MinPrice == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.MinPrice(childComplexity), true
+
+	case "IosysCrawlSetting.productId":
+		if e.complexity.IosysCrawlSetting.ProductID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.ProductID(childComplexity), true
+
+	case "IosysCrawlSetting.updatedAt":
+		if e.complexity.IosysCrawlSetting.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.UpdatedAt(childComplexity), true
+
+	case "IosysCrawlSettingExcludeKeyword.createdAt":
+		if e.complexity.IosysCrawlSettingExcludeKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeKeyword.CreatedAt(childComplexity), true
+
+	case "IosysCrawlSettingExcludeKeyword.id":
+		if e.complexity.IosysCrawlSettingExcludeKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeKeyword.ID(childComplexity), true
+
+	case "IosysCrawlSettingExcludeKeyword.iosysCrawlSettingId":
+		if e.complexity.IosysCrawlSettingExcludeKeyword.IosysCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeKeyword.IosysCrawlSettingID(childComplexity), true
+
+	case "IosysCrawlSettingExcludeKeyword.keyword":
+		if e.complexity.IosysCrawlSettingExcludeKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeKeyword.Keyword(childComplexity), true
+
+	case "IosysCrawlSettingExcludeKeyword.updatedAt":
+		if e.complexity.IosysCrawlSettingExcludeKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "IosysCrawlSettingRequiredKeyword.createdAt":
+		if e.complexity.IosysCrawlSettingRequiredKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingRequiredKeyword.CreatedAt(childComplexity), true
+
+	case "IosysCrawlSettingRequiredKeyword.id":
+		if e.complexity.IosysCrawlSettingRequiredKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingRequiredKeyword.ID(childComplexity), true
+
+	case "IosysCrawlSettingRequiredKeyword.iosysCrawlSettingId":
+		if e.complexity.IosysCrawlSettingRequiredKeyword.IosysCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingRequiredKeyword.IosysCrawlSettingID(childComplexity), true
+
+	case "IosysCrawlSettingRequiredKeyword.keyword":
+		if e.complexity.IosysCrawlSettingRequiredKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingRequiredKeyword.Keyword(childComplexity), true
+
+	case "IosysCrawlSettingRequiredKeyword.updatedAt":
+		if e.complexity.IosysCrawlSettingRequiredKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingRequiredKeyword.UpdatedAt(childComplexity), true
 
 	case "JanparaCrawlSetting.createdAt":
 		if e.complexity.JanparaCrawlSetting.CreatedAt == nil {
@@ -1717,6 +2181,30 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.MercariProduct.UpdatedAt(childComplexity), true
 
+	case "Mutation.createIosysCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.CreateIosysCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createIosysCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateIosysCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateIosysCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.createIosysCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.CreateIosysCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createIosysCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateIosysCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreateIosysCrawlSettingRequiredKeywordInput)), true
+
 	case "Mutation.createJanparaCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.CreateJanparaCrawlSettingExcludeKeyword == nil {
 			break
@@ -1801,6 +2289,30 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateYahooAuctionCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreateYahooAuctionCrawlSettingRequiredKeywordInput)), true
 
+	case "Mutation.deleteIosysCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.DeleteIosysCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteIosysCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteIosysCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deleteIosysCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.DeleteIosysCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteIosysCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteIosysCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
 	case "Mutation.deleteJanparaCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.DeleteJanparaCrawlSettingExcludeKeyword == nil {
 			break
@@ -1884,6 +2396,30 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.DeleteYahooAuctionCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.updateIosysCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.UpdateIosysCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateIosysCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateIosysCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateIosysCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updateIosysCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.UpdateIosysCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateIosysCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateIosysCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdateIosysCrawlSettingRequiredKeywordInput)), true
 
 	case "Mutation.updateJanparaCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.UpdateJanparaCrawlSettingExcludeKeyword == nil {
@@ -1975,6 +2511,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.ID(childComplexity), true
+
+	case "Product.iosysCrawlSetting":
+		if e.complexity.Product.IosysCrawlSetting == nil {
+			break
+		}
+
+		return e.complexity.Product.IosysCrawlSetting(childComplexity), true
 
 	case "Product.janparaCrawlSetting":
 		if e.complexity.Product.JanparaCrawlSetting == nil {
@@ -2180,6 +2723,104 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.RelatedProduct.UpdatedAt(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultSuccess.iosysCrawlSettingExcludeKeyword":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultSuccess.IosysCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultSuccess.IosysCrawlSettingExcludeKeyword(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultSuccess.iosysCrawlSettingRequiredKeyword":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultSuccess.IosysCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultSuccess.IosysCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "UpdateJanparaCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.UpdateJanparaCrawlSettingExcludeKeywordResultError.Error == nil {
@@ -2847,6 +3488,9 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 	rc := graphql.GetOperationContext(ctx)
 	ec := executionContext{rc, e, 0, 0, make(chan graphql.DeferredResult)}
 	inputUnmarshalMap := graphql.BuildUnmarshalerMap(
+		ec.unmarshalInputCreateIosysCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreateIosysCrawlSettingInput,
+		ec.unmarshalInputCreateIosysCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateJanparaCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateJanparaCrawlSettingInput,
 		ec.unmarshalInputCreateJanparaCrawlSettingRequiredKeywordInput,
@@ -2857,6 +3501,9 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingRequiredKeywordInput,
+		ec.unmarshalInputUpdateIosysCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdateIosysCrawlSettingInput,
+		ec.unmarshalInputUpdateIosysCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateJanparaCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputUpdateJanparaCrawlSettingInput,
 		ec.unmarshalInputUpdateJanparaCrawlSettingRequiredKeywordInput,
@@ -3032,6 +3679,26 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteJanparaCrawlSettingRequiredKeywordResult!
+  createIosysCrawlSettingExcludeKeyword(
+    input: CreateIosysCrawlSettingExcludeKeywordInput!
+  ): CreateIosysCrawlSettingExcludeKeywordResult!
+  updateIosysCrawlSettingExcludeKeyword(
+    input: UpdateIosysCrawlSettingExcludeKeywordInput!
+  ): UpdateIosysCrawlSettingExcludeKeywordResult!
+  deleteIosysCrawlSettingExcludeKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteIosysCrawlSettingExcludeKeywordResult!
+  createIosysCrawlSettingRequiredKeyword(
+    input: CreateIosysCrawlSettingRequiredKeywordInput!
+  ): CreateIosysCrawlSettingRequiredKeywordResult!
+  updateIosysCrawlSettingRequiredKeyword(
+    input: UpdateIosysCrawlSettingRequiredKeywordInput!
+  ): UpdateIosysCrawlSettingRequiredKeywordResult!
+  deleteIosysCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteIosysCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -3057,6 +3724,7 @@ input CreateProductInput {
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput!
   mercari_crawl_setting: CreateMercariCrawlSettingInput!
   janpara_crawl_setting: CreateJanparaCrawlSettingInput!
+  iosys_crawl_setting: CreateIosysCrawlSettingInput!
 }
 
 input CreateYahooAuctionCrawlSettingInput {
@@ -3076,6 +3744,13 @@ input CreateMercariCrawlSettingInput {
 }
 
 input CreateJanparaCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input CreateIosysCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -3111,6 +3786,7 @@ input UpdateProductInput {
   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput!
   mercari_crawl_setting: UpdateMercariCrawlSettingInput!
   janpara_crawl_setting: UpdateJanparaCrawlSettingInput!
+  iosys_crawl_setting: UpdateIosysCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
@@ -3130,6 +3806,13 @@ input UpdateMercariCrawlSettingInput {
 }
 
 input UpdateJanparaCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input UpdateIosysCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -3690,6 +4373,176 @@ type DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed implements U
   message: String!
   details: [ErrorDetail!]!
 }
+
+## CreateIosysCrawlSettingExcludeKeyword ##
+
+input CreateIosysCrawlSettingExcludeKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateIosysCrawlSettingExcludeKeywordResult =
+    CreateIosysCrawlSettingExcludeKeywordResultSuccess
+  | CreateIosysCrawlSettingExcludeKeywordResultError
+
+type CreateIosysCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingExcludeKeyword: IosysCrawlSettingExcludeKeyword!
+}
+
+type CreateIosysCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateIosysCrawlSettingExcludeKeywordResultErrors!
+}
+
+union CreateIosysCrawlSettingExcludeKeywordResultErrors =
+    CreateIosysCrawlSettingExcludeKeywordResultValidationFailed
+
+type CreateIosysCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateIosysCrawlSettingExcludeKeyword ##
+
+input UpdateIosysCrawlSettingExcludeKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateIosysCrawlSettingExcludeKeywordResult =
+    UpdateIosysCrawlSettingExcludeKeywordResultSuccess
+  | UpdateIosysCrawlSettingExcludeKeywordResultError
+
+type UpdateIosysCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingExcludeKeyword: IosysCrawlSettingExcludeKeyword!
+}
+
+type UpdateIosysCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateIosysCrawlSettingExcludeKeywordResultErrors!
+}
+
+union UpdateIosysCrawlSettingExcludeKeywordResultErrors =
+    UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed
+
+type UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteIosysCrawlSettingExcludeKeyword ##
+
+union DeleteIosysCrawlSettingExcludeKeywordResult =
+    DeleteIosysCrawlSettingExcludeKeywordResultSuccess
+  | DeleteIosysCrawlSettingExcludeKeywordResultError
+
+type DeleteIosysCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteIosysCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteIosysCrawlSettingExcludeKeywordResultErrors!
+}
+
+union DeleteIosysCrawlSettingExcludeKeywordResultErrors =
+    DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed
+
+type DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateIosysCrawlSettingRequiredKeyword ##
+
+input CreateIosysCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateIosysCrawlSettingRequiredKeywordResult =
+    CreateIosysCrawlSettingRequiredKeywordResultSuccess
+  | CreateIosysCrawlSettingRequiredKeywordResultError
+
+type CreateIosysCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingRequiredKeyword: IosysCrawlSettingRequiredKeyword!
+}
+
+type CreateIosysCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateIosysCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateIosysCrawlSettingRequiredKeywordResultErrors =
+    CreateIosysCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateIosysCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateIosysCrawlSettingRequiredKeyword ##
+
+input UpdateIosysCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateIosysCrawlSettingRequiredKeywordResult =
+    UpdateIosysCrawlSettingRequiredKeywordResultSuccess
+  | UpdateIosysCrawlSettingRequiredKeywordResultError
+
+type UpdateIosysCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingRequiredKeyword: IosysCrawlSettingRequiredKeyword!
+}
+
+type UpdateIosysCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateIosysCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateIosysCrawlSettingRequiredKeywordResultErrors =
+    UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteIosysCrawlSettingRequiredKeyword ##
+
+union DeleteIosysCrawlSettingRequiredKeywordResult =
+    DeleteIosysCrawlSettingRequiredKeywordResultSuccess
+  | DeleteIosysCrawlSettingRequiredKeywordResultError
+
+type DeleteIosysCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteIosysCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteIosysCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteIosysCrawlSettingRequiredKeywordResultErrors =
+    DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
 `, BuiltIn: false},
 	{Name: "../graph/product.graphqls", Input: `type Product implements Node {
   id: ID!
@@ -3710,6 +4563,7 @@ type DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed implements U
   mercariCrawlSetting: MercariCrawlSetting!
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   janparaCrawlSetting: JanparaCrawlSetting!
+  iosysCrawlSetting: IosysCrawlSetting!
   relatedProducts(
     platformMask: String!
     published: Boolean!
@@ -3866,6 +4720,35 @@ type JanparaCrawlSettingRequiredKeyword implements Node {
   updatedAt: String!
 }
 
+type IosysCrawlSetting implements Node {
+  id: ID!
+  productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  iosysCrawlSettingExcludeKeywords: [IosysCrawlSettingExcludeKeyword!]!
+  iosysCrawlSettingRequiredKeywords: [IosysCrawlSettingRequiredKeyword!]!
+}
+
+type IosysCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  iosysCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type IosysCrawlSettingRequiredKeyword implements Node {
+  id: ID!
+  iosysCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
 type RelatedProduct {
   platform: String!
   productId: Int!
@@ -3893,6 +4776,36 @@ var parsedSchema = gqlparser.MustLoadSchema(sources...)
 // endregion ************************** generated!.gotpl **************************
 
 // region    ***************************** args.gotpl *****************************
+
+func (ec *executionContext) field_Mutation_createIosysCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateIosysCrawlSettingExcludeKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateIosysCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createIosysCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateIosysCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateIosysCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingRequiredKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
 
 func (ec *executionContext) field_Mutation_createJanparaCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
@@ -3996,6 +4909,54 @@ func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingRequire
 		}
 	}
 	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteIosysCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteIosysCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
 	return args, nil
 }
 
@@ -4155,6 +5116,36 @@ func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingRequire
 		}
 	}
 	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateIosysCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateIosysCrawlSettingExcludeKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateIosysCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateIosysCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateIosysCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateIosysCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingRequiredKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
 	return args, nil
 }
 
@@ -4513,6 +5504,658 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 // endregion ************************** directives.gotpl **************************
 
 // region    **************************** field.gotpl *****************************
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateIosysCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateIosysCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateIosysCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingExcludeKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateIosysCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateIosysCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateIosysCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
 
 func (ec *executionContext) _CreateJanparaCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeKeywordResultError_ok(ctx, field)
@@ -6009,6 +7652,8 @@ func (ec *executionContext) fieldContext_CreateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
+			case "iosysCrawlSetting":
+				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -6792,6 +8437,546 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResult
 func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteIosysCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteIosysCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteIosysCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteIosysCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteIosysCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteIosysCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -8776,6 +10961,904 @@ func (ec *executionContext) _ErrorDetail_message(ctx context.Context, field grap
 func (ec *executionContext) fieldContext_ErrorDetail_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "ErrorDetail",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_id(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_productId(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_productId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ProductID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_keyword(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_minPrice(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_minPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MinPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_minPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_maxPrice(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_maxPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MaxPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_maxPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_enabled(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Enabled, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_iosysCrawlSettingExcludeKeywords(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.IosysCrawlSetting().IosysCrawlSettingExcludeKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.IosysCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingExcludeKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.IosysCrawlSetting().IosysCrawlSettingRequiredKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.IosysCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingRequiredKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingRequiredKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingRequiredKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingRequiredKeyword",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -12520,6 +15603,336 @@ func (ec *executionContext) fieldContext_Mutation_deleteJanparaCrawlSettingRequi
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createIosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createIosysCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateIosysCrawlSettingExcludeKeyword(rctx, fc.Args["input"].(model.CreateIosysCrawlSettingExcludeKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateIosysCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreateIosysCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createIosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateIosysCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createIosysCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateIosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateIosysCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateIosysCrawlSettingExcludeKeyword(rctx, fc.Args["input"].(model.UpdateIosysCrawlSettingExcludeKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateIosysCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdateIosysCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateIosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateIosysCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateIosysCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteIosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteIosysCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteIosysCrawlSettingExcludeKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteIosysCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeleteIosysCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteIosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteIosysCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteIosysCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createIosysCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateIosysCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.CreateIosysCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateIosysCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreateIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateIosysCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createIosysCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateIosysCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateIosysCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.UpdateIosysCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateIosysCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdateIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateIosysCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateIosysCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteIosysCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteIosysCrawlSettingRequiredKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteIosysCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeleteIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteIosysCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteIosysCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Product_id(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Product_id(ctx, field)
 	if err != nil {
@@ -13144,6 +16557,72 @@ func (ec *executionContext) fieldContext_Product_janparaCrawlSetting(ctx context
 	return fc, nil
 }
 
+func (ec *executionContext) _Product_iosysCrawlSetting(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Product().IosysCrawlSetting(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSetting)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSetting2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSetting(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Product_iosysCrawlSetting(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Product",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSetting_id(ctx, field)
+			case "productId":
+				return ec.fieldContext_IosysCrawlSetting_productId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSetting_keyword(ctx, field)
+			case "minPrice":
+				return ec.fieldContext_IosysCrawlSetting_minPrice(ctx, field)
+			case "maxPrice":
+				return ec.fieldContext_IosysCrawlSetting_maxPrice(ctx, field)
+			case "enabled":
+				return ec.fieldContext_IosysCrawlSetting_enabled(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSetting_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSetting_updatedAt(ctx, field)
+			case "iosysCrawlSettingExcludeKeywords":
+				return ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeKeywords(ctx, field)
+			case "iosysCrawlSettingRequiredKeywords":
+				return ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSetting", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Product_relatedProducts(ctx, field)
 	if err != nil {
@@ -13284,6 +16763,8 @@ func (ec *executionContext) fieldContext_Query_product(ctx context.Context, fiel
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
+			case "iosysCrawlSetting":
+				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -13363,6 +16844,8 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
+			case "iosysCrawlSetting":
+				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -14078,6 +17561,658 @@ func (ec *executionContext) fieldContext_RelatedProduct_updatedAt(ctx context.Co
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateIosysCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateIosysCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateIosysCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingExcludeKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateIosysCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateIosysCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateIosysCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
 		},
 	}
 	return fc, nil
@@ -15578,6 +19713,8 @@ func (ec *executionContext) fieldContext_UpdateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_mercariDailyPurchaseSummaries(ctx, field)
 			case "janparaCrawlSetting":
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
+			case "iosysCrawlSetting":
+				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -20136,6 +24273,138 @@ func (ec *executionContext) fieldContext___Type_specifiedByURL(ctx context.Conte
 
 // region    **************************** input.gotpl *****************************
 
+func (ec *executionContext) unmarshalInputCreateIosysCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.CreateIosysCrawlSettingExcludeKeywordInput, error) {
+	var it model.CreateIosysCrawlSettingExcludeKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateIosysCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreateIosysCrawlSettingInput, error) {
+	var it model.CreateIosysCrawlSettingInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "min_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MinPrice = data
+		case "max_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MaxPrice = data
+		case "enabled":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateIosysCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.CreateIosysCrawlSettingRequiredKeywordInput, error) {
+	var it model.CreateIosysCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateJanparaCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.CreateJanparaCrawlSettingExcludeKeywordInput, error) {
 	var it model.CreateJanparaCrawlSettingExcludeKeywordInput
 	asMap := map[string]interface{}{}
@@ -20416,7 +24685,7 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting"}
+	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -20459,6 +24728,15 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 				return it, err
 			}
 			it.JanparaCrawlSetting = data
+		case "iosys_crawl_setting":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("iosys_crawl_setting"))
+			data, err := ec.unmarshalNCreateIosysCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingInput(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.IosysCrawlSetting = data
 		}
 	}
 
@@ -20582,6 +24860,156 @@ func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingRequired
 			continue
 		}
 		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateIosysCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.UpdateIosysCrawlSettingExcludeKeywordInput, error) {
+	var it model.UpdateIosysCrawlSettingExcludeKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateIosysCrawlSettingInput(ctx context.Context, obj interface{}) (model.UpdateIosysCrawlSettingInput, error) {
+	var it model.UpdateIosysCrawlSettingInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "min_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MinPrice = data
+		case "max_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MaxPrice = data
+		case "enabled":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateIosysCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.UpdateIosysCrawlSettingRequiredKeywordInput, error) {
+	var it model.UpdateIosysCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
 		case "productId":
 			var err error
 
@@ -20922,7 +25350,7 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting"}
+	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -20965,6 +25393,15 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 				return it, err
 			}
 			it.JanparaCrawlSetting = data
+		case "iosys_crawl_setting":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("iosys_crawl_setting"))
+			data, err := ec.unmarshalNUpdateIosysCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingInput(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.IosysCrawlSetting = data
 		}
 	}
 
@@ -21133,6 +25570,84 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingRequired
 // endregion **************************** input.gotpl *****************************
 
 // region    ************************** interface.gotpl ***************************
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateIosysCrawlSettingExcludeKeywordResultSuccess:
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeKeywordResultError:
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateIosysCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingRequiredKeywordResultError:
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
 
 func (ec *executionContext) _CreateJanparaCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateJanparaCrawlSettingExcludeKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
@@ -21402,6 +25917,84 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResult
 			return graphql.Null
 		}
 		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteIosysCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteIosysCrawlSettingExcludeKeywordResultSuccess:
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeKeywordResultError:
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteIosysCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteIosysCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteIosysCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -21789,6 +26382,27 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._JanparaCrawlSettingRequiredKeyword(ctx, sel, obj)
+	case model.IosysCrawlSetting:
+		return ec._IosysCrawlSetting(ctx, sel, &obj)
+	case *model.IosysCrawlSetting:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._IosysCrawlSetting(ctx, sel, obj)
+	case model.IosysCrawlSettingExcludeKeyword:
+		return ec._IosysCrawlSettingExcludeKeyword(ctx, sel, &obj)
+	case *model.IosysCrawlSettingExcludeKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._IosysCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.IosysCrawlSettingRequiredKeyword:
+		return ec._IosysCrawlSettingRequiredKeyword(ctx, sel, &obj)
+	case *model.IosysCrawlSettingRequiredKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._IosysCrawlSettingRequiredKeyword(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -22092,6 +26706,168 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteJanparaCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeKeywordResultSuccess:
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeKeywordResultError:
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess:
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeKeywordResultError:
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeKeywordResultSuccess:
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeKeywordResultError:
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingRequiredKeywordResultError:
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess:
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeKeywordResultError:
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -22521,6 +27297,48 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -22529,6 +27347,280 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 // endregion ************************** interface.gotpl ***************************
 
 // region    **************************** object.gotpl ****************************
+
+var createIosysCrawlSettingExcludeKeywordResultErrorImplementors = []string{"CreateIosysCrawlSettingExcludeKeywordResultError", "CreateIosysCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"CreateIosysCrawlSettingExcludeKeywordResultSuccess", "CreateIosysCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingExcludeKeyword":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"CreateIosysCrawlSettingExcludeKeywordResultValidationFailed", "CreateIosysCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateIosysCrawlSettingRequiredKeywordResultError", "CreateIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"CreateIosysCrawlSettingRequiredKeywordResultSuccess", "CreateIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"CreateIosysCrawlSettingRequiredKeywordResultValidationFailed", "CreateIosysCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
 
 var createJanparaCrawlSettingExcludeKeywordResultErrorImplementors = []string{"CreateJanparaCrawlSettingExcludeKeywordResultError", "CreateJanparaCrawlSettingExcludeKeywordResult", "ResultBase"}
 
@@ -23463,6 +28555,270 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResult
 			}
 		case "details":
 			out.Values[i] = ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingExcludeKeywordResultErrorImplementors = []string{"DeleteIosysCrawlSettingExcludeKeywordResultError", "DeleteIosysCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"DeleteIosysCrawlSettingExcludeKeywordResultSuccess", "DeleteIosysCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed", "DeleteIosysCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteIosysCrawlSettingRequiredKeywordResultError", "DeleteIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteIosysCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"DeleteIosysCrawlSettingRequiredKeywordResultSuccess", "DeleteIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed", "DeleteIosysCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -24457,6 +29813,264 @@ func (ec *executionContext) _ErrorDetail(ctx context.Context, sel ast.SelectionS
 	return out
 }
 
+var iosysCrawlSettingImplementors = []string{"IosysCrawlSetting", "Node"}
+
+func (ec *executionContext) _IosysCrawlSetting(ctx context.Context, sel ast.SelectionSet, obj *model.IosysCrawlSetting) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, iosysCrawlSettingImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("IosysCrawlSetting")
+		case "id":
+			out.Values[i] = ec._IosysCrawlSetting_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "productId":
+			out.Values[i] = ec._IosysCrawlSetting_productId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "keyword":
+			out.Values[i] = ec._IosysCrawlSetting_keyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "minPrice":
+			out.Values[i] = ec._IosysCrawlSetting_minPrice(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "maxPrice":
+			out.Values[i] = ec._IosysCrawlSetting_maxPrice(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "enabled":
+			out.Values[i] = ec._IosysCrawlSetting_enabled(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "createdAt":
+			out.Values[i] = ec._IosysCrawlSetting_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "updatedAt":
+			out.Values[i] = ec._IosysCrawlSetting_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "iosysCrawlSettingExcludeKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._IosysCrawlSetting_iosysCrawlSettingExcludeKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "iosysCrawlSettingRequiredKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var iosysCrawlSettingExcludeKeywordImplementors = []string{"IosysCrawlSettingExcludeKeyword", "Node"}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.IosysCrawlSettingExcludeKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, iosysCrawlSettingExcludeKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("IosysCrawlSettingExcludeKeyword")
+		case "id":
+			out.Values[i] = ec._IosysCrawlSettingExcludeKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingId":
+			out.Values[i] = ec._IosysCrawlSettingExcludeKeyword_iosysCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._IosysCrawlSettingExcludeKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._IosysCrawlSettingExcludeKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._IosysCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var iosysCrawlSettingRequiredKeywordImplementors = []string{"IosysCrawlSettingRequiredKeyword", "Node"}
+
+func (ec *executionContext) _IosysCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.IosysCrawlSettingRequiredKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, iosysCrawlSettingRequiredKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("IosysCrawlSettingRequiredKeyword")
+		case "id":
+			out.Values[i] = ec._IosysCrawlSettingRequiredKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingId":
+			out.Values[i] = ec._IosysCrawlSettingRequiredKeyword_iosysCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._IosysCrawlSettingRequiredKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._IosysCrawlSettingRequiredKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._IosysCrawlSettingRequiredKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var janparaCrawlSettingImplementors = []string{"JanparaCrawlSetting", "Node"}
 
 func (ec *executionContext) _JanparaCrawlSetting(ctx context.Context, sel ast.SelectionSet, obj *model.JanparaCrawlSetting) graphql.Marshaler {
@@ -25288,6 +30902,48 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createIosysCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createIosysCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateIosysCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateIosysCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteIosysCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteIosysCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createIosysCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createIosysCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateIosysCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateIosysCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteIosysCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteIosysCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -25620,6 +31276,42 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "iosysCrawlSetting":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Product_iosysCrawlSetting(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "relatedProducts":
 			field := field
 
@@ -25851,6 +31543,280 @@ func (ec *executionContext) _RelatedProduct(ctx context.Context, sel ast.Selecti
 			}
 		case "updatedAt":
 			out.Values[i] = ec._RelatedProduct_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingExcludeKeywordResultErrorImplementors = []string{"UpdateIosysCrawlSettingExcludeKeywordResultError", "UpdateIosysCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"UpdateIosysCrawlSettingExcludeKeywordResultSuccess", "UpdateIosysCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingExcludeKeyword":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultSuccess_iosysCrawlSettingExcludeKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed", "UpdateIosysCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateIosysCrawlSettingRequiredKeywordResultError", "UpdateIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"UpdateIosysCrawlSettingRequiredKeywordResultSuccess", "UpdateIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultSuccess_iosysCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed", "UpdateIosysCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -27650,6 +33616,61 @@ func (ec *executionContext) marshalNBoolean2bool(ctx context.Context, sel ast.Se
 	return res
 }
 
+func (ec *executionContext) unmarshalNCreateIosysCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.CreateIosysCrawlSettingExcludeKeywordInput, error) {
+	res, err := ec.unmarshalInputCreateIosysCrawlSettingExcludeKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateIosysCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreateIosysCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateIosysCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateIosysCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateIosysCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateIosysCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreateIosysCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateIosysCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputCreateIosysCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNCreateIosysCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.CreateIosysCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputCreateIosysCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreateIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateIosysCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateIosysCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateIosysCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateIosysCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateJanparaCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.CreateJanparaCrawlSettingExcludeKeywordInput, error) {
 	res, err := ec.unmarshalInputCreateJanparaCrawlSettingExcludeKeywordInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -27838,6 +33859,46 @@ func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingRequiredKeywor
 		return graphql.Null
 	}
 	return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteIosysCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteIosysCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteIosysCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteIosysCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteIosysCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteIosysCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteIosysCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteJanparaCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteJanparaCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteJanparaCrawlSettingExcludeKeywordResult) graphql.Marshaler {
@@ -28062,6 +34123,128 @@ func (ec *executionContext) marshalNInt2int(ctx context.Context, sel ast.Selecti
 		}
 	}
 	return res
+}
+
+func (ec *executionContext) marshalNIosysCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.IosysCrawlSetting) graphql.Marshaler {
+	return ec._IosysCrawlSetting(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNIosysCrawlSetting2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSetting(ctx context.Context, sel ast.SelectionSet, v *model.IosysCrawlSetting) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._IosysCrawlSetting(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNIosysCrawlSettingExcludeKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.IosysCrawlSettingExcludeKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNIosysCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNIosysCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeKeyword(ctx context.Context, sel ast.SelectionSet, v *model.IosysCrawlSettingExcludeKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._IosysCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNIosysCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.IosysCrawlSettingRequiredKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNIosysCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNIosysCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, v *model.IosysCrawlSettingRequiredKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._IosysCrawlSettingRequiredKeyword(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNJanparaCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.JanparaCrawlSetting) graphql.Marshaler {
@@ -28541,6 +34724,61 @@ func (ec *executionContext) marshalNString2string(ctx context.Context, sel ast.S
 		}
 	}
 	return res
+}
+
+func (ec *executionContext) unmarshalNUpdateIosysCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.UpdateIosysCrawlSettingExcludeKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdateIosysCrawlSettingExcludeKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateIosysCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateIosysCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateIosysCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateIosysCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateIosysCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateIosysCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdateIosysCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateIosysCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputUpdateIosysCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNUpdateIosysCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.UpdateIosysCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdateIosysCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateIosysCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateIosysCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateIosysCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateIosysCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNUpdateJanparaCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.UpdateJanparaCrawlSettingExcludeKeywordInput, error) {

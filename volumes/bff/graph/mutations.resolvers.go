@@ -116,6 +116,36 @@ func (r *mutationResolver) DeleteJanparaCrawlSettingRequiredKeyword(ctx context.
 	return r.ProductService.DeleteJanparaCrawlSettingRequiredKeyword(ctx, id, productID)
 }
 
+// CreateIosysCrawlSettingExcludeKeyword is the resolver for the createIosysCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) CreateIosysCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateIosysCrawlSettingExcludeKeywordInput) (model.CreateIosysCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.CreateIosysCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// UpdateIosysCrawlSettingExcludeKeyword is the resolver for the updateIosysCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) UpdateIosysCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingExcludeKeywordInput) (model.UpdateIosysCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.UpdateIosysCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// DeleteIosysCrawlSettingExcludeKeyword is the resolver for the deleteIosysCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) DeleteIosysCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.DeleteIosysCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreateIosysCrawlSettingRequiredKeyword is the resolver for the createIosysCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) CreateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateIosysCrawlSettingRequiredKeywordInput) (model.CreateIosysCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.CreateIosysCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// UpdateIosysCrawlSettingRequiredKeyword is the resolver for the updateIosysCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) UpdateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingRequiredKeywordInput) (model.UpdateIosysCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.UpdateIosysCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// DeleteIosysCrawlSettingRequiredKeyword is the resolver for the deleteIosysCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) DeleteIosysCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.DeleteIosysCrawlSettingRequiredKeyword(ctx, id, productID)
+}
+
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 

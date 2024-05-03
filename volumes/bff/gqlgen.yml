@@ -103,6 +103,8 @@ models:
         resolver: true
       janparaCrawlSetting:
         resolver: true
+      iosysCrawlSetting:
+        resolver: true
       relatedProducts:
         resolver: true
   YahooAuctionCrawlSetting:
@@ -122,4 +124,10 @@ models:
       janparaCrawlSettingExcludeKeywords:
         resolver: true
       janparaCrawlSettingRequiredKeywords:
+        resolver: true
+  IosysCrawlSetting:
+    fields:
+      iosysCrawlSettingExcludeKeywords:
+        resolver: true
+      iosysCrawlSettingRequiredKeywords:
         resolver: true
