@@ -39,11 +39,12 @@ const SearchForm = () => {
             onChange={handlePlatformMaskChange}
             value={platformMask}
           >
-            <option value='yahoo_auction,yahoo_fleamarket,mercari,janpara'>すべて</option>
+            <option value='yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys'>すべて</option>
             <option value='yahoo_auction'>ヤフオク</option>
             <option value='yahoo_fleamarket'>ペイペイ</option>
             <option value='mercari'>メルカリ</option>
             <option value='janpara'>じゃんぱら</option>
+            <option value='iosys'>じゃんぱら</option>
           </select>
         </label>
         <label className='form-control w-32 pr-2'>
@@ -59,7 +60,7 @@ const SearchForm = () => {
             <option value='false'>売り切れ</option>
           </select>
         </label>
-        {(platformMask == 'yahoo_auction,yahoo_fleamarket,mercari,janpara' ||
+        {(platformMask == 'yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys' ||
           platformMask == 'yahoo_auction') &&
           published && (
             <label className='form-control w-32 pr-2'>

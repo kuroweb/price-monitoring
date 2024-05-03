@@ -62,7 +62,6 @@ const EditCrawlSettingModal = ({
   })
 
   const onSubmit: SubmitHandler<UpdateProductInput> = async (input) => {
-    console.log(input)
     if (productId === undefined) {
       return toast.error('更新対象が見つかりませんでした。')
     }

@@ -2,7 +2,7 @@ import { parseAsString, useQueryState } from 'nuqs'
 import { createSearchParamsCache, parseAsString as parseAsStringServer } from 'nuqs/server'
 
 export const usePlatformMaskStateQuery = 'platform_mask'
-const defaultValue = "yahoo_auction,yahoo_fleamarket,mercari,janpara"
+const defaultValue = "yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys"
 
 export const usePlatformMaskState = () => {
   return useQueryState(

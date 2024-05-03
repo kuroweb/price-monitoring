@@ -2,7 +2,7 @@
 # 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProduct
-    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara].freeze
+    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara iosys].freeze
     SORT_TYPES = %w[bought_date created_at updated_at].freeze
     ORDER_TYPES = %w[desc asc].freeze
 
@@ -84,7 +84,7 @@ module Search
         end
 
       columns <<
-        if platform == "janpara"
+        if shop_platform?(platform)
           ["TRUE AS published", "NULL AS bought_date"]
         else
           %w[published bought_date]
@@ -94,8 +94,8 @@ module Search
     end
 
     def published_condition(platform, condition)
-      return condition if platform == "janpara" && published == true
-      return condition.where(id: nil) if platform == "janpara" && published == false
+      return condition if shop_platform?(platform) && published == true
+      return condition.where(id: nil) if shop_platform?(platform) && published == false
 
       condition.where(published:)
     end
@@ -118,6 +118,10 @@ module Search
     def normalize(result)
       result["published"] = result["published"] == 1
       result
+    end
+
+    def shop_platform?(platform)
+      %w[janpara iosys].include?(platform)
     end
 
     def product

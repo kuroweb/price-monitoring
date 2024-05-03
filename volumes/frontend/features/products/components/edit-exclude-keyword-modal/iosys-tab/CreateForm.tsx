@@ -24,7 +24,6 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateIosysCrawlSettingExcludeKeywordInput> = async (data) => {
-    console.log(data)
     const result = await createIosysCrawlSettingExcludeKeyword(data)
     if (result.data?.createIosysCrawlSettingExcludeKeyword.ok) {
       toast.success('success')

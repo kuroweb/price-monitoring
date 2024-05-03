@@ -18,6 +18,7 @@ const RelatedProductsTable = ({
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
     yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
     janpara: 'www.janpara.co.jp/sale/search/detail/?',
+    iosys: 'iosys.co.jp/items/',
   }
 
   const serviceNameMap: { [key: string]: string } = {
@@ -25,10 +26,10 @@ const RelatedProductsTable = ({
     yahoo_auction: 'ヤフオク',
     yahoo_fleamarket: 'ペイペイ',
     janpara: 'じゃんぱら',
+    iosys: 'イオシス',
   }
 
   const handleRowClick = (platform: string, externalId: string) => {
-    console.log(`https://${serviceDomainMap[platform]}${externalId}`)
     window.open(`https://${serviceDomainMap[platform]}${externalId}`, '_blank')
   }
 
@@ -63,7 +64,7 @@ const RelatedProductsTable = ({
                   <p className='text-xs text-gray-500'>現在</p>
                   <p>{relatedProduct.price}</p>
                 </div>
-                <div className="pt-1">
+                <div className='pt-1'>
                   <p className='text-xs text-gray-500'>即決</p>
                   <p>{relatedProduct.buyoutPrice ? relatedProduct.buyoutPrice : '-'}</p>
                 </div>

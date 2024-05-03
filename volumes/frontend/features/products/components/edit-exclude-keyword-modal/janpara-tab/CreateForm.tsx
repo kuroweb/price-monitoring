@@ -24,7 +24,6 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateJanparaCrawlSettingExcludeKeywordInput> = async (data) => {
-    console.log(data)
     const result = await createJanparaCrawlSettingExcludeKeyword(data)
     if (result.data?.createJanparaCrawlSettingExcludeKeyword.ok) {
       toast.success('success')

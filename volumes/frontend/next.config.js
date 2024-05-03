@@ -14,6 +14,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.janpara.co.jp',
       },
+      {
+        protocol: 'https',
+        hostname: '*.cloudfront.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'iosys.co.jp',
+      },
     ],
   },
   experimental: {
