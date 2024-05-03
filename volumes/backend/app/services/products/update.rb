@@ -60,7 +60,8 @@ module Products
     end
 
     def janpara_crawl_setting_params
-      params[:janpara_crawl_setting]&.slice(*MERCARI_CRAWL_SETTING_ATTRIBUTES) || {}
+      params[:janpara_crawl_setting]&.slice(*JANPARA_CRAWL_SETTING_ATTRIBUTES) || {}
+    end
     end
   end
 end
