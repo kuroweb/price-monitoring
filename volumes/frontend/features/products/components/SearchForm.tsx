@@ -44,7 +44,7 @@ const SearchForm = () => {
             <option value='yahoo_fleamarket'>ペイペイ</option>
             <option value='mercari'>メルカリ</option>
             <option value='janpara'>じゃんぱら</option>
-            <option value='iosys'>じゃんぱら</option>
+            <option value='iosys'>イオシス</option>
           </select>
         </label>
         <label className='form-control w-32 pr-2'>
