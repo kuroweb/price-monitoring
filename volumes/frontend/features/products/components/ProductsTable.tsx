@@ -125,6 +125,12 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
               max_price: product?.janparaCrawlSetting?.maxPrice,
               enabled: product?.janparaCrawlSetting?.enabled,
             },
+            iosys_crawl_setting: {
+              keyword: product?.iosysCrawlSetting?.keyword,
+              min_price: product?.iosysCrawlSetting?.minPrice,
+              max_price: product?.iosysCrawlSetting?.maxPrice,
+              enabled: product?.iosysCrawlSetting?.enabled,
+            },
           }
         }
       />
