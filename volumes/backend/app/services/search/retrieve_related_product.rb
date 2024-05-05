@@ -25,8 +25,7 @@ module Search
     def call
       records = exec_query
       related_products = RelatedProducts.new(records.map { |record| RelatedProduct.new(normalize(record)) })
-
-      raise StandardError, related_products.errors unless related_products.valid?
+      handle_errors(related_products)
 
       related_products
     end
@@ -122,6 +121,10 @@ module Search
 
     def shop_platform?(platform)
       %w[janpara iosys].include?(platform)
+    end
+
+    def handle_errors(related_products)
+      raise StandardError, related_products.errors.full_messages.join(", ") unless related_products.valid?
     end
 
     def product
