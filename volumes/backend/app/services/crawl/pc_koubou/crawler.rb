@@ -16,9 +16,10 @@ module Crawl
         Crawl::Client.execute do |page|
           Retryable.retryable(tries: RETRY_COUNT) do
             page.goto(url)
+            load(page)
+
             return crawl_results if no_results?(page)
 
-            load(page)
             append_results(page)
           end
         end
@@ -42,7 +43,7 @@ module Crawl
         sleep(1)
         more_button = page.query_selector(".more >> a")
 
-        if more_button.visible?
+        if more_button&.visible?
           more_button.click
           load(page)
         else
