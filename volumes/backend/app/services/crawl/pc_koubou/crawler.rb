@@ -16,9 +16,9 @@ module Crawl
         Crawl::Client.execute do |page|
           Retryable.retryable(tries: RETRY_COUNT) do
             page.goto(url)
-            load(page)
             return crawl_results if no_results?(page)
 
+            load(page)
             append_results(page)
           end
         end
