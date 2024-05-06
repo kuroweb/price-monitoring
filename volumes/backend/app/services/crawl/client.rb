@@ -63,17 +63,24 @@ module Crawl
       end
 
       def launch_options
-        server, username, password = Proxy.get
-
         {
           headless: true,
-          proxy: { server:, username:, password: },
           args: ["--blink-settings=imagesEnabled=false", "--disable-remote-fonts"]
         }
       end
 
       def context_options
-        { userAgent: USER_AGENT }
+        # server, username, password = Proxy.get
+
+        {
+          userAgent: USER_AGENT,
+          # proxy: { server:, username:, password: }
+          proxy: {
+            server: ENV.fetch("PROXY_HOST"),
+            username: ENV.fetch("PROXY_USERNAME"),
+            password: ENV.fetch("PROXY_PASSWORD")
+          }
+        }
       end
 
       def blocked_request?(url)
