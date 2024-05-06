@@ -131,6 +131,12 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
               max_price: product?.iosysCrawlSetting?.maxPrice,
               enabled: product?.iosysCrawlSetting?.enabled,
             },
+            pc_koubou_crawl_setting: {
+              keyword: product?.pcKoubouCrawlSetting?.keyword,
+              min_price: product?.pcKoubouCrawlSetting?.minPrice,
+              max_price: product?.pcKoubouCrawlSetting?.maxPrice,
+              enabled: product?.pcKoubouCrawlSetting?.enabled,
+            },
           }
         }
       />
