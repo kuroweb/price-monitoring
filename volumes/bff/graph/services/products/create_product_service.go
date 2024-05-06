@@ -50,6 +50,12 @@ func (c *CreateProductService) CreateProduct(ctx context.Context, input model.Cr
 			"max_price": input.IosysCrawlSetting.MaxPrice,
 			"enabled":   input.IosysCrawlSetting.Enabled,
 		},
+		"pc_koubou_crawl_setting": map[string]interface{}{
+			"keyword":   input.PcKoubouCrawlSetting.Keyword,
+			"min_price": input.PcKoubouCrawlSetting.MinPrice,
+			"max_price": input.PcKoubouCrawlSetting.MaxPrice,
+			"enabled":   input.PcKoubouCrawlSetting.Enabled,
+		},
 	}
 
 	requestBody, err := json.Marshal(body)

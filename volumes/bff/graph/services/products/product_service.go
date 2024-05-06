@@ -12,6 +12,9 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_daily_purchase_summaries"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/mercari_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/pc_koubou_crawl_setting_exclude_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/pc_koubou_crawl_setting_required_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/pc_koubou_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/related_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_required_keywords"
@@ -43,6 +46,9 @@ type IProductService interface {
 	iosys_crawl_settings.IIosysCrawlSettingService
 	iosys_crawl_setting_exclude_keywords.IIosysCrawlSettingExcludeKeywordService
 	iosys_crawl_setting_required_keywords.IIosysCrawlSettingRequiredKeywordService
+	pc_koubou_crawl_settings.IPcKoubouCrawlSettingService
+	pc_koubou_crawl_setting_exclude_keywords.IPcKoubouCrawlSettingExcludeKeywordService
+	pc_koubou_crawl_setting_required_keywords.IPcKoubouCrawlSettingRequiredKeywordService
 	related_products.IRelatedProductService
 }
 
@@ -68,6 +74,9 @@ type ProductService struct {
 	*iosys_crawl_settings.IosysCrawlSettingService
 	*iosys_crawl_setting_exclude_keywords.IosysCrawlSettingExcludeKeywordService
 	*iosys_crawl_setting_required_keywords.IosysCrawlSettingRequiredKeywordService
+	*pc_koubou_crawl_settings.PcKoubouCrawlSettingService
+	*pc_koubou_crawl_setting_exclude_keywords.PcKoubouCrawlSettingExcludeKeywordService
+	*pc_koubou_crawl_setting_required_keywords.PcKoubouCrawlSettingRequiredKeywordService
 	*related_products.RelatedProductService
 }
 
@@ -94,6 +103,9 @@ func New() IProductService {
 		IosysCrawlSettingService:                       &iosys_crawl_settings.IosysCrawlSettingService{},
 		IosysCrawlSettingExcludeKeywordService:         &iosys_crawl_setting_exclude_keywords.IosysCrawlSettingExcludeKeywordService{},
 		IosysCrawlSettingRequiredKeywordService:        &iosys_crawl_setting_required_keywords.IosysCrawlSettingRequiredKeywordService{},
+		PcKoubouCrawlSettingService:                    &pc_koubou_crawl_settings.PcKoubouCrawlSettingService{},
+		PcKoubouCrawlSettingExcludeKeywordService:      &pc_koubou_crawl_setting_exclude_keywords.PcKoubouCrawlSettingExcludeKeywordService{},
+		PcKoubouCrawlSettingRequiredKeywordService:     &pc_koubou_crawl_setting_required_keywords.PcKoubouCrawlSettingRequiredKeywordService{},
 		RelatedProductService:                          &related_products.RelatedProductService{},
 	}
 }

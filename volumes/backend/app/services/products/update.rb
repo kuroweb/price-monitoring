@@ -5,6 +5,7 @@ module Products
     MERCARI_CRAWL_SETTING_ATTRIBUTES = %i[keyword category_id min_price max_price enabled].freeze
     JANPARA_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
     IOSYS_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
+    PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
 
     def self.call(...)
       new(...).call
@@ -22,6 +23,7 @@ module Products
         update_mercari_crawl_setting
         update_janpara_crawl_setting
         update_iosys_crawl_setting
+        update_pc_koubou_crawl_setting
 
         ServiceResponse.success(payload: { product: })
       end
@@ -53,6 +55,10 @@ module Products
       product.iosys_crawl_setting.update(iosys_crawl_setting_params)
     end
 
+    def update_pc_koubou_crawl_setting
+      product.pc_koubou_crawl_setting.update(pc_koubou_crawl_setting_params)
+    end
+
     def product_params
       params.slice(*PRODUCT_ATTRIBUTES) || {}
     end
@@ -71,6 +77,10 @@ module Products
 
     def iosys_crawl_setting_params
       params[:iosys_crawl_setting]&.slice(*IOSYS_CRAWL_SETTING_ATTRIBUTES) || {}
+    end
+
+    def pc_koubou_crawl_setting_params
+      params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
     end
   end
 end

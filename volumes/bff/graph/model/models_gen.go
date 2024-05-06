@@ -50,6 +50,22 @@ type CreateMercariCrawlSettingRequiredKeywordResultErrors interface {
 	IsCreateMercariCrawlSettingRequiredKeywordResultErrors()
 }
 
+type CreatePcKoubouCrawlSettingExcludeKeywordResult interface {
+	IsCreatePcKoubouCrawlSettingExcludeKeywordResult()
+}
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultErrors interface {
+	IsCreatePcKoubouCrawlSettingExcludeKeywordResultErrors()
+}
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResult interface {
+	IsCreatePcKoubouCrawlSettingRequiredKeywordResult()
+}
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultErrors interface {
+	IsCreatePcKoubouCrawlSettingRequiredKeywordResultErrors()
+}
+
 type CreateProductResult interface {
 	IsCreateProductResult()
 }
@@ -120,6 +136,22 @@ type DeleteMercariCrawlSettingRequiredKeywordResult interface {
 
 type DeleteMercariCrawlSettingRequiredKeywordResultErrors interface {
 	IsDeleteMercariCrawlSettingRequiredKeywordResultErrors()
+}
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResult interface {
+	IsDeletePcKoubouCrawlSettingExcludeKeywordResult()
+}
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResultErrors interface {
+	IsDeletePcKoubouCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResult interface {
+	IsDeletePcKoubouCrawlSettingRequiredKeywordResult()
+}
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultErrors interface {
+	IsDeletePcKoubouCrawlSettingRequiredKeywordResultErrors()
 }
 
 type DeleteProductResult interface {
@@ -202,6 +234,22 @@ type UpdateMercariCrawlSettingRequiredKeywordResult interface {
 
 type UpdateMercariCrawlSettingRequiredKeywordResultErrors interface {
 	IsUpdateMercariCrawlSettingRequiredKeywordResultErrors()
+}
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResult interface {
+	IsUpdatePcKoubouCrawlSettingExcludeKeywordResult()
+}
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors interface {
+	IsUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResult interface {
+	IsUpdatePcKoubouCrawlSettingRequiredKeywordResult()
+}
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors interface {
+	IsUpdatePcKoubouCrawlSettingRequiredKeywordResultErrors()
 }
 
 type UpdateProductResult interface {
@@ -520,12 +568,108 @@ func (this CreateMercariCrawlSettingRequiredKeywordResultValidationFailed) GetMe
 	return this.Message
 }
 
+type CreatePcKoubouCrawlSettingExcludeKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error CreatePcKoubouCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (CreatePcKoubouCrawlSettingExcludeKeywordResultError) IsCreatePcKoubouCrawlSettingExcludeKeywordResult() {
+}
+
+func (CreatePcKoubouCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this CreatePcKoubouCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	PcKoubouCrawlSettingExcludeKeyword *PcKoubouCrawlSettingExcludeKeyword `json:"pcKoubouCrawlSettingExcludeKeyword"`
+}
+
+func (CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess) IsCreatePcKoubouCrawlSettingExcludeKeywordResult() {
+}
+
+func (CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) IsCreatePcKoubouCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreatePcKoubouCrawlSettingInput struct {
+	Keyword  string `json:"keyword"`
+	MinPrice int    `json:"min_price"`
+	MaxPrice int    `json:"max_price"`
+	Enabled  bool   `json:"enabled"`
+}
+
+type CreatePcKoubouCrawlSettingRequiredKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                  `json:"ok"`
+	Error CreatePcKoubouCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (CreatePcKoubouCrawlSettingRequiredKeywordResultError) IsCreatePcKoubouCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreatePcKoubouCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this CreatePcKoubouCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                  bool                                 `json:"ok"`
+	PcKoubouCrawlSettingRequiredKeyword *PcKoubouCrawlSettingRequiredKeyword `json:"pcKoubouCrawlSettingRequiredKeyword"`
+}
+
+func (CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess) IsCreatePcKoubouCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) IsCreatePcKoubouCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type CreateProductInput struct {
 	Name                     string                               `json:"name"`
 	YahooAuctionCrawlSetting *CreateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
 	MercariCrawlSetting      *CreateMercariCrawlSettingInput      `json:"mercari_crawl_setting"`
 	JanparaCrawlSetting      *CreateJanparaCrawlSettingInput      `json:"janpara_crawl_setting"`
 	IosysCrawlSetting        *CreateIosysCrawlSettingInput        `json:"iosys_crawl_setting"`
+	PcKoubouCrawlSetting     *CreatePcKoubouCrawlSettingInput     `json:"pc_koubou_crawl_setting"`
 }
 
 type CreateProductResultError struct {
@@ -884,6 +1028,82 @@ func (this DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed) GetMe
 	return this.Message
 }
 
+type DeletePcKoubouCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error DeletePcKoubouCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (DeletePcKoubouCrawlSettingExcludeKeywordResultError) IsDeletePcKoubouCrawlSettingExcludeKeywordResult() {
+}
+
+func (DeletePcKoubouCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this DeletePcKoubouCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess) IsDeletePcKoubouCrawlSettingExcludeKeywordResult() {
+}
+
+func (DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) IsDeletePcKoubouCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                  `json:"ok"`
+	Error DeletePcKoubouCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (DeletePcKoubouCrawlSettingRequiredKeywordResultError) IsDeletePcKoubouCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeletePcKoubouCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this DeletePcKoubouCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess) IsDeletePcKoubouCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) IsDeletePcKoubouCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type DeleteProductResultError struct {
 	Ok    bool                      `json:"ok"`
 	Error DeleteProductResultErrors `json:"error"`
@@ -1140,6 +1360,44 @@ type MercariProduct struct {
 func (MercariProduct) IsNode()            {}
 func (this MercariProduct) GetID() string { return this.ID }
 
+type PcKoubouCrawlSetting struct {
+	ID                                   string                                 `json:"id"`
+	ProductID                            int                                    `json:"productId"`
+	Keyword                              string                                 `json:"keyword"`
+	MinPrice                             int                                    `json:"minPrice"`
+	MaxPrice                             int                                    `json:"maxPrice"`
+	Enabled                              bool                                   `json:"enabled"`
+	CreatedAt                            string                                 `json:"createdAt"`
+	UpdatedAt                            string                                 `json:"updatedAt"`
+	PcKoubouCrawlSettingExcludeKeywords  []*PcKoubouCrawlSettingExcludeKeyword  `json:"pcKoubouCrawlSettingExcludeKeywords"`
+	PcKoubouCrawlSettingRequiredKeywords []*PcKoubouCrawlSettingRequiredKeyword `json:"pcKoubouCrawlSettingRequiredKeywords"`
+}
+
+func (PcKoubouCrawlSetting) IsNode()            {}
+func (this PcKoubouCrawlSetting) GetID() string { return this.ID }
+
+type PcKoubouCrawlSettingExcludeKeyword struct {
+	ID                     string  `json:"id"`
+	PcKoubouCrawlSettingID int     `json:"pcKoubouCrawlSettingId"`
+	Keyword                *string `json:"keyword,omitempty"`
+	CreatedAt              string  `json:"createdAt"`
+	UpdatedAt              string  `json:"updatedAt"`
+}
+
+func (PcKoubouCrawlSettingExcludeKeyword) IsNode()            {}
+func (this PcKoubouCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type PcKoubouCrawlSettingRequiredKeyword struct {
+	ID                     string  `json:"id"`
+	PcKoubouCrawlSettingID int     `json:"pcKoubouCrawlSettingId"`
+	Keyword                *string `json:"keyword,omitempty"`
+	CreatedAt              string  `json:"createdAt"`
+	UpdatedAt              string  `json:"updatedAt"`
+}
+
+func (PcKoubouCrawlSettingRequiredKeyword) IsNode()            {}
+func (this PcKoubouCrawlSettingRequiredKeyword) GetID() string { return this.ID }
+
 type Product struct {
 	ID                                    string                                 `json:"id"`
 	Name                                  string                                 `json:"name"`
@@ -1152,6 +1410,7 @@ type Product struct {
 	MercariDailyPurchaseSummaries         []*MercariDailyPurchaseSummary         `json:"mercariDailyPurchaseSummaries"`
 	JanparaCrawlSetting                   *JanparaCrawlSetting                   `json:"janparaCrawlSetting"`
 	IosysCrawlSetting                     *IosysCrawlSetting                     `json:"iosysCrawlSetting"`
+	PcKoubouCrawlSetting                  *PcKoubouCrawlSetting                  `json:"pcKoubouCrawlSetting"`
 	RelatedProducts                       []*RelatedProduct                      `json:"relatedProducts"`
 }
 
@@ -1465,12 +1724,110 @@ func (this UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed) GetMe
 	return this.Message
 }
 
+type UpdatePcKoubouCrawlSettingExcludeKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeKeywordResultError) IsUpdatePcKoubouCrawlSettingExcludeKeywordResult() {
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this UpdatePcKoubouCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	PcKoubouCrawlSettingExcludeKeyword *PcKoubouCrawlSettingExcludeKeyword `json:"pcKoubouCrawlSettingExcludeKeyword"`
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess) IsUpdatePcKoubouCrawlSettingExcludeKeywordResult() {
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) IsUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdatePcKoubouCrawlSettingInput struct {
+	Keyword  string `json:"keyword"`
+	MinPrice int    `json:"min_price"`
+	MaxPrice int    `json:"max_price"`
+	Enabled  bool   `json:"enabled"`
+}
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                  `json:"ok"`
+	Error UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (UpdatePcKoubouCrawlSettingRequiredKeywordResultError) IsUpdatePcKoubouCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdatePcKoubouCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this UpdatePcKoubouCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                  bool                                 `json:"ok"`
+	PcKoubouCrawlSettingRequiredKeyword *PcKoubouCrawlSettingRequiredKeyword `json:"pcKoubouCrawlSettingRequiredKeyword"`
+}
+
+func (UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess) IsUpdatePcKoubouCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) IsUpdatePcKoubouCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type UpdateProductInput struct {
 	Name                     string                               `json:"name"`
 	YahooAuctionCrawlSetting *UpdateYahooAuctionCrawlSettingInput `json:"yahoo_auction_crawl_setting"`
 	MercariCrawlSetting      *UpdateMercariCrawlSettingInput      `json:"mercari_crawl_setting"`
 	JanparaCrawlSetting      *UpdateJanparaCrawlSettingInput      `json:"janpara_crawl_setting"`
 	IosysCrawlSetting        *UpdateIosysCrawlSettingInput        `json:"iosys_crawl_setting"`
+	PcKoubouCrawlSetting     *UpdatePcKoubouCrawlSettingInput     `json:"pc_koubou_crawl_setting"`
 }
 
 type UpdateProductResultError struct {

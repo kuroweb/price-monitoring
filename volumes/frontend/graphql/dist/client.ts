@@ -207,11 +207,75 @@ export type CreateMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
   message: Scalars['String']['output'];
 };
 
+export type CreatePcKoubouCrawlSettingExcludeKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreatePcKoubouCrawlSettingExcludeKeywordResult = CreatePcKoubouCrawlSettingExcludeKeywordResultError | CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess;
+
+export type CreatePcKoubouCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'CreatePcKoubouCrawlSettingExcludeKeywordResultError';
+  error: CreatePcKoubouCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreatePcKoubouCrawlSettingExcludeKeywordResultErrors = CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  pcKoubouCrawlSettingExcludeKeyword: PcKoubouCrawlSettingExcludeKeyword;
+};
+
+export type CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type CreatePcKoubouCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordInput = {
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordResult = CreatePcKoubouCrawlSettingRequiredKeywordResultError | CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess;
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'CreatePcKoubouCrawlSettingRequiredKeywordResultError';
+  error: CreatePcKoubouCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordResultErrors = CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  pcKoubouCrawlSettingRequiredKeyword: PcKoubouCrawlSettingRequiredKeyword;
+};
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type CreateProductInput = {
   iosys_crawl_setting: CreateIosysCrawlSettingInput;
   janpara_crawl_setting: CreateJanparaCrawlSettingInput;
   mercari_crawl_setting: CreateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
+  pc_koubou_crawl_setting: CreatePcKoubouCrawlSettingInput;
   yahoo_auction_crawl_setting: CreateYahooAuctionCrawlSettingInput;
 };
 
@@ -434,6 +498,50 @@ export type DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
   message: Scalars['String']['output'];
 };
 
+export type DeletePcKoubouCrawlSettingExcludeKeywordResult = DeletePcKoubouCrawlSettingExcludeKeywordResultError | DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess;
+
+export type DeletePcKoubouCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultError';
+  error: DeletePcKoubouCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeletePcKoubouCrawlSettingExcludeKeywordResultErrors = DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordResult = DeletePcKoubouCrawlSettingRequiredKeywordResultError | DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess;
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultError';
+  error: DeletePcKoubouCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordResultErrors = DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+};
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type DeleteProductResult = DeleteProductResultError | DeleteProductResultSuccess;
 
 export type DeleteProductResultError = ResultBase & {
@@ -636,6 +744,8 @@ export type Mutation = {
   createJanparaCrawlSettingRequiredKeyword: CreateJanparaCrawlSettingRequiredKeywordResult;
   createMercariCrawlSettingExcludeKeyword: CreateMercariCrawlSettingExcludeKeywordResult;
   createMercariCrawlSettingRequiredKeyword: CreateMercariCrawlSettingRequiredKeywordResult;
+  createPcKoubouCrawlSettingExcludeKeyword: CreatePcKoubouCrawlSettingExcludeKeywordResult;
+  createPcKoubouCrawlSettingRequiredKeyword: CreatePcKoubouCrawlSettingRequiredKeywordResult;
   createProduct: CreateProductResult;
   createYahooAuctionCrawlSettingExcludeKeyword: CreateYahooAuctionCrawlSettingExcludeKeywordResult;
   createYahooAuctionCrawlSettingRequiredKeyword: CreateYahooAuctionCrawlSettingRequiredKeywordResult;
@@ -645,6 +755,8 @@ export type Mutation = {
   deleteJanparaCrawlSettingRequiredKeyword: DeleteJanparaCrawlSettingRequiredKeywordResult;
   deleteMercariCrawlSettingExcludeKeyword: DeleteMercariCrawlSettingExcludeKeywordResult;
   deleteMercariCrawlSettingRequiredKeyword: DeleteMercariCrawlSettingRequiredKeywordResult;
+  deletePcKoubouCrawlSettingExcludeKeyword: DeletePcKoubouCrawlSettingExcludeKeywordResult;
+  deletePcKoubouCrawlSettingRequiredKeyword: DeletePcKoubouCrawlSettingRequiredKeywordResult;
   deleteProduct: DeleteProductResult;
   deleteYahooAuctionCrawlSettingExcludeKeyword: DeleteYahooAuctionCrawlSettingExcludeKeywordResult;
   deleteYahooAuctionCrawlSettingRequiredKeyword: DeleteYahooAuctionCrawlSettingRequiredKeywordResult;
@@ -654,6 +766,8 @@ export type Mutation = {
   updateJanparaCrawlSettingRequiredKeyword: UpdateJanparaCrawlSettingRequiredKeywordResult;
   updateMercariCrawlSettingExcludeKeyword: UpdateMercariCrawlSettingExcludeKeywordResult;
   updateMercariCrawlSettingRequiredKeyword: UpdateMercariCrawlSettingRequiredKeywordResult;
+  updatePcKoubouCrawlSettingExcludeKeyword: UpdatePcKoubouCrawlSettingExcludeKeywordResult;
+  updatePcKoubouCrawlSettingRequiredKeyword: UpdatePcKoubouCrawlSettingRequiredKeywordResult;
   updateProduct: UpdateProductResult;
   updateYahooAuctionCrawlSettingExcludeKeyword: UpdateYahooAuctionCrawlSettingExcludeKeywordResult;
   updateYahooAuctionCrawlSettingRequiredKeyword: UpdateYahooAuctionCrawlSettingRequiredKeywordResult;
@@ -687,6 +801,16 @@ export type MutationCreateMercariCrawlSettingExcludeKeywordArgs = {
 
 export type MutationCreateMercariCrawlSettingRequiredKeywordArgs = {
   input: CreateMercariCrawlSettingRequiredKeywordInput;
+};
+
+
+export type MutationCreatePcKoubouCrawlSettingExcludeKeywordArgs = {
+  input: CreatePcKoubouCrawlSettingExcludeKeywordInput;
+};
+
+
+export type MutationCreatePcKoubouCrawlSettingRequiredKeywordArgs = {
+  input: CreatePcKoubouCrawlSettingRequiredKeywordInput;
 };
 
 
@@ -741,6 +865,18 @@ export type MutationDeleteMercariCrawlSettingRequiredKeywordArgs = {
 };
 
 
+export type MutationDeletePcKoubouCrawlSettingExcludeKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+};
+
+
+export type MutationDeletePcKoubouCrawlSettingRequiredKeywordArgs = {
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+};
+
+
 export type MutationDeleteProductArgs = {
   id: Scalars['ID']['input'];
 };
@@ -788,6 +924,16 @@ export type MutationUpdateMercariCrawlSettingRequiredKeywordArgs = {
 };
 
 
+export type MutationUpdatePcKoubouCrawlSettingExcludeKeywordArgs = {
+  input: UpdatePcKoubouCrawlSettingExcludeKeywordInput;
+};
+
+
+export type MutationUpdatePcKoubouCrawlSettingRequiredKeywordArgs = {
+  input: UpdatePcKoubouCrawlSettingRequiredKeywordInput;
+};
+
+
 export type MutationUpdateProductArgs = {
   id: Scalars['ID']['input'];
   input: UpdateProductInput;
@@ -807,6 +953,38 @@ export type Node = {
   id: Scalars['ID']['output'];
 };
 
+export type PcKoubouCrawlSetting = Node & {
+  __typename?: 'PcKoubouCrawlSetting';
+  createdAt: Scalars['String']['output'];
+  enabled: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  keyword: Scalars['String']['output'];
+  maxPrice: Scalars['Int']['output'];
+  minPrice: Scalars['Int']['output'];
+  pcKoubouCrawlSettingExcludeKeywords: Array<PcKoubouCrawlSettingExcludeKeyword>;
+  pcKoubouCrawlSettingRequiredKeywords: Array<PcKoubouCrawlSettingRequiredKeyword>;
+  productId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
+export type PcKoubouCrawlSettingExcludeKeyword = Node & {
+  __typename?: 'PcKoubouCrawlSettingExcludeKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  pcKoubouCrawlSettingId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
+export type PcKoubouCrawlSettingRequiredKeyword = Node & {
+  __typename?: 'PcKoubouCrawlSettingRequiredKeyword';
+  createdAt: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  keyword?: Maybe<Scalars['String']['output']>;
+  pcKoubouCrawlSettingId: Scalars['Int']['output'];
+  updatedAt: Scalars['String']['output'];
+};
+
 export type Product = Node & {
   __typename?: 'Product';
   id: Scalars['ID']['output'];
@@ -816,6 +994,7 @@ export type Product = Node & {
   mercariDailyPurchaseSummaries: Array<MercariDailyPurchaseSummary>;
   mercariProducts: Array<MercariProduct>;
   name: Scalars['String']['output'];
+  pcKoubouCrawlSetting: PcKoubouCrawlSetting;
   relatedProducts: Array<RelatedProduct>;
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting;
   yahooAuctionDailyPurchaseSummaries: Array<YahooAuctionDailyPurchaseSummary>;
@@ -1087,11 +1266,77 @@ export type UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed = Use
   message: Scalars['String']['output'];
 };
 
+export type UpdatePcKoubouCrawlSettingExcludeKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordResult = UpdatePcKoubouCrawlSettingExcludeKeywordResultError | UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess;
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordResultError = ResultBase & {
+  __typename?: 'UpdatePcKoubouCrawlSettingExcludeKeywordResultError';
+  error: UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors = UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed;
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  pcKoubouCrawlSettingExcludeKeyword: PcKoubouCrawlSettingExcludeKeyword;
+};
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
+export type UpdatePcKoubouCrawlSettingInput = {
+  enabled: Scalars['Boolean']['input'];
+  keyword: Scalars['String']['input'];
+  max_price: Scalars['Int']['input'];
+  min_price: Scalars['Int']['input'];
+};
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordInput = {
+  id: Scalars['ID']['input'];
+  keyword?: InputMaybe<Scalars['String']['input']>;
+  productId: Scalars['ID']['input'];
+};
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordResult = UpdatePcKoubouCrawlSettingRequiredKeywordResultError | UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess;
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordResultError = ResultBase & {
+  __typename?: 'UpdatePcKoubouCrawlSettingRequiredKeywordResultError';
+  error: UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors;
+  ok: Scalars['Boolean']['output'];
+};
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors = UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed;
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
+  __typename?: 'UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess';
+  ok: Scalars['Boolean']['output'];
+  pcKoubouCrawlSettingRequiredKeyword: PcKoubouCrawlSettingRequiredKeyword;
+};
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
+  __typename?: 'UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed';
+  code: Scalars['String']['output'];
+  details: Array<ErrorDetail>;
+  message: Scalars['String']['output'];
+};
+
 export type UpdateProductInput = {
   iosys_crawl_setting: UpdateIosysCrawlSettingInput;
   janpara_crawl_setting: UpdateJanparaCrawlSettingInput;
   mercari_crawl_setting: UpdateMercariCrawlSettingInput;
   name: Scalars['String']['input'];
+  pc_koubou_crawl_setting: UpdatePcKoubouCrawlSettingInput;
   yahoo_auction_crawl_setting: UpdateYahooAuctionCrawlSettingInput;
 };
 
@@ -1456,13 +1701,57 @@ export type DeleteIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
 
 export type DeleteIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingRequiredKeyword: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
+export type CreatePcKoubouCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreatePcKoubouCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type CreatePcKoubouCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createPcKoubouCrawlSettingExcludeKeyword: { __typename?: 'CreatePcKoubouCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess', ok: boolean, pcKoubouCrawlSettingExcludeKeyword: { __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdatePcKoubouCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type UpdatePcKoubouCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updatePcKoubouCrawlSettingExcludeKeyword: { __typename?: 'UpdatePcKoubouCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess', ok: boolean, pcKoubouCrawlSettingExcludeKeyword: { __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeletePcKoubouCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeletePcKoubouCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deletePcKoubouCrawlSettingExcludeKeyword: { __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: CreatePcKoubouCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type CreatePcKoubouCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createPcKoubouCrawlSettingRequiredKeyword: { __typename?: 'CreatePcKoubouCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess', ok: boolean, pcKoubouCrawlSettingRequiredKeyword: { __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: UpdatePcKoubouCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type UpdatePcKoubouCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updatePcKoubouCrawlSettingRequiredKeyword: { __typename?: 'UpdatePcKoubouCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess', ok: boolean, pcKoubouCrawlSettingRequiredKeyword: { __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: string, updatedAt: string } } };
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  id: Scalars['ID']['input'];
+  productId: Scalars['ID']['input'];
+}>;
+
+
+export type DeletePcKoubouCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deletePcKoubouCrawlSettingRequiredKeyword: { __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
+
 export type GetProductPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 }>;
 
 
-export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
+export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
@@ -1476,7 +1765,7 @@ export type GetProductDetailPageDataQueryVariables = Exact<{
 }>;
 
 
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: string | null, endDate?: string | null, createdAt: string, updatedAt: string }> } };
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: string, createdAt: string, updatedAt: string }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, pcKoubouCrawlSettingExcludeKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }>, pcKoubouCrawlSettingRequiredKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: string, updatedAt: string }> }, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: string | null, endDate?: string | null, createdAt: string, updatedAt: string }> } };
 
 export type GetRecommendsPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -2185,6 +2474,162 @@ export const DeleteIosysCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
+export const CreatePcKoubouCrawlSettingExcludeKeywordDocument = gql`
+    mutation createPcKoubouCrawlSettingExcludeKeyword($input: CreatePcKoubouCrawlSettingExcludeKeywordInput!) {
+  createPcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdatePcKoubouCrawlSettingExcludeKeywordDocument = gql`
+    mutation updatePcKoubouCrawlSettingExcludeKeyword($input: UpdatePcKoubouCrawlSettingExcludeKeywordInput!) {
+  updatePcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeletePcKoubouCrawlSettingExcludeKeywordDocument = gql`
+    mutation deletePcKoubouCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deletePcKoubouCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreatePcKoubouCrawlSettingRequiredKeywordDocument = gql`
+    mutation createPcKoubouCrawlSettingRequiredKeyword($input: CreatePcKoubouCrawlSettingRequiredKeywordInput!) {
+  createPcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdatePcKoubouCrawlSettingRequiredKeywordDocument = gql`
+    mutation updatePcKoubouCrawlSettingRequiredKeyword($input: UpdatePcKoubouCrawlSettingRequiredKeywordInput!) {
+  updatePcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeletePcKoubouCrawlSettingRequiredKeywordDocument = gql`
+    mutation deletePcKoubouCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deletePcKoubouCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const GetProductPageDataDocument = gql`
     query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -2217,6 +2662,14 @@ export const GetProductPageDataDocument = gql`
       enabled
     }
     iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
+    pcKoubouCrawlSetting {
       id
       productId
       keyword
@@ -2343,6 +2796,28 @@ export const GetProductDetailPageDataDocument = gql`
       iosysCrawlSettingRequiredKeywords {
         id
         iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    pcKoubouCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      pcKoubouCrawlSettingExcludeKeywords {
+        id
+        pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingRequiredKeywords {
+        id
+        pcKoubouCrawlSettingId
         keyword
         createdAt
         updatedAt
@@ -2491,6 +2966,24 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     deleteIosysCrawlSettingRequiredKeyword(variables: DeleteIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingRequiredKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingRequiredKeywordMutation>(DeleteIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteIosysCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    createPcKoubouCrawlSettingExcludeKeyword(variables: CreatePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingExcludeKeywordMutation>(CreatePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createPcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    updatePcKoubouCrawlSettingExcludeKeyword(variables: UpdatePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>(UpdatePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    deletePcKoubouCrawlSettingExcludeKeyword(variables: DeletePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingExcludeKeywordMutation>(DeletePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deletePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
+    },
+    createPcKoubouCrawlSettingRequiredKeyword(variables: CreatePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingRequiredKeywordMutation>(CreatePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createPcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    updatePcKoubouCrawlSettingRequiredKeyword(variables: UpdatePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingRequiredKeywordMutation>(UpdatePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
+    },
+    deletePcKoubouCrawlSettingRequiredKeyword(variables: DeletePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingRequiredKeywordMutation>(DeletePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deletePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
     },
     getProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductPageData', 'query', variables);

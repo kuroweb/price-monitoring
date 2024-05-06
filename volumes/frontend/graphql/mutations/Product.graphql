@@ -736,3 +736,169 @@ mutation deleteIosysCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
     }
   }
 }
+
+#
+# PcKoubou
+#
+
+## PcKoubouCrawlSettingExcludeKeyword ##
+
+mutation createPcKoubouCrawlSettingExcludeKeyword(
+  $input: CreatePcKoubouCrawlSettingExcludeKeywordInput!
+) {
+  createPcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updatePcKoubouCrawlSettingExcludeKeyword(
+  $input: UpdatePcKoubouCrawlSettingExcludeKeywordInput!
+) {
+  updatePcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deletePcKoubouCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
+  deletePcKoubouCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+    ... on DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## PcKoubouCrawlSettingRequiredKeyword ##
+
+mutation createPcKoubouCrawlSettingRequiredKeyword(
+  $input: CreatePcKoubouCrawlSettingRequiredKeywordInput!
+) {
+  createPcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updatePcKoubouCrawlSettingRequiredKeyword(
+  $input: UpdatePcKoubouCrawlSettingRequiredKeywordInput!
+) {
+  updatePcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deletePcKoubouCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
+  deletePcKoubouCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+    ... on DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

@@ -146,6 +146,36 @@ func (r *mutationResolver) DeleteIosysCrawlSettingRequiredKeyword(ctx context.Co
 	return r.ProductService.DeleteIosysCrawlSettingRequiredKeyword(ctx, id, productID)
 }
 
+// CreatePcKoubouCrawlSettingExcludeKeyword is the resolver for the createPcKoubouCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) CreatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingExcludeKeywordInput) (model.CreatePcKoubouCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.CreatePcKoubouCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// UpdatePcKoubouCrawlSettingExcludeKeyword is the resolver for the updatePcKoubouCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) UpdatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingExcludeKeywordInput) (model.UpdatePcKoubouCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.UpdatePcKoubouCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// DeletePcKoubouCrawlSettingExcludeKeyword is the resolver for the deletePcKoubouCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) DeletePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.DeletePcKoubouCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreatePcKoubouCrawlSettingRequiredKeyword is the resolver for the createPcKoubouCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) CreatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) (model.CreatePcKoubouCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.CreatePcKoubouCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// UpdatePcKoubouCrawlSettingRequiredKeyword is the resolver for the updatePcKoubouCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) UpdatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) (model.UpdatePcKoubouCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.UpdatePcKoubouCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// DeletePcKoubouCrawlSettingRequiredKeyword is the resolver for the deletePcKoubouCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) DeletePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.DeletePcKoubouCrawlSettingRequiredKeyword(ctx, id, productID)
+}
+
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 

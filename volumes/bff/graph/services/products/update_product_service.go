@@ -51,6 +51,12 @@ func (u *UpdateProductService) UpdateProduct(ctx context.Context, id string, inp
 			"max_price": input.IosysCrawlSetting.MaxPrice,
 			"enabled":   input.IosysCrawlSetting.Enabled,
 		},
+		"pc_koubou_crawl_setting": map[string]interface{}{
+			"keyword":   input.PcKoubouCrawlSetting.Keyword,
+			"min_price": input.PcKoubouCrawlSetting.MinPrice,
+			"max_price": input.PcKoubouCrawlSetting.MaxPrice,
+			"enabled":   input.PcKoubouCrawlSetting.Enabled,
+		},
 	}
 
 	requestBody, err := json.Marshal(body)

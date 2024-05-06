@@ -18,6 +18,7 @@ type Product implements Node {
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   janparaCrawlSetting: JanparaCrawlSetting!
   iosysCrawlSetting: IosysCrawlSetting!
+  pcKoubouCrawlSetting: PcKoubouCrawlSetting!
   relatedProducts(
     platformMask: String!
     published: Boolean!
@@ -198,6 +199,35 @@ type IosysCrawlSettingExcludeKeyword implements Node {
 type IosysCrawlSettingRequiredKeyword implements Node {
   id: ID!
   iosysCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type PcKoubouCrawlSetting implements Node {
+  id: ID!
+  productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  pcKoubouCrawlSettingExcludeKeywords: [PcKoubouCrawlSettingExcludeKeyword!]!
+  pcKoubouCrawlSettingRequiredKeywords: [PcKoubouCrawlSettingRequiredKeyword!]!
+}
+
+type PcKoubouCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  pcKoubouCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type PcKoubouCrawlSettingRequiredKeyword implements Node {
+  id: ID!
+  pcKoubouCrawlSettingId: Int!
   keyword: String
   createdAt: String!
   updatedAt: String!

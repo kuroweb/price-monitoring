@@ -154,6 +154,12 @@ const Page = async ({
             max_price: data.product.iosysCrawlSetting?.maxPrice,
             enabled: data.product.iosysCrawlSetting?.enabled,
           },
+          pc_koubou_crawl_setting: {
+            keyword: data.product.pcKoubouCrawlSetting?.keyword,
+            min_price: data.product.pcKoubouCrawlSetting?.minPrice,
+            max_price: data.product.pcKoubouCrawlSetting?.maxPrice,
+            enabled: data.product.pcKoubouCrawlSetting?.enabled,
+          },
         }}
       />
       <EditExcludeKeywordModal data={data} />

@@ -44,6 +44,13 @@ Rails.application.routes.draw do
             resources :iosys_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
 
+          ## pc_koubou ##
+          resources :pc_koubou_crawl_settings, only: [:index]
+          namespace :pc_koubou_crawl_settings do
+            resources :pc_koubou_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :pc_koubou_crawl_setting_required_keywords, only: %i[index create update destroy]
+          end
+
           ## related_product ##
           resources :related_products, only: %i[index]
         end

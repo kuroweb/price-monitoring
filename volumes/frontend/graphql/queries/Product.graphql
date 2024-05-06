@@ -40,6 +40,14 @@ query getProductPageData($id: ID, $name: String) {
       maxPrice
       enabled
     }
+    pcKoubouCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
   }
 }
 
@@ -167,6 +175,28 @@ query getProductDetailPageData(
       iosysCrawlSettingRequiredKeywords {
         id
         iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    pcKoubouCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      pcKoubouCrawlSettingExcludeKeywords {
+        id
+        pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingRequiredKeywords {
+        id
+        pcKoubouCrawlSettingId
         keyword
         createdAt
         updatedAt

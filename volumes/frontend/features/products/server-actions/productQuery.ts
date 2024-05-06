@@ -73,6 +73,22 @@ import {
   UpdateIosysCrawlSettingRequiredKeywordDocument,
   UpdateIosysCrawlSettingRequiredKeywordInput,
   UpdateIosysCrawlSettingRequiredKeywordMutation,
+  CreatePcKoubouCrawlSettingExcludeKeywordInput,
+  UpdatePcKoubouCrawlSettingExcludeKeywordInput,
+  CreatePcKoubouCrawlSettingExcludeKeywordDocument,
+  CreatePcKoubouCrawlSettingExcludeKeywordMutation,
+  DeletePcKoubouCrawlSettingExcludeKeywordDocument,
+  DeletePcKoubouCrawlSettingExcludeKeywordMutation,
+  UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
+  UpdatePcKoubouCrawlSettingExcludeKeywordMutation,
+  CreatePcKoubouCrawlSettingRequiredKeywordInput,
+  CreatePcKoubouCrawlSettingRequiredKeywordDocument,
+  CreatePcKoubouCrawlSettingRequiredKeywordMutation,
+  DeletePcKoubouCrawlSettingRequiredKeywordDocument,
+  DeletePcKoubouCrawlSettingRequiredKeywordMutation,
+  UpdatePcKoubouCrawlSettingRequiredKeywordDocument,
+  UpdatePcKoubouCrawlSettingRequiredKeywordInput,
+  UpdatePcKoubouCrawlSettingRequiredKeywordMutation,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -335,6 +351,64 @@ export const updateIosysCrawlSettingRequiredKeyword = async (
 export const deleteIosysCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeleteIosysCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteIosysCrawlSettingRequiredKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/*
+  PcKoubou
+*/
+
+/* PcKoubouCrawlSettingExcludeKeyword */
+
+export const createPcKoubouCrawlSettingExcludeKeyword = async (
+  input: CreatePcKoubouCrawlSettingExcludeKeywordInput,
+) => {
+  return await getClient().mutate<CreatePcKoubouCrawlSettingExcludeKeywordMutation>({
+    mutation: CreatePcKoubouCrawlSettingExcludeKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updatePcKoubouCrawlSettingExcludeKeyword = async (
+  input: UpdatePcKoubouCrawlSettingExcludeKeywordInput,
+) => {
+  return await getClient().mutate<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>({
+    mutation: UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deletePcKoubouCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeletePcKoubouCrawlSettingExcludeKeywordMutation>({
+    mutation: DeletePcKoubouCrawlSettingExcludeKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/* PcKoubouCrawlSettingRequiredKeyword */
+
+export const createPcKoubouCrawlSettingRequiredKeyword = async (
+  input: CreatePcKoubouCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<CreatePcKoubouCrawlSettingRequiredKeywordMutation>({
+    mutation: CreatePcKoubouCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const updatePcKoubouCrawlSettingRequiredKeyword = async (
+  input: UpdatePcKoubouCrawlSettingRequiredKeywordInput,
+) => {
+  return await getClient().mutate<UpdatePcKoubouCrawlSettingRequiredKeywordMutation>({
+    mutation: UpdatePcKoubouCrawlSettingRequiredKeywordDocument,
+    variables: { input: input },
+  })
+}
+
+export const deletePcKoubouCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
+  return await getClient().mutate<DeletePcKoubouCrawlSettingRequiredKeywordMutation>({
+    mutation: DeletePcKoubouCrawlSettingRequiredKeywordDocument,
     variables: { id: id, productId: productId },
   })
 }

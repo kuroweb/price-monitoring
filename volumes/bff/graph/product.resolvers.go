@@ -41,6 +41,16 @@ func (r *mercariCrawlSettingResolver) MercariCrawlSettingRequiredKeywords(ctx co
 	return r.ProductService.FindMercariCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
 }
 
+// PcKoubouCrawlSettingExcludeKeywords is the resolver for the pcKoubouCrawlSettingExcludeKeywords field.
+func (r *pcKoubouCrawlSettingResolver) PcKoubouCrawlSettingExcludeKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeKeyword, error) {
+	return r.ProductService.FindPcKoubouCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// PcKoubouCrawlSettingRequiredKeywords is the resolver for the pcKoubouCrawlSettingRequiredKeywords field.
+func (r *pcKoubouCrawlSettingResolver) PcKoubouCrawlSettingRequiredKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingRequiredKeyword, error) {
+	return r.ProductService.FindPcKoubouCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
+}
+
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
 func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error) {
 	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)
@@ -86,6 +96,11 @@ func (r *productResolver) IosysCrawlSetting(ctx context.Context, obj *model.Prod
 	return r.ProductService.FindIosysCrawlSetting(ctx, obj.ID)
 }
 
+// PcKoubouCrawlSetting is the resolver for the pcKoubouCrawlSetting field.
+func (r *productResolver) PcKoubouCrawlSetting(ctx context.Context, obj *model.Product) (*model.PcKoubouCrawlSetting, error) {
+	return r.ProductService.FindPcKoubouCrawlSetting(ctx, obj.ID)
+}
+
 // RelatedProducts is the resolver for the relatedProducts field.
 func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, published, yahooAuctionBuyable, page, per, sort, order)
@@ -116,6 +131,11 @@ func (r *Resolver) MercariCrawlSetting() internal.MercariCrawlSettingResolver {
 	return &mercariCrawlSettingResolver{r}
 }
 
+// PcKoubouCrawlSetting returns internal.PcKoubouCrawlSettingResolver implementation.
+func (r *Resolver) PcKoubouCrawlSetting() internal.PcKoubouCrawlSettingResolver {
+	return &pcKoubouCrawlSettingResolver{r}
+}
+
 // Product returns internal.ProductResolver implementation.
 func (r *Resolver) Product() internal.ProductResolver { return &productResolver{r} }
 
@@ -127,5 +147,6 @@ func (r *Resolver) YahooAuctionCrawlSetting() internal.YahooAuctionCrawlSettingR
 type iosysCrawlSettingResolver struct{ *Resolver }
 type janparaCrawlSettingResolver struct{ *Resolver }
 type mercariCrawlSettingResolver struct{ *Resolver }
+type pcKoubouCrawlSettingResolver struct{ *Resolver }
 type productResolver struct{ *Resolver }
 type yahooAuctionCrawlSettingResolver struct{ *Resolver }

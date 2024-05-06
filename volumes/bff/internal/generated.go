@@ -42,6 +42,7 @@ type ResolverRoot interface {
 	JanparaCrawlSetting() JanparaCrawlSettingResolver
 	MercariCrawlSetting() MercariCrawlSettingResolver
 	Mutation() MutationResolver
+	PcKoubouCrawlSetting() PcKoubouCrawlSettingResolver
 	Product() ProductResolver
 	Query() QueryResolver
 	YahooAuctionCrawlSetting() YahooAuctionCrawlSettingResolver
@@ -142,6 +143,38 @@ type ComplexityRoot struct {
 	}
 
 	CreateMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok                                 func(childComplexity int) int
+		PcKoubouCrawlSettingExcludeKeyword func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok                                  func(childComplexity int) int
+		PcKoubouCrawlSettingRequiredKeyword func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -280,6 +313,36 @@ type ComplexityRoot struct {
 	}
 
 	DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -453,6 +516,8 @@ type ComplexityRoot struct {
 		CreateJanparaCrawlSettingRequiredKeyword      func(childComplexity int, input model.CreateJanparaCrawlSettingRequiredKeywordInput) int
 		CreateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.CreateMercariCrawlSettingExcludeKeywordInput) int
 		CreateMercariCrawlSettingRequiredKeyword      func(childComplexity int, input model.CreateMercariCrawlSettingRequiredKeywordInput) int
+		CreatePcKoubouCrawlSettingExcludeKeyword      func(childComplexity int, input model.CreatePcKoubouCrawlSettingExcludeKeywordInput) int
+		CreatePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) int
 		CreateProduct                                 func(childComplexity int, input model.CreateProductInput) int
 		CreateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) int
 		CreateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) int
@@ -462,6 +527,8 @@ type ComplexityRoot struct {
 		DeleteJanparaCrawlSettingRequiredKeyword      func(childComplexity int, id string, productID string) int
 		DeleteMercariCrawlSettingExcludeKeyword       func(childComplexity int, id string, productID string) int
 		DeleteMercariCrawlSettingRequiredKeyword      func(childComplexity int, id string, productID string) int
+		DeletePcKoubouCrawlSettingExcludeKeyword      func(childComplexity int, id string, productID string) int
+		DeletePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, id string, productID string) int
 		DeleteProduct                                 func(childComplexity int, id string) int
 		DeleteYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, id string, productID string) int
 		DeleteYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, id string, productID string) int
@@ -471,9 +538,40 @@ type ComplexityRoot struct {
 		UpdateJanparaCrawlSettingRequiredKeyword      func(childComplexity int, input model.UpdateJanparaCrawlSettingRequiredKeywordInput) int
 		UpdateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.UpdateMercariCrawlSettingExcludeKeywordInput) int
 		UpdateMercariCrawlSettingRequiredKeyword      func(childComplexity int, input model.UpdateMercariCrawlSettingRequiredKeywordInput) int
+		UpdatePcKoubouCrawlSettingExcludeKeyword      func(childComplexity int, input model.UpdatePcKoubouCrawlSettingExcludeKeywordInput) int
+		UpdatePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) int
 		UpdateProduct                                 func(childComplexity int, id string, input model.UpdateProductInput) int
 		UpdateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) int
 		UpdateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) int
+	}
+
+	PcKoubouCrawlSetting struct {
+		CreatedAt                            func(childComplexity int) int
+		Enabled                              func(childComplexity int) int
+		ID                                   func(childComplexity int) int
+		Keyword                              func(childComplexity int) int
+		MaxPrice                             func(childComplexity int) int
+		MinPrice                             func(childComplexity int) int
+		PcKoubouCrawlSettingExcludeKeywords  func(childComplexity int) int
+		PcKoubouCrawlSettingRequiredKeywords func(childComplexity int) int
+		ProductID                            func(childComplexity int) int
+		UpdatedAt                            func(childComplexity int) int
+	}
+
+	PcKoubouCrawlSettingExcludeKeyword struct {
+		CreatedAt              func(childComplexity int) int
+		ID                     func(childComplexity int) int
+		Keyword                func(childComplexity int) int
+		PcKoubouCrawlSettingID func(childComplexity int) int
+		UpdatedAt              func(childComplexity int) int
+	}
+
+	PcKoubouCrawlSettingRequiredKeyword struct {
+		CreatedAt              func(childComplexity int) int
+		ID                     func(childComplexity int) int
+		Keyword                func(childComplexity int) int
+		PcKoubouCrawlSettingID func(childComplexity int) int
+		UpdatedAt              func(childComplexity int) int
 	}
 
 	Product struct {
@@ -484,6 +582,7 @@ type ComplexityRoot struct {
 		MercariDailyPurchaseSummaries         func(childComplexity int) int
 		MercariProducts                       func(childComplexity int, published *bool, sort *string, order *string) int
 		Name                                  func(childComplexity int) int
+		PcKoubouCrawlSetting                  func(childComplexity int) int
 		RelatedProducts                       func(childComplexity int, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) int
 		YahooAuctionCrawlSetting              func(childComplexity int) int
 		YahooAuctionDailyPurchaseSummaries    func(childComplexity int) int
@@ -603,6 +702,38 @@ type ComplexityRoot struct {
 	}
 
 	UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok                                 func(childComplexity int) int
+		PcKoubouCrawlSettingExcludeKeyword func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok                                  func(childComplexity int) int
+		PcKoubouCrawlSettingRequiredKeyword func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -760,6 +891,16 @@ type MutationResolver interface {
 	CreateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateIosysCrawlSettingRequiredKeywordInput) (model.CreateIosysCrawlSettingRequiredKeywordResult, error)
 	UpdateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingRequiredKeywordInput) (model.UpdateIosysCrawlSettingRequiredKeywordResult, error)
 	DeleteIosysCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingRequiredKeywordResult, error)
+	CreatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingExcludeKeywordInput) (model.CreatePcKoubouCrawlSettingExcludeKeywordResult, error)
+	UpdatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingExcludeKeywordInput) (model.UpdatePcKoubouCrawlSettingExcludeKeywordResult, error)
+	DeletePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingExcludeKeywordResult, error)
+	CreatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) (model.CreatePcKoubouCrawlSettingRequiredKeywordResult, error)
+	UpdatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) (model.UpdatePcKoubouCrawlSettingRequiredKeywordResult, error)
+	DeletePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingRequiredKeywordResult, error)
+}
+type PcKoubouCrawlSettingResolver interface {
+	PcKoubouCrawlSettingExcludeKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeKeyword, error)
+	PcKoubouCrawlSettingRequiredKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingRequiredKeyword, error)
 }
 type ProductResolver interface {
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error)
@@ -771,6 +912,7 @@ type ProductResolver interface {
 	MercariDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.MercariDailyPurchaseSummary, error)
 	JanparaCrawlSetting(ctx context.Context, obj *model.Product) (*model.JanparaCrawlSetting, error)
 	IosysCrawlSetting(ctx context.Context, obj *model.Product) (*model.IosysCrawlSetting, error)
+	PcKoubouCrawlSetting(ctx context.Context, obj *model.Product) (*model.PcKoubouCrawlSetting, error)
 	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 type QueryResolver interface {
@@ -1095,6 +1237,104 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess.pcKoubouCrawlSettingExcludeKeyword":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess.PcKoubouCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess.PcKoubouCrawlSettingExcludeKeyword(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess.pcKoubouCrawlSettingRequiredKeyword":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess.PcKoubouCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess.PcKoubouCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "CreateProductResultError.error":
 		if e.complexity.CreateProductResultError.Error == nil {
@@ -1494,6 +1734,90 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "DeleteProductResultError.error":
 		if e.complexity.DeleteProductResultError.Error == nil {
@@ -2253,6 +2577,30 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateMercariCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreateMercariCrawlSettingRequiredKeywordInput)), true
 
+	case "Mutation.createPcKoubouCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.CreatePcKoubouCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createPcKoubouCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreatePcKoubouCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreatePcKoubouCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.createPcKoubouCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.CreatePcKoubouCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createPcKoubouCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreatePcKoubouCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreatePcKoubouCrawlSettingRequiredKeywordInput)), true
+
 	case "Mutation.createProduct":
 		if e.complexity.Mutation.CreateProduct == nil {
 			break
@@ -2360,6 +2708,30 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.DeleteMercariCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deletePcKoubouCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.DeletePcKoubouCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deletePcKoubouCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeletePcKoubouCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deletePcKoubouCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.DeletePcKoubouCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deletePcKoubouCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeletePcKoubouCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
 
 	case "Mutation.deleteProduct":
 		if e.complexity.Mutation.DeleteProduct == nil {
@@ -2469,6 +2841,30 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.UpdateMercariCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdateMercariCrawlSettingRequiredKeywordInput)), true
 
+	case "Mutation.updatePcKoubouCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.UpdatePcKoubouCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updatePcKoubouCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdatePcKoubouCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdatePcKoubouCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updatePcKoubouCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.UpdatePcKoubouCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updatePcKoubouCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdatePcKoubouCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdatePcKoubouCrawlSettingRequiredKeywordInput)), true
+
 	case "Mutation.updateProduct":
 		if e.complexity.Mutation.UpdateProduct == nil {
 			break
@@ -2504,6 +2900,146 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdateYahooAuctionCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput)), true
+
+	case "PcKoubouCrawlSetting.createdAt":
+		if e.complexity.PcKoubouCrawlSetting.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.CreatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSetting.enabled":
+		if e.complexity.PcKoubouCrawlSetting.Enabled == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.Enabled(childComplexity), true
+
+	case "PcKoubouCrawlSetting.id":
+		if e.complexity.PcKoubouCrawlSetting.ID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.ID(childComplexity), true
+
+	case "PcKoubouCrawlSetting.keyword":
+		if e.complexity.PcKoubouCrawlSetting.Keyword == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.Keyword(childComplexity), true
+
+	case "PcKoubouCrawlSetting.maxPrice":
+		if e.complexity.PcKoubouCrawlSetting.MaxPrice == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.MaxPrice(childComplexity), true
+
+	case "PcKoubouCrawlSetting.minPrice":
+		if e.complexity.PcKoubouCrawlSetting.MinPrice == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.MinPrice(childComplexity), true
+
+	case "PcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords":
+		if e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingExcludeKeywords == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingExcludeKeywords(childComplexity), true
+
+	case "PcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords":
+		if e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingRequiredKeywords == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingRequiredKeywords(childComplexity), true
+
+	case "PcKoubouCrawlSetting.productId":
+		if e.complexity.PcKoubouCrawlSetting.ProductID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.ProductID(childComplexity), true
+
+	case "PcKoubouCrawlSetting.updatedAt":
+		if e.complexity.PcKoubouCrawlSetting.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.UpdatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeKeyword.createdAt":
+		if e.complexity.PcKoubouCrawlSettingExcludeKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeKeyword.CreatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeKeyword.id":
+		if e.complexity.PcKoubouCrawlSettingExcludeKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeKeyword.ID(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeKeyword.keyword":
+		if e.complexity.PcKoubouCrawlSettingExcludeKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeKeyword.Keyword(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeKeyword.pcKoubouCrawlSettingId":
+		if e.complexity.PcKoubouCrawlSettingExcludeKeyword.PcKoubouCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeKeyword.PcKoubouCrawlSettingID(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeKeyword.updatedAt":
+		if e.complexity.PcKoubouCrawlSettingExcludeKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSettingRequiredKeyword.createdAt":
+		if e.complexity.PcKoubouCrawlSettingRequiredKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingRequiredKeyword.CreatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSettingRequiredKeyword.id":
+		if e.complexity.PcKoubouCrawlSettingRequiredKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingRequiredKeyword.ID(childComplexity), true
+
+	case "PcKoubouCrawlSettingRequiredKeyword.keyword":
+		if e.complexity.PcKoubouCrawlSettingRequiredKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingRequiredKeyword.Keyword(childComplexity), true
+
+	case "PcKoubouCrawlSettingRequiredKeyword.pcKoubouCrawlSettingId":
+		if e.complexity.PcKoubouCrawlSettingRequiredKeyword.PcKoubouCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingRequiredKeyword.PcKoubouCrawlSettingID(childComplexity), true
+
+	case "PcKoubouCrawlSettingRequiredKeyword.updatedAt":
+		if e.complexity.PcKoubouCrawlSettingRequiredKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingRequiredKeyword.UpdatedAt(childComplexity), true
 
 	case "Product.id":
 		if e.complexity.Product.ID == nil {
@@ -2558,6 +3094,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.Name(childComplexity), true
+
+	case "Product.pcKoubouCrawlSetting":
+		if e.complexity.Product.PcKoubouCrawlSetting == nil {
+			break
+		}
+
+		return e.complexity.Product.PcKoubouCrawlSetting(childComplexity), true
 
 	case "Product.relatedProducts":
 		if e.complexity.Product.RelatedProducts == nil {
@@ -3017,6 +3560,104 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess.pcKoubouCrawlSettingExcludeKeyword":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess.PcKoubouCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess.PcKoubouCrawlSettingExcludeKeyword(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess.pcKoubouCrawlSettingRequiredKeyword":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess.PcKoubouCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess.PcKoubouCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "UpdateProductResultError.error":
 		if e.complexity.UpdateProductResultError.Error == nil {
@@ -3497,6 +4138,9 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 		ec.unmarshalInputCreateMercariCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateMercariCrawlSettingInput,
 		ec.unmarshalInputCreateMercariCrawlSettingRequiredKeywordInput,
+		ec.unmarshalInputCreatePcKoubouCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreatePcKoubouCrawlSettingInput,
+		ec.unmarshalInputCreatePcKoubouCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateProductInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingInput,
@@ -3510,6 +4154,9 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 		ec.unmarshalInputUpdateMercariCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingRequiredKeywordInput,
+		ec.unmarshalInputUpdatePcKoubouCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdatePcKoubouCrawlSettingInput,
+		ec.unmarshalInputUpdatePcKoubouCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateProductInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput,
@@ -3699,6 +4346,26 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteIosysCrawlSettingRequiredKeywordResult!
+  createPcKoubouCrawlSettingExcludeKeyword(
+    input: CreatePcKoubouCrawlSettingExcludeKeywordInput!
+  ): CreatePcKoubouCrawlSettingExcludeKeywordResult!
+  updatePcKoubouCrawlSettingExcludeKeyword(
+    input: UpdatePcKoubouCrawlSettingExcludeKeywordInput!
+  ): UpdatePcKoubouCrawlSettingExcludeKeywordResult!
+  deletePcKoubouCrawlSettingExcludeKeyword(
+    id: ID!
+    productId: ID!
+  ): DeletePcKoubouCrawlSettingExcludeKeywordResult!
+  createPcKoubouCrawlSettingRequiredKeyword(
+    input: CreatePcKoubouCrawlSettingRequiredKeywordInput!
+  ): CreatePcKoubouCrawlSettingRequiredKeywordResult!
+  updatePcKoubouCrawlSettingRequiredKeyword(
+    input: UpdatePcKoubouCrawlSettingRequiredKeywordInput!
+  ): UpdatePcKoubouCrawlSettingRequiredKeywordResult!
+  deletePcKoubouCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeletePcKoubouCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -3725,6 +4392,7 @@ input CreateProductInput {
   mercari_crawl_setting: CreateMercariCrawlSettingInput!
   janpara_crawl_setting: CreateJanparaCrawlSettingInput!
   iosys_crawl_setting: CreateIosysCrawlSettingInput!
+  pc_koubou_crawl_setting: CreatePcKoubouCrawlSettingInput!
 }
 
 input CreateYahooAuctionCrawlSettingInput {
@@ -3751,6 +4419,12 @@ input CreateJanparaCrawlSettingInput {
 }
 
 input CreateIosysCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+input CreatePcKoubouCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -3787,6 +4461,7 @@ input UpdateProductInput {
   mercari_crawl_setting: UpdateMercariCrawlSettingInput!
   janpara_crawl_setting: UpdateJanparaCrawlSettingInput!
   iosys_crawl_setting: UpdateIosysCrawlSettingInput!
+  pc_koubou_crawl_setting: UpdatePcKoubouCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
@@ -3813,6 +4488,13 @@ input UpdateJanparaCrawlSettingInput {
 }
 
 input UpdateIosysCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input UpdatePcKoubouCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -4543,6 +5225,176 @@ type DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed implements Use
   message: String!
   details: [ErrorDetail!]!
 }
+
+## CreatePcKoubouCrawlSettingExcludeKeyword ##
+
+input CreatePcKoubouCrawlSettingExcludeKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreatePcKoubouCrawlSettingExcludeKeywordResult =
+    CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess
+  | CreatePcKoubouCrawlSettingExcludeKeywordResultError
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingExcludeKeyword: PcKoubouCrawlSettingExcludeKeyword!
+}
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreatePcKoubouCrawlSettingExcludeKeywordResultErrors!
+}
+
+union CreatePcKoubouCrawlSettingExcludeKeywordResultErrors =
+    CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed
+
+type CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdatePcKoubouCrawlSettingExcludeKeyword ##
+
+input UpdatePcKoubouCrawlSettingExcludeKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdatePcKoubouCrawlSettingExcludeKeywordResult =
+    UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess
+  | UpdatePcKoubouCrawlSettingExcludeKeywordResultError
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingExcludeKeyword: PcKoubouCrawlSettingExcludeKeyword!
+}
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors!
+}
+
+union UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors =
+    UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed
+
+type UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeletePcKoubouCrawlSettingExcludeKeyword ##
+
+union DeletePcKoubouCrawlSettingExcludeKeywordResult =
+    DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess
+  | DeletePcKoubouCrawlSettingExcludeKeywordResultError
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeletePcKoubouCrawlSettingExcludeKeywordResultErrors!
+}
+
+union DeletePcKoubouCrawlSettingExcludeKeywordResultErrors =
+    DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed
+
+type DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreatePcKoubouCrawlSettingRequiredKeyword ##
+
+input CreatePcKoubouCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreatePcKoubouCrawlSettingRequiredKeywordResult =
+    CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess
+  | CreatePcKoubouCrawlSettingRequiredKeywordResultError
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingRequiredKeyword: PcKoubouCrawlSettingRequiredKeyword!
+}
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreatePcKoubouCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreatePcKoubouCrawlSettingRequiredKeywordResultErrors =
+    CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdatePcKoubouCrawlSettingRequiredKeyword ##
+
+input UpdatePcKoubouCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdatePcKoubouCrawlSettingRequiredKeywordResult =
+    UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess
+  | UpdatePcKoubouCrawlSettingRequiredKeywordResultError
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingRequiredKeyword: PcKoubouCrawlSettingRequiredKeyword!
+}
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors =
+    UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeletePcKoubouCrawlSettingRequiredKeyword ##
+
+union DeletePcKoubouCrawlSettingRequiredKeywordResult =
+    DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess
+  | DeletePcKoubouCrawlSettingRequiredKeywordResultError
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeletePcKoubouCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeletePcKoubouCrawlSettingRequiredKeywordResultErrors =
+    DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
 `, BuiltIn: false},
 	{Name: "../graph/product.graphqls", Input: `type Product implements Node {
   id: ID!
@@ -4564,6 +5416,7 @@ type DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed implements Use
   mercariDailyPurchaseSummaries: [MercariDailyPurchaseSummary!]!
   janparaCrawlSetting: JanparaCrawlSetting!
   iosysCrawlSetting: IosysCrawlSetting!
+  pcKoubouCrawlSetting: PcKoubouCrawlSetting!
   relatedProducts(
     platformMask: String!
     published: Boolean!
@@ -4749,6 +5602,35 @@ type IosysCrawlSettingRequiredKeyword implements Node {
   updatedAt: String!
 }
 
+type PcKoubouCrawlSetting implements Node {
+  id: ID!
+  productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  pcKoubouCrawlSettingExcludeKeywords: [PcKoubouCrawlSettingExcludeKeyword!]!
+  pcKoubouCrawlSettingRequiredKeywords: [PcKoubouCrawlSettingRequiredKeyword!]!
+}
+
+type PcKoubouCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  pcKoubouCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type PcKoubouCrawlSettingRequiredKeyword implements Node {
+  id: ID!
+  pcKoubouCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
 type RelatedProduct {
   platform: String!
   productId: Int!
@@ -4859,6 +5741,36 @@ func (ec *executionContext) field_Mutation_createMercariCrawlSettingRequiredKeyw
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNCreateMercariCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingRequiredKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createPcKoubouCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreatePcKoubouCrawlSettingExcludeKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreatePcKoubouCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createPcKoubouCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreatePcKoubouCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreatePcKoubouCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingRequiredKeywordInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -5056,6 +5968,54 @@ func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingRequiredKeyw
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_deletePcKoubouCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deletePcKoubouCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_deleteProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -5201,6 +6161,36 @@ func (ec *executionContext) field_Mutation_updateMercariCrawlSettingRequiredKeyw
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNUpdateMercariCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingRequiredKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updatePcKoubouCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdatePcKoubouCrawlSettingExcludeKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdatePcKoubouCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updatePcKoubouCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdatePcKoubouCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdatePcKoubouCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingRequiredKeywordInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -7461,6 +8451,658 @@ func (ec *executionContext) fieldContext_CreateMercariCrawlSettingRequiredKeywor
 	return fc, nil
 }
 
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreatePcKoubouCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreatePcKoubouCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreatePcKoubouCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingExcludeKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreatePcKoubouCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreatePcKoubouCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreatePcKoubouCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _CreateProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateProductResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_CreateProductResultError_ok(ctx, field)
 	if err != nil {
@@ -7654,6 +9296,8 @@ func (ec *executionContext) fieldContext_CreateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
 			case "iosysCrawlSetting":
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
+			case "pcKoubouCrawlSetting":
+				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -10057,6 +11701,546 @@ func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultValid
 func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeletePcKoubouCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeletePcKoubouCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeletePcKoubouCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeletePcKoubouCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeletePcKoubouCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeletePcKoubouCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -15933,6 +18117,1234 @@ func (ec *executionContext) fieldContext_Mutation_deleteIosysCrawlSettingRequire
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createPcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createPcKoubouCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreatePcKoubouCrawlSettingExcludeKeyword(rctx, fc.Args["input"].(model.CreatePcKoubouCrawlSettingExcludeKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreatePcKoubouCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreatePcKoubouCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createPcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreatePcKoubouCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createPcKoubouCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updatePcKoubouCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdatePcKoubouCrawlSettingExcludeKeyword(rctx, fc.Args["input"].(model.UpdatePcKoubouCrawlSettingExcludeKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdatePcKoubouCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdatePcKoubouCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdatePcKoubouCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updatePcKoubouCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deletePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deletePcKoubouCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeletePcKoubouCrawlSettingExcludeKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeletePcKoubouCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeletePcKoubouCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deletePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeletePcKoubouCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deletePcKoubouCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createPcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createPcKoubouCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreatePcKoubouCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.CreatePcKoubouCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreatePcKoubouCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreatePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createPcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreatePcKoubouCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createPcKoubouCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updatePcKoubouCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdatePcKoubouCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.UpdatePcKoubouCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdatePcKoubouCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdatePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdatePcKoubouCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updatePcKoubouCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deletePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deletePcKoubouCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeletePcKoubouCrawlSettingRequiredKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeletePcKoubouCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeletePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deletePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeletePcKoubouCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deletePcKoubouCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_id(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_productId(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_productId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ProductID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_keyword(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_minPrice(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_minPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MinPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_minPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_maxPrice(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_maxPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MaxPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_maxPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_enabled(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Enabled, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeKeywords(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.PcKoubouCrawlSetting().PcKoubouCrawlSettingExcludeKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.PcKoubouCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingExcludeKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.PcKoubouCrawlSetting().PcKoubouCrawlSettingRequiredKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.PcKoubouCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Product_id(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Product_id(ctx, field)
 	if err != nil {
@@ -16623,6 +20035,72 @@ func (ec *executionContext) fieldContext_Product_iosysCrawlSetting(ctx context.C
 	return fc, nil
 }
 
+func (ec *executionContext) _Product_pcKoubouCrawlSetting(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Product().PcKoubouCrawlSetting(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSetting)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSetting2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSetting(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Product_pcKoubouCrawlSetting(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Product",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSetting_id(ctx, field)
+			case "productId":
+				return ec.fieldContext_PcKoubouCrawlSetting_productId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSetting_keyword(ctx, field)
+			case "minPrice":
+				return ec.fieldContext_PcKoubouCrawlSetting_minPrice(ctx, field)
+			case "maxPrice":
+				return ec.fieldContext_PcKoubouCrawlSetting_maxPrice(ctx, field)
+			case "enabled":
+				return ec.fieldContext_PcKoubouCrawlSetting_enabled(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSetting_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSetting_updatedAt(ctx, field)
+			case "pcKoubouCrawlSettingExcludeKeywords":
+				return ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeKeywords(ctx, field)
+			case "pcKoubouCrawlSettingRequiredKeywords":
+				return ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSetting", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Product_relatedProducts(ctx, field)
 	if err != nil {
@@ -16765,6 +20243,8 @@ func (ec *executionContext) fieldContext_Query_product(ctx context.Context, fiel
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
 			case "iosysCrawlSetting":
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
+			case "pcKoubouCrawlSetting":
+				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -16846,6 +20326,8 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
 			case "iosysCrawlSetting":
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
+			case "pcKoubouCrawlSetting":
+				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -19522,6 +23004,658 @@ func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingRequiredKeywor
 	return fc, nil
 }
 
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingExcludeKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdatePcKoubouCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _UpdateProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateProductResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_UpdateProductResultError_ok(ctx, field)
 	if err != nil {
@@ -19715,6 +23849,8 @@ func (ec *executionContext) fieldContext_UpdateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_janparaCrawlSetting(ctx, field)
 			case "iosysCrawlSetting":
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
+			case "pcKoubouCrawlSetting":
+				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
 			case "relatedProducts":
 				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			}
@@ -24678,6 +28814,138 @@ func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingRequiredKeywo
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreatePcKoubouCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.CreatePcKoubouCrawlSettingExcludeKeywordInput, error) {
+	var it model.CreatePcKoubouCrawlSettingExcludeKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreatePcKoubouCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreatePcKoubouCrawlSettingInput, error) {
+	var it model.CreatePcKoubouCrawlSettingInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "min_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MinPrice = data
+		case "max_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MaxPrice = data
+		case "enabled":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreatePcKoubouCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.CreatePcKoubouCrawlSettingRequiredKeywordInput, error) {
+	var it model.CreatePcKoubouCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context, obj interface{}) (model.CreateProductInput, error) {
 	var it model.CreateProductInput
 	asMap := map[string]interface{}{}
@@ -24685,7 +28953,7 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting"}
+	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting", "pc_koubou_crawl_setting"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -24737,6 +29005,15 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 				return it, err
 			}
 			it.IosysCrawlSetting = data
+		case "pc_koubou_crawl_setting":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("pc_koubou_crawl_setting"))
+			data, err := ec.unmarshalNCreatePcKoubouCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingInput(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.PcKoubouCrawlSetting = data
 		}
 	}
 
@@ -25343,6 +29620,156 @@ func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingRequiredKeywo
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputUpdatePcKoubouCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.UpdatePcKoubouCrawlSettingExcludeKeywordInput, error) {
+	var it model.UpdatePcKoubouCrawlSettingExcludeKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdatePcKoubouCrawlSettingInput(ctx context.Context, obj interface{}) (model.UpdatePcKoubouCrawlSettingInput, error) {
+	var it model.UpdatePcKoubouCrawlSettingInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "min_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MinPrice = data
+		case "max_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MaxPrice = data
+		case "enabled":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdatePcKoubouCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.UpdatePcKoubouCrawlSettingRequiredKeywordInput, error) {
+	var it model.UpdatePcKoubouCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context, obj interface{}) (model.UpdateProductInput, error) {
 	var it model.UpdateProductInput
 	asMap := map[string]interface{}{}
@@ -25350,7 +29777,7 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting"}
+	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting", "pc_koubou_crawl_setting"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -25402,6 +29829,15 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 				return it, err
 			}
 			it.IosysCrawlSetting = data
+		case "pc_koubou_crawl_setting":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("pc_koubou_crawl_setting"))
+			data, err := ec.unmarshalNUpdatePcKoubouCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingInput(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.PcKoubouCrawlSetting = data
 		}
 	}
 
@@ -25805,6 +30241,84 @@ func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultError
 	}
 }
 
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreatePcKoubouCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeKeywordResultError:
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreatePcKoubouCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreatePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultError:
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreatePcKoubouCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _CreateProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateProductResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -26156,6 +30670,84 @@ func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultError
 	}
 }
 
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeletePcKoubouCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeKeywordResultError:
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeletePcKoubouCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeletePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingRequiredKeywordResultError:
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeletePcKoubouCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteProductResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -26403,6 +30995,27 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._IosysCrawlSettingRequiredKeyword(ctx, sel, obj)
+	case model.PcKoubouCrawlSetting:
+		return ec._PcKoubouCrawlSetting(ctx, sel, &obj)
+	case *model.PcKoubouCrawlSetting:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._PcKoubouCrawlSetting(ctx, sel, obj)
+	case model.PcKoubouCrawlSettingExcludeKeyword:
+		return ec._PcKoubouCrawlSettingExcludeKeyword(ctx, sel, &obj)
+	case *model.PcKoubouCrawlSettingExcludeKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._PcKoubouCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.PcKoubouCrawlSettingRequiredKeyword:
+		return ec._PcKoubouCrawlSettingRequiredKeyword(ctx, sel, &obj)
+	case *model.PcKoubouCrawlSettingRequiredKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._PcKoubouCrawlSettingRequiredKeyword(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -26790,6 +31403,90 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteIosysCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeKeywordResultError:
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError:
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeKeywordResultError:
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultError:
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError:
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingRequiredKeywordResultError:
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -27024,6 +31721,84 @@ func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultError
 			return graphql.Null
 		}
 		return ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdatePcKoubouCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError:
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdatePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError:
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -27339,6 +32114,48 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -28144,6 +32961,280 @@ func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultValid
 			}
 		case "details":
 			out.Values[i] = ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingExcludeKeywordResultErrorImplementors = []string{"CreatePcKoubouCrawlSettingExcludeKeywordResultError", "CreatePcKoubouCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess", "CreatePcKoubouCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingExcludeKeyword":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed", "CreatePcKoubouCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreatePcKoubouCrawlSettingRequiredKeywordResultError", "CreatePcKoubouCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess", "CreatePcKoubouCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed", "CreatePcKoubouCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -29347,6 +34438,270 @@ func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultValid
 			}
 		case "details":
 			out.Values[i] = ec._DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingExcludeKeywordResultErrorImplementors = []string{"DeletePcKoubouCrawlSettingExcludeKeywordResultError", "DeletePcKoubouCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess", "DeletePcKoubouCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed", "DeletePcKoubouCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeletePcKoubouCrawlSettingRequiredKeywordResultError", "DeletePcKoubouCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess", "DeletePcKoubouCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed", "DeletePcKoubouCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -30944,6 +36299,306 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createPcKoubouCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createPcKoubouCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatePcKoubouCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updatePcKoubouCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deletePcKoubouCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deletePcKoubouCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createPcKoubouCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createPcKoubouCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatePcKoubouCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updatePcKoubouCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deletePcKoubouCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deletePcKoubouCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var pcKoubouCrawlSettingImplementors = []string{"PcKoubouCrawlSetting", "Node"}
+
+func (ec *executionContext) _PcKoubouCrawlSetting(ctx context.Context, sel ast.SelectionSet, obj *model.PcKoubouCrawlSetting) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, pcKoubouCrawlSettingImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("PcKoubouCrawlSetting")
+		case "id":
+			out.Values[i] = ec._PcKoubouCrawlSetting_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "productId":
+			out.Values[i] = ec._PcKoubouCrawlSetting_productId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "keyword":
+			out.Values[i] = ec._PcKoubouCrawlSetting_keyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "minPrice":
+			out.Values[i] = ec._PcKoubouCrawlSetting_minPrice(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "maxPrice":
+			out.Values[i] = ec._PcKoubouCrawlSetting_maxPrice(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "enabled":
+			out.Values[i] = ec._PcKoubouCrawlSetting_enabled(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "createdAt":
+			out.Values[i] = ec._PcKoubouCrawlSetting_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "updatedAt":
+			out.Values[i] = ec._PcKoubouCrawlSetting_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "pcKoubouCrawlSettingExcludeKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "pcKoubouCrawlSettingRequiredKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var pcKoubouCrawlSettingExcludeKeywordImplementors = []string{"PcKoubouCrawlSettingExcludeKeyword", "Node"}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.PcKoubouCrawlSettingExcludeKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, pcKoubouCrawlSettingExcludeKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("PcKoubouCrawlSettingExcludeKeyword")
+		case "id":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingId":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeKeyword_pcKoubouCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var pcKoubouCrawlSettingRequiredKeywordImplementors = []string{"PcKoubouCrawlSettingRequiredKeyword", "Node"}
+
+func (ec *executionContext) _PcKoubouCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.PcKoubouCrawlSettingRequiredKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, pcKoubouCrawlSettingRequiredKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("PcKoubouCrawlSettingRequiredKeyword")
+		case "id":
+			out.Values[i] = ec._PcKoubouCrawlSettingRequiredKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingId":
+			out.Values[i] = ec._PcKoubouCrawlSettingRequiredKeyword_pcKoubouCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._PcKoubouCrawlSettingRequiredKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._PcKoubouCrawlSettingRequiredKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._PcKoubouCrawlSettingRequiredKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -31286,6 +36941,42 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 					}
 				}()
 				res = ec._Product_iosysCrawlSetting(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "pcKoubouCrawlSetting":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Product_pcKoubouCrawlSetting(ctx, field, obj)
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}
@@ -32365,6 +38056,280 @@ func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultValid
 			}
 		case "details":
 			out.Values[i] = ec._UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingExcludeKeywordResultErrorImplementors = []string{"UpdatePcKoubouCrawlSettingExcludeKeywordResultError", "UpdatePcKoubouCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess", "UpdatePcKoubouCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingExcludeKeyword":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess_pcKoubouCrawlSettingExcludeKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed", "UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdatePcKoubouCrawlSettingRequiredKeywordResultError", "UpdatePcKoubouCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess", "UpdatePcKoubouCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess_pcKoubouCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed", "UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -33781,6 +39746,61 @@ func (ec *executionContext) marshalNCreateMercariCrawlSettingRequiredKeywordResu
 	return ec._CreateMercariCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNCreatePcKoubouCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.CreatePcKoubouCrawlSettingExcludeKeywordInput, error) {
+	res, err := ec.unmarshalInputCreatePcKoubouCrawlSettingExcludeKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreatePcKoubouCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreatePcKoubouCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreatePcKoubouCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreatePcKoubouCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreatePcKoubouCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputCreatePcKoubouCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNCreatePcKoubouCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.CreatePcKoubouCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputCreatePcKoubouCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreatePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreatePcKoubouCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreatePcKoubouCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateProductInput(ctx context.Context, v interface{}) (model.CreateProductInput, error) {
 	res, err := ec.unmarshalInputCreateProductInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -33979,6 +39999,46 @@ func (ec *executionContext) marshalNDeleteMercariCrawlSettingRequiredKeywordResu
 		return graphql.Null
 	}
 	return ec._DeleteMercariCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeletePcKoubouCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeletePcKoubouCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteProductResult) graphql.Marshaler {
@@ -34599,6 +40659,128 @@ func (ec *executionContext) marshalNMercariProduct2ᚖgithubᚗcomᚋkurowebᚋp
 	return ec._MercariProduct(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNPcKoubouCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.PcKoubouCrawlSetting) graphql.Marshaler {
+	return ec._PcKoubouCrawlSetting(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNPcKoubouCrawlSetting2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSetting(ctx context.Context, sel ast.SelectionSet, v *model.PcKoubouCrawlSetting) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._PcKoubouCrawlSetting(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNPcKoubouCrawlSettingExcludeKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.PcKoubouCrawlSettingExcludeKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNPcKoubouCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNPcKoubouCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeKeyword(ctx context.Context, sel ast.SelectionSet, v *model.PcKoubouCrawlSettingExcludeKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._PcKoubouCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNPcKoubouCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.PcKoubouCrawlSettingRequiredKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNPcKoubouCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNPcKoubouCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, v *model.PcKoubouCrawlSettingRequiredKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._PcKoubouCrawlSettingRequiredKeyword(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNProduct2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐProduct(ctx context.Context, sel ast.SelectionSet, v model.Product) graphql.Marshaler {
 	return ec._Product(ctx, sel, &v)
 }
@@ -34889,6 +41071,61 @@ func (ec *executionContext) marshalNUpdateMercariCrawlSettingRequiredKeywordResu
 		return graphql.Null
 	}
 	return ec._UpdateMercariCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdatePcKoubouCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.UpdatePcKoubouCrawlSettingExcludeKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdatePcKoubouCrawlSettingExcludeKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdatePcKoubouCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdatePcKoubouCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdatePcKoubouCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputUpdatePcKoubouCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNUpdatePcKoubouCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.UpdatePcKoubouCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdatePcKoubouCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdatePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdatePcKoubouCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNUpdateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateProductInput(ctx context.Context, v interface{}) (model.UpdateProductInput, error) {

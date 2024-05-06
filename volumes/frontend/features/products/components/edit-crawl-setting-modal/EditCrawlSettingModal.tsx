@@ -13,6 +13,7 @@ import { updateProduct } from '../../server-actions/productQuery'
 import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
+import PcKoubouForm from './PcKoubouForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
 import { UpdateProductInput } from '@/graphql/dist/client'
@@ -25,7 +26,7 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス'>('ヤフオク')
+  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房'>('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({
@@ -56,6 +57,12 @@ const EditCrawlSettingModal = ({
         min_price: defaultValues?.iosys_crawl_setting?.min_price || 0,
         max_price: defaultValues?.iosys_crawl_setting?.max_price || 0,
         enabled: defaultValues?.iosys_crawl_setting?.enabled || false,
+      },
+      pc_koubou_crawl_setting: {
+        keyword: defaultValues?.pc_koubou_crawl_setting?.keyword || '',
+        min_price: defaultValues?.pc_koubou_crawl_setting?.min_price || 0,
+        max_price: defaultValues?.pc_koubou_crawl_setting?.max_price || 0,
+        enabled: defaultValues?.pc_koubou_crawl_setting?.enabled || false,
       },
     },
     values: defaultValues,
@@ -105,7 +112,7 @@ const EditCrawlSettingModal = ({
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -113,7 +120,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -121,7 +128,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
@@ -129,12 +136,20 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('じゃんぱら')}
               />
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='イオシス'
                 checked={tab == 'イオシス'}
                 onChange={() => setTab('イオシス')}
+              />
+              <input
+                className='join-item btn btn-md w-1/5'
+                type='radio'
+                name='options'
+                aria-label='パソコン工房'
+                checked={tab == 'パソコン工房'}
+                onChange={() => setTab('パソコン工房')}
               />
             </Join>
             <div>
@@ -156,6 +171,11 @@ const EditCrawlSettingModal = ({
               {tab == 'イオシス' && (
                 <div className='py-4'>
                   <IosysForm register={register} />
+                </div>
+              )}
+              {tab == 'パソコン工房' && (
+                <div className='py-4'>
+                  <PcKoubouForm register={register} />
                 </div>
               )}
             </div>

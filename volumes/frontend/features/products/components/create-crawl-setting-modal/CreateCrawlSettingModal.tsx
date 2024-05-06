@@ -12,6 +12,7 @@ import { createProduct } from '../../server-actions/productQuery'
 import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
+import PcKoubouForm from './PcKoubouForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
 import { CreateProductInput } from '@/graphql/dist/client'
@@ -45,6 +46,12 @@ const CreateCrawlSettingModal = () => {
         enabled: true,
       },
       iosys_crawl_setting: {
+        keyword: '',
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
+      },
+      pc_koubou_crawl_setting: {
         keyword: '',
         min_price: 0,
         max_price: 0,
@@ -93,7 +100,7 @@ const CreateCrawlSettingModal = () => {
             <div className='divider py-8'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -101,7 +108,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -109,7 +116,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
@@ -117,12 +124,20 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('じゃんぱら')}
               />
               <input
-                className='join-item btn btn-md w-1/4'
+                className='join-item btn btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='イオシス'
                 defaultChecked={tab === 'イオシス'}
                 onClick={() => setTab('イオシス')}
+              />
+              <input
+                className='join-item btn btn-md w-1/5'
+                type='radio'
+                name='options'
+                aria-label='パソコン工房'
+                defaultChecked={tab === 'パソコン工房'}
+                onClick={() => setTab('パソコン工房')}
               />
             </Join>
             <div>
@@ -144,6 +159,11 @@ const CreateCrawlSettingModal = () => {
               {tab === 'イオシス' && (
                 <div className='py-4'>
                   <IosysForm register={register} />
+                </div>
+              )}
+              {tab === 'パソコン工房' && (
+                <div className='py-4'>
+                  <PcKoubouForm register={register} />
                 </div>
               )}
             </div>

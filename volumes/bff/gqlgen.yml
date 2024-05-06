@@ -105,6 +105,8 @@ models:
         resolver: true
       iosysCrawlSetting:
         resolver: true
+      pcKoubouCrawlSetting:
+        resolver: true
       relatedProducts:
         resolver: true
   YahooAuctionCrawlSetting:
@@ -130,4 +132,10 @@ models:
       iosysCrawlSettingExcludeKeywords:
         resolver: true
       iosysCrawlSettingRequiredKeywords:
+        resolver: true
+  PcKoubouCrawlSetting:
+    fields:
+      pcKoubouCrawlSettingExcludeKeywords:
+        resolver: true
+      pcKoubouCrawlSettingRequiredKeywords:
         resolver: true

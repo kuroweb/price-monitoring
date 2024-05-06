@@ -1,0 +1,15 @@
+package pc_koubou_crawl_setting_required_keywords
+
+type IPcKoubouCrawlSettingRequiredKeywordService interface {
+	IFindPcKoubouCrawlSettingRequiredKeywordService
+	ICreatePcKoubouCrawlSettingRequiredKeywordService
+	IUpdatePcKoubouCrawlSettingRequiredKeywordService
+	IDeletePcKoubouCrawlSettingRequiredKeywordService
+}
+
+type PcKoubouCrawlSettingRequiredKeywordService struct {
+	*FindPcKoubouCrawlSettingRequiredKeywordService
+	*CreatePcKoubouCrawlSettingRequiredKeywordService
+	*UpdatePcKoubouCrawlSettingRequiredKeywordService
+	*DeletePcKoubouCrawlSettingRequiredKeywordService
+}
