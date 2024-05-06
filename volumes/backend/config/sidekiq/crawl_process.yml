@@ -13,3 +13,5 @@ production:
   - ['crawl_janpara_sync_job', 1]
   - ['crawl_iosys_enqueue_sync_job', 1]
   - ['crawl_iosys_sync_job', 1]
+  - ['crawl_pc_koubou_enqueue_sync_job', 1]
+  - ['crawl_pc_koubou_sync_job', 1]

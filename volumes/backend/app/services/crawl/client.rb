@@ -46,6 +46,20 @@ module Crawl
       statics.a8.net
     ].freeze
 
+    PC_KOUBOU_BLOCKED_LIST = %w[
+      www.pc-koubou.jp/pwa.js
+      pckoubou-f-s.snva.jp
+      www.pc-koubou.jp/user_data/root_alias/basestyle/js/cssrelpreload.js
+      www.pc-koubou.jp/user_data/packages/default/_asset/js/setting.js
+      www.pc-koubou.jp/user_data/packages/default/design/common/js/common_minify.js
+      pc-koubou.my.salesforce.com
+      service.force.com
+      cd.ladsp.com
+      platform.twitter.com
+      px.ladsp.com
+      um.ladsp.com
+    ].freeze
+
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
 
@@ -88,7 +102,8 @@ module Crawl
           || blocked_url?(MERCARI_BLOCKED_LIST, url) \
           || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
           || blocked_url?(JANPARA_BLOCKED_LIST, url) \
-          || blocked_url?(IOSYS_BLOCKED_LIST, url)
+          || blocked_url?(IOSYS_BLOCKED_LIST, url) \
+          || blocked_url?(PC_KOUBOU_BLOCKED_LIST, url)
       end
 
       def blocked_url?(blocked_list, url)

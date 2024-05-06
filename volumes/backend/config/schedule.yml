@@ -13,6 +13,9 @@ crawl_janpara_enqueue_sync_job:
 crawl_iosys_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::Iosys::EnqueueSyncJob"
+crawl_pc_koubou_enqueue_sync_job:
+  cron: "*/20 * * * *"
+  class: "Crawl::PcKoubou::EnqueueSyncJob"
 products_calculate_daily_purchase_summary_calculator_job:
   cron: "0 0 * * *"
   class: "Products::CalculateDailyPurchaseSummary::CalculatorJob"
