@@ -19,6 +19,7 @@ const RelatedProductsTable = ({
     yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
     janpara: 'www.janpara.co.jp/sale/search/detail/?',
     iosys: 'iosys.co.jp/items/',
+    pc_koubou: 'www.pc-koubou.jp/products/detail.php?product_id=',
   }
 
   const serviceNameMap: { [key: string]: string } = {
@@ -27,6 +28,7 @@ const RelatedProductsTable = ({
     yahoo_fleamarket: 'ペイペイ',
     janpara: 'じゃんぱら',
     iosys: 'イオシス',
+    pc_koubou: 'パソコン工房',
   }
 
   const handleRowClick = (platform: string, externalId: string) => {

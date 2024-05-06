@@ -2,7 +2,7 @@
 # 一覧表示用の検索クラス
 module Search
   class RetrieveRelatedProduct
-    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara iosys].freeze
+    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara iosys pc_koubou].freeze
     SORT_TYPES = %w[bought_date created_at updated_at].freeze
     ORDER_TYPES = %w[desc asc].freeze
 
@@ -120,7 +120,7 @@ module Search
     end
 
     def shop_platform?(platform)
-      %w[janpara iosys].include?(platform)
+      %w[janpara iosys pc_koubou].include?(platform)
     end
 
     def handle_errors(related_products)

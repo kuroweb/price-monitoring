@@ -2854,7 +2854,7 @@ export const GetRecommendsPageDataDocument = gql`
     id
     name
     relatedProducts(
-      platformMask: "yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys"
+      platformMask: "yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys,pc_koubou"
       published: true
       yahooAuctionBuyable: true
       page: 1

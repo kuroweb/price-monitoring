@@ -22,6 +22,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'iosys.co.jp',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.pc-koubou.jp',
+      },
     ],
   },
   experimental: {
