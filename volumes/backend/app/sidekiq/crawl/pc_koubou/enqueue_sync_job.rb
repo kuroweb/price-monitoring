@@ -7,7 +7,7 @@ module Crawl
 
       def perform
         job_params = Product.all.pluck(:id).map { |p| [p] }
-        Crawl::Iosys::SyncJob.perform_bulk(job_params)
+        Crawl::PcKoubou::SyncJob.perform_bulk(job_params)
       end
     end
   end
