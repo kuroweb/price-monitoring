@@ -80,8 +80,8 @@ module Api
           product_attributes,
           yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
           mercari_crawl_setting: mercari_crawl_setting_attributes,
-          iosys_crawl_setting: iosys_crawl_setting_attributes,
-          janpara_crawl_setting: janpara_crawl_setting_attributes
+          janpara_crawl_setting: janpara_crawl_setting_attributes,
+          iosys_crawl_setting: iosys_crawl_setting_attributes
         )
       end
 
