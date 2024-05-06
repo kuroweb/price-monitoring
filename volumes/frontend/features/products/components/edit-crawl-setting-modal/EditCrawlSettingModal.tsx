@@ -26,7 +26,9 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
-  const [tab, setTab] = useState<'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房'>('ヤフオク')
+  const [tab, setTab] = useState<
+    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房'
+  >('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
 
   const { register, handleSubmit } = useForm<UpdateProductInput>({

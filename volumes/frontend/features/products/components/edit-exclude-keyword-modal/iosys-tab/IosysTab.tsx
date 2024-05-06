@@ -13,9 +13,7 @@ import {
 
 const IosysTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
-  const [condition, setCondition] = useState<IosysCrawlSettingExcludeKeyword | undefined>(
-    undefined,
-  )
+  const [condition, setCondition] = useState<IosysCrawlSettingExcludeKeyword | undefined>(undefined)
 
   return (
     <>
