@@ -50,12 +50,13 @@ subgraph Kubernetest Node
     bff_go[Go]
   end
 
-  subgraph price ["Backend (Price Monitoring Domain)"]
+  subgraph price ["Backend"]
     direction LR
 
     price_rails[Rails]
     price_rails_batch[Sidekiq]
     price_rails_mysql[(MySQL)]
+    price_playwright[Playwright]
 
     price_rails-->price_rails_mysql
     price_rails_batch-->price_rails_mysql
@@ -112,6 +113,48 @@ erDiagram
     datetime bought_date
     datetime end_date
   }
+  yahoo_auction_daily_purchase_summaries {
+    bigint id PK
+    bigint product_id FK
+    int average_purchase_price
+    int purchase_count
+    date date
+  }
+
+  products ||--|| yahoo_auction_crawl_settings : "1:1"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
+  products ||--o{ yahoo_auction_products : "1:N"
+  products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
+```
+
+### ヤフーフリマ関連
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  yahoo_auction_crawl_settings {
+    bigint id PK
+    bigint product_id FK
+    string keyword
+    int category_id
+    int min_price
+    int max_price
+    boolean enabled
+  }
+  yahoo_auction_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string keyword
+  }
+  yahoo_auction_crawl_setting_required_keywords {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string keyword
+  }
   yahoo_fleamarket_products {
     bigint id PK
     string yahoo_fleamarket_id
@@ -121,13 +164,6 @@ erDiagram
     int price
     boolean published
     datetime bought_date
-  }
-  yahoo_auction_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
   }
   yahoo_fleamarket_daily_purchase_summaries {
     bigint id PK
@@ -140,9 +176,7 @@ erDiagram
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
-  products ||--o{ yahoo_auction_products : "1:N"
   products ||--o{ yahoo_fleamarket_products : "1:N"
-  products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
   products ||--o{ yahoo_fleamarket_daily_purchase_summaries : "1:N"
 ```
 
@@ -276,6 +310,46 @@ erDiagram
   iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_keywords : "1:N"
   iosys_crawl_settings ||--o{ iosys_crawl_setting_required_keywords : "1:N"
   products ||--o{ iosys_products : "1:N"
+```
+
+### パソコン工房関連
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  pc_koubou_crawl_settings {
+    bigint id PK
+    bigint product_id FK
+    string keyword
+    int min_price
+    int max_price
+    boolean enabled
+  }
+  pc_koubou_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint pc_koubou_crawl_setting_id FK
+    string keyword
+  }
+  pc_koubou_crawl_setting_required_keywords {
+    bigint id PK
+    bigint pc_koubou_crawl_setting_id FK
+    string keyword
+  }
+  pc_koubou_products {
+    bigint id PK
+    string pc_koubou_id
+    string name
+    text thumbnail_url
+    int price
+  }
+
+  products ||--|| pc_koubou_crawl_settings : "1:1"
+  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_keywords : "1:N"
+  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_required_keywords : "1:N"
+  products ||--o{ pc_koubou_products : "1:N"
 ```
 
 ## 自動デプロイ
