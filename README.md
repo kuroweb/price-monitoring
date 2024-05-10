@@ -74,7 +74,9 @@ price--proxy-->VPS
 
 ## ER
 
-### ヤフオク関連
+### クロール処理
+
+#### ヤフオク
 
 ```mermaid
 erDiagram
@@ -113,22 +115,14 @@ erDiagram
     datetime bought_date
     datetime end_date
   }
-  yahoo_auction_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
-  }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
-  products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
 ```
 
-### ヤフーフリマ関連
+#### ヤフーフリマ
 
 ```mermaid
 erDiagram
@@ -165,22 +159,15 @@ erDiagram
     boolean published
     datetime bought_date
   }
-  yahoo_fleamarket_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
-  }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
   products ||--o{ yahoo_fleamarket_products : "1:N"
-  products ||--o{ yahoo_fleamarket_daily_purchase_summaries : "1:N"
+
 ```
 
-### メルカリ関連
+#### メルカリ
 
 ```mermaid
 erDiagram
@@ -217,22 +204,14 @@ erDiagram
     boolean published
     datetime bought_date
   }
-  mercari_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
-  }
 
   products ||--|| mercari_crawl_settings : "1:1"
   mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
   mercari_crawl_settings ||--o{ mercari_crawl_setting_required_keywords : "1:N"
   products ||--o{ mercari_products : "1:N"
-  products ||--o{ mercari_daily_purchase_summaries : "1:N"
 ```
 
-### じゃんぱら関連
+#### じゃんぱら
 
 ```mermaid
 erDiagram
@@ -272,7 +251,7 @@ erDiagram
   products ||--o{ janpara_products : "1:N"
 ```
 
-### イオシス関連
+#### イオシス
 
 ```mermaid
 erDiagram
@@ -312,7 +291,7 @@ erDiagram
   products ||--o{ iosys_products : "1:N"
 ```
 
-### パソコン工房関連
+#### パソコン工房
 
 ```mermaid
 erDiagram
@@ -350,6 +329,41 @@ erDiagram
   pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_keywords : "1:N"
   pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_required_keywords : "1:N"
   products ||--o{ pc_koubou_products : "1:N"
+```
+
+### 相場集計
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  yahoo_auction_daily_purchase_summaries {
+    bigint id PK
+    bigint product_id FK
+    int average_purchase_price
+    int purchase_count
+    date date
+  }
+  yahoo_fleamarket_daily_purchase_summaries {
+    bigint id PK
+    bigint product_id FK
+    int average_purchase_price
+    int purchase_count
+    date date
+  }
+  mercari_daily_purchase_summaries {
+    bigint id PK
+    bigint product_id FK
+    int average_purchase_price
+    int purchase_count
+    date date
+  }
+
+  products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
+  products ||--o{ yahoo_fleamarket_daily_purchase_summaries : "1:N"
+  products ||--o{ mercari_daily_purchase_summaries : "1:N"
 ```
 
 ## 自動デプロイ
