@@ -241,8 +241,8 @@ query getRecommendsPageData($id: ID, $name: String) {
       yahooAuctionBuyable: true
       page: 1
       per: 10
-      sort: "updated_at"
-      order: "desc"
+      sort: "price"
+      order: "asc"
     ) {
       platform
       productId

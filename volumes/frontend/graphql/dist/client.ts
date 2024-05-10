@@ -2859,8 +2859,8 @@ export const GetRecommendsPageDataDocument = gql`
       yahooAuctionBuyable: true
       page: 1
       per: 10
-      sort: "updated_at"
-      order: "desc"
+      sort: "price"
+      order: "asc"
     ) {
       platform
       productId

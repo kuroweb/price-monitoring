@@ -3,7 +3,7 @@
 module Search
   class RetrieveRelatedProduct
     PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara iosys pc_koubou].freeze
-    SORT_TYPES = %w[bought_date created_at updated_at].freeze
+    SORT_TYPES = %w[price bought_date created_at updated_at].freeze
     ORDER_TYPES = %w[desc asc].freeze
 
     def self.call(...)
