@@ -19,6 +19,7 @@ module Crawl
 
                 Retryable.retryable(tries: RETRY_COUNT) do
                   page.goto(url(start))
+                  binding.pry
                   break if no_results?(page)
 
                   append_results(page)
@@ -96,7 +97,12 @@ module Crawl
           end
 
           def end_date(dom)
-            dom.query_selector(".Product__data >> :has-text('終了')")&.inner_text&.to_datetime
+            explicit_end_date = dom.query_selector(".Product__data >> :has-text('終了')")&.inner_text&.to_datetime
+            return explicit_end_date if explicit_end_date
+
+            remaining_seconds = dom.query_selector(".Product__time").get_attribute("data-timeleft").to_i
+            end_date = Time.current.since(remaining_seconds.seconds)
+            end_date
           end
 
           def crawl_results
