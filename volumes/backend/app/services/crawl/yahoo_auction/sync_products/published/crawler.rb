@@ -19,7 +19,6 @@ module Crawl
 
                 Retryable.retryable(tries: RETRY_COUNT) do
                   page.goto(url(start))
-                  binding.pry
                   break if no_results?(page)
 
                   append_results(page)
