@@ -45,7 +45,7 @@ module Search
 
     private
 
-    attr_reader :product_id, :published, :page, :per, :offset, :sort, :order, :platform_mask, :yahoo_auction_buyable
+    attr_reader :product_id, :platform_mask, :page, :per, :offset, :sort, :order
 
     def exec_query
       ActiveRecord::Base.connection.exec_query(sql)
