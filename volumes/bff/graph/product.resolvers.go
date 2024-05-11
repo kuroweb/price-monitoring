@@ -102,8 +102,8 @@ func (r *productResolver) PcKoubouCrawlSetting(ctx context.Context, obj *model.P
 }
 
 // RelatedProducts is the resolver for the relatedProducts field.
-func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
-	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, published, yahooAuctionBuyable, page, per, sort, order)
+func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
+	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, page, per, sort, order)
 }
 
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.

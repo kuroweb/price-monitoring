@@ -1015,9 +1015,7 @@ export type ProductRelatedProductsArgs = {
   page?: InputMaybe<Scalars['Int']['input']>;
   per?: InputMaybe<Scalars['Int']['input']>;
   platformMask: Scalars['String']['input'];
-  published: Scalars['Boolean']['input'];
   sort?: InputMaybe<Scalars['String']['input']>;
-  yahooAuctionBuyable: Scalars['Boolean']['input'];
 };
 
 
@@ -1756,8 +1754,6 @@ export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ 
 export type GetProductDetailPageDataQueryVariables = Exact<{
   id: Scalars['ID']['input'];
   platformMask: Scalars['String']['input'];
-  published: Scalars['Boolean']['input'];
-  yahooAuctionBuyable: Scalars['Boolean']['input'];
   page?: InputMaybe<Scalars['Int']['input']>;
   per?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<Scalars['String']['input']>;
@@ -2681,7 +2677,7 @@ export const GetProductPageDataDocument = gql`
 }
     `;
 export const GetProductDetailPageDataDocument = gql`
-    query getProductDetailPageData($id: ID!, $platformMask: String!, $published: Boolean!, $yahooAuctionBuyable: Boolean!, $page: Int, $per: Int, $sort: String, $order: String) {
+    query getProductDetailPageData($id: ID!, $platformMask: String!, $page: Int, $per: Int, $sort: String, $order: String) {
   product(id: $id) {
     id
     name
@@ -2825,8 +2821,6 @@ export const GetProductDetailPageDataDocument = gql`
     }
     relatedProducts(
       platformMask: $platformMask
-      published: $published
-      yahooAuctionBuyable: $yahooAuctionBuyable
       page: $page
       per: $per
       sort: $sort
@@ -2854,9 +2848,7 @@ export const GetRecommendsPageDataDocument = gql`
     id
     name
     relatedProducts(
-      platformMask: "yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys,pc_koubou"
-      published: true
-      yahooAuctionBuyable: true
+      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all"
       page: 1
       per: 10
       sort: "price"

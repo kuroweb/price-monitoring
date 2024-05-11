@@ -15,12 +15,7 @@ module Api
         end
 
         def search_params
-          params.permit(
-            %i[product_id platform_mask published yahoo_auction_buyable page per sort order]
-          ).tap do |p|
-            p[:published] = params[:published] == "true"
-            p[:yahoo_auction_buyable] = params[:yahoo_auction_buyable] == "true"
-          end
+          params.permit(%i[product_id platform_mask page per sort order])
         end
       end
     end

@@ -1,26 +1,20 @@
 'use client'
 
 import { usePerState } from '../hooks/usePerState'
-import { usePlatformMaskState } from '../hooks/usePlatformMaskState'
-import { usePublishedState } from '../hooks/usePublishedState'
-import { useYahooAuctionBuyableState } from '../hooks/useYahooAuctionBuyableState'
+import { usePlatformState } from '../hooks/usePlatformState'
+import { useStatusState } from '../hooks/useStatusState'
 
 const SearchForm = () => {
-  const [platformMask, setPlatformMask] = usePlatformMaskState()
-  const [published, setPublished] = usePublishedState()
-  const [yahooAuctionBuyable, setYahooAuctionBuyable] = useYahooAuctionBuyableState()
+  const [platform, setPlatform] = usePlatformState()
+  const [status, setStatus] = useStatusState()
   const [per, setPer] = usePerState()
 
-  const handlePlatformMaskChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPlatformMask(e.target.value)
+  const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setPlatform(e.target.value)
   }
 
   const handlePublishedChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setPublished(e.target.value === 'true')
-  }
-
-  const handleYahooAuctionBuyableChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setYahooAuctionBuyable(e.target.value === 'true')
+    setStatus(e.target.value)
   }
 
   const handlePerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -30,18 +24,16 @@ const SearchForm = () => {
   return (
     <>
       <div className='flex flex-wrap'>
-        <label className='form-control w-32 pr-2'>
+        <label className='form-control w-36 pr-2'>
           <div className='label'>
             <span className='label-text'>プラットフォーム</span>
           </div>
           <select
             className='select select-bordered'
-            onChange={handlePlatformMaskChange}
-            value={platformMask}
+            onChange={handlePlatformChange}
+            value={platform}
           >
-            <option value='yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys,pc_koubou'>
-              すべて
-            </option>
+            <option value='all'>すべて</option>
             <option value='yahoo_auction'>ヤフオク</option>
             <option value='yahoo_fleamarket'>ペイペイ</option>
             <option value='mercari'>メルカリ</option>
@@ -50,37 +42,22 @@ const SearchForm = () => {
             <option value='pc_koubou'>パソコン工房</option>
           </select>
         </label>
-        <label className='form-control w-32 pr-2'>
-          <div className='label'>
-            <span className='label-text'>ステータス</span>
-          </div>
-          <select
-            className='select select-bordered'
-            onChange={handlePublishedChange}
-            value={published ? 'true' : 'false'}
-          >
-            <option value='true'>出品中</option>
-            <option value='false'>売り切れ</option>
-          </select>
-        </label>
-        {(platformMask == 'yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys,pc_koubou' ||
-          platformMask == 'yahoo_auction') &&
-          published && (
-            <label className='form-control w-32 pr-2'>
-              <div className='label'>
-                <span className='label-text'>ヤフオク表示</span>
-              </div>
-              <select
-                className='select select-bordered'
-                onChange={handleYahooAuctionBuyableChange}
-                value={yahooAuctionBuyable ? 'true' : 'false'}
-              >
-                <option value='true'>直近</option>
-                <option value='false'>すべて</option>
-              </select>
-            </label>
-          )}
-        <label className='form-control w-32 pr-2'>
+        {['all', 'yahoo_auction', 'yahoo_fleamarket', 'mercari'].includes(platform) && (
+          <label className='form-control w-36 pr-2'>
+            <div className='label'>
+              <span className='label-text'>ステータス</span>
+            </div>
+            <select
+              className='select select-bordered'
+              onChange={handlePublishedChange}
+              value={status}
+            >
+              <option value='published'>出品中</option>
+              <option value='unpublished'>売り切れ</option>
+            </select>
+          </label>
+        )}
+        <label className='form-control w-36 pr-2'>
           <div className='label'>
             <span className='label-text'>表示数</span>
           </div>

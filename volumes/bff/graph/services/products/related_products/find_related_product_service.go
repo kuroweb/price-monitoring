@@ -14,17 +14,15 @@ import (
 )
 
 type IFindRelatedProductService interface {
-	FindRelatedProduct(ctx context.Context, productID *string, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
+	FindRelatedProduct(ctx context.Context, productID *string, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 
 type FindRelatedProductService struct{}
 
-func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, productID *string, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
+func (f *FindRelatedProductService) FindRelatedProduct(ctx context.Context, productID *string, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
 	params := make(url.Values)
 
 	params.Set("platform_mask", platformMask)
-	params.Set("published", strconv.FormatBool(published))
-	params.Set("yahoo_auction_buyable", strconv.FormatBool(yahooAuctionBuyable))
 
 	if page != nil {
 		params.Set("page", strconv.Itoa(*page))

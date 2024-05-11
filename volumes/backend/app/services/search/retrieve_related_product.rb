@@ -1,8 +1,23 @@
 # Productに紐づく関連商品を取得する
 # 一覧表示用の検索クラス
 module Search
-  class RetrieveRelatedProduct
-    PLATFORM_MASK_TYPES = %w[yahoo_auction yahoo_fleamarket mercari janpara iosys pc_koubou].freeze
+  class RetrieveRelatedProduct # rubocop:disable Metrics/ClassLength
+    PLATFORM_MASK_TYPES = %w[
+      yahoo_auction.all
+      yahoo_auction.published
+      yahoo_auction.unpublished
+      yahoo_auction.buyable
+      yahoo_fleamarket.all
+      yahoo_fleamarket.published
+      yahoo_fleamarket.unpublished
+      mercari.all
+      mercari.published
+      mercari.unpublished
+      janpara.all
+      iosys.all
+      pc_koubou.all
+    ].freeze
+
     SORT_TYPES = %w[price bought_date created_at updated_at].freeze
     ORDER_TYPES = %w[desc asc].freeze
 
@@ -10,11 +25,9 @@ module Search
       new(...).call
     end
 
-    def initialize(params: {}) # rubocop:disable Metrics/AbcSize
+    def initialize(params: {})
       @product_id = params[:product_id]
       @platform_mask = params[:platform_mask]
-      @published = params[:published]
-      @yahoo_auction_buyable = params[:yahoo_auction_buyable]
       @page = params[:page].to_i.nonzero? || 1
       @per = params[:per].to_i.nonzero? || 10
       @offset = (page - 1) * per
@@ -50,13 +63,42 @@ module Search
 
     def build_platform_sql
       masks = platform_mask.split(",").select { |mask| PLATFORM_MASK_TYPES.include?(mask) }
-      masks.map { |mask| build_sql_for(mask) }.join(" UNION ")
+      masks.map { |mask| build_sql_for(*mask.split(".")) }.join(" UNION ")
     end
 
-    def build_sql_for(platform)
+    def build_sql_for(platform, option)
+      case option
+      when "all"
+        all_sql(platform)
+      when "published"
+        published_sql(platform)
+      when "unpublished"
+        unpublished_sql(platform)
+      when "buyable"
+        buyable_sql(platform)
+      end
+    end
+
+    def all_sql(platform)
+      base_condition(platform).to_sql
+    end
+
+    def published_sql(platform)
       condition = base_condition(platform)
-      condition = published_condition(platform, condition)
-      condition = yahoo_auction_buyable_condition(platform, condition)
+      condition = published_condition(condition, true)
+      condition.to_sql
+    end
+
+    def unpublished_sql(platform)
+      condition = base_condition(platform)
+      condition = published_condition(condition, false)
+      condition.to_sql
+    end
+
+    def buyable_sql(platform)
+      condition = base_condition(platform)
+      condition = published_condition(condition, true)
+      condition = buyable_condition(condition)
       condition.to_sql
     end
 
@@ -92,16 +134,11 @@ module Search
       columns.flatten
     end
 
-    def published_condition(platform, condition)
-      return condition if shop_platform?(platform) && published == true
-      return condition.where(id: nil) if shop_platform?(platform) && published == false
-
+    def published_condition(condition, published)
       condition.where(published:)
     end
 
-    def yahoo_auction_buyable_condition(platform, condition)
-      return condition unless platform == "yahoo_auction" && yahoo_auction_buyable && published
-
+    def buyable_condition(condition)
       condition.where(
         "(end_date <= ?) OR (buyout_price IS NOT NULL AND buyout_price <= ?)",
         Time.current.since(1.day), product.yahoo_auction_crawl_setting.max_price

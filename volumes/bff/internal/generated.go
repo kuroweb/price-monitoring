@@ -583,7 +583,7 @@ type ComplexityRoot struct {
 		MercariProducts                       func(childComplexity int, published *bool, sort *string, order *string) int
 		Name                                  func(childComplexity int) int
 		PcKoubouCrawlSetting                  func(childComplexity int) int
-		RelatedProducts                       func(childComplexity int, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) int
+		RelatedProducts                       func(childComplexity int, platformMask string, page *int, per *int, sort *string, order *string) int
 		YahooAuctionCrawlSetting              func(childComplexity int) int
 		YahooAuctionDailyPurchaseSummaries    func(childComplexity int) int
 		YahooAuctionProducts                  func(childComplexity int, published *bool, sort *string, order *string) int
@@ -913,7 +913,7 @@ type ProductResolver interface {
 	JanparaCrawlSetting(ctx context.Context, obj *model.Product) (*model.JanparaCrawlSetting, error)
 	IosysCrawlSetting(ctx context.Context, obj *model.Product) (*model.IosysCrawlSetting, error)
 	PcKoubouCrawlSetting(ctx context.Context, obj *model.Product) (*model.PcKoubouCrawlSetting, error)
-	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, published bool, yahooAuctionBuyable bool, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
+	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 }
 type QueryResolver interface {
 	Product(ctx context.Context, id string) (*model.Product, error)
@@ -3112,7 +3112,7 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 			return 0, false
 		}
 
-		return e.complexity.Product.RelatedProducts(childComplexity, args["platformMask"].(string), args["published"].(bool), args["yahooAuctionBuyable"].(bool), args["page"].(*int), args["per"].(*int), args["sort"].(*string), args["order"].(*string)), true
+		return e.complexity.Product.RelatedProducts(childComplexity, args["platformMask"].(string), args["page"].(*int), args["per"].(*int), args["sort"].(*string), args["order"].(*string)), true
 
 	case "Product.yahooAuctionCrawlSetting":
 		if e.complexity.Product.YahooAuctionCrawlSetting == nil {
@@ -5419,8 +5419,6 @@ type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements 
   pcKoubouCrawlSetting: PcKoubouCrawlSetting!
   relatedProducts(
     platformMask: String!
-    published: Boolean!
-    yahooAuctionBuyable: Boolean!
     page: Int
     per: Int
     sort: String
@@ -6298,60 +6296,42 @@ func (ec *executionContext) field_Product_relatedProducts_args(ctx context.Conte
 		}
 	}
 	args["platformMask"] = arg0
-	var arg1 bool
-	if tmp, ok := rawArgs["published"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("published"))
-		arg1, err = ec.unmarshalNBoolean2bool(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["published"] = arg1
-	var arg2 bool
-	if tmp, ok := rawArgs["yahooAuctionBuyable"]; ok {
-		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("yahooAuctionBuyable"))
-		arg2, err = ec.unmarshalNBoolean2bool(ctx, tmp)
-		if err != nil {
-			return nil, err
-		}
-	}
-	args["yahooAuctionBuyable"] = arg2
-	var arg3 *int
+	var arg1 *int
 	if tmp, ok := rawArgs["page"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("page"))
-		arg3, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg1, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["page"] = arg3
-	var arg4 *int
+	args["page"] = arg1
+	var arg2 *int
 	if tmp, ok := rawArgs["per"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("per"))
-		arg4, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
+		arg2, err = ec.unmarshalOInt2ᚖint(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["per"] = arg4
-	var arg5 *string
+	args["per"] = arg2
+	var arg3 *string
 	if tmp, ok := rawArgs["sort"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("sort"))
-		arg5, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		arg3, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["sort"] = arg5
-	var arg6 *string
+	args["sort"] = arg3
+	var arg4 *string
 	if tmp, ok := rawArgs["order"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("order"))
-		arg6, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
+		arg4, err = ec.unmarshalOString2ᚖstring(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
 	}
-	args["order"] = arg6
+	args["order"] = arg4
 	return args, nil
 }
 
@@ -20115,7 +20095,7 @@ func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field 
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().RelatedProducts(rctx, obj, fc.Args["platformMask"].(string), fc.Args["published"].(bool), fc.Args["yahooAuctionBuyable"].(bool), fc.Args["page"].(*int), fc.Args["per"].(*int), fc.Args["sort"].(*string), fc.Args["order"].(*string))
+		return ec.resolvers.Product().RelatedProducts(rctx, obj, fc.Args["platformMask"].(string), fc.Args["page"].(*int), fc.Args["per"].(*int), fc.Args["sort"].(*string), fc.Args["order"].(*string))
 	})
 	if err != nil {
 		ec.Error(ctx, err)

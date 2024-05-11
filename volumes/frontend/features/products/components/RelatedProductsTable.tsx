@@ -2,7 +2,7 @@
 
 import NextImage from 'next/image'
 
-import { usePublishedState } from '../hooks/usePublishedState'
+import { useStatusState } from '../hooks/useStatusState'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -11,7 +11,7 @@ const RelatedProductsTable = ({
 }: {
   relatedProducts: GetProductDetailPageDataQuery['product']['relatedProducts']
 }) => {
-  const [published, _] = usePublishedState()
+  const [status, _] = useStatusState()
 
   const serviceDomainMap: { [key: string]: string } = {
     mercari: 'jp.mercari.com/item/',
@@ -48,7 +48,7 @@ const RelatedProductsTable = ({
             <th></th>
             <th>商品名</th>
             <th>価格</th>
-            <th>{published ? '終了日' : '売却日'}</th>
+            <th>{status == 'published' ? '終了日' : '売却日'}</th>
             <th></th>
           </tr>
         </thead>
@@ -72,7 +72,7 @@ const RelatedProductsTable = ({
                 </div>
               </td>
               <td className='w-24 min-w-24 md:w-28 md:min-w-28'>
-                {published
+                {status == 'published'
                   ? relatedProduct.endDate
                     ? parseDate(relatedProduct.endDate)
                     : '-'

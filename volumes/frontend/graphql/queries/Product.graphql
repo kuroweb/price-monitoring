@@ -54,8 +54,6 @@ query getProductPageData($id: ID, $name: String) {
 query getProductDetailPageData(
   $id: ID!
   $platformMask: String!
-  $published: Boolean!
-  $yahooAuctionBuyable: Boolean!
   $page: Int
   $per: Int
   $sort: String
@@ -204,8 +202,6 @@ query getProductDetailPageData(
     }
     relatedProducts(
       platformMask: $platformMask
-      published: $published
-      yahooAuctionBuyable: $yahooAuctionBuyable
       page: $page
       per: $per
       sort: $sort
@@ -236,9 +232,7 @@ query getRecommendsPageData($id: ID, $name: String) {
     id
     name
     relatedProducts(
-      platformMask: "yahoo_auction,yahoo_fleamarket,mercari,janpara,iosys,pc_koubou"
-      published: true
-      yahooAuctionBuyable: true
+      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all"
       page: 1
       per: 10
       sort: "price"
