@@ -22,7 +22,7 @@ const CreateCrawlSettingModal = () => {
   const [modal, setModal] = useCreateCrawlSettingModalState()
   const [tab, setTab] = useQueryState('create_crawl_setting_tab')
 
-  const { register, handleSubmit } = useForm<CreateProductInput>({
+  const { register, handleSubmit, getValues, setValue } = useForm<CreateProductInput>({
     defaultValues: {
       name: '',
       yahoo_auction_crawl_setting: {
@@ -90,14 +90,14 @@ const CreateCrawlSettingModal = () => {
           </div>
           <h3 className='font-bold text-lg'>計測設定を追加</h3>
           <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2'>
-            <div className='divider py-4'>共通設定</div>
+            <div className='divider py-2'>共通設定</div>
             <label className='form-control'>
               <div className='label'>
                 <span className='label-text'>管理コード</span>
               </div>
               <input {...register('name')} className='input input-bordered' />
             </label>
-            <div className='divider py-8'>詳細設定</div>
+            <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
                 className='join-item btn btn-md w-1/5'
@@ -143,27 +143,27 @@ const CreateCrawlSettingModal = () => {
             <div>
               {(tab === null || tab === 'ヤフオク') && (
                 <div className='py-4'>
-                  <YahooAuctionForm register={register} />
+                  <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'メルカリ' && (
                 <div className='py-4'>
-                  <MercariForm register={register} />
+                  <MercariForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'じゃんぱら' && (
                 <div className='py-4'>
-                  <JanparaForm register={register} />
+                  <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'イオシス' && (
                 <div className='py-4'>
-                  <IosysForm register={register} />
+                  <IosysForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'パソコン工房' && (
                 <div className='py-4'>
-                  <PcKoubouForm register={register} />
+                  <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
             </div>

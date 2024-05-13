@@ -31,7 +31,7 @@ const EditCrawlSettingModal = ({
   >('ヤフオク')
   const [modal, setModal] = useEditCrawlSettingModalState()
 
-  const { register, handleSubmit } = useForm<UpdateProductInput>({
+  const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductInput>({
     defaultValues: {
       name: defaultValues?.name || '',
       yahoo_auction_crawl_setting: {
@@ -157,27 +157,27 @@ const EditCrawlSettingModal = ({
             <div>
               {tab == 'ヤフオク' && (
                 <div className='py-4'>
-                  <YahooAuctionForm register={register} />
+                  <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'メルカリ' && (
                 <div className='py-4'>
-                  <MercariForm register={register} />
+                  <MercariForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'じゃんぱら' && (
                 <div className='py-4'>
-                  <JanparaForm register={register} />
+                  <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'イオシス' && (
                 <div className='py-4'>
-                  <IosysForm register={register} />
+                  <IosysForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'パソコン工房' && (
                 <div className='py-4'>
-                  <PcKoubouForm register={register} />
+                  <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
             </div>
