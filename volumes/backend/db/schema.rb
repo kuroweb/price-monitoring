@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
   create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "iosys_crawl_setting_id"
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["iosys_crawl_setting_id", "keyword"], name: "idx_on_iosys_crawl_setting_id_keyword_2429715633", unique: true
     t.index ["iosys_crawl_setting_id"], name: "idx_on_iosys_crawl_setting_id_889c2c2e88"
   end
 
@@ -24,6 +25,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["iosys_crawl_setting_id", "keyword"], name: "idx_on_iosys_crawl_setting_id_keyword_5beae71d90", unique: true
     t.index ["iosys_crawl_setting_id"], name: "idx_on_iosys_crawl_setting_id_abd2c33544"
   end
 
@@ -56,6 +58,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["janpara_crawl_setting_id", "keyword"], name: "idx_on_janpara_crawl_setting_id_keyword_7074a129f7", unique: true
     t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_e7210a8e11"
   end
 
@@ -64,6 +67,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["janpara_crawl_setting_id", "keyword"], name: "idx_on_janpara_crawl_setting_id_keyword_198f4d9655", unique: true
     t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_e721383245"
   end
 
@@ -96,6 +100,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["mercari_crawl_setting_id", "keyword"], name: "idx_on_mercari_crawl_setting_id_keyword_4e4cc0381b", unique: true
     t.index ["mercari_crawl_setting_id"], name: "idx_on_mercari_crawl_setting_id_f56a952474"
   end
 
@@ -104,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["mercari_crawl_setting_id", "keyword"], name: "idx_on_mercari_crawl_setting_id_keyword_cc21910aea", unique: true
     t.index ["mercari_crawl_setting_id"], name: "idx_on_mercari_crawl_setting_id_4659f97e15"
   end
 
@@ -149,6 +155,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pc_koubou_crawl_setting_id", "keyword"], name: "idx_on_pc_koubou_crawl_setting_id_keyword_8c3917f08a", unique: true
     t.index ["pc_koubou_crawl_setting_id"], name: "idx_on_pc_koubou_crawl_setting_id_f8f5317000"
   end
 
@@ -157,6 +164,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["pc_koubou_crawl_setting_id", "keyword"], name: "idx_on_pc_koubou_crawl_setting_id_keyword_8e3b9acc35", unique: true
     t.index ["pc_koubou_crawl_setting_id"], name: "idx_on_pc_koubou_crawl_setting_id_d2ecc2a271"
   end
 
@@ -201,6 +209,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["yahoo_auction_crawl_setting_id", "keyword"], name: "idx_on_yahoo_auction_crawl_setting_id_keyword_9341e10548", unique: true
     t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_fb93459e66"
   end
 
@@ -209,6 +218,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_06_084920) do
     t.string "keyword", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["yahoo_auction_crawl_setting_id", "keyword"], name: "idx_on_yahoo_auction_crawl_setting_id_keyword_daee6cea4b", unique: true
     t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_49589afeb2"
   end
 
