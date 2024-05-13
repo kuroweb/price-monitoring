@@ -44,8 +44,8 @@ const Page = async ({
       platformMask: makePlatformMask(platform, status),
       page: page,
       per: per,
-      sort: status ? 'updated_at' : 'bought_date',
-      order: 'desc',
+      sort: status == 'published' ? 'price' : 'bought_date',
+      order: status == 'published' ? 'asc' : 'desc',
     },
   })
 
