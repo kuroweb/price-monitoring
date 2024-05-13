@@ -21,7 +21,6 @@ export const makePlatformMask = (platform: string, status: string) => {
   }
 
   const platformMask = platformMaskMap[platform]?.[String(status)]
-  console.log(platformMask || defaultMask)
 
   return platformMask || defaultMask
 }
