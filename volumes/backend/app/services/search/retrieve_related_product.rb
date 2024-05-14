@@ -62,7 +62,7 @@ module Search
     end
 
     def build_platform_sql
-      masks ||= platform_mask.split(",").select { |mask| PLATFORM_MASK_TYPES.include?(mask) }.uniq
+      masks = platform_mask.split(",").select { |mask| PLATFORM_MASK_TYPES.include?(mask) }.uniq
       masks.map { |mask| build_sql_for(*mask.split(".")) }.join(" UNION ")
     end
 
