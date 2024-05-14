@@ -15,45 +15,25 @@ module Api
               product
               .yahoo_auction_crawl_setting
               .yahoo_auction_crawl_setting_required_keywords
-              .build(yahoo_auction_crawl_setting_required_keyword_params)
+              .create!(yahoo_auction_crawl_setting_required_keyword_params)
 
-            if yahoo_auction_crawl_setting_required_keyword.save
-              render json: yahoo_auction_crawl_setting_required_keyword.as_json, status: 200
-            else
-              render json: { message: yahoo_auction_crawl_setting_required_keyword.errors.full_messages }, status: 400
-            end
+            render json: yahoo_auction_crawl_setting_required_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def update
-            yahoo_auction_crawl_setting_required_keyword =
-              product
-              .yahoo_auction_crawl_setting
-              .yahoo_auction_crawl_setting_required_keywords
-              .find(params[:id])
-
-            yahoo_auction_crawl_setting_required_keyword.assign_attributes(
-              yahoo_auction_crawl_setting_required_keyword_params
-            )
-
-            if yahoo_auction_crawl_setting_required_keyword.save
-              render json: yahoo_auction_crawl_setting_required_keyword.as_json, status: 200
-            else
-              render json: { message: yahoo_auction_crawl_setting_required_keyword.errors.full_messages }, status: 400
-            end
+            yahoo_auction_crawl_setting_required_keyword.update!(yahoo_auction_crawl_setting_required_keyword_params)
+            render json: yahoo_auction_crawl_setting_required_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def destroy
-            yahoo_auction_crawl_setting_required_keyword =
-              product
-              .yahoo_auction_crawl_setting
-              .yahoo_auction_crawl_setting_required_keywords
-              .find(params[:id])
-
-            if yahoo_auction_crawl_setting_required_keyword.destroy
-              head 200
-            else
-              render json: { message: result.message }, status: 400
-            end
+            yahoo_auction_crawl_setting_required_keyword.destroy!
+            head 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           private
@@ -68,6 +48,14 @@ module Api
 
           def yahoo_auction_crawl_setting_required_keyword_params
             params.permit(yahoo_auction_crawl_setting_required_keyword_attributes)
+          end
+
+          def yahoo_auction_crawl_setting_required_keyword
+            @yahoo_auction_crawl_setting_required_keyword ||=
+              product
+              .yahoo_auction_crawl_setting
+              .yahoo_auction_crawl_setting_required_keywords
+              .find(params[:id])
           end
         end
       end

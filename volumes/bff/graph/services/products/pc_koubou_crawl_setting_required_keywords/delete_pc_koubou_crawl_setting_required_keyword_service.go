@@ -2,8 +2,10 @@ package pc_koubou_crawl_setting_required_keywords
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/config"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
@@ -40,21 +42,11 @@ func (d *DeletePcKoubouCrawlSettingRequiredKeywordService) DeletePcKoubouCrawlSe
 	}
 	defer resp.Body.Close()
 
-	switch resp.StatusCode {
-	case http.StatusOK:
-		return model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess{Ok: true}, nil
-	case http.StatusNotFound:
-		return model.DeletePcKoubouCrawlSettingRequiredKeywordResultError{
-			Ok: false,
-			Error: model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed{
-				Code:    "404",
-				Message: "Requested resource was not found.",
-				Details: []*model.ErrorDetail{},
-			},
-		}, nil
-	default:
-		return d.handleServerError(), nil
+	if resp.StatusCode != http.StatusOK {
+		return d.handleApiError(resp), nil
 	}
+
+	return model.DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess{Ok: true}, nil
 }
 
 func (d *DeletePcKoubouCrawlSettingRequiredKeywordService) handleServerError() model.DeletePcKoubouCrawlSettingRequiredKeywordResultError {
@@ -62,8 +54,29 @@ func (d *DeletePcKoubouCrawlSettingRequiredKeywordService) handleServerError() m
 		Ok: false,
 		Error: model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed{
 			Code:    "503",
-			Message: "Service is currently unavailable.",
+			Message: "Internal Server Error.",
 			Details: []*model.ErrorDetail{},
 		},
 	}
+}
+
+func (d *DeletePcKoubouCrawlSettingRequiredKeywordService) handleApiError(resp *http.Response) model.DeletePcKoubouCrawlSettingRequiredKeywordResultError {
+	var errorResponse struct {
+		Error  string `json:"error"`
+		Status int    `json:"status"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&errorResponse); err == nil {
+		return model.DeletePcKoubouCrawlSettingRequiredKeywordResultError{
+			Ok: false,
+			Error: model.DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed{
+				Code:    strconv.Itoa(errorResponse.Status),
+				Message: errorResponse.Error,
+				Details: []*model.ErrorDetail{},
+			},
+		}
+	}
+
+	return d.handleServerError()
 }

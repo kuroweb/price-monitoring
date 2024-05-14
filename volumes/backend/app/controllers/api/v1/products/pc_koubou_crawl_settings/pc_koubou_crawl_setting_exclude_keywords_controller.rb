@@ -15,45 +15,25 @@ module Api
               product
               .pc_koubou_crawl_setting
               .pc_koubou_crawl_setting_exclude_keywords
-              .build(pc_koubou_crawl_setting_exclude_keyword_params)
+              .create!(pc_koubou_crawl_setting_exclude_keyword_params)
 
-            if pc_koubou_crawl_setting_exclude_keyword.save
-              render json: pc_koubou_crawl_setting_exclude_keyword.as_json, status: 200
-            else
-              render json: { message: pc_koubou_crawl_setting_exclude_keyword.errors.full_messages }, status: 400
-            end
+            render json: pc_koubou_crawl_setting_exclude_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def update
-            pc_koubou_crawl_setting_exclude_keyword =
-              product
-              .pc_koubou_crawl_setting
-              .pc_koubou_crawl_setting_exclude_keywords
-              .find(params[:id])
-
-            pc_koubou_crawl_setting_exclude_keyword.assign_attributes(
-              pc_koubou_crawl_setting_exclude_keyword_params
-            )
-
-            if pc_koubou_crawl_setting_exclude_keyword.save
-              render json: pc_koubou_crawl_setting_exclude_keyword.as_json, status: 200
-            else
-              render json: { message: pc_koubou_crawl_setting_exclude_keyword.errors.full_messages }, status: 400
-            end
+            pc_koubou_crawl_setting_exclude_keyword.update!(pc_koubou_crawl_setting_exclude_keyword_params)
+            render json: pc_koubou_crawl_setting_exclude_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def destroy
-            pc_koubou_crawl_setting_exclude_keyword =
-              product
-              .pc_koubou_crawl_setting
-              .pc_koubou_crawl_setting_exclude_keywords
-              .find(params[:id])
-
-            if pc_koubou_crawl_setting_exclude_keyword.destroy
-              head 200
-            else
-              render json: { message: result.message }, status: 400
-            end
+            pc_koubou_crawl_setting_exclude_keyword.destroy!
+            head 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           private
@@ -68,6 +48,14 @@ module Api
 
           def pc_koubou_crawl_setting_exclude_keyword_params
             params.permit(pc_koubou_crawl_setting_exclude_keyword_attributes)
+          end
+
+          def pc_koubou_crawl_setting_exclude_keyword
+            @pc_koubou_crawl_setting_exclude_keyword ||=
+              product
+              .pc_koubou_crawl_setting
+              .pc_koubou_crawl_setting_exclude_keywords
+              .find(params[:id])
           end
         end
       end

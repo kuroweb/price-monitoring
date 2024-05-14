@@ -46,7 +46,7 @@ func (u *UpdateJanparaCrawlSettingRequiredKeywordService) UpdateJanparaCrawlSett
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return u.handleServerError(), nil
+		return u.handleApiError(resp), nil
 	}
 
 	var response struct {
@@ -81,8 +81,29 @@ func (u *UpdateJanparaCrawlSettingRequiredKeywordService) handleServerError() mo
 		Ok: false,
 		Error: model.UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed{
 			Code:    "503",
-			Message: "Service is currently unavailable.",
+			Message: "Internal Server Error.",
 			Details: []*model.ErrorDetail{},
 		},
 	}
+}
+
+func (u *UpdateJanparaCrawlSettingRequiredKeywordService) handleApiError(resp *http.Response) model.UpdateJanparaCrawlSettingRequiredKeywordResultError {
+	var errorResponse struct {
+		Error  string `json:"error"`
+		Status int    `json:"status"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&errorResponse); err == nil {
+		return model.UpdateJanparaCrawlSettingRequiredKeywordResultError{
+			Ok: false,
+			Error: model.UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed{
+				Code:    strconv.Itoa(errorResponse.Status),
+				Message: errorResponse.Error,
+				Details: []*model.ErrorDetail{},
+			},
+		}
+	}
+
+	return u.handleServerError()
 }

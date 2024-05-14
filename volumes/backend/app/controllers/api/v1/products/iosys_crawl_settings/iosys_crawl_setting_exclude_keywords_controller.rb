@@ -15,45 +15,25 @@ module Api
               product
               .iosys_crawl_setting
               .iosys_crawl_setting_exclude_keywords
-              .build(iosys_crawl_setting_exclude_keyword_params)
+              .create!(iosys_crawl_setting_exclude_keyword_params)
 
-            if iosys_crawl_setting_exclude_keyword.save
-              render json: iosys_crawl_setting_exclude_keyword.as_json, status: 200
-            else
-              render json: { message: iosys_crawl_setting_exclude_keyword.errors.full_messages }, status: 400
-            end
+            render json: iosys_crawl_setting_exclude_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def update
-            iosys_crawl_setting_exclude_keyword =
-              product
-              .iosys_crawl_setting
-              .iosys_crawl_setting_exclude_keywords
-              .find(params[:id])
-
-            iosys_crawl_setting_exclude_keyword.assign_attributes(
-              iosys_crawl_setting_exclude_keyword_params
-            )
-
-            if iosys_crawl_setting_exclude_keyword.save
-              render json: iosys_crawl_setting_exclude_keyword.as_json, status: 200
-            else
-              render json: { message: iosys_crawl_setting_exclude_keyword.errors.full_messages }, status: 400
-            end
+            iosys_crawl_setting_exclude_keyword.update!(iosys_crawl_setting_exclude_keyword_params)
+            render json: iosys_crawl_setting_exclude_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def destroy
-            iosys_crawl_setting_exclude_keyword =
-              product
-              .iosys_crawl_setting
-              .iosys_crawl_setting_exclude_keywords
-              .find(params[:id])
-
-            if iosys_crawl_setting_exclude_keyword.destroy
-              head 200
-            else
-              render json: { message: result.message }, status: 400
-            end
+            iosys_crawl_setting_exclude_keyword.destroy!
+            head 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           private
@@ -68,6 +48,14 @@ module Api
 
           def iosys_crawl_setting_exclude_keyword_params
             params.permit(iosys_crawl_setting_exclude_keyword_attributes)
+          end
+
+          def iosys_crawl_setting_exclude_keyword
+            @iosys_crawl_setting_exclude_keyword ||=
+              product
+              .iosys_crawl_setting
+              .iosys_crawl_setting_exclude_keywords
+              .find(params[:id])
           end
         end
       end

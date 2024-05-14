@@ -33,12 +33,12 @@ func (c *CreateMercariCrawlSettingRequiredKeywordService) CreateMercariCrawlSett
 
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(requestBody))
 	if err != nil {
-		return c.handleServerError(), nil
+		return c.handleApiError(resp), nil
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return c.handleServerError(), nil
+		return c.handleApiError(resp), nil
 	}
 
 	var response struct {
@@ -67,8 +67,29 @@ func (c *CreateMercariCrawlSettingRequiredKeywordService) handleServerError() mo
 		Ok: false,
 		Error: model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed{
 			Code:    "503",
-			Message: "Service is currently unavailable.",
+			Message: "Internal Server Error.",
 			Details: []*model.ErrorDetail{},
 		},
 	}
+}
+
+func (c *CreateMercariCrawlSettingRequiredKeywordService) handleApiError(resp *http.Response) model.CreateMercariCrawlSettingRequiredKeywordResultError {
+	var errorResponse struct {
+		Error  string `json:"error"`
+		Status int    `json:"status"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&errorResponse); err == nil {
+		return model.CreateMercariCrawlSettingRequiredKeywordResultError{
+			Ok: false,
+			Error: model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed{
+				Code:    strconv.Itoa(errorResponse.Status),
+				Message: errorResponse.Error,
+				Details: []*model.ErrorDetail{},
+			},
+		}
+	}
+
+	return c.handleServerError()
 }

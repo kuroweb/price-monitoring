@@ -15,45 +15,25 @@ module Api
               product
               .janpara_crawl_setting
               .janpara_crawl_setting_required_keywords
-              .build(janpara_crawl_setting_required_keyword_params)
+              .create!(janpara_crawl_setting_required_keyword_params)
 
-            if janpara_crawl_setting_required_keyword.save
-              render json: janpara_crawl_setting_required_keyword.as_json, status: 200
-            else
-              render json: { message: janpara_crawl_setting_required_keyword.errors.full_messages }, status: 400
-            end
+            render json: janpara_crawl_setting_required_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def update
-            janpara_crawl_setting_required_keyword =
-              product
-              .janpara_crawl_setting
-              .janpara_crawl_setting_required_keywords
-              .find(params[:id])
-
-            janpara_crawl_setting_required_keyword.assign_attributes(
-              janpara_crawl_setting_required_keyword_params
-            )
-
-            if janpara_crawl_setting_required_keyword.save
-              render json: janpara_crawl_setting_required_keyword.as_json, status: 200
-            else
-              render json: { message: janpara_crawl_setting_required_keyword.errors.full_messages }, status: 400
-            end
+            janpara_crawl_setting_required_keyword.update!(janpara_crawl_setting_required_keyword_params)
+            render json: janpara_crawl_setting_required_keyword.as_json, status: 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           def destroy
-            janpara_crawl_setting_required_keyword =
-              product
-              .janpara_crawl_setting
-              .janpara_crawl_setting_required_keywords
-              .find(params[:id])
-
-            if janpara_crawl_setting_required_keyword.destroy
-              head 200
-            else
-              render json: { message: result.message }, status: 400
-            end
+            janpara_crawl_setting_required_keyword.destroy!
+            head 200
+          rescue ActiveRecord::RecordInvalid
+            render json: { error: "Validation Error.", status: 400 }, status: 400
           end
 
           private
@@ -68,6 +48,14 @@ module Api
 
           def janpara_crawl_setting_required_keyword_params
             params.permit(janpara_crawl_setting_required_keyword_attributes)
+          end
+
+          def janpara_crawl_setting_required_keyword
+            @janpara_crawl_setting_required_keyword ||=
+              product
+              .janpara_crawl_setting
+              .janpara_crawl_setting_required_keywords
+              .find(params[:id])
           end
         end
       end

@@ -2,8 +2,10 @@ package mercari_crawl_setting_exclude_keywords
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/kuroweb/price-monitoring/volumes/bff/config"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/model"
@@ -40,21 +42,11 @@ func (d *DeleteMercariCrawlSettingExcludeKeywordService) DeleteMercariCrawlSetti
 	}
 	defer resp.Body.Close()
 
-	switch resp.StatusCode {
-	case http.StatusOK:
-		return model.DeleteMercariCrawlSettingExcludeKeywordResultSuccess{Ok: true}, nil
-	case http.StatusNotFound:
-		return model.DeleteMercariCrawlSettingExcludeKeywordResultError{
-			Ok: false,
-			Error: model.DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed{
-				Code:    "404",
-				Message: "Requested resource was not found.",
-				Details: []*model.ErrorDetail{},
-			},
-		}, nil
-	default:
-		return d.handleServerError(), nil
+	if resp.StatusCode != http.StatusOK {
+		return d.handleApiError(resp), nil
 	}
+
+	return model.DeleteMercariCrawlSettingExcludeKeywordResultSuccess{Ok: true}, nil
 }
 
 func (d *DeleteMercariCrawlSettingExcludeKeywordService) handleServerError() model.DeleteMercariCrawlSettingExcludeKeywordResultError {
@@ -62,8 +54,29 @@ func (d *DeleteMercariCrawlSettingExcludeKeywordService) handleServerError() mod
 		Ok: false,
 		Error: model.DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed{
 			Code:    "503",
-			Message: "Service is currently unavailable.",
+			Message: "Internal Server Error.",
 			Details: []*model.ErrorDetail{},
 		},
 	}
+}
+
+func (d *DeleteMercariCrawlSettingExcludeKeywordService) handleApiError(resp *http.Response) model.DeleteMercariCrawlSettingExcludeKeywordResultError {
+	var errorResponse struct {
+		Error  string `json:"error"`
+		Status int    `json:"status"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&errorResponse); err == nil {
+		return model.DeleteMercariCrawlSettingExcludeKeywordResultError{
+			Ok: false,
+			Error: model.DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed{
+				Code:    strconv.Itoa(errorResponse.Status),
+				Message: errorResponse.Error,
+				Details: []*model.ErrorDetail{},
+			},
+		}
+	}
+
+	return d.handleServerError()
 }

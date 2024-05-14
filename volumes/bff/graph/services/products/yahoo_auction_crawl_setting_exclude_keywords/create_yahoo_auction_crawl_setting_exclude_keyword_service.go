@@ -33,12 +33,12 @@ func (c *CreateYahooAuctionCrawlSettingExcludeKeywordService) CreateYahooAuction
 
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(requestBody))
 	if err != nil {
-		return c.handleServerError(), nil
+		return c.handleApiError(resp), nil
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return c.handleServerError(), nil
+		return c.handleApiError(resp), nil
 	}
 
 	var response struct {
@@ -67,8 +67,29 @@ func (c *CreateYahooAuctionCrawlSettingExcludeKeywordService) handleServerError(
 		Ok: false,
 		Error: model.CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed{
 			Code:    "503",
-			Message: "Service is currently unavailable.",
+			Message: "Internal Server Error.",
 			Details: []*model.ErrorDetail{},
 		},
 	}
+}
+
+func (c *CreateYahooAuctionCrawlSettingExcludeKeywordService) handleApiError(resp *http.Response) model.CreateYahooAuctionCrawlSettingExcludeKeywordResultError {
+	var errorResponse struct {
+		Error  string `json:"error"`
+		Status int    `json:"status"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&errorResponse); err == nil {
+		return model.CreateYahooAuctionCrawlSettingExcludeKeywordResultError{
+			Ok: false,
+			Error: model.CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed{
+				Code:    strconv.Itoa(errorResponse.Status),
+				Message: errorResponse.Error,
+				Details: []*model.ErrorDetail{},
+			},
+		}
+	}
+
+	return c.handleServerError()
 }

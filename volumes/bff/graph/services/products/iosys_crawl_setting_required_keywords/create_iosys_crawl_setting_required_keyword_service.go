@@ -33,12 +33,12 @@ func (c *CreateIosysCrawlSettingRequiredKeywordService) CreateIosysCrawlSettingR
 
 	resp, err := http.Post(url, "application/json", bytes.NewBuffer(requestBody))
 	if err != nil {
-		return c.handleServerError(), nil
+		return c.handleApiError(resp), nil
 	}
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return c.handleServerError(), nil
+		return c.handleApiError(resp), nil
 	}
 
 	var response struct {
@@ -67,8 +67,29 @@ func (c *CreateIosysCrawlSettingRequiredKeywordService) handleServerError() mode
 		Ok: false,
 		Error: model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed{
 			Code:    "503",
-			Message: "Service is currently unavailable.",
+			Message: "Internal Server Error.",
 			Details: []*model.ErrorDetail{},
 		},
 	}
+}
+
+func (c *CreateIosysCrawlSettingRequiredKeywordService) handleApiError(resp *http.Response) model.CreateIosysCrawlSettingRequiredKeywordResultError {
+	var errorResponse struct {
+		Error  string `json:"error"`
+		Status int    `json:"status"`
+	}
+
+	decoder := json.NewDecoder(resp.Body)
+	if err := decoder.Decode(&errorResponse); err == nil {
+		return model.CreateIosysCrawlSettingRequiredKeywordResultError{
+			Ok: false,
+			Error: model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed{
+				Code:    strconv.Itoa(errorResponse.Status),
+				Message: errorResponse.Error,
+				Details: []*model.ErrorDetail{},
+			},
+		}
+	}
+
+	return c.handleServerError()
 }
