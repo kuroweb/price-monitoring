@@ -42,20 +42,20 @@ module Api
             @product ||= Product.find(params[:product_id])
           end
 
-          def yahoo_auction_crawl_setting_required_keyword_attributes
-            %i[keyword]
-          end
-
-          def yahoo_auction_crawl_setting_required_keyword_params
-            params.permit(yahoo_auction_crawl_setting_required_keyword_attributes)
-          end
-
           def yahoo_auction_crawl_setting_required_keyword
             @yahoo_auction_crawl_setting_required_keyword ||=
               product
               .yahoo_auction_crawl_setting
               .yahoo_auction_crawl_setting_required_keywords
               .find(params[:id])
+          end
+
+          def yahoo_auction_crawl_setting_required_keyword_attributes
+            %i[keyword]
+          end
+
+          def yahoo_auction_crawl_setting_required_keyword_params
+            params.permit(yahoo_auction_crawl_setting_required_keyword_attributes)
           end
         end
       end

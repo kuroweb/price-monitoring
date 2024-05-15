@@ -42,20 +42,20 @@ module Api
             @product ||= Product.find(params[:product_id])
           end
 
-          def iosys_crawl_setting_exclude_keyword_attributes
-            %i[keyword]
-          end
-
-          def iosys_crawl_setting_exclude_keyword_params
-            params.permit(iosys_crawl_setting_exclude_keyword_attributes)
-          end
-
           def iosys_crawl_setting_exclude_keyword
             @iosys_crawl_setting_exclude_keyword ||=
               product
               .iosys_crawl_setting
               .iosys_crawl_setting_exclude_keywords
               .find(params[:id])
+          end
+
+          def iosys_crawl_setting_exclude_keyword_attributes
+            %i[keyword]
+          end
+
+          def iosys_crawl_setting_exclude_keyword_params
+            params.permit(iosys_crawl_setting_exclude_keyword_attributes)
           end
         end
       end

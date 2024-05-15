@@ -42,20 +42,20 @@ module Api
             @product ||= Product.find(params[:product_id])
           end
 
-          def mercari_crawl_setting_exclude_keyword_attributes
-            %i[keyword]
-          end
-
-          def mercari_crawl_setting_exclude_keyword_params
-            params.permit(mercari_crawl_setting_exclude_keyword_attributes)
-          end
-
           def mercari_crawl_setting_exclude_keyword
             @mercari_crawl_setting_exclude_keyword ||=
               product
               .mercari_crawl_setting
               .mercari_crawl_setting_exclude_keywords
               .find(params[:id])
+          end
+
+          def mercari_crawl_setting_exclude_keyword_attributes
+            %i[keyword]
+          end
+
+          def mercari_crawl_setting_exclude_keyword_params
+            params.permit(mercari_crawl_setting_exclude_keyword_attributes)
           end
         end
       end

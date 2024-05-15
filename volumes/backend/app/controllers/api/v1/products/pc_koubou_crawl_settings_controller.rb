@@ -3,13 +3,11 @@ module Api
     module Products
       class PcKoubouCrawlSettingsController < ApplicationController
         def index
-          pc_koubou_crawl_setting = PcKoubouCrawlSetting.find_by(product_id: params[:product_id])
+          render json: pc_koubou_crawl_setting, status: 200
+        end
 
-          if pc_koubou_crawl_setting
-            render json: pc_koubou_crawl_setting, status: 200
-          else
-            render json: { message: "Requested resource was not found." }, status: 404
-          end
+        def pc_koubou_crawl_setting
+          @pc_koubou_crawl_setting ||= PcKoubouCrawlSetting.find_by!(product_id: params[:product_id])
         end
       end
     end

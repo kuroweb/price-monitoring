@@ -8,7 +8,6 @@ module Api
         end
 
         def show
-          mercari_product = MercariProduct.find_by!(id: params[:id])
           render json: mercari_product, status: 200
         end
 
@@ -19,6 +18,14 @@ module Api
         def destroy; end
 
         private
+
+        def product
+          @product ||= Product.find(params[:product_id])
+        end
+
+        def mercari_product
+          @mercari_product ||= product.mercari_products.find(params[:id])
+        end
 
         def mercari_product_params_attributes
           %i[id product_id mercari_id name price published]

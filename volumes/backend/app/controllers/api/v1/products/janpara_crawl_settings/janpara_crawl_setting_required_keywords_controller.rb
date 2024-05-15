@@ -42,20 +42,20 @@ module Api
             @product ||= Product.find(params[:product_id])
           end
 
-          def janpara_crawl_setting_required_keyword_attributes
-            %i[keyword]
-          end
-
-          def janpara_crawl_setting_required_keyword_params
-            params.permit(janpara_crawl_setting_required_keyword_attributes)
-          end
-
           def janpara_crawl_setting_required_keyword
             @janpara_crawl_setting_required_keyword ||=
               product
               .janpara_crawl_setting
               .janpara_crawl_setting_required_keywords
               .find(params[:id])
+          end
+
+          def janpara_crawl_setting_required_keyword_attributes
+            %i[keyword]
+          end
+
+          def janpara_crawl_setting_required_keyword_params
+            params.permit(janpara_crawl_setting_required_keyword_attributes)
           end
         end
       end

@@ -42,20 +42,20 @@ module Api
             @product ||= Product.find(params[:product_id])
           end
 
-          def pc_koubou_crawl_setting_required_keyword_attributes
-            %i[keyword]
-          end
-
-          def pc_koubou_crawl_setting_required_keyword_params
-            params.permit(pc_koubou_crawl_setting_required_keyword_attributes)
-          end
-
           def pc_koubou_crawl_setting_required_keyword
             @pc_koubou_crawl_setting_required_keyword ||=
               product
               .pc_koubou_crawl_setting
               .pc_koubou_crawl_setting_required_keywords
               .find(params[:id])
+          end
+
+          def pc_koubou_crawl_setting_required_keyword_attributes
+            %i[keyword]
+          end
+
+          def pc_koubou_crawl_setting_required_keyword_params
+            params.permit(pc_koubou_crawl_setting_required_keyword_attributes)
           end
         end
       end

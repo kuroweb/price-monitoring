@@ -8,13 +8,7 @@ module Api
         end
 
         def show
-          yahoo_auction_product = YahooAuctionProduct.find_by(id: params[:id])
-
-          if yahoo_auction_product
-            render json: yahoo_auction_product, status: 200
-          else
-            render json: { message: "Requested resource was not found." }, status: 404
-          end
+          render json: yahoo_auction_product, status: 200
         end
 
         def create; end
@@ -24,6 +18,14 @@ module Api
         def destroy; end
 
         private
+
+        def product
+          @product ||= Product.find(params[:product_id])
+        end
+
+        def yahoo_auction_product
+          @yahoo_auction_product ||= product.yahoo_auction_products.find(params[:id])
+        end
 
         def yahoo_auction_product_params_attributes
           %i[id product_id yahoo_auction_id name price published]
