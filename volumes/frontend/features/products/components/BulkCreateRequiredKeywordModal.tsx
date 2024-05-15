@@ -14,7 +14,6 @@ import {
 } from '../server-actions/productQuery'
 
 type inputType = {
-  productId: string
   keyword: string | null
 }
 
@@ -25,17 +24,21 @@ const BulkCreateRequiredKeywordModal = () => {
   const [modal, setModal] = useBulkCreateRequiredKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
     defaultValues: {
-      productId: String(params.id),
       keyword: null,
     },
   })
 
-  const onSubmit: SubmitHandler<inputType> = async (data) => {
-    bulkCreate(data)
+  const onSubmit: SubmitHandler<inputType> = async (input) => {
+    bulkCreate(input)
   }
 
-  const bulkCreate = async (data: inputType) => {
-    const yahooAuctionResult = await createYahooAuctionCrawlSettingRequiredKeyword(data)
+  const bulkCreate = async (input: inputType) => {
+    const postData = {
+      productId: String(params.id),
+      keyword: input.keyword,
+    }
+
+    const yahooAuctionResult = await createYahooAuctionCrawlSettingRequiredKeyword(postData)
     if (
       yahooAuctionResult?.data?.createYahooAuctionCrawlSettingRequiredKeyword.__typename ===
         'CreateYahooAuctionCrawlSettingRequiredKeywordResultError' &&
@@ -44,7 +47,7 @@ const BulkCreateRequiredKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const mercariResult = await createMercariCrawlSettingRequiredKeyword(data)
+    const mercariResult = await createMercariCrawlSettingRequiredKeyword(postData)
     if (
       mercariResult?.data?.createMercariCrawlSettingRequiredKeyword.__typename ===
         'CreateMercariCrawlSettingRequiredKeywordResultError' &&
@@ -53,7 +56,7 @@ const BulkCreateRequiredKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const janparaResult = await createJanparaCrawlSettingRequiredKeyword(data)
+    const janparaResult = await createJanparaCrawlSettingRequiredKeyword(postData)
     if (
       janparaResult?.data?.createJanparaCrawlSettingRequiredKeyword.__typename ===
         'CreateJanparaCrawlSettingRequiredKeywordResultError' &&
@@ -62,7 +65,7 @@ const BulkCreateRequiredKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const iosysResult = await createIosysCrawlSettingRequiredKeyword(data)
+    const iosysResult = await createIosysCrawlSettingRequiredKeyword(postData)
     if (
       iosysResult?.data?.createIosysCrawlSettingRequiredKeyword.__typename ===
         'CreateIosysCrawlSettingRequiredKeywordResultError' &&
@@ -71,7 +74,7 @@ const BulkCreateRequiredKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const pcKoubouResult = await createPcKoubouCrawlSettingRequiredKeyword(data)
+    const pcKoubouResult = await createPcKoubouCrawlSettingRequiredKeyword(postData)
     if (
       pcKoubouResult?.data?.createPcKoubouCrawlSettingRequiredKeyword.__typename ===
         'CreatePcKoubouCrawlSettingRequiredKeywordResultError' &&

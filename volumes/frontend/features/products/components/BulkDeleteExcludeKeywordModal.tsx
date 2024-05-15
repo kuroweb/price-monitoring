@@ -16,7 +16,6 @@ import {
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 type inputType = {
-  productId: string
   keyword: string | null
 }
 
@@ -43,15 +42,15 @@ const BulkDeleteExcludeKeywordModal = ({
     },
   })
 
-  const onSubmit: SubmitHandler<inputType> = async (data) => {
-    bulkDelete(data)
+  const onSubmit: SubmitHandler<inputType> = async (input) => {
+    bulkDelete(input)
   }
 
-  const bulkDelete = async (data: inputType) => {
+  const bulkDelete = async (input: inputType) => {
     const productId = String(params.id)
 
     for (const excludeKeyword of yahooAuctionCrawlSettingExcludeKeywords) {
-      if (excludeKeyword.keyword === data.keyword) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deleteYahooAuctionCrawlSettingExcludeKeyword(
             excludeKeyword.id,
@@ -73,7 +72,7 @@ const BulkDeleteExcludeKeywordModal = ({
     }
 
     for (const excludeKeyword of mercariCrawlSettingExcludeKeywords) {
-      if (excludeKeyword.keyword === data.keyword) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deleteMercariCrawlSettingExcludeKeyword(excludeKeyword.id, productId)
           if (
@@ -92,7 +91,7 @@ const BulkDeleteExcludeKeywordModal = ({
     }
 
     for (const excludeKeyword of janparaCrawlSettingExcludeKeywords) {
-      if (excludeKeyword.keyword === data.keyword) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deleteJanparaCrawlSettingExcludeKeyword(excludeKeyword.id, productId)
           if (
@@ -111,7 +110,7 @@ const BulkDeleteExcludeKeywordModal = ({
     }
 
     for (const excludeKeyword of iosysCrawlSettingExcludeKeywords) {
-      if (excludeKeyword.keyword === data.keyword) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deleteIosysCrawlSettingExcludeKeyword(excludeKeyword.id, productId)
           if (
@@ -130,7 +129,7 @@ const BulkDeleteExcludeKeywordModal = ({
     }
 
     for (const excludeKeyword of pcKoubouCrawlSettingExcludeKeywords) {
-      if (excludeKeyword.keyword === data.keyword) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deletePcKoubouCrawlSettingExcludeKeyword(
             excludeKeyword.id,

@@ -16,7 +16,6 @@ import {
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 type inputType = {
-  productId: string
   keyword: string | null
 }
 
@@ -43,15 +42,15 @@ const BulkDeleteRequiredKeywordModal = ({
     },
   })
 
-  const onSubmit: SubmitHandler<inputType> = async (data) => {
-    bulkDelete(data)
+  const onSubmit: SubmitHandler<inputType> = async (input) => {
+    bulkDelete(input)
   }
 
-  const bulkDelete = async (data: inputType) => {
+  const bulkDelete = async (input: inputType) => {
     const productId = String(params.id)
 
     for (const requiredKeyword of yahooAuctionCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === data.keyword) {
+      if (requiredKeyword.keyword === input.keyword) {
         try {
           const result = await deleteYahooAuctionCrawlSettingRequiredKeyword(
             requiredKeyword.id,
@@ -73,7 +72,7 @@ const BulkDeleteRequiredKeywordModal = ({
     }
 
     for (const requiredKeyword of mercariCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === data.keyword) {
+      if (requiredKeyword.keyword === input.keyword) {
         try {
           const result = await deleteMercariCrawlSettingRequiredKeyword(
             requiredKeyword.id,
@@ -95,7 +94,7 @@ const BulkDeleteRequiredKeywordModal = ({
     }
 
     for (const requiredKeyword of janparaCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === data.keyword) {
+      if (requiredKeyword.keyword === input.keyword) {
         try {
           const result = await deleteJanparaCrawlSettingRequiredKeyword(
             requiredKeyword.id,
@@ -117,7 +116,7 @@ const BulkDeleteRequiredKeywordModal = ({
     }
 
     for (const requiredKeyword of iosysCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === data.keyword) {
+      if (requiredKeyword.keyword === input.keyword) {
         try {
           const result = await deleteIosysCrawlSettingRequiredKeyword(requiredKeyword.id, productId)
           if (
@@ -136,7 +135,7 @@ const BulkDeleteRequiredKeywordModal = ({
     }
 
     for (const requiredKeyword of pcKoubouCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === data.keyword) {
+      if (requiredKeyword.keyword === input.keyword) {
         try {
           const result = await deletePcKoubouCrawlSettingRequiredKeyword(
             requiredKeyword.id,

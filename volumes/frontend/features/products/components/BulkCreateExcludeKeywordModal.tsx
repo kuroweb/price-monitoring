@@ -14,7 +14,6 @@ import {
 } from '../server-actions/productQuery'
 
 type inputType = {
-  productId: string
   keyword: string | null
 }
 
@@ -25,17 +24,21 @@ const BulkCreateExcludeKeywordModal = () => {
   const [modal, setModal] = useBulkCreateExcludeKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
     defaultValues: {
-      productId: String(params.id),
       keyword: null,
     },
   })
 
-  const onSubmit: SubmitHandler<inputType> = async (data) => {
-    bulkCreate(data)
+  const onSubmit: SubmitHandler<inputType> = async (input) => {
+    bulkCreate(input)
   }
 
-  const bulkCreate = async (data: inputType) => {
-    const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeKeyword(data)
+  const bulkCreate = async (input: inputType) => {
+    const postData = {
+      productId: String(params.id),
+      keyword: input.keyword,
+    }
+
+    const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeKeyword(postData)
     if (
       yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeKeyword.__typename ===
         'CreateYahooAuctionCrawlSettingExcludeKeywordResultError' &&
@@ -44,7 +47,7 @@ const BulkCreateExcludeKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const mercariResult = await createMercariCrawlSettingExcludeKeyword(data)
+    const mercariResult = await createMercariCrawlSettingExcludeKeyword(postData)
     if (
       mercariResult?.data?.createMercariCrawlSettingExcludeKeyword.__typename ===
         'CreateMercariCrawlSettingExcludeKeywordResultError' &&
@@ -53,7 +56,7 @@ const BulkCreateExcludeKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const janparaResult = await createJanparaCrawlSettingExcludeKeyword(data)
+    const janparaResult = await createJanparaCrawlSettingExcludeKeyword(postData)
     if (
       janparaResult?.data?.createJanparaCrawlSettingExcludeKeyword.__typename ===
         'CreateJanparaCrawlSettingExcludeKeywordResultError' &&
@@ -62,7 +65,7 @@ const BulkCreateExcludeKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const iosysResult = await createIosysCrawlSettingExcludeKeyword(data)
+    const iosysResult = await createIosysCrawlSettingExcludeKeyword(postData)
     if (
       iosysResult?.data?.createIosysCrawlSettingExcludeKeyword.__typename ===
         'CreateIosysCrawlSettingExcludeKeywordResultError' &&
@@ -71,7 +74,7 @@ const BulkCreateExcludeKeywordModal = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const pcKoubouResult = await createPcKoubouCrawlSettingExcludeKeyword(data)
+    const pcKoubouResult = await createPcKoubouCrawlSettingExcludeKeyword(postData)
     if (
       pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeKeyword.__typename ===
         'CreatePcKoubouCrawlSettingExcludeKeywordResultError' &&
