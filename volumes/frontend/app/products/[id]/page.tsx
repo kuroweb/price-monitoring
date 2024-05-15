@@ -2,12 +2,20 @@ import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
+import BulkCreateExcludeKeywordModal from '@/features/products/components/BulkCreateExcludeKeywordModal'
+import BulkCreateRequiredKeywordModal from '@/features/products/components/BulkCreateRequiredKeywordModal'
+import BulkDeleteExcludeKeywordModal from '@/features/products/components/BulkDeleteExcludeKeywordModal'
+import BulkDeleteRequiredKeywordModal from '@/features/products/components/BulkDeleteRequiredKeywordModal'
 import Pagination from '@/features/products/components/Pagination'
 import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
 import SearchForm from '@/features/products/components/SearchForm'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import EditRequiredKeywordModal from '@/features/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
+import { useBulkCreateExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkCreateExcludeKeywordModalState'
+import { useBulkCreateRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkCreateRequiredKeywordModalState'
+import { useBulkDeleteExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkDeleteExcludeKeywordModalState'
+import { useBulkDeleteRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkDeleteRequiredKeywordModalState'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useEditRequiredKeywordModalState'
@@ -55,7 +63,7 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>設定</h2>
-            <div className='grid grid-cols-2 gap-4'>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
               <Link
                 className='btn'
                 href={{
@@ -74,11 +82,11 @@ const Page = async ({
                   pathname: `/products/${params.id}`,
                   query: {
                     ...searchParams,
-                    [useEditExcludeKeywordModalQuery]: 'true',
+                    [useEditRequiredKeywordModalQuery]: 'true',
                   },
                 }}
               >
-                除外キーワード
+                必須キーワード
               </Link>
               <Link
                 className='btn'
@@ -86,11 +94,66 @@ const Page = async ({
                   pathname: `/products/${params.id}`,
                   query: {
                     ...searchParams,
-                    [useEditRequiredKeywordModalQuery]: 'true',
+                    [useEditExcludeKeywordModalQuery]: 'true',
                   },
                 }}
               >
-                必須キーワード
+                除外キーワード
+              </Link>
+            </div>
+          </div>
+        </div>
+        <div className='card w-full bg-neutral'>
+          <div className='card-body'>
+            <h2 className='card-title pb-4'>一括設定</h2>
+            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+              <Link
+                className='btn'
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useBulkCreateRequiredKeywordModalQuery]: 'true',
+                  },
+                }}
+              >
+                必須キーワード（一括登録）
+              </Link>
+              <Link
+                className='btn'
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useBulkDeleteRequiredKeywordModalQuery]: 'true',
+                  },
+                }}
+              >
+                必須キーワード（一括削除）
+              </Link>
+              <Link
+                className='btn'
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useBulkCreateExcludeKeywordModalQuery]: 'true',
+                  },
+                }}
+              >
+                除外キーワード（一括登録）
+              </Link>
+              <Link
+                className='btn'
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useBulkDeleteExcludeKeywordModalQuery]: 'true',
+                  },
+                }}
+              >
+                除外キーワード（一括削除）
               </Link>
             </div>
           </div>
@@ -154,6 +217,42 @@ const Page = async ({
       />
       <EditExcludeKeywordModal data={data} />
       <EditRequiredKeywordModal data={data} />
+      <BulkCreateExcludeKeywordModal />
+      <BulkCreateRequiredKeywordModal />
+      <BulkDeleteExcludeKeywordModal
+        yahooAuctionCrawlSettingExcludeKeywords={
+          data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords
+        }
+        mercariCrawlSettingExcludeKeywords={
+          data.product.mercariCrawlSetting.mercariCrawlSettingExcludeKeywords
+        }
+        janparaCrawlSettingExcludeKeywords={
+          data.product.janparaCrawlSetting.janparaCrawlSettingExcludeKeywords
+        }
+        iosysCrawlSettingExcludeKeywords={
+          data.product.iosysCrawlSetting.iosysCrawlSettingExcludeKeywords
+        }
+        pcKoubouCrawlSettingExcludeKeywords={
+          data.product.pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords
+        }
+      />
+      <BulkDeleteRequiredKeywordModal
+        yahooAuctionCrawlSettingRequiredKeywords={
+          data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords
+        }
+        mercariCrawlSettingRequiredKeywords={
+          data.product.mercariCrawlSetting.mercariCrawlSettingRequiredKeywords
+        }
+        janparaCrawlSettingRequiredKeywords={
+          data.product.janparaCrawlSetting.janparaCrawlSettingRequiredKeywords
+        }
+        iosysCrawlSettingRequiredKeywords={
+          data.product.iosysCrawlSetting.iosysCrawlSettingRequiredKeywords
+        }
+        pcKoubouCrawlSettingRequiredKeywords={
+          data.product.pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords
+        }
+      />
     </Layout>
   )
 }
