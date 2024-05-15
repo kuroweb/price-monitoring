@@ -7,8 +7,7 @@ module Api
       end
 
       def show
-        products = ProductFinder.new(params: { id: params[:id] }).execute
-        render json: products.first.as_json, status: 200
+        render json: product.as_json, status: 200
       end
 
       def create
@@ -17,35 +16,35 @@ module Api
         if result.success?
           render json: result.payload[:product].as_json, status: 200
         else
-          render json: { message: result.message }, status: 400
+          render json: { error: result.message, status: 400 }, status: 400
         end
       end
 
       def update
-        product = Product.find_by(id: params[:id])
-        return head 404 if product.blank?
-
         result = ::Products::Update.call(product:, params: update_product_params)
+
         if result.success?
           render json: result.payload[:product].as_json, status: 200
         else
-          render json: { message: result.message }, status: 400
+          render json: { error: result.message, status: 400 }, status: 400
         end
       end
 
       def destroy
-        product = Product.find_by(id: params[:id])
-        return head 404 if product.blank?
-
         result = ::Products::Delete.call(product:)
+
         if result.success?
           head 200
         else
-          render json: { message: result.message }, status: 400
+          render json: { error: result.message, status: 400 }, status: 400
         end
       end
 
       private
+
+      def product
+        @product ||= Product.find(params[:id])
+      end
 
       def product_attributes
         %i[id name]
