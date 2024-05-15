@@ -24,7 +24,7 @@ const SearchForm = () => {
   return (
     <>
       <div className='flex flex-wrap'>
-        <label className='form-control w-36 pr-2'>
+        <label className='form-control w-32 pr-2'>
           <div className='label'>
             <span className='label-text'>プラットフォーム</span>
           </div>
@@ -43,7 +43,7 @@ const SearchForm = () => {
           </select>
         </label>
         {['all', 'yahoo_auction', 'yahoo_fleamarket', 'mercari'].includes(platform) && (
-          <label className='form-control w-36 pr-2'>
+          <label className='form-control w-32 pr-2'>
             <div className='label'>
               <span className='label-text'>ステータス</span>
             </div>
@@ -57,7 +57,7 @@ const SearchForm = () => {
             </select>
           </label>
         )}
-        <label className='form-control w-36 pr-2'>
+        <label className='form-control w-32 pr-2'>
           <div className='label'>
             <span className='label-text'>表示数</span>
           </div>
