@@ -18,45 +18,43 @@ module Products
 
     def call
       ApplicationRecord.transaction do
-        update_product
-        update_yahoo_auction_crawl_setting
-        update_mercari_crawl_setting
-        update_janpara_crawl_setting
-        update_iosys_crawl_setting
-        update_pc_koubou_crawl_setting
+        update_product!
+        update_yahoo_auction_crawl_setting!
+        update_mercari_crawl_setting!
+        update_janpara_crawl_setting!
+        update_iosys_crawl_setting!
+        update_pc_koubou_crawl_setting!
 
-        ServiceResponse.success(payload: { product: })
+        product
       end
-    rescue StandardError => e
-      ServiceResponse.error(message: e.message)
     end
 
     private
 
     attr_reader :product, :params
 
-    def update_product
-      product.update(product_params)
+    def update_product!
+      product.update!(product_params)
     end
 
-    def update_yahoo_auction_crawl_setting
-      product.yahoo_auction_crawl_setting.update(yahoo_auction_crawl_setting_params)
+    def update_yahoo_auction_crawl_setting!
+      product.yahoo_auction_crawl_setting.update!(yahoo_auction_crawl_setting_params)
     end
 
-    def update_mercari_crawl_setting
-      product.mercari_crawl_setting.update(mercari_crawl_setting_params)
+    def update_mercari_crawl_setting!
+      product.mercari_crawl_setting.update!(mercari_crawl_setting_params)
     end
 
-    def update_janpara_crawl_setting
-      product.janpara_crawl_setting.update(janpara_crawl_setting_params)
+    def update_janpara_crawl_setting!
+      product.janpara_crawl_setting.update!(janpara_crawl_setting_params)
     end
 
-    def update_iosys_crawl_setting
-      product.iosys_crawl_setting.update(iosys_crawl_setting_params)
+    def update_iosys_crawl_setting!
+      product.iosys_crawl_setting.update!(iosys_crawl_setting_params)
     end
 
-    def update_pc_koubou_crawl_setting
-      product.pc_koubou_crawl_setting.update(pc_koubou_crawl_setting_params)
+    def update_pc_koubou_crawl_setting!
+      product.pc_koubou_crawl_setting.update!(pc_koubou_crawl_setting_params)
     end
 
     def product_params

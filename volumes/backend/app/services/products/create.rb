@@ -24,10 +24,8 @@ module Products
         product.create_iosys_crawl_setting!(iosys_crawl_setting_params)
         product.create_pc_koubou_crawl_setting!(pc_koubou_crawl_setting_params)
 
-        ServiceResponse.success(payload: { product: })
+        product
       end
-    rescue StandardError => e
-      ServiceResponse.error(message: e.message)
     end
 
     private

@@ -18,14 +18,16 @@ module Api
               .create!(janpara_crawl_setting_exclude_keyword_params)
 
             render json: janpara_crawl_setting_exclude_keyword.as_json, status: 200
-          rescue ActiveRecord::RecordInvalid
+          rescue ActiveRecord::RecordInvalid => e
+            Rails.logger.error("Bad Request. exception: #{e.full_message}")
             render json: { error: "Bad Request.", status: 400 }, status: 400
           end
 
           def update
             janpara_crawl_setting_exclude_keyword.update!(janpara_crawl_setting_exclude_keyword_params)
             render json: janpara_crawl_setting_exclude_keyword.as_json, status: 200
-          rescue ActiveRecord::RecordInvalid
+          rescue ActiveRecord::RecordInvalid => e
+            Rails.logger.error("Bad Request. exception: #{e.full_message}")
             render json: { error: "Bad Request.", status: 400 }, status: 400
           end
 

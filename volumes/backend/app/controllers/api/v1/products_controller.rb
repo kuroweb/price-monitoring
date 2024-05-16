@@ -11,23 +11,19 @@ module Api
       end
 
       def create
-        result = ::Products::Create.call(params: create_product_params)
-
-        if result.success?
-          render json: result.payload[:product].as_json, status: 200
-        else
-          render json: { error: "Bad Request.", status: 400 }, status: 400
-        end
+        ::Products::Create.call(params: create_product_params)
+        render json: product.as_json, status: 200
+      rescue ActiveRecord::RecordInvalid => e
+        Rails.logger.error("Bad Request. exception: #{e.full_message}")
+        render json: { error: "Bad Request.", status: 400 }, status: 400
       end
 
       def update
-        result = ::Products::Update.call(product:, params: update_product_params)
-
-        if result.success?
-          render json: result.payload[:product].as_json, status: 200
-        else
-          render json: { error: "Bad Request.", status: 400 }, status: 400
-        end
+        ::Products::Update.call(product:, params: update_product_params)
+        render json: product.as_json, status: 200
+      rescue ActiveRecord::RecordInvalid => e
+        Rails.logger.error("Bad Request. exception: #{e.full_message}")
+        render json: { error: "Bad Request.", status: 400 }, status: 400
       end
 
       def destroy
