@@ -31,9 +31,7 @@ module Api
       end
 
       def destroy
-        result = ::Products::Delete.call(product:)
-
-        if result.success?
+        if product.destroy
           head 200
         else
           render json: { error: result.message, status: 400 }, status: 400
