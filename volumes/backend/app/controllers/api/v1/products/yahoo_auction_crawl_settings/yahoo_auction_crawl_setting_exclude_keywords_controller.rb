@@ -19,21 +19,22 @@ module Api
 
             render json: yahoo_auction_crawl_setting_exclude_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            render json: { error: "Bad Request.", status: 400 }, status: 400
           end
 
           def update
             yahoo_auction_crawl_setting_exclude_keyword.update!(yahoo_auction_crawl_setting_exclude_keyword_params)
             render json: yahoo_auction_crawl_setting_exclude_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            render json: { error: "Bad Request.", status: 400 }, status: 400
           end
 
           def destroy
-            yahoo_auction_crawl_setting_exclude_keyword.destroy!
-            head 200
-          rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            if yahoo_auction_crawl_setting_exclude_keyword.destroy
+              head 200
+            else
+              render json: { error: "Bad Request.", status: 400 }, status: 400
+            end
           end
 
           private

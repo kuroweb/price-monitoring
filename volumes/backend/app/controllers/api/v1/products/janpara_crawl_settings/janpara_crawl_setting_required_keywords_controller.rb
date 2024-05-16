@@ -30,10 +30,11 @@ module Api
           end
 
           def destroy
-            janpara_crawl_setting_required_keyword.destroy!
-            head 200
-          rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            if janpara_crawl_setting_required_keyword.destroy
+              head 200
+            else
+              render json: { error: "Bad Request.", status: 400 }, status: 400
+            end
           end
 
           private

@@ -19,21 +19,22 @@ module Api
 
             render json: janpara_crawl_setting_exclude_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            render json: { error: "Bad Request.", status: 400 }, status: 400
           end
 
           def update
             janpara_crawl_setting_exclude_keyword.update!(janpara_crawl_setting_exclude_keyword_params)
             render json: janpara_crawl_setting_exclude_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            render json: { error: "Bad Request.", status: 400 }, status: 400
           end
 
           def destroy
-            janpara_crawl_setting_exclude_keyword.destroy!
-            head 200
-          rescue ActiveRecord::RecordInvalid
-            render json: { error: "Validation Error.", status: 400 }, status: 400
+            if janpara_crawl_setting_exclude_keyword.destroy
+              head 200
+            else
+              render json: { error: "Bad Request.", status: 400 }, status: 400
+            end
           end
 
           private

@@ -16,7 +16,7 @@ module Api
         if result.success?
           render json: result.payload[:product].as_json, status: 200
         else
-          render json: { error: result.message, status: 400 }, status: 400
+          render json: { error: "Bad Request.", status: 400 }, status: 400
         end
       end
 
@@ -26,7 +26,7 @@ module Api
         if result.success?
           render json: result.payload[:product].as_json, status: 200
         else
-          render json: { error: result.message, status: 400 }, status: 400
+          render json: { error: "Bad Request.", status: 400 }, status: 400
         end
       end
 
@@ -34,7 +34,7 @@ module Api
         if product.destroy
           head 200
         else
-          render json: { error: result.message, status: 400 }, status: 400
+          render json: { error: "Bad Request.", status: 400 }, status: 400
         end
       end
 
