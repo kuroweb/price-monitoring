@@ -69,7 +69,7 @@ module Crawl
 
         doms.each do |dom|
           result = CrawlResult.new(
-            iosys_id: iosys_id(dom),
+            external_id: external_id(dom),
             name: name(dom),
             price: price(dom),
             thumbnail_url: thumbnail_url(dom)
@@ -82,7 +82,7 @@ module Crawl
         page.query_selector_all("li.item")
       end
 
-      def iosys_id(dom)
+      def external_id(dom)
         href = dom.query_selector("a").get_attribute("href")
         href.match(%r{/items/(.*)})[1]
       end

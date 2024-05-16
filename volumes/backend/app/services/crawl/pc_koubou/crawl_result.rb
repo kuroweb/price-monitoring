@@ -4,12 +4,12 @@ module Crawl
       include ActiveModel::Model
       include ActiveModel::Attributes
 
-      attribute :pc_koubou_id, :string
+      attribute :external_id, :string
       attribute :name, :string
       attribute :price, :integer
       attribute :thumbnail_url, :string
 
-      validates_presence_of :pc_koubou_id, :name, :price, :thumbnail_url
+      validates_presence_of :external_id, :name, :price, :thumbnail_url
     end
   end
 end

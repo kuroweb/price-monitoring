@@ -109,7 +109,7 @@ module Search
 
     def common_columns(platform)
       [
-        "'#{platform}' AS platform", "#{platform}_id AS external_id",
+        "'#{platform}' AS platform", "external_id",
         "product_id", "name", "price", "thumbnail_url", "created_at", "updated_at"
       ]
     end

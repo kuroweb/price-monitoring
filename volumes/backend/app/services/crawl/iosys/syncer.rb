@@ -33,7 +33,7 @@ module Crawl
 
       def delete
         IosysProduct.where(product_id: product.id)
-                    .where.not(iosys_id: crawl_results.results.map(&:iosys_id))
+                    .where.not(external_id: crawl_results.results.map(&:external_id))
                     .delete_all
       end
 

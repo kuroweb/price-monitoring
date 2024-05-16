@@ -33,7 +33,7 @@ module Crawl
         attr_reader :yahoo_fleamarket_product
 
         def url
-          "https://paypayfleamarket.yahoo.co.jp/item/#{yahoo_fleamarket_product.yahoo_fleamarket_id}"
+          "https://paypayfleamarket.yahoo.co.jp/item/#{yahoo_fleamarket_product.external_id}"
         end
 
         def load(page)
@@ -51,7 +51,7 @@ module Crawl
 
         def deleted_crawl_result
           crawl_result = CrawlResult.new(
-            yahoo_fleamarket_id: yahoo_fleamarket_product.yahoo_fleamarket_id,
+            external_id: yahoo_fleamarket_product.external_id,
             seller_id: yahoo_fleamarket_product.seller_id,
             name: yahoo_fleamarket_product.name,
             price: yahoo_fleamarket_product.price,
@@ -67,7 +67,7 @@ module Crawl
 
         def upsertable_crawl_result(page)
           crawl_result = CrawlResult.new(
-            yahoo_fleamarket_id: yahoo_fleamarket_product.yahoo_fleamarket_id,
+            external_id: yahoo_fleamarket_product.external_id,
             seller_id: seller_id(page),
             name: name(page),
             price: price(page),

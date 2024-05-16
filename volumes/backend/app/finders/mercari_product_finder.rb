@@ -12,7 +12,7 @@ class MercariProductFinder
     products = base_scope
     products = by_id(products)
     products = by_product_id(products)
-    products = by_mercari_id(products)
+    products = by_external_id(products)
     products = by_name(products)
     products = by_price(products)
     products = by_published(products)
@@ -38,10 +38,10 @@ class MercariProductFinder
     products.where(product_id: params[:product_id])
   end
 
-  def by_mercari_id(products)
-    return products unless params[:mercari_id]
+  def by_external_id(products)
+    return products unless params[:external_id]
 
-    products.where(mercari_id: params[:mercari_id])
+    products.where(external_id: params[:external_id])
   end
 
   def by_name(products)

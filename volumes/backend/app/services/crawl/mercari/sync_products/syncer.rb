@@ -44,7 +44,7 @@ module Crawl
           job_params =
             MercariProduct
             .where(product_id: product.id, published: true)
-            .where.not(mercari_id: crawl_results.results.map(&:mercari_id))
+            .where.not(external_id: crawl_results.results.map(&:external_id))
             .map { |mercari_product| [mercari_product.id] }
 
           Crawl::Mercari::SyncProduct::SyncJob.perform_bulk(job_params)

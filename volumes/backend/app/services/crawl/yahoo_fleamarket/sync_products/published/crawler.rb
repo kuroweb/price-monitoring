@@ -44,7 +44,7 @@ module Crawl
             product_doms = page.query_selector_all("li.Product")
             product_doms.each do |dom|
               result = Crawl::YahooFleamarket::SyncProducts::CrawlResult.new(
-                yahoo_fleamarket_id: yahoo_fleamarket_id(dom),
+                external_id: external_id(dom),
                 seller_id: seller_id(dom),
                 name: name(dom),
                 price: price(dom),
@@ -69,7 +69,7 @@ module Crawl
             page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
           end
 
-          def yahoo_fleamarket_id(dom)
+          def external_id(dom)
             dom.query_selector(".Product__titleLink").get_attribute("data-auction-id")
           end
 

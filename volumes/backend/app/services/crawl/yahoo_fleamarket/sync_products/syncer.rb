@@ -40,7 +40,7 @@ module Crawl
           job_params =
             YahooFleamarketProduct
             .where(product_id: product.id, published: true)
-            .where.not(yahoo_fleamarket_id: crawl_results.results.map(&:yahoo_fleamarket_id))
+            .where.not(external_id: crawl_results.results.map(&:external_id))
             .map { |yahoo_fleamarket_product| [yahoo_fleamarket_product.id] }
 
           Crawl::YahooFleamarket::SyncProduct::SyncJob.perform_bulk(job_params)

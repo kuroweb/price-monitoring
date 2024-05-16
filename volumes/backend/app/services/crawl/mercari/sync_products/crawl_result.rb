@@ -6,14 +6,14 @@ module Crawl
         include ActiveModel::Model
         include ActiveModel::Attributes
 
-        attribute :mercari_id, :string
+        attribute :external_id, :string
         attribute :name, :string
         attribute :price, :integer
         attribute :thumbnail_url, :string
         attribute :published, :boolean
 
         validates :published, inclusion: { in: [true, false] }
-        validates_presence_of :mercari_id, :name, :price, :thumbnail_url
+        validates_presence_of :external_id, :name, :price, :thumbnail_url
       end
     end
   end

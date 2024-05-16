@@ -27,7 +27,7 @@ module Crawl
         attr_reader :yahoo_auction_product
 
         def url
-          "https://page.auctions.yahoo.co.jp/jp/auction/#{yahoo_auction_product.yahoo_auction_id}"
+          "https://page.auctions.yahoo.co.jp/jp/auction/#{yahoo_auction_product.external_id}"
         end
 
         def load(page)
@@ -57,7 +57,7 @@ module Crawl
 
         def deletable_crawl_result # rubocop:disable Metrics/AbcSize
           crawl_result = CrawlResult.new(
-            yahoo_auction_id: yahoo_auction_product.yahoo_auction_id,
+            external_id: yahoo_auction_product.external_id,
             seller_id: yahoo_auction_product.seller_id,
             name: yahoo_auction_product.name,
             price: yahoo_auction_product.price,
@@ -75,7 +75,7 @@ module Crawl
 
         def upsertable_crawl_result(page)
           crawl_result = CrawlResult.new(
-            yahoo_auction_id: yahoo_auction_product.yahoo_auction_id,
+            external_id: yahoo_auction_product.external_id,
             seller_id: seller_id(page),
             name: name(page),
             price: price(page),

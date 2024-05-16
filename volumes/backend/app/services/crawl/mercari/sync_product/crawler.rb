@@ -34,7 +34,7 @@ module Crawl
         attr_reader :mercari_product
 
         def url
-          "https://jp.mercari.com/item/#{mercari_product.mercari_id}"
+          "https://jp.mercari.com/item/#{mercari_product.external_id}"
         end
 
         def load(page)
@@ -51,7 +51,7 @@ module Crawl
 
         def deleted_crawl_result
           crawl_result = CrawlResult.new(
-            mercari_id: mercari_product.mercari_id,
+            external_id: mercari_product.external_id,
             name: mercari_product.name,
             price: mercari_product.price,
             thumbnail_url: mercari_product.thumbnail_url,
@@ -66,7 +66,7 @@ module Crawl
 
         def exist_crawl_result(page)
           crawl_result = CrawlResult.new(
-            mercari_id: mercari_product.mercari_id,
+            external_id: mercari_product.external_id,
             name: name(page),
             price: price(page),
             thumbnail_url: thumbnail_url(page),

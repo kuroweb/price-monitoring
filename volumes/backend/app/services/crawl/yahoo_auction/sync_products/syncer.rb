@@ -40,7 +40,7 @@ module Crawl
           job_params =
             YahooAuctionProduct
             .where(product_id: product.id, published: true)
-            .where.not(yahoo_auction_id: crawl_results.results.map(&:yahoo_auction_id))
+            .where.not(external_id: crawl_results.results.map(&:external_id))
             .map { |yahoo_auction_product| [yahoo_auction_product.id] }
 
           Crawl::YahooAuction::SyncProduct::SyncJob.perform_bulk(job_params)

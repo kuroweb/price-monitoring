@@ -28,7 +28,7 @@ module Api
         end
 
         def yahoo_auction_product_params_attributes
-          %i[id product_id yahoo_auction_id name price published]
+          %i[id product_id external_id name price published]
         end
 
         def external_params_attributes

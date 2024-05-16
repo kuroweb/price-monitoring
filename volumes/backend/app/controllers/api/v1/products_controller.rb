@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        ::Products::Create.call(params: create_product_params)
+        product = ::Products::Create.call(params: create_product_params)
         render json: product.as_json, status: 200
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error("Bad Request. exception: #{e.full_message}")

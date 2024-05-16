@@ -12,7 +12,7 @@ class YahooAuctionProductFinder
     products = base_scope
     products = by_id(products)
     products = by_product_id(products)
-    products = by_yahoo_auction_id(products)
+    products = by_external_id(products)
     products = by_name(products)
     products = by_price(products)
     products = by_published(products)
@@ -38,10 +38,10 @@ class YahooAuctionProductFinder
     products.where(product_id: params[:product_id])
   end
 
-  def by_yahoo_auction_id(products)
-    return products unless params[:yahoo_auction_id]
+  def by_external_id(products)
+    return products unless params[:external_id]
 
-    products.where(yahoo_auction_id: params[:yahoo_auction_id])
+    products.where(external_id: params[:external_id])
   end
 
   def by_name(products)

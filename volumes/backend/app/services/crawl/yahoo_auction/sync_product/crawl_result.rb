@@ -6,7 +6,7 @@ module Crawl
         include ActiveModel::Model
         include ActiveModel::Attributes
 
-        attribute :yahoo_auction_id, :string
+        attribute :external_id, :string
         attribute :seller_id, :string
         attribute :name, :string
         attribute :price, :integer
@@ -19,7 +19,7 @@ module Crawl
 
         validates :published, inclusion: { in: [true, false] }
         validates :deletable, inclusion: { in: [true, false] }
-        validates_presence_of :yahoo_auction_id, :name, :price, :thumbnail_url
+        validates_presence_of :external_id, :name, :price, :thumbnail_url
       end
     end
   end

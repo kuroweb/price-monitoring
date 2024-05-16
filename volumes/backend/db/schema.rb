@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
   create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "iosys_crawl_setting_id"
     t.string "keyword", null: false
@@ -42,14 +42,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
 
   create_table "iosys_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "iosys_id", null: false
+    t.string "external_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["iosys_id"], name: "index_iosys_products_on_iosys_id", unique: true
-    t.index ["product_id", "iosys_id"], name: "index_iosys_products_on_product_id_and_iosys_id", unique: true
+    t.index ["external_id"], name: "index_iosys_products_on_external_id", unique: true
+    t.index ["product_id", "external_id"], name: "index_iosys_products_on_product_id_and_external_id", unique: true
     t.index ["product_id"], name: "index_iosys_products_on_product_id"
   end
 
@@ -84,14 +84,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
 
   create_table "janpara_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "janpara_id", null: false
+    t.string "external_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["janpara_id"], name: "index_janpara_products_on_janpara_id", unique: true
-    t.index ["product_id", "janpara_id"], name: "index_janpara_products_on_product_id_and_janpara_id", unique: true
+    t.index ["external_id"], name: "index_janpara_products_on_external_id", unique: true
+    t.index ["product_id", "external_id"], name: "index_janpara_products_on_product_id_and_external_id", unique: true
     t.index ["product_id"], name: "index_janpara_products_on_product_id"
   end
 
@@ -138,7 +138,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
 
   create_table "mercari_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "mercari_id", null: false
+    t.string "external_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
@@ -146,7 +146,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
     t.datetime "bought_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id", "mercari_id"], name: "index_mercari_products_on_product_id_and_mercari_id", unique: true
+    t.index ["product_id", "external_id"], name: "index_mercari_products_on_product_id_and_external_id", unique: true
     t.index ["product_id"], name: "index_mercari_products_on_product_id"
   end
 
@@ -181,14 +181,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
 
   create_table "pc_koubou_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "pc_koubou_id", null: false
+    t.string "external_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["pc_koubou_id"], name: "index_pc_koubou_products_on_pc_koubou_id", unique: true
-    t.index ["product_id", "pc_koubou_id"], name: "index_pc_koubou_products_on_product_id_and_pc_koubou_id", unique: true
+    t.index ["external_id"], name: "index_pc_koubou_products_on_external_id", unique: true
+    t.index ["product_id", "external_id"], name: "index_pc_koubou_products_on_product_id_and_external_id", unique: true
     t.index ["product_id"], name: "index_pc_koubou_products_on_product_id"
   end
 
@@ -247,7 +247,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
 
   create_table "yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "yahoo_auction_id", null: false
+    t.string "external_id", null: false
     t.string "seller_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
@@ -258,7 +258,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
     t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id", "yahoo_auction_id"], name: "idx_on_product_id_yahoo_auction_id_770761a83e", unique: true
+    t.index ["product_id", "external_id"], name: "index_yahoo_auction_products_on_product_id_and_external_id", unique: true
     t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
   end
 
@@ -275,7 +275,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
 
   create_table "yahoo_fleamarket_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id"
-    t.string "yahoo_fleamarket_id", null: false
+    t.string "external_id", null: false
     t.string "seller_id", null: false
     t.string "name", null: false
     t.text "thumbnail_url"
@@ -284,7 +284,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_13_113159) do
     t.datetime "bought_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id", "yahoo_fleamarket_id"], name: "idx_on_product_id_yahoo_fleamarket_id_2d476d7a24", unique: true
+    t.index ["product_id", "external_id"], name: "index_yahoo_fleamarket_products_on_product_id_and_external_id", unique: true
     t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
   end
 

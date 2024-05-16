@@ -33,7 +33,7 @@ module Crawl
 
       def delete
         JanparaProduct.where(product_id: product.id)
-                      .where.not(janpara_id: crawl_results.results.map(&:janpara_id))
+                      .where.not(external_id: crawl_results.results.map(&:external_id))
                       .delete_all
       end
 

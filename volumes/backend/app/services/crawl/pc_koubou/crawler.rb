@@ -60,7 +60,7 @@ module Crawl
 
         doms.each do |dom|
           result = CrawlResult.new(
-            pc_koubou_id: pc_koubou_id(dom),
+            external_id: external_id(dom),
             name: name(dom),
             price: price(dom),
             thumbnail_url: thumbnail_url(dom)
@@ -73,7 +73,7 @@ module Crawl
         page.query_selector_all(".search-result")
       end
 
-      def pc_koubou_id(dom)
+      def external_id(dom)
         href = dom.query_selector("a").get_attribute("href")
         href.match(/product_id=(.*)/)[1]
       end

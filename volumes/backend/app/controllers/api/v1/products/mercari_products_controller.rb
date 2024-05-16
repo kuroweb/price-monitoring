@@ -28,7 +28,7 @@ module Api
         end
 
         def mercari_product_params_attributes
-          %i[id product_id mercari_id name price published]
+          %i[id product_id external_id name price published]
         end
 
         def external_params_attributes

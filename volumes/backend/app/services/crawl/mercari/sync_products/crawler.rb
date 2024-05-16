@@ -70,7 +70,7 @@ module Crawl
           doms = product_doms(page)
           doms.each do |dom|
             result = CrawlResult.new(
-              mercari_id: mercari_id(dom),
+              external_id: external_id(dom),
               name: name(dom),
               price: price(dom),
               thumbnail_url: thumbnail_url(dom),
@@ -98,7 +98,7 @@ module Crawl
           href[%r{product/([^/]+)}, 1].present?
         end
 
-        def mercari_id(dom)
+        def external_id(dom)
           href = dom.query_selector("a").get_attribute("href")
           href[%r{item/([^/]+)}, 1]
         end
