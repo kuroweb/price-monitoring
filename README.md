@@ -93,19 +93,24 @@ erDiagram
     int max_price
     boolean enabled
   }
-  yahoo_auction_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string keyword
-  }
   yahoo_auction_crawl_setting_required_keywords {
     bigint id PK
     bigint yahoo_auction_crawl_setting_id FK
     string keyword
   }
+  yahoo_auction_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string keyword
+  }
+  yahoo_auction_crawl_setting_exclude_products {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string external_id
+  }
   yahoo_auction_products {
     bigint id PK
-    string yahoo_auction_id
+    string external_id
     string seller_id
     string name
     text thumbnail_url
@@ -117,8 +122,9 @@ erDiagram
   }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_products : "1:N"
   products ||--o{ yahoo_auction_products : "1:N"
 ```
 
@@ -139,19 +145,24 @@ erDiagram
     int max_price
     boolean enabled
   }
-  yahoo_auction_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string keyword
-  }
   yahoo_auction_crawl_setting_required_keywords {
     bigint id PK
     bigint yahoo_auction_crawl_setting_id FK
     string keyword
   }
+  yahoo_auction_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string keyword
+  }
+  yahoo_auction_crawl_setting_exclude_products {
+    bigint id PK
+    bigint yahoo_auction_crawl_setting_id FK
+    string external_id
+  }
   yahoo_fleamarket_products {
     bigint id PK
-    string yahoo_fleamarket_id
+    string external_id
     string seller_id
     string name
     text thumbnail_url
@@ -161,8 +172,9 @@ erDiagram
   }
 
   products ||--|| yahoo_auction_crawl_settings : "1:1"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
   yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
+  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_products : "1:N"
   products ||--o{ yahoo_fleamarket_products : "1:N"
 
 ```
@@ -184,19 +196,24 @@ erDiagram
     int max_price
     boolean enabled
   }
-  mercari_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-    string keyword
-  }
   mercari_crawl_setting_required_keywords {
     bigint id PK
     bigint mercari_crawl_setting_id FK
     string keyword
   }
+  mercari_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint mercari_crawl_setting_id FK
+    string keyword
+  }
+  mercari_crawl_setting_exclude_products {
+    bigint id PK
+    bigint mercari_crawl_setting_id FK
+    string external_id
+  }
   mercari_products {
     bigint id PK
-    string mercari_id
+    string external_id
     string seller_id
     string name
     text thumbnail_url
@@ -206,8 +223,9 @@ erDiagram
   }
 
   products ||--|| mercari_crawl_settings : "1:1"
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
   mercari_crawl_settings ||--o{ mercari_crawl_setting_required_keywords : "1:N"
+  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
+  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_products : "1:N"
   products ||--o{ mercari_products : "1:N"
 ```
 
@@ -227,27 +245,33 @@ erDiagram
     int max_price
     boolean enabled
   }
-  janpara_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-    string keyword
-  }
   janpara_crawl_setting_required_keywords {
     bigint id PK
     bigint janpara_crawl_setting_id FK
     string keyword
   }
+  janpara_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint janpara_crawl_setting_id FK
+    string keyword
+  }
+  janpara_crawl_setting_exclude_products {
+    bigint id PK
+    bigint janpara_crawl_setting_id FK
+    string external_id
+  }
   janpara_products {
     bigint id PK
-    string janpara_id
+    string external_id
     string name
     text thumbnail_url
     int price
   }
 
   products ||--|| janpara_crawl_settings : "1:1"
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : "1:N"
   janpara_crawl_settings ||--o{ janpara_crawl_setting_required_keywords : "1:N"
+  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : "1:N"
+  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_products : "1:N"
   products ||--o{ janpara_products : "1:N"
 ```
 
@@ -267,27 +291,33 @@ erDiagram
     int max_price
     boolean enabled
   }
-  iosys_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-    string keyword
-  }
   iosys_crawl_setting_required_keywords {
     bigint id PK
     bigint iosys_crawl_setting_id FK
     string keyword
   }
+  iosys_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint iosys_crawl_setting_id FK
+    string keyword
+  }
+  iosys_crawl_setting_exclude_products {
+    bigint id PK
+    bigint iosys_crawl_setting_id FK
+    string external_id
+  }
   iosys_products {
     bigint id PK
-    string iosys_id
+    string external_id
     string name
     text thumbnail_url
     int price
   }
 
   products ||--|| iosys_crawl_settings : "1:1"
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_keywords : "1:N"
   iosys_crawl_settings ||--o{ iosys_crawl_setting_required_keywords : "1:N"
+  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_keywords : "1:N"
+  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_products : "1:N"
   products ||--o{ iosys_products : "1:N"
 ```
 
@@ -307,27 +337,33 @@ erDiagram
     int max_price
     boolean enabled
   }
-  pc_koubou_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-    string keyword
-  }
   pc_koubou_crawl_setting_required_keywords {
     bigint id PK
     bigint pc_koubou_crawl_setting_id FK
     string keyword
   }
+  pc_koubou_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint pc_koubou_crawl_setting_id FK
+    string keyword
+  }
+  pc_koubou_crawl_setting_exclude_products {
+    bigint id PK
+    bigint pc_koubou_crawl_setting_id FK
+    string external_id
+  }
   pc_koubou_products {
     bigint id PK
-    string pc_koubou_id
+    string external_id
     string name
     text thumbnail_url
     int price
   }
 
   products ||--|| pc_koubou_crawl_settings : "1:1"
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_keywords : "1:N"
   pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_required_keywords : "1:N"
+  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_keywords : "1:N"
+  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_products : "1:N"
   products ||--o{ pc_koubou_products : "1:N"
 ```
 
