@@ -4,14 +4,14 @@ import { useParams, useRouter } from 'next/navigation'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useBulkDeleteRequiredKeywordModalState } from '../hooks/useBulkDeleteRequiredKeywordModalState'
+import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
 import {
-  deleteIosysCrawlSettingRequiredKeyword,
-  deleteJanparaCrawlSettingRequiredKeyword,
-  deleteMercariCrawlSettingRequiredKeyword,
-  deletePcKoubouCrawlSettingRequiredKeyword,
   deleteYahooAuctionCrawlSettingRequiredKeyword,
-} from '../server-actions/productQuery'
+  deleteMercariCrawlSettingRequiredKeyword,
+  deleteJanparaCrawlSettingRequiredKeyword,
+  deleteIosysCrawlSettingRequiredKeyword,
+  deletePcKoubouCrawlSettingRequiredKeyword,
+} from '../../server-actions/productQuery'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -19,7 +19,7 @@ type inputType = {
   keyword: string | null
 }
 
-const BulkDeleteRequiredKeywordModal = ({
+const DeleteForm = ({
   yahooAuctionCrawlSettingRequiredKeywords,
   mercariCrawlSettingRequiredKeywords,
   janparaCrawlSettingRequiredKeywords,
@@ -35,7 +35,7 @@ const BulkDeleteRequiredKeywordModal = ({
   const router = useRouter()
   const params = useParams()
 
-  const [modal, setModal] = useBulkDeleteRequiredKeywordModalState()
+  const [_, setModal] = useBulkEditRequiredKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
     defaultValues: {
       keyword: null,
@@ -49,11 +49,11 @@ const BulkDeleteRequiredKeywordModal = ({
   const bulkDelete = async (input: inputType) => {
     const productId = String(params.id)
 
-    for (const requiredKeyword of yahooAuctionCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === input.keyword) {
+    for (const excludeKeyword of yahooAuctionCrawlSettingRequiredKeywords) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deleteYahooAuctionCrawlSettingRequiredKeyword(
-            requiredKeyword.id,
+            excludeKeyword.id,
             productId,
           )
           if (
@@ -71,13 +71,10 @@ const BulkDeleteRequiredKeywordModal = ({
       }
     }
 
-    for (const requiredKeyword of mercariCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === input.keyword) {
+    for (const excludeKeyword of mercariCrawlSettingRequiredKeywords) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteMercariCrawlSettingRequiredKeyword(
-            requiredKeyword.id,
-            productId,
-          )
+          const result = await deleteMercariCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteMercariCrawlSettingRequiredKeyword.__typename ===
               'DeleteMercariCrawlSettingRequiredKeywordResultError' &&
@@ -93,13 +90,10 @@ const BulkDeleteRequiredKeywordModal = ({
       }
     }
 
-    for (const requiredKeyword of janparaCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === input.keyword) {
+    for (const excludeKeyword of janparaCrawlSettingRequiredKeywords) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteJanparaCrawlSettingRequiredKeyword(
-            requiredKeyword.id,
-            productId,
-          )
+          const result = await deleteJanparaCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteJanparaCrawlSettingRequiredKeyword.__typename ===
               'DeleteJanparaCrawlSettingRequiredKeywordResultError' &&
@@ -115,10 +109,10 @@ const BulkDeleteRequiredKeywordModal = ({
       }
     }
 
-    for (const requiredKeyword of iosysCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === input.keyword) {
+    for (const excludeKeyword of iosysCrawlSettingRequiredKeywords) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteIosysCrawlSettingRequiredKeyword(requiredKeyword.id, productId)
+          const result = await deleteIosysCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteIosysCrawlSettingRequiredKeyword.__typename ===
               'DeleteIosysCrawlSettingRequiredKeywordResultError' &&
@@ -134,11 +128,11 @@ const BulkDeleteRequiredKeywordModal = ({
       }
     }
 
-    for (const requiredKeyword of pcKoubouCrawlSettingRequiredKeywords) {
-      if (requiredKeyword.keyword === input.keyword) {
+    for (const excludeKeyword of pcKoubouCrawlSettingRequiredKeywords) {
+      if (excludeKeyword.keyword === input.keyword) {
         try {
           const result = await deletePcKoubouCrawlSettingRequiredKeyword(
-            requiredKeyword.id,
+            excludeKeyword.id,
             productId,
           )
           if (
@@ -164,39 +158,21 @@ const BulkDeleteRequiredKeywordModal = ({
 
   return (
     <>
-      <input
-        type='checkbox'
-        className='modal-toggle'
-        checked={modal}
-        onChange={(e) => setModal(e.target.checked)}
-      />
-      <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
-          >
-            ✕
+      <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2 pt-4'>
+        <label className='form-control'>
+          <div className='label'>
+            <span className='label-text'>キーワード</span>
           </div>
-          <h3 className='font-bold text-lg'>除外キーワード（一括削除）</h3>
-          <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2 pt-4'>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>キーワード</span>
-              </div>
-              <input {...register('keyword')} className='input input-bordered' />
-            </label>
-            <div className='pt-4'>
-              <button type='submit' className='btn btn-md btn-primary w-full'>
-                すべてのプラットフォームから削除
-              </button>
-            </div>
-          </form>
+          <input {...register('keyword')} className='input input-bordered' />
+        </label>
+        <div className='pt-4'>
+          <button type='submit' className='btn btn-md btn-primary w-full'>
+            すべてのプラットフォームから削除
+          </button>
         </div>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
-      </div>
+      </form>
     </>
   )
 }
 
-export default BulkDeleteRequiredKeywordModal
+export default DeleteForm

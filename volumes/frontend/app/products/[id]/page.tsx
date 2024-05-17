@@ -2,21 +2,17 @@ import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
-import BulkCreateExcludeKeywordModal from '@/features/products/components/BulkCreateExcludeKeywordModal'
-import BulkCreateRequiredKeywordModal from '@/features/products/components/BulkCreateRequiredKeywordModal'
-import BulkDeleteExcludeKeywordModal from '@/features/products/components/BulkDeleteExcludeKeywordModal'
-import BulkDeleteRequiredKeywordModal from '@/features/products/components/BulkDeleteRequiredKeywordModal'
 import Pagination from '@/features/products/components/Pagination'
 import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
 import SearchForm from '@/features/products/components/SearchForm'
+import BulkEditExcludeKeywordModal from '@/features/products/components/bulk-edit-exclude-keyword-modal/BulkEditExcludeKeywordModal'
+import BulkEditRequiredKeywordModal from '@/features/products/components/bulk-edit-required-keyword-modal/BulkEditRequiredKeywordModal'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import EditExcludeProductModal from '@/features/products/components/edit-exclude-product-modal/EditExcludeProductModal'
 import EditRequiredKeywordModal from '@/features/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
-import { useBulkCreateExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkCreateExcludeKeywordModalState'
-import { useBulkCreateRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkCreateRequiredKeywordModalState'
-import { useBulkDeleteExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkDeleteExcludeKeywordModalState'
-import { useBulkDeleteRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkDeleteRequiredKeywordModalState'
+import { useBulkEditExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkEditExcludeKeywordModalState'
+import { useBulkEditRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkEditRequiredKeywordModalState'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
 import { useEditExcludeProductModalQuery } from '@/features/products/hooks/useEditExcludeProductModalState'
@@ -127,11 +123,11 @@ const Page = async ({
                   pathname: `/products/${params.id}`,
                   query: {
                     ...searchParams,
-                    [useBulkCreateRequiredKeywordModalQuery]: 'true',
+                    [useBulkEditRequiredKeywordModalQuery]: 'true',
                   },
                 }}
               >
-                必須キーワード（一括登録）
+                必須キーワード
               </Link>
               <Link
                 className='btn'
@@ -139,35 +135,11 @@ const Page = async ({
                   pathname: `/products/${params.id}`,
                   query: {
                     ...searchParams,
-                    [useBulkDeleteRequiredKeywordModalQuery]: 'true',
+                    [useBulkEditExcludeKeywordModalQuery]: 'true',
                   },
                 }}
               >
-                必須キーワード（一括削除）
-              </Link>
-              <Link
-                className='btn'
-                href={{
-                  pathname: `/products/${params.id}`,
-                  query: {
-                    ...searchParams,
-                    [useBulkCreateExcludeKeywordModalQuery]: 'true',
-                  },
-                }}
-              >
-                除外キーワード（一括登録）
-              </Link>
-              <Link
-                className='btn'
-                href={{
-                  pathname: `/products/${params.id}`,
-                  query: {
-                    ...searchParams,
-                    [useBulkDeleteExcludeKeywordModalQuery]: 'true',
-                  },
-                }}
-              >
-                除外キーワード（一括削除）
+                除外キーワード
               </Link>
             </div>
           </div>
@@ -232,9 +204,7 @@ const Page = async ({
       <EditExcludeKeywordModal data={data} />
       <EditExcludeProductModal data={data} />
       <EditRequiredKeywordModal data={data} />
-      <BulkCreateExcludeKeywordModal />
-      <BulkCreateRequiredKeywordModal />
-      <BulkDeleteExcludeKeywordModal
+      <BulkEditExcludeKeywordModal
         yahooAuctionCrawlSettingExcludeKeywords={
           data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords
         }
@@ -251,7 +221,7 @@ const Page = async ({
           data.product.pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords
         }
       />
-      <BulkDeleteRequiredKeywordModal
+      <BulkEditRequiredKeywordModal
         yahooAuctionCrawlSettingRequiredKeywords={
           data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords
         }

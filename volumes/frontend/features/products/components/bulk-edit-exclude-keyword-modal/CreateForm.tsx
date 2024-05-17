@@ -1,27 +1,27 @@
 'use client'
 
 import { useParams, useRouter } from 'next/navigation'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useBulkCreateExcludeKeywordModalState } from '../hooks/useBulkCreateExcludeKeywordModalState'
+import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcludeKeywordModalState'
 import {
-  createIosysCrawlSettingExcludeKeyword,
-  createJanparaCrawlSettingExcludeKeyword,
-  createMercariCrawlSettingExcludeKeyword,
-  createPcKoubouCrawlSettingExcludeKeyword,
   createYahooAuctionCrawlSettingExcludeKeyword,
-} from '../server-actions/productQuery'
+  createMercariCrawlSettingExcludeKeyword,
+  createJanparaCrawlSettingExcludeKeyword,
+  createIosysCrawlSettingExcludeKeyword,
+  createPcKoubouCrawlSettingExcludeKeyword,
+} from '../../server-actions/productQuery'
 
 type inputType = {
   keyword: string | null
 }
 
-const BulkCreateExcludeKeywordModal = () => {
+const CreateForm = () => {
   const router = useRouter()
   const params = useParams()
 
-  const [modal, setModal] = useBulkCreateExcludeKeywordModalState()
+  const [_, setModal] = useBulkEditExcludeKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
     defaultValues: {
       keyword: null,
@@ -91,39 +91,21 @@ const BulkCreateExcludeKeywordModal = () => {
 
   return (
     <>
-      <input
-        type='checkbox'
-        className='modal-toggle'
-        checked={modal}
-        onChange={(e) => setModal(e.target.checked)}
-      />
-      <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
-          >
-            ✕
+      <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2 pt-4'>
+        <label className='form-control'>
+          <div className='label'>
+            <span className='label-text'>キーワード</span>
           </div>
-          <h3 className='font-bold text-lg'>除外キーワード（一括登録）</h3>
-          <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2 pt-4'>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>キーワード</span>
-              </div>
-              <input {...register('keyword')} className='input input-bordered' />
-            </label>
-            <div className='pt-4'>
-              <button type='submit' className='btn btn-md btn-primary w-full'>
-                すべてのプラットフォームに追加
-              </button>
-            </div>
-          </form>
+          <input {...register('keyword')} className='input input-bordered' />
+        </label>
+        <div className='pt-4'>
+          <button type='submit' className='btn btn-md btn-primary w-full'>
+            すべてのプラットフォームに追加
+          </button>
         </div>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
-      </div>
+      </form>
     </>
   )
 }
 
-export default BulkCreateExcludeKeywordModal
+export default CreateForm
