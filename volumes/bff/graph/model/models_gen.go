@@ -10,6 +10,14 @@ type CreateIosysCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreateIosysCrawlSettingExcludeKeywordResultErrors()
 }
 
+type CreateIosysCrawlSettingExcludeProductResult interface {
+	IsCreateIosysCrawlSettingExcludeProductResult()
+}
+
+type CreateIosysCrawlSettingExcludeProductResultErrors interface {
+	IsCreateIosysCrawlSettingExcludeProductResultErrors()
+}
+
 type CreateIosysCrawlSettingRequiredKeywordResult interface {
 	IsCreateIosysCrawlSettingRequiredKeywordResult()
 }
@@ -24,6 +32,14 @@ type CreateJanparaCrawlSettingExcludeKeywordResult interface {
 
 type CreateJanparaCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreateJanparaCrawlSettingExcludeKeywordResultErrors()
+}
+
+type CreateJanparaCrawlSettingExcludeProductResult interface {
+	IsCreateJanparaCrawlSettingExcludeProductResult()
+}
+
+type CreateJanparaCrawlSettingExcludeProductResultErrors interface {
+	IsCreateJanparaCrawlSettingExcludeProductResultErrors()
 }
 
 type CreateJanparaCrawlSettingRequiredKeywordResult interface {
@@ -42,6 +58,14 @@ type CreateMercariCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreateMercariCrawlSettingExcludeKeywordResultErrors()
 }
 
+type CreateMercariCrawlSettingExcludeProductResult interface {
+	IsCreateMercariCrawlSettingExcludeProductResult()
+}
+
+type CreateMercariCrawlSettingExcludeProductResultErrors interface {
+	IsCreateMercariCrawlSettingExcludeProductResultErrors()
+}
+
 type CreateMercariCrawlSettingRequiredKeywordResult interface {
 	IsCreateMercariCrawlSettingRequiredKeywordResult()
 }
@@ -56,6 +80,14 @@ type CreatePcKoubouCrawlSettingExcludeKeywordResult interface {
 
 type CreatePcKoubouCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreatePcKoubouCrawlSettingExcludeKeywordResultErrors()
+}
+
+type CreatePcKoubouCrawlSettingExcludeProductResult interface {
+	IsCreatePcKoubouCrawlSettingExcludeProductResult()
+}
+
+type CreatePcKoubouCrawlSettingExcludeProductResultErrors interface {
+	IsCreatePcKoubouCrawlSettingExcludeProductResultErrors()
 }
 
 type CreatePcKoubouCrawlSettingRequiredKeywordResult interface {
@@ -82,6 +114,14 @@ type CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors interface {
 	IsCreateYahooAuctionCrawlSettingExcludeKeywordResultErrors()
 }
 
+type CreateYahooAuctionCrawlSettingExcludeProductResult interface {
+	IsCreateYahooAuctionCrawlSettingExcludeProductResult()
+}
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultErrors interface {
+	IsCreateYahooAuctionCrawlSettingExcludeProductResultErrors()
+}
+
 type CreateYahooAuctionCrawlSettingRequiredKeywordResult interface {
 	IsCreateYahooAuctionCrawlSettingRequiredKeywordResult()
 }
@@ -96,6 +136,14 @@ type DeleteIosysCrawlSettingExcludeKeywordResult interface {
 
 type DeleteIosysCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeleteIosysCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeleteIosysCrawlSettingExcludeProductResult interface {
+	IsDeleteIosysCrawlSettingExcludeProductResult()
+}
+
+type DeleteIosysCrawlSettingExcludeProductResultErrors interface {
+	IsDeleteIosysCrawlSettingExcludeProductResultErrors()
 }
 
 type DeleteIosysCrawlSettingRequiredKeywordResult interface {
@@ -114,6 +162,14 @@ type DeleteJanparaCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeleteJanparaCrawlSettingExcludeKeywordResultErrors()
 }
 
+type DeleteJanparaCrawlSettingExcludeProductResult interface {
+	IsDeleteJanparaCrawlSettingExcludeProductResult()
+}
+
+type DeleteJanparaCrawlSettingExcludeProductResultErrors interface {
+	IsDeleteJanparaCrawlSettingExcludeProductResultErrors()
+}
+
 type DeleteJanparaCrawlSettingRequiredKeywordResult interface {
 	IsDeleteJanparaCrawlSettingRequiredKeywordResult()
 }
@@ -130,6 +186,14 @@ type DeleteMercariCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeleteMercariCrawlSettingExcludeKeywordResultErrors()
 }
 
+type DeleteMercariCrawlSettingExcludeProductResult interface {
+	IsDeleteMercariCrawlSettingExcludeProductResult()
+}
+
+type DeleteMercariCrawlSettingExcludeProductResultErrors interface {
+	IsDeleteMercariCrawlSettingExcludeProductResultErrors()
+}
+
 type DeleteMercariCrawlSettingRequiredKeywordResult interface {
 	IsDeleteMercariCrawlSettingRequiredKeywordResult()
 }
@@ -144,6 +208,14 @@ type DeletePcKoubouCrawlSettingExcludeKeywordResult interface {
 
 type DeletePcKoubouCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeletePcKoubouCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeletePcKoubouCrawlSettingExcludeProductResult interface {
+	IsDeletePcKoubouCrawlSettingExcludeProductResult()
+}
+
+type DeletePcKoubouCrawlSettingExcludeProductResultErrors interface {
+	IsDeletePcKoubouCrawlSettingExcludeProductResultErrors()
 }
 
 type DeletePcKoubouCrawlSettingRequiredKeywordResult interface {
@@ -168,6 +240,14 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResult interface {
 
 type DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors interface {
 	IsDeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResult interface {
+	IsDeleteYahooAuctionCrawlSettingExcludeProductResult()
+}
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultErrors interface {
+	IsDeleteYahooAuctionCrawlSettingExcludeProductResultErrors()
 }
 
 type DeleteYahooAuctionCrawlSettingRequiredKeywordResult interface {
@@ -196,6 +276,14 @@ type UpdateIosysCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdateIosysCrawlSettingExcludeKeywordResultErrors()
 }
 
+type UpdateIosysCrawlSettingExcludeProductResult interface {
+	IsUpdateIosysCrawlSettingExcludeProductResult()
+}
+
+type UpdateIosysCrawlSettingExcludeProductResultErrors interface {
+	IsUpdateIosysCrawlSettingExcludeProductResultErrors()
+}
+
 type UpdateIosysCrawlSettingRequiredKeywordResult interface {
 	IsUpdateIosysCrawlSettingRequiredKeywordResult()
 }
@@ -210,6 +298,14 @@ type UpdateJanparaCrawlSettingExcludeKeywordResult interface {
 
 type UpdateJanparaCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdateJanparaCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdateJanparaCrawlSettingExcludeProductResult interface {
+	IsUpdateJanparaCrawlSettingExcludeProductResult()
+}
+
+type UpdateJanparaCrawlSettingExcludeProductResultErrors interface {
+	IsUpdateJanparaCrawlSettingExcludeProductResultErrors()
 }
 
 type UpdateJanparaCrawlSettingRequiredKeywordResult interface {
@@ -228,6 +324,14 @@ type UpdateMercariCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdateMercariCrawlSettingExcludeKeywordResultErrors()
 }
 
+type UpdateMercariCrawlSettingExcludeProductResult interface {
+	IsUpdateMercariCrawlSettingExcludeProductResult()
+}
+
+type UpdateMercariCrawlSettingExcludeProductResultErrors interface {
+	IsUpdateMercariCrawlSettingExcludeProductResultErrors()
+}
+
 type UpdateMercariCrawlSettingRequiredKeywordResult interface {
 	IsUpdateMercariCrawlSettingRequiredKeywordResult()
 }
@@ -242,6 +346,14 @@ type UpdatePcKoubouCrawlSettingExcludeKeywordResult interface {
 
 type UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdatePcKoubouCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdatePcKoubouCrawlSettingExcludeProductResult interface {
+	IsUpdatePcKoubouCrawlSettingExcludeProductResult()
+}
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultErrors interface {
+	IsUpdatePcKoubouCrawlSettingExcludeProductResultErrors()
 }
 
 type UpdatePcKoubouCrawlSettingRequiredKeywordResult interface {
@@ -266,6 +378,14 @@ type UpdateYahooAuctionCrawlSettingExcludeKeywordResult interface {
 
 type UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors interface {
 	IsUpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResult interface {
+	IsUpdateYahooAuctionCrawlSettingExcludeProductResult()
+}
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultErrors interface {
+	IsUpdateYahooAuctionCrawlSettingExcludeProductResultErrors()
 }
 
 type UpdateYahooAuctionCrawlSettingRequiredKeywordResult interface {
@@ -323,6 +443,50 @@ func (this CreateIosysCrawlSettingExcludeKeywordResultValidationFailed) GetCode(
 	return this.Code
 }
 func (this CreateIosysCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreateIosysCrawlSettingExcludeProductInput struct {
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type CreateIosysCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                              `json:"ok"`
+	Error CreateIosysCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (CreateIosysCrawlSettingExcludeProductResultError) IsCreateIosysCrawlSettingExcludeProductResult() {
+}
+
+func (CreateIosysCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this CreateIosysCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type CreateIosysCrawlSettingExcludeProductResultSuccess struct {
+	Ok                              bool                             `json:"ok"`
+	IosysCrawlSettingExcludeProduct *IosysCrawlSettingExcludeProduct `json:"iosysCrawlSettingExcludeProduct"`
+}
+
+func (CreateIosysCrawlSettingExcludeProductResultSuccess) IsCreateIosysCrawlSettingExcludeProductResult() {
+}
+
+func (CreateIosysCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this CreateIosysCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateIosysCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateIosysCrawlSettingExcludeProductResultValidationFailed) IsCreateIosysCrawlSettingExcludeProductResultErrors() {
+}
+
+func (CreateIosysCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this CreateIosysCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateIosysCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -421,6 +585,50 @@ func (this CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetMes
 	return this.Message
 }
 
+type CreateJanparaCrawlSettingExcludeProductInput struct {
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type CreateJanparaCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error CreateJanparaCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (CreateJanparaCrawlSettingExcludeProductResultError) IsCreateJanparaCrawlSettingExcludeProductResult() {
+}
+
+func (CreateJanparaCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this CreateJanparaCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type CreateJanparaCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                bool                               `json:"ok"`
+	JanparaCrawlSettingExcludeProduct *JanparaCrawlSettingExcludeProduct `json:"janparaCrawlSettingExcludeProduct"`
+}
+
+func (CreateJanparaCrawlSettingExcludeProductResultSuccess) IsCreateJanparaCrawlSettingExcludeProductResult() {
+}
+
+func (CreateJanparaCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this CreateJanparaCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateJanparaCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateJanparaCrawlSettingExcludeProductResultValidationFailed) IsCreateJanparaCrawlSettingExcludeProductResultErrors() {
+}
+
+func (CreateJanparaCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this CreateJanparaCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateJanparaCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type CreateJanparaCrawlSettingInput struct {
 	Keyword  string `json:"keyword"`
 	MinPrice int    `json:"min_price"`
@@ -513,6 +721,50 @@ func (this CreateMercariCrawlSettingExcludeKeywordResultValidationFailed) GetCod
 	return this.Code
 }
 func (this CreateMercariCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreateMercariCrawlSettingExcludeProductInput struct {
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type CreateMercariCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error CreateMercariCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (CreateMercariCrawlSettingExcludeProductResultError) IsCreateMercariCrawlSettingExcludeProductResult() {
+}
+
+func (CreateMercariCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this CreateMercariCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type CreateMercariCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                bool                               `json:"ok"`
+	MercariCrawlSettingExcludeProduct *MercariCrawlSettingExcludeProduct `json:"mercariCrawlSettingExcludeProduct"`
+}
+
+func (CreateMercariCrawlSettingExcludeProductResultSuccess) IsCreateMercariCrawlSettingExcludeProductResult() {
+}
+
+func (CreateMercariCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this CreateMercariCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateMercariCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateMercariCrawlSettingExcludeProductResultValidationFailed) IsCreateMercariCrawlSettingExcludeProductResultErrors() {
+}
+
+func (CreateMercariCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this CreateMercariCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateMercariCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -609,6 +861,50 @@ func (this CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetCo
 	return this.Code
 }
 func (this CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreatePcKoubouCrawlSettingExcludeProductInput struct {
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type CreatePcKoubouCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error CreatePcKoubouCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (CreatePcKoubouCrawlSettingExcludeProductResultError) IsCreatePcKoubouCrawlSettingExcludeProductResult() {
+}
+
+func (CreatePcKoubouCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this CreatePcKoubouCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type CreatePcKoubouCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	PcKoubouCrawlSettingExcludeProduct *PcKoubouCrawlSettingExcludeProduct `json:"pcKoubouCrawlSettingExcludeProduct"`
+}
+
+func (CreatePcKoubouCrawlSettingExcludeProductResultSuccess) IsCreatePcKoubouCrawlSettingExcludeProductResult() {
+}
+
+func (CreatePcKoubouCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this CreatePcKoubouCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) IsCreatePcKoubouCrawlSettingExcludeProductResultErrors() {
+}
+
+func (CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -748,6 +1044,50 @@ func (this CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed) G
 	return this.Message
 }
 
+type CreateYahooAuctionCrawlSettingExcludeProductInput struct {
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                     `json:"ok"`
+	Error CreateYahooAuctionCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeProductResultError) IsCreateYahooAuctionCrawlSettingExcludeProductResult() {
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this CreateYahooAuctionCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                     bool                                    `json:"ok"`
+	YahooAuctionCrawlSettingExcludeProduct *YahooAuctionCrawlSettingExcludeProduct `json:"yahooAuctionCrawlSettingExcludeProduct"`
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeProductResultSuccess) IsCreateYahooAuctionCrawlSettingExcludeProductResult() {
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this CreateYahooAuctionCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) IsCreateYahooAuctionCrawlSettingExcludeProductResultErrors() {
+}
+
+func (CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type CreateYahooAuctionCrawlSettingInput struct {
 	Keyword    string `json:"keyword"`
 	CategoryID *int   `json:"category_id,omitempty"`
@@ -838,6 +1178,44 @@ func (this DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed) GetMessa
 	return this.Message
 }
 
+type DeleteIosysCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                              `json:"ok"`
+	Error DeleteIosysCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (DeleteIosysCrawlSettingExcludeProductResultError) IsDeleteIosysCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteIosysCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this DeleteIosysCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type DeleteIosysCrawlSettingExcludeProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteIosysCrawlSettingExcludeProductResultSuccess) IsDeleteIosysCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteIosysCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this DeleteIosysCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteIosysCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteIosysCrawlSettingExcludeProductResultValidationFailed) IsDeleteIosysCrawlSettingExcludeProductResultErrors() {
+}
+
+func (DeleteIosysCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this DeleteIosysCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteIosysCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type DeleteIosysCrawlSettingRequiredKeywordResultError struct {
 	Ok    bool                                               `json:"ok"`
 	Error DeleteIosysCrawlSettingRequiredKeywordResultErrors `json:"error"`
@@ -911,6 +1289,44 @@ func (this DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetCod
 	return this.Code
 }
 func (this DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeleteJanparaCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error DeleteJanparaCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (DeleteJanparaCrawlSettingExcludeProductResultError) IsDeleteJanparaCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteJanparaCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this DeleteJanparaCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type DeleteJanparaCrawlSettingExcludeProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteJanparaCrawlSettingExcludeProductResultSuccess) IsDeleteJanparaCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteJanparaCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this DeleteJanparaCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteJanparaCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) IsDeleteJanparaCrawlSettingExcludeProductResultErrors() {
+}
+
+func (DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -990,6 +1406,44 @@ func (this DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed) GetMes
 	return this.Message
 }
 
+type DeleteMercariCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error DeleteMercariCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (DeleteMercariCrawlSettingExcludeProductResultError) IsDeleteMercariCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteMercariCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this DeleteMercariCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type DeleteMercariCrawlSettingExcludeProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteMercariCrawlSettingExcludeProductResultSuccess) IsDeleteMercariCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteMercariCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this DeleteMercariCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteMercariCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteMercariCrawlSettingExcludeProductResultValidationFailed) IsDeleteMercariCrawlSettingExcludeProductResultErrors() {
+}
+
+func (DeleteMercariCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this DeleteMercariCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteMercariCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type DeleteMercariCrawlSettingRequiredKeywordResultError struct {
 	Ok    bool                                                 `json:"ok"`
 	Error DeleteMercariCrawlSettingRequiredKeywordResultErrors `json:"error"`
@@ -1063,6 +1517,44 @@ func (this DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetCo
 	return this.Code
 }
 func (this DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeletePcKoubouCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error DeletePcKoubouCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (DeletePcKoubouCrawlSettingExcludeProductResultError) IsDeletePcKoubouCrawlSettingExcludeProductResult() {
+}
+
+func (DeletePcKoubouCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this DeletePcKoubouCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type DeletePcKoubouCrawlSettingExcludeProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeletePcKoubouCrawlSettingExcludeProductResultSuccess) IsDeletePcKoubouCrawlSettingExcludeProductResult() {
+}
+
+func (DeletePcKoubouCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this DeletePcKoubouCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) IsDeletePcKoubouCrawlSettingExcludeProductResultErrors() {
+}
+
+func (DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -1173,6 +1665,44 @@ func (this DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed) G
 	return this.Message
 }
 
+type DeleteYahooAuctionCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                     `json:"ok"`
+	Error DeleteYahooAuctionCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeProductResultError) IsDeleteYahooAuctionCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this DeleteYahooAuctionCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess) IsDeleteYahooAuctionCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) IsDeleteYahooAuctionCrawlSettingExcludeProductResultErrors() {
+}
+
+func (DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type DeleteYahooAuctionCrawlSettingRequiredKeywordResultError struct {
 	Ok    bool                                                      `json:"ok"`
 	Error DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors `json:"error"`
@@ -1226,6 +1756,7 @@ type IosysCrawlSetting struct {
 	CreatedAt                         string                              `json:"createdAt"`
 	UpdatedAt                         string                              `json:"updatedAt"`
 	IosysCrawlSettingExcludeKeywords  []*IosysCrawlSettingExcludeKeyword  `json:"iosysCrawlSettingExcludeKeywords"`
+	IosysCrawlSettingExcludeProducts  []*IosysCrawlSettingExcludeProduct  `json:"iosysCrawlSettingExcludeProducts"`
 	IosysCrawlSettingRequiredKeywords []*IosysCrawlSettingRequiredKeyword `json:"iosysCrawlSettingRequiredKeywords"`
 }
 
@@ -1242,6 +1773,17 @@ type IosysCrawlSettingExcludeKeyword struct {
 
 func (IosysCrawlSettingExcludeKeyword) IsNode()            {}
 func (this IosysCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type IosysCrawlSettingExcludeProduct struct {
+	ID                  string `json:"id"`
+	IosysCrawlSettingID int    `json:"iosysCrawlSettingId"`
+	ExternalID          string `json:"externalId"`
+	CreatedAt           string `json:"createdAt"`
+	UpdatedAt           string `json:"updatedAt"`
+}
+
+func (IosysCrawlSettingExcludeProduct) IsNode()            {}
+func (this IosysCrawlSettingExcludeProduct) GetID() string { return this.ID }
 
 type IosysCrawlSettingRequiredKeyword struct {
 	ID                  string  `json:"id"`
@@ -1264,6 +1806,7 @@ type JanparaCrawlSetting struct {
 	CreatedAt                           string                                `json:"createdAt"`
 	UpdatedAt                           string                                `json:"updatedAt"`
 	JanparaCrawlSettingExcludeKeywords  []*JanparaCrawlSettingExcludeKeyword  `json:"janparaCrawlSettingExcludeKeywords"`
+	JanparaCrawlSettingExcludeProducts  []*JanparaCrawlSettingExcludeProduct  `json:"janparaCrawlSettingExcludeProducts"`
 	JanparaCrawlSettingRequiredKeywords []*JanparaCrawlSettingRequiredKeyword `json:"janparaCrawlSettingRequiredKeywords"`
 }
 
@@ -1280,6 +1823,17 @@ type JanparaCrawlSettingExcludeKeyword struct {
 
 func (JanparaCrawlSettingExcludeKeyword) IsNode()            {}
 func (this JanparaCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type JanparaCrawlSettingExcludeProduct struct {
+	ID                    string `json:"id"`
+	JanparaCrawlSettingID int    `json:"janparaCrawlSettingId"`
+	ExternalID            string `json:"externalId"`
+	CreatedAt             string `json:"createdAt"`
+	UpdatedAt             string `json:"updatedAt"`
+}
+
+func (JanparaCrawlSettingExcludeProduct) IsNode()            {}
+func (this JanparaCrawlSettingExcludeProduct) GetID() string { return this.ID }
 
 type JanparaCrawlSettingRequiredKeyword struct {
 	ID                    string  `json:"id"`
@@ -1303,6 +1857,7 @@ type MercariCrawlSetting struct {
 	CreatedAt                           string                                `json:"createdAt"`
 	UpdatedAt                           string                                `json:"updatedAt"`
 	MercariCrawlSettingExcludeKeywords  []*MercariCrawlSettingExcludeKeyword  `json:"mercariCrawlSettingExcludeKeywords"`
+	MercariCrawlSettingExcludeProducts  []*MercariCrawlSettingExcludeProduct  `json:"mercariCrawlSettingExcludeProducts"`
 	MercariCrawlSettingRequiredKeywords []*MercariCrawlSettingRequiredKeyword `json:"mercariCrawlSettingRequiredKeywords"`
 }
 
@@ -1319,6 +1874,17 @@ type MercariCrawlSettingExcludeKeyword struct {
 
 func (MercariCrawlSettingExcludeKeyword) IsNode()            {}
 func (this MercariCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type MercariCrawlSettingExcludeProduct struct {
+	ID                    string `json:"id"`
+	MercariCrawlSettingID int    `json:"mercariCrawlSettingId"`
+	ExternalID            string `json:"externalId"`
+	CreatedAt             string `json:"createdAt"`
+	UpdatedAt             string `json:"updatedAt"`
+}
+
+func (MercariCrawlSettingExcludeProduct) IsNode()            {}
+func (this MercariCrawlSettingExcludeProduct) GetID() string { return this.ID }
 
 type MercariCrawlSettingRequiredKeyword struct {
 	ID                    string  `json:"id"`
@@ -1370,6 +1936,7 @@ type PcKoubouCrawlSetting struct {
 	CreatedAt                            string                                 `json:"createdAt"`
 	UpdatedAt                            string                                 `json:"updatedAt"`
 	PcKoubouCrawlSettingExcludeKeywords  []*PcKoubouCrawlSettingExcludeKeyword  `json:"pcKoubouCrawlSettingExcludeKeywords"`
+	PcKoubouCrawlSettingExcludeProducts  []*PcKoubouCrawlSettingExcludeProduct  `json:"pcKoubouCrawlSettingExcludeProducts"`
 	PcKoubouCrawlSettingRequiredKeywords []*PcKoubouCrawlSettingRequiredKeyword `json:"pcKoubouCrawlSettingRequiredKeywords"`
 }
 
@@ -1386,6 +1953,17 @@ type PcKoubouCrawlSettingExcludeKeyword struct {
 
 func (PcKoubouCrawlSettingExcludeKeyword) IsNode()            {}
 func (this PcKoubouCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type PcKoubouCrawlSettingExcludeProduct struct {
+	ID                     string `json:"id"`
+	PcKoubouCrawlSettingID int    `json:"pcKoubouCrawlSettingId"`
+	ExternalID             string `json:"externalId"`
+	CreatedAt              string `json:"createdAt"`
+	UpdatedAt              string `json:"updatedAt"`
+}
+
+func (PcKoubouCrawlSettingExcludeProduct) IsNode()            {}
+func (this PcKoubouCrawlSettingExcludeProduct) GetID() string { return this.ID }
 
 type PcKoubouCrawlSettingRequiredKeyword struct {
 	ID                     string  `json:"id"`
@@ -1474,6 +2052,51 @@ func (this UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed) GetCode(
 	return this.Code
 }
 func (this UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdateIosysCrawlSettingExcludeProductInput struct {
+	ID         string `json:"id"`
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type UpdateIosysCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                              `json:"ok"`
+	Error UpdateIosysCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (UpdateIosysCrawlSettingExcludeProductResultError) IsUpdateIosysCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateIosysCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this UpdateIosysCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type UpdateIosysCrawlSettingExcludeProductResultSuccess struct {
+	Ok                              bool                             `json:"ok"`
+	IosysCrawlSettingExcludeProduct *IosysCrawlSettingExcludeProduct `json:"iosysCrawlSettingExcludeProduct"`
+}
+
+func (UpdateIosysCrawlSettingExcludeProductResultSuccess) IsUpdateIosysCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateIosysCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this UpdateIosysCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateIosysCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateIosysCrawlSettingExcludeProductResultValidationFailed) IsUpdateIosysCrawlSettingExcludeProductResultErrors() {
+}
+
+func (UpdateIosysCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this UpdateIosysCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateIosysCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -1574,6 +2197,51 @@ func (this UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed) GetMes
 	return this.Message
 }
 
+type UpdateJanparaCrawlSettingExcludeProductInput struct {
+	ID         string `json:"id"`
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type UpdateJanparaCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error UpdateJanparaCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (UpdateJanparaCrawlSettingExcludeProductResultError) IsUpdateJanparaCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateJanparaCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this UpdateJanparaCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type UpdateJanparaCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                bool                               `json:"ok"`
+	JanparaCrawlSettingExcludeProduct *JanparaCrawlSettingExcludeProduct `json:"janparaCrawlSettingExcludeProduct"`
+}
+
+func (UpdateJanparaCrawlSettingExcludeProductResultSuccess) IsUpdateJanparaCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateJanparaCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this UpdateJanparaCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateJanparaCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) IsUpdateJanparaCrawlSettingExcludeProductResultErrors() {
+}
+
+func (UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type UpdateJanparaCrawlSettingInput struct {
 	Keyword  string `json:"keyword"`
 	MinPrice int    `json:"min_price"`
@@ -1668,6 +2336,51 @@ func (this UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed) GetCod
 	return this.Code
 }
 func (this UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdateMercariCrawlSettingExcludeProductInput struct {
+	ID         string `json:"id"`
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type UpdateMercariCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                `json:"ok"`
+	Error UpdateMercariCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (UpdateMercariCrawlSettingExcludeProductResultError) IsUpdateMercariCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateMercariCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this UpdateMercariCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type UpdateMercariCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                bool                               `json:"ok"`
+	MercariCrawlSettingExcludeProduct *MercariCrawlSettingExcludeProduct `json:"mercariCrawlSettingExcludeProduct"`
+}
+
+func (UpdateMercariCrawlSettingExcludeProductResultSuccess) IsUpdateMercariCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateMercariCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this UpdateMercariCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateMercariCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateMercariCrawlSettingExcludeProductResultValidationFailed) IsUpdateMercariCrawlSettingExcludeProductResultErrors() {
+}
+
+func (UpdateMercariCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this UpdateMercariCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateMercariCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -1766,6 +2479,51 @@ func (this UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetCo
 	return this.Code
 }
 func (this UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdatePcKoubouCrawlSettingExcludeProductInput struct {
+	ID         string `json:"id"`
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                 `json:"ok"`
+	Error UpdatePcKoubouCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeProductResultError) IsUpdatePcKoubouCrawlSettingExcludeProductResult() {
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this UpdatePcKoubouCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                 bool                                `json:"ok"`
+	PcKoubouCrawlSettingExcludeProduct *PcKoubouCrawlSettingExcludeProduct `json:"pcKoubouCrawlSettingExcludeProduct"`
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeProductResultSuccess) IsUpdatePcKoubouCrawlSettingExcludeProductResult() {
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this UpdatePcKoubouCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) IsUpdatePcKoubouCrawlSettingExcludeProductResultErrors() {
+}
+
+func (UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
 	return this.Message
 }
 
@@ -1907,6 +2665,51 @@ func (this UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed) G
 	return this.Message
 }
 
+type UpdateYahooAuctionCrawlSettingExcludeProductInput struct {
+	ID         string `json:"id"`
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                     `json:"ok"`
+	Error UpdateYahooAuctionCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (UpdateYahooAuctionCrawlSettingExcludeProductResultError) IsUpdateYahooAuctionCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateYahooAuctionCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this UpdateYahooAuctionCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                     bool                                    `json:"ok"`
+	YahooAuctionCrawlSettingExcludeProduct *YahooAuctionCrawlSettingExcludeProduct `json:"yahooAuctionCrawlSettingExcludeProduct"`
+}
+
+func (UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess) IsUpdateYahooAuctionCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) IsUpdateYahooAuctionCrawlSettingExcludeProductResultErrors() {
+}
+
+func (UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type UpdateYahooAuctionCrawlSettingInput struct {
 	Keyword    string `json:"keyword"`
 	CategoryID *int   `json:"category_id,omitempty"`
@@ -1971,6 +2774,7 @@ type YahooAuctionCrawlSetting struct {
 	CreatedAt                                string                                     `json:"createdAt"`
 	UpdatedAt                                string                                     `json:"updatedAt"`
 	YahooAuctionCrawlSettingExcludeKeywords  []*YahooAuctionCrawlSettingExcludeKeyword  `json:"yahooAuctionCrawlSettingExcludeKeywords"`
+	YahooAuctionCrawlSettingExcludeProducts  []*YahooAuctionCrawlSettingExcludeProduct  `json:"yahooAuctionCrawlSettingExcludeProducts"`
 	YahooAuctionCrawlSettingRequiredKeywords []*YahooAuctionCrawlSettingRequiredKeyword `json:"yahooAuctionCrawlSettingRequiredKeywords"`
 }
 
@@ -1987,6 +2791,17 @@ type YahooAuctionCrawlSettingExcludeKeyword struct {
 
 func (YahooAuctionCrawlSettingExcludeKeyword) IsNode()            {}
 func (this YahooAuctionCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type YahooAuctionCrawlSettingExcludeProduct struct {
+	ID                         string `json:"id"`
+	YahooAuctionCrawlSettingID int    `json:"yahooAuctionCrawlSettingId"`
+	ExternalID                 string `json:"externalId"`
+	CreatedAt                  string `json:"createdAt"`
+	UpdatedAt                  string `json:"updatedAt"`
+}
+
+func (YahooAuctionCrawlSettingExcludeProduct) IsNode()            {}
+func (this YahooAuctionCrawlSettingExcludeProduct) GetID() string { return this.ID }
 
 type YahooAuctionCrawlSettingRequiredKeyword struct {
 	ID                         string  `json:"id"`

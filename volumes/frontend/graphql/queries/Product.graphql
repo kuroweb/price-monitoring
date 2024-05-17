@@ -76,6 +76,13 @@ query getProductDetailPageData(
         createdAt
         updatedAt
       }
+      yahooAuctionCrawlSettingExcludeProducts {
+        id
+        yahooAuctionCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
       yahooAuctionCrawlSettingRequiredKeywords {
         id
         yahooAuctionCrawlSettingId
@@ -117,6 +124,13 @@ query getProductDetailPageData(
         createdAt
         updatedAt
       }
+      mercariCrawlSettingExcludeProducts {
+        id
+        mercariCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
       mercariCrawlSettingRequiredKeywords {
         id
         mercariCrawlSettingId
@@ -148,6 +162,13 @@ query getProductDetailPageData(
         createdAt
         updatedAt
       }
+      janparaCrawlSettingExcludeProducts {
+        id
+        janparaCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
       janparaCrawlSettingRequiredKeywords {
         id
         janparaCrawlSettingId
@@ -170,6 +191,13 @@ query getProductDetailPageData(
         createdAt
         updatedAt
       }
+      iosysCrawlSettingExcludeProducts {
+        id
+        iosysCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
       iosysCrawlSettingRequiredKeywords {
         id
         iosysCrawlSettingId
@@ -189,6 +217,13 @@ query getProductDetailPageData(
         id
         pcKoubouCrawlSettingId
         keyword
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingExcludeProducts {
+        id
+        pcKoubouCrawlSettingId
+        externalId
         createdAt
         updatedAt
       }

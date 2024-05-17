@@ -12,6 +12,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
+  createYahooAuctionCrawlSettingExcludeProduct(
+    input: CreateYahooAuctionCrawlSettingExcludeProductInput!
+  ): CreateYahooAuctionCrawlSettingExcludeProductResult!
+  updateYahooAuctionCrawlSettingExcludeProduct(
+    input: UpdateYahooAuctionCrawlSettingExcludeProductInput!
+  ): UpdateYahooAuctionCrawlSettingExcludeProductResult!
+  deleteYahooAuctionCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteYahooAuctionCrawlSettingExcludeProductResult!
   createYahooAuctionCrawlSettingRequiredKeyword(
     input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
   ): CreateYahooAuctionCrawlSettingRequiredKeywordResult!
@@ -32,6 +42,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteMercariCrawlSettingExcludeKeywordResult!
+  createMercariCrawlSettingExcludeProduct(
+    input: CreateMercariCrawlSettingExcludeProductInput!
+  ): CreateMercariCrawlSettingExcludeProductResult!
+  updateMercariCrawlSettingExcludeProduct(
+    input: UpdateMercariCrawlSettingExcludeProductInput!
+  ): UpdateMercariCrawlSettingExcludeProductResult!
+  deleteMercariCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteMercariCrawlSettingExcludeProductResult!
   createMercariCrawlSettingRequiredKeyword(
     input: CreateMercariCrawlSettingRequiredKeywordInput!
   ): CreateMercariCrawlSettingRequiredKeywordResult!
@@ -52,6 +72,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteJanparaCrawlSettingExcludeKeywordResult!
+  createJanparaCrawlSettingExcludeProduct(
+    input: CreateJanparaCrawlSettingExcludeProductInput!
+  ): CreateJanparaCrawlSettingExcludeProductResult!
+  updateJanparaCrawlSettingExcludeProduct(
+    input: UpdateJanparaCrawlSettingExcludeProductInput!
+  ): UpdateJanparaCrawlSettingExcludeProductResult!
+  deleteJanparaCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteJanparaCrawlSettingExcludeProductResult!
   createJanparaCrawlSettingRequiredKeyword(
     input: CreateJanparaCrawlSettingRequiredKeywordInput!
   ): CreateJanparaCrawlSettingRequiredKeywordResult!
@@ -72,6 +102,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteIosysCrawlSettingExcludeKeywordResult!
+  createIosysCrawlSettingExcludeProduct(
+    input: CreateIosysCrawlSettingExcludeProductInput!
+  ): CreateIosysCrawlSettingExcludeProductResult!
+  updateIosysCrawlSettingExcludeProduct(
+    input: UpdateIosysCrawlSettingExcludeProductInput!
+  ): UpdateIosysCrawlSettingExcludeProductResult!
+  deleteIosysCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteIosysCrawlSettingExcludeProductResult!
   createIosysCrawlSettingRequiredKeyword(
     input: CreateIosysCrawlSettingRequiredKeywordInput!
   ): CreateIosysCrawlSettingRequiredKeywordResult!
@@ -92,6 +132,16 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeletePcKoubouCrawlSettingExcludeKeywordResult!
+  createPcKoubouCrawlSettingExcludeProduct(
+    input: CreatePcKoubouCrawlSettingExcludeProductInput!
+  ): CreatePcKoubouCrawlSettingExcludeProductResult!
+  updatePcKoubouCrawlSettingExcludeProduct(
+    input: UpdatePcKoubouCrawlSettingExcludeProductInput!
+  ): UpdatePcKoubouCrawlSettingExcludeProductResult!
+  deletePcKoubouCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeletePcKoubouCrawlSettingExcludeProductResult!
   createPcKoubouCrawlSettingRequiredKeyword(
     input: CreatePcKoubouCrawlSettingRequiredKeywordInput!
   ): CreatePcKoubouCrawlSettingRequiredKeywordResult!
@@ -367,6 +417,91 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implemen
   details: [ErrorDetail!]!
 }
 
+## CreateYahooAuctionCrawlSettingExcludeProduct ##
+
+input CreateYahooAuctionCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateYahooAuctionCrawlSettingExcludeProductResult =
+    CreateYahooAuctionCrawlSettingExcludeProductResultSuccess
+  | CreateYahooAuctionCrawlSettingExcludeProductResultError
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingExcludeProduct: YahooAuctionCrawlSettingExcludeProduct!
+}
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateYahooAuctionCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateYahooAuctionCrawlSettingExcludeProductResultErrors =
+    CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateYahooAuctionCrawlSettingExcludeProduct ##
+
+input UpdateYahooAuctionCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateYahooAuctionCrawlSettingExcludeProductResult =
+    UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess
+  | UpdateYahooAuctionCrawlSettingExcludeProductResultError
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingExcludeProduct: YahooAuctionCrawlSettingExcludeProduct!
+}
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateYahooAuctionCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateYahooAuctionCrawlSettingExcludeProductResultErrors =
+    UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteYahooAuctionCrawlSettingExcludeProduct ##
+
+union DeleteYahooAuctionCrawlSettingExcludeProductResult =
+    DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess
+  | DeleteYahooAuctionCrawlSettingExcludeProductResultError
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteYahooAuctionCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteYahooAuctionCrawlSettingExcludeProductResultErrors =
+    DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateYahooAuctionCrawlSettingRequiredKeyword ##
 
 input CreateYahooAuctionCrawlSettingRequiredKeywordInput {
@@ -532,6 +667,91 @@ union DeleteMercariCrawlSettingExcludeKeywordResultErrors =
     DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed
 
 type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateMercariCrawlSettingExcludeProduct ##
+
+input CreateMercariCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateMercariCrawlSettingExcludeProductResult =
+    CreateMercariCrawlSettingExcludeProductResultSuccess
+  | CreateMercariCrawlSettingExcludeProductResultError
+
+type CreateMercariCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingExcludeProduct: MercariCrawlSettingExcludeProduct!
+}
+
+type CreateMercariCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateMercariCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateMercariCrawlSettingExcludeProductResultErrors =
+    CreateMercariCrawlSettingExcludeProductResultValidationFailed
+
+type CreateMercariCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateMercariCrawlSettingExcludeProduct ##
+
+input UpdateMercariCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateMercariCrawlSettingExcludeProductResult =
+    UpdateMercariCrawlSettingExcludeProductResultSuccess
+  | UpdateMercariCrawlSettingExcludeProductResultError
+
+type UpdateMercariCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingExcludeProduct: MercariCrawlSettingExcludeProduct!
+}
+
+type UpdateMercariCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateMercariCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateMercariCrawlSettingExcludeProductResultErrors =
+    UpdateMercariCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateMercariCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteMercariCrawlSettingExcludeProduct ##
+
+union DeleteMercariCrawlSettingExcludeProductResult =
+    DeleteMercariCrawlSettingExcludeProductResultSuccess
+  | DeleteMercariCrawlSettingExcludeProductResultError
+
+type DeleteMercariCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteMercariCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteMercariCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteMercariCrawlSettingExcludeProductResultErrors =
+    DeleteMercariCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteMercariCrawlSettingExcludeProductResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!
@@ -707,6 +927,91 @@ type DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed implements Us
   details: [ErrorDetail!]!
 }
 
+## CreateJanparaCrawlSettingExcludeProduct ##
+
+input CreateJanparaCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateJanparaCrawlSettingExcludeProductResult =
+    CreateJanparaCrawlSettingExcludeProductResultSuccess
+  | CreateJanparaCrawlSettingExcludeProductResultError
+
+type CreateJanparaCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingExcludeProduct: JanparaCrawlSettingExcludeProduct!
+}
+
+type CreateJanparaCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateJanparaCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateJanparaCrawlSettingExcludeProductResultErrors =
+    CreateJanparaCrawlSettingExcludeProductResultValidationFailed
+
+type CreateJanparaCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateJanparaCrawlSettingExcludeProduct ##
+
+input UpdateJanparaCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateJanparaCrawlSettingExcludeProductResult =
+    UpdateJanparaCrawlSettingExcludeProductResultSuccess
+  | UpdateJanparaCrawlSettingExcludeProductResultError
+
+type UpdateJanparaCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingExcludeProduct: JanparaCrawlSettingExcludeProduct!
+}
+
+type UpdateJanparaCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateJanparaCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateJanparaCrawlSettingExcludeProductResultErrors =
+    UpdateJanparaCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateJanparaCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteJanparaCrawlSettingExcludeProduct ##
+
+union DeleteJanparaCrawlSettingExcludeProductResult =
+    DeleteJanparaCrawlSettingExcludeProductResultSuccess
+  | DeleteJanparaCrawlSettingExcludeProductResultError
+
+type DeleteJanparaCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteJanparaCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteJanparaCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteJanparaCrawlSettingExcludeProductResultErrors =
+    DeleteJanparaCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteJanparaCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateJanparaCrawlSettingRequiredKeyword ##
 
 input CreateJanparaCrawlSettingRequiredKeywordInput {
@@ -877,6 +1182,91 @@ type DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed implements User
   details: [ErrorDetail!]!
 }
 
+## CreateIosysCrawlSettingExcludeProduct ##
+
+input CreateIosysCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateIosysCrawlSettingExcludeProductResult =
+    CreateIosysCrawlSettingExcludeProductResultSuccess
+  | CreateIosysCrawlSettingExcludeProductResultError
+
+type CreateIosysCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingExcludeProduct: IosysCrawlSettingExcludeProduct!
+}
+
+type CreateIosysCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateIosysCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateIosysCrawlSettingExcludeProductResultErrors =
+    CreateIosysCrawlSettingExcludeProductResultValidationFailed
+
+type CreateIosysCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateIosysCrawlSettingExcludeProduct ##
+
+input UpdateIosysCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateIosysCrawlSettingExcludeProductResult =
+    UpdateIosysCrawlSettingExcludeProductResultSuccess
+  | UpdateIosysCrawlSettingExcludeProductResultError
+
+type UpdateIosysCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingExcludeProduct: IosysCrawlSettingExcludeProduct!
+}
+
+type UpdateIosysCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateIosysCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateIosysCrawlSettingExcludeProductResultErrors =
+    UpdateIosysCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateIosysCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteIosysCrawlSettingExcludeProduct ##
+
+union DeleteIosysCrawlSettingExcludeProductResult =
+    DeleteIosysCrawlSettingExcludeProductResultSuccess
+  | DeleteIosysCrawlSettingExcludeProductResultError
+
+type DeleteIosysCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteIosysCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteIosysCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteIosysCrawlSettingExcludeProductResultErrors =
+    DeleteIosysCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteIosysCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateIosysCrawlSettingRequiredKeyword ##
 
 input CreateIosysCrawlSettingRequiredKeywordInput {
@@ -1042,6 +1432,91 @@ union DeletePcKoubouCrawlSettingExcludeKeywordResultErrors =
     DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed
 
 type DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreatePcKoubouCrawlSettingExcludeProduct ##
+
+input CreatePcKoubouCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreatePcKoubouCrawlSettingExcludeProductResult =
+    CreatePcKoubouCrawlSettingExcludeProductResultSuccess
+  | CreatePcKoubouCrawlSettingExcludeProductResultError
+
+type CreatePcKoubouCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingExcludeProduct: PcKoubouCrawlSettingExcludeProduct!
+}
+
+type CreatePcKoubouCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreatePcKoubouCrawlSettingExcludeProductResultErrors!
+}
+
+union CreatePcKoubouCrawlSettingExcludeProductResultErrors =
+    CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed
+
+type CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdatePcKoubouCrawlSettingExcludeProduct ##
+
+input UpdatePcKoubouCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdatePcKoubouCrawlSettingExcludeProductResult =
+    UpdatePcKoubouCrawlSettingExcludeProductResultSuccess
+  | UpdatePcKoubouCrawlSettingExcludeProductResultError
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingExcludeProduct: PcKoubouCrawlSettingExcludeProduct!
+}
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdatePcKoubouCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdatePcKoubouCrawlSettingExcludeProductResultErrors =
+    UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeletePcKoubouCrawlSettingExcludeProduct ##
+
+union DeletePcKoubouCrawlSettingExcludeProductResult =
+    DeletePcKoubouCrawlSettingExcludeProductResultSuccess
+  | DeletePcKoubouCrawlSettingExcludeProductResultError
+
+type DeletePcKoubouCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeletePcKoubouCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeletePcKoubouCrawlSettingExcludeProductResultErrors!
+}
+
+union DeletePcKoubouCrawlSettingExcludeProductResultErrors =
+    DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed
+
+type DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

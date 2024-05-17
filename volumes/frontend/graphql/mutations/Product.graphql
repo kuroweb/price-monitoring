@@ -158,6 +158,87 @@ mutation deleteYahooAuctionCrawlSettingExcludeKeyword($id: ID!, $productId: ID!)
   }
 }
 
+## YahooAuctionCrawlSettingExcludeProduct ##
+
+mutation createYahooAuctionCrawlSettingExcludeProduct(
+  $input: CreateYahooAuctionCrawlSettingExcludeProductInput!
+) {
+  createYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateYahooAuctionCrawlSettingExcludeProduct(
+  $input: UpdateYahooAuctionCrawlSettingExcludeProductInput!
+) {
+  updateYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteYahooAuctionCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
+  deleteYahooAuctionCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
 ## YahooAuctionCrawlSettingRequiredKeyword ##
 
 mutation createYahooAuctionCrawlSettingRequiredKeyword(
@@ -312,6 +393,87 @@ mutation deleteMercariCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
       ok
       error {
         ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## MercariCrawlSettingExcludeProduct ##
+
+mutation createMercariCrawlSettingExcludeProduct(
+  $input: CreateMercariCrawlSettingExcludeProductInput!
+) {
+  createMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+      mercariCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateMercariCrawlSettingExcludeProduct(
+  $input: UpdateMercariCrawlSettingExcludeProductInput!
+) {
+  updateMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+      mercariCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteMercariCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
+  deleteMercariCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+    ... on DeleteMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeProductResultValidationFailed {
           code
           message
           details {
@@ -490,6 +652,87 @@ mutation deleteJanparaCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
   }
 }
 
+## JanparaCrawlSettingExcludeProduct ##
+
+mutation createJanparaCrawlSettingExcludeProduct(
+  $input: CreateJanparaCrawlSettingExcludeProductInput!
+) {
+  createJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+      janparaCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateJanparaCrawlSettingExcludeProduct(
+  $input: UpdateJanparaCrawlSettingExcludeProductInput!
+) {
+  updateJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+      janparaCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteJanparaCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
+  deleteJanparaCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+    ... on DeleteJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
 ## JanparaCrawlSettingRequiredKeyword ##
 
 mutation createJanparaCrawlSettingRequiredKeyword(
@@ -656,6 +899,87 @@ mutation deleteIosysCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
   }
 }
 
+## IosysCrawlSettingExcludeProduct ##
+
+mutation createIosysCrawlSettingExcludeProduct(
+  $input: CreateIosysCrawlSettingExcludeProductInput!
+) {
+  createIosysCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateIosysCrawlSettingExcludeProductResultSuccess {
+      ok
+      iosysCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateIosysCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateIosysCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updateIosysCrawlSettingExcludeProduct(
+  $input: UpdateIosysCrawlSettingExcludeProductInput!
+) {
+  updateIosysCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateIosysCrawlSettingExcludeProductResultSuccess {
+      ok
+      iosysCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateIosysCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateIosysCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deleteIosysCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
+  deleteIosysCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+    ... on DeleteIosysCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteIosysCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteIosysCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
 ## IosysCrawlSettingRequiredKeyword ##
 
 mutation createIosysCrawlSettingRequiredKeyword(
@@ -810,6 +1134,87 @@ mutation deletePcKoubouCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
       ok
       error {
         ... on DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## PcKoubouCrawlSettingExcludeProduct ##
+
+mutation createPcKoubouCrawlSettingExcludeProduct(
+  $input: CreatePcKoubouCrawlSettingExcludeProductInput!
+) {
+  createPcKoubouCrawlSettingExcludeProduct(input: $input) {
+    ... on CreatePcKoubouCrawlSettingExcludeProductResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation updatePcKoubouCrawlSettingExcludeProduct(
+  $input: UpdatePcKoubouCrawlSettingExcludeProductInput!
+) {
+  updatePcKoubouCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingExcludeProductResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation deletePcKoubouCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
+  deletePcKoubouCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+    ... on DeletePcKoubouCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed {
           code
           message
           details {

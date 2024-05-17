@@ -1,0 +1,15 @@
+package mercari_crawl_setting_exclude_products
+
+type IMercariCrawlSettingExcludeProductService interface {
+	IFindMercariCrawlSettingExcludeProductService
+	ICreateMercariCrawlSettingExcludeProductService
+	IUpdateMercariCrawlSettingExcludeProductService
+	IDeleteMercariCrawlSettingExcludeProductService
+}
+
+type MercariCrawlSettingExcludeProductService struct {
+	*FindMercariCrawlSettingExcludeProductService
+	*CreateMercariCrawlSettingExcludeProductService
+	*UpdateMercariCrawlSettingExcludeProductService
+	*DeleteMercariCrawlSettingExcludeProductService
+}

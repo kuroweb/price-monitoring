@@ -1,0 +1,15 @@
+package pc_koubou_crawl_setting_exclude_products
+
+type IPcKoubouCrawlSettingExcludeProductService interface {
+	IFindPcKoubouCrawlSettingExcludeProductService
+	ICreatePcKoubouCrawlSettingExcludeProductService
+	IUpdatePcKoubouCrawlSettingExcludeProductService
+	IDeletePcKoubouCrawlSettingExcludeProductService
+}
+
+type PcKoubouCrawlSettingExcludeProductService struct {
+	*FindPcKoubouCrawlSettingExcludeProductService
+	*CreatePcKoubouCrawlSettingExcludeProductService
+	*UpdatePcKoubouCrawlSettingExcludeProductService
+	*DeletePcKoubouCrawlSettingExcludeProductService
+}

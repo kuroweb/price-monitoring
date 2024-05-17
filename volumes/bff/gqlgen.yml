@@ -113,11 +113,15 @@ models:
     fields:
       yahooAuctionCrawlSettingExcludeKeywords:
         resolver: true
+      yahooAuctionCrawlSettingExcludeProducts:
+        resolver: true
       yahooAuctionCrawlSettingRequiredKeywords:
         resolver: true
   MercariCrawlSetting:
     fields:
       mercariCrawlSettingExcludeKeywords:
+        resolver: true
+      mercariCrawlSettingExcludeProducts:
         resolver: true
       mercariCrawlSettingRequiredKeywords:
         resolver: true
@@ -125,17 +129,23 @@ models:
     fields:
       janparaCrawlSettingExcludeKeywords:
         resolver: true
+      janparaCrawlSettingExcludeProducts:
+        resolver: true
       janparaCrawlSettingRequiredKeywords:
         resolver: true
   IosysCrawlSetting:
     fields:
       iosysCrawlSettingExcludeKeywords:
         resolver: true
+      iosysCrawlSettingExcludeProducts:
+        resolver: true
       iosysCrawlSettingRequiredKeywords:
         resolver: true
   PcKoubouCrawlSetting:
     fields:
       pcKoubouCrawlSettingExcludeKeywords:
+        resolver: true
+      pcKoubouCrawlSettingExcludeProducts:
         resolver: true
       pcKoubouCrawlSettingRequiredKeywords:
         resolver: true

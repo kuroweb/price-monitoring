@@ -17,6 +17,14 @@ import {
   UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
   UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
   UpdateYahooAuctionCrawlSettingExcludeKeywordMutation,
+  CreateYahooAuctionCrawlSettingExcludeProductDocument,
+  CreateYahooAuctionCrawlSettingExcludeProductInput,
+  CreateYahooAuctionCrawlSettingExcludeProductMutation,
+  DeleteYahooAuctionCrawlSettingExcludeProductMutation,
+  DeleteYahooAuctionCrawlSettingExcludeProductDocument,
+  UpdateYahooAuctionCrawlSettingExcludeProductInput,
+  UpdateYahooAuctionCrawlSettingExcludeProductDocument,
+  UpdateYahooAuctionCrawlSettingExcludeProductMutation,
   CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
   CreateYahooAuctionCrawlSettingRequiredKeywordInput,
   CreateYahooAuctionCrawlSettingRequiredKeywordMutation,
@@ -33,6 +41,14 @@ import {
   DeleteMercariCrawlSettingExcludeKeywordMutation,
   UpdateMercariCrawlSettingExcludeKeywordDocument,
   UpdateMercariCrawlSettingExcludeKeywordMutation,
+  CreateMercariCrawlSettingExcludeProductInput,
+  UpdateMercariCrawlSettingExcludeProductInput,
+  CreateMercariCrawlSettingExcludeProductDocument,
+  CreateMercariCrawlSettingExcludeProductMutation,
+  DeleteMercariCrawlSettingExcludeProductDocument,
+  DeleteMercariCrawlSettingExcludeProductMutation,
+  UpdateMercariCrawlSettingExcludeProductDocument,
+  UpdateMercariCrawlSettingExcludeProductMutation,
   CreateMercariCrawlSettingRequiredKeywordInput,
   CreateMercariCrawlSettingRequiredKeywordDocument,
   CreateMercariCrawlSettingRequiredKeywordMutation,
@@ -49,6 +65,14 @@ import {
   DeleteJanparaCrawlSettingExcludeKeywordMutation,
   UpdateJanparaCrawlSettingExcludeKeywordDocument,
   UpdateJanparaCrawlSettingExcludeKeywordMutation,
+  CreateJanparaCrawlSettingExcludeProductInput,
+  UpdateJanparaCrawlSettingExcludeProductInput,
+  CreateJanparaCrawlSettingExcludeProductDocument,
+  CreateJanparaCrawlSettingExcludeProductMutation,
+  DeleteJanparaCrawlSettingExcludeProductDocument,
+  DeleteJanparaCrawlSettingExcludeProductMutation,
+  UpdateJanparaCrawlSettingExcludeProductDocument,
+  UpdateJanparaCrawlSettingExcludeProductMutation,
   CreateJanparaCrawlSettingRequiredKeywordInput,
   CreateJanparaCrawlSettingRequiredKeywordDocument,
   CreateJanparaCrawlSettingRequiredKeywordMutation,
@@ -65,6 +89,14 @@ import {
   DeleteIosysCrawlSettingExcludeKeywordMutation,
   UpdateIosysCrawlSettingExcludeKeywordDocument,
   UpdateIosysCrawlSettingExcludeKeywordMutation,
+  CreateIosysCrawlSettingExcludeProductInput,
+  UpdateIosysCrawlSettingExcludeProductInput,
+  CreateIosysCrawlSettingExcludeProductDocument,
+  CreateIosysCrawlSettingExcludeProductMutation,
+  DeleteIosysCrawlSettingExcludeProductDocument,
+  DeleteIosysCrawlSettingExcludeProductMutation,
+  UpdateIosysCrawlSettingExcludeProductDocument,
+  UpdateIosysCrawlSettingExcludeProductMutation,
   CreateIosysCrawlSettingRequiredKeywordInput,
   CreateIosysCrawlSettingRequiredKeywordDocument,
   CreateIosysCrawlSettingRequiredKeywordMutation,
@@ -81,6 +113,14 @@ import {
   DeletePcKoubouCrawlSettingExcludeKeywordMutation,
   UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
   UpdatePcKoubouCrawlSettingExcludeKeywordMutation,
+  CreatePcKoubouCrawlSettingExcludeProductInput,
+  UpdatePcKoubouCrawlSettingExcludeProductInput,
+  CreatePcKoubouCrawlSettingExcludeProductDocument,
+  CreatePcKoubouCrawlSettingExcludeProductMutation,
+  DeletePcKoubouCrawlSettingExcludeProductDocument,
+  DeletePcKoubouCrawlSettingExcludeProductMutation,
+  UpdatePcKoubouCrawlSettingExcludeProductDocument,
+  UpdatePcKoubouCrawlSettingExcludeProductMutation,
   CreatePcKoubouCrawlSettingRequiredKeywordInput,
   CreatePcKoubouCrawlSettingRequiredKeywordDocument,
   CreatePcKoubouCrawlSettingRequiredKeywordMutation,
@@ -151,6 +191,36 @@ export const deleteYahooAuctionCrawlSettingExcludeKeyword = async (
   })
 }
 
+/* YahooAuctionCrawlSettingExcludeProduct */
+
+export const createYahooAuctionCrawlSettingExcludeProduct = async (
+  input: CreateYahooAuctionCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeProductMutation>({
+    mutation: CreateYahooAuctionCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateYahooAuctionCrawlSettingExcludeProduct = async (
+  input: UpdateYahooAuctionCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeProductMutation>({
+    mutation: UpdateYahooAuctionCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteYahooAuctionCrawlSettingExcludeProduct = async (
+  id: String,
+  productId: String,
+) => {
+  return await getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeProductMutation>({
+    mutation: DeleteYahooAuctionCrawlSettingExcludeProductDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
 /* YahooAuctionCrawlSettingRequiredKeyword */
 
 export const createYahooAuctionCrawlSettingRequiredKeyword = async (
@@ -208,6 +278,33 @@ export const updateMercariCrawlSettingExcludeKeyword = async (
 export const deleteMercariCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteMercariCrawlSettingExcludeKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/* MercariCrawlSettingExcludeProduct */
+
+export const createMercariCrawlSettingExcludeProduct = async (
+  input: CreateMercariCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<CreateMercariCrawlSettingExcludeProductMutation>({
+    mutation: CreateMercariCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateMercariCrawlSettingExcludeProduct = async (
+  input: UpdateMercariCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<UpdateMercariCrawlSettingExcludeProductMutation>({
+    mutation: UpdateMercariCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteMercariCrawlSettingExcludeProduct = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteMercariCrawlSettingExcludeProductMutation>({
+    mutation: DeleteMercariCrawlSettingExcludeProductDocument,
     variables: { id: id, productId: productId },
   })
 }
@@ -270,6 +367,33 @@ export const deleteJanparaCrawlSettingExcludeKeyword = async (id: String, produc
   })
 }
 
+/* JanparaCrawlSettingExcludeProduct */
+
+export const createJanparaCrawlSettingExcludeProduct = async (
+  input: CreateJanparaCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<CreateJanparaCrawlSettingExcludeProductMutation>({
+    mutation: CreateJanparaCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateJanparaCrawlSettingExcludeProduct = async (
+  input: UpdateJanparaCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<UpdateJanparaCrawlSettingExcludeProductMutation>({
+    mutation: UpdateJanparaCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteJanparaCrawlSettingExcludeProduct = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteJanparaCrawlSettingExcludeProductMutation>({
+    mutation: DeleteJanparaCrawlSettingExcludeProductDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
 /* JanparaCrawlSettingRequiredKeyword */
 
 export const createJanparaCrawlSettingRequiredKeyword = async (
@@ -328,6 +452,33 @@ export const deleteIosysCrawlSettingExcludeKeyword = async (id: String, productI
   })
 }
 
+/* IosysCrawlSettingExcludeProduct */
+
+export const createIosysCrawlSettingExcludeProduct = async (
+  input: CreateIosysCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<CreateIosysCrawlSettingExcludeProductMutation>({
+    mutation: CreateIosysCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const updateIosysCrawlSettingExcludeProduct = async (
+  input: UpdateIosysCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<UpdateIosysCrawlSettingExcludeProductMutation>({
+    mutation: UpdateIosysCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const deleteIosysCrawlSettingExcludeProduct = async (id: String, productId: String) => {
+  return await getClient().mutate<DeleteIosysCrawlSettingExcludeProductMutation>({
+    mutation: DeleteIosysCrawlSettingExcludeProductDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
 /* IosysCrawlSettingRequiredKeyword */
 
 export const createIosysCrawlSettingRequiredKeyword = async (
@@ -382,6 +533,33 @@ export const updatePcKoubouCrawlSettingExcludeKeyword = async (
 export const deletePcKoubouCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
   return await getClient().mutate<DeletePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: DeletePcKoubouCrawlSettingExcludeKeywordDocument,
+    variables: { id: id, productId: productId },
+  })
+}
+
+/* PcKoubouCrawlSettingExcludeProduct */
+
+export const createPcKoubouCrawlSettingExcludeProduct = async (
+  input: CreatePcKoubouCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<CreatePcKoubouCrawlSettingExcludeProductMutation>({
+    mutation: CreatePcKoubouCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const updatePcKoubouCrawlSettingExcludeProduct = async (
+  input: UpdatePcKoubouCrawlSettingExcludeProductInput,
+) => {
+  return await getClient().mutate<UpdatePcKoubouCrawlSettingExcludeProductMutation>({
+    mutation: UpdatePcKoubouCrawlSettingExcludeProductDocument,
+    variables: { input: input },
+  })
+}
+
+export const deletePcKoubouCrawlSettingExcludeProduct = async (id: String, productId: String) => {
+  return await getClient().mutate<DeletePcKoubouCrawlSettingExcludeProductMutation>({
+    mutation: DeletePcKoubouCrawlSettingExcludeProductDocument,
     variables: { id: id, productId: productId },
   })
 }

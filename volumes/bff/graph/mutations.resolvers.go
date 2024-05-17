@@ -41,6 +41,21 @@ func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx cont
 	return r.ProductService.DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx, id, productID)
 }
 
+// CreateYahooAuctionCrawlSettingExcludeProduct is the resolver for the createYahooAuctionCrawlSettingExcludeProduct field.
+func (r *mutationResolver) CreateYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeProductInput) (model.CreateYahooAuctionCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.CreateYahooAuctionCrawlSettingExcludeProduct(ctx, input)
+}
+
+// UpdateYahooAuctionCrawlSettingExcludeProduct is the resolver for the updateYahooAuctionCrawlSettingExcludeProduct field.
+func (r *mutationResolver) UpdateYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeProductInput) (model.UpdateYahooAuctionCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.UpdateYahooAuctionCrawlSettingExcludeProduct(ctx, input)
+}
+
+// DeleteYahooAuctionCrawlSettingExcludeProduct is the resolver for the deleteYahooAuctionCrawlSettingExcludeProduct field.
+func (r *mutationResolver) DeleteYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.DeleteYahooAuctionCrawlSettingExcludeProduct(ctx, id, productID)
+}
+
 // CreateYahooAuctionCrawlSettingRequiredKeyword is the resolver for the createYahooAuctionCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) CreateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) (model.CreateYahooAuctionCrawlSettingRequiredKeywordResult, error) {
 	return r.ProductService.CreateYahooAuctionCrawlSettingRequiredKeyword(ctx, input)
@@ -69,6 +84,21 @@ func (r *mutationResolver) UpdateMercariCrawlSettingExcludeKeyword(ctx context.C
 // DeleteMercariCrawlSettingExcludeKeyword is the resolver for the deleteMercariCrawlSettingExcludeKeyword field.
 func (r *mutationResolver) DeleteMercariCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeKeywordResult, error) {
 	return r.ProductService.DeleteMercariCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreateMercariCrawlSettingExcludeProduct is the resolver for the createMercariCrawlSettingExcludeProduct field.
+func (r *mutationResolver) CreateMercariCrawlSettingExcludeProduct(ctx context.Context, input model.CreateMercariCrawlSettingExcludeProductInput) (model.CreateMercariCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.CreateMercariCrawlSettingExcludeProduct(ctx, input)
+}
+
+// UpdateMercariCrawlSettingExcludeProduct is the resolver for the updateMercariCrawlSettingExcludeProduct field.
+func (r *mutationResolver) UpdateMercariCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateMercariCrawlSettingExcludeProductInput) (model.UpdateMercariCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.UpdateMercariCrawlSettingExcludeProduct(ctx, input)
+}
+
+// DeleteMercariCrawlSettingExcludeProduct is the resolver for the deleteMercariCrawlSettingExcludeProduct field.
+func (r *mutationResolver) DeleteMercariCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.DeleteMercariCrawlSettingExcludeProduct(ctx, id, productID)
 }
 
 // CreateMercariCrawlSettingRequiredKeyword is the resolver for the createMercariCrawlSettingRequiredKeyword field.
@@ -101,6 +131,21 @@ func (r *mutationResolver) DeleteJanparaCrawlSettingExcludeKeyword(ctx context.C
 	return r.ProductService.DeleteJanparaCrawlSettingExcludeKeyword(ctx, id, productID)
 }
 
+// CreateJanparaCrawlSettingExcludeProduct is the resolver for the createJanparaCrawlSettingExcludeProduct field.
+func (r *mutationResolver) CreateJanparaCrawlSettingExcludeProduct(ctx context.Context, input model.CreateJanparaCrawlSettingExcludeProductInput) (model.CreateJanparaCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.CreateJanparaCrawlSettingExcludeProduct(ctx, input)
+}
+
+// UpdateJanparaCrawlSettingExcludeProduct is the resolver for the updateJanparaCrawlSettingExcludeProduct field.
+func (r *mutationResolver) UpdateJanparaCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateJanparaCrawlSettingExcludeProductInput) (model.UpdateJanparaCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.UpdateJanparaCrawlSettingExcludeProduct(ctx, input)
+}
+
+// DeleteJanparaCrawlSettingExcludeProduct is the resolver for the deleteJanparaCrawlSettingExcludeProduct field.
+func (r *mutationResolver) DeleteJanparaCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.DeleteJanparaCrawlSettingExcludeProduct(ctx, id, productID)
+}
+
 // CreateJanparaCrawlSettingRequiredKeyword is the resolver for the createJanparaCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) CreateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateJanparaCrawlSettingRequiredKeywordInput) (model.CreateJanparaCrawlSettingRequiredKeywordResult, error) {
 	return r.ProductService.CreateJanparaCrawlSettingRequiredKeyword(ctx, input)
@@ -131,6 +176,21 @@ func (r *mutationResolver) DeleteIosysCrawlSettingExcludeKeyword(ctx context.Con
 	return r.ProductService.DeleteIosysCrawlSettingExcludeKeyword(ctx, id, productID)
 }
 
+// CreateIosysCrawlSettingExcludeProduct is the resolver for the createIosysCrawlSettingExcludeProduct field.
+func (r *mutationResolver) CreateIosysCrawlSettingExcludeProduct(ctx context.Context, input model.CreateIosysCrawlSettingExcludeProductInput) (model.CreateIosysCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.CreateIosysCrawlSettingExcludeProduct(ctx, input)
+}
+
+// UpdateIosysCrawlSettingExcludeProduct is the resolver for the updateIosysCrawlSettingExcludeProduct field.
+func (r *mutationResolver) UpdateIosysCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateIosysCrawlSettingExcludeProductInput) (model.UpdateIosysCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.UpdateIosysCrawlSettingExcludeProduct(ctx, input)
+}
+
+// DeleteIosysCrawlSettingExcludeProduct is the resolver for the deleteIosysCrawlSettingExcludeProduct field.
+func (r *mutationResolver) DeleteIosysCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.DeleteIosysCrawlSettingExcludeProduct(ctx, id, productID)
+}
+
 // CreateIosysCrawlSettingRequiredKeyword is the resolver for the createIosysCrawlSettingRequiredKeyword field.
 func (r *mutationResolver) CreateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateIosysCrawlSettingRequiredKeywordInput) (model.CreateIosysCrawlSettingRequiredKeywordResult, error) {
 	return r.ProductService.CreateIosysCrawlSettingRequiredKeyword(ctx, input)
@@ -159,6 +219,21 @@ func (r *mutationResolver) UpdatePcKoubouCrawlSettingExcludeKeyword(ctx context.
 // DeletePcKoubouCrawlSettingExcludeKeyword is the resolver for the deletePcKoubouCrawlSettingExcludeKeyword field.
 func (r *mutationResolver) DeletePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingExcludeKeywordResult, error) {
 	return r.ProductService.DeletePcKoubouCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreatePcKoubouCrawlSettingExcludeProduct is the resolver for the createPcKoubouCrawlSettingExcludeProduct field.
+func (r *mutationResolver) CreatePcKoubouCrawlSettingExcludeProduct(ctx context.Context, input model.CreatePcKoubouCrawlSettingExcludeProductInput) (model.CreatePcKoubouCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.CreatePcKoubouCrawlSettingExcludeProduct(ctx, input)
+}
+
+// UpdatePcKoubouCrawlSettingExcludeProduct is the resolver for the updatePcKoubouCrawlSettingExcludeProduct field.
+func (r *mutationResolver) UpdatePcKoubouCrawlSettingExcludeProduct(ctx context.Context, input model.UpdatePcKoubouCrawlSettingExcludeProductInput) (model.UpdatePcKoubouCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.UpdatePcKoubouCrawlSettingExcludeProduct(ctx, input)
+}
+
+// DeletePcKoubouCrawlSettingExcludeProduct is the resolver for the deletePcKoubouCrawlSettingExcludeProduct field.
+func (r *mutationResolver) DeletePcKoubouCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.DeletePcKoubouCrawlSettingExcludeProduct(ctx, id, productID)
 }
 
 // CreatePcKoubouCrawlSettingRequiredKeyword is the resolver for the createPcKoubouCrawlSettingRequiredKeyword field.

@@ -11,6 +11,7 @@ import RelatedProductsTable from '@/features/products/components/RelatedProducts
 import SearchForm from '@/features/products/components/SearchForm'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
+import EditExcludeProductModal from '@/features/products/components/edit-exclude-product-modal/EditExcludeProductModal'
 import EditRequiredKeywordModal from '@/features/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
 import { useBulkCreateExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkCreateExcludeKeywordModalState'
 import { useBulkCreateRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkCreateRequiredKeywordModalState'
@@ -18,6 +19,7 @@ import { useBulkDeleteExcludeKeywordModalQuery } from '@/features/products/hooks
 import { useBulkDeleteRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkDeleteRequiredKeywordModalState'
 import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
+import { useEditExcludeProductModalQuery } from '@/features/products/hooks/useEditExcludeProductModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useEditRequiredKeywordModalState'
 import { pageStateCache, usePageStateQuery } from '@/features/products/hooks/usePageState'
 import { usePerStateQuery, perStateCache } from '@/features/products/hooks/usePerState'
@@ -99,6 +101,18 @@ const Page = async ({
                 }}
               >
                 除外キーワード
+              </Link>
+              <Link
+                className='btn'
+                href={{
+                  pathname: `/products/${params.id}`,
+                  query: {
+                    ...searchParams,
+                    [useEditExcludeProductModalQuery]: 'true',
+                  },
+                }}
+              >
+                除外商品ID
               </Link>
             </div>
           </div>
@@ -216,6 +230,7 @@ const Page = async ({
         }}
       />
       <EditExcludeKeywordModal data={data} />
+      <EditExcludeProductModal data={data} />
       <EditRequiredKeywordModal data={data} />
       <BulkCreateExcludeKeywordModal />
       <BulkCreateRequiredKeywordModal />

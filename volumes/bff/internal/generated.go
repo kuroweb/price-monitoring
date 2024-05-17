@@ -68,6 +68,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	CreateIosysCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingExcludeProductResultSuccess struct {
+		IosysCrawlSettingExcludeProduct func(childComplexity int) int
+		Ok                              func(childComplexity int) int
+	}
+
+	CreateIosysCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	CreateIosysCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -95,6 +111,22 @@ type ComplexityRoot struct {
 	}
 
 	CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreateJanparaCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateJanparaCrawlSettingExcludeProductResultSuccess struct {
+		JanparaCrawlSettingExcludeProduct func(childComplexity int) int
+		Ok                                func(childComplexity int) int
+	}
+
+	CreateJanparaCrawlSettingExcludeProductResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -132,6 +164,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	CreateMercariCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateMercariCrawlSettingExcludeProductResultSuccess struct {
+		MercariCrawlSettingExcludeProduct func(childComplexity int) int
+		Ok                                func(childComplexity int) int
+	}
+
+	CreateMercariCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	CreateMercariCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -159,6 +207,22 @@ type ComplexityRoot struct {
 	}
 
 	CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingExcludeProductResultSuccess struct {
+		Ok                                 func(childComplexity int) int
+		PcKoubouCrawlSettingExcludeProduct func(childComplexity int) int
+	}
+
+	CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -212,6 +276,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	CreateYahooAuctionCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateYahooAuctionCrawlSettingExcludeProductResultSuccess struct {
+		Ok                                     func(childComplexity int) int
+		YahooAuctionCrawlSettingExcludeProduct func(childComplexity int) int
+	}
+
+	CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	CreateYahooAuctionCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -238,6 +318,21 @@ type ComplexityRoot struct {
 	}
 
 	DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingExcludeProductResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteIosysCrawlSettingExcludeProductResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -273,6 +368,21 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	DeleteJanparaCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteJanparaCrawlSettingExcludeProductResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteJanparaCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	DeleteJanparaCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -303,6 +413,21 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	DeleteMercariCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteMercariCrawlSettingExcludeProductResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteMercariCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	DeleteMercariCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -328,6 +453,21 @@ type ComplexityRoot struct {
 	}
 
 	DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingExcludeProductResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -378,6 +518,21 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	DeleteYahooAuctionCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	DeleteYahooAuctionCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -403,6 +558,7 @@ type ComplexityRoot struct {
 		Enabled                           func(childComplexity int) int
 		ID                                func(childComplexity int) int
 		IosysCrawlSettingExcludeKeywords  func(childComplexity int) int
+		IosysCrawlSettingExcludeProducts  func(childComplexity int) int
 		IosysCrawlSettingRequiredKeywords func(childComplexity int) int
 		Keyword                           func(childComplexity int) int
 		MaxPrice                          func(childComplexity int) int
@@ -419,6 +575,14 @@ type ComplexityRoot struct {
 		UpdatedAt           func(childComplexity int) int
 	}
 
+	IosysCrawlSettingExcludeProduct struct {
+		CreatedAt           func(childComplexity int) int
+		ExternalID          func(childComplexity int) int
+		ID                  func(childComplexity int) int
+		IosysCrawlSettingID func(childComplexity int) int
+		UpdatedAt           func(childComplexity int) int
+	}
+
 	IosysCrawlSettingRequiredKeyword struct {
 		CreatedAt           func(childComplexity int) int
 		ID                  func(childComplexity int) int
@@ -432,6 +596,7 @@ type ComplexityRoot struct {
 		Enabled                             func(childComplexity int) int
 		ID                                  func(childComplexity int) int
 		JanparaCrawlSettingExcludeKeywords  func(childComplexity int) int
+		JanparaCrawlSettingExcludeProducts  func(childComplexity int) int
 		JanparaCrawlSettingRequiredKeywords func(childComplexity int) int
 		Keyword                             func(childComplexity int) int
 		MaxPrice                            func(childComplexity int) int
@@ -445,6 +610,14 @@ type ComplexityRoot struct {
 		ID                    func(childComplexity int) int
 		JanparaCrawlSettingID func(childComplexity int) int
 		Keyword               func(childComplexity int) int
+		UpdatedAt             func(childComplexity int) int
+	}
+
+	JanparaCrawlSettingExcludeProduct struct {
+		CreatedAt             func(childComplexity int) int
+		ExternalID            func(childComplexity int) int
+		ID                    func(childComplexity int) int
+		JanparaCrawlSettingID func(childComplexity int) int
 		UpdatedAt             func(childComplexity int) int
 	}
 
@@ -464,6 +637,7 @@ type ComplexityRoot struct {
 		Keyword                             func(childComplexity int) int
 		MaxPrice                            func(childComplexity int) int
 		MercariCrawlSettingExcludeKeywords  func(childComplexity int) int
+		MercariCrawlSettingExcludeProducts  func(childComplexity int) int
 		MercariCrawlSettingRequiredKeywords func(childComplexity int) int
 		MinPrice                            func(childComplexity int) int
 		ProductID                           func(childComplexity int) int
@@ -474,6 +648,14 @@ type ComplexityRoot struct {
 		CreatedAt             func(childComplexity int) int
 		ID                    func(childComplexity int) int
 		Keyword               func(childComplexity int) int
+		MercariCrawlSettingID func(childComplexity int) int
+		UpdatedAt             func(childComplexity int) int
+	}
+
+	MercariCrawlSettingExcludeProduct struct {
+		CreatedAt             func(childComplexity int) int
+		ExternalID            func(childComplexity int) int
+		ID                    func(childComplexity int) int
 		MercariCrawlSettingID func(childComplexity int) int
 		UpdatedAt             func(childComplexity int) int
 	}
@@ -511,37 +693,52 @@ type ComplexityRoot struct {
 
 	Mutation struct {
 		CreateIosysCrawlSettingExcludeKeyword         func(childComplexity int, input model.CreateIosysCrawlSettingExcludeKeywordInput) int
+		CreateIosysCrawlSettingExcludeProduct         func(childComplexity int, input model.CreateIosysCrawlSettingExcludeProductInput) int
 		CreateIosysCrawlSettingRequiredKeyword        func(childComplexity int, input model.CreateIosysCrawlSettingRequiredKeywordInput) int
 		CreateJanparaCrawlSettingExcludeKeyword       func(childComplexity int, input model.CreateJanparaCrawlSettingExcludeKeywordInput) int
+		CreateJanparaCrawlSettingExcludeProduct       func(childComplexity int, input model.CreateJanparaCrawlSettingExcludeProductInput) int
 		CreateJanparaCrawlSettingRequiredKeyword      func(childComplexity int, input model.CreateJanparaCrawlSettingRequiredKeywordInput) int
 		CreateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.CreateMercariCrawlSettingExcludeKeywordInput) int
+		CreateMercariCrawlSettingExcludeProduct       func(childComplexity int, input model.CreateMercariCrawlSettingExcludeProductInput) int
 		CreateMercariCrawlSettingRequiredKeyword      func(childComplexity int, input model.CreateMercariCrawlSettingRequiredKeywordInput) int
 		CreatePcKoubouCrawlSettingExcludeKeyword      func(childComplexity int, input model.CreatePcKoubouCrawlSettingExcludeKeywordInput) int
+		CreatePcKoubouCrawlSettingExcludeProduct      func(childComplexity int, input model.CreatePcKoubouCrawlSettingExcludeProductInput) int
 		CreatePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) int
 		CreateProduct                                 func(childComplexity int, input model.CreateProductInput) int
 		CreateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) int
+		CreateYahooAuctionCrawlSettingExcludeProduct  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeProductInput) int
 		CreateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) int
 		DeleteIosysCrawlSettingExcludeKeyword         func(childComplexity int, id string, productID string) int
+		DeleteIosysCrawlSettingExcludeProduct         func(childComplexity int, id string, productID string) int
 		DeleteIosysCrawlSettingRequiredKeyword        func(childComplexity int, id string, productID string) int
 		DeleteJanparaCrawlSettingExcludeKeyword       func(childComplexity int, id string, productID string) int
+		DeleteJanparaCrawlSettingExcludeProduct       func(childComplexity int, id string, productID string) int
 		DeleteJanparaCrawlSettingRequiredKeyword      func(childComplexity int, id string, productID string) int
 		DeleteMercariCrawlSettingExcludeKeyword       func(childComplexity int, id string, productID string) int
+		DeleteMercariCrawlSettingExcludeProduct       func(childComplexity int, id string, productID string) int
 		DeleteMercariCrawlSettingRequiredKeyword      func(childComplexity int, id string, productID string) int
 		DeletePcKoubouCrawlSettingExcludeKeyword      func(childComplexity int, id string, productID string) int
+		DeletePcKoubouCrawlSettingExcludeProduct      func(childComplexity int, id string, productID string) int
 		DeletePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, id string, productID string) int
 		DeleteProduct                                 func(childComplexity int, id string) int
 		DeleteYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, id string, productID string) int
+		DeleteYahooAuctionCrawlSettingExcludeProduct  func(childComplexity int, id string, productID string) int
 		DeleteYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, id string, productID string) int
 		UpdateIosysCrawlSettingExcludeKeyword         func(childComplexity int, input model.UpdateIosysCrawlSettingExcludeKeywordInput) int
+		UpdateIosysCrawlSettingExcludeProduct         func(childComplexity int, input model.UpdateIosysCrawlSettingExcludeProductInput) int
 		UpdateIosysCrawlSettingRequiredKeyword        func(childComplexity int, input model.UpdateIosysCrawlSettingRequiredKeywordInput) int
 		UpdateJanparaCrawlSettingExcludeKeyword       func(childComplexity int, input model.UpdateJanparaCrawlSettingExcludeKeywordInput) int
+		UpdateJanparaCrawlSettingExcludeProduct       func(childComplexity int, input model.UpdateJanparaCrawlSettingExcludeProductInput) int
 		UpdateJanparaCrawlSettingRequiredKeyword      func(childComplexity int, input model.UpdateJanparaCrawlSettingRequiredKeywordInput) int
 		UpdateMercariCrawlSettingExcludeKeyword       func(childComplexity int, input model.UpdateMercariCrawlSettingExcludeKeywordInput) int
+		UpdateMercariCrawlSettingExcludeProduct       func(childComplexity int, input model.UpdateMercariCrawlSettingExcludeProductInput) int
 		UpdateMercariCrawlSettingRequiredKeyword      func(childComplexity int, input model.UpdateMercariCrawlSettingRequiredKeywordInput) int
 		UpdatePcKoubouCrawlSettingExcludeKeyword      func(childComplexity int, input model.UpdatePcKoubouCrawlSettingExcludeKeywordInput) int
+		UpdatePcKoubouCrawlSettingExcludeProduct      func(childComplexity int, input model.UpdatePcKoubouCrawlSettingExcludeProductInput) int
 		UpdatePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) int
 		UpdateProduct                                 func(childComplexity int, id string, input model.UpdateProductInput) int
 		UpdateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) int
+		UpdateYahooAuctionCrawlSettingExcludeProduct  func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeProductInput) int
 		UpdateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) int
 	}
 
@@ -553,6 +750,7 @@ type ComplexityRoot struct {
 		MaxPrice                             func(childComplexity int) int
 		MinPrice                             func(childComplexity int) int
 		PcKoubouCrawlSettingExcludeKeywords  func(childComplexity int) int
+		PcKoubouCrawlSettingExcludeProducts  func(childComplexity int) int
 		PcKoubouCrawlSettingRequiredKeywords func(childComplexity int) int
 		ProductID                            func(childComplexity int) int
 		UpdatedAt                            func(childComplexity int) int
@@ -562,6 +760,14 @@ type ComplexityRoot struct {
 		CreatedAt              func(childComplexity int) int
 		ID                     func(childComplexity int) int
 		Keyword                func(childComplexity int) int
+		PcKoubouCrawlSettingID func(childComplexity int) int
+		UpdatedAt              func(childComplexity int) int
+	}
+
+	PcKoubouCrawlSettingExcludeProduct struct {
+		CreatedAt              func(childComplexity int) int
+		ExternalID             func(childComplexity int) int
+		ID                     func(childComplexity int) int
 		PcKoubouCrawlSettingID func(childComplexity int) int
 		UpdatedAt              func(childComplexity int) int
 	}
@@ -627,6 +833,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	UpdateIosysCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingExcludeProductResultSuccess struct {
+		IosysCrawlSettingExcludeProduct func(childComplexity int) int
+		Ok                              func(childComplexity int) int
+	}
+
+	UpdateIosysCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	UpdateIosysCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -654,6 +876,22 @@ type ComplexityRoot struct {
 	}
 
 	UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdateJanparaCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateJanparaCrawlSettingExcludeProductResultSuccess struct {
+		JanparaCrawlSettingExcludeProduct func(childComplexity int) int
+		Ok                                func(childComplexity int) int
+	}
+
+	UpdateJanparaCrawlSettingExcludeProductResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -691,6 +929,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	UpdateMercariCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateMercariCrawlSettingExcludeProductResultSuccess struct {
+		MercariCrawlSettingExcludeProduct func(childComplexity int) int
+		Ok                                func(childComplexity int) int
+	}
+
+	UpdateMercariCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	UpdateMercariCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -718,6 +972,22 @@ type ComplexityRoot struct {
 	}
 
 	UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingExcludeProductResultSuccess struct {
+		Ok                                 func(childComplexity int) int
+		PcKoubouCrawlSettingExcludeProduct func(childComplexity int) int
+	}
+
+	UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -771,6 +1041,22 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	UpdateYahooAuctionCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess struct {
+		Ok                                     func(childComplexity int) int
+		YahooAuctionCrawlSettingExcludeProduct func(childComplexity int) int
+	}
+
+	UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	UpdateYahooAuctionCrawlSettingRequiredKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -798,6 +1084,7 @@ type ComplexityRoot struct {
 		ProductID                                func(childComplexity int) int
 		UpdatedAt                                func(childComplexity int) int
 		YahooAuctionCrawlSettingExcludeKeywords  func(childComplexity int) int
+		YahooAuctionCrawlSettingExcludeProducts  func(childComplexity int) int
 		YahooAuctionCrawlSettingRequiredKeywords func(childComplexity int) int
 	}
 
@@ -805,6 +1092,14 @@ type ComplexityRoot struct {
 		CreatedAt                  func(childComplexity int) int
 		ID                         func(childComplexity int) int
 		Keyword                    func(childComplexity int) int
+		UpdatedAt                  func(childComplexity int) int
+		YahooAuctionCrawlSettingID func(childComplexity int) int
+	}
+
+	YahooAuctionCrawlSettingExcludeProduct struct {
+		CreatedAt                  func(childComplexity int) int
+		ExternalID                 func(childComplexity int) int
+		ID                         func(childComplexity int) int
 		UpdatedAt                  func(childComplexity int) int
 		YahooAuctionCrawlSettingID func(childComplexity int) int
 	}
@@ -853,14 +1148,17 @@ type ComplexityRoot struct {
 
 type IosysCrawlSettingResolver interface {
 	IosysCrawlSettingExcludeKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingExcludeKeyword, error)
+	IosysCrawlSettingExcludeProducts(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingExcludeProduct, error)
 	IosysCrawlSettingRequiredKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingRequiredKeyword, error)
 }
 type JanparaCrawlSettingResolver interface {
 	JanparaCrawlSettingExcludeKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeKeyword, error)
+	JanparaCrawlSettingExcludeProducts(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeProduct, error)
 	JanparaCrawlSettingRequiredKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingRequiredKeyword, error)
 }
 type MercariCrawlSettingResolver interface {
 	MercariCrawlSettingExcludeKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingExcludeKeyword, error)
+	MercariCrawlSettingExcludeProducts(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingExcludeProduct, error)
 	MercariCrawlSettingRequiredKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingRequiredKeyword, error)
 }
 type MutationResolver interface {
@@ -870,36 +1168,52 @@ type MutationResolver interface {
 	CreateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) (model.CreateYahooAuctionCrawlSettingExcludeKeywordResult, error)
 	UpdateYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) (model.UpdateYahooAuctionCrawlSettingExcludeKeywordResult, error)
 	DeleteYahooAuctionCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult, error)
+	CreateYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, input model.CreateYahooAuctionCrawlSettingExcludeProductInput) (model.CreateYahooAuctionCrawlSettingExcludeProductResult, error)
+	UpdateYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingExcludeProductInput) (model.UpdateYahooAuctionCrawlSettingExcludeProductResult, error)
+	DeleteYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingExcludeProductResult, error)
 	CreateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) (model.CreateYahooAuctionCrawlSettingRequiredKeywordResult, error)
 	UpdateYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) (model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult, error)
 	DeleteYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult, error)
 	CreateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateMercariCrawlSettingExcludeKeywordInput) (model.CreateMercariCrawlSettingExcludeKeywordResult, error)
 	UpdateMercariCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingExcludeKeywordInput) (model.UpdateMercariCrawlSettingExcludeKeywordResult, error)
 	DeleteMercariCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeKeywordResult, error)
+	CreateMercariCrawlSettingExcludeProduct(ctx context.Context, input model.CreateMercariCrawlSettingExcludeProductInput) (model.CreateMercariCrawlSettingExcludeProductResult, error)
+	UpdateMercariCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateMercariCrawlSettingExcludeProductInput) (model.UpdateMercariCrawlSettingExcludeProductResult, error)
+	DeleteMercariCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingExcludeProductResult, error)
 	CreateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateMercariCrawlSettingRequiredKeywordInput) (model.CreateMercariCrawlSettingRequiredKeywordResult, error)
 	UpdateMercariCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateMercariCrawlSettingRequiredKeywordInput) (model.UpdateMercariCrawlSettingRequiredKeywordResult, error)
 	DeleteMercariCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteMercariCrawlSettingRequiredKeywordResult, error)
 	CreateJanparaCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateJanparaCrawlSettingExcludeKeywordInput) (model.CreateJanparaCrawlSettingExcludeKeywordResult, error)
 	UpdateJanparaCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateJanparaCrawlSettingExcludeKeywordInput) (model.UpdateJanparaCrawlSettingExcludeKeywordResult, error)
 	DeleteJanparaCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingExcludeKeywordResult, error)
+	CreateJanparaCrawlSettingExcludeProduct(ctx context.Context, input model.CreateJanparaCrawlSettingExcludeProductInput) (model.CreateJanparaCrawlSettingExcludeProductResult, error)
+	UpdateJanparaCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateJanparaCrawlSettingExcludeProductInput) (model.UpdateJanparaCrawlSettingExcludeProductResult, error)
+	DeleteJanparaCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingExcludeProductResult, error)
 	CreateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateJanparaCrawlSettingRequiredKeywordInput) (model.CreateJanparaCrawlSettingRequiredKeywordResult, error)
 	UpdateJanparaCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateJanparaCrawlSettingRequiredKeywordInput) (model.UpdateJanparaCrawlSettingRequiredKeywordResult, error)
 	DeleteJanparaCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteJanparaCrawlSettingRequiredKeywordResult, error)
 	CreateIosysCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateIosysCrawlSettingExcludeKeywordInput) (model.CreateIosysCrawlSettingExcludeKeywordResult, error)
 	UpdateIosysCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingExcludeKeywordInput) (model.UpdateIosysCrawlSettingExcludeKeywordResult, error)
 	DeleteIosysCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingExcludeKeywordResult, error)
+	CreateIosysCrawlSettingExcludeProduct(ctx context.Context, input model.CreateIosysCrawlSettingExcludeProductInput) (model.CreateIosysCrawlSettingExcludeProductResult, error)
+	UpdateIosysCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateIosysCrawlSettingExcludeProductInput) (model.UpdateIosysCrawlSettingExcludeProductResult, error)
+	DeleteIosysCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingExcludeProductResult, error)
 	CreateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateIosysCrawlSettingRequiredKeywordInput) (model.CreateIosysCrawlSettingRequiredKeywordResult, error)
 	UpdateIosysCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateIosysCrawlSettingRequiredKeywordInput) (model.UpdateIosysCrawlSettingRequiredKeywordResult, error)
 	DeleteIosysCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteIosysCrawlSettingRequiredKeywordResult, error)
 	CreatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingExcludeKeywordInput) (model.CreatePcKoubouCrawlSettingExcludeKeywordResult, error)
 	UpdatePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingExcludeKeywordInput) (model.UpdatePcKoubouCrawlSettingExcludeKeywordResult, error)
 	DeletePcKoubouCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingExcludeKeywordResult, error)
+	CreatePcKoubouCrawlSettingExcludeProduct(ctx context.Context, input model.CreatePcKoubouCrawlSettingExcludeProductInput) (model.CreatePcKoubouCrawlSettingExcludeProductResult, error)
+	UpdatePcKoubouCrawlSettingExcludeProduct(ctx context.Context, input model.UpdatePcKoubouCrawlSettingExcludeProductInput) (model.UpdatePcKoubouCrawlSettingExcludeProductResult, error)
+	DeletePcKoubouCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingExcludeProductResult, error)
 	CreatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) (model.CreatePcKoubouCrawlSettingRequiredKeywordResult, error)
 	UpdatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) (model.UpdatePcKoubouCrawlSettingRequiredKeywordResult, error)
 	DeletePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingRequiredKeywordResult, error)
 }
 type PcKoubouCrawlSettingResolver interface {
 	PcKoubouCrawlSettingExcludeKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeKeyword, error)
+	PcKoubouCrawlSettingExcludeProducts(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeProduct, error)
 	PcKoubouCrawlSettingRequiredKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingRequiredKeyword, error)
 }
 type ProductResolver interface {
@@ -922,6 +1236,7 @@ type QueryResolver interface {
 }
 type YahooAuctionCrawlSettingResolver interface {
 	YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error)
+	YahooAuctionCrawlSettingExcludeProducts(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeProduct, error)
 	YahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingRequiredKeyword, error)
 }
 
@@ -992,6 +1307,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.CreateIosysCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultError.error":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultSuccess.iosysCrawlSettingExcludeProduct":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultSuccess.IosysCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultSuccess.IosysCrawlSettingExcludeProduct(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "CreateIosysCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.CreateIosysCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateIosysCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
 
 	case "CreateIosysCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.CreateIosysCrawlSettingRequiredKeywordResultError.Error == nil {
@@ -1091,6 +1455,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "CreateJanparaCrawlSettingExcludeProductResultError.error":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "CreateJanparaCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "CreateJanparaCrawlSettingExcludeProductResultSuccess.janparaCrawlSettingExcludeProduct":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultSuccess.JanparaCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultSuccess.JanparaCrawlSettingExcludeProduct(childComplexity), true
+
+	case "CreateJanparaCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "CreateJanparaCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "CreateJanparaCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "CreateJanparaCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.CreateJanparaCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateJanparaCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "CreateJanparaCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.CreateJanparaCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -1189,6 +1602,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateMercariCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "CreateMercariCrawlSettingExcludeProductResultError.error":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "CreateMercariCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "CreateMercariCrawlSettingExcludeProductResultSuccess.mercariCrawlSettingExcludeProduct":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultSuccess.MercariCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultSuccess.MercariCrawlSettingExcludeProduct(childComplexity), true
+
+	case "CreateMercariCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "CreateMercariCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "CreateMercariCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "CreateMercariCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.CreateMercariCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateMercariCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "CreateMercariCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.CreateMercariCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -1286,6 +1748,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultError.error":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultSuccess.pcKoubouCrawlSettingExcludeProduct":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultSuccess.PcKoubouCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultSuccess.PcKoubouCrawlSettingExcludeProduct(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
 
 	case "CreatePcKoubouCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.CreatePcKoubouCrawlSettingRequiredKeywordResultError.Error == nil {
@@ -1434,6 +1945,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultError.error":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultSuccess.yahooAuctionCrawlSettingExcludeProduct":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess.YahooAuctionCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess.YahooAuctionCrawlSettingExcludeProduct(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "CreateYahooAuctionCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.CreateYahooAuctionCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -1525,6 +2085,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "DeleteIosysCrawlSettingExcludeProductResultError.error":
+		if e.complexity.DeleteIosysCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.DeleteIosysCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.DeleteIosysCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.DeleteIosysCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.DeleteIosysCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteIosysCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.DeleteIosysCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteIosysCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "DeleteIosysCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.DeleteIosysCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -1608,6 +2210,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeleteJanparaCrawlSettingExcludeProductResultError.error":
+		if e.complexity.DeleteJanparaCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteJanparaCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "DeleteJanparaCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.DeleteJanparaCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteJanparaCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "DeleteJanparaCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.DeleteJanparaCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteJanparaCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
 
 	case "DeleteJanparaCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.DeleteJanparaCrawlSettingRequiredKeywordResultError.Error == nil {
@@ -1693,6 +2337,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "DeleteMercariCrawlSettingExcludeProductResultError.error":
+		if e.complexity.DeleteMercariCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "DeleteMercariCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.DeleteMercariCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "DeleteMercariCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.DeleteMercariCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "DeleteMercariCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.DeleteMercariCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteMercariCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.DeleteMercariCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteMercariCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.DeleteMercariCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteMercariCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "DeleteMercariCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.DeleteMercariCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -1776,6 +2462,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeProductResultError.error":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
 
 	case "DeletePcKoubouCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.DeletePcKoubouCrawlSettingRequiredKeywordResultError.Error == nil {
@@ -1903,6 +2631,48 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "DeleteYahooAuctionCrawlSettingExcludeProductResultError.error":
+		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -1987,6 +2757,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.IosysCrawlSetting.IosysCrawlSettingExcludeKeywords(childComplexity), true
 
+	case "IosysCrawlSetting.iosysCrawlSettingExcludeProducts":
+		if e.complexity.IosysCrawlSetting.IosysCrawlSettingExcludeProducts == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSetting.IosysCrawlSettingExcludeProducts(childComplexity), true
+
 	case "IosysCrawlSetting.iosysCrawlSettingRequiredKeywords":
 		if e.complexity.IosysCrawlSetting.IosysCrawlSettingRequiredKeywords == nil {
 			break
@@ -2064,6 +2841,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.IosysCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
 
+	case "IosysCrawlSettingExcludeProduct.createdAt":
+		if e.complexity.IosysCrawlSettingExcludeProduct.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeProduct.CreatedAt(childComplexity), true
+
+	case "IosysCrawlSettingExcludeProduct.externalId":
+		if e.complexity.IosysCrawlSettingExcludeProduct.ExternalID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeProduct.ExternalID(childComplexity), true
+
+	case "IosysCrawlSettingExcludeProduct.id":
+		if e.complexity.IosysCrawlSettingExcludeProduct.ID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeProduct.ID(childComplexity), true
+
+	case "IosysCrawlSettingExcludeProduct.iosysCrawlSettingId":
+		if e.complexity.IosysCrawlSettingExcludeProduct.IosysCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeProduct.IosysCrawlSettingID(childComplexity), true
+
+	case "IosysCrawlSettingExcludeProduct.updatedAt":
+		if e.complexity.IosysCrawlSettingExcludeProduct.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.IosysCrawlSettingExcludeProduct.UpdatedAt(childComplexity), true
+
 	case "IosysCrawlSettingRequiredKeyword.createdAt":
 		if e.complexity.IosysCrawlSettingRequiredKeyword.CreatedAt == nil {
 			break
@@ -2126,6 +2938,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.JanparaCrawlSetting.JanparaCrawlSettingExcludeKeywords(childComplexity), true
+
+	case "JanparaCrawlSetting.janparaCrawlSettingExcludeProducts":
+		if e.complexity.JanparaCrawlSetting.JanparaCrawlSettingExcludeProducts == nil {
+			break
+		}
+
+		return e.complexity.JanparaCrawlSetting.JanparaCrawlSettingExcludeProducts(childComplexity), true
 
 	case "JanparaCrawlSetting.janparaCrawlSettingRequiredKeywords":
 		if e.complexity.JanparaCrawlSetting.JanparaCrawlSettingRequiredKeywords == nil {
@@ -2203,6 +3022,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.JanparaCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "JanparaCrawlSettingExcludeProduct.createdAt":
+		if e.complexity.JanparaCrawlSettingExcludeProduct.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.JanparaCrawlSettingExcludeProduct.CreatedAt(childComplexity), true
+
+	case "JanparaCrawlSettingExcludeProduct.externalId":
+		if e.complexity.JanparaCrawlSettingExcludeProduct.ExternalID == nil {
+			break
+		}
+
+		return e.complexity.JanparaCrawlSettingExcludeProduct.ExternalID(childComplexity), true
+
+	case "JanparaCrawlSettingExcludeProduct.id":
+		if e.complexity.JanparaCrawlSettingExcludeProduct.ID == nil {
+			break
+		}
+
+		return e.complexity.JanparaCrawlSettingExcludeProduct.ID(childComplexity), true
+
+	case "JanparaCrawlSettingExcludeProduct.janparaCrawlSettingId":
+		if e.complexity.JanparaCrawlSettingExcludeProduct.JanparaCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.JanparaCrawlSettingExcludeProduct.JanparaCrawlSettingID(childComplexity), true
+
+	case "JanparaCrawlSettingExcludeProduct.updatedAt":
+		if e.complexity.JanparaCrawlSettingExcludeProduct.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.JanparaCrawlSettingExcludeProduct.UpdatedAt(childComplexity), true
 
 	case "JanparaCrawlSettingRequiredKeyword.createdAt":
 		if e.complexity.JanparaCrawlSettingRequiredKeyword.CreatedAt == nil {
@@ -2288,6 +3142,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.MercariCrawlSetting.MercariCrawlSettingExcludeKeywords(childComplexity), true
 
+	case "MercariCrawlSetting.mercariCrawlSettingExcludeProducts":
+		if e.complexity.MercariCrawlSetting.MercariCrawlSettingExcludeProducts == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSetting.MercariCrawlSettingExcludeProducts(childComplexity), true
+
 	case "MercariCrawlSetting.mercariCrawlSettingRequiredKeywords":
 		if e.complexity.MercariCrawlSetting.MercariCrawlSettingRequiredKeywords == nil {
 			break
@@ -2350,6 +3211,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.MercariCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "MercariCrawlSettingExcludeProduct.createdAt":
+		if e.complexity.MercariCrawlSettingExcludeProduct.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingExcludeProduct.CreatedAt(childComplexity), true
+
+	case "MercariCrawlSettingExcludeProduct.externalId":
+		if e.complexity.MercariCrawlSettingExcludeProduct.ExternalID == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingExcludeProduct.ExternalID(childComplexity), true
+
+	case "MercariCrawlSettingExcludeProduct.id":
+		if e.complexity.MercariCrawlSettingExcludeProduct.ID == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingExcludeProduct.ID(childComplexity), true
+
+	case "MercariCrawlSettingExcludeProduct.mercariCrawlSettingId":
+		if e.complexity.MercariCrawlSettingExcludeProduct.MercariCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingExcludeProduct.MercariCrawlSettingID(childComplexity), true
+
+	case "MercariCrawlSettingExcludeProduct.updatedAt":
+		if e.complexity.MercariCrawlSettingExcludeProduct.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.MercariCrawlSettingExcludeProduct.UpdatedAt(childComplexity), true
 
 	case "MercariCrawlSettingRequiredKeyword.createdAt":
 		if e.complexity.MercariCrawlSettingRequiredKeyword.CreatedAt == nil {
@@ -2517,6 +3413,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateIosysCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateIosysCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.createIosysCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.CreateIosysCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createIosysCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateIosysCrawlSettingExcludeProduct(childComplexity, args["input"].(model.CreateIosysCrawlSettingExcludeProductInput)), true
+
 	case "Mutation.createIosysCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.CreateIosysCrawlSettingRequiredKeyword == nil {
 			break
@@ -2540,6 +3448,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.CreateJanparaCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateJanparaCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.createJanparaCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.CreateJanparaCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createJanparaCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateJanparaCrawlSettingExcludeProduct(childComplexity, args["input"].(model.CreateJanparaCrawlSettingExcludeProductInput)), true
 
 	case "Mutation.createJanparaCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.CreateJanparaCrawlSettingRequiredKeyword == nil {
@@ -2565,6 +3485,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateMercariCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateMercariCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.createMercariCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.CreateMercariCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createMercariCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateMercariCrawlSettingExcludeProduct(childComplexity, args["input"].(model.CreateMercariCrawlSettingExcludeProductInput)), true
+
 	case "Mutation.createMercariCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.CreateMercariCrawlSettingRequiredKeyword == nil {
 			break
@@ -2588,6 +3520,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.CreatePcKoubouCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreatePcKoubouCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.createPcKoubouCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.CreatePcKoubouCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createPcKoubouCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreatePcKoubouCrawlSettingExcludeProduct(childComplexity, args["input"].(model.CreatePcKoubouCrawlSettingExcludeProductInput)), true
 
 	case "Mutation.createPcKoubouCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.CreatePcKoubouCrawlSettingRequiredKeyword == nil {
@@ -2625,6 +3569,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateYahooAuctionCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.createYahooAuctionCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createYahooAuctionCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeProduct(childComplexity, args["input"].(model.CreateYahooAuctionCrawlSettingExcludeProductInput)), true
+
 	case "Mutation.createYahooAuctionCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.CreateYahooAuctionCrawlSettingRequiredKeyword == nil {
 			break
@@ -2648,6 +3604,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.DeleteIosysCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deleteIosysCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.DeleteIosysCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteIosysCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteIosysCrawlSettingExcludeProduct(childComplexity, args["id"].(string), args["productId"].(string)), true
 
 	case "Mutation.deleteIosysCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.DeleteIosysCrawlSettingRequiredKeyword == nil {
@@ -2673,6 +3641,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.DeleteJanparaCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
 
+	case "Mutation.deleteJanparaCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.DeleteJanparaCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteJanparaCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteJanparaCrawlSettingExcludeProduct(childComplexity, args["id"].(string), args["productId"].(string)), true
+
 	case "Mutation.deleteJanparaCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.DeleteJanparaCrawlSettingRequiredKeyword == nil {
 			break
@@ -2697,6 +3677,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.DeleteMercariCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
 
+	case "Mutation.deleteMercariCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.DeleteMercariCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteMercariCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteMercariCrawlSettingExcludeProduct(childComplexity, args["id"].(string), args["productId"].(string)), true
+
 	case "Mutation.deleteMercariCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.DeleteMercariCrawlSettingRequiredKeyword == nil {
 			break
@@ -2720,6 +3712,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.DeletePcKoubouCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deletePcKoubouCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.DeletePcKoubouCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deletePcKoubouCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeletePcKoubouCrawlSettingExcludeProduct(childComplexity, args["id"].(string), args["productId"].(string)), true
 
 	case "Mutation.deletePcKoubouCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.DeletePcKoubouCrawlSettingRequiredKeyword == nil {
@@ -2757,6 +3761,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.DeleteYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
 
+	case "Mutation.deleteYahooAuctionCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.DeleteYahooAuctionCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteYahooAuctionCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteYahooAuctionCrawlSettingExcludeProduct(childComplexity, args["id"].(string), args["productId"].(string)), true
+
 	case "Mutation.deleteYahooAuctionCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.DeleteYahooAuctionCrawlSettingRequiredKeyword == nil {
 			break
@@ -2780,6 +3796,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdateIosysCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateIosysCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updateIosysCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.UpdateIosysCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateIosysCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateIosysCrawlSettingExcludeProduct(childComplexity, args["input"].(model.UpdateIosysCrawlSettingExcludeProductInput)), true
 
 	case "Mutation.updateIosysCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.UpdateIosysCrawlSettingRequiredKeyword == nil {
@@ -2805,6 +3833,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.UpdateJanparaCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateJanparaCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.updateJanparaCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.UpdateJanparaCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateJanparaCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateJanparaCrawlSettingExcludeProduct(childComplexity, args["input"].(model.UpdateJanparaCrawlSettingExcludeProductInput)), true
+
 	case "Mutation.updateJanparaCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.UpdateJanparaCrawlSettingRequiredKeyword == nil {
 			break
@@ -2829,6 +3869,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.UpdateMercariCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateMercariCrawlSettingExcludeKeywordInput)), true
 
+	case "Mutation.updateMercariCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.UpdateMercariCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateMercariCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateMercariCrawlSettingExcludeProduct(childComplexity, args["input"].(model.UpdateMercariCrawlSettingExcludeProductInput)), true
+
 	case "Mutation.updateMercariCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.UpdateMercariCrawlSettingRequiredKeyword == nil {
 			break
@@ -2852,6 +3904,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdatePcKoubouCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdatePcKoubouCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updatePcKoubouCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.UpdatePcKoubouCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updatePcKoubouCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdatePcKoubouCrawlSettingExcludeProduct(childComplexity, args["input"].(model.UpdatePcKoubouCrawlSettingExcludeProductInput)), true
 
 	case "Mutation.updatePcKoubouCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.UpdatePcKoubouCrawlSettingRequiredKeyword == nil {
@@ -2888,6 +3952,18 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdateYahooAuctionCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updateYahooAuctionCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.UpdateYahooAuctionCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateYahooAuctionCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateYahooAuctionCrawlSettingExcludeProduct(childComplexity, args["input"].(model.UpdateYahooAuctionCrawlSettingExcludeProductInput)), true
 
 	case "Mutation.updateYahooAuctionCrawlSettingRequiredKeyword":
 		if e.complexity.Mutation.UpdateYahooAuctionCrawlSettingRequiredKeyword == nil {
@@ -2950,6 +4026,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingExcludeKeywords(childComplexity), true
 
+	case "PcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeProducts":
+		if e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingExcludeProducts == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingExcludeProducts(childComplexity), true
+
 	case "PcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords":
 		if e.complexity.PcKoubouCrawlSetting.PcKoubouCrawlSettingRequiredKeywords == nil {
 			break
@@ -3005,6 +4088,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.PcKoubouCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeProduct.createdAt":
+		if e.complexity.PcKoubouCrawlSettingExcludeProduct.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeProduct.CreatedAt(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeProduct.externalId":
+		if e.complexity.PcKoubouCrawlSettingExcludeProduct.ExternalID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeProduct.ExternalID(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeProduct.id":
+		if e.complexity.PcKoubouCrawlSettingExcludeProduct.ID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeProduct.ID(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeProduct.pcKoubouCrawlSettingId":
+		if e.complexity.PcKoubouCrawlSettingExcludeProduct.PcKoubouCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeProduct.PcKoubouCrawlSettingID(childComplexity), true
+
+	case "PcKoubouCrawlSettingExcludeProduct.updatedAt":
+		if e.complexity.PcKoubouCrawlSettingExcludeProduct.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.PcKoubouCrawlSettingExcludeProduct.UpdatedAt(childComplexity), true
 
 	case "PcKoubouCrawlSettingRequiredKeyword.createdAt":
 		if e.complexity.PcKoubouCrawlSettingRequiredKeyword.CreatedAt == nil {
@@ -3316,6 +4434,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "UpdateIosysCrawlSettingExcludeProductResultError.error":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeProductResultSuccess.iosysCrawlSettingExcludeProduct":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultSuccess.IosysCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultSuccess.IosysCrawlSettingExcludeProduct(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateIosysCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.UpdateIosysCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateIosysCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "UpdateIosysCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.UpdateIosysCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -3413,6 +4580,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultError.error":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultSuccess.janparaCrawlSettingExcludeProduct":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultSuccess.JanparaCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultSuccess.JanparaCrawlSettingExcludeProduct(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
 
 	case "UpdateJanparaCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.UpdateJanparaCrawlSettingRequiredKeywordResultError.Error == nil {
@@ -3512,6 +4728,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "UpdateMercariCrawlSettingExcludeProductResultError.error":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "UpdateMercariCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "UpdateMercariCrawlSettingExcludeProductResultSuccess.mercariCrawlSettingExcludeProduct":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultSuccess.MercariCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultSuccess.MercariCrawlSettingExcludeProduct(childComplexity), true
+
+	case "UpdateMercariCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "UpdateMercariCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateMercariCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateMercariCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.UpdateMercariCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateMercariCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "UpdateMercariCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.UpdateMercariCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -3609,6 +4874,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultError.error":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultSuccess.pcKoubouCrawlSettingExcludeProduct":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess.PcKoubouCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess.PcKoubouCrawlSettingExcludeProduct(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
 
 	case "UpdatePcKoubouCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.UpdatePcKoubouCrawlSettingRequiredKeywordResultError.Error == nil {
@@ -3757,6 +5071,55 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
 
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultError.error":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess.yahooAuctionCrawlSettingExcludeProduct":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess.YahooAuctionCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess.YahooAuctionCrawlSettingExcludeProduct(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
 	case "UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.error":
 		if e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError.Error == nil {
 			break
@@ -3876,6 +5239,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingExcludeKeywords(childComplexity), true
 
+	case "YahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeProducts":
+		if e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingExcludeProducts == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingExcludeProducts(childComplexity), true
+
 	case "YahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords":
 		if e.complexity.YahooAuctionCrawlSetting.YahooAuctionCrawlSettingRequiredKeywords == nil {
 			break
@@ -3917,6 +5287,41 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.YahooAuctionCrawlSettingExcludeKeyword.YahooAuctionCrawlSettingID(childComplexity), true
+
+	case "YahooAuctionCrawlSettingExcludeProduct.createdAt":
+		if e.complexity.YahooAuctionCrawlSettingExcludeProduct.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingExcludeProduct.CreatedAt(childComplexity), true
+
+	case "YahooAuctionCrawlSettingExcludeProduct.externalId":
+		if e.complexity.YahooAuctionCrawlSettingExcludeProduct.ExternalID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingExcludeProduct.ExternalID(childComplexity), true
+
+	case "YahooAuctionCrawlSettingExcludeProduct.id":
+		if e.complexity.YahooAuctionCrawlSettingExcludeProduct.ID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingExcludeProduct.ID(childComplexity), true
+
+	case "YahooAuctionCrawlSettingExcludeProduct.updatedAt":
+		if e.complexity.YahooAuctionCrawlSettingExcludeProduct.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingExcludeProduct.UpdatedAt(childComplexity), true
+
+	case "YahooAuctionCrawlSettingExcludeProduct.yahooAuctionCrawlSettingId":
+		if e.complexity.YahooAuctionCrawlSettingExcludeProduct.YahooAuctionCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.YahooAuctionCrawlSettingExcludeProduct.YahooAuctionCrawlSettingID(childComplexity), true
 
 	case "YahooAuctionCrawlSettingRequiredKeyword.createdAt":
 		if e.complexity.YahooAuctionCrawlSettingRequiredKeyword.CreatedAt == nil {
@@ -4130,35 +5535,45 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 	ec := executionContext{rc, e, 0, 0, make(chan graphql.DeferredResult)}
 	inputUnmarshalMap := graphql.BuildUnmarshalerMap(
 		ec.unmarshalInputCreateIosysCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreateIosysCrawlSettingExcludeProductInput,
 		ec.unmarshalInputCreateIosysCrawlSettingInput,
 		ec.unmarshalInputCreateIosysCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateJanparaCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreateJanparaCrawlSettingExcludeProductInput,
 		ec.unmarshalInputCreateJanparaCrawlSettingInput,
 		ec.unmarshalInputCreateJanparaCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateMercariCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreateMercariCrawlSettingExcludeProductInput,
 		ec.unmarshalInputCreateMercariCrawlSettingInput,
 		ec.unmarshalInputCreateMercariCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreatePcKoubouCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreatePcKoubouCrawlSettingExcludeProductInput,
 		ec.unmarshalInputCreatePcKoubouCrawlSettingInput,
 		ec.unmarshalInputCreatePcKoubouCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateProductInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeProductInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateIosysCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdateIosysCrawlSettingExcludeProductInput,
 		ec.unmarshalInputUpdateIosysCrawlSettingInput,
 		ec.unmarshalInputUpdateIosysCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateJanparaCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdateJanparaCrawlSettingExcludeProductInput,
 		ec.unmarshalInputUpdateJanparaCrawlSettingInput,
 		ec.unmarshalInputUpdateJanparaCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdateMercariCrawlSettingExcludeProductInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingInput,
 		ec.unmarshalInputUpdateMercariCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdatePcKoubouCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdatePcKoubouCrawlSettingExcludeProductInput,
 		ec.unmarshalInputUpdatePcKoubouCrawlSettingInput,
 		ec.unmarshalInputUpdatePcKoubouCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateProductInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeProductInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingRequiredKeywordInput,
 	)
@@ -4276,6 +5691,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteYahooAuctionCrawlSettingExcludeKeywordResult!
+  createYahooAuctionCrawlSettingExcludeProduct(
+    input: CreateYahooAuctionCrawlSettingExcludeProductInput!
+  ): CreateYahooAuctionCrawlSettingExcludeProductResult!
+  updateYahooAuctionCrawlSettingExcludeProduct(
+    input: UpdateYahooAuctionCrawlSettingExcludeProductInput!
+  ): UpdateYahooAuctionCrawlSettingExcludeProductResult!
+  deleteYahooAuctionCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteYahooAuctionCrawlSettingExcludeProductResult!
   createYahooAuctionCrawlSettingRequiredKeyword(
     input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
   ): CreateYahooAuctionCrawlSettingRequiredKeywordResult!
@@ -4296,6 +5721,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteMercariCrawlSettingExcludeKeywordResult!
+  createMercariCrawlSettingExcludeProduct(
+    input: CreateMercariCrawlSettingExcludeProductInput!
+  ): CreateMercariCrawlSettingExcludeProductResult!
+  updateMercariCrawlSettingExcludeProduct(
+    input: UpdateMercariCrawlSettingExcludeProductInput!
+  ): UpdateMercariCrawlSettingExcludeProductResult!
+  deleteMercariCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteMercariCrawlSettingExcludeProductResult!
   createMercariCrawlSettingRequiredKeyword(
     input: CreateMercariCrawlSettingRequiredKeywordInput!
   ): CreateMercariCrawlSettingRequiredKeywordResult!
@@ -4316,6 +5751,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteJanparaCrawlSettingExcludeKeywordResult!
+  createJanparaCrawlSettingExcludeProduct(
+    input: CreateJanparaCrawlSettingExcludeProductInput!
+  ): CreateJanparaCrawlSettingExcludeProductResult!
+  updateJanparaCrawlSettingExcludeProduct(
+    input: UpdateJanparaCrawlSettingExcludeProductInput!
+  ): UpdateJanparaCrawlSettingExcludeProductResult!
+  deleteJanparaCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteJanparaCrawlSettingExcludeProductResult!
   createJanparaCrawlSettingRequiredKeyword(
     input: CreateJanparaCrawlSettingRequiredKeywordInput!
   ): CreateJanparaCrawlSettingRequiredKeywordResult!
@@ -4336,6 +5781,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeleteIosysCrawlSettingExcludeKeywordResult!
+  createIosysCrawlSettingExcludeProduct(
+    input: CreateIosysCrawlSettingExcludeProductInput!
+  ): CreateIosysCrawlSettingExcludeProductResult!
+  updateIosysCrawlSettingExcludeProduct(
+    input: UpdateIosysCrawlSettingExcludeProductInput!
+  ): UpdateIosysCrawlSettingExcludeProductResult!
+  deleteIosysCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteIosysCrawlSettingExcludeProductResult!
   createIosysCrawlSettingRequiredKeyword(
     input: CreateIosysCrawlSettingRequiredKeywordInput!
   ): CreateIosysCrawlSettingRequiredKeywordResult!
@@ -4356,6 +5811,16 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeletePcKoubouCrawlSettingExcludeKeywordResult!
+  createPcKoubouCrawlSettingExcludeProduct(
+    input: CreatePcKoubouCrawlSettingExcludeProductInput!
+  ): CreatePcKoubouCrawlSettingExcludeProductResult!
+  updatePcKoubouCrawlSettingExcludeProduct(
+    input: UpdatePcKoubouCrawlSettingExcludeProductInput!
+  ): UpdatePcKoubouCrawlSettingExcludeProductResult!
+  deletePcKoubouCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeletePcKoubouCrawlSettingExcludeProductResult!
   createPcKoubouCrawlSettingRequiredKeyword(
     input: CreatePcKoubouCrawlSettingRequiredKeywordInput!
   ): CreatePcKoubouCrawlSettingRequiredKeywordResult!
@@ -4631,6 +6096,91 @@ type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed implemen
   details: [ErrorDetail!]!
 }
 
+## CreateYahooAuctionCrawlSettingExcludeProduct ##
+
+input CreateYahooAuctionCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateYahooAuctionCrawlSettingExcludeProductResult =
+    CreateYahooAuctionCrawlSettingExcludeProductResultSuccess
+  | CreateYahooAuctionCrawlSettingExcludeProductResultError
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingExcludeProduct: YahooAuctionCrawlSettingExcludeProduct!
+}
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateYahooAuctionCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateYahooAuctionCrawlSettingExcludeProductResultErrors =
+    CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+
+type CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateYahooAuctionCrawlSettingExcludeProduct ##
+
+input UpdateYahooAuctionCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateYahooAuctionCrawlSettingExcludeProductResult =
+    UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess
+  | UpdateYahooAuctionCrawlSettingExcludeProductResultError
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  yahooAuctionCrawlSettingExcludeProduct: YahooAuctionCrawlSettingExcludeProduct!
+}
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateYahooAuctionCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateYahooAuctionCrawlSettingExcludeProductResultErrors =
+    UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteYahooAuctionCrawlSettingExcludeProduct ##
+
+union DeleteYahooAuctionCrawlSettingExcludeProductResult =
+    DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess
+  | DeleteYahooAuctionCrawlSettingExcludeProductResultError
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteYahooAuctionCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteYahooAuctionCrawlSettingExcludeProductResultErrors =
+    DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateYahooAuctionCrawlSettingRequiredKeyword ##
 
 input CreateYahooAuctionCrawlSettingRequiredKeywordInput {
@@ -4796,6 +6346,91 @@ union DeleteMercariCrawlSettingExcludeKeywordResultErrors =
     DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed
 
 type DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateMercariCrawlSettingExcludeProduct ##
+
+input CreateMercariCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateMercariCrawlSettingExcludeProductResult =
+    CreateMercariCrawlSettingExcludeProductResultSuccess
+  | CreateMercariCrawlSettingExcludeProductResultError
+
+type CreateMercariCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingExcludeProduct: MercariCrawlSettingExcludeProduct!
+}
+
+type CreateMercariCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateMercariCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateMercariCrawlSettingExcludeProductResultErrors =
+    CreateMercariCrawlSettingExcludeProductResultValidationFailed
+
+type CreateMercariCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateMercariCrawlSettingExcludeProduct ##
+
+input UpdateMercariCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateMercariCrawlSettingExcludeProductResult =
+    UpdateMercariCrawlSettingExcludeProductResultSuccess
+  | UpdateMercariCrawlSettingExcludeProductResultError
+
+type UpdateMercariCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  mercariCrawlSettingExcludeProduct: MercariCrawlSettingExcludeProduct!
+}
+
+type UpdateMercariCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateMercariCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateMercariCrawlSettingExcludeProductResultErrors =
+    UpdateMercariCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateMercariCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteMercariCrawlSettingExcludeProduct ##
+
+union DeleteMercariCrawlSettingExcludeProductResult =
+    DeleteMercariCrawlSettingExcludeProductResultSuccess
+  | DeleteMercariCrawlSettingExcludeProductResultError
+
+type DeleteMercariCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteMercariCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteMercariCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteMercariCrawlSettingExcludeProductResultErrors =
+    DeleteMercariCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteMercariCrawlSettingExcludeProductResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!
@@ -4971,6 +6606,91 @@ type DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed implements Us
   details: [ErrorDetail!]!
 }
 
+## CreateJanparaCrawlSettingExcludeProduct ##
+
+input CreateJanparaCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateJanparaCrawlSettingExcludeProductResult =
+    CreateJanparaCrawlSettingExcludeProductResultSuccess
+  | CreateJanparaCrawlSettingExcludeProductResultError
+
+type CreateJanparaCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingExcludeProduct: JanparaCrawlSettingExcludeProduct!
+}
+
+type CreateJanparaCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateJanparaCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateJanparaCrawlSettingExcludeProductResultErrors =
+    CreateJanparaCrawlSettingExcludeProductResultValidationFailed
+
+type CreateJanparaCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateJanparaCrawlSettingExcludeProduct ##
+
+input UpdateJanparaCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateJanparaCrawlSettingExcludeProductResult =
+    UpdateJanparaCrawlSettingExcludeProductResultSuccess
+  | UpdateJanparaCrawlSettingExcludeProductResultError
+
+type UpdateJanparaCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  janparaCrawlSettingExcludeProduct: JanparaCrawlSettingExcludeProduct!
+}
+
+type UpdateJanparaCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateJanparaCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateJanparaCrawlSettingExcludeProductResultErrors =
+    UpdateJanparaCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateJanparaCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteJanparaCrawlSettingExcludeProduct ##
+
+union DeleteJanparaCrawlSettingExcludeProductResult =
+    DeleteJanparaCrawlSettingExcludeProductResultSuccess
+  | DeleteJanparaCrawlSettingExcludeProductResultError
+
+type DeleteJanparaCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteJanparaCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteJanparaCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteJanparaCrawlSettingExcludeProductResultErrors =
+    DeleteJanparaCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteJanparaCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreateJanparaCrawlSettingRequiredKeyword ##
 
 input CreateJanparaCrawlSettingRequiredKeywordInput {
@@ -5136,6 +6856,91 @@ union DeleteIosysCrawlSettingExcludeKeywordResultErrors =
     DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed
 
 type DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateIosysCrawlSettingExcludeProduct ##
+
+input CreateIosysCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateIosysCrawlSettingExcludeProductResult =
+    CreateIosysCrawlSettingExcludeProductResultSuccess
+  | CreateIosysCrawlSettingExcludeProductResultError
+
+type CreateIosysCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingExcludeProduct: IosysCrawlSettingExcludeProduct!
+}
+
+type CreateIosysCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateIosysCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateIosysCrawlSettingExcludeProductResultErrors =
+    CreateIosysCrawlSettingExcludeProductResultValidationFailed
+
+type CreateIosysCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateIosysCrawlSettingExcludeProduct ##
+
+input UpdateIosysCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateIosysCrawlSettingExcludeProductResult =
+    UpdateIosysCrawlSettingExcludeProductResultSuccess
+  | UpdateIosysCrawlSettingExcludeProductResultError
+
+type UpdateIosysCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  iosysCrawlSettingExcludeProduct: IosysCrawlSettingExcludeProduct!
+}
+
+type UpdateIosysCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateIosysCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateIosysCrawlSettingExcludeProductResultErrors =
+    UpdateIosysCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateIosysCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteIosysCrawlSettingExcludeProduct ##
+
+union DeleteIosysCrawlSettingExcludeProductResult =
+    DeleteIosysCrawlSettingExcludeProductResultSuccess
+  | DeleteIosysCrawlSettingExcludeProductResultError
+
+type DeleteIosysCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteIosysCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteIosysCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteIosysCrawlSettingExcludeProductResultErrors =
+    DeleteIosysCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteIosysCrawlSettingExcludeProductResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!
@@ -5311,6 +7116,91 @@ type DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed implements U
   details: [ErrorDetail!]!
 }
 
+## CreatePcKoubouCrawlSettingExcludeProduct ##
+
+input CreatePcKoubouCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreatePcKoubouCrawlSettingExcludeProductResult =
+    CreatePcKoubouCrawlSettingExcludeProductResultSuccess
+  | CreatePcKoubouCrawlSettingExcludeProductResultError
+
+type CreatePcKoubouCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingExcludeProduct: PcKoubouCrawlSettingExcludeProduct!
+}
+
+type CreatePcKoubouCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreatePcKoubouCrawlSettingExcludeProductResultErrors!
+}
+
+union CreatePcKoubouCrawlSettingExcludeProductResultErrors =
+    CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed
+
+type CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdatePcKoubouCrawlSettingExcludeProduct ##
+
+input UpdatePcKoubouCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdatePcKoubouCrawlSettingExcludeProductResult =
+    UpdatePcKoubouCrawlSettingExcludeProductResultSuccess
+  | UpdatePcKoubouCrawlSettingExcludeProductResultError
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  pcKoubouCrawlSettingExcludeProduct: PcKoubouCrawlSettingExcludeProduct!
+}
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdatePcKoubouCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdatePcKoubouCrawlSettingExcludeProductResultErrors =
+    UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed
+
+type UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeletePcKoubouCrawlSettingExcludeProduct ##
+
+union DeletePcKoubouCrawlSettingExcludeProductResult =
+    DeletePcKoubouCrawlSettingExcludeProductResultSuccess
+  | DeletePcKoubouCrawlSettingExcludeProductResultError
+
+type DeletePcKoubouCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeletePcKoubouCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeletePcKoubouCrawlSettingExcludeProductResultErrors!
+}
+
+union DeletePcKoubouCrawlSettingExcludeProductResultErrors =
+    DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed
+
+type DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
 ## CreatePcKoubouCrawlSettingRequiredKeyword ##
 
 input CreatePcKoubouCrawlSettingRequiredKeywordInput {
@@ -5450,6 +7340,7 @@ type YahooAuctionCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   yahooAuctionCrawlSettingExcludeKeywords: [YahooAuctionCrawlSettingExcludeKeyword!]!
+  yahooAuctionCrawlSettingExcludeProducts: [YahooAuctionCrawlSettingExcludeProduct!]!
   yahooAuctionCrawlSettingRequiredKeywords: [YahooAuctionCrawlSettingRequiredKeyword!]!
 }
 
@@ -5457,6 +7348,14 @@ type YahooAuctionCrawlSettingExcludeKeyword implements Node {
   id: ID!
   yahooAuctionCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type YahooAuctionCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  yahooAuctionCrawlSettingId: Int!
+  externalId: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -5523,6 +7422,7 @@ type MercariCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   mercariCrawlSettingExcludeKeywords: [MercariCrawlSettingExcludeKeyword!]!
+  mercariCrawlSettingExcludeProducts: [MercariCrawlSettingExcludeProduct!]!
   mercariCrawlSettingRequiredKeywords: [MercariCrawlSettingRequiredKeyword!]!
 }
 
@@ -5530,6 +7430,14 @@ type MercariCrawlSettingExcludeKeyword implements Node {
   id: ID!
   mercariCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type MercariCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  mercariCrawlSettingId: Int!
+  externalId: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -5552,6 +7460,7 @@ type JanparaCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   janparaCrawlSettingExcludeKeywords: [JanparaCrawlSettingExcludeKeyword!]!
+  janparaCrawlSettingExcludeProducts: [JanparaCrawlSettingExcludeProduct!]!
   janparaCrawlSettingRequiredKeywords: [JanparaCrawlSettingRequiredKeyword!]!
 }
 
@@ -5559,6 +7468,14 @@ type JanparaCrawlSettingExcludeKeyword implements Node {
   id: ID!
   janparaCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type JanparaCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  janparaCrawlSettingId: Int!
+  externalId: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -5581,6 +7498,7 @@ type IosysCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   iosysCrawlSettingExcludeKeywords: [IosysCrawlSettingExcludeKeyword!]!
+  iosysCrawlSettingExcludeProducts: [IosysCrawlSettingExcludeProduct!]!
   iosysCrawlSettingRequiredKeywords: [IosysCrawlSettingRequiredKeyword!]!
 }
 
@@ -5588,6 +7506,14 @@ type IosysCrawlSettingExcludeKeyword implements Node {
   id: ID!
   iosysCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type IosysCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  iosysCrawlSettingId: Int!
+  externalId: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -5610,6 +7536,7 @@ type PcKoubouCrawlSetting implements Node {
   createdAt: String!
   updatedAt: String!
   pcKoubouCrawlSettingExcludeKeywords: [PcKoubouCrawlSettingExcludeKeyword!]!
+  pcKoubouCrawlSettingExcludeProducts: [PcKoubouCrawlSettingExcludeProduct!]!
   pcKoubouCrawlSettingRequiredKeywords: [PcKoubouCrawlSettingRequiredKeyword!]!
 }
 
@@ -5617,6 +7544,14 @@ type PcKoubouCrawlSettingExcludeKeyword implements Node {
   id: ID!
   pcKoubouCrawlSettingId: Int!
   keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type PcKoubouCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  pcKoubouCrawlSettingId: Int!
+  externalId: String!
   createdAt: String!
   updatedAt: String!
 }
@@ -5672,6 +7607,21 @@ func (ec *executionContext) field_Mutation_createIosysCrawlSettingExcludeKeyword
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_createIosysCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateIosysCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateIosysCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_createIosysCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -5694,6 +7644,21 @@ func (ec *executionContext) field_Mutation_createJanparaCrawlSettingExcludeKeywo
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNCreateJanparaCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createJanparaCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateJanparaCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateJanparaCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeProductInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -5732,6 +7697,21 @@ func (ec *executionContext) field_Mutation_createMercariCrawlSettingExcludeKeywo
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_createMercariCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateMercariCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateMercariCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_createMercariCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -5754,6 +7734,21 @@ func (ec *executionContext) field_Mutation_createPcKoubouCrawlSettingExcludeKeyw
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNCreatePcKoubouCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createPcKoubouCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreatePcKoubouCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreatePcKoubouCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeProductInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -5807,6 +7802,21 @@ func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingExclude
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateYahooAuctionCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateYahooAuctionCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -5823,6 +7833,30 @@ func (ec *executionContext) field_Mutation_createYahooAuctionCrawlSettingRequire
 }
 
 func (ec *executionContext) field_Mutation_deleteIosysCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteIosysCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 string
@@ -5894,6 +7928,30 @@ func (ec *executionContext) field_Mutation_deleteJanparaCrawlSettingExcludeKeywo
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_deleteJanparaCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_deleteJanparaCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -5942,6 +8000,30 @@ func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingExcludeKeywo
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -5967,6 +8049,30 @@ func (ec *executionContext) field_Mutation_deleteMercariCrawlSettingRequiredKeyw
 }
 
 func (ec *executionContext) field_Mutation_deletePcKoubouCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deletePcKoubouCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
 	var arg0 string
@@ -6053,6 +8159,30 @@ func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingExclude
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -6092,6 +8222,21 @@ func (ec *executionContext) field_Mutation_updateIosysCrawlSettingExcludeKeyword
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_updateIosysCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateIosysCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateIosysCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_updateIosysCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -6114,6 +8259,21 @@ func (ec *executionContext) field_Mutation_updateJanparaCrawlSettingExcludeKeywo
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNUpdateJanparaCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateJanparaCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateJanparaCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateJanparaCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeProductInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -6152,6 +8312,21 @@ func (ec *executionContext) field_Mutation_updateMercariCrawlSettingExcludeKeywo
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_updateMercariCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateMercariCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateMercariCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_updateMercariCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -6174,6 +8349,21 @@ func (ec *executionContext) field_Mutation_updatePcKoubouCrawlSettingExcludeKeyw
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNUpdatePcKoubouCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updatePcKoubouCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdatePcKoubouCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdatePcKoubouCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeProductInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -6228,6 +8418,21 @@ func (ec *executionContext) field_Mutation_updateYahooAuctionCrawlSettingExclude
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNUpdateYahooAuctionCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateYahooAuctionCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateYahooAuctionCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateYahooAuctionCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeProductInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -6785,6 +8990,332 @@ func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultValidati
 func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CreateIosysCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateIosysCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateIosysCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateIosysCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateIosysCrawlSettingExcludeProductResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -7453,6 +9984,332 @@ func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeKeyword
 	return fc, nil
 }
 
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateJanparaCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateJanparaCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateJanparaCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.JanparaCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.JanparaCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNJanparaCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_id(ctx, field)
+			case "janparaCrawlSettingId":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type JanparaCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _CreateJanparaCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateJanparaCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_CreateJanparaCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -8105,6 +10962,332 @@ func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeKeyword
 	return fc, nil
 }
 
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateMercariCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateMercariCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateMercariCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MercariCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.MercariCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNMercariCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_id(ctx, field)
+			case "mercariCrawlSettingId":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_CreateMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -8741,6 +11924,332 @@ func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultValid
 func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreatePcKoubouCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNCreatePcKoubouCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreatePcKoubouCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -9751,6 +13260,332 @@ func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeKe
 	return fc, nil
 }
 
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateYahooAuctionCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateYahooAuctionCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateYahooAuctionCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.YahooAuctionCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.YahooAuctionCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_CreateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -10347,6 +14182,276 @@ func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeKeywordRe
 	return fc, nil
 }
 
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteIosysCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteIosysCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteIosysCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _DeleteIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_DeleteIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -10871,6 +14976,276 @@ func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeKeywordResultValida
 func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJanparaCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJanparaCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteJanparaCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJanparaCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJanparaCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteJanparaCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteJanparaCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteJanparaCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteJanparaCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteJanparaCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJanparaCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteJanparaCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -11427,6 +15802,276 @@ func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeKeyword
 	return fc, nil
 }
 
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteMercariCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteMercariCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteMercariCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_DeleteMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -11951,6 +16596,276 @@ func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultValid
 func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeletePcKoubouCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNDeletePcKoubouCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeletePcKoubouCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -12777,6 +17692,276 @@ func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeKe
 	return fc, nil
 }
 
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteYahooAuctionCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteYahooAuctionCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteYahooAuctionCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_DeleteYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -13543,6 +18728,62 @@ func (ec *executionContext) fieldContext_IosysCrawlSetting_iosysCrawlSettingExcl
 	return fc, nil
 }
 
+func (ec *executionContext) _IosysCrawlSetting_iosysCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.IosysCrawlSetting().IosysCrawlSettingExcludeProducts(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.IosysCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx, field)
 	if err != nil {
@@ -13806,6 +19047,226 @@ func (ec *executionContext) _IosysCrawlSettingExcludeKeyword_updatedAt(ctx conte
 func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "IosysCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeProduct_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeProduct_externalId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ExternalID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeProduct_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.IosysCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_IosysCrawlSettingExcludeProduct_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_IosysCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "IosysCrawlSettingExcludeProduct",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -14441,6 +19902,62 @@ func (ec *executionContext) fieldContext_JanparaCrawlSetting_janparaCrawlSetting
 	return fc, nil
 }
 
+func (ec *executionContext) _JanparaCrawlSetting_janparaCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_JanparaCrawlSetting_janparaCrawlSettingExcludeProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.JanparaCrawlSetting().JanparaCrawlSettingExcludeProducts(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.JanparaCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNJanparaCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingExcludeProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_JanparaCrawlSetting_janparaCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "JanparaCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_id(ctx, field)
+			case "janparaCrawlSettingId":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type JanparaCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _JanparaCrawlSetting_janparaCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_JanparaCrawlSetting_janparaCrawlSettingRequiredKeywords(ctx, field)
 	if err != nil {
@@ -14704,6 +20221,226 @@ func (ec *executionContext) _JanparaCrawlSettingExcludeKeyword_updatedAt(ctx con
 func (ec *executionContext) fieldContext_JanparaCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "JanparaCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _JanparaCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_JanparaCrawlSettingExcludeProduct_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_JanparaCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "JanparaCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.JanparaCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "JanparaCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _JanparaCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_JanparaCrawlSettingExcludeProduct_externalId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ExternalID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_JanparaCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "JanparaCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _JanparaCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_JanparaCrawlSettingExcludeProduct_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_JanparaCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "JanparaCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _JanparaCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.JanparaCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_JanparaCrawlSettingExcludeProduct_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_JanparaCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "JanparaCrawlSettingExcludeProduct",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -15380,6 +21117,62 @@ func (ec *executionContext) fieldContext_MercariCrawlSetting_mercariCrawlSetting
 	return fc, nil
 }
 
+func (ec *executionContext) _MercariCrawlSetting_mercariCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingExcludeProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.MercariCrawlSetting().MercariCrawlSettingExcludeProducts(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.MercariCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNMercariCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingExcludeProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSetting_mercariCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_id(ctx, field)
+			case "mercariCrawlSettingId":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx, field)
 	if err != nil {
@@ -15643,6 +21436,226 @@ func (ec *executionContext) _MercariCrawlSettingExcludeKeyword_updatedAt(ctx con
 func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "MercariCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingExcludeProduct_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MercariCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingExcludeProduct_externalId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ExternalID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingExcludeProduct_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _MercariCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.MercariCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_MercariCrawlSettingExcludeProduct_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_MercariCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "MercariCrawlSettingExcludeProduct",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -16942,6 +22955,171 @@ func (ec *executionContext) fieldContext_Mutation_deleteYahooAuctionCrawlSetting
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createYahooAuctionCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateYahooAuctionCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.CreateYahooAuctionCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateYahooAuctionCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNCreateYahooAuctionCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateYahooAuctionCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createYahooAuctionCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateYahooAuctionCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateYahooAuctionCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.UpdateYahooAuctionCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateYahooAuctionCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNUpdateYahooAuctionCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateYahooAuctionCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateYahooAuctionCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteYahooAuctionCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteYahooAuctionCrawlSettingExcludeProduct(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteYahooAuctionCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNDeleteYahooAuctionCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteYahooAuctionCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteYahooAuctionCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
 	if err != nil {
@@ -17266,6 +23444,171 @@ func (ec *executionContext) fieldContext_Mutation_deleteMercariCrawlSettingExclu
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
 	if fc.Args, err = ec.field_Mutation_deleteMercariCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createMercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createMercariCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateMercariCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.CreateMercariCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateMercariCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNCreateMercariCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createMercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateMercariCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createMercariCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateMercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateMercariCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateMercariCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.UpdateMercariCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateMercariCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNUpdateMercariCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateMercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateMercariCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateMercariCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteMercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteMercariCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteMercariCrawlSettingExcludeProduct(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteMercariCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNDeleteMercariCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteMercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteMercariCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteMercariCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return fc, err
 	}
@@ -17602,6 +23945,171 @@ func (ec *executionContext) fieldContext_Mutation_deleteJanparaCrawlSettingExclu
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createJanparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createJanparaCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateJanparaCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.CreateJanparaCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateJanparaCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNCreateJanparaCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createJanparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateJanparaCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createJanparaCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateJanparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateJanparaCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateJanparaCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.UpdateJanparaCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateJanparaCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNUpdateJanparaCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateJanparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateJanparaCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateJanparaCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteJanparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteJanparaCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteJanparaCrawlSettingExcludeProduct(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteJanparaCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNDeleteJanparaCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteJanparaCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteJanparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteJanparaCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteJanparaCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Mutation_createJanparaCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Mutation_createJanparaCrawlSettingRequiredKeyword(ctx, field)
 	if err != nil {
@@ -17932,6 +24440,171 @@ func (ec *executionContext) fieldContext_Mutation_deleteIosysCrawlSettingExclude
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createIosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createIosysCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateIosysCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.CreateIosysCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateIosysCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNCreateIosysCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createIosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateIosysCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createIosysCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateIosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateIosysCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateIosysCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.UpdateIosysCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateIosysCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNUpdateIosysCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateIosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateIosysCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateIosysCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteIosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteIosysCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteIosysCrawlSettingExcludeProduct(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteIosysCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNDeleteIosysCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteIosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteIosysCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteIosysCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Mutation_createIosysCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Mutation_createIosysCrawlSettingRequiredKeyword(ctx, field)
 	if err != nil {
@@ -18256,6 +24929,171 @@ func (ec *executionContext) fieldContext_Mutation_deletePcKoubouCrawlSettingExcl
 	}()
 	ctx = graphql.WithFieldContext(ctx, fc)
 	if fc.Args, err = ec.field_Mutation_deletePcKoubouCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createPcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createPcKoubouCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreatePcKoubouCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.CreatePcKoubouCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreatePcKoubouCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNCreatePcKoubouCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createPcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreatePcKoubouCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createPcKoubouCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updatePcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updatePcKoubouCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdatePcKoubouCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.UpdatePcKoubouCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdatePcKoubouCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNUpdatePcKoubouCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updatePcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdatePcKoubouCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updatePcKoubouCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deletePcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deletePcKoubouCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeletePcKoubouCrawlSettingExcludeProduct(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeletePcKoubouCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNDeletePcKoubouCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deletePcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeletePcKoubouCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deletePcKoubouCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
 		ec.Error(ctx, err)
 		return fc, err
 	}
@@ -18835,6 +25673,62 @@ func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSetti
 	return fc, nil
 }
 
+func (ec *executionContext) _PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.PcKoubouCrawlSetting().PcKoubouCrawlSettingExcludeProducts(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.PcKoubouCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx, field)
 	if err != nil {
@@ -19098,6 +25992,226 @@ func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx co
 func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "PcKoubouCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_externalId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ExternalID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "PcKoubouCrawlSettingExcludeProduct",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -19549,6 +26663,8 @@ func (ec *executionContext) fieldContext_Product_yahooAuctionCrawlSetting(ctx co
 				return ec.fieldContext_YahooAuctionCrawlSetting_updatedAt(ctx, field)
 			case "yahooAuctionCrawlSettingExcludeKeywords":
 				return ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeKeywords(ctx, field)
+			case "yahooAuctionCrawlSettingExcludeProducts":
+				return ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeProducts(ctx, field)
 			case "yahooAuctionCrawlSettingRequiredKeywords":
 				return ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx, field)
 			}
@@ -19814,6 +26930,8 @@ func (ec *executionContext) fieldContext_Product_mercariCrawlSetting(ctx context
 				return ec.fieldContext_MercariCrawlSetting_updatedAt(ctx, field)
 			case "mercariCrawlSettingExcludeKeywords":
 				return ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingExcludeKeywords(ctx, field)
+			case "mercariCrawlSettingExcludeProducts":
+				return ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingExcludeProducts(ctx, field)
 			case "mercariCrawlSettingRequiredKeywords":
 				return ec.fieldContext_MercariCrawlSetting_mercariCrawlSettingRequiredKeywords(ctx, field)
 			}
@@ -19940,6 +27058,8 @@ func (ec *executionContext) fieldContext_Product_janparaCrawlSetting(ctx context
 				return ec.fieldContext_JanparaCrawlSetting_updatedAt(ctx, field)
 			case "janparaCrawlSettingExcludeKeywords":
 				return ec.fieldContext_JanparaCrawlSetting_janparaCrawlSettingExcludeKeywords(ctx, field)
+			case "janparaCrawlSettingExcludeProducts":
+				return ec.fieldContext_JanparaCrawlSetting_janparaCrawlSettingExcludeProducts(ctx, field)
 			case "janparaCrawlSettingRequiredKeywords":
 				return ec.fieldContext_JanparaCrawlSetting_janparaCrawlSettingRequiredKeywords(ctx, field)
 			}
@@ -20006,6 +27126,8 @@ func (ec *executionContext) fieldContext_Product_iosysCrawlSetting(ctx context.C
 				return ec.fieldContext_IosysCrawlSetting_updatedAt(ctx, field)
 			case "iosysCrawlSettingExcludeKeywords":
 				return ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeKeywords(ctx, field)
+			case "iosysCrawlSettingExcludeProducts":
+				return ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingExcludeProducts(ctx, field)
 			case "iosysCrawlSettingRequiredKeywords":
 				return ec.fieldContext_IosysCrawlSetting_iosysCrawlSettingRequiredKeywords(ctx, field)
 			}
@@ -20072,6 +27194,8 @@ func (ec *executionContext) fieldContext_Product_pcKoubouCrawlSetting(ctx contex
 				return ec.fieldContext_PcKoubouCrawlSetting_updatedAt(ctx, field)
 			case "pcKoubouCrawlSettingExcludeKeywords":
 				return ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeKeywords(ctx, field)
+			case "pcKoubouCrawlSettingExcludeProducts":
+				return ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeProducts(ctx, field)
 			case "pcKoubouCrawlSettingRequiredKeywords":
 				return ec.fieldContext_PcKoubouCrawlSetting_pcKoubouCrawlSettingRequiredKeywords(ctx, field)
 			}
@@ -21354,6 +28478,332 @@ func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeKeywordRe
 	return fc, nil
 }
 
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateIosysCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateIosysCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateIosysCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.IosysCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.IosysCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNIosysCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_id(ctx, field)
+			case "iosysCrawlSettingId":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_IosysCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type IosysCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateIosysCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_UpdateIosysCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -21990,6 +29440,332 @@ func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeKeywordResultValida
 func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateJanparaCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateJanparaCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateJanparaCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.JanparaCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.JanparaCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNJanparaCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_id(ctx, field)
+			case "janparaCrawlSettingId":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_JanparaCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type JanparaCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -22658,6 +30434,332 @@ func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeKeyword
 	return fc, nil
 }
 
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateMercariCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateMercariCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateMercariCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MercariCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.MercariCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNMercariCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_id(ctx, field)
+			case "mercariCrawlSettingId":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_MercariCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type MercariCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateMercariCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_UpdateMercariCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -23294,6 +31396,332 @@ func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultValid
 func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdatePcKoubouCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdatePcKoubouCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdatePcKoubouCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.PcKoubouCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.PcKoubouCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNPcKoubouCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_id(ctx, field)
+			case "pcKoubouCrawlSettingId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type PcKoubouCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -24304,6 +32732,332 @@ func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeKe
 	return fc, nil
 }
 
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateYahooAuctionCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateYahooAuctionCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateYahooAuctionCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.YahooAuctionCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.YahooAuctionCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_UpdateYahooAuctionCrawlSettingRequiredKeywordResultError_ok(ctx, field)
 	if err != nil {
@@ -25079,6 +33833,62 @@ func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_yahooAuctionCr
 	return fc, nil
 }
 
+func (ec *executionContext) _YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.YahooAuctionCrawlSetting().YahooAuctionCrawlSettingExcludeProducts(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.YahooAuctionCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNYahooAuctionCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_id(ctx, field)
+			case "yahooAuctionCrawlSettingId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type YahooAuctionCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_YahooAuctionCrawlSetting_yahooAuctionCrawlSettingRequiredKeywords(ctx, field)
 	if err != nil {
@@ -25342,6 +34152,226 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ct
 func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "YahooAuctionCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.YahooAuctionCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_externalId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ExternalID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.YahooAuctionCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "YahooAuctionCrawlSettingExcludeProduct",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -28427,6 +37457,44 @@ func (ec *executionContext) unmarshalInputCreateIosysCrawlSettingExcludeKeywordI
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreateIosysCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.CreateIosysCrawlSettingExcludeProductInput, error) {
+	var it model.CreateIosysCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateIosysCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreateIosysCrawlSettingInput, error) {
 	var it model.CreateIosysCrawlSettingInput
 	asMap := map[string]interface{}{}
@@ -28559,6 +37627,44 @@ func (ec *executionContext) unmarshalInputCreateJanparaCrawlSettingExcludeKeywor
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreateJanparaCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.CreateJanparaCrawlSettingExcludeProductInput, error) {
+	var it model.CreateJanparaCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateJanparaCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreateJanparaCrawlSettingInput, error) {
 	var it model.CreateJanparaCrawlSettingInput
 	asMap := map[string]interface{}{}
@@ -28685,6 +37791,44 @@ func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingExcludeKeywor
 				return it, err
 			}
 			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateMercariCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.CreateMercariCrawlSettingExcludeProductInput, error) {
+	var it model.CreateMercariCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
 		}
 	}
 
@@ -28826,6 +37970,44 @@ func (ec *executionContext) unmarshalInputCreatePcKoubouCrawlSettingExcludeKeywo
 				return it, err
 			}
 			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreatePcKoubouCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.CreatePcKoubouCrawlSettingExcludeProductInput, error) {
+	var it model.CreatePcKoubouCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
 		}
 	}
 
@@ -29038,6 +38220,44 @@ func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingExcludeK
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.CreateYahooAuctionCrawlSettingExcludeProductInput, error) {
+	var it model.CreateYahooAuctionCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputCreateYahooAuctionCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreateYahooAuctionCrawlSettingInput, error) {
 	var it model.CreateYahooAuctionCrawlSettingInput
 	asMap := map[string]interface{}{}
@@ -29182,6 +38402,53 @@ func (ec *executionContext) unmarshalInputUpdateIosysCrawlSettingExcludeKeywordI
 				return it, err
 			}
 			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateIosysCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.UpdateIosysCrawlSettingExcludeProductInput, error) {
+	var it model.UpdateIosysCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
 		}
 	}
 
@@ -29338,6 +38605,53 @@ func (ec *executionContext) unmarshalInputUpdateJanparaCrawlSettingExcludeKeywor
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputUpdateJanparaCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.UpdateJanparaCrawlSettingExcludeProductInput, error) {
+	var it model.UpdateJanparaCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputUpdateJanparaCrawlSettingInput(ctx context.Context, obj interface{}) (model.UpdateJanparaCrawlSettingInput, error) {
 	var it model.UpdateJanparaCrawlSettingInput
 	asMap := map[string]interface{}{}
@@ -29482,6 +38796,53 @@ func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingExcludeKeywor
 				return it, err
 			}
 			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateMercariCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.UpdateMercariCrawlSettingExcludeProductInput, error) {
+	var it model.UpdateMercariCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
 		}
 	}
 
@@ -29641,6 +39002,53 @@ func (ec *executionContext) unmarshalInputUpdatePcKoubouCrawlSettingExcludeKeywo
 				return it, err
 			}
 			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdatePcKoubouCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.UpdatePcKoubouCrawlSettingExcludeProductInput, error) {
+	var it model.UpdatePcKoubouCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
 		}
 	}
 
@@ -29871,6 +39279,53 @@ func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingExcludeK
 	return it, nil
 }
 
+func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.UpdateYahooAuctionCrawlSettingExcludeProductInput, error) {
+	var it model.UpdateYahooAuctionCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
 func (ec *executionContext) unmarshalInputUpdateYahooAuctionCrawlSettingInput(ctx context.Context, obj interface{}) (model.UpdateYahooAuctionCrawlSettingInput, error) {
 	var it model.UpdateYahooAuctionCrawlSettingInput
 	asMap := map[string]interface{}{}
@@ -30026,6 +39481,45 @@ func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultErrors(c
 	}
 }
 
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateIosysCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeProductResultError:
+		return ec._CreateIosysCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateIosysCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _CreateIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -30099,6 +39593,45 @@ func (ec *executionContext) _CreateJanparaCrawlSettingExcludeKeywordResultErrors
 			return graphql.Null
 		}
 		return ec._CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateJanparaCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateJanparaCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateJanparaCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateJanparaCrawlSettingExcludeProductResultError:
+		return ec._CreateJanparaCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateJanparaCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateJanparaCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateJanparaCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -30182,6 +39715,45 @@ func (ec *executionContext) _CreateMercariCrawlSettingExcludeKeywordResultErrors
 	}
 }
 
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateMercariCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateMercariCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingExcludeProductResultError:
+		return ec._CreateMercariCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateMercariCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateMercariCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -30255,6 +39827,45 @@ func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultError
 			return graphql.Null
 		}
 		return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreatePcKoubouCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeProductResultError:
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreatePcKoubouCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -30377,6 +39988,45 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeKeywordResultE
 	}
 }
 
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeProductResultError:
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -30450,6 +40100,45 @@ func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultErrors(c
 			return graphql.Null
 		}
 		return ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteIosysCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteIosysCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeProductResultError:
+		return ec._DeleteIosysCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteIosysCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -30533,6 +40222,45 @@ func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeKeywordResultErrors
 	}
 }
 
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteJanparaCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteJanparaCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteJanparaCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteJanparaCrawlSettingExcludeProductResultError:
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteJanparaCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteJanparaCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteJanparaCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteJanparaCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -30611,6 +40339,45 @@ func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultErrors
 	}
 }
 
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteMercariCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteMercariCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingExcludeProductResultError:
+		return ec._DeleteMercariCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteMercariCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -30684,6 +40451,45 @@ func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultError
 			return graphql.Null
 		}
 		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeletePcKoubouCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeletePcKoubouCrawlSettingExcludeProductResultSuccess:
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeProductResultError:
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeletePcKoubouCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -30806,6 +40612,45 @@ func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeKeywordResultE
 	}
 }
 
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteYahooAuctionCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingExcludeProductResultError:
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteYahooAuctionCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -30877,6 +40722,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._YahooAuctionCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.YahooAuctionCrawlSettingExcludeProduct:
+		return ec._YahooAuctionCrawlSettingExcludeProduct(ctx, sel, &obj)
+	case *model.YahooAuctionCrawlSettingExcludeProduct:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._YahooAuctionCrawlSettingExcludeProduct(ctx, sel, obj)
 	case model.YahooAuctionCrawlSettingRequiredKeyword:
 		return ec._YahooAuctionCrawlSettingRequiredKeyword(ctx, sel, &obj)
 	case *model.YahooAuctionCrawlSettingRequiredKeyword:
@@ -30926,6 +40778,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._MercariCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.MercariCrawlSettingExcludeProduct:
+		return ec._MercariCrawlSettingExcludeProduct(ctx, sel, &obj)
+	case *model.MercariCrawlSettingExcludeProduct:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._MercariCrawlSettingExcludeProduct(ctx, sel, obj)
 	case model.MercariCrawlSettingRequiredKeyword:
 		return ec._MercariCrawlSettingRequiredKeyword(ctx, sel, &obj)
 	case *model.MercariCrawlSettingRequiredKeyword:
@@ -30947,6 +40806,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._JanparaCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.JanparaCrawlSettingExcludeProduct:
+		return ec._JanparaCrawlSettingExcludeProduct(ctx, sel, &obj)
+	case *model.JanparaCrawlSettingExcludeProduct:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._JanparaCrawlSettingExcludeProduct(ctx, sel, obj)
 	case model.JanparaCrawlSettingRequiredKeyword:
 		return ec._JanparaCrawlSettingRequiredKeyword(ctx, sel, &obj)
 	case *model.JanparaCrawlSettingRequiredKeyword:
@@ -30968,6 +40834,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._IosysCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.IosysCrawlSettingExcludeProduct:
+		return ec._IosysCrawlSettingExcludeProduct(ctx, sel, &obj)
+	case *model.IosysCrawlSettingExcludeProduct:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._IosysCrawlSettingExcludeProduct(ctx, sel, obj)
 	case model.IosysCrawlSettingRequiredKeyword:
 		return ec._IosysCrawlSettingRequiredKeyword(ctx, sel, &obj)
 	case *model.IosysCrawlSettingRequiredKeyword:
@@ -30989,6 +40862,13 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._PcKoubouCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.PcKoubouCrawlSettingExcludeProduct:
+		return ec._PcKoubouCrawlSettingExcludeProduct(ctx, sel, &obj)
+	case *model.PcKoubouCrawlSettingExcludeProduct:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._PcKoubouCrawlSettingExcludeProduct(ctx, sel, obj)
 	case model.PcKoubouCrawlSettingRequiredKeyword:
 		return ec._PcKoubouCrawlSettingRequiredKeyword(ctx, sel, &obj)
 	case *model.PcKoubouCrawlSettingRequiredKeyword:
@@ -31089,6 +40969,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeProductResultError:
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingExcludeProductResultError:
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingExcludeProductResultError:
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, obj)
 	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
 		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
 	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess:
@@ -31173,6 +41095,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteMercariCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingExcludeProductResultError:
+		return ec._CreateMercariCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingExcludeProductResultError:
+		return ec._UpdateMercariCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingExcludeProductResultError:
+		return ec._DeleteMercariCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingExcludeProductResultError(ctx, sel, obj)
 	case model.CreateMercariCrawlSettingRequiredKeywordResultSuccess:
 		return ec._CreateMercariCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
 	case *model.CreateMercariCrawlSettingRequiredKeywordResultSuccess:
@@ -31257,6 +41221,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteJanparaCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateJanparaCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateJanparaCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateJanparaCrawlSettingExcludeProductResultError:
+		return ec._CreateJanparaCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateJanparaCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateJanparaCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.UpdateJanparaCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateJanparaCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateJanparaCrawlSettingExcludeProductResultError:
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateJanparaCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.DeleteJanparaCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteJanparaCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteJanparaCrawlSettingExcludeProductResultError:
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteJanparaCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultError(ctx, sel, obj)
 	case model.CreateJanparaCrawlSettingRequiredKeywordResultSuccess:
 		return ec._CreateJanparaCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
 	case *model.CreateJanparaCrawlSettingRequiredKeywordResultSuccess:
@@ -31341,6 +41347,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeleteIosysCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeProductResultError:
+		return ec._CreateIosysCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeProductResultError:
+		return ec._UpdateIosysCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeProductResultError:
+		return ec._DeleteIosysCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeProductResultError(ctx, sel, obj)
 	case model.CreateIosysCrawlSettingRequiredKeywordResultSuccess:
 		return ec._CreateIosysCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
 	case *model.CreateIosysCrawlSettingRequiredKeywordResultSuccess:
@@ -31425,6 +41473,48 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeProductResultError:
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeProductResultError:
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeProductResultSuccess:
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeProductResultError:
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, obj)
 	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
 		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
 	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess:
@@ -31511,6 +41601,45 @@ func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultErrors(c
 	}
 }
 
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateIosysCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeProductResultError:
+		return ec._UpdateIosysCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -31584,6 +41713,45 @@ func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeKeywordResultErrors
 			return graphql.Null
 		}
 		return ec._UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateJanparaCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateJanparaCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateJanparaCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateJanparaCrawlSettingExcludeProductResultError:
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateJanparaCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateJanparaCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -31667,6 +41835,45 @@ func (ec *executionContext) _UpdateMercariCrawlSettingExcludeKeywordResultErrors
 	}
 }
 
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateMercariCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateMercariCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingExcludeProductResultError:
+		return ec._UpdateMercariCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateMercariCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -31740,6 +41947,45 @@ func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultError
 			return graphql.Null
 		}
 		return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdatePcKoubouCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeProductResultError:
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdatePcKoubouCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -31862,6 +42108,45 @@ func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeKeywordResultE
 	}
 }
 
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateYahooAuctionCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingExcludeProductResultError:
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateYahooAuctionCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -31947,6 +42232,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	case model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
 		return ec._CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
 	case *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed:
@@ -31989,6 +42295,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateMercariCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateMercariCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	case model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed:
 		return ec._CreateMercariCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
 	case *model.CreateMercariCrawlSettingRequiredKeywordResultValidationFailed:
@@ -32031,6 +42358,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	case model.CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed:
 		return ec._CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
 	case *model.CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed:
@@ -32073,6 +42421,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateIosysCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateIosysCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	case model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed:
 		return ec._CreateIosysCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
 	case *model.CreateIosysCrawlSettingRequiredKeywordResultValidationFailed:
@@ -32115,6 +42484,27 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
 	case model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
 		return ec._CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
 	case *model.CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed:
@@ -32256,6 +42646,143 @@ func (ec *executionContext) _CreateIosysCrawlSettingExcludeKeywordResultValidati
 			}
 		case "details":
 			out.Values[i] = ec._CreateIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingExcludeProductResultErrorImplementors = []string{"CreateIosysCrawlSettingExcludeProductResultError", "CreateIosysCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingExcludeProductResultSuccessImplementors = []string{"CreateIosysCrawlSettingExcludeProductResultSuccess", "CreateIosysCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingExcludeProduct":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createIosysCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"CreateIosysCrawlSettingExcludeProductResultValidationFailed", "CreateIosysCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateIosysCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateIosysCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createIosysCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateIosysCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -32556,6 +43083,143 @@ func (ec *executionContext) _CreateJanparaCrawlSettingExcludeKeywordResultValida
 	return out
 }
 
+var createJanparaCrawlSettingExcludeProductResultErrorImplementors = []string{"CreateJanparaCrawlSettingExcludeProductResultError", "CreateJanparaCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateJanparaCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createJanparaCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateJanparaCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createJanparaCrawlSettingExcludeProductResultSuccessImplementors = []string{"CreateJanparaCrawlSettingExcludeProductResultSuccess", "CreateJanparaCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateJanparaCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createJanparaCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateJanparaCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "janparaCrawlSettingExcludeProduct":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createJanparaCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"CreateJanparaCrawlSettingExcludeProductResultValidationFailed", "CreateJanparaCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateJanparaCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createJanparaCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateJanparaCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var createJanparaCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateJanparaCrawlSettingRequiredKeywordResultError", "CreateJanparaCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _CreateJanparaCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateJanparaCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -32830,6 +43494,143 @@ func (ec *executionContext) _CreateMercariCrawlSettingExcludeKeywordResultValida
 	return out
 }
 
+var createMercariCrawlSettingExcludeProductResultErrorImplementors = []string{"CreateMercariCrawlSettingExcludeProductResultError", "CreateMercariCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createMercariCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateMercariCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createMercariCrawlSettingExcludeProductResultSuccessImplementors = []string{"CreateMercariCrawlSettingExcludeProductResultSuccess", "CreateMercariCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createMercariCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateMercariCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "mercariCrawlSettingExcludeProduct":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createMercariCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"CreateMercariCrawlSettingExcludeProductResultValidationFailed", "CreateMercariCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateMercariCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createMercariCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateMercariCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var createMercariCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateMercariCrawlSettingRequiredKeywordResultError", "CreateMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _CreateMercariCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateMercariCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -33078,6 +43879,143 @@ func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeKeywordResultValid
 			}
 		case "details":
 			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingExcludeProductResultErrorImplementors = []string{"CreatePcKoubouCrawlSettingExcludeProductResultError", "CreatePcKoubouCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingExcludeProductResultSuccessImplementors = []string{"CreatePcKoubouCrawlSettingExcludeProductResultSuccess", "CreatePcKoubouCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingExcludeProduct":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createPcKoubouCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed", "CreatePcKoubouCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createPcKoubouCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -33515,6 +44453,143 @@ func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeKeywordResultV
 	return out
 }
 
+var createYahooAuctionCrawlSettingExcludeProductResultErrorImplementors = []string{"CreateYahooAuctionCrawlSettingExcludeProductResultError", "CreateYahooAuctionCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingExcludeProductResultSuccessImplementors = []string{"CreateYahooAuctionCrawlSettingExcludeProductResultSuccess", "CreateYahooAuctionCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "yahooAuctionCrawlSettingExcludeProduct":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createYahooAuctionCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed", "CreateYahooAuctionCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createYahooAuctionCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var createYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateYahooAuctionCrawlSettingRequiredKeywordResultError", "CreateYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _CreateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateYahooAuctionCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -33758,6 +44833,138 @@ func (ec *executionContext) _DeleteIosysCrawlSettingExcludeKeywordResultValidati
 			}
 		case "details":
 			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingExcludeProductResultErrorImplementors = []string{"DeleteIosysCrawlSettingExcludeProductResultError", "DeleteIosysCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingExcludeProductResultSuccessImplementors = []string{"DeleteIosysCrawlSettingExcludeProductResultSuccess", "DeleteIosysCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteIosysCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"DeleteIosysCrawlSettingExcludeProductResultValidationFailed", "DeleteIosysCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteIosysCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteIosysCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteIosysCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteIosysCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -34048,6 +45255,138 @@ func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeKeywordResultValida
 	return out
 }
 
+var deleteJanparaCrawlSettingExcludeProductResultErrorImplementors = []string{"DeleteJanparaCrawlSettingExcludeProductResultError", "DeleteJanparaCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteJanparaCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteJanparaCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteJanparaCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteJanparaCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteJanparaCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteJanparaCrawlSettingExcludeProductResultSuccessImplementors = []string{"DeleteJanparaCrawlSettingExcludeProductResultSuccess", "DeleteJanparaCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteJanparaCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteJanparaCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteJanparaCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteJanparaCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"DeleteJanparaCrawlSettingExcludeProductResultValidationFailed", "DeleteJanparaCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteJanparaCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteJanparaCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteJanparaCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteJanparaCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var deleteJanparaCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteJanparaCrawlSettingRequiredKeywordResultError", "DeleteJanparaCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _DeleteJanparaCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteJanparaCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -34312,6 +45651,138 @@ func (ec *executionContext) _DeleteMercariCrawlSettingExcludeKeywordResultValida
 	return out
 }
 
+var deleteMercariCrawlSettingExcludeProductResultErrorImplementors = []string{"DeleteMercariCrawlSettingExcludeProductResultError", "DeleteMercariCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteMercariCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteMercariCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteMercariCrawlSettingExcludeProductResultSuccessImplementors = []string{"DeleteMercariCrawlSettingExcludeProductResultSuccess", "DeleteMercariCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteMercariCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteMercariCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteMercariCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"DeleteMercariCrawlSettingExcludeProductResultValidationFailed", "DeleteMercariCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteMercariCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteMercariCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteMercariCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var deleteMercariCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteMercariCrawlSettingRequiredKeywordResultError", "DeleteMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _DeleteMercariCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteMercariCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -34550,6 +46021,138 @@ func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeKeywordResultValid
 			}
 		case "details":
 			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingExcludeProductResultErrorImplementors = []string{"DeletePcKoubouCrawlSettingExcludeProductResultError", "DeletePcKoubouCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingExcludeProductResultSuccessImplementors = []string{"DeletePcKoubouCrawlSettingExcludeProductResultSuccess", "DeletePcKoubouCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deletePcKoubouCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed", "DeletePcKoubouCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deletePcKoubouCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -34972,6 +46575,138 @@ func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeKeywordResultV
 	return out
 }
 
+var deleteYahooAuctionCrawlSettingExcludeProductResultErrorImplementors = []string{"DeleteYahooAuctionCrawlSettingExcludeProductResultError", "DeleteYahooAuctionCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteYahooAuctionCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteYahooAuctionCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteYahooAuctionCrawlSettingExcludeProductResultSuccessImplementors = []string{"DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess", "DeleteYahooAuctionCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteYahooAuctionCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteYahooAuctionCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed", "DeleteYahooAuctionCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteYahooAuctionCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var deleteYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteYahooAuctionCrawlSettingRequiredKeywordResultError", "DeleteYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _DeleteYahooAuctionCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -35235,6 +46970,42 @@ func (ec *executionContext) _IosysCrawlSetting(ctx context.Context, sel ast.Sele
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "iosysCrawlSettingExcludeProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._IosysCrawlSetting_iosysCrawlSettingExcludeProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "iosysCrawlSettingRequiredKeywords":
 			field := field
 
@@ -35324,6 +47095,65 @@ func (ec *executionContext) _IosysCrawlSettingExcludeKeyword(ctx context.Context
 			}
 		case "updatedAt":
 			out.Values[i] = ec._IosysCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var iosysCrawlSettingExcludeProductImplementors = []string{"IosysCrawlSettingExcludeProduct", "Node"}
+
+func (ec *executionContext) _IosysCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, obj *model.IosysCrawlSettingExcludeProduct) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, iosysCrawlSettingExcludeProductImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("IosysCrawlSettingExcludeProduct")
+		case "id":
+			out.Values[i] = ec._IosysCrawlSettingExcludeProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingId":
+			out.Values[i] = ec._IosysCrawlSettingExcludeProduct_iosysCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "externalId":
+			out.Values[i] = ec._IosysCrawlSettingExcludeProduct_externalId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._IosysCrawlSettingExcludeProduct_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._IosysCrawlSettingExcludeProduct_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -35493,6 +47323,42 @@ func (ec *executionContext) _JanparaCrawlSetting(ctx context.Context, sel ast.Se
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "janparaCrawlSettingExcludeProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._JanparaCrawlSetting_janparaCrawlSettingExcludeProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "janparaCrawlSettingRequiredKeywords":
 			field := field
 
@@ -35582,6 +47448,65 @@ func (ec *executionContext) _JanparaCrawlSettingExcludeKeyword(ctx context.Conte
 			}
 		case "updatedAt":
 			out.Values[i] = ec._JanparaCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var janparaCrawlSettingExcludeProductImplementors = []string{"JanparaCrawlSettingExcludeProduct", "Node"}
+
+func (ec *executionContext) _JanparaCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, obj *model.JanparaCrawlSettingExcludeProduct) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, janparaCrawlSettingExcludeProductImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("JanparaCrawlSettingExcludeProduct")
+		case "id":
+			out.Values[i] = ec._JanparaCrawlSettingExcludeProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "janparaCrawlSettingId":
+			out.Values[i] = ec._JanparaCrawlSettingExcludeProduct_janparaCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "externalId":
+			out.Values[i] = ec._JanparaCrawlSettingExcludeProduct_externalId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._JanparaCrawlSettingExcludeProduct_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._JanparaCrawlSettingExcludeProduct_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -35753,6 +47678,42 @@ func (ec *executionContext) _MercariCrawlSetting(ctx context.Context, sel ast.Se
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "mercariCrawlSettingExcludeProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._MercariCrawlSetting_mercariCrawlSettingExcludeProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "mercariCrawlSettingRequiredKeywords":
 			field := field
 
@@ -35842,6 +47803,65 @@ func (ec *executionContext) _MercariCrawlSettingExcludeKeyword(ctx context.Conte
 			}
 		case "updatedAt":
 			out.Values[i] = ec._MercariCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var mercariCrawlSettingExcludeProductImplementors = []string{"MercariCrawlSettingExcludeProduct", "Node"}
+
+func (ec *executionContext) _MercariCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, obj *model.MercariCrawlSettingExcludeProduct) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, mercariCrawlSettingExcludeProductImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("MercariCrawlSettingExcludeProduct")
+		case "id":
+			out.Values[i] = ec._MercariCrawlSettingExcludeProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "mercariCrawlSettingId":
+			out.Values[i] = ec._MercariCrawlSettingExcludeProduct_mercariCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "externalId":
+			out.Values[i] = ec._MercariCrawlSettingExcludeProduct_externalId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._MercariCrawlSettingExcludeProduct_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._MercariCrawlSettingExcludeProduct_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -36132,6 +48152,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createYahooAuctionCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createYahooAuctionCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateYahooAuctionCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateYahooAuctionCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteYahooAuctionCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteYahooAuctionCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		case "createYahooAuctionCrawlSettingRequiredKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_createYahooAuctionCrawlSettingRequiredKeyword(ctx, field)
@@ -36170,6 +48211,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 		case "deleteMercariCrawlSettingExcludeKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_deleteMercariCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createMercariCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createMercariCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateMercariCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateMercariCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteMercariCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteMercariCrawlSettingExcludeProduct(ctx, field)
 			})
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
@@ -36216,6 +48278,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createJanparaCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createJanparaCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateJanparaCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateJanparaCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteJanparaCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteJanparaCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		case "createJanparaCrawlSettingRequiredKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_createJanparaCrawlSettingRequiredKeyword(ctx, field)
@@ -36258,6 +48341,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createIosysCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createIosysCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateIosysCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateIosysCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteIosysCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteIosysCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		case "createIosysCrawlSettingRequiredKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_createIosysCrawlSettingRequiredKeyword(ctx, field)
@@ -36296,6 +48400,27 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 		case "deletePcKoubouCrawlSettingExcludeKeyword":
 			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
 				return ec._Mutation_deletePcKoubouCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createPcKoubouCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createPcKoubouCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatePcKoubouCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updatePcKoubouCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deletePcKoubouCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deletePcKoubouCrawlSettingExcludeProduct(ctx, field)
 			})
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
@@ -36431,6 +48556,42 @@ func (ec *executionContext) _PcKoubouCrawlSetting(ctx context.Context, sel ast.S
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "pcKoubouCrawlSettingExcludeProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._PcKoubouCrawlSetting_pcKoubouCrawlSettingExcludeProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "pcKoubouCrawlSettingRequiredKeywords":
 			field := field
 
@@ -36520,6 +48681,65 @@ func (ec *executionContext) _PcKoubouCrawlSettingExcludeKeyword(ctx context.Cont
 			}
 		case "updatedAt":
 			out.Values[i] = ec._PcKoubouCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var pcKoubouCrawlSettingExcludeProductImplementors = []string{"PcKoubouCrawlSettingExcludeProduct", "Node"}
+
+func (ec *executionContext) _PcKoubouCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, obj *model.PcKoubouCrawlSettingExcludeProduct) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, pcKoubouCrawlSettingExcludeProductImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("PcKoubouCrawlSettingExcludeProduct")
+		case "id":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingId":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeProduct_pcKoubouCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "externalId":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeProduct_externalId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeProduct_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._PcKoubouCrawlSettingExcludeProduct_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -37377,6 +49597,143 @@ func (ec *executionContext) _UpdateIosysCrawlSettingExcludeKeywordResultValidati
 	return out
 }
 
+var updateIosysCrawlSettingExcludeProductResultErrorImplementors = []string{"UpdateIosysCrawlSettingExcludeProductResultError", "UpdateIosysCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingExcludeProductResultSuccessImplementors = []string{"UpdateIosysCrawlSettingExcludeProductResultSuccess", "UpdateIosysCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "iosysCrawlSettingExcludeProduct":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultSuccess_iosysCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateIosysCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"UpdateIosysCrawlSettingExcludeProductResultValidationFailed", "UpdateIosysCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateIosysCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateIosysCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateIosysCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateIosysCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var updateIosysCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateIosysCrawlSettingRequiredKeywordResultError", "UpdateIosysCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _UpdateIosysCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateIosysCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -37625,6 +49982,143 @@ func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeKeywordResultValida
 			}
 		case "details":
 			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateJanparaCrawlSettingExcludeProductResultErrorImplementors = []string{"UpdateJanparaCrawlSettingExcludeProductResultError", "UpdateJanparaCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateJanparaCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateJanparaCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateJanparaCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateJanparaCrawlSettingExcludeProductResultSuccessImplementors = []string{"UpdateJanparaCrawlSettingExcludeProductResultSuccess", "UpdateJanparaCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateJanparaCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateJanparaCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateJanparaCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "janparaCrawlSettingExcludeProduct":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultSuccess_janparaCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateJanparaCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"UpdateJanparaCrawlSettingExcludeProductResultValidationFailed", "UpdateJanparaCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateJanparaCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateJanparaCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateJanparaCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateJanparaCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateJanparaCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -37925,6 +50419,143 @@ func (ec *executionContext) _UpdateMercariCrawlSettingExcludeKeywordResultValida
 	return out
 }
 
+var updateMercariCrawlSettingExcludeProductResultErrorImplementors = []string{"UpdateMercariCrawlSettingExcludeProductResultError", "UpdateMercariCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateMercariCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateMercariCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateMercariCrawlSettingExcludeProductResultSuccessImplementors = []string{"UpdateMercariCrawlSettingExcludeProductResultSuccess", "UpdateMercariCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateMercariCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateMercariCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "mercariCrawlSettingExcludeProduct":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultSuccess_mercariCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateMercariCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"UpdateMercariCrawlSettingExcludeProductResultValidationFailed", "UpdateMercariCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateMercariCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateMercariCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateMercariCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateMercariCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var updateMercariCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateMercariCrawlSettingRequiredKeywordResultError", "UpdateMercariCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _UpdateMercariCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateMercariCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -38173,6 +50804,143 @@ func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeKeywordResultValid
 			}
 		case "details":
 			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingExcludeProductResultErrorImplementors = []string{"UpdatePcKoubouCrawlSettingExcludeProductResultError", "UpdatePcKoubouCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingExcludeProductResultSuccessImplementors = []string{"UpdatePcKoubouCrawlSettingExcludeProductResultSuccess", "UpdatePcKoubouCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "pcKoubouCrawlSettingExcludeProduct":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultSuccess_pcKoubouCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updatePcKoubouCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed", "UpdatePcKoubouCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updatePcKoubouCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -38610,6 +51378,143 @@ func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeKeywordResultV
 	return out
 }
 
+var updateYahooAuctionCrawlSettingExcludeProductResultErrorImplementors = []string{"UpdateYahooAuctionCrawlSettingExcludeProductResultError", "UpdateYahooAuctionCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateYahooAuctionCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateYahooAuctionCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateYahooAuctionCrawlSettingExcludeProductResultSuccessImplementors = []string{"UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess", "UpdateYahooAuctionCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateYahooAuctionCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "yahooAuctionCrawlSettingExcludeProduct":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess_yahooAuctionCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateYahooAuctionCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed", "UpdateYahooAuctionCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateYahooAuctionCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var updateYahooAuctionCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateYahooAuctionCrawlSettingRequiredKeywordResultError", "UpdateYahooAuctionCrawlSettingRequiredKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
@@ -38836,6 +51741,42 @@ func (ec *executionContext) _YahooAuctionCrawlSetting(ctx context.Context, sel a
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "yahooAuctionCrawlSettingExcludeProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._YahooAuctionCrawlSetting_yahooAuctionCrawlSettingExcludeProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "yahooAuctionCrawlSettingRequiredKeywords":
 			field := field
 
@@ -38925,6 +51866,65 @@ func (ec *executionContext) _YahooAuctionCrawlSettingExcludeKeyword(ctx context.
 			}
 		case "updatedAt":
 			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var yahooAuctionCrawlSettingExcludeProductImplementors = []string{"YahooAuctionCrawlSettingExcludeProduct", "Node"}
+
+func (ec *executionContext) _YahooAuctionCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, obj *model.YahooAuctionCrawlSettingExcludeProduct) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, yahooAuctionCrawlSettingExcludeProductImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("YahooAuctionCrawlSettingExcludeProduct")
+		case "id":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "yahooAuctionCrawlSettingId":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeProduct_yahooAuctionCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "externalId":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeProduct_externalId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeProduct_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._YahooAuctionCrawlSettingExcludeProduct_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -39586,6 +52586,31 @@ func (ec *executionContext) marshalNCreateIosysCrawlSettingExcludeKeywordResultE
 	return ec._CreateIosysCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNCreateIosysCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.CreateIosysCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputCreateIosysCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateIosysCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.CreateIosysCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateIosysCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateIosysCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateIosysCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateIosysCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateIosysCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateIosysCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateIosysCrawlSettingInput, error) {
 	res, err := ec.unmarshalInputCreateIosysCrawlSettingInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
@@ -39639,6 +52664,31 @@ func (ec *executionContext) marshalNCreateJanparaCrawlSettingExcludeKeywordResul
 		return graphql.Null
 	}
 	return ec._CreateJanparaCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreateJanparaCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.CreateJanparaCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputCreateJanparaCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateJanparaCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.CreateJanparaCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateJanparaCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateJanparaCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateJanparaCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateJanparaCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNCreateJanparaCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateJanparaCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateJanparaCrawlSettingInput, error) {
@@ -39696,6 +52746,31 @@ func (ec *executionContext) marshalNCreateMercariCrawlSettingExcludeKeywordResul
 	return ec._CreateMercariCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNCreateMercariCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.CreateMercariCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputCreateMercariCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateMercariCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.CreateMercariCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateMercariCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateMercariCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateMercariCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateMercariCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateMercariCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateMercariCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateMercariCrawlSettingInput, error) {
 	res, err := ec.unmarshalInputCreateMercariCrawlSettingInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
@@ -39749,6 +52824,31 @@ func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingExcludeKeywordResu
 		return graphql.Null
 	}
 	return ec._CreatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreatePcKoubouCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.CreatePcKoubouCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputCreatePcKoubouCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.CreatePcKoubouCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreatePcKoubouCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreatePcKoubouCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreatePcKoubouCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreatePcKoubouCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNCreatePcKoubouCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreatePcKoubouCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreatePcKoubouCrawlSettingInput, error) {
@@ -39831,6 +52931,31 @@ func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingExcludeKeyword
 	return ec._CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.CreateYahooAuctionCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.CreateYahooAuctionCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateYahooAuctionCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateYahooAuctionCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateYahooAuctionCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateYahooAuctionCrawlSettingInput, error) {
 	res, err := ec.unmarshalInputCreateYahooAuctionCrawlSettingInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
@@ -39881,6 +53006,26 @@ func (ec *executionContext) marshalNDeleteIosysCrawlSettingExcludeKeywordResultE
 	return ec._DeleteIosysCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNDeleteIosysCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteIosysCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteIosysCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteIosysCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNDeleteIosysCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteIosysCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteIosysCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
@@ -39919,6 +53064,26 @@ func (ec *executionContext) marshalNDeleteJanparaCrawlSettingExcludeKeywordResul
 		return graphql.Null
 	}
 	return ec._DeleteJanparaCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteJanparaCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteJanparaCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteJanparaCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteJanparaCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteJanparaCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteJanparaCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteJanparaCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteJanparaCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteJanparaCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteJanparaCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteJanparaCrawlSettingRequiredKeywordResult) graphql.Marshaler {
@@ -39961,6 +53126,26 @@ func (ec *executionContext) marshalNDeleteMercariCrawlSettingExcludeKeywordResul
 	return ec._DeleteMercariCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNDeleteMercariCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteMercariCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteMercariCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteMercariCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteMercariCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteMercariCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNDeleteMercariCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteMercariCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteMercariCrawlSettingRequiredKeywordResult) graphql.Marshaler {
 	if v == nil {
 		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
@@ -39999,6 +53184,26 @@ func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingExcludeKeywordResu
 		return graphql.Null
 	}
 	return ec._DeletePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeletePcKoubouCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeletePcKoubouCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeletePcKoubouCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeletePcKoubouCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeletePcKoubouCrawlSettingRequiredKeywordResult) graphql.Marshaler {
@@ -40059,6 +53264,26 @@ func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingExcludeKeyword
 		return graphql.Null
 	}
 	return ec._DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteYahooAuctionCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteYahooAuctionCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingRequiredKeywordResult) graphql.Marshaler {
@@ -40233,6 +53458,60 @@ func (ec *executionContext) marshalNIosysCrawlSettingExcludeKeyword2ᚖgithubᚗ
 	return ec._IosysCrawlSettingExcludeKeyword(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNIosysCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.IosysCrawlSettingExcludeProduct) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNIosysCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeProduct(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNIosysCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, v *model.IosysCrawlSettingExcludeProduct) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._IosysCrawlSettingExcludeProduct(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNIosysCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐIosysCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.IosysCrawlSettingRequiredKeyword) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -40355,6 +53634,60 @@ func (ec *executionContext) marshalNJanparaCrawlSettingExcludeKeyword2ᚖgithub�
 	return ec._JanparaCrawlSettingExcludeKeyword(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNJanparaCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingExcludeProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.JanparaCrawlSettingExcludeProduct) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNJanparaCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingExcludeProduct(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNJanparaCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, v *model.JanparaCrawlSettingExcludeProduct) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._JanparaCrawlSettingExcludeProduct(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNJanparaCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐJanparaCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.JanparaCrawlSettingRequiredKeyword) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -40475,6 +53808,60 @@ func (ec *executionContext) marshalNMercariCrawlSettingExcludeKeyword2ᚖgithub�
 		return graphql.Null
 	}
 	return ec._MercariCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNMercariCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingExcludeProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.MercariCrawlSettingExcludeProduct) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNMercariCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingExcludeProduct(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNMercariCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, v *model.MercariCrawlSettingExcludeProduct) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._MercariCrawlSettingExcludeProduct(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNMercariCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐMercariCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.MercariCrawlSettingRequiredKeyword) graphql.Marshaler {
@@ -40707,6 +54094,60 @@ func (ec *executionContext) marshalNPcKoubouCrawlSettingExcludeKeyword2ᚖgithub
 	return ec._PcKoubouCrawlSettingExcludeKeyword(ctx, sel, v)
 }
 
+func (ec *executionContext) marshalNPcKoubouCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.PcKoubouCrawlSettingExcludeProduct) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNPcKoubouCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeProduct(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNPcKoubouCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, v *model.PcKoubouCrawlSettingExcludeProduct) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._PcKoubouCrawlSettingExcludeProduct(ctx, sel, v)
+}
+
 func (ec *executionContext) marshalNPcKoubouCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐPcKoubouCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.PcKoubouCrawlSettingRequiredKeyword) graphql.Marshaler {
 	ret := make(graphql.Array, len(v))
 	var wg sync.WaitGroup
@@ -40913,6 +54354,31 @@ func (ec *executionContext) marshalNUpdateIosysCrawlSettingExcludeKeywordResultE
 	return ec._UpdateIosysCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNUpdateIosysCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.UpdateIosysCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputUpdateIosysCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateIosysCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateIosysCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateIosysCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateIosysCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateIosysCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateIosysCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNUpdateIosysCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateIosysCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateIosysCrawlSettingInput, error) {
 	res, err := ec.unmarshalInputUpdateIosysCrawlSettingInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
@@ -40966,6 +54432,31 @@ func (ec *executionContext) marshalNUpdateJanparaCrawlSettingExcludeKeywordResul
 		return graphql.Null
 	}
 	return ec._UpdateJanparaCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdateJanparaCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.UpdateJanparaCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputUpdateJanparaCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateJanparaCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateJanparaCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateJanparaCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateJanparaCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateJanparaCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateJanparaCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNUpdateJanparaCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateJanparaCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateJanparaCrawlSettingInput, error) {
@@ -41023,6 +54514,31 @@ func (ec *executionContext) marshalNUpdateMercariCrawlSettingExcludeKeywordResul
 	return ec._UpdateMercariCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNUpdateMercariCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.UpdateMercariCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputUpdateMercariCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateMercariCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateMercariCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateMercariCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateMercariCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateMercariCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateMercariCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNUpdateMercariCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateMercariCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateMercariCrawlSettingInput, error) {
 	res, err := ec.unmarshalInputUpdateMercariCrawlSettingInput(ctx, v)
 	return &res, graphql.ErrorOnPath(ctx, err)
@@ -41076,6 +54592,31 @@ func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingExcludeKeywordResu
 		return graphql.Null
 	}
 	return ec._UpdatePcKoubouCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdatePcKoubouCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.UpdatePcKoubouCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputUpdatePcKoubouCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdatePcKoubouCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdatePcKoubouCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdatePcKoubouCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdatePcKoubouCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdatePcKoubouCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNUpdatePcKoubouCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdatePcKoubouCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdatePcKoubouCrawlSettingInput, error) {
@@ -41156,6 +54697,31 @@ func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingExcludeKeyword
 		return graphql.Null
 	}
 	return ec._UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdateYahooAuctionCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.UpdateYahooAuctionCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateYahooAuctionCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateYahooAuctionCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateYahooAuctionCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateYahooAuctionCrawlSettingExcludeProductResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) unmarshalNUpdateYahooAuctionCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateYahooAuctionCrawlSettingInput, error) {
@@ -41254,6 +54820,60 @@ func (ec *executionContext) marshalNYahooAuctionCrawlSettingExcludeKeyword2ᚖgi
 		return graphql.Null
 	}
 	return ec._YahooAuctionCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNYahooAuctionCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.YahooAuctionCrawlSettingExcludeProduct) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNYahooAuctionCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeProduct(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNYahooAuctionCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, v *model.YahooAuctionCrawlSettingExcludeProduct) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._YahooAuctionCrawlSettingExcludeProduct(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNYahooAuctionCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.YahooAuctionCrawlSettingRequiredKeyword) graphql.Marshaler {

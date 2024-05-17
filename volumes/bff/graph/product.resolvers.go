@@ -16,6 +16,11 @@ func (r *iosysCrawlSettingResolver) IosysCrawlSettingExcludeKeywords(ctx context
 	return r.ProductService.FindIosysCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
 }
 
+// IosysCrawlSettingExcludeProducts is the resolver for the iosysCrawlSettingExcludeProducts field.
+func (r *iosysCrawlSettingResolver) IosysCrawlSettingExcludeProducts(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingExcludeProduct, error) {
+	return r.ProductService.FindIosysCrawlSettingExcludeProduct(ctx, obj.ProductID, obj.ID)
+}
+
 // IosysCrawlSettingRequiredKeywords is the resolver for the iosysCrawlSettingRequiredKeywords field.
 func (r *iosysCrawlSettingResolver) IosysCrawlSettingRequiredKeywords(ctx context.Context, obj *model.IosysCrawlSetting) ([]*model.IosysCrawlSettingRequiredKeyword, error) {
 	return r.ProductService.FindIosysCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
@@ -24,6 +29,11 @@ func (r *iosysCrawlSettingResolver) IosysCrawlSettingRequiredKeywords(ctx contex
 // JanparaCrawlSettingExcludeKeywords is the resolver for the janparaCrawlSettingExcludeKeywords field.
 func (r *janparaCrawlSettingResolver) JanparaCrawlSettingExcludeKeywords(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindJanparaCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// JanparaCrawlSettingExcludeProducts is the resolver for the janparaCrawlSettingExcludeProducts field.
+func (r *janparaCrawlSettingResolver) JanparaCrawlSettingExcludeProducts(ctx context.Context, obj *model.JanparaCrawlSetting) ([]*model.JanparaCrawlSettingExcludeProduct, error) {
+	return r.ProductService.FindJanparaCrawlSettingExcludeProduct(ctx, obj.ProductID, obj.ID)
 }
 
 // JanparaCrawlSettingRequiredKeywords is the resolver for the janparaCrawlSettingRequiredKeywords field.
@@ -36,6 +46,11 @@ func (r *mercariCrawlSettingResolver) MercariCrawlSettingExcludeKeywords(ctx con
 	return r.ProductService.FindMercariCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
 }
 
+// MercariCrawlSettingExcludeProducts is the resolver for the mercariCrawlSettingExcludeProducts field.
+func (r *mercariCrawlSettingResolver) MercariCrawlSettingExcludeProducts(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingExcludeProduct, error) {
+	return r.ProductService.FindMercariCrawlSettingExcludeProduct(ctx, obj.ProductID, obj.ID)
+}
+
 // MercariCrawlSettingRequiredKeywords is the resolver for the mercariCrawlSettingRequiredKeywords field.
 func (r *mercariCrawlSettingResolver) MercariCrawlSettingRequiredKeywords(ctx context.Context, obj *model.MercariCrawlSetting) ([]*model.MercariCrawlSettingRequiredKeyword, error) {
 	return r.ProductService.FindMercariCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
@@ -44,6 +59,11 @@ func (r *mercariCrawlSettingResolver) MercariCrawlSettingRequiredKeywords(ctx co
 // PcKoubouCrawlSettingExcludeKeywords is the resolver for the pcKoubouCrawlSettingExcludeKeywords field.
 func (r *pcKoubouCrawlSettingResolver) PcKoubouCrawlSettingExcludeKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindPcKoubouCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// PcKoubouCrawlSettingExcludeProducts is the resolver for the pcKoubouCrawlSettingExcludeProducts field.
+func (r *pcKoubouCrawlSettingResolver) PcKoubouCrawlSettingExcludeProducts(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeProduct, error) {
+	return r.ProductService.FindPcKoubouCrawlSettingExcludeProduct(ctx, obj.ProductID, obj.ID)
 }
 
 // PcKoubouCrawlSettingRequiredKeywords is the resolver for the pcKoubouCrawlSettingRequiredKeywords field.
@@ -109,6 +129,11 @@ func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Produc
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
 func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error) {
 	return r.ProductService.FindYahooAuctionCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// YahooAuctionCrawlSettingExcludeProducts is the resolver for the yahooAuctionCrawlSettingExcludeProducts field.
+func (r *yahooAuctionCrawlSettingResolver) YahooAuctionCrawlSettingExcludeProducts(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeProduct, error) {
+	return r.ProductService.FindYahooAuctionCrawlSettingExcludeProduct(ctx, obj.ProductID, obj.ID)
 }
 
 // YahooAuctionCrawlSettingRequiredKeywords is the resolver for the yahooAuctionCrawlSettingRequiredKeywords field.
