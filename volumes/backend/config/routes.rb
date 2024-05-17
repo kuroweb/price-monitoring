@@ -14,6 +14,7 @@ Rails.application.routes.draw do
           resources :yahoo_auction_crawl_settings, only: [:index]
           namespace :yahoo_auction_crawl_settings do
             resources :yahoo_auction_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :yahoo_auction_crawl_setting_exclude_products, only: %i[index create update destroy]
             resources :yahoo_auction_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
           resources :yahoo_auction_daily_purchase_summaries, only: [:index]
@@ -26,6 +27,7 @@ Rails.application.routes.draw do
           resources :mercari_crawl_settings, only: [:index]
           namespace :mercari_crawl_settings do
             resources :mercari_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :mercari_crawl_setting_exclude_products, only: %i[index create update destroy]
             resources :mercari_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
           resources :mercari_daily_purchase_summaries, only: [:index]
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
           resources :janpara_crawl_settings, only: [:index]
           namespace :janpara_crawl_settings do
             resources :janpara_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :janpara_crawl_setting_exclude_products, only: %i[index create update destroy]
             resources :janpara_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
 
@@ -41,6 +44,7 @@ Rails.application.routes.draw do
           resources :iosys_crawl_settings, only: [:index]
           namespace :iosys_crawl_settings do
             resources :iosys_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :iosys_crawl_setting_exclude_products, only: %i[index create update destroy]
             resources :iosys_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
 
@@ -48,6 +52,7 @@ Rails.application.routes.draw do
           resources :pc_koubou_crawl_settings, only: [:index]
           namespace :pc_koubou_crawl_settings do
             resources :pc_koubou_crawl_setting_exclude_keywords, only: %i[index create update destroy]
+            resources :pc_koubou_crawl_setting_exclude_products, only: %i[index create update destroy]
             resources :pc_koubou_crawl_setting_required_keywords, only: %i[index create update destroy]
           end
 

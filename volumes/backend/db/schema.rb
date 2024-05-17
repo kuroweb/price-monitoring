@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_16_145407) do
   create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "iosys_crawl_setting_id"
     t.string "keyword", null: false
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
     t.datetime "updated_at", null: false
     t.index ["iosys_crawl_setting_id", "keyword"], name: "idx_on_iosys_crawl_setting_id_keyword_2429715633", unique: true
     t.index ["iosys_crawl_setting_id"], name: "idx_on_iosys_crawl_setting_id_889c2c2e88"
+  end
+
+  create_table "iosys_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "iosys_crawl_setting_id"
+    t.string "external_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["iosys_crawl_setting_id", "external_id"], name: "idx_on_iosys_crawl_setting_id_external_id_b0528c956e", unique: true
+    t.index ["iosys_crawl_setting_id"], name: "idx_on_iosys_crawl_setting_id_180f55a37c"
   end
 
   create_table "iosys_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -62,6 +71,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
     t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_e7210a8e11"
   end
 
+  create_table "janpara_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "janpara_crawl_setting_id"
+    t.string "external_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["janpara_crawl_setting_id", "external_id"], name: "idx_on_janpara_crawl_setting_id_external_id_102eeb7612", unique: true
+    t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_3d622eaffd"
+  end
+
   create_table "janpara_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "janpara_crawl_setting_id"
     t.string "keyword", null: false
@@ -102,6 +120,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
     t.datetime "updated_at", null: false
     t.index ["mercari_crawl_setting_id", "keyword"], name: "idx_on_mercari_crawl_setting_id_keyword_4e4cc0381b", unique: true
     t.index ["mercari_crawl_setting_id"], name: "idx_on_mercari_crawl_setting_id_f56a952474"
+  end
+
+  create_table "mercari_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "mercari_crawl_setting_id"
+    t.string "external_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mercari_crawl_setting_id", "external_id"], name: "idx_on_mercari_crawl_setting_id_external_id_34002464be", unique: true
+    t.index ["mercari_crawl_setting_id"], name: "idx_on_mercari_crawl_setting_id_22de934ea6"
   end
 
   create_table "mercari_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -159,6 +186,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
     t.index ["pc_koubou_crawl_setting_id"], name: "idx_on_pc_koubou_crawl_setting_id_f8f5317000"
   end
 
+  create_table "pc_koubou_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "pc_koubou_crawl_setting_id"
+    t.string "external_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pc_koubou_crawl_setting_id", "external_id"], name: "idx_on_pc_koubou_crawl_setting_id_external_id_96823e00f8", unique: true
+    t.index ["pc_koubou_crawl_setting_id"], name: "idx_on_pc_koubou_crawl_setting_id_8b1b1a24af"
+  end
+
   create_table "pc_koubou_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "pc_koubou_crawl_setting_id"
     t.string "keyword", null: false
@@ -211,6 +247,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
     t.datetime "updated_at", null: false
     t.index ["yahoo_auction_crawl_setting_id", "keyword"], name: "idx_on_yahoo_auction_crawl_setting_id_keyword_9341e10548", unique: true
     t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_fb93459e66"
+  end
+
+  create_table "yahoo_auction_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "yahoo_auction_crawl_setting_id"
+    t.string "external_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["yahoo_auction_crawl_setting_id", "external_id"], name: "idx_on_yahoo_auction_crawl_setting_id_external_id_c904750663", unique: true
+    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_b30a20343c"
   end
 
   create_table "yahoo_auction_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -289,23 +334,28 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_16_142403) do
   end
 
   add_foreign_key "iosys_crawl_setting_exclude_keywords", "iosys_crawl_settings"
+  add_foreign_key "iosys_crawl_setting_exclude_products", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_required_keywords", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_settings", "products"
   add_foreign_key "iosys_products", "products"
   add_foreign_key "janpara_crawl_setting_exclude_keywords", "janpara_crawl_settings"
+  add_foreign_key "janpara_crawl_setting_exclude_products", "janpara_crawl_settings"
   add_foreign_key "janpara_crawl_setting_required_keywords", "janpara_crawl_settings"
   add_foreign_key "janpara_crawl_settings", "products"
   add_foreign_key "janpara_products", "products"
   add_foreign_key "mercari_crawl_setting_exclude_keywords", "mercari_crawl_settings"
+  add_foreign_key "mercari_crawl_setting_exclude_products", "mercari_crawl_settings"
   add_foreign_key "mercari_crawl_setting_required_keywords", "mercari_crawl_settings"
   add_foreign_key "mercari_crawl_settings", "products"
   add_foreign_key "mercari_daily_purchase_summaries", "products"
   add_foreign_key "mercari_products", "products"
   add_foreign_key "pc_koubou_crawl_setting_exclude_keywords", "pc_koubou_crawl_settings"
+  add_foreign_key "pc_koubou_crawl_setting_exclude_products", "pc_koubou_crawl_settings"
   add_foreign_key "pc_koubou_crawl_setting_required_keywords", "pc_koubou_crawl_settings"
   add_foreign_key "pc_koubou_crawl_settings", "products"
   add_foreign_key "pc_koubou_products", "products"
   add_foreign_key "yahoo_auction_crawl_setting_exclude_keywords", "yahoo_auction_crawl_settings"
+  add_foreign_key "yahoo_auction_crawl_setting_exclude_products", "yahoo_auction_crawl_settings"
   add_foreign_key "yahoo_auction_crawl_setting_required_keywords", "yahoo_auction_crawl_settings"
   add_foreign_key "yahoo_auction_crawl_settings", "products"
   add_foreign_key "yahoo_auction_daily_purchase_summaries", "products"
