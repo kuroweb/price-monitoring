@@ -36,7 +36,7 @@ module Crawl
 
         # 計測設定とマッチしないレコードを削除する
         def inspect
-          Crawl::Mercari::Inspect.call(product:)
+          Products::Inspect::DeleteMercariProducts.call(product:)
         end
 
         # 今回の計測結果に含まれなかった過去の計測結果を個別同期する

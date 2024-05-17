@@ -17,6 +17,7 @@ module Api
               .janpara_crawl_setting_required_keywords
               .create!(janpara_crawl_setting_required_keyword_params)
 
+            inspect
             render json: janpara_crawl_setting_required_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -25,6 +26,7 @@ module Api
 
           def update
             janpara_crawl_setting_required_keyword.update!(janpara_crawl_setting_required_keyword_params)
+            inspect
             render json: janpara_crawl_setting_required_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -59,6 +61,10 @@ module Api
 
           def janpara_crawl_setting_required_keyword_params
             params.permit(janpara_crawl_setting_required_keyword_attributes)
+          end
+
+          def inspect
+            ::Products::Inspect::DeleteJanparaProducts.call(product:)
           end
         end
       end

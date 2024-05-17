@@ -38,7 +38,7 @@ module Crawl
       end
 
       def inspect
-        Inspect.call(product:)
+        Products::Inspect::DeleteJanparaProducts.call(product:)
       end
 
       def janpara_crawl_setting

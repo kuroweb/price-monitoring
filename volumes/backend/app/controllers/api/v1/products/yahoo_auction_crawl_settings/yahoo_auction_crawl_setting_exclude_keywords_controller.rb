@@ -17,6 +17,7 @@ module Api
               .yahoo_auction_crawl_setting_exclude_keywords
               .create!(yahoo_auction_crawl_setting_exclude_keyword_params)
 
+            inspect
             render json: yahoo_auction_crawl_setting_exclude_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -25,6 +26,7 @@ module Api
 
           def update
             yahoo_auction_crawl_setting_exclude_keyword.update!(yahoo_auction_crawl_setting_exclude_keyword_params)
+            inspect
             render json: yahoo_auction_crawl_setting_exclude_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -59,6 +61,11 @@ module Api
 
           def yahoo_auction_crawl_setting_exclude_keyword_params
             params.permit(yahoo_auction_crawl_setting_exclude_keyword_attributes)
+          end
+
+          def inspect
+            ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
+            ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
           end
         end
       end

@@ -12,6 +12,7 @@ module Api
 
       def create
         product = ::Products::Create.call(params: create_product_params)
+        inspect
         render json: product.as_json, status: 200
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -20,6 +21,7 @@ module Api
 
       def update
         ::Products::Update.call(product:, params: update_product_params)
+        inspect
         render json: product.as_json, status: 200
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -92,6 +94,15 @@ module Api
           iosys_crawl_setting: iosys_crawl_setting_attributes,
           pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes
         )
+      end
+
+      def inspect
+        ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
+        ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
+        ::Products::Inspect::DeleteMercariProducts.call(product:)
+        ::Products::Inspect::DeleteJanparaProducts.call(product:)
+        ::Products::Inspect::DeleteIosysProducts.call(product:)
+        ::Products::Inspect::DeletePcKoubouProducts.call(product:)
       end
     end
   end

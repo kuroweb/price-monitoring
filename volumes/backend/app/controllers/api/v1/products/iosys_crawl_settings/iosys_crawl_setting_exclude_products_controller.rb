@@ -17,6 +17,7 @@ module Api
               .iosys_crawl_setting_exclude_products
               .create!(iosys_crawl_setting_exclude_product_params)
 
+            inspect
             render json: iosys_crawl_setting_exclude_product.as_json, status: 200
           rescue ActiveRecord::RecordInvalid
             render json: { error: "Bad Request.", status: 400 }, status: 400
@@ -24,6 +25,7 @@ module Api
 
           def update
             iosys_crawl_setting_exclude_product.update!(iosys_crawl_setting_exclude_product_params)
+            inspect
             render json: iosys_crawl_setting_exclude_product.as_json, status: 200
           rescue ActiveRecord::RecordInvalid
             render json: { error: "Bad Request.", status: 400 }, status: 400
@@ -57,6 +59,10 @@ module Api
 
           def iosys_crawl_setting_exclude_product_params
             params.permit(iosys_crawl_setting_exclude_product_attributes)
+          end
+
+          def inspect
+            ::Products::Inspect::DeleteIosysProducts.call(product:)
           end
         end
       end

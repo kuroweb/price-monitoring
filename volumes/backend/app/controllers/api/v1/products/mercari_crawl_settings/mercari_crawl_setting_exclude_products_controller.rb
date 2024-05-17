@@ -17,6 +17,7 @@ module Api
               .mercari_crawl_setting_exclude_products
               .create!(mercari_crawl_setting_exclude_product_params)
 
+            inspect
             render json: mercari_crawl_setting_exclude_product.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -25,6 +26,7 @@ module Api
 
           def update
             mercari_crawl_setting_exclude_product.update!(mercari_crawl_setting_exclude_product_params)
+            inspect
             render json: mercari_crawl_setting_exclude_product.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -59,6 +61,10 @@ module Api
 
           def mercari_crawl_setting_exclude_product_params
             params.permit(mercari_crawl_setting_exclude_product_attributes)
+          end
+
+          def inspect
+            ::Products::Inspect::DeleteMercariProducts.call(product:)
           end
         end
       end

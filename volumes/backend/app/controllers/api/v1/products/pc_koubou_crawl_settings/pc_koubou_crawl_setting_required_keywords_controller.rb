@@ -17,6 +17,7 @@ module Api
               .pc_koubou_crawl_setting_required_keywords
               .create!(pc_koubou_crawl_setting_required_keyword_params)
 
+            inspect
             render json: pc_koubou_crawl_setting_required_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -25,6 +26,8 @@ module Api
 
           def update
             pc_koubou_crawl_setting_required_keyword.update!(pc_koubou_crawl_setting_required_keyword_params)
+
+            inspect
             render json: pc_koubou_crawl_setting_required_keyword.as_json, status: 200
           rescue ActiveRecord::RecordInvalid => e
             Rails.logger.error("Bad Request. exception: #{e.full_message}")
@@ -59,6 +62,10 @@ module Api
 
           def pc_koubou_crawl_setting_required_keyword_params
             params.permit(pc_koubou_crawl_setting_required_keyword_attributes)
+          end
+
+          def inspect
+            ::Products::Inspect::DeletePcKoubouProducts.call(product:)
           end
         end
       end
