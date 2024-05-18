@@ -36,7 +36,7 @@ const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>除外商品</h3>
+          <h3 className='font-bold text-lg'>除外商品ID</h3>
           <div className='py-6'>
             <Join className='flex'>
               <input

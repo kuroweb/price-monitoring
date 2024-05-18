@@ -38,7 +38,7 @@ const KeywordTable = ({
       <table className='table'>
         <thead>
           <tr>
-            <td>キーワード</td>
+            <td>商品ID</td>
             <td></td>
           </tr>
         </thead>

@@ -41,7 +41,7 @@ const CreateForm = ({
       <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2'>
         <label className='form-control'>
           <div className='label'>
-            <span className='label-text'>キーワード</span>
+            <span className='label-text'>商品ID</span>
           </div>
           <input {...register('externalId')} className='input input-bordered' />
         </label>

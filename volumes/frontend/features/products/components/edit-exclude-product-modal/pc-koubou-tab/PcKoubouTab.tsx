@@ -25,7 +25,7 @@ const PcKoubouTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
         {mode == 'list' && (
           <>
             <Button onClick={() => setMode('create')} color='neutral' size='md' className='w-full'>
-              ＋ 除外キーワードを追加
+              ＋ 除外したい商品IDを追加
             </Button>
             <KeywordTable data={data} setMode={setMode} setCondition={setCondition} />
           </>
