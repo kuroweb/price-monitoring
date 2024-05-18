@@ -141,16 +141,29 @@ const RelatedProductsTable = ({
           {relatedProducts.map((relatedProduct) => (
             <tr key={relatedProduct.externalId} className='border-b border-base-200 cursor-pointer'>
               <td
-                className='w-2/12'
+                className='w-2/12 p-0'
                 onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
               >
                 {serviceNameMap[relatedProduct.platform]}
               </td>
               <td
-                className='w-5/12'
+                className='w-3/12 md:w-5/12 px-0'
                 onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
               >
-                {relatedProduct.name}
+                <div className='space-y-2'>
+                  <div>
+                    <p className='text-xs text-gray-500'>商品名</p>
+                    <p>{relatedProduct.name}</p>
+                  </div>
+                  <div>
+                    <p className='text-xs text-gray-500'>終了日</p>
+                    {status == 'published'
+                      ? relatedProduct.endDate
+                        ? parseDate(relatedProduct.endDate)
+                        : '-'
+                      : parseDate(relatedProduct.boughtDate)}
+                  </div>
+                </div>
               </td>
               <td
                 className='w-2/12'
@@ -164,14 +177,6 @@ const RelatedProductsTable = ({
                   <div>
                     <p className='text-xs text-gray-500'>即決</p>
                     <p>{relatedProduct.buyoutPrice ? relatedProduct.buyoutPrice : '-'}</p>
-                  </div>
-                  <div>
-                    <p className='text-xs text-gray-500'>終了日</p>
-                    {status == 'published'
-                      ? relatedProduct.endDate
-                        ? parseDate(relatedProduct.endDate)
-                        : '-'
-                      : parseDate(relatedProduct.boughtDate)}
                   </div>
                 </div>
               </td>
@@ -189,7 +194,7 @@ const RelatedProductsTable = ({
                   />
                 </div>
               </td>
-              <td className='w-1/12'>
+              <td className='w-1/12 p-0'>
                 <div className='dropdown dropdown-left'>
                   <div tabIndex={0} role='button' className='btn btn-square btn-md'>
                     <svg
