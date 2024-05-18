@@ -3,8 +3,7 @@ import Link from 'next/link'
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
 import Pagination from '@/features/products/components/Pagination'
-import RelatedProductsTable from '@/features/products/components/RelatedProductsTable'
-import SearchForm from '@/features/products/components/SearchForm'
+import RelatedProductCard from '@/features/products/components/RelatedProductCard'
 import BulkEditExcludeKeywordModal from '@/features/products/components/bulk-edit-exclude-keyword-modal/BulkEditExcludeKeywordModal'
 import BulkEditRequiredKeywordModal from '@/features/products/components/bulk-edit-required-keyword-modal/BulkEditRequiredKeywordModal'
 import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
@@ -157,8 +156,14 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>商品一覧</h2>
-            <SearchForm />
-            <RelatedProductsTable relatedProducts={data.product.relatedProducts} />
+            <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+              {data.product.relatedProducts.map((relatedProduct) => (
+                <RelatedProductCard
+                  key={relatedProduct.externalId}
+                  relatedProduct={relatedProduct}
+                />
+              ))}
+            </div>
             <Pagination />
           </div>
         </div>
