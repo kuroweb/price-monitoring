@@ -190,7 +190,6 @@ const RelatedProductsTable = ({
                     src={relatedProduct.thumbnailUrl}
                     alt=''
                     fill
-                    sizes='100vw, 100vw'
                   />
                 </div>
               </td>
