@@ -25,12 +25,16 @@ function EditForm({
 
   const onSubmit: SubmitHandler<UpdateMercariCrawlSettingExcludeProductInput> = async (data) => {
     const result = await updateMercariCrawlSettingExcludeProduct(data)
-    if (result.data?.updateMercariCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.updateMercariCrawlSettingExcludeProduct.__typename ===
+        'UpdateMercariCrawlSettingExcludeProductResultError' &&
+      result?.data?.updateMercariCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 

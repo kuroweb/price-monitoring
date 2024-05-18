@@ -27,12 +27,16 @@ const CreateForm = ({
 
   const onSubmit: SubmitHandler<CreateMercariCrawlSettingExcludeProductInput> = async (data) => {
     const result = await createMercariCrawlSettingExcludeProduct(data)
-    if (result.data?.createMercariCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.createMercariCrawlSettingExcludeProduct.__typename ===
+        'CreateMercariCrawlSettingExcludeProductResultError' &&
+      result?.data?.createMercariCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 

@@ -27,12 +27,16 @@ function EditForm({
     data,
   ) => {
     const result = await updateYahooAuctionCrawlSettingExcludeProduct(data)
-    if (result.data?.updateYahooAuctionCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.updateYahooAuctionCrawlSettingExcludeProduct.__typename ===
+        'UpdateYahooAuctionCrawlSettingExcludeProductResultError' &&
+      result?.data?.updateYahooAuctionCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 

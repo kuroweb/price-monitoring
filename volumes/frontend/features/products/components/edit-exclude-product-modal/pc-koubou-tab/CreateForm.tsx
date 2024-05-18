@@ -27,12 +27,16 @@ const CreateForm = ({
 
   const onSubmit: SubmitHandler<CreatePcKoubouCrawlSettingExcludeProductInput> = async (data) => {
     const result = await createPcKoubouCrawlSettingExcludeProduct(data)
-    if (result.data?.createPcKoubouCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
+        'CreatePcKoubouCrawlSettingExcludeProductResultError' &&
+      result?.data?.createPcKoubouCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 

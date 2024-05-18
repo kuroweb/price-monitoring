@@ -25,12 +25,16 @@ function EditForm({
 
   const onSubmit: SubmitHandler<UpdateIosysCrawlSettingExcludeProductInput> = async (data) => {
     const result = await updateIosysCrawlSettingExcludeProduct(data)
-    if (result.data?.updateIosysCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.updateIosysCrawlSettingExcludeProduct.__typename ===
+        'UpdateIosysCrawlSettingExcludeProductResultError' &&
+      result?.data?.updateIosysCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 

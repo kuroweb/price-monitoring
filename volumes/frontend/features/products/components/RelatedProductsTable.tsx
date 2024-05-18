@@ -1,8 +1,17 @@
 'use client'
 
 import NextImage from 'next/image'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 import { useStatusState } from '../hooks/useStatusState'
+import {
+  createIosysCrawlSettingExcludeProduct,
+  createJanparaCrawlSettingExcludeProduct,
+  createMercariCrawlSettingExcludeProduct,
+  createPcKoubouCrawlSettingExcludeProduct,
+  createYahooAuctionCrawlSettingExcludeProduct,
+} from '../server-actions/productQuery'
 
 import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -11,6 +20,7 @@ const RelatedProductsTable = ({
 }: {
   relatedProducts: GetProductDetailPageDataQuery['product']['relatedProducts']
 }) => {
+  const router = useRouter()
   const [status, _] = useStatusState()
 
   const serviceDomainMap: { [key: string]: string } = {
@@ -31,7 +41,7 @@ const RelatedProductsTable = ({
     pc_koubou: 'パソコン工房',
   }
 
-  const handleRowClick = (platform: string, externalId: string) => {
+  const openProductPage = async (platform: string, externalId: string) => {
     window.open(`https://${serviceDomainMap[platform]}${externalId}`, '_blank')
   }
 
@@ -40,45 +50,135 @@ const RelatedProductsTable = ({
     return date ? date.substring(0, 10) : ''
   }
 
+  const createExcludeProduct = async (
+    platform: string,
+    input: { externalId: string; productId: string },
+  ) => {
+    switch (platform) {
+      case 'yahoo_auction':
+      case 'yahoo_fleamarket':
+        let yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeProduct(input)
+        if (
+          yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.__typename ===
+            'CreateYahooAuctionCrawlSettingExcludeProductResultError' &&
+          yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.error.code !==
+            '409'
+        ) {
+          return toast.error('error')
+        }
+
+        toast.success('success')
+        router.refresh()
+        break
+      case 'mercari':
+        let mercariResult = await createMercariCrawlSettingExcludeProduct(input)
+        if (
+          mercariResult?.data?.createMercariCrawlSettingExcludeProduct.__typename ===
+            'CreateMercariCrawlSettingExcludeProductResultError' &&
+          mercariResult?.data?.createMercariCrawlSettingExcludeProduct.error.code !== '409'
+        ) {
+          return toast.error('error')
+        }
+
+        toast.success('success')
+        router.refresh()
+        break
+      case 'janpara':
+        let janparaResult = await createJanparaCrawlSettingExcludeProduct(input)
+        if (
+          janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.__typename ===
+            'CreateJanparaCrawlSettingExcludeProductResultError' &&
+          janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.error.code !== '409'
+        ) {
+          return toast.error('error')
+        }
+
+        toast.success('success')
+        router.refresh()
+        break
+      case 'iosys':
+        let iosys = await createIosysCrawlSettingExcludeProduct(input)
+        if (
+          iosys?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
+            'CreateIosysCrawlSettingExcludeProductResultError' &&
+          iosys?.data?.createIosysCrawlSettingExcludeProduct.error.code !== '409'
+        ) {
+          return toast.error('error')
+        }
+
+        toast.success('success')
+        router.refresh()
+        break
+      case 'pc_koubou':
+        let pcKoubouResult = await createPcKoubouCrawlSettingExcludeProduct(input)
+        if (
+          pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
+            'CreatePcKoubouCrawlSettingExcludeProductResultError' &&
+          pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.error.code !== '409'
+        ) {
+          return toast.error('error')
+        }
+
+        toast.success('success')
+        router.refresh()
+        break
+    }
+  }
+
   return (
     <>
       <table className='table'>
         <thead>
           <tr>
-            <th></th>
-            <th>商品名</th>
-            <th>価格</th>
-            <th>{status == 'published' ? '終了日' : '売却日'}</th>
-            <th></th>
+            <th />
+            <th />
+            <th />
+            <th />
+            <th />
           </tr>
         </thead>
         <tbody>
           {relatedProducts.map((relatedProduct) => (
-            <tr
-              key={relatedProduct.externalId}
-              onClick={() => handleRowClick(relatedProduct.platform, relatedProduct.externalId)}
-              className='border-b border-base-200 cursor-pointer hover:bg-base-100'
-            >
-              <td className='p-0 w-16 min-w-16'>{serviceNameMap[relatedProduct.platform]}</td>
-              <td className='w-36 max-w-36 md:w-full md:max-w-full'>{relatedProduct.name}</td>
-              <td className='w-16 min-w-16'>
-                <div>
-                  <p className='text-xs text-gray-500'>現在</p>
-                  <p>{relatedProduct.price}</p>
-                </div>
-                <div className='pt-1'>
-                  <p className='text-xs text-gray-500'>即決</p>
-                  <p>{relatedProduct.buyoutPrice ? relatedProduct.buyoutPrice : '-'}</p>
+            <tr key={relatedProduct.externalId} className='border-b border-base-200 cursor-pointer'>
+              <td
+                className='w-2/12'
+                onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
+              >
+                {serviceNameMap[relatedProduct.platform]}
+              </td>
+              <td
+                className='w-5/12'
+                onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
+              >
+                {relatedProduct.name}
+              </td>
+              <td
+                className='w-2/12'
+                onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
+              >
+                <div className='space-y-2'>
+                  <div>
+                    <p className='text-xs text-gray-500'>現在</p>
+                    <p>{relatedProduct.price}</p>
+                  </div>
+                  <div>
+                    <p className='text-xs text-gray-500'>即決</p>
+                    <p>{relatedProduct.buyoutPrice ? relatedProduct.buyoutPrice : '-'}</p>
+                  </div>
+                  <div>
+                    <p className='text-xs text-gray-500'>終了日</p>
+                    {status == 'published'
+                      ? relatedProduct.endDate
+                        ? parseDate(relatedProduct.endDate)
+                        : '-'
+                      : parseDate(relatedProduct.boughtDate)}
+                  </div>
                 </div>
               </td>
-              <td className='w-24 min-w-24 md:w-28 md:min-w-28'>
-                {status == 'published'
-                  ? relatedProduct.endDate
-                    ? parseDate(relatedProduct.endDate)
-                    : '-'
-                  : parseDate(relatedProduct.boughtDate)}
-              </td>
-              <td className='p-2 w-20 min-w-20 md:w-24 md:min-w-24'>
+              <td
+                className='w-2/12'
+                onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
+              >
                 <div className='relative aspect-square'>
                   <NextImage
                     className='object-cover rounded-lg'
@@ -87,6 +187,43 @@ const RelatedProductsTable = ({
                     fill
                     sizes='100vw, 100vw'
                   />
+                </div>
+              </td>
+              <td className='w-1/12'>
+                <div className='dropdown dropdown-left'>
+                  <div tabIndex={0} role='button' className='btn btn-square btn-md'>
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      className='inline-block w-5 h-5 stroke-current'
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
+                      ></path>
+                    </svg>
+                  </div>
+                  <ul
+                    tabIndex={0}
+                    className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
+                  >
+                    <li>
+                      <button
+                        className='btn btn-error'
+                        onClick={async () =>
+                          createExcludeProduct(relatedProduct.platform, {
+                            externalId: relatedProduct.externalId,
+                            productId: String(relatedProduct.productId),
+                          })
+                        }
+                      >
+                        除外
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </td>
             </tr>

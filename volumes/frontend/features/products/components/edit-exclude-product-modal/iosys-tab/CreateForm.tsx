@@ -27,12 +27,16 @@ const CreateForm = ({
 
   const onSubmit: SubmitHandler<CreateIosysCrawlSettingExcludeProductInput> = async (data) => {
     const result = await createIosysCrawlSettingExcludeProduct(data)
-    if (result.data?.createIosysCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
+        'CreateIosysCrawlSettingExcludeProductResultError' &&
+      result?.data?.createIosysCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 

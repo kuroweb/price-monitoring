@@ -29,12 +29,16 @@ const CreateForm = ({
     data,
   ) => {
     const result = await createYahooAuctionCrawlSettingExcludeProduct(data)
-    if (result.data?.createYahooAuctionCrawlSettingExcludeProduct.ok) {
-      toast.success('success')
-      setMode('list')
-    } else {
-      toast.error('error')
+    if (
+      result?.data?.createYahooAuctionCrawlSettingExcludeProduct.__typename ===
+        'CreateYahooAuctionCrawlSettingExcludeProductResultError' &&
+      result?.data?.createYahooAuctionCrawlSettingExcludeProduct.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
     }
+
+    setMode('list')
+    toast.success('success')
     router.refresh()
   }
 
