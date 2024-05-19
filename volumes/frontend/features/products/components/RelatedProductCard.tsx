@@ -218,7 +218,7 @@ const RelatedProductCard = ({
                   <div className='flex justify-end'>
                     <div className='badge badge-outline'>
                       <span className='text-xs pr-1'>即決:</span>
-                      <span className='pr-1'>{relatedProduct.price}</span>
+                      <span className='pr-1'>{relatedProduct.buyoutPrice}</span>
                       <span className='text-xs'>円</span>
                     </div>
                   </div>
@@ -227,7 +227,7 @@ const RelatedProductCard = ({
             ) : (
               <div className='flex justify-end'>
                 <div className='badge badge-outline'>
-                  <span className='text-xs pr-1'>価格:</span>
+                  <span className='text-xs pr-1'>現在:</span>
                   <span className='pr-1'>{relatedProduct.price}</span>
                   <span className='text-xs'>円</span>
                 </div>
