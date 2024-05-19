@@ -138,12 +138,12 @@ const RelatedProductCard = ({
     <>
       <div className='card bg-base-100 shadow-xl'>
         <figure>
-          <div className='h-32 w-full relative' title='hoge'>
+          <div className='h-32 w-full relative'>
             <NextImage
               src={relatedProduct.thumbnailUrl}
               alt=''
               fill
-              objectFit='cover'
+              objectFit='contain'
               className='cursor-pointer'
               onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
             />
