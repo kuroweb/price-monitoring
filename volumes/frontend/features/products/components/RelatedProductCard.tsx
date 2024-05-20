@@ -63,75 +63,66 @@ const RelatedProductCard = ({
     platform: string,
     input: { externalId: string; productId: string },
   ) => {
+    const allowedStatus = '409'
+
     switch (platform) {
       case 'yahoo_auction':
       case 'yahoo_fleamarket':
-        let yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeProduct(input)
+        const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeProduct(input)
         if (
           yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.__typename ===
             'CreateYahooAuctionCrawlSettingExcludeProductResultError' &&
           yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.error.code !==
-            '409'
+            allowedStatus
         ) {
           return toast.error('error')
         }
-
-        toast.success('success')
-        router.refresh()
         break
       case 'mercari':
-        let mercariResult = await createMercariCrawlSettingExcludeProduct(input)
+        const mercariResult = await createMercariCrawlSettingExcludeProduct(input)
         if (
           mercariResult?.data?.createMercariCrawlSettingExcludeProduct.__typename ===
             'CreateMercariCrawlSettingExcludeProductResultError' &&
-          mercariResult?.data?.createMercariCrawlSettingExcludeProduct.error.code !== '409'
+          mercariResult?.data?.createMercariCrawlSettingExcludeProduct.error.code !== allowedStatus
         ) {
           return toast.error('error')
         }
-
-        toast.success('success')
-        router.refresh()
         break
       case 'janpara':
-        let janparaResult = await createJanparaCrawlSettingExcludeProduct(input)
+        const janparaResult = await createJanparaCrawlSettingExcludeProduct(input)
         if (
           janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.__typename ===
             'CreateJanparaCrawlSettingExcludeProductResultError' &&
-          janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.error.code !== '409'
+          janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.error.code !== allowedStatus
         ) {
           return toast.error('error')
         }
-
-        toast.success('success')
-        router.refresh()
         break
       case 'iosys':
-        let iosys = await createIosysCrawlSettingExcludeProduct(input)
+        const iosys = await createIosysCrawlSettingExcludeProduct(input)
         if (
           iosys?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
             'CreateIosysCrawlSettingExcludeProductResultError' &&
-          iosys?.data?.createIosysCrawlSettingExcludeProduct.error.code !== '409'
+          iosys?.data?.createIosysCrawlSettingExcludeProduct.error.code !== allowedStatus
         ) {
           return toast.error('error')
         }
-
-        toast.success('success')
-        router.refresh()
         break
       case 'pc_koubou':
-        let pcKoubouResult = await createPcKoubouCrawlSettingExcludeProduct(input)
+        const pcKoubouResult = await createPcKoubouCrawlSettingExcludeProduct(input)
         if (
           pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
             'CreatePcKoubouCrawlSettingExcludeProductResultError' &&
-          pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.error.code !== '409'
+          pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.error.code !==
+            allowedStatus
         ) {
           return toast.error('error')
         }
-
-        toast.success('success')
-        router.refresh()
         break
     }
+
+    toast.success('success')
+    router.refresh()
   }
 
   return (
