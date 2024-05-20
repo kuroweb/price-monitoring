@@ -143,7 +143,8 @@ const RelatedProductCard = ({
               src={relatedProduct.thumbnailUrl}
               alt=''
               fill
-              objectFit='contain'
+              sizes='100vh 100vw'
+              style={{ objectFit: 'contain' }}
               className='cursor-pointer'
               onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
             />
