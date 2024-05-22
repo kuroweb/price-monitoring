@@ -1,7 +1,7 @@
 development:
   :concurrency: 3
 production:
-  :concurrency: 4
+  :concurrency: 3
 :queues:
   - ['crawl_yahoo_auction_sync_products_enqueue_sync_job', 1]
   - ['crawl_yahoo_auction_sync_products_sync_job', 1]
