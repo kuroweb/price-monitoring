@@ -1,10 +1,10 @@
-import type { Config } from "tailwindcss";
+import type { Config } from 'tailwindcss'
 
 export default {
   content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "node_modules/daisyui/dist/**/*.js",
-    "node_modules/react-daisyui/dist/**/*.js",
+    './app/**/*.{js,jsx,ts,tsx}',
+    'node_modules/daisyui/dist/**/*.js',
+    'node_modules/react-daisyui/dist/**/*.js',
   ],
   theme: {
     extend: {},
@@ -13,4 +13,4 @@ export default {
   daisyui: {
     themes: ['light', 'dark'],
   },
-} satisfies Config;
+} satisfies Config
