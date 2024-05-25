@@ -42,6 +42,9 @@ attach-bff:
 attach-frontend:
 	docker attach $(docker compose ps -q frontend)
 
+attach-remix:
+	docker attach $(docker compose ps -q remix)
+
 #
 # Log
 #
