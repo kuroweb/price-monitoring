@@ -1,0 +1,290 @@
+#
+# products
+#
+
+query getProductPageData($id: ID, $name: String) {
+  products(id: $id, name: $name) {
+    id
+    name
+    yahooAuctionCrawlSetting {
+      id
+      productId
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+    }
+    mercariCrawlSetting {
+      id
+      productId
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+    }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
+    iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
+    pcKoubouCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
+  }
+}
+
+query getProductDetailPageData(
+  $id: ID!
+  $platformMask: String!
+  $page: Int
+  $per: Int
+  $sort: String
+  $order: String
+) {
+  product(id: $id) {
+    id
+    name
+    yahooAuctionCrawlSetting {
+      id
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+      yahooAuctionCrawlSettingExcludeKeywords {
+        id
+        yahooAuctionCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      yahooAuctionCrawlSettingExcludeProducts {
+        id
+        yahooAuctionCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      yahooAuctionCrawlSettingRequiredKeywords {
+        id
+        yahooAuctionCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    yahooAuctionDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
+    yahooFleamarketDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
+    mercariCrawlSetting {
+      id
+      productId
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+      mercariCrawlSettingExcludeKeywords {
+        id
+        mercariCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      mercariCrawlSettingExcludeProducts {
+        id
+        mercariCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      mercariCrawlSettingRequiredKeywords {
+        id
+        mercariCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    mercariDailyPurchaseSummaries {
+      id
+      productId
+      averagePurchasePrice
+      purchaseCount
+      date
+      createdAt
+      updatedAt
+    }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      janparaCrawlSettingExcludeKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      janparaCrawlSettingExcludeProducts {
+        id
+        janparaCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      janparaCrawlSettingRequiredKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      iosysCrawlSettingExcludeKeywords {
+        id
+        iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      iosysCrawlSettingExcludeProducts {
+        id
+        iosysCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      iosysCrawlSettingRequiredKeywords {
+        id
+        iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    pcKoubouCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      pcKoubouCrawlSettingExcludeKeywords {
+        id
+        pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingExcludeProducts {
+        id
+        pcKoubouCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingRequiredKeywords {
+        id
+        pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    relatedProducts(
+      platformMask: $platformMask
+      page: $page
+      per: $per
+      sort: $sort
+      order: $order
+    ) {
+      platform
+      productId
+      externalId
+      name
+      thumbnailUrl
+      price
+      buyoutPrice
+      published
+      boughtDate
+      endDate
+      createdAt
+      updatedAt
+    }
+  }
+}
+
+#
+# recommends
+#
+
+query getRecommendsPageData($id: ID, $name: String) {
+  products(id: $id, name: $name) {
+    id
+    name
+    relatedProducts(
+      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all"
+      page: 1
+      per: 4
+      sort: "price"
+      order: "asc"
+    ) {
+      platform
+      productId
+      externalId
+      name
+      thumbnailUrl
+      price
+      buyoutPrice
+      published
+      boughtDate
+      endDate
+      createdAt
+      updatedAt
+    }
+  }
+}
