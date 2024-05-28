@@ -5,9 +5,10 @@ import { Links, Meta, Outlet, Scripts, ScrollRestoration } from '@remix-run/reac
 
 import ToastProvider from '../lib/toast-provider'
 
-import Header from 'components/Header'
-import Sidebar from 'components/Sidebar'
-import stylesheet from '~/tailwind.css?url'
+import stylesheet from './tailwind.css?url'
+
+import Header from '@/components/Header'
+import Sidebar from '@/components/Sidebar'
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: stylesheet }]
 
