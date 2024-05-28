@@ -18,7 +18,7 @@ export default defineConfig({
     }),
     tsconfigPaths(),
     cjsInterop({
-      dependencies: ["@apollo/client"]
-    })
+      dependencies: ['@apollo/client'],
+    }),
   ],
 })
