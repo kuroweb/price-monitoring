@@ -6,9 +6,9 @@ const client = new ApolloClient({
   defaultOptions: {
     watchQuery: {
       // 暫定対応でキャッシュ無効化
-      fetchPolicy: 'no-cache'
-    }
-  }
+      fetchPolicy: 'no-cache',
+    },
+  },
 })
 
 export default client
