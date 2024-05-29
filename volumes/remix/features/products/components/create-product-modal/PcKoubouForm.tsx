@@ -1,18 +1,18 @@
 import { useForm } from 'react-hook-form'
 
-import { UpdateProductInput } from '@/graphql/dist/client'
+import { CreateProductInput } from '@/graphql/dist/client'
 
 const PcKoubouForm = ({
   register,
   getValues,
   setValue,
 }: {
-  register: ReturnType<typeof useForm<UpdateProductInput>>['register']
-  getValues: ReturnType<typeof useForm<UpdateProductInput>>['getValues']
-  setValue: ReturnType<typeof useForm<UpdateProductInput>>['setValue']
+  register: ReturnType<typeof useForm<CreateProductInput>>['register']
+  getValues: ReturnType<typeof useForm<CreateProductInput>>['getValues']
+  setValue: ReturnType<typeof useForm<CreateProductInput>>['setValue']
 }) => {
   const reflectValue = (property: 'keyword' | 'min_price' | 'max_price') => {
-    const value = getValues(`mercari_crawl_setting.${property}`)
+    const value = getValues(`pc_koubou_crawl_setting.${property}`)
     setValue(`yahoo_auction_crawl_setting.${property}`, value)
     setValue(`mercari_crawl_setting.${property}`, value)
     setValue(`janpara_crawl_setting.${property}`, value)
@@ -72,7 +72,7 @@ const PcKoubouForm = ({
           他のプラットフォームに反映
         </button>
       </div>
-      <label className='label cursor-pointer '>
+      <label className='label cursor-pointer'>
         <span className='label-text'>自動計測</span>
         <input
           {...register('pc_koubou_crawl_setting.enabled')}

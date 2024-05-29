@@ -5,7 +5,7 @@ import { useTypedFetcher } from 'remix-typedjson'
 
 import EditCrawlSettingModal from './edit-crawl-setting-modal/EditCrawlSettingModal'
 
-import { action } from '@/app/routes/api.products.delete'
+import { action } from '@/app/routes/api.products._index'
 import { useEditCrawlSettingModalStore } from '@/features/products/stores/edit-crawl-setting-modal-store'
 import { GetProductPageDataQuery } from '@/graphql/dist/client'
 
@@ -23,7 +23,7 @@ const ProductsTable = ({ products }: { products: GetProductPageDataQuery['produc
     const data = fetcher.data?.data
     if (!data) return
 
-    if (data.deleteProduct.ok) {
+    if ('deleteProduct' in data && data.deleteProduct.ok) {
       toast.success('success')
       close()
     } else {
@@ -86,9 +86,9 @@ const ProductsTable = ({ products }: { products: GetProductPageDataQuery['produc
                         className='btn btn-error'
                         onClick={() =>
                           fetcher.submit(
-                            { productId: product.id },
+                            { control: 'delete', productId: product.id },
                             {
-                              action: '/api/products/delete',
+                              action: '/api/products',
                               method: 'post',
                               encType: 'application/json',
                             },

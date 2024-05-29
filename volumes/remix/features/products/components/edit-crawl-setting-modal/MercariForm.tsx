@@ -1,5 +1,3 @@
-'use client'
-
 import { useForm } from 'react-hook-form'
 
 import { UpdateProductInput } from '@/graphql/dist/client'
