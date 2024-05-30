@@ -46,7 +46,7 @@ services:
       context: .
       dockerfile: containers/frontend/Dockerfile
     ports:
-      - 8081:3000
+      - 8080:3000
     environment:
       NEXT_PRIVATE_BFF_URL: 'http://bff:8080/query'
       NEXT_PUBLIC_BFF_URL: 'http://bff:8080/query'
@@ -56,21 +56,6 @@ services:
       - ./volumes/frontend:/app
       - ./volumes/bff/graph:/app/graphql/schema
       - frontend-node-modules:/app/node_modules
-
-  remix:
-    build:
-      context: .
-      dockerfile: containers/remix/Dockerfile
-    ports:
-      - 8080:3000
-    environment:
-      BFF_URL: 'http://bff:8080/query'
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./volumes/remix:/app
-      - ./volumes/bff/graph:/app/graphql/schema
-      - remix-node-modules:/app/node_modules
 
   backend:
     <<: *backend
@@ -164,12 +149,6 @@ volumes:
     driver_opts:
       type: none
       device: ${PWD}/volumes/frontend/node_modules
-      o: bind
-  remix-node-modules:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/volumes/remix/node_modules
       o: bind
   backend-bundle:
   # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
