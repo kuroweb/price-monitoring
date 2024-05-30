@@ -135,7 +135,7 @@ import {
   DeletePcKoubouCrawlSettingRequiredKeywordDocument,
   UpdatePcKoubouCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
-import { getClient } from '@/lib/rsc-client'
+import { getClient } from '@/lib/apollo-client-rsc'
 
 /*
   Product

@@ -28,7 +28,7 @@ import {
 import { statusStateCache, useStatusStateQuery } from '@/features/products/hooks/useStatusState'
 import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
 import { GetProductDetailPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/rsc-client'
+import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async ({
   params,

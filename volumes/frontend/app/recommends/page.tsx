@@ -5,7 +5,7 @@ import type { GetRecommendsPageDataQuery } from '@/graphql/dist/client'
 import Layout from '@/components/layouts/Layout'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
 import { GetRecommendsPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/rsc-client'
+import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async () => {
   const { data } = await getClient().query<GetRecommendsPageDataQuery>({
