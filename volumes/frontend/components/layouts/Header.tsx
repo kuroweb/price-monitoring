@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
 import Link from 'next/link'
 
@@ -21,7 +21,7 @@ const Header = (props: Props) => {
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
                 viewBox='0 0 24 24'
-                className='inline-block w-5 h-5 stroke-current'
+                className='inline-block size-5 stroke-current'
               >
                 <path
                   strokeLinecap='round'
@@ -33,8 +33,8 @@ const Header = (props: Props) => {
             </button>
           </div>
           <div className='flex-1'>
-            <Link href={'/'}>
-              <p className='text-xl px-4'>Price Monitoring</p>
+            <Link href='/'>
+              <p className='px-4 text-xl'>Price Monitoring</p>
             </Link>
           </div>
           <div className='flex-none'>{/* ヘッダー右側 */}</div>

@@ -1,14 +1,16 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import type { CreateJanparaCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
 import { createJanparaCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
-import { CreateJanparaCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 
 const CreateForm = ({
   setMode,
@@ -17,6 +19,7 @@ const CreateForm = ({
 }) => {
   const router = useRouter()
   const params = useParams()
+  const pathname = usePathname()
 
   const { register, handleSubmit } = useForm<CreateJanparaCrawlSettingExcludeProductInput>({
     defaultValues: {
@@ -26,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateJanparaCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await createJanparaCrawlSettingExcludeProduct(data)
+    const result = await createJanparaCrawlSettingExcludeProduct(data, pathname)
     if (
       result?.data?.createJanparaCrawlSettingExcludeProduct.__typename ===
         'CreateJanparaCrawlSettingExcludeProductResultError' &&

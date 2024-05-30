@@ -8,7 +8,7 @@ import CreateForm from './CreateForm'
 import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
-import {
+import type {
   GetProductDetailPageDataQuery,
   PcKoubouCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'

@@ -9,7 +9,7 @@ import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcl
 import CreateForm from './CreateForm'
 import DeleteForm from './DeleteForm'
 
-import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const BulkEditExcludeKeywordModal = ({
   yahooAuctionCrawlSettingExcludeKeywords,
@@ -39,14 +39,14 @@ const BulkEditExcludeKeywordModal = ({
         <div className='modal-box h-fit'>
           <div
             onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
+            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>除外キーワード</h3>
+          <h3 className='text-lg font-bold'>除外キーワード</h3>
           <Join className='flex pt-8'>
             <input
-              className='join-item btn btn-md w-1/2'
+              className='btn join-item btn-md w-1/2'
               type='radio'
               name='bulk_edit_exclude_keyword_options'
               aria-label='一括登録'
@@ -54,7 +54,7 @@ const BulkEditExcludeKeywordModal = ({
               onChange={() => setTab('一括登録')}
             />
             <input
-              className='join-item btn btn-md w-1/2'
+              className='btn join-item btn-md w-1/2'
               type='radio'
               name='bulk_edit_exclude_keyword_options'
               aria-label='一括削除'

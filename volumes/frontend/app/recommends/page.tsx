@@ -1,11 +1,13 @@
 import Link from 'next/link'
 
+import type { GetRecommendsPageDataQuery } from '@/graphql/dist/client'
+
 import Layout from '@/components/layouts/Layout'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import { GetRecommendsPageDataDocument, GetRecommendsPageDataQuery } from '@/graphql/dist/client'
+import { GetRecommendsPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
-const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Page = async () => {
   const { data } = await getClient().query<GetRecommendsPageDataQuery>({
     query: GetRecommendsPageDataDocument,
   })
@@ -21,7 +23,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                   <Link className='card-title' href={`/products/${product.id}`}>
                     {product.name}
                   </Link>
-                  <div className='pt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+                  <div className='grid grid-cols-2 gap-4 pt-4 md:grid-cols-3 lg:grid-cols-4'>
                     {product.relatedProducts.map((relatedProduct) => (
                       <RelatedProductCard
                         key={relatedProduct.externalId}

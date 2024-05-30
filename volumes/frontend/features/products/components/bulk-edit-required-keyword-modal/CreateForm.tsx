@@ -1,7 +1,7 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
@@ -13,6 +13,8 @@ import {
   createPcKoubouCrawlSettingRequiredKeyword,
 } from '../../server-actions/productQuery'
 
+import type { SubmitHandler } from 'react-hook-form'
+
 type inputType = {
   keyword: string | null
 }
@@ -20,6 +22,7 @@ type inputType = {
 const CreateForm = () => {
   const router = useRouter()
   const params = useParams()
+  const pathname = usePathname()
 
   const [_, setModal] = useBulkEditRequiredKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
@@ -38,7 +41,10 @@ const CreateForm = () => {
       keyword: input.keyword,
     }
 
-    const yahooAuctionResult = await createYahooAuctionCrawlSettingRequiredKeyword(postData)
+    const yahooAuctionResult = await createYahooAuctionCrawlSettingRequiredKeyword(
+      postData,
+      pathname,
+    )
     if (
       yahooAuctionResult?.data?.createYahooAuctionCrawlSettingRequiredKeyword.__typename ===
         'CreateYahooAuctionCrawlSettingRequiredKeywordResultError' &&
@@ -47,7 +53,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const mercariResult = await createMercariCrawlSettingRequiredKeyword(postData)
+    const mercariResult = await createMercariCrawlSettingRequiredKeyword(postData, pathname)
     if (
       mercariResult?.data?.createMercariCrawlSettingRequiredKeyword.__typename ===
         'CreateMercariCrawlSettingRequiredKeywordResultError' &&
@@ -56,7 +62,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const janparaResult = await createJanparaCrawlSettingRequiredKeyword(postData)
+    const janparaResult = await createJanparaCrawlSettingRequiredKeyword(postData, pathname)
     if (
       janparaResult?.data?.createJanparaCrawlSettingRequiredKeyword.__typename ===
         'CreateJanparaCrawlSettingRequiredKeywordResultError' &&
@@ -65,7 +71,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const iosysResult = await createIosysCrawlSettingRequiredKeyword(postData)
+    const iosysResult = await createIosysCrawlSettingRequiredKeyword(postData, pathname)
     if (
       iosysResult?.data?.createIosysCrawlSettingRequiredKeyword.__typename ===
         'CreateIosysCrawlSettingRequiredKeywordResultError' &&
@@ -74,7 +80,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const pcKoubouResult = await createPcKoubouCrawlSettingRequiredKeyword(postData)
+    const pcKoubouResult = await createPcKoubouCrawlSettingRequiredKeyword(postData, pathname)
     if (
       pcKoubouResult?.data?.createPcKoubouCrawlSettingRequiredKeyword.__typename ===
         'CreatePcKoubouCrawlSettingRequiredKeywordResultError' &&
@@ -99,7 +105,7 @@ const CreateForm = () => {
           <input {...register('keyword')} className='input input-bordered' />
         </label>
         <div className='pt-4'>
-          <button type='submit' className='btn btn-md btn-primary w-full'>
+          <button type='submit' className='btn btn-primary btn-md w-full'>
             すべてのプラットフォームに追加
           </button>
         </div>

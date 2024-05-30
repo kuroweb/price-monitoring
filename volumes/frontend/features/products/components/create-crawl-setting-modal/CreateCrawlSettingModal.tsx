@@ -1,9 +1,9 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useQueryState } from 'nuqs'
 import { Join } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useCreateCrawlSettingModalState } from '../../hooks/useCreateCrawlSettingModalState'
@@ -15,10 +15,13 @@ import MercariForm from './MercariForm'
 import PcKoubouForm from './PcKoubouForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
-import { CreateProductInput } from '@/graphql/dist/client'
+import type { CreateProductInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
 
 const CreateCrawlSettingModal = () => {
   const router = useRouter()
+  const pathname = usePathname()
+
   const [modal, setModal] = useCreateCrawlSettingModalState()
   const [tab, setTab] = useQueryState('create_crawl_setting_tab')
 
@@ -61,7 +64,7 @@ const CreateCrawlSettingModal = () => {
   })
 
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
-    const result = await createProduct(data)
+    const result = await createProduct(data, pathname)
 
     if (result.data?.createProduct.ok) {
       toast.success('success')
@@ -84,11 +87,11 @@ const CreateCrawlSettingModal = () => {
         <div className='modal-box h-fit'>
           <div
             onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
+            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>計測設定を追加</h3>
+          <h3 className='text-lg font-bold'>計測設定を追加</h3>
           <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2'>
             <div className='divider py-2'>共通設定</div>
             <label className='form-control'>
@@ -100,7 +103,7 @@ const CreateCrawlSettingModal = () => {
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -108,7 +111,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -116,7 +119,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
@@ -124,7 +127,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('じゃんぱら')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='イオシス'
@@ -132,7 +135,7 @@ const CreateCrawlSettingModal = () => {
                 onClick={() => setTab('イオシス')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='パソコン工房'

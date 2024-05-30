@@ -1,14 +1,16 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import type { CreateJanparaCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
 import { createJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
-import { CreateJanparaCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
 
 const CreateForm = ({
   setMode,
@@ -16,6 +18,7 @@ const CreateForm = ({
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
 }) => {
   const router = useRouter()
+  const pathname = usePathname()
   const params = useParams()
 
   const { register, handleSubmit } = useForm<CreateJanparaCrawlSettingExcludeKeywordInput>({
@@ -26,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateJanparaCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await createJanparaCrawlSettingExcludeKeyword(data)
+    const result = await createJanparaCrawlSettingExcludeKeyword(data, pathname)
     if (result.data?.createJanparaCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

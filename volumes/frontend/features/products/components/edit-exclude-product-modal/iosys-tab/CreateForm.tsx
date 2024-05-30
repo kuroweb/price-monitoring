@@ -1,14 +1,16 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import type { CreateIosysCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
 import { createIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
-import { CreateIosysCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 
 const CreateForm = ({
   setMode,
@@ -17,16 +19,17 @@ const CreateForm = ({
 }) => {
   const router = useRouter()
   const params = useParams()
+  const pathname = usePathname()
 
   const { register, handleSubmit } = useForm<CreateIosysCrawlSettingExcludeProductInput>({
     defaultValues: {
       productId: String(params.id),
-      externalId: "",
+      externalId: '',
     },
   })
 
   const onSubmit: SubmitHandler<CreateIosysCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await createIosysCrawlSettingExcludeProduct(data)
+    const result = await createIosysCrawlSettingExcludeProduct(data, pathname)
     if (
       result?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
         'CreateIosysCrawlSettingExcludeProductResultError' &&

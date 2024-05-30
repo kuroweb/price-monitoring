@@ -12,7 +12,7 @@ import MercariTab from './mercari-tab/MercariTab'
 import PcKoubouTab from './pc-koubou-tab/PcKoubouTab'
 import YahooAuctionTab from './yahoo-auction-tab/YahooAuctionTab'
 
-import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [tab, setTab] = useState<
@@ -32,15 +32,15 @@ const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
         <div className='modal-box h-fit'>
           <div
             onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
+            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>除外商品ID</h3>
+          <h3 className='text-lg font-bold'>除外商品ID</h3>
           <div className='py-6'>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='exclude_product'
                 aria-label='ヤフオク'
@@ -48,7 +48,7 @@ const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='exclude_product'
                 aria-label='メルカリ'
@@ -56,7 +56,7 @@ const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
                 onChange={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='exclude_product'
                 aria-label='じゃんぱら'
@@ -64,7 +64,7 @@ const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
                 onChange={() => setTab('じゃんぱら')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='exclude_product'
                 aria-label='イオシス'
@@ -72,7 +72,7 @@ const ExcludeProductModal = ({ data }: { data: GetProductDetailPageDataQuery }) 
                 onChange={() => setTab('イオシス')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='exclude_product'
                 aria-label='パソコン工房'

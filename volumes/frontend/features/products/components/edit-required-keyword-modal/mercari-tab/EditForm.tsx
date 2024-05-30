@@ -1,17 +1,19 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useParams, useRouter } from 'next/dist/client/components/navigation'
+import { useParams, usePathname, useRouter } from 'next/dist/client/components/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { updateMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
-import {
+import type {
   UpdateMercariCrawlSettingRequiredKeywordInput,
   MercariCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
+import { updateMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
 
 function EditForm({
   setMode,
@@ -22,9 +24,10 @@ function EditForm({
 }) {
   const params = useParams()
   const router = useRouter()
+  const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateMercariCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updateMercariCrawlSettingRequiredKeyword(data)
+    const result = await updateMercariCrawlSettingRequiredKeyword(data, pathname)
     if (result.data?.updateMercariCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

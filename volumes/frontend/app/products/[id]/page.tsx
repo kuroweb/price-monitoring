@@ -1,5 +1,7 @@
 import Link from 'next/link'
 
+import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
 import Pagination from '@/features/products/components/Pagination'
@@ -25,10 +27,7 @@ import {
 } from '@/features/products/hooks/usePlatformState'
 import { statusStateCache, useStatusStateQuery } from '@/features/products/hooks/useStatusState'
 import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
-import {
-  GetProductDetailPageDataDocument,
-  GetProductDetailPageDataQuery,
-} from '@/graphql/dist/client'
+import { GetProductDetailPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
 const Page = async ({
@@ -48,8 +47,8 @@ const Page = async ({
     variables: {
       id: params.id,
       platformMask: makePlatformMask(platform, status),
-      page: page,
-      per: per,
+      page,
+      per,
       sort: status == 'published' ? 'price' : 'bought_date',
       order: status == 'published' ? 'asc' : 'desc',
     },
@@ -61,7 +60,7 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>設定</h2>
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
               <Link
                 className='btn'
                 href={{
@@ -116,7 +115,7 @@ const Page = async ({
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>一括設定</h2>
-            <div className='grid grid-cols-2 md:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>
               <Link
                 className='btn'
                 href={{
@@ -158,7 +157,7 @@ const Page = async ({
           <div className='card-body'>
             <h2 className='card-title pb-4'>商品一覧</h2>
             <SearchForm />
-            <div className='pt-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+            <div className='grid grid-cols-2 gap-4 pt-4 md:grid-cols-3 lg:grid-cols-4'>
               {data.product.relatedProducts.map((relatedProduct) => (
                 <RelatedProductCard
                   key={relatedProduct.externalId}

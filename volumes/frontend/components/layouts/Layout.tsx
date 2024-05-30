@@ -1,6 +1,7 @@
 'use client'
 
-import { ReactNode, useState } from 'react'
+import type { ReactNode } from 'react'
+import { useState } from 'react'
 
 import Header from './Header'
 import Sidebar from './Sidebar'
@@ -18,9 +19,9 @@ const Layout = ({ children }: Props) => {
         <div className='flex h-full overflow-hidden'>
           <Header open={open} setOpen={setOpen} />
           <Sidebar open={open} setOpen={setOpen} />
-          <div className='h-full w-full overflow-y-auto md:pl-64'>
+          <div className='size-full overflow-y-auto md:pl-64'>
             <main>
-              <div className='pt-20 p-4'>
+              <div className='p-4 pt-20'>
                 <main>{children}</main>
               </div>
             </main>

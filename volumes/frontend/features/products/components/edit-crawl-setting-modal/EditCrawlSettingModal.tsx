@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { Join } from 'react-daisyui'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useEditCrawlSettingModalState } from '../../hooks/useEditCrawlSettingModalState'
@@ -16,7 +16,8 @@ import MercariForm from './MercariForm'
 import PcKoubouForm from './PcKoubouForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
-import { UpdateProductInput } from '@/graphql/dist/client'
+import type { UpdateProductInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
 
 const EditCrawlSettingModal = ({
   productId,
@@ -26,6 +27,8 @@ const EditCrawlSettingModal = ({
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
+  const pathname = usePathname()
+
   const [tab, setTab] = useState<
     'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房'
   >('ヤフオク')
@@ -75,7 +78,7 @@ const EditCrawlSettingModal = ({
       return toast.error('更新対象が見つかりませんでした。')
     }
 
-    const result = await updateProduct(productId || '', input)
+    const result = await updateProduct(productId, input, pathname)
 
     if (result.data?.updateProduct.ok) {
       toast.success('success')
@@ -98,11 +101,11 @@ const EditCrawlSettingModal = ({
         <div className='modal-box h-fit'>
           <div
             onClick={() => setModal(false)}
-            className='btn btn-sm btn-circle btn-ghost absolute right-4 top-4'
+            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
           >
             ✕
           </div>
-          <h3 className='font-bold text-lg'>計測設定を更新</h3>
+          <h3 className='text-lg font-bold'>計測設定を更新</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='divider py-4'>共通設定</div>
             <label className='form-control'>
@@ -114,7 +117,7 @@ const EditCrawlSettingModal = ({
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex'>
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
@@ -122,7 +125,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
@@ -130,7 +133,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('メルカリ')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
@@ -138,7 +141,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('じゃんぱら')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='イオシス'
@@ -146,7 +149,7 @@ const EditCrawlSettingModal = ({
                 onChange={() => setTab('イオシス')}
               />
               <input
-                className='join-item btn btn-md w-1/5'
+                className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='パソコン工房'

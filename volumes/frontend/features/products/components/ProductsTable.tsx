@@ -3,7 +3,7 @@
 import { useState } from 'react'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { useEditCrawlSettingModalState } from '../hooks/useEditCrawlSettingModalState'
@@ -11,9 +11,10 @@ import { deleteProduct } from '../server-actions/productQuery'
 
 import EditCrawlSettingModal from './edit-crawl-setting-modal/EditCrawlSettingModal'
 
-import { GetProductPageDataQuery } from '@/graphql/dist/client'
+import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
+  const pathname = usePathname()
   const router = useRouter()
   const [_, setModal] = useEditCrawlSettingModalState()
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
@@ -21,8 +22,8 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
   )
   const [productId, setProductId] = useState<string | undefined>(undefined)
 
-  const submitDeleteProduct = async (productId: String) => {
-    const result = await deleteProduct(productId)
+  const submitDeleteProduct = async (productId: string) => {
+    const result = await deleteProduct(productId, pathname)
 
     if (result.data?.deleteProduct.ok) {
       toast.success('success')
@@ -46,7 +47,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
             <tr key={product.id} className=''>
               <td>
                 <Link
-                  className='w-full justify-start btn btn-ghost no-animation'
+                  className='btn btn-ghost no-animation w-full justify-start'
                   href={`/products/${product.id}`}
                 >
                   {product.name}
@@ -59,7 +60,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'
                       viewBox='0 0 24 24'
-                      className='inline-block w-5 h-5 stroke-current'
+                      className='inline-block size-5 stroke-current'
                     >
                       <path
                         strokeLinecap='round'
@@ -71,7 +72,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
                   </div>
                   <ul
                     tabIndex={0}
-                    className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
+                    className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
                   >
                     <li>
                       <button

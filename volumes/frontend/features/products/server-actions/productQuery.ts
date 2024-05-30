@@ -1,134 +1,139 @@
 'use server'
 
-import {
+import { revalidatePath } from 'next/cache'
+
+import type {
   CreateProductInput,
-  CreateProductDocument,
   CreateProductMutation,
-  DeleteProductDocument,
   DeleteProductMutation,
-  UpdateProductDocument,
   UpdateProductMutation,
   UpdateProductInput,
-  CreateYahooAuctionCrawlSettingExcludeKeywordDocument,
   CreateYahooAuctionCrawlSettingExcludeKeywordInput,
   CreateYahooAuctionCrawlSettingExcludeKeywordMutation,
   DeleteYahooAuctionCrawlSettingExcludeKeywordMutation,
-  DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
   UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
-  UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
   UpdateYahooAuctionCrawlSettingExcludeKeywordMutation,
-  CreateYahooAuctionCrawlSettingExcludeProductDocument,
   CreateYahooAuctionCrawlSettingExcludeProductInput,
   CreateYahooAuctionCrawlSettingExcludeProductMutation,
   DeleteYahooAuctionCrawlSettingExcludeProductMutation,
-  DeleteYahooAuctionCrawlSettingExcludeProductDocument,
   UpdateYahooAuctionCrawlSettingExcludeProductInput,
-  UpdateYahooAuctionCrawlSettingExcludeProductDocument,
   UpdateYahooAuctionCrawlSettingExcludeProductMutation,
-  CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
   CreateYahooAuctionCrawlSettingRequiredKeywordInput,
   CreateYahooAuctionCrawlSettingRequiredKeywordMutation,
-  DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
   DeleteYahooAuctionCrawlSettingRequiredKeywordMutation,
-  UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
   UpdateYahooAuctionCrawlSettingRequiredKeywordInput,
   UpdateYahooAuctionCrawlSettingRequiredKeywordMutation,
   CreateMercariCrawlSettingExcludeKeywordInput,
   UpdateMercariCrawlSettingExcludeKeywordInput,
-  CreateMercariCrawlSettingExcludeKeywordDocument,
   CreateMercariCrawlSettingExcludeKeywordMutation,
-  DeleteMercariCrawlSettingExcludeKeywordDocument,
   DeleteMercariCrawlSettingExcludeKeywordMutation,
-  UpdateMercariCrawlSettingExcludeKeywordDocument,
   UpdateMercariCrawlSettingExcludeKeywordMutation,
   CreateMercariCrawlSettingExcludeProductInput,
   UpdateMercariCrawlSettingExcludeProductInput,
-  CreateMercariCrawlSettingExcludeProductDocument,
   CreateMercariCrawlSettingExcludeProductMutation,
-  DeleteMercariCrawlSettingExcludeProductDocument,
   DeleteMercariCrawlSettingExcludeProductMutation,
-  UpdateMercariCrawlSettingExcludeProductDocument,
   UpdateMercariCrawlSettingExcludeProductMutation,
   CreateMercariCrawlSettingRequiredKeywordInput,
-  CreateMercariCrawlSettingRequiredKeywordDocument,
   CreateMercariCrawlSettingRequiredKeywordMutation,
-  DeleteMercariCrawlSettingRequiredKeywordDocument,
   DeleteMercariCrawlSettingRequiredKeywordMutation,
-  UpdateMercariCrawlSettingRequiredKeywordDocument,
   UpdateMercariCrawlSettingRequiredKeywordInput,
   UpdateMercariCrawlSettingRequiredKeywordMutation,
   CreateJanparaCrawlSettingExcludeKeywordInput,
   UpdateJanparaCrawlSettingExcludeKeywordInput,
-  CreateJanparaCrawlSettingExcludeKeywordDocument,
   CreateJanparaCrawlSettingExcludeKeywordMutation,
-  DeleteJanparaCrawlSettingExcludeKeywordDocument,
   DeleteJanparaCrawlSettingExcludeKeywordMutation,
-  UpdateJanparaCrawlSettingExcludeKeywordDocument,
   UpdateJanparaCrawlSettingExcludeKeywordMutation,
   CreateJanparaCrawlSettingExcludeProductInput,
   UpdateJanparaCrawlSettingExcludeProductInput,
-  CreateJanparaCrawlSettingExcludeProductDocument,
   CreateJanparaCrawlSettingExcludeProductMutation,
-  DeleteJanparaCrawlSettingExcludeProductDocument,
   DeleteJanparaCrawlSettingExcludeProductMutation,
-  UpdateJanparaCrawlSettingExcludeProductDocument,
   UpdateJanparaCrawlSettingExcludeProductMutation,
   CreateJanparaCrawlSettingRequiredKeywordInput,
-  CreateJanparaCrawlSettingRequiredKeywordDocument,
   CreateJanparaCrawlSettingRequiredKeywordMutation,
-  DeleteJanparaCrawlSettingRequiredKeywordDocument,
   DeleteJanparaCrawlSettingRequiredKeywordMutation,
-  UpdateJanparaCrawlSettingRequiredKeywordDocument,
   UpdateJanparaCrawlSettingRequiredKeywordInput,
   UpdateJanparaCrawlSettingRequiredKeywordMutation,
   CreateIosysCrawlSettingExcludeKeywordInput,
   UpdateIosysCrawlSettingExcludeKeywordInput,
-  CreateIosysCrawlSettingExcludeKeywordDocument,
   CreateIosysCrawlSettingExcludeKeywordMutation,
-  DeleteIosysCrawlSettingExcludeKeywordDocument,
   DeleteIosysCrawlSettingExcludeKeywordMutation,
-  UpdateIosysCrawlSettingExcludeKeywordDocument,
   UpdateIosysCrawlSettingExcludeKeywordMutation,
   CreateIosysCrawlSettingExcludeProductInput,
   UpdateIosysCrawlSettingExcludeProductInput,
-  CreateIosysCrawlSettingExcludeProductDocument,
   CreateIosysCrawlSettingExcludeProductMutation,
-  DeleteIosysCrawlSettingExcludeProductDocument,
   DeleteIosysCrawlSettingExcludeProductMutation,
-  UpdateIosysCrawlSettingExcludeProductDocument,
   UpdateIosysCrawlSettingExcludeProductMutation,
   CreateIosysCrawlSettingRequiredKeywordInput,
-  CreateIosysCrawlSettingRequiredKeywordDocument,
   CreateIosysCrawlSettingRequiredKeywordMutation,
-  DeleteIosysCrawlSettingRequiredKeywordDocument,
   DeleteIosysCrawlSettingRequiredKeywordMutation,
-  UpdateIosysCrawlSettingRequiredKeywordDocument,
   UpdateIosysCrawlSettingRequiredKeywordInput,
   UpdateIosysCrawlSettingRequiredKeywordMutation,
   CreatePcKoubouCrawlSettingExcludeKeywordInput,
   UpdatePcKoubouCrawlSettingExcludeKeywordInput,
-  CreatePcKoubouCrawlSettingExcludeKeywordDocument,
   CreatePcKoubouCrawlSettingExcludeKeywordMutation,
-  DeletePcKoubouCrawlSettingExcludeKeywordDocument,
   DeletePcKoubouCrawlSettingExcludeKeywordMutation,
-  UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
   UpdatePcKoubouCrawlSettingExcludeKeywordMutation,
   CreatePcKoubouCrawlSettingExcludeProductInput,
   UpdatePcKoubouCrawlSettingExcludeProductInput,
-  CreatePcKoubouCrawlSettingExcludeProductDocument,
   CreatePcKoubouCrawlSettingExcludeProductMutation,
-  DeletePcKoubouCrawlSettingExcludeProductDocument,
   DeletePcKoubouCrawlSettingExcludeProductMutation,
-  UpdatePcKoubouCrawlSettingExcludeProductDocument,
   UpdatePcKoubouCrawlSettingExcludeProductMutation,
   CreatePcKoubouCrawlSettingRequiredKeywordInput,
-  CreatePcKoubouCrawlSettingRequiredKeywordDocument,
   CreatePcKoubouCrawlSettingRequiredKeywordMutation,
-  DeletePcKoubouCrawlSettingRequiredKeywordDocument,
   DeletePcKoubouCrawlSettingRequiredKeywordMutation,
-  UpdatePcKoubouCrawlSettingRequiredKeywordDocument,
   UpdatePcKoubouCrawlSettingRequiredKeywordInput,
   UpdatePcKoubouCrawlSettingRequiredKeywordMutation,
+} from '@/graphql/dist/client'
+
+import {
+  CreateProductDocument,
+  DeleteProductDocument,
+  UpdateProductDocument,
+  CreateYahooAuctionCrawlSettingExcludeKeywordDocument,
+  DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
+  UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
+  CreateYahooAuctionCrawlSettingExcludeProductDocument,
+  DeleteYahooAuctionCrawlSettingExcludeProductDocument,
+  UpdateYahooAuctionCrawlSettingExcludeProductDocument,
+  CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
+  DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
+  UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
+  CreateMercariCrawlSettingExcludeKeywordDocument,
+  DeleteMercariCrawlSettingExcludeKeywordDocument,
+  UpdateMercariCrawlSettingExcludeKeywordDocument,
+  CreateMercariCrawlSettingExcludeProductDocument,
+  DeleteMercariCrawlSettingExcludeProductDocument,
+  UpdateMercariCrawlSettingExcludeProductDocument,
+  CreateMercariCrawlSettingRequiredKeywordDocument,
+  DeleteMercariCrawlSettingRequiredKeywordDocument,
+  UpdateMercariCrawlSettingRequiredKeywordDocument,
+  CreateJanparaCrawlSettingExcludeKeywordDocument,
+  DeleteJanparaCrawlSettingExcludeKeywordDocument,
+  UpdateJanparaCrawlSettingExcludeKeywordDocument,
+  CreateJanparaCrawlSettingExcludeProductDocument,
+  DeleteJanparaCrawlSettingExcludeProductDocument,
+  UpdateJanparaCrawlSettingExcludeProductDocument,
+  CreateJanparaCrawlSettingRequiredKeywordDocument,
+  DeleteJanparaCrawlSettingRequiredKeywordDocument,
+  UpdateJanparaCrawlSettingRequiredKeywordDocument,
+  CreateIosysCrawlSettingExcludeKeywordDocument,
+  DeleteIosysCrawlSettingExcludeKeywordDocument,
+  UpdateIosysCrawlSettingExcludeKeywordDocument,
+  CreateIosysCrawlSettingExcludeProductDocument,
+  DeleteIosysCrawlSettingExcludeProductDocument,
+  UpdateIosysCrawlSettingExcludeProductDocument,
+  CreateIosysCrawlSettingRequiredKeywordDocument,
+  DeleteIosysCrawlSettingRequiredKeywordDocument,
+  UpdateIosysCrawlSettingRequiredKeywordDocument,
+  CreatePcKoubouCrawlSettingExcludeKeywordDocument,
+  DeletePcKoubouCrawlSettingExcludeKeywordDocument,
+  UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
+  CreatePcKoubouCrawlSettingExcludeProductDocument,
+  DeletePcKoubouCrawlSettingExcludeProductDocument,
+  UpdatePcKoubouCrawlSettingExcludeProductDocument,
+  CreatePcKoubouCrawlSettingRequiredKeywordDocument,
+  DeletePcKoubouCrawlSettingRequiredKeywordDocument,
+  UpdatePcKoubouCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
@@ -136,25 +141,34 @@ import { getClient } from '@/lib/rsc-client'
   Product
 */
 
-export const createProduct = async (input: CreateProductInput) => {
-  return await getClient().mutate<CreateProductMutation>({
+export const createProduct = async (input: CreateProductInput, pathname: string) => {
+  const result = getClient().mutate<CreateProductMutation>({
     mutation: CreateProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const updateProduct = async (id: String, input: UpdateProductInput) => {
-  return await getClient().mutate<UpdateProductMutation>({
+export const updateProduct = async (id: string, input: UpdateProductInput, pathname: string) => {
+  const result = getClient().mutate<UpdateProductMutation>({
     mutation: UpdateProductDocument,
-    variables: { id: id, input: input },
+    variables: { id, input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteProduct = async (id: String) => {
-  return await getClient().mutate<DeleteProductMutation>({
+export const deleteProduct = async (id: string, pathname: string) => {
+  const result = getClient().mutate<DeleteProductMutation>({
     mutation: DeleteProductDocument,
-    variables: { id: id },
+    variables: { id },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /*
@@ -165,90 +179,126 @@ export const deleteProduct = async (id: String) => {
 
 export const createYahooAuctionCrawlSettingExcludeKeyword = async (
   input: CreateYahooAuctionCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<CreateYahooAuctionCrawlSettingExcludeKeywordMutation>({
     mutation: CreateYahooAuctionCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateYahooAuctionCrawlSettingExcludeKeyword = async (
   input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const deleteYahooAuctionCrawlSettingExcludeKeyword = async (
-  id: String,
-  productId: String,
+  id: string,
+  productId: string,
+  pathname: string,
 ) => {
-  return await getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* YahooAuctionCrawlSettingExcludeProduct */
 
 export const createYahooAuctionCrawlSettingExcludeProduct = async (
   input: CreateYahooAuctionCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeProductMutation>({
+  const result = await getClient().mutate<CreateYahooAuctionCrawlSettingExcludeProductMutation>({
     mutation: CreateYahooAuctionCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateYahooAuctionCrawlSettingExcludeProduct = async (
   input: UpdateYahooAuctionCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<UpdateYahooAuctionCrawlSettingExcludeProductMutation>({
     mutation: UpdateYahooAuctionCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const deleteYahooAuctionCrawlSettingExcludeProduct = async (
-  id: String,
-  productId: String,
+  id: string,
+  productId: string,
+  pathname: string,
 ) => {
-  return await getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeProductMutation>({
     mutation: DeleteYahooAuctionCrawlSettingExcludeProductDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* YahooAuctionCrawlSettingRequiredKeyword */
 
 export const createYahooAuctionCrawlSettingRequiredKeyword = async (
   input: CreateYahooAuctionCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateYahooAuctionCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<CreateYahooAuctionCrawlSettingRequiredKeywordMutation>({
     mutation: CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateYahooAuctionCrawlSettingRequiredKeyword = async (
   input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation>({
     mutation: UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const deleteYahooAuctionCrawlSettingRequiredKeyword = async (
-  id: String,
-  productId: String,
+  id: string,
+  productId: string,
+  pathname: string,
 ) => {
-  return await getClient().mutate<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /*
@@ -259,81 +309,126 @@ export const deleteYahooAuctionCrawlSettingRequiredKeyword = async (
 
 export const createMercariCrawlSettingExcludeKeyword = async (
   input: CreateMercariCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateMercariCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<CreateMercariCrawlSettingExcludeKeywordMutation>({
     mutation: CreateMercariCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateMercariCrawlSettingExcludeKeyword = async (
   input: UpdateMercariCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateMercariCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<UpdateMercariCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateMercariCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteMercariCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
+export const deleteMercariCrawlSettingExcludeKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteMercariCrawlSettingExcludeKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* MercariCrawlSettingExcludeProduct */
 
 export const createMercariCrawlSettingExcludeProduct = async (
   input: CreateMercariCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateMercariCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<CreateMercariCrawlSettingExcludeProductMutation>({
     mutation: CreateMercariCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateMercariCrawlSettingExcludeProduct = async (
   input: UpdateMercariCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateMercariCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<UpdateMercariCrawlSettingExcludeProductMutation>({
     mutation: UpdateMercariCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteMercariCrawlSettingExcludeProduct = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteMercariCrawlSettingExcludeProductMutation>({
+export const deleteMercariCrawlSettingExcludeProduct = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteMercariCrawlSettingExcludeProductMutation>({
     mutation: DeleteMercariCrawlSettingExcludeProductDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* MercariCrawlSettingRequiredKeyword */
 
 export const createMercariCrawlSettingRequiredKeyword = async (
   input: CreateMercariCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateMercariCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<CreateMercariCrawlSettingRequiredKeywordMutation>({
     mutation: CreateMercariCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateMercariCrawlSettingRequiredKeyword = async (
   input: UpdateMercariCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateMercariCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<UpdateMercariCrawlSettingRequiredKeywordMutation>({
     mutation: UpdateMercariCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteMercariCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteMercariCrawlSettingRequiredKeywordMutation>({
+export const deleteMercariCrawlSettingRequiredKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteMercariCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteMercariCrawlSettingRequiredKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /*
@@ -344,81 +439,126 @@ export const deleteMercariCrawlSettingRequiredKeyword = async (id: String, produ
 
 export const createJanparaCrawlSettingExcludeKeyword = async (
   input: CreateJanparaCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateJanparaCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<CreateJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: CreateJanparaCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateJanparaCrawlSettingExcludeKeyword = async (
   input: UpdateJanparaCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateJanparaCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<UpdateJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateJanparaCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteJanparaCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteJanparaCrawlSettingExcludeKeywordMutation>({
+export const deleteJanparaCrawlSettingExcludeKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteJanparaCrawlSettingExcludeKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* JanparaCrawlSettingExcludeProduct */
 
 export const createJanparaCrawlSettingExcludeProduct = async (
   input: CreateJanparaCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateJanparaCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<CreateJanparaCrawlSettingExcludeProductMutation>({
     mutation: CreateJanparaCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateJanparaCrawlSettingExcludeProduct = async (
   input: UpdateJanparaCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateJanparaCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<UpdateJanparaCrawlSettingExcludeProductMutation>({
     mutation: UpdateJanparaCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteJanparaCrawlSettingExcludeProduct = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteJanparaCrawlSettingExcludeProductMutation>({
+export const deleteJanparaCrawlSettingExcludeProduct = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteJanparaCrawlSettingExcludeProductMutation>({
     mutation: DeleteJanparaCrawlSettingExcludeProductDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* JanparaCrawlSettingRequiredKeyword */
 
 export const createJanparaCrawlSettingRequiredKeyword = async (
   input: CreateJanparaCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateJanparaCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<CreateJanparaCrawlSettingRequiredKeywordMutation>({
     mutation: CreateJanparaCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateJanparaCrawlSettingRequiredKeyword = async (
   input: UpdateJanparaCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateJanparaCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<UpdateJanparaCrawlSettingRequiredKeywordMutation>({
     mutation: UpdateJanparaCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteJanparaCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteJanparaCrawlSettingRequiredKeywordMutation>({
+export const deleteJanparaCrawlSettingRequiredKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteJanparaCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteJanparaCrawlSettingRequiredKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /*
@@ -429,81 +569,126 @@ export const deleteJanparaCrawlSettingRequiredKeyword = async (id: String, produ
 
 export const createIosysCrawlSettingExcludeKeyword = async (
   input: CreateIosysCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateIosysCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<CreateIosysCrawlSettingExcludeKeywordMutation>({
     mutation: CreateIosysCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateIosysCrawlSettingExcludeKeyword = async (
   input: UpdateIosysCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateIosysCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<UpdateIosysCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateIosysCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteIosysCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteIosysCrawlSettingExcludeKeywordMutation>({
+export const deleteIosysCrawlSettingExcludeKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteIosysCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteIosysCrawlSettingExcludeKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* IosysCrawlSettingExcludeProduct */
 
 export const createIosysCrawlSettingExcludeProduct = async (
   input: CreateIosysCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateIosysCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<CreateIosysCrawlSettingExcludeProductMutation>({
     mutation: CreateIosysCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateIosysCrawlSettingExcludeProduct = async (
   input: UpdateIosysCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateIosysCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<UpdateIosysCrawlSettingExcludeProductMutation>({
     mutation: UpdateIosysCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteIosysCrawlSettingExcludeProduct = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteIosysCrawlSettingExcludeProductMutation>({
+export const deleteIosysCrawlSettingExcludeProduct = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteIosysCrawlSettingExcludeProductMutation>({
     mutation: DeleteIosysCrawlSettingExcludeProductDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* IosysCrawlSettingRequiredKeyword */
 
 export const createIosysCrawlSettingRequiredKeyword = async (
   input: CreateIosysCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreateIosysCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<CreateIosysCrawlSettingRequiredKeywordMutation>({
     mutation: CreateIosysCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updateIosysCrawlSettingRequiredKeyword = async (
   input: UpdateIosysCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdateIosysCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<UpdateIosysCrawlSettingRequiredKeywordMutation>({
     mutation: UpdateIosysCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deleteIosysCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeleteIosysCrawlSettingRequiredKeywordMutation>({
+export const deleteIosysCrawlSettingRequiredKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeleteIosysCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteIosysCrawlSettingRequiredKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /*
@@ -514,79 +699,124 @@ export const deleteIosysCrawlSettingRequiredKeyword = async (id: String, product
 
 export const createPcKoubouCrawlSettingExcludeKeyword = async (
   input: CreatePcKoubouCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreatePcKoubouCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<CreatePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: CreatePcKoubouCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updatePcKoubouCrawlSettingExcludeKeyword = async (
   input: UpdatePcKoubouCrawlSettingExcludeKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>({
+  const result = getClient().mutate<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deletePcKoubouCrawlSettingExcludeKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeletePcKoubouCrawlSettingExcludeKeywordMutation>({
+export const deletePcKoubouCrawlSettingExcludeKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeletePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: DeletePcKoubouCrawlSettingExcludeKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* PcKoubouCrawlSettingExcludeProduct */
 
 export const createPcKoubouCrawlSettingExcludeProduct = async (
   input: CreatePcKoubouCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreatePcKoubouCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<CreatePcKoubouCrawlSettingExcludeProductMutation>({
     mutation: CreatePcKoubouCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updatePcKoubouCrawlSettingExcludeProduct = async (
   input: UpdatePcKoubouCrawlSettingExcludeProductInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdatePcKoubouCrawlSettingExcludeProductMutation>({
+  const result = getClient().mutate<UpdatePcKoubouCrawlSettingExcludeProductMutation>({
     mutation: UpdatePcKoubouCrawlSettingExcludeProductDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deletePcKoubouCrawlSettingExcludeProduct = async (id: String, productId: String) => {
-  return await getClient().mutate<DeletePcKoubouCrawlSettingExcludeProductMutation>({
+export const deletePcKoubouCrawlSettingExcludeProduct = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeletePcKoubouCrawlSettingExcludeProductMutation>({
     mutation: DeletePcKoubouCrawlSettingExcludeProductDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 /* PcKoubouCrawlSettingRequiredKeyword */
 
 export const createPcKoubouCrawlSettingRequiredKeyword = async (
   input: CreatePcKoubouCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<CreatePcKoubouCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<CreatePcKoubouCrawlSettingRequiredKeywordMutation>({
     mutation: CreatePcKoubouCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
 export const updatePcKoubouCrawlSettingRequiredKeyword = async (
   input: UpdatePcKoubouCrawlSettingRequiredKeywordInput,
+  pathname: string,
 ) => {
-  return await getClient().mutate<UpdatePcKoubouCrawlSettingRequiredKeywordMutation>({
+  const result = getClient().mutate<UpdatePcKoubouCrawlSettingRequiredKeywordMutation>({
     mutation: UpdatePcKoubouCrawlSettingRequiredKeywordDocument,
-    variables: { input: input },
+    variables: { input },
   })
+  revalidatePath(pathname)
+
+  return result
 }
 
-export const deletePcKoubouCrawlSettingRequiredKeyword = async (id: String, productId: String) => {
-  return await getClient().mutate<DeletePcKoubouCrawlSettingRequiredKeywordMutation>({
+export const deletePcKoubouCrawlSettingRequiredKeyword = async (
+  id: string,
+  productId: string,
+  pathname: string,
+) => {
+  const result = getClient().mutate<DeletePcKoubouCrawlSettingRequiredKeywordMutation>({
     mutation: DeletePcKoubouCrawlSettingRequiredKeywordDocument,
-    variables: { id: id, productId: productId },
+    variables: { id, productId },
   })
+  revalidatePath(pathname)
+
+  return result
 }

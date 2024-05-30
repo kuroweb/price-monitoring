@@ -11,7 +11,7 @@ import {
   ComposedChart,
 } from 'recharts'
 
-import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const AnalysisChart = ({
   yahooAuctionData,

@@ -1,14 +1,16 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import type { CreateYahooAuctionCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
 import { createYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
-import { CreateYahooAuctionCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 
 const CreateForm = ({
   setMode,
@@ -17,6 +19,7 @@ const CreateForm = ({
 }) => {
   const router = useRouter()
   const params = useParams()
+  const pathname = usePathname()
 
   const { register, handleSubmit } = useForm<CreateYahooAuctionCrawlSettingRequiredKeywordInput>({
     defaultValues: {
@@ -28,7 +31,7 @@ const CreateForm = ({
   const onSubmit: SubmitHandler<CreateYahooAuctionCrawlSettingRequiredKeywordInput> = async (
     data,
   ) => {
-    const result = await createYahooAuctionCrawlSettingRequiredKeyword(data)
+    const result = await createYahooAuctionCrawlSettingRequiredKeyword(data, pathname)
     if (result.data?.createYahooAuctionCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

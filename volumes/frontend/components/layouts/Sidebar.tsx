@@ -1,6 +1,6 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
 import Link from 'next/link'
 
@@ -15,18 +15,18 @@ const Sidebar = ({ open, setOpen }: Props) => {
       <aside
         className={`${
           open ? 'flex' : 'hidden'
-        } md:flex fixed z-20 h-full top-0 left-0 pt-16 flex-shrink-0 flex-col w-64 transition-width duration-75`}
+        } transition-width fixed left-0 top-0 z-20 h-full w-64 shrink-0 flex-col pt-16 duration-75 md:flex`}
       >
-        <div className='flex-1 h-full flex flex-col min-h-0 bg-base-200'>
-          <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
+        <div className='flex h-full min-h-0 flex-1 flex-col bg-base-200'>
+          <div className='flex flex-1 flex-col overflow-y-auto pb-4 pt-5'>
             <ul className='space-y-2 pb-2'>
               <li>
                 <Link
                   href='/'
-                  className='text-base font-normal rounded-lg flex items-center py-2 px-4 hover:bg-base-100 group'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
                   <svg
-                    className='w-6 h-6 text-gray-500 group-hover transition duration-75'
+                    className='group-hover size-6 text-gray-500 transition duration-75'
                     fill='currentColor'
                     viewBox='0 0 20 20'
                     xmlns='http://www.w3.org/2000/svg'
@@ -40,10 +40,10 @@ const Sidebar = ({ open, setOpen }: Props) => {
               <li>
                 <Link
                   href='/recommends'
-                  className='text-base font-normal rounded-lg flex items-center py-2 px-4 hover:bg-base-100 group'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
                   <svg
-                    className='w-6 h-6 text-gray-500 group-hover transition duration-75'
+                    className='group-hover size-6 text-gray-500 transition duration-75'
                     xmlns='http://www.w3.org/2000/svg'
                     width='1em'
                     height='1em'
@@ -77,7 +77,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
       </aside>
       <div
         onClick={() => setOpen(!open)}
-        className={`${open ? '' : 'hidden'} bg-gray-900 opacity-50 fixed inset-0 z-10`}
+        className={`${open ? '' : 'hidden'} fixed inset-0 z-10 bg-gray-900 opacity-50`}
       ></div>
     </>
   )

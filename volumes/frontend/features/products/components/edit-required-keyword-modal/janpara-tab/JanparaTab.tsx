@@ -8,7 +8,7 @@ import CreateForm from './CreateForm'
 import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
-import {
+import type {
   GetProductDetailPageDataQuery,
   JanparaCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'

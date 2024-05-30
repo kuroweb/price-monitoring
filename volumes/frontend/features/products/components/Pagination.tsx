@@ -7,13 +7,13 @@ const Pagination = () => {
 
   return (
     <>
-      <div className='pt-6 flex justify-end'>
+      <div className='flex justify-end pt-6'>
         <div className='join'>
-          <button className='join-item btn' disabled={page <= 1} onClick={() => setPage(page - 1)}>
+          <button className='btn join-item' disabled={page <= 1} onClick={() => setPage(page - 1)}>
             «
           </button>
-          <button className='join-item btn cursor-default no-animation'>Page {page}</button>
-          <button className='join-item btn' onClick={() => setPage(page + 1)}>
+          <button className='btn join-item no-animation cursor-default'>Page {page}</button>
+          <button className='btn join-item' onClick={() => setPage(page + 1)}>
             »
           </button>
         </div>

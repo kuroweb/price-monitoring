@@ -1,7 +1,7 @@
 'use client'
 
-import { useParams, useRouter } from 'next/navigation'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
@@ -13,7 +13,8 @@ import {
   deletePcKoubouCrawlSettingRequiredKeyword,
 } from '../../server-actions/productQuery'
 
-import { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
 
 type inputType = {
   keyword: string | null
@@ -34,6 +35,7 @@ const DeleteForm = ({
 }) => {
   const router = useRouter()
   const params = useParams()
+  const pathname = usePathname()
 
   const [_, setModal] = useBulkEditRequiredKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
@@ -55,6 +57,7 @@ const DeleteForm = ({
           const result = await deleteYahooAuctionCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
+            pathname,
           )
           if (
             result?.data?.deleteYahooAuctionCrawlSettingRequiredKeyword.__typename ===
@@ -74,7 +77,11 @@ const DeleteForm = ({
     for (const excludeKeyword of mercariCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteMercariCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
+          const result = await deleteMercariCrawlSettingRequiredKeyword(
+            excludeKeyword.id,
+            productId,
+            pathname,
+          )
           if (
             result?.data?.deleteMercariCrawlSettingRequiredKeyword.__typename ===
               'DeleteMercariCrawlSettingRequiredKeywordResultError' &&
@@ -93,7 +100,11 @@ const DeleteForm = ({
     for (const excludeKeyword of janparaCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteJanparaCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
+          const result = await deleteJanparaCrawlSettingRequiredKeyword(
+            excludeKeyword.id,
+            productId,
+            pathname,
+          )
           if (
             result?.data?.deleteJanparaCrawlSettingRequiredKeyword.__typename ===
               'DeleteJanparaCrawlSettingRequiredKeywordResultError' &&
@@ -112,7 +123,11 @@ const DeleteForm = ({
     for (const excludeKeyword of iosysCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteIosysCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
+          const result = await deleteIosysCrawlSettingRequiredKeyword(
+            excludeKeyword.id,
+            productId,
+            pathname,
+          )
           if (
             result?.data?.deleteIosysCrawlSettingRequiredKeyword.__typename ===
               'DeleteIosysCrawlSettingRequiredKeywordResultError' &&
@@ -134,6 +149,7 @@ const DeleteForm = ({
           const result = await deletePcKoubouCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
+            pathname,
           )
           if (
             result?.data?.deletePcKoubouCrawlSettingRequiredKeyword.__typename ===
@@ -166,7 +182,7 @@ const DeleteForm = ({
           <input {...register('keyword')} className='input input-bordered' />
         </label>
         <div className='pt-4'>
-          <button type='submit' className='btn btn-md btn-primary w-full'>
+          <button type='submit' className='btn btn-primary btn-md w-full'>
             すべてのプラットフォームから削除
           </button>
         </div>

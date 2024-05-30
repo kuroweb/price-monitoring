@@ -1,8 +1,7 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
-
-import { CreateProductInput } from '@/graphql/dist/client'
+import type { CreateProductInput } from '@/graphql/dist/client'
+import type { useForm } from 'react-hook-form'
 
 const PcKoubouForm = ({
   register,
@@ -31,7 +30,7 @@ const PcKoubouForm = ({
       </label>
       <div className='flex flex-row justify-end'>
         <button
-          className='btn btn-xs btn-link'
+          className='btn btn-link btn-xs'
           type='button'
           onClick={() => reflectValue('keyword')}
         >
@@ -49,7 +48,7 @@ const PcKoubouForm = ({
       </label>
       <div className='flex flex-row justify-end'>
         <button
-          className='btn btn-xs btn-link'
+          className='btn btn-link btn-xs'
           type='button'
           onClick={() => reflectValue('min_price')}
         >
@@ -67,7 +66,7 @@ const PcKoubouForm = ({
       </label>
       <div className='flex flex-row justify-end'>
         <button
-          className='btn btn-xs btn-link'
+          className='btn btn-link btn-xs'
           type='button'
           onClick={() => reflectValue('max_price')}
         >

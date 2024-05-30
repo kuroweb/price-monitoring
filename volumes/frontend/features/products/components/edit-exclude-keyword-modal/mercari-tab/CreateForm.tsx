@@ -1,14 +1,16 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import type { CreateMercariCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
 import { createMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
-import { CreateMercariCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
 
 const CreateForm = ({
   setMode,
@@ -16,6 +18,7 @@ const CreateForm = ({
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
 }) => {
   const router = useRouter()
+  const pathname = usePathname()
   const params = useParams()
 
   const { register, handleSubmit } = useForm<CreateMercariCrawlSettingExcludeKeywordInput>({
@@ -26,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateMercariCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await createMercariCrawlSettingExcludeKeyword(data)
+    const result = await createMercariCrawlSettingExcludeKeyword(data, pathname)
     if (result.data?.createMercariCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

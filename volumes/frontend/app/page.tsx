@@ -1,10 +1,12 @@
 import Link from 'next/link'
 
+import type { GetProductPageDataQuery } from '@/graphql/dist/client'
+
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/products/components/ProductsTable'
 import CreateCrawlSettingModal from '@/features/products/components/create-crawl-setting-modal/CreateCrawlSettingModal'
 import { useCreateCrawlSettingModalQuery } from '@/features/products/hooks/useCreateCrawlSettingModalState'
-import { GetProductPageDataDocument, GetProductPageDataQuery } from '@/graphql/dist/client'
+import { GetProductPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/rsc-client'
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {

@@ -1,15 +1,16 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams } from 'next/navigation'
+import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { deleteMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
-import {
+import type {
   GetProductDetailPageDataQuery,
   MercariCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
+
+import { deleteMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
 
 const KeywordTable = ({
   data,
@@ -22,9 +23,10 @@ const KeywordTable = ({
 }) => {
   const params = useParams()
   const router = useRouter()
+  const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteMercariCrawlSettingRequiredKeyword(id, productId)
+    const result = await deleteMercariCrawlSettingRequiredKeyword(id, productId, pathname)
     if (result.data?.deleteMercariCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
     } else {
@@ -53,7 +55,7 @@ const KeywordTable = ({
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'
                       viewBox='0 0 24 24'
-                      className='inline-block w-5 h-5 stroke-current'
+                      className='inline-block size-5 stroke-current'
                     >
                       <path
                         strokeLinecap='round'
@@ -65,7 +67,7 @@ const KeywordTable = ({
                   </div>
                   <ul
                     tabIndex={0}
-                    className='dropdown-content z-[1] menu space-y-2 shadow bg-base-200 rounded-box w-20'
+                    className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
                   >
                     <li>
                       <button

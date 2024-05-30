@@ -1,8 +1,7 @@
 'use client'
 
-import { useForm } from 'react-hook-form'
-
-import { UpdateProductInput } from '@/graphql/dist/client'
+import type { UpdateProductInput } from '@/graphql/dist/client'
+import type { useForm } from 'react-hook-form'
 
 const JanparaForm = ({
   register,
@@ -31,7 +30,7 @@ const JanparaForm = ({
       </label>
       <div className='flex flex-row justify-end'>
         <button
-          className='btn btn-xs btn-link'
+          className='btn btn-link btn-xs'
           type='button'
           onClick={() => reflectValue('keyword')}
         >
@@ -46,7 +45,7 @@ const JanparaForm = ({
       </label>
       <div className='flex flex-row justify-end'>
         <button
-          className='btn btn-xs btn-link'
+          className='btn btn-link btn-xs'
           type='button'
           onClick={() => reflectValue('min_price')}
         >
@@ -61,7 +60,7 @@ const JanparaForm = ({
       </label>
       <div className='flex flex-row justify-end'>
         <button
-          className='btn btn-xs btn-link'
+          className='btn btn-link btn-xs'
           type='button'
           onClick={() => reflectValue('max_price')}
         >

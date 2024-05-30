@@ -1,17 +1,19 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useParams, useRouter } from 'next/dist/client/components/navigation'
+import { useParams, usePathname, useRouter } from 'next/dist/client/components/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { updateIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
-import {
+import type {
   UpdateIosysCrawlSettingRequiredKeywordInput,
   IosysCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
+import { updateIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
 
 function EditForm({
   setMode,
@@ -22,9 +24,10 @@ function EditForm({
 }) {
   const params = useParams()
   const router = useRouter()
+  const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateIosysCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updateIosysCrawlSettingRequiredKeyword(data)
+    const result = await updateIosysCrawlSettingRequiredKeyword(data, pathname)
     if (result.data?.updateIosysCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

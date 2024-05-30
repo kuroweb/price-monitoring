@@ -1,17 +1,19 @@
 'use client'
 
-import { Dispatch, SetStateAction } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
 
-import { useParams, useRouter } from 'next/dist/client/components/navigation'
+import { useParams, usePathname, useRouter } from 'next/dist/client/components/navigation'
 import { Button } from 'react-daisyui'
-import { SubmitHandler, useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { updatePcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
-import {
+import type {
   UpdatePcKoubouCrawlSettingRequiredKeywordInput,
   PcKoubouCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
+import type { SubmitHandler } from 'react-hook-form'
+
+import { updatePcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
 
 function EditForm({
   setMode,
@@ -22,9 +24,10 @@ function EditForm({
 }) {
   const params = useParams()
   const router = useRouter()
+  const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdatePcKoubouCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updatePcKoubouCrawlSettingRequiredKeyword(data)
+    const result = await updatePcKoubouCrawlSettingRequiredKeyword(data, pathname)
     if (result.data?.updatePcKoubouCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')
