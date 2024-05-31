@@ -6,17 +6,17 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { useEditCrawlSettingModalState } from '../hooks/useEditCrawlSettingModalState'
+import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 import { deleteProduct } from '../server-actions/productQuery'
 
-import EditCrawlSettingModal from './edit-crawl-setting-modal/EditCrawlSettingModal'
+import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
 import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
   const pathname = usePathname()
   const router = useRouter()
-  const [_, setModal] = useEditCrawlSettingModalState()
+  const [_, setModal] = useUpdateProductModalState()
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
     undefined,
   )
@@ -101,7 +101,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
           ))}
         </tbody>
       </table>
-      <EditCrawlSettingModal
+      <UpdateProductModal
         productId={productId}
         defaultValues={
           product && {

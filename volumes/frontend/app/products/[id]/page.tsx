@@ -9,13 +9,12 @@ import RelatedProductCard from '@/features/products/components/RelatedProductCar
 import SearchForm from '@/features/products/components/SearchForm'
 import BulkEditExcludeKeywordModal from '@/features/products/components/bulk-edit-exclude-keyword-modal/BulkEditExcludeKeywordModal'
 import BulkEditRequiredKeywordModal from '@/features/products/components/bulk-edit-required-keyword-modal/BulkEditRequiredKeywordModal'
-import EditCrawlSettingModal from '@/features/products/components/edit-crawl-setting-modal/EditCrawlSettingModal'
 import EditExcludeKeywordModal from '@/features/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
 import EditExcludeProductModal from '@/features/products/components/edit-exclude-product-modal/EditExcludeProductModal'
 import EditRequiredKeywordModal from '@/features/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
+import UpdateProductModal from '@/features/products/components/update-product-modal/UpdateProductModal'
 import { useBulkEditExcludeKeywordModalQuery } from '@/features/products/hooks/useBulkEditExcludeKeywordModalState'
 import { useBulkEditRequiredKeywordModalQuery } from '@/features/products/hooks/useBulkEditRequiredKeywordModalState'
-import { useEditCrawlSettingModalQuery } from '@/features/products/hooks/useEditCrawlSettingModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/products/hooks/useEditExcludeKeywordModalState'
 import { useEditExcludeProductModalQuery } from '@/features/products/hooks/useEditExcludeProductModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/products/hooks/useEditRequiredKeywordModalState'
@@ -26,6 +25,7 @@ import {
   usePlatformStateQuery,
 } from '@/features/products/hooks/usePlatformState'
 import { statusStateCache, useStatusStateQuery } from '@/features/products/hooks/useStatusState'
+import { useUpdateProductModalQuery } from '@/features/products/hooks/useUpdateProductModalState'
 import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
 import { GetProductDetailPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
@@ -67,7 +67,7 @@ const Page = async ({
                   pathname: `/products/${params.id}`,
                   query: {
                     ...searchParams,
-                    [useEditCrawlSettingModalQuery]: 'true',
+                    [useUpdateProductModalQuery]: 'true',
                   },
                 }}
               >
@@ -169,7 +169,7 @@ const Page = async ({
           </div>
         </div>
       </div>
-      <EditCrawlSettingModal
+      <UpdateProductModal
         productId={params.id}
         defaultValues={{
           name: data.product.name,

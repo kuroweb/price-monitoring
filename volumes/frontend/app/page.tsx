@@ -4,8 +4,8 @@ import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/products/components/ProductsTable'
-import CreateCrawlSettingModal from '@/features/products/components/create-crawl-setting-modal/CreateCrawlSettingModal'
-import { useCreateCrawlSettingModalQuery } from '@/features/products/hooks/useCreateCrawlSettingModalState'
+import CreateProductModal from '@/features/products/components/create-product-modal/CreateProductModal'
+import { useCreateProductModalQuery } from '@/features/products/hooks/useCreateProductModalState'
 import { GetProductPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
@@ -27,7 +27,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                   pathname: '/',
                   query: {
                     ...searchParams,
-                    [useCreateCrawlSettingModalQuery]: 'true',
+                    [useCreateProductModalQuery]: 'true',
                   },
                 }}
               >
@@ -38,7 +38,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
           </div>
         </div>
       </div>
-      <CreateCrawlSettingModal />
+      <CreateProductModal />
     </Layout>
   )
 }

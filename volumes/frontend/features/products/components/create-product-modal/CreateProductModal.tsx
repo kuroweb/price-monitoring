@@ -1,14 +1,13 @@
 'use client'
 
-import { useState } from 'react'
-
 import { usePathname, useRouter } from 'next/navigation'
+import { useQueryState } from 'nuqs'
 import { Join } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useEditCrawlSettingModalState } from '../../hooks/useEditCrawlSettingModalState'
-import { updateProduct } from '../../server-actions/productQuery'
+import { useCreateProductModalState } from '../../hooks/useCreateProductModalState'
+import { createProduct } from '../../server-actions/productQuery'
 
 import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
@@ -16,71 +15,58 @@ import MercariForm from './MercariForm'
 import PcKoubouForm from './PcKoubouForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
-import type { UpdateProductInput } from '@/graphql/dist/client'
+import type { CreateProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-const EditCrawlSettingModal = ({
-  productId,
-  defaultValues,
-}: {
-  productId: string | undefined
-  defaultValues: UpdateProductInput | undefined
-}) => {
+const CreateProductModal = () => {
   const router = useRouter()
   const pathname = usePathname()
 
-  const [tab, setTab] = useState<
-    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房'
-  >('ヤフオク')
-  const [modal, setModal] = useEditCrawlSettingModalState()
+  const [modal, setModal] = useCreateProductModalState()
+  const [tab, setTab] = useQueryState('create_crawl_setting_tab')
 
-  const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductInput>({
+  const { register, handleSubmit, getValues, setValue } = useForm<CreateProductInput>({
     defaultValues: {
-      name: defaultValues?.name || '',
+      name: '',
       yahoo_auction_crawl_setting: {
-        keyword: defaultValues?.yahoo_auction_crawl_setting?.keyword || '',
-        category_id: defaultValues?.yahoo_auction_crawl_setting?.category_id || null,
-        min_price: defaultValues?.yahoo_auction_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.yahoo_auction_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.yahoo_auction_crawl_setting?.enabled || false,
+        keyword: '',
+        category_id: null,
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
       },
       mercari_crawl_setting: {
-        keyword: defaultValues?.mercari_crawl_setting?.keyword || '',
-        category_id: defaultValues?.mercari_crawl_setting?.category_id || null,
-        min_price: defaultValues?.mercari_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.mercari_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.mercari_crawl_setting?.enabled || false,
+        keyword: '',
+        category_id: null,
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
       },
       janpara_crawl_setting: {
-        keyword: defaultValues?.janpara_crawl_setting?.keyword || '',
-        min_price: defaultValues?.janpara_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.janpara_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.janpara_crawl_setting?.enabled || false,
+        keyword: '',
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
       },
       iosys_crawl_setting: {
-        keyword: defaultValues?.iosys_crawl_setting?.keyword || '',
-        min_price: defaultValues?.iosys_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.iosys_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.iosys_crawl_setting?.enabled || false,
+        keyword: '',
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
       },
       pc_koubou_crawl_setting: {
-        keyword: defaultValues?.pc_koubou_crawl_setting?.keyword || '',
-        min_price: defaultValues?.pc_koubou_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.pc_koubou_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.pc_koubou_crawl_setting?.enabled || false,
+        keyword: '',
+        min_price: 0,
+        max_price: 0,
+        enabled: true,
       },
     },
-    values: defaultValues,
   })
 
-  const onSubmit: SubmitHandler<UpdateProductInput> = async (input) => {
-    if (productId === undefined) {
-      return toast.error('更新対象が見つかりませんでした。')
-    }
+  const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
+    const result = await createProduct(data, pathname)
 
-    const result = await updateProduct(productId, input, pathname)
-
-    if (result.data?.updateProduct.ok) {
+    if (result.data?.createProduct.ok) {
       toast.success('success')
       setModal(false)
     } else {
@@ -105,9 +91,9 @@ const EditCrawlSettingModal = ({
           >
             ✕
           </div>
-          <h3 className='text-lg font-bold'>計測設定を更新</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='divider py-4'>共通設定</div>
+          <h3 className='text-lg font-bold'>計測設定を追加</h3>
+          <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-2'>
+            <div className='divider py-2'>共通設定</div>
             <label className='form-control'>
               <div className='label'>
                 <span className='label-text'>管理コード</span>
@@ -121,71 +107,71 @@ const EditCrawlSettingModal = ({
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
-                checked={tab == 'ヤフオク'}
-                onChange={() => setTab('ヤフオク')}
+                defaultChecked={tab === null || tab === 'ヤフオク'}
+                onClick={() => setTab('ヤフオク')}
               />
               <input
                 className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
-                checked={tab == 'メルカリ'}
-                onChange={() => setTab('メルカリ')}
+                defaultChecked={tab === 'メルカリ'}
+                onClick={() => setTab('メルカリ')}
               />
               <input
                 className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
-                checked={tab == 'じゃんぱら'}
-                onChange={() => setTab('じゃんぱら')}
+                defaultChecked={tab === 'じゃんぱら'}
+                onClick={() => setTab('じゃんぱら')}
               />
               <input
                 className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='イオシス'
-                checked={tab == 'イオシス'}
-                onChange={() => setTab('イオシス')}
+                defaultChecked={tab === 'イオシス'}
+                onClick={() => setTab('イオシス')}
               />
               <input
                 className='btn join-item btn-md w-1/5'
                 type='radio'
                 name='options'
                 aria-label='パソコン工房'
-                checked={tab == 'パソコン工房'}
-                onChange={() => setTab('パソコン工房')}
+                defaultChecked={tab === 'パソコン工房'}
+                onClick={() => setTab('パソコン工房')}
               />
             </Join>
             <div>
-              {tab == 'ヤフオク' && (
+              {(tab === null || tab === 'ヤフオク') && (
                 <div className='py-4'>
                   <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab == 'メルカリ' && (
+              {tab === 'メルカリ' && (
                 <div className='py-4'>
                   <MercariForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab == 'じゃんぱら' && (
+              {tab === 'じゃんぱら' && (
                 <div className='py-4'>
                   <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab == 'イオシス' && (
+              {tab === 'イオシス' && (
                 <div className='py-4'>
                   <IosysForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab == 'パソコン工房' && (
+              {tab === 'パソコン工房' && (
                 <div className='py-4'>
                   <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
             </div>
             <button type='submit' className='btn btn-primary w-full'>
-              更新
+              登録
             </button>
           </form>
         </div>
@@ -195,4 +181,4 @@ const EditCrawlSettingModal = ({
   )
 }
 
-export default EditCrawlSettingModal
+export default CreateProductModal
