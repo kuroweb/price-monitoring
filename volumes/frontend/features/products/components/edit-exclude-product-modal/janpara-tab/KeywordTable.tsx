@@ -10,7 +10,7 @@ import type {
   JanparaCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'
 
-import { deleteJanparaCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
+import { deleteJanparaCrawlSettingExcludeProduct } from '@/features/products/server-actions/janparaCrawlSettingExcludeProductQuery'
 
 const KeywordTable = ({
   data,

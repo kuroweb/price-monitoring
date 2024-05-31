@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateIosysCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
+import { createIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/iosysCrawlSettingExcludeProductQuery'
 
 const CreateForm = ({
   setMode,

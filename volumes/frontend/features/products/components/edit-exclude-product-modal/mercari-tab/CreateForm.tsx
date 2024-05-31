@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateMercariCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createMercariCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
+import { createMercariCrawlSettingExcludeProduct } from '@/features/products/server-actions/mercariCrawlSettingExcludeProductQuery'
 
 const CreateForm = ({
   setMode,

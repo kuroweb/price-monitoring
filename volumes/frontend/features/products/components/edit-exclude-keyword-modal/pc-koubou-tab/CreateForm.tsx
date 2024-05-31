@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreatePcKoubouCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createPcKoubouCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
+import { createPcKoubouCrawlSettingExcludeKeyword } from '@/features/products/server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
 
 const CreateForm = ({
   setMode,

@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateJanparaCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { updateJanparaCrawlSettingRequiredKeyword } from '@/features/products/server-actions/janparaCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,

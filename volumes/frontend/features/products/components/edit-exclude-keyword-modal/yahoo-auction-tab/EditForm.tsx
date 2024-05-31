@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
+import { updateYahooAuctionCrawlSettingExcludeKeyword } from '@/features/products/server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,

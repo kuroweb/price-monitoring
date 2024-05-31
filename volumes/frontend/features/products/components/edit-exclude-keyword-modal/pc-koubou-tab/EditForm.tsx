@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updatePcKoubouCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
+import { updatePcKoubouCrawlSettingExcludeKeyword } from '@/features/products/server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,

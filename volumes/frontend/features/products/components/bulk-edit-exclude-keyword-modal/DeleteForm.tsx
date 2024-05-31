@@ -5,13 +5,11 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcludeKeywordModalState'
-import {
-  deleteYahooAuctionCrawlSettingExcludeKeyword,
-  deleteMercariCrawlSettingExcludeKeyword,
-  deleteJanparaCrawlSettingExcludeKeyword,
-  deleteIosysCrawlSettingExcludeKeyword,
-  deletePcKoubouCrawlSettingExcludeKeyword,
-} from '../../server-actions/productQuery'
+import { deleteIosysCrawlSettingExcludeKeyword } from '../../server-actions/iosysCrawlSettingExcludeKeywordQuery'
+import { deleteJanparaCrawlSettingExcludeKeyword } from '../../server-actions/janparaCrawlSettingExcludeKeywordQuery'
+import { deleteMercariCrawlSettingExcludeKeyword } from '../../server-actions/mercariCrawlSettingExcludeKeywordQuery'
+import { deletePcKoubouCrawlSettingExcludeKeyword } from '../../server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
+import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '../../server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'

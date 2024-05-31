@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateMercariCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { createMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/mercariCrawlSettingRequiredKeywordQuery'
 
 const CreateForm = ({
   setMode,

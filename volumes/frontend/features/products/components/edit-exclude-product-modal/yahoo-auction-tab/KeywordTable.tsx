@@ -10,7 +10,7 @@ import type {
   YahooAuctionCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'
 
-import { deleteYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
+import { deleteYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
 
 const KeywordTable = ({
   data,

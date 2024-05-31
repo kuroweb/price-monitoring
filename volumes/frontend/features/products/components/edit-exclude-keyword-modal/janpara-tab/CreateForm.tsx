@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateJanparaCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
+import { createJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/janparaCrawlSettingExcludeKeywordQuery'
 
 const CreateForm = ({
   setMode,

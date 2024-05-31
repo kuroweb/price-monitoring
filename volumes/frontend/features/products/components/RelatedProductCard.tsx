@@ -5,13 +5,11 @@ import { usePathname, useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { useStatusState } from '../hooks/useStatusState'
-import {
-  createYahooAuctionCrawlSettingExcludeProduct,
-  createMercariCrawlSettingExcludeProduct,
-  createJanparaCrawlSettingExcludeProduct,
-  createIosysCrawlSettingExcludeProduct,
-  createPcKoubouCrawlSettingExcludeProduct,
-} from '../server-actions/productQuery'
+import { createIosysCrawlSettingExcludeProduct } from '../server-actions/iosysCrawlSettingExcludeProductQuery'
+import { createJanparaCrawlSettingExcludeProduct } from '../server-actions/janparaCrawlSettingExcludeProductQuery'
+import { createMercariCrawlSettingExcludeProduct } from '../server-actions/mercariCrawlSettingExcludeProductQuery'
+import { createPcKoubouCrawlSettingExcludeProduct } from '../server-actions/pcKoubouCrawlSettingExcludeProductQuery'
+import { createYahooAuctionCrawlSettingExcludeProduct } from '../server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 

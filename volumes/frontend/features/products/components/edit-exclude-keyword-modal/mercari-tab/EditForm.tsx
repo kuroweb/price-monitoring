@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
+import { updateMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/mercariCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,

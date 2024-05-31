@@ -5,13 +5,11 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
-import {
-  createYahooAuctionCrawlSettingRequiredKeyword,
-  createMercariCrawlSettingRequiredKeyword,
-  createJanparaCrawlSettingRequiredKeyword,
-  createIosysCrawlSettingRequiredKeyword,
-  createPcKoubouCrawlSettingRequiredKeyword,
-} from '../../server-actions/productQuery'
+import { createIosysCrawlSettingRequiredKeyword } from '../../server-actions/iosysCrawlSettingRequiredKeywordQuery'
+import { createJanparaCrawlSettingRequiredKeyword } from '../../server-actions/janparaCrawlSettingRequiredKeywordQuery'
+import { createMercariCrawlSettingRequiredKeyword } from '../../server-actions/mercariCrawlSettingRequiredKeywordQuery'
+import { createPcKoubouCrawlSettingRequiredKeyword } from '../../server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { createYahooAuctionCrawlSettingRequiredKeyword } from '../../server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 import type { SubmitHandler } from 'react-hook-form'
 

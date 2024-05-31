@@ -10,7 +10,7 @@ import type {
   PcKoubouCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-import { deletePcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { deletePcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
 
 const KeywordTable = ({
   data,

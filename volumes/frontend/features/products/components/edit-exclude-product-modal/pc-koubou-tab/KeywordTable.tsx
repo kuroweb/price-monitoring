@@ -10,7 +10,7 @@ import type {
   PcKoubouCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'
 
-import { deletePcKoubouCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
+import { deletePcKoubouCrawlSettingExcludeProduct } from '@/features/products/server-actions/pcKoubouCrawlSettingExcludeProductQuery'
 
 const KeywordTable = ({
   data,

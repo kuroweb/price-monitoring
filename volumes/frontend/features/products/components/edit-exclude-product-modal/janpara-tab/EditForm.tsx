@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateJanparaCrawlSettingExcludeProduct } from '@/features/products/server-actions/productQuery'
+import { updateJanparaCrawlSettingExcludeProduct } from '@/features/products/server-actions/janparaCrawlSettingExcludeProductQuery'
 
 function EditForm({
   setMode,

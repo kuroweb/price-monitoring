@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateYahooAuctionCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { createYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 const CreateForm = ({
   setMode,

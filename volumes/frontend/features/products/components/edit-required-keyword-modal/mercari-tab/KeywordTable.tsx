@@ -10,7 +10,7 @@ import type {
   MercariCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { deleteMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/mercariCrawlSettingRequiredKeywordQuery'
 
 const KeywordTable = ({
   data,

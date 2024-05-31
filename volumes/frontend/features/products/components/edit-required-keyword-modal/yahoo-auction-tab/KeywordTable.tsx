@@ -10,7 +10,7 @@ import type {
   YahooAuctionCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { deleteYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 const KeywordTable = ({
   data,

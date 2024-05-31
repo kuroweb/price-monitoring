@@ -10,7 +10,7 @@ import type {
   IosysCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/productQuery'
+import { deleteIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/iosysCrawlSettingRequiredKeywordQuery'
 
 const KeywordTable = ({
   data,

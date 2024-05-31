@@ -10,7 +10,7 @@ import type {
   IosysCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteIosysCrawlSettingExcludeKeyword } from '@/features/products/server-actions/productQuery'
+import { deleteIosysCrawlSettingExcludeKeyword } from '@/features/products/server-actions/iosysCrawlSettingExcludeKeywordQuery'
 
 const KeywordTable = ({
   data,
