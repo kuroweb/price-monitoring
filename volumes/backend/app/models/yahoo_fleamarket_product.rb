@@ -5,7 +5,6 @@ class YahooFleamarketProduct < ApplicationRecord
   ## validations ##
 
   ## scopes ##
-  scope :published, -> { where(published: true) }
 
   ## methods ##
 end
