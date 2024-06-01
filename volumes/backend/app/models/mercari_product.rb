@@ -3,11 +3,8 @@ class MercariProduct < ApplicationRecord
   belongs_to :product
 
   ## validations ##
+  validates_presence_of :external_id, :name, :thumbnail_url
 
   ## scopes ##
-  scope :published, -> { where(published: true) }
-  scope :unpublished, -> { where(published: false) }
-  scope :bought, -> { where.not(bought_date: nil) }
-
   ## methods ##
 end
