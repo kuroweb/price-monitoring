@@ -367,6 +367,52 @@ erDiagram
   products ||--o{ pc_koubou_products : "1:N"
 ```
 
+#### リコレ
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  used_sofmap_crawl_settings {
+    bigint id PK
+    bigint product_id FK
+    string keyword
+    int min_price
+    int max_price
+    boolean enabled
+  }
+  used_sofmap_crawl_setting_required_keywords {
+    bigint id PK
+    bigint used_sofmap_crawl_setting_id FK
+    string keyword
+  }
+  used_sofmap_crawl_setting_exclude_keywords {
+    bigint id PK
+    bigint used_sofmap_crawl_setting_id FK
+    string keyword
+  }
+  used_sofmap_crawl_setting_exclude_products {
+    bigint id PK
+    bigint used_sofmap_crawl_setting_id FK
+    string external_id
+  }
+  used_sofmap_products {
+    bigint id PK
+    string external_id
+    string name
+    text thumbnail_url
+    int price
+  }
+
+  products ||--|| used_sofmap_crawl_settings : "1:1"
+  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_required_keywords : "1:N"
+  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_exclude_keywords : "1:N"
+  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_exclude_products : "1:N"
+  products ||--o{ used_sofmap_products : "1:N"
+```
+
 ### 相場集計
 
 ```mermaid
