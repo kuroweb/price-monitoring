@@ -41,6 +41,7 @@ const SearchForm = () => {
     { value: 'janpara', label: 'じゃんぱら' },
     { value: 'iosys', label: 'イオシス' },
     { value: 'pc_koubou', label: 'パソコン工房' },
+    { value: 'used_sofmap', label: 'リコレ' },
   ]
 
   const statusOptions: Option[] = [

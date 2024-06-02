@@ -4613,7 +4613,7 @@ export const GetRecommendsPageDataDocument = gql`
     id
     name
     relatedProducts(
-      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all"
+      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all,used_sofmap.all"
       page: 1
       per: 4
       sort: "price"

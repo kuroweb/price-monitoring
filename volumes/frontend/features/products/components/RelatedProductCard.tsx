@@ -29,6 +29,7 @@ const RelatedProductCard = ({
     janpara: 'www.janpara.co.jp/sale/search/detail/?',
     iosys: 'iosys.co.jp/items/',
     pc_koubou: 'www.pc-koubou.jp/products/detail.php?product_id=',
+    used_sofmap: 'used.sofmap.com',
   }
 
   const serviceNameMap: { [key: string]: string } = {
@@ -38,6 +39,7 @@ const RelatedProductCard = ({
     janpara: 'じゃんぱら',
     iosys: 'イオシス',
     pc_koubou: 'パソコン工房',
+    used_sofmap: 'リコレ',
   }
 
   const serviceColorMap: { [key: string]: string } = {
@@ -47,6 +49,7 @@ const RelatedProductCard = ({
     janpara: 'bg-blue-500',
     iosys: 'bg-blue-600',
     pc_koubou: 'bg-blue-400',
+    used_sofmap: 'bg-green-500',
   }
 
   const openProductPage = async (platform: string, externalId: string) => {

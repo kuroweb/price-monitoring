@@ -26,6 +26,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'www.pc-koubou.jp',
       },
+      {
+        protocol: 'https',
+        hostname: 'image.sofmap.com',
+      },
     ],
   },
   experimental: {

@@ -17,6 +17,7 @@ export const makePlatformMask = (platform: string, status: string) => {
     janpara: { published: 'janpara.all', unpublished: 'janpara.all' },
     iosys: { published: 'iosys.all', unpublished: 'iosys.all' },
     pc_koubou: { published: 'pc_koubou.all', unpublished: 'pc_koubou.all' },
+    used_sofmap: { published: 'used_sofmap.all', unpublished: 'used_sofmap.all' },
   }
 
   const platformMask = platformMaskMap[platform]?.[String(status)]

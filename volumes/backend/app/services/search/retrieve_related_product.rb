@@ -16,6 +16,7 @@ module Search
       janpara.all
       iosys.all
       pc_koubou.all
+      used_sofmap.all
     ].freeze
 
     SORT_TYPES = %w[price bought_date created_at updated_at].freeze
@@ -157,7 +158,7 @@ module Search
     end
 
     def shop_platform?(platform)
-      %w[janpara iosys pc_koubou].include?(platform)
+      %w[janpara iosys pc_koubou used_sofmap].include?(platform)
     end
 
     def handle_errors(related_products)
