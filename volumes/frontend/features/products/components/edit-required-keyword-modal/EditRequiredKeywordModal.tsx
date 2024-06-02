@@ -10,13 +10,14 @@ import IosysTab from './iosys-tab/IosysTab'
 import JanparaTab from './janpara-tab/JanparaTab'
 import MercariTab from './mercari-tab/MercariTab'
 import PcKoubouTab from './pc-koubou-tab/PcKoubouTab'
+import UsedSofmapTab from './used-sofmap-tab/UsedSofmapTab'
 import YahooAuctionTab from './yahoo-auction-tab/YahooAuctionTab'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
 const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
   const [tab, setTab] = useState<
-    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房'
+    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
   >('ヤフオク')
   const [modal, setModal] = useEditRequiredKeywordModalState()
 
@@ -38,9 +39,9 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
           </div>
           <h3 className='text-lg font-bold'>必須キーワード</h3>
           <div className='py-6'>
-            <Join className='flex'>
+            <Join className='flex pb-2'>
               <input
-                className='btn join-item btn-md w-1/5'
+                className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='ヤフオク'
@@ -48,7 +49,7 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
                 onChange={() => setTab('ヤフオク')}
               />
               <input
-                className='btn join-item btn-md w-1/5'
+                className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='メルカリ'
@@ -56,15 +57,17 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
                 onChange={() => setTab('メルカリ')}
               />
               <input
-                className='btn join-item btn-md w-1/5'
+                className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='じゃんぱら'
                 checked={tab == 'じゃんぱら'}
                 onChange={() => setTab('じゃんぱら')}
               />
+            </Join>
+            <Join className='flex'>
               <input
-                className='btn join-item btn-md w-1/5'
+                className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='イオシス'
@@ -72,12 +75,20 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
                 onChange={() => setTab('イオシス')}
               />
               <input
-                className='btn join-item btn-md w-1/5'
+                className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='required_keyword'
                 aria-label='パソコン工房'
                 checked={tab == 'パソコン工房'}
                 onChange={() => setTab('パソコン工房')}
+              />
+              <input
+                className='btn join-item btn-md w-1/3'
+                type='radio'
+                name='required_keyword'
+                aria-label='リコレ'
+                checked={tab == 'リコレ'}
+                onChange={() => setTab('リコレ')}
               />
             </Join>
           </div>
@@ -87,6 +98,7 @@ const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery })
             {tab == 'じゃんぱら' && <JanparaTab data={data} />}
             {tab == 'イオシス' && <IosysTab data={data} />}
             {tab == 'パソコン工房' && <PcKoubouTab data={data} />}
+            {tab == 'リコレ' && <UsedSofmapTab data={data} />}
           </div>
         </div>
 

@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   has_one :janpara_crawl_setting, dependent: :destroy
   has_one :iosys_crawl_setting, dependent: :destroy
   has_one :pc_koubou_crawl_setting, dependent: :destroy
+  has_one :used_sofmap_crawl_setting, dependent: :destroy
 
   has_many :yahoo_auction_products, dependent: :destroy
   has_many :yahoo_auction_daily_purchase_summaries, dependent: :destroy
@@ -15,6 +16,7 @@ class Product < ApplicationRecord
   has_many :janpara_products, dependent: :destroy
   has_many :iosys_products, dependent: :destroy
   has_many :pc_koubou_products, dependent: :destroy
+  has_many :used_sofmap_products, dependent: :destroy
 
   ## validations ##
   validates :name, presence: true

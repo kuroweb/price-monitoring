@@ -251,6 +251,51 @@ func (r *mutationResolver) DeletePcKoubouCrawlSettingRequiredKeyword(ctx context
 	return r.ProductService.DeletePcKoubouCrawlSettingRequiredKeyword(ctx, id, productID)
 }
 
+// CreateUsedSofmapCrawlSettingExcludeKeyword is the resolver for the createUsedSofmapCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) CreateUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateUsedSofmapCrawlSettingExcludeKeywordInput) (model.CreateUsedSofmapCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.CreateUsedSofmapCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// UpdateUsedSofmapCrawlSettingExcludeKeyword is the resolver for the updateUsedSofmapCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) UpdateUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput) (model.UpdateUsedSofmapCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.UpdateUsedSofmapCrawlSettingExcludeKeyword(ctx, input)
+}
+
+// DeleteUsedSofmapCrawlSettingExcludeKeyword is the resolver for the deleteUsedSofmapCrawlSettingExcludeKeyword field.
+func (r *mutationResolver) DeleteUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteUsedSofmapCrawlSettingExcludeKeywordResult, error) {
+	return r.ProductService.DeleteUsedSofmapCrawlSettingExcludeKeyword(ctx, id, productID)
+}
+
+// CreateUsedSofmapCrawlSettingExcludeProduct is the resolver for the createUsedSofmapCrawlSettingExcludeProduct field.
+func (r *mutationResolver) CreateUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, input model.CreateUsedSofmapCrawlSettingExcludeProductInput) (model.CreateUsedSofmapCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.CreateUsedSofmapCrawlSettingExcludeProduct(ctx, input)
+}
+
+// UpdateUsedSofmapCrawlSettingExcludeProduct is the resolver for the updateUsedSofmapCrawlSettingExcludeProduct field.
+func (r *mutationResolver) UpdateUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateUsedSofmapCrawlSettingExcludeProductInput) (model.UpdateUsedSofmapCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.UpdateUsedSofmapCrawlSettingExcludeProduct(ctx, input)
+}
+
+// DeleteUsedSofmapCrawlSettingExcludeProduct is the resolver for the deleteUsedSofmapCrawlSettingExcludeProduct field.
+func (r *mutationResolver) DeleteUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteUsedSofmapCrawlSettingExcludeProductResult, error) {
+	return r.ProductService.DeleteUsedSofmapCrawlSettingExcludeProduct(ctx, id, productID)
+}
+
+// CreateUsedSofmapCrawlSettingRequiredKeyword is the resolver for the createUsedSofmapCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) CreateUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateUsedSofmapCrawlSettingRequiredKeywordInput) (model.CreateUsedSofmapCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.CreateUsedSofmapCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// UpdateUsedSofmapCrawlSettingRequiredKeyword is the resolver for the updateUsedSofmapCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) UpdateUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput) (model.UpdateUsedSofmapCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.UpdateUsedSofmapCrawlSettingRequiredKeyword(ctx, input)
+}
+
+// DeleteUsedSofmapCrawlSettingRequiredKeyword is the resolver for the deleteUsedSofmapCrawlSettingRequiredKeyword field.
+func (r *mutationResolver) DeleteUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteUsedSofmapCrawlSettingRequiredKeywordResult, error) {
+	return r.ProductService.DeleteUsedSofmapCrawlSettingRequiredKeyword(ctx, id, productID)
+}
+
 // Mutation returns internal.MutationResolver implementation.
 func (r *Resolver) Mutation() internal.MutationResolver { return &mutationResolver{r} }
 

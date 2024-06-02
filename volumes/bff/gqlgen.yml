@@ -87,6 +87,8 @@ models:
       - github.com/99designs/gqlgen/graphql.Int32
   Product:
     fields:
+      relatedProducts:
+        resolver: true
       yahooAuctionProducts:
         resolver: true
       yahooAuctionCrawlSetting:
@@ -107,7 +109,7 @@ models:
         resolver: true
       pcKoubouCrawlSetting:
         resolver: true
-      relatedProducts:
+      usedSofmapCrawlSetting:
         resolver: true
   YahooAuctionCrawlSetting:
     fields:
@@ -148,4 +150,12 @@ models:
       pcKoubouCrawlSettingExcludeProducts:
         resolver: true
       pcKoubouCrawlSettingRequiredKeywords:
+        resolver: true
+  UsedSofmapCrawlSetting:
+    fields:
+      usedSofmapCrawlSettingExcludeKeywords:
+        resolver: true
+      usedSofmapCrawlSettingExcludeProducts:
+        resolver: true
+      usedSofmapCrawlSettingRequiredKeywords:
         resolver: true

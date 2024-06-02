@@ -48,6 +48,14 @@ query getProductPageData($id: ID, $name: String) {
       maxPrice
       enabled
     }
+    usedSofmapCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+    }
   }
 }
 
@@ -230,6 +238,35 @@ query getProductDetailPageData(
       pcKoubouCrawlSettingRequiredKeywords {
         id
         pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    usedSofmapCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      usedSofmapCrawlSettingExcludeKeywords {
+        id
+        usedSofmapCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      usedSofmapCrawlSettingExcludeProducts {
+        id
+        usedSofmapCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      usedSofmapCrawlSettingRequiredKeywords {
+        id
+        usedSofmapCrawlSettingId
         keyword
         createdAt
         updatedAt

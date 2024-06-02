@@ -1,0 +1,15 @@
+package used_sofmap_crawl_setting_exclude_keywords
+
+type IUsedSofmapCrawlSettingExcludeKeywordService interface {
+	IFindUsedSofmapCrawlSettingExcludeKeywordService
+	ICreateUsedSofmapCrawlSettingExcludeKeywordService
+	IUpdateUsedSofmapCrawlSettingExcludeKeywordService
+	IDeleteUsedSofmapCrawlSettingExcludeKeywordService
+}
+
+type UsedSofmapCrawlSettingExcludeKeywordService struct {
+	*FindUsedSofmapCrawlSettingExcludeKeywordService
+	*CreateUsedSofmapCrawlSettingExcludeKeywordService
+	*UpdateUsedSofmapCrawlSettingExcludeKeywordService
+	*DeleteUsedSofmapCrawlSettingExcludeKeywordService
+}

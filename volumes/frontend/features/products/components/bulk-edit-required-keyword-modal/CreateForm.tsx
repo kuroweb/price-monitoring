@@ -9,6 +9,7 @@ import { createIosysCrawlSettingRequiredKeyword } from '../../server-actions/ios
 import { createJanparaCrawlSettingRequiredKeyword } from '../../server-actions/janparaCrawlSettingRequiredKeywordQuery'
 import { createMercariCrawlSettingRequiredKeyword } from '../../server-actions/mercariCrawlSettingRequiredKeywordQuery'
 import { createPcKoubouCrawlSettingRequiredKeyword } from '../../server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { createUsedSofmapCrawlSettingRequiredKeyword } from '../../server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
 import { createYahooAuctionCrawlSettingRequiredKeyword } from '../../server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 import type { SubmitHandler } from 'react-hook-form'
@@ -83,6 +84,15 @@ const CreateForm = () => {
       pcKoubouResult?.data?.createPcKoubouCrawlSettingRequiredKeyword.__typename ===
         'CreatePcKoubouCrawlSettingRequiredKeywordResultError' &&
       pcKoubouResult?.data?.createPcKoubouCrawlSettingRequiredKeyword.error.code !== '409'
+    ) {
+      return toast.error('一括登録に失敗しました。')
+    }
+
+    const usedSofmapResult = await createUsedSofmapCrawlSettingRequiredKeyword(postData, pathname)
+    if (
+      usedSofmapResult?.data?.createUsedSofmapCrawlSettingRequiredKeyword.__typename ===
+        'CreateUsedSofmapCrawlSettingRequiredKeywordResultError' &&
+      usedSofmapResult?.data?.createUsedSofmapCrawlSettingRequiredKeyword.error.code !== '409'
     ) {
       return toast.error('一括登録に失敗しました。')
     }

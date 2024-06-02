@@ -152,6 +152,36 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeletePcKoubouCrawlSettingRequiredKeywordResult!
+  createUsedSofmapCrawlSettingExcludeKeyword(
+    input: CreateUsedSofmapCrawlSettingExcludeKeywordInput!
+  ): CreateUsedSofmapCrawlSettingExcludeKeywordResult!
+  updateUsedSofmapCrawlSettingExcludeKeyword(
+    input: UpdateUsedSofmapCrawlSettingExcludeKeywordInput!
+  ): UpdateUsedSofmapCrawlSettingExcludeKeywordResult!
+  deleteUsedSofmapCrawlSettingExcludeKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteUsedSofmapCrawlSettingExcludeKeywordResult!
+  createUsedSofmapCrawlSettingExcludeProduct(
+    input: CreateUsedSofmapCrawlSettingExcludeProductInput!
+  ): CreateUsedSofmapCrawlSettingExcludeProductResult!
+  updateUsedSofmapCrawlSettingExcludeProduct(
+    input: UpdateUsedSofmapCrawlSettingExcludeProductInput!
+  ): UpdateUsedSofmapCrawlSettingExcludeProductResult!
+  deleteUsedSofmapCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteUsedSofmapCrawlSettingExcludeProductResult!
+  createUsedSofmapCrawlSettingRequiredKeyword(
+    input: CreateUsedSofmapCrawlSettingRequiredKeywordInput!
+  ): CreateUsedSofmapCrawlSettingRequiredKeywordResult!
+  updateUsedSofmapCrawlSettingRequiredKeyword(
+    input: UpdateUsedSofmapCrawlSettingRequiredKeywordInput!
+  ): UpdateUsedSofmapCrawlSettingRequiredKeywordResult!
+  deleteUsedSofmapCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteUsedSofmapCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -179,6 +209,7 @@ input CreateProductInput {
   janpara_crawl_setting: CreateJanparaCrawlSettingInput!
   iosys_crawl_setting: CreateIosysCrawlSettingInput!
   pc_koubou_crawl_setting: CreatePcKoubouCrawlSettingInput!
+  used_sofmap_crawl_setting: CreateUsedSofmapCrawlSettingInput!
 }
 
 input CreateYahooAuctionCrawlSettingInput {
@@ -210,7 +241,15 @@ input CreateIosysCrawlSettingInput {
   max_price: Int!
   enabled: Boolean!
 }
+
 input CreatePcKoubouCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input CreateUsedSofmapCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -248,6 +287,7 @@ input UpdateProductInput {
   janpara_crawl_setting: UpdateJanparaCrawlSettingInput!
   iosys_crawl_setting: UpdateIosysCrawlSettingInput!
   pc_koubou_crawl_setting: UpdatePcKoubouCrawlSettingInput!
+  used_sofmap_crawl_setting: UpdateUsedSofmapCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
@@ -281,6 +321,13 @@ input UpdateIosysCrawlSettingInput {
 }
 
 input UpdatePcKoubouCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input UpdateUsedSofmapCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -1602,6 +1649,261 @@ union DeletePcKoubouCrawlSettingRequiredKeywordResultErrors =
     DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed
 
 type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateUsedSofmapCrawlSettingExcludeKeyword ##
+
+input CreateUsedSofmapCrawlSettingExcludeKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateUsedSofmapCrawlSettingExcludeKeywordResult =
+    CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess
+  | CreateUsedSofmapCrawlSettingExcludeKeywordResultError
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeKeyword: UsedSofmapCrawlSettingExcludeKeyword!
+}
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors!
+}
+
+union CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors =
+    CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateUsedSofmapCrawlSettingExcludeKeyword ##
+
+input UpdateUsedSofmapCrawlSettingExcludeKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeKeywordResult =
+    UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess
+  | UpdateUsedSofmapCrawlSettingExcludeKeywordResultError
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeKeyword: UsedSofmapCrawlSettingExcludeKeyword!
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors!
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors =
+    UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteUsedSofmapCrawlSettingExcludeKeyword ##
+
+union DeleteUsedSofmapCrawlSettingExcludeKeywordResult =
+    DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess
+  | DeleteUsedSofmapCrawlSettingExcludeKeywordResultError
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors!
+}
+
+union DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors =
+    DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateUsedSofmapCrawlSettingExcludeProduct ##
+
+input CreateUsedSofmapCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateUsedSofmapCrawlSettingExcludeProductResult =
+    CreateUsedSofmapCrawlSettingExcludeProductResultSuccess
+  | CreateUsedSofmapCrawlSettingExcludeProductResultError
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeProduct: UsedSofmapCrawlSettingExcludeProduct!
+}
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateUsedSofmapCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateUsedSofmapCrawlSettingExcludeProductResultErrors =
+    CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateUsedSofmapCrawlSettingExcludeProduct ##
+
+input UpdateUsedSofmapCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeProductResult =
+    UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess
+  | UpdateUsedSofmapCrawlSettingExcludeProductResultError
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeProduct: UsedSofmapCrawlSettingExcludeProduct!
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateUsedSofmapCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeProductResultErrors =
+    UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteUsedSofmapCrawlSettingExcludeProduct ##
+
+union DeleteUsedSofmapCrawlSettingExcludeProductResult =
+    DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess
+  | DeleteUsedSofmapCrawlSettingExcludeProductResultError
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteUsedSofmapCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteUsedSofmapCrawlSettingExcludeProductResultErrors =
+    DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateUsedSofmapCrawlSettingRequiredKeyword ##
+
+input CreateUsedSofmapCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateUsedSofmapCrawlSettingRequiredKeywordResult =
+    CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess
+  | CreateUsedSofmapCrawlSettingRequiredKeywordResultError
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingRequiredKeyword: UsedSofmapCrawlSettingRequiredKeyword!
+}
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors =
+    CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateUsedSofmapCrawlSettingRequiredKeyword ##
+
+input UpdateUsedSofmapCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateUsedSofmapCrawlSettingRequiredKeywordResult =
+    UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess
+  | UpdateUsedSofmapCrawlSettingRequiredKeywordResultError
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingRequiredKeyword: UsedSofmapCrawlSettingRequiredKeyword!
+}
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors =
+    UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteUsedSofmapCrawlSettingRequiredKeyword ##
+
+union DeleteUsedSofmapCrawlSettingRequiredKeywordResult =
+    DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess
+  | DeleteUsedSofmapCrawlSettingRequiredKeywordResultError
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors =
+    DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
   code: String!
   message: String!
   details: [ErrorDetail!]!

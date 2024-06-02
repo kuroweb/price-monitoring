@@ -6,6 +6,7 @@ module Products
     JANPARA_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
     IOSYS_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
     PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
+    USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
 
     def self.call(...)
       new(...).call
@@ -16,14 +17,15 @@ module Products
       @params = params
     end
 
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       ApplicationRecord.transaction do
-        update_product!
-        update_yahoo_auction_crawl_setting!
-        update_mercari_crawl_setting!
-        update_janpara_crawl_setting!
-        update_iosys_crawl_setting!
-        update_pc_koubou_crawl_setting!
+        product.update!(product_params)
+        product.yahoo_auction_crawl_setting.update!(yahoo_auction_crawl_setting_params)
+        product.mercari_crawl_setting.update!(mercari_crawl_setting_params)
+        product.janpara_crawl_setting.update!(janpara_crawl_setting_params)
+        product.iosys_crawl_setting.update!(iosys_crawl_setting_params)
+        product.pc_koubou_crawl_setting.update!(pc_koubou_crawl_setting_params)
+        product.used_sofmap_crawl_setting.update!(used_sofmap_crawl_setting_params)
 
         product
       end
@@ -32,30 +34,6 @@ module Products
     private
 
     attr_reader :product, :params
-
-    def update_product!
-      product.update!(product_params)
-    end
-
-    def update_yahoo_auction_crawl_setting!
-      product.yahoo_auction_crawl_setting.update!(yahoo_auction_crawl_setting_params)
-    end
-
-    def update_mercari_crawl_setting!
-      product.mercari_crawl_setting.update!(mercari_crawl_setting_params)
-    end
-
-    def update_janpara_crawl_setting!
-      product.janpara_crawl_setting.update!(janpara_crawl_setting_params)
-    end
-
-    def update_iosys_crawl_setting!
-      product.iosys_crawl_setting.update!(iosys_crawl_setting_params)
-    end
-
-    def update_pc_koubou_crawl_setting!
-      product.pc_koubou_crawl_setting.update!(pc_koubou_crawl_setting_params)
-    end
 
     def product_params
       params.slice(*PRODUCT_ATTRIBUTES) || {}
@@ -79,6 +57,10 @@ module Products
 
     def pc_koubou_crawl_setting_params
       params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
+    end
+
+    def used_sofmap_crawl_setting_params
+      params[:used_sofmap_crawl_setting]&.slice(*USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES) || {}
     end
   end
 end

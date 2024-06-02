@@ -71,6 +71,11 @@ func (r *pcKoubouCrawlSettingResolver) PcKoubouCrawlSettingRequiredKeywords(ctx 
 	return r.ProductService.FindPcKoubouCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
 }
 
+// RelatedProducts is the resolver for the relatedProducts field.
+func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
+	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, page, per, sort, order)
+}
+
 // YahooAuctionProducts is the resolver for the yahooAuctionProducts field.
 func (r *productResolver) YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error) {
 	return r.ProductService.FindYahooAuctionProduct(ctx, nil, &obj.ID, nil, nil, nil, published, sort, order)
@@ -121,9 +126,24 @@ func (r *productResolver) PcKoubouCrawlSetting(ctx context.Context, obj *model.P
 	return r.ProductService.FindPcKoubouCrawlSetting(ctx, obj.ID)
 }
 
-// RelatedProducts is the resolver for the relatedProducts field.
-func (r *productResolver) RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error) {
-	return r.ProductService.FindRelatedProduct(ctx, &obj.ID, platformMask, page, per, sort, order)
+// UsedSofmapCrawlSetting is the resolver for the usedSofmapCrawlSetting field.
+func (r *productResolver) UsedSofmapCrawlSetting(ctx context.Context, obj *model.Product) (*model.UsedSofmapCrawlSetting, error) {
+	return r.ProductService.FindUsedSofmapCrawlSetting(ctx, obj.ID)
+}
+
+// UsedSofmapCrawlSettingExcludeKeywords is the resolver for the usedSofmapCrawlSettingExcludeKeywords field.
+func (r *usedSofmapCrawlSettingResolver) UsedSofmapCrawlSettingExcludeKeywords(ctx context.Context, obj *model.UsedSofmapCrawlSetting) ([]*model.UsedSofmapCrawlSettingExcludeKeyword, error) {
+	return r.ProductService.FindUsedSofmapCrawlSettingExcludeKeyword(ctx, obj.ProductID, obj.ID)
+}
+
+// UsedSofmapCrawlSettingExcludeProducts is the resolver for the usedSofmapCrawlSettingExcludeProducts field.
+func (r *usedSofmapCrawlSettingResolver) UsedSofmapCrawlSettingExcludeProducts(ctx context.Context, obj *model.UsedSofmapCrawlSetting) ([]*model.UsedSofmapCrawlSettingExcludeProduct, error) {
+	return r.ProductService.FindUsedSofmapCrawlSettingExcludeProduct(ctx, obj.ProductID, obj.ID)
+}
+
+// UsedSofmapCrawlSettingRequiredKeywords is the resolver for the usedSofmapCrawlSettingRequiredKeywords field.
+func (r *usedSofmapCrawlSettingResolver) UsedSofmapCrawlSettingRequiredKeywords(ctx context.Context, obj *model.UsedSofmapCrawlSetting) ([]*model.UsedSofmapCrawlSettingRequiredKeyword, error) {
+	return r.ProductService.FindUsedSofmapCrawlSettingRequiredKeyword(ctx, obj.ProductID, obj.ID)
 }
 
 // YahooAuctionCrawlSettingExcludeKeywords is the resolver for the yahooAuctionCrawlSettingExcludeKeywords field.
@@ -164,6 +184,11 @@ func (r *Resolver) PcKoubouCrawlSetting() internal.PcKoubouCrawlSettingResolver 
 // Product returns internal.ProductResolver implementation.
 func (r *Resolver) Product() internal.ProductResolver { return &productResolver{r} }
 
+// UsedSofmapCrawlSetting returns internal.UsedSofmapCrawlSettingResolver implementation.
+func (r *Resolver) UsedSofmapCrawlSetting() internal.UsedSofmapCrawlSettingResolver {
+	return &usedSofmapCrawlSettingResolver{r}
+}
+
 // YahooAuctionCrawlSetting returns internal.YahooAuctionCrawlSettingResolver implementation.
 func (r *Resolver) YahooAuctionCrawlSetting() internal.YahooAuctionCrawlSettingResolver {
 	return &yahooAuctionCrawlSettingResolver{r}
@@ -174,4 +199,5 @@ type janparaCrawlSettingResolver struct{ *Resolver }
 type mercariCrawlSettingResolver struct{ *Resolver }
 type pcKoubouCrawlSettingResolver struct{ *Resolver }
 type productResolver struct{ *Resolver }
+type usedSofmapCrawlSettingResolver struct{ *Resolver }
 type yahooAuctionCrawlSettingResolver struct{ *Resolver }

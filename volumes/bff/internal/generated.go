@@ -45,6 +45,7 @@ type ResolverRoot interface {
 	PcKoubouCrawlSetting() PcKoubouCrawlSettingResolver
 	Product() ProductResolver
 	Query() QueryResolver
+	UsedSofmapCrawlSetting() UsedSofmapCrawlSettingResolver
 	YahooAuctionCrawlSetting() YahooAuctionCrawlSettingResolver
 }
 
@@ -255,6 +256,54 @@ type ComplexityRoot struct {
 	}
 
 	CreateProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok                                   func(childComplexity int) int
+		UsedSofmapCrawlSettingExcludeKeyword func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingExcludeProductResultSuccess struct {
+		Ok                                   func(childComplexity int) int
+		UsedSofmapCrawlSettingExcludeProduct func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok                                    func(childComplexity int) int
+		UsedSofmapCrawlSettingRequiredKeyword func(childComplexity int) int
+	}
+
+	CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
@@ -503,6 +552,51 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	DeleteUsedSofmapCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok func(childComplexity int) int
+	}
+
+	DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	DeleteYahooAuctionCrawlSettingExcludeKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -705,6 +799,9 @@ type ComplexityRoot struct {
 		CreatePcKoubouCrawlSettingExcludeProduct      func(childComplexity int, input model.CreatePcKoubouCrawlSettingExcludeProductInput) int
 		CreatePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) int
 		CreateProduct                                 func(childComplexity int, input model.CreateProductInput) int
+		CreateUsedSofmapCrawlSettingExcludeKeyword    func(childComplexity int, input model.CreateUsedSofmapCrawlSettingExcludeKeywordInput) int
+		CreateUsedSofmapCrawlSettingExcludeProduct    func(childComplexity int, input model.CreateUsedSofmapCrawlSettingExcludeProductInput) int
+		CreateUsedSofmapCrawlSettingRequiredKeyword   func(childComplexity int, input model.CreateUsedSofmapCrawlSettingRequiredKeywordInput) int
 		CreateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeKeywordInput) int
 		CreateYahooAuctionCrawlSettingExcludeProduct  func(childComplexity int, input model.CreateYahooAuctionCrawlSettingExcludeProductInput) int
 		CreateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.CreateYahooAuctionCrawlSettingRequiredKeywordInput) int
@@ -721,6 +818,9 @@ type ComplexityRoot struct {
 		DeletePcKoubouCrawlSettingExcludeProduct      func(childComplexity int, id string, productID string) int
 		DeletePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, id string, productID string) int
 		DeleteProduct                                 func(childComplexity int, id string) int
+		DeleteUsedSofmapCrawlSettingExcludeKeyword    func(childComplexity int, id string, productID string) int
+		DeleteUsedSofmapCrawlSettingExcludeProduct    func(childComplexity int, id string, productID string) int
+		DeleteUsedSofmapCrawlSettingRequiredKeyword   func(childComplexity int, id string, productID string) int
 		DeleteYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, id string, productID string) int
 		DeleteYahooAuctionCrawlSettingExcludeProduct  func(childComplexity int, id string, productID string) int
 		DeleteYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, id string, productID string) int
@@ -737,6 +837,9 @@ type ComplexityRoot struct {
 		UpdatePcKoubouCrawlSettingExcludeProduct      func(childComplexity int, input model.UpdatePcKoubouCrawlSettingExcludeProductInput) int
 		UpdatePcKoubouCrawlSettingRequiredKeyword     func(childComplexity int, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) int
 		UpdateProduct                                 func(childComplexity int, id string, input model.UpdateProductInput) int
+		UpdateUsedSofmapCrawlSettingExcludeKeyword    func(childComplexity int, input model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput) int
+		UpdateUsedSofmapCrawlSettingExcludeProduct    func(childComplexity int, input model.UpdateUsedSofmapCrawlSettingExcludeProductInput) int
+		UpdateUsedSofmapCrawlSettingRequiredKeyword   func(childComplexity int, input model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput) int
 		UpdateYahooAuctionCrawlSettingExcludeKeyword  func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput) int
 		UpdateYahooAuctionCrawlSettingExcludeProduct  func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingExcludeProductInput) int
 		UpdateYahooAuctionCrawlSettingRequiredKeyword func(childComplexity int, input model.UpdateYahooAuctionCrawlSettingRequiredKeywordInput) int
@@ -790,6 +893,7 @@ type ComplexityRoot struct {
 		Name                                  func(childComplexity int) int
 		PcKoubouCrawlSetting                  func(childComplexity int) int
 		RelatedProducts                       func(childComplexity int, platformMask string, page *int, per *int, sort *string, order *string) int
+		UsedSofmapCrawlSetting                func(childComplexity int) int
 		YahooAuctionCrawlSetting              func(childComplexity int) int
 		YahooAuctionDailyPurchaseSummaries    func(childComplexity int) int
 		YahooAuctionProducts                  func(childComplexity int, published *bool, sort *string, order *string) int
@@ -1025,6 +1129,54 @@ type ComplexityRoot struct {
 		Message func(childComplexity int) int
 	}
 
+	UpdateUsedSofmapCrawlSettingExcludeKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess struct {
+		Ok                                   func(childComplexity int) int
+		UsedSofmapCrawlSettingExcludeKeyword func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingExcludeProductResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess struct {
+		Ok                                   func(childComplexity int) int
+		UsedSofmapCrawlSettingExcludeProduct func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingRequiredKeywordResultError struct {
+		Error func(childComplexity int) int
+		Ok    func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess struct {
+		Ok                                    func(childComplexity int) int
+		UsedSofmapCrawlSettingRequiredKeyword func(childComplexity int) int
+	}
+
+	UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed struct {
+		Code    func(childComplexity int) int
+		Details func(childComplexity int) int
+		Message func(childComplexity int) int
+	}
+
 	UpdateYahooAuctionCrawlSettingExcludeKeywordResultError struct {
 		Error func(childComplexity int) int
 		Ok    func(childComplexity int) int
@@ -1071,6 +1223,44 @@ type ComplexityRoot struct {
 		Code    func(childComplexity int) int
 		Details func(childComplexity int) int
 		Message func(childComplexity int) int
+	}
+
+	UsedSofmapCrawlSetting struct {
+		CreatedAt                              func(childComplexity int) int
+		Enabled                                func(childComplexity int) int
+		ID                                     func(childComplexity int) int
+		Keyword                                func(childComplexity int) int
+		MaxPrice                               func(childComplexity int) int
+		MinPrice                               func(childComplexity int) int
+		ProductID                              func(childComplexity int) int
+		UpdatedAt                              func(childComplexity int) int
+		UsedSofmapCrawlSettingExcludeKeywords  func(childComplexity int) int
+		UsedSofmapCrawlSettingExcludeProducts  func(childComplexity int) int
+		UsedSofmapCrawlSettingRequiredKeywords func(childComplexity int) int
+	}
+
+	UsedSofmapCrawlSettingExcludeKeyword struct {
+		CreatedAt                func(childComplexity int) int
+		ID                       func(childComplexity int) int
+		Keyword                  func(childComplexity int) int
+		UpdatedAt                func(childComplexity int) int
+		UsedSofmapCrawlSettingID func(childComplexity int) int
+	}
+
+	UsedSofmapCrawlSettingExcludeProduct struct {
+		CreatedAt                func(childComplexity int) int
+		ExternalID               func(childComplexity int) int
+		ID                       func(childComplexity int) int
+		UpdatedAt                func(childComplexity int) int
+		UsedSofmapCrawlSettingID func(childComplexity int) int
+	}
+
+	UsedSofmapCrawlSettingRequiredKeyword struct {
+		CreatedAt                func(childComplexity int) int
+		ID                       func(childComplexity int) int
+		Keyword                  func(childComplexity int) int
+		UpdatedAt                func(childComplexity int) int
+		UsedSofmapCrawlSettingID func(childComplexity int) int
 	}
 
 	YahooAuctionCrawlSetting struct {
@@ -1210,6 +1400,15 @@ type MutationResolver interface {
 	CreatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.CreatePcKoubouCrawlSettingRequiredKeywordInput) (model.CreatePcKoubouCrawlSettingRequiredKeywordResult, error)
 	UpdatePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdatePcKoubouCrawlSettingRequiredKeywordInput) (model.UpdatePcKoubouCrawlSettingRequiredKeywordResult, error)
 	DeletePcKoubouCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeletePcKoubouCrawlSettingRequiredKeywordResult, error)
+	CreateUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, input model.CreateUsedSofmapCrawlSettingExcludeKeywordInput) (model.CreateUsedSofmapCrawlSettingExcludeKeywordResult, error)
+	UpdateUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, input model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput) (model.UpdateUsedSofmapCrawlSettingExcludeKeywordResult, error)
+	DeleteUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, id string, productID string) (model.DeleteUsedSofmapCrawlSettingExcludeKeywordResult, error)
+	CreateUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, input model.CreateUsedSofmapCrawlSettingExcludeProductInput) (model.CreateUsedSofmapCrawlSettingExcludeProductResult, error)
+	UpdateUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, input model.UpdateUsedSofmapCrawlSettingExcludeProductInput) (model.UpdateUsedSofmapCrawlSettingExcludeProductResult, error)
+	DeleteUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, id string, productID string) (model.DeleteUsedSofmapCrawlSettingExcludeProductResult, error)
+	CreateUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, input model.CreateUsedSofmapCrawlSettingRequiredKeywordInput) (model.CreateUsedSofmapCrawlSettingRequiredKeywordResult, error)
+	UpdateUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, input model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput) (model.UpdateUsedSofmapCrawlSettingRequiredKeywordResult, error)
+	DeleteUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, id string, productID string) (model.DeleteUsedSofmapCrawlSettingRequiredKeywordResult, error)
 }
 type PcKoubouCrawlSettingResolver interface {
 	PcKoubouCrawlSettingExcludeKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingExcludeKeyword, error)
@@ -1217,6 +1416,7 @@ type PcKoubouCrawlSettingResolver interface {
 	PcKoubouCrawlSettingRequiredKeywords(ctx context.Context, obj *model.PcKoubouCrawlSetting) ([]*model.PcKoubouCrawlSettingRequiredKeyword, error)
 }
 type ProductResolver interface {
+	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
 	YahooAuctionProducts(ctx context.Context, obj *model.Product, published *bool, sort *string, order *string) ([]*model.YahooAuctionProduct, error)
 	YahooAuctionCrawlSetting(ctx context.Context, obj *model.Product) (*model.YahooAuctionCrawlSetting, error)
 	YahooAuctionDailyPurchaseSummaries(ctx context.Context, obj *model.Product) ([]*model.YahooAuctionDailyPurchaseSummary, error)
@@ -1227,12 +1427,17 @@ type ProductResolver interface {
 	JanparaCrawlSetting(ctx context.Context, obj *model.Product) (*model.JanparaCrawlSetting, error)
 	IosysCrawlSetting(ctx context.Context, obj *model.Product) (*model.IosysCrawlSetting, error)
 	PcKoubouCrawlSetting(ctx context.Context, obj *model.Product) (*model.PcKoubouCrawlSetting, error)
-	RelatedProducts(ctx context.Context, obj *model.Product, platformMask string, page *int, per *int, sort *string, order *string) ([]*model.RelatedProduct, error)
+	UsedSofmapCrawlSetting(ctx context.Context, obj *model.Product) (*model.UsedSofmapCrawlSetting, error)
 }
 type QueryResolver interface {
 	Product(ctx context.Context, id string) (*model.Product, error)
 	Products(ctx context.Context, id *string, name *string) ([]*model.Product, error)
 	Node(ctx context.Context, id string) (model.Node, error)
+}
+type UsedSofmapCrawlSettingResolver interface {
+	UsedSofmapCrawlSettingExcludeKeywords(ctx context.Context, obj *model.UsedSofmapCrawlSetting) ([]*model.UsedSofmapCrawlSettingExcludeKeyword, error)
+	UsedSofmapCrawlSettingExcludeProducts(ctx context.Context, obj *model.UsedSofmapCrawlSetting) ([]*model.UsedSofmapCrawlSettingExcludeProduct, error)
+	UsedSofmapCrawlSettingRequiredKeywords(ctx context.Context, obj *model.UsedSofmapCrawlSetting) ([]*model.UsedSofmapCrawlSettingRequiredKeyword, error)
 }
 type YahooAuctionCrawlSettingResolver interface {
 	YahooAuctionCrawlSettingExcludeKeywords(ctx context.Context, obj *model.YahooAuctionCrawlSetting) ([]*model.YahooAuctionCrawlSettingExcludeKeyword, error)
@@ -1895,6 +2100,153 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.CreateProductResultValidationFailed.Message(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.usedSofmapCrawlSettingExcludeKeyword":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.UsedSofmapCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.UsedSofmapCrawlSettingExcludeKeyword(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultError.error":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultSuccess.usedSofmapCrawlSettingExcludeProduct":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess.UsedSofmapCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess.UsedSofmapCrawlSettingExcludeProduct(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.usedSofmapCrawlSettingRequiredKeyword":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.UsedSofmapCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.UsedSofmapCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "CreateYahooAuctionCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.CreateYahooAuctionCrawlSettingExcludeKeywordResultError.Error == nil {
@@ -2588,6 +2940,132 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.DeleteProductResultValidationFailed.Message(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeProductResultError.error":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
 
 	case "DeleteYahooAuctionCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.DeleteYahooAuctionCrawlSettingExcludeKeywordResultError.Error == nil {
@@ -3557,6 +4035,42 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.CreateProduct(childComplexity, args["input"].(model.CreateProductInput)), true
 
+	case "Mutation.createUsedSofmapCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.CreateUsedSofmapCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createUsedSofmapCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateUsedSofmapCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.CreateUsedSofmapCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.createUsedSofmapCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.CreateUsedSofmapCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createUsedSofmapCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateUsedSofmapCrawlSettingExcludeProduct(childComplexity, args["input"].(model.CreateUsedSofmapCrawlSettingExcludeProductInput)), true
+
+	case "Mutation.createUsedSofmapCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.CreateUsedSofmapCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_createUsedSofmapCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.CreateUsedSofmapCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.CreateUsedSofmapCrawlSettingRequiredKeywordInput)), true
+
 	case "Mutation.createYahooAuctionCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.CreateYahooAuctionCrawlSettingExcludeKeyword == nil {
 			break
@@ -3749,6 +4263,42 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Mutation.DeleteProduct(childComplexity, args["id"].(string)), true
 
+	case "Mutation.deleteUsedSofmapCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.DeleteUsedSofmapCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteUsedSofmapCrawlSettingExcludeKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deleteUsedSofmapCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.DeleteUsedSofmapCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteUsedSofmapCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteUsedSofmapCrawlSettingExcludeProduct(childComplexity, args["id"].(string), args["productId"].(string)), true
+
+	case "Mutation.deleteUsedSofmapCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.DeleteUsedSofmapCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.DeleteUsedSofmapCrawlSettingRequiredKeyword(childComplexity, args["id"].(string), args["productId"].(string)), true
+
 	case "Mutation.deleteYahooAuctionCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.DeleteYahooAuctionCrawlSettingExcludeKeyword == nil {
 			break
@@ -3940,6 +4490,42 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Mutation.UpdateProduct(childComplexity, args["id"].(string), args["input"].(model.UpdateProductInput)), true
+
+	case "Mutation.updateUsedSofmapCrawlSettingExcludeKeyword":
+		if e.complexity.Mutation.UpdateUsedSofmapCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateUsedSofmapCrawlSettingExcludeKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateUsedSofmapCrawlSettingExcludeKeyword(childComplexity, args["input"].(model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput)), true
+
+	case "Mutation.updateUsedSofmapCrawlSettingExcludeProduct":
+		if e.complexity.Mutation.UpdateUsedSofmapCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateUsedSofmapCrawlSettingExcludeProduct_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateUsedSofmapCrawlSettingExcludeProduct(childComplexity, args["input"].(model.UpdateUsedSofmapCrawlSettingExcludeProductInput)), true
+
+	case "Mutation.updateUsedSofmapCrawlSettingRequiredKeyword":
+		if e.complexity.Mutation.UpdateUsedSofmapCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		args, err := ec.field_Mutation_updateUsedSofmapCrawlSettingRequiredKeyword_args(context.TODO(), rawArgs)
+		if err != nil {
+			return 0, false
+		}
+
+		return e.complexity.Mutation.UpdateUsedSofmapCrawlSettingRequiredKeyword(childComplexity, args["input"].(model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput)), true
 
 	case "Mutation.updateYahooAuctionCrawlSettingExcludeKeyword":
 		if e.complexity.Mutation.UpdateYahooAuctionCrawlSettingExcludeKeyword == nil {
@@ -4231,6 +4817,13 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Product.RelatedProducts(childComplexity, args["platformMask"].(string), args["page"].(*int), args["per"].(*int), args["sort"].(*string), args["order"].(*string)), true
+
+	case "Product.usedSofmapCrawlSetting":
+		if e.complexity.Product.UsedSofmapCrawlSetting == nil {
+			break
+		}
+
+		return e.complexity.Product.UsedSofmapCrawlSetting(childComplexity), true
 
 	case "Product.yahooAuctionCrawlSetting":
 		if e.complexity.Product.YahooAuctionCrawlSetting == nil {
@@ -5022,6 +5615,153 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.UpdateProductResultValidationFailed.Message(childComplexity), true
 
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultError.error":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError.Error(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultError.ok":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError.Ok(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.ok":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.usedSofmapCrawlSettingExcludeKeyword":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.UsedSofmapCrawlSettingExcludeKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess.UsedSofmapCrawlSettingExcludeKeyword(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.code":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.details":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.message":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultError.error":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultError.Error(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultError.ok":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultError.Ok(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess.ok":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess.Ok(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess.usedSofmapCrawlSettingExcludeProduct":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess.UsedSofmapCrawlSettingExcludeProduct == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess.UsedSofmapCrawlSettingExcludeProduct(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.code":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.details":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.message":
+		if e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed.Message(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultError.error":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError.Error == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError.Error(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultError.ok":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError.Ok(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.ok":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.Ok == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.Ok(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.usedSofmapCrawlSettingRequiredKeyword":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.UsedSofmapCrawlSettingRequiredKeyword == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess.UsedSofmapCrawlSettingRequiredKeyword(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.code":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Code == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Code(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.details":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Details == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Details(childComplexity), true
+
+	case "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.message":
+		if e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Message == nil {
+			break
+		}
+
+		return e.complexity.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
 	case "UpdateYahooAuctionCrawlSettingExcludeKeywordResultError.error":
 		if e.complexity.UpdateYahooAuctionCrawlSettingExcludeKeywordResultError.Error == nil {
 			break
@@ -5168,6 +5908,188 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed.Message(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.createdAt":
+		if e.complexity.UsedSofmapCrawlSetting.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.CreatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.enabled":
+		if e.complexity.UsedSofmapCrawlSetting.Enabled == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.Enabled(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.id":
+		if e.complexity.UsedSofmapCrawlSetting.ID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.ID(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.keyword":
+		if e.complexity.UsedSofmapCrawlSetting.Keyword == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.Keyword(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.maxPrice":
+		if e.complexity.UsedSofmapCrawlSetting.MaxPrice == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.MaxPrice(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.minPrice":
+		if e.complexity.UsedSofmapCrawlSetting.MinPrice == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.MinPrice(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.productId":
+		if e.complexity.UsedSofmapCrawlSetting.ProductID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.ProductID(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.updatedAt":
+		if e.complexity.UsedSofmapCrawlSetting.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.UpdatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords":
+		if e.complexity.UsedSofmapCrawlSetting.UsedSofmapCrawlSettingExcludeKeywords == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.UsedSofmapCrawlSettingExcludeKeywords(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeProducts":
+		if e.complexity.UsedSofmapCrawlSetting.UsedSofmapCrawlSettingExcludeProducts == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.UsedSofmapCrawlSettingExcludeProducts(childComplexity), true
+
+	case "UsedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords":
+		if e.complexity.UsedSofmapCrawlSetting.UsedSofmapCrawlSettingRequiredKeywords == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSetting.UsedSofmapCrawlSettingRequiredKeywords(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeKeyword.createdAt":
+		if e.complexity.UsedSofmapCrawlSettingExcludeKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeKeyword.CreatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeKeyword.id":
+		if e.complexity.UsedSofmapCrawlSettingExcludeKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeKeyword.ID(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeKeyword.keyword":
+		if e.complexity.UsedSofmapCrawlSettingExcludeKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeKeyword.Keyword(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeKeyword.updatedAt":
+		if e.complexity.UsedSofmapCrawlSettingExcludeKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeKeyword.UpdatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeKeyword.usedSofmapCrawlSettingId":
+		if e.complexity.UsedSofmapCrawlSettingExcludeKeyword.UsedSofmapCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeKeyword.UsedSofmapCrawlSettingID(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeProduct.createdAt":
+		if e.complexity.UsedSofmapCrawlSettingExcludeProduct.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeProduct.CreatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeProduct.externalId":
+		if e.complexity.UsedSofmapCrawlSettingExcludeProduct.ExternalID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeProduct.ExternalID(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeProduct.id":
+		if e.complexity.UsedSofmapCrawlSettingExcludeProduct.ID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeProduct.ID(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeProduct.updatedAt":
+		if e.complexity.UsedSofmapCrawlSettingExcludeProduct.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeProduct.UpdatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSettingExcludeProduct.usedSofmapCrawlSettingId":
+		if e.complexity.UsedSofmapCrawlSettingExcludeProduct.UsedSofmapCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingExcludeProduct.UsedSofmapCrawlSettingID(childComplexity), true
+
+	case "UsedSofmapCrawlSettingRequiredKeyword.createdAt":
+		if e.complexity.UsedSofmapCrawlSettingRequiredKeyword.CreatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingRequiredKeyword.CreatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSettingRequiredKeyword.id":
+		if e.complexity.UsedSofmapCrawlSettingRequiredKeyword.ID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingRequiredKeyword.ID(childComplexity), true
+
+	case "UsedSofmapCrawlSettingRequiredKeyword.keyword":
+		if e.complexity.UsedSofmapCrawlSettingRequiredKeyword.Keyword == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingRequiredKeyword.Keyword(childComplexity), true
+
+	case "UsedSofmapCrawlSettingRequiredKeyword.updatedAt":
+		if e.complexity.UsedSofmapCrawlSettingRequiredKeyword.UpdatedAt == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingRequiredKeyword.UpdatedAt(childComplexity), true
+
+	case "UsedSofmapCrawlSettingRequiredKeyword.usedSofmapCrawlSettingId":
+		if e.complexity.UsedSofmapCrawlSettingRequiredKeyword.UsedSofmapCrawlSettingID == nil {
+			break
+		}
+
+		return e.complexity.UsedSofmapCrawlSettingRequiredKeyword.UsedSofmapCrawlSettingID(childComplexity), true
 
 	case "YahooAuctionCrawlSetting.categoryId":
 		if e.complexity.YahooAuctionCrawlSetting.CategoryID == nil {
@@ -5551,6 +6473,10 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 		ec.unmarshalInputCreatePcKoubouCrawlSettingInput,
 		ec.unmarshalInputCreatePcKoubouCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateProductInput,
+		ec.unmarshalInputCreateUsedSofmapCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputCreateUsedSofmapCrawlSettingExcludeProductInput,
+		ec.unmarshalInputCreateUsedSofmapCrawlSettingInput,
+		ec.unmarshalInputCreateUsedSofmapCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeProductInput,
 		ec.unmarshalInputCreateYahooAuctionCrawlSettingInput,
@@ -5572,6 +6498,10 @@ func (e *executableSchema) Exec(ctx context.Context) graphql.ResponseHandler {
 		ec.unmarshalInputUpdatePcKoubouCrawlSettingInput,
 		ec.unmarshalInputUpdatePcKoubouCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateProductInput,
+		ec.unmarshalInputUpdateUsedSofmapCrawlSettingExcludeKeywordInput,
+		ec.unmarshalInputUpdateUsedSofmapCrawlSettingExcludeProductInput,
+		ec.unmarshalInputUpdateUsedSofmapCrawlSettingInput,
+		ec.unmarshalInputUpdateUsedSofmapCrawlSettingRequiredKeywordInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeKeywordInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeProductInput,
 		ec.unmarshalInputUpdateYahooAuctionCrawlSettingInput,
@@ -5831,6 +6761,36 @@ var sources = []*ast.Source{
     id: ID!
     productId: ID!
   ): DeletePcKoubouCrawlSettingRequiredKeywordResult!
+  createUsedSofmapCrawlSettingExcludeKeyword(
+    input: CreateUsedSofmapCrawlSettingExcludeKeywordInput!
+  ): CreateUsedSofmapCrawlSettingExcludeKeywordResult!
+  updateUsedSofmapCrawlSettingExcludeKeyword(
+    input: UpdateUsedSofmapCrawlSettingExcludeKeywordInput!
+  ): UpdateUsedSofmapCrawlSettingExcludeKeywordResult!
+  deleteUsedSofmapCrawlSettingExcludeKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteUsedSofmapCrawlSettingExcludeKeywordResult!
+  createUsedSofmapCrawlSettingExcludeProduct(
+    input: CreateUsedSofmapCrawlSettingExcludeProductInput!
+  ): CreateUsedSofmapCrawlSettingExcludeProductResult!
+  updateUsedSofmapCrawlSettingExcludeProduct(
+    input: UpdateUsedSofmapCrawlSettingExcludeProductInput!
+  ): UpdateUsedSofmapCrawlSettingExcludeProductResult!
+  deleteUsedSofmapCrawlSettingExcludeProduct(
+    id: ID!
+    productId: ID!
+  ): DeleteUsedSofmapCrawlSettingExcludeProductResult!
+  createUsedSofmapCrawlSettingRequiredKeyword(
+    input: CreateUsedSofmapCrawlSettingRequiredKeywordInput!
+  ): CreateUsedSofmapCrawlSettingRequiredKeywordResult!
+  updateUsedSofmapCrawlSettingRequiredKeyword(
+    input: UpdateUsedSofmapCrawlSettingRequiredKeywordInput!
+  ): UpdateUsedSofmapCrawlSettingRequiredKeywordResult!
+  deleteUsedSofmapCrawlSettingRequiredKeyword(
+    id: ID!
+    productId: ID!
+  ): DeleteUsedSofmapCrawlSettingRequiredKeywordResult!
 }
 
 ## common ##
@@ -5858,6 +6818,7 @@ input CreateProductInput {
   janpara_crawl_setting: CreateJanparaCrawlSettingInput!
   iosys_crawl_setting: CreateIosysCrawlSettingInput!
   pc_koubou_crawl_setting: CreatePcKoubouCrawlSettingInput!
+  used_sofmap_crawl_setting: CreateUsedSofmapCrawlSettingInput!
 }
 
 input CreateYahooAuctionCrawlSettingInput {
@@ -5889,7 +6850,15 @@ input CreateIosysCrawlSettingInput {
   max_price: Int!
   enabled: Boolean!
 }
+
 input CreatePcKoubouCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input CreateUsedSofmapCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -5927,6 +6896,7 @@ input UpdateProductInput {
   janpara_crawl_setting: UpdateJanparaCrawlSettingInput!
   iosys_crawl_setting: UpdateIosysCrawlSettingInput!
   pc_koubou_crawl_setting: UpdatePcKoubouCrawlSettingInput!
+  used_sofmap_crawl_setting: UpdateUsedSofmapCrawlSettingInput!
 }
 
 input UpdateYahooAuctionCrawlSettingInput {
@@ -5960,6 +6930,13 @@ input UpdateIosysCrawlSettingInput {
 }
 
 input UpdatePcKoubouCrawlSettingInput {
+  keyword: String!
+  min_price: Int!
+  max_price: Int!
+  enabled: Boolean!
+}
+
+input UpdateUsedSofmapCrawlSettingInput {
   keyword: String!
   min_price: Int!
   max_price: Int!
@@ -7285,10 +8262,272 @@ type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements 
   message: String!
   details: [ErrorDetail!]!
 }
+
+## CreateUsedSofmapCrawlSettingExcludeKeyword ##
+
+input CreateUsedSofmapCrawlSettingExcludeKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateUsedSofmapCrawlSettingExcludeKeywordResult =
+    CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess
+  | CreateUsedSofmapCrawlSettingExcludeKeywordResultError
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeKeyword: UsedSofmapCrawlSettingExcludeKeyword!
+}
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors!
+}
+
+union CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors =
+    CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateUsedSofmapCrawlSettingExcludeKeyword ##
+
+input UpdateUsedSofmapCrawlSettingExcludeKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeKeywordResult =
+    UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess
+  | UpdateUsedSofmapCrawlSettingExcludeKeywordResultError
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeKeyword: UsedSofmapCrawlSettingExcludeKeyword!
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors!
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors =
+    UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteUsedSofmapCrawlSettingExcludeKeyword ##
+
+union DeleteUsedSofmapCrawlSettingExcludeKeywordResult =
+    DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess
+  | DeleteUsedSofmapCrawlSettingExcludeKeywordResultError
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors!
+}
+
+union DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors =
+    DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateUsedSofmapCrawlSettingExcludeProduct ##
+
+input CreateUsedSofmapCrawlSettingExcludeProductInput {
+  productId: ID!
+  externalId: String!
+}
+
+union CreateUsedSofmapCrawlSettingExcludeProductResult =
+    CreateUsedSofmapCrawlSettingExcludeProductResultSuccess
+  | CreateUsedSofmapCrawlSettingExcludeProductResultError
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeProduct: UsedSofmapCrawlSettingExcludeProduct!
+}
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateUsedSofmapCrawlSettingExcludeProductResultErrors!
+}
+
+union CreateUsedSofmapCrawlSettingExcludeProductResultErrors =
+    CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateUsedSofmapCrawlSettingExcludeProduct ##
+
+input UpdateUsedSofmapCrawlSettingExcludeProductInput {
+  id: ID!
+  productId: ID!
+  externalId: String!
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeProductResult =
+    UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess
+  | UpdateUsedSofmapCrawlSettingExcludeProductResultError
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingExcludeProduct: UsedSofmapCrawlSettingExcludeProduct!
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateUsedSofmapCrawlSettingExcludeProductResultErrors!
+}
+
+union UpdateUsedSofmapCrawlSettingExcludeProductResultErrors =
+    UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteUsedSofmapCrawlSettingExcludeProduct ##
+
+union DeleteUsedSofmapCrawlSettingExcludeProductResult =
+    DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess
+  | DeleteUsedSofmapCrawlSettingExcludeProductResultError
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteUsedSofmapCrawlSettingExcludeProductResultErrors!
+}
+
+union DeleteUsedSofmapCrawlSettingExcludeProductResultErrors =
+    DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## CreateUsedSofmapCrawlSettingRequiredKeyword ##
+
+input CreateUsedSofmapCrawlSettingRequiredKeywordInput {
+  productId: ID!
+  keyword: String
+}
+
+union CreateUsedSofmapCrawlSettingRequiredKeywordResult =
+    CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess
+  | CreateUsedSofmapCrawlSettingRequiredKeywordResultError
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingRequiredKeyword: UsedSofmapCrawlSettingRequiredKeyword!
+}
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors!
+}
+
+union CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors =
+    CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## UpdateUsedSofmapCrawlSettingRequiredKeyword ##
+
+input UpdateUsedSofmapCrawlSettingRequiredKeywordInput {
+  id: ID!
+  productId: ID!
+  keyword: String
+}
+
+union UpdateUsedSofmapCrawlSettingRequiredKeywordResult =
+    UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess
+  | UpdateUsedSofmapCrawlSettingRequiredKeywordResultError
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+  usedSofmapCrawlSettingRequiredKeyword: UsedSofmapCrawlSettingRequiredKeyword!
+}
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors!
+}
+
+union UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors =
+    UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
+
+## DeleteUsedSofmapCrawlSettingRequiredKeyword ##
+
+union DeleteUsedSofmapCrawlSettingRequiredKeywordResult =
+    DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess
+  | DeleteUsedSofmapCrawlSettingRequiredKeywordResultError
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess implements ResultBase {
+  ok: Boolean!
+}
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultError implements ResultBase {
+  ok: Boolean!
+  error: DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors!
+}
+
+union DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors =
+    DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed implements UserError {
+  code: String!
+  message: String!
+  details: [ErrorDetail!]!
+}
 `, BuiltIn: false},
 	{Name: "../graph/product.graphqls", Input: `type Product implements Node {
   id: ID!
   name: String!
+  relatedProducts(
+    platformMask: String!
+    page: Int
+    per: Int
+    sort: String
+    order: String
+  ): [RelatedProduct!]!
   yahooAuctionProducts(
     published: Boolean
     sort: String
@@ -7307,13 +8546,22 @@ type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed implements 
   janparaCrawlSetting: JanparaCrawlSetting!
   iosysCrawlSetting: IosysCrawlSetting!
   pcKoubouCrawlSetting: PcKoubouCrawlSetting!
-  relatedProducts(
-    platformMask: String!
-    page: Int
-    per: Int
-    sort: String
-    order: String
-  ): [RelatedProduct!]!
+  usedSofmapCrawlSetting: UsedSofmapCrawlSetting!
+}
+
+type RelatedProduct {
+  platform: String!
+  productId: Int!
+  externalId: String!
+  name: String!
+  thumbnailUrl: String!
+  price: Int!
+  buyoutPrice: Int
+  published: Boolean!
+  boughtDate: String
+  endDate: String
+  createdAt: String!
+  updatedAt: String!
 }
 
 type YahooAuctionProduct implements Node {
@@ -7564,17 +8812,40 @@ type PcKoubouCrawlSettingRequiredKeyword implements Node {
   updatedAt: String!
 }
 
-type RelatedProduct {
-  platform: String!
+type UsedSofmapCrawlSetting implements Node {
+  id: ID!
   productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  usedSofmapCrawlSettingExcludeKeywords: [UsedSofmapCrawlSettingExcludeKeyword!]!
+  usedSofmapCrawlSettingExcludeProducts: [UsedSofmapCrawlSettingExcludeProduct!]!
+  usedSofmapCrawlSettingRequiredKeywords: [UsedSofmapCrawlSettingRequiredKeyword!]!
+}
+
+type UsedSofmapCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  usedSofmapCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type UsedSofmapCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  usedSofmapCrawlSettingId: Int!
   externalId: String!
-  name: String!
-  thumbnailUrl: String!
-  price: Int!
-  buyoutPrice: Int
-  published: Boolean!
-  boughtDate: String
-  endDate: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type UsedSofmapCrawlSettingRequiredKeyword implements Node {
+  id: ID!
+  usedSofmapCrawlSettingId: Int!
+  keyword: String
   createdAt: String!
   updatedAt: String!
 }
@@ -7779,6 +9050,51 @@ func (ec *executionContext) field_Mutation_createProduct_args(ctx context.Contex
 	if tmp, ok := rawArgs["input"]; ok {
 		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
 		arg0, err = ec.unmarshalNCreateProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createUsedSofmapCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateUsedSofmapCrawlSettingExcludeKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateUsedSofmapCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createUsedSofmapCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateUsedSofmapCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateUsedSofmapCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_createUsedSofmapCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.CreateUsedSofmapCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNCreateUsedSofmapCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingRequiredKeywordInput(ctx, tmp)
 		if err != nil {
 			return nil, err
 		}
@@ -8135,6 +9451,78 @@ func (ec *executionContext) field_Mutation_deleteProduct_args(ctx context.Contex
 	return args, nil
 }
 
+func (ec *executionContext) field_Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteUsedSofmapCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 string
+	if tmp, ok := rawArgs["id"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+		arg0, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["id"] = arg0
+	var arg1 string
+	if tmp, ok := rawArgs["productId"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+		arg1, err = ec.unmarshalNID2string(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["productId"] = arg1
+	return args, nil
+}
+
 func (ec *executionContext) field_Mutation_deleteYahooAuctionCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
 	var err error
 	args := map[string]interface{}{}
@@ -8408,6 +9796,51 @@ func (ec *executionContext) field_Mutation_updateProduct_args(ctx context.Contex
 		}
 	}
 	args["input"] = arg1
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateUsedSofmapCrawlSettingExcludeKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateUsedSofmapCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateUsedSofmapCrawlSettingExcludeProduct_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateUsedSofmapCrawlSettingExcludeProductInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateUsedSofmapCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeProductInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
+	return args, nil
+}
+
+func (ec *executionContext) field_Mutation_updateUsedSofmapCrawlSettingRequiredKeyword_args(ctx context.Context, rawArgs map[string]interface{}) (map[string]interface{}, error) {
+	var err error
+	args := map[string]interface{}{}
+	var arg0 model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput
+	if tmp, ok := rawArgs["input"]; ok {
+		ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("input"))
+		arg0, err = ec.unmarshalNUpdateUsedSofmapCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingRequiredKeywordInput(ctx, tmp)
+		if err != nil {
+			return nil, err
+		}
+	}
+	args["input"] = arg0
 	return args, nil
 }
 
@@ -12767,6 +14200,8 @@ func (ec *executionContext) fieldContext_CreateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Product_name(ctx, field)
+			case "relatedProducts":
+				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			case "yahooAuctionProducts":
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
@@ -12787,8 +14222,8 @@ func (ec *executionContext) fieldContext_CreateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "pcKoubouCrawlSetting":
 				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
-			case "relatedProducts":
-				return ec.fieldContext_Product_relatedProducts(ctx, field)
+			case "usedSofmapCrawlSetting":
+				return ec.fieldContext_Product_usedSofmapCrawlSetting(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -12918,6 +14353,984 @@ func (ec *executionContext) _CreateProductResultValidationFailed_details(ctx con
 func (ec *executionContext) fieldContext_CreateProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "CreateProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateUsedSofmapCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingExcludeKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.UsedSofmapCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateUsedSofmapCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateUsedSofmapCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateUsedSofmapCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.UsedSofmapCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNCreateUsedSofmapCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.UsedSofmapCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -17406,6 +19819,816 @@ func (ec *executionContext) _DeleteProductResultValidationFailed_details(ctx con
 func (ec *executionContext) fieldContext_DeleteProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "DeleteProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteUsedSofmapCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteUsedSofmapCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteUsedSofmapCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNDeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -25265,6 +28488,501 @@ func (ec *executionContext) fieldContext_Mutation_deletePcKoubouCrawlSettingRequ
 	return fc, nil
 }
 
+func (ec *executionContext) _Mutation_createUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createUsedSofmapCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateUsedSofmapCrawlSettingExcludeKeyword(rctx, fc.Args["input"].(model.CreateUsedSofmapCrawlSettingExcludeKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateUsedSofmapCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreateUsedSofmapCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateUsedSofmapCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createUsedSofmapCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateUsedSofmapCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateUsedSofmapCrawlSettingExcludeKeyword(rctx, fc.Args["input"].(model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateUsedSofmapCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdateUsedSofmapCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateUsedSofmapCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateUsedSofmapCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteUsedSofmapCrawlSettingExcludeKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteUsedSofmapCrawlSettingExcludeKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeleteUsedSofmapCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteUsedSofmapCrawlSettingExcludeKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createUsedSofmapCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateUsedSofmapCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.CreateUsedSofmapCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateUsedSofmapCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNCreateUsedSofmapCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateUsedSofmapCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createUsedSofmapCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateUsedSofmapCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateUsedSofmapCrawlSettingExcludeProduct(rctx, fc.Args["input"].(model.UpdateUsedSofmapCrawlSettingExcludeProductInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateUsedSofmapCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNUpdateUsedSofmapCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateUsedSofmapCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateUsedSofmapCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteUsedSofmapCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteUsedSofmapCrawlSettingExcludeProduct(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteUsedSofmapCrawlSettingExcludeProductResult)
+	fc.Result = res
+	return ec.marshalNDeleteUsedSofmapCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeProductResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteUsedSofmapCrawlSettingExcludeProductResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteUsedSofmapCrawlSettingExcludeProduct_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_createUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_createUsedSofmapCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().CreateUsedSofmapCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.CreateUsedSofmapCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.CreateUsedSofmapCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNCreateUsedSofmapCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_createUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type CreateUsedSofmapCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_createUsedSofmapCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_updateUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_updateUsedSofmapCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().UpdateUsedSofmapCrawlSettingRequiredKeyword(rctx, fc.Args["input"].(model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateUsedSofmapCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNUpdateUsedSofmapCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_updateUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateUsedSofmapCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_updateUsedSofmapCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Mutation().DeleteUsedSofmapCrawlSettingRequiredKeyword(rctx, fc.Args["id"].(string), fc.Args["productId"].(string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.DeleteUsedSofmapCrawlSettingRequiredKeywordResult)
+	fc.Result = res
+	return ec.marshalNDeleteUsedSofmapCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingRequiredKeywordResult(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Mutation",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type DeleteUsedSofmapCrawlSettingRequiredKeywordResult does not have child fields")
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _PcKoubouCrawlSetting_id(ctx context.Context, field graphql.CollectedField, obj *model.PcKoubouCrawlSetting) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_PcKoubouCrawlSetting_id(ctx, field)
 	if err != nil {
@@ -26527,6 +30245,87 @@ func (ec *executionContext) fieldContext_Product_name(ctx context.Context, field
 	return fc, nil
 }
 
+func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_relatedProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.Product().RelatedProducts(rctx, obj, fc.Args["platformMask"].(string), fc.Args["page"].(*int), fc.Args["per"].(*int), fc.Args["sort"].(*string), fc.Args["order"].(*string))
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.RelatedProduct)
+	fc.Result = res
+	return ec.marshalNRelatedProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐRelatedProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_Product_relatedProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "Product",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "platform":
+				return ec.fieldContext_RelatedProduct_platform(ctx, field)
+			case "productId":
+				return ec.fieldContext_RelatedProduct_productId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_RelatedProduct_externalId(ctx, field)
+			case "name":
+				return ec.fieldContext_RelatedProduct_name(ctx, field)
+			case "thumbnailUrl":
+				return ec.fieldContext_RelatedProduct_thumbnailUrl(ctx, field)
+			case "price":
+				return ec.fieldContext_RelatedProduct_price(ctx, field)
+			case "buyoutPrice":
+				return ec.fieldContext_RelatedProduct_buyoutPrice(ctx, field)
+			case "published":
+				return ec.fieldContext_RelatedProduct_published(ctx, field)
+			case "boughtDate":
+				return ec.fieldContext_RelatedProduct_boughtDate(ctx, field)
+			case "endDate":
+				return ec.fieldContext_RelatedProduct_endDate(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_RelatedProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_RelatedProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type RelatedProduct", field.Name)
+		},
+	}
+	defer func() {
+		if r := recover(); r != nil {
+			err = ec.Recover(ctx, r)
+			ec.Error(ctx, err)
+		}
+	}()
+	ctx = graphql.WithFieldContext(ctx, fc)
+	if fc.Args, err = ec.field_Product_relatedProducts_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
+		ec.Error(ctx, err)
+		return fc, err
+	}
+	return fc, nil
+}
+
 func (ec *executionContext) _Product_yahooAuctionProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
 	fc, err := ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 	if err != nil {
@@ -27205,8 +31004,8 @@ func (ec *executionContext) fieldContext_Product_pcKoubouCrawlSetting(ctx contex
 	return fc, nil
 }
 
-func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Product_relatedProducts(ctx, field)
+func (ec *executionContext) _Product_usedSofmapCrawlSetting(ctx context.Context, field graphql.CollectedField, obj *model.Product) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Product_usedSofmapCrawlSetting(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -27219,7 +31018,7 @@ func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field 
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return ec.resolvers.Product().RelatedProducts(rctx, obj, fc.Args["platformMask"].(string), fc.Args["page"].(*int), fc.Args["per"].(*int), fc.Args["sort"].(*string), fc.Args["order"].(*string))
+		return ec.resolvers.Product().UsedSofmapCrawlSetting(rctx, obj)
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -27231,12 +31030,12 @@ func (ec *executionContext) _Product_relatedProducts(ctx context.Context, field 
 		}
 		return graphql.Null
 	}
-	res := resTmp.([]*model.RelatedProduct)
+	res := resTmp.(*model.UsedSofmapCrawlSetting)
 	fc.Result = res
-	return ec.marshalNRelatedProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐRelatedProductᚄ(ctx, field.Selections, res)
+	return ec.marshalNUsedSofmapCrawlSetting2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSetting(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Product_relatedProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Product_usedSofmapCrawlSetting(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Product",
 		Field:      field,
@@ -27244,44 +31043,31 @@ func (ec *executionContext) fieldContext_Product_relatedProducts(ctx context.Con
 		IsResolver: true,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "platform":
-				return ec.fieldContext_RelatedProduct_platform(ctx, field)
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSetting_id(ctx, field)
 			case "productId":
-				return ec.fieldContext_RelatedProduct_productId(ctx, field)
-			case "externalId":
-				return ec.fieldContext_RelatedProduct_externalId(ctx, field)
-			case "name":
-				return ec.fieldContext_RelatedProduct_name(ctx, field)
-			case "thumbnailUrl":
-				return ec.fieldContext_RelatedProduct_thumbnailUrl(ctx, field)
-			case "price":
-				return ec.fieldContext_RelatedProduct_price(ctx, field)
-			case "buyoutPrice":
-				return ec.fieldContext_RelatedProduct_buyoutPrice(ctx, field)
-			case "published":
-				return ec.fieldContext_RelatedProduct_published(ctx, field)
-			case "boughtDate":
-				return ec.fieldContext_RelatedProduct_boughtDate(ctx, field)
-			case "endDate":
-				return ec.fieldContext_RelatedProduct_endDate(ctx, field)
+				return ec.fieldContext_UsedSofmapCrawlSetting_productId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSetting_keyword(ctx, field)
+			case "minPrice":
+				return ec.fieldContext_UsedSofmapCrawlSetting_minPrice(ctx, field)
+			case "maxPrice":
+				return ec.fieldContext_UsedSofmapCrawlSetting_maxPrice(ctx, field)
+			case "enabled":
+				return ec.fieldContext_UsedSofmapCrawlSetting_enabled(ctx, field)
 			case "createdAt":
-				return ec.fieldContext_RelatedProduct_createdAt(ctx, field)
+				return ec.fieldContext_UsedSofmapCrawlSetting_createdAt(ctx, field)
 			case "updatedAt":
-				return ec.fieldContext_RelatedProduct_updatedAt(ctx, field)
+				return ec.fieldContext_UsedSofmapCrawlSetting_updatedAt(ctx, field)
+			case "usedSofmapCrawlSettingExcludeKeywords":
+				return ec.fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeKeywords(ctx, field)
+			case "usedSofmapCrawlSettingExcludeProducts":
+				return ec.fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeProducts(ctx, field)
+			case "usedSofmapCrawlSettingRequiredKeywords":
+				return ec.fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingRequiredKeywords(ctx, field)
 			}
-			return nil, fmt.Errorf("no field named %q was found under type RelatedProduct", field.Name)
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSetting", field.Name)
 		},
-	}
-	defer func() {
-		if r := recover(); r != nil {
-			err = ec.Recover(ctx, r)
-			ec.Error(ctx, err)
-		}
-	}()
-	ctx = graphql.WithFieldContext(ctx, fc)
-	if fc.Args, err = ec.field_Product_relatedProducts_args(ctx, field.ArgumentMap(ec.Variables)); err != nil {
-		ec.Error(ctx, err)
-		return fc, err
 	}
 	return fc, nil
 }
@@ -27329,6 +31115,8 @@ func (ec *executionContext) fieldContext_Query_product(ctx context.Context, fiel
 				return ec.fieldContext_Product_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Product_name(ctx, field)
+			case "relatedProducts":
+				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			case "yahooAuctionProducts":
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
@@ -27349,8 +31137,8 @@ func (ec *executionContext) fieldContext_Query_product(ctx context.Context, fiel
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "pcKoubouCrawlSetting":
 				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
-			case "relatedProducts":
-				return ec.fieldContext_Product_relatedProducts(ctx, field)
+			case "usedSofmapCrawlSetting":
+				return ec.fieldContext_Product_usedSofmapCrawlSetting(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -27412,6 +31200,8 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 				return ec.fieldContext_Product_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Product_name(ctx, field)
+			case "relatedProducts":
+				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			case "yahooAuctionProducts":
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
@@ -27432,8 +31222,8 @@ func (ec *executionContext) fieldContext_Query_products(ctx context.Context, fie
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "pcKoubouCrawlSetting":
 				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
-			case "relatedProducts":
-				return ec.fieldContext_Product_relatedProducts(ctx, field)
+			case "usedSofmapCrawlSetting":
+				return ec.fieldContext_Product_usedSofmapCrawlSetting(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -32239,6 +36029,8 @@ func (ec *executionContext) fieldContext_UpdateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_id(ctx, field)
 			case "name":
 				return ec.fieldContext_Product_name(ctx, field)
+			case "relatedProducts":
+				return ec.fieldContext_Product_relatedProducts(ctx, field)
 			case "yahooAuctionProducts":
 				return ec.fieldContext_Product_yahooAuctionProducts(ctx, field)
 			case "yahooAuctionCrawlSetting":
@@ -32259,8 +36051,8 @@ func (ec *executionContext) fieldContext_UpdateProductResultSuccess_product(ctx 
 				return ec.fieldContext_Product_iosysCrawlSetting(ctx, field)
 			case "pcKoubouCrawlSetting":
 				return ec.fieldContext_Product_pcKoubouCrawlSetting(ctx, field)
-			case "relatedProducts":
-				return ec.fieldContext_Product_relatedProducts(ctx, field)
+			case "usedSofmapCrawlSetting":
+				return ec.fieldContext_Product_usedSofmapCrawlSetting(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type Product", field.Name)
 		},
@@ -32390,6 +36182,984 @@ func (ec *executionContext) _UpdateProductResultValidationFailed_details(ctx con
 func (ec *executionContext) fieldContext_UpdateProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "UpdateProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingExcludeKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.UsedSofmapCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateUsedSofmapCrawlSettingExcludeProductResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateUsedSofmapCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateUsedSofmapCrawlSettingExcludeProductResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingExcludeProduct, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.UsedSofmapCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeProduct(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "field":
+				return ec.fieldContext_ErrorDetail_field(ctx, field)
+			case "message":
+				return ec.fieldContext_ErrorDetail_message(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Error, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors)
+	fc.Result = res
+	return ec.marshalNUpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultError",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Ok, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingRequiredKeyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(*model.UsedSofmapCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingRequiredKeyword(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Code, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Message, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Details, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.ErrorDetail)
+	fc.Result = res
+	return ec.marshalNErrorDetail2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐErrorDetailᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
 		Field:      field,
 		IsMethod:   false,
 		IsResolver: false,
@@ -33379,6 +38149,1180 @@ func (ec *executionContext) fieldContext_UpdateYahooAuctionCrawlSettingRequiredK
 				return ec.fieldContext_ErrorDetail_message(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type ErrorDetail", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_id(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_productId(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_productId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ProductID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_productId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_keyword(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_minPrice(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_minPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MinPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_minPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_maxPrice(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_maxPrice(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.MaxPrice, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_maxPrice(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_enabled(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Enabled, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(bool)
+	fc.Result = res
+	return ec.marshalNBoolean2bool(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_enabled(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Boolean does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeKeywords(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.UsedSofmapCrawlSetting().UsedSofmapCrawlSettingExcludeKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.UsedSofmapCrawlSettingExcludeKeyword)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingExcludeKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingExcludeKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeProducts(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.UsedSofmapCrawlSetting().UsedSofmapCrawlSettingExcludeProducts(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.UsedSofmapCrawlSettingExcludeProduct)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeProductᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeProducts(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx, field)
+			case "externalId":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_externalId(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingExcludeProduct", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting_usedSofmapCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSetting) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingRequiredKeywords(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return ec.resolvers.UsedSofmapCrawlSetting().UsedSofmapCrawlSettingRequiredKeywords(rctx, obj)
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.([]*model.UsedSofmapCrawlSettingRequiredKeyword)
+	fc.Result = res
+	return ec.marshalNUsedSofmapCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingRequiredKeywordᚄ(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSetting_usedSofmapCrawlSettingRequiredKeywords(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSetting",
+		Field:      field,
+		IsMethod:   true,
+		IsResolver: true,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "id":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_id(ctx, field)
+			case "usedSofmapCrawlSettingId":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx, field)
+			case "keyword":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx, field)
+			case "createdAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx, field)
+			case "updatedAt":
+				return ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type UsedSofmapCrawlSettingRequiredKeyword", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeProduct_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_externalId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ExternalID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeProduct_externalId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingExcludeProduct) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingExcludeProduct",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_id(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.ID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNID2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingRequiredKeyword_id(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type ID does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UsedSofmapCrawlSettingID, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(int)
+	fc.Result = res
+	return ec.marshalNInt2int(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type Int does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Keyword, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.CreatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField, obj *model.UsedSofmapCrawlSettingRequiredKeyword) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.UpdatedAt, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		if !graphql.HasFieldError(ctx, fc) {
+			ec.Errorf(ctx, "must not be null")
+		}
+		return graphql.Null
+	}
+	res := resTmp.(string)
+	fc.Result = res
+	return ec.marshalNString2string(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "UsedSofmapCrawlSettingRequiredKeyword",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -38115,7 +44059,7 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting", "pc_koubou_crawl_setting"}
+	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting", "pc_koubou_crawl_setting", "used_sofmap_crawl_setting"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -38176,6 +44120,185 @@ func (ec *executionContext) unmarshalInputCreateProductInput(ctx context.Context
 				return it, err
 			}
 			it.PcKoubouCrawlSetting = data
+		case "used_sofmap_crawl_setting":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("used_sofmap_crawl_setting"))
+			data, err := ec.unmarshalNCreateUsedSofmapCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingInput(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.UsedSofmapCrawlSetting = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateUsedSofmapCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.CreateUsedSofmapCrawlSettingExcludeKeywordInput, error) {
+	var it model.CreateUsedSofmapCrawlSettingExcludeKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateUsedSofmapCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.CreateUsedSofmapCrawlSettingExcludeProductInput, error) {
+	var it model.CreateUsedSofmapCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateUsedSofmapCrawlSettingInput(ctx context.Context, obj interface{}) (model.CreateUsedSofmapCrawlSettingInput, error) {
+	var it model.CreateUsedSofmapCrawlSettingInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "min_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MinPrice = data
+		case "max_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MaxPrice = data
+		case "enabled":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputCreateUsedSofmapCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.CreateUsedSofmapCrawlSettingRequiredKeywordInput, error) {
+	var it model.CreateUsedSofmapCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
 		}
 	}
 
@@ -39165,7 +45288,7 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 		asMap[k] = v
 	}
 
-	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting", "pc_koubou_crawl_setting"}
+	fieldsInOrder := [...]string{"name", "yahoo_auction_crawl_setting", "mercari_crawl_setting", "janpara_crawl_setting", "iosys_crawl_setting", "pc_koubou_crawl_setting", "used_sofmap_crawl_setting"}
 	for _, k := range fieldsInOrder {
 		v, ok := asMap[k]
 		if !ok {
@@ -39226,6 +45349,212 @@ func (ec *executionContext) unmarshalInputUpdateProductInput(ctx context.Context
 				return it, err
 			}
 			it.PcKoubouCrawlSetting = data
+		case "used_sofmap_crawl_setting":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("used_sofmap_crawl_setting"))
+			data, err := ec.unmarshalNUpdateUsedSofmapCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingInput(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.UsedSofmapCrawlSetting = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateUsedSofmapCrawlSettingExcludeKeywordInput(ctx context.Context, obj interface{}) (model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput, error) {
+	var it model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateUsedSofmapCrawlSettingExcludeProductInput(ctx context.Context, obj interface{}) (model.UpdateUsedSofmapCrawlSettingExcludeProductInput, error) {
+	var it model.UpdateUsedSofmapCrawlSettingExcludeProductInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "externalId"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "externalId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("externalId"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ExternalID = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateUsedSofmapCrawlSettingInput(ctx context.Context, obj interface{}) (model.UpdateUsedSofmapCrawlSettingInput, error) {
+	var it model.UpdateUsedSofmapCrawlSettingInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"keyword", "min_price", "max_price", "enabled"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalNString2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
+		case "min_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("min_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MinPrice = data
+		case "max_price":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("max_price"))
+			data, err := ec.unmarshalNInt2int(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.MaxPrice = data
+		case "enabled":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("enabled"))
+			data, err := ec.unmarshalNBoolean2bool(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Enabled = data
+		}
+	}
+
+	return it, nil
+}
+
+func (ec *executionContext) unmarshalInputUpdateUsedSofmapCrawlSettingRequiredKeywordInput(ctx context.Context, obj interface{}) (model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput, error) {
+	var it model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput
+	asMap := map[string]interface{}{}
+	for k, v := range obj.(map[string]interface{}) {
+		asMap[k] = v
+	}
+
+	fieldsInOrder := [...]string{"id", "productId", "keyword"}
+	for _, k := range fieldsInOrder {
+		v, ok := asMap[k]
+		if !ok {
+			continue
+		}
+		switch k {
+		case "id":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("id"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ID = data
+		case "productId":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("productId"))
+			data, err := ec.unmarshalNID2string(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.ProductID = data
+		case "keyword":
+			var err error
+
+			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("keyword"))
+			data, err := ec.unmarshalOString2ᚖstring(ctx, v)
+			if err != nil {
+				return it, err
+			}
+			it.Keyword = data
 		}
 	}
 
@@ -39949,6 +46278,123 @@ func (ec *executionContext) _CreateProductResultErrors(ctx context.Context, sel 
 	}
 }
 
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateUsedSofmapCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateUsedSofmapCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeProductResultError:
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateUsedSofmapCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateUsedSofmapCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _CreateYahooAuctionCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.CreateYahooAuctionCrawlSettingExcludeKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -40573,6 +47019,123 @@ func (ec *executionContext) _DeleteProductResultErrors(ctx context.Context, sel 
 	}
 }
 
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteUsedSofmapCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteUsedSofmapCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeProductResultError:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteUsedSofmapCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteUsedSofmapCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -40876,6 +47439,34 @@ func (ec *executionContext) _Node(ctx context.Context, sel ast.SelectionSet, obj
 			return graphql.Null
 		}
 		return ec._PcKoubouCrawlSettingRequiredKeyword(ctx, sel, obj)
+	case model.UsedSofmapCrawlSetting:
+		return ec._UsedSofmapCrawlSetting(ctx, sel, &obj)
+	case *model.UsedSofmapCrawlSetting:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UsedSofmapCrawlSetting(ctx, sel, obj)
+	case model.UsedSofmapCrawlSettingExcludeKeyword:
+		return ec._UsedSofmapCrawlSettingExcludeKeyword(ctx, sel, &obj)
+	case *model.UsedSofmapCrawlSettingExcludeKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UsedSofmapCrawlSettingExcludeKeyword(ctx, sel, obj)
+	case model.UsedSofmapCrawlSettingExcludeProduct:
+		return ec._UsedSofmapCrawlSettingExcludeProduct(ctx, sel, &obj)
+	case *model.UsedSofmapCrawlSettingExcludeProduct:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UsedSofmapCrawlSettingExcludeProduct(ctx, sel, obj)
+	case model.UsedSofmapCrawlSettingRequiredKeyword:
+		return ec._UsedSofmapCrawlSettingRequiredKeyword(ctx, sel, &obj)
+	case *model.UsedSofmapCrawlSettingRequiredKeyword:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UsedSofmapCrawlSettingRequiredKeyword(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -41557,6 +48148,132 @@ func (ec *executionContext) _ResultBase(ctx context.Context, sel ast.SelectionSe
 			return graphql.Null
 		}
 		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeProductResultError:
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeProductResultError:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeProductResultError:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError:
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -42069,6 +48786,123 @@ func (ec *executionContext) _UpdateProductResultErrors(ctx context.Context, sel 
 	}
 }
 
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateUsedSofmapCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateUsedSofmapCrawlSettingExcludeProductResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeProductResultError:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeProductResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateUsedSofmapCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateUsedSofmapCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, obj model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	switch obj := (obj).(type) {
+	case nil:
+		return graphql.Null
+	case model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	default:
+		panic(fmt.Errorf("unexpected type %T", obj))
+	}
+}
+
 func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, obj model.UpdateYahooAuctionCrawlSettingExcludeKeywordResult) graphql.Marshaler {
 	switch obj := (obj).(type) {
 	case nil:
@@ -42526,6 +49360,69 @@ func (ec *executionContext) _UserError(ctx context.Context, sel ast.SelectionSet
 			return graphql.Null
 		}
 		return ec._DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx, sel, obj)
+	case model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
+	case model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, &obj)
+	case *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed:
+		if obj == nil {
+			return graphql.Null
+		}
+		return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx, sel, obj)
 	default:
 		panic(fmt.Errorf("unexpected type %T", obj))
 	}
@@ -44290,6 +51187,417 @@ func (ec *executionContext) _CreateProductResultValidationFailed(ctx context.Con
 			}
 		case "details":
 			out.Values[i] = ec._CreateProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingExcludeKeywordResultErrorImplementors = []string{"CreateUsedSofmapCrawlSettingExcludeKeywordResultError", "CreateUsedSofmapCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess", "CreateUsedSofmapCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingExcludeKeyword":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed", "CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingExcludeProductResultErrorImplementors = []string{"CreateUsedSofmapCrawlSettingExcludeProductResultError", "CreateUsedSofmapCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingExcludeProductResultSuccessImplementors = []string{"CreateUsedSofmapCrawlSettingExcludeProductResultSuccess", "CreateUsedSofmapCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingExcludeProduct":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed", "CreateUsedSofmapCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingRequiredKeywordResultErrorImplementors = []string{"CreateUsedSofmapCrawlSettingRequiredKeywordResultError", "CreateUsedSofmapCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess", "CreateUsedSofmapCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var createUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed", "CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, createUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -46443,6 +53751,402 @@ func (ec *executionContext) _DeleteProductResultValidationFailed(ctx context.Con
 	return out
 }
 
+var deleteUsedSofmapCrawlSettingExcludeKeywordResultErrorImplementors = []string{"DeleteUsedSofmapCrawlSettingExcludeKeywordResultError", "DeleteUsedSofmapCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess", "DeleteUsedSofmapCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed", "DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingExcludeProductResultErrorImplementors = []string{"DeleteUsedSofmapCrawlSettingExcludeProductResultError", "DeleteUsedSofmapCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingExcludeProductResultSuccessImplementors = []string{"DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess", "DeleteUsedSofmapCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed", "DeleteUsedSofmapCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingRequiredKeywordResultErrorImplementors = []string{"DeleteUsedSofmapCrawlSettingRequiredKeywordResultError", "DeleteUsedSofmapCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess", "DeleteUsedSofmapCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var deleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed", "DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, deleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var deleteYahooAuctionCrawlSettingExcludeKeywordResultErrorImplementors = []string{"DeleteYahooAuctionCrawlSettingExcludeKeywordResultError", "DeleteYahooAuctionCrawlSettingExcludeKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _DeleteYahooAuctionCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.DeleteYahooAuctionCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
@@ -48446,6 +56150,69 @@ func (ec *executionContext) _Mutation(ctx context.Context, sel ast.SelectionSet)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
+		case "createUsedSofmapCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createUsedSofmapCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateUsedSofmapCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateUsedSofmapCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteUsedSofmapCrawlSettingExcludeKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteUsedSofmapCrawlSettingExcludeKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createUsedSofmapCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createUsedSofmapCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateUsedSofmapCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateUsedSofmapCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteUsedSofmapCrawlSettingExcludeProduct":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteUsedSofmapCrawlSettingExcludeProduct(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createUsedSofmapCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_createUsedSofmapCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updateUsedSofmapCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_updateUsedSofmapCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "deleteUsedSofmapCrawlSettingRequiredKeyword":
+			out.Values[i] = ec.OperationContext.RootResolverMiddleware(innerCtx, func(ctx context.Context) (res graphql.Marshaler) {
+				return ec._Mutation_deleteUsedSofmapCrawlSettingRequiredKeyword(ctx, field)
+			})
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
 		default:
 			panic("unknown field " + strconv.Quote(field.Name))
 		}
@@ -48843,6 +56610,42 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 			if out.Values[i] == graphql.Null {
 				atomic.AddUint32(&out.Invalids, 1)
 			}
+		case "relatedProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._Product_relatedProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
 		case "yahooAuctionProducts":
 			field := field
 
@@ -49203,7 +57006,7 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 			}
 
 			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
-		case "relatedProducts":
+		case "usedSofmapCrawlSetting":
 			field := field
 
 			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
@@ -49212,7 +57015,7 @@ func (ec *executionContext) _Product(ctx context.Context, sel ast.SelectionSet, 
 						ec.Error(ctx, ec.Recover(ctx, r))
 					}
 				}()
-				res = ec._Product_relatedProducts(ctx, field, obj)
+				res = ec._Product_usedSofmapCrawlSetting(ctx, field, obj)
 				if res == graphql.Null {
 					atomic.AddUint32(&fs.Invalids, 1)
 				}
@@ -51241,6 +59044,417 @@ func (ec *executionContext) _UpdateProductResultValidationFailed(ctx context.Con
 	return out
 }
 
+var updateUsedSofmapCrawlSettingExcludeKeywordResultErrorImplementors = []string{"UpdateUsedSofmapCrawlSettingExcludeKeywordResultError", "UpdateUsedSofmapCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingExcludeKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingExcludeKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingExcludeKeywordResultSuccessImplementors = []string{"UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess", "UpdateUsedSofmapCrawlSettingExcludeKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingExcludeKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingExcludeKeyword":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess_usedSofmapCrawlSettingExcludeKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedImplementors = []string{"UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed", "UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingExcludeProductResultErrorImplementors = []string{"UpdateUsedSofmapCrawlSettingExcludeProductResultError", "UpdateUsedSofmapCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingExcludeProductResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingExcludeProductResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingExcludeProductResultSuccessImplementors = []string{"UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess", "UpdateUsedSofmapCrawlSettingExcludeProductResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingExcludeProductResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingExcludeProduct":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess_usedSofmapCrawlSettingExcludeProduct(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingExcludeProductResultValidationFailedImplementors = []string{"UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed", "UpdateUsedSofmapCrawlSettingExcludeProductResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingExcludeProductResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingRequiredKeywordResultErrorImplementors = []string{"UpdateUsedSofmapCrawlSettingRequiredKeywordResultError", "UpdateUsedSofmapCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultError) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingRequiredKeywordResultErrorImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingRequiredKeywordResultError")
+		case "ok":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "error":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultError_error(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingRequiredKeywordResultSuccessImplementors = []string{"UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess", "UpdateUsedSofmapCrawlSettingRequiredKeywordResult", "ResultBase"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingRequiredKeywordResultSuccessImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess")
+		case "ok":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_ok(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingRequiredKeyword":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess_usedSofmapCrawlSettingRequiredKeyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var updateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedImplementors = []string{"UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed", "UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors", "UserError"}
+
+func (ec *executionContext) _UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, updateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed")
+		case "code":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_code(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "message":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_message(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "details":
+			out.Values[i] = ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var updateYahooAuctionCrawlSettingExcludeKeywordResultErrorImplementors = []string{"UpdateYahooAuctionCrawlSettingExcludeKeywordResultError", "UpdateYahooAuctionCrawlSettingExcludeKeywordResult", "ResultBase"}
 
 func (ec *executionContext) _UpdateYahooAuctionCrawlSettingExcludeKeywordResultError(ctx context.Context, sel ast.SelectionSet, obj *model.UpdateYahooAuctionCrawlSettingExcludeKeywordResultError) graphql.Marshaler {
@@ -51626,6 +59840,359 @@ func (ec *executionContext) _UpdateYahooAuctionCrawlSettingRequiredKeywordResult
 			}
 		case "details":
 			out.Values[i] = ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed_details(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var usedSofmapCrawlSettingImplementors = []string{"UsedSofmapCrawlSetting", "Node"}
+
+func (ec *executionContext) _UsedSofmapCrawlSetting(ctx context.Context, sel ast.SelectionSet, obj *model.UsedSofmapCrawlSetting) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, usedSofmapCrawlSettingImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UsedSofmapCrawlSetting")
+		case "id":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "productId":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_productId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "keyword":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_keyword(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "minPrice":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_minPrice(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "maxPrice":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_maxPrice(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "enabled":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_enabled(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "createdAt":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "updatedAt":
+			out.Values[i] = ec._UsedSofmapCrawlSetting_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				atomic.AddUint32(&out.Invalids, 1)
+			}
+		case "usedSofmapCrawlSettingExcludeKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "usedSofmapCrawlSettingExcludeProducts":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._UsedSofmapCrawlSetting_usedSofmapCrawlSettingExcludeProducts(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		case "usedSofmapCrawlSettingRequiredKeywords":
+			field := field
+
+			innerFunc := func(ctx context.Context, fs *graphql.FieldSet) (res graphql.Marshaler) {
+				defer func() {
+					if r := recover(); r != nil {
+						ec.Error(ctx, ec.Recover(ctx, r))
+					}
+				}()
+				res = ec._UsedSofmapCrawlSetting_usedSofmapCrawlSettingRequiredKeywords(ctx, field, obj)
+				if res == graphql.Null {
+					atomic.AddUint32(&fs.Invalids, 1)
+				}
+				return res
+			}
+
+			if field.Deferrable != nil {
+				dfs, ok := deferred[field.Deferrable.Label]
+				di := 0
+				if ok {
+					dfs.AddField(field)
+					di = len(dfs.Values) - 1
+				} else {
+					dfs = graphql.NewFieldSet([]graphql.CollectedField{field})
+					deferred[field.Deferrable.Label] = dfs
+				}
+				dfs.Concurrently(di, func(ctx context.Context) graphql.Marshaler {
+					return innerFunc(ctx, dfs)
+				})
+
+				// don't run the out.Concurrently() call below
+				out.Values[i] = graphql.Null
+				continue
+			}
+
+			out.Concurrently(i, func(ctx context.Context) graphql.Marshaler { return innerFunc(ctx, out) })
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var usedSofmapCrawlSettingExcludeKeywordImplementors = []string{"UsedSofmapCrawlSettingExcludeKeyword", "Node"}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.UsedSofmapCrawlSettingExcludeKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, usedSofmapCrawlSettingExcludeKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UsedSofmapCrawlSettingExcludeKeyword")
+		case "id":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingId":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeKeyword_usedSofmapCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeKeyword_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var usedSofmapCrawlSettingExcludeProductImplementors = []string{"UsedSofmapCrawlSettingExcludeProduct", "Node"}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, obj *model.UsedSofmapCrawlSettingExcludeProduct) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, usedSofmapCrawlSettingExcludeProductImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UsedSofmapCrawlSettingExcludeProduct")
+		case "id":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeProduct_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingId":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeProduct_usedSofmapCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "externalId":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeProduct_externalId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "createdAt":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeProduct_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._UsedSofmapCrawlSettingExcludeProduct_updatedAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var usedSofmapCrawlSettingRequiredKeywordImplementors = []string{"UsedSofmapCrawlSettingRequiredKeyword", "Node"}
+
+func (ec *executionContext) _UsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, obj *model.UsedSofmapCrawlSettingRequiredKeyword) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, usedSofmapCrawlSettingRequiredKeywordImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("UsedSofmapCrawlSettingRequiredKeyword")
+		case "id":
+			out.Values[i] = ec._UsedSofmapCrawlSettingRequiredKeyword_id(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "usedSofmapCrawlSettingId":
+			out.Values[i] = ec._UsedSofmapCrawlSettingRequiredKeyword_usedSofmapCrawlSettingId(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "keyword":
+			out.Values[i] = ec._UsedSofmapCrawlSettingRequiredKeyword_keyword(ctx, field, obj)
+		case "createdAt":
+			out.Values[i] = ec._UsedSofmapCrawlSettingRequiredKeyword_createdAt(ctx, field, obj)
+			if out.Values[i] == graphql.Null {
+				out.Invalids++
+			}
+		case "updatedAt":
+			out.Values[i] = ec._UsedSofmapCrawlSettingRequiredKeyword_updatedAt(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}
@@ -52906,6 +61473,86 @@ func (ec *executionContext) marshalNCreateProductResultErrors2githubᚗcomᚋkur
 	return ec._CreateProductResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNCreateUsedSofmapCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.CreateUsedSofmapCrawlSettingExcludeKeywordInput, error) {
+	res, err := ec.unmarshalInputCreateUsedSofmapCrawlSettingExcludeKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateUsedSofmapCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreateUsedSofmapCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateUsedSofmapCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreateUsedSofmapCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.CreateUsedSofmapCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputCreateUsedSofmapCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateUsedSofmapCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.CreateUsedSofmapCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateUsedSofmapCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateUsedSofmapCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateUsedSofmapCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNCreateUsedSofmapCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingInput(ctx context.Context, v interface{}) (*model.CreateUsedSofmapCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputCreateUsedSofmapCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNCreateUsedSofmapCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.CreateUsedSofmapCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputCreateUsedSofmapCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNCreateUsedSofmapCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.CreateUsedSofmapCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNCreateUsedSofmapCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNCreateYahooAuctionCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐCreateYahooAuctionCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.CreateYahooAuctionCrawlSettingExcludeKeywordInput, error) {
 	res, err := ec.unmarshalInputCreateYahooAuctionCrawlSettingExcludeKeywordInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -53244,6 +61891,66 @@ func (ec *executionContext) marshalNDeleteProductResultErrors2githubᚗcomᚋkur
 		return graphql.Null
 	}
 	return ec._DeleteProductResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteUsedSofmapCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteUsedSofmapCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteUsedSofmapCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteUsedSofmapCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUsedSofmapCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteUsedSofmapCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteUsedSofmapCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUsedSofmapCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteUsedSofmapCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteUsedSofmapCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNDeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNDeleteYahooAuctionCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐDeleteYahooAuctionCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.DeleteYahooAuctionCrawlSettingExcludeKeywordResult) graphql.Marshaler {
@@ -54674,6 +63381,86 @@ func (ec *executionContext) marshalNUpdateProductResultErrors2githubᚗcomᚋkur
 	return ec._UpdateProductResultErrors(ctx, sel, v)
 }
 
+func (ec *executionContext) unmarshalNUpdateUsedSofmapCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.UpdateUsedSofmapCrawlSettingExcludeKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdateUsedSofmapCrawlSettingExcludeKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateUsedSofmapCrawlSettingExcludeKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateUsedSofmapCrawlSettingExcludeKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdateUsedSofmapCrawlSettingExcludeProductInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeProductInput(ctx context.Context, v interface{}) (model.UpdateUsedSofmapCrawlSettingExcludeProductInput, error) {
+	res, err := ec.unmarshalInputUpdateUsedSofmapCrawlSettingExcludeProductInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateUsedSofmapCrawlSettingExcludeProductResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeProductResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateUsedSofmapCrawlSettingExcludeProductResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateUsedSofmapCrawlSettingExcludeProductResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateUsedSofmapCrawlSettingExcludeProductResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateUsedSofmapCrawlSettingExcludeProductResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateUsedSofmapCrawlSettingExcludeProductResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) unmarshalNUpdateUsedSofmapCrawlSettingInput2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingInput(ctx context.Context, v interface{}) (*model.UpdateUsedSofmapCrawlSettingInput, error) {
+	res, err := ec.unmarshalInputUpdateUsedSofmapCrawlSettingInput(ctx, v)
+	return &res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) unmarshalNUpdateUsedSofmapCrawlSettingRequiredKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingRequiredKeywordInput(ctx context.Context, v interface{}) (model.UpdateUsedSofmapCrawlSettingRequiredKeywordInput, error) {
+	res, err := ec.unmarshalInputUpdateUsedSofmapCrawlSettingRequiredKeywordInput(ctx, v)
+	return res, graphql.ErrorOnPath(ctx, err)
+}
+
+func (ec *executionContext) marshalNUpdateUsedSofmapCrawlSettingRequiredKeywordResult2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingRequiredKeywordResult(ctx context.Context, sel ast.SelectionSet, v model.UpdateUsedSofmapCrawlSettingRequiredKeywordResult) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResult(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx context.Context, sel ast.SelectionSet, v model.UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
 func (ec *executionContext) unmarshalNUpdateYahooAuctionCrawlSettingExcludeKeywordInput2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUpdateYahooAuctionCrawlSettingExcludeKeywordInput(ctx context.Context, v interface{}) (model.UpdateYahooAuctionCrawlSettingExcludeKeywordInput, error) {
 	res, err := ec.unmarshalInputUpdateYahooAuctionCrawlSettingExcludeKeywordInput(ctx, v)
 	return res, graphql.ErrorOnPath(ctx, err)
@@ -54752,6 +63539,182 @@ func (ec *executionContext) marshalNUpdateYahooAuctionCrawlSettingRequiredKeywor
 		return graphql.Null
 	}
 	return ec._UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.UsedSofmapCrawlSetting) graphql.Marshaler {
+	return ec._UsedSofmapCrawlSetting(ctx, sel, &v)
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSetting2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSetting(ctx context.Context, sel ast.SelectionSet, v *model.UsedSofmapCrawlSetting) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UsedSofmapCrawlSetting(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSettingExcludeKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.UsedSofmapCrawlSettingExcludeKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNUsedSofmapCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSettingExcludeKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeKeyword(ctx context.Context, sel ast.SelectionSet, v *model.UsedSofmapCrawlSettingExcludeKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UsedSofmapCrawlSettingExcludeKeyword(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSettingExcludeProduct2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeProductᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.UsedSofmapCrawlSettingExcludeProduct) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNUsedSofmapCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeProduct(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSettingExcludeProduct2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingExcludeProduct(ctx context.Context, sel ast.SelectionSet, v *model.UsedSofmapCrawlSettingExcludeProduct) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UsedSofmapCrawlSettingExcludeProduct(ctx, sel, v)
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSettingRequiredKeyword2ᚕᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingRequiredKeywordᚄ(ctx context.Context, sel ast.SelectionSet, v []*model.UsedSofmapCrawlSettingRequiredKeyword) graphql.Marshaler {
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalNUsedSofmapCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingRequiredKeyword(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	for _, e := range ret {
+		if e == graphql.Null {
+			return graphql.Null
+		}
+	}
+
+	return ret
+}
+
+func (ec *executionContext) marshalNUsedSofmapCrawlSettingRequiredKeyword2ᚖgithubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐUsedSofmapCrawlSettingRequiredKeyword(ctx context.Context, sel ast.SelectionSet, v *model.UsedSofmapCrawlSettingRequiredKeyword) graphql.Marshaler {
+	if v == nil {
+		if !graphql.HasFieldError(ctx, graphql.GetFieldContext(ctx)) {
+			ec.Errorf(ctx, "the requested element is null which the schema does not allow")
+		}
+		return graphql.Null
+	}
+	return ec._UsedSofmapCrawlSettingRequiredKeyword(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalNYahooAuctionCrawlSetting2githubᚗcomᚋkurowebᚋpriceᚑmonitoringᚋvolumesᚋbffᚋgraphᚋmodelᚐYahooAuctionCrawlSetting(ctx context.Context, sel ast.SelectionSet, v model.YahooAuctionCrawlSetting) graphql.Marshaler {

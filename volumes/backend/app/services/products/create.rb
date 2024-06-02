@@ -6,6 +6,7 @@ module Products
     JANPARA_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
     IOSYS_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
     PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
+    USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES = %i[keyword min_price max_price enabled].freeze
 
     def self.call(...)
       new(...).call
@@ -23,6 +24,7 @@ module Products
         product.create_janpara_crawl_setting!(janpara_crawl_setting_params)
         product.create_iosys_crawl_setting!(iosys_crawl_setting_params)
         product.create_pc_koubou_crawl_setting!(pc_koubou_crawl_setting_params)
+        product.create_used_sofmap_crawl_setting!(used_sofmap_crawl_setting_params)
 
         product
       end
@@ -54,6 +56,10 @@ module Products
 
     def pc_koubou_crawl_setting_params
       params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
+    end
+
+    def used_sofmap_crawl_setting_params
+      params[:used_sofmap_crawl_setting]&.slice(*USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES) || {}
     end
   end
 end

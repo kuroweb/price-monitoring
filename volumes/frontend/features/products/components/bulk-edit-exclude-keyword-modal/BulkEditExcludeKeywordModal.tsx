@@ -17,12 +17,14 @@ const BulkEditExcludeKeywordModal = ({
   janparaCrawlSettingExcludeKeywords,
   iosysCrawlSettingExcludeKeywords,
   pcKoubouCrawlSettingExcludeKeywords,
+  usedSofmapCrawlSettingExcludeKeywords,
 }: {
   yahooAuctionCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['yahooAuctionCrawlSetting']['yahooAuctionCrawlSettingExcludeKeywords']
   mercariCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['mercariCrawlSetting']['mercariCrawlSettingExcludeKeywords']
   janparaCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['janparaCrawlSetting']['janparaCrawlSettingExcludeKeywords']
   iosysCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['iosysCrawlSetting']['iosysCrawlSettingExcludeKeywords']
   pcKoubouCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['pcKoubouCrawlSetting']['pcKoubouCrawlSettingExcludeKeywords']
+  usedSofmapCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['usedSofmapCrawlSetting']['usedSofmapCrawlSettingExcludeKeywords']
 }) => {
   const [tab, setTab] = useState<'一括登録' | '一括削除'>('一括登録')
   const [modal, setModal] = useBulkEditExcludeKeywordModalState()
@@ -71,6 +73,7 @@ const BulkEditExcludeKeywordModal = ({
                 janparaCrawlSettingExcludeKeywords={janparaCrawlSettingExcludeKeywords}
                 iosysCrawlSettingExcludeKeywords={iosysCrawlSettingExcludeKeywords}
                 pcKoubouCrawlSettingExcludeKeywords={pcKoubouCrawlSettingExcludeKeywords}
+                usedSofmapCrawlSettingExcludeKeywords={usedSofmapCrawlSettingExcludeKeywords}
               />
             )}
           </div>

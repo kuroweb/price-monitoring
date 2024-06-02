@@ -1,25 +1,16 @@
 'use client'
 
+import type { reflectValueType } from './UpdateProductModal'
 import type { UpdateProductInput } from '@/graphql/dist/client'
 import type { useForm } from 'react-hook-form'
 
 const PcKoubouForm = ({
   register,
-  getValues,
-  setValue,
+  reflectValue,
 }: {
   register: ReturnType<typeof useForm<UpdateProductInput>>['register']
-  getValues: ReturnType<typeof useForm<UpdateProductInput>>['getValues']
-  setValue: ReturnType<typeof useForm<UpdateProductInput>>['setValue']
+  reflectValue: reflectValueType
 }) => {
-  const reflectValue = (property: 'keyword' | 'min_price' | 'max_price') => {
-    const value = getValues(`mercari_crawl_setting.${property}`)
-    setValue(`yahoo_auction_crawl_setting.${property}`, value)
-    setValue(`mercari_crawl_setting.${property}`, value)
-    setValue(`janpara_crawl_setting.${property}`, value)
-    setValue(`iosys_crawl_setting.${property}`, value)
-  }
-
   return (
     <>
       <label className='form-control'>
@@ -32,7 +23,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('keyword')}
+          onClick={() => reflectValue('pc_koubou', 'keyword')}
         >
           他のプラットフォームに反映
         </button>
@@ -50,7 +41,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('min_price')}
+          onClick={() => reflectValue('pc_koubou', 'min_price')}
         >
           他のプラットフォームに反映
         </button>
@@ -68,7 +59,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('max_price')}
+          onClick={() => reflectValue('pc_koubou', 'max_price')}
         >
           他のプラットフォームに反映
         </button>

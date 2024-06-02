@@ -35,7 +35,7 @@ function EditForm({
         'UpdateYahooAuctionCrawlSettingExcludeProductResultError' &&
       result?.data?.updateYahooAuctionCrawlSettingExcludeProduct.error.code !== '409'
     ) {
-      return toast.error('一括登録に失敗しました。')
+      return toast.error('登録に失敗しました。')
     }
 
     setMode('list')

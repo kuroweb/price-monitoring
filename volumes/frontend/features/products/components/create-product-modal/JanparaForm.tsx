@@ -1,25 +1,16 @@
 'use client'
 
+import type { reflectValueType } from './CreateProductModal'
 import type { CreateProductInput } from '@/graphql/dist/client'
 import type { useForm } from 'react-hook-form'
 
 const JanparaForm = ({
   register,
-  getValues,
-  setValue,
+  reflectValue,
 }: {
   register: ReturnType<typeof useForm<CreateProductInput>>['register']
-  getValues: ReturnType<typeof useForm<CreateProductInput>>['getValues']
-  setValue: ReturnType<typeof useForm<CreateProductInput>>['setValue']
+  reflectValue: reflectValueType
 }) => {
-  const reflectValue = (property: 'keyword' | 'min_price' | 'max_price') => {
-    const value = getValues(`janpara_crawl_setting.${property}`)
-    setValue(`yahoo_auction_crawl_setting.${property}`, value)
-    setValue(`mercari_crawl_setting.${property}`, value)
-    setValue(`iosys_crawl_setting.${property}`, value)
-    setValue(`pc_koubou_crawl_setting.${property}`, value)
-  }
-
   return (
     <>
       <label className='form-control'>
@@ -32,7 +23,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('keyword')}
+          onClick={() => reflectValue('janpara', 'keyword')}
         >
           他のプラットフォームに反映
         </button>
@@ -47,7 +38,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('min_price')}
+          onClick={() => reflectValue('janpara', 'min_price')}
         >
           他のプラットフォームに反映
         </button>
@@ -62,7 +53,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('max_price')}
+          onClick={() => reflectValue('janpara', 'max_price')}
         >
           他のプラットフォームに反映
         </button>

@@ -9,6 +9,7 @@ import { deleteIosysCrawlSettingExcludeKeyword } from '../../server-actions/iosy
 import { deleteJanparaCrawlSettingExcludeKeyword } from '../../server-actions/janparaCrawlSettingExcludeKeywordQuery'
 import { deleteMercariCrawlSettingExcludeKeyword } from '../../server-actions/mercariCrawlSettingExcludeKeywordQuery'
 import { deletePcKoubouCrawlSettingExcludeKeyword } from '../../server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
+import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '../../server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
 import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '../../server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
@@ -24,12 +25,14 @@ const DeleteForm = ({
   janparaCrawlSettingExcludeKeywords,
   iosysCrawlSettingExcludeKeywords,
   pcKoubouCrawlSettingExcludeKeywords,
+  usedSofmapCrawlSettingExcludeKeywords,
 }: {
   yahooAuctionCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['yahooAuctionCrawlSetting']['yahooAuctionCrawlSettingExcludeKeywords']
   mercariCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['mercariCrawlSetting']['mercariCrawlSettingExcludeKeywords']
   janparaCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['janparaCrawlSetting']['janparaCrawlSettingExcludeKeywords']
   iosysCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['iosysCrawlSetting']['iosysCrawlSettingExcludeKeywords']
   pcKoubouCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['pcKoubouCrawlSetting']['pcKoubouCrawlSettingExcludeKeywords']
+  usedSofmapCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['usedSofmapCrawlSetting']['usedSofmapCrawlSettingExcludeKeywords']
 }) => {
   const router = useRouter()
   const params = useParams()
@@ -153,6 +156,29 @@ const DeleteForm = ({
             result?.data?.deletePcKoubouCrawlSettingExcludeKeyword.__typename ===
               'DeletePcKoubouCrawlSettingExcludeKeywordResultError' &&
             result?.data?.deletePcKoubouCrawlSettingExcludeKeyword.error.code !== '404'
+          ) {
+            toast.error('一括削除に失敗しました。')
+            return
+          }
+        } catch (error) {
+          toast.error('一括削除に失敗しました。')
+          return
+        }
+      }
+    }
+
+    for (const excludeKeyword of usedSofmapCrawlSettingExcludeKeywords) {
+      if (excludeKeyword.keyword === input.keyword) {
+        try {
+          const result = await deleteUsedSofmapCrawlSettingExcludeKeyword(
+            excludeKeyword.id,
+            productId,
+            pathname,
+          )
+          if (
+            result?.data?.deleteUsedSofmapCrawlSettingExcludeKeyword.__typename ===
+              'DeleteUsedSofmapCrawlSettingExcludeKeywordResultError' &&
+            result?.data?.deleteUsedSofmapCrawlSettingExcludeKeyword.error.code !== '404'
           ) {
             toast.error('一括削除に失敗しました。')
             return

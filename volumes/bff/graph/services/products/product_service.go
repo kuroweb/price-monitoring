@@ -20,6 +20,10 @@ import (
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/pc_koubou_crawl_setting_required_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/pc_koubou_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/related_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/used_sofmap_crawl_setting_exclude_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/used_sofmap_crawl_setting_exclude_products"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/used_sofmap_crawl_setting_required_keywords"
+	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/used_sofmap_crawl_settings"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_keywords"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_exclude_products"
 	"github.com/kuroweb/price-monitoring/volumes/bff/graph/services/products/yahoo_auction_crawl_setting_required_keywords"
@@ -59,6 +63,10 @@ type IProductService interface {
 	pc_koubou_crawl_setting_exclude_keywords.IPcKoubouCrawlSettingExcludeKeywordService
 	pc_koubou_crawl_setting_exclude_products.IPcKoubouCrawlSettingExcludeProductService
 	pc_koubou_crawl_setting_required_keywords.IPcKoubouCrawlSettingRequiredKeywordService
+	used_sofmap_crawl_settings.IUsedSofmapCrawlSettingService
+	used_sofmap_crawl_setting_exclude_keywords.IUsedSofmapCrawlSettingExcludeKeywordService
+	used_sofmap_crawl_setting_exclude_products.IUsedSofmapCrawlSettingExcludeProductService
+	used_sofmap_crawl_setting_required_keywords.IUsedSofmapCrawlSettingRequiredKeywordService
 	related_products.IRelatedProductService
 }
 
@@ -92,6 +100,10 @@ type ProductService struct {
 	*pc_koubou_crawl_setting_exclude_keywords.PcKoubouCrawlSettingExcludeKeywordService
 	*pc_koubou_crawl_setting_exclude_products.PcKoubouCrawlSettingExcludeProductService
 	*pc_koubou_crawl_setting_required_keywords.PcKoubouCrawlSettingRequiredKeywordService
+	*used_sofmap_crawl_settings.UsedSofmapCrawlSettingService
+	*used_sofmap_crawl_setting_exclude_keywords.UsedSofmapCrawlSettingExcludeKeywordService
+	*used_sofmap_crawl_setting_exclude_products.UsedSofmapCrawlSettingExcludeProductService
+	*used_sofmap_crawl_setting_required_keywords.UsedSofmapCrawlSettingRequiredKeywordService
 	*related_products.RelatedProductService
 }
 
@@ -126,6 +138,10 @@ func New() IProductService {
 		PcKoubouCrawlSettingExcludeKeywordService:      &pc_koubou_crawl_setting_exclude_keywords.PcKoubouCrawlSettingExcludeKeywordService{},
 		PcKoubouCrawlSettingExcludeProductService:      &pc_koubou_crawl_setting_exclude_products.PcKoubouCrawlSettingExcludeProductService{},
 		PcKoubouCrawlSettingRequiredKeywordService:     &pc_koubou_crawl_setting_required_keywords.PcKoubouCrawlSettingRequiredKeywordService{},
+		UsedSofmapCrawlSettingService:                  &used_sofmap_crawl_settings.UsedSofmapCrawlSettingService{},
+		UsedSofmapCrawlSettingExcludeKeywordService:    &used_sofmap_crawl_setting_exclude_keywords.UsedSofmapCrawlSettingExcludeKeywordService{},
+		UsedSofmapCrawlSettingExcludeProductService:    &used_sofmap_crawl_setting_exclude_products.UsedSofmapCrawlSettingExcludeProductService{},
+		UsedSofmapCrawlSettingRequiredKeywordService:   &used_sofmap_crawl_setting_required_keywords.UsedSofmapCrawlSettingRequiredKeywordService{},
 		RelatedProductService:                          &related_products.RelatedProductService{},
 	}
 }

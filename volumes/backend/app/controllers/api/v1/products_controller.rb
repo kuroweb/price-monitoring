@@ -65,6 +65,10 @@ module Api
         %i[keyword min_price max_price enabled]
       end
 
+      def used_sofmap_crawl_setting_attributes
+        %i[keyword min_price max_price enabled]
+      end
+
       def external_params_attributes
         %i[sort order]
       end
@@ -80,7 +84,8 @@ module Api
           mercari_crawl_setting: mercari_crawl_setting_attributes,
           janpara_crawl_setting: janpara_crawl_setting_attributes,
           iosys_crawl_setting: iosys_crawl_setting_attributes,
-          pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes
+          pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes,
+          used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes
         )
       end
 
@@ -91,7 +96,8 @@ module Api
           mercari_crawl_setting: mercari_crawl_setting_attributes,
           janpara_crawl_setting: janpara_crawl_setting_attributes,
           iosys_crawl_setting: iosys_crawl_setting_attributes,
-          pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes
+          pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes,
+          used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes
         )
       end
 
@@ -102,6 +108,7 @@ module Api
         ::Products::Inspect::DeleteJanparaProducts.call(product:)
         ::Products::Inspect::DeleteIosysProducts.call(product:)
         ::Products::Inspect::DeletePcKoubouProducts.call(product:)
+        ::Products::Inspect::DeleteUsedSofmapProducts.call(product:)
       end
     end
   end

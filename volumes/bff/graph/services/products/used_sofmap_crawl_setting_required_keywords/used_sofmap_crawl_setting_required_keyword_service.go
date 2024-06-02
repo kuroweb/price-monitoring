@@ -1,0 +1,15 @@
+package used_sofmap_crawl_setting_required_keywords
+
+type IUsedSofmapCrawlSettingRequiredKeywordService interface {
+	IFindUsedSofmapCrawlSettingRequiredKeywordService
+	ICreateUsedSofmapCrawlSettingRequiredKeywordService
+	IUpdateUsedSofmapCrawlSettingRequiredKeywordService
+	IDeleteUsedSofmapCrawlSettingRequiredKeywordService
+}
+
+type UsedSofmapCrawlSettingRequiredKeywordService struct {
+	*FindUsedSofmapCrawlSettingRequiredKeywordService
+	*CreateUsedSofmapCrawlSettingRequiredKeywordService
+	*UpdateUsedSofmapCrawlSettingRequiredKeywordService
+	*DeleteUsedSofmapCrawlSettingRequiredKeywordService
+}

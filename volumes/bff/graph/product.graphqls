@@ -1,6 +1,13 @@
 type Product implements Node {
   id: ID!
   name: String!
+  relatedProducts(
+    platformMask: String!
+    page: Int
+    per: Int
+    sort: String
+    order: String
+  ): [RelatedProduct!]!
   yahooAuctionProducts(
     published: Boolean
     sort: String
@@ -19,13 +26,22 @@ type Product implements Node {
   janparaCrawlSetting: JanparaCrawlSetting!
   iosysCrawlSetting: IosysCrawlSetting!
   pcKoubouCrawlSetting: PcKoubouCrawlSetting!
-  relatedProducts(
-    platformMask: String!
-    page: Int
-    per: Int
-    sort: String
-    order: String
-  ): [RelatedProduct!]!
+  usedSofmapCrawlSetting: UsedSofmapCrawlSetting!
+}
+
+type RelatedProduct {
+  platform: String!
+  productId: Int!
+  externalId: String!
+  name: String!
+  thumbnailUrl: String!
+  price: Int!
+  buyoutPrice: Int
+  published: Boolean!
+  boughtDate: String
+  endDate: String
+  createdAt: String!
+  updatedAt: String!
 }
 
 type YahooAuctionProduct implements Node {
@@ -276,17 +292,40 @@ type PcKoubouCrawlSettingRequiredKeyword implements Node {
   updatedAt: String!
 }
 
-type RelatedProduct {
-  platform: String!
+type UsedSofmapCrawlSetting implements Node {
+  id: ID!
   productId: Int!
+  keyword: String!
+  minPrice: Int!
+  maxPrice: Int!
+  enabled: Boolean!
+  createdAt: String!
+  updatedAt: String!
+  usedSofmapCrawlSettingExcludeKeywords: [UsedSofmapCrawlSettingExcludeKeyword!]!
+  usedSofmapCrawlSettingExcludeProducts: [UsedSofmapCrawlSettingExcludeProduct!]!
+  usedSofmapCrawlSettingRequiredKeywords: [UsedSofmapCrawlSettingRequiredKeyword!]!
+}
+
+type UsedSofmapCrawlSettingExcludeKeyword implements Node {
+  id: ID!
+  usedSofmapCrawlSettingId: Int!
+  keyword: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type UsedSofmapCrawlSettingExcludeProduct implements Node {
+  id: ID!
+  usedSofmapCrawlSettingId: Int!
   externalId: String!
-  name: String!
-  thumbnailUrl: String!
-  price: Int!
-  buyoutPrice: Int
-  published: Boolean!
-  boughtDate: String
-  endDate: String
+  createdAt: String!
+  updatedAt: String!
+}
+
+type UsedSofmapCrawlSettingRequiredKeyword implements Node {
+  id: ID!
+  usedSofmapCrawlSettingId: Int!
+  keyword: String
   createdAt: String!
   updatedAt: String!
 }

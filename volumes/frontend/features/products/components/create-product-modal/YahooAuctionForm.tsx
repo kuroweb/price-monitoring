@@ -1,25 +1,16 @@
 'use client'
 
+import type { reflectValueType } from './CreateProductModal'
 import type { CreateProductInput } from '@/graphql/dist/client'
 import type { useForm } from 'react-hook-form'
 
 const YahooAuctionForm = ({
   register,
-  getValues,
-  setValue,
+  reflectValue,
 }: {
   register: ReturnType<typeof useForm<CreateProductInput>>['register']
-  getValues: ReturnType<typeof useForm<CreateProductInput>>['getValues']
-  setValue: ReturnType<typeof useForm<CreateProductInput>>['setValue']
+  reflectValue: reflectValueType
 }) => {
-  const reflectValue = (property: 'keyword' | 'min_price' | 'max_price') => {
-    const value = getValues(`yahoo_auction_crawl_setting.${property}`)
-    setValue(`mercari_crawl_setting.${property}`, value)
-    setValue(`janpara_crawl_setting.${property}`, value)
-    setValue(`iosys_crawl_setting.${property}`, value)
-    setValue(`pc_koubou_crawl_setting.${property}`, value)
-  }
-
   return (
     <>
       <label className='form-control'>
@@ -35,7 +26,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('keyword')}
+          onClick={() => reflectValue('yahoo_auction', 'keyword')}
         >
           他のプラットフォームに反映
         </button>
@@ -64,7 +55,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('min_price')}
+          onClick={() => reflectValue('yahoo_auction', 'min_price')}
         >
           他のプラットフォームに反映
         </button>
@@ -82,7 +73,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('max_price')}
+          onClick={() => reflectValue('yahoo_auction', 'max_price')}
         >
           他のプラットフォームに反映
         </button>

@@ -138,6 +138,12 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
               max_price: product?.pcKoubouCrawlSetting?.maxPrice,
               enabled: product?.pcKoubouCrawlSetting?.enabled,
             },
+            used_sofmap_crawl_setting: {
+              keyword: product?.usedSofmapCrawlSetting?.keyword,
+              min_price: product?.usedSofmapCrawlSetting?.minPrice,
+              max_price: product?.usedSofmapCrawlSetting?.maxPrice,
+              enabled: product?.usedSofmapCrawlSetting?.enabled,
+            },
           }
         }
       />

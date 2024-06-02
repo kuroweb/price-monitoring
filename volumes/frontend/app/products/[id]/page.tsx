@@ -205,6 +205,12 @@ const Page = async ({
             max_price: data.product.pcKoubouCrawlSetting?.maxPrice,
             enabled: data.product.pcKoubouCrawlSetting?.enabled,
           },
+          used_sofmap_crawl_setting: {
+            keyword: data.product.usedSofmapCrawlSetting?.keyword,
+            min_price: data.product.usedSofmapCrawlSetting?.minPrice,
+            max_price: data.product.usedSofmapCrawlSetting?.maxPrice,
+            enabled: data.product.usedSofmapCrawlSetting?.enabled,
+          },
         }}
       />
       <EditExcludeKeywordModal data={data} />
@@ -226,6 +232,9 @@ const Page = async ({
         pcKoubouCrawlSettingExcludeKeywords={
           data.product.pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords
         }
+        usedSofmapCrawlSettingExcludeKeywords={
+          data.product.usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords
+        }
       />
       <BulkEditRequiredKeywordModal
         yahooAuctionCrawlSettingRequiredKeywords={
@@ -242,6 +251,9 @@ const Page = async ({
         }
         pcKoubouCrawlSettingRequiredKeywords={
           data.product.pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords
+        }
+        usedSofmapCrawlSettingRequiredKeywords={
+          data.product.usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords
         }
       />
     </Layout>

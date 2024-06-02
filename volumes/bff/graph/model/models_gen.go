@@ -106,6 +106,30 @@ type CreateProductResultErrors interface {
 	IsCreateProductResultErrors()
 }
 
+type CreateUsedSofmapCrawlSettingExcludeKeywordResult interface {
+	IsCreateUsedSofmapCrawlSettingExcludeKeywordResult()
+}
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors interface {
+	IsCreateUsedSofmapCrawlSettingExcludeKeywordResultErrors()
+}
+
+type CreateUsedSofmapCrawlSettingExcludeProductResult interface {
+	IsCreateUsedSofmapCrawlSettingExcludeProductResult()
+}
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultErrors interface {
+	IsCreateUsedSofmapCrawlSettingExcludeProductResultErrors()
+}
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResult interface {
+	IsCreateUsedSofmapCrawlSettingRequiredKeywordResult()
+}
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors interface {
+	IsCreateUsedSofmapCrawlSettingRequiredKeywordResultErrors()
+}
+
 type CreateYahooAuctionCrawlSettingExcludeKeywordResult interface {
 	IsCreateYahooAuctionCrawlSettingExcludeKeywordResult()
 }
@@ -232,6 +256,30 @@ type DeleteProductResult interface {
 
 type DeleteProductResultErrors interface {
 	IsDeleteProductResultErrors()
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResult interface {
+	IsDeleteUsedSofmapCrawlSettingExcludeKeywordResult()
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors interface {
+	IsDeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors()
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResult interface {
+	IsDeleteUsedSofmapCrawlSettingExcludeProductResult()
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultErrors interface {
+	IsDeleteUsedSofmapCrawlSettingExcludeProductResultErrors()
+}
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResult interface {
+	IsDeleteUsedSofmapCrawlSettingRequiredKeywordResult()
+}
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors interface {
+	IsDeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors()
 }
 
 type DeleteYahooAuctionCrawlSettingExcludeKeywordResult interface {
@@ -370,6 +418,30 @@ type UpdateProductResult interface {
 
 type UpdateProductResultErrors interface {
 	IsUpdateProductResultErrors()
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResult interface {
+	IsUpdateUsedSofmapCrawlSettingExcludeKeywordResult()
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors interface {
+	IsUpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors()
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResult interface {
+	IsUpdateUsedSofmapCrawlSettingExcludeProductResult()
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultErrors interface {
+	IsUpdateUsedSofmapCrawlSettingExcludeProductResultErrors()
+}
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResult interface {
+	IsUpdateUsedSofmapCrawlSettingRequiredKeywordResult()
+}
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors interface {
+	IsUpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors()
 }
 
 type UpdateYahooAuctionCrawlSettingExcludeKeywordResult interface {
@@ -966,6 +1038,7 @@ type CreateProductInput struct {
 	JanparaCrawlSetting      *CreateJanparaCrawlSettingInput      `json:"janpara_crawl_setting"`
 	IosysCrawlSetting        *CreateIosysCrawlSettingInput        `json:"iosys_crawl_setting"`
 	PcKoubouCrawlSetting     *CreatePcKoubouCrawlSettingInput     `json:"pc_koubou_crawl_setting"`
+	UsedSofmapCrawlSetting   *CreateUsedSofmapCrawlSettingInput   `json:"used_sofmap_crawl_setting"`
 }
 
 type CreateProductResultError struct {
@@ -999,6 +1072,145 @@ func (CreateProductResultValidationFailed) IsCreateProductResultErrors() {}
 func (CreateProductResultValidationFailed) IsUserError()            {}
 func (this CreateProductResultValidationFailed) GetCode() string    { return this.Code }
 func (this CreateProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                   `json:"ok"`
+	Error CreateUsedSofmapCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeKeywordResultError) IsCreateUsedSofmapCrawlSettingExcludeKeywordResult() {
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this CreateUsedSofmapCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok                                   bool                                  `json:"ok"`
+	UsedSofmapCrawlSettingExcludeKeyword *UsedSofmapCrawlSettingExcludeKeyword `json:"usedSofmapCrawlSettingExcludeKeyword"`
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) IsCreateUsedSofmapCrawlSettingExcludeKeywordResult() {
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) IsCreateUsedSofmapCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreateUsedSofmapCrawlSettingExcludeProductInput struct {
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                   `json:"ok"`
+	Error CreateUsedSofmapCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeProductResultError) IsCreateUsedSofmapCrawlSettingExcludeProductResult() {
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this CreateUsedSofmapCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                   bool                                  `json:"ok"`
+	UsedSofmapCrawlSettingExcludeProduct *UsedSofmapCrawlSettingExcludeProduct `json:"usedSofmapCrawlSettingExcludeProduct"`
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeProductResultSuccess) IsCreateUsedSofmapCrawlSettingExcludeProductResult() {
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this CreateUsedSofmapCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) IsCreateUsedSofmapCrawlSettingExcludeProductResultErrors() {
+}
+
+func (CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type CreateUsedSofmapCrawlSettingInput struct {
+	Keyword  string `json:"keyword"`
+	MinPrice int    `json:"min_price"`
+	MaxPrice int    `json:"max_price"`
+	Enabled  bool   `json:"enabled"`
+}
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordInput struct {
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                    `json:"ok"`
+	Error CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (CreateUsedSofmapCrawlSettingRequiredKeywordResultError) IsCreateUsedSofmapCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateUsedSofmapCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this CreateUsedSofmapCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                    bool                                   `json:"ok"`
+	UsedSofmapCrawlSettingRequiredKeyword *UsedSofmapCrawlSettingRequiredKeyword `json:"usedSofmapCrawlSettingRequiredKeyword"`
+}
+
+func (CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) IsCreateUsedSofmapCrawlSettingRequiredKeywordResult() {
+}
+
+func (CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) IsCreateUsedSofmapCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
 
 type CreateYahooAuctionCrawlSettingExcludeKeywordInput struct {
 	ProductID string  `json:"productId"`
@@ -1627,6 +1839,120 @@ func (DeleteProductResultValidationFailed) IsUserError()            {}
 func (this DeleteProductResultValidationFailed) GetCode() string    { return this.Code }
 func (this DeleteProductResultValidationFailed) GetMessage() string { return this.Message }
 
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                   `json:"ok"`
+	Error DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeKeywordResultError) IsDeleteUsedSofmapCrawlSettingExcludeKeywordResult() {
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this DeleteUsedSofmapCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess) IsDeleteUsedSofmapCrawlSettingExcludeKeywordResult() {
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) IsDeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                   `json:"ok"`
+	Error DeleteUsedSofmapCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeProductResultError) IsDeleteUsedSofmapCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this DeleteUsedSofmapCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess) IsDeleteUsedSofmapCrawlSettingExcludeProductResult() {
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) IsDeleteUsedSofmapCrawlSettingExcludeProductResultErrors() {
+}
+
+func (DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                    `json:"ok"`
+	Error DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (DeleteUsedSofmapCrawlSettingRequiredKeywordResultError) IsDeleteUsedSofmapCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteUsedSofmapCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this DeleteUsedSofmapCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok bool `json:"ok"`
+}
+
+func (DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess) IsDeleteUsedSofmapCrawlSettingRequiredKeywordResult() {
+}
+
+func (DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) IsDeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
 type DeleteYahooAuctionCrawlSettingExcludeKeywordResultError struct {
 	Ok    bool                                                     `json:"ok"`
 	Error DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors `json:"error"`
@@ -1979,6 +2305,7 @@ func (this PcKoubouCrawlSettingRequiredKeyword) GetID() string { return this.ID 
 type Product struct {
 	ID                                    string                                 `json:"id"`
 	Name                                  string                                 `json:"name"`
+	RelatedProducts                       []*RelatedProduct                      `json:"relatedProducts"`
 	YahooAuctionProducts                  []*YahooAuctionProduct                 `json:"yahooAuctionProducts"`
 	YahooAuctionCrawlSetting              *YahooAuctionCrawlSetting              `json:"yahooAuctionCrawlSetting"`
 	YahooAuctionDailyPurchaseSummaries    []*YahooAuctionDailyPurchaseSummary    `json:"yahooAuctionDailyPurchaseSummaries"`
@@ -1989,7 +2316,7 @@ type Product struct {
 	JanparaCrawlSetting                   *JanparaCrawlSetting                   `json:"janparaCrawlSetting"`
 	IosysCrawlSetting                     *IosysCrawlSetting                     `json:"iosysCrawlSetting"`
 	PcKoubouCrawlSetting                  *PcKoubouCrawlSetting                  `json:"pcKoubouCrawlSetting"`
-	RelatedProducts                       []*RelatedProduct                      `json:"relatedProducts"`
+	UsedSofmapCrawlSetting                *UsedSofmapCrawlSetting                `json:"usedSofmapCrawlSetting"`
 }
 
 func (Product) IsNode()            {}
@@ -2586,6 +2913,7 @@ type UpdateProductInput struct {
 	JanparaCrawlSetting      *UpdateJanparaCrawlSettingInput      `json:"janpara_crawl_setting"`
 	IosysCrawlSetting        *UpdateIosysCrawlSettingInput        `json:"iosys_crawl_setting"`
 	PcKoubouCrawlSetting     *UpdatePcKoubouCrawlSettingInput     `json:"pc_koubou_crawl_setting"`
+	UsedSofmapCrawlSetting   *UpdateUsedSofmapCrawlSettingInput   `json:"used_sofmap_crawl_setting"`
 }
 
 type UpdateProductResultError struct {
@@ -2619,6 +2947,148 @@ func (UpdateProductResultValidationFailed) IsUpdateProductResultErrors() {}
 func (UpdateProductResultValidationFailed) IsUserError()            {}
 func (this UpdateProductResultValidationFailed) GetCode() string    { return this.Code }
 func (this UpdateProductResultValidationFailed) GetMessage() string { return this.Message }
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultError struct {
+	Ok    bool                                                   `json:"ok"`
+	Error UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors `json:"error"`
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeKeywordResultError) IsUpdateUsedSofmapCrawlSettingExcludeKeywordResult() {
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeKeywordResultError) IsResultBase()    {}
+func (this UpdateUsedSofmapCrawlSettingExcludeKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess struct {
+	Ok                                   bool                                  `json:"ok"`
+	UsedSofmapCrawlSettingExcludeKeyword *UsedSofmapCrawlSettingExcludeKeyword `json:"usedSofmapCrawlSettingExcludeKeyword"`
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) IsUpdateUsedSofmapCrawlSettingExcludeKeywordResult() {
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) IsResultBase()    {}
+func (this UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) IsUpdateUsedSofmapCrawlSettingExcludeKeywordResultErrors() {
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) IsUserError() {}
+func (this UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeProductInput struct {
+	ID         string `json:"id"`
+	ProductID  string `json:"productId"`
+	ExternalID string `json:"externalId"`
+}
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultError struct {
+	Ok    bool                                                   `json:"ok"`
+	Error UpdateUsedSofmapCrawlSettingExcludeProductResultErrors `json:"error"`
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeProductResultError) IsUpdateUsedSofmapCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeProductResultError) IsResultBase()    {}
+func (this UpdateUsedSofmapCrawlSettingExcludeProductResultError) GetOk() bool { return this.Ok }
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess struct {
+	Ok                                   bool                                  `json:"ok"`
+	UsedSofmapCrawlSettingExcludeProduct *UsedSofmapCrawlSettingExcludeProduct `json:"usedSofmapCrawlSettingExcludeProduct"`
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess) IsUpdateUsedSofmapCrawlSettingExcludeProductResult() {
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess) IsResultBase()    {}
+func (this UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) IsUpdateUsedSofmapCrawlSettingExcludeProductResultErrors() {
+}
+
+func (UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) IsUserError() {}
+func (this UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed) GetMessage() string {
+	return this.Message
+}
+
+type UpdateUsedSofmapCrawlSettingInput struct {
+	Keyword  string `json:"keyword"`
+	MinPrice int    `json:"min_price"`
+	MaxPrice int    `json:"max_price"`
+	Enabled  bool   `json:"enabled"`
+}
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordInput struct {
+	ID        string  `json:"id"`
+	ProductID string  `json:"productId"`
+	Keyword   *string `json:"keyword,omitempty"`
+}
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultError struct {
+	Ok    bool                                                    `json:"ok"`
+	Error UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors `json:"error"`
+}
+
+func (UpdateUsedSofmapCrawlSettingRequiredKeywordResultError) IsUpdateUsedSofmapCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateUsedSofmapCrawlSettingRequiredKeywordResultError) IsResultBase()    {}
+func (this UpdateUsedSofmapCrawlSettingRequiredKeywordResultError) GetOk() bool { return this.Ok }
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess struct {
+	Ok                                    bool                                   `json:"ok"`
+	UsedSofmapCrawlSettingRequiredKeyword *UsedSofmapCrawlSettingRequiredKeyword `json:"usedSofmapCrawlSettingRequiredKeyword"`
+}
+
+func (UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) IsUpdateUsedSofmapCrawlSettingRequiredKeywordResult() {
+}
+
+func (UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) IsResultBase()    {}
+func (this UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess) GetOk() bool { return this.Ok }
+
+type UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed struct {
+	Code    string         `json:"code"`
+	Message string         `json:"message"`
+	Details []*ErrorDetail `json:"details"`
+}
+
+func (UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) IsUpdateUsedSofmapCrawlSettingRequiredKeywordResultErrors() {
+}
+
+func (UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) IsUserError() {}
+func (this UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) GetCode() string {
+	return this.Code
+}
+func (this UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
+	return this.Message
+}
 
 type UpdateYahooAuctionCrawlSettingExcludeKeywordInput struct {
 	ID        string  `json:"id"`
@@ -2762,6 +3232,56 @@ func (this UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) 
 func (this UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed) GetMessage() string {
 	return this.Message
 }
+
+type UsedSofmapCrawlSetting struct {
+	ID                                     string                                   `json:"id"`
+	ProductID                              int                                      `json:"productId"`
+	Keyword                                string                                   `json:"keyword"`
+	MinPrice                               int                                      `json:"minPrice"`
+	MaxPrice                               int                                      `json:"maxPrice"`
+	Enabled                                bool                                     `json:"enabled"`
+	CreatedAt                              string                                   `json:"createdAt"`
+	UpdatedAt                              string                                   `json:"updatedAt"`
+	UsedSofmapCrawlSettingExcludeKeywords  []*UsedSofmapCrawlSettingExcludeKeyword  `json:"usedSofmapCrawlSettingExcludeKeywords"`
+	UsedSofmapCrawlSettingExcludeProducts  []*UsedSofmapCrawlSettingExcludeProduct  `json:"usedSofmapCrawlSettingExcludeProducts"`
+	UsedSofmapCrawlSettingRequiredKeywords []*UsedSofmapCrawlSettingRequiredKeyword `json:"usedSofmapCrawlSettingRequiredKeywords"`
+}
+
+func (UsedSofmapCrawlSetting) IsNode()            {}
+func (this UsedSofmapCrawlSetting) GetID() string { return this.ID }
+
+type UsedSofmapCrawlSettingExcludeKeyword struct {
+	ID                       string  `json:"id"`
+	UsedSofmapCrawlSettingID int     `json:"usedSofmapCrawlSettingId"`
+	Keyword                  *string `json:"keyword,omitempty"`
+	CreatedAt                string  `json:"createdAt"`
+	UpdatedAt                string  `json:"updatedAt"`
+}
+
+func (UsedSofmapCrawlSettingExcludeKeyword) IsNode()            {}
+func (this UsedSofmapCrawlSettingExcludeKeyword) GetID() string { return this.ID }
+
+type UsedSofmapCrawlSettingExcludeProduct struct {
+	ID                       string `json:"id"`
+	UsedSofmapCrawlSettingID int    `json:"usedSofmapCrawlSettingId"`
+	ExternalID               string `json:"externalId"`
+	CreatedAt                string `json:"createdAt"`
+	UpdatedAt                string `json:"updatedAt"`
+}
+
+func (UsedSofmapCrawlSettingExcludeProduct) IsNode()            {}
+func (this UsedSofmapCrawlSettingExcludeProduct) GetID() string { return this.ID }
+
+type UsedSofmapCrawlSettingRequiredKeyword struct {
+	ID                       string  `json:"id"`
+	UsedSofmapCrawlSettingID int     `json:"usedSofmapCrawlSettingId"`
+	Keyword                  *string `json:"keyword,omitempty"`
+	CreatedAt                string  `json:"createdAt"`
+	UpdatedAt                string  `json:"updatedAt"`
+}
+
+func (UsedSofmapCrawlSettingRequiredKeyword) IsNode()            {}
+func (this UsedSofmapCrawlSettingRequiredKeyword) GetID() string { return this.ID }
 
 type YahooAuctionCrawlSetting struct {
 	ID                                       string                                     `json:"id"`
