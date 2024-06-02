@@ -9,6 +9,7 @@ import { createIosysCrawlSettingExcludeProduct } from '../server-actions/iosysCr
 import { createJanparaCrawlSettingExcludeProduct } from '../server-actions/janparaCrawlSettingExcludeProductQuery'
 import { createMercariCrawlSettingExcludeProduct } from '../server-actions/mercariCrawlSettingExcludeProductQuery'
 import { createPcKoubouCrawlSettingExcludeProduct } from '../server-actions/pcKoubouCrawlSettingExcludeProductQuery'
+import { createUsedSofmapCrawlSettingExcludeProduct } from '../server-actions/usedSofmapCrawlSettingExcludeProductQuery'
 import { createYahooAuctionCrawlSettingExcludeProduct } from '../server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
@@ -119,6 +120,17 @@ const RelatedProductCard = ({
           pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
             'CreatePcKoubouCrawlSettingExcludeProductResultError' &&
           pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.error.code !==
+            allowedStatus
+        ) {
+          return toast.error('error')
+        }
+        break
+      case 'used_sofmap':
+        const usedSofmapResult = await createUsedSofmapCrawlSettingExcludeProduct(input, pathname)
+        if (
+          usedSofmapResult?.data?.createUsedSofmapCrawlSettingExcludeProduct.__typename ===
+            'CreateUsedSofmapCrawlSettingExcludeProductResultError' &&
+          usedSofmapResult?.data?.createUsedSofmapCrawlSettingExcludeProduct.error.code !==
             allowedStatus
         ) {
           return toast.error('error')
