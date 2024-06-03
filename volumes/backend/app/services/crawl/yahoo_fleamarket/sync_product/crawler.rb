@@ -121,7 +121,7 @@ module Crawl
             Time.current.days_ago(date_str.gsub(DATE, "").to_i).beginning_of_day
           when /#{MONTH}/
             Time.current.months_ago(date_str.gsub(MONTH, "").to_i).beginning_of_day
-          when /#{OTHER}/
+          else
             Time.current.months_ago(6).beginning_of_day
           end
         end

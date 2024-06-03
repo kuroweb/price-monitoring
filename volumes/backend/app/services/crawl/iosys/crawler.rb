@@ -57,7 +57,7 @@ module Crawl
       end
 
       def no_results?(page)
-        page.query_selector(".empty").inner_text.present?
+        page.query_selector("#empty").inner_text.present?
       end
 
       def exists_next_page?(page)
@@ -96,7 +96,7 @@ module Crawl
       end
 
       def thumbnail_url(dom)
-        href = dom.query_selector("img").get_attribute("src")
+        href = dom.query_selector(".photo > picture > source").get_attribute("data-srcset")
 
         case href
         when "/common_img/dummy/dummy.gif", "/photos/no_photo_S.jpg"
