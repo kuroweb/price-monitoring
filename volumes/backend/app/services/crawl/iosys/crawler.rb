@@ -99,7 +99,7 @@ module Crawl
         href = dom.query_selector(".photo > picture > source").get_attribute("data-srcset")
 
         case href
-        when "/common_img/dummy/dummy.gif", "/photos/no_photo_S.jpg"
+        when "/common_img/dummy/dummy.gif", "/photos/no_photo_S.jpg", "/photos/no_photo_S.webp"
           "https://iosys.co.jp/photos/no_photo_L.webp"
         else
           href
