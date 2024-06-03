@@ -28,7 +28,9 @@ const CreateForm = ({
     },
   })
 
-  const onSubmit: SubmitHandler<CreateUsedSofmapCrawlSettingRequiredKeywordInput> = async (data) => {
+  const onSubmit: SubmitHandler<CreateUsedSofmapCrawlSettingRequiredKeywordInput> = async (
+    data,
+  ) => {
     const result = await createUsedSofmapCrawlSettingRequiredKeyword(data, pathname)
     if (result.data?.createUsedSofmapCrawlSettingRequiredKeyword.ok) {
       toast.success('success')

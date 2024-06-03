@@ -26,7 +26,9 @@ function EditForm({
   const router = useRouter()
   const pathname = usePathname()
 
-  const onSubmit: SubmitHandler<UpdateUsedSofmapCrawlSettingRequiredKeywordInput> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateUsedSofmapCrawlSettingRequiredKeywordInput> = async (
+    data,
+  ) => {
     const result = await updateUsedSofmapCrawlSettingRequiredKeyword(data, pathname)
     if (result.data?.updateUsedSofmapCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
