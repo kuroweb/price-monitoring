@@ -6,18 +6,18 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   UsedSofmapCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '@/features/products/server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
+import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/usedSofmapCrawlSettingExcludeKeywordQuery'
 
 const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
-  data: GetProductDetailPageDataQuery
+  data: GetProductSettingPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<UsedSofmapCrawlSettingExcludeKeyword | undefined>>
 }) => {
@@ -26,7 +26,7 @@ const KeywordTable = ({
   const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteUsedSofmapCrawlSettingExcludeKeyword(id, productId, pathname)
+    const result = await deleteUsedSofmapCrawlSettingExcludeKeyword(id, productId)
     if (result.data?.deleteUsedSofmapCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {

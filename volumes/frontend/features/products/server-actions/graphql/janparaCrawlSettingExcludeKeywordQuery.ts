@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateJanparaCrawlSettingExcludeKeywordInput,
@@ -19,40 +19,34 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createJanparaCrawlSettingExcludeKeyword = async (
   input: CreateJanparaCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreateJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: CreateJanparaCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updateJanparaCrawlSettingExcludeKeyword = async (
   input: UpdateJanparaCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdateJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateJanparaCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const deleteJanparaCrawlSettingExcludeKeyword = async (
-  id: string,
-  productId: string,
-  pathname: string,
-) => {
+export const deleteJanparaCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
   const result = getClient().mutate<DeleteJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteJanparaCrawlSettingExcludeKeywordDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

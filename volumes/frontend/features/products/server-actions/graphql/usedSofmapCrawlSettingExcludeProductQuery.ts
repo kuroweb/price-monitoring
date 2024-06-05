@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateUsedSofmapCrawlSettingExcludeProductInput,
@@ -19,40 +19,34 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createUsedSofmapCrawlSettingExcludeProduct = async (
   input: CreateUsedSofmapCrawlSettingExcludeProductInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreateUsedSofmapCrawlSettingExcludeProductMutation>({
     mutation: CreateUsedSofmapCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updateUsedSofmapCrawlSettingExcludeProduct = async (
   input: UpdateUsedSofmapCrawlSettingExcludeProductInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdateUsedSofmapCrawlSettingExcludeProductMutation>({
     mutation: UpdateUsedSofmapCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const deleteUsedSofmapCrawlSettingExcludeProduct = async (
-  id: string,
-  productId: string,
-  pathname: string,
-) => {
+export const deleteUsedSofmapCrawlSettingExcludeProduct = async (id: string, productId: string) => {
   const result = getClient().mutate<DeleteUsedSofmapCrawlSettingExcludeProductMutation>({
     mutation: DeleteUsedSofmapCrawlSettingExcludeProductDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

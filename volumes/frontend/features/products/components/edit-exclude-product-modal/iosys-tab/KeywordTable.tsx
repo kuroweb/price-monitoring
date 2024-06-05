@@ -6,18 +6,18 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   IosysCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'
 
-import { deleteIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/iosysCrawlSettingExcludeProductQuery'
+import { deleteIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/iosysCrawlSettingExcludeProductQuery'
 
 const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
-  data: GetProductDetailPageDataQuery
+  data: GetProductSettingPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<IosysCrawlSettingExcludeProduct | undefined>>
 }) => {
@@ -26,7 +26,7 @@ const KeywordTable = ({
   const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteIosysCrawlSettingExcludeProduct(id, productId, pathname)
+    const result = await deleteIosysCrawlSettingExcludeProduct(id, productId)
     if (result.data?.deleteIosysCrawlSettingExcludeProduct.ok) {
       toast.success('success')
     } else {

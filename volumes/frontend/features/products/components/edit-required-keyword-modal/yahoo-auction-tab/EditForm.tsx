@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
+import { updateYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,
@@ -29,7 +29,7 @@ function EditForm({
   const onSubmit: SubmitHandler<UpdateYahooAuctionCrawlSettingRequiredKeywordInput> = async (
     data,
   ) => {
-    const result = await updateYahooAuctionCrawlSettingRequiredKeyword(data, pathname)
+    const result = await updateYahooAuctionCrawlSettingRequiredKeyword(data)
     if (result.data?.updateYahooAuctionCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

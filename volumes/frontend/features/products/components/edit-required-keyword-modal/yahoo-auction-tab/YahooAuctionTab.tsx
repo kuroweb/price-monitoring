@@ -9,11 +9,11 @@ import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   YahooAuctionCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-const YahooAuctionTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const YahooAuctionTab = ({ data }: { data: GetProductSettingPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
   const [condition, setCondition] = useState<YahooAuctionCrawlSettingRequiredKeyword | undefined>(
     undefined,

@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateUsedSofmapCrawlSettingExcludeKeyword } from '@/features/products/server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
+import { updateUsedSofmapCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/usedSofmapCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateUsedSofmapCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await updateUsedSofmapCrawlSettingExcludeKeyword(data, pathname)
+    const result = await updateUsedSofmapCrawlSettingExcludeKeyword(data)
     if (result.data?.updateUsedSofmapCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

@@ -6,18 +6,18 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   IosysCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/iosysCrawlSettingRequiredKeywordQuery'
+import { deleteIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/iosysCrawlSettingRequiredKeywordQuery'
 
 const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
-  data: GetProductDetailPageDataQuery
+  data: GetProductSettingPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<IosysCrawlSettingRequiredKeyword | undefined>>
 }) => {
@@ -26,7 +26,7 @@ const KeywordTable = ({
   const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteIosysCrawlSettingRequiredKeyword(id, productId, pathname)
+    const result = await deleteIosysCrawlSettingRequiredKeyword(id, productId)
     if (result.data?.deleteIosysCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
     } else {

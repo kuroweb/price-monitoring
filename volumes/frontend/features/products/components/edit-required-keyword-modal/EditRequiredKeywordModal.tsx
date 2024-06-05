@@ -13,9 +13,9 @@ import PcKoubouTab from './pc-koubou-tab/PcKoubouTab'
 import UsedSofmapTab from './used-sofmap-tab/UsedSofmapTab'
 import YahooAuctionTab from './yahoo-auction-tab/YahooAuctionTab'
 
-import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { GetProductSettingPageDataQuery } from '@/graphql/dist/client'
 
-const RequiredKeywordModal = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const RequiredKeywordModal = ({ data }: { data: GetProductSettingPageDataQuery }) => {
   const [tab, setTab] = useState<
     'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
   >('ヤフオク')

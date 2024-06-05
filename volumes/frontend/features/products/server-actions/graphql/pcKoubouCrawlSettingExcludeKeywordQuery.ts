@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreatePcKoubouCrawlSettingExcludeKeywordInput,
@@ -19,40 +19,34 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createPcKoubouCrawlSettingExcludeKeyword = async (
   input: CreatePcKoubouCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreatePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: CreatePcKoubouCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updatePcKoubouCrawlSettingExcludeKeyword = async (
   input: UpdatePcKoubouCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const deletePcKoubouCrawlSettingExcludeKeyword = async (
-  id: string,
-  productId: string,
-  pathname: string,
-) => {
+export const deletePcKoubouCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
   const result = getClient().mutate<DeletePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: DeletePcKoubouCrawlSettingExcludeKeywordDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

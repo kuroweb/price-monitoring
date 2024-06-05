@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateYahooAuctionCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
+import { createYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/yahooAuctionCrawlSettingExcludeProductQuery'
 
 const CreateForm = ({
   setMode,
@@ -31,7 +31,7 @@ const CreateForm = ({
   const onSubmit: SubmitHandler<CreateYahooAuctionCrawlSettingExcludeProductInput> = async (
     data,
   ) => {
-    const result = await createYahooAuctionCrawlSettingExcludeProduct(data, pathname)
+    const result = await createYahooAuctionCrawlSettingExcludeProduct(data)
     if (
       result?.data?.createYahooAuctionCrawlSettingExcludeProduct.__typename ===
         'CreateYahooAuctionCrawlSettingExcludeProductResultError' &&

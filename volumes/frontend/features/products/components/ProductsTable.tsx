@@ -3,18 +3,17 @@
 import { useState } from 'react'
 
 import Link from 'next/link'
-import { usePathname, useRouter } from 'next/navigation'
+import {  useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
-import { deleteProduct } from '../server-actions/productQuery'
+import { deleteProduct } from '../server-actions/graphql/productQuery'
 
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
 import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
-  const pathname = usePathname()
   const router = useRouter()
   const [_, setModal] = useUpdateProductModalState()
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
@@ -23,7 +22,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
   const [productId, setProductId] = useState<string | undefined>(undefined)
 
   const submitDeleteProduct = async (productId: string) => {
-    const result = await deleteProduct(productId, pathname)
+    const result = await deleteProduct(productId)
 
     if (result.data?.deleteProduct.ok) {
       toast.success('success')

@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateYahooAuctionCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
+import { createYahooAuctionCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 const CreateForm = ({
   setMode,
@@ -31,7 +31,7 @@ const CreateForm = ({
   const onSubmit: SubmitHandler<CreateYahooAuctionCrawlSettingRequiredKeywordInput> = async (
     data,
   ) => {
-    const result = await createYahooAuctionCrawlSettingRequiredKeyword(data, pathname)
+    const result = await createYahooAuctionCrawlSettingRequiredKeyword(data)
     if (result.data?.createYahooAuctionCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateJanparaCrawlSettingRequiredKeyword } from '@/features/products/server-actions/janparaCrawlSettingRequiredKeywordQuery'
+import { updateJanparaCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/janparaCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateJanparaCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updateJanparaCrawlSettingRequiredKeyword(data, pathname)
+    const result = await updateJanparaCrawlSettingRequiredKeyword(data)
     if (result.data?.updateJanparaCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

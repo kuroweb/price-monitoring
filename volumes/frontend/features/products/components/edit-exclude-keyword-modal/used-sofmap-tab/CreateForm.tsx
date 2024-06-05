@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateUsedSofmapCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createUsedSofmapCrawlSettingExcludeKeyword } from '@/features/products/server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
+import { createUsedSofmapCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/usedSofmapCrawlSettingExcludeKeywordQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateUsedSofmapCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await createUsedSofmapCrawlSettingExcludeKeyword(data, pathname)
+    const result = await createUsedSofmapCrawlSettingExcludeKeyword(data)
     if (result.data?.createUsedSofmapCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

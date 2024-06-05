@@ -9,11 +9,11 @@ import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   UsedSofmapCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-const UsedSofmapTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const UsedSofmapTab = ({ data }: { data: GetProductSettingPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
   const [condition, setCondition] = useState<UsedSofmapCrawlSettingRequiredKeyword | undefined>(
     undefined,

@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateUsedSofmapCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createUsedSofmapCrawlSettingExcludeProduct } from '@/features/products/server-actions/usedSofmapCrawlSettingExcludeProductQuery'
+import { createUsedSofmapCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/usedSofmapCrawlSettingExcludeProductQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateUsedSofmapCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await createUsedSofmapCrawlSettingExcludeProduct(data, pathname)
+    const result = await createUsedSofmapCrawlSettingExcludeProduct(data)
     if (
       result?.data?.createUsedSofmapCrawlSettingExcludeProduct.__typename ===
         'CreateUsedSofmapCrawlSettingExcludeProductResultError' &&

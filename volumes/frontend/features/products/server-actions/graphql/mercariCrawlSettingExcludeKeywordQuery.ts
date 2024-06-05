@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateMercariCrawlSettingExcludeKeywordInput,
@@ -19,40 +19,34 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createMercariCrawlSettingExcludeKeyword = async (
   input: CreateMercariCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreateMercariCrawlSettingExcludeKeywordMutation>({
     mutation: CreateMercariCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updateMercariCrawlSettingExcludeKeyword = async (
   input: UpdateMercariCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdateMercariCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateMercariCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const deleteMercariCrawlSettingExcludeKeyword = async (
-  id: string,
-  productId: string,
-  pathname: string,
-) => {
+export const deleteMercariCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
   const result = getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteMercariCrawlSettingExcludeKeywordDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

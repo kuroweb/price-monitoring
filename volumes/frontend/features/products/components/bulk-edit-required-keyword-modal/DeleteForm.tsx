@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
-import { deleteIosysCrawlSettingRequiredKeyword } from '../../server-actions/iosysCrawlSettingRequiredKeywordQuery'
-import { deleteJanparaCrawlSettingRequiredKeyword } from '../../server-actions/janparaCrawlSettingRequiredKeywordQuery'
-import { deleteMercariCrawlSettingRequiredKeyword } from '../../server-actions/mercariCrawlSettingRequiredKeywordQuery'
-import { deletePcKoubouCrawlSettingRequiredKeyword } from '../../server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
-import { deleteUsedSofmapCrawlSettingRequiredKeyword } from '../../server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
-import { deleteYahooAuctionCrawlSettingRequiredKeyword } from '../../server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
+import { deleteIosysCrawlSettingRequiredKeyword } from '../../server-actions/graphql/iosysCrawlSettingRequiredKeywordQuery'
+import { deleteJanparaCrawlSettingRequiredKeyword } from '../../server-actions/graphql/janparaCrawlSettingRequiredKeywordQuery'
+import { deleteMercariCrawlSettingRequiredKeyword } from '../../server-actions/graphql/mercariCrawlSettingRequiredKeywordQuery'
+import { deletePcKoubouCrawlSettingRequiredKeyword } from '../../server-actions/graphql/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { deleteUsedSofmapCrawlSettingRequiredKeyword } from '../../server-actions/graphql/usedSofmapCrawlSettingRequiredKeywordQuery'
+import { deleteYahooAuctionCrawlSettingRequiredKeyword } from '../../server-actions/graphql/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
@@ -58,7 +58,6 @@ const DeleteForm = ({
           const result = await deleteYahooAuctionCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deleteYahooAuctionCrawlSettingRequiredKeyword.__typename ===
@@ -81,7 +80,6 @@ const DeleteForm = ({
           const result = await deleteMercariCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deleteMercariCrawlSettingRequiredKeyword.__typename ===
@@ -104,7 +102,6 @@ const DeleteForm = ({
           const result = await deleteJanparaCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deleteJanparaCrawlSettingRequiredKeyword.__typename ===
@@ -124,11 +121,7 @@ const DeleteForm = ({
     for (const excludeKeyword of iosysCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteIosysCrawlSettingRequiredKeyword(
-            excludeKeyword.id,
-            productId,
-            pathname,
-          )
+          const result = await deleteIosysCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteIosysCrawlSettingRequiredKeyword.__typename ===
               'DeleteIosysCrawlSettingRequiredKeywordResultError' &&
@@ -150,7 +143,6 @@ const DeleteForm = ({
           const result = await deletePcKoubouCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deletePcKoubouCrawlSettingRequiredKeyword.__typename ===
@@ -173,7 +165,6 @@ const DeleteForm = ({
           const result = await deleteUsedSofmapCrawlSettingRequiredKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deleteUsedSofmapCrawlSettingRequiredKeyword.__typename ===

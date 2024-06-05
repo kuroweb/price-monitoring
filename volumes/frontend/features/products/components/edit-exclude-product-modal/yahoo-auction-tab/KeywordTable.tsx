@@ -6,18 +6,18 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   YahooAuctionCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'
 
-import { deleteYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
+import { deleteYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/yahooAuctionCrawlSettingExcludeProductQuery'
 
 const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
-  data: GetProductDetailPageDataQuery
+  data: GetProductSettingPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<YahooAuctionCrawlSettingExcludeProduct | undefined>>
 }) => {
@@ -26,7 +26,7 @@ const KeywordTable = ({
   const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteYahooAuctionCrawlSettingExcludeProduct(id, productId, pathname)
+    const result = await deleteYahooAuctionCrawlSettingExcludeProduct(id, productId)
     if (result.data?.deleteYahooAuctionCrawlSettingExcludeProduct.ok) {
       toast.success('success')
     } else {

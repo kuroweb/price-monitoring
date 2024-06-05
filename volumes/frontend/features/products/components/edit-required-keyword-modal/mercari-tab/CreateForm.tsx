@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateMercariCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/mercariCrawlSettingRequiredKeywordQuery'
+import { createMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/mercariCrawlSettingRequiredKeywordQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateMercariCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await createMercariCrawlSettingRequiredKeyword(data, pathname)
+    const result = await createMercariCrawlSettingRequiredKeyword(data)
     if (result.data?.createMercariCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

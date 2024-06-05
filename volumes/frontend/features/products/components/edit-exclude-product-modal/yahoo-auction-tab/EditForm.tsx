@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
+import { updateYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/yahooAuctionCrawlSettingExcludeProductQuery'
 
 function EditForm({
   setMode,
@@ -29,7 +29,7 @@ function EditForm({
   const onSubmit: SubmitHandler<UpdateYahooAuctionCrawlSettingExcludeProductInput> = async (
     data,
   ) => {
-    const result = await updateYahooAuctionCrawlSettingExcludeProduct(data, pathname)
+    const result = await updateYahooAuctionCrawlSettingExcludeProduct(data)
     if (
       result?.data?.updateYahooAuctionCrawlSettingExcludeProduct.__typename ===
         'UpdateYahooAuctionCrawlSettingExcludeProductResultError' &&

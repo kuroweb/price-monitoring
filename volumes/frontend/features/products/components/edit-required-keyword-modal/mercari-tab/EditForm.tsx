@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/mercariCrawlSettingRequiredKeywordQuery'
+import { updateMercariCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/mercariCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateMercariCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updateMercariCrawlSettingRequiredKeyword(data, pathname)
+    const result = await updateMercariCrawlSettingRequiredKeyword(data)
     if (result.data?.updateMercariCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useCreateProductModalState } from '../../hooks/useCreateProductModalState'
-import { createProduct } from '../../server-actions/productQuery'
+import { createProduct } from '../../server-actions/graphql/productQuery'
 
 import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
@@ -79,7 +79,7 @@ const CreateProductModal = () => {
   })
 
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
-    const result = await createProduct(data, pathname)
+    const result = await createProduct(data)
 
     if (result.data?.createProduct.ok) {
       toast.success('success')

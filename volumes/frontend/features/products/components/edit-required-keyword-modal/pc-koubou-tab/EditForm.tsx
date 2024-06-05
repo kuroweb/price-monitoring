@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updatePcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { updatePcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/pcKoubouCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdatePcKoubouCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updatePcKoubouCrawlSettingRequiredKeyword(data, pathname)
+    const result = await updatePcKoubouCrawlSettingRequiredKeyword(data)
     if (result.data?.updatePcKoubouCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

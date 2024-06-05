@@ -6,18 +6,18 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   MercariCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/mercariCrawlSettingExcludeKeywordQuery'
+import { deleteMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/mercariCrawlSettingExcludeKeywordQuery'
 
 const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
-  data: GetProductDetailPageDataQuery
+  data: GetProductSettingPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<MercariCrawlSettingExcludeKeyword | undefined>>
 }) => {
@@ -26,7 +26,7 @@ const KeywordTable = ({
   const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteMercariCrawlSettingExcludeKeyword(id, productId, pathname)
+    const result = await deleteMercariCrawlSettingExcludeKeyword(id, productId)
     if (result.data?.deleteMercariCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {

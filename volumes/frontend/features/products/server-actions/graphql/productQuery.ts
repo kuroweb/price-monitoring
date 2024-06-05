@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateProductInput,
@@ -21,32 +21,36 @@ import { getClient } from '@/lib/apollo-client-rsc'
   Product
 */
 
-export const createProduct = async (input: CreateProductInput, pathname: string) => {
+export const createProduct = async (input: CreateProductInput) => {
   const result = getClient().mutate<CreateProductMutation>({
     mutation: CreateProductDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const updateProduct = async (id: string, input: UpdateProductInput, pathname: string) => {
+export const updateProduct = async (
+  id: string,
+  input: UpdateProductInput,
+  pathnames: string | string[],
+) => {
   const result = getClient().mutate<UpdateProductMutation>({
     mutation: UpdateProductDocument,
     variables: { id, input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const deleteProduct = async (id: string, pathname: string) => {
+export const deleteProduct = async (id: string) => {
   const result = getClient().mutate<DeleteProductMutation>({
     mutation: DeleteProductDocument,
     variables: { id },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

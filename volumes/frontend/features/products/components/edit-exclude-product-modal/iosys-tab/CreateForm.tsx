@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateIosysCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/iosysCrawlSettingExcludeProductQuery'
+import { createIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/iosysCrawlSettingExcludeProductQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateIosysCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await createIosysCrawlSettingExcludeProduct(data, pathname)
+    const result = await createIosysCrawlSettingExcludeProduct(data)
     if (
       result?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
         'CreateIosysCrawlSettingExcludeProductResultError' &&

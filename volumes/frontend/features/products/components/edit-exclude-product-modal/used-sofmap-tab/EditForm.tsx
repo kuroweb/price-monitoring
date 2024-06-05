@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateUsedSofmapCrawlSettingExcludeProduct } from '@/features/products/server-actions/usedSofmapCrawlSettingExcludeProductQuery'
+import { updateUsedSofmapCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/usedSofmapCrawlSettingExcludeProductQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateUsedSofmapCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await updateUsedSofmapCrawlSettingExcludeProduct(data, pathname)
+    const result = await updateUsedSofmapCrawlSettingExcludeProduct(data)
     if (
       result?.data?.updateUsedSofmapCrawlSettingExcludeProduct.__typename ===
         'UpdateUsedSofmapCrawlSettingExcludeProductResultError' &&

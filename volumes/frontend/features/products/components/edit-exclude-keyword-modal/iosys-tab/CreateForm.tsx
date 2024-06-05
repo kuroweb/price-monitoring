@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateIosysCrawlSettingExcludeKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createIosysCrawlSettingExcludeKeyword } from '@/features/products/server-actions/iosysCrawlSettingExcludeKeywordQuery'
+import { createIosysCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/iosysCrawlSettingExcludeKeywordQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateIosysCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await createIosysCrawlSettingExcludeKeyword(data, pathname)
+    const result = await createIosysCrawlSettingExcludeKeyword(data)
     if (result.data?.createIosysCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

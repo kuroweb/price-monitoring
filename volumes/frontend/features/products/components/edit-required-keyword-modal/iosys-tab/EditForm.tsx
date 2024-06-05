@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/iosysCrawlSettingRequiredKeywordQuery'
+import { updateIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/iosysCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateIosysCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await updateIosysCrawlSettingRequiredKeyword(data, pathname)
+    const result = await updateIosysCrawlSettingRequiredKeyword(data)
     if (result.data?.updateIosysCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

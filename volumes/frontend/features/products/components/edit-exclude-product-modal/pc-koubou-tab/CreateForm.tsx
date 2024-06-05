@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreatePcKoubouCrawlSettingExcludeProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createPcKoubouCrawlSettingExcludeProduct } from '@/features/products/server-actions/pcKoubouCrawlSettingExcludeProductQuery'
+import { createPcKoubouCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/pcKoubouCrawlSettingExcludeProductQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreatePcKoubouCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await createPcKoubouCrawlSettingExcludeProduct(data, pathname)
+    const result = await createPcKoubouCrawlSettingExcludeProduct(data)
     if (
       result?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
         'CreatePcKoubouCrawlSettingExcludeProductResultError' &&

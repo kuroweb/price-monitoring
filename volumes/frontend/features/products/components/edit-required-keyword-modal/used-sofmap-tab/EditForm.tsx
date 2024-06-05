@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateUsedSofmapCrawlSettingRequiredKeyword } from '@/features/products/server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
+import { updateUsedSofmapCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/usedSofmapCrawlSettingRequiredKeywordQuery'
 
 function EditForm({
   setMode,
@@ -29,7 +29,7 @@ function EditForm({
   const onSubmit: SubmitHandler<UpdateUsedSofmapCrawlSettingRequiredKeywordInput> = async (
     data,
   ) => {
-    const result = await updateUsedSofmapCrawlSettingRequiredKeyword(data, pathname)
+    const result = await updateUsedSofmapCrawlSettingRequiredKeyword(data)
     if (result.data?.updateUsedSofmapCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

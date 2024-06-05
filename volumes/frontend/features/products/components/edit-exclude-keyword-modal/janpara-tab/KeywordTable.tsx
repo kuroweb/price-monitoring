@@ -6,18 +6,18 @@ import { useRouter, useParams, usePathname } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   JanparaCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-import { deleteJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/janparaCrawlSettingExcludeKeywordQuery'
+import { deleteJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/janparaCrawlSettingExcludeKeywordQuery'
 
 const KeywordTable = ({
   data,
   setMode,
   setCondition,
 }: {
-  data: GetProductDetailPageDataQuery
+  data: GetProductSettingPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<JanparaCrawlSettingExcludeKeyword | undefined>>
 }) => {
@@ -26,7 +26,7 @@ const KeywordTable = ({
   const pathname = usePathname()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteJanparaCrawlSettingExcludeKeyword(id, productId, pathname)
+    const result = await deleteJanparaCrawlSettingExcludeKeyword(id, productId)
     if (result.data?.deleteJanparaCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {

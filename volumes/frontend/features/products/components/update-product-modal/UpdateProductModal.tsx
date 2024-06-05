@@ -8,7 +8,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useUpdateProductModalState } from '../../hooks/useUpdateProductModalState'
-import { updateProduct } from '../../server-actions/productQuery'
+import { updateProduct } from '../../server-actions/graphql/productQuery'
 
 import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
@@ -103,7 +103,7 @@ const UpdateProductModal = ({
       return toast.error('更新対象が見つかりませんでした。')
     }
 
-    const result = await updateProduct(productId, input, pathname)
+    const result = await updateProduct(productId, input)
 
     if (result.data?.updateProduct.ok) {
       toast.success('success')

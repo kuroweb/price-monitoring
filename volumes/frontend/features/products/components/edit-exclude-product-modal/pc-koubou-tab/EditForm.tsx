@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updatePcKoubouCrawlSettingExcludeProduct } from '@/features/products/server-actions/pcKoubouCrawlSettingExcludeProductQuery'
+import { updatePcKoubouCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/pcKoubouCrawlSettingExcludeProductQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdatePcKoubouCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await updatePcKoubouCrawlSettingExcludeProduct(data, pathname)
+    const result = await updatePcKoubouCrawlSettingExcludeProduct(data)
     if (
       result?.data?.updatePcKoubouCrawlSettingExcludeProduct.__typename ===
         'UpdatePcKoubouCrawlSettingExcludeProductResultError' &&

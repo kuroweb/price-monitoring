@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/mercariCrawlSettingExcludeKeywordQuery'
+import { updateMercariCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/mercariCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateMercariCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await updateMercariCrawlSettingExcludeKeyword(data, pathname)
+    const result = await updateMercariCrawlSettingExcludeKeyword(data)
     if (result.data?.updateMercariCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

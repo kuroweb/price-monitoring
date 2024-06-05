@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateUsedSofmapCrawlSettingRequiredKeywordInput,
@@ -19,26 +19,24 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createUsedSofmapCrawlSettingRequiredKeyword = async (
   input: CreateUsedSofmapCrawlSettingRequiredKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreateUsedSofmapCrawlSettingRequiredKeywordMutation>({
     mutation: CreateUsedSofmapCrawlSettingRequiredKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updateUsedSofmapCrawlSettingRequiredKeyword = async (
   input: UpdateUsedSofmapCrawlSettingRequiredKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdateUsedSofmapCrawlSettingRequiredKeywordMutation>({
     mutation: UpdateUsedSofmapCrawlSettingRequiredKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
@@ -46,13 +44,12 @@ export const updateUsedSofmapCrawlSettingRequiredKeyword = async (
 export const deleteUsedSofmapCrawlSettingRequiredKeyword = async (
   id: string,
   productId: string,
-  pathname: string,
 ) => {
   const result = getClient().mutate<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteUsedSofmapCrawlSettingRequiredKeywordDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

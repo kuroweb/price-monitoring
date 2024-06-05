@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreatePcKoubouCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createPcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { createPcKoubouCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/pcKoubouCrawlSettingRequiredKeywordQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreatePcKoubouCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await createPcKoubouCrawlSettingRequiredKeyword(data, pathname)
+    const result = await createPcKoubouCrawlSettingRequiredKeyword(data)
     if (result.data?.createPcKoubouCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

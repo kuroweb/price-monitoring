@@ -10,7 +10,7 @@ import { toast } from 'react-toastify'
 import type { CreateIosysCrawlSettingRequiredKeywordInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/iosysCrawlSettingRequiredKeywordQuery'
+import { createIosysCrawlSettingRequiredKeyword } from '@/features/products/server-actions/graphql/iosysCrawlSettingRequiredKeywordQuery'
 
 const CreateForm = ({
   setMode,
@@ -29,7 +29,7 @@ const CreateForm = ({
   })
 
   const onSubmit: SubmitHandler<CreateIosysCrawlSettingRequiredKeywordInput> = async (data) => {
-    const result = await createIosysCrawlSettingRequiredKeyword(data, pathname)
+    const result = await createIosysCrawlSettingRequiredKeyword(data)
     if (result.data?.createIosysCrawlSettingRequiredKeyword.ok) {
       toast.success('success')
       setMode('list')

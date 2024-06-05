@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/janparaCrawlSettingExcludeKeywordQuery'
+import { updateJanparaCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/janparaCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateJanparaCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await updateJanparaCrawlSettingExcludeKeyword(data, pathname)
+    const result = await updateJanparaCrawlSettingExcludeKeyword(data)
     if (result.data?.updateJanparaCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

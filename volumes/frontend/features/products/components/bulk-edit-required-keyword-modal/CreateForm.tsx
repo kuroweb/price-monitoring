@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
-import { createIosysCrawlSettingRequiredKeyword } from '../../server-actions/iosysCrawlSettingRequiredKeywordQuery'
-import { createJanparaCrawlSettingRequiredKeyword } from '../../server-actions/janparaCrawlSettingRequiredKeywordQuery'
-import { createMercariCrawlSettingRequiredKeyword } from '../../server-actions/mercariCrawlSettingRequiredKeywordQuery'
-import { createPcKoubouCrawlSettingRequiredKeyword } from '../../server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
-import { createUsedSofmapCrawlSettingRequiredKeyword } from '../../server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
-import { createYahooAuctionCrawlSettingRequiredKeyword } from '../../server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
+import { createIosysCrawlSettingRequiredKeyword } from '../../server-actions/graphql/iosysCrawlSettingRequiredKeywordQuery'
+import { createJanparaCrawlSettingRequiredKeyword } from '../../server-actions/graphql/janparaCrawlSettingRequiredKeywordQuery'
+import { createMercariCrawlSettingRequiredKeyword } from '../../server-actions/graphql/mercariCrawlSettingRequiredKeywordQuery'
+import { createPcKoubouCrawlSettingRequiredKeyword } from '../../server-actions/graphql/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { createUsedSofmapCrawlSettingRequiredKeyword } from '../../server-actions/graphql/usedSofmapCrawlSettingRequiredKeywordQuery'
+import { createYahooAuctionCrawlSettingRequiredKeyword } from '../../server-actions/graphql/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 import type { SubmitHandler } from 'react-hook-form'
 
@@ -40,10 +40,7 @@ const CreateForm = () => {
       keyword: input.keyword,
     }
 
-    const yahooAuctionResult = await createYahooAuctionCrawlSettingRequiredKeyword(
-      postData,
-      pathname,
-    )
+    const yahooAuctionResult = await createYahooAuctionCrawlSettingRequiredKeyword(postData)
     if (
       yahooAuctionResult?.data?.createYahooAuctionCrawlSettingRequiredKeyword.__typename ===
         'CreateYahooAuctionCrawlSettingRequiredKeywordResultError' &&
@@ -52,7 +49,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const mercariResult = await createMercariCrawlSettingRequiredKeyword(postData, pathname)
+    const mercariResult = await createMercariCrawlSettingRequiredKeyword(postData)
     if (
       mercariResult?.data?.createMercariCrawlSettingRequiredKeyword.__typename ===
         'CreateMercariCrawlSettingRequiredKeywordResultError' &&
@@ -61,7 +58,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const janparaResult = await createJanparaCrawlSettingRequiredKeyword(postData, pathname)
+    const janparaResult = await createJanparaCrawlSettingRequiredKeyword(postData)
     if (
       janparaResult?.data?.createJanparaCrawlSettingRequiredKeyword.__typename ===
         'CreateJanparaCrawlSettingRequiredKeywordResultError' &&
@@ -70,7 +67,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const iosysResult = await createIosysCrawlSettingRequiredKeyword(postData, pathname)
+    const iosysResult = await createIosysCrawlSettingRequiredKeyword(postData)
     if (
       iosysResult?.data?.createIosysCrawlSettingRequiredKeyword.__typename ===
         'CreateIosysCrawlSettingRequiredKeywordResultError' &&
@@ -79,7 +76,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const pcKoubouResult = await createPcKoubouCrawlSettingRequiredKeyword(postData, pathname)
+    const pcKoubouResult = await createPcKoubouCrawlSettingRequiredKeyword(postData)
     if (
       pcKoubouResult?.data?.createPcKoubouCrawlSettingRequiredKeyword.__typename ===
         'CreatePcKoubouCrawlSettingRequiredKeywordResultError' &&
@@ -88,7 +85,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const usedSofmapResult = await createUsedSofmapCrawlSettingRequiredKeyword(postData, pathname)
+    const usedSofmapResult = await createUsedSofmapCrawlSettingRequiredKeyword(postData)
     if (
       usedSofmapResult?.data?.createUsedSofmapCrawlSettingRequiredKeyword.__typename ===
         'CreateUsedSofmapCrawlSettingRequiredKeywordResultError' &&

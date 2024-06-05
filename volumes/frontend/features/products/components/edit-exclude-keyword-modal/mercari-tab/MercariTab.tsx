@@ -9,11 +9,11 @@ import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   MercariCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-const MercariTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const MercariTab = ({ data }: { data: GetProductSettingPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
   const [condition, setCondition] = useState<MercariCrawlSettingExcludeKeyword | undefined>(
     undefined,

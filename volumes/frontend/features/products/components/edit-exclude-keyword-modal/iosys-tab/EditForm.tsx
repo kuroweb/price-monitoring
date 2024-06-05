@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateIosysCrawlSettingExcludeKeyword } from '@/features/products/server-actions/iosysCrawlSettingExcludeKeywordQuery'
+import { updateIosysCrawlSettingExcludeKeyword } from '@/features/products/server-actions/graphql/iosysCrawlSettingExcludeKeywordQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateIosysCrawlSettingExcludeKeywordInput> = async (data) => {
-    const result = await updateIosysCrawlSettingExcludeKeyword(data, pathname)
+    const result = await updateIosysCrawlSettingExcludeKeyword(data)
     if (result.data?.updateIosysCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
       setMode('list')

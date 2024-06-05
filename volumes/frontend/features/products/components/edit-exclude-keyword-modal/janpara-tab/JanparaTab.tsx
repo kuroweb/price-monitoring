@@ -9,11 +9,11 @@ import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   JanparaCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
-const JanparaTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const JanparaTab = ({ data }: { data: GetProductSettingPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
   const [condition, setCondition] = useState<JanparaCrawlSettingExcludeKeyword | undefined>(
     undefined,

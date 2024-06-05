@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateIosysCrawlSettingExcludeKeywordInput,
@@ -19,40 +19,34 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createIosysCrawlSettingExcludeKeyword = async (
   input: CreateIosysCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreateIosysCrawlSettingExcludeKeywordMutation>({
     mutation: CreateIosysCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updateIosysCrawlSettingExcludeKeyword = async (
   input: UpdateIosysCrawlSettingExcludeKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdateIosysCrawlSettingExcludeKeywordMutation>({
     mutation: UpdateIosysCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
-export const deleteIosysCrawlSettingExcludeKeyword = async (
-  id: string,
-  productId: string,
-  pathname: string,
-) => {
+export const deleteIosysCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
   const result = getClient().mutate<DeleteIosysCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteIosysCrawlSettingExcludeKeywordDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

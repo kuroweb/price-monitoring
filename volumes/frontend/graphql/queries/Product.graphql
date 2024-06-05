@@ -295,6 +295,188 @@ query getProductDetailPageData(
   }
 }
 
+query getProductSettingPageData($id: ID!) {
+  product(id: $id) {
+    id
+    name
+    yahooAuctionCrawlSetting {
+      id
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+      yahooAuctionCrawlSettingExcludeKeywords {
+        id
+        yahooAuctionCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      yahooAuctionCrawlSettingExcludeProducts {
+        id
+        yahooAuctionCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      yahooAuctionCrawlSettingRequiredKeywords {
+        id
+        yahooAuctionCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    mercariCrawlSetting {
+      id
+      productId
+      keyword
+      categoryId
+      minPrice
+      maxPrice
+      enabled
+      mercariCrawlSettingExcludeKeywords {
+        id
+        mercariCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      mercariCrawlSettingExcludeProducts {
+        id
+        mercariCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      mercariCrawlSettingRequiredKeywords {
+        id
+        mercariCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    janparaCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      janparaCrawlSettingExcludeKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      janparaCrawlSettingExcludeProducts {
+        id
+        janparaCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      janparaCrawlSettingRequiredKeywords {
+        id
+        janparaCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    iosysCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      iosysCrawlSettingExcludeKeywords {
+        id
+        iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      iosysCrawlSettingExcludeProducts {
+        id
+        iosysCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      iosysCrawlSettingRequiredKeywords {
+        id
+        iosysCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    pcKoubouCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      pcKoubouCrawlSettingExcludeKeywords {
+        id
+        pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingExcludeProducts {
+        id
+        pcKoubouCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      pcKoubouCrawlSettingRequiredKeywords {
+        id
+        pcKoubouCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    usedSofmapCrawlSetting {
+      id
+      productId
+      keyword
+      minPrice
+      maxPrice
+      enabled
+      usedSofmapCrawlSettingExcludeKeywords {
+        id
+        usedSofmapCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+      usedSofmapCrawlSettingExcludeProducts {
+        id
+        usedSofmapCrawlSettingId
+        externalId
+        createdAt
+        updatedAt
+      }
+      usedSofmapCrawlSettingRequiredKeywords {
+        id
+        usedSofmapCrawlSettingId
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+  }
+}
+
 #
 # recommends
 #

@@ -13,7 +13,7 @@ import type {
 } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/iosysCrawlSettingExcludeProductQuery'
+import { updateIosysCrawlSettingExcludeProduct } from '@/features/products/server-actions/graphql/iosysCrawlSettingExcludeProductQuery'
 
 function EditForm({
   setMode,
@@ -27,7 +27,7 @@ function EditForm({
   const pathname = usePathname()
 
   const onSubmit: SubmitHandler<UpdateIosysCrawlSettingExcludeProductInput> = async (data) => {
-    const result = await updateIosysCrawlSettingExcludeProduct(data, pathname)
+    const result = await updateIosysCrawlSettingExcludeProduct(data)
     if (
       result?.data?.updateIosysCrawlSettingExcludeProduct.__typename ===
         'UpdateIosysCrawlSettingExcludeProductResultError' &&

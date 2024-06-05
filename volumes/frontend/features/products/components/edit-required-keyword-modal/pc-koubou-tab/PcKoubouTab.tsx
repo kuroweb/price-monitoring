@@ -9,11 +9,11 @@ import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
 import type {
-  GetProductDetailPageDataQuery,
+  GetProductSettingPageDataQuery,
   PcKoubouCrawlSettingRequiredKeyword,
 } from '@/graphql/dist/client'
 
-const PcKoubouTab = ({ data }: { data: GetProductDetailPageDataQuery }) => {
+const PcKoubouTab = ({ data }: { data: GetProductSettingPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
   const [condition, setCondition] = useState<PcKoubouCrawlSettingRequiredKeyword | undefined>(
     undefined,

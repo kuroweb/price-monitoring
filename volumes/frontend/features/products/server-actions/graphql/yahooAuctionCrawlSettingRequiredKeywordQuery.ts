@@ -1,6 +1,6 @@
 'use server'
 
-import { revalidatePath } from 'next/cache'
+import { revalidateProductPaths } from '../../lib/revalidatePaths'
 
 import type {
   CreateYahooAuctionCrawlSettingRequiredKeywordInput,
@@ -19,26 +19,24 @@ import { getClient } from '@/lib/apollo-client-rsc'
 
 export const createYahooAuctionCrawlSettingRequiredKeyword = async (
   input: CreateYahooAuctionCrawlSettingRequiredKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<CreateYahooAuctionCrawlSettingRequiredKeywordMutation>({
     mutation: CreateYahooAuctionCrawlSettingRequiredKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
 
 export const updateYahooAuctionCrawlSettingRequiredKeyword = async (
   input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput,
-  pathname: string,
 ) => {
   const result = getClient().mutate<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation>({
     mutation: UpdateYahooAuctionCrawlSettingRequiredKeywordDocument,
     variables: { input },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }
@@ -46,13 +44,12 @@ export const updateYahooAuctionCrawlSettingRequiredKeyword = async (
 export const deleteYahooAuctionCrawlSettingRequiredKeyword = async (
   id: string,
   productId: string,
-  pathname: string,
 ) => {
   const result = getClient().mutate<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
     variables: { id, productId },
   })
-  revalidatePath(pathname)
+  revalidateProductPaths()
 
   return result
 }

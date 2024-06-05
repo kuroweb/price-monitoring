@@ -1,16 +1,16 @@
 'use client'
 
-import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useParams,  useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcludeKeywordModalState'
-import { deleteIosysCrawlSettingExcludeKeyword } from '../../server-actions/iosysCrawlSettingExcludeKeywordQuery'
-import { deleteJanparaCrawlSettingExcludeKeyword } from '../../server-actions/janparaCrawlSettingExcludeKeywordQuery'
-import { deleteMercariCrawlSettingExcludeKeyword } from '../../server-actions/mercariCrawlSettingExcludeKeywordQuery'
-import { deletePcKoubouCrawlSettingExcludeKeyword } from '../../server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
-import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '../../server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
-import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '../../server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
+import { deleteIosysCrawlSettingExcludeKeyword } from '../../server-actions/graphql/iosysCrawlSettingExcludeKeywordQuery'
+import { deleteJanparaCrawlSettingExcludeKeyword } from '../../server-actions/graphql/janparaCrawlSettingExcludeKeywordQuery'
+import { deleteMercariCrawlSettingExcludeKeyword } from '../../server-actions/graphql/mercariCrawlSettingExcludeKeywordQuery'
+import { deletePcKoubouCrawlSettingExcludeKeyword } from '../../server-actions/graphql/pcKoubouCrawlSettingExcludeKeywordQuery'
+import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '../../server-actions/graphql/usedSofmapCrawlSettingExcludeKeywordQuery'
+import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '../../server-actions/graphql/yahooAuctionCrawlSettingExcludeKeywordQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
@@ -36,7 +36,6 @@ const DeleteForm = ({
 }) => {
   const router = useRouter()
   const params = useParams()
-  const pathname = usePathname()
 
   const [_, setModal] = useBulkEditExcludeKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
@@ -58,7 +57,6 @@ const DeleteForm = ({
           const result = await deleteYahooAuctionCrawlSettingExcludeKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deleteYahooAuctionCrawlSettingExcludeKeyword.__typename ===
@@ -78,11 +76,7 @@ const DeleteForm = ({
     for (const excludeKeyword of mercariCrawlSettingExcludeKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteMercariCrawlSettingExcludeKeyword(
-            excludeKeyword.id,
-            productId,
-            pathname,
-          )
+          const result = await deleteMercariCrawlSettingExcludeKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteMercariCrawlSettingExcludeKeyword.__typename ===
               'DeleteMercariCrawlSettingExcludeKeywordResultError' &&
@@ -101,11 +95,7 @@ const DeleteForm = ({
     for (const excludeKeyword of janparaCrawlSettingExcludeKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteJanparaCrawlSettingExcludeKeyword(
-            excludeKeyword.id,
-            productId,
-            pathname,
-          )
+          const result = await deleteJanparaCrawlSettingExcludeKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteJanparaCrawlSettingExcludeKeyword.__typename ===
               'DeleteJanparaCrawlSettingExcludeKeywordResultError' &&
@@ -124,11 +114,7 @@ const DeleteForm = ({
     for (const excludeKeyword of iosysCrawlSettingExcludeKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteIosysCrawlSettingExcludeKeyword(
-            excludeKeyword.id,
-            productId,
-            pathname,
-          )
+          const result = await deleteIosysCrawlSettingExcludeKeyword(excludeKeyword.id, productId)
           if (
             result?.data?.deleteIosysCrawlSettingExcludeKeyword.__typename ===
               'DeleteIosysCrawlSettingExcludeKeywordResultError' &&
@@ -150,7 +136,6 @@ const DeleteForm = ({
           const result = await deletePcKoubouCrawlSettingExcludeKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deletePcKoubouCrawlSettingExcludeKeyword.__typename ===
@@ -173,7 +158,6 @@ const DeleteForm = ({
           const result = await deleteUsedSofmapCrawlSettingExcludeKeyword(
             excludeKeyword.id,
             productId,
-            pathname,
           )
           if (
             result?.data?.deleteUsedSofmapCrawlSettingExcludeKeyword.__typename ===

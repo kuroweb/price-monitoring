@@ -5,12 +5,12 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcludeKeywordModalState'
-import { createIosysCrawlSettingExcludeKeyword } from '../../server-actions/iosysCrawlSettingExcludeKeywordQuery'
-import { createJanparaCrawlSettingExcludeKeyword } from '../../server-actions/janparaCrawlSettingExcludeKeywordQuery'
-import { createMercariCrawlSettingExcludeKeyword } from '../../server-actions/mercariCrawlSettingExcludeKeywordQuery'
-import { createPcKoubouCrawlSettingExcludeKeyword } from '../../server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
-import { createUsedSofmapCrawlSettingExcludeKeyword } from '../../server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
-import { createYahooAuctionCrawlSettingExcludeKeyword } from '../../server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
+import { createIosysCrawlSettingExcludeKeyword } from '../../server-actions/graphql/iosysCrawlSettingExcludeKeywordQuery'
+import { createJanparaCrawlSettingExcludeKeyword } from '../../server-actions/graphql/janparaCrawlSettingExcludeKeywordQuery'
+import { createMercariCrawlSettingExcludeKeyword } from '../../server-actions/graphql/mercariCrawlSettingExcludeKeywordQuery'
+import { createPcKoubouCrawlSettingExcludeKeyword } from '../../server-actions/graphql/pcKoubouCrawlSettingExcludeKeywordQuery'
+import { createUsedSofmapCrawlSettingExcludeKeyword } from '../../server-actions/graphql/usedSofmapCrawlSettingExcludeKeywordQuery'
+import { createYahooAuctionCrawlSettingExcludeKeyword } from '../../server-actions/graphql/yahooAuctionCrawlSettingExcludeKeywordQuery'
 
 import type { SubmitHandler } from 'react-hook-form'
 
@@ -40,10 +40,7 @@ const CreateForm = () => {
       keyword: input.keyword,
     }
 
-    const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeKeyword(
-      postData,
-      pathname,
-    )
+    const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeKeyword(postData)
     if (
       yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeKeyword.__typename ===
         'CreateYahooAuctionCrawlSettingExcludeKeywordResultError' &&
@@ -52,7 +49,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const mercariResult = await createMercariCrawlSettingExcludeKeyword(postData, pathname)
+    const mercariResult = await createMercariCrawlSettingExcludeKeyword(postData)
     if (
       mercariResult?.data?.createMercariCrawlSettingExcludeKeyword.__typename ===
         'CreateMercariCrawlSettingExcludeKeywordResultError' &&
@@ -61,7 +58,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const janparaResult = await createJanparaCrawlSettingExcludeKeyword(postData, pathname)
+    const janparaResult = await createJanparaCrawlSettingExcludeKeyword(postData)
     if (
       janparaResult?.data?.createJanparaCrawlSettingExcludeKeyword.__typename ===
         'CreateJanparaCrawlSettingExcludeKeywordResultError' &&
@@ -70,7 +67,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const iosysResult = await createIosysCrawlSettingExcludeKeyword(postData, pathname)
+    const iosysResult = await createIosysCrawlSettingExcludeKeyword(postData)
     if (
       iosysResult?.data?.createIosysCrawlSettingExcludeKeyword.__typename ===
         'CreateIosysCrawlSettingExcludeKeywordResultError' &&
@@ -79,7 +76,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const pcKoubouResult = await createPcKoubouCrawlSettingExcludeKeyword(postData, pathname)
+    const pcKoubouResult = await createPcKoubouCrawlSettingExcludeKeyword(postData)
     if (
       pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeKeyword.__typename ===
         'CreatePcKoubouCrawlSettingExcludeKeywordResultError' &&
@@ -88,7 +85,7 @@ const CreateForm = () => {
       return toast.error('一括登録に失敗しました。')
     }
 
-    const usedSofmapResult = await createUsedSofmapCrawlSettingExcludeKeyword(postData, pathname)
+    const usedSofmapResult = await createUsedSofmapCrawlSettingExcludeKeyword(postData)
     if (
       usedSofmapResult?.data?.createUsedSofmapCrawlSettingExcludeKeyword.__typename ===
         'CreateUsedSofmapCrawlSettingExcludeKeywordResultError' &&

@@ -1,16 +1,16 @@
 'use client'
 
 import NextImage from 'next/image'
-import { usePathname, useRouter } from 'next/navigation'
+import {  useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { useStatusState } from '../hooks/useStatusState'
-import { createIosysCrawlSettingExcludeProduct } from '../server-actions/iosysCrawlSettingExcludeProductQuery'
-import { createJanparaCrawlSettingExcludeProduct } from '../server-actions/janparaCrawlSettingExcludeProductQuery'
-import { createMercariCrawlSettingExcludeProduct } from '../server-actions/mercariCrawlSettingExcludeProductQuery'
-import { createPcKoubouCrawlSettingExcludeProduct } from '../server-actions/pcKoubouCrawlSettingExcludeProductQuery'
-import { createUsedSofmapCrawlSettingExcludeProduct } from '../server-actions/usedSofmapCrawlSettingExcludeProductQuery'
-import { createYahooAuctionCrawlSettingExcludeProduct } from '../server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
+import { createIosysCrawlSettingExcludeProduct } from '../server-actions/graphql/iosysCrawlSettingExcludeProductQuery'
+import { createJanparaCrawlSettingExcludeProduct } from '../server-actions/graphql/janparaCrawlSettingExcludeProductQuery'
+import { createMercariCrawlSettingExcludeProduct } from '../server-actions/graphql/mercariCrawlSettingExcludeProductQuery'
+import { createPcKoubouCrawlSettingExcludeProduct } from '../server-actions/graphql/pcKoubouCrawlSettingExcludeProductQuery'
+import { createUsedSofmapCrawlSettingExcludeProduct } from '../server-actions/graphql/usedSofmapCrawlSettingExcludeProductQuery'
+import { createYahooAuctionCrawlSettingExcludeProduct } from '../server-actions/graphql/yahooAuctionCrawlSettingExcludeProductQuery'
 
 import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
 
@@ -19,7 +19,6 @@ const RelatedProductCard = ({
 }: {
   relatedProduct: GetProductDetailPageDataQuery['product']['relatedProducts'][0]
 }) => {
-  const pathname = usePathname()
   const router = useRouter()
   const [status, _] = useStatusState()
 
@@ -71,10 +70,7 @@ const RelatedProductCard = ({
     switch (platform) {
       case 'yahoo_auction':
       case 'yahoo_fleamarket':
-        const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeProduct(
-          input,
-          pathname,
-        )
+        const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeProduct(input)
         if (
           yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.__typename ===
             'CreateYahooAuctionCrawlSettingExcludeProductResultError' &&
@@ -85,7 +81,7 @@ const RelatedProductCard = ({
         }
         break
       case 'mercari':
-        const mercariResult = await createMercariCrawlSettingExcludeProduct(input, pathname)
+        const mercariResult = await createMercariCrawlSettingExcludeProduct(input)
         if (
           mercariResult?.data?.createMercariCrawlSettingExcludeProduct.__typename ===
             'CreateMercariCrawlSettingExcludeProductResultError' &&
@@ -95,7 +91,7 @@ const RelatedProductCard = ({
         }
         break
       case 'janpara':
-        const janparaResult = await createJanparaCrawlSettingExcludeProduct(input, pathname)
+        const janparaResult = await createJanparaCrawlSettingExcludeProduct(input)
         if (
           janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.__typename ===
             'CreateJanparaCrawlSettingExcludeProductResultError' &&
@@ -105,7 +101,7 @@ const RelatedProductCard = ({
         }
         break
       case 'iosys':
-        const iosys = await createIosysCrawlSettingExcludeProduct(input, pathname)
+        const iosys = await createIosysCrawlSettingExcludeProduct(input)
         if (
           iosys?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
             'CreateIosysCrawlSettingExcludeProductResultError' &&
@@ -115,7 +111,7 @@ const RelatedProductCard = ({
         }
         break
       case 'pc_koubou':
-        const pcKoubouResult = await createPcKoubouCrawlSettingExcludeProduct(input, pathname)
+        const pcKoubouResult = await createPcKoubouCrawlSettingExcludeProduct(input)
         if (
           pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
             'CreatePcKoubouCrawlSettingExcludeProductResultError' &&
@@ -126,7 +122,7 @@ const RelatedProductCard = ({
         }
         break
       case 'used_sofmap':
-        const usedSofmapResult = await createUsedSofmapCrawlSettingExcludeProduct(input, pathname)
+        const usedSofmapResult = await createUsedSofmapCrawlSettingExcludeProduct(input)
         if (
           usedSofmapResult?.data?.createUsedSofmapCrawlSettingExcludeProduct.__typename ===
             'CreateUsedSofmapCrawlSettingExcludeProductResultError' &&
