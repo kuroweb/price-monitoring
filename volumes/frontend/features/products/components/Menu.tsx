@@ -1,11 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import {  useParams } from 'next/navigation'
+import { usePathname, useParams } from 'next/navigation'
 
 const Menu = () => {
   const params = useParams()
-  
+  const pathname = usePathname()
 
   const product_detail_path = `/products/${params.id}`
   const product_settings_path = `/products/${params.id}/settings`

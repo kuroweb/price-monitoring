@@ -23,7 +23,6 @@ const KeywordTable = ({
 }) => {
   const params = useParams()
   const router = useRouter()
-  
 
   const destroy = async (id: string, productId: string) => {
     const result = await deleteUsedSofmapCrawlSettingRequiredKeyword(id, productId)

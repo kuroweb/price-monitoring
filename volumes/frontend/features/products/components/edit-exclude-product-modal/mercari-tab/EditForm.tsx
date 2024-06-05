@@ -2,7 +2,7 @@
 
 import type { Dispatch, SetStateAction } from 'react'
 
-import { useParams,  useRouter } from 'next/dist/client/components/navigation'
+import { useParams, useRouter } from 'next/dist/client/components/navigation'
 import { Button } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -24,7 +24,6 @@ function EditForm({
 }) {
   const params = useParams()
   const router = useRouter()
-  
 
   const onSubmit: SubmitHandler<UpdateMercariCrawlSettingExcludeProductInput> = async (data) => {
     const result = await updateMercariCrawlSettingExcludeProduct(data)

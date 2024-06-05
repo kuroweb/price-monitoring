@@ -18,7 +18,7 @@ const CreateForm = ({
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
 }) => {
   const router = useRouter()
-  
+
   const params = useParams()
 
   const { register, handleSubmit } = useForm<CreateJanparaCrawlSettingExcludeKeywordInput>({

@@ -1,7 +1,7 @@
 'use client'
 
 import NextImage from 'next/image'
-import {  useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { useStatusState } from '../hooks/useStatusState'
