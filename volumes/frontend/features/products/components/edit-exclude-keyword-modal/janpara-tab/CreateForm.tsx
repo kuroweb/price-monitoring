@@ -2,7 +2,7 @@
 
 import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams, usePathname } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { Button } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -18,7 +18,7 @@ const CreateForm = ({
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
 }) => {
   const router = useRouter()
-  const pathname = usePathname()
+  
   const params = useParams()
 
   const { register, handleSubmit } = useForm<CreateJanparaCrawlSettingExcludeKeywordInput>({

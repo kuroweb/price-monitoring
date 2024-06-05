@@ -2,7 +2,7 @@
 
 import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams, usePathname } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
@@ -23,7 +23,7 @@ const KeywordTable = ({
 }) => {
   const params = useParams()
   const router = useRouter()
-  const pathname = usePathname()
+  
 
   const destroy = async (id: string, productId: string) => {
     const result = await deleteUsedSofmapCrawlSettingRequiredKeyword(id, productId)

@@ -2,7 +2,7 @@
 
 import type { Dispatch, SetStateAction } from 'react'
 
-import { useRouter, useParams, usePathname } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { Button } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
@@ -19,7 +19,7 @@ const CreateForm = ({
 }) => {
   const router = useRouter()
   const params = useParams()
-  const pathname = usePathname()
+  
 
   const { register, handleSubmit } = useForm<CreateUsedSofmapCrawlSettingRequiredKeywordInput>({
     defaultValues: {

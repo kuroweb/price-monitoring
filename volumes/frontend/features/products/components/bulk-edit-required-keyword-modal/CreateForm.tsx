@@ -1,6 +1,6 @@
 'use client'
 
-import { useParams, usePathname, useRouter } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -21,7 +21,6 @@ type inputType = {
 const CreateForm = () => {
   const router = useRouter()
   const params = useParams()
-  const pathname = usePathname()
 
   const [_, setModal] = useBulkEditRequiredKeywordModalState()
   const { register, handleSubmit, setValue } = useForm<inputType>({
