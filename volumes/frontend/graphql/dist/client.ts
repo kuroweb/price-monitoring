@@ -6633,7 +6633,7 @@ export const GetRecommendsPageDataDocument = gql`
       relatedProducts(
         platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all,used_sofmap.all"
         page: 1
-        per: 4
+        per: 10
         sort: "price"
         order: "asc"
       ) {

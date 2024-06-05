@@ -140,7 +140,7 @@ const RelatedProductCard = ({
 
   return (
     <>
-      <div className='card bg-base-100 shadow-xl'>
+      <div className='card w-48 flex-none bg-base-100 shadow-xl'>
         <figure>
           <div className='relative h-32 w-full'>
             <NextImage
