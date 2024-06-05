@@ -31,11 +31,7 @@ export const createProduct = async (input: CreateProductInput) => {
   return result
 }
 
-export const updateProduct = async (
-  id: string,
-  input: UpdateProductInput,
-  pathnames: string | string[],
-) => {
+export const updateProduct = async (id: string, input: UpdateProductInput) => {
   const result = getClient().mutate<UpdateProductMutation>({
     mutation: UpdateProductDocument,
     variables: { id, input },
