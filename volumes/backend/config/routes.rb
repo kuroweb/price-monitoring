@@ -3,6 +3,8 @@ require "sidekiq/cron/web"
 
 # rubocop:disable Metrics/BlockLength
 Rails.application.routes.draw do
+  mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
+  post "/graphql", to: "graphql#execute"
   namespace :api do
     namespace :v1 do
       resources :products
@@ -73,7 +75,12 @@ Rails.application.routes.draw do
 
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # Sidekiq
   # TODO: ProductionでBasic認証をかける
   mount Sidekiq::Web, at: "/sidekiq"
+
+  # GraphQL
+  post "/graphql", to: "graphql#execute"
+  mount GraphiQL::Rails::Engine, at: "/graphiql", as: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
 end
 # rubocop:enable Metrics/BlockLength

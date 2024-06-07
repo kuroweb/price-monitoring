@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "3.2.2"
 
 gem "bootsnap", require: false
+gem "graphql"
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
@@ -23,6 +24,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
+  gem "graphiql-rails"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"
