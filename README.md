@@ -2,9 +2,9 @@
 
 [![Deployment](https://github.com/kuroweb/price-monitoring/actions/workflows/deployment.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/deployment.yml)
 
-価格監視ツール
+Web上にある商品の最安値を探したり、相場を把握するためのツール
 
-Web上にある欲しい物の価格監視を行うことができる
+開発目的としては、GraphQL, TypeScriptの学習目的である
 
 ## 技術スタック
 
