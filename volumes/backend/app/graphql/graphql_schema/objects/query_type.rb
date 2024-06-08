@@ -4,12 +4,12 @@ module GraphqlSchema
       include GraphQL::Types::Relay::HasNodeField
       include GraphQL::Types::Relay::HasNodesField
 
-      field :product, Objects::ProductType, null: false do
+      field :product, Objects::Products::ProductType, null: false do
         description "product"
         argument :id, ID, required: true
       end
 
-      field :products, [Objects::ProductType], null: false do
+      field :products, [Objects::Products::ProductType], null: false do
         description "products"
         argument :id, ID, required: false
         argument :name, String, required: false
