@@ -14,9 +14,9 @@ module GraphqlSchema
         field :iosys_crawl_setting, IosysCrawlSettings::IosysCrawlSettingType, null: false
         field :pc_koubou_crawl_setting, PcKoubouCrawlSettings::PcKoubouCrawlSettingType, null: false
         field :used_sofmap_crawl_setting, UsedSofmapCrawlSettings::UsedSofmapCrawlSettingType, null: false
-        field :yahoo_auction_daily_purchase_summaries, [YahooAuctionDailyPurchaseSummary], null: false
-        field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummary], null: false
-        field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummary], null: false
+        field :yahoo_auction_daily_purchase_summaries, [YahooAuctionDailyPurchaseSummaryType], null: false
+        field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummaryType], null: false
+        field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummaryType], null: false
         field :related_products, [RelatedProductType], null: false do
           argument :platform_mask, String, required: true
           argument :page, Int, required: false
