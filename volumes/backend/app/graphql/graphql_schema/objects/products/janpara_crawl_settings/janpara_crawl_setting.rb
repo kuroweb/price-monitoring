@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module JanparaCrawlSettings
-        class JanparaCrawlSettingType < Base
+        class JanparaCrawlSetting < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false
@@ -14,9 +14,9 @@ module GraphqlSchema
           field :enabled, Boolean, null: false
           field :created_at, GraphQL::Types::ISO8601DateTime, null: false
           field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-          field :janpara_crawl_setting_required_keywords, [JanparaCrawlSettingRequiredKeywordType], null: false
-          field :janpara_crawl_setting_exclude_keywords, [JanparaCrawlSettingExcludeKeywordType], null: false
-          field :janpara_crawl_setting_exclude_products, [JanparaCrawlSettingExcludeProductType], null: false
+          field :janpara_crawl_setting_required_keywords, [JanparaCrawlSettingRequiredKeyword], null: false
+          field :janpara_crawl_setting_exclude_keywords, [JanparaCrawlSettingExcludeKeyword], null: false
+          field :janpara_crawl_setting_exclude_products, [JanparaCrawlSettingExcludeProduct], null: false
 
           def janpara_crawl_setting_required_keywords
             object.janpara_crawl_setting_required_keywords

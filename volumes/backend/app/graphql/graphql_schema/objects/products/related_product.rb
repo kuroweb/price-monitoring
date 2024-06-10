@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Objects
     module Products
-      class RelatedProductType < Base
+      class RelatedProduct < Base
         field :platform, String, null: false
         field :product_id, Int, null: false
         field :external_id, String, null: false

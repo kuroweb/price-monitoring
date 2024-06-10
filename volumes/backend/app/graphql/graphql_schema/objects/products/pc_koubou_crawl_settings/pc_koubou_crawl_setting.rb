@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module PcKoubouCrawlSettings
-        class PcKoubouCrawlSettingType < Base
+        class PcKoubouCrawlSetting < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false
@@ -14,9 +14,9 @@ module GraphqlSchema
           field :enabled, Boolean, null: false
           field :created_at, GraphQL::Types::ISO8601DateTime, null: false
           field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-          field :pc_koubou_crawl_setting_required_keywords, [PcKoubouCrawlSettingRequiredKeywordType], null: false
-          field :pc_koubou_crawl_setting_exclude_keywords, [PcKoubouCrawlSettingExcludeKeywordType], null: false
-          field :pc_koubou_crawl_setting_exclude_products, [PcKoubouCrawlSettingExcludeProductType], null: false
+          field :pc_koubou_crawl_setting_required_keywords, [PcKoubouCrawlSettingRequiredKeyword], null: false
+          field :pc_koubou_crawl_setting_exclude_keywords, [PcKoubouCrawlSettingExcludeKeyword], null: false
+          field :pc_koubou_crawl_setting_exclude_products, [PcKoubouCrawlSettingExcludeProduct], null: false
 
           def pc_koubou_crawl_setting_required_keywords
             object.pc_koubou_crawl_setting_required_keywords

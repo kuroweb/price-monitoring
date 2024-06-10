@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module UsedSofmapCrawlSettings
-        class UsedSofmapCrawlSettingType < Base
+        class UsedSofmapCrawlSetting < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false
@@ -14,9 +14,9 @@ module GraphqlSchema
           field :enabled, Boolean, null: false
           field :created_at, GraphQL::Types::ISO8601DateTime, null: false
           field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-          field :used_sofmap_crawl_setting_required_keywords, [UsedSofmapCrawlSettingRequiredKeywordType], null: false
-          field :used_sofmap_crawl_setting_exclude_keywords, [UsedSofmapCrawlSettingExcludeKeywordType], null: false
-          field :used_sofmap_crawl_setting_exclude_products, [UsedSofmapCrawlSettingExcludeProductType], null: false
+          field :used_sofmap_crawl_setting_required_keywords, [UsedSofmapCrawlSettingRequiredKeyword], null: false
+          field :used_sofmap_crawl_setting_exclude_keywords, [UsedSofmapCrawlSettingExcludeKeyword], null: false
+          field :used_sofmap_crawl_setting_exclude_products, [UsedSofmapCrawlSettingExcludeProduct], null: false
 
           def used_sofmap_crawl_setting_required_keywords
             object.used_sofmap_crawl_setting_required_keywords

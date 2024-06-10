@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module YahooAuctionCrawlSettings
-        class YahooAuctionCrawlSettingType < Base
+        class YahooAuctionCrawlSetting < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false
@@ -14,9 +14,9 @@ module GraphqlSchema
           field :enabled, Boolean, null: false
           field :created_at, GraphQL::Types::ISO8601DateTime, null: false
           field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-          field :yahoo_auction_crawl_setting_required_keywords, [YahooAuctionCrawlSettingRequiredKeywordType], null: false
-          field :yahoo_auction_crawl_setting_exclude_keywords, [YahooAuctionCrawlSettingExcludeKeywordType], null: false
-          field :yahoo_auction_crawl_setting_exclude_products, [YahooAuctionCrawlSettingExcludeProductType], null: false
+          field :yahoo_auction_crawl_setting_required_keywords, [YahooAuctionCrawlSettingRequiredKeyword], null: false
+          field :yahoo_auction_crawl_setting_exclude_keywords, [YahooAuctionCrawlSettingExcludeKeyword], null: false
+          field :yahoo_auction_crawl_setting_exclude_products, [YahooAuctionCrawlSettingExcludeProduct], null: false
 
           def yahoo_auction_crawl_setting_required_keywords
             object.yahoo_auction_crawl_setting_required_keywords

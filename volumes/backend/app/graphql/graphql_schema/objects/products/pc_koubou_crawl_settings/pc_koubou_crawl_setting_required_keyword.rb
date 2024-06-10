@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module PcKoubouCrawlSettings
-        class PcKoubouCrawlSettingExcludeKeywordType < Base
+        class PcKoubouCrawlSettingRequiredKeyword < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false
