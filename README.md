@@ -14,7 +14,7 @@ Web上にある商品の最安値を探したり、相場を把握するため�
 - TypeScript
 - TailwindCSS
 
-### BFF
+### BFF（撤去中）
 
 - Go
 - gqlgen
