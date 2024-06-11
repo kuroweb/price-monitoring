@@ -1,4 +1,4 @@
-schema: ./graphql/schema
+schema: "http://backend:3000/graphql"
 documents:
   - ./graphql/queries/*.graphql
   - ./graphql/mutations/*.graphql
