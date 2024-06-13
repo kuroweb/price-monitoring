@@ -44,9 +44,9 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "UpdateYahooAuctionCrawlSettingExcludeKeywordResultError",
+            __typename: "CreateYahooAuctionCrawlSettingExcludeKeywordResultError",
             error: {
-              __typename: "UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed",
+              __typename: "CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed",
               code:,
               message:,
               details: []
