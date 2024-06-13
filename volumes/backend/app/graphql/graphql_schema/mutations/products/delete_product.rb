@@ -8,7 +8,7 @@ module GraphqlSchema
 
         type Unions::Products::DeleteProductResult
 
-        def resolve(id:) # rubocop:disable Metrics/MethodLength
+        def resolve(id:)
           product = Product.find(id)
 
           if product.destroy
@@ -18,24 +18,31 @@ module GraphqlSchema
               ok: true
             }
           else
-            {
-              __typename: "DeleteProductResultError",
-              error: {
-                __typename: "DeleteProductResultValidationFailed",
-                code: "400",
-                message: "Bad Request.",
-                details: []
-              },
-              ok: false
-            }
+            error_response("400", "Bad Request.")
           end
-        rescue ActiveRecord::RecordNotFound
+        rescue StandardError => e
+          handle_error(e)
+        end
+
+        private
+
+        def handle_error(exception)
+          case exception
+          when ActiveRecord::RecordNotFound
+            error_response("404", "Not Found.")
+          else
+            Rails.logger.error("Internal Server Error. exception: #{exception.full_message}")
+            error_response("503", "Internal Server Error.")
+          end
+        end
+
+        def error_response(code, message)
           {
             __typename: "DeleteProductResultError",
             error: {
               __typename: "DeleteProductResultValidationFailed",
-              code: "404",
-              message: "Not Found.",
+              code:,
+              message:,
               details: []
             },
             ok: false

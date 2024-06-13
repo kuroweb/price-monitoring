@@ -45,7 +45,7 @@ module GraphqlSchema
           when ActiveRecord::RecordNotUnique
             error_response("409", "Conflict.")
           else
-            Rails.logger.error("Bad Request. exception: #{exception.full_message}")
+            Rails.logger.error("Internal Server Error. exception: #{exception.full_message}")
             error_response("503", "Internal Server Error.")
           end
         end
