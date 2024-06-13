@@ -2,14 +2,14 @@ module GraphqlSchema
   module Mutations
     module Products
       class DeleteProduct < Base
-        argument :id, ID, required: true
+        input_object_class InputObjects::Products::DeleteProductInput
 
         field :result, Unions::Products::DeleteProductResult, null: false
 
         type Unions::Products::DeleteProductResult
 
-        def resolve(id:)
-          product = Product.find(id)
+        def resolve(input)
+          product = Product.find(input[:id])
 
           if product.destroy
             {
