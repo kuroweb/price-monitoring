@@ -5,7 +5,7 @@ module GraphqlSchema
         class UpdateProductResultSuccess < Base
           implements Interfaces::Products::ResultBase
 
-          field :product, Product, null: false
+          field :product, Objects::Products::Product, null: false
         end
       end
     end
