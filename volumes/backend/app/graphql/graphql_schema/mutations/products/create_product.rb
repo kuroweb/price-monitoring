@@ -2,14 +2,15 @@ module GraphqlSchema
   module Mutations
     module Products
       class CreateProduct < Base
-        argument :product, InputObjects::Products::CreateProduct, required: true
+        input_object_class InputObjects::Products::CreateProductInput
 
         field :result, Unions::Products::CreateProductResult, null: false
 
         type Unions::Products::CreateProductResult
 
-        def resolve(product:) # rubocop:disable Metrics/MethodLength
-          product = ::Products::Create.call(params: product.as_json.deep_symbolize_keys)
+        # rubocop:disable Metrics/MethodLength
+        def resolve(input)
+          product = ::Products::Create.call(params: input.as_json.deep_symbolize_keys)
 
           {
             __typename: "CreateProductResultSuccess",
@@ -30,6 +31,7 @@ module GraphqlSchema
             ok: false
           }
         end
+        # rubocop:enable Metrics/MethodLength
       end
     end
   end

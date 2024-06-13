@@ -1,8 +1,9 @@
 module GraphqlSchema
   module InputObjects
     module Products
-      class CreateJanparaCrawlSetting < Base
+      class UpdateYahooAuctionCrawlSettingInput < Base
         argument :keyword, String, required: true
+        argument :category_id, Int, required: false
         argument :min_price, Int, required: true
         argument :max_price, Int, required: true
         argument :enabled, Boolean, required: true

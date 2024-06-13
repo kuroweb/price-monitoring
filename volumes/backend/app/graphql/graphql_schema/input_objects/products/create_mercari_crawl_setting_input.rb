@@ -1,7 +1,7 @@
 module GraphqlSchema
   module InputObjects
     module Products
-      class UpdateYahooAuctionCrawlSetting < Base
+      class CreateMercariCrawlSettingInput < Base
         argument :keyword, String, required: true
         argument :category_id, Int, required: false
         argument :min_price, Int, required: true
