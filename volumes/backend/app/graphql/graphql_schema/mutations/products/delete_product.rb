@@ -8,8 +8,6 @@ module GraphqlSchema
 
         type Unions::Products::DeleteProductResult
 
-        graphql_name :DeleteProduct
-
         def resolve(id:) # rubocop:disable Metrics/MethodLength
           product = Product.find(id)
 

@@ -8,8 +8,6 @@ module GraphqlSchema
 
         type Unions::Products::UpdateProductResult
 
-        graphql_name :UpdateProduct
-
         def resolve(product:) # rubocop:disable Metrics/MethodLength
           product = Product.find(product.id)
           ::Products::Update.call(product:, params: product.as_json.deep_symbolize_keys)
