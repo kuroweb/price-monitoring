@@ -15,8 +15,9 @@ module GraphqlSchema
             .yahoo_auction_crawl_setting
             .yahoo_auction_crawl_setting_required_keywords
             .find(input[:id])
-
           yahoo_auction_crawl_setting_required_keyword.update!(keyword: input[:keyword])
+
+          inspect(product)
 
           {
             __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
@@ -28,6 +29,11 @@ module GraphqlSchema
         end
 
         private
+
+        def inspect(product)
+          ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
+          ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
+        end
 
         def handle_error(exception)
           case exception

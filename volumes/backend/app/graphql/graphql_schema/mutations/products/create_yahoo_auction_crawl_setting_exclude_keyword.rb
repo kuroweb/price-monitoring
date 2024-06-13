@@ -16,6 +16,8 @@ module GraphqlSchema
             .yahoo_auction_crawl_setting_exclude_keywords
             .create!(keyword: input[:keyword])
 
+          inspect(product)
+
           {
             __typename: "CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess",
             yahoo_auction_crawl_setting_exclude_keyword:,
@@ -26,6 +28,11 @@ module GraphqlSchema
         end
 
         private
+
+        def inspect(product)
+          ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
+          ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
+        end
 
         def handle_error(exception)
           case exception
