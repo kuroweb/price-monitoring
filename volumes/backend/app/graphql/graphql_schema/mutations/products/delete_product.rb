@@ -2,7 +2,7 @@ module GraphqlSchema
   module Mutations
     module Products
       class DeleteProduct < Base
-        input_object_class InputObjects::Products::DeleteProduct::DeleteProductInput
+        input_object_class InputObjects::Products::DeleteProductInput
 
         field :result, Unions::Products::DeleteProduct::DeleteProductResult, null: false
 
