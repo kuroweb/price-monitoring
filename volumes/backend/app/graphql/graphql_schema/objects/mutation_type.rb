@@ -40,6 +40,24 @@ module GraphqlSchema
             mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct
       field :delete_mercari_crawl_setting_exclude_product,
             mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct
+      field :create_iosys_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeKeyword
+      field :update_iosys_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword
+      field :delete_iosys_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeKeyword
+      field :create_iosys_crawl_setting_required_keyword,
+            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword
+      field :update_iosys_crawl_setting_required_keyword,
+            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingRequiredKeyword
+      field :delete_iosys_crawl_setting_required_keyword,
+            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword
+      field :create_iosys_crawl_setting_exclude_product,
+            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeProduct
+      field :update_iosys_crawl_setting_exclude_product,
+            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProduct
+      field :delete_iosys_crawl_setting_exclude_product,
+            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct
     end
   end
 end
