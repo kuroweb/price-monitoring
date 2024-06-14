@@ -2,11 +2,11 @@ module GraphqlSchema
   module Mutations
     module Products
       class DeleteProduct < Base
-        input_object_class InputObjects::Products::DeleteProductInput
+        input_object_class InputObjects::Products::DeleteProduct::DeleteProductInput
 
-        field :result, Unions::Products::DeleteProductResult, null: false
+        field :result, Unions::Products::DeleteProduct::DeleteProductResult, null: false
 
-        type Unions::Products::DeleteProductResult
+        type Unions::Products::DeleteProduct::DeleteProductResult
 
         def resolve(input)
           product = Product.find(input[:id])

@@ -1,9 +1,11 @@
 module GraphqlSchema
   module Objects
     module Products
-      module MutationResults
-        class DeleteProductResultSuccess < Base
+      module CreateProduct
+        class CreateProductResultSuccess < Base
           implements Interfaces::Products::ResultBase
+
+          field :product, Objects::Products::Product, null: false
         end
       end
     end

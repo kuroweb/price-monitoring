@@ -2,11 +2,11 @@ module GraphqlSchema
   module Mutations
     module Products
       class CreateProduct < Base
-        input_object_class InputObjects::Products::CreateProductInput
+        input_object_class InputObjects::Products::CreateProduct::CreateProductInput
 
-        field :result, Unions::Products::CreateProductResult, null: false
+        field :result, Unions::Products::CreateProduct::CreateProductResult, null: false
 
-        type Unions::Products::CreateProductResult
+        type Unions::Products::CreateProduct::CreateProductResult
 
         def resolve(input)
           product = ::Products::Create.call(params: input.as_json.deep_symbolize_keys)

@@ -2,11 +2,11 @@ module GraphqlSchema
   module Mutations
     module Products
       class UpdateProduct < Base
-        input_object_class InputObjects::Products::UpdateProductInput
+        input_object_class InputObjects::Products::UpdateProduct::UpdateProductInput
 
-        field :result, Unions::Products::UpdateProductResult, null: false
+        field :result, Unions::Products::UpdateProduct::UpdateProductResult, null: false
 
-        type Unions::Products::UpdateProductResult
+        type Unions::Products::UpdateProduct::UpdateProductResult
 
         def resolve(input)
           params = input.as_json.deep_symbolize_keys
