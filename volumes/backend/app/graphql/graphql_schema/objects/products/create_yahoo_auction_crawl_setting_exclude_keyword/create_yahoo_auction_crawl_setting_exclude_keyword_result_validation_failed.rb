@@ -1,11 +1,12 @@
 module GraphqlSchema
   module Objects
     module Products
-      module MutationResults
+      module CreateYahooAuctionCrawlSettingExcludeKeyword
         class CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed < Base
           implements Interfaces::Products::UserError
 
-          field :details, [ErrorDetail], null: false
+          # TODO: 後でネームスペースを直す
+          field :details, [Objects::Products::MutationResults::ErrorDetail], null: false
         end
       end
     end

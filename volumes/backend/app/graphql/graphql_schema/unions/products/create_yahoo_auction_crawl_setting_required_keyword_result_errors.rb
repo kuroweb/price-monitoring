@@ -2,7 +2,7 @@ module GraphqlSchema
   module Unions
     module Products
       class CreateYahooAuctionCrawlSettingRequiredKeywordResultErrors < Base
-        possible_types Objects::Products::MutationResults::\
+        possible_types Objects::Products::MutationResults::
                        CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed
 
         def self.resolve_type(object, _context)

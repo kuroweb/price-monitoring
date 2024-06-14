@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Objects
     module Products
-      module MutationResults
+      module CreateYahooAuctionCrawlSettingExcludeKeyword
         class CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess < Base
           implements Interfaces::Products::ResultBase
 
