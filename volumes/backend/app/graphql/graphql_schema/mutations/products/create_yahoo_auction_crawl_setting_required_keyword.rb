@@ -4,9 +4,13 @@ module GraphqlSchema
       class CreateYahooAuctionCrawlSettingRequiredKeyword < Base
         input_object_class InputObjects::Products::CreateYahooAuctionCrawlSettingRequiredKeywordInput
 
-        field :result, Unions::Products::CreateYahooAuctionCrawlSettingRequiredKeywordResult, null: false
+        field :result,
+              Unions::Products::CreateYahooAuctionCrawlSettingRequiredKeyword::
+              CreateYahooAuctionCrawlSettingRequiredKeywordResult,
+              null: false
 
-        type Unions::Products::CreateYahooAuctionCrawlSettingRequiredKeywordResult
+        type Unions::Products::CreateYahooAuctionCrawlSettingRequiredKeyword::
+             CreateYahooAuctionCrawlSettingRequiredKeywordResult
 
         def resolve(input)
           product = Product.find(input[:product_id])
