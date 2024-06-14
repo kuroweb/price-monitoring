@@ -7,7 +7,7 @@ module GraphqlSchema
             implements Interfaces::Products::ResultBase
 
             field :error,
-                  Unions::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+                  Unions::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
                   DeleteYahooAuctionCrawlSettingExcludeProductResultErrors,
                   null: false
           end

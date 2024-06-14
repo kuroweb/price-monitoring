@@ -7,11 +7,11 @@ module GraphqlSchema
                              UpdateYahooAuctionCrawlSettingExcludeKeywordInput
 
           field :result,
-                Unions::Products::UpdateYahooAuctionCrawlSettingExcludeKeyword::
+                Unions::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword::
                 UpdateYahooAuctionCrawlSettingExcludeKeywordResult,
                 null: false
 
-          type Unions::Products::UpdateYahooAuctionCrawlSettingExcludeKeyword::
+          type Unions::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword::
                UpdateYahooAuctionCrawlSettingExcludeKeywordResult
 
           def resolve(input)

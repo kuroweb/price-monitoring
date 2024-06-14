@@ -7,7 +7,7 @@ module GraphqlSchema
             implements Interfaces::Products::ResultBase
 
             field :error,
-                  Unions::Products::UpdateYahooAuctionCrawlSettingRequiredKeyword::
+                  Unions::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingRequiredKeyword::
                   UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrors,
                   null: false
           end

@@ -7,11 +7,11 @@ module GraphqlSchema
                              DeleteYahooAuctionCrawlSettingExcludeProductInput
 
           field :result,
-                Unions::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+                Unions::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
                 DeleteYahooAuctionCrawlSettingExcludeProductResult,
                 null: false
 
-          type Unions::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+          type Unions::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
                DeleteYahooAuctionCrawlSettingExcludeProductResult
 
           def resolve(input) # rubocop:disable Metrics/MethodLength

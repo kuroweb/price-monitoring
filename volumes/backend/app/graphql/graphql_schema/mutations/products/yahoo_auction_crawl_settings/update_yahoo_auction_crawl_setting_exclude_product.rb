@@ -7,11 +7,11 @@ module GraphqlSchema
                              UpdateYahooAuctionCrawlSettingExcludeProductInput
 
           field :result,
-                Unions::Products::UpdateYahooAuctionCrawlSettingExcludeProduct::
+                Unions::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeProduct::
                 UpdateYahooAuctionCrawlSettingExcludeProductResult,
                 null: false
 
-          type Unions::Products::UpdateYahooAuctionCrawlSettingExcludeProduct::
+          type Unions::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeProduct::
                UpdateYahooAuctionCrawlSettingExcludeProductResult
 
           def resolve(input)
