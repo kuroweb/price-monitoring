@@ -5,8 +5,7 @@ module GraphqlSchema
         class DeleteProductResultValidationFailed < Base
           implements Interfaces::Products::UserError
 
-          # TODO: 後でネームスペースを直す
-          field :details, [Objects::Products::MutationResults::ErrorDetail], null: false
+          field :details, [ErrorDetail], null: false
         end
       end
     end

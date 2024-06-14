@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Objects
     module Products
-      module MutationResults
+      module UpdateYahooAuctionCrawlSettingRequiredKeyword
         class UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed < Base
           implements Interfaces::Products::UserError
 

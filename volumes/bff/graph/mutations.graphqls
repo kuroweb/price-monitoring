@@ -1,13 +1,19 @@
 type Mutation {
+  # ✅⬜
   createProduct(input: CreateProductInput!): CreateProductResult!
+  # ✅⬜
   updateProduct(id: ID!, input: UpdateProductInput!): UpdateProductResult!
+  # ✅⬜
   deleteProduct(id: ID!): DeleteProductResult!
+  # ✅⬜
   createYahooAuctionCrawlSettingExcludeKeyword(
     input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!
   ): CreateYahooAuctionCrawlSettingExcludeKeywordResult!
+  # ✅⬜
   updateYahooAuctionCrawlSettingExcludeKeyword(
     input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!
   ): UpdateYahooAuctionCrawlSettingExcludeKeywordResult!
+  # ✅⬜
   deleteYahooAuctionCrawlSettingExcludeKeyword(
     id: ID!
     productId: ID!
@@ -22,12 +28,15 @@ type Mutation {
     id: ID!
     productId: ID!
   ): DeleteYahooAuctionCrawlSettingExcludeProductResult!
+  # ✅⬜
   createYahooAuctionCrawlSettingRequiredKeyword(
     input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
   ): CreateYahooAuctionCrawlSettingRequiredKeywordResult!
+  # ✅⬜
   updateYahooAuctionCrawlSettingRequiredKeyword(
     input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!
   ): UpdateYahooAuctionCrawlSettingRequiredKeywordResult!
+  # ✅⬜
   deleteYahooAuctionCrawlSettingRequiredKeyword(
     id: ID!
     productId: ID!
