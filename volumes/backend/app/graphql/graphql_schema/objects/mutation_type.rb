@@ -22,6 +22,24 @@ module GraphqlSchema
             mutation: Mutations::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeProduct
       field :delete_yahoo_auction_crawl_setting_exclude_product,
             mutation: Mutations::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct
+      field :create_mercari_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeKeyword
+      field :update_mercari_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeKeyword
+      field :delete_mercari_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeKeyword
+      field :create_mercari_crawl_setting_required_keyword,
+            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingRequiredKeyword
+      field :update_mercari_crawl_setting_required_keyword,
+            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingRequiredKeyword
+      field :delete_mercari_crawl_setting_required_keyword,
+            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingRequiredKeyword
+      field :create_mercari_crawl_setting_exclude_product,
+            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct
+      field :update_mercari_crawl_setting_exclude_product,
+            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct
+      field :delete_mercari_crawl_setting_exclude_product,
+            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct
     end
   end
 end
