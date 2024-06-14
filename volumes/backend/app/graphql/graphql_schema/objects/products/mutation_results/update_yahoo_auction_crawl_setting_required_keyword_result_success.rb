@@ -6,7 +6,7 @@ module GraphqlSchema
           implements Interfaces::Products::ResultBase
 
           field :yahoo_auction_crawl_setting_required_keyword,
-                Objects::Products::YahooAuctionCrawlSettings::YahooAuctionCrawlSettingRequiredKeyword, null: false
+                Objects::Products::YahooAuctionCrawlSettingRequiredKeyword, null: false
         end
       end
     end

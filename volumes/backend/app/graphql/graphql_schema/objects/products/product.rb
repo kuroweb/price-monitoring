@@ -8,12 +8,12 @@ module GraphqlSchema
         field :name, String, null: false
         field :created_at, GraphQL::Types::ISO8601DateTime, null: false
         field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-        field :yahoo_auction_crawl_setting, YahooAuctionCrawlSettings::YahooAuctionCrawlSetting, null: false
-        field :mercari_crawl_setting, MercariCrawlSettings::MercariCrawlSetting, null: false
-        field :janpara_crawl_setting, JanparaCrawlSettings::JanparaCrawlSetting, null: false
-        field :iosys_crawl_setting, IosysCrawlSettings::IosysCrawlSetting, null: false
-        field :pc_koubou_crawl_setting, PcKoubouCrawlSettings::PcKoubouCrawlSetting, null: false
-        field :used_sofmap_crawl_setting, UsedSofmapCrawlSettings::UsedSofmapCrawlSetting, null: false
+        field :yahoo_auction_crawl_setting, YahooAuctionCrawlSetting, null: false
+        field :mercari_crawl_setting, MercariCrawlSetting, null: false
+        field :janpara_crawl_setting, JanparaCrawlSetting, null: false
+        field :iosys_crawl_setting, IosysCrawlSetting, null: false
+        field :pc_koubou_crawl_setting, PcKoubouCrawlSetting, null: false
+        field :used_sofmap_crawl_setting, UsedSofmapCrawlSetting, null: false
         field :yahoo_auction_daily_purchase_summaries, [YahooAuctionDailyPurchaseSummary], null: false
         field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummary], null: false
         field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummary], null: false
