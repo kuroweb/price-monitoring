@@ -18,6 +18,10 @@ module GraphqlSchema
             mutation: Mutations::Products::DeleteYahooAuctionCrawlSettingRequiredKeyword
       field :create_yahoo_auction_crawl_setting_exclude_product,
             mutation: Mutations::Products::CreateYahooAuctionCrawlSettingExcludeProduct
+      field :update_yahoo_auction_crawl_setting_exclude_product,
+            mutation: Mutations::Products::UpdateYahooAuctionCrawlSettingExcludeProduct
+      field :delete_yahoo_auction_crawl_setting_exclude_product,
+            mutation: Mutations::Products::DeleteYahooAuctionCrawlSettingExcludeProduct
     end
   end
 end

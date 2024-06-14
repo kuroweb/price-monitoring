@@ -1,16 +1,16 @@
 module GraphqlSchema
   module Mutations
     module Products
-      class CreateYahooAuctionCrawlSettingExcludeProduct < Base
-        input_object_class InputObjects::Products::CreateYahooAuctionCrawlSettingExcludeProductInput
+      class UpdateYahooAuctionCrawlSettingExcludeProduct < Base
+        input_object_class InputObjects::Products::UpdateYahooAuctionCrawlSettingExcludeProductInput
 
         field :result,
-              Unions::Products::CreateYahooAuctionCrawlSettingExcludeProduct::
-              CreateYahooAuctionCrawlSettingExcludeProductResult,
+              Unions::Products::UpdateYahooAuctionCrawlSettingExcludeProduct::
+              UpdateYahooAuctionCrawlSettingExcludeProductResult,
               null: false
 
-        type Unions::Products::CreateYahooAuctionCrawlSettingExcludeProduct::
-             CreateYahooAuctionCrawlSettingExcludeProductResult
+        type Unions::Products::UpdateYahooAuctionCrawlSettingExcludeProduct::
+             UpdateYahooAuctionCrawlSettingExcludeProductResult
 
         def resolve(input)
           product = Product.find(input[:product_id])
@@ -18,12 +18,13 @@ module GraphqlSchema
             product
             .yahoo_auction_crawl_setting
             .yahoo_auction_crawl_setting_exclude_products
-            .create!(external_id: input[:external_id])
+            .find(input[:id])
+          yahoo_auction_crawl_setting_exclude_product.update!(external_id: input[:external_id])
 
           inspect(product)
 
           {
-            __typename: "CreateYahooAuctionCrawlSettingExcludeProductResultSuccess",
+            __typename: "UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess",
             yahoo_auction_crawl_setting_exclude_product:,
             ok: true
           }
@@ -55,9 +56,9 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "CreateYahooAuctionCrawlSettingExcludeProductResultError",
+            __typename: "UpdateYahooAuctionCrawlSettingExcludeProductResultError",
             error: {
-              __typename: "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+              __typename: "UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
               code:,
               message:,
               details: []
