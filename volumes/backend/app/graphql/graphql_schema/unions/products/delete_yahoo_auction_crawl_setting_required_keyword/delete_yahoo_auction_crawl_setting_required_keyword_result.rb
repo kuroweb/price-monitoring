@@ -3,18 +3,18 @@ module GraphqlSchema
     module Products
       module DeleteYahooAuctionCrawlSettingRequiredKeyword
         class DeleteYahooAuctionCrawlSettingRequiredKeywordResult < Base
-          possible_types Objects::Products::DeleteYahooAuctionCrawlSettingRequiredKeyword::
+          possible_types Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingRequiredKeyword::
                          DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess,
-                         Objects::Products::DeleteYahooAuctionCrawlSettingRequiredKeyword::
+                         Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingRequiredKeyword::
                          DeleteYahooAuctionCrawlSettingRequiredKeywordResultError
 
           def self.resolve_type(object, _context)
             case object[:__typename]
             when "DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess"
-              Objects::Products::DeleteYahooAuctionCrawlSettingRequiredKeyword::
+              Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingRequiredKeyword::
               DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess
             when "DeleteYahooAuctionCrawlSettingRequiredKeywordResultError"
-              Objects::Products::DeleteYahooAuctionCrawlSettingRequiredKeyword::
+              Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingRequiredKeyword::
               DeleteYahooAuctionCrawlSettingRequiredKeywordResultError
             else
               raise "Unexpected DeleteYahooAuctionCrawlSettingRequiredKeywordResult: #{object}"

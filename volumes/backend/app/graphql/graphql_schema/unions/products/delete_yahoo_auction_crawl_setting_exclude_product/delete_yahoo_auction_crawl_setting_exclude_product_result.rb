@@ -3,18 +3,18 @@ module GraphqlSchema
     module Products
       module DeleteYahooAuctionCrawlSettingExcludeProduct
         class DeleteYahooAuctionCrawlSettingExcludeProductResult < Base
-          possible_types Objects::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+          possible_types Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
                          DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess,
-                         Objects::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+                         Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
                          DeleteYahooAuctionCrawlSettingExcludeProductResultError
 
           def self.resolve_type(object, _context)
             case object[:__typename]
             when "DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess"
-              Objects::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+              Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
               DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess
             when "DeleteYahooAuctionCrawlSettingExcludeProductResultError"
-              Objects::Products::DeleteYahooAuctionCrawlSettingExcludeProduct::
+              Objects::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::
               DeleteYahooAuctionCrawlSettingExcludeProductResultError
             else
               raise "Unexpected DeleteYahooAuctionCrawlSettingExcludeProductResult: #{object}"

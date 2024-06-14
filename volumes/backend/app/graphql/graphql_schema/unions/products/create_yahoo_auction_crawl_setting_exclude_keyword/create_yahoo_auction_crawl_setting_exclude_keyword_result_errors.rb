@@ -3,13 +3,13 @@ module GraphqlSchema
     module Products
       module CreateYahooAuctionCrawlSettingExcludeKeyword
         class CreateYahooAuctionCrawlSettingExcludeKeywordResultErrors < Base
-          possible_types Objects::Products::CreateYahooAuctionCrawlSettingExcludeKeyword::
+          possible_types Objects::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeKeyword::
                          CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed
 
           def self.resolve_type(object, _context)
             case object[:__typename]
             when "CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed"
-              Objects::Products::CreateYahooAuctionCrawlSettingExcludeKeyword::
+              Objects::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeKeyword::
               CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed
             else
               raise "Unexpected error type: #{object}"
