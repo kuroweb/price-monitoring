@@ -17,13 +17,7 @@ module GraphqlSchema
         field :yahoo_auction_daily_purchase_summaries, [YahooAuctionDailyPurchaseSummary], null: false
         field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummary], null: false
         field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummary], null: false
-        field :related_products, [RelatedProduct], null: false do
-          argument :platform_mask, String, required: true
-          argument :page, Int, required: false
-          argument :per, Int, required: false
-          argument :sort, String, required: false
-          argument :order, String, required: false
-        end
+        field :related_products, resolver: Resolvers::Products::RelatedProducts
 
         def yahoo_auction_crawl_setting
           object.yahoo_auction_crawl_setting
@@ -59,15 +53,6 @@ module GraphqlSchema
 
         def mercari_daily_purchase_summaries
           object.mercari_daily_purchase_summaries
-        end
-
-        def related_products(platform_mask:, page: nil, per: nil, sort: nil, order: nil)
-          Search::RetrieveRelatedProduct.call(
-            params: {
-              product_id: object.id,
-              platform_mask:, page:, per:, sort:, order:
-            }
-          ).products
         end
       end
     end
