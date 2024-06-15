@@ -76,6 +76,24 @@ module GraphqlSchema
             mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProduct
       field :delete_iosys_crawl_setting_exclude_product,
             mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct
+      field :create_pc_koubou_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeKeyword
+      field :update_pc_koubou_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword
+      field :delete_pc_koubou_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeyword
+      field :create_pc_koubou_crawl_setting_required_keyword,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword
+      field :update_pc_koubou_crawl_setting_required_keyword,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingRequiredKeyword
+      field :delete_pc_koubou_crawl_setting_required_keyword,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingRequiredKeyword
+      field :create_pc_koubou_crawl_setting_exclude_product,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProduct
+      field :update_pc_koubou_crawl_setting_exclude_product,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeProduct
+      field :delete_pc_koubou_crawl_setting_exclude_product,
+            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeProduct
     end
   end
 end
