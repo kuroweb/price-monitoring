@@ -40,6 +40,24 @@ module GraphqlSchema
             mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct
       field :delete_mercari_crawl_setting_exclude_product,
             mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct
+      field :create_janpara_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingExcludeKeyword
+      field :update_janpara_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword
+      field :delete_janpara_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeyword
+      field :create_janpara_crawl_setting_required_keyword,
+            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword
+      field :update_janpara_crawl_setting_required_keyword,
+            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingRequiredKeyword
+      field :delete_janpara_crawl_setting_required_keyword,
+            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeyword
+      field :create_janpara_crawl_setting_exclude_product,
+            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingExcludeProduct
+      field :update_janpara_crawl_setting_exclude_product,
+            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProduct
+      field :delete_janpara_crawl_setting_exclude_product,
+            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct
       field :create_iosys_crawl_setting_exclude_keyword,
             mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeKeyword
       field :update_iosys_crawl_setting_exclude_keyword,
