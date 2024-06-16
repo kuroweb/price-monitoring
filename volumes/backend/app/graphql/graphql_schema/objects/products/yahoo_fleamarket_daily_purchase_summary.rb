@@ -8,6 +8,7 @@ module GraphqlSchema
         field :product_id, Int, null: false
         field :average_purchase_price, Int, null: true
         field :purchase_count, Int, null: false
+        field :date, GraphQL::Types::ISO8601DateTime, null: false
         field :created_at, GraphQL::Types::ISO8601DateTime, null: false
         field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
       end

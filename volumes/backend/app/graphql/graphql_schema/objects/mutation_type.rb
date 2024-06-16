@@ -94,6 +94,24 @@ module GraphqlSchema
             mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeProduct
       field :delete_pc_koubou_crawl_setting_exclude_product,
             mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeProduct
+      field :create_used_sofmap_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeKeyword
+      field :update_used_sofmap_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeKeyword
+      field :delete_used_sofmap_crawl_setting_exclude_keyword,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeyword
+      field :create_used_sofmap_crawl_setting_required_keyword,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword
+      field :update_used_sofmap_crawl_setting_required_keyword,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingRequiredKeyword
+      field :delete_used_sofmap_crawl_setting_required_keyword,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingRequiredKeyword
+      field :create_used_sofmap_crawl_setting_exclude_product,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeProduct
+      field :update_used_sofmap_crawl_setting_exclude_product,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeProduct
+      field :delete_used_sofmap_crawl_setting_exclude_product,
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct
     end
   end
 end

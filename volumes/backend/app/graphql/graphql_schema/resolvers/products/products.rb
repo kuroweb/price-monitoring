@@ -5,7 +5,7 @@ module GraphqlSchema
         type [Objects::Products::Product], null: false
 
         argument :id, ID, required: false
-        argument :name, ID, required: false
+        argument :name, String, required: false
 
         def resolve(**args)
           ProductFinder.new(params: args).execute
