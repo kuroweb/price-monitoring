@@ -116,45 +116,45 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
           </div>
         </div>
         <UpdateProductModal
-          productId={params.id}
           defaultValues={{
+            id: String(params.id),
             name: data.product.name,
-            yahoo_auction_crawl_setting: {
+            yahooAuctionCrawlSetting: {
               keyword: data.product.yahooAuctionCrawlSetting?.keyword,
-              category_id: data.product.yahooAuctionCrawlSetting?.categoryId,
-              min_price: data.product.yahooAuctionCrawlSetting?.minPrice,
-              max_price: data.product.yahooAuctionCrawlSetting?.maxPrice,
+              categoryId: data.product.yahooAuctionCrawlSetting?.categoryId,
+              minPrice: data.product.yahooAuctionCrawlSetting?.minPrice,
+              maxPrice: data.product.yahooAuctionCrawlSetting?.maxPrice,
               enabled: data.product.yahooAuctionCrawlSetting?.enabled,
             },
-            mercari_crawl_setting: {
+            mercariCrawlSetting: {
               keyword: data.product.mercariCrawlSetting?.keyword,
-              category_id: data.product.mercariCrawlSetting?.categoryId,
-              min_price: data.product.mercariCrawlSetting?.minPrice,
-              max_price: data.product.mercariCrawlSetting?.maxPrice,
+              categoryId: data.product.mercariCrawlSetting?.categoryId,
+              minPrice: data.product.mercariCrawlSetting?.minPrice,
+              maxPrice: data.product.mercariCrawlSetting?.maxPrice,
               enabled: data.product.mercariCrawlSetting?.enabled,
             },
-            janpara_crawl_setting: {
+            janparaCrawlSetting: {
               keyword: data.product.janparaCrawlSetting?.keyword,
-              min_price: data.product.janparaCrawlSetting?.minPrice,
-              max_price: data.product.janparaCrawlSetting?.maxPrice,
+              minPrice: data.product.janparaCrawlSetting?.minPrice,
+              maxPrice: data.product.janparaCrawlSetting?.maxPrice,
               enabled: data.product.janparaCrawlSetting?.enabled,
             },
-            iosys_crawl_setting: {
+            iosysCrawlSetting: {
               keyword: data.product.iosysCrawlSetting?.keyword,
-              min_price: data.product.iosysCrawlSetting?.minPrice,
-              max_price: data.product.iosysCrawlSetting?.maxPrice,
+              minPrice: data.product.iosysCrawlSetting?.minPrice,
+              maxPrice: data.product.iosysCrawlSetting?.maxPrice,
               enabled: data.product.iosysCrawlSetting?.enabled,
             },
-            pc_koubou_crawl_setting: {
+            pcKoubouCrawlSetting: {
               keyword: data.product.pcKoubouCrawlSetting?.keyword,
-              min_price: data.product.pcKoubouCrawlSetting?.minPrice,
-              max_price: data.product.pcKoubouCrawlSetting?.maxPrice,
+              minPrice: data.product.pcKoubouCrawlSetting?.minPrice,
+              maxPrice: data.product.pcKoubouCrawlSetting?.maxPrice,
               enabled: data.product.pcKoubouCrawlSetting?.enabled,
             },
-            used_sofmap_crawl_setting: {
+            usedSofmapCrawlSetting: {
               keyword: data.product.usedSofmapCrawlSetting?.keyword,
-              min_price: data.product.usedSofmapCrawlSetting?.minPrice,
-              max_price: data.product.usedSofmapCrawlSetting?.maxPrice,
+              minPrice: data.product.usedSofmapCrawlSetting?.minPrice,
+              maxPrice: data.product.usedSofmapCrawlSetting?.maxPrice,
               enabled: data.product.usedSofmapCrawlSetting?.enabled,
             },
           }}

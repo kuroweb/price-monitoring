@@ -38,9 +38,7 @@ const UpdateProductModal = ({
   const [modal, setModal] = useUpdateProductModalState()
 
   const reflectValue: reflectValueType = (source, property) => {
-    console.log(source, property)
     const value = getValues(`${source}CrawlSetting.${property}`)
-    console.log(value)
     setValue(`yahooAuctionCrawlSetting.${property}`, value)
     setValue(`mercariCrawlSetting.${property}`, value)
     setValue(`janparaCrawlSetting.${property}`, value)
@@ -96,7 +94,6 @@ const UpdateProductModal = ({
   })
 
   const onSubmit: SubmitHandler<UpdateProductInput> = async (input) => {
-    console.log(input)
     const result = await updateProduct(input)
 
     if (result.data?.updateProduct.ok) {
