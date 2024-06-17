@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::MercariCrawlSettings::
                              UpdateMercariCrawlSettingExcludeKeywordInput
 
-          field :result,
-                Unions::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeKeyword::
-                UpdateMercariCrawlSettingExcludeKeywordResult,
-                null: false
-
           type Unions::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeKeyword::
-               UpdateMercariCrawlSettingExcludeKeywordResult
+               UpdateMercariCrawlSettingExcludeKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

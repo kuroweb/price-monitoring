@@ -4,9 +4,7 @@ module GraphqlSchema
       class DeleteProduct < Base
         input_object_class InputObjects::Products::DeleteProductInput
 
-        field :result, Unions::Products::DeleteProduct::DeleteProductResult, null: false
-
-        type Unions::Products::DeleteProduct::DeleteProductResult
+        type Unions::Products::DeleteProduct::DeleteProductResult, null: false
 
         def resolve(input)
           product = Product.find(input[:id])

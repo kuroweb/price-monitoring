@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::JanparaCrawlSettings::
                              UpdateJanparaCrawlSettingExcludeProductInput
 
-          field :result,
-                Unions::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProduct::
-                UpdateJanparaCrawlSettingExcludeProductResult,
-                null: false
-
           type Unions::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProduct::
-               UpdateJanparaCrawlSettingExcludeProductResult
+               UpdateJanparaCrawlSettingExcludeProductResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::JanparaCrawlSettings::
                              DeleteJanparaCrawlSettingExcludeProductInput
 
-          field :result,
-                Unions::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct::
-                DeleteJanparaCrawlSettingExcludeProductResult,
-                null: false
-
           type Unions::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct::
-               DeleteJanparaCrawlSettingExcludeProductResult
+               DeleteJanparaCrawlSettingExcludeProductResult, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])

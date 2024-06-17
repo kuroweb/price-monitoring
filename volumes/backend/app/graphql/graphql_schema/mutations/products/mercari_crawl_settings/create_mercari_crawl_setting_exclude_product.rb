@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::MercariCrawlSettings::
                              CreateMercariCrawlSettingExcludeProductInput
 
-          field :result,
-                Unions::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct::
-                CreateMercariCrawlSettingExcludeProductResult,
-                null: false
-
           type Unions::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct::
-               CreateMercariCrawlSettingExcludeProductResult
+               CreateMercariCrawlSettingExcludeProductResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

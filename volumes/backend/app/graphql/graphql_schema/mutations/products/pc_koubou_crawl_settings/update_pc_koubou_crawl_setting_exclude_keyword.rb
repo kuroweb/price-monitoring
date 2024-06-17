@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::PcKoubouCrawlSettings::
                              UpdatePcKoubouCrawlSettingExcludeKeywordInput
 
-          field :result,
-                Unions::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword::
-                UpdatePcKoubouCrawlSettingExcludeKeywordResult,
-                null: false
-
           type Unions::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword::
-               UpdatePcKoubouCrawlSettingExcludeKeywordResult
+               UpdatePcKoubouCrawlSettingExcludeKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

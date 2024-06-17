@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::IosysCrawlSettings::
                              CreateIosysCrawlSettingExcludeKeywordInput
 
-          field :result,
-                Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeKeyword::
-                CreateIosysCrawlSettingExcludeKeywordResult,
-                null: false
-
           type Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeKeyword::
-               CreateIosysCrawlSettingExcludeKeywordResult
+               CreateIosysCrawlSettingExcludeKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

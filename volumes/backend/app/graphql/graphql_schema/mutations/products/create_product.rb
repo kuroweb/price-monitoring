@@ -4,9 +4,7 @@ module GraphqlSchema
       class CreateProduct < Base
         input_object_class InputObjects::Products::CreateProduct::CreateProductInput
 
-        field :result, Unions::Products::CreateProduct::CreateProductResult, null: false
-
-        type Unions::Products::CreateProduct::CreateProductResult
+        type Unions::Products::CreateProduct::CreateProductResult, null: false
 
         def resolve(input)
           product = ::Products::Create.call(params: input.as_json.deep_symbolize_keys)

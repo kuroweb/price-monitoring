@@ -4,9 +4,7 @@ module GraphqlSchema
       class UpdateProduct < Base
         input_object_class InputObjects::Products::UpdateProduct::UpdateProductInput
 
-        field :result, Unions::Products::UpdateProduct::UpdateProductResult, null: false
-
-        type Unions::Products::UpdateProduct::UpdateProductResult
+        type Unions::Products::UpdateProduct::UpdateProductResult, null: false
 
         def resolve(input)
           params = input.as_json.deep_symbolize_keys

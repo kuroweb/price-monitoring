@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::IosysCrawlSettings::
                              CreateIosysCrawlSettingRequiredKeywordInput
 
-          field :result,
-                Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword::
-                CreateIosysCrawlSettingRequiredKeywordResult,
-                null: false
-
           type Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword::
-               CreateIosysCrawlSettingRequiredKeywordResult
+               CreateIosysCrawlSettingRequiredKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

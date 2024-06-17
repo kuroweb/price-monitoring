@@ -6,13 +6,8 @@ module GraphqlSchema
           input_object_class InputObjects::Products::UsedSofmapCrawlSettings::
                              DeleteUsedSofmapCrawlSettingExcludeProductInput
 
-          field :result,
-                Unions::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct::
-                DeleteUsedSofmapCrawlSettingExcludeProductResult,
-                null: false
-
           type Unions::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct::
-               DeleteUsedSofmapCrawlSettingExcludeProductResult
+               DeleteUsedSofmapCrawlSettingExcludeProductResult, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])
