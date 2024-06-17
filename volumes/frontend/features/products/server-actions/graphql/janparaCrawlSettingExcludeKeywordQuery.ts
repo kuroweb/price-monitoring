@@ -8,6 +8,7 @@ import type {
   UpdateJanparaCrawlSettingExcludeKeywordInput,
   UpdateJanparaCrawlSettingExcludeKeywordMutation,
   DeleteJanparaCrawlSettingExcludeKeywordMutation,
+  DeleteJanparaCrawlSettingExcludeKeywordInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -41,10 +42,12 @@ export const updateJanparaCrawlSettingExcludeKeyword = async (
   return result
 }
 
-export const deleteJanparaCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
+export const deleteJanparaCrawlSettingExcludeKeyword = async (
+  input: DeleteJanparaCrawlSettingExcludeKeywordInput,
+) => {
   const result = getClient().mutate<DeleteJanparaCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteJanparaCrawlSettingExcludeKeywordDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 

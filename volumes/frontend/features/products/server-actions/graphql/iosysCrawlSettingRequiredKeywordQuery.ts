@@ -8,6 +8,7 @@ import type {
   UpdateIosysCrawlSettingRequiredKeywordInput,
   UpdateIosysCrawlSettingRequiredKeywordMutation,
   DeleteIosysCrawlSettingRequiredKeywordMutation,
+  DeleteIosysCrawlSettingRequiredKeywordInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -41,10 +42,12 @@ export const updateIosysCrawlSettingRequiredKeyword = async (
   return result
 }
 
-export const deleteIosysCrawlSettingRequiredKeyword = async (id: string, productId: string) => {
+export const deleteIosysCrawlSettingRequiredKeyword = async (
+  input: DeleteIosysCrawlSettingRequiredKeywordInput,
+) => {
   const result = getClient().mutate<DeleteIosysCrawlSettingRequiredKeywordMutation>({
     mutation: DeleteIosysCrawlSettingRequiredKeywordDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 

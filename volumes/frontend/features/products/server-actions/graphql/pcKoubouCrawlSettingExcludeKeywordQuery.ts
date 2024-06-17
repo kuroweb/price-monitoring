@@ -8,6 +8,7 @@ import type {
   UpdatePcKoubouCrawlSettingExcludeKeywordInput,
   UpdatePcKoubouCrawlSettingExcludeKeywordMutation,
   DeletePcKoubouCrawlSettingExcludeKeywordMutation,
+  DeletePcKoubouCrawlSettingExcludeKeywordInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -41,10 +42,12 @@ export const updatePcKoubouCrawlSettingExcludeKeyword = async (
   return result
 }
 
-export const deletePcKoubouCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
+export const deletePcKoubouCrawlSettingExcludeKeyword = async (
+  input: DeletePcKoubouCrawlSettingExcludeKeywordInput,
+) => {
   const result = getClient().mutate<DeletePcKoubouCrawlSettingExcludeKeywordMutation>({
     mutation: DeletePcKoubouCrawlSettingExcludeKeywordDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 

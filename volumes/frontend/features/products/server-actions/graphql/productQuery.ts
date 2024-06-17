@@ -8,6 +8,7 @@ import type {
   DeleteProductMutation,
   UpdateProductMutation,
   UpdateProductInput,
+  DeleteProductInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -31,20 +32,20 @@ export const createProduct = async (input: CreateProductInput) => {
   return result
 }
 
-export const updateProduct = async (id: string, input: UpdateProductInput) => {
+export const updateProduct = async (input: UpdateProductInput) => {
   const result = getClient().mutate<UpdateProductMutation>({
     mutation: UpdateProductDocument,
-    variables: { id, input },
+    variables: { input },
   })
   revalidateProductPaths()
 
   return result
 }
 
-export const deleteProduct = async (id: string) => {
+export const deleteProduct = async (input: DeleteProductInput) => {
   const result = getClient().mutate<DeleteProductMutation>({
     mutation: DeleteProductDocument,
-    variables: { id },
+    variables: { input },
   })
   revalidateProductPaths()
 

@@ -8,6 +8,7 @@ import type {
   UpdateMercariCrawlSettingExcludeKeywordInput,
   UpdateMercariCrawlSettingExcludeKeywordMutation,
   DeleteMercariCrawlSettingExcludeKeywordMutation,
+  DeleteMercariCrawlSettingExcludeKeywordInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -41,10 +42,12 @@ export const updateMercariCrawlSettingExcludeKeyword = async (
   return result
 }
 
-export const deleteMercariCrawlSettingExcludeKeyword = async (id: string, productId: string) => {
+export const deleteMercariCrawlSettingExcludeKeyword = async (
+  input: DeleteMercariCrawlSettingExcludeKeywordInput,
+) => {
   const result = getClient().mutate<DeleteMercariCrawlSettingExcludeKeywordMutation>({
     mutation: DeleteMercariCrawlSettingExcludeKeywordDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 

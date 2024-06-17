@@ -8,6 +8,7 @@ import type {
   UpdateIosysCrawlSettingExcludeProductInput,
   UpdateIosysCrawlSettingExcludeProductMutation,
   DeleteIosysCrawlSettingExcludeProductMutation,
+  DeleteIosysCrawlSettingExcludeProductInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -41,10 +42,12 @@ export const updateIosysCrawlSettingExcludeProduct = async (
   return result
 }
 
-export const deleteIosysCrawlSettingExcludeProduct = async (id: string, productId: string) => {
+export const deleteIosysCrawlSettingExcludeProduct = async (
+  input: DeleteIosysCrawlSettingExcludeProductInput,
+) => {
   const result = getClient().mutate<DeleteIosysCrawlSettingExcludeProductMutation>({
     mutation: DeleteIosysCrawlSettingExcludeProductDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 

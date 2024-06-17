@@ -8,6 +8,7 @@ import type {
   UpdateUsedSofmapCrawlSettingExcludeProductInput,
   UpdateUsedSofmapCrawlSettingExcludeProductMutation,
   DeleteUsedSofmapCrawlSettingExcludeProductMutation,
+  DeleteUsedSofmapCrawlSettingExcludeProductInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -41,10 +42,12 @@ export const updateUsedSofmapCrawlSettingExcludeProduct = async (
   return result
 }
 
-export const deleteUsedSofmapCrawlSettingExcludeProduct = async (id: string, productId: string) => {
+export const deleteUsedSofmapCrawlSettingExcludeProduct = async (
+  input: DeleteUsedSofmapCrawlSettingExcludeProductInput,
+) => {
   const result = getClient().mutate<DeleteUsedSofmapCrawlSettingExcludeProductMutation>({
     mutation: DeleteUsedSofmapCrawlSettingExcludeProductDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 

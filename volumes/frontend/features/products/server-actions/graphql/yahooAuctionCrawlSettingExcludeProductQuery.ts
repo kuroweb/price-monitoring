@@ -8,6 +8,7 @@ import type {
   UpdateYahooAuctionCrawlSettingExcludeProductInput,
   UpdateYahooAuctionCrawlSettingExcludeProductMutation,
   DeleteYahooAuctionCrawlSettingExcludeProductMutation,
+  DeleteYahooAuctionCrawlSettingExcludeProductInput,
 } from '@/graphql/dist/client'
 
 import {
@@ -42,12 +43,11 @@ export const updateYahooAuctionCrawlSettingExcludeProduct = async (
 }
 
 export const deleteYahooAuctionCrawlSettingExcludeProduct = async (
-  id: string,
-  productId: string,
+  input: DeleteYahooAuctionCrawlSettingExcludeProductInput,
 ) => {
   const result = getClient().mutate<DeleteYahooAuctionCrawlSettingExcludeProductMutation>({
     mutation: DeleteYahooAuctionCrawlSettingExcludeProductDocument,
-    variables: { id, productId },
+    variables: { input },
   })
   revalidateProductPaths()
 
