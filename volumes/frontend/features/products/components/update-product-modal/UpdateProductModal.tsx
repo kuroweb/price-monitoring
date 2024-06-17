@@ -21,15 +21,13 @@ import type { UpdateProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
 export type reflectValueType = (
-  source: 'yahoo_auction' | 'mercari' | 'janpara' | 'iosys' | 'pc_koubou' | 'used_sofmap',
-  property: 'keyword' | 'min_price' | 'max_price',
+  source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
+  property: 'keyword' | 'minPrice' | 'maxPrice',
 ) => void
 
 const UpdateProductModal = ({
-  productId,
   defaultValues,
 }: {
-  productId: string | undefined
   defaultValues: UpdateProductInput | undefined
 }) => {
   const router = useRouter()
@@ -39,70 +37,67 @@ const UpdateProductModal = ({
   >('ヤフオク')
   const [modal, setModal] = useUpdateProductModalState()
 
-  const reflectValue: reflectValueType = (
-    source: 'yahoo_auction' | 'mercari' | 'janpara' | 'iosys' | 'pc_koubou' | 'used_sofmap',
-    property: 'keyword' | 'min_price' | 'max_price',
-  ) => {
-    const value = getValues(`${source}_crawl_setting.${property}`)
-    setValue(`yahoo_auction_crawl_setting.${property}`, value)
-    setValue(`mercari_crawl_setting.${property}`, value)
-    setValue(`janpara_crawl_setting.${property}`, value)
-    setValue(`iosys_crawl_setting.${property}`, value)
-    setValue(`pc_koubou_crawl_setting.${property}`, value)
-    setValue(`used_sofmap_crawl_setting.${property}`, value)
+  const reflectValue: reflectValueType = (source, property) => {
+    console.log(source, property)
+    const value = getValues(`${source}CrawlSetting.${property}`)
+    console.log(value)
+    setValue(`yahooAuctionCrawlSetting.${property}`, value)
+    setValue(`mercariCrawlSetting.${property}`, value)
+    setValue(`janparaCrawlSetting.${property}`, value)
+    setValue(`iosysCrawlSetting.${property}`, value)
+    setValue(`pcKoubouCrawlSetting.${property}`, value)
+    setValue(`usedSofmapCrawlSetting.${property}`, value)
   }
 
   const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductInput>({
     defaultValues: {
+      id: defaultValues?.id || '',
       name: defaultValues?.name || '',
-      yahoo_auction_crawl_setting: {
-        keyword: defaultValues?.yahoo_auction_crawl_setting?.keyword || '',
-        category_id: defaultValues?.yahoo_auction_crawl_setting?.category_id || null,
-        min_price: defaultValues?.yahoo_auction_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.yahoo_auction_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.yahoo_auction_crawl_setting?.enabled || false,
+      yahooAuctionCrawlSetting: {
+        keyword: defaultValues?.yahooAuctionCrawlSetting?.keyword || '',
+        categoryId: defaultValues?.yahooAuctionCrawlSetting?.categoryId || null,
+        minPrice: defaultValues?.yahooAuctionCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.yahooAuctionCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.yahooAuctionCrawlSetting?.enabled || false,
       },
-      mercari_crawl_setting: {
-        keyword: defaultValues?.mercari_crawl_setting?.keyword || '',
-        category_id: defaultValues?.mercari_crawl_setting?.category_id || null,
-        min_price: defaultValues?.mercari_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.mercari_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.mercari_crawl_setting?.enabled || false,
+      mercariCrawlSetting: {
+        keyword: defaultValues?.mercariCrawlSetting?.keyword || '',
+        categoryId: defaultValues?.mercariCrawlSetting?.categoryId || null,
+        minPrice: defaultValues?.mercariCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.mercariCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.mercariCrawlSetting?.enabled || false,
       },
-      janpara_crawl_setting: {
-        keyword: defaultValues?.janpara_crawl_setting?.keyword || '',
-        min_price: defaultValues?.janpara_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.janpara_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.janpara_crawl_setting?.enabled || false,
+      janparaCrawlSetting: {
+        keyword: defaultValues?.janparaCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.janparaCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.janparaCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.janparaCrawlSetting?.enabled || false,
       },
-      iosys_crawl_setting: {
-        keyword: defaultValues?.iosys_crawl_setting?.keyword || '',
-        min_price: defaultValues?.iosys_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.iosys_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.iosys_crawl_setting?.enabled || false,
+      iosysCrawlSetting: {
+        keyword: defaultValues?.iosysCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.iosysCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.iosysCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.iosysCrawlSetting?.enabled || false,
       },
-      pc_koubou_crawl_setting: {
-        keyword: defaultValues?.pc_koubou_crawl_setting?.keyword || '',
-        min_price: defaultValues?.pc_koubou_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.pc_koubou_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.pc_koubou_crawl_setting?.enabled || false,
+      pcKoubouCrawlSetting: {
+        keyword: defaultValues?.pcKoubouCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.pcKoubouCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.pcKoubouCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.pcKoubouCrawlSetting?.enabled || false,
       },
-      used_sofmap_crawl_setting: {
-        keyword: defaultValues?.used_sofmap_crawl_setting?.keyword || '',
-        min_price: defaultValues?.used_sofmap_crawl_setting?.min_price || 0,
-        max_price: defaultValues?.used_sofmap_crawl_setting?.max_price || 0,
-        enabled: defaultValues?.used_sofmap_crawl_setting?.enabled || false,
+      usedSofmapCrawlSetting: {
+        keyword: defaultValues?.usedSofmapCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.usedSofmapCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.usedSofmapCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.usedSofmapCrawlSetting?.enabled || false,
       },
     },
     values: defaultValues,
   })
 
   const onSubmit: SubmitHandler<UpdateProductInput> = async (input) => {
-    if (productId === undefined) {
-      return toast.error('更新対象が見つかりませんでした。')
-    }
-
-    const result = await updateProduct(productId, input)
+    console.log(input)
+    const result = await updateProduct(input)
 
     if (result.data?.updateProduct.ok) {
       toast.success('success')

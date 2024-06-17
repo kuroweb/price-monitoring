@@ -17,16 +17,13 @@ const UsedSofmapForm = ({
         <div className='label'>
           <span className='label-text'>計測キーワード</span>
         </div>
-        <input
-          {...register('used_sofmap_crawl_setting.keyword')}
-          className='input input-bordered'
-        />
+        <input {...register('usedSofmapCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('used_sofmap', 'keyword')}
+          onClick={() => reflectValue('usedSofmap', 'keyword')}
         >
           他のプラットフォームに反映
         </button>
@@ -36,7 +33,7 @@ const UsedSofmapForm = ({
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('used_sofmap_crawl_setting.min_price')}
+          {...register('usedSofmapCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -44,7 +41,7 @@ const UsedSofmapForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('used_sofmap', 'min_price')}
+          onClick={() => reflectValue('usedSofmap', 'minPrice')}
         >
           他のプラットフォームに反映
         </button>
@@ -54,7 +51,7 @@ const UsedSofmapForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('used_sofmap_crawl_setting.max_price')}
+          {...register('usedSofmapCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -62,7 +59,7 @@ const UsedSofmapForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('used_sofmap', 'max_price')}
+          onClick={() => reflectValue('usedSofmap', 'maxPrice')}
         >
           他のプラットフォームに反映
         </button>
@@ -70,7 +67,7 @@ const UsedSofmapForm = ({
       <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('used_sofmap_crawl_setting.enabled')}
+          {...register('usedSofmapCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />

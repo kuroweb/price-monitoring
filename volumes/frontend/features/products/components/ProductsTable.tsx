@@ -19,10 +19,11 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
     undefined,
   )
-  const [productId, setProductId] = useState<string | undefined>(undefined)
 
   const submitDeleteProduct = async (productId: string) => {
-    const result = await deleteProduct(productId)
+    const result = await deleteProduct({
+      id: productId,
+    })
 
     if (result.data?.deleteProduct.ok) {
       toast.success('success')
@@ -77,7 +78,6 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
                       <button
                         className='btn btn-primary'
                         onClick={() => {
-                          setProductId(product.id)
                           setProduct(product)
                           setModal(true)
                         }}
@@ -101,46 +101,46 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
         </tbody>
       </table>
       <UpdateProductModal
-        productId={productId}
         defaultValues={
           product && {
+            id: product?.id,
             name: product?.name,
-            yahoo_auction_crawl_setting: {
+            yahooAuctionCrawlSetting: {
               keyword: product?.yahooAuctionCrawlSetting?.keyword,
-              category_id: product?.yahooAuctionCrawlSetting?.categoryId,
-              min_price: product?.yahooAuctionCrawlSetting?.minPrice,
-              max_price: product?.yahooAuctionCrawlSetting?.maxPrice,
+              categoryId: product?.yahooAuctionCrawlSetting?.categoryId,
+              minPrice: product?.yahooAuctionCrawlSetting?.minPrice,
+              maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice,
               enabled: product?.yahooAuctionCrawlSetting?.enabled,
             },
-            mercari_crawl_setting: {
+            mercariCrawlSetting: {
               keyword: product?.mercariCrawlSetting?.keyword,
-              category_id: product?.mercariCrawlSetting?.categoryId,
-              min_price: product?.mercariCrawlSetting?.minPrice,
-              max_price: product?.mercariCrawlSetting?.maxPrice,
+              categoryId: product?.mercariCrawlSetting?.categoryId,
+              minPrice: product?.mercariCrawlSetting?.minPrice,
+              maxPrice: product?.mercariCrawlSetting?.maxPrice,
               enabled: product?.mercariCrawlSetting?.enabled,
             },
-            janpara_crawl_setting: {
+            janparaCrawlSetting: {
               keyword: product?.janparaCrawlSetting?.keyword,
-              min_price: product?.janparaCrawlSetting?.minPrice,
-              max_price: product?.janparaCrawlSetting?.maxPrice,
+              minPrice: product?.janparaCrawlSetting?.minPrice,
+              maxPrice: product?.janparaCrawlSetting?.maxPrice,
               enabled: product?.janparaCrawlSetting?.enabled,
             },
-            iosys_crawl_setting: {
+            iosysCrawlSetting: {
               keyword: product?.iosysCrawlSetting?.keyword,
-              min_price: product?.iosysCrawlSetting?.minPrice,
-              max_price: product?.iosysCrawlSetting?.maxPrice,
+              minPrice: product?.iosysCrawlSetting?.minPrice,
+              maxPrice: product?.iosysCrawlSetting?.maxPrice,
               enabled: product?.iosysCrawlSetting?.enabled,
             },
-            pc_koubou_crawl_setting: {
+            pcKoubouCrawlSetting: {
               keyword: product?.pcKoubouCrawlSetting?.keyword,
-              min_price: product?.pcKoubouCrawlSetting?.minPrice,
-              max_price: product?.pcKoubouCrawlSetting?.maxPrice,
+              minPrice: product?.pcKoubouCrawlSetting?.minPrice,
+              maxPrice: product?.pcKoubouCrawlSetting?.maxPrice,
               enabled: product?.pcKoubouCrawlSetting?.enabled,
             },
-            used_sofmap_crawl_setting: {
+            usedSofmapCrawlSetting: {
               keyword: product?.usedSofmapCrawlSetting?.keyword,
-              min_price: product?.usedSofmapCrawlSetting?.minPrice,
-              max_price: product?.usedSofmapCrawlSetting?.maxPrice,
+              minPrice: product?.usedSofmapCrawlSetting?.minPrice,
+              maxPrice: product?.usedSofmapCrawlSetting?.maxPrice,
               enabled: product?.usedSofmapCrawlSetting?.enabled,
             },
           }

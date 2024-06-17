@@ -17,7 +17,7 @@ const IosysForm = ({
         <div className='label'>
           <span className='label-text'>計測キーワード</span>
         </div>
-        <input {...register('iosys_crawl_setting.keyword')} className='input input-bordered' />
+        <input {...register('iosysCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
@@ -32,13 +32,16 @@ const IosysForm = ({
         <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
-        <input {...register('iosys_crawl_setting.min_price')} className='input input-bordered' />
+        <input
+          {...register('iosysCrawlSetting.minPrice', { valueAsNumber: true })}
+          className='input input-bordered'
+        />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('iosys', 'min_price')}
+          onClick={() => reflectValue('iosys', 'minPrice')}
         >
           他のプラットフォームに反映
         </button>
@@ -47,13 +50,13 @@ const IosysForm = ({
         <div className='label'>
           <span className='label-text'>最高価格</span>
         </div>
-        <input {...register('iosys_crawl_setting.max_price')} className='input input-bordered' />
+        <input {...register('iosysCrawlSetting.maxPrice')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('iosys', 'max_price')}
+          onClick={() => reflectValue('iosys', 'maxPrice')}
         >
           他のプラットフォームに反映
         </button>
@@ -61,7 +64,7 @@ const IosysForm = ({
       <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('iosys_crawl_setting.enabled')}
+          {...register('iosysCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
