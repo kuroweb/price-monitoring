@@ -5,7 +5,7 @@ export const { getClient } = registerApolloClient(() => {
   return new ApolloClient({
     cache: new InMemoryCache(),
     link: new HttpLink({
-      uri: process.env.NEXT_PRIVATE_BFF_URL,
+      uri: process.env.NEXT_PRIVATE_BACKEND_URL,
       fetchOptions: { next: { revalidate: 60 } },
     }),
   })
