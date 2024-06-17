@@ -27,8 +27,8 @@ mutation createProduct($input: CreateProductInput!) {
   }
 }
 
-mutation updateProduct($id: ID!, $input: UpdateProductInput!) {
-  updateProduct(id: $id, input: $input) {
+mutation updateProduct($input: UpdateProductInput!) {
+  updateProduct(input: $input) {
     ... on UpdateProductResultSuccess {
       ok
       product {
@@ -52,8 +52,8 @@ mutation updateProduct($id: ID!, $input: UpdateProductInput!) {
   }
 }
 
-mutation deleteProduct($id: ID!) {
-  deleteProduct(id: $id) {
+mutation deleteProduct($input: DeleteProductInput!) {
+  deleteProduct(input: $input) {
     ... on DeleteProductResultSuccess {
       ok
     }
@@ -137,8 +137,8 @@ mutation updateYahooAuctionCrawlSettingExcludeKeyword(
   }
 }
 
-mutation deleteYahooAuctionCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
-  deleteYahooAuctionCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+mutation deleteYahooAuctionCrawlSettingExcludeKeyword($input: DeleteYahooAuctionCrawlSettingExcludeKeywordInput!) {
+  deleteYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
@@ -218,8 +218,8 @@ mutation updateYahooAuctionCrawlSettingExcludeProduct(
   }
 }
 
-mutation deleteYahooAuctionCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
-  deleteYahooAuctionCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+mutation deleteYahooAuctionCrawlSettingExcludeProduct($input: DeleteYahooAuctionCrawlSettingExcludeProductInput!) {
+  deleteYahooAuctionCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess {
       ok
     }
@@ -299,8 +299,8 @@ mutation updateYahooAuctionCrawlSettingRequiredKeyword(
   }
 }
 
-mutation deleteYahooAuctionCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
-  deleteYahooAuctionCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+mutation deleteYahooAuctionCrawlSettingRequiredKeyword($input: DeleteYahooAuctionCrawlSettingRequiredKeywordInput!) {
+  deleteYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
       ok
     }
@@ -384,8 +384,8 @@ mutation updateMercariCrawlSettingExcludeKeyword(
   }
 }
 
-mutation deleteMercariCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
-  deleteMercariCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+mutation deleteMercariCrawlSettingExcludeKeyword($input: DeleteMercariCrawlSettingExcludeKeywordInput!) {
+  deleteMercariCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteMercariCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
@@ -465,8 +465,8 @@ mutation updateMercariCrawlSettingExcludeProduct(
   }
 }
 
-mutation deleteMercariCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
-  deleteMercariCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+mutation deleteMercariCrawlSettingExcludeProduct($input: DeleteMercariCrawlSettingExcludeProductInput!) {
+  deleteMercariCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteMercariCrawlSettingExcludeProductResultSuccess {
       ok
     }
@@ -546,8 +546,8 @@ mutation updateMercariCrawlSettingRequiredKeyword(
   }
 }
 
-mutation deleteMercariCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
-  deleteMercariCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+mutation deleteMercariCrawlSettingRequiredKeyword($input: DeleteMercariCrawlSettingRequiredKeywordInput!) {
+  deleteMercariCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteMercariCrawlSettingRequiredKeywordResultSuccess {
       ok
     }
@@ -631,8 +631,8 @@ mutation updateJanparaCrawlSettingExcludeKeyword(
   }
 }
 
-mutation deleteJanparaCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
-  deleteJanparaCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+mutation deleteJanparaCrawlSettingExcludeKeyword($input: DeleteJanparaCrawlSettingExcludeKeywordInput!) {
+  deleteJanparaCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteJanparaCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
@@ -712,8 +712,8 @@ mutation updateJanparaCrawlSettingExcludeProduct(
   }
 }
 
-mutation deleteJanparaCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
-  deleteJanparaCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+mutation deleteJanparaCrawlSettingExcludeProduct($input: DeleteJanparaCrawlSettingExcludeProductInput!) {
+  deleteJanparaCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteJanparaCrawlSettingExcludeProductResultSuccess {
       ok
     }
@@ -793,8 +793,8 @@ mutation updateJanparaCrawlSettingRequiredKeyword(
   }
 }
 
-mutation deleteJanparaCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
-  deleteJanparaCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+mutation deleteJanparaCrawlSettingRequiredKeyword($input: DeleteJanparaCrawlSettingRequiredKeywordInput!) {
+  deleteJanparaCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteJanparaCrawlSettingRequiredKeywordResultSuccess {
       ok
     }
@@ -878,8 +878,8 @@ mutation updateIosysCrawlSettingExcludeKeyword(
   }
 }
 
-mutation deleteIosysCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
-  deleteIosysCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+mutation deleteIosysCrawlSettingExcludeKeyword($input: DeleteIosysCrawlSettingExcludeKeywordInput!) {
+  deleteIosysCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteIosysCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
@@ -959,8 +959,8 @@ mutation updateIosysCrawlSettingExcludeProduct(
   }
 }
 
-mutation deleteIosysCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
-  deleteIosysCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+mutation deleteIosysCrawlSettingExcludeProduct($input: DeleteIosysCrawlSettingExcludeProductInput!) {
+  deleteIosysCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteIosysCrawlSettingExcludeProductResultSuccess {
       ok
     }
@@ -1040,8 +1040,8 @@ mutation updateIosysCrawlSettingRequiredKeyword(
   }
 }
 
-mutation deleteIosysCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
-  deleteIosysCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+mutation deleteIosysCrawlSettingRequiredKeyword($input: DeleteIosysCrawlSettingRequiredKeywordInput!) {
+  deleteIosysCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteIosysCrawlSettingRequiredKeywordResultSuccess {
       ok
     }
@@ -1125,8 +1125,8 @@ mutation updatePcKoubouCrawlSettingExcludeKeyword(
   }
 }
 
-mutation deletePcKoubouCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
-  deletePcKoubouCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+mutation deletePcKoubouCrawlSettingExcludeKeyword($input: DeletePcKoubouCrawlSettingExcludeKeywordInput!) {
+  deletePcKoubouCrawlSettingExcludeKeyword(input: $input) {
     ... on DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
@@ -1206,8 +1206,8 @@ mutation updatePcKoubouCrawlSettingExcludeProduct(
   }
 }
 
-mutation deletePcKoubouCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
-  deletePcKoubouCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+mutation deletePcKoubouCrawlSettingExcludeProduct($input: DeletePcKoubouCrawlSettingExcludeProductInput!) {
+  deletePcKoubouCrawlSettingExcludeProduct(input: $input) {
     ... on DeletePcKoubouCrawlSettingExcludeProductResultSuccess {
       ok
     }
@@ -1287,8 +1287,8 @@ mutation updatePcKoubouCrawlSettingRequiredKeyword(
   }
 }
 
-mutation deletePcKoubouCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
-  deletePcKoubouCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+mutation deletePcKoubouCrawlSettingRequiredKeyword($input: DeletePcKoubouCrawlSettingRequiredKeywordInput!) {
+  deletePcKoubouCrawlSettingRequiredKeyword(input: $input) {
     ... on DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess {
       ok
     }
@@ -1372,8 +1372,8 @@ mutation updateUsedSofmapCrawlSettingExcludeKeyword(
   }
 }
 
-mutation deleteUsedSofmapCrawlSettingExcludeKeyword($id: ID!, $productId: ID!) {
-  deleteUsedSofmapCrawlSettingExcludeKeyword(id: $id, productId: $productId) {
+mutation deleteUsedSofmapCrawlSettingExcludeKeyword($input: DeleteUsedSofmapCrawlSettingExcludeKeywordInput!) {
+  deleteUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
       ok
     }
@@ -1453,8 +1453,8 @@ mutation updateUsedSofmapCrawlSettingExcludeProduct(
   }
 }
 
-mutation deleteUsedSofmapCrawlSettingExcludeProduct($id: ID!, $productId: ID!) {
-  deleteUsedSofmapCrawlSettingExcludeProduct(id: $id, productId: $productId) {
+mutation deleteUsedSofmapCrawlSettingExcludeProduct($input: DeleteUsedSofmapCrawlSettingExcludeProductInput!) {
+  deleteUsedSofmapCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess {
       ok
     }
@@ -1534,8 +1534,8 @@ mutation updateUsedSofmapCrawlSettingRequiredKeyword(
   }
 }
 
-mutation deleteUsedSofmapCrawlSettingRequiredKeyword($id: ID!, $productId: ID!) {
-  deleteUsedSofmapCrawlSettingRequiredKeyword(id: $id, productId: $productId) {
+mutation deleteUsedSofmapCrawlSettingRequiredKeyword($input: DeleteUsedSofmapCrawlSettingRequiredKeywordInput!) {
+  deleteUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
       ok
     }
