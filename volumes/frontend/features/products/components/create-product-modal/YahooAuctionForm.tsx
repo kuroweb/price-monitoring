@@ -17,16 +17,13 @@ const YahooAuctionForm = ({
         <div className='label'>
           <span className='label-text'>計測キーワード</span>
         </div>
-        <input
-          {...register('yahoo_auction_crawl_setting.keyword')}
-          className='input input-bordered'
-        />
+        <input {...register('yahooAuctionCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('yahoo_auction', 'keyword')}
+          onClick={() => reflectValue('yahooAuction', 'keyword')}
         >
           他のプラットフォームに反映
         </button>
@@ -36,7 +33,7 @@ const YahooAuctionForm = ({
           <span className='label-text'>カテゴリID</span>
         </div>
         <input
-          {...register('yahoo_auction_crawl_setting.category_id', {
+          {...register('yahooAuctionCrawlSetting.categoryId', {
             setValueAs: (v) => (v === '' ? null : v),
           })}
           className='input input-bordered'
@@ -47,7 +44,7 @@ const YahooAuctionForm = ({
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('yahoo_auction_crawl_setting.min_price')}
+          {...register('yahooAuctionCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -55,7 +52,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('yahoo_auction', 'min_price')}
+          onClick={() => reflectValue('yahooAuction', 'minPrice')}
         >
           他のプラットフォームに反映
         </button>
@@ -65,7 +62,7 @@ const YahooAuctionForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('yahoo_auction_crawl_setting.max_price')}
+          {...register('yahooAuctionCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -73,7 +70,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => reflectValue('yahoo_auction', 'max_price')}
+          onClick={() => reflectValue('yahooAuction', 'maxPrice')}
         >
           他のプラットフォームに反映
         </button>
@@ -81,7 +78,7 @@ const YahooAuctionForm = ({
       <label className='label cursor-pointer'>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('yahoo_auction_crawl_setting.enabled')}
+          {...register('yahooAuctionCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />

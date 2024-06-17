@@ -21,8 +21,8 @@ import type { CreateProductInput } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
 export type reflectValueType = (
-  source: 'yahoo_auction' | 'mercari' | 'janpara' | 'iosys' | 'pc_koubou' | 'used_sofmap',
-  property: 'keyword' | 'min_price' | 'max_price',
+  source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
+  property: 'keyword' | 'minPrice' | 'maxPrice',
 ) => void
 
 const CreateProductModal = () => {
@@ -36,42 +36,42 @@ const CreateProductModal = () => {
   const { register, handleSubmit, setValue, getValues } = useForm<CreateProductInput>({
     defaultValues: {
       name: '',
-      yahoo_auction_crawl_setting: {
+      yahooAuctionCrawlSetting: {
         keyword: '',
-        category_id: null,
-        min_price: 0,
-        max_price: 0,
+        categoryId: null,
+        minPrice: 0,
+        maxPrice: 0,
         enabled: true,
       },
-      mercari_crawl_setting: {
+      mercariCrawlSetting: {
         keyword: '',
-        category_id: null,
-        min_price: 0,
-        max_price: 0,
+        categoryId: null,
+        minPrice: 0,
+        maxPrice: 0,
         enabled: true,
       },
-      janpara_crawl_setting: {
+      janparaCrawlSetting: {
         keyword: '',
-        min_price: 0,
-        max_price: 0,
+        minPrice: 0,
+        maxPrice: 0,
         enabled: true,
       },
-      iosys_crawl_setting: {
+      iosysCrawlSetting: {
         keyword: '',
-        min_price: 0,
-        max_price: 0,
+        minPrice: 0,
+        maxPrice: 0,
         enabled: true,
       },
-      pc_koubou_crawl_setting: {
+      pcKoubouCrawlSetting: {
         keyword: '',
-        min_price: 0,
-        max_price: 0,
+        minPrice: 0,
+        maxPrice: 0,
         enabled: true,
       },
-      used_sofmap_crawl_setting: {
+      usedSofmapCrawlSetting: {
         keyword: '',
-        min_price: 0,
-        max_price: 0,
+        minPrice: 0,
+        maxPrice: 0,
         enabled: true,
       },
     },
@@ -90,16 +90,16 @@ const CreateProductModal = () => {
   }
 
   const reflectValue: reflectValueType = (
-    source: 'yahoo_auction' | 'mercari' | 'janpara' | 'iosys' | 'pc_koubou' | 'used_sofmap',
-    property: 'keyword' | 'min_price' | 'max_price',
+    source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
+    property: 'keyword' | 'minPrice' | 'maxPrice',
   ) => {
-    const value = getValues(`${source}_crawl_setting.${property}`)
-    setValue(`yahoo_auction_crawl_setting.${property}`, value)
-    setValue(`mercari_crawl_setting.${property}`, value)
-    setValue(`janpara_crawl_setting.${property}`, value)
-    setValue(`iosys_crawl_setting.${property}`, value)
-    setValue(`pc_koubou_crawl_setting.${property}`, value)
-    setValue(`used_sofmap_crawl_setting.${property}`, value)
+    const value = getValues(`${source}CrawlSetting.${property}`)
+    setValue(`yahooAuctionCrawlSetting.${property}`, value)
+    setValue(`mercariCrawlSetting.${property}`, value)
+    setValue(`janparaCrawlSetting.${property}`, value)
+    setValue(`iosysCrawlSetting.${property}`, value)
+    setValue(`pcKoubouCrawlSetting.${property}`, value)
+    setValue(`usedSofmapCrawlSetting.${property}`, value)
   }
 
   return (
