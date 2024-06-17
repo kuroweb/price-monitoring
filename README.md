@@ -14,14 +14,10 @@ Web上にある商品の最安値を探したり、相場を把握するため�
 - TypeScript
 - TailwindCSS
 
-### BFF（撤去中）
-
-- Go
-- gqlgen
-
 ### Backend
 
 - Rails
+- graphql-ruby
 
 ## Infra
 
@@ -44,12 +40,6 @@ subgraph Kubernetest Node
     Next.js
   end
 
-  subgraph bff [BFF]
-    direction LR
-
-    bff_go[Go]
-  end
-
   subgraph price ["Backend"]
     direction LR
 
@@ -67,8 +57,7 @@ subgraph VPS
   proxy-1
 end
 
-client-->frontend--GraphQL-->bff
-bff--REST API-->price
+client-->frontend--GraphQL-->price
 price--proxy-->VPS
 ```
 

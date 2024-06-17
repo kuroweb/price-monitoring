@@ -1,9 +1,0 @@
-package yahoo_fleamarket_daily_purchase_summaries
-
-type IYahooFleamarketDailyPurchaseSummaryService interface {
-	IFindYahooFleamarketDailyPurchaseSummaryService
-}
-
-type YahooFleamarketDailyPurchaseSummaryService struct {
-	*FindYahooFleamarketDailyPurchaseSummaryService
-}

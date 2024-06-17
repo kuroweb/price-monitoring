@@ -54,7 +54,6 @@ services:
     tty: true
     volumes:
       - ./volumes/frontend:/app
-      - ./volumes/bff/graph:/app/graphql/schema
       - frontend-node-modules:/app/node_modules
 
   backend:
@@ -127,21 +126,6 @@ services:
       dockerfile: containers/backend_playwright/Dockerfile
     ports:
       - 8888:8888
-
-  bff:
-    build:
-      context: .
-      dockerfile: containers/bff/Dockerfile
-    ports:
-      - 3001:8080
-    environment:
-      PORT: "8080"
-      ALLOWED_ORIGIN: "bff"
-      BACKEND_URL: "http://backend:3000"
-    stdin_open: true
-    tty: true
-    volumes:
-      - ./volumes/bff:/app
 
 volumes:
   frontend-node-modules:

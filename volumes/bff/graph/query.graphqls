@@ -1,5 +1,0 @@
-type Query {
-  product(id: ID!): Product!
-  products(id: ID, name: String): [Product!]!
-  node(id: ID!): Node
-}
