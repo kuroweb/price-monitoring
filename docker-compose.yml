@@ -48,8 +48,8 @@ services:
     ports:
       - 8080:3000
     environment:
-      NEXT_PRIVATE_BFF_URL: 'http://bff:8080/query'
-      NEXT_PUBLIC_BFF_URL: 'http://bff:8080/query'
+      NEXT_PRIVATE_BFF_URL: 'http://backend:3000/graphql'
+      NEXT_PUBLIC_BFF_URL: 'http://backend:3000/graphql'
     stdin_open: true
     tty: true
     volumes:

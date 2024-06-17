@@ -78,9 +78,5 @@ Rails.application.routes.draw do
   # Sidekiq
   # TODO: ProductionでBasic認証をかける
   mount Sidekiq::Web, at: "/sidekiq"
-
-  # GraphQL
-  post "/graphql", to: "graphql#execute"
-  mount GraphiQL::Rails::Engine, at: "/graphiql", as: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
 end
 # rubocop:enable Metrics/BlockLength
