@@ -36,9 +36,6 @@ attach-backend-batch-2:
 attach-backend-playwright:
 	docker attach $(docker compose ps -q backend-playwright)
 
-attach-bff:
-	docker attach $(docker compose ps -q bff)
-
 attach-frontend:
 	docker attach $(docker compose ps -q frontend)
 

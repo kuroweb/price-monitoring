@@ -16,10 +16,10 @@ tag_suffix := $(shell git rev-parse --short HEAD)
 all: build-all push-all
 
 # Dockerイメージをビルドする
-build-all: build-backend build-backend-playwright build-bff build-frontend
+build-all: build-backend build-backend-playwright build-frontend
 
 # Dockerイメージをプッシュする
-push-all: push-backend push-backend-playwright push-bff push-frontend
+push-all: push-backend push-backend-playwright push-frontend
 
 #
 # backend
@@ -48,20 +48,6 @@ build-backend-playwright:
 
 push-backend-playwright:
 	docker push $(backend_playwright_tag)
-
-#
-# bff
-#
-
-bff_tag := $(registry)/$(project)-bff:$(tag_suffix)
-
-build-bff:
-	docker build \
-	-t $(bff_tag) \
-	-f containers/bff/Dockerfile.prod volumes/bff
-
-push-bff:
-	docker push $(bff_tag)
 
 #
 # frontend
