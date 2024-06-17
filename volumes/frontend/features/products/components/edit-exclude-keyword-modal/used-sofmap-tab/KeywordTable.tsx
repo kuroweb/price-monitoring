@@ -25,7 +25,7 @@ const KeywordTable = ({
   const router = useRouter()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteUsedSofmapCrawlSettingExcludeKeyword(id, productId)
+    const result = await deleteUsedSofmapCrawlSettingExcludeKeyword({ id, productId })
     if (result.data?.deleteUsedSofmapCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {

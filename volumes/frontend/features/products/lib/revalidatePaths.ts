@@ -10,6 +10,7 @@ export const revalidatePaths = (pathnames: RevalidatePathArgs[]) => {
 
 export const revalidateProductPaths = () => {
   revalidatePaths([
+    [`/`, 'page'],
     [`/products/[id]`, 'page'],
     ['/products/[id]/settings', 'page'],
     ['/recommends', 'page'],

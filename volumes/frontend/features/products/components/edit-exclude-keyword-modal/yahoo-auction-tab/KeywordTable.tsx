@@ -25,7 +25,7 @@ const KeywordTable = ({
   const router = useRouter()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteYahooAuctionCrawlSettingExcludeKeyword(id, productId)
+    const result = await deleteYahooAuctionCrawlSettingExcludeKeyword({ id, productId })
     if (result.data?.deleteYahooAuctionCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {

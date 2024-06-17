@@ -54,10 +54,10 @@ const DeleteForm = ({
     for (const excludeKeyword of yahooAuctionCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteYahooAuctionCrawlSettingRequiredKeyword(
-            excludeKeyword.id,
+          const result = await deleteYahooAuctionCrawlSettingRequiredKeyword({
+            id: excludeKeyword.id,
             productId,
-          )
+          })
           if (
             result?.data?.deleteYahooAuctionCrawlSettingRequiredKeyword.__typename ===
               'DeleteYahooAuctionCrawlSettingRequiredKeywordResultError' &&
@@ -76,10 +76,10 @@ const DeleteForm = ({
     for (const excludeKeyword of mercariCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteMercariCrawlSettingRequiredKeyword(
-            excludeKeyword.id,
+          const result = await deleteMercariCrawlSettingRequiredKeyword({
+            id: excludeKeyword.id,
             productId,
-          )
+          })
           if (
             result?.data?.deleteMercariCrawlSettingRequiredKeyword.__typename ===
               'DeleteMercariCrawlSettingRequiredKeywordResultError' &&
@@ -98,10 +98,10 @@ const DeleteForm = ({
     for (const excludeKeyword of janparaCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteJanparaCrawlSettingRequiredKeyword(
-            excludeKeyword.id,
+          const result = await deleteJanparaCrawlSettingRequiredKeyword({
+            id: excludeKeyword.id,
             productId,
-          )
+          })
           if (
             result?.data?.deleteJanparaCrawlSettingRequiredKeyword.__typename ===
               'DeleteJanparaCrawlSettingRequiredKeywordResultError' &&
@@ -120,7 +120,10 @@ const DeleteForm = ({
     for (const excludeKeyword of iosysCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteIosysCrawlSettingRequiredKeyword(excludeKeyword.id, productId)
+          const result = await deleteIosysCrawlSettingRequiredKeyword({
+            id: excludeKeyword.id,
+            productId,
+          })
           if (
             result?.data?.deleteIosysCrawlSettingRequiredKeyword.__typename ===
               'DeleteIosysCrawlSettingRequiredKeywordResultError' &&
@@ -139,10 +142,10 @@ const DeleteForm = ({
     for (const excludeKeyword of pcKoubouCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deletePcKoubouCrawlSettingRequiredKeyword(
-            excludeKeyword.id,
+          const result = await deletePcKoubouCrawlSettingRequiredKeyword({
+            id: excludeKeyword.id,
             productId,
-          )
+          })
           if (
             result?.data?.deletePcKoubouCrawlSettingRequiredKeyword.__typename ===
               'DeletePcKoubouCrawlSettingRequiredKeywordResultError' &&
@@ -161,10 +164,10 @@ const DeleteForm = ({
     for (const excludeKeyword of usedSofmapCrawlSettingRequiredKeywords) {
       if (excludeKeyword.keyword === input.keyword) {
         try {
-          const result = await deleteUsedSofmapCrawlSettingRequiredKeyword(
-            excludeKeyword.id,
+          const result = await deleteUsedSofmapCrawlSettingRequiredKeyword({
+            id: excludeKeyword.id,
             productId,
-          )
+          })
           if (
             result?.data?.deleteUsedSofmapCrawlSettingRequiredKeyword.__typename ===
               'DeleteUsedSofmapCrawlSettingRequiredKeywordResultError' &&

@@ -25,7 +25,7 @@ const KeywordTable = ({
   const router = useRouter()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deleteMercariCrawlSettingExcludeProduct(id, productId)
+    const result = await deleteMercariCrawlSettingExcludeProduct({ id, productId })
     if (result.data?.deleteMercariCrawlSettingExcludeProduct.ok) {
       toast.success('success')
     } else {

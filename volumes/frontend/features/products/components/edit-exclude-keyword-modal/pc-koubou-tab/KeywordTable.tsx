@@ -25,7 +25,7 @@ const KeywordTable = ({
   const router = useRouter()
 
   const destroy = async (id: string, productId: string) => {
-    const result = await deletePcKoubouCrawlSettingExcludeKeyword(id, productId)
+    const result = await deletePcKoubouCrawlSettingExcludeKeyword({ id, productId })
     if (result.data?.deletePcKoubouCrawlSettingExcludeKeyword.ok) {
       toast.success('success')
     } else {
