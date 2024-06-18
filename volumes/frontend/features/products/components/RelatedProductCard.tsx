@@ -140,7 +140,7 @@ const RelatedProductCard = ({
 
   return (
     <>
-      <div className='card w-48 flex-none bg-base-100 shadow-xl'>
+      <div className='card bg-base-100 shadow-xl'>
         <figure>
           <div className='relative h-32 w-full'>
             <NextImage
@@ -208,7 +208,7 @@ const RelatedProductCard = ({
           className='card-body cursor-pointer p-4'
           onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
         >
-          <p className='text-sm'>{relatedProduct.name}</p>
+          <p className='text-sm'>{`${relatedProduct.name.substring(0, 40)}...`}</p>
           <div className='flex-wrap space-y-2'>
             {status == 'published' && relatedProduct.platform == 'yahoo_auction' ? (
               <>

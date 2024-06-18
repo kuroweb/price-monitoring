@@ -22,7 +22,7 @@ const Page = async () => {
                 <Link className='card-title' href={`/products/${product.id}`}>
                   {product.name}
                 </Link>
-                <div className='flex gap-4 overflow-auto pt-4'>
+                <div className='grid auto-cols-[10rem] grid-flow-col gap-4 overflow-x-auto pt-4'>
                   {product.relatedProducts.map((relatedProduct) => (
                     <RelatedProductCard
                       key={relatedProduct.externalId}

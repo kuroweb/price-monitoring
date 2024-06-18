@@ -59,7 +59,7 @@ const Page = async ({
           <div className='card-body'>
             <h2 className='card-title pb-4'>商品一覧</h2>
             <SearchForm />
-            <div className='grid grid-cols-2 gap-4 pt-4 md:grid-cols-3 lg:grid-cols-4'>
+            <div className='grid grid-cols-2 gap-4 pt-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6'>
               {data.product.relatedProducts.map((relatedProduct) => (
                 <RelatedProductCard
                   key={relatedProduct.externalId}
