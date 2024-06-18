@@ -14,24 +14,21 @@ const Page = async () => {
 
   return (
     <Layout>
-      <div className='grid grid-cols-1 gap-4'>
+      <div className='grid grid-cols-1'>
         {data.products.map((product) => (
           <>
-            <div className='card w-full bg-neutral'>
-              <div className='card-body'>
-                <Link className='card-title' href={`/products/${product.id}`}>
-                  {product.name}
-                </Link>
-                <div className='grid auto-cols-[10rem] grid-flow-col gap-4 overflow-x-auto pt-4'>
-                  {product.relatedProducts.map((relatedProduct) => (
-                    <RelatedProductCard
-                      key={relatedProduct.externalId}
-                      relatedProduct={relatedProduct}
-                    />
-                  ))}
-                </div>
-              </div>
+            <Link className='card-title' href={`/products/${product.id}`}>
+              {product.name}
+            </Link>
+            <div className='grid auto-cols-[10rem] grid-flow-col gap-2 overflow-x-auto pt-4'>
+              {product.relatedProducts.map((relatedProduct) => (
+                <RelatedProductCard
+                  key={relatedProduct.externalId}
+                  relatedProduct={relatedProduct}
+                />
+              ))}
             </div>
+            <div className="divider" />
           </>
         ))}
       </div>
