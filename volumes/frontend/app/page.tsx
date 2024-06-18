@@ -4,7 +4,6 @@ import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/products/components/ProductsTable'
-import CreateProductModal from '@/features/products/components/create-product-modal/CreateProductModal'
 import { useCreateProductModalQuery } from '@/features/products/hooks/useCreateProductModalState'
 import { GetProductPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
@@ -38,7 +37,6 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
           </div>
         </div>
       </div>
-      <CreateProductModal />
     </Layout>
   )
 }

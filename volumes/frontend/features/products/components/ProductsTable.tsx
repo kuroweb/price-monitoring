@@ -6,16 +6,19 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
+import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 import { deleteProduct } from '../server-actions/graphql/productQuery'
 
+import CreateProductModal from './create-product-modal/CreateProductModal'
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
 import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
   const router = useRouter()
-  const [_, setModal] = useUpdateProductModalState()
+  const [_createModal, setCreateModal] = useCreateProductModalState()
+  const [_updateModal, setUpdateModal] = useUpdateProductModalState()
   const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
     undefined,
   )
@@ -79,10 +82,21 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
                         className='btn btn-primary'
                         onClick={() => {
                           setProduct(product)
-                          setModal(true)
+                          setUpdateModal(true)
                         }}
                       >
                         編集
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className='btn btn-success'
+                        onClick={() => {
+                          setProduct(product)
+                          setCreateModal(true)
+                        }}
+                      >
+                        複製
                       </button>
                     </li>
                     <li>
@@ -100,6 +114,51 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
           ))}
         </tbody>
       </table>
+      <CreateProductModal
+        defaultValues={
+          product && {
+            name: product?.name,
+            yahooAuctionCrawlSetting: {
+              keyword: product?.yahooAuctionCrawlSetting?.keyword,
+              categoryId: product?.yahooAuctionCrawlSetting?.categoryId,
+              minPrice: product?.yahooAuctionCrawlSetting?.minPrice,
+              maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice,
+              enabled: product?.yahooAuctionCrawlSetting?.enabled,
+            },
+            mercariCrawlSetting: {
+              keyword: product?.mercariCrawlSetting?.keyword,
+              categoryId: product?.mercariCrawlSetting?.categoryId,
+              minPrice: product?.mercariCrawlSetting?.minPrice,
+              maxPrice: product?.mercariCrawlSetting?.maxPrice,
+              enabled: product?.mercariCrawlSetting?.enabled,
+            },
+            janparaCrawlSetting: {
+              keyword: product?.janparaCrawlSetting?.keyword,
+              minPrice: product?.janparaCrawlSetting?.minPrice,
+              maxPrice: product?.janparaCrawlSetting?.maxPrice,
+              enabled: product?.janparaCrawlSetting?.enabled,
+            },
+            iosysCrawlSetting: {
+              keyword: product?.iosysCrawlSetting?.keyword,
+              minPrice: product?.iosysCrawlSetting?.minPrice,
+              maxPrice: product?.iosysCrawlSetting?.maxPrice,
+              enabled: product?.iosysCrawlSetting?.enabled,
+            },
+            pcKoubouCrawlSetting: {
+              keyword: product?.pcKoubouCrawlSetting?.keyword,
+              minPrice: product?.pcKoubouCrawlSetting?.minPrice,
+              maxPrice: product?.pcKoubouCrawlSetting?.maxPrice,
+              enabled: product?.pcKoubouCrawlSetting?.enabled,
+            },
+            usedSofmapCrawlSetting: {
+              keyword: product?.usedSofmapCrawlSetting?.keyword,
+              minPrice: product?.usedSofmapCrawlSetting?.minPrice,
+              maxPrice: product?.usedSofmapCrawlSetting?.maxPrice,
+              enabled: product?.usedSofmapCrawlSetting?.enabled,
+            },
+          }
+        }
+      />
       <UpdateProductModal
         defaultValues={
           product && {

@@ -25,7 +25,11 @@ export type reflectValueType = (
   property: 'keyword' | 'minPrice' | 'maxPrice',
 ) => void
 
-const CreateProductModal = () => {
+const CreateProductModal = ({
+  defaultValues,
+}: {
+  defaultValues: CreateProductInput | undefined
+}) => {
   const router = useRouter()
 
   const [modal, setModal] = useCreateProductModalState()
@@ -35,46 +39,47 @@ const CreateProductModal = () => {
 
   const { register, handleSubmit, setValue, getValues } = useForm<CreateProductInput>({
     defaultValues: {
-      name: '',
+      name: defaultValues?.name || '',
       yahooAuctionCrawlSetting: {
-        keyword: '',
-        categoryId: null,
-        minPrice: 0,
-        maxPrice: 0,
-        enabled: true,
+        keyword: defaultValues?.yahooAuctionCrawlSetting?.keyword || '',
+        categoryId: defaultValues?.yahooAuctionCrawlSetting?.categoryId || null,
+        minPrice: defaultValues?.yahooAuctionCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.yahooAuctionCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.yahooAuctionCrawlSetting?.enabled || false,
       },
       mercariCrawlSetting: {
-        keyword: '',
-        categoryId: null,
-        minPrice: 0,
-        maxPrice: 0,
-        enabled: true,
+        keyword: defaultValues?.mercariCrawlSetting?.keyword || '',
+        categoryId: defaultValues?.mercariCrawlSetting?.categoryId || null,
+        minPrice: defaultValues?.mercariCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.mercariCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.mercariCrawlSetting?.enabled || false,
       },
       janparaCrawlSetting: {
-        keyword: '',
-        minPrice: 0,
-        maxPrice: 0,
-        enabled: true,
+        keyword: defaultValues?.janparaCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.janparaCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.janparaCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.janparaCrawlSetting?.enabled || false,
       },
       iosysCrawlSetting: {
-        keyword: '',
-        minPrice: 0,
-        maxPrice: 0,
-        enabled: true,
+        keyword: defaultValues?.iosysCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.iosysCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.iosysCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.iosysCrawlSetting?.enabled || false,
       },
       pcKoubouCrawlSetting: {
-        keyword: '',
-        minPrice: 0,
-        maxPrice: 0,
-        enabled: true,
+        keyword: defaultValues?.pcKoubouCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.pcKoubouCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.pcKoubouCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.pcKoubouCrawlSetting?.enabled || false,
       },
       usedSofmapCrawlSetting: {
-        keyword: '',
-        minPrice: 0,
-        maxPrice: 0,
-        enabled: true,
+        keyword: defaultValues?.usedSofmapCrawlSetting?.keyword || '',
+        minPrice: defaultValues?.usedSofmapCrawlSetting?.minPrice || 0,
+        maxPrice: defaultValues?.usedSofmapCrawlSetting?.maxPrice || 0,
+        enabled: defaultValues?.usedSofmapCrawlSetting?.enabled || false,
       },
     },
+    values: defaultValues,
   })
 
   const onSubmit: SubmitHandler<CreateProductInput> = async (data) => {
