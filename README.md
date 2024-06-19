@@ -86,8 +86,8 @@ erDiagram
     int depth "親子関係のパスの深さ"
   }
 
-  products ||--o{ product_category_map : "1:N"
-  product_category_map }o--|| categories : "N:1"
+  products ||--|| product_category_map : "1:1"
+  product_category_map ||--|| categories : "1:1"
   categories ||--o{ category_closures : "親カテゴリ"
   categories ||--o{ category_closures : "子カテゴリ"
 ```
