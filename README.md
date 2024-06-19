@@ -71,9 +71,13 @@ erDiagram
     bigint id PK
     string name
   }
-  categories {
+  product_category_map {
     bigint id PK
     bigint product_id FK
+    bigint category_id FK
+  }
+  categories {
+    bigint id PK
     string name
   }
   category_closures {
@@ -82,7 +86,8 @@ erDiagram
     int depth "親子関係のパスの深さ"
   }
 
-  products ||--|| categories : "1:1"
+  products ||--o{ product_category_map : "1:N"
+  product_category_map }o--|| categories : "N:1"
   categories ||--o{ category_closures : "親カテゴリ"
   categories ||--o{ category_closures : "子カテゴリ"
 ```
