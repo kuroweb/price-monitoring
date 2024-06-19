@@ -63,7 +63,7 @@ price--proxy-->VPS
 
 ## ER
 
-### 計測対象管理
+### カテゴリ
 
 ```mermaid
 erDiagram
@@ -81,13 +81,14 @@ erDiagram
     string name
   }
   category_closures {
+    bigint id PK
     bigint parent_id FK "親カテゴリID (category_id)"
     bigint child_id FK "子カテゴリID (category_id)"
     int depth "親子関係のパスの深さ"
   }
 
-  products ||--|| product_category_map : "1:1"
-  product_category_map }o--|| categories : "N:1"
+  products ||--|| product_category_map : ""
+  product_category_map }o--|| categories : ""
   categories ||--o{ category_closures : "親カテゴリ"
   categories ||--o{ category_closures : "子カテゴリ"
 ```
