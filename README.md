@@ -73,6 +73,7 @@ erDiagram
   }
   categories {
     bigint id PK
+    bigint product_id FK
     string name
   }
   category_closures {
