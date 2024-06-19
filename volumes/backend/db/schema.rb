@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_19_205903) do
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_closures", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "parent_id", null: false
+    t.bigint "child_id", null: false
+    t.integer "depth", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["child_id"], name: "index_category_closures_on_child_id"
+    t.index ["parent_id"], name: "index_category_closures_on_parent_id"
+  end
+
   create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "iosys_crawl_setting_id"
     t.string "keyword", null: false
@@ -228,6 +244,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
     t.index ["product_id"], name: "index_pc_koubou_products_on_product_id"
   end
 
+  create_table "product_category_maps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_category_maps_on_category_id"
+    t.index ["product_id"], name: "index_product_category_maps_on_product_id"
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -384,6 +409,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
     t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
   end
 
+  add_foreign_key "category_closures", "categories", column: "child_id"
+  add_foreign_key "category_closures", "categories", column: "parent_id"
   add_foreign_key "iosys_crawl_setting_exclude_keywords", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_exclude_products", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_required_keywords", "iosys_crawl_settings"
@@ -405,6 +432,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
   add_foreign_key "pc_koubou_crawl_setting_required_keywords", "pc_koubou_crawl_settings"
   add_foreign_key "pc_koubou_crawl_settings", "products"
   add_foreign_key "pc_koubou_products", "products"
+  add_foreign_key "product_category_maps", "categories"
+  add_foreign_key "product_category_maps", "products"
   add_foreign_key "used_sofmap_crawl_setting_exclude_keywords", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_exclude_products", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_required_keywords", "used_sofmap_crawl_settings"
