@@ -63,6 +63,29 @@ price--proxy-->VPS
 
 ## ER
 
+### 計測対象管理
+
+```mermaid
+erDiagram
+  products {
+    bigint id PK
+    string name
+  }
+  categories {
+    bigint id PK
+    string name
+  }
+  category_closures {
+    bigint ancestor_id FK "親カテゴリID (category_id)"
+    bigint descendant_id FK "子カテゴリID (category_id)"
+    int depth "親子関係のパスの深さ"
+  }
+
+  products ||--|| categories : "1:1"
+  categories ||--o{ category_closures : "親カテゴリ"
+  categories ||--o{ category_closures : "子カテゴリ"
+```
+
 ### クロール処理
 
 #### ヤフオク
