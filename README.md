@@ -87,7 +87,7 @@ erDiagram
   }
 
   products ||--|| product_category_map : "1:1"
-  product_category_map ||--|| categories : "1:1"
+  product_category_map }o--|| categories : "N:1"
   categories ||--o{ category_closures : "親カテゴリ"
   categories ||--o{ category_closures : "子カテゴリ"
 ```
