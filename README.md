@@ -76,8 +76,8 @@ erDiagram
     string name
   }
   category_closures {
-    bigint ancestor_id FK "親カテゴリID (category_id)"
-    bigint descendant_id FK "子カテゴリID (category_id)"
+    bigint parent_id FK "親カテゴリID (category_id)"
+    bigint child_id FK "子カテゴリID (category_id)"
     int depth "親子関係のパスの深さ"
   }
 
