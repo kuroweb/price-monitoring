@@ -41,10 +41,10 @@ class Category < ApplicationRecord
   # 親カテゴリを追加
   def add_parent_category(parent_category)
     CategoryClosure.transaction do
-      # 自分自身との関係を追加（存在しない場合）
+      # 自分自身との関係を追加
       CategoryClosure.find_or_create_by!(ancestor: parent_category, descendant: parent_category, depth: 0)
 
-      # 直近の親子関係を追加（存在しない場合）
+      # 直近の親子関係を追加
       CategoryClosure.find_or_create_by!(ancestor: parent_category, descendant: self, depth: 1)
 
       # 既存の子孫との関係を更新
