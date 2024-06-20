@@ -18,13 +18,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_205903) do
   end
 
   create_table "category_closures", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "parent_id", null: false
-    t.bigint "child_id", null: false
+    t.bigint "ancestor_id", null: false
+    t.bigint "descendant_id", null: false
     t.integer "depth", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["child_id"], name: "index_category_closures_on_child_id"
-    t.index ["parent_id"], name: "index_category_closures_on_parent_id"
+    t.index ["ancestor_id", "descendant_id", "depth"], name: "index_category_closures_on_ancestor_and_descendant_and_depth", unique: true
+    t.index ["ancestor_id"], name: "index_category_closures_on_ancestor_id"
+    t.index ["descendant_id"], name: "index_category_closures_on_descendant_id"
   end
 
   create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -409,8 +410,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_19_205903) do
     t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
   end
 
-  add_foreign_key "category_closures", "categories", column: "child_id"
-  add_foreign_key "category_closures", "categories", column: "parent_id"
+  add_foreign_key "category_closures", "categories", column: "ancestor_id"
+  add_foreign_key "category_closures", "categories", column: "descendant_id"
   add_foreign_key "iosys_crawl_setting_exclude_keywords", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_exclude_products", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_required_keywords", "iosys_crawl_settings"
