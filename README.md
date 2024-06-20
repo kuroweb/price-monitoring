@@ -63,7 +63,9 @@ price--proxy-->VPS
 
 ## ER
 
-### カテゴリ
+### 計測対象管理
+
+#### カテゴリ
 
 ```mermaid
 erDiagram
