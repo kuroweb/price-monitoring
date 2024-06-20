@@ -87,9 +87,8 @@ class Category < ApplicationRecord
       # 親カテゴリーと子カテゴリーの新しい関係を作成
       parents.each do |parent|
         children.each do |child|
-          new_depth = parent.ancestor_closures.find_by(
-            descendant: self
-          ).depth + child.ancestor_closures.find_by(descendant: self).depth
+          new_depth = parent.ancestor_closures.find_by(descendant: self).depth + \
+                      child.ancestor_closures.find_by(descendant: self).depth
           CategoryClosure.find_or_create_by!(ancestor: parent, descendant: child, depth: new_depth)
         end
       end
