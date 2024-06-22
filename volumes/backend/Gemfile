@@ -3,6 +3,7 @@ source "https://rubygems.org"
 ruby "3.2.2"
 
 gem "bootsnap", require: false
+gem "closure_tree"
 gem "graphql"
 gem "importmap-rails"
 gem "jbuilder"
