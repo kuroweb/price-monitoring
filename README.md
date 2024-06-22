@@ -82,17 +82,17 @@ erDiagram
     bigint id PK
     string name
   }
-  category_closures {
+  category_hierarchies {
     bigint id PK
-    bigint parent_id FK "親カテゴリID (category_id)"
-    bigint child_id FK "子カテゴリID (category_id)"
-    int depth "親子関係のパスの深さ"
+    bigint ancestor_id FK "親カテゴリID (category_id)"
+    bigint descendant_id FK "子カテゴリID (category_id)"
+    int generations "親子関係のパスの深さ"
   }
 
   products ||--|| product_category_map : ""
   product_category_map }o--|| categories : ""
-  categories ||--o{ category_closures : "親カテゴリ"
-  categories ||--o{ category_closures : "子カテゴリ"
+  categories ||--o{ category_hierarchies : "親カテゴリ"
+  categories ||--o{ category_hierarchies : "子カテゴリ"
 ```
 
 ### クロール処理

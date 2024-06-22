@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_21_214534) do
+  create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name"
+    t.integer "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "category_hierarchies", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "ancestor_id", null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations", null: false
+    t.index ["ancestor_id", "descendant_id", "generations"], name: "category_anc_desc_idx", unique: true
+    t.index ["descendant_id"], name: "category_desc_idx"
+  end
+
   create_table "iosys_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "iosys_crawl_setting_id"
     t.string "keyword", null: false
@@ -228,6 +243,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
     t.index ["product_id"], name: "index_pc_koubou_products_on_product_id"
   end
 
+  create_table "product_category_maps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_product_category_maps_on_category_id"
+    t.index ["product_id", "category_id"], name: "index_product_category_maps_on_product_id_and_category_id", unique: true
+    t.index ["product_id"], name: "index_product_category_maps_on_product_id"
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -405,6 +430,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_01_140619) do
   add_foreign_key "pc_koubou_crawl_setting_required_keywords", "pc_koubou_crawl_settings"
   add_foreign_key "pc_koubou_crawl_settings", "products"
   add_foreign_key "pc_koubou_products", "products"
+  add_foreign_key "product_category_maps", "categories"
+  add_foreign_key "product_category_maps", "products"
   add_foreign_key "used_sofmap_crawl_setting_exclude_keywords", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_exclude_products", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_required_keywords", "used_sofmap_crawl_settings"
