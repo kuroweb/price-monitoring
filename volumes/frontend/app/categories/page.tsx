@@ -23,7 +23,7 @@ const Page = async () => {
               {'__'.repeat(depth)}
               {category.name}
             </span>
-            {renderCategories(category.children, depth + 1)}
+            {renderCategories(category?.children, depth + 1)}
           </li>
         ))}
       </ul>
