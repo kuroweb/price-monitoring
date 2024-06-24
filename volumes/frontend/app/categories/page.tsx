@@ -36,7 +36,7 @@ const Page = async () => {
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>カテゴリ</h2>
-            {renderCategories(data.categories)}
+            {renderCategories(data?.categories)}
           </div>
         </div>
       </div>
