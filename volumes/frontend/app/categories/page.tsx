@@ -9,25 +9,24 @@ const Page = async () => {
     query: GetCategoriesPageDataDocument,
   })
 
-  const renderCategories = (
-    categories: GetCategoriesPageDataQuery['categories'],
-    depth: number = 0,
-  ) => {
-    if (!categories || categories.length === 0) return <></>
+  type ChildCategory = {
+    id: string
+    name: string
+    children: ChildCategory[]
+  }
 
-    return (
-      <ul>
-        {categories.map((category) => (
-          <li key={category.id}>
-            <span>
-              {'__'.repeat(depth)}
-              {category.name}
-            </span>
-            {renderCategories(category?.children, depth + 1)}
+  const renderChildren = (children: ChildCategory[], depth: number = 1) => {
+    return children.map((child): JSX.Element => {
+      return (
+        <>
+          <li key={child.id}>
+            {'__'.repeat(depth)}
+            {child.name}
           </li>
-        ))}
-      </ul>
-    )
+          {renderChildren(child.children, depth + 1)}
+        </>
+      )
+    })
   }
 
   return (
@@ -36,7 +35,16 @@ const Page = async () => {
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>カテゴリ</h2>
-            {renderCategories(data?.categories)}
+            <ul>
+              {data.categories.map((category) => {
+                return (
+                  <>
+                    <li key={category.id}>{category.name}</li>
+                    {renderChildren(category.children as ChildCategory[])}
+                  </>
+                )
+              })}
+            </ul>
           </div>
         </div>
       </div>

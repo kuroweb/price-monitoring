@@ -1,0 +1,26 @@
+#
+# categories
+#
+
+query getCategoriesPageData {
+  categories {
+    ...CategoryFields
+    children {
+      ...CategoryFields
+      children {
+        ...CategoryFields
+        children {
+          ...CategoryFields
+          children {
+            ...CategoryFields
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment CategoryFields on Category {
+  id
+  name
+}
