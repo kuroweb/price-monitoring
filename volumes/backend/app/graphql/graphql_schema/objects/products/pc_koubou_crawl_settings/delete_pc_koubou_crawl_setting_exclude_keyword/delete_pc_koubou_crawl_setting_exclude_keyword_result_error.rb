@@ -4,7 +4,7 @@ module GraphqlSchema
       module PcKoubouCrawlSettings
         module DeletePcKoubouCrawlSettingExcludeKeyword
           class DeletePcKoubouCrawlSettingExcludeKeywordResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeyword::

@@ -4,7 +4,7 @@ module GraphqlSchema
       module PcKoubouCrawlSettings
         module CreatePcKoubouCrawlSettingExcludeProduct
           class CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed < Base
-            implements Interfaces::Products::UserError
+            implements Interfaces::UserError
 
             field :details, [ErrorDetail], null: false
           end

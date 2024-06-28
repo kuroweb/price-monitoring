@@ -4,7 +4,7 @@ module GraphqlSchema
       module MercariCrawlSettings
         module UpdateMercariCrawlSettingExcludeProduct
           class UpdateMercariCrawlSettingExcludeProductResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :mercari_crawl_setting_exclude_product,
                   Objects::Products::MercariCrawlSettings::MercariCrawlSettingExcludeProduct, null: false

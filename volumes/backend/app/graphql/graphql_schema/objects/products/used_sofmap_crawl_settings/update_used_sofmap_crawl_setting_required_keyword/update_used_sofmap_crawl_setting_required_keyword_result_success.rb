@@ -4,7 +4,7 @@ module GraphqlSchema
       module UsedSofmapCrawlSettings
         module UpdateUsedSofmapCrawlSettingRequiredKeyword
           class UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :used_sofmap_crawl_setting_required_keyword,
                   Objects::Products::UsedSofmapCrawlSettings::UsedSofmapCrawlSettingRequiredKeyword, null: false

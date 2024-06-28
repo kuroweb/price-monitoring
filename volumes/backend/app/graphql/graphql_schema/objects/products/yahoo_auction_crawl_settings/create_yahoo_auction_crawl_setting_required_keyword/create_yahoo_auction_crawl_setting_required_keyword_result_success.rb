@@ -4,7 +4,7 @@ module GraphqlSchema
       module YahooAuctionCrawlSettings
         module CreateYahooAuctionCrawlSettingRequiredKeyword
           class CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :yahoo_auction_crawl_setting_required_keyword,
                   Objects::Products::YahooAuctionCrawlSettings::YahooAuctionCrawlSettingRequiredKeyword,

@@ -4,7 +4,7 @@ module GraphqlSchema
       module UsedSofmapCrawlSettings
         module DeleteUsedSofmapCrawlSettingExcludeKeyword
           class DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed < Base
-            implements Interfaces::Products::UserError
+            implements Interfaces::UserError
 
             field :details, [ErrorDetail], null: false
           end

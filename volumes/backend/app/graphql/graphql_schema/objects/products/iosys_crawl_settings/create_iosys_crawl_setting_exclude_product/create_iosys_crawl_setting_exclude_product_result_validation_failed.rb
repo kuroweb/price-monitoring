@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module CreateIosysCrawlSettingExcludeProduct
           class CreateIosysCrawlSettingExcludeProductResultValidationFailed < Base
-            implements Interfaces::Products::UserError
+            implements Interfaces::UserError
 
             field :details, [ErrorDetail], null: false
           end

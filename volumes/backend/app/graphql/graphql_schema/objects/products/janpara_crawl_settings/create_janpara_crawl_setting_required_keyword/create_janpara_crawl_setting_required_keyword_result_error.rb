@@ -4,7 +4,7 @@ module GraphqlSchema
       module JanparaCrawlSettings
         module CreateJanparaCrawlSettingRequiredKeyword
           class CreateJanparaCrawlSettingRequiredKeywordResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword::

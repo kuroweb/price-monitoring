@@ -4,7 +4,7 @@ module GraphqlSchema
       module JanparaCrawlSettings
         module CreateJanparaCrawlSettingRequiredKeyword
           class CreateJanparaCrawlSettingRequiredKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :janpara_crawl_setting_required_keyword,
                   Objects::Products::JanparaCrawlSettings::JanparaCrawlSettingRequiredKeyword,

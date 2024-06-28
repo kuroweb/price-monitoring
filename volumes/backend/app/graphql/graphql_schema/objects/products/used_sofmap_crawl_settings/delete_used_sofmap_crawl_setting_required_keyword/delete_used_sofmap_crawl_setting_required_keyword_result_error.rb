@@ -4,7 +4,7 @@ module GraphqlSchema
       module UsedSofmapCrawlSettings
         module DeleteUsedSofmapCrawlSettingRequiredKeyword
           class DeleteUsedSofmapCrawlSettingRequiredKeywordResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingRequiredKeyword::

@@ -4,7 +4,7 @@ module GraphqlSchema
       module JanparaCrawlSettings
         module CreateJanparaCrawlSettingExcludeKeyword
           class CreateJanparaCrawlSettingExcludeKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :janpara_crawl_setting_exclude_keyword,
                   Objects::Products::JanparaCrawlSettings::JanparaCrawlSettingExcludeKeyword,

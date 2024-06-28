@@ -4,7 +4,7 @@ module GraphqlSchema
       module YahooAuctionCrawlSettings
         module DeleteYahooAuctionCrawlSettingExcludeProduct
           class DeleteYahooAuctionCrawlSettingExcludeProductResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct::

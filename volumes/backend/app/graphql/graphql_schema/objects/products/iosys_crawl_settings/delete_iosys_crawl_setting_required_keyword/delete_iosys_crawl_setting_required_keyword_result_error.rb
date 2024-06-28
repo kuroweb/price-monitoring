@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module DeleteIosysCrawlSettingRequiredKeyword
           class DeleteIosysCrawlSettingRequiredKeywordResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::

@@ -4,7 +4,7 @@ module GraphqlSchema
       module MercariCrawlSettings
         module CreateMercariCrawlSettingExcludeKeyword
           class CreateMercariCrawlSettingExcludeKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :mercari_crawl_setting_exclude_keyword,
                   Objects::Products::MercariCrawlSettings::MercariCrawlSettingExcludeKeyword,

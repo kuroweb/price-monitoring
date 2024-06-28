@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module CreateIosysCrawlSettingRequiredKeyword
           class CreateIosysCrawlSettingRequiredKeywordResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword::

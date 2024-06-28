@@ -4,7 +4,7 @@ module GraphqlSchema
       module UsedSofmapCrawlSettings
         module DeleteUsedSofmapCrawlSettingExcludeProduct
           class DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :used_sofmap_crawl_setting_exclude_product,
                   Objects::Products::UsedSofmapCrawlSettings::UsedSofmapCrawlSettingExcludeProduct, null: false

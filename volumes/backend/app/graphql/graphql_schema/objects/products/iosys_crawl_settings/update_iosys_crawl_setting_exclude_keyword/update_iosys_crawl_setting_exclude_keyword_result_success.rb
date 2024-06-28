@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module UpdateIosysCrawlSettingExcludeKeyword
           class UpdateIosysCrawlSettingExcludeKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :iosys_crawl_setting_exclude_keyword,
                   Objects::Products::IosysCrawlSettings::IosysCrawlSettingExcludeKeyword, null: false

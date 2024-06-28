@@ -4,7 +4,7 @@ module GraphqlSchema
       module MercariCrawlSettings
         module CreateMercariCrawlSettingRequiredKeyword
           class CreateMercariCrawlSettingRequiredKeywordResultValidationFailed < Base
-            implements Interfaces::Products::UserError
+            implements Interfaces::UserError
 
             field :details, [ErrorDetail], null: false
           end

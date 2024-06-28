@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module DeleteIosysCrawlSettingRequiredKeyword
           class DeleteIosysCrawlSettingRequiredKeywordResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :iosys_crawl_setting_required_keyword,
                   Objects::Products::IosysCrawlSettings::IosysCrawlSettingRequiredKeyword, null: false

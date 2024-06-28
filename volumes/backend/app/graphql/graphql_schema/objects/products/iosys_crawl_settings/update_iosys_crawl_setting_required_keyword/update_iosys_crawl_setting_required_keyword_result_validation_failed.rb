@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module UpdateIosysCrawlSettingRequiredKeyword
           class UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed < Base
-            implements Interfaces::Products::UserError
+            implements Interfaces::UserError
 
             field :details, [ErrorDetail], null: false
           end

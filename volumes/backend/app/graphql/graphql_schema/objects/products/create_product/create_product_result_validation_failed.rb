@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module CreateProduct
         class CreateProductResultValidationFailed < Base
-          implements Interfaces::Products::UserError
+          implements Interfaces::UserError
 
           field :details, [ErrorDetail], null: false
         end

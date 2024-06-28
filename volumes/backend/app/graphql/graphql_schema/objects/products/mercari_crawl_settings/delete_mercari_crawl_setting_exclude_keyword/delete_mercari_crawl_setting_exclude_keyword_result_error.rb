@@ -4,7 +4,7 @@ module GraphqlSchema
       module MercariCrawlSettings
         module DeleteMercariCrawlSettingExcludeKeyword
           class DeleteMercariCrawlSettingExcludeKeywordResultError < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :error,
                   Unions::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeKeyword::

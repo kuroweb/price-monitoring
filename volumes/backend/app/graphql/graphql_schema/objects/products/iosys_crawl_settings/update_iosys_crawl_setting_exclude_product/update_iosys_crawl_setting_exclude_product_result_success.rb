@@ -4,7 +4,7 @@ module GraphqlSchema
       module IosysCrawlSettings
         module UpdateIosysCrawlSettingExcludeProduct
           class UpdateIosysCrawlSettingExcludeProductResultSuccess < Base
-            implements Interfaces::Products::ResultBase
+            implements Interfaces::ResultBase
 
             field :iosys_crawl_setting_exclude_product,
                   Objects::Products::IosysCrawlSettings::IosysCrawlSettingExcludeProduct, null: false
