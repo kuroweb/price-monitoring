@@ -23,3 +23,24 @@ mutation createCategory($input: CreateCategoryInput!) {
     }
   }
 }
+
+mutation deleteCategory($input: DeleteCategoryInput!) {
+  deleteCategory(input: $input) {
+    ... on DeleteCategoryResultSuccess {
+      ok
+    }
+    ... on DeleteCategoryResultError {
+      ok
+      error {
+        ... on DeleteCategoryResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
