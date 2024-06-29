@@ -1,7 +1,5 @@
 'use server'
 
-import { revalidateProductPaths } from '../../lib/revalidatePaths'
-
 import type {
   CreateIosysCrawlSettingRequiredKeywordInput,
   CreateIosysCrawlSettingRequiredKeywordMutation,
@@ -17,6 +15,7 @@ import {
   DeleteIosysCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
+import { revalidateProductPaths } from '@/lib/revalidatePaths'
 
 export const createIosysCrawlSettingRequiredKeyword = async (
   input: CreateIosysCrawlSettingRequiredKeywordInput,

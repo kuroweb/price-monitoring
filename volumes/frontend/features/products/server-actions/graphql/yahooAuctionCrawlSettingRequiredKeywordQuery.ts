@@ -1,7 +1,5 @@
 'use server'
 
-import { revalidateProductPaths } from '../../lib/revalidatePaths'
-
 import type {
   CreateYahooAuctionCrawlSettingRequiredKeywordInput,
   CreateYahooAuctionCrawlSettingRequiredKeywordMutation,
@@ -17,6 +15,7 @@ import {
   DeleteYahooAuctionCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
+import { revalidateProductPaths } from '@/lib/revalidatePaths'
 
 export const createYahooAuctionCrawlSettingRequiredKeyword = async (
   input: CreateYahooAuctionCrawlSettingRequiredKeywordInput,

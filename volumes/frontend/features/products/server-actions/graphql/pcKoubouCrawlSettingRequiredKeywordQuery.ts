@@ -1,7 +1,5 @@
 'use server'
 
-import { revalidateProductPaths } from '../../lib/revalidatePaths'
-
 import type {
   CreatePcKoubouCrawlSettingRequiredKeywordInput,
   CreatePcKoubouCrawlSettingRequiredKeywordMutation,
@@ -17,6 +15,7 @@ import {
   DeletePcKoubouCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
+import { revalidateProductPaths } from '@/lib/revalidatePaths'
 
 export const createPcKoubouCrawlSettingRequiredKeyword = async (
   input: CreatePcKoubouCrawlSettingRequiredKeywordInput,

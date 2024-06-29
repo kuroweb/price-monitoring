@@ -16,3 +16,4 @@ export const revalidateProductPaths = () => {
     ['/recommends', 'page'],
   ])
 }
+
