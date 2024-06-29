@@ -1,63 +1,34 @@
 #
-# products
+# queries
 #
+
+# /products
 
 query getProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
-    id
-    name
+    ...ProductField
     yahooAuctionCrawlSetting {
-      id
-      productId
-      keyword
-      categoryId
-      minPrice
-      maxPrice
-      enabled
+      ...YahooAuctionCrawlSettingField
     }
     mercariCrawlSetting {
-      id
-      productId
-      keyword
-      categoryId
-      minPrice
-      maxPrice
-      enabled
+      ...MercariCrawlSettingField
     }
     janparaCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...JanparaCrawlSettingField
     }
     iosysCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...IosysCrawlSettingField
     }
     pcKoubouCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...PcKoubouCrawlSettingField
     }
     usedSofmapCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...UsedSofmapCrawlSettingField
     }
   }
 }
+
+# /products/:id
 
 query getProductDetailPageData(
   $id: ID!
@@ -68,208 +39,86 @@ query getProductDetailPageData(
   $order: String
 ) {
   product(id: $id) {
-    id
-    name
+    ...ProductField
     yahooAuctionCrawlSetting {
-      id
-      keyword
-      categoryId
-      minPrice
-      maxPrice
-      enabled
+      ...YahooAuctionCrawlSettingField
       yahooAuctionCrawlSettingExcludeKeywords {
-        id
-        yahooAuctionCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...YahooAuctionCrawlSettingExcludeKeywordField
       }
       yahooAuctionCrawlSettingExcludeProducts {
-        id
-        yahooAuctionCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...YahooAuctionCrawlSettingExcludeProductField
       }
       yahooAuctionCrawlSettingRequiredKeywords {
-        id
-        yahooAuctionCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...YahooAuctionCrawlSettingRequiredKeywordField
       }
     }
     yahooAuctionDailyPurchaseSummaries {
-      id
-      productId
-      averagePurchasePrice
-      purchaseCount
-      date
-      createdAt
-      updatedAt
+      ...YahooAuctionDailyPurchaseSummaryField
     }
     yahooFleamarketDailyPurchaseSummaries {
-      id
-      productId
-      averagePurchasePrice
-      purchaseCount
-      date
-      createdAt
-      updatedAt
+      ...YahooFleamarketDailyPurchaseSummaryField
     }
     mercariCrawlSetting {
-      id
-      productId
-      keyword
-      categoryId
-      minPrice
-      maxPrice
-      enabled
+      ...MercariCrawlSettingField
       mercariCrawlSettingExcludeKeywords {
-        id
-        mercariCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...MercariCrawlSettingExcludeKeywordField
       }
       mercariCrawlSettingExcludeProducts {
-        id
-        mercariCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...MercariCrawlSettingExcludeProductField
       }
       mercariCrawlSettingRequiredKeywords {
-        id
-        mercariCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...MercariCrawlSettingRequiredKeywordField
       }
     }
     mercariDailyPurchaseSummaries {
-      id
-      productId
-      averagePurchasePrice
-      purchaseCount
-      date
-      createdAt
-      updatedAt
+      ...MercariDailyPurchaseSummaryField
     }
     janparaCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...JanparaCrawlSettingField
       janparaCrawlSettingExcludeKeywords {
-        id
-        janparaCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...JanparaCrawlSettingExcludeKeywordField
       }
       janparaCrawlSettingExcludeProducts {
-        id
-        janparaCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...JanparaCrawlSettingExcludeProductField
       }
       janparaCrawlSettingRequiredKeywords {
-        id
-        janparaCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...JanparaCrawlSettingRequiredKeywordField
       }
     }
     iosysCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...IosysCrawlSettingField
       iosysCrawlSettingExcludeKeywords {
-        id
-        iosysCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...IosysCrawlSettingExcludeKeywordField
       }
       iosysCrawlSettingExcludeProducts {
-        id
-        iosysCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...IosysCrawlSettingExcludeProductField
       }
       iosysCrawlSettingRequiredKeywords {
-        id
-        iosysCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...IosysCrawlSettingRequiredKeywordField
       }
     }
     pcKoubouCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...PcKoubouCrawlSettingField
       pcKoubouCrawlSettingExcludeKeywords {
-        id
-        pcKoubouCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...PcKoubouCrawlSettingExcludeKeywordField
       }
       pcKoubouCrawlSettingExcludeProducts {
-        id
-        pcKoubouCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...PcKoubouCrawlSettingExcludeProductField
       }
       pcKoubouCrawlSettingRequiredKeywords {
-        id
-        pcKoubouCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...PcKoubouCrawlSettingRequiredKeywordField
       }
     }
     usedSofmapCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...UsedSofmapCrawlSettingField
       usedSofmapCrawlSettingExcludeKeywords {
-        id
-        usedSofmapCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...UsedSofmapCrawlSettingExcludeKeywordField
       }
       usedSofmapCrawlSettingExcludeProducts {
-        id
-        usedSofmapCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...UsedSofmapCrawlSettingExcludeProductField
       }
       usedSofmapCrawlSettingRequiredKeywords {
-        id
-        usedSofmapCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...UsedSofmapCrawlSettingRequiredKeywordField
       }
     }
     relatedProducts(
@@ -279,207 +128,101 @@ query getProductDetailPageData(
       sort: $sort
       order: $order
     ) {
-      platform
-      productId
-      externalId
-      name
-      thumbnailUrl
-      price
-      buyoutPrice
-      published
-      boughtDate
-      endDate
-      createdAt
-      updatedAt
+      ...RelatedProductField
     }
   }
 }
+
+# /products/:id/settings
 
 query getProductSettingPageData($id: ID!) {
   product(id: $id) {
-    id
-    name
+    ...ProductField
     yahooAuctionCrawlSetting {
-      id
-      keyword
-      categoryId
-      minPrice
-      maxPrice
-      enabled
+      ...YahooAuctionCrawlSettingField
       yahooAuctionCrawlSettingExcludeKeywords {
-        id
-        yahooAuctionCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...YahooAuctionCrawlSettingExcludeKeywordField
       }
       yahooAuctionCrawlSettingExcludeProducts {
-        id
-        yahooAuctionCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...YahooAuctionCrawlSettingExcludeProductField
       }
       yahooAuctionCrawlSettingRequiredKeywords {
-        id
-        yahooAuctionCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...YahooAuctionCrawlSettingRequiredKeywordField
       }
+    }
+    yahooAuctionDailyPurchaseSummaries {
+      ...YahooAuctionDailyPurchaseSummaryField
+    }
+    yahooFleamarketDailyPurchaseSummaries {
+      ...YahooFleamarketDailyPurchaseSummaryField
     }
     mercariCrawlSetting {
-      id
-      productId
-      keyword
-      categoryId
-      minPrice
-      maxPrice
-      enabled
+      ...MercariCrawlSettingField
       mercariCrawlSettingExcludeKeywords {
-        id
-        mercariCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...MercariCrawlSettingExcludeKeywordField
       }
       mercariCrawlSettingExcludeProducts {
-        id
-        mercariCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...MercariCrawlSettingExcludeProductField
       }
       mercariCrawlSettingRequiredKeywords {
-        id
-        mercariCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...MercariCrawlSettingRequiredKeywordField
       }
     }
+    mercariDailyPurchaseSummaries {
+      ...MercariDailyPurchaseSummaryField
+    }
     janparaCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...JanparaCrawlSettingField
       janparaCrawlSettingExcludeKeywords {
-        id
-        janparaCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...JanparaCrawlSettingExcludeKeywordField
       }
       janparaCrawlSettingExcludeProducts {
-        id
-        janparaCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...JanparaCrawlSettingExcludeProductField
       }
       janparaCrawlSettingRequiredKeywords {
-        id
-        janparaCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...JanparaCrawlSettingRequiredKeywordField
       }
     }
     iosysCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...IosysCrawlSettingField
       iosysCrawlSettingExcludeKeywords {
-        id
-        iosysCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...IosysCrawlSettingExcludeKeywordField
       }
       iosysCrawlSettingExcludeProducts {
-        id
-        iosysCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...IosysCrawlSettingExcludeProductField
       }
       iosysCrawlSettingRequiredKeywords {
-        id
-        iosysCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...IosysCrawlSettingRequiredKeywordField
       }
     }
     pcKoubouCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...PcKoubouCrawlSettingField
       pcKoubouCrawlSettingExcludeKeywords {
-        id
-        pcKoubouCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...PcKoubouCrawlSettingExcludeKeywordField
       }
       pcKoubouCrawlSettingExcludeProducts {
-        id
-        pcKoubouCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...PcKoubouCrawlSettingExcludeProductField
       }
       pcKoubouCrawlSettingRequiredKeywords {
-        id
-        pcKoubouCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...PcKoubouCrawlSettingRequiredKeywordField
       }
     }
     usedSofmapCrawlSetting {
-      id
-      productId
-      keyword
-      minPrice
-      maxPrice
-      enabled
+      ...UsedSofmapCrawlSettingField
       usedSofmapCrawlSettingExcludeKeywords {
-        id
-        usedSofmapCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...UsedSofmapCrawlSettingExcludeKeywordField
       }
       usedSofmapCrawlSettingExcludeProducts {
-        id
-        usedSofmapCrawlSettingId
-        externalId
-        createdAt
-        updatedAt
+        ...UsedSofmapCrawlSettingExcludeProductField
       }
       usedSofmapCrawlSettingRequiredKeywords {
-        id
-        usedSofmapCrawlSettingId
-        keyword
-        createdAt
-        updatedAt
+        ...UsedSofmapCrawlSettingRequiredKeywordField
       }
     }
   }
 }
 
-#
-# recommends
-#
+# /recommends
 
 query getRecommendsPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -492,18 +235,277 @@ query getRecommendsPageData($id: ID, $name: String) {
       sort: "price"
       order: "asc"
     ) {
-      platform
-      productId
-      externalId
-      name
-      thumbnailUrl
-      price
-      buyoutPrice
-      published
-      boughtDate
-      endDate
-      createdAt
-      updatedAt
+      ...RelatedProductField
     }
   }
+}
+
+#
+# fragments
+#
+
+# YahooAuction
+
+fragment ProductField on Product {
+  id
+  name
+}
+
+fragment YahooAuctionCrawlSettingField on YahooAuctionCrawlSetting {
+  id
+  productId
+  keyword
+  categoryId
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment YahooAuctionCrawlSettingExcludeKeywordField on YahooAuctionCrawlSettingExcludeKeyword {
+  id
+  yahooAuctionCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment YahooAuctionCrawlSettingExcludeProductField on YahooAuctionCrawlSettingExcludeProduct {
+  id
+  yahooAuctionCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment YahooAuctionCrawlSettingRequiredKeywordField on YahooAuctionCrawlSettingRequiredKeyword {
+  id
+  yahooAuctionCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment YahooAuctionDailyPurchaseSummaryField on YahooAuctionDailyPurchaseSummary {
+  id
+  productId
+  averagePurchasePrice
+  purchaseCount
+  date
+  createdAt
+  updatedAt
+}
+
+# YahooFleamarket
+
+fragment YahooFleamarketDailyPurchaseSummaryField on YahooFleamarketDailyPurchaseSummary {
+  id
+  productId
+  averagePurchasePrice
+  purchaseCount
+  date
+  createdAt
+  updatedAt
+}
+
+fragment MercariCrawlSettingField on MercariCrawlSetting {
+  id
+  productId
+  keyword
+  categoryId
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment JanparaCrawlSettingField on JanparaCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment IosysCrawlSettingField on IosysCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment PcKoubouCrawlSettingField on PcKoubouCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment UsedSofmapCrawlSettingField on UsedSofmapCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+# Mercari
+
+fragment MercariCrawlSettingExcludeKeywordField on MercariCrawlSettingExcludeKeyword {
+  id
+  mercariCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment MercariCrawlSettingExcludeProductField on MercariCrawlSettingExcludeProduct {
+  id
+  mercariCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment MercariCrawlSettingRequiredKeywordField on MercariCrawlSettingRequiredKeyword {
+  id
+  mercariCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment MercariDailyPurchaseSummaryField on MercariDailyPurchaseSummary {
+  id
+  productId
+  averagePurchasePrice
+  purchaseCount
+  date
+  createdAt
+  updatedAt
+}
+
+# Janpara
+
+fragment JanparaCrawlSettingExcludeKeywordField on JanparaCrawlSettingExcludeKeyword {
+  id
+  janparaCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment JanparaCrawlSettingExcludeProductField on JanparaCrawlSettingExcludeProduct {
+  id
+  janparaCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment JanparaCrawlSettingRequiredKeywordField on JanparaCrawlSettingRequiredKeyword {
+  id
+  janparaCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# Iosys
+
+fragment IosysCrawlSettingExcludeKeywordField on IosysCrawlSettingExcludeKeyword {
+  id
+  iosysCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment IosysCrawlSettingExcludeProductField on IosysCrawlSettingExcludeProduct {
+  id
+  iosysCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment IosysCrawlSettingRequiredKeywordField on IosysCrawlSettingRequiredKeyword {
+  id
+  iosysCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# PcKoubou
+
+fragment PcKoubouCrawlSettingExcludeKeywordField on PcKoubouCrawlSettingExcludeKeyword {
+  id
+  pcKoubouCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment PcKoubouCrawlSettingExcludeProductField on PcKoubouCrawlSettingExcludeProduct {
+  id
+  pcKoubouCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment PcKoubouCrawlSettingRequiredKeywordField on PcKoubouCrawlSettingRequiredKeyword {
+  id
+  pcKoubouCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# UsedSofmap
+
+fragment UsedSofmapCrawlSettingExcludeKeywordField on UsedSofmapCrawlSettingExcludeKeyword {
+  id
+  usedSofmapCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment UsedSofmapCrawlSettingExcludeProductField on UsedSofmapCrawlSettingExcludeProduct {
+  id
+  usedSofmapCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment UsedSofmapCrawlSettingRequiredKeywordField on UsedSofmapCrawlSettingRequiredKeyword {
+  id
+  usedSofmapCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# RelatedProduct
+
+fragment RelatedProductField on RelatedProduct {
+  platform
+  productId
+  externalId
+  name
+  thumbnailUrl
+  price
+  buyoutPrice
+  published
+  boughtDate
+  endDate
+  createdAt
+  updatedAt
 }
