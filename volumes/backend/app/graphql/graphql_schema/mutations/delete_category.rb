@@ -11,7 +11,6 @@ module GraphqlSchema
         if category.destroy
           {
             __typename: "DeleteCategoryResultSuccess",
-            category:,
             ok: true
           }
         else

@@ -113,6 +113,7 @@ module GraphqlSchema
       field :delete_used_sofmap_crawl_setting_exclude_product,
             mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct
       field :create_category, mutation: Mutations::CreateCategory
+      field :delete_category, mutation: Mutations::DeleteCategory
     end
   end
 end
