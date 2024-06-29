@@ -1,6 +1,6 @@
 module GraphqlSchema
   module Objects
-    class MutationType < Base
+    class MutationType < Base # rubocop:disable Metrics/ClassLength
       field :create_product, mutation: Mutations::Products::CreateProduct
       field :update_product, mutation: Mutations::Products::UpdateProduct
       field :delete_product, mutation: Mutations::Products::DeleteProduct
@@ -112,6 +112,7 @@ module GraphqlSchema
             mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeProduct
       field :delete_used_sofmap_crawl_setting_exclude_product,
             mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct
+      field :create_category, mutation: Mutations::CreateCategory
     end
   end
 end

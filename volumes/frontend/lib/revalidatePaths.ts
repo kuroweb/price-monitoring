@@ -17,3 +17,6 @@ export const revalidateProductPaths = () => {
   ])
 }
 
+export const revalidateCategoryPaths = () => {
+  revalidatePaths([['/categories', 'page']])
+}

@@ -1,0 +1,25 @@
+mutation createCategory($input: CreateCategoryInput!) {
+  createCategory(input: $input) {
+    ... on CreateCategoryResultSuccess {
+      ok
+      category {
+        id
+        parentId
+        name
+      }
+    }
+    ... on CreateCategoryResultError {
+      ok
+      error {
+        ... on CreateCategoryResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
