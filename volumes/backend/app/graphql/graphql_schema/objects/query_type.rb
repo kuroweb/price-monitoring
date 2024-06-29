@@ -6,7 +6,7 @@ module GraphqlSchema
 
       field :product, resolver: Resolvers::Products::Product
       field :products, resolver: Resolvers::Products::Products
-      field :categories, resolver: Resolvers::Categories
+      field :categories, resolver: Resolvers::Categories::Categories
     end
   end
 end

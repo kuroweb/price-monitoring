@@ -14,8 +14,8 @@ const Page = async () => {
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>
-        <CreateCategoryCard />
-        <CategoriesCard categories={data.categories} />
+        <CreateCategoryCard categories={data.categories} />
+        <CategoriesCard categoryTree={data.categoryTree} />
       </div>
     </Layout>
   )

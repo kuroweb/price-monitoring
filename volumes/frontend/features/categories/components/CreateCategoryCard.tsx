@@ -6,10 +6,14 @@ import { toast } from 'react-toastify'
 
 import { createCategory } from '../server-actions/graphql/categoryQuery'
 
-import type { CreateCategoryInput } from '@/graphql/dist/client'
+import type { CreateCategoryInput, GetCategoriesPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
-const CreateCategoryCard = () => {
+const CreateCategoryCard = ({
+  categories,
+}: {
+  categories: GetCategoriesPageDataQuery['categories']
+}) => {
   const router = useRouter()
   const { register, handleSubmit } = useForm<{ parentId: string; name: string }>()
 
@@ -34,12 +38,14 @@ const CreateCategoryCard = () => {
               <div className='label'>
                 <span className='label-text'>親カテゴリ</span>
               </div>
-              <input
-                {...register('parentId', {
-                  setValueAs: (v) => (v === '' ? null : v),
-                })}
-                className='input input-bordered'
-              />
+              <select {...register('parentId')} className='input input-bordered'>
+                <option value=''>なし</option>
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </label>
             <label className='form-control'>
               <div className='label'>

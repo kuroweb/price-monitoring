@@ -8,9 +8,9 @@ import { deleteCategory } from '../server-actions/graphql/categoryQuery'
 import type { DeleteCategoryInput, GetCategoriesPageDataQuery } from '@/graphql/dist/client'
 
 const CategoriesCard = ({
-  categories,
+  categoryTree,
 }: {
-  categories: GetCategoriesPageDataQuery['categories']
+  categoryTree: GetCategoriesPageDataQuery['categoryTree']
 }) => {
   const router = useRouter()
 
@@ -72,7 +72,7 @@ const CategoriesCard = ({
         <div className='card-body'>
           <h2 className='card-title pb-4'>カテゴリ一覧</h2>
           <ul>
-            {categories.map((category) => {
+            {categoryTree.map((category) => {
               return (
                 <>
                   <li key={category.id} className='flex items-center'>

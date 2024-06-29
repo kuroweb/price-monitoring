@@ -3,7 +3,10 @@
 #
 
 query getCategoriesPageData {
-  categories {
+  categories(rootOnly: false) {
+    ...CategoryFields
+  }
+  categoryTree: categories(rootOnly: true) {
     ...CategoryFields
     children {
       ...CategoryFields
@@ -22,5 +25,6 @@ query getCategoriesPageData {
 
 fragment CategoryFields on Category {
   id
+  parentId
   name
 }

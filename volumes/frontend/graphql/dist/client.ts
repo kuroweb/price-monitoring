@@ -1885,6 +1885,11 @@ export type Query = {
 };
 
 
+export type QueryCategoriesArgs = {
+  rootOnly?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type QueryNodeArgs = {
   id: Scalars['ID']['input'];
 };
@@ -3111,9 +3116,9 @@ export type DeleteUsedSofmapCrawlSettingRequiredKeywordMutation = { __typename?:
 export type GetCategoriesPageDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCategoriesPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, name: string, children: Array<{ __typename?: 'Category', id: string, name: string, children: Array<{ __typename?: 'Category', id: string, name: string, children: Array<{ __typename?: 'Category', id: string, name: string, children: Array<{ __typename?: 'Category', id: string, name: string }> }> }> }> }> };
+export type GetCategoriesPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }>, categoryTree: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> }> }> }> }> };
 
-export type CategoryFieldsFragment = { __typename?: 'Category', id: string, name: string };
+export type CategoryFieldsFragment = { __typename?: 'Category', id: string, parentId?: string | null, name: string };
 
 export type GetProductPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
@@ -3153,6 +3158,7 @@ export type GetRecommendsPageDataQuery = { __typename?: 'Query', products: Array
 export const CategoryFieldsFragmentDoc = gql`
     fragment CategoryFields on Category {
   id
+  parentId
   name
 }
     `;
@@ -4685,7 +4691,10 @@ export const DeleteUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
     `;
 export const GetCategoriesPageDataDocument = gql`
     query getCategoriesPageData {
-  categories {
+  categories(rootOnly: false) {
+    ...CategoryFields
+  }
+  categoryTree: categories(rootOnly: true) {
     ...CategoryFields
     children {
       ...CategoryFields
