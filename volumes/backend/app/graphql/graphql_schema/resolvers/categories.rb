@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Resolvers
     class Categories < Base
-      type [Objects::Category], null: false
+      type [Objects::Categories::Category], null: false
 
       def resolve
         ::Category.roots
