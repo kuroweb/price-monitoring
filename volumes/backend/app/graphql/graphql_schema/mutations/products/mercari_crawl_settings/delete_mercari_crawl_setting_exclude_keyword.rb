@@ -20,7 +20,6 @@ module GraphqlSchema
             if mercari_crawl_setting_exclude_keyword.destroy
               {
                 __typename: "DeleteMercariCrawlSettingExcludeKeywordResultSuccess",
-                mercari_crawl_setting_exclude_keyword:,
                 ok: true
               }
             else

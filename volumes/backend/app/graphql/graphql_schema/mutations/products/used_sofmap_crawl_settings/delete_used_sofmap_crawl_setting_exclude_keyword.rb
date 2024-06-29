@@ -20,7 +20,6 @@ module GraphqlSchema
             if used_sofmap_crawl_setting_exclude_keyword.destroy
               {
                 __typename: "DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
-                used_sofmap_crawl_setting_exclude_keyword:,
                 ok: true
               }
             else

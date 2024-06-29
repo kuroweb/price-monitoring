@@ -20,7 +20,6 @@ module GraphqlSchema
             if yahoo_auction_crawl_setting_exclude_product.destroy
               {
                 __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess",
-                yahoo_auction_crawl_setting_exclude_product:,
                 ok: true
               }
             else

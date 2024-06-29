@@ -12,7 +12,6 @@ module GraphqlSchema
           if product.destroy
             {
               __typename: "DeleteProductResultSuccess",
-              product:,
               ok: true
             }
           else

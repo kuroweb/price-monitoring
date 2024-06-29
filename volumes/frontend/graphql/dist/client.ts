@@ -715,7 +715,6 @@ export type DeleteIosysCrawlSettingExcludeKeywordResultErrors = DeleteIosysCrawl
 
 export type DeleteIosysCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultSuccess';
-  iosysCrawlSettingExcludeKeyword: IosysCrawlSettingExcludeKeyword;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -746,7 +745,6 @@ export type DeleteIosysCrawlSettingExcludeProductResultErrors = DeleteIosysCrawl
 
 export type DeleteIosysCrawlSettingExcludeProductResultSuccess = ResultBase & {
   __typename?: 'DeleteIosysCrawlSettingExcludeProductResultSuccess';
-  iosysCrawlSettingExcludeProduct: IosysCrawlSettingExcludeProduct;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -777,7 +775,6 @@ export type DeleteIosysCrawlSettingRequiredKeywordResultErrors = DeleteIosysCraw
 
 export type DeleteIosysCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultSuccess';
-  iosysCrawlSettingRequiredKeyword: IosysCrawlSettingRequiredKeyword;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -808,7 +805,6 @@ export type DeleteJanparaCrawlSettingExcludeKeywordResultErrors = DeleteJanparaC
 
 export type DeleteJanparaCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteJanparaCrawlSettingExcludeKeywordResultSuccess';
-  janparaCrawlSettingExcludeKeyword: JanparaCrawlSettingExcludeKeyword;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -839,7 +835,6 @@ export type DeleteJanparaCrawlSettingExcludeProductResultErrors = DeleteJanparaC
 
 export type DeleteJanparaCrawlSettingExcludeProductResultSuccess = ResultBase & {
   __typename?: 'DeleteJanparaCrawlSettingExcludeProductResultSuccess';
-  janparaCrawlSettingExcludeProduct: JanparaCrawlSettingExcludeProduct;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -870,7 +865,6 @@ export type DeleteJanparaCrawlSettingRequiredKeywordResultErrors = DeleteJanpara
 
 export type DeleteJanparaCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultSuccess';
-  janparaCrawlSettingRequiredKeyword: JanparaCrawlSettingRequiredKeyword;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -901,7 +895,6 @@ export type DeleteMercariCrawlSettingExcludeKeywordResultErrors = DeleteMercariC
 
 export type DeleteMercariCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultSuccess';
-  mercariCrawlSettingExcludeKeyword: MercariCrawlSettingExcludeKeyword;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -932,7 +925,6 @@ export type DeleteMercariCrawlSettingExcludeProductResultErrors = DeleteMercariC
 
 export type DeleteMercariCrawlSettingExcludeProductResultSuccess = ResultBase & {
   __typename?: 'DeleteMercariCrawlSettingExcludeProductResultSuccess';
-  mercariCrawlSettingExcludeProduct: MercariCrawlSettingExcludeProduct;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -963,7 +955,6 @@ export type DeleteMercariCrawlSettingRequiredKeywordResultErrors = DeleteMercari
 
 export type DeleteMercariCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultSuccess';
-  mercariCrawlSettingRequiredKeyword: MercariCrawlSettingRequiredKeyword;
   ok: Scalars['Boolean']['output'];
 };
 
@@ -995,7 +986,6 @@ export type DeletePcKoubouCrawlSettingExcludeKeywordResultErrors = DeletePcKoubo
 export type DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
   __typename?: 'DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  pcKoubouCrawlSettingExcludeKeyword: PcKoubouCrawlSettingExcludeKeyword;
 };
 
 export type DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
@@ -1026,7 +1016,6 @@ export type DeletePcKoubouCrawlSettingExcludeProductResultErrors = DeletePcKoubo
 export type DeletePcKoubouCrawlSettingExcludeProductResultSuccess = ResultBase & {
   __typename?: 'DeletePcKoubouCrawlSettingExcludeProductResultSuccess';
   ok: Scalars['Boolean']['output'];
-  pcKoubouCrawlSettingExcludeProduct: PcKoubouCrawlSettingExcludeProduct;
 };
 
 export type DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed = UserError & {
@@ -1057,7 +1046,6 @@ export type DeletePcKoubouCrawlSettingRequiredKeywordResultErrors = DeletePcKoub
 export type DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
   __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  pcKoubouCrawlSettingRequiredKeyword: PcKoubouCrawlSettingRequiredKeyword;
 };
 
 export type DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
@@ -1117,7 +1105,6 @@ export type DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrors = DeleteUsedS
 export type DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  usedSofmapCrawlSettingExcludeKeyword: UsedSofmapCrawlSettingExcludeKeyword;
 };
 
 export type DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
@@ -1148,7 +1135,6 @@ export type DeleteUsedSofmapCrawlSettingExcludeProductResultErrors = DeleteUsedS
 export type DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess = ResultBase & {
   __typename?: 'DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess';
   ok: Scalars['Boolean']['output'];
-  usedSofmapCrawlSettingExcludeProduct: UsedSofmapCrawlSettingExcludeProduct;
 };
 
 export type DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed = UserError & {
@@ -1179,7 +1165,6 @@ export type DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrors = DeleteUsed
 export type DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  usedSofmapCrawlSettingRequiredKeyword: UsedSofmapCrawlSettingRequiredKeyword;
 };
 
 export type DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed = UserError & {
@@ -1210,7 +1195,6 @@ export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrors = DeleteYah
 export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  yahooAuctionCrawlSettingExcludeKeyword: YahooAuctionCrawlSettingExcludeKeyword;
 };
 
 export type DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed = UserError & {
@@ -1241,7 +1225,6 @@ export type DeleteYahooAuctionCrawlSettingExcludeProductResultErrors = DeleteYah
 export type DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess = ResultBase & {
   __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess';
   ok: Scalars['Boolean']['output'];
-  yahooAuctionCrawlSettingExcludeProduct: YahooAuctionCrawlSettingExcludeProduct;
 };
 
 export type DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed = UserError & {
@@ -1272,7 +1255,6 @@ export type DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors = DeleteYa
 export type DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess = ResultBase & {
   __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess';
   ok: Scalars['Boolean']['output'];
-  yahooAuctionCrawlSettingRequiredKeyword: YahooAuctionCrawlSettingRequiredKeyword;
 };
 
 export type DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed = UserError & {

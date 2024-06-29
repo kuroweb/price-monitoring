@@ -20,7 +20,6 @@ module GraphqlSchema
             if janpara_crawl_setting_required_keyword.destroy
               {
                 __typename: "DeleteJanparaCrawlSettingRequiredKeywordResultSuccess",
-                janpara_crawl_setting_required_keyword:,
                 ok: true
               }
             else

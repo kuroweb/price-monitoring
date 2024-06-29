@@ -20,7 +20,6 @@ module GraphqlSchema
             if pc_koubou_crawl_setting_exclude_product.destroy
               {
                 __typename: "DeletePcKoubouCrawlSettingExcludeProductResultSuccess",
-                pc_koubou_crawl_setting_exclude_product:,
                 ok: true
               }
             else

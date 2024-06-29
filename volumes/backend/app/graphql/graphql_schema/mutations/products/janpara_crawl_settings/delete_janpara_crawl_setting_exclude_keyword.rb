@@ -20,7 +20,6 @@ module GraphqlSchema
             if janpara_crawl_setting_exclude_keyword.destroy
               {
                 __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultSuccess",
-                janpara_crawl_setting_exclude_keyword:,
                 ok: true
               }
             else

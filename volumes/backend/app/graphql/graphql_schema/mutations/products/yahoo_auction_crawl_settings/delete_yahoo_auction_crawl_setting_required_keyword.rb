@@ -20,7 +20,6 @@ module GraphqlSchema
             if yahoo_auction_crawl_setting_required_keyword.destroy
               {
                 __typename: "DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
-                yahoo_auction_crawl_setting_required_keyword:,
                 ok: true
               }
             else

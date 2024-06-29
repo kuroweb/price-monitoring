@@ -20,7 +20,6 @@ module GraphqlSchema
             if iosys_crawl_setting_exclude_product.destroy
               {
                 __typename: "DeleteIosysCrawlSettingExcludeProductResultSuccess",
-                iosys_crawl_setting_exclude_product:,
                 ok: true
               }
             else

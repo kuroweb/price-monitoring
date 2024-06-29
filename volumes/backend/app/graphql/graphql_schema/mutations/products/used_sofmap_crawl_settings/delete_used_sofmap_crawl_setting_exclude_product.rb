@@ -20,7 +20,6 @@ module GraphqlSchema
             if used_sofmap_crawl_setting_exclude_product.destroy
               {
                 __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess",
-                used_sofmap_crawl_setting_exclude_product:,
                 ok: true
               }
             else

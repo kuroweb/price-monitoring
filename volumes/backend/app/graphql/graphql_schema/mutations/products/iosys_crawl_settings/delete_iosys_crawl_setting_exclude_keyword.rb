@@ -20,7 +20,6 @@ module GraphqlSchema
             if iosys_crawl_setting_exclude_keyword.destroy
               {
                 __typename: "DeleteIosysCrawlSettingExcludeKeywordResultSuccess",
-                iosys_crawl_setting_exclude_keyword:,
                 ok: true
               }
             else

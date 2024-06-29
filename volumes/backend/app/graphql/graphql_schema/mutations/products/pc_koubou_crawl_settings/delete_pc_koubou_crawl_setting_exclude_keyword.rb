@@ -20,7 +20,6 @@ module GraphqlSchema
             if pc_koubou_crawl_setting_exclude_keyword.destroy
               {
                 __typename: "DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess",
-                pc_koubou_crawl_setting_exclude_keyword:,
                 ok: true
               }
             else

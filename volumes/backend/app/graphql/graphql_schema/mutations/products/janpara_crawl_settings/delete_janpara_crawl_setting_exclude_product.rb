@@ -20,7 +20,6 @@ module GraphqlSchema
             if janpara_crawl_setting_exclude_product.destroy
               {
                 __typename: "DeleteJanparaCrawlSettingExcludeProductResultSuccess",
-                janpara_crawl_setting_exclude_product:,
                 ok: true
               }
             else

@@ -20,7 +20,6 @@ module GraphqlSchema
             if mercari_crawl_setting_exclude_product.destroy
               {
                 __typename: "DeleteMercariCrawlSettingExcludeProductResultSuccess",
-                mercari_crawl_setting_exclude_product:,
                 ok: true
               }
             else
