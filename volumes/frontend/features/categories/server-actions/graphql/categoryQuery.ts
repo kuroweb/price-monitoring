@@ -14,7 +14,5 @@ export const createCategory = async (input: CreateCategoryInput) => {
   revalidateProductPaths()
   revalidateCategoryPaths()
 
-  // TODO: add revalidatePath
-
   return result
 }
