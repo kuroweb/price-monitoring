@@ -81,8 +81,9 @@ module Crawl
         end
 
         def product_doms(page)
-          page.query_selector_all("li[data-testid='item-cell']")
-              .reject { |dom| not_crawlable?(dom) }
+          search_item_dom = page.query_selector("div[data-testid='search-item-grid']")
+          search_item_dom.query_selector_all("li[data-testid='item-cell']")
+                         .reject { |dom| not_crawlable?(dom) }
         end
 
         def not_crawlable?(dom)
