@@ -1,0 +1,277 @@
+#
+# fragments
+#
+
+# YahooAuction
+
+fragment ProductField on Product {
+  id
+  name
+}
+
+fragment YahooAuctionCrawlSettingField on YahooAuctionCrawlSetting {
+  id
+  productId
+  keyword
+  categoryId
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment YahooAuctionCrawlSettingExcludeKeywordField on YahooAuctionCrawlSettingExcludeKeyword {
+  id
+  yahooAuctionCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment YahooAuctionCrawlSettingExcludeProductField on YahooAuctionCrawlSettingExcludeProduct {
+  id
+  yahooAuctionCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment YahooAuctionCrawlSettingRequiredKeywordField on YahooAuctionCrawlSettingRequiredKeyword {
+  id
+  yahooAuctionCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment YahooAuctionDailyPurchaseSummaryField on YahooAuctionDailyPurchaseSummary {
+  id
+  productId
+  averagePurchasePrice
+  purchaseCount
+  date
+  createdAt
+  updatedAt
+}
+
+# YahooFleamarket
+
+fragment YahooFleamarketDailyPurchaseSummaryField on YahooFleamarketDailyPurchaseSummary {
+  id
+  productId
+  averagePurchasePrice
+  purchaseCount
+  date
+  createdAt
+  updatedAt
+}
+
+fragment MercariCrawlSettingField on MercariCrawlSetting {
+  id
+  productId
+  keyword
+  categoryId
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment JanparaCrawlSettingField on JanparaCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment IosysCrawlSettingField on IosysCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment PcKoubouCrawlSettingField on PcKoubouCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+fragment UsedSofmapCrawlSettingField on UsedSofmapCrawlSetting {
+  id
+  productId
+  keyword
+  minPrice
+  maxPrice
+  enabled
+}
+
+# Mercari
+
+fragment MercariCrawlSettingExcludeKeywordField on MercariCrawlSettingExcludeKeyword {
+  id
+  mercariCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment MercariCrawlSettingExcludeProductField on MercariCrawlSettingExcludeProduct {
+  id
+  mercariCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment MercariCrawlSettingRequiredKeywordField on MercariCrawlSettingRequiredKeyword {
+  id
+  mercariCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment MercariDailyPurchaseSummaryField on MercariDailyPurchaseSummary {
+  id
+  productId
+  averagePurchasePrice
+  purchaseCount
+  date
+  createdAt
+  updatedAt
+}
+
+# Janpara
+
+fragment JanparaCrawlSettingExcludeKeywordField on JanparaCrawlSettingExcludeKeyword {
+  id
+  janparaCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment JanparaCrawlSettingExcludeProductField on JanparaCrawlSettingExcludeProduct {
+  id
+  janparaCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment JanparaCrawlSettingRequiredKeywordField on JanparaCrawlSettingRequiredKeyword {
+  id
+  janparaCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# Iosys
+
+fragment IosysCrawlSettingExcludeKeywordField on IosysCrawlSettingExcludeKeyword {
+  id
+  iosysCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment IosysCrawlSettingExcludeProductField on IosysCrawlSettingExcludeProduct {
+  id
+  iosysCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment IosysCrawlSettingRequiredKeywordField on IosysCrawlSettingRequiredKeyword {
+  id
+  iosysCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# PcKoubou
+
+fragment PcKoubouCrawlSettingExcludeKeywordField on PcKoubouCrawlSettingExcludeKeyword {
+  id
+  pcKoubouCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment PcKoubouCrawlSettingExcludeProductField on PcKoubouCrawlSettingExcludeProduct {
+  id
+  pcKoubouCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment PcKoubouCrawlSettingRequiredKeywordField on PcKoubouCrawlSettingRequiredKeyword {
+  id
+  pcKoubouCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# UsedSofmap
+
+fragment UsedSofmapCrawlSettingExcludeKeywordField on UsedSofmapCrawlSettingExcludeKeyword {
+  id
+  usedSofmapCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+fragment UsedSofmapCrawlSettingExcludeProductField on UsedSofmapCrawlSettingExcludeProduct {
+  id
+  usedSofmapCrawlSettingId
+  externalId
+  createdAt
+  updatedAt
+}
+
+fragment UsedSofmapCrawlSettingRequiredKeywordField on UsedSofmapCrawlSettingRequiredKeyword {
+  id
+  usedSofmapCrawlSettingId
+  keyword
+  createdAt
+  updatedAt
+}
+
+# RelatedProduct
+
+fragment RelatedProductField on RelatedProduct {
+  platform
+  productId
+  externalId
+  name
+  thumbnailUrl
+  price
+  buyoutPrice
+  published
+  boughtDate
+  endDate
+  createdAt
+  updatedAt
+}
+
+# Category
+
+fragment CategoryField on Category {
+  id
+  parentId
+  name
+}

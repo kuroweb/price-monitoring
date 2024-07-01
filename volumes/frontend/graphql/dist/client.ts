@@ -1848,6 +1848,7 @@ export type PcKoubouCrawlSettingRequiredKeyword = Node & {
 
 export type Product = Node & {
   __typename?: 'Product';
+  category: Category;
   createdAt: Scalars['ISO8601DateTime']['output'];
   id: Scalars['ID']['output'];
   iosysCrawlSetting: IosysCrawlSetting;
@@ -3118,43 +3119,6 @@ export type GetCategoriesPageDataQueryVariables = Exact<{ [key: string]: never; 
 
 export type GetCategoriesPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }>, categoryTree: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> }> }> }> }> };
 
-export type CategoryFieldsFragment = { __typename?: 'Category', id: string, parentId?: string | null, name: string };
-
-export type GetProductPageDataQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean } }> };
-
-export type GetProductDetailPageDataQueryVariables = Exact<{
-  id: Scalars['ID']['input'];
-  platformMask: Scalars['String']['input'];
-  page?: InputMaybe<Scalars['Int']['input']>;
-  per?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  order?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingExcludeProducts: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, yahooAuctionCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, mercariCrawlSettingExcludeProducts: Array<{ __typename?: 'MercariCrawlSettingExcludeProduct', id: string, mercariCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, janparaCrawlSettingExcludeProducts: Array<{ __typename?: 'JanparaCrawlSettingExcludeProduct', id: string, janparaCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, iosysCrawlSettingExcludeProducts: Array<{ __typename?: 'IosysCrawlSettingExcludeProduct', id: string, iosysCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, pcKoubouCrawlSettingExcludeKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingExcludeProducts: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeProduct', id: string, pcKoubouCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingRequiredKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, usedSofmapCrawlSettingExcludeKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingExcludeProducts: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeProduct', id: string, usedSofmapCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingRequiredKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingRequiredKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: any | null, endDate?: any | null, createdAt: any, updatedAt: any }> } };
-
-export type GetProductSettingPageDataQueryVariables = Exact<{
-  id: Scalars['ID']['input'];
-}>;
-
-
-export type GetProductSettingPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingExcludeProducts: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, yahooAuctionCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, mercariCrawlSettingExcludeProducts: Array<{ __typename?: 'MercariCrawlSettingExcludeProduct', id: string, mercariCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, janparaCrawlSettingExcludeProducts: Array<{ __typename?: 'JanparaCrawlSettingExcludeProduct', id: string, janparaCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, iosysCrawlSettingExcludeProducts: Array<{ __typename?: 'IosysCrawlSettingExcludeProduct', id: string, iosysCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, pcKoubouCrawlSettingExcludeKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingExcludeProducts: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeProduct', id: string, pcKoubouCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingRequiredKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, usedSofmapCrawlSettingExcludeKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingExcludeProducts: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeProduct', id: string, usedSofmapCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingRequiredKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingRequiredKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> } } };
-
-export type GetRecommendsPageDataQueryVariables = Exact<{
-  id?: InputMaybe<Scalars['ID']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-}>;
-
-
-export type GetRecommendsPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: any | null, endDate?: any | null, createdAt: any, updatedAt: any }> }> };
-
 export type ProductFieldFragment = { __typename?: 'Product', id: string, name: string };
 
 export type YahooAuctionCrawlSettingFieldFragment = { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean };
@@ -3213,13 +3177,43 @@ export type UsedSofmapCrawlSettingRequiredKeywordFieldFragment = { __typename?: 
 
 export type RelatedProductFieldFragment = { __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: any | null, endDate?: any | null, createdAt: any, updatedAt: any };
 
-export const CategoryFieldsFragmentDoc = gql`
-    fragment CategoryFields on Category {
-  id
-  parentId
-  name
-}
-    `;
+export type CategoryFieldFragment = { __typename?: 'Category', id: string, parentId?: string | null, name: string };
+
+export type GetProductPageDataQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetProductPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean }, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean }, category: { __typename?: 'Category', id: string, parentId?: string | null, name: string } }> };
+
+export type GetProductDetailPageDataQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+  platformMask: Scalars['String']['input'];
+  page?: InputMaybe<Scalars['Int']['input']>;
+  per?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetProductDetailPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingExcludeProducts: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, yahooAuctionCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, mercariCrawlSettingExcludeProducts: Array<{ __typename?: 'MercariCrawlSettingExcludeProduct', id: string, mercariCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, janparaCrawlSettingExcludeProducts: Array<{ __typename?: 'JanparaCrawlSettingExcludeProduct', id: string, janparaCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, iosysCrawlSettingExcludeProducts: Array<{ __typename?: 'IosysCrawlSettingExcludeProduct', id: string, iosysCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, pcKoubouCrawlSettingExcludeKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingExcludeProducts: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeProduct', id: string, pcKoubouCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingRequiredKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, usedSofmapCrawlSettingExcludeKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingExcludeProducts: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeProduct', id: string, usedSofmapCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingRequiredKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingRequiredKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: any | null, endDate?: any | null, createdAt: any, updatedAt: any }>, category: { __typename?: 'Category', id: string, parentId?: string | null, name: string } } };
+
+export type GetProductSettingPageDataQueryVariables = Exact<{
+  id: Scalars['ID']['input'];
+}>;
+
+
+export type GetProductSettingPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingExcludeProducts: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, yahooAuctionCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, mercariCrawlSettingExcludeProducts: Array<{ __typename?: 'MercariCrawlSettingExcludeProduct', id: string, mercariCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, janparaCrawlSettingExcludeProducts: Array<{ __typename?: 'JanparaCrawlSettingExcludeProduct', id: string, janparaCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, iosysCrawlSettingExcludeProducts: Array<{ __typename?: 'IosysCrawlSettingExcludeProduct', id: string, iosysCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, pcKoubouCrawlSettingExcludeKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingExcludeProducts: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeProduct', id: string, pcKoubouCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingRequiredKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, usedSofmapCrawlSettingExcludeKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingExcludeProducts: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeProduct', id: string, usedSofmapCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingRequiredKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingRequiredKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, category: { __typename?: 'Category', id: string, parentId?: string | null, name: string } } };
+
+export type GetRecommendsPageDataQueryVariables = Exact<{
+  id?: InputMaybe<Scalars['ID']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type GetRecommendsPageDataQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', id: string, name: string, relatedProducts: Array<{ __typename?: 'RelatedProduct', platform: string, productId: number, externalId: string, name: string, thumbnailUrl: string, price: number, buyoutPrice?: number | null, published: boolean, boughtDate?: any | null, endDate?: any | null, createdAt: any, updatedAt: any }> }> };
+
 export const ProductFieldFragmentDoc = gql`
     fragment ProductField on Product {
   id
@@ -3497,6 +3491,13 @@ export const RelatedProductFieldFragmentDoc = gql`
   endDate
   createdAt
   updatedAt
+}
+    `;
+export const CategoryFieldFragmentDoc = gql`
+    fragment CategoryField on Category {
+  id
+  parentId
+  name
 }
     `;
 export const CreateCategoryDocument = gql`
@@ -5027,29 +5028,29 @@ export const DeleteUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const GetCategoriesPageDataDocument = gql`
-    query getCategoriesPageData {
+    query GetCategoriesPageData {
   categories(rootOnly: false) {
-    ...CategoryFields
+    ...CategoryField
   }
   categoryTree: categories(rootOnly: true) {
-    ...CategoryFields
+    ...CategoryField
     children {
-      ...CategoryFields
+      ...CategoryField
       children {
-        ...CategoryFields
+        ...CategoryField
         children {
-          ...CategoryFields
+          ...CategoryField
           children {
-            ...CategoryFields
+            ...CategoryField
           }
         }
       }
     }
   }
 }
-    ${CategoryFieldsFragmentDoc}`;
+    ${CategoryFieldFragmentDoc}`;
 export const GetProductPageDataDocument = gql`
-    query getProductPageData($id: ID, $name: String) {
+    query GetProductPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
     ...ProductField
     yahooAuctionCrawlSetting {
@@ -5070,6 +5071,9 @@ export const GetProductPageDataDocument = gql`
     usedSofmapCrawlSetting {
       ...UsedSofmapCrawlSettingField
     }
+    category {
+      ...CategoryField
+    }
   }
 }
     ${ProductFieldFragmentDoc}
@@ -5078,9 +5082,10 @@ ${MercariCrawlSettingFieldFragmentDoc}
 ${JanparaCrawlSettingFieldFragmentDoc}
 ${IosysCrawlSettingFieldFragmentDoc}
 ${PcKoubouCrawlSettingFieldFragmentDoc}
-${UsedSofmapCrawlSettingFieldFragmentDoc}`;
+${UsedSofmapCrawlSettingFieldFragmentDoc}
+${CategoryFieldFragmentDoc}`;
 export const GetProductDetailPageDataDocument = gql`
-    query getProductDetailPageData($id: ID!, $platformMask: String!, $page: Int, $per: Int, $sort: String, $order: String) {
+    query GetProductDetailPageData($id: ID!, $platformMask: String!, $page: Int, $per: Int, $sort: String, $order: String) {
   product(id: $id) {
     ...ProductField
     yahooAuctionCrawlSetting {
@@ -5173,6 +5178,9 @@ export const GetProductDetailPageDataDocument = gql`
     ) {
       ...RelatedProductField
     }
+    category {
+      ...CategoryField
+    }
   }
 }
     ${ProductFieldFragmentDoc}
@@ -5203,9 +5211,10 @@ ${UsedSofmapCrawlSettingFieldFragmentDoc}
 ${UsedSofmapCrawlSettingExcludeKeywordFieldFragmentDoc}
 ${UsedSofmapCrawlSettingExcludeProductFieldFragmentDoc}
 ${UsedSofmapCrawlSettingRequiredKeywordFieldFragmentDoc}
-${RelatedProductFieldFragmentDoc}`;
+${RelatedProductFieldFragmentDoc}
+${CategoryFieldFragmentDoc}`;
 export const GetProductSettingPageDataDocument = gql`
-    query getProductSettingPageData($id: ID!) {
+    query GetProductSettingPageData($id: ID!) {
   product(id: $id) {
     ...ProductField
     yahooAuctionCrawlSetting {
@@ -5289,6 +5298,9 @@ export const GetProductSettingPageDataDocument = gql`
         ...UsedSofmapCrawlSettingRequiredKeywordField
       }
     }
+    category {
+      ...CategoryField
+    }
   }
 }
     ${ProductFieldFragmentDoc}
@@ -5318,7 +5330,8 @@ ${PcKoubouCrawlSettingRequiredKeywordFieldFragmentDoc}
 ${UsedSofmapCrawlSettingFieldFragmentDoc}
 ${UsedSofmapCrawlSettingExcludeKeywordFieldFragmentDoc}
 ${UsedSofmapCrawlSettingExcludeProductFieldFragmentDoc}
-${UsedSofmapCrawlSettingRequiredKeywordFieldFragmentDoc}`;
+${UsedSofmapCrawlSettingRequiredKeywordFieldFragmentDoc}
+${CategoryFieldFragmentDoc}`;
 export const GetRecommendsPageDataDocument = gql`
     query getRecommendsPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -5521,17 +5534,17 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     deleteUsedSofmapCrawlSettingRequiredKeyword(variables: DeleteUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation>(DeleteUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    getCategoriesPageData(variables?: GetCategoriesPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetCategoriesPageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCategoriesPageDataQuery>(GetCategoriesPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getCategoriesPageData', 'query', variables);
+    GetCategoriesPageData(variables?: GetCategoriesPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetCategoriesPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCategoriesPageDataQuery>(GetCategoriesPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetCategoriesPageData', 'query', variables);
     },
-    getProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductPageData', 'query', variables);
+    GetProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductPageData', 'query', variables);
     },
-    getProductDetailPageData(variables: GetProductDetailPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductDetailPageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductDetailPageDataQuery>(GetProductDetailPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductDetailPageData', 'query', variables);
+    GetProductDetailPageData(variables: GetProductDetailPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductDetailPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductDetailPageDataQuery>(GetProductDetailPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductDetailPageData', 'query', variables);
     },
-    getProductSettingPageData(variables: GetProductSettingPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductSettingPageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetProductSettingPageDataQuery>(GetProductSettingPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getProductSettingPageData', 'query', variables);
+    GetProductSettingPageData(variables: GetProductSettingPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductSettingPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProductSettingPageDataQuery>(GetProductSettingPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductSettingPageData', 'query', variables);
     },
     getRecommendsPageData(variables?: GetRecommendsPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetRecommendsPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetRecommendsPageDataQuery>(GetRecommendsPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getRecommendsPageData', 'query', variables);
