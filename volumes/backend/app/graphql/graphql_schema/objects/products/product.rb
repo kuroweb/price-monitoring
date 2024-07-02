@@ -18,7 +18,8 @@ module GraphqlSchema
         field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummary], null: false
         field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummary], null: false
         field :related_products, resolver: Resolvers::Products::RelatedProducts
-        field :category, Categories::Category, null: false
+        # TODO: category関連の機能が揃うまではnullableにしておく
+        field :category, Categories::Category, null: true
 
         def yahoo_auction_crawl_setting
           object.yahoo_auction_crawl_setting
