@@ -13,7 +13,6 @@ module Crawl
       api.mercari.jp/services/master/v1/shippingPayers
       api.mercari.jp/services/master/v1/reactions
       api.mercari.jp/master/v2/datasets/item_brands_for_content_page
-      api.mercari.jp/master/v2/datasets/item_categories
       api.mercari.jp/master/v2/datasets/item_brands
       api.mercari.jp/services/item_watch/v1/ValidateText
       api.mercari.jp/v2/tag:suggest
