@@ -137,10 +137,9 @@ const CreateProductModal = ({
             </label>
             <label className='form-control'>
               <div className='label'>
-                <span className='label-text'>親カテゴリ</span>
+                <span className='label-text'>カテゴリ</span>
               </div>
               <select {...register('categoryId')} className='input input-bordered'>
-                <option value=''>なし</option>
                 {categories?.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
