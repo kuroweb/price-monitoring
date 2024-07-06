@@ -35,7 +35,7 @@ module GraphqlSchema
             Rails.logger.error("Bad Request. exception: #{exception.full_message}")
             error_response("400", "Bad Request.")
           when ActiveRecord::RecordNotFound
-            error_response("404", "Not Found.")
+            exception.model == "Product" ? error_response("404", "Not Found.") : error_response("400", "Bad Request.")
           when ActiveRecord::RecordNotUnique
             error_response("409", "Conflict.")
           else

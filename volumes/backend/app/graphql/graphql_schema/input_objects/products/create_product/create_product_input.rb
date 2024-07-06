@@ -4,6 +4,7 @@ module GraphqlSchema
       module CreateProduct
         class CreateProductInput < Base
           argument :name, String, required: true
+          argument :category_id, ID, required: true
           argument :yahoo_auction_crawl_setting, CreateYahooAuctionCrawlSettingInput, required: true
           argument :mercari_crawl_setting, CreateMercariCrawlSettingInput, required: true
           argument :janpara_crawl_setting, CreateJanparaCrawlSettingInput, required: true

@@ -119,6 +119,7 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
           defaultValues={{
             id: String(params.id),
             name: data.product.name,
+            categoryId: data.product.category?.id,
             yahooAuctionCrawlSetting: {
               keyword: data.product.yahooAuctionCrawlSetting?.keyword,
               categoryId: data.product.yahooAuctionCrawlSetting?.categoryId,
@@ -158,6 +159,7 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
               enabled: data.product.usedSofmapCrawlSetting?.enabled,
             },
           }}
+          categories={data.categories}
         />
         <EditExcludeKeywordModal data={data} />
         <EditExcludeProductModal data={data} />

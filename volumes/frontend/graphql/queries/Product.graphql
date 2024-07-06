@@ -29,6 +29,9 @@ query GetProductPageData($id: ID, $name: String) {
       ...CategoryField
     }
   }
+  categories(rootOnly: false) {
+    ...CategoryField
+  }
 }
 
 # /products/:id
@@ -228,6 +231,9 @@ query GetProductSettingPageData($id: ID!) {
     category {
       ...CategoryField
     }
+  }
+  categories(rootOnly: false) {
+    ...CategoryField
   }
 }
 

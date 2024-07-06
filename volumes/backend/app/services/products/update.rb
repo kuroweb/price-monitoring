@@ -17,15 +17,16 @@ module Products
       @params = params
     end
 
-    def call # rubocop:disable Metrics/AbcSize
+    def call
       ApplicationRecord.transaction do
-        product.update!(product_params)
-        product.yahoo_auction_crawl_setting.update!(yahoo_auction_crawl_setting_params)
-        product.mercari_crawl_setting.update!(mercari_crawl_setting_params)
-        product.janpara_crawl_setting.update!(janpara_crawl_setting_params)
-        product.iosys_crawl_setting.update!(iosys_crawl_setting_params)
-        product.pc_koubou_crawl_setting.update!(pc_koubou_crawl_setting_params)
-        product.used_sofmap_crawl_setting.update!(used_sofmap_crawl_setting_params)
+        update_product
+        update_yahoo_auction_crawl_setting
+        update_mercari_crawl_setting
+        update_janpara_crawl_setting
+        update_iosys_crawl_setting
+        update_pc_koubou_crawl_setting
+        update_used_sofmap_crawl_setting
+        update_category_association
 
         product
       end
@@ -35,32 +36,44 @@ module Products
 
     attr_reader :product, :params
 
-    def product_params
-      params.slice(*PRODUCT_ATTRIBUTES) || {}
+    def update_product
+      attributes = params.slice(*PRODUCT_ATTRIBUTES) || {}
+      product.update!(attributes)
     end
 
-    def yahoo_auction_crawl_setting_params
-      params[:yahoo_auction_crawl_setting]&.slice(*YAHOO_AUCTION_CRAWL_SETTING_ATTRIBUTES) || {}
+    def update_yahoo_auction_crawl_setting
+      attributes = params[:yahoo_auction_crawl_setting]&.slice(*YAHOO_AUCTION_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.yahoo_auction_crawl_setting.update!(attributes)
     end
 
-    def mercari_crawl_setting_params
-      params[:mercari_crawl_setting]&.slice(*MERCARI_CRAWL_SETTING_ATTRIBUTES) || {}
+    def update_mercari_crawl_setting
+      attributes = params[:mercari_crawl_setting]&.slice(*MERCARI_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.mercari_crawl_setting.update!(attributes)
     end
 
-    def janpara_crawl_setting_params
-      params[:janpara_crawl_setting]&.slice(*JANPARA_CRAWL_SETTING_ATTRIBUTES) || {}
+    def update_janpara_crawl_setting
+      attributes = params[:janpara_crawl_setting]&.slice(*JANPARA_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.janpara_crawl_setting.update!(attributes)
     end
 
-    def iosys_crawl_setting_params
-      params[:iosys_crawl_setting]&.slice(*IOSYS_CRAWL_SETTING_ATTRIBUTES) || {}
+    def update_iosys_crawl_setting
+      attributes = params[:iosys_crawl_setting]&.slice(*IOSYS_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.iosys_crawl_setting.update!(attributes)
     end
 
-    def pc_koubou_crawl_setting_params
-      params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
+    def update_pc_koubou_crawl_setting
+      attributes = params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.pc_koubou_crawl_setting.update!(attributes)
     end
 
-    def used_sofmap_crawl_setting_params
-      params[:used_sofmap_crawl_setting]&.slice(*USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES) || {}
+    def update_used_sofmap_crawl_setting
+      attributes = params[:used_sofmap_crawl_setting]&.slice(*USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.used_sofmap_crawl_setting.update!(attributes)
+    end
+
+    def update_category_association
+      category = Category.find(params[:category_id])
+      product.category = category
     end
   end
 end

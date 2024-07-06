@@ -17,7 +17,7 @@ import PcKoubouForm from './PcKoubouForm'
 import UsedSofmapForm from './UsedSofmapForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
-import type { CreateProductInput } from '@/graphql/dist/client'
+import type { CreateProductInput, GetProductPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
 export type reflectValueType = (
@@ -27,8 +27,10 @@ export type reflectValueType = (
 
 const CreateProductModal = ({
   defaultValues,
+  categories,
 }: {
   defaultValues: CreateProductInput | undefined
+  categories: GetProductPageDataQuery['categories'] | undefined
 }) => {
   const router = useRouter()
 
@@ -40,6 +42,7 @@ const CreateProductModal = ({
   const { register, handleSubmit, setValue, getValues } = useForm<CreateProductInput>({
     defaultValues: {
       name: defaultValues?.name || '',
+      categoryId: defaultValues?.categoryId || '',
       yahooAuctionCrawlSetting: {
         keyword: defaultValues?.yahooAuctionCrawlSetting?.keyword || '',
         categoryId: defaultValues?.yahooAuctionCrawlSetting?.categoryId || null,
@@ -131,6 +134,19 @@ const CreateProductModal = ({
                 <span className='label-text'>管理コード</span>
               </div>
               <input {...register('name')} className='input input-bordered' />
+            </label>
+            <label className='form-control'>
+              <div className='label'>
+                <span className='label-text'>親カテゴリ</span>
+              </div>
+              <select {...register('categoryId')} className='input input-bordered'>
+                <option value=''>なし</option>
+                {categories?.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </label>
             <div className='divider py-6'>詳細設定</div>
             <Join className='flex pb-2'>

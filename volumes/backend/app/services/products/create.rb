@@ -18,13 +18,14 @@ module Products
 
     def call
       ApplicationRecord.transaction do
-        product = Product.create!(product_params)
-        product.create_yahoo_auction_crawl_setting!(yahoo_auction_crawl_setting_params)
-        product.create_mercari_crawl_setting!(mercari_crawl_setting_params)
-        product.create_janpara_crawl_setting!(janpara_crawl_setting_params)
-        product.create_iosys_crawl_setting!(iosys_crawl_setting_params)
-        product.create_pc_koubou_crawl_setting!(pc_koubou_crawl_setting_params)
-        product.create_used_sofmap_crawl_setting!(used_sofmap_crawl_setting_params)
+        product = create_product
+        create_yahoo_auction_crawl_setting(product)
+        create_mercari_crawl_setting(product)
+        create_janpara_crawl_setting(product)
+        create_iosys_crawl_setting(product)
+        create_pc_koubou_crawl_setting(product)
+        create_used_sofmap_crawl_setting(product)
+        create_category_association(product)
 
         product
       end
@@ -34,32 +35,44 @@ module Products
 
     attr_reader :params
 
-    def product_params
-      params.slice(*PRODUCT_ATTRIBUTES) || {}
+    def create_product
+      attributes = params.slice(*PRODUCT_ATTRIBUTES) || {}
+      Product.create!(attributes)
     end
 
-    def yahoo_auction_crawl_setting_params
-      params[:yahoo_auction_crawl_setting]&.slice(*YAHOO_AUCTION_CRAWL_SETTING_ATTRIBUTES) || {}
+    def create_yahoo_auction_crawl_setting(product)
+      attributes = params[:yahoo_auction_crawl_setting]&.slice(*YAHOO_AUCTION_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.create_yahoo_auction_crawl_setting!(attributes)
     end
 
-    def mercari_crawl_setting_params
-      params[:mercari_crawl_setting]&.slice(*MERCARI_CRAWL_SETTING_ATTRIBUTES) || {}
+    def create_mercari_crawl_setting(product)
+      attributes = params[:mercari_crawl_setting]&.slice(*MERCARI_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.create_mercari_crawl_setting!(attributes)
     end
 
-    def janpara_crawl_setting_params
-      params[:janpara_crawl_setting]&.slice(*JANPARA_CRAWL_SETTING_ATTRIBUTES) || {}
+    def create_janpara_crawl_setting(product)
+      attributes = params[:janpara_crawl_setting]&.slice(*JANPARA_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.create_janpara_crawl_setting!(attributes)
     end
 
-    def iosys_crawl_setting_params
-      params[:iosys_crawl_setting]&.slice(*IOSYS_CRAWL_SETTING_ATTRIBUTES) || {}
+    def create_iosys_crawl_setting(product)
+      attributes = params[:iosys_crawl_setting]&.slice(*IOSYS_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.create_iosys_crawl_setting!(attributes)
     end
 
-    def pc_koubou_crawl_setting_params
-      params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
+    def create_pc_koubou_crawl_setting(product)
+      attributes = params[:pc_koubou_crawl_setting]&.slice(*PC_KOUBOU_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.create_pc_koubou_crawl_setting!(attributes)
     end
 
-    def used_sofmap_crawl_setting_params
-      params[:used_sofmap_crawl_setting]&.slice(*USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES) || {}
+    def create_used_sofmap_crawl_setting(product)
+      attributes = params[:used_sofmap_crawl_setting]&.slice(*USED_SOFMAP_CRAWL_SETTING_ATTRIBUTES) || {}
+      product.create_used_sofmap_crawl_setting!(attributes)
+    end
+
+    def create_category_association(product)
+      category = Category.find(params[:category_id])
+      product.category = category
     end
   end
 end

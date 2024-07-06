@@ -118,6 +118,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
         defaultValues={
           product && {
             name: product?.name,
+            categoryId: product?.category?.id,
             yahooAuctionCrawlSetting: {
               keyword: product?.yahooAuctionCrawlSetting?.keyword,
               categoryId: product?.yahooAuctionCrawlSetting?.categoryId,
@@ -158,12 +159,14 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
             },
           }
         }
+        categories={data?.categories}
       />
       <UpdateProductModal
         defaultValues={
           product && {
             id: product?.id,
             name: product?.name,
+            categoryId: product?.category?.id,
             yahooAuctionCrawlSetting: {
               keyword: product?.yahooAuctionCrawlSetting?.keyword,
               categoryId: product?.yahooAuctionCrawlSetting?.categoryId,
@@ -204,6 +207,7 @@ const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) 
             },
           }
         }
+        categories={data?.categories}
       />
     </>
   )
