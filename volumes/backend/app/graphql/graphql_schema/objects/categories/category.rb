@@ -15,7 +15,8 @@ module GraphqlSchema
         end
 
         def products
-          object.products
+          category_ids = object.self_and_descendant_ids
+          Product.joins(:category).where(categories: { id: category_ids })
         end
       end
     end

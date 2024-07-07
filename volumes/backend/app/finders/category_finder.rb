@@ -28,6 +28,6 @@ class CategoryFinder
   def by_name(categories)
     return categories unless params[:name]
 
-    categories.where("name LIKE ?", "%#{params[:name]}%")
+    categories.where("name LIKE ?", params[:name])
   end
 end
