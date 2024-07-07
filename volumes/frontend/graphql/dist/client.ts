@@ -3116,10 +3116,10 @@ export type DeleteUsedSofmapCrawlSettingRequiredKeywordMutationVariables = Exact
 
 export type DeleteUsedSofmapCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteUsedSofmapCrawlSettingRequiredKeyword: { __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
-export type GetCategoriesPageDataQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetCategoryPageDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCategoriesPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }>, categoryTree: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> }> }> }> }> };
+export type GetCategoryPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }>, categoryTree: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> }> }> }> }> };
 
 export type ProductFieldFragment = { __typename?: 'Product', id: string, name: string };
 
@@ -5029,8 +5029,8 @@ export const DeleteUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
-export const GetCategoriesPageDataDocument = gql`
-    query GetCategoriesPageData {
+export const GetCategoryPageDataDocument = gql`
+    query GetCategoryPageData {
   categories(rootOnly: false) {
     ...CategoryField
   }
@@ -5542,8 +5542,8 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     deleteUsedSofmapCrawlSettingRequiredKeyword(variables: DeleteUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation>(DeleteUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    GetCategoriesPageData(variables?: GetCategoriesPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetCategoriesPageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetCategoriesPageDataQuery>(GetCategoriesPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetCategoriesPageData', 'query', variables);
+    GetCategoryPageData(variables?: GetCategoryPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetCategoryPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetCategoryPageDataQuery>(GetCategoryPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetCategoryPageData', 'query', variables);
     },
     GetProductPageData(variables?: GetProductPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetProductPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProductPageDataQuery>(GetProductPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProductPageData', 'query', variables);
