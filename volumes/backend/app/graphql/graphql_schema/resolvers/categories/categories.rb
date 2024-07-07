@@ -5,11 +5,10 @@ module GraphqlSchema
         type [Objects::Categories::Category], null: false
 
         argument :root_only, Boolean, required: false
+        argument :name, String, required: false
 
         def resolve(**args)
-          categories = ::Category.all
-          categories = categories.roots if args[:root_only]
-          categories
+          CategoryFinder.new(params: args).execute
         end
       end
     end
