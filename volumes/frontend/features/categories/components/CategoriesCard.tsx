@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
@@ -76,7 +77,9 @@ const CategoriesCard = ({
               return (
                 <>
                   <li key={category.id} className='flex items-center'>
-                    {category.name}
+                    <Link className='' href={`/categories/${category.name}`}>
+                      {category.name}
+                    </Link>
                     {deleteButton(category.id)}
                   </li>
                   {renderChildren(category.children as ChildCategory[])}
