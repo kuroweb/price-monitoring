@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { deleteCategory } from '../server-actions/graphql/categoryQuery'
+import { deleteCategory } from '../../../../server-actions/categoryQuery'
 
 import type { DeleteCategoryInput, GetCategoryPageDataQuery } from '@/graphql/dist/client'
 

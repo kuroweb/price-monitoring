@@ -3,8 +3,8 @@ import Link from 'next/link'
 import type { GetProductPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
-import ProductsTable from '@/features/products/components/ProductsTable'
-import { useCreateProductModalQuery } from '@/features/products/hooks/useCreateProductModalState'
+import ProductsTable from '@/features/admin/products/components/ProductsTable'
+import { useCreateProductModalQuery } from '@/features/admin/products/hooks/useCreateProductModalState'
 import { GetProductPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 

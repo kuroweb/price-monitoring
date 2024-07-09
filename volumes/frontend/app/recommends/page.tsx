@@ -3,7 +3,7 @@ import Link from 'next/link'
 import type { GetRecommendsPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
-import RelatedProductCard from '@/features/products/components/RelatedProductCard'
+import RelatedProductCard from '@/features/recommends/components/RelatedProductCard'
 import { GetRecommendsPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
