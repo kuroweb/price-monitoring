@@ -39,6 +39,26 @@ const Sidebar = ({ open, setOpen }: Props) => {
               </li>
               <li>
                 <Link
+                  href='/categories'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                >
+                  <svg
+                    className='group-hover size-6 text-gray-500 transition duration-75'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='1em'
+                    height='1em'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      fill='currentColor'
+                      d='M6.5 11L12 2l5.5 9zm11 11q-1.875 0-3.187-1.312T13 17.5t1.313-3.187T17.5 13t3.188 1.313T22 17.5t-1.312 3.188T17.5 22M3 21.5v-8h8v8z'
+                    ></path>
+                  </svg>
+                  <span className='ml-3'>カテゴリ管理</span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   href='/recommends'
                   className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
@@ -69,26 +89,6 @@ const Sidebar = ({ open, setOpen }: Props) => {
                     <path fill='currentColor' d='M0 0h48v48H0z' mask='url(#ipSTrend0)' />
                   </svg>
                   <span className='ml-3'>レコメンド</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href='/categories'
-                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
-                >
-                  <svg
-                    className='group-hover size-6 text-gray-500 transition duration-75'
-                    xmlns='http://www.w3.org/2000/svg'
-                    width='1em'
-                    height='1em'
-                    viewBox='0 0 24 24'
-                  >
-                    <path
-                      fill='currentColor'
-                      d='M6.5 11L12 2l5.5 9zm11 11q-1.875 0-3.187-1.312T13 17.5t1.313-3.187T17.5 13t3.188 1.313T22 17.5t-1.312 3.188T17.5 22M3 21.5v-8h8v8z'
-                    ></path>
-                  </svg>
-                  <span className='ml-3'>カテゴリ（仮）</span>
                 </Link>
               </li>
             </ul>

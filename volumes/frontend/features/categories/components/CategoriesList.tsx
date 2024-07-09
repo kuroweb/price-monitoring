@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
@@ -8,7 +7,7 @@ import { deleteCategory } from '../server-actions/graphql/categoryQuery'
 
 import type { DeleteCategoryInput, GetCategoryPageDataQuery } from '@/graphql/dist/client'
 
-const CategoriesCard = ({
+const CategoriesList = ({
   categoryTree,
 }: {
   categoryTree: GetCategoryPageDataQuery['categoryTree']
@@ -69,28 +68,21 @@ const CategoriesCard = ({
 
   return (
     <>
-      <div className='card w-full bg-neutral'>
-        <div className='card-body'>
-          <h2 className='card-title pb-4'>カテゴリ一覧</h2>
-          <ul>
-            {categoryTree.map((category) => {
-              return (
-                <>
-                  <li key={category.id} className='flex items-center'>
-                    <Link className='' href={`/categories/${category.name}`}>
-                      {category.name}
-                    </Link>
-                    {deleteButton(category.id)}
-                  </li>
-                  {renderChildren(category.children as ChildCategory[])}
-                </>
-              )
-            })}
-          </ul>
-        </div>
-      </div>
+      <ul>
+        {categoryTree.map((category) => {
+          return (
+            <>
+              <li key={category.id} className='flex items-center'>
+                {category.name}
+                {deleteButton(category.id)}
+              </li>
+              {renderChildren(category.children as ChildCategory[])}
+            </>
+          )
+        })}
+      </ul>
     </>
   )
 }
 
-export default CategoriesCard
+export default CategoriesList
