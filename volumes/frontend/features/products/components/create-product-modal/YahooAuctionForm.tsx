@@ -35,6 +35,7 @@ const YahooAuctionForm = ({
         <input
           {...register('yahooAuctionCrawlSetting.categoryId', {
             setValueAs: (v) => (v === '' ? null : v),
+            valueAsNumber: true,
           })}
           className='input input-bordered'
         />
