@@ -19,12 +19,12 @@ module Crawl
 
                 Retryable.retryable(tries: RETRY_COUNT) do
                   page.goto(url(start))
-                  break if no_results?(page)
+                  break if not_exist_results?(page)
 
                   append_results(page)
                 end
 
-                break unless exists_next_page?(page)
+                break if stop?(page)
 
                 start += 100
               end
@@ -62,12 +62,16 @@ module Crawl
             UrlGenerator.new(yahoo_auction_crawl_setting: product.yahoo_auction_crawl_setting, start:).generate
           end
 
-          def no_results?(page)
-            page.query_selector(".Empty__title")
+          def stop?(page)
+            not_exist_results?(page) || not_exist_next_page?(page)
           end
 
-          def exists_next_page?(page)
-            page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
+          def not_exist_results?(page)
+            page.query_selector(".Notice__wandQuery")
+          end
+
+          def not_exist_next_page?(page)
+            !page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
           end
 
           def external_id(dom)
