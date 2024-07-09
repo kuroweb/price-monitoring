@@ -31,5 +31,8 @@ export const revalidateAdminCategoryPaths = () => {
 // /recommends
 
 export const revalidateRecommendPaths = () => {
-  revalidatePaths([['/recommends', 'page']])
+  revalidatePaths([
+    ['/recommends', 'page'],
+    ['/recommends/[...category]', 'page'],
+  ])
 }

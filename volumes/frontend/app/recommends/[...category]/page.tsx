@@ -7,13 +7,13 @@ import RelatedProductCard from '@/features/products/components/RelatedProductCar
 import { GetCategoryDetailPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
-const Page = async ({ params }: { params: { slug: string[] } }) => {
+const Page = async ({ params }: { params: { category: string[] } }) => {
   const { data } = await getClient().query<GetCategoryDetailPageDataQuery>({
     query: GetCategoryDetailPageDataDocument,
-    variables: { name: decodeURIComponent(params.slug[params.slug.length - 1]) },
+    variables: { name: decodeURIComponent(params.category[params.category.length - 1]) },
   })
 
-  console.log(params.slug.slice(0, -1).map(decodeURIComponent).join('/'))
+  console.log(params.category.slice(0, -1).map(decodeURIComponent).join('/'))
 
   return (
     <Layout>
@@ -22,7 +22,7 @@ const Page = async ({ params }: { params: { slug: string[] } }) => {
           {data.category.parent && (
             <Link
               className=''
-              href={`/categories/${params.slug.slice(0, -1).map(decodeURIComponent).join('/')}`}
+              href={`/categories/${params.category.slice(0, -1).map(decodeURIComponent).join('/')}`}
             >
               {data.category.parent?.name}
               <span> / </span>
@@ -36,7 +36,7 @@ const Page = async ({ params }: { params: { slug: string[] } }) => {
                   <span>- </span>
                   <Link
                     className=''
-                    href={`/categories/${[...params.slug, child.name].map(decodeURIComponent).join('/')}`}
+                    href={`/categories/${[...params.category, child.name].map(decodeURIComponent).join('/')}`}
                   >
                     {child.name}
                   </Link>
