@@ -15,7 +15,7 @@ import {
   DeleteJanparaCrawlSettingExcludeKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateProductPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminProductPaths, revalidateRecommendPaths } from '@/lib/revalidatePaths'
 
 export const createJanparaCrawlSettingExcludeKeyword = async (
   input: CreateJanparaCrawlSettingExcludeKeywordInput,
@@ -24,7 +24,8 @@ export const createJanparaCrawlSettingExcludeKeyword = async (
     mutation: CreateJanparaCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -36,7 +37,8 @@ export const updateJanparaCrawlSettingExcludeKeyword = async (
     mutation: UpdateJanparaCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -48,7 +50,8 @@ export const deleteJanparaCrawlSettingExcludeKeyword = async (
     mutation: DeleteJanparaCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }

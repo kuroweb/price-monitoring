@@ -15,7 +15,7 @@ import {
   UpdateProductDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateProductPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminProductPaths, revalidateRecommendPaths } from '@/lib/revalidatePaths'
 
 /*
   Product
@@ -26,7 +26,8 @@ export const createProduct = async (input: CreateProductInput) => {
     mutation: CreateProductDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -36,7 +37,8 @@ export const updateProduct = async (input: UpdateProductInput) => {
     mutation: UpdateProductDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -46,7 +48,8 @@ export const deleteProduct = async (input: DeleteProductInput) => {
     mutation: DeleteProductDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }

@@ -15,7 +15,7 @@ import {
   DeletePcKoubouCrawlSettingExcludeKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateProductPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminProductPaths, revalidateRecommendPaths } from '@/lib/revalidatePaths'
 
 export const createPcKoubouCrawlSettingExcludeKeyword = async (
   input: CreatePcKoubouCrawlSettingExcludeKeywordInput,
@@ -24,7 +24,8 @@ export const createPcKoubouCrawlSettingExcludeKeyword = async (
     mutation: CreatePcKoubouCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -36,7 +37,8 @@ export const updatePcKoubouCrawlSettingExcludeKeyword = async (
     mutation: UpdatePcKoubouCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -48,7 +50,8 @@ export const deletePcKoubouCrawlSettingExcludeKeyword = async (
     mutation: DeletePcKoubouCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }

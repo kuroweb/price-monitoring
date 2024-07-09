@@ -15,7 +15,7 @@ import {
   DeleteUsedSofmapCrawlSettingExcludeProductDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateProductPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminProductPaths, revalidateRecommendPaths } from '@/lib/revalidatePaths'
 
 export const createUsedSofmapCrawlSettingExcludeProduct = async (
   input: CreateUsedSofmapCrawlSettingExcludeProductInput,
@@ -24,7 +24,8 @@ export const createUsedSofmapCrawlSettingExcludeProduct = async (
     mutation: CreateUsedSofmapCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -36,7 +37,8 @@ export const updateUsedSofmapCrawlSettingExcludeProduct = async (
     mutation: UpdateUsedSofmapCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }
@@ -48,7 +50,8 @@ export const deleteUsedSofmapCrawlSettingExcludeProduct = async (
     mutation: DeleteUsedSofmapCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidateProductPaths()
+  revalidateAdminProductPaths()
+  revalidateRecommendPaths()
 
   return result
 }

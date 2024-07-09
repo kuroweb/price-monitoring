@@ -2,21 +2,34 @@ import { revalidatePath } from 'next/cache'
 
 type RevalidatePathArgs = Parameters<typeof revalidatePath>
 
+// Utils
+
 export const revalidatePaths = (pathnames: RevalidatePathArgs[]) => {
   pathnames.forEach((path) => {
     revalidatePath(...path)
   })
 }
 
-export const revalidateProductPaths = () => {
+// /admin
+
+export const revalidateAdminPaths = () => {
+  revalidateAdminProductPaths()
+  revalidateAdminCategoryPaths()
+}
+
+export const revalidateAdminProductPaths = () => {
   revalidatePaths([
-    [`/`, 'page'],
-    [`/products/[id]`, 'page'],
-    ['/products/[id]/settings', 'page'],
-    ['/recommends', 'page'],
+    ['/admin/products', 'page'],
+    ['/admin/products/[id]/settings', 'page'],
   ])
 }
 
-export const revalidateCategoryPaths = () => {
-  revalidatePaths([['/categories', 'page']])
+export const revalidateAdminCategoryPaths = () => {
+  revalidatePaths([['/admin/categories', 'page']])
+}
+
+// /recommends
+
+export const revalidateRecommendPaths = () => {
+  revalidatePaths([['/recommends', 'page']])
 }

@@ -20,9 +20,12 @@ const Sidebar = ({ open, setOpen }: Props) => {
         <div className='flex h-full min-h-0 flex-1 flex-col bg-base-200'>
           <div className='flex flex-1 flex-col overflow-y-auto pb-4 pt-5'>
             <ul className='space-y-2 pb-2'>
+              <li className='px-4'>
+                <span className='text-base font-normal text-gray-500'>- 管理機能 -</span>
+              </li>
               <li>
                 <Link
-                  href='/'
+                  href='/admin/products'
                   className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
                   <svg
@@ -39,7 +42,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               </li>
               <li>
                 <Link
-                  href='/categories'
+                  href='/admin/categories'
                   className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
                   <svg
@@ -56,6 +59,9 @@ const Sidebar = ({ open, setOpen }: Props) => {
                   </svg>
                   <span className='ml-3'>カテゴリ管理</span>
                 </Link>
+              </li>
+              <li className='px-4 pt-4'>
+                <span className='text-base font-normal text-gray-500'>- 価格情報 -</span>
               </li>
               <li>
                 <Link
@@ -88,7 +94,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
                     </defs>
                     <path fill='currentColor' d='M0 0h48v48H0z' mask='url(#ipSTrend0)' />
                   </svg>
-                  <span className='ml-3'>レコメンド</span>
+                  <span className='ml-3'>最安値を調べる</span>
                 </Link>
               </li>
             </ul>

@@ -27,9 +27,9 @@ export type reflectValueType = (
 
 const UpdateProductModal = ({
   defaultValues,
-  categories
+  categories,
 }: {
-  defaultValues: UpdateProductInput | undefined,
+  defaultValues: UpdateProductInput | undefined
   categories: GetProductPageDataQuery['categories'] | undefined
 }) => {
   const router = useRouter()
