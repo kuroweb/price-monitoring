@@ -1,8 +1,8 @@
 import type { GetCategoryPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
-import CategoriesList from '@/features/categories/components/CategoriesList'
-import CreateCategoryForm from '@/features/categories/components/CreateCategoryForm'
+import CategoriesList from '@/features/admin/categories/components/CategoriesList'
+import CreateCategoryForm from '@/features/admin/categories/components/CreateCategoryForm'
 import { GetCategoryPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
