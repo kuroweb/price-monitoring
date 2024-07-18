@@ -13,37 +13,39 @@ const Page = async ({ params }: { params: { category: string[] } }) => {
     variables: { name: decodeURIComponent(params.category[params.category.length - 1]) },
   })
 
-  console.log(params.category.slice(0, -1))
-
   return (
     <Layout>
-      <div className='grid grid-cols-1'>
-        <div className='pb-4'>
-          {data.category.parent && (
-            <Link
-              className=''
-              href={`/categories/${params.category.slice(0, -1).map(decodeURIComponent).join('/')}`}
-            >
-              {data.category.parent?.name}
-              <span> / </span>
-            </Link>
-          )}
-          <span>{data.category.name}</span>
-          {data.category.children.map((child) => {
-            return (
-              <>
-                <div>
-                  <span>- </span>
-                  <Link
-                    className=''
-                    href={`/categories/${[...params.category, child.name].map(decodeURIComponent).join('/')}`}
-                  >
-                    {child.name}
-                  </Link>
-                </div>
-              </>
-            )
-          })}
+      <div className='grid grid-cols-1 space-y-4'>
+        <div className='card bg-neutral'>
+          <div className='card-body'>
+            <div className='pb-4'>
+              {data.category.parent && (
+                <Link
+                  className=''
+                  href={`/categories/${params.category.slice(0, -1).map(decodeURIComponent).join('/')}`}
+                >
+                  {data.category.parent?.name}
+                  <span> / </span>
+                </Link>
+              )}
+              <span>{data.category.name}</span>
+              {data.category.children.map((child) => {
+                return (
+                  <>
+                    <div>
+                      <span>- </span>
+                      <Link
+                        className=''
+                        href={`/categories/${[...params.category, child.name].map(decodeURIComponent).join('/')}`}
+                      >
+                        {child.name}
+                      </Link>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
+          </div>
         </div>
         <div className='card bg-neutral'>
           <div className='card-body'>

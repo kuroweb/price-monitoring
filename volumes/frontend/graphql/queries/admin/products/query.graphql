@@ -1,34 +1,38 @@
-# /products
+# /admin/products
 
-query ProductsPageData {
-  products {
-    id
-    name
-    relatedProducts(
-      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all,used_sofmap.all"
-      page: 1
-      per: 10
-      sort: "price"
-      order: "asc"
-    ) {
-      ...RelatedProductField
+query AdminProductsPageData($id: ID, $name: String) {
+  products(id: $id, name: $name) {
+    ...ProductField
+    yahooAuctionCrawlSetting {
+      ...YahooAuctionCrawlSettingField
+    }
+    mercariCrawlSetting {
+      ...MercariCrawlSettingField
+    }
+    janparaCrawlSetting {
+      ...JanparaCrawlSettingField
+    }
+    iosysCrawlSetting {
+      ...IosysCrawlSettingField
+    }
+    pcKoubouCrawlSetting {
+      ...PcKoubouCrawlSettingField
+    }
+    usedSofmapCrawlSetting {
+      ...UsedSofmapCrawlSettingField
+    }
+    category {
+      ...CategoryField
     }
   }
-  categories(rootOnly: true) {
+  categories(rootOnly: false) {
     ...CategoryField
   }
 }
 
-# /products/:id
+# /admin/products/:id
 
-query ProductsIdPageData(
-  $id: ID!
-  $platformMask: String!
-  $page: Int
-  $per: Int
-  $sort: String
-  $order: String
-) {
+query AdminProductsIdPageData($id: ID!) {
   product(id: $id) {
     ...ProductField
     yahooAuctionCrawlSetting {
@@ -112,43 +116,11 @@ query ProductsIdPageData(
         ...UsedSofmapCrawlSettingRequiredKeywordField
       }
     }
-    relatedProducts(
-      platformMask: $platformMask
-      page: $page
-      per: $per
-      sort: $sort
-      order: $order
-    ) {
-      ...RelatedProductField
-    }
     category {
       ...CategoryField
     }
   }
-}
-
-# /products/categories/[...category]
-
-query ProductsCategoriesCategoryPageData($name: String!) {
-  category(name: $name) {
+  categories(rootOnly: false) {
     ...CategoryField
-    parent {
-      ...CategoryField
-    }
-    children {
-      ...CategoryField
-    }
-    products {
-      ...ProductField
-      relatedProducts(
-        platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all,used_sofmap.all"
-        page: 1
-        per: 10
-        sort: "price"
-        order: "asc"
-      ) {
-        ...RelatedProductField
-      }
-    }
   }
 }

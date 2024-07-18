@@ -1,0 +1,22 @@
+# /admin/categories
+
+query AdminCategoriesPageData {
+  categories(rootOnly: false) {
+    ...CategoryField
+  }
+  categoryTree: categories(rootOnly: true) {
+    ...CategoryField
+    children {
+      ...CategoryField
+      children {
+        ...CategoryField
+        children {
+          ...CategoryField
+          children {
+            ...CategoryField
+          }
+        }
+      }
+    }
+  }
+}
