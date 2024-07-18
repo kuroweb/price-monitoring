@@ -12,12 +12,12 @@ import { createUsedSofmapCrawlSettingExcludeProduct } from '../../../server-acti
 import { createYahooAuctionCrawlSettingExcludeProduct } from '../../../server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
 import { useStatusState } from '../../admin/products/hooks/useStatusState'
 
-import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 
 const RelatedProductCard = ({
   relatedProduct,
 }: {
-  relatedProduct: GetProductDetailPageDataQuery['product']['relatedProducts'][0]
+  relatedProduct: ProductsIdPageDataQuery['product']['relatedProducts'][0]
 }) => {
   const router = useRouter()
   const [status, _] = useStatusState()

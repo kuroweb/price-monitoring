@@ -9,7 +9,7 @@ import type {
 
 import { CreateCategoryDocument, DeleteCategoryDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateAdminPaths, revalidateRecommendPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminPaths } from '@/lib/revalidatePaths'
 
 export const createCategory = async (input: CreateCategoryInput) => {
   const result = getClient().mutate<CreateCategoryMutation>({
@@ -17,7 +17,6 @@ export const createCategory = async (input: CreateCategoryInput) => {
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateRecommendPaths()
 
   return result
 }
@@ -28,7 +27,6 @@ export const deleteCategory = async (input: DeleteCategoryInput) => {
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateRecommendPaths()
 
   return result
 }

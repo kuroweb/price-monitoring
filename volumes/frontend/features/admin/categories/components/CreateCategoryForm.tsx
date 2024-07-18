@@ -6,13 +6,13 @@ import { toast } from 'react-toastify'
 
 import { createCategory } from '../../../../server-actions/categoryQuery'
 
-import type { CreateCategoryInput, GetCategoryPageDataQuery } from '@/graphql/dist/client'
+import type { CreateCategoryInput, AdminCategoriesPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
 const CreateCategoryForm = ({
   categories,
 }: {
-  categories: GetCategoryPageDataQuery['categories']
+  categories: AdminCategoriesPageDataQuery['categories']
 }) => {
   const router = useRouter()
   const { register, handleSubmit } = useForm<{ parentId: string; name: string }>()

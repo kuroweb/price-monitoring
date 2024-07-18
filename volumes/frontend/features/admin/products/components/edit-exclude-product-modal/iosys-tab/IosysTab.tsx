@@ -9,11 +9,11 @@ import EditForm from './EditForm'
 import KeywordTable from './KeywordTable'
 
 import type {
-  GetProductSettingPageDataQuery,
+  AdminProductsIdPageDataQuery,
   IosysCrawlSettingExcludeProduct,
 } from '@/graphql/dist/client'
 
-const IosysTab = ({ data }: { data: GetProductSettingPageDataQuery }) => {
+const IosysTab = ({ data }: { data: AdminProductsIdPageDataQuery }) => {
   const [mode, setMode] = useState<'list' | 'create' | 'edit'>('list')
   const [condition, setCondition] = useState<IosysCrawlSettingExcludeProduct | undefined>(undefined)
 

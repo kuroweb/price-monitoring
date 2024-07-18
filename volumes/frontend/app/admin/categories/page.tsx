@@ -1,14 +1,14 @@
-import type { GetCategoryPageDataQuery } from '@/graphql/dist/client'
+import type { AdminCategoriesPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
 import CategoriesList from '@/features/admin/categories/components/CategoriesList'
 import CreateCategoryForm from '@/features/admin/categories/components/CreateCategoryForm'
-import { GetCategoryPageDataDocument } from '@/graphql/dist/client'
+import { AdminCategoriesPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async () => {
-  const { data } = await getClient().query<GetCategoryPageDataQuery>({
-    query: GetCategoryPageDataDocument,
+  const { data } = await getClient().query<AdminCategoriesPageDataQuery>({
+    query: AdminCategoriesPageDataDocument,
   })
 
   return (

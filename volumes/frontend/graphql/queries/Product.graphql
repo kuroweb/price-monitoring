@@ -2,9 +2,9 @@
 # queries
 #
 
-# /products
+# /admin/products
 
-query GetProductPageData($id: ID, $name: String) {
+query AdminProductsPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
     ...ProductField
     yahooAuctionCrawlSetting {
@@ -34,9 +34,122 @@ query GetProductPageData($id: ID, $name: String) {
   }
 }
 
+# /admin/products/:id
+
+query AdminProductsIdPageData($id: ID!) {
+  product(id: $id) {
+    ...ProductField
+    yahooAuctionCrawlSetting {
+      ...YahooAuctionCrawlSettingField
+      yahooAuctionCrawlSettingExcludeKeywords {
+        ...YahooAuctionCrawlSettingExcludeKeywordField
+      }
+      yahooAuctionCrawlSettingExcludeProducts {
+        ...YahooAuctionCrawlSettingExcludeProductField
+      }
+      yahooAuctionCrawlSettingRequiredKeywords {
+        ...YahooAuctionCrawlSettingRequiredKeywordField
+      }
+    }
+    yahooAuctionDailyPurchaseSummaries {
+      ...YahooAuctionDailyPurchaseSummaryField
+    }
+    yahooFleamarketDailyPurchaseSummaries {
+      ...YahooFleamarketDailyPurchaseSummaryField
+    }
+    mercariCrawlSetting {
+      ...MercariCrawlSettingField
+      mercariCrawlSettingExcludeKeywords {
+        ...MercariCrawlSettingExcludeKeywordField
+      }
+      mercariCrawlSettingExcludeProducts {
+        ...MercariCrawlSettingExcludeProductField
+      }
+      mercariCrawlSettingRequiredKeywords {
+        ...MercariCrawlSettingRequiredKeywordField
+      }
+    }
+    mercariDailyPurchaseSummaries {
+      ...MercariDailyPurchaseSummaryField
+    }
+    janparaCrawlSetting {
+      ...JanparaCrawlSettingField
+      janparaCrawlSettingExcludeKeywords {
+        ...JanparaCrawlSettingExcludeKeywordField
+      }
+      janparaCrawlSettingExcludeProducts {
+        ...JanparaCrawlSettingExcludeProductField
+      }
+      janparaCrawlSettingRequiredKeywords {
+        ...JanparaCrawlSettingRequiredKeywordField
+      }
+    }
+    iosysCrawlSetting {
+      ...IosysCrawlSettingField
+      iosysCrawlSettingExcludeKeywords {
+        ...IosysCrawlSettingExcludeKeywordField
+      }
+      iosysCrawlSettingExcludeProducts {
+        ...IosysCrawlSettingExcludeProductField
+      }
+      iosysCrawlSettingRequiredKeywords {
+        ...IosysCrawlSettingRequiredKeywordField
+      }
+    }
+    pcKoubouCrawlSetting {
+      ...PcKoubouCrawlSettingField
+      pcKoubouCrawlSettingExcludeKeywords {
+        ...PcKoubouCrawlSettingExcludeKeywordField
+      }
+      pcKoubouCrawlSettingExcludeProducts {
+        ...PcKoubouCrawlSettingExcludeProductField
+      }
+      pcKoubouCrawlSettingRequiredKeywords {
+        ...PcKoubouCrawlSettingRequiredKeywordField
+      }
+    }
+    usedSofmapCrawlSetting {
+      ...UsedSofmapCrawlSettingField
+      usedSofmapCrawlSettingExcludeKeywords {
+        ...UsedSofmapCrawlSettingExcludeKeywordField
+      }
+      usedSofmapCrawlSettingExcludeProducts {
+        ...UsedSofmapCrawlSettingExcludeProductField
+      }
+      usedSofmapCrawlSettingRequiredKeywords {
+        ...UsedSofmapCrawlSettingRequiredKeywordField
+      }
+    }
+    category {
+      ...CategoryField
+    }
+  }
+  categories(rootOnly: false) {
+    ...CategoryField
+  }
+}
+
+# /products
+
+query ProductsPageData {
+  products {
+    id
+    name
+    relatedProducts(
+      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all,used_sofmap.all"
+      page: 1
+      per: 10
+      sort: "price"
+      order: "asc"
+    ) {
+      ...RelatedProductField
+    }
+  }
+}
+
 # /products/:id
 
-query GetProductDetailPageData(
+query ProductsIdPageData(
   $id: ID!
   $platformMask: String!
   $page: Int
@@ -138,119 +251,6 @@ query GetProductDetailPageData(
     }
     category {
       ...CategoryField
-    }
-  }
-}
-
-# /products/:id/settings
-
-query GetProductSettingPageData($id: ID!) {
-  product(id: $id) {
-    ...ProductField
-    yahooAuctionCrawlSetting {
-      ...YahooAuctionCrawlSettingField
-      yahooAuctionCrawlSettingExcludeKeywords {
-        ...YahooAuctionCrawlSettingExcludeKeywordField
-      }
-      yahooAuctionCrawlSettingExcludeProducts {
-        ...YahooAuctionCrawlSettingExcludeProductField
-      }
-      yahooAuctionCrawlSettingRequiredKeywords {
-        ...YahooAuctionCrawlSettingRequiredKeywordField
-      }
-    }
-    yahooAuctionDailyPurchaseSummaries {
-      ...YahooAuctionDailyPurchaseSummaryField
-    }
-    yahooFleamarketDailyPurchaseSummaries {
-      ...YahooFleamarketDailyPurchaseSummaryField
-    }
-    mercariCrawlSetting {
-      ...MercariCrawlSettingField
-      mercariCrawlSettingExcludeKeywords {
-        ...MercariCrawlSettingExcludeKeywordField
-      }
-      mercariCrawlSettingExcludeProducts {
-        ...MercariCrawlSettingExcludeProductField
-      }
-      mercariCrawlSettingRequiredKeywords {
-        ...MercariCrawlSettingRequiredKeywordField
-      }
-    }
-    mercariDailyPurchaseSummaries {
-      ...MercariDailyPurchaseSummaryField
-    }
-    janparaCrawlSetting {
-      ...JanparaCrawlSettingField
-      janparaCrawlSettingExcludeKeywords {
-        ...JanparaCrawlSettingExcludeKeywordField
-      }
-      janparaCrawlSettingExcludeProducts {
-        ...JanparaCrawlSettingExcludeProductField
-      }
-      janparaCrawlSettingRequiredKeywords {
-        ...JanparaCrawlSettingRequiredKeywordField
-      }
-    }
-    iosysCrawlSetting {
-      ...IosysCrawlSettingField
-      iosysCrawlSettingExcludeKeywords {
-        ...IosysCrawlSettingExcludeKeywordField
-      }
-      iosysCrawlSettingExcludeProducts {
-        ...IosysCrawlSettingExcludeProductField
-      }
-      iosysCrawlSettingRequiredKeywords {
-        ...IosysCrawlSettingRequiredKeywordField
-      }
-    }
-    pcKoubouCrawlSetting {
-      ...PcKoubouCrawlSettingField
-      pcKoubouCrawlSettingExcludeKeywords {
-        ...PcKoubouCrawlSettingExcludeKeywordField
-      }
-      pcKoubouCrawlSettingExcludeProducts {
-        ...PcKoubouCrawlSettingExcludeProductField
-      }
-      pcKoubouCrawlSettingRequiredKeywords {
-        ...PcKoubouCrawlSettingRequiredKeywordField
-      }
-    }
-    usedSofmapCrawlSetting {
-      ...UsedSofmapCrawlSettingField
-      usedSofmapCrawlSettingExcludeKeywords {
-        ...UsedSofmapCrawlSettingExcludeKeywordField
-      }
-      usedSofmapCrawlSettingExcludeProducts {
-        ...UsedSofmapCrawlSettingExcludeProductField
-      }
-      usedSofmapCrawlSettingRequiredKeywords {
-        ...UsedSofmapCrawlSettingRequiredKeywordField
-      }
-    }
-    category {
-      ...CategoryField
-    }
-  }
-  categories(rootOnly: false) {
-    ...CategoryField
-  }
-}
-
-# /recommends
-
-query GetRecommendsPageData($id: ID, $name: String) {
-  products(id: $id, name: $name) {
-    id
-    name
-    relatedProducts(
-      platformMask: "yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all,used_sofmap.all"
-      page: 1
-      per: 10
-      sort: "price"
-      order: "asc"
-    ) {
-      ...RelatedProductField
     }
   }
 }

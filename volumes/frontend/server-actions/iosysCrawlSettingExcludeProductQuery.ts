@@ -15,11 +15,7 @@ import {
   DeleteIosysCrawlSettingExcludeProductDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import {
-  revalidateAdminProductPaths,
-  revalidateRecommendPaths,
-  revalidateProductPaths,
-} from '@/lib/revalidatePaths'
+import { revalidateAdminPaths, revalidateProductPaths } from '@/lib/revalidatePaths'
 
 export const createIosysCrawlSettingExcludeProduct = async (
   input: CreateIosysCrawlSettingExcludeProductInput,
@@ -28,9 +24,8 @@ export const createIosysCrawlSettingExcludeProduct = async (
     mutation: CreateIosysCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidateAdminProductPaths()
+  revalidateAdminPaths()
   revalidateProductPaths()
-  revalidateRecommendPaths()
 
   return result
 }
@@ -42,9 +37,8 @@ export const updateIosysCrawlSettingExcludeProduct = async (
     mutation: UpdateIosysCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidateAdminProductPaths()
+  revalidateAdminPaths()
   revalidateProductPaths()
-  revalidateRecommendPaths()
 
   return result
 }
@@ -56,9 +50,8 @@ export const deleteIosysCrawlSettingExcludeProduct = async (
     mutation: DeleteIosysCrawlSettingExcludeProductDocument,
     variables: { input },
   })
-  revalidateAdminProductPaths()
+  revalidateAdminPaths()
   revalidateProductPaths()
-  revalidateRecommendPaths()
 
   return result
 }

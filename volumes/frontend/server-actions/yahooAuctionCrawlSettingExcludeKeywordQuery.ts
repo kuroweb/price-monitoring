@@ -15,11 +15,7 @@ import {
   DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import {
-  revalidateAdminProductPaths,
-  revalidateRecommendPaths,
-  revalidateProductPaths,
-} from '@/lib/revalidatePaths'
+import { revalidateAdminPaths, revalidateProductPaths } from '@/lib/revalidatePaths'
 
 export const createYahooAuctionCrawlSettingExcludeKeyword = async (
   input: CreateYahooAuctionCrawlSettingExcludeKeywordInput,
@@ -28,9 +24,8 @@ export const createYahooAuctionCrawlSettingExcludeKeyword = async (
     mutation: CreateYahooAuctionCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateAdminProductPaths()
+  revalidateAdminPaths()
   revalidateProductPaths()
-  revalidateRecommendPaths()
 
   return result
 }
@@ -42,9 +37,8 @@ export const updateYahooAuctionCrawlSettingExcludeKeyword = async (
     mutation: UpdateYahooAuctionCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateAdminProductPaths()
+  revalidateAdminPaths()
   revalidateProductPaths()
-  revalidateRecommendPaths()
 
   return result
 }
@@ -56,9 +50,8 @@ export const deleteYahooAuctionCrawlSettingExcludeKeyword = async (
     mutation: DeleteYahooAuctionCrawlSettingExcludeKeywordDocument,
     variables: { input },
   })
-  revalidateAdminProductPaths()
+  revalidateAdminPaths()
   revalidateProductPaths()
-  revalidateRecommendPaths()
 
   return result
 }

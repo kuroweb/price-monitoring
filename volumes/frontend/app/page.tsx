@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation'
 
 const Page = async () => {
-  redirect('/recommends')
+  redirect('/products')
 }
 
 export default Page

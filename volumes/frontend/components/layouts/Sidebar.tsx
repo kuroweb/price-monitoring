@@ -65,7 +65,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               </li>
               <li>
                 <Link
-                  href='/recommends'
+                  href='/products'
                   className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
                   <svg

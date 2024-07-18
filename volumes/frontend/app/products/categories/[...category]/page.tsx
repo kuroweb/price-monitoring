@@ -1,19 +1,19 @@
 import Link from 'next/link'
 
-import type { GetCategoryDetailPageDataQuery } from '@/graphql/dist/client'
+import type { ProductsCategoriesCategoryPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
-import RelatedProductCard from '@/features/recommends/components/RelatedProductCard'
-import { GetCategoryDetailPageDataDocument } from '@/graphql/dist/client'
+import RelatedProductCard from '@/features/products/components/RelatedProductCard'
+import { ProductsCategoriesCategoryPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async ({ params }: { params: { category: string[] } }) => {
-  const { data } = await getClient().query<GetCategoryDetailPageDataQuery>({
-    query: GetCategoryDetailPageDataDocument,
+  const { data } = await getClient().query<ProductsCategoriesCategoryPageDataQuery>({
+    query: ProductsCategoriesCategoryPageDataDocument,
     variables: { name: decodeURIComponent(params.category[params.category.length - 1]) },
   })
 
-  console.log(params.category.slice(0, -1).map(decodeURIComponent).join('/'))
+  console.log(params.category.slice(0, -1))
 
   return (
     <Layout>

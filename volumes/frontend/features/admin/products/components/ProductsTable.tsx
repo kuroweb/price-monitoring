@@ -13,15 +13,15 @@ import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
-import type { GetProductPageDataQuery } from '@/graphql/dist/client'
+import type { AdminProductsPageDataQuery } from '@/graphql/dist/client'
 
-const ProductsTable = ({ data }: { data: GetProductPageDataQuery | undefined }) => {
+const ProductsTable = ({ data }: { data: AdminProductsPageDataQuery | undefined }) => {
   const router = useRouter()
   const [_createModal, setCreateModal] = useCreateProductModalState()
   const [_updateModal, setUpdateModal] = useUpdateProductModalState()
-  const [product, setProduct] = useState<GetProductPageDataQuery['products'][number] | undefined>(
-    undefined,
-  )
+  const [product, setProduct] = useState<
+    AdminProductsPageDataQuery['products'][number] | undefined
+  >(undefined)
 
   const submitDeleteProduct = async (productId: string) => {
     const result = await deleteProduct({

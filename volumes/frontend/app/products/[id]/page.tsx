@@ -1,4 +1,4 @@
-import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/admin/products/components/AnalysisChart'
@@ -15,8 +15,8 @@ import {
   useStatusStateQuery,
 } from '@/features/admin/products/hooks/useStatusState'
 import { makePlatformMask } from '@/features/admin/products/lib/makePlatformMask'
-import RelatedProductCard from '@/features/recommends/components/RelatedProductCard'
-import { GetProductDetailPageDataDocument } from '@/graphql/dist/client'
+import RelatedProductCard from '@/features/products/components/RelatedProductCard'
+import { ProductsIdPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async ({
@@ -31,8 +31,8 @@ const Page = async ({
   const { [usePageStateQuery]: page } = pageStateCache.parse(searchParams)
   const { [usePerStateQuery]: per } = perStateCache.parse(searchParams)
 
-  const { data } = await getClient().query<GetProductDetailPageDataQuery>({
-    query: GetProductDetailPageDataDocument,
+  const { data } = await getClient().query<ProductsIdPageDataQuery>({
+    query: ProductsIdPageDataDocument,
     variables: {
       id: params.id,
       platformMask: makePlatformMask(platform, status),

@@ -17,7 +17,7 @@ import PcKoubouForm from './PcKoubouForm'
 import UsedSofmapForm from './UsedSofmapForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
-import type { CreateProductInput, GetProductPageDataQuery } from '@/graphql/dist/client'
+import type { CreateProductInput, AdminProductsPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
 export type reflectValueType = (
@@ -30,7 +30,7 @@ const CreateProductModal = ({
   categories,
 }: {
   defaultValues: CreateProductInput | undefined
-  categories: GetProductPageDataQuery['categories'] | undefined
+  categories: AdminProductsPageDataQuery['categories'] | undefined
 }) => {
   const router = useRouter()
 

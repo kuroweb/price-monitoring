@@ -9,7 +9,7 @@ import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditReq
 import CreateForm from './CreateForm'
 import DeleteForm from './DeleteForm'
 
-import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 
 const BulkEditRequiredKeywordModal = ({
   yahooAuctionCrawlSettingRequiredKeywords,
@@ -19,12 +19,12 @@ const BulkEditRequiredKeywordModal = ({
   pcKoubouCrawlSettingRequiredKeywords,
   usedSofmapCrawlSettingRequiredKeywords,
 }: {
-  yahooAuctionCrawlSettingRequiredKeywords: GetProductDetailPageDataQuery['product']['yahooAuctionCrawlSetting']['yahooAuctionCrawlSettingRequiredKeywords']
-  mercariCrawlSettingRequiredKeywords: GetProductDetailPageDataQuery['product']['mercariCrawlSetting']['mercariCrawlSettingRequiredKeywords']
-  janparaCrawlSettingRequiredKeywords: GetProductDetailPageDataQuery['product']['janparaCrawlSetting']['janparaCrawlSettingRequiredKeywords']
-  iosysCrawlSettingRequiredKeywords: GetProductDetailPageDataQuery['product']['iosysCrawlSetting']['iosysCrawlSettingRequiredKeywords']
-  pcKoubouCrawlSettingRequiredKeywords: GetProductDetailPageDataQuery['product']['pcKoubouCrawlSetting']['pcKoubouCrawlSettingRequiredKeywords']
-  usedSofmapCrawlSettingRequiredKeywords: GetProductDetailPageDataQuery['product']['usedSofmapCrawlSetting']['usedSofmapCrawlSettingRequiredKeywords']
+  yahooAuctionCrawlSettingRequiredKeywords: ProductsIdPageDataQuery['product']['yahooAuctionCrawlSetting']['yahooAuctionCrawlSettingRequiredKeywords']
+  mercariCrawlSettingRequiredKeywords: ProductsIdPageDataQuery['product']['mercariCrawlSetting']['mercariCrawlSettingRequiredKeywords']
+  janparaCrawlSettingRequiredKeywords: ProductsIdPageDataQuery['product']['janparaCrawlSetting']['janparaCrawlSettingRequiredKeywords']
+  iosysCrawlSettingRequiredKeywords: ProductsIdPageDataQuery['product']['iosysCrawlSetting']['iosysCrawlSettingRequiredKeywords']
+  pcKoubouCrawlSettingRequiredKeywords: ProductsIdPageDataQuery['product']['pcKoubouCrawlSetting']['pcKoubouCrawlSettingRequiredKeywords']
+  usedSofmapCrawlSettingRequiredKeywords: ProductsIdPageDataQuery['product']['usedSofmapCrawlSetting']['usedSofmapCrawlSettingRequiredKeywords']
 }) => {
   const [tab, setTab] = useState<'一括登録' | '一括削除'>('一括登録')
   const [modal, setModal] = useBulkEditRequiredKeywordModalState()

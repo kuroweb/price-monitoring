@@ -6,7 +6,7 @@ import { useRouter, useParams } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import type {
-  GetProductSettingPageDataQuery,
+  AdminProductsIdPageDataQuery,
   UsedSofmapCrawlSettingExcludeKeyword,
 } from '@/graphql/dist/client'
 
@@ -17,7 +17,7 @@ const KeywordTable = ({
   setMode,
   setCondition,
 }: {
-  data: GetProductSettingPageDataQuery
+  data: AdminProductsIdPageDataQuery
   setMode: Dispatch<SetStateAction<'list' | 'create' | 'edit'>>
   setCondition: Dispatch<SetStateAction<UsedSofmapCrawlSettingExcludeKeyword | undefined>>
 }) => {

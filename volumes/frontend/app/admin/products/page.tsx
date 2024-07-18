@@ -1,16 +1,16 @@
 import Link from 'next/link'
 
-import type { GetProductPageDataQuery } from '@/graphql/dist/client'
+import type { AdminProductsPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/admin/products/components/ProductsTable'
 import { useCreateProductModalQuery } from '@/features/admin/products/hooks/useCreateProductModalState'
-import { GetProductPageDataDocument } from '@/graphql/dist/client'
+import { AdminProductsPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-  const { data } = await getClient().query<GetProductPageDataQuery>({
-    query: GetProductPageDataDocument,
+  const { data } = await getClient().query<AdminProductsPageDataQuery>({
+    query: AdminProductsPageDataDocument,
   })
 
   return (

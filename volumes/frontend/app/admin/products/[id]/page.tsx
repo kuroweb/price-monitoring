@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { GetProductSettingPageDataQuery } from '@/graphql/dist/client'
+import type { AdminProductsIdPageDataQuery } from '@/graphql/dist/client'
 
 import Layout from '@/components/layouts/Layout'
 import BulkEditExcludeKeywordModal from '@/features/admin/products/components/bulk-edit-exclude-keyword-modal/BulkEditExcludeKeywordModal'
@@ -15,12 +15,12 @@ import { useEditExcludeKeywordModalQuery } from '@/features/admin/products/hooks
 import { useEditExcludeProductModalQuery } from '@/features/admin/products/hooks/useEditExcludeProductModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/admin/products/hooks/useEditRequiredKeywordModalState'
 import { useUpdateProductModalQuery } from '@/features/admin/products/hooks/useUpdateProductModalState'
-import { GetProductSettingPageDataDocument } from '@/graphql/dist/client'
+import { AdminProductsIdPageDataDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
 
 const Page = async ({ params }: { params: { [key: string]: string | undefined } }) => {
-  const { data } = await getClient().query<GetProductSettingPageDataQuery>({
-    query: GetProductSettingPageDataDocument,
+  const { data } = await getClient().query<AdminProductsIdPageDataQuery>({
+    query: AdminProductsIdPageDataDocument,
     variables: {
       id: params.id,
     },

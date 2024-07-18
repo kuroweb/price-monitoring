@@ -2,9 +2,9 @@
 # queries
 #
 
-# /categories
+# /admin/categories
 
-query GetCategoryPageData {
+query AdminCategoriesPageData {
   categories(rootOnly: false) {
     ...CategoryField
   }
@@ -25,9 +25,9 @@ query GetCategoryPageData {
   }
 }
 
-# /categories/[...slug]
+# /products/categories/[...category]
 
-query GetCategoryDetailPageData($name: String!) {
+query ProductsCategoriesCategoryPageData($name: String!) {
   category(name: $name) {
     ...CategoryField
     parent {

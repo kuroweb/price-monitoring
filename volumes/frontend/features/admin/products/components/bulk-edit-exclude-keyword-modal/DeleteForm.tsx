@@ -12,7 +12,7 @@ import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '../../../../../serve
 import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '../../../../../server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
 import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcludeKeywordModalState'
 
-import type { GetProductDetailPageDataQuery } from '@/graphql/dist/client'
+import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
 
 type inputType = {
@@ -27,12 +27,12 @@ const DeleteForm = ({
   pcKoubouCrawlSettingExcludeKeywords,
   usedSofmapCrawlSettingExcludeKeywords,
 }: {
-  yahooAuctionCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['yahooAuctionCrawlSetting']['yahooAuctionCrawlSettingExcludeKeywords']
-  mercariCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['mercariCrawlSetting']['mercariCrawlSettingExcludeKeywords']
-  janparaCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['janparaCrawlSetting']['janparaCrawlSettingExcludeKeywords']
-  iosysCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['iosysCrawlSetting']['iosysCrawlSettingExcludeKeywords']
-  pcKoubouCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['pcKoubouCrawlSetting']['pcKoubouCrawlSettingExcludeKeywords']
-  usedSofmapCrawlSettingExcludeKeywords: GetProductDetailPageDataQuery['product']['usedSofmapCrawlSetting']['usedSofmapCrawlSettingExcludeKeywords']
+  yahooAuctionCrawlSettingExcludeKeywords: ProductsIdPageDataQuery['product']['yahooAuctionCrawlSetting']['yahooAuctionCrawlSettingExcludeKeywords']
+  mercariCrawlSettingExcludeKeywords: ProductsIdPageDataQuery['product']['mercariCrawlSetting']['mercariCrawlSettingExcludeKeywords']
+  janparaCrawlSettingExcludeKeywords: ProductsIdPageDataQuery['product']['janparaCrawlSetting']['janparaCrawlSettingExcludeKeywords']
+  iosysCrawlSettingExcludeKeywords: ProductsIdPageDataQuery['product']['iosysCrawlSetting']['iosysCrawlSettingExcludeKeywords']
+  pcKoubouCrawlSettingExcludeKeywords: ProductsIdPageDataQuery['product']['pcKoubouCrawlSetting']['pcKoubouCrawlSettingExcludeKeywords']
+  usedSofmapCrawlSettingExcludeKeywords: ProductsIdPageDataQuery['product']['usedSofmapCrawlSetting']['usedSofmapCrawlSettingExcludeKeywords']
 }) => {
   const router = useRouter()
   const params = useParams()

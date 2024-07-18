@@ -5,12 +5,12 @@ import { toast } from 'react-toastify'
 
 import { deleteCategory } from '../../../../server-actions/categoryQuery'
 
-import type { DeleteCategoryInput, GetCategoryPageDataQuery } from '@/graphql/dist/client'
+import type { DeleteCategoryInput, AdminCategoriesPageDataQuery } from '@/graphql/dist/client'
 
 const CategoriesList = ({
   categoryTree,
 }: {
-  categoryTree: GetCategoryPageDataQuery['categoryTree']
+  categoryTree: AdminCategoriesPageDataQuery['categoryTree']
 }) => {
   const router = useRouter()
 
