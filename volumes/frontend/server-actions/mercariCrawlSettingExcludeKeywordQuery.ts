@@ -15,7 +15,11 @@ import {
   DeleteMercariCrawlSettingExcludeKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateAdminProductPaths, revalidateRecommendPaths } from '@/lib/revalidatePaths'
+import {
+  revalidateAdminProductPaths,
+  revalidateRecommendPaths,
+  revalidateProductPaths,
+} from '@/lib/revalidatePaths'
 
 export const createMercariCrawlSettingExcludeKeyword = async (
   input: CreateMercariCrawlSettingExcludeKeywordInput,
@@ -25,6 +29,7 @@ export const createMercariCrawlSettingExcludeKeyword = async (
     variables: { input },
   })
   revalidateAdminProductPaths()
+  revalidateProductPaths()
   revalidateRecommendPaths()
 
   return result
@@ -38,6 +43,7 @@ export const updateMercariCrawlSettingExcludeKeyword = async (
     variables: { input },
   })
   revalidateAdminProductPaths()
+  revalidateProductPaths()
   revalidateRecommendPaths()
 
   return result
@@ -51,6 +57,7 @@ export const deleteMercariCrawlSettingExcludeKeyword = async (
     variables: { input },
   })
   revalidateAdminProductPaths()
+  revalidateProductPaths()
   revalidateRecommendPaths()
 
   return result

@@ -28,6 +28,12 @@ export const revalidateAdminCategoryPaths = () => {
   revalidatePaths([['/admin/categories', 'page']])
 }
 
+// /products
+
+export const revalidateProductPaths = () => {
+  revalidatePaths([['/products', 'page']])
+}
+
 // /recommends
 
 export const revalidateRecommendPaths = () => {
