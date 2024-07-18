@@ -1,0 +1,80 @@
+mutation CreatePcKoubouCrawlSettingRequiredKeyword(
+  $input: CreatePcKoubouCrawlSettingRequiredKeywordInput!
+) {
+  createPcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdatePcKoubouCrawlSettingRequiredKeyword(
+  $input: UpdatePcKoubouCrawlSettingRequiredKeywordInput!
+) {
+  updatePcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeletePcKoubouCrawlSettingRequiredKeyword(
+  $input: DeletePcKoubouCrawlSettingRequiredKeywordInput!
+) {
+  deletePcKoubouCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

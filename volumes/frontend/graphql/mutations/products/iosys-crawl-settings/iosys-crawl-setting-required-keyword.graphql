@@ -1,0 +1,80 @@
+mutation CreateIosysCrawlSettingRequiredKeyword(
+  $input: CreateIosysCrawlSettingRequiredKeywordInput!
+) {
+  createIosysCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateIosysCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      iosysCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateIosysCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateIosysCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateIosysCrawlSettingRequiredKeyword(
+  $input: UpdateIosysCrawlSettingRequiredKeywordInput!
+) {
+  updateIosysCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateIosysCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      iosysCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateIosysCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteIosysCrawlSettingRequiredKeyword(
+  $input: DeleteIosysCrawlSettingRequiredKeywordInput!
+) {
+  deleteIosysCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteIosysCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteIosysCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

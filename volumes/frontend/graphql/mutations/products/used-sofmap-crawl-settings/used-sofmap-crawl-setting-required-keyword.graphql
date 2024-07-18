@@ -1,0 +1,80 @@
+mutation CreateUsedSofmapCrawlSettingRequiredKeyword(
+  $input: CreateUsedSofmapCrawlSettingRequiredKeywordInput!
+) {
+  createUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      usedSofmapCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateUsedSofmapCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateUsedSofmapCrawlSettingRequiredKeyword(
+  $input: UpdateUsedSofmapCrawlSettingRequiredKeywordInput!
+) {
+  updateUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      usedSofmapCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateUsedSofmapCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteUsedSofmapCrawlSettingRequiredKeyword(
+  $input: DeleteUsedSofmapCrawlSettingRequiredKeywordInput!
+) {
+  deleteUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteUsedSofmapCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

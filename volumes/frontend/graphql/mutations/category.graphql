@@ -1,4 +1,4 @@
-mutation createCategory($input: CreateCategoryInput!) {
+mutation CreateCategory($input: CreateCategoryInput!) {
   createCategory(input: $input) {
     ... on CreateCategoryResultSuccess {
       ok
@@ -24,7 +24,7 @@ mutation createCategory($input: CreateCategoryInput!) {
   }
 }
 
-mutation deleteCategory($input: DeleteCategoryInput!) {
+mutation DeleteCategory($input: DeleteCategoryInput!) {
   deleteCategory(input: $input) {
     ... on DeleteCategoryResultSuccess {
       ok

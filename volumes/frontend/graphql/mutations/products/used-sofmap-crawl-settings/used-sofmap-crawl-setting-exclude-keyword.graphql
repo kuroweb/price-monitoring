@@ -1,0 +1,163 @@
+mutation CreateUsedSofmapCrawlSettingExcludeKeyword(
+  $input: CreateUsedSofmapCrawlSettingExcludeKeywordInput!
+) {
+  createUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      usedSofmapCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateUsedSofmapCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateUsedSofmapCrawlSettingExcludeKeyword(
+  $input: UpdateUsedSofmapCrawlSettingExcludeKeywordInput!
+) {
+  updateUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      usedSofmapCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateUsedSofmapCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteUsedSofmapCrawlSettingExcludeKeyword(
+  $input: DeleteUsedSofmapCrawlSettingExcludeKeywordInput!
+) {
+  deleteUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteUsedSofmapCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## UsedSofmapCrawlSettingExcludeProduct ##
+
+mutation CreateUsedSofmapCrawlSettingExcludeProduct(
+  $input: CreateUsedSofmapCrawlSettingExcludeProductInput!
+) {
+  createUsedSofmapCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateUsedSofmapCrawlSettingExcludeProductResultSuccess {
+      ok
+      usedSofmapCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateUsedSofmapCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateUsedSofmapCrawlSettingExcludeProduct(
+  $input: UpdateUsedSofmapCrawlSettingExcludeProductInput!
+) {
+  updateUsedSofmapCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess {
+      ok
+      usedSofmapCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateUsedSofmapCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateUsedSofmapCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteUsedSofmapCrawlSettingExcludeProduct(
+  $input: DeleteUsedSofmapCrawlSettingExcludeProductInput!
+) {
+  deleteUsedSofmapCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteUsedSofmapCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,163 @@
+mutation CreateJanparaCrawlSettingExcludeKeyword(
+  $input: CreateJanparaCrawlSettingExcludeKeywordInput!
+) {
+  createJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateJanparaCrawlSettingExcludeKeyword(
+  $input: UpdateJanparaCrawlSettingExcludeKeywordInput!
+) {
+  updateJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteJanparaCrawlSettingExcludeKeyword(
+  $input: DeleteJanparaCrawlSettingExcludeKeywordInput!
+) {
+  deleteJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## JanparaCrawlSettingExcludeProduct ##
+
+mutation CreateJanparaCrawlSettingExcludeProduct(
+  $input: CreateJanparaCrawlSettingExcludeProductInput!
+) {
+  createJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+      janparaCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateJanparaCrawlSettingExcludeProduct(
+  $input: UpdateJanparaCrawlSettingExcludeProductInput!
+) {
+  updateJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+      janparaCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteJanparaCrawlSettingExcludeProduct(
+  $input: DeleteJanparaCrawlSettingExcludeProductInput!
+) {
+  deleteJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

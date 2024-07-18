@@ -1,0 +1,163 @@
+mutation CreateMercariCrawlSettingExcludeKeyword(
+  $input: CreateMercariCrawlSettingExcludeKeywordInput!
+) {
+  createMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateMercariCrawlSettingExcludeKeyword(
+  $input: UpdateMercariCrawlSettingExcludeKeywordInput!
+) {
+  updateMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteMercariCrawlSettingExcludeKeyword(
+  $input: DeleteMercariCrawlSettingExcludeKeywordInput!
+) {
+  deleteMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## MercariCrawlSettingExcludeProduct ##
+
+mutation CreateMercariCrawlSettingExcludeProduct(
+  $input: CreateMercariCrawlSettingExcludeProductInput!
+) {
+  createMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+      mercariCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateMercariCrawlSettingExcludeProduct(
+  $input: UpdateMercariCrawlSettingExcludeProductInput!
+) {
+  updateMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+      mercariCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteMercariCrawlSettingExcludeProduct(
+  $input: DeleteMercariCrawlSettingExcludeProductInput!
+) {
+  deleteMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

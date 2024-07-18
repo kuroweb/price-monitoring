@@ -1,0 +1,80 @@
+mutation CreateYahooAuctionCrawlSettingRequiredKeyword(
+  $input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!
+) {
+  createYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateYahooAuctionCrawlSettingRequiredKeyword(
+  $input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!
+) {
+  updateYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteYahooAuctionCrawlSettingRequiredKeyword(
+  $input: DeleteYahooAuctionCrawlSettingRequiredKeywordInput!
+) {
+  deleteYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

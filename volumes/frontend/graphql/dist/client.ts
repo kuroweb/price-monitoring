@@ -2726,152 +2726,68 @@ export type DeleteCategoryMutationVariables = Exact<{
 
 export type DeleteCategoryMutation = { __typename?: 'Mutation', deleteCategory: { __typename?: 'DeleteCategoryResultError', ok: boolean, error: { __typename?: 'DeleteCategoryResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteCategoryResultSuccess', ok: boolean } };
 
-export type CreateProductMutationVariables = Exact<{
-  input: CreateProductInput;
+export type CreateIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateIosysCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'CreateProductResultError', ok: boolean, error: { __typename?: 'CreateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string } } };
+export type CreateIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createIosysCrawlSettingExcludeKeyword: { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean, iosysCrawlSettingExcludeKeyword: { __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type UpdateProductMutationVariables = Exact<{
-  input: UpdateProductInput;
+export type UpdateIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateIosysCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type UpdateProductMutation = { __typename?: 'Mutation', updateProduct: { __typename?: 'UpdateProductResultError', ok: boolean, error: { __typename?: 'UpdateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string } } };
+export type UpdateIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateIosysCrawlSettingExcludeKeyword: { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean, iosysCrawlSettingExcludeKeyword: { __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type DeleteProductMutationVariables = Exact<{
-  input: DeleteProductInput;
+export type DeleteIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: DeleteIosysCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type DeleteProductMutation = { __typename?: 'Mutation', deleteProduct: { __typename?: 'DeleteProductResultError', ok: boolean, error: { __typename?: 'DeleteProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteProductResultSuccess', ok: boolean } };
+export type DeleteIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingExcludeKeyword: { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
 
-export type CreateYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: CreateYahooAuctionCrawlSettingExcludeKeywordInput;
+export type CreateIosysCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: CreateIosysCrawlSettingExcludeProductInput;
 }>;
 
 
-export type CreateYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+export type CreateIosysCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', createIosysCrawlSettingExcludeProduct: { __typename?: 'CreateIosysCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingExcludeProductResultSuccess', ok: boolean, iosysCrawlSettingExcludeProduct: { __typename?: 'IosysCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
 
-export type UpdateYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput;
+export type UpdateIosysCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: UpdateIosysCrawlSettingExcludeProductInput;
 }>;
 
 
-export type UpdateYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+export type UpdateIosysCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', updateIosysCrawlSettingExcludeProduct: { __typename?: 'UpdateIosysCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingExcludeProductResultSuccess', ok: boolean, iosysCrawlSettingExcludeProduct: { __typename?: 'IosysCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
 
-export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: DeleteYahooAuctionCrawlSettingExcludeKeywordInput;
+export type DeleteIosysCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: DeleteIosysCrawlSettingExcludeProductInput;
 }>;
 
 
-export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+export type DeleteIosysCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingExcludeProduct: { __typename?: 'DeleteIosysCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingExcludeProductResultSuccess', ok: boolean } };
 
-export type CreateYahooAuctionCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: CreateYahooAuctionCrawlSettingExcludeProductInput;
+export type CreateIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: CreateIosysCrawlSettingRequiredKeywordInput;
 }>;
 
 
-export type CreateYahooAuctionCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeProduct: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeProductResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeProduct: { __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
+export type CreateIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createIosysCrawlSettingRequiredKeyword: { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean, iosysCrawlSettingRequiredKeyword: { __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type UpdateYahooAuctionCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: UpdateYahooAuctionCrawlSettingExcludeProductInput;
+export type UpdateIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: UpdateIosysCrawlSettingRequiredKeywordInput;
 }>;
 
 
-export type UpdateYahooAuctionCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingExcludeProduct: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeProduct: { __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
+export type UpdateIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateIosysCrawlSettingRequiredKeyword: { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean, iosysCrawlSettingRequiredKeyword: { __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type DeleteYahooAuctionCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: DeleteYahooAuctionCrawlSettingExcludeProductInput;
+export type DeleteIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: DeleteIosysCrawlSettingRequiredKeywordInput;
 }>;
 
 
-export type DeleteYahooAuctionCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeProduct: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess', ok: boolean } };
-
-export type CreateYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: CreateYahooAuctionCrawlSettingRequiredKeywordInput;
-}>;
-
-
-export type CreateYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
-
-export type UpdateYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput;
-}>;
-
-
-export type UpdateYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'UpdateYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
-
-export type DeleteYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: DeleteYahooAuctionCrawlSettingRequiredKeywordInput;
-}>;
-
-
-export type DeleteYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
-
-export type CreateMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: CreateMercariCrawlSettingExcludeKeywordInput;
-}>;
-
-
-export type CreateMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createMercariCrawlSettingExcludeKeyword: { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean, mercariCrawlSettingExcludeKeyword: { __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
-
-export type UpdateMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: UpdateMercariCrawlSettingExcludeKeywordInput;
-}>;
-
-
-export type UpdateMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateMercariCrawlSettingExcludeKeyword: { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean, mercariCrawlSettingExcludeKeyword: { __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
-
-export type DeleteMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: DeleteMercariCrawlSettingExcludeKeywordInput;
-}>;
-
-
-export type DeleteMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingExcludeKeyword: { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
-
-export type CreateMercariCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: CreateMercariCrawlSettingExcludeProductInput;
-}>;
-
-
-export type CreateMercariCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', createMercariCrawlSettingExcludeProduct: { __typename?: 'CreateMercariCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingExcludeProductResultSuccess', ok: boolean, mercariCrawlSettingExcludeProduct: { __typename?: 'MercariCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
-
-export type UpdateMercariCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: UpdateMercariCrawlSettingExcludeProductInput;
-}>;
-
-
-export type UpdateMercariCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', updateMercariCrawlSettingExcludeProduct: { __typename?: 'UpdateMercariCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingExcludeProductResultSuccess', ok: boolean, mercariCrawlSettingExcludeProduct: { __typename?: 'MercariCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
-
-export type DeleteMercariCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: DeleteMercariCrawlSettingExcludeProductInput;
-}>;
-
-
-export type DeleteMercariCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingExcludeProduct: { __typename?: 'DeleteMercariCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingExcludeProductResultSuccess', ok: boolean } };
-
-export type CreateMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: CreateMercariCrawlSettingRequiredKeywordInput;
-}>;
-
-
-export type CreateMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createMercariCrawlSettingRequiredKeyword: { __typename?: 'CreateMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean, mercariCrawlSettingRequiredKeyword: { __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
-
-export type UpdateMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: UpdateMercariCrawlSettingRequiredKeywordInput;
-}>;
-
-
-export type UpdateMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateMercariCrawlSettingRequiredKeyword: { __typename?: 'UpdateMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean, mercariCrawlSettingRequiredKeyword: { __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
-
-export type DeleteMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: DeleteMercariCrawlSettingRequiredKeywordInput;
-}>;
-
-
-export type DeleteMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingRequiredKeyword: { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
+export type DeleteIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingRequiredKeyword: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
 export type CreateJanparaCrawlSettingExcludeKeywordMutationVariables = Exact<{
   input: CreateJanparaCrawlSettingExcludeKeywordInput;
@@ -2936,68 +2852,68 @@ export type DeleteJanparaCrawlSettingRequiredKeywordMutationVariables = Exact<{
 
 export type DeleteJanparaCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteJanparaCrawlSettingRequiredKeyword: { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteJanparaCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
-export type CreateIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: CreateIosysCrawlSettingExcludeKeywordInput;
+export type CreateMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateMercariCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type CreateIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createIosysCrawlSettingExcludeKeyword: { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean, iosysCrawlSettingExcludeKeyword: { __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+export type CreateMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createMercariCrawlSettingExcludeKeyword: { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean, mercariCrawlSettingExcludeKeyword: { __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type UpdateIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: UpdateIosysCrawlSettingExcludeKeywordInput;
+export type UpdateMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateMercariCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type UpdateIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateIosysCrawlSettingExcludeKeyword: { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean, iosysCrawlSettingExcludeKeyword: { __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+export type UpdateMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateMercariCrawlSettingExcludeKeyword: { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean, mercariCrawlSettingExcludeKeyword: { __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type DeleteIosysCrawlSettingExcludeKeywordMutationVariables = Exact<{
-  input: DeleteIosysCrawlSettingExcludeKeywordInput;
+export type DeleteMercariCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: DeleteMercariCrawlSettingExcludeKeywordInput;
 }>;
 
 
-export type DeleteIosysCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingExcludeKeyword: { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+export type DeleteMercariCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingExcludeKeyword: { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
 
-export type CreateIosysCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: CreateIosysCrawlSettingExcludeProductInput;
+export type CreateMercariCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: CreateMercariCrawlSettingExcludeProductInput;
 }>;
 
 
-export type CreateIosysCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', createIosysCrawlSettingExcludeProduct: { __typename?: 'CreateIosysCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingExcludeProductResultSuccess', ok: boolean, iosysCrawlSettingExcludeProduct: { __typename?: 'IosysCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
+export type CreateMercariCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', createMercariCrawlSettingExcludeProduct: { __typename?: 'CreateMercariCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingExcludeProductResultSuccess', ok: boolean, mercariCrawlSettingExcludeProduct: { __typename?: 'MercariCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
 
-export type UpdateIosysCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: UpdateIosysCrawlSettingExcludeProductInput;
+export type UpdateMercariCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: UpdateMercariCrawlSettingExcludeProductInput;
 }>;
 
 
-export type UpdateIosysCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', updateIosysCrawlSettingExcludeProduct: { __typename?: 'UpdateIosysCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingExcludeProductResultSuccess', ok: boolean, iosysCrawlSettingExcludeProduct: { __typename?: 'IosysCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
+export type UpdateMercariCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', updateMercariCrawlSettingExcludeProduct: { __typename?: 'UpdateMercariCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingExcludeProductResultSuccess', ok: boolean, mercariCrawlSettingExcludeProduct: { __typename?: 'MercariCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
 
-export type DeleteIosysCrawlSettingExcludeProductMutationVariables = Exact<{
-  input: DeleteIosysCrawlSettingExcludeProductInput;
+export type DeleteMercariCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: DeleteMercariCrawlSettingExcludeProductInput;
 }>;
 
 
-export type DeleteIosysCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingExcludeProduct: { __typename?: 'DeleteIosysCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingExcludeProductResultSuccess', ok: boolean } };
+export type DeleteMercariCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingExcludeProduct: { __typename?: 'DeleteMercariCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingExcludeProductResultSuccess', ok: boolean } };
 
-export type CreateIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: CreateIosysCrawlSettingRequiredKeywordInput;
+export type CreateMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: CreateMercariCrawlSettingRequiredKeywordInput;
 }>;
 
 
-export type CreateIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createIosysCrawlSettingRequiredKeyword: { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean, iosysCrawlSettingRequiredKeyword: { __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+export type CreateMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createMercariCrawlSettingRequiredKeyword: { __typename?: 'CreateMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean, mercariCrawlSettingRequiredKeyword: { __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type UpdateIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: UpdateIosysCrawlSettingRequiredKeywordInput;
+export type UpdateMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: UpdateMercariCrawlSettingRequiredKeywordInput;
 }>;
 
 
-export type UpdateIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateIosysCrawlSettingRequiredKeyword: { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean, iosysCrawlSettingRequiredKeyword: { __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+export type UpdateMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateMercariCrawlSettingRequiredKeyword: { __typename?: 'UpdateMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean, mercariCrawlSettingRequiredKeyword: { __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
 
-export type DeleteIosysCrawlSettingRequiredKeywordMutationVariables = Exact<{
-  input: DeleteIosysCrawlSettingRequiredKeywordInput;
+export type DeleteMercariCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: DeleteMercariCrawlSettingRequiredKeywordInput;
 }>;
 
 
-export type DeleteIosysCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteIosysCrawlSettingRequiredKeyword: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteIosysCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
+export type DeleteMercariCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteMercariCrawlSettingRequiredKeyword: { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteMercariCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
 export type CreatePcKoubouCrawlSettingExcludeKeywordMutationVariables = Exact<{
   input: CreatePcKoubouCrawlSettingExcludeKeywordInput;
@@ -3062,6 +2978,27 @@ export type DeletePcKoubouCrawlSettingRequiredKeywordMutationVariables = Exact<{
 
 export type DeletePcKoubouCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deletePcKoubouCrawlSettingRequiredKeyword: { __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
+export type CreateProductMutationVariables = Exact<{
+  input: CreateProductInput;
+}>;
+
+
+export type CreateProductMutation = { __typename?: 'Mutation', createProduct: { __typename?: 'CreateProductResultError', ok: boolean, error: { __typename?: 'CreateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string } } };
+
+export type UpdateProductMutationVariables = Exact<{
+  input: UpdateProductInput;
+}>;
+
+
+export type UpdateProductMutation = { __typename?: 'Mutation', updateProduct: { __typename?: 'UpdateProductResultError', ok: boolean, error: { __typename?: 'UpdateProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateProductResultSuccess', ok: boolean, product: { __typename?: 'Product', id: string, name: string } } };
+
+export type DeleteProductMutationVariables = Exact<{
+  input: DeleteProductInput;
+}>;
+
+
+export type DeleteProductMutation = { __typename?: 'Mutation', deleteProduct: { __typename?: 'DeleteProductResultError', ok: boolean, error: { __typename?: 'DeleteProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteProductResultSuccess', ok: boolean } };
+
 export type CreateUsedSofmapCrawlSettingExcludeKeywordMutationVariables = Exact<{
   input: CreateUsedSofmapCrawlSettingExcludeKeywordInput;
 }>;
@@ -3124,6 +3061,69 @@ export type DeleteUsedSofmapCrawlSettingRequiredKeywordMutationVariables = Exact
 
 
 export type DeleteUsedSofmapCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteUsedSofmapCrawlSettingRequiredKeyword: { __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
+
+export type CreateYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: CreateYahooAuctionCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type CreateYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type UpdateYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables = Exact<{
+  input: DeleteYahooAuctionCrawlSettingExcludeKeywordInput;
+}>;
+
+
+export type DeleteYahooAuctionCrawlSettingExcludeKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess', ok: boolean } };
+
+export type CreateYahooAuctionCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: CreateYahooAuctionCrawlSettingExcludeProductInput;
+}>;
+
+
+export type CreateYahooAuctionCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingExcludeProduct: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingExcludeProductResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeProduct: { __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
+
+export type UpdateYahooAuctionCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: UpdateYahooAuctionCrawlSettingExcludeProductInput;
+}>;
+
+
+export type UpdateYahooAuctionCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingExcludeProduct: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess', ok: boolean, yahooAuctionCrawlSettingExcludeProduct: { __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, externalId: string, createdAt: any, updatedAt: any } } };
+
+export type DeleteYahooAuctionCrawlSettingExcludeProductMutationVariables = Exact<{
+  input: DeleteYahooAuctionCrawlSettingExcludeProductInput;
+}>;
+
+
+export type DeleteYahooAuctionCrawlSettingExcludeProductMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingExcludeProduct: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess', ok: boolean } };
+
+export type CreateYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: CreateYahooAuctionCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type CreateYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', createYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+
+export type UpdateYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type UpdateYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', updateYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'UpdateYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean, yahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, keyword?: string | null, createdAt: any, updatedAt: any } } };
+
+export type DeleteYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exact<{
+  input: DeleteYahooAuctionCrawlSettingRequiredKeywordInput;
+}>;
+
+
+export type DeleteYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
 export type AdminCategoriesPageDataQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3516,7 +3516,7 @@ export const CategoryFieldFragmentDoc = gql`
 }
     `;
 export const CreateCategoryDocument = gql`
-    mutation createCategory($input: CreateCategoryInput!) {
+    mutation CreateCategory($input: CreateCategoryInput!) {
   createCategory(input: $input) {
     ... on CreateCategoryResultSuccess {
       ok
@@ -3543,7 +3543,7 @@ export const CreateCategoryDocument = gql`
 }
     `;
 export const DeleteCategoryDocument = gql`
-    mutation deleteCategory($input: DeleteCategoryInput!) {
+    mutation DeleteCategory($input: DeleteCategoryInput!) {
   deleteCategory(input: $input) {
     ... on DeleteCategoryResultSuccess {
       ok
@@ -3564,784 +3564,8 @@ export const DeleteCategoryDocument = gql`
   }
 }
     `;
-export const CreateProductDocument = gql`
-    mutation createProduct($input: CreateProductInput!) {
-  createProduct(input: $input) {
-    ... on CreateProductResultSuccess {
-      ok
-      product {
-        id
-        name
-      }
-    }
-    ... on CreateProductResultError {
-      ok
-      error {
-        ... on CreateProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateProductDocument = gql`
-    mutation updateProduct($input: UpdateProductInput!) {
-  updateProduct(input: $input) {
-    ... on UpdateProductResultSuccess {
-      ok
-      product {
-        id
-        name
-      }
-    }
-    ... on UpdateProductResultError {
-      ok
-      error {
-        ... on UpdateProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteProductDocument = gql`
-    mutation deleteProduct($input: DeleteProductInput!) {
-  deleteProduct(input: $input) {
-    ... on DeleteProductResultSuccess {
-      ok
-    }
-    ... on DeleteProductResultError {
-      ok
-      error {
-        ... on DeleteProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
-    mutation createYahooAuctionCrawlSettingExcludeKeyword($input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!) {
-  createYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
-    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
-      ok
-      yahooAuctionCrawlSettingExcludeKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
-    mutation updateYahooAuctionCrawlSettingExcludeKeyword($input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!) {
-  updateYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
-    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
-      ok
-      yahooAuctionCrawlSettingExcludeKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
-    mutation deleteYahooAuctionCrawlSettingExcludeKeyword($input: DeleteYahooAuctionCrawlSettingExcludeKeywordInput!) {
-  deleteYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
-    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
-      ok
-    }
-    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateYahooAuctionCrawlSettingExcludeProductDocument = gql`
-    mutation createYahooAuctionCrawlSettingExcludeProduct($input: CreateYahooAuctionCrawlSettingExcludeProductInput!) {
-  createYahooAuctionCrawlSettingExcludeProduct(input: $input) {
-    ... on CreateYahooAuctionCrawlSettingExcludeProductResultSuccess {
-      ok
-      yahooAuctionCrawlSettingExcludeProduct {
-        id
-        externalId
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateYahooAuctionCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateYahooAuctionCrawlSettingExcludeProductDocument = gql`
-    mutation updateYahooAuctionCrawlSettingExcludeProduct($input: UpdateYahooAuctionCrawlSettingExcludeProductInput!) {
-  updateYahooAuctionCrawlSettingExcludeProduct(input: $input) {
-    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess {
-      ok
-      yahooAuctionCrawlSettingExcludeProduct {
-        id
-        externalId
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteYahooAuctionCrawlSettingExcludeProductDocument = gql`
-    mutation deleteYahooAuctionCrawlSettingExcludeProduct($input: DeleteYahooAuctionCrawlSettingExcludeProductInput!) {
-  deleteYahooAuctionCrawlSettingExcludeProduct(input: $input) {
-    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess {
-      ok
-    }
-    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
-    mutation createYahooAuctionCrawlSettingRequiredKeyword($input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!) {
-  createYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
-    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
-      ok
-      yahooAuctionCrawlSettingRequiredKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
-    mutation updateYahooAuctionCrawlSettingRequiredKeyword($input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!) {
-  updateYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
-    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
-      ok
-      yahooAuctionCrawlSettingRequiredKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
-    mutation deleteYahooAuctionCrawlSettingRequiredKeyword($input: DeleteYahooAuctionCrawlSettingRequiredKeywordInput!) {
-  deleteYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
-    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
-      ok
-    }
-    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateMercariCrawlSettingExcludeKeywordDocument = gql`
-    mutation createMercariCrawlSettingExcludeKeyword($input: CreateMercariCrawlSettingExcludeKeywordInput!) {
-  createMercariCrawlSettingExcludeKeyword(input: $input) {
-    ... on CreateMercariCrawlSettingExcludeKeywordResultSuccess {
-      ok
-      mercariCrawlSettingExcludeKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateMercariCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on CreateMercariCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateMercariCrawlSettingExcludeKeywordDocument = gql`
-    mutation updateMercariCrawlSettingExcludeKeyword($input: UpdateMercariCrawlSettingExcludeKeywordInput!) {
-  updateMercariCrawlSettingExcludeKeyword(input: $input) {
-    ... on UpdateMercariCrawlSettingExcludeKeywordResultSuccess {
-      ok
-      mercariCrawlSettingExcludeKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateMercariCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteMercariCrawlSettingExcludeKeywordDocument = gql`
-    mutation deleteMercariCrawlSettingExcludeKeyword($input: DeleteMercariCrawlSettingExcludeKeywordInput!) {
-  deleteMercariCrawlSettingExcludeKeyword(input: $input) {
-    ... on DeleteMercariCrawlSettingExcludeKeywordResultSuccess {
-      ok
-    }
-    ... on DeleteMercariCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateMercariCrawlSettingExcludeProductDocument = gql`
-    mutation createMercariCrawlSettingExcludeProduct($input: CreateMercariCrawlSettingExcludeProductInput!) {
-  createMercariCrawlSettingExcludeProduct(input: $input) {
-    ... on CreateMercariCrawlSettingExcludeProductResultSuccess {
-      ok
-      mercariCrawlSettingExcludeProduct {
-        id
-        externalId
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateMercariCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on CreateMercariCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateMercariCrawlSettingExcludeProductDocument = gql`
-    mutation updateMercariCrawlSettingExcludeProduct($input: UpdateMercariCrawlSettingExcludeProductInput!) {
-  updateMercariCrawlSettingExcludeProduct(input: $input) {
-    ... on UpdateMercariCrawlSettingExcludeProductResultSuccess {
-      ok
-      mercariCrawlSettingExcludeProduct {
-        id
-        externalId
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateMercariCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on UpdateMercariCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteMercariCrawlSettingExcludeProductDocument = gql`
-    mutation deleteMercariCrawlSettingExcludeProduct($input: DeleteMercariCrawlSettingExcludeProductInput!) {
-  deleteMercariCrawlSettingExcludeProduct(input: $input) {
-    ... on DeleteMercariCrawlSettingExcludeProductResultSuccess {
-      ok
-    }
-    ... on DeleteMercariCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on DeleteMercariCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateMercariCrawlSettingRequiredKeywordDocument = gql`
-    mutation createMercariCrawlSettingRequiredKeyword($input: CreateMercariCrawlSettingRequiredKeywordInput!) {
-  createMercariCrawlSettingRequiredKeyword(input: $input) {
-    ... on CreateMercariCrawlSettingRequiredKeywordResultSuccess {
-      ok
-      mercariCrawlSettingRequiredKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateMercariCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on CreateMercariCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateMercariCrawlSettingRequiredKeywordDocument = gql`
-    mutation updateMercariCrawlSettingRequiredKeyword($input: UpdateMercariCrawlSettingRequiredKeywordInput!) {
-  updateMercariCrawlSettingRequiredKeyword(input: $input) {
-    ... on UpdateMercariCrawlSettingRequiredKeywordResultSuccess {
-      ok
-      mercariCrawlSettingRequiredKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateMercariCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteMercariCrawlSettingRequiredKeywordDocument = gql`
-    mutation deleteMercariCrawlSettingRequiredKeyword($input: DeleteMercariCrawlSettingRequiredKeywordInput!) {
-  deleteMercariCrawlSettingRequiredKeyword(input: $input) {
-    ... on DeleteMercariCrawlSettingRequiredKeywordResultSuccess {
-      ok
-    }
-    ... on DeleteMercariCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateJanparaCrawlSettingExcludeKeywordDocument = gql`
-    mutation createJanparaCrawlSettingExcludeKeyword($input: CreateJanparaCrawlSettingExcludeKeywordInput!) {
-  createJanparaCrawlSettingExcludeKeyword(input: $input) {
-    ... on CreateJanparaCrawlSettingExcludeKeywordResultSuccess {
-      ok
-      janparaCrawlSettingExcludeKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateJanparaCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateJanparaCrawlSettingExcludeKeywordDocument = gql`
-    mutation updateJanparaCrawlSettingExcludeKeyword($input: UpdateJanparaCrawlSettingExcludeKeywordInput!) {
-  updateJanparaCrawlSettingExcludeKeyword(input: $input) {
-    ... on UpdateJanparaCrawlSettingExcludeKeywordResultSuccess {
-      ok
-      janparaCrawlSettingExcludeKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateJanparaCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteJanparaCrawlSettingExcludeKeywordDocument = gql`
-    mutation deleteJanparaCrawlSettingExcludeKeyword($input: DeleteJanparaCrawlSettingExcludeKeywordInput!) {
-  deleteJanparaCrawlSettingExcludeKeyword(input: $input) {
-    ... on DeleteJanparaCrawlSettingExcludeKeywordResultSuccess {
-      ok
-    }
-    ... on DeleteJanparaCrawlSettingExcludeKeywordResultError {
-      ok
-      error {
-        ... on DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateJanparaCrawlSettingExcludeProductDocument = gql`
-    mutation createJanparaCrawlSettingExcludeProduct($input: CreateJanparaCrawlSettingExcludeProductInput!) {
-  createJanparaCrawlSettingExcludeProduct(input: $input) {
-    ... on CreateJanparaCrawlSettingExcludeProductResultSuccess {
-      ok
-      janparaCrawlSettingExcludeProduct {
-        id
-        externalId
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateJanparaCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on CreateJanparaCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateJanparaCrawlSettingExcludeProductDocument = gql`
-    mutation updateJanparaCrawlSettingExcludeProduct($input: UpdateJanparaCrawlSettingExcludeProductInput!) {
-  updateJanparaCrawlSettingExcludeProduct(input: $input) {
-    ... on UpdateJanparaCrawlSettingExcludeProductResultSuccess {
-      ok
-      janparaCrawlSettingExcludeProduct {
-        id
-        externalId
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateJanparaCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on UpdateJanparaCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteJanparaCrawlSettingExcludeProductDocument = gql`
-    mutation deleteJanparaCrawlSettingExcludeProduct($input: DeleteJanparaCrawlSettingExcludeProductInput!) {
-  deleteJanparaCrawlSettingExcludeProduct(input: $input) {
-    ... on DeleteJanparaCrawlSettingExcludeProductResultSuccess {
-      ok
-    }
-    ... on DeleteJanparaCrawlSettingExcludeProductResultError {
-      ok
-      error {
-        ... on DeleteJanparaCrawlSettingExcludeProductResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const CreateJanparaCrawlSettingRequiredKeywordDocument = gql`
-    mutation createJanparaCrawlSettingRequiredKeyword($input: CreateJanparaCrawlSettingRequiredKeywordInput!) {
-  createJanparaCrawlSettingRequiredKeyword(input: $input) {
-    ... on CreateJanparaCrawlSettingRequiredKeywordResultSuccess {
-      ok
-      janparaCrawlSettingRequiredKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on CreateJanparaCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const UpdateJanparaCrawlSettingRequiredKeywordDocument = gql`
-    mutation updateJanparaCrawlSettingRequiredKeyword($input: UpdateJanparaCrawlSettingRequiredKeywordInput!) {
-  updateJanparaCrawlSettingRequiredKeyword(input: $input) {
-    ... on UpdateJanparaCrawlSettingRequiredKeywordResultSuccess {
-      ok
-      janparaCrawlSettingRequiredKeyword {
-        id
-        keyword
-        createdAt
-        updatedAt
-      }
-    }
-    ... on UpdateJanparaCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
-export const DeleteJanparaCrawlSettingRequiredKeywordDocument = gql`
-    mutation deleteJanparaCrawlSettingRequiredKeyword($input: DeleteJanparaCrawlSettingRequiredKeywordInput!) {
-  deleteJanparaCrawlSettingRequiredKeyword(input: $input) {
-    ... on DeleteJanparaCrawlSettingRequiredKeywordResultSuccess {
-      ok
-    }
-    ... on DeleteJanparaCrawlSettingRequiredKeywordResultError {
-      ok
-      error {
-        ... on DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed {
-          code
-          message
-          details {
-            field
-            message
-          }
-        }
-      }
-    }
-  }
-}
-    `;
 export const CreateIosysCrawlSettingExcludeKeywordDocument = gql`
-    mutation createIosysCrawlSettingExcludeKeyword($input: CreateIosysCrawlSettingExcludeKeywordInput!) {
+    mutation CreateIosysCrawlSettingExcludeKeyword($input: CreateIosysCrawlSettingExcludeKeywordInput!) {
   createIosysCrawlSettingExcludeKeyword(input: $input) {
     ... on CreateIosysCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4369,7 +3593,7 @@ export const CreateIosysCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const UpdateIosysCrawlSettingExcludeKeywordDocument = gql`
-    mutation updateIosysCrawlSettingExcludeKeyword($input: UpdateIosysCrawlSettingExcludeKeywordInput!) {
+    mutation UpdateIosysCrawlSettingExcludeKeyword($input: UpdateIosysCrawlSettingExcludeKeywordInput!) {
   updateIosysCrawlSettingExcludeKeyword(input: $input) {
     ... on UpdateIosysCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4397,7 +3621,7 @@ export const UpdateIosysCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const DeleteIosysCrawlSettingExcludeKeywordDocument = gql`
-    mutation deleteIosysCrawlSettingExcludeKeyword($input: DeleteIosysCrawlSettingExcludeKeywordInput!) {
+    mutation DeleteIosysCrawlSettingExcludeKeyword($input: DeleteIosysCrawlSettingExcludeKeywordInput!) {
   deleteIosysCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteIosysCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4419,7 +3643,7 @@ export const DeleteIosysCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const CreateIosysCrawlSettingExcludeProductDocument = gql`
-    mutation createIosysCrawlSettingExcludeProduct($input: CreateIosysCrawlSettingExcludeProductInput!) {
+    mutation CreateIosysCrawlSettingExcludeProduct($input: CreateIosysCrawlSettingExcludeProductInput!) {
   createIosysCrawlSettingExcludeProduct(input: $input) {
     ... on CreateIosysCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4447,7 +3671,7 @@ export const CreateIosysCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const UpdateIosysCrawlSettingExcludeProductDocument = gql`
-    mutation updateIosysCrawlSettingExcludeProduct($input: UpdateIosysCrawlSettingExcludeProductInput!) {
+    mutation UpdateIosysCrawlSettingExcludeProduct($input: UpdateIosysCrawlSettingExcludeProductInput!) {
   updateIosysCrawlSettingExcludeProduct(input: $input) {
     ... on UpdateIosysCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4475,7 +3699,7 @@ export const UpdateIosysCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const DeleteIosysCrawlSettingExcludeProductDocument = gql`
-    mutation deleteIosysCrawlSettingExcludeProduct($input: DeleteIosysCrawlSettingExcludeProductInput!) {
+    mutation DeleteIosysCrawlSettingExcludeProduct($input: DeleteIosysCrawlSettingExcludeProductInput!) {
   deleteIosysCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteIosysCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4497,7 +3721,7 @@ export const DeleteIosysCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const CreateIosysCrawlSettingRequiredKeywordDocument = gql`
-    mutation createIosysCrawlSettingRequiredKeyword($input: CreateIosysCrawlSettingRequiredKeywordInput!) {
+    mutation CreateIosysCrawlSettingRequiredKeyword($input: CreateIosysCrawlSettingRequiredKeywordInput!) {
   createIosysCrawlSettingRequiredKeyword(input: $input) {
     ... on CreateIosysCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4525,7 +3749,7 @@ export const CreateIosysCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const UpdateIosysCrawlSettingRequiredKeywordDocument = gql`
-    mutation updateIosysCrawlSettingRequiredKeyword($input: UpdateIosysCrawlSettingRequiredKeywordInput!) {
+    mutation UpdateIosysCrawlSettingRequiredKeyword($input: UpdateIosysCrawlSettingRequiredKeywordInput!) {
   updateIosysCrawlSettingRequiredKeyword(input: $input) {
     ... on UpdateIosysCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4553,7 +3777,7 @@ export const UpdateIosysCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const DeleteIosysCrawlSettingRequiredKeywordDocument = gql`
-    mutation deleteIosysCrawlSettingRequiredKeyword($input: DeleteIosysCrawlSettingRequiredKeywordInput!) {
+    mutation DeleteIosysCrawlSettingRequiredKeyword($input: DeleteIosysCrawlSettingRequiredKeywordInput!) {
   deleteIosysCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteIosysCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4574,8 +3798,476 @@ export const DeleteIosysCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
+export const CreateJanparaCrawlSettingExcludeKeywordDocument = gql`
+    mutation CreateJanparaCrawlSettingExcludeKeyword($input: CreateJanparaCrawlSettingExcludeKeywordInput!) {
+  createJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateJanparaCrawlSettingExcludeKeywordDocument = gql`
+    mutation UpdateJanparaCrawlSettingExcludeKeyword($input: UpdateJanparaCrawlSettingExcludeKeywordInput!) {
+  updateJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      janparaCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteJanparaCrawlSettingExcludeKeywordDocument = gql`
+    mutation DeleteJanparaCrawlSettingExcludeKeyword($input: DeleteJanparaCrawlSettingExcludeKeywordInput!) {
+  deleteJanparaCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateJanparaCrawlSettingExcludeProductDocument = gql`
+    mutation CreateJanparaCrawlSettingExcludeProduct($input: CreateJanparaCrawlSettingExcludeProductInput!) {
+  createJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+      janparaCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateJanparaCrawlSettingExcludeProductDocument = gql`
+    mutation UpdateJanparaCrawlSettingExcludeProduct($input: UpdateJanparaCrawlSettingExcludeProductInput!) {
+  updateJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+      janparaCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteJanparaCrawlSettingExcludeProductDocument = gql`
+    mutation DeleteJanparaCrawlSettingExcludeProduct($input: DeleteJanparaCrawlSettingExcludeProductInput!) {
+  deleteJanparaCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteJanparaCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateJanparaCrawlSettingRequiredKeywordDocument = gql`
+    mutation CreateJanparaCrawlSettingRequiredKeyword($input: CreateJanparaCrawlSettingRequiredKeywordInput!) {
+  createJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateJanparaCrawlSettingRequiredKeywordDocument = gql`
+    mutation UpdateJanparaCrawlSettingRequiredKeyword($input: UpdateJanparaCrawlSettingRequiredKeywordInput!) {
+  updateJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteJanparaCrawlSettingRequiredKeywordDocument = gql`
+    mutation DeleteJanparaCrawlSettingRequiredKeyword($input: DeleteJanparaCrawlSettingRequiredKeywordInput!) {
+  deleteJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateMercariCrawlSettingExcludeKeywordDocument = gql`
+    mutation CreateMercariCrawlSettingExcludeKeyword($input: CreateMercariCrawlSettingExcludeKeywordInput!) {
+  createMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateMercariCrawlSettingExcludeKeywordDocument = gql`
+    mutation UpdateMercariCrawlSettingExcludeKeyword($input: UpdateMercariCrawlSettingExcludeKeywordInput!) {
+  updateMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      mercariCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteMercariCrawlSettingExcludeKeywordDocument = gql`
+    mutation DeleteMercariCrawlSettingExcludeKeyword($input: DeleteMercariCrawlSettingExcludeKeywordInput!) {
+  deleteMercariCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateMercariCrawlSettingExcludeProductDocument = gql`
+    mutation CreateMercariCrawlSettingExcludeProduct($input: CreateMercariCrawlSettingExcludeProductInput!) {
+  createMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+      mercariCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateMercariCrawlSettingExcludeProductDocument = gql`
+    mutation UpdateMercariCrawlSettingExcludeProduct($input: UpdateMercariCrawlSettingExcludeProductInput!) {
+  updateMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+      mercariCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteMercariCrawlSettingExcludeProductDocument = gql`
+    mutation DeleteMercariCrawlSettingExcludeProduct($input: DeleteMercariCrawlSettingExcludeProductInput!) {
+  deleteMercariCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteMercariCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateMercariCrawlSettingRequiredKeywordDocument = gql`
+    mutation CreateMercariCrawlSettingRequiredKeyword($input: CreateMercariCrawlSettingRequiredKeywordInput!) {
+  createMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      mercariCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateMercariCrawlSettingRequiredKeywordDocument = gql`
+    mutation UpdateMercariCrawlSettingRequiredKeyword($input: UpdateMercariCrawlSettingRequiredKeywordInput!) {
+  updateMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      mercariCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteMercariCrawlSettingRequiredKeywordDocument = gql`
+    mutation DeleteMercariCrawlSettingRequiredKeyword($input: DeleteMercariCrawlSettingRequiredKeywordInput!) {
+  deleteMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const CreatePcKoubouCrawlSettingExcludeKeywordDocument = gql`
-    mutation createPcKoubouCrawlSettingExcludeKeyword($input: CreatePcKoubouCrawlSettingExcludeKeywordInput!) {
+    mutation CreatePcKoubouCrawlSettingExcludeKeyword($input: CreatePcKoubouCrawlSettingExcludeKeywordInput!) {
   createPcKoubouCrawlSettingExcludeKeyword(input: $input) {
     ... on CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4603,7 +4295,7 @@ export const CreatePcKoubouCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const UpdatePcKoubouCrawlSettingExcludeKeywordDocument = gql`
-    mutation updatePcKoubouCrawlSettingExcludeKeyword($input: UpdatePcKoubouCrawlSettingExcludeKeywordInput!) {
+    mutation UpdatePcKoubouCrawlSettingExcludeKeyword($input: UpdatePcKoubouCrawlSettingExcludeKeywordInput!) {
   updatePcKoubouCrawlSettingExcludeKeyword(input: $input) {
     ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4631,7 +4323,7 @@ export const UpdatePcKoubouCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const DeletePcKoubouCrawlSettingExcludeKeywordDocument = gql`
-    mutation deletePcKoubouCrawlSettingExcludeKeyword($input: DeletePcKoubouCrawlSettingExcludeKeywordInput!) {
+    mutation DeletePcKoubouCrawlSettingExcludeKeyword($input: DeletePcKoubouCrawlSettingExcludeKeywordInput!) {
   deletePcKoubouCrawlSettingExcludeKeyword(input: $input) {
     ... on DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4653,7 +4345,7 @@ export const DeletePcKoubouCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const CreatePcKoubouCrawlSettingExcludeProductDocument = gql`
-    mutation createPcKoubouCrawlSettingExcludeProduct($input: CreatePcKoubouCrawlSettingExcludeProductInput!) {
+    mutation CreatePcKoubouCrawlSettingExcludeProduct($input: CreatePcKoubouCrawlSettingExcludeProductInput!) {
   createPcKoubouCrawlSettingExcludeProduct(input: $input) {
     ... on CreatePcKoubouCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4681,7 +4373,7 @@ export const CreatePcKoubouCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const UpdatePcKoubouCrawlSettingExcludeProductDocument = gql`
-    mutation updatePcKoubouCrawlSettingExcludeProduct($input: UpdatePcKoubouCrawlSettingExcludeProductInput!) {
+    mutation UpdatePcKoubouCrawlSettingExcludeProduct($input: UpdatePcKoubouCrawlSettingExcludeProductInput!) {
   updatePcKoubouCrawlSettingExcludeProduct(input: $input) {
     ... on UpdatePcKoubouCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4709,7 +4401,7 @@ export const UpdatePcKoubouCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const DeletePcKoubouCrawlSettingExcludeProductDocument = gql`
-    mutation deletePcKoubouCrawlSettingExcludeProduct($input: DeletePcKoubouCrawlSettingExcludeProductInput!) {
+    mutation DeletePcKoubouCrawlSettingExcludeProduct($input: DeletePcKoubouCrawlSettingExcludeProductInput!) {
   deletePcKoubouCrawlSettingExcludeProduct(input: $input) {
     ... on DeletePcKoubouCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4731,7 +4423,7 @@ export const DeletePcKoubouCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const CreatePcKoubouCrawlSettingRequiredKeywordDocument = gql`
-    mutation createPcKoubouCrawlSettingRequiredKeyword($input: CreatePcKoubouCrawlSettingRequiredKeywordInput!) {
+    mutation CreatePcKoubouCrawlSettingRequiredKeyword($input: CreatePcKoubouCrawlSettingRequiredKeywordInput!) {
   createPcKoubouCrawlSettingRequiredKeyword(input: $input) {
     ... on CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4759,7 +4451,7 @@ export const CreatePcKoubouCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const UpdatePcKoubouCrawlSettingRequiredKeywordDocument = gql`
-    mutation updatePcKoubouCrawlSettingRequiredKeyword($input: UpdatePcKoubouCrawlSettingRequiredKeywordInput!) {
+    mutation UpdatePcKoubouCrawlSettingRequiredKeyword($input: UpdatePcKoubouCrawlSettingRequiredKeywordInput!) {
   updatePcKoubouCrawlSettingRequiredKeyword(input: $input) {
     ... on UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4787,7 +4479,7 @@ export const UpdatePcKoubouCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const DeletePcKoubouCrawlSettingRequiredKeywordDocument = gql`
-    mutation deletePcKoubouCrawlSettingRequiredKeyword($input: DeletePcKoubouCrawlSettingRequiredKeywordInput!) {
+    mutation DeletePcKoubouCrawlSettingRequiredKeyword($input: DeletePcKoubouCrawlSettingRequiredKeywordInput!) {
   deletePcKoubouCrawlSettingRequiredKeyword(input: $input) {
     ... on DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4808,8 +4500,82 @@ export const DeletePcKoubouCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
+export const CreateProductDocument = gql`
+    mutation CreateProduct($input: CreateProductInput!) {
+  createProduct(input: $input) {
+    ... on CreateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+      }
+    }
+    ... on CreateProductResultError {
+      ok
+      error {
+        ... on CreateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateProductDocument = gql`
+    mutation UpdateProduct($input: UpdateProductInput!) {
+  updateProduct(input: $input) {
+    ... on UpdateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+      }
+    }
+    ... on UpdateProductResultError {
+      ok
+      error {
+        ... on UpdateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteProductDocument = gql`
+    mutation DeleteProduct($input: DeleteProductInput!) {
+  deleteProduct(input: $input) {
+    ... on DeleteProductResultSuccess {
+      ok
+    }
+    ... on DeleteProductResultError {
+      ok
+      error {
+        ... on DeleteProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
 export const CreateUsedSofmapCrawlSettingExcludeKeywordDocument = gql`
-    mutation createUsedSofmapCrawlSettingExcludeKeyword($input: CreateUsedSofmapCrawlSettingExcludeKeywordInput!) {
+    mutation CreateUsedSofmapCrawlSettingExcludeKeyword($input: CreateUsedSofmapCrawlSettingExcludeKeywordInput!) {
   createUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
     ... on CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4837,7 +4603,7 @@ export const CreateUsedSofmapCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const UpdateUsedSofmapCrawlSettingExcludeKeywordDocument = gql`
-    mutation updateUsedSofmapCrawlSettingExcludeKeyword($input: UpdateUsedSofmapCrawlSettingExcludeKeywordInput!) {
+    mutation UpdateUsedSofmapCrawlSettingExcludeKeyword($input: UpdateUsedSofmapCrawlSettingExcludeKeywordInput!) {
   updateUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
     ... on UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4865,7 +4631,7 @@ export const UpdateUsedSofmapCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const DeleteUsedSofmapCrawlSettingExcludeKeywordDocument = gql`
-    mutation deleteUsedSofmapCrawlSettingExcludeKeyword($input: DeleteUsedSofmapCrawlSettingExcludeKeywordInput!) {
+    mutation DeleteUsedSofmapCrawlSettingExcludeKeyword($input: DeleteUsedSofmapCrawlSettingExcludeKeywordInput!) {
   deleteUsedSofmapCrawlSettingExcludeKeyword(input: $input) {
     ... on DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess {
       ok
@@ -4887,7 +4653,7 @@ export const DeleteUsedSofmapCrawlSettingExcludeKeywordDocument = gql`
 }
     `;
 export const CreateUsedSofmapCrawlSettingExcludeProductDocument = gql`
-    mutation createUsedSofmapCrawlSettingExcludeProduct($input: CreateUsedSofmapCrawlSettingExcludeProductInput!) {
+    mutation CreateUsedSofmapCrawlSettingExcludeProduct($input: CreateUsedSofmapCrawlSettingExcludeProductInput!) {
   createUsedSofmapCrawlSettingExcludeProduct(input: $input) {
     ... on CreateUsedSofmapCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4915,7 +4681,7 @@ export const CreateUsedSofmapCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const UpdateUsedSofmapCrawlSettingExcludeProductDocument = gql`
-    mutation updateUsedSofmapCrawlSettingExcludeProduct($input: UpdateUsedSofmapCrawlSettingExcludeProductInput!) {
+    mutation UpdateUsedSofmapCrawlSettingExcludeProduct($input: UpdateUsedSofmapCrawlSettingExcludeProductInput!) {
   updateUsedSofmapCrawlSettingExcludeProduct(input: $input) {
     ... on UpdateUsedSofmapCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4943,7 +4709,7 @@ export const UpdateUsedSofmapCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const DeleteUsedSofmapCrawlSettingExcludeProductDocument = gql`
-    mutation deleteUsedSofmapCrawlSettingExcludeProduct($input: DeleteUsedSofmapCrawlSettingExcludeProductInput!) {
+    mutation DeleteUsedSofmapCrawlSettingExcludeProduct($input: DeleteUsedSofmapCrawlSettingExcludeProductInput!) {
   deleteUsedSofmapCrawlSettingExcludeProduct(input: $input) {
     ... on DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess {
       ok
@@ -4965,7 +4731,7 @@ export const DeleteUsedSofmapCrawlSettingExcludeProductDocument = gql`
 }
     `;
 export const CreateUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
-    mutation createUsedSofmapCrawlSettingRequiredKeyword($input: CreateUsedSofmapCrawlSettingRequiredKeywordInput!) {
+    mutation CreateUsedSofmapCrawlSettingRequiredKeyword($input: CreateUsedSofmapCrawlSettingRequiredKeywordInput!) {
   createUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
     ... on CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -4993,7 +4759,7 @@ export const CreateUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const UpdateUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
-    mutation updateUsedSofmapCrawlSettingRequiredKeyword($input: UpdateUsedSofmapCrawlSettingRequiredKeywordInput!) {
+    mutation UpdateUsedSofmapCrawlSettingRequiredKeyword($input: UpdateUsedSofmapCrawlSettingRequiredKeywordInput!) {
   updateUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
     ... on UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -5021,7 +4787,7 @@ export const UpdateUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
 }
     `;
 export const DeleteUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
-    mutation deleteUsedSofmapCrawlSettingRequiredKeyword($input: DeleteUsedSofmapCrawlSettingRequiredKeywordInput!) {
+    mutation DeleteUsedSofmapCrawlSettingRequiredKeyword($input: DeleteUsedSofmapCrawlSettingRequiredKeywordInput!) {
   deleteUsedSofmapCrawlSettingRequiredKeyword(input: $input) {
     ... on DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess {
       ok
@@ -5030,6 +4796,240 @@ export const DeleteUsedSofmapCrawlSettingRequiredKeywordDocument = gql`
       ok
       error {
         ... on DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
+    mutation CreateYahooAuctionCrawlSettingExcludeKeyword($input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!) {
+  createYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
+    mutation UpdateYahooAuctionCrawlSettingExcludeKeyword($input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!) {
+  updateYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteYahooAuctionCrawlSettingExcludeKeywordDocument = gql`
+    mutation DeleteYahooAuctionCrawlSettingExcludeKeyword($input: DeleteYahooAuctionCrawlSettingExcludeKeywordInput!) {
+  deleteYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateYahooAuctionCrawlSettingExcludeProductDocument = gql`
+    mutation CreateYahooAuctionCrawlSettingExcludeProduct($input: CreateYahooAuctionCrawlSettingExcludeProductInput!) {
+  createYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateYahooAuctionCrawlSettingExcludeProductDocument = gql`
+    mutation UpdateYahooAuctionCrawlSettingExcludeProduct($input: UpdateYahooAuctionCrawlSettingExcludeProductInput!) {
+  updateYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteYahooAuctionCrawlSettingExcludeProductDocument = gql`
+    mutation DeleteYahooAuctionCrawlSettingExcludeProduct($input: DeleteYahooAuctionCrawlSettingExcludeProductInput!) {
+  deleteYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const CreateYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
+    mutation CreateYahooAuctionCrawlSettingRequiredKeyword($input: CreateYahooAuctionCrawlSettingRequiredKeywordInput!) {
+  createYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const UpdateYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
+    mutation UpdateYahooAuctionCrawlSettingRequiredKeyword($input: UpdateYahooAuctionCrawlSettingRequiredKeywordInput!) {
+  updateYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const DeleteYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
+    mutation DeleteYahooAuctionCrawlSettingRequiredKeyword($input: DeleteYahooAuctionCrawlSettingRequiredKeywordInput!) {
+  deleteYahooAuctionCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed {
           code
           message
           details {
@@ -5405,182 +5405,182 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    createCategory(variables: CreateCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateCategoryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateCategoryMutation>(CreateCategoryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createCategory', 'mutation', variables);
+    CreateCategory(variables: CreateCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateCategoryMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateCategoryMutation>(CreateCategoryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateCategory', 'mutation', variables);
     },
-    deleteCategory(variables: DeleteCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteCategoryMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteCategoryMutation>(DeleteCategoryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteCategory', 'mutation', variables);
+    DeleteCategory(variables: DeleteCategoryMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteCategoryMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteCategoryMutation>(DeleteCategoryDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteCategory', 'mutation', variables);
     },
-    createProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createProduct', 'mutation', variables);
+    CreateIosysCrawlSettingExcludeKeyword(variables: CreateIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingExcludeKeywordMutation>(CreateIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateIosysCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updateProduct(variables: UpdateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateProductMutation>(UpdateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateProduct', 'mutation', variables);
+    UpdateIosysCrawlSettingExcludeKeyword(variables: UpdateIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingExcludeKeywordMutation>(UpdateIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateIosysCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deleteProduct(variables: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteProduct', 'mutation', variables);
+    DeleteIosysCrawlSettingExcludeKeyword(variables: DeleteIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingExcludeKeywordMutation>(DeleteIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteIosysCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    createYahooAuctionCrawlSettingExcludeKeyword(variables: CreateYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeKeywordMutation>(CreateYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
+    CreateIosysCrawlSettingExcludeProduct(variables: CreateIosysCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingExcludeProductMutation>(CreateIosysCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateIosysCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    updateYahooAuctionCrawlSettingExcludeKeyword(variables: UpdateYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation>(UpdateYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
+    UpdateIosysCrawlSettingExcludeProduct(variables: UpdateIosysCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingExcludeProductMutation>(UpdateIosysCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateIosysCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    deleteYahooAuctionCrawlSettingExcludeKeyword(variables: DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>(DeleteYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
+    DeleteIosysCrawlSettingExcludeProduct(variables: DeleteIosysCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingExcludeProductMutation>(DeleteIosysCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteIosysCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    createYahooAuctionCrawlSettingExcludeProduct(variables: CreateYahooAuctionCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeProductMutation>(CreateYahooAuctionCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createYahooAuctionCrawlSettingExcludeProduct', 'mutation', variables);
+    CreateIosysCrawlSettingRequiredKeyword(variables: CreateIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingRequiredKeywordMutation>(CreateIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateIosysCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    updateYahooAuctionCrawlSettingExcludeProduct(variables: UpdateYahooAuctionCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingExcludeProductMutation>(UpdateYahooAuctionCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateYahooAuctionCrawlSettingExcludeProduct', 'mutation', variables);
+    UpdateIosysCrawlSettingRequiredKeyword(variables: UpdateIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingRequiredKeywordMutation>(UpdateIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateIosysCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    deleteYahooAuctionCrawlSettingExcludeProduct(variables: DeleteYahooAuctionCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeProductMutation>(DeleteYahooAuctionCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteYahooAuctionCrawlSettingExcludeProduct', 'mutation', variables);
+    DeleteIosysCrawlSettingRequiredKeyword(variables: DeleteIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingRequiredKeywordMutation>(DeleteIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteIosysCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    createYahooAuctionCrawlSettingRequiredKeyword(variables: CreateYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingRequiredKeywordMutation>(CreateYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
+    CreateJanparaCrawlSettingExcludeKeyword(variables: CreateJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingExcludeKeywordMutation>(CreateJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updateYahooAuctionCrawlSettingRequiredKeyword(variables: UpdateYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation>(UpdateYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
+    UpdateJanparaCrawlSettingExcludeKeyword(variables: UpdateJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingExcludeKeywordMutation>(UpdateJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deleteYahooAuctionCrawlSettingRequiredKeyword(variables: DeleteYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>(DeleteYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
+    DeleteJanparaCrawlSettingExcludeKeyword(variables: DeleteJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingExcludeKeywordMutation>(DeleteJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    createMercariCrawlSettingExcludeKeyword(variables: CreateMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingExcludeKeywordMutation>(CreateMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMercariCrawlSettingExcludeKeyword', 'mutation', variables);
+    CreateJanparaCrawlSettingExcludeProduct(variables: CreateJanparaCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingExcludeProductMutation>(CreateJanparaCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateJanparaCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    updateMercariCrawlSettingExcludeKeyword(variables: UpdateMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingExcludeKeywordMutation>(UpdateMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateMercariCrawlSettingExcludeKeyword', 'mutation', variables);
+    UpdateJanparaCrawlSettingExcludeProduct(variables: UpdateJanparaCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingExcludeProductMutation>(UpdateJanparaCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateJanparaCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    deleteMercariCrawlSettingExcludeKeyword(variables: DeleteMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingExcludeKeywordMutation>(DeleteMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteMercariCrawlSettingExcludeKeyword', 'mutation', variables);
+    DeleteJanparaCrawlSettingExcludeProduct(variables: DeleteJanparaCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingExcludeProductMutation>(DeleteJanparaCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteJanparaCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    createMercariCrawlSettingExcludeProduct(variables: CreateMercariCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingExcludeProductMutation>(CreateMercariCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMercariCrawlSettingExcludeProduct', 'mutation', variables);
+    CreateJanparaCrawlSettingRequiredKeyword(variables: CreateJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingRequiredKeywordMutation>(CreateJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    updateMercariCrawlSettingExcludeProduct(variables: UpdateMercariCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingExcludeProductMutation>(UpdateMercariCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateMercariCrawlSettingExcludeProduct', 'mutation', variables);
+    UpdateJanparaCrawlSettingRequiredKeyword(variables: UpdateJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingRequiredKeywordMutation>(UpdateJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    deleteMercariCrawlSettingExcludeProduct(variables: DeleteMercariCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingExcludeProductMutation>(DeleteMercariCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteMercariCrawlSettingExcludeProduct', 'mutation', variables);
+    DeleteJanparaCrawlSettingRequiredKeyword(variables: DeleteJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingRequiredKeywordMutation>(DeleteJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    createMercariCrawlSettingRequiredKeyword(variables: CreateMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingRequiredKeywordMutation>(CreateMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createMercariCrawlSettingRequiredKeyword', 'mutation', variables);
+    CreateMercariCrawlSettingExcludeKeyword(variables: CreateMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingExcludeKeywordMutation>(CreateMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateMercariCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updateMercariCrawlSettingRequiredKeyword(variables: UpdateMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingRequiredKeywordMutation>(UpdateMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateMercariCrawlSettingRequiredKeyword', 'mutation', variables);
+    UpdateMercariCrawlSettingExcludeKeyword(variables: UpdateMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingExcludeKeywordMutation>(UpdateMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateMercariCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deleteMercariCrawlSettingRequiredKeyword(variables: DeleteMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingRequiredKeywordMutation>(DeleteMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteMercariCrawlSettingRequiredKeyword', 'mutation', variables);
+    DeleteMercariCrawlSettingExcludeKeyword(variables: DeleteMercariCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingExcludeKeywordMutation>(DeleteMercariCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteMercariCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    createJanparaCrawlSettingExcludeKeyword(variables: CreateJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingExcludeKeywordMutation>(CreateJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
+    CreateMercariCrawlSettingExcludeProduct(variables: CreateMercariCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingExcludeProductMutation>(CreateMercariCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateMercariCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    updateJanparaCrawlSettingExcludeKeyword(variables: UpdateJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingExcludeKeywordMutation>(UpdateJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
+    UpdateMercariCrawlSettingExcludeProduct(variables: UpdateMercariCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingExcludeProductMutation>(UpdateMercariCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateMercariCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    deleteJanparaCrawlSettingExcludeKeyword(variables: DeleteJanparaCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingExcludeKeywordMutation>(DeleteJanparaCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteJanparaCrawlSettingExcludeKeyword', 'mutation', variables);
+    DeleteMercariCrawlSettingExcludeProduct(variables: DeleteMercariCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingExcludeProductMutation>(DeleteMercariCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteMercariCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    createJanparaCrawlSettingExcludeProduct(variables: CreateJanparaCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingExcludeProductMutation>(CreateJanparaCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createJanparaCrawlSettingExcludeProduct', 'mutation', variables);
+    CreateMercariCrawlSettingRequiredKeyword(variables: CreateMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateMercariCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateMercariCrawlSettingRequiredKeywordMutation>(CreateMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateMercariCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    updateJanparaCrawlSettingExcludeProduct(variables: UpdateJanparaCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingExcludeProductMutation>(UpdateJanparaCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateJanparaCrawlSettingExcludeProduct', 'mutation', variables);
+    UpdateMercariCrawlSettingRequiredKeyword(variables: UpdateMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateMercariCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateMercariCrawlSettingRequiredKeywordMutation>(UpdateMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateMercariCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    deleteJanparaCrawlSettingExcludeProduct(variables: DeleteJanparaCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingExcludeProductMutation>(DeleteJanparaCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteJanparaCrawlSettingExcludeProduct', 'mutation', variables);
+    DeleteMercariCrawlSettingRequiredKeyword(variables: DeleteMercariCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteMercariCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteMercariCrawlSettingRequiredKeywordMutation>(DeleteMercariCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteMercariCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    createJanparaCrawlSettingRequiredKeyword(variables: CreateJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateJanparaCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateJanparaCrawlSettingRequiredKeywordMutation>(CreateJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
+    CreatePcKoubouCrawlSettingExcludeKeyword(variables: CreatePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingExcludeKeywordMutation>(CreatePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updateJanparaCrawlSettingRequiredKeyword(variables: UpdateJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateJanparaCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateJanparaCrawlSettingRequiredKeywordMutation>(UpdateJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
+    UpdatePcKoubouCrawlSettingExcludeKeyword(variables: UpdatePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>(UpdatePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdatePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deleteJanparaCrawlSettingRequiredKeyword(variables: DeleteJanparaCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteJanparaCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteJanparaCrawlSettingRequiredKeywordMutation>(DeleteJanparaCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteJanparaCrawlSettingRequiredKeyword', 'mutation', variables);
+    DeletePcKoubouCrawlSettingExcludeKeyword(variables: DeletePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingExcludeKeywordMutation>(DeletePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    createIosysCrawlSettingExcludeKeyword(variables: CreateIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingExcludeKeywordMutation>(CreateIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createIosysCrawlSettingExcludeKeyword', 'mutation', variables);
+    CreatePcKoubouCrawlSettingExcludeProduct(variables: CreatePcKoubouCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingExcludeProductMutation>(CreatePcKoubouCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePcKoubouCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    updateIosysCrawlSettingExcludeKeyword(variables: UpdateIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingExcludeKeywordMutation>(UpdateIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateIosysCrawlSettingExcludeKeyword', 'mutation', variables);
+    UpdatePcKoubouCrawlSettingExcludeProduct(variables: UpdatePcKoubouCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingExcludeProductMutation>(UpdatePcKoubouCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdatePcKoubouCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    deleteIosysCrawlSettingExcludeKeyword(variables: DeleteIosysCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingExcludeKeywordMutation>(DeleteIosysCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteIosysCrawlSettingExcludeKeyword', 'mutation', variables);
+    DeletePcKoubouCrawlSettingExcludeProduct(variables: DeletePcKoubouCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingExcludeProductMutation>(DeletePcKoubouCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePcKoubouCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    createIosysCrawlSettingExcludeProduct(variables: CreateIosysCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingExcludeProductMutation>(CreateIosysCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createIosysCrawlSettingExcludeProduct', 'mutation', variables);
+    CreatePcKoubouCrawlSettingRequiredKeyword(variables: CreatePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingRequiredKeywordMutation>(CreatePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreatePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    updateIosysCrawlSettingExcludeProduct(variables: UpdateIosysCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingExcludeProductMutation>(UpdateIosysCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateIosysCrawlSettingExcludeProduct', 'mutation', variables);
+    UpdatePcKoubouCrawlSettingRequiredKeyword(variables: UpdatePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingRequiredKeywordMutation>(UpdatePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdatePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    deleteIosysCrawlSettingExcludeProduct(variables: DeleteIosysCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingExcludeProductMutation>(DeleteIosysCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteIosysCrawlSettingExcludeProduct', 'mutation', variables);
+    DeletePcKoubouCrawlSettingRequiredKeyword(variables: DeletePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingRequiredKeywordMutation>(DeletePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeletePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    createIosysCrawlSettingRequiredKeyword(variables: CreateIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateIosysCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateIosysCrawlSettingRequiredKeywordMutation>(CreateIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createIosysCrawlSettingRequiredKeyword', 'mutation', variables);
+    CreateProduct(variables: CreateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateProductMutation>(CreateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateProduct', 'mutation', variables);
     },
-    updateIosysCrawlSettingRequiredKeyword(variables: UpdateIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateIosysCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateIosysCrawlSettingRequiredKeywordMutation>(UpdateIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateIosysCrawlSettingRequiredKeyword', 'mutation', variables);
+    UpdateProduct(variables: UpdateProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateProductMutation>(UpdateProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateProduct', 'mutation', variables);
     },
-    deleteIosysCrawlSettingRequiredKeyword(variables: DeleteIosysCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteIosysCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteIosysCrawlSettingRequiredKeywordMutation>(DeleteIosysCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteIosysCrawlSettingRequiredKeyword', 'mutation', variables);
+    DeleteProduct(variables: DeleteProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteProductMutation>(DeleteProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteProduct', 'mutation', variables);
     },
-    createPcKoubouCrawlSettingExcludeKeyword(variables: CreatePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingExcludeKeywordMutation>(CreatePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createPcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
+    CreateUsedSofmapCrawlSettingExcludeKeyword(variables: CreateUsedSofmapCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUsedSofmapCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateUsedSofmapCrawlSettingExcludeKeywordMutation>(CreateUsedSofmapCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUsedSofmapCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updatePcKoubouCrawlSettingExcludeKeyword(variables: UpdatePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingExcludeKeywordMutation>(UpdatePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
+    UpdateUsedSofmapCrawlSettingExcludeKeyword(variables: UpdateUsedSofmapCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateUsedSofmapCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUsedSofmapCrawlSettingExcludeKeywordMutation>(UpdateUsedSofmapCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateUsedSofmapCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deletePcKoubouCrawlSettingExcludeKeyword(variables: DeletePcKoubouCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingExcludeKeywordMutation>(DeletePcKoubouCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deletePcKoubouCrawlSettingExcludeKeyword', 'mutation', variables);
+    DeleteUsedSofmapCrawlSettingExcludeKeyword(variables: DeleteUsedSofmapCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingExcludeKeywordMutation>(DeleteUsedSofmapCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteUsedSofmapCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    createPcKoubouCrawlSettingExcludeProduct(variables: CreatePcKoubouCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingExcludeProductMutation>(CreatePcKoubouCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createPcKoubouCrawlSettingExcludeProduct', 'mutation', variables);
+    CreateUsedSofmapCrawlSettingExcludeProduct(variables: CreateUsedSofmapCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUsedSofmapCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateUsedSofmapCrawlSettingExcludeProductMutation>(CreateUsedSofmapCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUsedSofmapCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    updatePcKoubouCrawlSettingExcludeProduct(variables: UpdatePcKoubouCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingExcludeProductMutation>(UpdatePcKoubouCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePcKoubouCrawlSettingExcludeProduct', 'mutation', variables);
+    UpdateUsedSofmapCrawlSettingExcludeProduct(variables: UpdateUsedSofmapCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateUsedSofmapCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUsedSofmapCrawlSettingExcludeProductMutation>(UpdateUsedSofmapCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateUsedSofmapCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    deletePcKoubouCrawlSettingExcludeProduct(variables: DeletePcKoubouCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingExcludeProductMutation>(DeletePcKoubouCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deletePcKoubouCrawlSettingExcludeProduct', 'mutation', variables);
+    DeleteUsedSofmapCrawlSettingExcludeProduct(variables: DeleteUsedSofmapCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingExcludeProductMutation>(DeleteUsedSofmapCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteUsedSofmapCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    createPcKoubouCrawlSettingRequiredKeyword(variables: CreatePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreatePcKoubouCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreatePcKoubouCrawlSettingRequiredKeywordMutation>(CreatePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createPcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
+    CreateUsedSofmapCrawlSettingRequiredKeyword(variables: CreateUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUsedSofmapCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateUsedSofmapCrawlSettingRequiredKeywordMutation>(CreateUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    updatePcKoubouCrawlSettingRequiredKeyword(variables: UpdatePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdatePcKoubouCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdatePcKoubouCrawlSettingRequiredKeywordMutation>(UpdatePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updatePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
+    UpdateUsedSofmapCrawlSettingRequiredKeyword(variables: UpdateUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateUsedSofmapCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUsedSofmapCrawlSettingRequiredKeywordMutation>(UpdateUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    deletePcKoubouCrawlSettingRequiredKeyword(variables: DeletePcKoubouCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeletePcKoubouCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeletePcKoubouCrawlSettingRequiredKeywordMutation>(DeletePcKoubouCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deletePcKoubouCrawlSettingRequiredKeyword', 'mutation', variables);
+    DeleteUsedSofmapCrawlSettingRequiredKeyword(variables: DeleteUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation>(DeleteUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    createUsedSofmapCrawlSettingExcludeKeyword(variables: CreateUsedSofmapCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUsedSofmapCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateUsedSofmapCrawlSettingExcludeKeywordMutation>(CreateUsedSofmapCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createUsedSofmapCrawlSettingExcludeKeyword', 'mutation', variables);
+    CreateYahooAuctionCrawlSettingExcludeKeyword(variables: CreateYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeKeywordMutation>(CreateYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    updateUsedSofmapCrawlSettingExcludeKeyword(variables: UpdateUsedSofmapCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateUsedSofmapCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUsedSofmapCrawlSettingExcludeKeywordMutation>(UpdateUsedSofmapCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUsedSofmapCrawlSettingExcludeKeyword', 'mutation', variables);
+    UpdateYahooAuctionCrawlSettingExcludeKeyword(variables: UpdateYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingExcludeKeywordMutation>(UpdateYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    deleteUsedSofmapCrawlSettingExcludeKeyword(variables: DeleteUsedSofmapCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingExcludeKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingExcludeKeywordMutation>(DeleteUsedSofmapCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUsedSofmapCrawlSettingExcludeKeyword', 'mutation', variables);
+    DeleteYahooAuctionCrawlSettingExcludeKeyword(variables: DeleteYahooAuctionCrawlSettingExcludeKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeKeywordMutation>(DeleteYahooAuctionCrawlSettingExcludeKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteYahooAuctionCrawlSettingExcludeKeyword', 'mutation', variables);
     },
-    createUsedSofmapCrawlSettingExcludeProduct(variables: CreateUsedSofmapCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUsedSofmapCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateUsedSofmapCrawlSettingExcludeProductMutation>(CreateUsedSofmapCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createUsedSofmapCrawlSettingExcludeProduct', 'mutation', variables);
+    CreateYahooAuctionCrawlSettingExcludeProduct(variables: CreateYahooAuctionCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingExcludeProductMutation>(CreateYahooAuctionCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateYahooAuctionCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    updateUsedSofmapCrawlSettingExcludeProduct(variables: UpdateUsedSofmapCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateUsedSofmapCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUsedSofmapCrawlSettingExcludeProductMutation>(UpdateUsedSofmapCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUsedSofmapCrawlSettingExcludeProduct', 'mutation', variables);
+    UpdateYahooAuctionCrawlSettingExcludeProduct(variables: UpdateYahooAuctionCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingExcludeProductMutation>(UpdateYahooAuctionCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateYahooAuctionCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    deleteUsedSofmapCrawlSettingExcludeProduct(variables: DeleteUsedSofmapCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingExcludeProductMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingExcludeProductMutation>(DeleteUsedSofmapCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUsedSofmapCrawlSettingExcludeProduct', 'mutation', variables);
+    DeleteYahooAuctionCrawlSettingExcludeProduct(variables: DeleteYahooAuctionCrawlSettingExcludeProductMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingExcludeProductMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingExcludeProductMutation>(DeleteYahooAuctionCrawlSettingExcludeProductDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteYahooAuctionCrawlSettingExcludeProduct', 'mutation', variables);
     },
-    createUsedSofmapCrawlSettingRequiredKeyword(variables: CreateUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateUsedSofmapCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CreateUsedSofmapCrawlSettingRequiredKeywordMutation>(CreateUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'createUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
+    CreateYahooAuctionCrawlSettingRequiredKeyword(variables: CreateYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CreateYahooAuctionCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CreateYahooAuctionCrawlSettingRequiredKeywordMutation>(CreateYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CreateYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    updateUsedSofmapCrawlSettingRequiredKeyword(variables: UpdateUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateUsedSofmapCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<UpdateUsedSofmapCrawlSettingRequiredKeywordMutation>(UpdateUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'updateUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
+    UpdateYahooAuctionCrawlSettingRequiredKeyword(variables: UpdateYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<UpdateYahooAuctionCrawlSettingRequiredKeywordMutation>(UpdateYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'UpdateYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    deleteUsedSofmapCrawlSettingRequiredKeyword(variables: DeleteUsedSofmapCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation> {
-      return withWrapper((wrappedRequestHeaders) => client.request<DeleteUsedSofmapCrawlSettingRequiredKeywordMutation>(DeleteUsedSofmapCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'deleteUsedSofmapCrawlSettingRequiredKeyword', 'mutation', variables);
+    DeleteYahooAuctionCrawlSettingRequiredKeyword(variables: DeleteYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>(DeleteYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
     },
     AdminCategoriesPageData(variables?: AdminCategoriesPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AdminCategoriesPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AdminCategoriesPageDataQuery>(AdminCategoriesPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AdminCategoriesPageData', 'query', variables);

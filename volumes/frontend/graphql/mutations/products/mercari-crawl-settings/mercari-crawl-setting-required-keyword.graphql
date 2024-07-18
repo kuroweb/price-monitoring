@@ -1,0 +1,80 @@
+mutation CreateMercariCrawlSettingRequiredKeyword(
+  $input: CreateMercariCrawlSettingRequiredKeywordInput!
+) {
+  createMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      mercariCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateMercariCrawlSettingRequiredKeyword(
+  $input: UpdateMercariCrawlSettingRequiredKeywordInput!
+) {
+  updateMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      mercariCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteMercariCrawlSettingRequiredKeyword(
+  $input: DeleteMercariCrawlSettingRequiredKeywordInput!
+) {
+  deleteMercariCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteMercariCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteMercariCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteMercariCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

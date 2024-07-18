@@ -1,0 +1,163 @@
+mutation CreateYahooAuctionCrawlSettingExcludeKeyword(
+  $input: CreateYahooAuctionCrawlSettingExcludeKeywordInput!
+) {
+  createYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateYahooAuctionCrawlSettingExcludeKeyword(
+  $input: UpdateYahooAuctionCrawlSettingExcludeKeywordInput!
+) {
+  updateYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteYahooAuctionCrawlSettingExcludeKeyword(
+  $input: DeleteYahooAuctionCrawlSettingExcludeKeywordInput!
+) {
+  deleteYahooAuctionCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## YahooAuctionCrawlSettingExcludeProduct ##
+
+mutation CreateYahooAuctionCrawlSettingExcludeProduct(
+  $input: CreateYahooAuctionCrawlSettingExcludeProductInput!
+) {
+  createYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateYahooAuctionCrawlSettingExcludeProduct(
+  $input: UpdateYahooAuctionCrawlSettingExcludeProductInput!
+) {
+  updateYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+      yahooAuctionCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteYahooAuctionCrawlSettingExcludeProduct(
+  $input: DeleteYahooAuctionCrawlSettingExcludeProductInput!
+) {
+  deleteYahooAuctionCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteYahooAuctionCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

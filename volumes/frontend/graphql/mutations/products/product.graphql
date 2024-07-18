@@ -1,0 +1,74 @@
+#
+# Product
+#
+
+mutation CreateProduct($input: CreateProductInput!) {
+  createProduct(input: $input) {
+    ... on CreateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+      }
+    }
+    ... on CreateProductResultError {
+      ok
+      error {
+        ... on CreateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateProduct($input: UpdateProductInput!) {
+  updateProduct(input: $input) {
+    ... on UpdateProductResultSuccess {
+      ok
+      product {
+        id
+        name
+      }
+    }
+    ... on UpdateProductResultError {
+      ok
+      error {
+        ... on UpdateProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteProduct($input: DeleteProductInput!) {
+  deleteProduct(input: $input) {
+    ... on DeleteProductResultSuccess {
+      ok
+    }
+    ... on DeleteProductResultError {
+      ok
+      error {
+        ... on DeleteProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

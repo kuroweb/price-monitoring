@@ -1,0 +1,163 @@
+mutation CreateIosysCrawlSettingExcludeKeyword(
+  $input: CreateIosysCrawlSettingExcludeKeywordInput!
+) {
+  createIosysCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreateIosysCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      iosysCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateIosysCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreateIosysCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateIosysCrawlSettingExcludeKeyword(
+  $input: UpdateIosysCrawlSettingExcludeKeywordInput!
+) {
+  updateIosysCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdateIosysCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      iosysCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateIosysCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdateIosysCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteIosysCrawlSettingExcludeKeyword(
+  $input: DeleteIosysCrawlSettingExcludeKeywordInput!
+) {
+  deleteIosysCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeleteIosysCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteIosysCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## IosysCrawlSettingExcludeProduct ##
+
+mutation CreateIosysCrawlSettingExcludeProduct(
+  $input: CreateIosysCrawlSettingExcludeProductInput!
+) {
+  createIosysCrawlSettingExcludeProduct(input: $input) {
+    ... on CreateIosysCrawlSettingExcludeProductResultSuccess {
+      ok
+      iosysCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateIosysCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreateIosysCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateIosysCrawlSettingExcludeProduct(
+  $input: UpdateIosysCrawlSettingExcludeProductInput!
+) {
+  updateIosysCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdateIosysCrawlSettingExcludeProductResultSuccess {
+      ok
+      iosysCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateIosysCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdateIosysCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteIosysCrawlSettingExcludeProduct(
+  $input: DeleteIosysCrawlSettingExcludeProductInput!
+) {
+  deleteIosysCrawlSettingExcludeProduct(input: $input) {
+    ... on DeleteIosysCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeleteIosysCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeleteIosysCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

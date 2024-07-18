@@ -1,0 +1,80 @@
+mutation CreateJanparaCrawlSettingRequiredKeyword(
+  $input: CreateJanparaCrawlSettingRequiredKeywordInput!
+) {
+  createJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateJanparaCrawlSettingRequiredKeyword(
+  $input: UpdateJanparaCrawlSettingRequiredKeywordInput!
+) {
+  updateJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+      janparaCrawlSettingRequiredKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdateJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on UpdateJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteJanparaCrawlSettingRequiredKeyword(
+  $input: DeleteJanparaCrawlSettingRequiredKeywordInput!
+) {
+  deleteJanparaCrawlSettingRequiredKeyword(input: $input) {
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultSuccess {
+      ok
+    }
+    ... on DeleteJanparaCrawlSettingRequiredKeywordResultError {
+      ok
+      error {
+        ... on DeleteJanparaCrawlSettingRequiredKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}

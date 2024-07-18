@@ -1,0 +1,163 @@
+mutation CreatePcKoubouCrawlSettingExcludeKeyword(
+  $input: CreatePcKoubouCrawlSettingExcludeKeywordInput!
+) {
+  createPcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdatePcKoubouCrawlSettingExcludeKeyword(
+  $input: UpdatePcKoubouCrawlSettingExcludeKeywordInput!
+) {
+  updatePcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeKeyword {
+        id
+        keyword
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeletePcKoubouCrawlSettingExcludeKeyword(
+  $input: DeletePcKoubouCrawlSettingExcludeKeywordInput!
+) {
+  deletePcKoubouCrawlSettingExcludeKeyword(input: $input) {
+    ... on DeletePcKoubouCrawlSettingExcludeKeywordResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingExcludeKeywordResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+## PcKoubouCrawlSettingExcludeProduct ##
+
+mutation CreatePcKoubouCrawlSettingExcludeProduct(
+  $input: CreatePcKoubouCrawlSettingExcludeProductInput!
+) {
+  createPcKoubouCrawlSettingExcludeProduct(input: $input) {
+    ... on CreatePcKoubouCrawlSettingExcludeProductResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on CreatePcKoubouCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on CreatePcKoubouCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdatePcKoubouCrawlSettingExcludeProduct(
+  $input: UpdatePcKoubouCrawlSettingExcludeProductInput!
+) {
+  updatePcKoubouCrawlSettingExcludeProduct(input: $input) {
+    ... on UpdatePcKoubouCrawlSettingExcludeProductResultSuccess {
+      ok
+      pcKoubouCrawlSettingExcludeProduct {
+        id
+        externalId
+        createdAt
+        updatedAt
+      }
+    }
+    ... on UpdatePcKoubouCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation DeletePcKoubouCrawlSettingExcludeProduct(
+  $input: DeletePcKoubouCrawlSettingExcludeProductInput!
+) {
+  deletePcKoubouCrawlSettingExcludeProduct(input: $input) {
+    ... on DeletePcKoubouCrawlSettingExcludeProductResultSuccess {
+      ok
+    }
+    ... on DeletePcKoubouCrawlSettingExcludeProductResultError {
+      ok
+      error {
+        ... on DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed {
+          code
+          message
+          details {
+            field
+            message
+          }
+        }
+      }
+    }
+  }
+}
