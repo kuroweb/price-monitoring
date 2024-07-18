@@ -10,7 +10,10 @@ import {
   platformStateCache,
   usePlatformStateQuery,
 } from '@/features/admin/products/hooks/usePlatformState'
-import { statusStateCache, useStatusStateQuery } from '@/features/admin/products/hooks/useStatusState'
+import {
+  statusStateCache,
+  useStatusStateQuery,
+} from '@/features/admin/products/hooks/useStatusState'
 import { makePlatformMask } from '@/features/admin/products/lib/makePlatformMask'
 import RelatedProductCard from '@/features/recommends/components/RelatedProductCard'
 import { GetProductDetailPageDataDocument } from '@/graphql/dist/client'
