@@ -15,7 +15,7 @@ import {
   DeletePcKoubouCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateAdminPaths, revalidateProductPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminPaths, revalidateProductPaths } from '@/lib/revalidate-paths'
 
 export const createPcKoubouCrawlSettingRequiredKeyword = async (
   input: CreatePcKoubouCrawlSettingRequiredKeywordInput,

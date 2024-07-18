@@ -9,7 +9,7 @@ import type {
 
 import { CreateCategoryDocument, DeleteCategoryDocument } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateAdminPaths } from '@/lib/revalidatePaths'
+import { revalidateAdminPaths } from '@/lib/revalidate-paths'
 
 export const createCategory = async (input: CreateCategoryInput) => {
   const result = getClient().mutate<CreateCategoryMutation>({
