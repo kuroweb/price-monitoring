@@ -3125,11 +3125,6 @@ export type DeleteYahooAuctionCrawlSettingRequiredKeywordMutationVariables = Exa
 
 export type DeleteYahooAuctionCrawlSettingRequiredKeywordMutation = { __typename?: 'Mutation', deleteYahooAuctionCrawlSettingRequiredKeyword: { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultError', ok: boolean, error: { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed', code: string, message: string, details: Array<{ __typename?: 'ErrorDetail', field: string, message: string }> } } | { __typename?: 'DeleteYahooAuctionCrawlSettingRequiredKeywordResultSuccess', ok: boolean } };
 
-export type AdminCategoriesPageDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type AdminCategoriesPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }>, categoryTree: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> }> }> }> }> };
-
 export type AdminProductsPageDataQueryVariables = Exact<{
   id?: InputMaybe<Scalars['ID']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
@@ -3144,6 +3139,11 @@ export type AdminProductsIdPageDataQueryVariables = Exact<{
 
 
 export type AdminProductsIdPageDataQuery = { __typename?: 'Query', product: { __typename?: 'Product', id: string, name: string, yahooAuctionCrawlSetting: { __typename?: 'YahooAuctionCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, yahooAuctionCrawlSettingExcludeKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingExcludeProducts: Array<{ __typename?: 'YahooAuctionCrawlSettingExcludeProduct', id: string, yahooAuctionCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, yahooAuctionCrawlSettingRequiredKeywords: Array<{ __typename?: 'YahooAuctionCrawlSettingRequiredKeyword', id: string, yahooAuctionCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, yahooAuctionDailyPurchaseSummaries: Array<{ __typename?: 'YahooAuctionDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, yahooFleamarketDailyPurchaseSummaries: Array<{ __typename?: 'YahooFleamarketDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, mercariCrawlSetting: { __typename?: 'MercariCrawlSetting', id: string, productId: number, keyword: string, categoryId?: number | null, minPrice: number, maxPrice: number, enabled: boolean, mercariCrawlSettingExcludeKeywords: Array<{ __typename?: 'MercariCrawlSettingExcludeKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, mercariCrawlSettingExcludeProducts: Array<{ __typename?: 'MercariCrawlSettingExcludeProduct', id: string, mercariCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, mercariCrawlSettingRequiredKeywords: Array<{ __typename?: 'MercariCrawlSettingRequiredKeyword', id: string, mercariCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, mercariDailyPurchaseSummaries: Array<{ __typename?: 'MercariDailyPurchaseSummary', id: string, productId: number, averagePurchasePrice?: number | null, purchaseCount: number, date: any, createdAt: any, updatedAt: any }>, janparaCrawlSetting: { __typename?: 'JanparaCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, janparaCrawlSettingExcludeKeywords: Array<{ __typename?: 'JanparaCrawlSettingExcludeKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, janparaCrawlSettingExcludeProducts: Array<{ __typename?: 'JanparaCrawlSettingExcludeProduct', id: string, janparaCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, janparaCrawlSettingRequiredKeywords: Array<{ __typename?: 'JanparaCrawlSettingRequiredKeyword', id: string, janparaCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, iosysCrawlSetting: { __typename?: 'IosysCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, iosysCrawlSettingExcludeKeywords: Array<{ __typename?: 'IosysCrawlSettingExcludeKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, iosysCrawlSettingExcludeProducts: Array<{ __typename?: 'IosysCrawlSettingExcludeProduct', id: string, iosysCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, iosysCrawlSettingRequiredKeywords: Array<{ __typename?: 'IosysCrawlSettingRequiredKeyword', id: string, iosysCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, pcKoubouCrawlSetting: { __typename?: 'PcKoubouCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, pcKoubouCrawlSettingExcludeKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingExcludeProducts: Array<{ __typename?: 'PcKoubouCrawlSettingExcludeProduct', id: string, pcKoubouCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, pcKoubouCrawlSettingRequiredKeywords: Array<{ __typename?: 'PcKoubouCrawlSettingRequiredKeyword', id: string, pcKoubouCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, usedSofmapCrawlSetting: { __typename?: 'UsedSofmapCrawlSetting', id: string, productId: number, keyword: string, minPrice: number, maxPrice: number, enabled: boolean, usedSofmapCrawlSettingExcludeKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingExcludeProducts: Array<{ __typename?: 'UsedSofmapCrawlSettingExcludeProduct', id: string, usedSofmapCrawlSettingId: number, externalId: string, createdAt: any, updatedAt: any }>, usedSofmapCrawlSettingRequiredKeywords: Array<{ __typename?: 'UsedSofmapCrawlSettingRequiredKeyword', id: string, usedSofmapCrawlSettingId: number, keyword?: string | null, createdAt: any, updatedAt: any }> }, category: { __typename?: 'Category', id: string, parentId?: string | null, name: string } }, categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> };
+
+export type AdminCategoriesPageDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AdminCategoriesPageDataQuery = { __typename?: 'Query', categories: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }>, categoryTree: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string, children: Array<{ __typename?: 'Category', id: string, parentId?: string | null, name: string }> }> }> }> }> };
 
 export type ProductFieldFragment = { __typename?: 'Product', id: string, name: string };
 
@@ -5042,28 +5042,6 @@ export const DeleteYahooAuctionCrawlSettingRequiredKeywordDocument = gql`
   }
 }
     `;
-export const AdminCategoriesPageDataDocument = gql`
-    query AdminCategoriesPageData {
-  categories(rootOnly: false) {
-    ...CategoryField
-  }
-  categoryTree: categories(rootOnly: true) {
-    ...CategoryField
-    children {
-      ...CategoryField
-      children {
-        ...CategoryField
-        children {
-          ...CategoryField
-          children {
-            ...CategoryField
-          }
-        }
-      }
-    }
-  }
-}
-    ${CategoryFieldFragmentDoc}`;
 export const AdminProductsPageDataDocument = gql`
     query AdminProductsPageData($id: ID, $name: String) {
   products(id: $id, name: $name) {
@@ -5224,6 +5202,28 @@ ${UsedSofmapCrawlSettingExcludeKeywordFieldFragmentDoc}
 ${UsedSofmapCrawlSettingExcludeProductFieldFragmentDoc}
 ${UsedSofmapCrawlSettingRequiredKeywordFieldFragmentDoc}
 ${CategoryFieldFragmentDoc}`;
+export const AdminCategoriesPageDataDocument = gql`
+    query AdminCategoriesPageData {
+  categories(rootOnly: false) {
+    ...CategoryField
+  }
+  categoryTree: categories(rootOnly: true) {
+    ...CategoryField
+    children {
+      ...CategoryField
+      children {
+        ...CategoryField
+        children {
+          ...CategoryField
+          children {
+            ...CategoryField
+          }
+        }
+      }
+    }
+  }
+}
+    ${CategoryFieldFragmentDoc}`;
 export const ProductsPageDataDocument = gql`
     query ProductsPageData {
   products {
@@ -5586,14 +5586,14 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     DeleteYahooAuctionCrawlSettingRequiredKeyword(variables: DeleteYahooAuctionCrawlSettingRequiredKeywordMutationVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<DeleteYahooAuctionCrawlSettingRequiredKeywordMutation>(DeleteYahooAuctionCrawlSettingRequiredKeywordDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'DeleteYahooAuctionCrawlSettingRequiredKeyword', 'mutation', variables);
     },
-    AdminCategoriesPageData(variables?: AdminCategoriesPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AdminCategoriesPageDataQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<AdminCategoriesPageDataQuery>(AdminCategoriesPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AdminCategoriesPageData', 'query', variables);
-    },
     AdminProductsPageData(variables?: AdminProductsPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AdminProductsPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AdminProductsPageDataQuery>(AdminProductsPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AdminProductsPageData', 'query', variables);
     },
     AdminProductsIdPageData(variables: AdminProductsIdPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AdminProductsIdPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<AdminProductsIdPageDataQuery>(AdminProductsIdPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AdminProductsIdPageData', 'query', variables);
+    },
+    AdminCategoriesPageData(variables?: AdminCategoriesPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<AdminCategoriesPageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AdminCategoriesPageDataQuery>(AdminCategoriesPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AdminCategoriesPageData', 'query', variables);
     },
     ProductsPageData(variables?: ProductsPageDataQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<ProductsPageDataQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<ProductsPageDataQuery>(ProductsPageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'ProductsPageData', 'query', variables);

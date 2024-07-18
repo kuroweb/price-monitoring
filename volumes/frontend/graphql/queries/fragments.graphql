@@ -1,6 +1,4 @@
-#
-# fragments
-#
+# NOTE: 各モデルのフィールドをfragmentとして記載して再利用性と保守性を高めるのが目的
 
 # YahooAuction
 
