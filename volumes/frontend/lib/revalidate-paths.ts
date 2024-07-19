@@ -36,7 +36,6 @@ export const revalidateAdminCategoriesPaths = () => {
   /products
 */
 
-// /products
 export const revalidateProductsPaths = () => {
   revalidatePaths([
     ['/products', 'page'],
