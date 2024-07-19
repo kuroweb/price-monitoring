@@ -18,7 +18,9 @@ const Page = async () => {
       <div className='grid grid-cols-1 space-y-4'>
         <div className='card bg-neutral'>
           <div className='card-body'>
-            <CategoryNavigation />
+            <CategoryNavigation
+              childCategoryNames={data.categories.map((category) => category.name)}
+            />
           </div>
         </div>
         <div className='card bg-neutral'>
