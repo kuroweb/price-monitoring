@@ -23,7 +23,6 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
               <Link
                 className='btn'
                 href={{
-                  pathname: '/',
                   query: {
                     ...searchParams,
                     [useCreateProductModalQuery]: 'true',
