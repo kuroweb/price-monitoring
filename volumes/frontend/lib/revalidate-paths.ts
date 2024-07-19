@@ -10,27 +10,34 @@ export const revalidatePaths = (pathnames: RevalidatePathArgs[]) => {
   })
 }
 
-// /admin
+/*
+  /admin
+*/
 
 export const revalidateAdminPaths = () => {
-  revalidateAdminProductPaths()
-  revalidateAdminCategoryPaths()
+  revalidateAdminProductsPaths()
+  revalidateAdminCategoriesPaths()
 }
 
-export const revalidateAdminProductPaths = () => {
+// /admin/products
+export const revalidateAdminProductsPaths = () => {
   revalidatePaths([
     ['/admin/products', 'page'],
     ['/admin/products/[id]', 'page'],
   ])
 }
 
-export const revalidateAdminCategoryPaths = () => {
+// /admin/categories
+export const revalidateAdminCategoriesPaths = () => {
   revalidatePaths([['/admin/categories', 'page']])
 }
 
-// /products
+/*
+  /products
+*/
 
-export const revalidateProductPaths = () => {
+// /products
+export const revalidateProductsPaths = () => {
   revalidatePaths([
     ['/products', 'page'],
     ['/products/[id]', 'page'],

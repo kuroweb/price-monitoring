@@ -15,7 +15,7 @@ import {
   DeleteIosysCrawlSettingRequiredKeywordDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateAdminPaths, revalidateProductPaths } from '@/lib/revalidate-paths'
+import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
 export const createIosysCrawlSettingRequiredKeyword = async (
   input: CreateIosysCrawlSettingRequiredKeywordInput,
@@ -25,7 +25,7 @@ export const createIosysCrawlSettingRequiredKeyword = async (
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateProductPaths()
+  revalidateProductsPaths()
 
   return result
 }
@@ -38,7 +38,7 @@ export const updateIosysCrawlSettingRequiredKeyword = async (
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateProductPaths()
+  revalidateProductsPaths()
 
   return result
 }
@@ -51,7 +51,7 @@ export const deleteIosysCrawlSettingRequiredKeyword = async (
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateProductPaths()
+  revalidateProductsPaths()
 
   return result
 }

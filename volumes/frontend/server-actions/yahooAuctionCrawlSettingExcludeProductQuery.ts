@@ -15,7 +15,7 @@ import {
   DeleteYahooAuctionCrawlSettingExcludeProductDocument,
 } from '@/graphql/dist/client'
 import { getClient } from '@/lib/apollo-client-rsc'
-import { revalidateAdminPaths, revalidateProductPaths } from '@/lib/revalidate-paths'
+import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
 export const createYahooAuctionCrawlSettingExcludeProduct = async (
   input: CreateYahooAuctionCrawlSettingExcludeProductInput,
@@ -25,7 +25,7 @@ export const createYahooAuctionCrawlSettingExcludeProduct = async (
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateProductPaths()
+  revalidateProductsPaths()
 
   return result
 }
@@ -38,7 +38,7 @@ export const updateYahooAuctionCrawlSettingExcludeProduct = async (
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateProductPaths()
+  revalidateProductsPaths()
 
   return result
 }
@@ -51,7 +51,7 @@ export const deleteYahooAuctionCrawlSettingExcludeProduct = async (
     variables: { input },
   })
   revalidateAdminPaths()
-  revalidateProductPaths()
+  revalidateProductsPaths()
 
   return result
 }
