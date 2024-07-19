@@ -40,6 +40,6 @@ export const revalidateProductsPaths = () => {
   revalidatePaths([
     ['/products', 'page'],
     ['/products/[id]', 'page'],
-    ['/products/categories/[...category]', 'page'],
+    ['/products/categories/[category]', 'page'],
   ])
 }
