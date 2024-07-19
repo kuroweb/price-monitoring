@@ -96,7 +96,7 @@ const CategoryNavigation = ({
         </div>
         {childCategoryNames && (
           <>
-            <div className='flex flex-wrap space-x-4'>
+            <div className='flex flex-wrap gap-3'>
               {childCategoryNames.map((categoryName) => {
                 return (
                   <>
