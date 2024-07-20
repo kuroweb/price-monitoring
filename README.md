@@ -81,6 +81,7 @@ erDiagram
   categories {
     bigint id PK
     string name
+    int parent_id "closure_tree gemでの探索コスト削減カラム"
   }
   category_hierarchies {
     bigint id PK
