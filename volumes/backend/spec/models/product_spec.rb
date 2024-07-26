@@ -1,5 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe Product, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "validates presence of name" do
+    product = Product.new
+    product.valid?
+    expect(product.errors[:name]).to include("can't be blank")
+  end
+
+  # Add more test cases as needed
 end
