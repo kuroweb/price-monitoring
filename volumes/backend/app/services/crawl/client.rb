@@ -17,8 +17,6 @@ module Crawl
       api.mercari.jp/services/item_watch/v1/ValidateText
       api.mercari.jp/v2/tag:suggest
       api.mercari.jp/services/seolp/v2/seoPages:search
-      api.mercari.jp/master/v2/datasets/item_category_groups
-      api.mercari.jp/master/v2/datasets/item_categories
       common.json
       mypage.json
       seo.json
@@ -31,7 +29,6 @@ module Crawl
       googletagmanager.com
       securepubads.g.doubleclick.net
       sentry.io
-      www.googletagmanager.com
     ].freeze
 
     YAHOO_AUCTION_BLOCKED_LIST = %w[
