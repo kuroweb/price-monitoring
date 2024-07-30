@@ -4,6 +4,9 @@ on:
   push:
     branches: [master]
 
+env:
+  changed: '0'
+
 jobs:
   backend:
     runs-on: ubuntu-20.04
@@ -11,6 +14,8 @@ jobs:
       - uses: actions/checkout@v3
       - run: git fetch origin master --depth=1
       - id: diff
-        run: echo "::set-output name=changed::$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ | wc -l)"
-      - if: ${{ steps.diff.outputs.changed != '0' }}
+        run: |
+          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ | wc -l)
+          echo "changed=$CHANGED" >> $GITHUB_ENV
+      - if: ${{ env.changed != '0' }}
         run: echo 'hoge'
