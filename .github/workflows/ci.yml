@@ -14,15 +14,3 @@ jobs:
         id: backend_changes
         run: |
           git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^backend/' || echo 'no-backend-changes' > backend_changes.log
-
-  backend-playwright:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-  frontend:
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
