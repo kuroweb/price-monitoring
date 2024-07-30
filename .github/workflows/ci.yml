@@ -8,9 +8,9 @@ jobs:
   backend:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Check for Backend Changes
-        id: backend_changes
-        run: |
-          git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '^backend/' || echo 'no-backend-changes' > backend_changes.log
+      - uses: actions/checkout@v3
+      - run: git fetch origin ${{ github.base_ref }} --depth=1
+      - id: diff
+        run: echo "::set-output name=changed::$(git diff --name-only origin/${{ github.base_ref }} HEAD --relative ./volumes/backend/ | wc -l)"
+      - if: ${{ steps.diff.outputs.changed != '0' }}
+        run: echo 'hoge'
