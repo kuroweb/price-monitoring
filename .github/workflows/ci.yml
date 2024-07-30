@@ -9,8 +9,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - run: git fetch origin ${{ github.base_ref }} --depth=1
+      - run: git fetch origin master --depth=1
       - id: diff
-        run: echo "::set-output name=changed::$(git diff --name-only origin/${{ github.base_ref }} HEAD --relative ./volumes/backend/ | wc -l)"
+        run: echo "::set-output name=changed::$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ | wc -l)"
       - if: ${{ steps.diff.outputs.changed != '0' }}
         run: echo 'hoge'
