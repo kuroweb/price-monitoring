@@ -21,3 +21,6 @@ attach container-name:
 
 logs:
 	docker compose logs -f
+
+rspec:
+	docker compose run backend rspec
