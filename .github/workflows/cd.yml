@@ -7,8 +7,22 @@ on:
     branches: [master]
 
 jobs:
+  check_changed:
+    runs-on: ubuntu-20.04
+    outputs:
+      backend_diff: ${{ steps.backend_diff.outputs.changed }}
+    steps:
+      - uses: actions/checkout@v3
+      - run: git fetch origin master --depth=1
+      - id: backend_diff
+        run: |
+          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ | wc -l)
+          echo "::set-output name=changed::$CHANGED"
+
   backend:
     runs-on: ubuntu-20.04
+    needs: check_changed
+    if: needs.check_changed.outputs.backend_diff != '0'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
