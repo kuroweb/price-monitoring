@@ -20,6 +20,8 @@ jobs:
         run: |
           BASE_SHA=$(git merge-base origin/master $GITHUB_SHA)
           CHANGED=$(git diff --name-only $BASE_SHA $GITHUB_SHA --relative ./volumes/backend/ ./containers/backend/ | wc -l)
+          echo $BASE_SHA
+          echo $CHANGED
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
