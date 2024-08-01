@@ -16,11 +16,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: git fetch origin master --depth=1
+      - run: git checkout master
+      - run: git pull origin master --depth=1
       - id: check_backend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
-          debug=$(git diff --name-only origin/master HEAD)
-          echo $debug
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
