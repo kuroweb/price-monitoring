@@ -14,7 +14,7 @@ RSpec.describe Category, type: :model do
     end
 
     context "depth limit validation" do
-      context "when depth 0" do
+      context "when depth 0 then valid" do
         let!(:depth_0_category) { build(:category) }
 
         it { expect(depth_0_category.valid?).to be(true) }
