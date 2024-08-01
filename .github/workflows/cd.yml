@@ -19,14 +19,17 @@ jobs:
       - id: check_backend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
+          echo "changed=$CHANGED" >> $GITHUB_ENV
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./containers/backend_playwright/ | wc -l)
+          echo "changed=$CHANGED" >> $GITHUB_ENV
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_frontend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/frontend/ ./containers/frontend/ | wc -l)
+          echo "changed=$CHANGED" >> $GITHUB_ENV
           echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
   backend:
