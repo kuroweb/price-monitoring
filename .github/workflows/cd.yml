@@ -22,6 +22,7 @@ jobs:
           CHANGED=$(git diff --name-only origin/master $GITHUB_SHA --relative ./volumes/backend/ ./containers/backend/ | wc -l)
           echo $(git diff --name-only origin/master $GITHUB_SHA)
           echo $(git diff --name-only $GITHUB_SHA origin/master)
+          echo $GITHUB_SHA
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
