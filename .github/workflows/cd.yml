@@ -19,7 +19,8 @@ jobs:
       - id: check_backend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
-          git diff --name-only origin/master HEAD
+          debug=$(git diff --name-only origin/master HEAD)
+          echo $debug
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
