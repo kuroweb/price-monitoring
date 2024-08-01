@@ -10,14 +10,19 @@ jobs:
   check_changed:
     runs-on: ubuntu-20.04
     outputs:
-      backend_diff: ${{ steps.backend_diff.outputs.changed }}
+      backend_diff: ${{ steps.check_backend_diff.outputs.changed }}
+      frontend_diff: ${{ steps.check_frontend_diff.outputs.changed }}
     steps:
       - uses: actions/checkout@v3
       - run: git fetch origin master --depth=1
-      - id: backend_diff
+      - id: check_backend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ | wc -l)
-          echo "::set-output name=changed::$CHANGED"
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
+      - id: check_frontend_diff
+        run: |
+          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/frontend/ | wc -l)
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
   backend:
     runs-on: ubuntu-20.04
@@ -139,6 +144,8 @@ jobs:
           make push
   frontend:
     runs-on: ubuntu-20.04
+    needs: check_changed
+    if: needs.check_changed.outputs.backend_diff != '0'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
