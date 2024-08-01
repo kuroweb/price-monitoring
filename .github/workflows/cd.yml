@@ -19,7 +19,6 @@ jobs:
       - id: check_backend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
-          echo $CHANGED
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
@@ -153,7 +152,7 @@ jobs:
   frontend:
     runs-on: ubuntu-20.04
     needs: check_changed
-    if: needs.check_changed.outputs.backend_diff != '0'
+    if: needs.check_changed.outputs.frontend_diff != '0'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
