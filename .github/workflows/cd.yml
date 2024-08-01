@@ -18,7 +18,8 @@ jobs:
       - run: git fetch origin master --depth=1
       - id: check_backend_diff
         run: |
-          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
+          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ | wc -l)
+          echo $CHANGED
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
