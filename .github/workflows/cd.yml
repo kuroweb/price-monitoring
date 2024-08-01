@@ -19,8 +19,7 @@ jobs:
       # TODO: diffがうまく取れてなさそう
       - id: check_backend_diff
         run: |
-          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
-          echo "hoge"
+          CHANGED=$(git diff --name-only origin/master $GITHUB_SHA --relative ./volumes/backend/ ./containers/backend/ | wc -l)
           echo $CHANGED
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
