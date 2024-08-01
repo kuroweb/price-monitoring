@@ -19,10 +19,7 @@ jobs:
       # TODO: diffがうまく取れてなさそう
       - id: check_backend_diff
         run: |
-          CHANGED=$(git diff --name-only origin/master $GITHUB_SHA --relative ./volumes/backend/ ./containers/backend/ | wc -l)
-          echo $(git diff --name-only origin/master $GITHUB_SHA)
-          echo $(git diff --name-only $GITHUB_SHA origin/master)
-          echo $GITHUB_SHA
+          CHANGED=$(git diff --name-only origin/master ${{ github.base_ref }} --relative ./volumes/backend/ ./containers/backend/ | wc -l)
           echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
