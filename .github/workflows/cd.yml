@@ -7,8 +7,6 @@ on:
     branches: [master]
 
 jobs:
-  # そもそもの実行フローから要検討
-  # アプリごとにCDを分ければ、当該パスの差分マージされたときだけ動作するようになる
   check_changed:
     runs-on: ubuntu-20.04
     outputs:
