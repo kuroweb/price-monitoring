@@ -7,30 +7,29 @@ on:
     branches: [master]
 
 jobs:
+  # そもそもの実行フローから要検討
+  # アプリごとにCDを分ければ、当該パスの差分マージされたときだけ動作するようになる
   check_changed:
     runs-on: ubuntu-20.04
     outputs:
-      backend_diff: ${{ steps.check_backend_diff.outputs.backend_changed }}
-      backend_playwright_diff: ${{ steps.check_backend_playwright_diff.outputs.backend_playwright_changed }}
-      frontend_diff: ${{ steps.check_frontend_diff.outputs.frontend_changed }}
+      backend_diff: ${{ steps.check_backend_diff.outputs.changed }}
+      backend_playwright_diff: ${{ steps.check_backend_playwright_diff.outputs.changed }}
+      frontend_diff: ${{ steps.check_frontend_diff.outputs.changed }}
     steps:
       - uses: actions/checkout@v3
       - run: git fetch origin master --depth=1
       - id: check_backend_diff
         run: |
-          BASE_SHA=$(git merge-base origin/master $GITHUB_SHA)
-          CHANGED=$(git diff --name-only $BASE_SHA $GITHUB_SHA --relative ./volumes/backend/ ./containers/backend/ | wc -l)
-          echo $BASE_SHA
-          echo $CHANGED
-          echo "backend_changed=$CHANGED" >> $GITHUB_OUTPUT
+          CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/backend/ ./containers/backend/ | wc -l)
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_backend_playwright_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./containers/backend_playwright/ | wc -l)
-          echo "backend_playwright_changed=$CHANGED" >> $GITHUB_OUTPUT
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
       - id: check_frontend_diff
         run: |
           CHANGED=$(git diff --name-only origin/master HEAD --relative ./volumes/frontend/ ./containers/frontend/ | wc -l)
-          echo "frontend_changed=$CHANGED" >> $GITHUB_OUTPUT
+          echo "changed=$CHANGED" >> $GITHUB_OUTPUT
 
   backend:
     runs-on: ubuntu-20.04
