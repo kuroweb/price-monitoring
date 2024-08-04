@@ -5,6 +5,10 @@ concurrency: production
 on:
   push:
     branches: [master]
+  pull_request:
+    branches:
+      - master
+    types: [closed]
 
 jobs:
   check_changes:
@@ -30,7 +34,7 @@ jobs:
 
   backend:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend == 'true' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -88,9 +92,10 @@ jobs:
           make apply-backend tag_suffix=${{ github.sha }}
           make commit
           make push
+
   backend-playwright:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend_playwright == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_playwright == 'true' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -148,9 +153,10 @@ jobs:
           make apply-backend-playwright tag_suffix=${{ github.sha }}
           make commit
           make push
+
   frontend:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.frontend == 'true' }}
+    if: ${{ needs.check_changes.outputs.frontend == 'true' && github.event.pull_request.merged == true }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
