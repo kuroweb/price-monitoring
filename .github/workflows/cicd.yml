@@ -35,14 +35,13 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: CI
+      - name: Execute CI
         run: |
           docker compose build backend
           docker compose run backend rails db:create
           docker compose run backend rails db:migrate
           docker compose run backend rspec
-      - name: CI result
-        id: set_result
+      - name: Set CI Result
         if: ${{ success() }}
         run: echo "result=true" >> $GITHUB_OUTPUT
 

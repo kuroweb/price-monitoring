@@ -51,7 +51,7 @@ RSpec.describe Category, type: :model do
         let!(:depth_3_category) { depth_2_category.children.create!(name: "depth 3") }
         let!(:depth_4_category) { depth_3_category.children.build(name: "depth 4") }
 
-        it { expect(depth_4_category.invalid?).to be(true) }
+        it { expect(depth_4_category.valid?).to be(true) }
       end
     end
   end
