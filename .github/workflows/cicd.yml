@@ -166,9 +166,22 @@ jobs:
           make commit
           make push
 
-  frontend:
+  frontend_ci:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.frontend == 'true' }}
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Execute CI
+        run: |
+          echo "skipping..."
+      - name: Set CI Result
+        if: ${{ success() }}
+        run: echo "result=true" >> $GITHUB_OUTPUT
+
+  frontend_cd:
+    needs: frontend_ci
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
