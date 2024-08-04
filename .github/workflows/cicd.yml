@@ -1,4 +1,4 @@
-name: CD
+name: CI/CD
 
 concurrency: production
 
@@ -28,9 +28,18 @@ jobs:
             - './volumes/frontend/**'
             - './containers/frontend/**'
 
-  backend:
+  backend_ci:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.backend == 'true' }}
+    runs-on: ubuntu-20.04
+    outputs:
+      result: 'true'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+  backend_cd:
+    needs: backend_ci
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
