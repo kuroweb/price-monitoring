@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
+      backend_playwright: ${{ steps.filter.outputs.backend_playwright }}
       frontend: ${{ steps.filter.outputs.frontend }}
     steps:
     - uses: actions/checkout@v4
@@ -20,8 +21,12 @@ jobs:
         filters: |
           backend:
             - './volumes/backend/**'
+            - './containers/backend/**'
+          backend_playwright:
+            - './containers/backend_playwright/**'
           frontend:
             - './volumes/frontend/**'
+            - './containers/frontend/**'
 
   backend:
     needs: check_changes
@@ -84,6 +89,8 @@ jobs:
           make commit
           make push
   backend-playwright:
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.backend_playwright == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
