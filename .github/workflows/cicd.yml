@@ -32,8 +32,6 @@ jobs:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.backend == 'true' }}
     runs-on: ubuntu-20.04
-    outputs:
-      result: 'true'
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -43,6 +41,10 @@ jobs:
           docker compose run backend rails db:create
           docker compose run backend rails db:migrate
           docker compose run backend rspec
+      - name: CI result
+        id: set_result
+        if: ${{ success() }}
+        run: echo "result=true" >> $GITHUB_OUTPUT
 
   backend_cd:
     needs: backend_ci
