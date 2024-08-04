@@ -34,7 +34,9 @@ jobs:
 
   backend:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend == 'true' && github.event.pull_request.merged == true }}
+    if: |
+      (github.event_name == 'push' && needs.check_changes.outputs.backend == 'true') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && needs.check_changes.outputs.backend == 'true')
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -95,7 +97,9 @@ jobs:
 
   backend-playwright:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend_playwright == 'true' && github.event.pull_request.merged == true }}
+    if: |
+      (github.event_name == 'push' && needs.check_changes.outputs.backend_playwright == 'true') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && needs.check_changes.outputs.backend_playwright == 'true')
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -156,7 +160,9 @@ jobs:
 
   frontend:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.frontend == 'true' && github.event.pull_request.merged == true }}
+    if: |
+      (github.event_name == 'push' && needs.check_changes.outputs.frontend == 'true') ||
+      (github.event_name == 'pull_request' && github.event.pull_request.merged == true && needs.check_changes.outputs.frontend == 'true')
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
