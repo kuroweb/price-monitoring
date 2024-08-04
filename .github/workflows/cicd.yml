@@ -37,6 +37,12 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      - name: CI
+        run: |
+          docker compose build
+          docker compose run backend rails db:create
+          docker compose run backend rails db:migrate
+          docker compose run backend rspec
 
   backend_cd:
     needs: backend_ci
