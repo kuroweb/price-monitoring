@@ -1,119 +1,128 @@
 module GraphqlSchema
   module Objects
     class MutationType < Base # rubocop:disable Metrics/ClassLength
-      field :create_product, mutation: Mutations::Products::CreateProduct
-      field :update_product, mutation: Mutations::Products::UpdateProduct
-      field :delete_product, mutation: Mutations::Products::DeleteProduct
+      field :create_product, mutation: Mutations::Products::CreateProductMutation
+      field :update_product, mutation: Mutations::Products::UpdateProductMutation
+      field :delete_product, mutation: Mutations::Products::DeleteProductMutation
       field :create_yahoo_auction_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      CreateYahooAuctionCrawlSettingExcludeKeywordMutation
       field :update_yahoo_auction_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      UpdateYahooAuctionCrawlSettingExcludeKeywordMutation
       field :delete_yahoo_auction_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      DeleteYahooAuctionCrawlSettingExcludeKeywordMutation
       field :create_yahoo_auction_crawl_setting_required_keyword,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      CreateYahooAuctionCrawlSettingRequiredKeywordMutation
       field :update_yahoo_auction_crawl_setting_required_keyword,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      UpdateYahooAuctionCrawlSettingRequiredKeywordMutation
       field :delete_yahoo_auction_crawl_setting_required_keyword,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      DeleteYahooAuctionCrawlSettingRequiredKeywordMutation
       field :create_yahoo_auction_crawl_setting_exclude_product,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeProduct
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      CreateYahooAuctionCrawlSettingExcludeProductMutation
       field :update_yahoo_auction_crawl_setting_exclude_product,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeProduct
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      UpdateYahooAuctionCrawlSettingExcludeProductMutation
       field :delete_yahoo_auction_crawl_setting_exclude_product,
-            mutation: Mutations::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingExcludeProduct
+            mutation: Mutations::Products::YahooAuctionCrawlSettings::
+                      DeleteYahooAuctionCrawlSettingExcludeProductMutation
       field :create_mercari_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeKeywordMutation
       field :update_mercari_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeKeywordMutation
       field :delete_mercari_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeKeywordMutation
       field :create_mercari_crawl_setting_required_keyword,
-            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingRequiredKeywordMutation
       field :update_mercari_crawl_setting_required_keyword,
-            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingRequiredKeywordMutation
       field :delete_mercari_crawl_setting_required_keyword,
-            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingRequiredKeywordMutation
       field :create_mercari_crawl_setting_exclude_product,
-            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct
+            mutation: Mutations::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProductMutation
       field :update_mercari_crawl_setting_exclude_product,
-            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct
+            mutation: Mutations::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProductMutation
       field :delete_mercari_crawl_setting_exclude_product,
-            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct
+            mutation: Mutations::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProductMutation
       field :create_janpara_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingExcludeKeywordMutation
       field :update_janpara_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeywordMutation
       field :delete_janpara_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeywordMutation
       field :create_janpara_crawl_setting_required_keyword,
-            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeywordMutation
       field :update_janpara_crawl_setting_required_keyword,
-            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingRequiredKeywordMutation
       field :delete_janpara_crawl_setting_required_keyword,
-            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeywordMutation
       field :create_janpara_crawl_setting_exclude_product,
-            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingExcludeProduct
+            mutation: Mutations::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingExcludeProductMutation
       field :update_janpara_crawl_setting_exclude_product,
-            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProduct
+            mutation: Mutations::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProductMutation
       field :delete_janpara_crawl_setting_exclude_product,
-            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct
+            mutation: Mutations::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProductMutation
       field :create_iosys_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeKeywordMutation
       field :update_iosys_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeywordMutation
       field :delete_iosys_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeKeywordMutation
       field :create_iosys_crawl_setting_required_keyword,
-            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeywordMutation
       field :update_iosys_crawl_setting_required_keyword,
-            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingRequiredKeywordMutation
       field :delete_iosys_crawl_setting_required_keyword,
-            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeywordMutation
       field :create_iosys_crawl_setting_exclude_product,
-            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeProduct
+            mutation: Mutations::Products::IosysCrawlSettings::CreateIosysCrawlSettingExcludeProductMutation
       field :update_iosys_crawl_setting_exclude_product,
-            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProduct
+            mutation: Mutations::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProductMutation
       field :delete_iosys_crawl_setting_exclude_product,
-            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct
+            mutation: Mutations::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProductMutation
       field :create_pc_koubou_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeKeywordMutation
       field :update_pc_koubou_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeywordMutation
       field :delete_pc_koubou_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeywordMutation
       field :create_pc_koubou_crawl_setting_required_keyword,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeywordMutation
       field :update_pc_koubou_crawl_setting_required_keyword,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingRequiredKeywordMutation
       field :delete_pc_koubou_crawl_setting_required_keyword,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingRequiredKeywordMutation
       field :create_pc_koubou_crawl_setting_exclude_product,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProduct
+            mutation: Mutations::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProductMutation
       field :update_pc_koubou_crawl_setting_exclude_product,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeProduct
+            mutation: Mutations::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeProductMutation
       field :delete_pc_koubou_crawl_setting_exclude_product,
-            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeProduct
+            mutation: Mutations::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeProductMutation
       field :create_used_sofmap_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeKeywordMutation
       field :update_used_sofmap_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeKeywordMutation
       field :delete_used_sofmap_crawl_setting_exclude_keyword,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeyword
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeywordMutation
       field :create_used_sofmap_crawl_setting_required_keyword,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeywordMutation
       field :update_used_sofmap_crawl_setting_required_keyword,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingRequiredKeywordMutation
       field :delete_used_sofmap_crawl_setting_required_keyword,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingRequiredKeyword
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingRequiredKeywordMutation
       field :create_used_sofmap_crawl_setting_exclude_product,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeProduct
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeProductMutation
       field :update_used_sofmap_crawl_setting_exclude_product,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeProduct
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeProductMutation
       field :delete_used_sofmap_crawl_setting_exclude_product,
-            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct
-      field :create_category, mutation: Mutations::Categories::CreateCategory
-      field :delete_category, mutation: Mutations::Categories::DeleteCategory
+            mutation: Mutations::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProductMutation
+      field :create_category, mutation: Mutations::Categories::CreateCategoryMutation
+      field :delete_category, mutation: Mutations::Categories::DeleteCategoryMutation
     end
   end
 end
