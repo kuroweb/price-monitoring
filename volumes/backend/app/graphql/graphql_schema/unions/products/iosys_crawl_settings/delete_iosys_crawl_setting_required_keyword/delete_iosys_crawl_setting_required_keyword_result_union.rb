@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module DeleteIosysCrawlSettingRequiredKeyword
-          class DeleteIosysCrawlSettingRequiredKeywordResult < Base
+          class DeleteIosysCrawlSettingRequiredKeywordResultUnion < Base
             possible_types Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
                            DeleteIosysCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
@@ -18,7 +18,7 @@ module GraphqlSchema
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
                 DeleteIosysCrawlSettingRequiredKeywordResultErrorType
               else
-                raise "Unexpected DeleteIosysCrawlSettingRequiredKeywordResult: #{object}"
+                raise "Unexpected DeleteIosysCrawlSettingRequiredKeywordResultUnion: #{object}"
               end
             end
           end

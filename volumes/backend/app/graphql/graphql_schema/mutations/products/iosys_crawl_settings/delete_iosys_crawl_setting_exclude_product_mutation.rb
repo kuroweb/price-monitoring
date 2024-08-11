@@ -7,7 +7,7 @@ module GraphqlSchema
                              DeleteIosysCrawlSettingExcludeProductInput
 
           type Unions::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
-               DeleteIosysCrawlSettingExcludeProductResult, null: false
+               DeleteIosysCrawlSettingExcludeProductResultUnion, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])
