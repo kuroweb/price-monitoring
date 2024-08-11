@@ -10,27 +10,36 @@ jobs:
   check_changes:
     runs-on: ubuntu-latest
     outputs:
-      backend: ${{ steps.filter.outputs.backend }}
-      backend_playwright: ${{ steps.filter.outputs.backend_playwright }}
-      frontend: ${{ steps.filter.outputs.frontend }}
+      backend_ci: ${{ steps.filter.outputs.backend_ci }}
+      backend_cd: ${{ steps.filter.outputs.backend_cd }}
+      backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
+      frontend_ci: ${{ steps.filter.outputs.frontend_ci }}
+      frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          backend:
-            - './volumes/backend/**'
-            - './containers/backend/**'
-          backend_playwright:
-            - './containers/backend_playwright/**'
-          frontend:
-            - './volumes/frontend/**'
-            - './containers/frontend/**'
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            backend_ci:
+              - './volumes/backend/**'
+              - './containers/backend/**'
+            backend_cd:
+              - './volumes/backend/**'
+              - './containers/backend/**'
+              - '!./volumes/backend/spec/**'
+            backend_playwright_cd:
+              - './containers/backend_playwright/**'
+            frontend_ci:
+              - './volumes/frontend/**'
+              - './containers/frontend/**'
+            frontend_cd:
+              - './volumes/frontend/**'
+              - './containers/frontend/**'
 
   backend_ci:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_ci == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -46,7 +55,10 @@ jobs:
         run: echo "result=true" >> $GITHUB_OUTPUT
 
   backend_cd:
-    needs: backend_ci
+    needs:
+      - check_changes
+      - backend_ci
+    if: ${{ needs.check_changes.outputs.backend_cd == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -107,7 +119,7 @@ jobs:
 
   backend_playwright_cd:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend_playwright == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_playwright_cd == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -168,7 +180,7 @@ jobs:
 
   frontend_ci:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.frontend == 'true' }}
+    if: ${{ needs.check_changes.outputs.frontend_ci == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
