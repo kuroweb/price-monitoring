@@ -4,7 +4,7 @@ module GraphqlSchema
       class CreateCategory < Base
         input_object_class InputObjects::Categories::CreateCategoryInput
 
-        type Unions::Categories::CreateCategory::CreateCategoryResultUnion, null: false
+        type Unions::Categories::CreateCategory::CreateCategoryResult, null: false
 
         def resolve(input)
           parent_category = Category.find_by(id: input[:parent_id])

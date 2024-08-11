@@ -2,7 +2,7 @@ module GraphqlSchema
   module Unions
     module Categories
       module DeleteCategory
-        class DeleteCategoryResultUnion < Base
+        class DeleteCategoryResult < Base
           possible_types Objects::Categories::DeleteCategory::DeleteCategoryResultSuccessType,
                          Objects::Categories::DeleteCategory::DeleteCategoryResultErrorType
 
@@ -13,7 +13,7 @@ module GraphqlSchema
             when "DeleteCategoryResultErrorType"
               Objects::Categories::DeleteCategory::DeleteCategoryResultErrorType
             else
-              raise "Unexpected DeleteCategoryResultUnion: #{object}"
+              raise "Unexpected DeleteCategoryResult: #{object}"
             end
           end
         end
