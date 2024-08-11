@@ -18,47 +18,18 @@ module GraphqlSchema
         field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummary], null: false
         field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummary], null: false
         field :related_products, resolver: Resolvers::Products::RelatedProducts
-        field :category, Categories::Category, null: false
+        field :category, Categories::CategoryType, null: false
 
-        def yahoo_auction_crawl_setting
-          object.yahoo_auction_crawl_setting
-        end
-
-        def mercari_crawl_setting
-          object.mercari_crawl_setting
-        end
-
-        def janpara_crawl_setting
-          object.janpara_crawl_setting
-        end
-
-        def iosys_crawl_setting
-          object.iosys_crawl_setting
-        end
-
-        def pc_koubou_crawl_setting
-          object.pc_koubou_crawl_setting
-        end
-
-        def used_sofmap_crawl_setting
-          object.used_sofmap_crawl_setting
-        end
-
-        def yahoo_auction_daily_purchase_summaries
-          object.yahoo_auction_daily_purchase_summaries
-        end
-
-        def yahoo_fleamarket_daily_purchase_summaries
-          object.yahoo_fleamarket_daily_purchase_summaries
-        end
-
-        def mercari_daily_purchase_summaries
-          object.mercari_daily_purchase_summaries
-        end
-
-        def category
-          object.category
-        end
+        delegate :yahoo_auction_crawl_setting, to: :object
+        delegate :mercari_crawl_setting, to: :object
+        delegate :janpara_crawl_setting, to: :object
+        delegate :iosys_crawl_setting, to: :object
+        delegate :pc_koubou_crawl_setting, to: :object
+        delegate :used_sofmap_crawl_setting, to: :object
+        delegate :yahoo_auction_daily_purchase_summaries, to: :object
+        delegate :yahoo_fleamarket_daily_purchase_summaries, to: :object
+        delegate :mercari_daily_purchase_summaries, to: :object
+        delegate :category, to: :object
       end
     end
   end

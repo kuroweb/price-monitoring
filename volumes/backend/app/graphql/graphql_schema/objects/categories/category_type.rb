@@ -1,23 +1,18 @@
 module GraphqlSchema
   module Objects
     module Categories
-      class Category < Base
+      class CategoryType < Base
         implements GraphQL::Types::Relay::Node
 
         field :id, ID, null: false
         field :parent_id, ID, null: true
         field :name, String, null: false
-        field :parent, Objects::Categories::Category, null: true
-        field :children, [Objects::Categories::Category], null: false
+        field :parent, Objects::Categories::CategoryType, null: true
+        field :children, [Objects::Categories::CategoryType], null: false
         field :products, [Objects::Products::Product], null: false
 
-        def parent
-          object.parent
-        end
-
-        def children
-          object.children
-        end
+        delegate :parent, to: :object
+        delegate :children, to: :object
 
         def products
           category_ids = object.self_and_descendant_ids
