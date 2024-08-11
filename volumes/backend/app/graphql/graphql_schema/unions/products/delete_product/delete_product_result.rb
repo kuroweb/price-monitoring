@@ -2,7 +2,7 @@ module GraphqlSchema
   module Unions
     module Products
       module DeleteProduct
-        class DeleteProductResultUnion < Base
+        class DeleteProductResult < Base
           possible_types Objects::Products::DeleteProduct::DeleteProductResultSuccessType,
                          Objects::Products::DeleteProduct::DeleteProductResultErrorType
 
@@ -13,7 +13,7 @@ module GraphqlSchema
             when "DeleteProductResultErrorType"
               Objects::Products::DeleteProduct::DeleteProductResultErrorType
             else
-              raise "Unexpected DeleteProductResultUnion: #{object}"
+              raise "Unexpected DeleteProductResult: #{object}"
             end
           end
         end
