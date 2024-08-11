@@ -4,14 +4,14 @@ module GraphqlSchema
       module DeleteCategory
         class DeleteCategoryResult < Base
           possible_types Objects::Categories::DeleteCategory::DeleteCategoryResultSuccess,
-                         Objects::Categories::DeleteCategory::DeleteCategoryResultError
+                         Objects::Categories::DeleteCategory::DeleteCategoryResultErrorType
 
           def self.resolve_type(object, _context)
             case object[:__typename]
             when "DeleteCategoryResultSuccess"
               Objects::Categories::DeleteCategory::DeleteCategoryResultSuccess
-            when "DeleteCategoryResultError"
-              Objects::Categories::DeleteCategory::DeleteCategoryResultError
+            when "DeleteCategoryResultErrorType"
+              Objects::Categories::DeleteCategory::DeleteCategoryResultErrorType
             else
               raise "Unexpected DeleteCategoryResult: #{object}"
             end

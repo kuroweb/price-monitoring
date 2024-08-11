@@ -35,7 +35,7 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "DeleteCategoryResultError",
+            __typename: "DeleteCategoryResultErrorType",
             error: {
               __typename: "DeleteCategoryResultValidationFailed",
               code:,
