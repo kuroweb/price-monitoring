@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Categories
       module DeleteCategory
-        class DeleteCategoryResultSuccess < Base
+        class DeleteCategoryResultSuccessType < Base
           implements Interfaces::ResultBase
         end
       end

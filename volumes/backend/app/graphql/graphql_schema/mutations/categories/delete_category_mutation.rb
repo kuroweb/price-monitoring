@@ -11,7 +11,7 @@ module GraphqlSchema
 
           if category.destroy
             {
-              __typename: "DeleteCategoryResultSuccess",
+              __typename: "DeleteCategoryResultSuccessType",
               ok: true
             }
           else
@@ -37,7 +37,7 @@ module GraphqlSchema
           {
             __typename: "DeleteCategoryResultErrorType",
             error: {
-              __typename: "DeleteCategoryResultValidationFailed",
+              __typename: "DeleteCategoryResultValidationFailedType",
               code:,
               message:,
               details: []

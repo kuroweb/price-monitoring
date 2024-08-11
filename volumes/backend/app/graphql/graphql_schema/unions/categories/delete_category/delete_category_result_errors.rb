@@ -3,12 +3,12 @@ module GraphqlSchema
     module Categories
       module DeleteCategory
         class DeleteCategoryResultErrors < Base
-          possible_types Objects::Categories::DeleteCategory::DeleteCategoryResultValidationFailed
+          possible_types Objects::Categories::DeleteCategory::DeleteCategoryResultValidationFailedType
 
           def self.resolve_type(object, _context)
             case object[:__typename]
-            when "DeleteCategoryResultValidationFailed"
-              Objects::Categories::DeleteCategory::DeleteCategoryResultValidationFailed
+            when "DeleteCategoryResultValidationFailedType"
+              Objects::Categories::DeleteCategory::DeleteCategoryResultValidationFailedType
             else
               raise "Unexpected error type: #{object}"
             end

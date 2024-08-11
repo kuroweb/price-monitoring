@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Categories
       module DeleteCategory
-        class DeleteCategoryResultValidationFailed < Base
+        class DeleteCategoryResultValidationFailedType < Base
           implements Interfaces::UserError
 
           field :details, [ErrorDetailType], null: false
