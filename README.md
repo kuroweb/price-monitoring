@@ -1,6 +1,6 @@
 # price-monitoring
 
-[![CD](https://github.com/kuroweb/price-monitoring/actions/workflows/cd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cd.yml)
+[![CI/CD](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml)
 
 Web上にある商品の最安値を探したり、相場を把握するためのツール
 
