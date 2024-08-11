@@ -11,22 +11,27 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       backend: ${{ steps.filter.outputs.backend }}
+      backend_cd: ${{ steps.filter.outputs.backend_cd }}
       backend_playwright: ${{ steps.filter.outputs.backend_playwright }}
       frontend: ${{ steps.filter.outputs.frontend }}
     steps:
-    - uses: actions/checkout@v4
-    - uses: dorny/paths-filter@v3
-      id: filter
-      with:
-        filters: |
-          backend:
-            - './volumes/backend/**'
-            - './containers/backend/**'
-          backend_playwright:
-            - './containers/backend_playwright/**'
-          frontend:
-            - './volumes/frontend/**'
-            - './containers/frontend/**'
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            backend:
+              - './volumes/backend/**'
+              - './containers/backend/**'
+            backend_cd:
+              - './volumes/backend/**'
+              - './containers/backend/**'
+              - '!./volumes/backend/spec/**/*.rb'
+            backend_playwright:
+              - './containers/backend_playwright/**'
+            frontend:
+              - './volumes/frontend/**'
+              - './containers/frontend/**'
 
   backend_ci:
     needs: check_changes
