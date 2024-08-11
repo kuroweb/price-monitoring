@@ -7,7 +7,7 @@ module GraphqlSchema
                              CreateYahooAuctionCrawlSettingRequiredKeywordInput
 
           type Unions::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingRequiredKeyword::
-               CreateYahooAuctionCrawlSettingRequiredKeywordResult, null: false
+               CreateYahooAuctionCrawlSettingRequiredKeywordResultUnion, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

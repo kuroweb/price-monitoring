@@ -7,7 +7,7 @@ module GraphqlSchema
                              DeleteUsedSofmapCrawlSettingRequiredKeywordInput
 
           type Unions::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingRequiredKeyword::
-               DeleteUsedSofmapCrawlSettingRequiredKeywordResult, null: false
+               DeleteUsedSofmapCrawlSettingRequiredKeywordResultUnion, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])

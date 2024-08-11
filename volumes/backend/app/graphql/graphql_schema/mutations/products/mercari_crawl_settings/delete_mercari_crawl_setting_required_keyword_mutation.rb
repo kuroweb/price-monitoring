@@ -7,7 +7,7 @@ module GraphqlSchema
                              DeleteMercariCrawlSettingRequiredKeywordInput
 
           type Unions::Products::MercariCrawlSettings::DeleteMercariCrawlSettingRequiredKeyword::
-               DeleteMercariCrawlSettingRequiredKeywordResult, null: false
+               DeleteMercariCrawlSettingRequiredKeywordResultUnion, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])

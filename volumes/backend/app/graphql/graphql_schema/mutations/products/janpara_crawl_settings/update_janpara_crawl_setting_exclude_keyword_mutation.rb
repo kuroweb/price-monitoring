@@ -7,7 +7,7 @@ module GraphqlSchema
                              UpdateJanparaCrawlSettingExcludeKeywordInput
 
           type Unions::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword::
-               UpdateJanparaCrawlSettingExcludeKeywordResult, null: false
+               UpdateJanparaCrawlSettingExcludeKeywordResultUnion, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])
