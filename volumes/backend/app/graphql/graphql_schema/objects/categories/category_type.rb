@@ -11,8 +11,7 @@ module GraphqlSchema
         field :children, [Objects::Categories::CategoryType], null: false
         field :products, [Objects::Products::ProductType], null: false
 
-        delegate :parent, to: :object
-        delegate :children, to: :object
+        delegate :parent, :children, to: :object
 
         def products
           category_ids = object.self_and_descendant_ids

@@ -20,16 +20,16 @@ module GraphqlSchema
         field :related_products, resolver: Resolvers::Products::RelatedProductsResolver
         field :category, Categories::CategoryType, null: false
 
-        delegate :yahoo_auction_crawl_setting, to: :object
-        delegate :mercari_crawl_setting, to: :object
-        delegate :janpara_crawl_setting, to: :object
-        delegate :iosys_crawl_setting, to: :object
-        delegate :pc_koubou_crawl_setting, to: :object
-        delegate :used_sofmap_crawl_setting, to: :object
-        delegate :yahoo_auction_daily_purchase_summaries, to: :object
-        delegate :yahoo_fleamarket_daily_purchase_summaries, to: :object
-        delegate :mercari_daily_purchase_summaries, to: :object
-        delegate :category, to: :object
+        delegate :yahoo_auction_crawl_setting,
+                 :mercari_crawl_setting,
+                 :janpara_crawl_setting,
+                 :iosys_crawl_setting,
+                 :pc_koubou_crawl_setting,
+                 :used_sofmap_crawl_setting,
+                 :yahoo_auction_daily_purchase_summaries,
+                 :yahoo_fleamarket_daily_purchase_summaries,
+                 :mercari_daily_purchase_summaries,
+                 :category, to: :object
       end
     end
   end
