@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module JanparaCrawlSettings
         module UpdateJanparaCrawlSettingExcludeProduct
-          class UpdateJanparaCrawlSettingExcludeProductResultValidationFailed < Base
+          class UpdateJanparaCrawlSettingExcludeProductResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

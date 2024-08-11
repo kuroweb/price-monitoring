@@ -5,18 +5,18 @@ module GraphqlSchema
         module CreateJanparaCrawlSettingRequiredKeyword
           class CreateJanparaCrawlSettingRequiredKeywordResult < Base
             possible_types Objects::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword::
-                           CreateJanparaCrawlSettingRequiredKeywordResultSuccess,
+                           CreateJanparaCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword::
-                           CreateJanparaCrawlSettingRequiredKeywordResultError
+                           CreateJanparaCrawlSettingRequiredKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreateJanparaCrawlSettingRequiredKeywordResultSuccess"
+              when "CreateJanparaCrawlSettingRequiredKeywordResultSuccessType"
                 Objects::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword::
-                CreateJanparaCrawlSettingRequiredKeywordResultSuccess
-              when "CreateJanparaCrawlSettingRequiredKeywordResultError"
+                CreateJanparaCrawlSettingRequiredKeywordResultSuccessType
+              when "CreateJanparaCrawlSettingRequiredKeywordResultErrorType"
                 Objects::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword::
-                CreateJanparaCrawlSettingRequiredKeywordResultError
+                CreateJanparaCrawlSettingRequiredKeywordResultErrorType
               else
                 raise "Unexpected CreateJanparaCrawlSettingRequiredKeywordResult: #{object}"
               end

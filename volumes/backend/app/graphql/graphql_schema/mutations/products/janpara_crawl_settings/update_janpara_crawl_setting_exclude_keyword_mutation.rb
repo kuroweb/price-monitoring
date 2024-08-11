@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdateJanparaCrawlSettingExcludeKeywordResultSuccess",
+              __typename: "UpdateJanparaCrawlSettingExcludeKeywordResultSuccessType",
               janpara_crawl_setting_exclude_keyword:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdateJanparaCrawlSettingExcludeKeywordResultError",
+              __typename: "UpdateJanparaCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "UpdateJanparaCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

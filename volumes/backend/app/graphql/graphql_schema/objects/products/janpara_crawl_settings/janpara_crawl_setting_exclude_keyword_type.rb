@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module JanparaCrawlSettings
-        class JanparaCrawlSettingRequiredKeyword < Base
+        class JanparaCrawlSettingExcludeKeywordType < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false

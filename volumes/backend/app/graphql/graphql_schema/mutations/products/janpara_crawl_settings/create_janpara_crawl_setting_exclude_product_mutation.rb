@@ -20,7 +20,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "CreateJanparaCrawlSettingExcludeProductResultSuccess",
+              __typename: "CreateJanparaCrawlSettingExcludeProductResultSuccessType",
               janpara_crawl_setting_exclude_product:,
               ok: true
             }
@@ -52,9 +52,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "CreateJanparaCrawlSettingExcludeProductResultError",
+              __typename: "CreateJanparaCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "CreateJanparaCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "CreateJanparaCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

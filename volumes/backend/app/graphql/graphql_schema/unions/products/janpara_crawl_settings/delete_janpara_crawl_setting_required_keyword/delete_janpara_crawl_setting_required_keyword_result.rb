@@ -5,18 +5,18 @@ module GraphqlSchema
         module DeleteJanparaCrawlSettingRequiredKeyword
           class DeleteJanparaCrawlSettingRequiredKeywordResult < Base
             possible_types Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeyword::
-                           DeleteJanparaCrawlSettingRequiredKeywordResultSuccess,
+                           DeleteJanparaCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeyword::
-                           DeleteJanparaCrawlSettingRequiredKeywordResultError
+                           DeleteJanparaCrawlSettingRequiredKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteJanparaCrawlSettingRequiredKeywordResultSuccess"
+              when "DeleteJanparaCrawlSettingRequiredKeywordResultSuccessType"
                 Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeyword::
-                DeleteJanparaCrawlSettingRequiredKeywordResultSuccess
-              when "DeleteJanparaCrawlSettingRequiredKeywordResultError"
+                DeleteJanparaCrawlSettingRequiredKeywordResultSuccessType
+              when "DeleteJanparaCrawlSettingRequiredKeywordResultErrorType"
                 Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingRequiredKeyword::
-                DeleteJanparaCrawlSettingRequiredKeywordResultError
+                DeleteJanparaCrawlSettingRequiredKeywordResultErrorType
               else
                 raise "Unexpected DeleteJanparaCrawlSettingRequiredKeywordResult: #{object}"
               end

@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module JanparaCrawlSettings
         module CreateJanparaCrawlSettingExcludeKeyword
-          class CreateJanparaCrawlSettingExcludeKeywordResultError < Base
+          class CreateJanparaCrawlSettingExcludeKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

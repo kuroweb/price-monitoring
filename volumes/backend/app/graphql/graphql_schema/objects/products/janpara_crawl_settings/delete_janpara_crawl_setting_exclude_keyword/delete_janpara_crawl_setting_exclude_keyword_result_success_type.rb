@@ -3,10 +3,8 @@ module GraphqlSchema
     module Products
       module JanparaCrawlSettings
         module DeleteJanparaCrawlSettingExcludeKeyword
-          class DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed < Base
-            implements Interfaces::UserError
-
-            field :details, [ErrorDetailType], null: false
+          class DeleteJanparaCrawlSettingExcludeKeywordResultSuccessType < Base
+            implements Interfaces::ResultBase
           end
         end
       end

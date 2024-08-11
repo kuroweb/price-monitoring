@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if janpara_crawl_setting_exclude_keyword.destroy
               {
-                __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultSuccess",
+                __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultError",
+              __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

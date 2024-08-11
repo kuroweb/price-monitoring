@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module JanparaCrawlSettings
         module UpdateJanparaCrawlSettingExcludeProduct
-          class UpdateJanparaCrawlSettingExcludeProductResultSuccess < Base
+          class UpdateJanparaCrawlSettingExcludeProductResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :janpara_crawl_setting_exclude_product,
-                  Objects::Products::JanparaCrawlSettings::JanparaCrawlSettingExcludeProduct, null: false
+                  Objects::Products::JanparaCrawlSettings::JanparaCrawlSettingExcludeProductType, null: false
           end
         end
       end

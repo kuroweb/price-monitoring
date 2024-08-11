@@ -5,13 +5,13 @@ module GraphqlSchema
         module UpdateJanparaCrawlSettingExcludeProduct
           class UpdateJanparaCrawlSettingExcludeProductResultErrorsUnion < Base
             possible_types Objects::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProduct::
-                           UpdateJanparaCrawlSettingExcludeProductResultValidationFailed
+                           UpdateJanparaCrawlSettingExcludeProductResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateJanparaCrawlSettingExcludeProductResultValidationFailed"
+              when "UpdateJanparaCrawlSettingExcludeProductResultValidationFailedType"
                 Objects::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeProduct::
-                UpdateJanparaCrawlSettingExcludeProductResultValidationFailed
+                UpdateJanparaCrawlSettingExcludeProductResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

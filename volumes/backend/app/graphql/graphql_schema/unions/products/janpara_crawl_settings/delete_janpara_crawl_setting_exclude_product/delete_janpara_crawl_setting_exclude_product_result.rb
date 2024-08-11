@@ -5,18 +5,18 @@ module GraphqlSchema
         module DeleteJanparaCrawlSettingExcludeProduct
           class DeleteJanparaCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct::
-                           DeleteJanparaCrawlSettingExcludeProductResultSuccess,
+                           DeleteJanparaCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct::
-                           DeleteJanparaCrawlSettingExcludeProductResultError
+                           DeleteJanparaCrawlSettingExcludeProductResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteJanparaCrawlSettingExcludeProductResultSuccess"
+              when "DeleteJanparaCrawlSettingExcludeProductResultSuccessType"
                 Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct::
-                DeleteJanparaCrawlSettingExcludeProductResultSuccess
-              when "DeleteJanparaCrawlSettingExcludeProductResultError"
+                DeleteJanparaCrawlSettingExcludeProductResultSuccessType
+              when "DeleteJanparaCrawlSettingExcludeProductResultErrorType"
                 Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeProduct::
-                DeleteJanparaCrawlSettingExcludeProductResultError
+                DeleteJanparaCrawlSettingExcludeProductResultErrorType
               else
                 raise "Unexpected DeleteJanparaCrawlSettingExcludeProductResult: #{object}"
               end

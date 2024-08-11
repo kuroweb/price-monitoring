@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module JanparaCrawlSettings
         module UpdateJanparaCrawlSettingRequiredKeyword
-          class UpdateJanparaCrawlSettingRequiredKeywordResultSuccess < Base
+          class UpdateJanparaCrawlSettingRequiredKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :janpara_crawl_setting_required_keyword,
-                  Objects::Products::JanparaCrawlSettings::JanparaCrawlSettingRequiredKeyword, null: false
+                  Objects::Products::JanparaCrawlSettings::JanparaCrawlSettingRequiredKeywordType, null: false
           end
         end
       end

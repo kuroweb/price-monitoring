@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if janpara_crawl_setting_exclude_product.destroy
               {
-                __typename: "DeleteJanparaCrawlSettingExcludeProductResultSuccess",
+                __typename: "DeleteJanparaCrawlSettingExcludeProductResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteJanparaCrawlSettingExcludeProductResultError",
+              __typename: "DeleteJanparaCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "DeleteJanparaCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "DeleteJanparaCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

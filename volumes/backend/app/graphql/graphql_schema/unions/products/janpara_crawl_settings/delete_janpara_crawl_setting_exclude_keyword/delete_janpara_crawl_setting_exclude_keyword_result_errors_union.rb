@@ -5,13 +5,13 @@ module GraphqlSchema
         module DeleteJanparaCrawlSettingExcludeKeyword
           class DeleteJanparaCrawlSettingExcludeKeywordResultErrorsUnion < Base
             possible_types Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeyword::
-                           DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed
+                           DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed"
+              when "DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailedType"
                 Objects::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeyword::
-                DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailed
+                DeleteJanparaCrawlSettingExcludeKeywordResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

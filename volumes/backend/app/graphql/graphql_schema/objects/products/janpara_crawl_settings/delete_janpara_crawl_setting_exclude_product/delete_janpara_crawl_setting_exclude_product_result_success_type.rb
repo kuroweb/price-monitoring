@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module JanparaCrawlSettings
-        module DeleteJanparaCrawlSettingExcludeKeyword
-          class DeleteJanparaCrawlSettingExcludeKeywordResultSuccess < Base
+        module DeleteJanparaCrawlSettingExcludeProduct
+          class DeleteJanparaCrawlSettingExcludeProductResultSuccessType < Base
             implements Interfaces::ResultBase
           end
         end

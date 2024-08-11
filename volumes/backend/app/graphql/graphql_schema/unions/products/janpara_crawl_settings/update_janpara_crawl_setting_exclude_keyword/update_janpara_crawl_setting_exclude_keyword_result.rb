@@ -5,18 +5,18 @@ module GraphqlSchema
         module UpdateJanparaCrawlSettingExcludeKeyword
           class UpdateJanparaCrawlSettingExcludeKeywordResult < Base
             possible_types Objects::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword::
-                           UpdateJanparaCrawlSettingExcludeKeywordResultSuccess,
+                           UpdateJanparaCrawlSettingExcludeKeywordResultSuccessType,
                            Objects::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword::
-                           UpdateJanparaCrawlSettingExcludeKeywordResultError
+                           UpdateJanparaCrawlSettingExcludeKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateJanparaCrawlSettingExcludeKeywordResultSuccess"
+              when "UpdateJanparaCrawlSettingExcludeKeywordResultSuccessType"
                 Objects::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword::
-                UpdateJanparaCrawlSettingExcludeKeywordResultSuccess
-              when "UpdateJanparaCrawlSettingExcludeKeywordResultError"
+                UpdateJanparaCrawlSettingExcludeKeywordResultSuccessType
+              when "UpdateJanparaCrawlSettingExcludeKeywordResultErrorType"
                 Objects::Products::JanparaCrawlSettings::UpdateJanparaCrawlSettingExcludeKeyword::
-                UpdateJanparaCrawlSettingExcludeKeywordResultError
+                UpdateJanparaCrawlSettingExcludeKeywordResultErrorType
               else
                 raise "Unexpected UpdateJanparaCrawlSettingExcludeKeywordResult: #{object}"
               end

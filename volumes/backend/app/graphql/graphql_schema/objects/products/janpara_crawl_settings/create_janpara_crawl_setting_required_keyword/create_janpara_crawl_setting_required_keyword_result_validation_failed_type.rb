@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module JanparaCrawlSettings
         module CreateJanparaCrawlSettingRequiredKeyword
-          class CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed < Base
+          class CreateJanparaCrawlSettingRequiredKeywordResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false
