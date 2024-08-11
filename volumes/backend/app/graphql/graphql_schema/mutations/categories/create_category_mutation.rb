@@ -17,7 +17,7 @@ module GraphqlSchema
             end
 
           {
-            __typename: "CreateCategoryResultSuccess",
+            __typename: "CreateCategoryResultSuccessType",
             category:,
             ok: true
           }
@@ -42,9 +42,9 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "CreateCategoryResultError",
+            __typename: "CreateCategoryResultErrorType",
             error: {
-              __typename: "CreateCategoryResultValidationFailed",
+              __typename: "CreateCategoryResultValidationFailedType",
               code:,
               message:,
               details: []

@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Categories
       module CreateCategory
-        class CreateCategoryResultValidationFailed < Base
+        class CreateCategoryResultValidationFailedType < Base
           implements Interfaces::UserError
 
           field :details, [ErrorDetailType], null: false

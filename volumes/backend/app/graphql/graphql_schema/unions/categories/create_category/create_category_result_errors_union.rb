@@ -3,12 +3,12 @@ module GraphqlSchema
     module Categories
       module CreateCategory
         class CreateCategoryResultErrorsUnion < Base
-          possible_types Objects::Categories::CreateCategory::CreateCategoryResultValidationFailed
+          possible_types Objects::Categories::CreateCategory::CreateCategoryResultValidationFailedType
 
           def self.resolve_type(object, _context)
             case object[:__typename]
-            when "CreateCategoryResultValidationFailed"
-              Objects::Categories::CreateCategory::CreateCategoryResultValidationFailed
+            when "CreateCategoryResultValidationFailedType"
+              Objects::Categories::CreateCategory::CreateCategoryResultValidationFailedType
             else
               raise "Unexpected error type: #{object}"
             end

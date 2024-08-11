@@ -2,10 +2,10 @@ module GraphqlSchema
   module Objects
     module Categories
       module CreateCategory
-        class CreateCategoryResultSuccess < Base
+        class CreateCategoryResultErrorType < Base
           implements Interfaces::ResultBase
 
-          field :category, Objects::Categories::CategoryType, null: false
+          field :error, Unions::Categories::CreateCategory::CreateCategoryResultErrorsUnion, null: false
         end
       end
     end
