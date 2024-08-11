@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword::
-                  CreateIosysCrawlSettingRequiredKeywordResultErrors,
+                  CreateIosysCrawlSettingRequiredKeywordResultErrorsUnion,
                   null: false
           end
         end

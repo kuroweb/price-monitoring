@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword::
-                  UpdateIosysCrawlSettingExcludeKeywordResultErrors,
+                  UpdateIosysCrawlSettingExcludeKeywordResultErrorsUnion,
                   null: false
           end
         end

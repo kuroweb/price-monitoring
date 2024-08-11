@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeKeyword::
-                  CreatePcKoubouCrawlSettingExcludeKeywordResultErrors,
+                  CreatePcKoubouCrawlSettingExcludeKeywordResultErrorsUnion,
                   null: false
           end
         end

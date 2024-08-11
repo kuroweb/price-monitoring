@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeProduct::
-                  CreateYahooAuctionCrawlSettingExcludeProductResultErrors,
+                  CreateYahooAuctionCrawlSettingExcludeProductResultErrorsUnion,
                   null: false
           end
         end

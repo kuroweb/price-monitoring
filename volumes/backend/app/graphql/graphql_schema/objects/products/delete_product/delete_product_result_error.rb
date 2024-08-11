@@ -5,7 +5,7 @@ module GraphqlSchema
         class DeleteProductResultError < Base
           implements Interfaces::ResultBase
 
-          field :error, Unions::Products::DeleteProduct::DeleteProductResultErrors, null: false
+          field :error, Unions::Products::DeleteProduct::DeleteProductResultErrorsUnion, null: false
         end
       end
     end

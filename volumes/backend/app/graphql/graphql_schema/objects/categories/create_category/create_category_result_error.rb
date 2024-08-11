@@ -5,7 +5,7 @@ module GraphqlSchema
         class CreateCategoryResultError < Base
           implements Interfaces::ResultBase
 
-          field :error, Unions::Categories::CreateCategory::CreateCategoryResultErrors, null: false
+          field :error, Unions::Categories::CreateCategory::CreateCategoryResultErrorsUnion, null: false
         end
       end
     end
