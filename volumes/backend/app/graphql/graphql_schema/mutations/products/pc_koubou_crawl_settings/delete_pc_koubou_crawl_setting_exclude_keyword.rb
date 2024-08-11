@@ -7,7 +7,7 @@ module GraphqlSchema
                              DeletePcKoubouCrawlSettingExcludeKeywordInput
 
           type Unions::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeyword::
-               DeletePcKoubouCrawlSettingExcludeKeywordResultUnion, null: false
+               DeletePcKoubouCrawlSettingExcludeKeywordResult, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])

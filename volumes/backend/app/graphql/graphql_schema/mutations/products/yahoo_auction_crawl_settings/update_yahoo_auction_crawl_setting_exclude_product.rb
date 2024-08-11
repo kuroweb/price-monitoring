@@ -7,7 +7,7 @@ module GraphqlSchema
                              UpdateYahooAuctionCrawlSettingExcludeProductInput
 
           type Unions::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeProduct::
-               UpdateYahooAuctionCrawlSettingExcludeProductResultUnion, null: false
+               UpdateYahooAuctionCrawlSettingExcludeProductResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

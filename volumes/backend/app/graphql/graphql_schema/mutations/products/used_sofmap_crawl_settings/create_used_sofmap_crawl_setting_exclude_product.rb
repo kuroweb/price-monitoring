@@ -7,7 +7,7 @@ module GraphqlSchema
                              CreateUsedSofmapCrawlSettingExcludeProductInput
 
           type Unions::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingExcludeProduct::
-               CreateUsedSofmapCrawlSettingExcludeProductResultUnion, null: false
+               CreateUsedSofmapCrawlSettingExcludeProductResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

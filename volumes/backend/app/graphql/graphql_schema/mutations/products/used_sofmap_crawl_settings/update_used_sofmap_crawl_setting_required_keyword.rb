@@ -7,7 +7,7 @@ module GraphqlSchema
                              UpdateUsedSofmapCrawlSettingRequiredKeywordInput
 
           type Unions::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingRequiredKeyword::
-               UpdateUsedSofmapCrawlSettingRequiredKeywordResultUnion, null: false
+               UpdateUsedSofmapCrawlSettingRequiredKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

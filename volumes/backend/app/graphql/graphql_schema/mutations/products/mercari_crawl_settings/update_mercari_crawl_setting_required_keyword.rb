@@ -7,7 +7,7 @@ module GraphqlSchema
                              UpdateMercariCrawlSettingRequiredKeywordInput
 
           type Unions::Products::MercariCrawlSettings::UpdateMercariCrawlSettingRequiredKeyword::
-               UpdateMercariCrawlSettingRequiredKeywordResultUnion, null: false
+               UpdateMercariCrawlSettingRequiredKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

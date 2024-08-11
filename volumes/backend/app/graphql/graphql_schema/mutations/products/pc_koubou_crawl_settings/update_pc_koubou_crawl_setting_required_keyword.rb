@@ -7,7 +7,7 @@ module GraphqlSchema
                              UpdatePcKoubouCrawlSettingRequiredKeywordInput
 
           type Unions::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingRequiredKeyword::
-               UpdatePcKoubouCrawlSettingRequiredKeywordResultUnion, null: false
+               UpdatePcKoubouCrawlSettingRequiredKeywordResult, null: false
 
           def resolve(input)
             product = Product.find(input[:product_id])

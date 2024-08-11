@@ -7,7 +7,7 @@ module GraphqlSchema
                              DeleteJanparaCrawlSettingExcludeKeywordInput
 
           type Unions::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeyword::
-               DeleteJanparaCrawlSettingExcludeKeywordResultUnion, null: false
+               DeleteJanparaCrawlSettingExcludeKeywordResult, null: false
 
           def resolve(input) # rubocop:disable Metrics/MethodLength
             product = Product.find(input[:product_id])
