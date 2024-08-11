@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module UpdatePcKoubouCrawlSettingExcludeProduct
-          class UpdatePcKoubouCrawlSettingExcludeProductResultSuccess < Base
+          class UpdatePcKoubouCrawlSettingExcludeProductResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :pc_koubou_crawl_setting_exclude_product,
-                  Objects::Products::PcKoubouCrawlSettings::PcKoubouCrawlSettingExcludeProduct, null: false
+                  Objects::Products::PcKoubouCrawlSettings::PcKoubouCrawlSettingExcludeProductType, null: false
           end
         end
       end

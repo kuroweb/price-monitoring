@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module PcKoubouCrawlSettings
-        module CreatePcKoubouCrawlSettingRequiredKeyword
-          class CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed < Base
+        module UpdatePcKoubouCrawlSettingExcludeKeyword
+          class UpdatePcKoubouCrawlSettingExcludeKeywordResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

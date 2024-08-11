@@ -5,13 +5,13 @@ module GraphqlSchema
         module DeletePcKoubouCrawlSettingExcludeKeyword
           class DeletePcKoubouCrawlSettingExcludeKeywordResultErrorsUnion < Base
             possible_types Objects::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeyword::
-                           DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed
+                           DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed"
+              when "DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailedType"
                 Objects::Products::PcKoubouCrawlSettings::DeletePcKoubouCrawlSettingExcludeKeyword::
-                DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailed
+                DeletePcKoubouCrawlSettingExcludeKeywordResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

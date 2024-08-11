@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module DeletePcKoubouCrawlSettingRequiredKeyword
-          class DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess < Base
+          class DeletePcKoubouCrawlSettingRequiredKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
           end
         end

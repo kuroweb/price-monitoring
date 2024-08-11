@@ -5,18 +5,18 @@ module GraphqlSchema
         module CreatePcKoubouCrawlSettingExcludeProduct
           class CreatePcKoubouCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProduct::
-                           CreatePcKoubouCrawlSettingExcludeProductResultSuccess,
+                           CreatePcKoubouCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProduct::
-                           CreatePcKoubouCrawlSettingExcludeProductResultError
+                           CreatePcKoubouCrawlSettingExcludeProductResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreatePcKoubouCrawlSettingExcludeProductResultSuccess"
+              when "CreatePcKoubouCrawlSettingExcludeProductResultSuccessType"
                 Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProduct::
-                CreatePcKoubouCrawlSettingExcludeProductResultSuccess
-              when "CreatePcKoubouCrawlSettingExcludeProductResultError"
+                CreatePcKoubouCrawlSettingExcludeProductResultSuccessType
+              when "CreatePcKoubouCrawlSettingExcludeProductResultErrorType"
                 Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingExcludeProduct::
-                CreatePcKoubouCrawlSettingExcludeProductResultError
+                CreatePcKoubouCrawlSettingExcludeProductResultErrorType
               else
                 raise "Unexpected CreatePcKoubouCrawlSettingExcludeProductResult: #{object}"
               end

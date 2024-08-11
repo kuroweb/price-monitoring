@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if pc_koubou_crawl_setting_required_keyword.destroy
               {
-                __typename: "DeletePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+                __typename: "DeletePcKoubouCrawlSettingRequiredKeywordResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeletePcKoubouCrawlSettingRequiredKeywordResultError",
+              __typename: "DeletePcKoubouCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "DeletePcKoubouCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

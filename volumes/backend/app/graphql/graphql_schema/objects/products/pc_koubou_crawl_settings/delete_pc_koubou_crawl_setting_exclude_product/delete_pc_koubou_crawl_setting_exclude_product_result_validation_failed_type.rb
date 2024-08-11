@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module DeletePcKoubouCrawlSettingExcludeProduct
-          class DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed < Base
+          class DeletePcKoubouCrawlSettingExcludeProductResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

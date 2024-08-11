@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccess",
+              __typename: "UpdatePcKoubouCrawlSettingRequiredKeywordResultSuccessType",
               pc_koubou_crawl_setting_required_keyword:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdatePcKoubouCrawlSettingRequiredKeywordResultError",
+              __typename: "UpdatePcKoubouCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "UpdatePcKoubouCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

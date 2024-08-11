@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module UpdatePcKoubouCrawlSettingRequiredKeyword
-          class UpdatePcKoubouCrawlSettingRequiredKeywordResultError < Base
+          class UpdatePcKoubouCrawlSettingRequiredKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if pc_koubou_crawl_setting_exclude_product.destroy
               {
-                __typename: "DeletePcKoubouCrawlSettingExcludeProductResultSuccess",
+                __typename: "DeletePcKoubouCrawlSettingExcludeProductResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeletePcKoubouCrawlSettingExcludeProductResultError",
+              __typename: "DeletePcKoubouCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "DeletePcKoubouCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

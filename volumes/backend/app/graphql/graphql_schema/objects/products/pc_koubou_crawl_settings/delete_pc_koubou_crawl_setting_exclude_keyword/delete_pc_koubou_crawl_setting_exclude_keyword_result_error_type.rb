@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module DeletePcKoubouCrawlSettingExcludeKeyword
-          class DeletePcKoubouCrawlSettingExcludeKeywordResultError < Base
+          class DeletePcKoubouCrawlSettingExcludeKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

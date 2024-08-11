@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module CreatePcKoubouCrawlSettingRequiredKeyword
-          class CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess < Base
+          class CreatePcKoubouCrawlSettingRequiredKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :pc_koubou_crawl_setting_required_keyword,
-                  Objects::Products::PcKoubouCrawlSettings::PcKoubouCrawlSettingRequiredKeyword,
+                  Objects::Products::PcKoubouCrawlSettings::PcKoubouCrawlSettingRequiredKeywordType,
                   null: false
           end
         end

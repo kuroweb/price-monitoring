@@ -5,18 +5,18 @@ module GraphqlSchema
         module CreatePcKoubouCrawlSettingRequiredKeyword
           class CreatePcKoubouCrawlSettingRequiredKeywordResult < Base
             possible_types Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword::
-                           CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess,
+                           CreatePcKoubouCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword::
-                           CreatePcKoubouCrawlSettingRequiredKeywordResultError
+                           CreatePcKoubouCrawlSettingRequiredKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess"
+              when "CreatePcKoubouCrawlSettingRequiredKeywordResultSuccessType"
                 Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword::
-                CreatePcKoubouCrawlSettingRequiredKeywordResultSuccess
-              when "CreatePcKoubouCrawlSettingRequiredKeywordResultError"
+                CreatePcKoubouCrawlSettingRequiredKeywordResultSuccessType
+              when "CreatePcKoubouCrawlSettingRequiredKeywordResultErrorType"
                 Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword::
-                CreatePcKoubouCrawlSettingRequiredKeywordResultError
+                CreatePcKoubouCrawlSettingRequiredKeywordResultErrorType
               else
                 raise "Unexpected CreatePcKoubouCrawlSettingRequiredKeywordResult: #{object}"
               end

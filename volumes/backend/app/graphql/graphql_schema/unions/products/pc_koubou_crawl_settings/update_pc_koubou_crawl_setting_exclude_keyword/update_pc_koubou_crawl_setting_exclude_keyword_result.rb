@@ -5,18 +5,18 @@ module GraphqlSchema
         module UpdatePcKoubouCrawlSettingExcludeKeyword
           class UpdatePcKoubouCrawlSettingExcludeKeywordResult < Base
             possible_types Objects::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword::
-                           UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess,
+                           UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccessType,
                            Objects::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword::
-                           UpdatePcKoubouCrawlSettingExcludeKeywordResultError
+                           UpdatePcKoubouCrawlSettingExcludeKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess"
+              when "UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccessType"
                 Objects::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword::
-                UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess
-              when "UpdatePcKoubouCrawlSettingExcludeKeywordResultError"
+                UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccessType
+              when "UpdatePcKoubouCrawlSettingExcludeKeywordResultErrorType"
                 Objects::Products::PcKoubouCrawlSettings::UpdatePcKoubouCrawlSettingExcludeKeyword::
-                UpdatePcKoubouCrawlSettingExcludeKeywordResultError
+                UpdatePcKoubouCrawlSettingExcludeKeywordResultErrorType
               else
                 raise "Unexpected UpdatePcKoubouCrawlSettingExcludeKeywordResult: #{object}"
               end

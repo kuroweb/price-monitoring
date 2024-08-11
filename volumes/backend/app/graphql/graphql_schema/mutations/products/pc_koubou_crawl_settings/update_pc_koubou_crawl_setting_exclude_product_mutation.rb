@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdatePcKoubouCrawlSettingExcludeProductResultSuccess",
+              __typename: "UpdatePcKoubouCrawlSettingExcludeProductResultSuccessType",
               pc_koubou_crawl_setting_exclude_product:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdatePcKoubouCrawlSettingExcludeProductResultError",
+              __typename: "UpdatePcKoubouCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "UpdatePcKoubouCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

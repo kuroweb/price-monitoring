@@ -20,7 +20,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "CreatePcKoubouCrawlSettingExcludeKeywordResultSuccess",
+              __typename: "CreatePcKoubouCrawlSettingExcludeKeywordResultSuccessType",
               pc_koubou_crawl_setting_exclude_keyword:,
               ok: true
             }
@@ -52,9 +52,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "CreatePcKoubouCrawlSettingExcludeKeywordResultError",
+              __typename: "CreatePcKoubouCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "CreatePcKoubouCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

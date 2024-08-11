@@ -5,13 +5,13 @@ module GraphqlSchema
         module CreatePcKoubouCrawlSettingRequiredKeyword
           class CreatePcKoubouCrawlSettingRequiredKeywordResultErrorsUnion < Base
             possible_types Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword::
-                           CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed
+                           CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed"
+              when "CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailedType"
                 Objects::Products::PcKoubouCrawlSettings::CreatePcKoubouCrawlSettingRequiredKeyword::
-                CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailed
+                CreatePcKoubouCrawlSettingRequiredKeywordResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

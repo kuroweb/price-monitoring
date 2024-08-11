@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module PcKoubouCrawlSettings
         module UpdatePcKoubouCrawlSettingExcludeKeyword
-          class UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccess < Base
+          class UpdatePcKoubouCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :pc_koubou_crawl_setting_exclude_keyword,
-                  Objects::Products::PcKoubouCrawlSettings::PcKoubouCrawlSettingExcludeKeyword, null: false
+                  Objects::Products::PcKoubouCrawlSettings::PcKoubouCrawlSettingExcludeKeywordType, null: false
           end
         end
       end
