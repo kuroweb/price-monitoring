@@ -11,6 +11,6 @@ class IosysCrawlSetting < ApplicationRecord
 
   ## methods ##
   def crawlable_keyword
-    keyword.gsub(" ", "+")
+    keyword.tr(" ", "+")
   end
 end
