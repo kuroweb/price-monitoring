@@ -10,7 +10,7 @@ module GraphqlSchema
           product = ::Products::Create.call(params: input.as_json.deep_symbolize_keys)
 
           {
-            __typename: "CreateProductResultSuccess",
+            __typename: "CreateProductResultSuccessType",
             product:,
             ok: true
           }
@@ -37,9 +37,9 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "CreateProductResultError",
+            __typename: "CreateProductResultErrorType",
             error: {
-              __typename: "CreateProductResultValidationFailed",
+              __typename: "CreateProductResultValidationFailedType",
               code:,
               message:,
               details: []

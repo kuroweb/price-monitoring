@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module CreateProduct
-        class CreateProductResultSuccess < Base
+        class CreateProductResultSuccessType < Base
           implements Interfaces::ResultBase
 
           field :product, Objects::Products::Product, null: false

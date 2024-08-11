@@ -3,15 +3,15 @@ module GraphqlSchema
     module Products
       module CreateProduct
         class CreateProductResult < Base
-          possible_types Objects::Products::CreateProduct::CreateProductResultSuccess,
-                         Objects::Products::CreateProduct::CreateProductResultError
+          possible_types Objects::Products::CreateProduct::CreateProductResultSuccessType,
+                         Objects::Products::CreateProduct::CreateProductResultErrorType
 
           def self.resolve_type(object, _context)
             case object[:__typename]
-            when "CreateProductResultSuccess"
-              Objects::Products::CreateProduct::CreateProductResultSuccess
-            when "CreateProductResultError"
-              Objects::Products::CreateProduct::CreateProductResultError
+            when "CreateProductResultSuccessType"
+              Objects::Products::CreateProduct::CreateProductResultSuccessType
+            when "CreateProductResultErrorType"
+              Objects::Products::CreateProduct::CreateProductResultErrorType
             else
               raise "Unexpected CreateProductResult: #{object}"
             end
