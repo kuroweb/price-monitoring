@@ -4,7 +4,7 @@ module GraphqlSchema
       class DeleteCategoryMutation < Base
         input_object_class InputObjects::Categories::DeleteCategoryInput
 
-        type Unions::Categories::DeleteCategory::DeleteCategoryResult, null: false
+        type Unions::Categories::DeleteCategory::DeleteCategoryResultUnion, null: false
 
         def resolve(input)
           category = Category.find(input[:id])

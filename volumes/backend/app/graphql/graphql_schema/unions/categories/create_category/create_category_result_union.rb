@@ -2,7 +2,7 @@ module GraphqlSchema
   module Unions
     module Categories
       module CreateCategory
-        class CreateCategoryResult < Base
+        class CreateCategoryResultUnion < Base
           possible_types Objects::Categories::CreateCategory::CreateCategoryResultSuccessType,
                          Objects::Categories::CreateCategory::CreateCategoryResultErrorType
 
@@ -13,7 +13,7 @@ module GraphqlSchema
             when "CreateCategoryResultErrorType"
               Objects::Categories::CreateCategory::CreateCategoryResultErrorType
             else
-              raise "Unexpected CreateCategoryResult: #{object}"
+              raise "Unexpected CreateCategoryResultUnion: #{object}"
             end
           end
         end
