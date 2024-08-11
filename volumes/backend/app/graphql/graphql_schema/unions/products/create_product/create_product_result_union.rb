@@ -2,7 +2,7 @@ module GraphqlSchema
   module Unions
     module Products
       module CreateProduct
-        class CreateProductResult < Base
+        class CreateProductResultUnion < Base
           possible_types Objects::Products::CreateProduct::CreateProductResultSuccessType,
                          Objects::Products::CreateProduct::CreateProductResultErrorType
 
@@ -13,7 +13,7 @@ module GraphqlSchema
             when "CreateProductResultErrorType"
               Objects::Products::CreateProduct::CreateProductResultErrorType
             else
-              raise "Unexpected CreateProductResult: #{object}"
+              raise "Unexpected CreateProductResultUnion: #{object}"
             end
           end
         end
