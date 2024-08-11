@@ -24,7 +24,6 @@ jobs:
               - './volumes/backend/**'
               - './containers/backend/**'
             backend_cd:
-              - './volumes/backend/**'
               - './volumes/backend/!(spec)/**'
               - './containers/backend/**'
             backend_playwright:

@@ -8,7 +8,7 @@ RSpec.describe MercariCrawlSetting, type: :model do
     it { is_expected.to have_many(:mercari_crawl_setting_required_keywords).dependent(:destroy) }
   end
 
-  describe "validations debug" do
+  describe "validations" do
     it { is_expected.to validate_presence_of(:keyword) }
   end
 end
