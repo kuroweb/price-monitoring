@@ -2,7 +2,7 @@ module GraphqlSchema
   module Resolvers
     module Products
       class RelatedProducts < Base
-        type [Objects::Products::RelatedProduct], null: false
+        type [Objects::Products::RelatedProductType], null: false
 
         argument :platform_mask, String, required: true
         argument :page, Int, required: false

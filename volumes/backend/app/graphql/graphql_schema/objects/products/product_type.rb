@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Objects
     module Products
-      class Product < Base
+      class ProductType < Base
         implements GraphQL::Types::Relay::Node
 
         field :id, ID, null: false

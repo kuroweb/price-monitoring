@@ -9,7 +9,7 @@ module GraphqlSchema
         field :name, String, null: false
         field :parent, Objects::Categories::CategoryType, null: true
         field :children, [Objects::Categories::CategoryType], null: false
-        field :products, [Objects::Products::Product], null: false
+        field :products, [Objects::Products::ProductType], null: false
 
         delegate :parent, to: :object
         delegate :children, to: :object

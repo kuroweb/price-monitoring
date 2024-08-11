@@ -19,7 +19,7 @@ module GraphqlSchema
     def self.resolve_type(_abstract_type, obj, _ctx)
       case obj
       when Product
-        Objects::Products::Product
+        Objects::Products::ProductType
       else
         raise("Unexpected object: #{obj}")
       end
