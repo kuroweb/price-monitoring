@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword::
-                  CreateUsedSofmapCrawlSettingRequiredKeywordResultErrorsUnion,
+                  CreateUsedSofmapCrawlSettingRequiredKeywordResultErrors,
                   null: false
           end
         end

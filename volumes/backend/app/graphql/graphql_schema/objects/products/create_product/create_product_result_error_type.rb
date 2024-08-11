@@ -5,7 +5,7 @@ module GraphqlSchema
         class CreateProductResultErrorType < Base
           implements Interfaces::ResultBase
 
-          field :error, Unions::Products::CreateProduct::CreateProductResultErrorsUnion, null: false
+          field :error, Unions::Products::CreateProduct::CreateProductResultErrors, null: false
         end
       end
     end

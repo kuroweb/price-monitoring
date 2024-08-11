@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct::
-                  CreateMercariCrawlSettingExcludeProductResultErrorsUnion,
+                  CreateMercariCrawlSettingExcludeProductResultErrors,
                   null: false
           end
         end

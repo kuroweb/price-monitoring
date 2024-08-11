@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::JanparaCrawlSettings::DeleteJanparaCrawlSettingExcludeKeyword::
-                  DeleteJanparaCrawlSettingExcludeKeywordResultErrorsUnion,
+                  DeleteJanparaCrawlSettingExcludeKeywordResultErrors,
                   null: false
           end
         end

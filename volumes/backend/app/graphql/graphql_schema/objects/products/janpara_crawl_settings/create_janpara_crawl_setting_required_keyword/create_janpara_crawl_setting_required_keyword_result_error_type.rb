@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::JanparaCrawlSettings::CreateJanparaCrawlSettingRequiredKeyword::
-                  CreateJanparaCrawlSettingRequiredKeywordResultErrorsUnion,
+                  CreateJanparaCrawlSettingRequiredKeywordResultErrors,
                   null: false
           end
         end

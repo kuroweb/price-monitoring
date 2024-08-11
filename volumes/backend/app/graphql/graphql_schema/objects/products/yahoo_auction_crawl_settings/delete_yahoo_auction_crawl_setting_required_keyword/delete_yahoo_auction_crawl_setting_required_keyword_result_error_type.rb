@@ -8,7 +8,7 @@ module GraphqlSchema
 
             field :error,
                   Unions::Products::YahooAuctionCrawlSettings::DeleteYahooAuctionCrawlSettingRequiredKeyword::
-                  DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrorsUnion,
+                  DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrors,
                   null: false
           end
         end

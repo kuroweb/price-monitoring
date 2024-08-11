@@ -5,7 +5,7 @@ module GraphqlSchema
         class DeleteCategoryResultErrorType < Base
           implements Interfaces::ResultBase
 
-          field :error, Unions::Categories::DeleteCategory::DeleteCategoryResultErrorsUnion, null: false
+          field :error, Unions::Categories::DeleteCategory::DeleteCategoryResultErrors, null: false
         end
       end
     end
