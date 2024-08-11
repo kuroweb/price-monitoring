@@ -19,8 +19,6 @@ class Category < ApplicationRecord
     return if root?
     return if parent.depth <= DEPTH_LIMIT
 
-    # debug
-
     errors.add(:base, "Depth limit exceeded. Maximum depth is #{DEPTH_LIMIT}.")
   end
 end

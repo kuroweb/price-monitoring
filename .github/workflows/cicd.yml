@@ -10,31 +10,31 @@ jobs:
   check_changes:
     runs-on: ubuntu-latest
     outputs:
-      backend: ${{ steps.filter.outputs.backend }}
+      backend_ci: ${{ steps.filter.outputs.backend_ci }}
       backend_cd: ${{ steps.filter.outputs.backend_cd }}
-      backend_playwright: ${{ steps.filter.outputs.backend_playwright }}
-      frontend: ${{ steps.filter.outputs.frontend }}
+      backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
+      frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
         id: filter
         with:
           filters: |
-            backend:
+            backend_ci:
               - './volumes/backend/**'
               - './containers/backend/**'
             backend_cd:
               - './volumes/backend/!(spec)/**'
               - './containers/backend/**'
-            backend_playwright:
+            backend_playwright_cd:
               - './containers/backend_playwright/**'
-            frontend:
+            frontend_cd:
               - './volumes/frontend/**'
               - './containers/frontend/**'
 
   backend_ci:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_ci == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -50,7 +50,10 @@ jobs:
         run: echo "result=true" >> $GITHUB_OUTPUT
 
   backend_cd:
-    needs: backend_ci
+    needs:
+      - check_changes
+      - backend_ci
+    if: ${{ needs.check_changes.outputs.backend_cd == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -111,7 +114,7 @@ jobs:
 
   backend_playwright_cd:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend_playwright == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_playwright_cd == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
@@ -170,22 +173,9 @@ jobs:
           make commit
           make push
 
-  frontend_ci:
-    needs: check_changes
-    if: ${{ needs.check_changes.outputs.frontend == 'true' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-      - name: Execute CI
-        run: |
-          echo "skipping..."
-      - name: Set CI Result
-        if: ${{ success() }}
-        run: echo "result=true" >> $GITHUB_OUTPUT
-
   frontend_cd:
-    needs: frontend_ci
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.frontend_cd == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
