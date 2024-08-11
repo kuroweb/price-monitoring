@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Objects
     module Products
-      class MercariDailyPurchaseSummary < Base
+      class YahooAuctionDailyPurchaseSummaryType < Base
         implements GraphQL::Types::Relay::Node
 
         field :id, ID, null: false

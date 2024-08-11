@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module UpdateProduct
-        class UpdateProductResultValidationFailed < Base
+        class UpdateProductResultValidationFailedType < Base
           implements Interfaces::UserError
 
           field :details, [ErrorDetailType], null: false

@@ -14,7 +14,7 @@ module GraphqlSchema
           inspect(product)
 
           {
-            __typename: "UpdateProductResultSuccess",
+            __typename: "UpdateProductResultSuccessType",
             product:,
             ok: true
           }
@@ -46,9 +46,9 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "UpdateProductResultError",
+            __typename: "UpdateProductResultErrorType",
             error: {
-              __typename: "UpdateProductResultValidationFailed",
+              __typename: "UpdateProductResultValidationFailedType",
               code:,
               message:,
               details: []

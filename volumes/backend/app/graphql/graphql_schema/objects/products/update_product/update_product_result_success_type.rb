@@ -2,10 +2,10 @@ module GraphqlSchema
   module Objects
     module Products
       module UpdateProduct
-        class UpdateProductResultError < Base
+        class UpdateProductResultSuccessType < Base
           implements Interfaces::ResultBase
 
-          field :error, Unions::Products::UpdateProduct::UpdateProductResultErrorsUnion, null: false
+          field :product, Objects::Products::Product, null: false
         end
       end
     end
