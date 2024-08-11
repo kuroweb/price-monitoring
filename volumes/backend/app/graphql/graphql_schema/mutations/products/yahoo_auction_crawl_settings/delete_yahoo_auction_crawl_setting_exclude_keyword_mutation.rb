@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if yahoo_auction_crawl_setting_exclude_keyword.destroy
               {
-                __typename: "DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess",
+                __typename: "DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteYahooAuctionCrawlSettingExcludeKeywordResultError",
+              __typename: "DeleteYahooAuctionCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "DeleteYahooAuctionCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

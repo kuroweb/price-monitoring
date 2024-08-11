@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module YahooAuctionCrawlSettings
-        class YahooAuctionCrawlSettingRequiredKeyword < Base
+        class YahooAuctionCrawlSettingExcludeKeywordType < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false

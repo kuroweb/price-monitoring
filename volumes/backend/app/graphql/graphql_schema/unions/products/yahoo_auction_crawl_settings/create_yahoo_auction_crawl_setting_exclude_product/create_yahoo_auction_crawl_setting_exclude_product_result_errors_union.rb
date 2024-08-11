@@ -5,13 +5,13 @@ module GraphqlSchema
         module CreateYahooAuctionCrawlSettingExcludeProduct
           class CreateYahooAuctionCrawlSettingExcludeProductResultErrorsUnion < Base
             possible_types Objects::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeProduct::
-                           CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+                           CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed"
+              when "CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailedType"
                 Objects::Products::YahooAuctionCrawlSettings::CreateYahooAuctionCrawlSettingExcludeProduct::
-                CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailed
+                CreateYahooAuctionCrawlSettingExcludeProductResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module YahooAuctionCrawlSettings
-        module CreateYahooAuctionCrawlSettingRequiredKeyword
-          class CreateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed < Base
+        module UpdateYahooAuctionCrawlSettingExcludeProduct
+          class UpdateYahooAuctionCrawlSettingExcludeProductResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

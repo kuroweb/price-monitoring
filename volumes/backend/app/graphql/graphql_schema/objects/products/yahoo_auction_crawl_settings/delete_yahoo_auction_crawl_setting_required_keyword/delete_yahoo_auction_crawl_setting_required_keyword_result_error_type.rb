@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module YahooAuctionCrawlSettings
         module DeleteYahooAuctionCrawlSettingRequiredKeyword
-          class DeleteYahooAuctionCrawlSettingRequiredKeywordResultError < Base
+          class DeleteYahooAuctionCrawlSettingRequiredKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

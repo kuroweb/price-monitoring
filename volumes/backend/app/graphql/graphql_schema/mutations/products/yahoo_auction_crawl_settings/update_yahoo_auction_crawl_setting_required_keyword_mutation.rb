@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccess",
+              __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultSuccessType",
               yahoo_auction_crawl_setting_required_keyword:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultError",
+              __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "UpdateYahooAuctionCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

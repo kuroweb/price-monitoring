@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module YahooAuctionCrawlSettings
         module DeleteYahooAuctionCrawlSettingExcludeKeyword
-          class DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccess < Base
+          class DeleteYahooAuctionCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
           end
         end

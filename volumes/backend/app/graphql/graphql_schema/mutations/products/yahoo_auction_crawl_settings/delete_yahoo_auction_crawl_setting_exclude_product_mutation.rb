@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if yahoo_auction_crawl_setting_exclude_product.destroy
               {
-                __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultSuccess",
+                __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultError",
+              __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "DeleteYahooAuctionCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

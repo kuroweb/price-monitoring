@@ -5,18 +5,18 @@ module GraphqlSchema
         module UpdateYahooAuctionCrawlSettingExcludeKeyword
           class UpdateYahooAuctionCrawlSettingExcludeKeywordResult < Base
             possible_types Objects::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword::
-                           UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess,
+                           UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccessType,
                            Objects::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword::
-                           UpdateYahooAuctionCrawlSettingExcludeKeywordResultError
+                           UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess"
+              when "UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccessType"
                 Objects::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword::
-                UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccess
-              when "UpdateYahooAuctionCrawlSettingExcludeKeywordResultError"
+                UpdateYahooAuctionCrawlSettingExcludeKeywordResultSuccessType
+              when "UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrorType"
                 Objects::Products::YahooAuctionCrawlSettings::UpdateYahooAuctionCrawlSettingExcludeKeyword::
-                UpdateYahooAuctionCrawlSettingExcludeKeywordResultError
+                UpdateYahooAuctionCrawlSettingExcludeKeywordResultErrorType
               else
                 raise "Unexpected UpdateYahooAuctionCrawlSettingExcludeKeywordResult: #{object}"
               end

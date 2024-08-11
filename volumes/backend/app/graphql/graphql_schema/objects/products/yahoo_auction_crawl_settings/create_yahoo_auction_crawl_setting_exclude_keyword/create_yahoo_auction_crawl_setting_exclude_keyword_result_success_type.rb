@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module YahooAuctionCrawlSettings
         module CreateYahooAuctionCrawlSettingExcludeKeyword
-          class CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccess < Base
+          class CreateYahooAuctionCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :yahoo_auction_crawl_setting_exclude_keyword,
-                  Objects::Products::YahooAuctionCrawlSettings::YahooAuctionCrawlSettingExcludeKeyword,
+                  Objects::Products::YahooAuctionCrawlSettings::YahooAuctionCrawlSettingExcludeKeywordType,
                   null: false
           end
         end

@@ -8,7 +8,7 @@ module GraphqlSchema
         field :name, String, null: false
         field :created_at, GraphQL::Types::ISO8601DateTime, null: false
         field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-        field :yahoo_auction_crawl_setting, YahooAuctionCrawlSettings::YahooAuctionCrawlSetting, null: false
+        field :yahoo_auction_crawl_setting, YahooAuctionCrawlSettings::YahooAuctionCrawlSettingType, null: false
         field :mercari_crawl_setting, MercariCrawlSettings::MercariCrawlSettingType, null: false
         field :janpara_crawl_setting, JanparaCrawlSettings::JanparaCrawlSettingType, null: false
         field :iosys_crawl_setting, IosysCrawlSettings::IosysCrawlSettingType, null: false
