@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module MercariCrawlSettings
         module UpdateMercariCrawlSettingExcludeKeyword
-          class UpdateMercariCrawlSettingExcludeKeywordResultSuccess < Base
+          class UpdateMercariCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :mercari_crawl_setting_exclude_keyword,
-                  Objects::Products::MercariCrawlSettings::MercariCrawlSettingExcludeKeyword, null: false
+                  Objects::Products::MercariCrawlSettings::MercariCrawlSettingExcludeKeywordType, null: false
           end
         end
       end

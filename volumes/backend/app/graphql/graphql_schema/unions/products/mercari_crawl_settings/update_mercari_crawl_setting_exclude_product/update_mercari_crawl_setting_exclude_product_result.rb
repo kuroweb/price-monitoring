@@ -5,18 +5,18 @@ module GraphqlSchema
         module UpdateMercariCrawlSettingExcludeProduct
           class UpdateMercariCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct::
-                           UpdateMercariCrawlSettingExcludeProductResultSuccess,
+                           UpdateMercariCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct::
-                           UpdateMercariCrawlSettingExcludeProductResultError
+                           UpdateMercariCrawlSettingExcludeProductResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateMercariCrawlSettingExcludeProductResultSuccess"
+              when "UpdateMercariCrawlSettingExcludeProductResultSuccessType"
                 Objects::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct::
-                UpdateMercariCrawlSettingExcludeProductResultSuccess
-              when "UpdateMercariCrawlSettingExcludeProductResultError"
+                UpdateMercariCrawlSettingExcludeProductResultSuccessType
+              when "UpdateMercariCrawlSettingExcludeProductResultErrorType"
                 Objects::Products::MercariCrawlSettings::UpdateMercariCrawlSettingExcludeProduct::
-                UpdateMercariCrawlSettingExcludeProductResultError
+                UpdateMercariCrawlSettingExcludeProductResultErrorType
               else
                 raise "Unexpected UpdateMercariCrawlSettingExcludeProductResult: #{object}"
               end

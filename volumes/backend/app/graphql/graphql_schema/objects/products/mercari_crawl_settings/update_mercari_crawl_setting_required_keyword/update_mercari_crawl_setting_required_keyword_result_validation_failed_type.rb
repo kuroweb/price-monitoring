@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module MercariCrawlSettings
-        module CreateMercariCrawlSettingRequiredKeyword
-          class CreateMercariCrawlSettingRequiredKeywordResultValidationFailed < Base
+        module UpdateMercariCrawlSettingRequiredKeyword
+          class UpdateMercariCrawlSettingRequiredKeywordResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

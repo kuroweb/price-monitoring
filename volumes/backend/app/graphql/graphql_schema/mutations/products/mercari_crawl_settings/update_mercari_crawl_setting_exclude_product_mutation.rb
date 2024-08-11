@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdateMercariCrawlSettingExcludeProductResultSuccess",
+              __typename: "UpdateMercariCrawlSettingExcludeProductResultSuccessType",
               mercari_crawl_setting_exclude_product:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdateMercariCrawlSettingExcludeProductResultError",
+              __typename: "UpdateMercariCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "UpdateMercariCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "UpdateMercariCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

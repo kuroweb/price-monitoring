@@ -3,12 +3,11 @@ module GraphqlSchema
     module Products
       module MercariCrawlSettings
         module CreateMercariCrawlSettingExcludeProduct
-          class CreateMercariCrawlSettingExcludeProductResultError < Base
+          class CreateMercariCrawlSettingExcludeProductResultSuccessType < Base
             implements Interfaces::ResultBase
 
-            field :error,
-                  Unions::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct::
-                  CreateMercariCrawlSettingExcludeProductResultErrorsUnion,
+            field :mercari_crawl_setting_exclude_product,
+                  Objects::Products::MercariCrawlSettings::MercariCrawlSettingExcludeProductType,
                   null: false
           end
         end

@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if mercari_crawl_setting_exclude_keyword.destroy
               {
-                __typename: "DeleteMercariCrawlSettingExcludeKeywordResultSuccess",
+                __typename: "DeleteMercariCrawlSettingExcludeKeywordResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteMercariCrawlSettingExcludeKeywordResultError",
+              __typename: "DeleteMercariCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "DeleteMercariCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "DeleteMercariCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module MercariCrawlSettings
         module DeleteMercariCrawlSettingExcludeProduct
-          class DeleteMercariCrawlSettingExcludeProductResultValidationFailed < Base
+          class DeleteMercariCrawlSettingExcludeProductResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

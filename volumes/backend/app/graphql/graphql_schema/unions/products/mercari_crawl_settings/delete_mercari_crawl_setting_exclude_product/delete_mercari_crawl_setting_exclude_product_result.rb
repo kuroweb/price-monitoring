@@ -5,18 +5,18 @@ module GraphqlSchema
         module DeleteMercariCrawlSettingExcludeProduct
           class DeleteMercariCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct::
-                           DeleteMercariCrawlSettingExcludeProductResultSuccess,
+                           DeleteMercariCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct::
-                           DeleteMercariCrawlSettingExcludeProductResultError
+                           DeleteMercariCrawlSettingExcludeProductResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteMercariCrawlSettingExcludeProductResultSuccess"
+              when "DeleteMercariCrawlSettingExcludeProductResultSuccessType"
                 Objects::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct::
-                DeleteMercariCrawlSettingExcludeProductResultSuccess
-              when "DeleteMercariCrawlSettingExcludeProductResultError"
+                DeleteMercariCrawlSettingExcludeProductResultSuccessType
+              when "DeleteMercariCrawlSettingExcludeProductResultErrorType"
                 Objects::Products::MercariCrawlSettings::DeleteMercariCrawlSettingExcludeProduct::
-                DeleteMercariCrawlSettingExcludeProductResultError
+                DeleteMercariCrawlSettingExcludeProductResultErrorType
               else
                 raise "Unexpected DeleteMercariCrawlSettingExcludeProductResult: #{object}"
               end

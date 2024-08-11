@@ -20,7 +20,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "CreateMercariCrawlSettingExcludeKeywordResultSuccess",
+              __typename: "CreateMercariCrawlSettingExcludeKeywordResultSuccessType",
               mercari_crawl_setting_exclude_keyword:,
               ok: true
             }
@@ -52,9 +52,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "CreateMercariCrawlSettingExcludeKeywordResultError",
+              __typename: "CreateMercariCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "CreateMercariCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "CreateMercariCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

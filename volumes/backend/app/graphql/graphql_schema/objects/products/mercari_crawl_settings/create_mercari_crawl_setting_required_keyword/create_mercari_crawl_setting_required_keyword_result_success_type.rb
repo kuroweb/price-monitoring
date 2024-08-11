@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module MercariCrawlSettings
         module CreateMercariCrawlSettingRequiredKeyword
-          class CreateMercariCrawlSettingRequiredKeywordResultSuccess < Base
+          class CreateMercariCrawlSettingRequiredKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :mercari_crawl_setting_required_keyword,
-                  Objects::Products::MercariCrawlSettings::MercariCrawlSettingRequiredKeyword,
+                  Objects::Products::MercariCrawlSettings::MercariCrawlSettingRequiredKeywordType,
                   null: false
           end
         end

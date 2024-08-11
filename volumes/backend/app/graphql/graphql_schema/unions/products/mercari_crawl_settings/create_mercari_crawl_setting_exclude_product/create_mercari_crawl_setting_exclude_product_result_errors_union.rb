@@ -5,13 +5,13 @@ module GraphqlSchema
         module CreateMercariCrawlSettingExcludeProduct
           class CreateMercariCrawlSettingExcludeProductResultErrorsUnion < Base
             possible_types Objects::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct::
-                           CreateMercariCrawlSettingExcludeProductResultValidationFailed
+                           CreateMercariCrawlSettingExcludeProductResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreateMercariCrawlSettingExcludeProductResultValidationFailed"
+              when "CreateMercariCrawlSettingExcludeProductResultValidationFailedType"
                 Objects::Products::MercariCrawlSettings::CreateMercariCrawlSettingExcludeProduct::
-                CreateMercariCrawlSettingExcludeProductResultValidationFailed
+                CreateMercariCrawlSettingExcludeProductResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

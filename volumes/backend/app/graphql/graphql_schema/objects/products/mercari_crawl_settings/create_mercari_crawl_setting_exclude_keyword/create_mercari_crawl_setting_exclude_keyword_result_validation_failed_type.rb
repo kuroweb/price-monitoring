@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module MercariCrawlSettings
         module CreateMercariCrawlSettingExcludeKeyword
-          class CreateMercariCrawlSettingExcludeKeywordResultValidationFailed < Base
+          class CreateMercariCrawlSettingExcludeKeywordResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

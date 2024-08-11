@@ -5,13 +5,13 @@ module GraphqlSchema
         module UpdateMercariCrawlSettingRequiredKeyword
           class UpdateMercariCrawlSettingRequiredKeywordResultErrorsUnion < Base
             possible_types Objects::Products::MercariCrawlSettings::UpdateMercariCrawlSettingRequiredKeyword::
-                           UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed
+                           UpdateMercariCrawlSettingRequiredKeywordResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed"
+              when "UpdateMercariCrawlSettingRequiredKeywordResultValidationFailedType"
                 Objects::Products::MercariCrawlSettings::UpdateMercariCrawlSettingRequiredKeyword::
-                UpdateMercariCrawlSettingRequiredKeywordResultValidationFailed
+                UpdateMercariCrawlSettingRequiredKeywordResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

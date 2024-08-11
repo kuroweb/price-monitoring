@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module MercariCrawlSettings
         module UpdateMercariCrawlSettingRequiredKeyword
-          class UpdateMercariCrawlSettingRequiredKeywordResultError < Base
+          class UpdateMercariCrawlSettingRequiredKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

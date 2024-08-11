@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module MercariCrawlSettings
-        module DeleteMercariCrawlSettingRequiredKeyword
-          class DeleteMercariCrawlSettingRequiredKeywordResultSuccess < Base
+        module DeleteMercariCrawlSettingExcludeProduct
+          class DeleteMercariCrawlSettingExcludeProductResultSuccessType < Base
             implements Interfaces::ResultBase
           end
         end
