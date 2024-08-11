@@ -17,7 +17,7 @@ module GraphqlSchema
         field :yahoo_auction_daily_purchase_summaries, [YahooAuctionDailyPurchaseSummaryType], null: false
         field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummaryType], null: false
         field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummaryType], null: false
-        field :related_products, resolver: Resolvers::Products::RelatedProducts
+        field :related_products, resolver: Resolvers::Products::RelatedProductsResolver
         field :category, Categories::CategoryType, null: false
 
         delegate :yahoo_auction_crawl_setting, to: :object

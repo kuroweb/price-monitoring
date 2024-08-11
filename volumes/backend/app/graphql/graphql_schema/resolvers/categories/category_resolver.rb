@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Resolvers
     module Categories
-      class Category < Base
+      class CategoryResolver < Base
         type Objects::Categories::CategoryType, null: false
 
         argument :name, String, required: true

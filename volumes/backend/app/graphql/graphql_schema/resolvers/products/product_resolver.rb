@@ -1,7 +1,7 @@
 module GraphqlSchema
   module Resolvers
     module Products
-      class Product < Base
+      class ProductResolver < Base
         type Objects::Products::ProductType, null: false
 
         argument :id, ID, required: true
