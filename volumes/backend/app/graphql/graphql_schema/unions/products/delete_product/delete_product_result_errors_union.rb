@@ -3,12 +3,12 @@ module GraphqlSchema
     module Products
       module DeleteProduct
         class DeleteProductResultErrorsUnion < Base
-          possible_types Objects::Products::DeleteProduct::DeleteProductResultValidationFailed
+          possible_types Objects::Products::DeleteProduct::DeleteProductResultValidationFailedType
 
           def self.resolve_type(object, _context)
             case object[:__typename]
-            when "DeleteProductResultValidationFailed"
-              Objects::Products::DeleteProduct::DeleteProductResultValidationFailed
+            when "DeleteProductResultValidationFailedType"
+              Objects::Products::DeleteProduct::DeleteProductResultValidationFailedType
             else
               raise "Unexpected error type: #{object}"
             end

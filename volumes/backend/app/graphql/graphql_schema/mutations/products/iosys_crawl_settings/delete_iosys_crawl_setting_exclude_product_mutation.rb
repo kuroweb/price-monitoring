@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if iosys_crawl_setting_exclude_product.destroy
               {
-                __typename: "DeleteIosysCrawlSettingExcludeProductResultSuccess",
+                __typename: "DeleteIosysCrawlSettingExcludeProductResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteIosysCrawlSettingExcludeProductResultError",
+              __typename: "DeleteIosysCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "DeleteIosysCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "DeleteIosysCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

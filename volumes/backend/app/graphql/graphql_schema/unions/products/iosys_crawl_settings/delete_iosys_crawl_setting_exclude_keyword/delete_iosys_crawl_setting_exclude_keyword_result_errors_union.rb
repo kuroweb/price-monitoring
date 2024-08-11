@@ -5,13 +5,13 @@ module GraphqlSchema
         module DeleteIosysCrawlSettingExcludeKeyword
           class DeleteIosysCrawlSettingExcludeKeywordResultErrorsUnion < Base
             possible_types Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeKeyword::
-                           DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed
+                           DeleteIosysCrawlSettingExcludeKeywordResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed"
+              when "DeleteIosysCrawlSettingExcludeKeywordResultValidationFailedType"
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeKeyword::
-                DeleteIosysCrawlSettingExcludeKeywordResultValidationFailed
+                DeleteIosysCrawlSettingExcludeKeywordResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

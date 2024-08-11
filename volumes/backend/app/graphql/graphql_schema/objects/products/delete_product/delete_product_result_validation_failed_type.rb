@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module DeleteProduct
-        class DeleteProductResultValidationFailed < Base
+        class DeleteProductResultValidationFailedType < Base
           implements Interfaces::UserError
 
           field :details, [ErrorDetailType], null: false

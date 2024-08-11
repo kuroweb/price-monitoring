@@ -3,15 +3,15 @@ module GraphqlSchema
     module Products
       module DeleteProduct
         class DeleteProductResult < Base
-          possible_types Objects::Products::DeleteProduct::DeleteProductResultSuccess,
-                         Objects::Products::DeleteProduct::DeleteProductResultError
+          possible_types Objects::Products::DeleteProduct::DeleteProductResultSuccessType,
+                         Objects::Products::DeleteProduct::DeleteProductResultErrorType
 
           def self.resolve_type(object, _context)
             case object[:__typename]
-            when "DeleteProductResultSuccess"
-              Objects::Products::DeleteProduct::DeleteProductResultSuccess
-            when "DeleteProductResultError"
-              Objects::Products::DeleteProduct::DeleteProductResultError
+            when "DeleteProductResultSuccessType"
+              Objects::Products::DeleteProduct::DeleteProductResultSuccessType
+            when "DeleteProductResultErrorType"
+              Objects::Products::DeleteProduct::DeleteProductResultErrorType
             else
               raise "Unexpected DeleteProductResult: #{object}"
             end

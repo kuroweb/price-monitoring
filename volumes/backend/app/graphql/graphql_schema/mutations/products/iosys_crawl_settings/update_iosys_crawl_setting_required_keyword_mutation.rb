@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdateIosysCrawlSettingRequiredKeywordResultSuccess",
+              __typename: "UpdateIosysCrawlSettingRequiredKeywordResultSuccessType",
               iosys_crawl_setting_required_keyword:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdateIosysCrawlSettingRequiredKeywordResultError",
+              __typename: "UpdateIosysCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "UpdateIosysCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

@@ -11,7 +11,7 @@ module GraphqlSchema
 
           if product.destroy
             {
-              __typename: "DeleteProductResultSuccess",
+              __typename: "DeleteProductResultSuccessType",
               ok: true
             }
           else
@@ -35,9 +35,9 @@ module GraphqlSchema
 
         def error_response(code, message)
           {
-            __typename: "DeleteProductResultError",
+            __typename: "DeleteProductResultErrorType",
             error: {
-              __typename: "DeleteProductResultValidationFailed",
+              __typename: "DeleteProductResultValidationFailedType",
               code:,
               message:,
               details: []

@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module UpdateIosysCrawlSettingExcludeProduct
-          class UpdateIosysCrawlSettingExcludeProductResultError < Base
+          class UpdateIosysCrawlSettingExcludeProductResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

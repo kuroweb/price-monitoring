@@ -5,18 +5,18 @@ module GraphqlSchema
         module UpdateIosysCrawlSettingExcludeKeyword
           class UpdateIosysCrawlSettingExcludeKeywordResult < Base
             possible_types Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword::
-                           UpdateIosysCrawlSettingExcludeKeywordResultSuccess,
+                           UpdateIosysCrawlSettingExcludeKeywordResultSuccessType,
                            Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword::
-                           UpdateIosysCrawlSettingExcludeKeywordResultError
+                           UpdateIosysCrawlSettingExcludeKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateIosysCrawlSettingExcludeKeywordResultSuccess"
+              when "UpdateIosysCrawlSettingExcludeKeywordResultSuccessType"
                 Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword::
-                UpdateIosysCrawlSettingExcludeKeywordResultSuccess
-              when "UpdateIosysCrawlSettingExcludeKeywordResultError"
+                UpdateIosysCrawlSettingExcludeKeywordResultSuccessType
+              when "UpdateIosysCrawlSettingExcludeKeywordResultErrorType"
                 Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeKeyword::
-                UpdateIosysCrawlSettingExcludeKeywordResultError
+                UpdateIosysCrawlSettingExcludeKeywordResultErrorType
               else
                 raise "Unexpected UpdateIosysCrawlSettingExcludeKeywordResult: #{object}"
               end

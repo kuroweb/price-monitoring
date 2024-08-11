@@ -5,18 +5,18 @@ module GraphqlSchema
         module DeleteIosysCrawlSettingRequiredKeyword
           class DeleteIosysCrawlSettingRequiredKeywordResult < Base
             possible_types Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
-                           DeleteIosysCrawlSettingRequiredKeywordResultSuccess,
+                           DeleteIosysCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
-                           DeleteIosysCrawlSettingRequiredKeywordResultError
+                           DeleteIosysCrawlSettingRequiredKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteIosysCrawlSettingRequiredKeywordResultSuccess"
+              when "DeleteIosysCrawlSettingRequiredKeywordResultSuccessType"
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
-                DeleteIosysCrawlSettingRequiredKeywordResultSuccess
-              when "DeleteIosysCrawlSettingRequiredKeywordResultError"
+                DeleteIosysCrawlSettingRequiredKeywordResultSuccessType
+              when "DeleteIosysCrawlSettingRequiredKeywordResultErrorType"
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingRequiredKeyword::
-                DeleteIosysCrawlSettingRequiredKeywordResultError
+                DeleteIosysCrawlSettingRequiredKeywordResultErrorType
               else
                 raise "Unexpected DeleteIosysCrawlSettingRequiredKeywordResult: #{object}"
               end

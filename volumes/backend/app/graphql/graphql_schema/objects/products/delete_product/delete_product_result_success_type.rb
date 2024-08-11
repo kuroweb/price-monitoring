@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module DeleteProduct
-        class DeleteProductResultSuccess < Base
+        class DeleteProductResultSuccessType < Base
           implements Interfaces::ResultBase
         end
       end

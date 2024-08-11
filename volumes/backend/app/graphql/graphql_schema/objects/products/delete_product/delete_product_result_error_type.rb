@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module DeleteProduct
-        class DeleteProductResultError < Base
+        class DeleteProductResultErrorType < Base
           implements Interfaces::ResultBase
 
           field :error, Unions::Products::DeleteProduct::DeleteProductResultErrorsUnion, null: false

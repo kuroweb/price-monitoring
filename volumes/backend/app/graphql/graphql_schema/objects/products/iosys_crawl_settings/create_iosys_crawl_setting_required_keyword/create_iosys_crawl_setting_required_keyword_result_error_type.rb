@@ -3,11 +3,12 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module CreateIosysCrawlSettingRequiredKeyword
-          class CreateIosysCrawlSettingRequiredKeywordResultSuccess < Base
+          class CreateIosysCrawlSettingRequiredKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
-            field :iosys_crawl_setting_required_keyword,
-                  Objects::Products::IosysCrawlSettings::IosysCrawlSettingRequiredKeyword,
+            field :error,
+                  Unions::Products::IosysCrawlSettings::CreateIosysCrawlSettingRequiredKeyword::
+                  CreateIosysCrawlSettingRequiredKeywordResultErrorsUnion,
                   null: false
           end
         end

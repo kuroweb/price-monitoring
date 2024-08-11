@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if iosys_crawl_setting_required_keyword.destroy
               {
-                __typename: "DeleteIosysCrawlSettingRequiredKeywordResultSuccess",
+                __typename: "DeleteIosysCrawlSettingRequiredKeywordResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteIosysCrawlSettingRequiredKeywordResultError",
+              __typename: "DeleteIosysCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "DeleteIosysCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

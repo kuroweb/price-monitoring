@@ -5,18 +5,18 @@ module GraphqlSchema
         module DeleteIosysCrawlSettingExcludeProduct
           class DeleteIosysCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
-                           DeleteIosysCrawlSettingExcludeProductResultSuccess,
+                           DeleteIosysCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
-                           DeleteIosysCrawlSettingExcludeProductResultError
+                           DeleteIosysCrawlSettingExcludeProductResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteIosysCrawlSettingExcludeProductResultSuccess"
+              when "DeleteIosysCrawlSettingExcludeProductResultSuccessType"
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
-                DeleteIosysCrawlSettingExcludeProductResultSuccess
-              when "DeleteIosysCrawlSettingExcludeProductResultError"
+                DeleteIosysCrawlSettingExcludeProductResultSuccessType
+              when "DeleteIosysCrawlSettingExcludeProductResultErrorType"
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
-                DeleteIosysCrawlSettingExcludeProductResultError
+                DeleteIosysCrawlSettingExcludeProductResultErrorType
               else
                 raise "Unexpected DeleteIosysCrawlSettingExcludeProductResult: #{object}"
               end

@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module DeleteIosysCrawlSettingExcludeKeyword
-          class DeleteIosysCrawlSettingExcludeKeywordResultError < Base
+          class DeleteIosysCrawlSettingExcludeKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

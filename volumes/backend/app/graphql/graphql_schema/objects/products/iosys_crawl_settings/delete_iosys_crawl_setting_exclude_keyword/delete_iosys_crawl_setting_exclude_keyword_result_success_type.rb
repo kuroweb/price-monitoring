@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module IosysCrawlSettings
-        module DeleteIosysCrawlSettingExcludeProduct
-          class DeleteIosysCrawlSettingExcludeProductResultSuccess < Base
+        module DeleteIosysCrawlSettingExcludeKeyword
+          class DeleteIosysCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
           end
         end
