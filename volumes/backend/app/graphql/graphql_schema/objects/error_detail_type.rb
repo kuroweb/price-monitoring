@@ -1,6 +1,6 @@
 module GraphqlSchema
   module Objects
-    class ErrorDetail < Base
+    class ErrorDetailType < Base
       field :field, String, null: false
       field :message, String, null: false
     end

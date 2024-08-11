@@ -6,7 +6,7 @@ module GraphqlSchema
           class CreateJanparaCrawlSettingRequiredKeywordResultValidationFailed < Base
             implements Interfaces::UserError
 
-            field :details, [ErrorDetail], null: false
+            field :details, [ErrorDetailType], null: false
           end
         end
       end
