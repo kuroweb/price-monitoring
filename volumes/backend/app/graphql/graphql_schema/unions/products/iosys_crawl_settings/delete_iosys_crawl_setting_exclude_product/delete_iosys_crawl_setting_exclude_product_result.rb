@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module DeleteIosysCrawlSettingExcludeProduct
-          class DeleteIosysCrawlSettingExcludeProductResultUnion < Base
+          class DeleteIosysCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
                            DeleteIosysCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
@@ -18,7 +18,7 @@ module GraphqlSchema
                 Objects::Products::IosysCrawlSettings::DeleteIosysCrawlSettingExcludeProduct::
                 DeleteIosysCrawlSettingExcludeProductResultErrorType
               else
-                raise "Unexpected DeleteIosysCrawlSettingExcludeProductResultUnion: #{object}"
+                raise "Unexpected DeleteIosysCrawlSettingExcludeProductResult: #{object}"
               end
             end
           end

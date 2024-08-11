@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module UpdateIosysCrawlSettingExcludeProduct
-          class UpdateIosysCrawlSettingExcludeProductResultUnion < Base
+          class UpdateIosysCrawlSettingExcludeProductResult < Base
             possible_types Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProduct::
                            UpdateIosysCrawlSettingExcludeProductResultSuccessType,
                            Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProduct::
@@ -18,7 +18,7 @@ module GraphqlSchema
                 Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingExcludeProduct::
                 UpdateIosysCrawlSettingExcludeProductResultErrorType
               else
-                raise "Unexpected UpdateIosysCrawlSettingExcludeProductResultUnion: #{object}"
+                raise "Unexpected UpdateIosysCrawlSettingExcludeProductResult: #{object}"
               end
             end
           end

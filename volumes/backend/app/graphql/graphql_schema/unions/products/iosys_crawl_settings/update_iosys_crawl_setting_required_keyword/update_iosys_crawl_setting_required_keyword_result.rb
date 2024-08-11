@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module IosysCrawlSettings
         module UpdateIosysCrawlSettingRequiredKeyword
-          class UpdateIosysCrawlSettingRequiredKeywordResultUnion < Base
+          class UpdateIosysCrawlSettingRequiredKeywordResult < Base
             possible_types Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingRequiredKeyword::
                            UpdateIosysCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingRequiredKeyword::
@@ -18,7 +18,7 @@ module GraphqlSchema
                 Objects::Products::IosysCrawlSettings::UpdateIosysCrawlSettingRequiredKeyword::
                 UpdateIosysCrawlSettingRequiredKeywordResultErrorType
               else
-                raise "Unexpected UpdateIosysCrawlSettingRequiredKeywordResultUnion: #{object}"
+                raise "Unexpected UpdateIosysCrawlSettingRequiredKeywordResult: #{object}"
               end
             end
           end
