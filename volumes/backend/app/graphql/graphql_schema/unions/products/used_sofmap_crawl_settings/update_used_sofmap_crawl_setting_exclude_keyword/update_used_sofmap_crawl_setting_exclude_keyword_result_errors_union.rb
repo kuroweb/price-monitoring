@@ -5,13 +5,13 @@ module GraphqlSchema
         module UpdateUsedSofmapCrawlSettingExcludeKeyword
           class UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrorsUnion < Base
             possible_types Objects::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeKeyword::
-                           UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+                           UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed"
+              when "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedType"
                 Objects::Products::UsedSofmapCrawlSettings::UpdateUsedSofmapCrawlSettingExcludeKeyword::
-                UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed
+                UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if used_sofmap_crawl_setting_exclude_product.destroy
               {
-                __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultSuccess",
+                __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultError",
+              __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

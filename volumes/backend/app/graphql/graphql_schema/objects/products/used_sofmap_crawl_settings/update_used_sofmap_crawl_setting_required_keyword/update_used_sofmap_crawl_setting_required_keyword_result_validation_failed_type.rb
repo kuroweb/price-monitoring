@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module UsedSofmapCrawlSettings
         module UpdateUsedSofmapCrawlSettingRequiredKeyword
-          class UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed < Base
+          class UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

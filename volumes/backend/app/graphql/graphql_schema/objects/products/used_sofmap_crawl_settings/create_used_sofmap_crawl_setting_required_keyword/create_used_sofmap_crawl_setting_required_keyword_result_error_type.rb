@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module UsedSofmapCrawlSettings
         module CreateUsedSofmapCrawlSettingRequiredKeyword
-          class CreateUsedSofmapCrawlSettingRequiredKeywordResultError < Base
+          class CreateUsedSofmapCrawlSettingRequiredKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

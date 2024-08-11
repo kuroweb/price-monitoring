@@ -5,18 +5,18 @@ module GraphqlSchema
         module DeleteUsedSofmapCrawlSettingExcludeKeyword
           class DeleteUsedSofmapCrawlSettingExcludeKeywordResult < Base
             possible_types Objects::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeyword::
-                           DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess,
+                           DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccessType,
                            Objects::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeyword::
-                           DeleteUsedSofmapCrawlSettingExcludeKeywordResultError
+                           DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess"
+              when "DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccessType"
                 Objects::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeyword::
-                DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccess
-              when "DeleteUsedSofmapCrawlSettingExcludeKeywordResultError"
+                DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccessType
+              when "DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrorType"
                 Objects::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeKeyword::
-                DeleteUsedSofmapCrawlSettingExcludeKeywordResultError
+                DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrorType
               else
                 raise "Unexpected DeleteUsedSofmapCrawlSettingExcludeKeywordResult: #{object}"
               end

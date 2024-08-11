@@ -5,13 +5,13 @@ module GraphqlSchema
         module DeleteUsedSofmapCrawlSettingExcludeProduct
           class DeleteUsedSofmapCrawlSettingExcludeProductResultErrorsUnion < Base
             possible_types Objects::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct::
-                           DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+                           DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailedType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed"
+              when "DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailedType"
                 Objects::Products::UsedSofmapCrawlSettings::DeleteUsedSofmapCrawlSettingExcludeProduct::
-                DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailed
+                DeleteUsedSofmapCrawlSettingExcludeProductResultValidationFailedType
               else
                 raise "Unexpected error type: #{object}"
               end

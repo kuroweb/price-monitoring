@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module UsedSofmapCrawlSettings
-        module DeleteUsedSofmapCrawlSettingRequiredKeyword
-          class DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess < Base
+        module DeleteUsedSofmapCrawlSettingExcludeKeyword
+          class DeleteUsedSofmapCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
           end
         end

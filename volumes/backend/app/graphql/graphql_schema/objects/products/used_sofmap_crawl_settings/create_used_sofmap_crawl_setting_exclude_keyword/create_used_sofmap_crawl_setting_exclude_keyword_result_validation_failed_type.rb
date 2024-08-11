@@ -2,8 +2,8 @@ module GraphqlSchema
   module Objects
     module Products
       module UsedSofmapCrawlSettings
-        module CreateUsedSofmapCrawlSettingExcludeProduct
-          class CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed < Base
+        module CreateUsedSofmapCrawlSettingExcludeKeyword
+          class CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedType < Base
             implements Interfaces::UserError
 
             field :details, [ErrorDetailType], null: false

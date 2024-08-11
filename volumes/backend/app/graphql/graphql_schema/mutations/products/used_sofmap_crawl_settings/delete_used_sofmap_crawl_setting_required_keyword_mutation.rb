@@ -19,7 +19,7 @@ module GraphqlSchema
 
             if used_sofmap_crawl_setting_required_keyword.destroy
               {
-                __typename: "DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+                __typename: "DeleteUsedSofmapCrawlSettingRequiredKeywordResultSuccessType",
                 ok: true
               }
             else
@@ -43,9 +43,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "DeleteUsedSofmapCrawlSettingRequiredKeywordResultError",
+              __typename: "DeleteUsedSofmapCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "DeleteUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

@@ -5,18 +5,18 @@ module GraphqlSchema
         module CreateUsedSofmapCrawlSettingRequiredKeyword
           class CreateUsedSofmapCrawlSettingRequiredKeywordResult < Base
             possible_types Objects::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword::
-                           CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess,
+                           CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccessType,
                            Objects::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword::
-                           CreateUsedSofmapCrawlSettingRequiredKeywordResultError
+                           CreateUsedSofmapCrawlSettingRequiredKeywordResultErrorType
 
             def self.resolve_type(object, _context)
               case object[:__typename]
-              when "CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess"
+              when "CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccessType"
                 Objects::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword::
-                CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccess
-              when "CreateUsedSofmapCrawlSettingRequiredKeywordResultError"
+                CreateUsedSofmapCrawlSettingRequiredKeywordResultSuccessType
+              when "CreateUsedSofmapCrawlSettingRequiredKeywordResultErrorType"
                 Objects::Products::UsedSofmapCrawlSettings::CreateUsedSofmapCrawlSettingRequiredKeyword::
-                CreateUsedSofmapCrawlSettingRequiredKeywordResultError
+                CreateUsedSofmapCrawlSettingRequiredKeywordResultErrorType
               else
                 raise "Unexpected CreateUsedSofmapCrawlSettingRequiredKeywordResult: #{object}"
               end

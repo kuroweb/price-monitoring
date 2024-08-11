@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module UsedSofmapCrawlSettings
-        class UsedSofmapCrawlSettingRequiredKeyword < Base
+        class UsedSofmapCrawlSettingRequiredKeywordType < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false

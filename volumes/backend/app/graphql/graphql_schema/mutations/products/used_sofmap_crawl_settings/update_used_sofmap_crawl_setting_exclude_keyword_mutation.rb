@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+              __typename: "UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccessType",
               used_sofmap_crawl_setting_exclude_keyword:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdateUsedSofmapCrawlSettingExcludeKeywordResultError",
+              __typename: "UpdateUsedSofmapCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "UpdateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

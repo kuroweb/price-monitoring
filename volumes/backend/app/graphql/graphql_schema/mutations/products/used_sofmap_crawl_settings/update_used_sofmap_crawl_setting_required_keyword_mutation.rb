@@ -21,7 +21,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccess",
+              __typename: "UpdateUsedSofmapCrawlSettingRequiredKeywordResultSuccessType",
               used_sofmap_crawl_setting_required_keyword:,
               ok: true
             }
@@ -53,9 +53,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "UpdateUsedSofmapCrawlSettingRequiredKeywordResultError",
+              __typename: "UpdateUsedSofmapCrawlSettingRequiredKeywordResultErrorType",
               error: {
-                __typename: "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailed",
+                __typename: "UpdateUsedSofmapCrawlSettingRequiredKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

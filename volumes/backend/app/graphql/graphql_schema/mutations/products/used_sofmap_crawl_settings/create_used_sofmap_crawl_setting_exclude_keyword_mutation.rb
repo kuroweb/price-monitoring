@@ -20,7 +20,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccess",
+              __typename: "CreateUsedSofmapCrawlSettingExcludeKeywordResultSuccessType",
               used_sofmap_crawl_setting_exclude_keyword:,
               ok: true
             }
@@ -52,9 +52,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "CreateUsedSofmapCrawlSettingExcludeKeywordResultError",
+              __typename: "CreateUsedSofmapCrawlSettingExcludeKeywordResultErrorType",
               error: {
-                __typename: "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailed",
+                __typename: "CreateUsedSofmapCrawlSettingExcludeKeywordResultValidationFailedType",
                 code:,
                 message:,
                 details: []

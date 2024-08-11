@@ -13,7 +13,7 @@ module GraphqlSchema
         field :janpara_crawl_setting, JanparaCrawlSettings::JanparaCrawlSettingType, null: false
         field :iosys_crawl_setting, IosysCrawlSettings::IosysCrawlSettingType, null: false
         field :pc_koubou_crawl_setting, PcKoubouCrawlSettings::PcKoubouCrawlSettingType, null: false
-        field :used_sofmap_crawl_setting, UsedSofmapCrawlSettings::UsedSofmapCrawlSetting, null: false
+        field :used_sofmap_crawl_setting, UsedSofmapCrawlSettings::UsedSofmapCrawlSettingType, null: false
         field :yahoo_auction_daily_purchase_summaries, [YahooAuctionDailyPurchaseSummaryType], null: false
         field :yahoo_fleamarket_daily_purchase_summaries, [YahooFleamarketDailyPurchaseSummaryType], null: false
         field :mercari_daily_purchase_summaries, [MercariDailyPurchaseSummaryType], null: false

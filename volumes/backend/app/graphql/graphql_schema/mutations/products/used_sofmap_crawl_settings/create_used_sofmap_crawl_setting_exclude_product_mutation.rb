@@ -20,7 +20,7 @@ module GraphqlSchema
             inspect(product)
 
             {
-              __typename: "CreateUsedSofmapCrawlSettingExcludeProductResultSuccess",
+              __typename: "CreateUsedSofmapCrawlSettingExcludeProductResultSuccessType",
               used_sofmap_crawl_setting_exclude_product:,
               ok: true
             }
@@ -52,9 +52,9 @@ module GraphqlSchema
 
           def error_response(code, message)
             {
-              __typename: "CreateUsedSofmapCrawlSettingExcludeProductResultError",
+              __typename: "CreateUsedSofmapCrawlSettingExcludeProductResultErrorType",
               error: {
-                __typename: "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailed",
+                __typename: "CreateUsedSofmapCrawlSettingExcludeProductResultValidationFailedType",
                 code:,
                 message:,
                 details: []

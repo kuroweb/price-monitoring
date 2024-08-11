@@ -2,7 +2,7 @@ module GraphqlSchema
   module Objects
     module Products
       module UsedSofmapCrawlSettings
-        class UsedSofmapCrawlSettingExcludeProduct < Base
+        class UsedSofmapCrawlSettingExcludeProductType < Base
           implements GraphQL::Types::Relay::Node
 
           field :id, ID, null: false

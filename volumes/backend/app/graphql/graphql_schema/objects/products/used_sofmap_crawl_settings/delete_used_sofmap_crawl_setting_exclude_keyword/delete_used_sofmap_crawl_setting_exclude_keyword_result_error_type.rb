@@ -3,7 +3,7 @@ module GraphqlSchema
     module Products
       module UsedSofmapCrawlSettings
         module DeleteUsedSofmapCrawlSettingExcludeKeyword
-          class DeleteUsedSofmapCrawlSettingExcludeKeywordResultError < Base
+          class DeleteUsedSofmapCrawlSettingExcludeKeywordResultErrorType < Base
             implements Interfaces::ResultBase
 
             field :error,

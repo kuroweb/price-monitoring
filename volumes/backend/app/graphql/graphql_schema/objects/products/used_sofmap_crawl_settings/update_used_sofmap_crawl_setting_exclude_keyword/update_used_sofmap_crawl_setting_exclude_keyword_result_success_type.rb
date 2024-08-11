@@ -3,11 +3,11 @@ module GraphqlSchema
     module Products
       module UsedSofmapCrawlSettings
         module UpdateUsedSofmapCrawlSettingExcludeKeyword
-          class UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccess < Base
+          class UpdateUsedSofmapCrawlSettingExcludeKeywordResultSuccessType < Base
             implements Interfaces::ResultBase
 
             field :used_sofmap_crawl_setting_exclude_keyword,
-                  Objects::Products::UsedSofmapCrawlSettings::UsedSofmapCrawlSettingExcludeKeyword, null: false
+                  Objects::Products::UsedSofmapCrawlSettings::UsedSofmapCrawlSettingExcludeKeywordType, null: false
           end
         end
       end
