@@ -3,7 +3,7 @@ class YahooAuctionProduct < ApplicationRecord
   belongs_to :product
 
   ## validations ##
-  validates_presence_of :external_id, :seller_id, :name, :thumbnail_url
+  validates :external_id, :seller_id, :name, :thumbnail_url, presence: true
 
   ## scopes ##
   ## methods ##

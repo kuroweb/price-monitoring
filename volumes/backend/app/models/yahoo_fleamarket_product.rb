@@ -3,6 +3,7 @@ class YahooFleamarketProduct < ApplicationRecord
   belongs_to :product
 
   ## validations ##
+  validates :external_id, :seller_id, :name, :thumbnail_url, presence: true
 
   ## scopes ##
 
