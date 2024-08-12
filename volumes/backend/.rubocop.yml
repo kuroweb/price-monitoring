@@ -57,3 +57,6 @@ RSpec/NestedGroups:
   Description: "ネストの深さ"
   Enabled: true
   Max: 7 # default: 3
+
+RSpec/IndexedLet:
+  Enabled: false
