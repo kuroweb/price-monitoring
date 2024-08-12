@@ -23,4 +23,4 @@ logs:
 	docker compose logs -f
 
 rspec:
-	docker compose run backend rspec
+	docker compose exec rspec rspec

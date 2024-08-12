@@ -107,6 +107,17 @@ services:
       - backend-bundle:/usr/local/bundle
     command: ["sidekiq", "-C", "config/sidekiq/crawl_process_2.yml"]
 
+  rspec:
+    <<: *backend
+    depends_on:
+      backend-db:
+        condition: service_healthy
+      backend-redis:
+        condition: service_healthy
+    volumes:
+      - ./volumes/backend:/app
+      - backend-bundle:/usr/local/bundle
+
   backend-db:
     <<: *mysql
     volumes:
