@@ -43,7 +43,7 @@ RSpec.describe ProductFinder, type: :finder do
 
     it "無効なソートまたは順序が指定された場合、デフォルトの順序で商品を返すこと" do
       finder = described_class.new(params: { sort: "invalid_column", order: "invalid_order" })
-      expect(finder.execute).to contain_exactly(product_a, product_b, product_c)
+      expect(finder.execute).to eq([product_a, product_b, product_c])
     end
   end
 end
