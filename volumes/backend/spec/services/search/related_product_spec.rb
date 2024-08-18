@@ -179,6 +179,31 @@ RSpec.describe Search::RelatedProduct, type: :service do
           include_examples "フィルタリングのテスト", "出品終了済みのMercariProductの値を返却すること"
         end
       end
+
+      context "janparaを指定した場合" do
+        let!(:janpara_product_a) { create(:janpara_product, product:, name: "JanparaProduct A") }
+        let!(:janpara_product_b) { create(:janpara_product, product:, name: "JanparaProduct B") }
+
+        context "janpara.allの場合" do
+          let!(:platform_mask) { "janpara.all" }
+          let!(:expected_products) { [janpara_product_a, janpara_product_b] }
+
+          it "すべてのJanparaProductの値を返却すること" do
+            service = described_class.new(params: { product_id: product.id, platform_mask:,
+                                                    sort: "created_at", order: "asc" })
+            actual_array = service.call.products
+            expected_array = expected_products.map do |product|
+              product.attributes
+                     .slice(*RelatedProduct.attribute_names)
+                     .merge("platform" => "janpara")
+            end
+
+            expected_array.each_with_index do |expected, index|
+              expect(actual_array[index]).to have_attributes(expected)
+            end
+          end
+        end
+      end
     end
   end
 end
