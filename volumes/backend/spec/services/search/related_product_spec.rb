@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Search::RelatedProduct, type: :model do
+RSpec.describe Search::RelatedProduct, type: :service do
   describe "#call" do
     let!(:product) { create(:product) }
 
