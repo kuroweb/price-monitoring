@@ -82,8 +82,7 @@ RSpec.describe Search::RelatedProduct, type: :service do
           let(:platform_mask) { "yahoo_auction.buyable" }
           let(:expected_products) { [yahoo_auction_product_buyable_a, yahoo_auction_product_buyable_b] }
 
-          include_examples "フィルタリングのテスト",
-                           "すぐに購入可能（即決価格がmax_price以下 OR 1日以内に終了）なYahooAuctionProductの値を返却すること"
+          include_examples "フィルタリングのテスト", "すぐに購入可能（即決価格がmax_price以下 OR 1日以内に終了）なYahooAuctionProductの値を返却すること"
         end
       end
 
