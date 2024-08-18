@@ -132,6 +132,53 @@ RSpec.describe Search::RelatedProduct, type: :service do
           include_examples "フィルタリングのテスト", "出品終了済みのYahooFleamarketProductの値を返却すること"
         end
       end
+
+      context "mercariを指定した場合" do
+        let!(:mercari_product_published) do
+          create(:mercari_product, product:, name: "published", published: true)
+        end
+        let!(:mercari_product_unpublished) do
+          create(:mercari_product, product:, name: "unpublished", published: false)
+        end
+
+        shared_examples "フィルタリングのテスト" do |description|
+          it description do
+            service = described_class.new(params: { product_id: product.id, platform_mask:,
+                                                    sort: "created_at", order: "asc" })
+            actual_array = service.call.products
+            expected_array = expected_products.map do |product|
+              product.attributes
+                     .slice(*RelatedProduct.attribute_names)
+                     .merge("platform" => "mercari")
+            end
+
+            expected_array.each_with_index do |expected, index|
+              expect(actual_array[index]).to have_attributes(expected)
+            end
+          end
+        end
+
+        context "mercari.allの場合" do
+          let(:platform_mask) { "mercari.all" }
+          let(:expected_products) { [mercari_product_published, mercari_product_unpublished] }
+
+          include_examples "フィルタリングのテスト", "すべてのMercariProductの値を返却すること"
+        end
+
+        context "mercari.publishedの場合" do
+          let(:platform_mask) { "mercari.published" }
+          let(:expected_products) { [mercari_product_published] }
+
+          include_examples "フィルタリングのテスト", "出品中のMercariProductの値を返却すること"
+        end
+
+        context "mercari.unpublishedの場合" do
+          let(:platform_mask) { "mercari.unpublished" }
+          let(:expected_products) { [mercari_product_unpublished] }
+
+          include_examples "フィルタリングのテスト", "出品終了済みのMercariProductの値を返却すること"
+        end
+      end
     end
   end
 end
