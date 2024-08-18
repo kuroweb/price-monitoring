@@ -154,6 +154,11 @@ module Search
 
     def normalize(result)
       result["published"] = result["published"] == 1
+      result["bought_date"] = result["bought_date"]&.in_time_zone
+      result["end_date"] = result["end_date"]&.in_time_zone
+      result["created_at"] = result["created_at"]&.in_time_zone
+      result["updated_at"] = result["updated_at"]&.in_time_zone
+
       result
     end
 
