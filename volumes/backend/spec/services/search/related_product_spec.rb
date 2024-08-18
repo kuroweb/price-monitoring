@@ -231,8 +231,8 @@ RSpec.describe Search::RelatedProduct, type: :service do
       end
 
       context "pc_koubouを指定した場合" do
-        let!(:pc_koubou_product_a) { create(:pc_koubou_product, product:, name: "IosysProduct A") }
-        let!(:pc_koubou_product_b) { create(:pc_koubou_product, product:, name: "IosysProduct B") }
+        let!(:pc_koubou_product_a) { create(:pc_koubou_product, product:, name: "PcKoubouProduct A") }
+        let!(:pc_koubou_product_b) { create(:pc_koubou_product, product:, name: "PcKoubouProduct B") }
 
         context "pc_koubou.allの場合" do
           let!(:platform_mask) { "pc_koubou.all" }
@@ -256,8 +256,8 @@ RSpec.describe Search::RelatedProduct, type: :service do
       end
 
       context "used_sofmapを指定した場合" do
-        let!(:used_sofmap_product_a) { create(:used_sofmap_product, product:, name: "IosysProduct A") }
-        let!(:used_sofmap_product_b) { create(:used_sofmap_product, product:, name: "IosysProduct B") }
+        let!(:used_sofmap_product_a) { create(:used_sofmap_product, product:, name: "UsedSofmapProduct A") }
+        let!(:used_sofmap_product_b) { create(:used_sofmap_product, product:, name: "UsedSofmapProduct B") }
 
         context "used_sofmap.allの場合" do
           let!(:platform_mask) { "used_sofmap.all" }
@@ -280,5 +280,9 @@ RSpec.describe Search::RelatedProduct, type: :service do
         end
       end
     end
+
+    context "page, perでのページングをテストする"
+
+    context "sort, orderでのソートをテストする"
   end
 end
