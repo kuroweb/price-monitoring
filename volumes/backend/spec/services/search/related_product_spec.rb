@@ -213,7 +213,7 @@ RSpec.describe Search::RelatedProduct, type: :service do
           let!(:platform_mask) { "iosys.all" }
           let!(:expected_products) { [iosys_product_a, iosys_product_b] }
 
-          it "すべてのJanparaProductの値を返却すること" do
+          it "すべてのIosysProductの値を返却すること" do
             service = described_class.new(params: { product_id: product.id, platform_mask:,
                                                     sort: "created_at", order: "asc" })
             actual_array = service.call.products
@@ -238,7 +238,7 @@ RSpec.describe Search::RelatedProduct, type: :service do
           let!(:platform_mask) { "pc_koubou.all" }
           let!(:expected_products) { [pc_koubou_product_a, pc_koubou_product_b] }
 
-          it "すべてのJanparaProductの値を返却すること" do
+          it "すべてのPcKoubouProductの値を返却すること" do
             service = described_class.new(params: { product_id: product.id, platform_mask:,
                                                     sort: "created_at", order: "asc" })
             actual_array = service.call.products
@@ -246,6 +246,31 @@ RSpec.describe Search::RelatedProduct, type: :service do
               product.attributes
                      .slice(*RelatedProduct.attribute_names)
                      .merge("platform" => "pc_koubou")
+            end
+
+            expected_array.each_with_index do |expected, index|
+              expect(actual_array[index]).to have_attributes(expected)
+            end
+          end
+        end
+      end
+
+      context "used_sofmapを指定した場合" do
+        let!(:used_sofmap_product_a) { create(:used_sofmap_product, product:, name: "IosysProduct A") }
+        let!(:used_sofmap_product_b) { create(:used_sofmap_product, product:, name: "IosysProduct B") }
+
+        context "used_sofmap.allの場合" do
+          let!(:platform_mask) { "used_sofmap.all" }
+          let!(:expected_products) { [used_sofmap_product_a, used_sofmap_product_b] }
+
+          it "すべてのUsedSofmapProductの値を返却すること" do
+            service = described_class.new(params: { product_id: product.id, platform_mask:,
+                                                    sort: "created_at", order: "asc" })
+            actual_array = service.call.products
+            expected_array = expected_products.map do |product|
+              product.attributes
+                     .slice(*RelatedProduct.attribute_names)
+                     .merge("platform" => "used_sofmap")
             end
 
             expected_array.each_with_index do |expected, index|
