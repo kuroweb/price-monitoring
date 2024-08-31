@@ -48,8 +48,8 @@ services:
     ports:
       - 8080:3000
     environment:
-      NEXT_PRIVATE_BACKEND_URL: 'http://backend:3000/graphql'
-      NEXT_PUBLIC_BACKEND_URL: 'http://backend:3000/graphql'
+      NEXT_PRIVATE_BACKEND_URL: "http://backend:3000/graphql"
+      NEXT_PUBLIC_BACKEND_URL: "http://backend:3000/graphql"
     stdin_open: true
     tty: true
     volumes:
@@ -81,7 +81,7 @@ services:
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
-    command: ["sidekiq", "-C", "config/sidekiq/crawl_process.yml"]
+    command: sidekiq -C config/sidekiq/crawl_process.yml
 
   backend-batch-2:
     <<: *backend
@@ -93,7 +93,7 @@ services:
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
-    command: ["sidekiq", "-C", "config/sidekiq/general_process.yml"]
+    command: sidekiq -C config/sidekiq/general_process.yml
 
   backend-batch-3:
     <<: *backend
@@ -105,7 +105,7 @@ services:
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
-    command: ["sidekiq", "-C", "config/sidekiq/crawl_process_2.yml"]
+    command: sidekiq -C config/sidekiq/crawl_process_2.yml
 
   spring:
     <<: *backend
@@ -130,7 +130,7 @@ services:
       - "6379:6379"
     volumes:
       - "backend-redis:/data"
-    command: ["--appendonly", "yes"]
+    command: --appendonly yes
 
   backend-playwright:
     build:
