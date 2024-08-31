@@ -107,7 +107,7 @@ services:
       - backend-bundle:/usr/local/bundle
     command: ["sidekiq", "-C", "config/sidekiq/crawl_process_2.yml"]
 
-  rspec:
+  spring:
     <<: *backend
     depends_on:
       backend-db:
@@ -117,6 +117,7 @@ services:
     volumes:
       - ./volumes/backend:/app
       - backend-bundle:/usr/local/bundle
+    command: bundle exec spring server && tail -f /dev/null
 
   backend-db:
     <<: *mysql

@@ -23,4 +23,4 @@ logs:
 	docker compose logs -f
 
 rspec:
-	docker compose exec rspec rspec
+	docker compose exec spring rspec
