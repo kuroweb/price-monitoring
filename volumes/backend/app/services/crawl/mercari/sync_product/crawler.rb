@@ -92,7 +92,9 @@ module Crawl
         end
 
         def thumbnail_url(page)
-          page.query_selector("img").get_attribute("src")
+          doms = page.query_selector_all("img")
+                     .reject { |dom| dom.get_attribute("src").include?("super_mercari_days") }
+          doms.first.get_attribute("src")
         end
 
         def published(page)
