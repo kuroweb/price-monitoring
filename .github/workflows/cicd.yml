@@ -175,7 +175,7 @@ jobs:
 
   frontend_cd:
     needs: check_changes
-    # if: ${{ needs.check_changes.outputs.frontend_cd == 'true' }}
+    if: ${{ needs.check_changes.outputs.frontend_cd == 'true' }}
     runs-on: ubuntu-20.04
     steps:
       - name: Checkout Repository
