@@ -4,6 +4,7 @@ x-backend: &backend
   build:
     context: .
     dockerfile: containers/backend/Dockerfile
+  env_file: .env
   environment:
     DB_HOST_NAME: "backend-db"
     DB_DATABASE_NAME: "rails"
@@ -12,11 +13,6 @@ x-backend: &backend
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
     ALLOWED_ORIGIN: "backend"
-    PROXY_HOST: ${PROXY_HOST}
-    PROXY_USERNAME: ${PROXY_USERNAME}
-    PROXY_PASSWORD: ${PROXY_PASSWORD}
-    PROXY_LIST: ${PROXY_LIST}
-    BUGSNAG_API_KEY: ${BUGSNAG_API_KEY}
   stdin_open: true
   tty: true
 
