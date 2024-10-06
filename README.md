@@ -4,7 +4,9 @@
 
 Web上にある商品の最安値を探したり、相場を把握するためのツール
 
-開発目的としては、GraphQL, TypeScriptの学習目的である
+Rails, TypeScriptのキャッチアップが主な開発目的
+
+DatadogやBugSnagを導入して運用監視についてのキャッチアップも兼ねている
 
 ## 技術スタック
 
@@ -18,6 +20,11 @@ Web上にある商品の最安値を探したり、相場を把握するため�
 
 - Rails
 - graphql-ruby
+
+### 運用監視
+
+- Datadog
+- BugSnag
 
 ## Infra
 
