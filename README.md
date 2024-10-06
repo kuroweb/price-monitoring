@@ -25,6 +25,7 @@ DatadogやBugSnagを導入して運用監視についてのキャッチアップ
 
 - Datadog
 - BugSnag
+- Slack
 
 ## Infra
 
