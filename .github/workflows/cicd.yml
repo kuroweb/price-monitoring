@@ -41,6 +41,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Execute CI
         run: |
+          touch .env
           docker compose build backend
           docker compose run backend rails db:create
           docker compose run backend rails db:migrate
