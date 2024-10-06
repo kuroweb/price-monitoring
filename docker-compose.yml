@@ -16,6 +16,7 @@ x-backend: &backend
     PROXY_USERNAME: ${PROXY_USERNAME}
     PROXY_PASSWORD: ${PROXY_PASSWORD}
     PROXY_LIST: ${PROXY_LIST}
+    BUGSNAG_API_KEY: ${BUGSNAG_API_KEY}
   stdin_open: true
   tty: true
 
