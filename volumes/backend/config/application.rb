@@ -23,5 +23,8 @@ module Hoge
     #
     config.time_zone = "Asia/Tokyo"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # 例外発生時にBugSnag通知する
+    config.middleware.use Bugsnag::Rack
   end
 end
