@@ -110,6 +110,10 @@ module Crawl
           tax_price = price_str.match(/(（税込 \d+,*\d+ 円）|（税 0 円）)/)[0].gsub(/（|）|,| |税込|円/, "").to_i
 
           tax_price.nonzero? || price
+        rescue StandardError => e
+          Bugsnag.notify(e)
+          Bugsnag.notify("price_str: #{price_str}")
+          raise e
         end
 
         def buyout_price(page)
