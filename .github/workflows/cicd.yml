@@ -55,182 +55,29 @@ jobs:
       - check_changes
       - backend_ci
     if: ${{ needs.check_changes.outputs.backend_cd == 'true' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Docker Registry
-        run: |
-          echo "${{ secrets.REGISTRY_IP }} registry.local" | sudo tee -a /etc/hosts
-          echo "${{ secrets.REGISTRY_CRT }}" > ~/registry.crt
-          echo "${{ secrets.REGISTRY_KEY }}" > ~/registry.key
-          sudo cp ~/registry.* /usr/local/share/ca-certificates/
-          sudo update-ca-certificates
-          sudo systemctl restart docker
-
-      - name: Build Docker Image
-        run: |
-          make build-backend tag_suffix=${{ github.sha }}
-
-      - name: Install OpenVPN
-        run: |
-          sudo apt-get update
-          sudo apt-get --assume-yes --no-install-recommends install openvpn
-
-      - name: Setup VPN config
-        run: |
-          echo "${{ secrets.CA_CRT }}" > ca.crt
-          echo "${{ secrets.CLIENT_CRT }}" > client.crt
-          echo "${{ secrets.CLIENT_KEY }}" > client.key
-          echo "${{ secrets.SECRET_TEXT }}" > secret.txt
-          echo "${{ secrets.VPN_OVPN }}" > vpn.ovpn
-
-      - name: Connect VPN
-        run: sudo openvpn --config vpn.ovpn --daemon
-
-      - name: Wait for a VPN connection
-        timeout-minutes: 1
-        run: until ping -c1 192.168.0.10; do sleep 2; done
-
-      - name: Push Docker Image
-        timeout-minutes: 60
-        run: |
-          make push-backend tag_suffix=${{ github.sha }}
-
-      - name: Kill VPN connection
-        if: always()
-        run: |
-          sudo killall openvpn
-
-      - name: Update Kubernetes Manifest
-        run: |
-          git config --global user.name ${{ secrets.GIT_COMMIT_USER }}
-          git config --global user.email ${{ secrets.GIT_COMMIT_EMAIL }}
-          git clone https://${{ secrets.GIT_REPO_USER }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_REPO_USER }}/k8s
-          cd k8s/manifests/price-monitoring
-          make apply-backend tag_suffix=${{ github.sha }}
-          make commit
-          make push
+    uses: ./.github/workflows/resusable/deploy.yml
+    with:
+      service_name: "k8s/manifests/price-monitoring"
+      build_command: "make build-backend tag_suffix=${{ github.sha }}"
+      push_command: "make push-backend tag_suffix=${{ github.sha }}"
+      apply_command: "make apply-backend tag_suffix=${{ github.sha }}"
 
   backend_playwright_cd:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.backend_playwright_cd == 'true' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Docker Registry
-        run: |
-          echo "${{ secrets.REGISTRY_IP }} registry.local" | sudo tee -a /etc/hosts
-          echo "${{ secrets.REGISTRY_CRT }}" > ~/registry.crt
-          echo "${{ secrets.REGISTRY_KEY }}" > ~/registry.key
-          sudo cp ~/registry.* /usr/local/share/ca-certificates/
-          sudo update-ca-certificates
-          sudo systemctl restart docker
-
-      - name: Build Docker Image
-        run: |
-          make build-backend-playwright tag_suffix=${{ github.sha }}
-
-      - name: Install OpenVPN
-        run: |
-          sudo apt-get update
-          sudo apt-get --assume-yes --no-install-recommends install openvpn
-
-      - name: Setup VPN config
-        run: |
-          echo "${{ secrets.CA_CRT }}" > ca.crt
-          echo "${{ secrets.CLIENT_CRT }}" > client.crt
-          echo "${{ secrets.CLIENT_KEY }}" > client.key
-          echo "${{ secrets.SECRET_TEXT }}" > secret.txt
-          echo "${{ secrets.VPN_OVPN }}" > vpn.ovpn
-
-      - name: Connect VPN
-        run: sudo openvpn --config vpn.ovpn --daemon
-
-      - name: Wait for a VPN connection
-        timeout-minutes: 1
-        run: until ping -c1 192.168.0.10; do sleep 2; done
-
-      - name: Push Docker Image
-        timeout-minutes: 60
-        run: |
-          make push-backend-playwright tag_suffix=${{ github.sha }}
-
-      - name: Kill VPN connection
-        if: always()
-        run: |
-          sudo killall openvpn
-
-      - name: Update Kubernetes Manifest
-        run: |
-          git config --global user.name ${{ secrets.GIT_COMMIT_USER }}
-          git config --global user.email ${{ secrets.GIT_COMMIT_EMAIL }}
-          git clone https://${{ secrets.GIT_REPO_USER }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_REPO_USER }}/k8s
-          cd k8s/manifests/price-monitoring
-          make apply-backend-playwright tag_suffix=${{ github.sha }}
-          make commit
-          make push
+    uses: ./.github/workflows/resusable/deploy.yml
+    with:
+      service_name: "k8s/manifests/price-monitoring"
+      build_command: "make build-backend-playwright tag_suffix=${{ github.sha }}"
+      push_command: "make push-backend-playwright tag_suffix=${{ github.sha }}"
+      apply_command: "make apply-backend-playwright tag_suffix=${{ github.sha }}"
 
   frontend_cd:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.frontend_cd == 'true' }}
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Docker Registry
-        run: |
-          echo "${{ secrets.REGISTRY_IP }} registry.local" | sudo tee -a /etc/hosts
-          echo "${{ secrets.REGISTRY_CRT }}" > ~/registry.crt
-          echo "${{ secrets.REGISTRY_KEY }}" > ~/registry.key
-          sudo cp ~/registry.* /usr/local/share/ca-certificates/
-          sudo update-ca-certificates
-          sudo systemctl restart docker
-
-      - name: Build Docker Image
-        run: |
-          make build-frontend tag_suffix=${{ github.sha }}
-
-      - name: Install OpenVPN
-        run: |
-          sudo apt-get update
-          sudo apt-get --assume-yes --no-install-recommends install openvpn
-
-      - name: Setup VPN config
-        run: |
-          echo "${{ secrets.CA_CRT }}" > ca.crt
-          echo "${{ secrets.CLIENT_CRT }}" > client.crt
-          echo "${{ secrets.CLIENT_KEY }}" > client.key
-          echo "${{ secrets.SECRET_TEXT }}" > secret.txt
-          echo "${{ secrets.VPN_OVPN }}" > vpn.ovpn
-
-      - name: Connect VPN
-        run: sudo openvpn --config vpn.ovpn --daemon
-
-      - name: Wait for a VPN connection
-        timeout-minutes: 1
-        run: until ping -c1 192.168.0.10; do sleep 2; done
-
-      - name: Push Docker Image
-        timeout-minutes: 60
-        run: |
-          make push-frontend tag_suffix=${{ github.sha }}
-
-      - name: Kill VPN connection
-        if: always()
-        run: |
-          sudo killall openvpn
-
-      - name: Update Kubernetes Manifest
-        run: |
-          git config --global user.name ${{ secrets.GIT_COMMIT_USER }}
-          git config --global user.email ${{ secrets.GIT_COMMIT_EMAIL }}
-          git clone https://${{ secrets.GIT_REPO_USER }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_REPO_USER }}/k8s
-          cd k8s/manifests/price-monitoring
-          make apply-frontend tag_suffix=${{ github.sha }}
-          make commit
-          make push
+    uses: ./.github/workflows/resusable/deploy.yml
+    with:
+      service_name: "k8s/manifests/price-monitoring"
+      build_command: "make build-frontend tag_suffix=${{ github.sha }}"
+      push_command: "make push-frontend tag_suffix=${{ github.sha }}"
+      apply_command: "make apply-frontend tag_suffix=${{ github.sha }}"
