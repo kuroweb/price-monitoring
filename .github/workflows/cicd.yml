@@ -55,7 +55,7 @@ jobs:
       - check_changes
       - backend_ci
     if: ${{ needs.check_changes.outputs.backend_cd == 'true' }}
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/resusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-backend tag_suffix=${{ github.sha }}"
@@ -65,7 +65,7 @@ jobs:
   backend_playwright_cd:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.backend_playwright_cd == 'true' }}
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/resusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-backend-playwright tag_suffix=${{ github.sha }}"
@@ -75,7 +75,7 @@ jobs:
   frontend_cd:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.frontend_cd == 'true' }}
-    uses: ./.github/workflows/deploy.yml
+    uses: ./.github/workflows/resusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-frontend tag_suffix=${{ github.sha }}"

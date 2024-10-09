@@ -1,4 +1,4 @@
-name: Deployment Workflow
+name: Resusable CD
 
 on:
   workflow_call:
