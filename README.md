@@ -487,7 +487,7 @@ erDiagram
 sequenceDiagram
   participant repo_pm as Repository - price-monitoring
   participant repo_k8s as Repository - k8s
-  participant deploy as GitHub Actions - Deployment
+  participant deploy as GitHub Actions - CI/CD
   participant vpn as 自宅サーバ - OpenVPN
   participant kp_registry as Kubernetes Pod - Docker Registry
   participant kp_argocd as Kubernetes Pod - ArgoCD
