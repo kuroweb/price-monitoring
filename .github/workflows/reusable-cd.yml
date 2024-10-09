@@ -1,4 +1,4 @@
-name: Resusable CD
+name: Reusable CD
 
 on:
   workflow_call:
