@@ -106,7 +106,7 @@ module Crawl
 
         def price(page)
           price_str = page.query_selector_all(".Price__value")[0].inner_text
-          price = price_str.match(/\d+,\d+/)[0].gsub(/,/, "").to_i
+          price = price_str.match(/\d+,\d+|\d+/)[0].delete(",").to_i
           tax_price = price_str.match(/(（税込 \d+,*\d+ 円）|（税 0 円）)/)[0].gsub(/（|）|,| |税込|円/, "").to_i
 
           tax_price.nonzero? || price
@@ -120,7 +120,7 @@ module Crawl
           return nil unless price_index
 
           price_str = page.query_selector_all(".Price__value")[price_index].inner_text
-          price = price_str.match(/\d+,\d+/)[0].gsub(/,/, "").to_i
+          price = price_str.match(/\d+,\d+|\d+/)[0].delete(",").to_i
           tax_price = price_str.match(/(（税込 \d+,*\d+ 円）|（税 0 円）)/)[0].gsub(/（|）|,| |税込|円/, "").to_i
 
           tax_price.nonzero? || price
