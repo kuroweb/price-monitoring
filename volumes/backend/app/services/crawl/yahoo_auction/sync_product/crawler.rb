@@ -111,8 +111,7 @@ module Crawl
 
           tax_price.nonzero? || price
         rescue StandardError => e
-          Bugsnag.notify(e)
-          Bugsnag.notify("price_str: #{price_str}")
+          Bugsnag.notify(e) { |event| event.add_tab(:debug, { price_str: }) }
           raise e
         end
 
