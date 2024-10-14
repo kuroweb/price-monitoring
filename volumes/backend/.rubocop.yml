@@ -60,3 +60,8 @@ RSpec/NestedGroups:
 
 RSpec/IndexedLet:
   Enabled: false
+
+Lint/MissingSuper:
+  Enabled: true
+  Exclude:
+    - "app/serializers/**/*.rb"
