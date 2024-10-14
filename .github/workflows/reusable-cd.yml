@@ -15,6 +15,31 @@ on:
       apply_command:
         required: true
         type: string
+    secrets:
+      REGISTRY_IP:
+        required: true
+      REGISTRY_CRT:
+        required: true
+      REGISTRY_KEY:
+        required: true
+      CA_CRT:
+        required: true
+      CLIENT_CRT:
+        required: true
+      CLIENT_KEY:
+        required: true
+      SECRET_TEXT:
+        required: true
+      VPN_OVPN:
+        required: true
+      GIT_COMMIT_USER:
+        required: true
+      GIT_COMMIT_EMAIL:
+        required: true
+      GIT_REPO_USER:
+        required: true
+      GIT_TOKEN:
+        required: true
 
 jobs:
   deploy:

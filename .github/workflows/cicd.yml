@@ -61,6 +61,19 @@ jobs:
       build_command: "make build-backend tag_suffix=${{ github.sha }}"
       push_command: "make push-backend tag_suffix=${{ github.sha }}"
       apply_command: "make apply-backend tag_suffix=${{ github.sha }}"
+    secrets:
+      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
+      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
+      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
+      CA_CRT: ${{ secrets.CA_CRT }}
+      CLIENT_CRT: ${{ secrets.CLIENT_CRT }}
+      CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+      SECRET_TEXT: ${{ secrets.SECRET_TEXT }}
+      VPN_OVPN: ${{ secrets.VPN_OVPN }}
+      GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
+      GIT_COMMIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL }}
+      GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
   backend_playwright_cd:
     needs: check_changes
@@ -71,6 +84,19 @@ jobs:
       build_command: "make build-backend-playwright tag_suffix=${{ github.sha }}"
       push_command: "make push-backend-playwright tag_suffix=${{ github.sha }}"
       apply_command: "make apply-backend-playwright tag_suffix=${{ github.sha }}"
+    secrets:
+      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
+      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
+      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
+      CA_CRT: ${{ secrets.CA_CRT }}
+      CLIENT_CRT: ${{ secrets.CLIENT_CRT }}
+      CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+      SECRET_TEXT: ${{ secrets.SECRET_TEXT }}
+      VPN_OVPN: ${{ secrets.VPN_OVPN }}
+      GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
+      GIT_COMMIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL }}
+      GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
 
   frontend_cd:
     needs: check_changes
@@ -81,3 +107,16 @@ jobs:
       build_command: "make build-frontend tag_suffix=${{ github.sha }}"
       push_command: "make push-frontend tag_suffix=${{ github.sha }}"
       apply_command: "make apply-frontend tag_suffix=${{ github.sha }}"
+    secrets:
+      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
+      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
+      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
+      CA_CRT: ${{ secrets.CA_CRT }}
+      CLIENT_CRT: ${{ secrets.CLIENT_CRT }}
+      CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+      SECRET_TEXT: ${{ secrets.SECRET_TEXT }}
+      VPN_OVPN: ${{ secrets.VPN_OVPN }}
+      GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
+      GIT_COMMIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL }}
+      GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
