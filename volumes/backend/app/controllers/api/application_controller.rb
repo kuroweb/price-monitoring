@@ -6,7 +6,7 @@ module Api
     rescue_from ActiveRecord::RecordNotFound, with: :not_found_error
 
     def internal_server_error(exception)
-      BugSnag.notify(exception)
+      Bugsnag.notify(exception)
       Rails.logger.error("Internal Server Error. exception: #{exception.full_message}")
       render json: { error: "Internal Server Error.", status: 503 }, status: :service_unavailable
     end
