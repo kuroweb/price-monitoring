@@ -2,9 +2,6 @@
 	just -l
 
 up:
-	docker compose up
-
-up-d:
 	docker compose up -d
 
 down:
@@ -13,8 +10,11 @@ down:
 ps:
 	docker compose ps
 
-restart:
+restart-all:
 	docker compose restart
+
+restart container-name:
+	docker compose restart {{container-name}}
 
 attach container-name:
 	docker attach $(docker compose ps -q {{container-name}})
