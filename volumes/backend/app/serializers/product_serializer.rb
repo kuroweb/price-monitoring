@@ -2,7 +2,8 @@ class ProductSerializer < BaseSerializer
   delegate(*Product.column_names, to: :product)
 
   attr_reader :product, :yahoo_auction_crawl_setting, :mercari_crawl_setting, :janpara_crawl_setting,
-              :iosys_crawl_setting, :pc_koubou_crawl_setting, :used_sofmap_crawl_setting
+              :iosys_crawl_setting, :pc_koubou_crawl_setting, :used_sofmap_crawl_setting,
+              :category
 
   def initialize(product)
     @product = product
@@ -12,6 +13,7 @@ class ProductSerializer < BaseSerializer
     @iosys_crawl_setting = IosysCrawlSettingSerializer.new(product.iosys_crawl_setting)
     @pc_koubou_crawl_setting = PcKoubouCrawlSettingSerializer.new(product.pc_koubou_crawl_setting)
     @used_sofmap_crawl_setting = UsedSofmapCrawlSettingSerializer.new(product.used_sofmap_crawl_setting)
+    @category = CategorySerializer.new(product.category)
   end
 
   private
@@ -24,6 +26,7 @@ class ProductSerializer < BaseSerializer
       iosys_crawl_setting
       pc_koubou_crawl_setting
       used_sofmap_crawl_setting
+      category
     ]
   end
 end
