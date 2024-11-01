@@ -65,11 +65,12 @@ const processResponse = <T>(response: AxiosResponse): ApiResponse<T> => {
 
 const handleAxiosError = <T>(error: unknown): ApiResponse<T> => {
   const axiosError = error as AxiosError<ErrorData>
-  notifyError(axiosError?.response?.data.message || 'Axios request failed.')
+  const message = axiosError?.response?.data.message || 'Axios request failed.'
+  notifyError(message)
 
   return {
     data: null,
-    error: axiosError.response?.data || DEFAULT_ERROR_DATA,
+    error: axiosError.response?.data || { ...DEFAULT_ERROR_DATA, message },
     status: axiosError.response?.status || 500,
   }
 }
