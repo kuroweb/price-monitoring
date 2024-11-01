@@ -6,6 +6,16 @@ module Api
         render json: ProductsSerializer.new(products), status: :ok
       end
 
+      def destroy
+        product = Product.find(params[:id])
+
+        if product.destroy
+          render json: {}, status: :ok
+        else
+          render json: build_error_json(500, "Bad Request.", []), status: :bad_request
+        end
+      end
+
       private
 
       def find_product_params
@@ -18,6 +28,16 @@ module Api
 
       def external_attributes
         %i[sort order]
+      end
+
+      def build_error_json(code, message, details)
+        {
+          error: {
+            code:,
+            message:,
+            details:
+          }
+        }
       end
     end
   end
