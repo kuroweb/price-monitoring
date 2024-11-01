@@ -10,6 +10,8 @@ module Api
 
       def find_category_params
         params.permit(category_attributes + external_attributes)
+        params[:root_only] = params[:root_only] == "true" if params[:root_only]
+        params
       end
 
       def category_attributes
