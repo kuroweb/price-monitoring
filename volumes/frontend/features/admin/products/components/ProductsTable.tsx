@@ -8,12 +8,13 @@ import { toast } from 'react-toastify'
 
 import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
-import { destroyProduct } from '../server-actions/api'
 
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
-import type { Product, Category } from '../api/model'
+import type { Product, Category } from '@/api/model'
+
+import { destroyProduct } from '@/server-actions/api'
 
 interface Props {
   products: Product[]
