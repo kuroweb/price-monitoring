@@ -6,29 +6,30 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { deleteProduct } from '../../../../server-actions/productQuery'
 import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
+import { destroyProduct } from '../server-actions/api'
 
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
-import type { AdminProductsPageDataQuery } from '@/graphql/dist/client'
+import type { Product, Category } from '../api/model'
 
-const ProductsTable = ({ data }: { data: AdminProductsPageDataQuery | undefined }) => {
+interface Props {
+  products: Product[]
+  categories: Category[]
+}
+
+const ProductsTable = ({ products, categories }: Props) => {
   const router = useRouter()
   const [_createModal, setCreateModal] = useCreateProductModalState()
   const [_updateModal, setUpdateModal] = useUpdateProductModalState()
-  const [product, setProduct] = useState<
-    AdminProductsPageDataQuery['products'][number] | undefined
-  >(undefined)
+  const [product, setProduct] = useState<Product | undefined>(undefined)
 
   const submitDeleteProduct = async (productId: string) => {
-    const result = await deleteProduct({
-      id: productId,
-    })
+    const response = await destroyProduct(productId)
 
-    if (result.data?.deleteProduct.ok) {
+    if (response.status === 200) {
       toast.success('success')
     } else {
       toast.error('error')
@@ -46,7 +47,7 @@ const ProductsTable = ({ data }: { data: AdminProductsPageDataQuery | undefined 
           </tr>
         </thead>
         <tbody>
-          {data?.products.map((product) => (
+          {products.map((product) => (
             <tr key={product.id} className=''>
               <td>
                 <Link
@@ -159,7 +160,7 @@ const ProductsTable = ({ data }: { data: AdminProductsPageDataQuery | undefined 
             },
           }
         }
-        categories={data?.categories}
+        categories={categories}
       />
       <UpdateProductModal
         defaultValues={
@@ -207,7 +208,7 @@ const ProductsTable = ({ data }: { data: AdminProductsPageDataQuery | undefined 
             },
           }
         }
-        categories={data?.categories}
+        categories={categories}
       />
     </>
   )

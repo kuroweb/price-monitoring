@@ -1,17 +1,13 @@
 import Link from 'next/link'
 
-import type { AdminProductsPageDataQuery } from '@/graphql/dist/client'
-
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/admin/products/components/ProductsTable'
 import { useCreateProductModalQuery } from '@/features/admin/products/hooks/useCreateProductModalState'
-import { AdminProductsPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/apollo-client-rsc'
+import { getProducts, getCategories } from '@/features/admin/products/server-actions/api'
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-  const { data } = await getClient().query<AdminProductsPageDataQuery>({
-    query: AdminProductsPageDataDocument,
-  })
+  const productResponse = await getProducts()
+  const categoryResponse = await getCategories({ rootOnly: true })
 
   return (
     <Layout>
@@ -32,7 +28,10 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                 計測対象を追加
               </Link>
             </div>
-            <ProductsTable data={data} />
+            <ProductsTable
+              products={productResponse?.data?.products || []}
+              categories={categoryResponse?.data?.categories || []}
+            />
           </div>
         </div>
       </div>
