@@ -12,7 +12,7 @@ import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
-import type { Product, Category } from '@/api/model'
+import type { Product, Category } from '@/api'
 
 import { destroyProduct } from '@/server-actions/api'
 
