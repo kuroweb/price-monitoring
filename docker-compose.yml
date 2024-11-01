@@ -47,6 +47,8 @@ services:
     environment:
       NEXT_PRIVATE_BACKEND_URL: "http://backend:3000/graphql"
       NEXT_PUBLIC_BACKEND_URL: "http://backend:3000/graphql"
+      NEXT_PRIVATE_API_URL: "http://backend:3000"
+      NEXT_PUBLIC_API_URL: "http://localhost:3000"
     stdin_open: true
     tty: true
     volumes:
