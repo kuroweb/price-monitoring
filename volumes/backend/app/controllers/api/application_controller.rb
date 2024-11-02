@@ -8,15 +8,25 @@ module Api
     def internal_server_error(exception)
       Bugsnag.notify(exception)
       Rails.logger.error("Internal Server Error. exception: #{exception.full_message}")
-      render json: { code: 503, message: "Internal Server Error.", details: [] }, status: :service_unavailable
+      render json: build_error_json(503, "Internal Server Error.", []), status: :service_unavailable
     end
 
     def conflict_error
-      render json: { code: 409, message: "Conflict.", details: [] }, status: :conflict
+      render json: build_error_json(409, "Conflict.", []), status: :conflict
     end
 
     def not_found_error
-      render json: { code: 404, message: "Not Found.", details: [] }, status: :not_found
+      render json: build_error_json(404, "Not Found.", []), status: :not_found
+    end
+
+    def build_error_json(code, message, details)
+      {
+        error: {
+          code:,
+          message:,
+          details:
+        }
+      }
     end
   end
 end
