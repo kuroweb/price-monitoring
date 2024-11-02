@@ -23,10 +23,10 @@ export interface ErrorData {
   details: object[] // 暫定的な型
 }
 
-export const http = async <T>(
+export async function http<T>(
   path: string,
   config: AxiosRequestConfig = {},
-): Promise<ApiResponse<T>> => {
+): Promise<ApiResponse<T>> {
   try {
     const response = await axios({
       baseURL: API_URL,
@@ -40,7 +40,7 @@ export const http = async <T>(
   }
 }
 
-const buildConfig = (config: AxiosRequestConfig) => {
+function buildConfig(config: AxiosRequestConfig) {
   return {
     ...config,
     headers: {
@@ -52,7 +52,7 @@ const buildConfig = (config: AxiosRequestConfig) => {
   }
 }
 
-const processResponse = <T>(response: AxiosResponse): ApiResponse<T> => {
+function processResponse<T>(response: AxiosResponse): ApiResponse<T> {
   const { status, data } = response
 
   if (status === 204) return { data: null, error: null, status }
@@ -63,7 +63,7 @@ const processResponse = <T>(response: AxiosResponse): ApiResponse<T> => {
   return handleServerError<T>()
 }
 
-const handleAxiosError = <T>(error: unknown): ApiResponse<T> => {
+function handleAxiosError<T>(error: unknown): ApiResponse<T> {
   const axiosError = error as AxiosError<ErrorData>
   const message = axiosError?.response?.data.message || 'Axios request failed.'
   notifyError(message)
@@ -75,7 +75,7 @@ const handleAxiosError = <T>(error: unknown): ApiResponse<T> => {
   }
 }
 
-const handleServerError = <T>(): ApiResponse<T> => {
+function handleServerError<T>(): ApiResponse<T> {
   const message = 'Internal Server Error.'
   notifyError(message)
 
@@ -86,7 +86,7 @@ const handleServerError = <T>(): ApiResponse<T> => {
   }
 }
 
-const handleUnexpectedError = <T>(): ApiResponse<T> => {
+function handleUnexpectedError<T>(): ApiResponse<T> {
   const message = 'Unexpected error occurred.'
   notifyError(message)
 
@@ -98,4 +98,6 @@ const handleUnexpectedError = <T>(): ApiResponse<T> => {
 }
 
 // TODO: BugSnag通知にする
-const notifyError = (message: string) => console.error(`Error: ${message}`)
+function notifyError(message: string) {
+  console.error(`Error: ${message}`)
+}
