@@ -32,13 +32,14 @@ module Api
 
       def create_product_params
         params.permit(
-          product_attributes,
-          yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
-          mercari_crawl_setting: mercari_crawl_setting_attributes,
-          janpara_crawl_setting: janpara_crawl_setting_attributes,
-          iosys_crawl_setting: iosys_crawl_setting_attributes,
-          pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes,
-          used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes
+          product_attributes + [
+            yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
+            mercari_crawl_setting: mercari_crawl_setting_attributes,
+            janpara_crawl_setting: janpara_crawl_setting_attributes,
+            iosys_crawl_setting: iosys_crawl_setting_attributes,
+            pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes,
+            used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes
+          ] + [:category_id]
         )
       end
 
