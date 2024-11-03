@@ -9,8 +9,6 @@ const API_URL =
     ? process.env.NEXT_PRIVATE_API_URL!
     : process.env.NEXT_PUBLIC_API_URL!
 
-const DEFAULT_ERROR_DATA: ErrorData = { code: 500, message: 'Request failed.', details: [] }
-
 export interface ApiResponse<T> {
   data: T | null
   error: ErrorData | null
@@ -60,41 +58,27 @@ function processResponse<T>(response: AxiosResponse): ApiResponse<T> {
     return { data: camelcaseKeys(data, { deep: true }) as T, error: null, status }
   }
 
-  return handleServerError<T>()
+  return handleUnexpectedError<T>()
 }
 
 function handleAxiosError<T>(error: unknown): ApiResponse<T> {
   const axiosError = error as AxiosError<ErrorData>
-  const message = axiosError?.response?.data.message || 'Axios request failed.'
-  notifyError(message)
 
   return {
     data: null,
-    error: axiosError.response?.data || { ...DEFAULT_ERROR_DATA, message },
+    error: {
+      code: axiosError.response?.data.code || 500,
+      message: axiosError.response?.data.message || 'Request failed.',
+      details: axiosError.response?.data.details || [],
+    },
     status: axiosError.response?.status || 500,
-  }
-}
-
-function handleServerError<T>(): ApiResponse<T> {
-  const message = 'Internal Server Error.'
-  notifyError(message)
-
-  return {
-    data: null,
-    error: { ...DEFAULT_ERROR_DATA, message },
-    status: 500,
   }
 }
 
 function handleUnexpectedError<T>(): ApiResponse<T> {
   const message = 'Unexpected error occurred.'
   notifyError(message)
-
-  return {
-    data: null,
-    error: { ...DEFAULT_ERROR_DATA, message },
-    status: 500,
-  }
+  throw new Error(message)
 }
 
 // TODO: BugSnag通知にする
