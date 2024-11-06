@@ -6,6 +6,10 @@ module Api
         render json: ProductsSerializer.new(products), status: :ok
       end
 
+      def show
+        render json: ProductSerializer.new(product), status: :ok
+      end
+
       def create
         product = ::Products::Create.call(params: create_product_params)
         render json: ProductSerializer.new(product), status: :ok
