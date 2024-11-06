@@ -11,12 +11,11 @@ module Api
         render json: ProductSerializer.new(product), status: :ok
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error("Bad Request. exception: #{e.full_message}")
-        render json: { code: 400, message: "Bad Request.", details: [] }, status: :bad_request
+        render json: build_error_json(400, "Bad Request.", []), status: :bad_request
+      end
       end
 
       def destroy
-        product = Product.find(params[:id])
-
         if product.destroy
           render json: {}, status: :ok
         else
@@ -25,6 +24,10 @@ module Api
       end
 
       private
+
+      def product
+        @product ||= Product.find(params[:id])
+      end
 
       def find_product_params
         params.permit(product_attributes + external_attributes)
