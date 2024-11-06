@@ -6,12 +6,12 @@ export interface GetCategoriesParams {
   rootOnly?: boolean
 }
 
-export interface GetCategoriesData {
+export interface GetCategories {
   categories: Category[]
 }
 
 export async function getCategories(params?: GetCategoriesParams) {
-  return http<GetCategoriesData>('/api/v1/categories', {
+  return http<GetCategories>('/api/v1/categories', {
     method: 'GET',
     params,
   })
