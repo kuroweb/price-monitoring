@@ -1,5 +1,5 @@
 export type Product = {
-  id: string
+  id: number
   name: string
   createdAt: string
   updatedAt: string
@@ -13,27 +13,27 @@ export type Product = {
 }
 
 export type YahooAuctionCrawlSetting = {
-  id: string
+  id: number
   productId: number
   keyword: string
-  categoryId?: number | null
+  categoryId: number | null
   minPrice: number
   maxPrice: number
   enabled: boolean
 }
 
 export type MercariCrawlSetting = {
-  id: string
+  id: number
   productId: number
   keyword: string
-  categoryId?: number | null
+  categoryId: number | null
   minPrice: number
   maxPrice: number
   enabled: boolean
 }
 
 export type JanparaCrawlSetting = {
-  id: string
+  id: number
   productId: number
   keyword: string
   minPrice: number
@@ -42,7 +42,7 @@ export type JanparaCrawlSetting = {
 }
 
 export type IosysCrawlSetting = {
-  id: string
+  id: number
   productId: number
   keyword: string
   minPrice: number
@@ -51,7 +51,7 @@ export type IosysCrawlSetting = {
 }
 
 export type PcKoubouCrawlSetting = {
-  id: string
+  id: number
   productId: number
   keyword: string
   minPrice: number
@@ -60,7 +60,7 @@ export type PcKoubouCrawlSetting = {
 }
 
 export type UsedSofmapCrawlSetting = {
-  id: string
+  id: number
   productId: number
   keyword: string
   minPrice: number
@@ -69,7 +69,7 @@ export type UsedSofmapCrawlSetting = {
 }
 
 export type Category = {
-  id: string
-  parentId?: string | null
+  id: number
+  parentId: number | null
   name: string
 }

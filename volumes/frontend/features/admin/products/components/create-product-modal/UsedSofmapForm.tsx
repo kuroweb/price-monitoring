@@ -1,14 +1,14 @@
 'use client'
 
 import type { reflectValueType } from './CreateProductModal'
-import type { CreateProductInput } from '@/graphql/dist/client'
+import type { CreateProductData } from '@/api'
 import type { useForm } from 'react-hook-form'
 
 const UsedSofmapForm = ({
   register,
   reflectValue,
 }: {
-  register: ReturnType<typeof useForm<CreateProductInput>>['register']
+  register: ReturnType<typeof useForm<CreateProductData>>['register']
   reflectValue: reflectValueType
 }) => {
   return (

@@ -27,10 +27,10 @@ const ProductsTable = ({ products, categories }: Props) => {
   const [_updateModal, setUpdateModal] = useUpdateProductModalState()
   const [product, setProduct] = useState<Product | undefined>(undefined)
 
-  const submitDeleteProduct = async (productId: string) => {
-    const response = await destroyProduct(productId)
+  const submitDeleteProduct = async (productId: number) => {
+    const res = await destroyProduct(productId)
 
-    if (response.status === 200) {
+    if (res.status === 200) {
       toast.success('success')
     } else {
       toast.error('error')
@@ -117,98 +117,94 @@ const ProductsTable = ({ products, categories }: Props) => {
         </tbody>
       </table>
       <CreateProductModal
-        defaultValues={
-          product && {
-            name: product.name,
-            categoryId: product.category?.id,
-            yahooAuctionCrawlSetting: {
-              keyword: product.yahooAuctionCrawlSetting?.keyword,
-              categoryId: product.yahooAuctionCrawlSetting?.categoryId,
-              minPrice: product.yahooAuctionCrawlSetting?.minPrice,
-              maxPrice: product.yahooAuctionCrawlSetting?.maxPrice,
-              enabled: product.yahooAuctionCrawlSetting?.enabled,
-            },
-            mercariCrawlSetting: {
-              keyword: product.mercariCrawlSetting?.keyword,
-              categoryId: product.mercariCrawlSetting?.categoryId,
-              minPrice: product.mercariCrawlSetting?.minPrice,
-              maxPrice: product.mercariCrawlSetting?.maxPrice,
-              enabled: product.mercariCrawlSetting?.enabled,
-            },
-            janparaCrawlSetting: {
-              keyword: product.janparaCrawlSetting?.keyword,
-              minPrice: product.janparaCrawlSetting?.minPrice,
-              maxPrice: product.janparaCrawlSetting?.maxPrice,
-              enabled: product.janparaCrawlSetting?.enabled,
-            },
-            iosysCrawlSetting: {
-              keyword: product.iosysCrawlSetting?.keyword,
-              minPrice: product.iosysCrawlSetting?.minPrice,
-              maxPrice: product.iosysCrawlSetting?.maxPrice,
-              enabled: product.iosysCrawlSetting?.enabled,
-            },
-            pcKoubouCrawlSetting: {
-              keyword: product.pcKoubouCrawlSetting?.keyword,
-              minPrice: product.pcKoubouCrawlSetting?.minPrice,
-              maxPrice: product.pcKoubouCrawlSetting?.maxPrice,
-              enabled: product.pcKoubouCrawlSetting?.enabled,
-            },
-            usedSofmapCrawlSetting: {
-              keyword: product.usedSofmapCrawlSetting?.keyword,
-              minPrice: product.usedSofmapCrawlSetting?.minPrice,
-              maxPrice: product.usedSofmapCrawlSetting?.maxPrice,
-              enabled: product.usedSofmapCrawlSetting?.enabled,
-            },
-          }
-        }
+        defaultValues={{
+          name: product?.name || '',
+          categoryId: product?.category?.id || categories[0].id,
+          yahooAuctionCrawlSetting: {
+            keyword: product?.yahooAuctionCrawlSetting?.keyword || '',
+            categoryId: product?.yahooAuctionCrawlSetting?.categoryId || null,
+            minPrice: product?.yahooAuctionCrawlSetting?.minPrice || 0,
+            maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
+            enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
+          },
+          mercariCrawlSetting: {
+            keyword: product?.mercariCrawlSetting?.keyword || '',
+            categoryId: product?.mercariCrawlSetting?.categoryId || null,
+            minPrice: product?.mercariCrawlSetting?.minPrice || 0,
+            maxPrice: product?.mercariCrawlSetting?.maxPrice || 0,
+            enabled: product?.mercariCrawlSetting?.enabled || true,
+          },
+          janparaCrawlSetting: {
+            keyword: product?.janparaCrawlSetting?.keyword || '',
+            minPrice: product?.janparaCrawlSetting?.minPrice || 0,
+            maxPrice: product?.janparaCrawlSetting?.maxPrice || 0,
+            enabled: product?.janparaCrawlSetting?.enabled || true,
+          },
+          iosysCrawlSetting: {
+            keyword: product?.iosysCrawlSetting?.keyword || '',
+            minPrice: product?.iosysCrawlSetting?.minPrice || 0,
+            maxPrice: product?.iosysCrawlSetting?.maxPrice || 0,
+            enabled: product?.iosysCrawlSetting?.enabled || true,
+          },
+          pcKoubouCrawlSetting: {
+            keyword: product?.pcKoubouCrawlSetting?.keyword || '',
+            minPrice: product?.pcKoubouCrawlSetting?.minPrice || 0,
+            maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
+            enabled: product?.pcKoubouCrawlSetting?.enabled || true,
+          },
+          usedSofmapCrawlSetting: {
+            keyword: product?.usedSofmapCrawlSetting?.keyword || '',
+            minPrice: product?.usedSofmapCrawlSetting?.minPrice || 0,
+            maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
+            enabled: product?.usedSofmapCrawlSetting?.enabled || true,
+          },
+        }}
         categories={categories}
       />
       <UpdateProductModal
-        defaultValues={
-          product && {
-            id: product.id,
-            name: product.name,
-            categoryId: product.category?.id,
-            yahooAuctionCrawlSetting: {
-              keyword: product.yahooAuctionCrawlSetting?.keyword,
-              categoryId: product.yahooAuctionCrawlSetting?.categoryId,
-              minPrice: product.yahooAuctionCrawlSetting?.minPrice,
-              maxPrice: product.yahooAuctionCrawlSetting?.maxPrice,
-              enabled: product.yahooAuctionCrawlSetting?.enabled,
-            },
-            mercariCrawlSetting: {
-              keyword: product.mercariCrawlSetting?.keyword,
-              categoryId: product.mercariCrawlSetting?.categoryId,
-              minPrice: product.mercariCrawlSetting?.minPrice,
-              maxPrice: product.mercariCrawlSetting?.maxPrice,
-              enabled: product.mercariCrawlSetting?.enabled,
-            },
-            janparaCrawlSetting: {
-              keyword: product.janparaCrawlSetting?.keyword,
-              minPrice: product.janparaCrawlSetting?.minPrice,
-              maxPrice: product.janparaCrawlSetting?.maxPrice,
-              enabled: product.janparaCrawlSetting?.enabled,
-            },
-            iosysCrawlSetting: {
-              keyword: product.iosysCrawlSetting?.keyword,
-              minPrice: product.iosysCrawlSetting?.minPrice,
-              maxPrice: product.iosysCrawlSetting?.maxPrice,
-              enabled: product.iosysCrawlSetting?.enabled,
-            },
-            pcKoubouCrawlSetting: {
-              keyword: product.pcKoubouCrawlSetting?.keyword,
-              minPrice: product.pcKoubouCrawlSetting?.minPrice,
-              maxPrice: product.pcKoubouCrawlSetting?.maxPrice,
-              enabled: product.pcKoubouCrawlSetting?.enabled,
-            },
-            usedSofmapCrawlSetting: {
-              keyword: product.usedSofmapCrawlSetting?.keyword,
-              minPrice: product.usedSofmapCrawlSetting?.minPrice,
-              maxPrice: product.usedSofmapCrawlSetting?.maxPrice,
-              enabled: product.usedSofmapCrawlSetting?.enabled,
-            },
-          }
-        }
+        productId={product?.id || 0}
+        defaultValues={{
+          name: product?.name || '',
+          categoryId: product?.category?.id || categories[0].id,
+          yahooAuctionCrawlSetting: {
+            keyword: product?.yahooAuctionCrawlSetting?.keyword || '',
+            categoryId: product?.yahooAuctionCrawlSetting?.categoryId || null,
+            minPrice: product?.yahooAuctionCrawlSetting?.minPrice || 0,
+            maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
+            enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
+          },
+          mercariCrawlSetting: {
+            keyword: product?.mercariCrawlSetting?.keyword || '',
+            categoryId: product?.mercariCrawlSetting?.categoryId || null,
+            minPrice: product?.mercariCrawlSetting?.minPrice || 0,
+            maxPrice: product?.mercariCrawlSetting?.maxPrice || 0,
+            enabled: product?.mercariCrawlSetting?.enabled || true,
+          },
+          janparaCrawlSetting: {
+            keyword: product?.janparaCrawlSetting?.keyword || '',
+            minPrice: product?.janparaCrawlSetting?.minPrice || 0,
+            maxPrice: product?.janparaCrawlSetting?.maxPrice || 0,
+            enabled: product?.janparaCrawlSetting?.enabled || true,
+          },
+          iosysCrawlSetting: {
+            keyword: product?.iosysCrawlSetting?.keyword || '',
+            minPrice: product?.iosysCrawlSetting?.minPrice || 0,
+            maxPrice: product?.iosysCrawlSetting?.maxPrice || 0,
+            enabled: product?.iosysCrawlSetting?.enabled || true,
+          },
+          pcKoubouCrawlSetting: {
+            keyword: product?.pcKoubouCrawlSetting?.keyword || '',
+            minPrice: product?.pcKoubouCrawlSetting?.minPrice || 0,
+            maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
+            enabled: product?.pcKoubouCrawlSetting?.enabled || true,
+          },
+          usedSofmapCrawlSetting: {
+            keyword: product?.usedSofmapCrawlSetting?.keyword || '',
+            minPrice: product?.usedSofmapCrawlSetting?.minPrice || 0,
+            maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
+            enabled: product?.usedSofmapCrawlSetting?.enabled || true,
+          },
+        }}
         categories={categories}
       />
     </>

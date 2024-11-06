@@ -1,14 +1,14 @@
 'use client'
 
 import type { reflectValueType } from './UpdateProductModal'
-import type { UpdateProductInput } from '@/graphql/dist/client'
+import type { UpdateProductData } from '@/api'
 import type { useForm } from 'react-hook-form'
 
 const MercariForm = ({
   register,
   reflectValue,
 }: {
-  register: ReturnType<typeof useForm<UpdateProductInput>>['register']
+  register: ReturnType<typeof useForm<UpdateProductData>>['register']
   reflectValue: reflectValueType
 }) => {
   return (
