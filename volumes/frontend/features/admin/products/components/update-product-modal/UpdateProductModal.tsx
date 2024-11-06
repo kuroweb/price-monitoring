@@ -7,7 +7,6 @@ import { Join } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { updateProduct } from '../../../../../server-actions/productQuery'
 import { useUpdateProductModalState } from '../../hooks/useUpdateProductModalState'
 
 import IosysForm from './IosysForm'
@@ -17,8 +16,10 @@ import PcKoubouForm from './PcKoubouForm'
 import UsedSofmapForm from './UsedSofmapForm'
 import YahooAuctionForm from './YahooAuctionForm'
 
-import type { AdminProductsPageDataQuery, UpdateProductInput } from '@/graphql/dist/client'
+import type { Category, UpdateProductData } from '@/api'
 import type { SubmitHandler } from 'react-hook-form'
+
+import { updateProduct } from '@/server-actions/api'
 
 export type reflectValueType = (
   source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
@@ -26,11 +27,13 @@ export type reflectValueType = (
 ) => void
 
 const UpdateProductModal = ({
+  productId,
   defaultValues,
   categories,
 }: {
-  defaultValues: UpdateProductInput | undefined
-  categories: AdminProductsPageDataQuery['categories'] | undefined
+  productId: number
+  defaultValues: UpdateProductData
+  categories: Category[]
 }) => {
   const router = useRouter()
 
@@ -49,57 +52,15 @@ const UpdateProductModal = ({
     setValue(`usedSofmapCrawlSetting.${property}`, value)
   }
 
-  const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductInput>({
-    defaultValues: {
-      id: defaultValues?.id || '',
-      name: defaultValues?.name || '',
-      categoryId: defaultValues?.categoryId || '',
-      yahooAuctionCrawlSetting: {
-        keyword: defaultValues?.yahooAuctionCrawlSetting?.keyword || '',
-        categoryId: defaultValues?.yahooAuctionCrawlSetting?.categoryId || null,
-        minPrice: defaultValues?.yahooAuctionCrawlSetting?.minPrice || 0,
-        maxPrice: defaultValues?.yahooAuctionCrawlSetting?.maxPrice || 0,
-        enabled: defaultValues?.yahooAuctionCrawlSetting?.enabled || true,
-      },
-      mercariCrawlSetting: {
-        keyword: defaultValues?.mercariCrawlSetting?.keyword || '',
-        categoryId: defaultValues?.mercariCrawlSetting?.categoryId || null,
-        minPrice: defaultValues?.mercariCrawlSetting?.minPrice || 0,
-        maxPrice: defaultValues?.mercariCrawlSetting?.maxPrice || 0,
-        enabled: defaultValues?.mercariCrawlSetting?.enabled || true,
-      },
-      janparaCrawlSetting: {
-        keyword: defaultValues?.janparaCrawlSetting?.keyword || '',
-        minPrice: defaultValues?.janparaCrawlSetting?.minPrice || 0,
-        maxPrice: defaultValues?.janparaCrawlSetting?.maxPrice || 0,
-        enabled: defaultValues?.janparaCrawlSetting?.enabled || true,
-      },
-      iosysCrawlSetting: {
-        keyword: defaultValues?.iosysCrawlSetting?.keyword || '',
-        minPrice: defaultValues?.iosysCrawlSetting?.minPrice || 0,
-        maxPrice: defaultValues?.iosysCrawlSetting?.maxPrice || 0,
-        enabled: defaultValues?.iosysCrawlSetting?.enabled || true,
-      },
-      pcKoubouCrawlSetting: {
-        keyword: defaultValues?.pcKoubouCrawlSetting?.keyword || '',
-        minPrice: defaultValues?.pcKoubouCrawlSetting?.minPrice || 0,
-        maxPrice: defaultValues?.pcKoubouCrawlSetting?.maxPrice || 0,
-        enabled: defaultValues?.pcKoubouCrawlSetting?.enabled || true,
-      },
-      usedSofmapCrawlSetting: {
-        keyword: defaultValues?.usedSofmapCrawlSetting?.keyword || '',
-        minPrice: defaultValues?.usedSofmapCrawlSetting?.minPrice || 0,
-        maxPrice: defaultValues?.usedSofmapCrawlSetting?.maxPrice || 0,
-        enabled: defaultValues?.usedSofmapCrawlSetting?.enabled || true,
-      },
-    },
+  const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductData>({
+    defaultValues,
     values: defaultValues,
   })
 
-  const onSubmit: SubmitHandler<UpdateProductInput> = async (input) => {
-    const result = await updateProduct(input)
+  const onSubmit: SubmitHandler<UpdateProductData> = async (data) => {
+    const res = await updateProduct(productId, data)
 
-    if (result.data?.updateProduct.ok) {
+    if (res.status === 200) {
       toast.success('success')
       setModal(false)
     } else {
