@@ -13,6 +13,14 @@ module Api
         Rails.logger.error("Bad Request. exception: #{e.full_message}")
         render json: build_error_json(400, "Bad Request.", []), status: :bad_request
       end
+
+      def update
+        ::Products::Update.call(product:, params: update_product_params)
+        inspect
+        render json: ProductSerializer.new(product), status: :ok
+      rescue ActiveRecord::RecordInvalid => e
+        Rails.logger.error("Bad Request. exception: #{e.full_message}")
+        render json: build_error_json(400, "Bad Request.", []), status: :bad_request
       end
 
       def destroy
@@ -34,6 +42,19 @@ module Api
       end
 
       def create_product_params
+        params.permit(
+          product_attributes + [
+            yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
+            mercari_crawl_setting: mercari_crawl_setting_attributes,
+            janpara_crawl_setting: janpara_crawl_setting_attributes,
+            iosys_crawl_setting: iosys_crawl_setting_attributes,
+            pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes,
+            used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes
+          ] + [:category_id]
+        )
+      end
+
+      def update_product_params
         params.permit(
           product_attributes + [
             yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes,
@@ -76,6 +97,16 @@ module Api
 
       def external_attributes
         %i[sort order]
+      end
+
+      def inspect
+        ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
+        ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
+        ::Products::Inspect::DeleteMercariProducts.call(product:)
+        ::Products::Inspect::DeleteJanparaProducts.call(product:)
+        ::Products::Inspect::DeleteIosysProducts.call(product:)
+        ::Products::Inspect::DeletePcKoubouProducts.call(product:)
+        ::Products::Inspect::DeleteUsedSofmapProducts.call(product:)
       end
     end
   end
