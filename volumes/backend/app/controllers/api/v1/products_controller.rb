@@ -3,16 +3,16 @@ module Api
     class ProductsController < Api::ApplicationController
       def index
         products = ProductFinder.new(params: find_product_params).execute
-        render json: Api::Products::ProductsSerializer.new(products).render_json, status: :ok
+        render json: Api::ProductsSerializer.new(products).render_json, status: :ok
       end
 
       def show
-        render json: Api::Products::ProductSerializer.new(product).render_json, status: :ok
+        render json: Api::ProductSerializer.new(product).render_json, status: :ok
       end
 
       def create
         product = ::Products::Create.call(params: create_product_params)
-        render json: ProductSerializer.new(product), status: :ok
+        render json: Api::ProductSerializer.new(product), status: :ok
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error("Bad Request. exception: #{e.full_message}")
         render json: build_error_json(400, "Bad Request.", []), status: :bad_request
@@ -21,7 +21,7 @@ module Api
       def update
         ::Products::Update.call(product:, params: update_product_params)
         inspect
-        render json: ProductSerializer.new(product), status: :ok
+        render json: Api::ProductSerializer.new(product), status: :ok
       rescue ActiveRecord::RecordInvalid => e
         Rails.logger.error("Bad Request. exception: #{e.full_message}")
         render json: build_error_json(400, "Bad Request.", []), status: :bad_request
