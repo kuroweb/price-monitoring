@@ -1,12 +1,15 @@
 'use server'
 
-import * as Api from '../api'
-
+import * as Api from '@/api'
 import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
 export async function getProducts(params?: Api.GetProductsParams) {
   return await Api.getProducts(params)
 }
+
+// export async function getProduct(productId: number) {
+//   return await Api.getProduct(productId)
+// }
 
 export async function createProduct(params: Api.CreateProductData) {
   const res = await Api.createProduct(params)
