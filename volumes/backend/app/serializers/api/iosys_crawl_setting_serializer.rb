@@ -20,11 +20,15 @@ module Api
     end
 
     def iosys_crawl_setting_exclude_keywords_json
-      @iosys_crawl_setting.iosys_crawl_setting_exclude_keywords.map(&:as_json)
+      @iosys_crawl_setting.iosys_crawl_setting_exclude_keywords.map do |p|
+        IosysCrawlSettingExcludeKeywordSerializer.new(p).render_json
+      end
     end
 
     def iosys_crawl_setting_required_keywords_json
-      @iosys_crawl_setting.iosys_crawl_setting_required_keywords.map(&:as_json)
+      @iosys_crawl_setting.iosys_crawl_setting_required_keywords.map do |p|
+        IosysCrawlSettingRequiredKeywordSerializer.new(p).render_json
+      end
     end
   end
 end

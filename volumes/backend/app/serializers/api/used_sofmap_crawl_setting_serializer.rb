@@ -20,11 +20,15 @@ module Api
     end
 
     def used_sofmap_crawl_setting_exclude_keywords_json
-      @used_sofmap_crawl_setting.used_sofmap_crawl_setting_exclude_keywords.map(&:as_json)
+      @used_sofmap_crawl_setting.used_sofmap_crawl_setting_exclude_keywords.map do |p|
+        UsedSofmapCrawlSettingExcludeKeywordSerializer.new(p).render_json
+      end
     end
 
     def used_sofmap_crawl_setting_required_keywords_json
-      @used_sofmap_crawl_setting.used_sofmap_crawl_setting_required_keywords.map(&:as_json)
+      @used_sofmap_crawl_setting.used_sofmap_crawl_setting_required_keywords.map do |p|
+        UsedSofmapCrawlSettingRequiredKeywordSerializer.new(p).render_json
+      end
     end
   end
 end

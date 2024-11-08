@@ -20,11 +20,15 @@ module Api
     end
 
     def janpara_crawl_setting_exclude_keywords_json
-      @janpara_crawl_setting.janpara_crawl_setting_exclude_keywords.map(&:as_json)
+      @janpara_crawl_setting.janpara_crawl_setting_exclude_keywords.map do |p|
+        JanparaCrawlSettingExcludeKeywordSerializer.new(p).render_json
+      end
     end
 
     def janpara_crawl_setting_required_keywords_json
-      @janpara_crawl_setting.janpara_crawl_setting_required_keywords.map(&:as_json)
+      @janpara_crawl_setting.janpara_crawl_setting_required_keywords.map do |p|
+        JanparaCrawlSettingRequiredKeywordSerializer.new(p).render_json
+      end
     end
   end
 end

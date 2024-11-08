@@ -20,11 +20,15 @@ module Api
     end
 
     def mercari_crawl_setting_exclude_keywords_json
-      @mercari_crawl_setting.mercari_crawl_setting_exclude_keywords.map(&:as_json)
+      @mercari_crawl_setting.mercari_crawl_setting_exclude_keywords.map do |p|
+        MercariCrawlSettingExcludeKeywordSerializer.new(p).render_json
+      end
     end
 
     def mercari_crawl_setting_required_keywords_json
-      @mercari_crawl_setting.mercari_crawl_setting_required_keywords.map(&:as_json)
+      @mercari_crawl_setting.mercari_crawl_setting_required_keywords.map do |p|
+        MercariCrawlSettingRequiredKeywordSerializer.new(p).render_json
+      end
     end
   end
 end
