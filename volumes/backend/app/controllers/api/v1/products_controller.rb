@@ -12,26 +12,20 @@ module Api
 
       def create
         product = ::Products::Create.call(params: create_product_params)
-        render json: Api::ProductSerializer.new(product), status: :ok
-      rescue ActiveRecord::RecordInvalid => e
-        Rails.logger.error("Bad Request. exception: #{e.full_message}")
-        render json: build_error_json(400, "Bad Request.", []), status: :bad_request
+        render json: Api::ProductSerializer.new(product).render_json, status: :ok
       end
 
       def update
         ::Products::Update.call(product:, params: update_product_params)
         inspect
-        render json: Api::ProductSerializer.new(product), status: :ok
-      rescue ActiveRecord::RecordInvalid => e
-        Rails.logger.error("Bad Request. exception: #{e.full_message}")
-        render json: build_error_json(400, "Bad Request.", []), status: :bad_request
+        render json: Api::ProductSerializer.new(product).render_json, status: :ok
       end
 
       def destroy
         if product.destroy
           render json: {}, status: :ok
         else
-          render json: build_error_json(500, "Bad Request.", []), status: :bad_request
+          render json: build_error_json(400, "Bad Request.", []), status: :bad_request
         end
       end
 
