@@ -20,11 +20,15 @@ module Api
     end
 
     def pc_koubou_crawl_setting_exclude_keywords_json
-      @pc_koubou_crawl_setting.pc_koubou_crawl_setting_exclude_keywords.map(&:as_json)
+      @pc_koubou_crawl_setting.pc_koubou_crawl_setting_exclude_keywords.map do |p|
+        PcKoubouCrawlSettingExcludeKeywordSerializer.new(p).render_json
+      end
     end
 
     def pc_koubou_crawl_setting_required_keywords_json
-      @pc_koubou_crawl_setting.pc_koubou_crawl_setting_required_keywords.map(&:as_json)
+      @pc_koubou_crawl_setting.pc_koubou_crawl_setting_required_keywords.map do |p|
+        PcKoubouCrawlSettingRequiredKeywordSerializer.new(p).render_json
+      end
     end
   end
 end

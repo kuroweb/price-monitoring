@@ -20,11 +20,15 @@ module Api
     end
 
     def yahoo_auction_crawl_setting_exclude_keywords_json
-      @yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_exclude_keywords.map(&:as_json)
+      @yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_exclude_keywords.map do |p|
+        YahooAuctionCrawlSettingExcludeKeywordSerializer.new(p).render_json
+      end
     end
 
     def yahoo_auction_crawl_setting_required_keywords_json
-      @yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_required_keywords.map(&:as_json)
+      @yahoo_auction_crawl_setting.yahoo_auction_crawl_setting_required_keywords.map do |p|
+        YahooAuctionCrawlSettingRequiredKeywordSerializer.new(p).render_json
+      end
     end
   end
 end
