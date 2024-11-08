@@ -3,13 +3,6 @@ export type Product = {
   name: string
   createdAt: string
   updatedAt: string
-  iosysCrawlSetting: IosysCrawlSetting
-  janparaCrawlSetting: JanparaCrawlSetting
-  mercariCrawlSetting: MercariCrawlSetting
-  pcKoubouCrawlSetting: PcKoubouCrawlSetting
-  usedSofmapCrawlSetting: UsedSofmapCrawlSetting
-  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
-  category: Category
 }
 
 export type YahooAuctionCrawlSetting = {
@@ -20,6 +13,24 @@ export type YahooAuctionCrawlSetting = {
   minPrice: number
   maxPrice: number
   enabled: boolean
+  createdAt: string
+  updatedAt: string
+}
+
+export type YahooAuctionCrawlSettingExcludeKeyword = {
+  id: number
+  yahooAuctionCrawlSettingId: number
+  keyword: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type YahooAuctionCrawlSettingRequiredKeyword = {
+  id: number
+  yahooAuctionCrawlSettingId: number
+  keyword: string
+  createdAt: string
+  updatedAt: string
 }
 
 export type MercariCrawlSetting = {
@@ -30,6 +41,8 @@ export type MercariCrawlSetting = {
   minPrice: number
   maxPrice: number
   enabled: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export type JanparaCrawlSetting = {
@@ -39,6 +52,8 @@ export type JanparaCrawlSetting = {
   minPrice: number
   maxPrice: number
   enabled: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export type IosysCrawlSetting = {
@@ -48,6 +63,8 @@ export type IosysCrawlSetting = {
   minPrice: number
   maxPrice: number
   enabled: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export type PcKoubouCrawlSetting = {
@@ -57,6 +74,8 @@ export type PcKoubouCrawlSetting = {
   minPrice: number
   maxPrice: number
   enabled: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export type UsedSofmapCrawlSetting = {
@@ -66,10 +85,14 @@ export type UsedSofmapCrawlSetting = {
   minPrice: number
   maxPrice: number
   enabled: boolean
+  createdAt: string
+  updatedAt: string
 }
 
 export type Category = {
   id: number
   parentId: number | null
   name: string
+  createdAt: string
+  updatedAt: string
 }
