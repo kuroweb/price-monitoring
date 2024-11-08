@@ -17,7 +17,7 @@ export interface GetProductsParams {
   // TODO: 後で実装する
 }
 
-type GetProducts = {
+export type GetProducts = {
   products: (Product & {
     iosysCrawlSetting: IosysCrawlSetting
     janparaCrawlSetting: JanparaCrawlSetting
