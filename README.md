@@ -19,7 +19,7 @@ DatadogやBugSnagを導入して運用監視についてのキャッチアップ
 ### Backend
 
 - Rails
-- graphql-ruby
+- graphql-ruby（WebAPIでリプレース中）
 
 ### 運用監視
 
