@@ -91,16 +91,14 @@ export type CreateProductData = {
   }
 }
 
-export type CreateProduct = {
-  products: Product & {
-    iosysCrawlSetting: IosysCrawlSetting
-    janparaCrawlSetting: JanparaCrawlSetting
-    mercariCrawlSetting: MercariCrawlSetting
-    pcKoubouCrawlSetting: PcKoubouCrawlSetting
-    usedSofmapCrawlSetting: UsedSofmapCrawlSetting
-    yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
-    category: Category
-  }
+export type CreateProduct = Product & {
+  iosysCrawlSetting: IosysCrawlSetting
+  janparaCrawlSetting: JanparaCrawlSetting
+  mercariCrawlSetting: MercariCrawlSetting
+  pcKoubouCrawlSetting: PcKoubouCrawlSetting
+  usedSofmapCrawlSetting: UsedSofmapCrawlSetting
+  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
+  category: Category
 }
 
 export async function createProduct(data: CreateProductData) {
@@ -155,16 +153,14 @@ export type UpdateProductData = {
   }
 }
 
-export type UpdateProduct = {
-  products: Product & {
-    iosysCrawlSetting: IosysCrawlSetting
-    janparaCrawlSetting: JanparaCrawlSetting
-    mercariCrawlSetting: MercariCrawlSetting
-    pcKoubouCrawlSetting: PcKoubouCrawlSetting
-    usedSofmapCrawlSetting: UsedSofmapCrawlSetting
-    yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
-    category: Category
-  }
+export type UpdateProduct = Product & {
+  iosysCrawlSetting: IosysCrawlSetting
+  janparaCrawlSetting: JanparaCrawlSetting
+  mercariCrawlSetting: MercariCrawlSetting
+  pcKoubouCrawlSetting: PcKoubouCrawlSetting
+  usedSofmapCrawlSetting: UsedSofmapCrawlSetting
+  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
+  category: Category
 }
 
 export async function updateProduct(productId: number, data: UpdateProductData) {
