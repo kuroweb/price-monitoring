@@ -11,16 +11,16 @@ export async function getProducts(params?: Api.GetProductsParams) {
 //   return await Api.getProduct(productId)
 // }
 
-export async function createProduct(params: Api.CreateProductData) {
-  const res = await Api.createProduct(params)
+export async function createProduct(data: Api.CreateProductData) {
+  const res = await Api.createProduct(data)
   revalidateAdminPaths()
   revalidateProductsPaths()
 
   return res
 }
 
-export async function updateProduct(productId: number, params: Api.UpdateProductData) {
-  const res = await Api.updateProduct(productId, params)
+export async function updateProduct(productId: number, data: Api.UpdateProductData) {
+  const res = await Api.updateProduct(productId, data)
   revalidateAdminPaths()
   revalidateProductsPaths()
 
