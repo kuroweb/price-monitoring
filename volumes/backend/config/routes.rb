@@ -8,6 +8,13 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :products, only: %i[index show create update destroy]
+      namespace :products do
+        scope path: ":product_id" do
+          namespace :yahoo_auction_crawl_settings do
+            resources :yahoo_auction_crawl_setting_exclude_keywords, only: %i[create update destroy]
+          end
+        end
+      end
       resources :categories, only: %i[index]
     end
   end
