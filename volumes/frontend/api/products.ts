@@ -7,7 +7,7 @@ import type {
   Product,
   UsedSofmapCrawlSetting,
   YahooAuctionCrawlSetting,
-} from '@/api'
+} from './model'
 
 import { http } from '@/lib/axios-client'
 
