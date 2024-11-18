@@ -46,7 +46,8 @@ module Api
                 used_sofmap_crawl_setting_exclude_products
               ]
             }
-          }
+          },
+          :category
         ]
       }.freeze
 
