@@ -9,6 +9,7 @@ module Api
           iosys_crawl_setting
           pc_koubou_crawl_setting
           used_sofmap_crawl_setting
+          category
         ]
       }.freeze
 
