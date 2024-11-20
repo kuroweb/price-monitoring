@@ -3,11 +3,11 @@ module Api
     class ProductsController < Api::ApplicationController
       def index
         products = ProductFinder.new(params: find_product_params).execute
-        render json: Api::Products::ProductListSerializer.new(products), status: :ok
+        render json: Api::Products::ProductListSerializer.new(products).as_json, status: :ok
       end
 
       def show
-        render json: Api::Products::ProductDetailSerializer.new(product), status: :ok
+        render json: Api::Products::ProductDetailSerializer.new(product).as_json, status: :ok
       end
 
       def create
