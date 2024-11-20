@@ -7,7 +7,7 @@ import { getCategories, getProducts } from '@/server-actions/api'
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const productResponse = await getProducts()
-  const categoryResponse = await getCategories({ rootOnly: true })
+  const categoryResponse = await getCategories({ rootOnly: false })
 
   return (
     <Layout>
