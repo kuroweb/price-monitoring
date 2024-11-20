@@ -7,9 +7,9 @@ export async function getProducts(params?: Api.GetProductsParams) {
   return await Api.getProducts(params)
 }
 
-// export async function getProduct(productId: number) {
-//   return await Api.getProduct(productId)
-// }
+export async function getProduct(productId: number) {
+  return await Api.getProduct(productId)
+}
 
 export async function createProduct(data: Api.CreateProductData) {
   const res = await Api.createProduct(data)

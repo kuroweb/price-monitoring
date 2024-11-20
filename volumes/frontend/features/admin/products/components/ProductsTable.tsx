@@ -12,12 +12,12 @@ import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import UpdateProductModal from './update-product-modal/UpdateProductModal'
 
-import type { Category, GetProducts } from '@/api'
+import type { Category, ProductList } from '@/api'
 
 import { destroyProduct } from '@/server-actions/api'
 
 interface Props {
-  products: GetProducts['products']
+  products: ProductList['products']
   categories: Category[]
 }
 
@@ -25,7 +25,7 @@ const ProductsTable = ({ products, categories }: Props) => {
   const router = useRouter()
   const [_createModal, setCreateModal] = useCreateProductModalState()
   const [_updateModal, setUpdateModal] = useUpdateProductModalState()
-  const [product, setProduct] = useState<GetProducts['products'][number] | undefined>(undefined)
+  const [product, setProduct] = useState<ProductList['products'][number] | undefined>(undefined)
 
   const submitDeleteProduct = async (productId: number) => {
     const res = await destroyProduct(productId)

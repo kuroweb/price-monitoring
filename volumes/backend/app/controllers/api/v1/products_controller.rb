@@ -12,13 +12,13 @@ module Api
 
       def create
         product = ::Products::Create.call(params: create_product_params)
-        render json: Api::Products::ProductDetailSerializer.new(product), status: :ok
+        render json: product.as_json, status: :ok
       end
 
       def update
         ::Products::Update.call(product:, params: update_product_params)
         inspect
-        render json: Api::Products::ProductDetailSerializer.new(product), status: :ok
+        render json: product.as_json, status: :ok
       end
 
       def destroy

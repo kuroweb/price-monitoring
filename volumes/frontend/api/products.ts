@@ -11,13 +11,7 @@ import type {
 
 import { http } from '@/lib/axios-client'
 
-// GET: /api/v1/products
-
-export interface GetProductsParams {
-  // TODO: 後で実装する
-}
-
-export type GetProducts = {
+export type ProductList = {
   products: (Product & {
     iosysCrawlSetting: IosysCrawlSetting
     janparaCrawlSetting: JanparaCrawlSetting
@@ -29,24 +23,44 @@ export type GetProducts = {
   })[]
 }
 
+export type ProductDetail = Product & {
+  iosysCrawlSetting: IosysCrawlSetting & {
+    iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
+  }
+  janparaCrawlSetting: JanparaCrawlSetting & {
+    janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
+  }
+  mercariCrawlSetting: MercariCrawlSetting & {
+    mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
+  }
+  pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
+    pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
+  }
+  usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
+    usedSofmapCrawlSettingExcludeKeywords: UsedSomapCrawlSettingExcludeKeyword[]
+  }
+  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
+    yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
+  }
+  category: Category
+}
+
+export interface GetProductsParams {
+  // TODO: 後で実装する
+}
+
 export async function getProducts(params?: GetProductsParams) {
-  return http<GetProducts>('/api/v1/products', {
+  return http<ProductList>('/api/v1/products', {
     method: 'GET',
     params,
   })
 }
 
-// GET: /api/v1/products
-
-// export interface GetProduct extends Product {}
-
-// export async function getProduct(productId: number) {
-//   return http<GetProduct>(`/api/v1/products/${productId}`, {
-//     method: 'GET',
-//   })
-// }
-
-// POST: /api/v1/products
+export async function getProduct(productId: number) {
+  return http<ProductDetail>(`/api/v1/products/${productId}`, {
+    method: 'GET',
+  })
+}
 
 export type CreateProductData = {
   name: string
@@ -91,24 +105,12 @@ export type CreateProductData = {
   }
 }
 
-export type CreateProduct = Product & {
-  iosysCrawlSetting: IosysCrawlSetting
-  janparaCrawlSetting: JanparaCrawlSetting
-  mercariCrawlSetting: MercariCrawlSetting
-  pcKoubouCrawlSetting: PcKoubouCrawlSetting
-  usedSofmapCrawlSetting: UsedSofmapCrawlSetting
-  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
-  category: Category
-}
-
 export async function createProduct(data: CreateProductData) {
-  return http<CreateProduct>('/api/v1/products', {
+  return http<Product>('/api/v1/products', {
     method: 'POST',
     data,
   })
 }
-
-// PUT: /api/v1/products/:productId
 
 export type UpdateProductData = {
   name: string
@@ -153,24 +155,12 @@ export type UpdateProductData = {
   }
 }
 
-export type UpdateProduct = Product & {
-  iosysCrawlSetting: IosysCrawlSetting
-  janparaCrawlSetting: JanparaCrawlSetting
-  mercariCrawlSetting: MercariCrawlSetting
-  pcKoubouCrawlSetting: PcKoubouCrawlSetting
-  usedSofmapCrawlSetting: UsedSofmapCrawlSetting
-  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
-  category: Category
-}
-
 export async function updateProduct(productId: number, data: UpdateProductData) {
-  return http<UpdateProduct>(`/api/v1/products/${productId}`, {
+  return http<Product>(`/api/v1/products/${productId}`, {
     method: 'PUT',
     data,
   })
 }
-
-// DELETE: /api/v1/products/:productId
 
 export async function destroyProduct(productId: number) {
   return http(`/api/v1/products/${productId}`, {
