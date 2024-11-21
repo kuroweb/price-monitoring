@@ -8,15 +8,13 @@ module Api
                                      .yahoo_auction_crawl_setting_exclude_keywords
                                      .create!(exclude_keyword_params)
             inspect
-            render json: Api::YahooAuctionCrawlSettingExcludeKeywordSerializer.new(exclude_keyword).render_json,
-                   status: :ok
+            render json: exclude_keyword.as_json, status: :ok
           end
 
           def update
             exclude_keyword.update!(exclude_keyword_params)
             inspect
-            render json: Api::YahooAuctionCrawlSettingExcludeKeywordSerializer.new(exclude_keyword).render_json,
-                   status: :ok
+            render json: exclude_keyword.as_json, status: :ok
           end
 
           def destroy
