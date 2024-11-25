@@ -66,7 +66,7 @@ module Api
       end
 
       def product_attributes
-        %i[id name]
+        %i[name]
       end
 
       def yahoo_auction_crawl_setting_attributes
