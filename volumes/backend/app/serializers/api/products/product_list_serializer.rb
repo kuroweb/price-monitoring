@@ -2,14 +2,46 @@ module Api
   module Products
     class ProductListSerializer
       JSON_OPTIONS = {
-        include: %i[
-          yahoo_auction_crawl_setting
-          mercari_crawl_setting
-          janpara_crawl_setting
-          iosys_crawl_setting
-          pc_koubou_crawl_setting
-          used_sofmap_crawl_setting
-          category
+        include: [
+          {
+            yahoo_auction_crawl_setting: {
+              include: %i[
+                yahoo_auction_crawl_setting_exclude_keywords
+                yahoo_auction_crawl_setting_required_keywords
+              ]
+            },
+            mercari_crawl_setting: {
+              include: %i[
+                mercari_crawl_setting_exclude_keywords
+                mercari_crawl_setting_required_keywords
+              ]
+            },
+            janpara_crawl_setting: {
+              include: %i[
+                janpara_crawl_setting_exclude_keywords
+                janpara_crawl_setting_required_keywords
+              ]
+            },
+            iosys_crawl_setting: {
+              include: %i[
+                iosys_crawl_setting_exclude_keywords
+                iosys_crawl_setting_required_keywords
+              ]
+            },
+            pc_koubou_crawl_setting: {
+              include: %i[
+                pc_koubou_crawl_setting_exclude_keywords
+                pc_koubou_crawl_setting_required_keywords
+              ]
+            },
+            used_sofmap_crawl_setting: {
+              include: %i[
+                used_sofmap_crawl_setting_exclude_keywords
+                used_sofmap_crawl_setting_required_keywords
+              ]
+            }
+          },
+          :category
         ]
       }.freeze
 
