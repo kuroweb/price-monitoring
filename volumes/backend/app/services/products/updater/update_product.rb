@@ -18,8 +18,6 @@ module Products
         @params = params
       end
 
-      # TODO: 要リファクタリング
-
       def call
         ApplicationRecord.transaction do
           update_product
