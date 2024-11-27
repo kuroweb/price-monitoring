@@ -16,7 +16,7 @@ module Api
       end
 
       def update
-        ::Products::Update.call(product:, params: upsert_product_params)
+        ::Products::Updater::UpdateProduct.call(product:, params: upsert_product_params)
         inspect
         render json: product.as_json, status: :ok
       end
