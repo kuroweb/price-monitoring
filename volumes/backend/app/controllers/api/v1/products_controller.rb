@@ -11,7 +11,7 @@ module Api
       end
 
       def create
-        product = ::Products::Create.call(params: upsert_product_params)
+        product = ::Products::Creator::CreateProduct.call(params: upsert_product_params)
         render json: product.as_json, status: :ok
       end
 
