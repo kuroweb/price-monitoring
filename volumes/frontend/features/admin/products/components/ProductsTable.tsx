@@ -127,11 +127,9 @@ const ProductsTable = ({ products, categories }: Props) => {
             maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
             enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
             yahooAuctionCrawlSettingExcludeKeywords:
-              product?.yahooAuctionCrawlSetting
-                ?.yahooAuctionCrawlSettingExcludeKeywords || [],
+              product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords || [],
             yahooAuctionCrawlSettingRequiredKeywords:
-              product?.yahooAuctionCrawlSetting
-                ?.yahooAuctionCrawlSettingRequiredKeywords || [],
+              product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords || [],
           },
           mercariCrawlSetting: {
             keyword: product?.mercariCrawlSetting?.keyword || '',
@@ -170,11 +168,9 @@ const ProductsTable = ({ products, categories }: Props) => {
             maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
             enabled: product?.pcKoubouCrawlSetting?.enabled || true,
             pcKoubouCrawlSettingExcludeKeywords:
-              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ||
-              [],
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords || [],
             pcKoubouCrawlSettingRequiredKeywords:
-              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ||
-              [],
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords || [],
           },
           usedSofmapCrawlSetting: {
             keyword: product?.usedSofmapCrawlSetting?.keyword || '',
@@ -182,11 +178,9 @@ const ProductsTable = ({ products, categories }: Props) => {
             maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
             enabled: product?.usedSofmapCrawlSetting?.enabled || true,
             usedSofmapCrawlSettingExcludeKeywords:
-              product?.usedSofmapCrawlSetting
-                ?.usedSofmapCrawlSettingExcludeKeywords || [],
+              product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingExcludeKeywords || [],
             usedSofmapCrawlSettingRequiredKeywords:
-              product?.usedSofmapCrawlSetting
-                ?.usedSofmapCrawlSettingRequiredKeywords || [],
+              product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingRequiredKeywords || [],
           },
         }}
         categories={categories}
@@ -203,11 +197,9 @@ const ProductsTable = ({ products, categories }: Props) => {
             maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
             enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
             yahooAuctionCrawlSettingExcludeKeywords:
-              product?.yahooAuctionCrawlSetting
-                ?.yahooAuctionCrawlSettingExcludeKeywords || [],
+              product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords || [],
             yahooAuctionCrawlSettingRequiredKeywords:
-              product?.yahooAuctionCrawlSetting
-                ?.yahooAuctionCrawlSettingRequiredKeywords || [],
+              product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords || [],
           },
           mercariCrawlSetting: {
             keyword: product?.mercariCrawlSetting?.keyword || '',
@@ -246,11 +238,9 @@ const ProductsTable = ({ products, categories }: Props) => {
             maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
             enabled: product?.pcKoubouCrawlSetting?.enabled || true,
             pcKoubouCrawlSettingExcludeKeywords:
-              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ||
-              [],
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords || [],
             pcKoubouCrawlSettingRequiredKeywords:
-              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ||
-              [],
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords || [],
           },
           usedSofmapCrawlSetting: {
             keyword: product?.usedSofmapCrawlSetting?.keyword || '',
@@ -258,11 +248,9 @@ const ProductsTable = ({ products, categories }: Props) => {
             maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
             enabled: product?.usedSofmapCrawlSetting?.enabled || true,
             usedSofmapCrawlSettingExcludeKeywords:
-              product?.usedSofmapCrawlSetting
-                ?.usedSofmapCrawlSettingExcludeKeywords || [],
+              product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingExcludeKeywords || [],
             usedSofmapCrawlSettingRequiredKeywords:
-              product?.usedSofmapCrawlSetting
-                ?.usedSofmapCrawlSettingRequiredKeywords || [],
+              product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingRequiredKeywords || [],
           },
         }}
         categories={categories}
