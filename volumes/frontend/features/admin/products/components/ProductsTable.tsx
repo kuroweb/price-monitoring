@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 
-import CreateProductModal from './create-product-modal/CreateProductModal'
+import CreateProductModal from './create-product-modal'
 import UpdateProductModal from './update-product-modal'
 
 import type { Category, ProductList } from '@/api'

@@ -1,14 +1,10 @@
 import Link from 'next/link'
 
-import type { AdminProductsIdPageDataQuery } from '@/graphql/dist/client'
-
 import Layout from '@/components/layouts/Layout'
-import BulkEditExcludeKeywordModal from '@/features/admin/products/components/bulk-edit-exclude-keyword-modal/BulkEditExcludeKeywordModal'
-import BulkEditRequiredKeywordModal from '@/features/admin/products/components/bulk-edit-required-keyword-modal/BulkEditRequiredKeywordModal'
-import EditExcludeKeywordModal from '@/features/admin/products/components/edit-exclude-keyword-modal/EditExcludeKeywordModal'
-import EditExcludeProductModal from '@/features/admin/products/components/edit-exclude-product-modal/EditExcludeProductModal'
-import EditRequiredKeywordModal from '@/features/admin/products/components/edit-required-keyword-modal/EditRequiredKeywordModal'
-// import UpdateProductModal from '@/features/admin/products/components/update-product-modal/UpdateProductModal'
+// import BulkEditExcludeKeywordModal from '@/features/admin/products/components/bulk-edit-exclude-keyword-modal/BulkEditExcludeKeywordModal'
+// import BulkEditRequiredKeywordModal from '@/features/admin/products/components/bulk-edit-required-keyword-modal/BulkEditRequiredKeywordModal'
+// import EditExcludeProductModal from '@/features/admin/products/components/edit-exclude-product-modal/EditExcludeProductModal'
+import UpdateProductModal from '@/features/admin/products/components/update-product-modal'
 import { useBulkEditExcludeKeywordModalQuery } from '@/features/admin/products/hooks/useBulkEditExcludeKeywordModalState'
 import { useBulkEditRequiredKeywordModalQuery } from '@/features/admin/products/hooks/useBulkEditRequiredKeywordModalState'
 import { useEditExcludeKeywordModalQuery } from '@/features/admin/products/hooks/useEditExcludeKeywordModalState'
@@ -189,6 +185,7 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
           }}
           categories={categoryResponse?.data?.categories || []}
         />
+        {/* <EditExcludeProductModal data={data} />
         <BulkEditExcludeKeywordModal
           yahooAuctionCrawlSettingExcludeKeywords={
             data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords
@@ -228,7 +225,7 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
           usedSofmapCrawlSettingRequiredKeywords={
             data.product.usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords
           }
-        />
+        /> */}
       </Layout>
     </>
   )

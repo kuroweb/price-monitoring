@@ -9,22 +9,17 @@ import { toast } from 'react-toastify'
 
 import { useCreateProductModalState } from '../../hooks/useCreateProductModalState'
 
-import IosysForm from './IosysForm'
-import JanparaForm from './JanparaForm'
-import MercariForm from './MercariForm'
-import PcKoubouForm from './PcKoubouForm'
-import UsedSofmapForm from './UsedSofmapForm'
-import YahooAuctionForm from './YahooAuctionForm'
+import IosysForm from './components/IosysForm'
+import JanparaForm from './components/JanparaForm'
+import MercariForm from './components/MercariForm'
+import PcKoubouForm from './components/PcKoubouForm'
+import UsedSofmapForm from './components/UsedSofmapForm'
+import YahooAuctionForm from './components/YahooAuctionForm'
 
 import type { Category, CreateProductData } from '@/api'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { createProduct } from '@/server-actions/api'
-
-export type reflectValueType = (
-  source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
-  property: 'keyword' | 'minPrice' | 'maxPrice',
-) => void
 
 const CreateProductModal = ({
   defaultValues,
@@ -35,12 +30,18 @@ const CreateProductModal = ({
 }) => {
   const router = useRouter()
 
-  const [modal, setModal] = useCreateProductModalState()
-  const [tab, setTab] = useState<
-    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
-  >('ヤフオク')
+  type SectionTypes =
+    | 'ヤフオク'
+    | 'メルカリ'
+    | 'じゃんぱら'
+    | 'イオシス'
+    | 'パソコン工房'
+    | 'リコレ'
+  const [tab, setTab] = useState<SectionTypes>('ヤフオク')
 
-  const { register, handleSubmit, setValue, getValues } = useForm<CreateProductData>({
+  const [modal, setModal] = useCreateProductModalState()
+
+  const { register, handleSubmit, getValues, setValue } = useForm<CreateProductData>({
     defaultValues,
     values: defaultValues,
   })
@@ -55,19 +56,6 @@ const CreateProductModal = ({
       toast.error('error')
     }
     router.refresh()
-  }
-
-  const reflectValue: reflectValueType = (
-    source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
-    property: 'keyword' | 'minPrice' | 'maxPrice',
-  ) => {
-    const value = getValues(`${source}CrawlSetting.${property}`)
-    setValue(`yahooAuctionCrawlSetting.${property}`, value)
-    setValue(`mercariCrawlSetting.${property}`, value)
-    setValue(`janparaCrawlSetting.${property}`, value)
-    setValue(`iosysCrawlSetting.${property}`, value)
-    setValue(`pcKoubouCrawlSetting.${property}`, value)
-    setValue(`usedSofmapCrawlSetting.${property}`, value)
   }
 
   return (
@@ -163,32 +151,32 @@ const CreateProductModal = ({
             <div>
               {(tab === null || tab === 'ヤフオク') && (
                 <div className='py-4'>
-                  <YahooAuctionForm register={register} reflectValue={reflectValue} />
+                  <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'メルカリ' && (
                 <div className='py-4'>
-                  <MercariForm register={register} reflectValue={reflectValue} />
+                  <MercariForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'じゃんぱら' && (
                 <div className='py-4'>
-                  <JanparaForm register={register} reflectValue={reflectValue} />
+                  <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'イオシス' && (
                 <div className='py-4'>
-                  <IosysForm register={register} reflectValue={reflectValue} />
+                  <IosysForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'パソコン工房' && (
                 <div className='py-4'>
-                  <PcKoubouForm register={register} reflectValue={reflectValue} />
+                  <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab === 'リコレ' && (
                 <div className='py-4'>
-                  <UsedSofmapForm register={register} reflectValue={reflectValue} />
+                  <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
             </div>
