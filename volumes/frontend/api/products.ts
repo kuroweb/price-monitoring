@@ -2,51 +2,81 @@ import type {
   Category,
   IosysCrawlSetting,
   IosysCrawlSettingExcludeKeyword,
+  IosysCrawlSettingRequiredKeyword,
   JanparaCrawlSetting,
   JanparaCrawlSettingExcludeKeyword,
+  JanparaCrawlSettingRequiredKeyword,
   MercariCrawlSetting,
   MercariCrawlSettingExcludeKeyword,
+  MercariCrawlSettingRequiredKeyword,
   PcKoubouCrawlSetting,
   PcKoubouCrawlSettingExcludeKeyword,
+  PcKoubouCrawlSettingRequiredKeyword,
   Product,
   UsedSofmapCrawlSetting,
-  UsedSomapCrawlSettingExcludeKeyword,
+  UsedSofmapCrawlSettingExcludeKeyword,
+  UsedSofmapCrawlSettingRequiredKeyword,
   YahooAuctionCrawlSetting,
   YahooAuctionCrawlSettingExcludeKeyword,
+  YahooAuctionCrawlSettingRequiredKeyword,
 } from './model'
 
 import { http } from '@/lib/axios-client'
 
 export type ProductList = {
   products: (Product & {
-    iosysCrawlSetting: IosysCrawlSetting
-    janparaCrawlSetting: JanparaCrawlSetting
-    mercariCrawlSetting: MercariCrawlSetting
-    pcKoubouCrawlSetting: PcKoubouCrawlSetting
-    usedSofmapCrawlSetting: UsedSofmapCrawlSetting
-    yahooAuctionCrawlSetting: YahooAuctionCrawlSetting
+    yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
+      yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
+      yahooAuctionCrawlSettingRequiredKeywords: YahooAuctionCrawlSettingRequiredKeyword[]
+    }
+    mercariCrawlSetting: MercariCrawlSetting & {
+      mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
+      mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
+    }
+    iosysCrawlSetting: IosysCrawlSetting & {
+      iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
+      iosysCrawlSettingRequiredKeywords: IosysCrawlSettingRequiredKeyword[]
+    }
+    janparaCrawlSetting: JanparaCrawlSetting & {
+      janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
+      janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
+    }
+    pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
+      pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
+      pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
+    }
+    usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
+      usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
+      usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
+    }
     category: Category
   })[]
 }
 
 export type ProductDetail = Product & {
-  iosysCrawlSetting: IosysCrawlSetting & {
-    iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
-  }
-  janparaCrawlSetting: JanparaCrawlSetting & {
-    janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
+  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
+    yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
+    yahooAuctionCrawlSettingRequiredKeywords: YahooAuctionCrawlSettingRequiredKeyword[]
   }
   mercariCrawlSetting: MercariCrawlSetting & {
     mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
+    mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
+  }
+  iosysCrawlSetting: IosysCrawlSetting & {
+    iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
+    iosysCrawlSettingRequiredKeywords: IosysCrawlSettingRequiredKeyword[]
+  }
+  janparaCrawlSetting: JanparaCrawlSetting & {
+    janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
+    janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
   }
   pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
     pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
+    pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
   }
   usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
-    usedSofmapCrawlSettingExcludeKeywords: UsedSomapCrawlSettingExcludeKeyword[]
-  }
-  yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
-    yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
+    usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
+    usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
   }
   category: Category
 }
@@ -77,6 +107,8 @@ export type CreateProductData = {
     keyword: string
     maxPrice: number
     minPrice: number
+    yahooAuctionCrawlSettingExcludeKeywords: { keyword: string }[]
+    yahooAuctionCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   mercariCrawlSetting: {
     categoryId: number | null
@@ -84,30 +116,40 @@ export type CreateProductData = {
     keyword: string
     maxPrice: number
     minPrice: number
+    mercariCrawlSettingExcludeKeywords: { keyword: string }[]
+    mercariCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   iosysCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    iosysCrawlSettingExcludeKeywords: { keyword: string }[]
+    iosysCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   janparaCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    janparaCrawlSettingExcludeKeywords: { keyword: string }[]
+    janparaCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   pcKoubouCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    pcKoubouCrawlSettingExcludeKeywords: { keyword: string }[]
+    pcKoubouCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   usedSofmapCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    usedSofmapCrawlSettingExcludeKeywords: { keyword: string }[]
+    usedSofmapCrawlSettingRequiredKeywords: { keyword: string }[]
   }
 }
 
@@ -127,6 +169,8 @@ export type UpdateProductData = {
     keyword: string
     maxPrice: number
     minPrice: number
+    yahooAuctionCrawlSettingExcludeKeywords: { keyword: string }[]
+    yahooAuctionCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   mercariCrawlSetting: {
     categoryId: number | null
@@ -134,30 +178,40 @@ export type UpdateProductData = {
     keyword: string
     maxPrice: number
     minPrice: number
+    mercariCrawlSettingExcludeKeywords: { keyword: string }[]
+    mercariCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   iosysCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    iosysCrawlSettingExcludeKeywords: { keyword: string }[]
+    iosysCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   janparaCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    janparaCrawlSettingExcludeKeywords: { keyword: string }[]
+    janparaCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   pcKoubouCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    pcKoubouCrawlSettingExcludeKeywords: { keyword: string }[]
+    pcKoubouCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   usedSofmapCrawlSetting: {
     enabled: boolean
     keyword: string
     maxPrice: number
     minPrice: number
+    usedSofmapCrawlSettingExcludeKeywords: { keyword: string }[]
+    usedSofmapCrawlSettingRequiredKeywords: { keyword: string }[]
   }
 }
 
