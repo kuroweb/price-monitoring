@@ -7,16 +7,13 @@ import Layout from '@/components/layouts/Layout'
 import UpdateProductModal from '@/features/admin/products/components/update-product-modal'
 import { useBulkEditExcludeKeywordModalQuery } from '@/features/admin/products/hooks/useBulkEditExcludeKeywordModalState'
 import { useBulkEditRequiredKeywordModalQuery } from '@/features/admin/products/hooks/useBulkEditRequiredKeywordModalState'
-import { useEditExcludeKeywordModalQuery } from '@/features/admin/products/hooks/useEditExcludeKeywordModalState'
 import { useEditExcludeProductModalQuery } from '@/features/admin/products/hooks/useEditExcludeProductModalState'
-import { useEditRequiredKeywordModalQuery } from '@/features/admin/products/hooks/useEditRequiredKeywordModalState'
 import { useUpdateProductModalQuery } from '@/features/admin/products/hooks/useUpdateProductModalState'
 import { getCategories, getProduct } from '@/server-actions/api'
 
 const Page = async ({ params }: { params: { [key: string]: string | undefined } }) => {
   const productResponse = await getProduct(Number(params.id))
   const categoryResponse = await getCategories({ rootOnly: false })
-
   const currentPathname = `/admin/products/${params.id}`
 
   return (
@@ -37,28 +34,6 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
                   }}
                 >
                   計測設定
-                </Link>
-                <Link
-                  className='btn'
-                  href={{
-                    pathname: currentPathname,
-                    query: {
-                      [useEditRequiredKeywordModalQuery]: 'true',
-                    },
-                  }}
-                >
-                  必須キーワード
-                </Link>
-                <Link
-                  className='btn'
-                  href={{
-                    pathname: currentPathname,
-                    query: {
-                      [useEditExcludeKeywordModalQuery]: 'true',
-                    },
-                  }}
-                >
-                  除外キーワード
                 </Link>
                 <Link
                   className='btn'
