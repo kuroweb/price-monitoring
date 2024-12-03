@@ -118,7 +118,6 @@ const MercariForm = ({
         <input
           {...register('mercariCrawlSetting.categoryId', {
             setValueAs: (v) => (v === '' ? null : v),
-            valueAsNumber: true,
           })}
           className='input input-bordered'
         />
