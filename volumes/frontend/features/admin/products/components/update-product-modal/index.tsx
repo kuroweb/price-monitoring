@@ -9,19 +9,19 @@ import { toast } from 'react-toastify'
 
 import { useUpdateProductModalState } from '../../hooks/useUpdateProductModalState'
 
-import IosysForm from './IosysForm'
-import JanparaForm from './JanparaForm'
-import MercariForm from './MercariForm'
-import PcKoubouForm from './PcKoubouForm'
-import UsedSofmapForm from './UsedSofmapForm'
-import YahooAuctionForm from './YahooAuctionForm'
+import IosysForm from './components/IosysForm'
+import JanparaForm from './components/JanparaForm'
+import MercariForm from './components/MercariForm'
+import PcKoubouForm from './components/PcKoubouForm'
+import UsedSofmapForm from './components/UsedSofmapForm'
+import YahooAuctionForm from './components/YahooAuctionForm'
 
 import type { Category, UpdateProductData } from '@/api'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { updateProduct } from '@/server-actions/api'
 
-export type reflectValueType = (
+export type copyValueType = (
   source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
   property: 'keyword' | 'minPrice' | 'maxPrice',
 ) => void
@@ -37,20 +37,16 @@ const UpdateProductModal = ({
 }) => {
   const router = useRouter()
 
-  const [tab, setTab] = useState<
-    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
-  >('ヤフオク')
-  const [modal, setModal] = useUpdateProductModalState()
+  type SectionTypes =
+    | 'ヤフオク'
+    | 'メルカリ'
+    | 'じゃんぱら'
+    | 'イオシス'
+    | 'パソコン工房'
+    | 'リコレ'
+  const [tab, setTab] = useState<SectionTypes>('ヤフオク')
 
-  const reflectValue: reflectValueType = (source, property) => {
-    const value = getValues(`${source}CrawlSetting.${property}`)
-    setValue(`yahooAuctionCrawlSetting.${property}`, value)
-    setValue(`mercariCrawlSetting.${property}`, value)
-    setValue(`janparaCrawlSetting.${property}`, value)
-    setValue(`iosysCrawlSetting.${property}`, value)
-    setValue(`pcKoubouCrawlSetting.${property}`, value)
-    setValue(`usedSofmapCrawlSetting.${property}`, value)
-  }
+  const [modal, setModal] = useUpdateProductModalState()
 
   const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductData>({
     defaultValues,
@@ -87,10 +83,10 @@ const UpdateProductModal = ({
           </div>
           <h3 className='text-lg font-bold'>計測設定を更新</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='divider py-4'>共通設定</div>
+            <div className='divider pt-6'>管理情報</div>
             <label className='form-control'>
               <div className='label'>
-                <span className='label-text'>管理コード</span>
+                <span className='label-text'>名称</span>
               </div>
               <input {...register('name')} className='input input-bordered' />
             </label>
@@ -106,7 +102,7 @@ const UpdateProductModal = ({
                 ))}
               </select>
             </label>
-            <div className='divider py-6'>詳細設定</div>
+            <div className='divider py-6'>計測条件</div>
             <Join className='flex pb-2'>
               <input
                 className='btn join-item btn-md w-1/3'
@@ -162,32 +158,32 @@ const UpdateProductModal = ({
             <div>
               {tab == 'ヤフオク' && (
                 <div className='py-4'>
-                  <YahooAuctionForm register={register} reflectValue={reflectValue} />
+                  <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'メルカリ' && (
                 <div className='py-4'>
-                  <MercariForm register={register} reflectValue={reflectValue} />
+                  <MercariForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'じゃんぱら' && (
                 <div className='py-4'>
-                  <JanparaForm register={register} reflectValue={reflectValue} />
+                  <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'イオシス' && (
                 <div className='py-4'>
-                  <IosysForm register={register} reflectValue={reflectValue} />
+                  <IosysForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'パソコン工房' && (
                 <div className='py-4'>
-                  <PcKoubouForm register={register} reflectValue={reflectValue} />
+                  <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
               {tab == 'リコレ' && (
                 <div className='py-4'>
-                  <UsedSofmapForm register={register} reflectValue={reflectValue} />
+                  <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
             </div>

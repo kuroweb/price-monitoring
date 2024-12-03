@@ -10,7 +10,7 @@ import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 
 import CreateProductModal from './create-product-modal/CreateProductModal'
-import UpdateProductModal from './update-product-modal/UpdateProductModal'
+import UpdateProductModal from './update-product-modal'
 
 import type { Category, ProductList } from '@/api'
 
@@ -126,6 +126,12 @@ const ProductsTable = ({ products, categories }: Props) => {
             minPrice: product?.yahooAuctionCrawlSetting?.minPrice || 0,
             maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
             enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
+            yahooAuctionCrawlSettingExcludeKeywords:
+              product?.yahooAuctionCrawlSetting
+                ?.yahooAuctionCrawlSettingExcludeKeywords || [],
+            yahooAuctionCrawlSettingRequiredKeywords:
+              product?.yahooAuctionCrawlSetting
+                ?.yahooAuctionCrawlSettingRequiredKeywords || [],
           },
           mercariCrawlSetting: {
             keyword: product?.mercariCrawlSetting?.keyword || '',
@@ -133,30 +139,54 @@ const ProductsTable = ({ products, categories }: Props) => {
             minPrice: product?.mercariCrawlSetting?.minPrice || 0,
             maxPrice: product?.mercariCrawlSetting?.maxPrice || 0,
             enabled: product?.mercariCrawlSetting?.enabled || true,
+            mercariCrawlSettingExcludeKeywords:
+              product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords || [],
+            mercariCrawlSettingRequiredKeywords:
+              product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords || [],
           },
           janparaCrawlSetting: {
             keyword: product?.janparaCrawlSetting?.keyword || '',
             minPrice: product?.janparaCrawlSetting?.minPrice || 0,
             maxPrice: product?.janparaCrawlSetting?.maxPrice || 0,
             enabled: product?.janparaCrawlSetting?.enabled || true,
+            janparaCrawlSettingExcludeKeywords:
+              product?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords || [],
+            janparaCrawlSettingRequiredKeywords:
+              product?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords || [],
           },
           iosysCrawlSetting: {
             keyword: product?.iosysCrawlSetting?.keyword || '',
             minPrice: product?.iosysCrawlSetting?.minPrice || 0,
             maxPrice: product?.iosysCrawlSetting?.maxPrice || 0,
             enabled: product?.iosysCrawlSetting?.enabled || true,
+            iosysCrawlSettingExcludeKeywords:
+              product?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords || [],
+            iosysCrawlSettingRequiredKeywords:
+              product?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords || [],
           },
           pcKoubouCrawlSetting: {
             keyword: product?.pcKoubouCrawlSetting?.keyword || '',
             minPrice: product?.pcKoubouCrawlSetting?.minPrice || 0,
             maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
             enabled: product?.pcKoubouCrawlSetting?.enabled || true,
+            pcKoubouCrawlSettingExcludeKeywords:
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ||
+              [],
+            pcKoubouCrawlSettingRequiredKeywords:
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ||
+              [],
           },
           usedSofmapCrawlSetting: {
             keyword: product?.usedSofmapCrawlSetting?.keyword || '',
             minPrice: product?.usedSofmapCrawlSetting?.minPrice || 0,
             maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
             enabled: product?.usedSofmapCrawlSetting?.enabled || true,
+            usedSofmapCrawlSettingExcludeKeywords:
+              product?.usedSofmapCrawlSetting
+                ?.usedSofmapCrawlSettingExcludeKeywords || [],
+            usedSofmapCrawlSettingRequiredKeywords:
+              product?.usedSofmapCrawlSetting
+                ?.usedSofmapCrawlSettingRequiredKeywords || [],
           },
         }}
         categories={categories}
@@ -172,6 +202,12 @@ const ProductsTable = ({ products, categories }: Props) => {
             minPrice: product?.yahooAuctionCrawlSetting?.minPrice || 0,
             maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
             enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
+            yahooAuctionCrawlSettingExcludeKeywords:
+              product?.yahooAuctionCrawlSetting
+                ?.yahooAuctionCrawlSettingExcludeKeywords || [],
+            yahooAuctionCrawlSettingRequiredKeywords:
+              product?.yahooAuctionCrawlSetting
+                ?.yahooAuctionCrawlSettingRequiredKeywords || [],
           },
           mercariCrawlSetting: {
             keyword: product?.mercariCrawlSetting?.keyword || '',
@@ -179,30 +215,54 @@ const ProductsTable = ({ products, categories }: Props) => {
             minPrice: product?.mercariCrawlSetting?.minPrice || 0,
             maxPrice: product?.mercariCrawlSetting?.maxPrice || 0,
             enabled: product?.mercariCrawlSetting?.enabled || true,
+            mercariCrawlSettingExcludeKeywords:
+              product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords || [],
+            mercariCrawlSettingRequiredKeywords:
+              product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords || [],
           },
           janparaCrawlSetting: {
             keyword: product?.janparaCrawlSetting?.keyword || '',
             minPrice: product?.janparaCrawlSetting?.minPrice || 0,
             maxPrice: product?.janparaCrawlSetting?.maxPrice || 0,
             enabled: product?.janparaCrawlSetting?.enabled || true,
+            janparaCrawlSettingExcludeKeywords:
+              product?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords || [],
+            janparaCrawlSettingRequiredKeywords:
+              product?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords || [],
           },
           iosysCrawlSetting: {
             keyword: product?.iosysCrawlSetting?.keyword || '',
             minPrice: product?.iosysCrawlSetting?.minPrice || 0,
             maxPrice: product?.iosysCrawlSetting?.maxPrice || 0,
             enabled: product?.iosysCrawlSetting?.enabled || true,
+            iosysCrawlSettingExcludeKeywords:
+              product?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords || [],
+            iosysCrawlSettingRequiredKeywords:
+              product?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords || [],
           },
           pcKoubouCrawlSetting: {
             keyword: product?.pcKoubouCrawlSetting?.keyword || '',
             minPrice: product?.pcKoubouCrawlSetting?.minPrice || 0,
             maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
             enabled: product?.pcKoubouCrawlSetting?.enabled || true,
+            pcKoubouCrawlSettingExcludeKeywords:
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ||
+              [],
+            pcKoubouCrawlSettingRequiredKeywords:
+              product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ||
+              [],
           },
           usedSofmapCrawlSetting: {
             keyword: product?.usedSofmapCrawlSetting?.keyword || '',
             minPrice: product?.usedSofmapCrawlSetting?.minPrice || 0,
             maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
             enabled: product?.usedSofmapCrawlSetting?.enabled || true,
+            usedSofmapCrawlSettingExcludeKeywords:
+              product?.usedSofmapCrawlSetting
+                ?.usedSofmapCrawlSettingExcludeKeywords || [],
+            usedSofmapCrawlSettingRequiredKeywords:
+              product?.usedSofmapCrawlSetting
+                ?.usedSofmapCrawlSettingRequiredKeywords || [],
           },
         }}
         categories={categories}

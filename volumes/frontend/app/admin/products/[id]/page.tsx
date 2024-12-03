@@ -15,16 +15,11 @@ import { useEditExcludeKeywordModalQuery } from '@/features/admin/products/hooks
 import { useEditExcludeProductModalQuery } from '@/features/admin/products/hooks/useEditExcludeProductModalState'
 import { useEditRequiredKeywordModalQuery } from '@/features/admin/products/hooks/useEditRequiredKeywordModalState'
 import { useUpdateProductModalQuery } from '@/features/admin/products/hooks/useUpdateProductModalState'
-import { AdminProductsIdPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/apollo-client-rsc'
+import { getCategories, getProduct } from '@/server-actions/api'
 
 const Page = async ({ params }: { params: { [key: string]: string | undefined } }) => {
-  const { data } = await getClient().query<AdminProductsIdPageDataQuery>({
-    query: AdminProductsIdPageDataDocument,
-    variables: {
-      id: params.id,
-    },
-  })
+  const productResponse = await getProduct(Number(params.id))
+  const categoryResponse = await getCategories({ rootOnly: false })
 
   const currentPathname = `/admin/products/${params.id}`
 
@@ -113,56 +108,87 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
             </div>
           </div>
         </div>
-        {/* TODO: 詳細ページをWebAPIで作り直すので一旦コメントアウト */}
-        {/* <UpdateProductModal
+        <UpdateProductModal
+          productId={productResponse?.data?.id || 0}
           defaultValues={{
-            id: String(params.id),
-            name: data.product.name,
-            categoryId: data.product.category?.id,
+            name: productResponse?.data?.name || '',
+            categoryId:
+              productResponse?.data?.category?.id || categoryResponse?.data?.categories[0].id || 0,
             yahooAuctionCrawlSetting: {
-              keyword: data.product.yahooAuctionCrawlSetting?.keyword,
-              categoryId: data.product.yahooAuctionCrawlSetting?.categoryId,
-              minPrice: data.product.yahooAuctionCrawlSetting?.minPrice,
-              maxPrice: data.product.yahooAuctionCrawlSetting?.maxPrice,
-              enabled: data.product.yahooAuctionCrawlSetting?.enabled,
+              keyword: productResponse?.data?.yahooAuctionCrawlSetting?.keyword || '',
+              categoryId: productResponse?.data?.yahooAuctionCrawlSetting?.categoryId || null,
+              minPrice: productResponse?.data?.yahooAuctionCrawlSetting?.minPrice || 0,
+              maxPrice: productResponse?.data?.yahooAuctionCrawlSetting?.maxPrice || 0,
+              enabled: productResponse?.data?.yahooAuctionCrawlSetting?.enabled || true,
+              yahooAuctionCrawlSettingExcludeKeywords:
+                productResponse?.data?.yahooAuctionCrawlSetting
+                  ?.yahooAuctionCrawlSettingExcludeKeywords || [],
+              yahooAuctionCrawlSettingRequiredKeywords:
+                productResponse?.data?.yahooAuctionCrawlSetting
+                  ?.yahooAuctionCrawlSettingRequiredKeywords || [],
             },
             mercariCrawlSetting: {
-              keyword: data.product.mercariCrawlSetting?.keyword,
-              categoryId: data.product.mercariCrawlSetting?.categoryId,
-              minPrice: data.product.mercariCrawlSetting?.minPrice,
-              maxPrice: data.product.mercariCrawlSetting?.maxPrice,
-              enabled: data.product.mercariCrawlSetting?.enabled,
+              keyword: productResponse?.data?.mercariCrawlSetting?.keyword || '',
+              categoryId: productResponse?.data?.mercariCrawlSetting?.categoryId || null,
+              minPrice: productResponse?.data?.mercariCrawlSetting?.minPrice || 0,
+              maxPrice: productResponse?.data?.mercariCrawlSetting?.maxPrice || 0,
+              enabled: productResponse?.data?.mercariCrawlSetting?.enabled || true,
+              mercariCrawlSettingExcludeKeywords:
+                productResponse?.data?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords ||
+                [],
+              mercariCrawlSettingRequiredKeywords:
+                productResponse?.data?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords ||
+                [],
             },
             janparaCrawlSetting: {
-              keyword: data.product.janparaCrawlSetting?.keyword,
-              minPrice: data.product.janparaCrawlSetting?.minPrice,
-              maxPrice: data.product.janparaCrawlSetting?.maxPrice,
-              enabled: data.product.janparaCrawlSetting?.enabled,
+              keyword: productResponse?.data?.janparaCrawlSetting?.keyword || '',
+              minPrice: productResponse?.data?.janparaCrawlSetting?.minPrice || 0,
+              maxPrice: productResponse?.data?.janparaCrawlSetting?.maxPrice || 0,
+              enabled: productResponse?.data?.janparaCrawlSetting?.enabled || true,
+              janparaCrawlSettingExcludeKeywords:
+                productResponse?.data?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords ||
+                [],
+              janparaCrawlSettingRequiredKeywords:
+                productResponse?.data?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords ||
+                [],
             },
             iosysCrawlSetting: {
-              keyword: data.product.iosysCrawlSetting?.keyword,
-              minPrice: data.product.iosysCrawlSetting?.minPrice,
-              maxPrice: data.product.iosysCrawlSetting?.maxPrice,
-              enabled: data.product.iosysCrawlSetting?.enabled,
+              keyword: productResponse?.data?.iosysCrawlSetting?.keyword || '',
+              minPrice: productResponse?.data?.iosysCrawlSetting?.minPrice || 0,
+              maxPrice: productResponse?.data?.iosysCrawlSetting?.maxPrice || 0,
+              enabled: productResponse?.data?.iosysCrawlSetting?.enabled || true,
+              iosysCrawlSettingExcludeKeywords:
+                productResponse?.data?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords || [],
+              iosysCrawlSettingRequiredKeywords:
+                productResponse?.data?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords || [],
             },
             pcKoubouCrawlSetting: {
-              keyword: data.product.pcKoubouCrawlSetting?.keyword,
-              minPrice: data.product.pcKoubouCrawlSetting?.minPrice,
-              maxPrice: data.product.pcKoubouCrawlSetting?.maxPrice,
-              enabled: data.product.pcKoubouCrawlSetting?.enabled,
+              keyword: productResponse?.data?.pcKoubouCrawlSetting?.keyword || '',
+              minPrice: productResponse?.data?.pcKoubouCrawlSetting?.minPrice || 0,
+              maxPrice: productResponse?.data?.pcKoubouCrawlSetting?.maxPrice || 0,
+              enabled: productResponse?.data?.pcKoubouCrawlSetting?.enabled || true,
+              pcKoubouCrawlSettingExcludeKeywords:
+                productResponse?.data?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ||
+                [],
+              pcKoubouCrawlSettingRequiredKeywords:
+                productResponse?.data?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ||
+                [],
             },
             usedSofmapCrawlSetting: {
-              keyword: data.product.usedSofmapCrawlSetting?.keyword,
-              minPrice: data.product.usedSofmapCrawlSetting?.minPrice,
-              maxPrice: data.product.usedSofmapCrawlSetting?.maxPrice,
-              enabled: data.product.usedSofmapCrawlSetting?.enabled,
+              keyword: productResponse?.data?.usedSofmapCrawlSetting?.keyword || '',
+              minPrice: productResponse?.data?.usedSofmapCrawlSetting?.minPrice || 0,
+              maxPrice: productResponse?.data?.usedSofmapCrawlSetting?.maxPrice || 0,
+              enabled: productResponse?.data?.usedSofmapCrawlSetting?.enabled || true,
+              usedSofmapCrawlSettingExcludeKeywords:
+                productResponse?.data?.usedSofmapCrawlSetting
+                  ?.usedSofmapCrawlSettingExcludeKeywords || [],
+              usedSofmapCrawlSettingRequiredKeywords:
+                productResponse?.data?.usedSofmapCrawlSetting
+                  ?.usedSofmapCrawlSettingRequiredKeywords || [],
             },
           }}
-          categories={data.categories}
-        /> */}
-        <EditExcludeKeywordModal data={data} />
-        <EditExcludeProductModal data={data} />
-        <EditRequiredKeywordModal data={data} />
+          categories={categoryResponse?.data?.categories || []}
+        />
         <BulkEditExcludeKeywordModal
           yahooAuctionCrawlSettingExcludeKeywords={
             data.product.yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords
