@@ -16,7 +16,7 @@ import PcKoubouForm from './components/PcKoubouForm'
 import UsedSofmapForm from './components/UsedSofmapForm'
 import YahooAuctionForm from './components/YahooAuctionForm'
 
-import type { Category, UpdateProductData } from '@/api'
+import type { Category, ProductDetail, UpdateProductData } from '@/api'
 import type { SubmitHandler } from 'react-hook-form'
 
 import { updateProduct } from '@/server-actions/api'
@@ -28,11 +28,11 @@ export type copyValueType = (
 
 const UpdateProductModal = ({
   productId,
-  defaultValues,
+  productDetail,
   categories,
 }: {
   productId: number
-  defaultValues: UpdateProductData
+  productDetail: ProductDetail | undefined
   categories: Category[]
 }) => {
   const router = useRouter()
@@ -44,9 +44,76 @@ const UpdateProductModal = ({
     | 'イオシス'
     | 'パソコン工房'
     | 'リコレ'
-  const [tab, setTab] = useState<SectionTypes>('ヤフオク')
 
+  const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useUpdateProductModalState()
+
+  const defaultValues = {
+    name: productDetail?.name || '',
+    categoryId: productDetail?.category?.id || categories[0].id,
+    yahooAuctionCrawlSetting: {
+      keyword: productDetail?.yahooAuctionCrawlSetting?.keyword || '',
+      categoryId: productDetail?.yahooAuctionCrawlSetting?.categoryId || null,
+      minPrice: productDetail?.yahooAuctionCrawlSetting?.minPrice || 0,
+      maxPrice: productDetail?.yahooAuctionCrawlSetting?.maxPrice || 0,
+      enabled: productDetail?.yahooAuctionCrawlSetting?.enabled || true,
+      yahooAuctionCrawlSettingExcludeKeywords:
+        productDetail?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords || [],
+      yahooAuctionCrawlSettingRequiredKeywords:
+        productDetail?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords || [],
+    },
+    mercariCrawlSetting: {
+      keyword: productDetail?.mercariCrawlSetting?.keyword || '',
+      categoryId: productDetail?.mercariCrawlSetting?.categoryId || null,
+      minPrice: productDetail?.mercariCrawlSetting?.minPrice || 0,
+      maxPrice: productDetail?.mercariCrawlSetting?.maxPrice || 0,
+      enabled: productDetail?.mercariCrawlSetting?.enabled || true,
+      mercariCrawlSettingExcludeKeywords:
+        productDetail?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords || [],
+      mercariCrawlSettingRequiredKeywords:
+        productDetail?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords || [],
+    },
+    janparaCrawlSetting: {
+      keyword: productDetail?.janparaCrawlSetting?.keyword || '',
+      minPrice: productDetail?.janparaCrawlSetting?.minPrice || 0,
+      maxPrice: productDetail?.janparaCrawlSetting?.maxPrice || 0,
+      enabled: productDetail?.janparaCrawlSetting?.enabled || true,
+      janparaCrawlSettingExcludeKeywords:
+        productDetail?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords || [],
+      janparaCrawlSettingRequiredKeywords:
+        productDetail?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords || [],
+    },
+    iosysCrawlSetting: {
+      keyword: productDetail?.iosysCrawlSetting?.keyword || '',
+      minPrice: productDetail?.iosysCrawlSetting?.minPrice || 0,
+      maxPrice: productDetail?.iosysCrawlSetting?.maxPrice || 0,
+      enabled: productDetail?.iosysCrawlSetting?.enabled || true,
+      iosysCrawlSettingExcludeKeywords:
+        productDetail?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords || [],
+      iosysCrawlSettingRequiredKeywords:
+        productDetail?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords || [],
+    },
+    pcKoubouCrawlSetting: {
+      keyword: productDetail?.pcKoubouCrawlSetting?.keyword || '',
+      minPrice: productDetail?.pcKoubouCrawlSetting?.minPrice || 0,
+      maxPrice: productDetail?.pcKoubouCrawlSetting?.maxPrice || 0,
+      enabled: productDetail?.pcKoubouCrawlSetting?.enabled || true,
+      pcKoubouCrawlSettingExcludeKeywords:
+        productDetail?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords || [],
+      pcKoubouCrawlSettingRequiredKeywords:
+        productDetail?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords || [],
+    },
+    usedSofmapCrawlSetting: {
+      keyword: productDetail?.usedSofmapCrawlSetting?.keyword || '',
+      minPrice: productDetail?.usedSofmapCrawlSetting?.minPrice || 0,
+      maxPrice: productDetail?.usedSofmapCrawlSetting?.maxPrice || 0,
+      enabled: productDetail?.usedSofmapCrawlSetting?.enabled || true,
+      usedSofmapCrawlSettingExcludeKeywords:
+        productDetail?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingExcludeKeywords || [],
+      usedSofmapCrawlSettingRequiredKeywords:
+        productDetail?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingRequiredKeywords || [],
+    },
+  }
 
   const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductData>({
     defaultValues,

@@ -23,36 +23,6 @@ import type {
 
 import { http } from '@/lib/axios-client'
 
-export type ProductList = {
-  products: (Product & {
-    yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
-      yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
-      yahooAuctionCrawlSettingRequiredKeywords: YahooAuctionCrawlSettingRequiredKeyword[]
-    }
-    mercariCrawlSetting: MercariCrawlSetting & {
-      mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
-      mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
-    }
-    iosysCrawlSetting: IosysCrawlSetting & {
-      iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
-      iosysCrawlSettingRequiredKeywords: IosysCrawlSettingRequiredKeyword[]
-    }
-    janparaCrawlSetting: JanparaCrawlSetting & {
-      janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
-      janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
-    }
-    pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
-      pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
-      pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
-    }
-    usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
-      usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
-      usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
-    }
-    category: Category
-  })[]
-}
-
 export type ProductDetail = Product & {
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
     yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
@@ -79,6 +49,10 @@ export type ProductDetail = Product & {
     usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
   }
   category: Category
+}
+
+export type ProductList = {
+  products: ProductDetail[]
 }
 
 export interface GetProductsParams {
