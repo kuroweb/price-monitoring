@@ -117,6 +117,7 @@ const ProductsTable = ({ products, categories }: Props) => {
         </tbody>
       </table>
       <CreateProductModal
+        key={product?.id}
         defaultValues={{
           name: product?.name || '',
           categoryId: product?.category?.id || categories[0].id,
@@ -186,6 +187,7 @@ const ProductsTable = ({ products, categories }: Props) => {
         categories={categories}
       />
       <UpdateProductModal
+        key={product?.id}
         productId={product?.id || 0}
         defaultValues={{
           name: product?.name || '',
