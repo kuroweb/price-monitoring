@@ -4,15 +4,18 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { createIosysCrawlSettingExcludeProduct } from '../../../server-actions/iosysCrawlSettingExcludeProductQuery'
-import { createJanparaCrawlSettingExcludeProduct } from '../../../server-actions/janparaCrawlSettingExcludeProductQuery'
-import { createMercariCrawlSettingExcludeProduct } from '../../../server-actions/mercariCrawlSettingExcludeProductQuery'
-import { createPcKoubouCrawlSettingExcludeProduct } from '../../../server-actions/pcKoubouCrawlSettingExcludeProductQuery'
-import { createUsedSofmapCrawlSettingExcludeProduct } from '../../../server-actions/usedSofmapCrawlSettingExcludeProductQuery'
-import { createYahooAuctionCrawlSettingExcludeProduct } from '../../../server-actions/yahooAuctionCrawlSettingExcludeProductQuery'
 import { useStatusState } from '../../admin/products/hooks/useStatusState'
 
 import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
+
+import {
+  createIosysCrawlSettingExcludeProduct,
+  createJanparaCrawlSettingExcludeProduct,
+  createMercariCrawlSettingExcludeProduct,
+  createPcKoubouCrawlSettingExcludeProduct,
+  createUsedSofmapCrawlSettingExcludeProduct,
+  createYahooAuctionCrawlSettingExcludeProduct,
+} from '@/server-actions/api'
 
 const RelatedProductCard = ({
   relatedProduct,
@@ -61,80 +64,41 @@ const RelatedProductCard = ({
     return date ? date.substring(0, 10) : ''
   }
 
-  const createExcludeProduct = async (
-    platform: string,
-    input: { externalId: string; productId: string },
-  ) => {
-    const allowedStatus = '409'
-
-    switch (platform) {
-      case 'yahoo_auction':
-      case 'yahoo_fleamarket':
-        const yahooAuctionResult = await createYahooAuctionCrawlSettingExcludeProduct(input)
-        if (
-          yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.__typename ===
-            'CreateYahooAuctionCrawlSettingExcludeProductResultError' &&
-          yahooAuctionResult?.data?.createYahooAuctionCrawlSettingExcludeProduct.error.code !==
-            allowedStatus
-        ) {
-          return toast.error('error')
-        }
-        break
-      case 'mercari':
-        const mercariResult = await createMercariCrawlSettingExcludeProduct(input)
-        if (
-          mercariResult?.data?.createMercariCrawlSettingExcludeProduct.__typename ===
-            'CreateMercariCrawlSettingExcludeProductResultError' &&
-          mercariResult?.data?.createMercariCrawlSettingExcludeProduct.error.code !== allowedStatus
-        ) {
-          return toast.error('error')
-        }
-        break
-      case 'janpara':
-        const janparaResult = await createJanparaCrawlSettingExcludeProduct(input)
-        if (
-          janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.__typename ===
-            'CreateJanparaCrawlSettingExcludeProductResultError' &&
-          janparaResult?.data?.createJanparaCrawlSettingExcludeProduct.error.code !== allowedStatus
-        ) {
-          return toast.error('error')
-        }
-        break
-      case 'iosys':
-        const iosys = await createIosysCrawlSettingExcludeProduct(input)
-        if (
-          iosys?.data?.createIosysCrawlSettingExcludeProduct.__typename ===
-            'CreateIosysCrawlSettingExcludeProductResultError' &&
-          iosys?.data?.createIosysCrawlSettingExcludeProduct.error.code !== allowedStatus
-        ) {
-          return toast.error('error')
-        }
-        break
-      case 'pc_koubou':
-        const pcKoubouResult = await createPcKoubouCrawlSettingExcludeProduct(input)
-        if (
-          pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.__typename ===
-            'CreatePcKoubouCrawlSettingExcludeProductResultError' &&
-          pcKoubouResult?.data?.createPcKoubouCrawlSettingExcludeProduct.error.code !==
-            allowedStatus
-        ) {
-          return toast.error('error')
-        }
-        break
-      case 'used_sofmap':
-        const usedSofmapResult = await createUsedSofmapCrawlSettingExcludeProduct(input)
-        if (
-          usedSofmapResult?.data?.createUsedSofmapCrawlSettingExcludeProduct.__typename ===
-            'CreateUsedSofmapCrawlSettingExcludeProductResultError' &&
-          usedSofmapResult?.data?.createUsedSofmapCrawlSettingExcludeProduct.error.code !==
-            allowedStatus
-        ) {
-          return toast.error('error')
-        }
-        break
+  // 暫定実装
+  const createExcludeProduct = async (platform: string, productId: number, externalId: string) => {
+    type ExcludeProductResponse = { status: number }
+    const platformActions: {
+      [key: string]: (
+        productId: number,
+        data: { externalId: string },
+      ) => Promise<ExcludeProductResponse>
+    } = {
+      yahoo_auction: createYahooAuctionCrawlSettingExcludeProduct,
+      yahoo_fleamarket: createYahooAuctionCrawlSettingExcludeProduct,
+      mercari: createMercariCrawlSettingExcludeProduct,
+      janpara: createJanparaCrawlSettingExcludeProduct,
+      iosys: createIosysCrawlSettingExcludeProduct,
+      pc_koubou: createPcKoubouCrawlSettingExcludeProduct,
+      used_sofmap: createUsedSofmapCrawlSettingExcludeProduct,
     }
 
-    toast.success('success')
+    const action = platformActions[platform]
+
+    if (action) {
+      try {
+        const result = await action(productId, { externalId })
+        if (result.status !== 200 && result.status !== 409) {
+          toast.error('error')
+        } else {
+          toast.success('success')
+        }
+      } catch (error) {
+        toast.error('An unexpected error occurred.')
+      }
+    } else {
+      toast.error('Invalid platform')
+    }
+
     router.refresh()
   }
 
@@ -192,10 +156,11 @@ const RelatedProductCard = ({
                 <button
                   className='btn btn-error'
                   onClick={async () =>
-                    createExcludeProduct(relatedProduct.platform, {
-                      externalId: relatedProduct.externalId,
-                      productId: String(relatedProduct.productId),
-                    })
+                    createExcludeProduct(
+                      relatedProduct.platform,
+                      relatedProduct.productId,
+                      relatedProduct.externalId,
+                    )
                   }
                 >
                   除外

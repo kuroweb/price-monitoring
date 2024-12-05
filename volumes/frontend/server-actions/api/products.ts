@@ -12,29 +12,25 @@ export async function getProduct(productId: number) {
 }
 
 export async function createProduct(data: Api.CreateProductData) {
-  const res = await Api.createProduct(data)
+  const result = await Api.createProduct(data)
   revalidateAdminPaths()
   revalidateProductsPaths()
 
-  return res
+  return result
 }
 
 export async function updateProduct(productId: number, data: Api.UpdateProductData) {
-  const res = await Api.updateProduct(productId, data)
+  const result = await Api.updateProduct(productId, data)
   revalidateAdminPaths()
   revalidateProductsPaths()
 
-  return res
+  return result
 }
 
 export async function destroyProduct(productId: number) {
-  const res = await Api.destroyProduct(productId)
+  const result = await Api.destroyProduct(productId)
   revalidateAdminPaths()
   revalidateProductsPaths()
 
-  return res
-}
-
-export async function getCategories(params?: Api.GetCategoriesParams) {
-  return await Api.getCategories(params)
+  return result
 }
