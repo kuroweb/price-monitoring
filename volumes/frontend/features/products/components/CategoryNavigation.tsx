@@ -11,8 +11,6 @@ const CategoryNavigation = ({
   currentCategoryName?: string
   childCategoryNames?: string[]
 }) => {
-  console.log(parentCategoryName)
-
   return (
     <>
       <div className='grid grid-cols-1 space-y-4'>
