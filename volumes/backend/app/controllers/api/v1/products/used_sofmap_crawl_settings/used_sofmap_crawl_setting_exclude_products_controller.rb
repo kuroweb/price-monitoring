@@ -1,11 +1,11 @@
 module Api
   module V1
     module Products
-      module PcKoubouCrawlSettings
-        class PcKoubouCrawlSettingExcludeProductsController < Api::ApplicationController
+      module UsedSofmapCrawlSettings
+        class UsedSofmapCrawlSettingExcludeProductsController < Api::ApplicationController
           def index
             render json: {
-              pc_koubou_crawl_setting_exclude_products: exclude_products
+              used_sofmap_crawl_setting_exclude_products: exclude_products
             }, status: :ok
           end
 
@@ -34,8 +34,8 @@ module Api
           end
 
           def exclude_products
-            @exclude_products ||= product.pc_koubou_crawl_setting
-                                         .pc_koubou_crawl_setting_exclude_products
+            @exclude_products ||= product.used_sofmap_crawl_setting
+                                         .used_sofmap_crawl_setting_exclude_products
           end
 
           def exclude_product_params
