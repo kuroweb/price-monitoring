@@ -33,6 +33,14 @@ export type YahooAuctionCrawlSettingRequiredKeyword = {
   updatedAt: string
 }
 
+export type YahooAuctionCrawlSettingExcludeProduct = {
+  id: number
+  yahooAuctionCrawlSettingId: number
+  externalId: string
+  createdAt: string
+  updatedAt: string
+}
+
 export type MercariCrawlSetting = {
   id: number
   productId: number
@@ -47,7 +55,7 @@ export type MercariCrawlSetting = {
 
 export type MercariCrawlSettingExcludeKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  mercariCrawlSettingId: number
   keyword: string
   createdAt: string
   updatedAt: string
@@ -55,8 +63,16 @@ export type MercariCrawlSettingExcludeKeyword = {
 
 export type MercariCrawlSettingRequiredKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  mercariCrawlSettingId: number
   keyword: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type MercariCrawlSettingExcludeProduct = {
+  id: number
+  mercariCrawlSettingId: number
+  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -74,7 +90,7 @@ export type JanparaCrawlSetting = {
 
 export type JanparaCrawlSettingExcludeKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  janparaCrawlSettingId: number
   keyword: string
   createdAt: string
   updatedAt: string
@@ -82,8 +98,16 @@ export type JanparaCrawlSettingExcludeKeyword = {
 
 export type JanparaCrawlSettingRequiredKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  janparaCrawlSettingId: number
   keyword: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type JanparaCrawlSettingExcludeProduct = {
+  id: number
+  janparaCrawlSettingId: number
+  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -101,7 +125,7 @@ export type IosysCrawlSetting = {
 
 export type IosysCrawlSettingExcludeKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  iosysCrawlSettingId: number
   keyword: string
   createdAt: string
   updatedAt: string
@@ -109,8 +133,16 @@ export type IosysCrawlSettingExcludeKeyword = {
 
 export type IosysCrawlSettingRequiredKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  iosysCrawlSettingId: number
   keyword: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type IosysCrawlSettingExcludeProduct = {
+  id: number
+  iosysCrawlSettingId: number
+  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -128,7 +160,7 @@ export type PcKoubouCrawlSetting = {
 
 export type PcKoubouCrawlSettingExcludeKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  pcKoubouCrawlSettingId: number
   keyword: string
   createdAt: string
   updatedAt: string
@@ -136,8 +168,16 @@ export type PcKoubouCrawlSettingExcludeKeyword = {
 
 export type PcKoubouCrawlSettingRequiredKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  pcKoubouCrawlSettingId: number
   keyword: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type PcKoubouCrawlSettingExcludeProduct = {
+  id: number
+  pcKoubouCrawlSettingId: number
+  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -155,7 +195,7 @@ export type UsedSofmapCrawlSetting = {
 
 export type UsedSofmapCrawlSettingExcludeKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  usedSofmapCrawlSettingId: number
   keyword: string
   createdAt: string
   updatedAt: string
@@ -163,8 +203,16 @@ export type UsedSofmapCrawlSettingExcludeKeyword = {
 
 export type UsedSofmapCrawlSettingRequiredKeyword = {
   id: number
-  yahooAuctionCrawlSettingId: number
+  usedSofmapCrawlSettingId: number
   keyword: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type UsedSofmapCrawlSettingExcludeProduct = {
+  id: number
+  usedSofmapCrawlSettingId: number
+  externalId: string
   createdAt: string
   updatedAt: string
 }
