@@ -1,11 +1,11 @@
 module Api
   module V1
     module Products
-      module MercariCrawlSettings
-        class MercariCrawlSettingExcludeProductsController < Api::ApplicationController
+      module PcKoubouCrawlSettings
+        class PcKoubouCrawlSettingExcludeProductsController < Api::ApplicationController
           def index
             render json: {
-              mercari_crawl_setting_exclude_products: exclude_products
+              pc_koubou_crawl_setting_exclude_products: exclude_products
             }, status: :ok
           end
 
@@ -34,8 +34,8 @@ module Api
           end
 
           def exclude_products
-            @exclude_products ||= product.mercari_crawl_setting
-                                         .mercari_crawl_setting_exclude_products
+            @exclude_products ||= product.pc_koubou_crawl_setting
+                                         .pc_koubou_crawl_setting_exclude_products
           end
 
           def exclude_product_params

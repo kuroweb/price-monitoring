@@ -1,11 +1,11 @@
 module Api
   module V1
     module Products
-      module UsedSofmapCrawlSettings
-        class UsedSofmapCrawlSettingExcludeProductsController < Api::ApplicationController
+      module MercariCrawlSettings
+        class MercariCrawlSettingExcludeProductsController < Api::ApplicationController
           def index
             render json: {
-              used_sofmap_crawl_setting_exclude_products: exclude_products
+              mercari_crawl_setting_exclude_products: exclude_products
             }, status: :ok
           end
 
@@ -34,8 +34,8 @@ module Api
           end
 
           def exclude_products
-            @exclude_products ||= product.used_sofmap_crawl_setting
-                                         .used_sofmap_crawl_setting_exclude_products
+            @exclude_products ||= product.mercari_crawl_setting
+                                         .mercari_crawl_setting_exclude_products
           end
 
           def exclude_product_params
