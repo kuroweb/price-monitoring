@@ -38,7 +38,7 @@ module Crawl
       end
 
       def inspect
-        Products::Inspect::DeleteUsedSofmapProducts.call(product:)
+        ::Products::Inspector::InspectUsedSofmapProducts.call(product:)
       end
 
       def used_sofmap_crawl_setting

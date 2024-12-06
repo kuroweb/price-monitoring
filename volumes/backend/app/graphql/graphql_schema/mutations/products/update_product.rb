@@ -25,8 +25,8 @@ module GraphqlSchema
         private
 
         def inspect(product)
-          ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
-          ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
+          ::Products::Inspector::InspectYahooAuctionProducts.call(product:)
+          ::Products::Inspector::InspectYahooFleamarketProducts.call(product:)
         end
 
         def handle_error(exception)

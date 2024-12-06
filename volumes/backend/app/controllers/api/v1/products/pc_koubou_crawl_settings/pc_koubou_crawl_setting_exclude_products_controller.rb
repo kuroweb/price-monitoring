@@ -11,7 +11,7 @@ module Api
 
           def create
             exclude_product = exclude_products.create!(exclude_product_params)
-            inspect
+            ::Products::Inspector::InspectPcKoubouProducts.call(product:)
             render json: exclude_product.as_json, status: :ok
           end
 
@@ -44,16 +44,6 @@ module Api
 
           def exclude_product_attributes
             %i[external_id]
-          end
-
-          def inspect
-            ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
-            ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
-            ::Products::Inspect::DeleteMercariProducts.call(product:)
-            ::Products::Inspect::DeleteJanparaProducts.call(product:)
-            ::Products::Inspect::DeleteIosysProducts.call(product:)
-            ::Products::Inspect::DeletePcKoubouProducts.call(product:)
-            ::Products::Inspect::DeleteUsedSofmapProducts.call(product:)
           end
         end
       end

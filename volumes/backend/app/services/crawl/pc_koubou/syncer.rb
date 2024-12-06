@@ -38,7 +38,7 @@ module Crawl
       end
 
       def inspect
-        Products::Inspect::DeletePcKoubouProducts.call(product:)
+        ::PcKoubouProducts.call(product:)
       end
 
       def pc_koubou_crawl_setting
