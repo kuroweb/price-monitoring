@@ -38,7 +38,7 @@ module Crawl
       end
 
       def inspect
-        Products::Inspect::DeleteIosysProducts.call(product:)
+        ::Products::Inspector::InspectIosysProducts.call(product:)
       end
 
       def iosys_crawl_setting

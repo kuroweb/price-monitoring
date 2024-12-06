@@ -17,7 +17,7 @@ module Api
 
       def update
         ::Products::Updater::UpdateProduct.call(product:, params: upsert_product_params)
-        inspect
+        ::Products::Inspector::InspectAll.call(product:)
         render json: product.as_json, status: :ok
       end
 
@@ -160,16 +160,6 @@ module Api
 
       def external_attributes
         %i[sort order]
-      end
-
-      def inspect
-        ::Products::Inspect::DeleteYahooAuctionProducts.call(product:)
-        ::Products::Inspect::DeleteYahooFleamarketProducts.call(product:)
-        ::Products::Inspect::DeleteMercariProducts.call(product:)
-        ::Products::Inspect::DeleteJanparaProducts.call(product:)
-        ::Products::Inspect::DeleteIosysProducts.call(product:)
-        ::Products::Inspect::DeletePcKoubouProducts.call(product:)
-        ::Products::Inspect::DeleteUsedSofmapProducts.call(product:)
       end
     end
   end

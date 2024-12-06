@@ -33,7 +33,7 @@ module Crawl
         end
 
         def inspect
-          Products::Inspect::DeleteYahooAuctionProducts.call(product:)
+          ::Products::Inspector::InspectYahooAuctionProducts.call(product:)
         end
 
         def enqueue_for_existence
