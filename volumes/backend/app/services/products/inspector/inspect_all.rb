@@ -11,13 +11,13 @@ module Products
       end
 
       def call
-        ::InspectYahooAuctionProducts.call(product:)
-        ::InspectYahooFleamarketProducts.call(product:)
-        ::InspectMercariProducts.call(product:)
-        ::InspectJanparaProducts.call(product:)
-        ::InspectIosysProducts.call(product:)
-        ::InspectPcKoubouProducts.call(product:)
-        ::InspectUsedSofmapProducts.call(product:)
+        InspectYahooAuctionProducts.call(product:)
+        InspectYahooFleamarketProducts.call(product:)
+        InspectMercariProducts.call(product:)
+        InspectJanparaProducts.call(product:)
+        InspectIosysProducts.call(product:)
+        InspectPcKoubouProducts.call(product:)
+        InspectUsedSofmapProducts.call(product:)
       end
 
       private
