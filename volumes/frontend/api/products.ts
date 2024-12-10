@@ -9,6 +9,7 @@ import type {
   MercariCrawlSetting,
   MercariCrawlSettingExcludeKeyword,
   MercariCrawlSettingRequiredKeyword,
+  MercariDailyPurchaseSummary,
   PcKoubouCrawlSetting,
   PcKoubouCrawlSettingExcludeKeyword,
   PcKoubouCrawlSettingRequiredKeyword,
@@ -19,7 +20,9 @@ import type {
   YahooAuctionCrawlSetting,
   YahooAuctionCrawlSettingExcludeKeyword,
   YahooAuctionCrawlSettingRequiredKeyword,
-} from './model'
+  YahooAuctionDailyPurchaseSummary,
+  YahooFleamarketDailyPurchaseSummary,
+} from './models'
 
 import { http } from '@/lib/axios-client'
 
@@ -49,10 +52,39 @@ export type ProductDetail = Product & {
     usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
   }
   category: Category
+  yahoo_auction_daily_purchase_summaries: YahooAuctionDailyPurchaseSummary[]
+  yahoo_fleamarket_daily_purchase_summaries: YahooFleamarketDailyPurchaseSummary[]
+  mercari_daily_purchase_summaries: MercariDailyPurchaseSummary[]
 }
 
 export type ProductList = {
-  products: ProductDetail[]
+  products: (Product & {
+    yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
+      yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
+      yahooAuctionCrawlSettingRequiredKeywords: YahooAuctionCrawlSettingRequiredKeyword[]
+    }
+    mercariCrawlSetting: MercariCrawlSetting & {
+      mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
+      mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
+    }
+    iosysCrawlSetting: IosysCrawlSetting & {
+      iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
+      iosysCrawlSettingRequiredKeywords: IosysCrawlSettingRequiredKeyword[]
+    }
+    janparaCrawlSetting: JanparaCrawlSetting & {
+      janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
+      janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
+    }
+    pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
+      pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
+      pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
+    }
+    usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
+      usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
+      usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
+    }
+    category: Category
+  })[]
 }
 
 export interface GetProductsParams {

@@ -1,4 +1,4 @@
-import type { YahooAuctionCrawlSettingExcludeProduct } from './model'
+import type { YahooAuctionCrawlSettingExcludeProduct } from './models'
 
 import { http } from '@/lib/axios-client'
 

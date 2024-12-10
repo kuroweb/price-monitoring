@@ -1,4 +1,4 @@
-import type { JanparaCrawlSettingExcludeProduct } from './model'
+import type { JanparaCrawlSettingExcludeProduct } from './models'
 
 import { http } from '@/lib/axios-client'
 
