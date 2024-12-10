@@ -1,4 +1,4 @@
-import type { PcKoubouCrawlSettingExcludeProduct } from './model'
+import type { PcKoubouCrawlSettingExcludeProduct } from './models'
 
 import { http } from '@/lib/axios-client'
 

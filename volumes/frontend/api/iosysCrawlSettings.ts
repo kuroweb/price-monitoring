@@ -1,4 +1,4 @@
-import type { IosysCrawlSettingExcludeProduct } from './model'
+import type { IosysCrawlSettingExcludeProduct } from './models'
 
 import { http } from '@/lib/axios-client'
 

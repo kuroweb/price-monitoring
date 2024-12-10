@@ -1,4 +1,4 @@
-import type { UsedSofmapCrawlSettingExcludeProduct } from './model'
+import type { UsedSofmapCrawlSettingExcludeProduct } from './models'
 
 import { http } from '@/lib/axios-client'
 

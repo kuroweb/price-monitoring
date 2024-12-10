@@ -1,4 +1,4 @@
-import type { MercariCrawlSettingExcludeProduct } from './model'
+import type { MercariCrawlSettingExcludeProduct } from './models'
 
 import { http } from '@/lib/axios-client'
 

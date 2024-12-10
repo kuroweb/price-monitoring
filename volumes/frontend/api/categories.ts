@@ -1,4 +1,4 @@
-import type { Category } from './model'
+import type { Category } from './models'
 
 import { http } from '@/lib/axios-client'
 
