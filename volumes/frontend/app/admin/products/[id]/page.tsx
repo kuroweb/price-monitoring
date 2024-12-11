@@ -81,7 +81,7 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
         </div>
         <UpdateProductModal
           productId={productResponse?.data?.id || 0}
-          productDetail={productResponse?.data || undefined}
+          product={productResponse?.data || undefined}
           categories={categoryResponse?.data?.categories || []}
         />
         {/* <EditExcludeProductModal data={data} />
