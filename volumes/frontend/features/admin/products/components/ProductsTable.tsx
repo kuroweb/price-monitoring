@@ -116,11 +116,11 @@ const ProductsTable = ({ products, categories }: Props) => {
           ))}
         </tbody>
       </table>
-      <CreateProductModal key={product?.id} productDetail={product} categories={categories} />
+      <CreateProductModal key={product?.id} product={product} categories={categories} />
       <UpdateProductModal
         key={product?.id}
         productId={product?.id || 0}
-        productDetail={product}
+        product={product}
         categories={categories}
       />
     </>
