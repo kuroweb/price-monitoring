@@ -42,69 +42,69 @@ const CreateProductModal = ({
   const [modal, setModal] = useCreateProductModalState()
 
   const defaultValues = {
-    name: product?.name || '',
-    categoryId: product?.category?.id || categories[0].id,
+    name: product?.name ?? '',
+    categoryId: product?.category?.id ?? categories[0].id,
     yahooAuctionCrawlSetting: {
-      keyword: product?.yahooAuctionCrawlSetting?.keyword || '',
-      categoryId: product?.yahooAuctionCrawlSetting?.categoryId || null,
-      minPrice: product?.yahooAuctionCrawlSetting?.minPrice || 0,
-      maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice || 0,
-      enabled: product?.yahooAuctionCrawlSetting?.enabled || true,
+      keyword: product?.yahooAuctionCrawlSetting?.keyword ?? '',
+      categoryId: product?.yahooAuctionCrawlSetting?.categoryId ?? null,
+      minPrice: product?.yahooAuctionCrawlSetting?.minPrice ?? 0,
+      maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice ?? 0,
+      enabled: product?.yahooAuctionCrawlSetting?.enabled ?? true,
       yahooAuctionCrawlSettingExcludeKeywords:
-        product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords || [],
+        product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords ?? [],
       yahooAuctionCrawlSettingRequiredKeywords:
-        product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords || [],
+        product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords ?? [],
     },
     mercariCrawlSetting: {
-      keyword: product?.mercariCrawlSetting?.keyword || '',
-      categoryId: product?.mercariCrawlSetting?.categoryId || null,
-      minPrice: product?.mercariCrawlSetting?.minPrice || 0,
-      maxPrice: product?.mercariCrawlSetting?.maxPrice || 0,
-      enabled: product?.mercariCrawlSetting?.enabled || true,
+      keyword: product?.mercariCrawlSetting?.keyword ?? '',
+      categoryId: product?.mercariCrawlSetting?.categoryId ?? null,
+      minPrice: product?.mercariCrawlSetting?.minPrice ?? 0,
+      maxPrice: product?.mercariCrawlSetting?.maxPrice ?? 0,
+      enabled: product?.mercariCrawlSetting?.enabled ?? true,
       mercariCrawlSettingExcludeKeywords:
-        product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords || [],
+        product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords ?? [],
       mercariCrawlSettingRequiredKeywords:
-        product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords || [],
+        product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords ?? [],
     },
     janparaCrawlSetting: {
-      keyword: product?.janparaCrawlSetting?.keyword || '',
-      minPrice: product?.janparaCrawlSetting?.minPrice || 0,
-      maxPrice: product?.janparaCrawlSetting?.maxPrice || 0,
-      enabled: product?.janparaCrawlSetting?.enabled || true,
+      keyword: product?.janparaCrawlSetting?.keyword ?? '',
+      minPrice: product?.janparaCrawlSetting?.minPrice ?? 0,
+      maxPrice: product?.janparaCrawlSetting?.maxPrice ?? 0,
+      enabled: product?.janparaCrawlSetting?.enabled ?? true,
       janparaCrawlSettingExcludeKeywords:
-        product?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords || [],
+        product?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords ?? [],
       janparaCrawlSettingRequiredKeywords:
-        product?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords || [],
+        product?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords ?? [],
     },
     iosysCrawlSetting: {
-      keyword: product?.iosysCrawlSetting?.keyword || '',
-      minPrice: product?.iosysCrawlSetting?.minPrice || 0,
-      maxPrice: product?.iosysCrawlSetting?.maxPrice || 0,
-      enabled: product?.iosysCrawlSetting?.enabled || true,
+      keyword: product?.iosysCrawlSetting?.keyword ?? '',
+      minPrice: product?.iosysCrawlSetting?.minPrice ?? 0,
+      maxPrice: product?.iosysCrawlSetting?.maxPrice ?? 0,
+      enabled: product?.iosysCrawlSetting?.enabled ?? true,
       iosysCrawlSettingExcludeKeywords:
-        product?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords || [],
+        product?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords ?? [],
       iosysCrawlSettingRequiredKeywords:
-        product?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords || [],
+        product?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords ?? [],
     },
     pcKoubouCrawlSetting: {
-      keyword: product?.pcKoubouCrawlSetting?.keyword || '',
-      minPrice: product?.pcKoubouCrawlSetting?.minPrice || 0,
-      maxPrice: product?.pcKoubouCrawlSetting?.maxPrice || 0,
-      enabled: product?.pcKoubouCrawlSetting?.enabled || true,
+      keyword: product?.pcKoubouCrawlSetting?.keyword ?? '',
+      minPrice: product?.pcKoubouCrawlSetting?.minPrice ?? 0,
+      maxPrice: product?.pcKoubouCrawlSetting?.maxPrice ?? 0,
+      enabled: product?.pcKoubouCrawlSetting?.enabled ?? true,
       pcKoubouCrawlSettingExcludeKeywords:
-        product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords || [],
+        product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ?? [],
       pcKoubouCrawlSettingRequiredKeywords:
-        product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords || [],
+        product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ?? [],
     },
     usedSofmapCrawlSetting: {
-      keyword: product?.usedSofmapCrawlSetting?.keyword || '',
-      minPrice: product?.usedSofmapCrawlSetting?.minPrice || 0,
-      maxPrice: product?.usedSofmapCrawlSetting?.maxPrice || 0,
-      enabled: product?.usedSofmapCrawlSetting?.enabled || true,
+      keyword: product?.usedSofmapCrawlSetting?.keyword ?? '',
+      minPrice: product?.usedSofmapCrawlSetting?.minPrice ?? 0,
+      maxPrice: product?.usedSofmapCrawlSetting?.maxPrice ?? 0,
+      enabled: product?.usedSofmapCrawlSetting?.enabled ?? true,
       usedSofmapCrawlSettingExcludeKeywords:
-        product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingExcludeKeywords || [],
+        product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingExcludeKeywords ?? [],
       usedSofmapCrawlSettingRequiredKeywords:
-        product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingRequiredKeywords || [],
+        product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingRequiredKeywords ?? [],
     },
   }
 
@@ -169,7 +169,7 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
-                defaultChecked={tab === null || tab === 'ヤフオク'}
+                defaultChecked={tab === null ?? tab === 'ヤフオク'}
                 onClick={() => setTab('ヤフオク')}
               />
               <input
@@ -216,7 +216,7 @@ const CreateProductModal = ({
               />
             </Join>
             <div>
-              {(tab === null || tab === 'ヤフオク') && (
+              {(tab === null ?? tab === 'ヤフオク') && (
                 <div className='py-4'>
                   <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
