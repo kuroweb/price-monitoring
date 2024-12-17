@@ -11,7 +11,7 @@ module GraphqlSchema
         argument :order, String, required: false
 
         def resolve(**args)
-          Search::RelatedProduct.call(
+          RetrieveRelatedProducts::Retriever.call(
             params: { product_id: object.id, **args }
           ).products
         end
