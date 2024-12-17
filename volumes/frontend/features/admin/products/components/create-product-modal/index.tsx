@@ -42,11 +42,11 @@ const CreateProductModal = ({
   const [modal, setModal] = useCreateProductModalState()
 
   const defaultValues = {
-    name: product?.name ?? '',
-    categoryId: product?.category?.id ?? categories[0].id,
+    name: product?.name|| '',
+    categoryId: product?.category?.id|| categories[0].id,
     yahooAuctionCrawlSetting: {
-      keyword: product?.yahooAuctionCrawlSetting?.keyword ?? '',
-      categoryId: product?.yahooAuctionCrawlSetting?.categoryId ?? null,
+      keyword: product?.yahooAuctionCrawlSetting?.keyword|| '',
+      categoryId: product?.yahooAuctionCrawlSetting?.categoryId|| null,
       minPrice: product?.yahooAuctionCrawlSetting?.minPrice ?? 0,
       maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice ?? 0,
       enabled: product?.yahooAuctionCrawlSetting?.enabled ?? true,
@@ -169,7 +169,7 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
-                defaultChecked={tab === null ?? tab === 'ヤフオク'}
+                checked={tab === 'ヤフオク'}
                 onClick={() => setTab('ヤフオク')}
               />
               <input
@@ -177,7 +177,7 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
-                defaultChecked={tab === 'メルカリ'}
+                checked={tab === 'メルカリ'}
                 onClick={() => setTab('メルカリ')}
               />
               <input
@@ -185,7 +185,7 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
-                defaultChecked={tab === 'じゃんぱら'}
+                checked={tab === 'じゃんぱら'}
                 onClick={() => setTab('じゃんぱら')}
               />
             </Join>
@@ -195,7 +195,7 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='イオシス'
-                defaultChecked={tab === 'イオシス'}
+                checked={tab === 'イオシス'}
                 onClick={() => setTab('イオシス')}
               />
               <input
@@ -203,7 +203,7 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='パソコン工房'
-                defaultChecked={tab === 'パソコン工房'}
+                checked={tab === 'パソコン工房'}
                 onClick={() => setTab('パソコン工房')}
               />
               <input
@@ -211,12 +211,12 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='リコレ'
-                defaultChecked={tab === 'リコレ'}
+                checked={tab === 'リコレ'}
                 onClick={() => setTab('リコレ')}
               />
             </Join>
             <div>
-              {(tab === null ?? tab === 'ヤフオク') && (
+              {(tab === null|| tab === 'ヤフオク') && (
                 <div className='py-4'>
                   <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
