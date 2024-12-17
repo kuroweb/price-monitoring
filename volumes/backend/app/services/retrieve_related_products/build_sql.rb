@@ -1,27 +1,5 @@
-# Productに紐づく関連商品を取得する
-# 一覧表示用の検索クラス
-module Search
-  class RelatedProduct # rubocop:disable Metrics/ClassLength
-    PLATFORM_MASK_TYPES = %w[
-      yahoo_auction.all
-      yahoo_auction.published
-      yahoo_auction.unpublished
-      yahoo_auction.buyable
-      yahoo_fleamarket.all
-      yahoo_fleamarket.published
-      yahoo_fleamarket.unpublished
-      mercari.all
-      mercari.published
-      mercari.unpublished
-      janpara.all
-      iosys.all
-      pc_koubou.all
-      used_sofmap.all
-    ].freeze
-
-    SORT_TYPES = %w[price bought_date created_at updated_at].freeze
-    ORDER_TYPES = %w[desc asc].freeze
-
+module RetrieveRelatedProducts
+  class BuildSql
     def self.call(...)
       new(...).call
     end
@@ -29,41 +7,33 @@ module Search
     def initialize(params: {})
       @product_id = params[:product_id]
       @platform_mask = params[:platform_mask]
-      @page = params[:page].to_i.nonzero? || 1
-      @per = params[:per].to_i.nonzero? || 10
-      @offset = (page - 1) * per
-      @sort = params[:sort] || "updated_at"
-      @order = params[:order] || "desc"
+      @page = params[:page]
+      @per = params[:per]
+      @offset = params[:offset]
+      @sort = params[:sort]
+      @order = params[:order]
     end
 
     def call
-      records = exec_query
-      related_products = ::RelatedProducts.new(records.map { |record| ::RelatedProduct.new(normalize(record)) })
-      handle_errors(related_products)
-
-      related_products
+      build_sql
     end
 
     private
 
     attr_reader :product_id, :platform_mask, :page, :per, :offset, :sort, :order
 
-    def exec_query
-      ActiveRecord::Base.connection.exec_query(sql)
-    end
-
-    def sql
+    def build_sql
       <<~SQL.squish
         #{build_platform_sql}
         ORDER BY
-          #{build_order_sql}
+          #{sort} #{order}
         LIMIT
           #{per} OFFSET #{offset}
       SQL
     end
 
     def build_platform_sql
-      masks = platform_mask.split(",").select { |mask| PLATFORM_MASK_TYPES.include?(mask) }.uniq
+      masks = platform_mask.split(",")
       masks.map { |mask| build_sql_for(*mask.split(".")) }.join(" UNION ")
     end
 
@@ -146,28 +116,8 @@ module Search
       )
     end
 
-    def build_order_sql
-      return "updated_at asc" if SORT_TYPES.exclude?(sort) || ORDER_TYPES.exclude?(order)
-
-      "#{sort} #{order}"
-    end
-
-    def normalize(result)
-      result["published"] = result["published"] == 1
-      result["bought_date"] = result["bought_date"]&.in_time_zone
-      result["end_date"] = result["end_date"]&.in_time_zone
-      result["created_at"] = result["created_at"]&.in_time_zone
-      result["updated_at"] = result["updated_at"]&.in_time_zone
-
-      result
-    end
-
     def shop_platform?(platform)
       %w[janpara iosys pc_koubou used_sofmap].include?(platform)
-    end
-
-    def handle_errors(related_products)
-      raise StandardError, related_products.errors.full_messages.join(", ") unless related_products.valid?
     end
 
     def product
