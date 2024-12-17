@@ -22,11 +22,6 @@ module RetrieveRelatedProducts
       ORDER = %w[desc asc].freeze
     end
 
-    module DefaultType
-      SORT = "price".freeze
-      ORDER = "asc".freeze
-    end
-
     def self.call(...)
       new(...).call
     end
@@ -82,11 +77,15 @@ module RetrieveRelatedProducts
     end
 
     def page
-      @page.to_i.nonzero? || 1
+      raise ArgumentError, "Invalid page" unless @page.to_i.nonzero?
+
+      @page.to_i
     end
 
     def per
-      @per.to_i.nonzero? || 10
+      raise ArgumentError, "Invalid per" unless @per.to_i.nonzero?
+
+      @per.to_i
     end
 
     def offset
@@ -94,14 +93,12 @@ module RetrieveRelatedProducts
     end
 
     def sort
-      return DefaultType::SORT if @sort.blank?
       raise ArgumentError, "Invalid sort" unless ParamsType::SORT.include?(@sort)
 
       @sort
     end
 
     def order
-      return DefaultType::ORDER if @order.blank?
       raise ArgumentError, "Invalid order" unless ParamsType::ORDER.include?(@order)
 
       @order
