@@ -1,3 +1,4 @@
+# データ抽出用クエリをビルドするクラス
 module RetrieveRelatedProducts
   class BuildSql
     def self.call(...)
