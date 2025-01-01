@@ -1,11 +1,11 @@
 require "sidekiq/web"
 require "sidekiq/cron/web"
 
-Rails.application.routes.draw do
+Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql" if Rails.env.development?
   post "/graphql", to: "graphql#execute"
 
-  namespace :api do
+  namespace :api do # rubocop:disable Metrics/BlockLength
     namespace :v1 do
       resources :products, only: %i[index show create update destroy]
       namespace :products do
@@ -31,6 +31,7 @@ Rails.application.routes.draw do
         end
       end
       resources :categories, only: %i[index]
+      resources :related_products, only: %i[index]
     end
   end
 
