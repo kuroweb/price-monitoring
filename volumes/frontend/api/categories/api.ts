@@ -1,14 +1,6 @@
-import type { Category } from './models'
+import type { GetCategories, GetCategoriesParams } from './types'
 
 import { http } from '@/lib/axios-client'
-
-export interface GetCategoriesParams {
-  rootOnly?: boolean
-}
-
-export interface GetCategories {
-  categories: Category[]
-}
 
 export async function getCategories(params?: GetCategoriesParams) {
   return http<GetCategories>('/api/v1/categories', {
