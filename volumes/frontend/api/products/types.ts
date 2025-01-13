@@ -22,9 +22,7 @@ import type {
   YahooAuctionCrawlSettingRequiredKeyword,
   YahooAuctionDailyPurchaseSummary,
   YahooFleamarketDailyPurchaseSummary,
-} from './models'
-
-import { http } from '@/lib/axios-client'
+} from '../models'
 
 export type ProductDetail = Product & {
   yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
@@ -87,21 +85,8 @@ export type ProductList = {
   })[]
 }
 
-export interface GetProductsParams {
+export type GetProductsParams = {
   // TODO: 後で実装する
-}
-
-export async function getProducts(params?: GetProductsParams) {
-  return http<ProductList>('/api/v1/products', {
-    method: 'GET',
-    params,
-  })
-}
-
-export async function getProduct(productId: number) {
-  return http<ProductDetail>(`/api/v1/products/${productId}`, {
-    method: 'GET',
-  })
 }
 
 export type CreateProductData = {
@@ -159,13 +144,6 @@ export type CreateProductData = {
   }
 }
 
-export async function createProduct(data: CreateProductData) {
-  return http<Product>('/api/v1/products', {
-    method: 'POST',
-    data,
-  })
-}
-
 export type UpdateProductData = {
   name: string
   categoryId: number
@@ -219,17 +197,4 @@ export type UpdateProductData = {
     usedSofmapCrawlSettingExcludeKeywords: { keyword: string }[]
     usedSofmapCrawlSettingRequiredKeywords: { keyword: string }[]
   }
-}
-
-export async function updateProduct(productId: number, data: UpdateProductData) {
-  return http<Product>(`/api/v1/products/${productId}`, {
-    method: 'PUT',
-    data,
-  })
-}
-
-export async function destroyProduct(productId: number) {
-  return http(`/api/v1/products/${productId}`, {
-    method: 'DELETE',
-  })
 }
