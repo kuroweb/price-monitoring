@@ -1,9 +1,9 @@
-import type { Category } from "../models"
+import type { Category } from '../models'
 
-export interface GetCategoriesParams {
+export type GetCategoriesParams = {
   rootOnly?: boolean
 }
 
-export interface GetCategories {
+export type GetCategories = {
   categories: Category[]
 }
