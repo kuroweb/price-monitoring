@@ -51,7 +51,6 @@ module RetrieveRelatedProducts
       {
         product_id:,
         platform_mask:,
-        page:,
         per:,
         offset:,
         sort:,
