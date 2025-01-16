@@ -3,11 +3,11 @@ module Api
     class ProductsController < Api::ApplicationController # rubocop:disable Metrics/ClassLength
       def index
         products = ProductFinder.new(params: find_product_params).execute
-        render json: Api::Products::ProductListSerializer.new(products).as_json, status: :ok
+        render json: Api::ProductListSerializer.new(products).as_json, status: :ok
       end
 
       def show
-        render json: Api::Products::ProductDetailSerializer.new(product).as_json, status: :ok
+        render json: Api::ProductDetailSerializer.new(product).as_json, status: :ok
       end
 
       def create
