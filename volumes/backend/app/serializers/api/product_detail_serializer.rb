@@ -46,10 +46,7 @@ module Api
             ]
           }
         },
-        :category,
-        :yahoo_auction_daily_purchase_summaries,
-        :yahoo_fleamarket_daily_purchase_summaries,
-        :mercari_daily_purchase_summaries
+        :category
       ]
     }.freeze
 
