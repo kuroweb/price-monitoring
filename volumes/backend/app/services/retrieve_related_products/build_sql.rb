@@ -8,7 +8,6 @@ module RetrieveRelatedProducts
     def initialize(params: {})
       @product_id = params[:product_id]
       @platform_mask = params[:platform_mask]
-      @page = params[:page]
       @per = params[:per]
       @offset = params[:offset]
       @sort = params[:sort]
@@ -21,7 +20,7 @@ module RetrieveRelatedProducts
 
     private
 
-    attr_reader :product_id, :platform_mask, :page, :per, :offset, :sort, :order
+    attr_reader :product_id, :platform_mask, :per, :offset, :sort, :order
 
     def build_sql
       <<~SQL.squish
