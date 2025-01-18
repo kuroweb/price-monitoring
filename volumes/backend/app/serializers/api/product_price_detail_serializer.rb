@@ -20,8 +20,13 @@ module Api
     private
 
     def related_products
-      RetrieveRelatedProducts::Retriever.call(params: { product_id: @product.id, **@params })
+      RetrieveRelatedProducts::Retriever.call(params: retrieve_params)
                                         .products.map(&:attributes)
+    end
+
+    def retrieve_params
+      @params[:product_id] = @product.id
+      @params
     end
   end
 end
