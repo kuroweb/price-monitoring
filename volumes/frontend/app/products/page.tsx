@@ -11,7 +11,8 @@ const Page = async () => {
   const categories = categoriesResponse.data?.categories || []
 
   const productPricesResponse = await getProductPrices({
-    platformMask: 'yahoo_auction.all',
+    platformMask:
+      'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all',
     sort: 'price',
     order: 'asc',
     priceDisplayLimit: 10,
