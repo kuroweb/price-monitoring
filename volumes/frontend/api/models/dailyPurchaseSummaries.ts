@@ -1,29 +1,29 @@
 export type YahooAuctionDailyPurchaseSummary = {
   id: number
-  product_id: number
-  average_purchase_price: number
-  purchase_count: number
+  productId: number
+  averagePurchasePrice: number
+  purchaseCount: number
   date: string
-  created_at: string
-  updated_at: string
+  createdAt: string
+  updatedAt: string
 }
 
 export type YahooFleamarketDailyPurchaseSummary = {
   id: number
-  product_id: number
-  average_purchase_price: number
-  purchase_count: number
+  productId: number
+  averagePurchasePrice: number
+  purchaseCount: number
   date: string
-  created_at: string
-  updated_at: string
+  createdAt: string
+  updatedAt: string
 }
 
 export type MercariDailyPurchaseSummary = {
   id: number
-  product_id: number
-  average_purchase_price: number
-  purchase_count: number
+  productId: number
+  averagePurchasePrice: number
+  purchaseCount: number
   date: string
-  created_at: string
-  updated_at: string
+  createdAt: string
+  updatedAt: string
 }
