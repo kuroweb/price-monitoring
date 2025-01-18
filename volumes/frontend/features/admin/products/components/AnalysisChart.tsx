@@ -11,16 +11,20 @@ import {
   ComposedChart,
 } from 'recharts'
 
-import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
+import type {
+  MercariDailyPurchaseSummary,
+  YahooAuctionDailyPurchaseSummary,
+  YahooFleamarketDailyPurchaseSummary,
+} from '@/api'
 
 const AnalysisChart = ({
   yahooAuctionData,
   yahooFleamarketData,
   mercariData,
 }: {
-  yahooAuctionData: ProductsIdPageDataQuery['product']['yahooAuctionDailyPurchaseSummaries']
-  yahooFleamarketData: ProductsIdPageDataQuery['product']['yahooFleamarketDailyPurchaseSummaries']
-  mercariData: ProductsIdPageDataQuery['product']['mercariDailyPurchaseSummaries']
+  yahooAuctionData: YahooAuctionDailyPurchaseSummary[]
+  yahooFleamarketData: YahooFleamarketDailyPurchaseSummary[]
+  mercariData: MercariDailyPurchaseSummary[]
 }) => {
   const yahooAuctionDataMap = yahooAuctionData.reduce<{
     [date: string]: { yahooAuctionAveragePurchasePrice: number }
