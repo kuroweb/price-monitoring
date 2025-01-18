@@ -1,31 +1,34 @@
 import Link from 'next/link'
 
-import type { ProductsPageDataQuery } from '@/graphql/dist/client'
-
 import Layout from '@/components/layouts/Layout'
 import CategoryNavigation from '@/features/products/components/CategoryNavigation'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import { ProductsPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/apollo-client-rsc'
+import { getCategories } from '@/server-actions/api'
+import { getProductPrices } from '@/server-actions/api/productPrices'
 
 const Page = async () => {
-  const { data } = await getClient().query<ProductsPageDataQuery>({
-    query: ProductsPageDataDocument,
+  const categoriesResponse = await getCategories()
+  const categories = categoriesResponse.data?.categories || []
+
+  const productPricesResponse = await getProductPrices({
+    platformMask: 'yahoo_auction.all',
+    sort: 'price',
+    order: 'asc',
+    priceDisplayLimit: 10,
   })
+  const productPrices = productPricesResponse.data || []
 
   return (
     <Layout>
       <div className='grid grid-cols-1 space-y-4'>
         <div className='card bg-neutral'>
           <div className='card-body'>
-            <CategoryNavigation
-              childCategoryNames={data.categories.map((category) => category.name)}
-            />
+            <CategoryNavigation childCategoryNames={categories.map((category) => category.name)} />
           </div>
         </div>
         <div className='card bg-neutral'>
           <div className='card-body'>
-            {data.products.map((product) => (
+            {productPrices.map((product) => (
               <>
                 <Link className='card-title' href={`/products/${product.id}`}>
                   {product.name}

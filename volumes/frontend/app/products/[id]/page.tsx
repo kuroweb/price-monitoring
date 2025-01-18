@@ -1,5 +1,3 @@
-import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
-
 import Layout from '@/components/layouts/Layout'
 import AnalysisChart from '@/features/admin/products/components/AnalysisChart'
 import Pagination from '@/features/admin/products/components/Pagination'
@@ -16,8 +14,7 @@ import {
 } from '@/features/admin/products/hooks/useStatusState'
 import { makePlatformMask } from '@/features/admin/products/lib/makePlatformMask'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import { ProductsIdPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/apollo-client-rsc'
+import { getProductPrice } from '@/server-actions/api/productPrices'
 
 const Page = async ({
   params,
@@ -31,17 +28,14 @@ const Page = async ({
   const { [usePageStateQuery]: page } = pageStateCache.parse(searchParams)
   const { [usePerStateQuery]: per } = perStateCache.parse(searchParams)
 
-  const { data } = await getClient().query<ProductsIdPageDataQuery>({
-    query: ProductsIdPageDataDocument,
-    variables: {
-      id: params.id,
-      platformMask: makePlatformMask(platform, status),
-      page,
-      per,
-      sort: status == 'published' ? 'price' : 'bought_date',
-      order: status == 'published' ? 'asc' : 'desc',
-    },
+  const productPriceDetailResponse = await getProductPrice(Number(params.id), {
+    platformMask: makePlatformMask(platform, status),
+    sort: status == 'published' ? 'price' : 'bought_date',
+    order: status == 'published' ? 'asc' : 'desc',
+    page,
+    per,
   })
+  const productPriceDetail = productPriceDetailResponse.data
 
   return (
     <Layout>
@@ -50,9 +44,9 @@ const Page = async ({
           <div className='card-body'>
             <h2 className='card-title pb-4'>価格推移</h2>
             <AnalysisChart
-              yahooAuctionData={data.product.yahooAuctionDailyPurchaseSummaries}
-              yahooFleamarketData={data.product.yahooFleamarketDailyPurchaseSummaries}
-              mercariData={data.product.mercariDailyPurchaseSummaries}
+              yahooAuctionData={productPriceDetail?.yahooAuctionDailyPurchaseSummaries || []}
+              yahooFleamarketData={productPriceDetail?.yahooFleamarketDailyPurchaseSummaries || []}
+              mercariData={productPriceDetail?.mercariDailyPurchaseSummaries || []}
             />
           </div>
         </div>
@@ -61,7 +55,7 @@ const Page = async ({
             <h2 className='card-title pb-4'>商品一覧</h2>
             <SearchForm />
             <div className='grid grid-cols-2 gap-4 pt-4 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6'>
-              {data.product.relatedProducts.map((relatedProduct) => (
+              {productPriceDetail?.relatedProducts.map((relatedProduct) => (
                 <RelatedProductCard
                   key={relatedProduct.externalId}
                   relatedProduct={relatedProduct}
