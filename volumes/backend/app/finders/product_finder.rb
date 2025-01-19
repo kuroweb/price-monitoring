@@ -12,6 +12,7 @@ class ProductFinder
     products = base_scope
     products = by_id(products)
     products = by_name(products)
+    products = by_category_id(products)
 
     order(products)
   end
@@ -32,6 +33,12 @@ class ProductFinder
     return products unless params[:name]
 
     products.where(name: params[:name])
+  end
+
+  def by_category_id(products)
+    return products unless params[:category_id]
+
+    products.joins(:product_category_map).where(product_category_maps: { category_id: params[:category_id] })
   end
 
   def order(products)
