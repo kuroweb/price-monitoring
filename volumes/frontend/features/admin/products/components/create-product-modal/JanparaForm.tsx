@@ -6,12 +6,12 @@ import {
   copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from '../lib/copyFields'
+} from './lib/copyFields'
 
 import type { CreateProductData } from '@/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const PcKoubouForm = ({
+const JanparaForm = ({
   register,
   getValues,
   setValue,
@@ -20,13 +20,11 @@ const PcKoubouForm = ({
   getValues: UseFormGetValues<CreateProductData>
   setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues(
-    'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
-  )
+  const requiredKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -35,7 +33,7 @@ const PcKoubouForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -43,7 +41,7 @@ const PcKoubouForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -52,13 +50,13 @@ const PcKoubouForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('pcKoubouCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('janparaCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'pcKoubouCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'janparaCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -81,7 +79,7 @@ const PcKoubouForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
+              'janparaCrawlSetting.janparaCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -106,7 +104,7 @@ const PcKoubouForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
+              'janparaCrawlSetting.janparaCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -118,7 +116,7 @@ const PcKoubouForm = ({
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('pcKoubouCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('janparaCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -126,7 +124,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'pcKoubouCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'janparaCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -136,7 +134,7 @@ const PcKoubouForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('pcKoubouCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('janparaCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -144,7 +142,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'pcKoubouCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'janparaCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -152,7 +150,7 @@ const PcKoubouForm = ({
       <label className='label cursor-pointer'>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('pcKoubouCrawlSetting.enabled')}
+          {...register('janparaCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -161,4 +159,4 @@ const PcKoubouForm = ({
   )
 }
 
-export default PcKoubouForm
+export default JanparaForm

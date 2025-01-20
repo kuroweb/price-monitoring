@@ -4,16 +4,17 @@ import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { deleteIosysCrawlSettingRequiredKeyword } from '../../../../../server-actions/iosysCrawlSettingRequiredKeywordQuery'
-import { deleteJanparaCrawlSettingRequiredKeyword } from '../../../../../server-actions/janparaCrawlSettingRequiredKeywordQuery'
-import { deleteMercariCrawlSettingRequiredKeyword } from '../../../../../server-actions/mercariCrawlSettingRequiredKeywordQuery'
-import { deletePcKoubouCrawlSettingRequiredKeyword } from '../../../../../server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
-import { deleteUsedSofmapCrawlSettingRequiredKeyword } from '../../../../../server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
-import { deleteYahooAuctionCrawlSettingRequiredKeyword } from '../../../../../server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
-import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
+import { useBulkEditRequiredKeywordModalState } from './hooks/useBulkEditRequiredKeywordModalState'
 
 import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
+
+import { deleteIosysCrawlSettingRequiredKeyword } from '@/server-actions/iosysCrawlSettingRequiredKeywordQuery'
+import { deleteJanparaCrawlSettingRequiredKeyword } from '@/server-actions/janparaCrawlSettingRequiredKeywordQuery'
+import { deleteMercariCrawlSettingRequiredKeyword } from '@/server-actions/mercariCrawlSettingRequiredKeywordQuery'
+import { deletePcKoubouCrawlSettingRequiredKeyword } from '@/server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { deleteUsedSofmapCrawlSettingRequiredKeyword } from '@/server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
+import { deleteYahooAuctionCrawlSettingRequiredKeyword } from '@/server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 type inputType = {
   keyword: string | null

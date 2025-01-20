@@ -1,34 +1,30 @@
 'use client'
 
 import {
-  copyExcludeKeyword,
   copyKeyword,
-  copyMaxPrice,
-  copyMinPrice,
   copyRequiredKeyword,
-} from '../lib/copyFields'
+  copyExcludeKeyword,
+  copyMinPrice,
+  copyMaxPrice,
+} from './lib/copyFields'
 
-import type { CreateProductData } from '@/api'
-import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import type { UpdateProductData } from '@/api'
+import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
-const YahooAuctionForm = ({
+const JanparaForm = ({
   register,
   getValues,
   setValue,
 }: {
-  register: UseFormRegister<CreateProductData>
-  getValues: UseFormGetValues<CreateProductData>
-  setValue: UseFormSetValue<CreateProductData>
+  register: UseFormRegister<UpdateProductData>
+  getValues: UseFormGetValues<UpdateProductData>
+  setValue: UseFormSetValue<UpdateProductData>
 }) => {
-  const requiredKeywordsText = getValues(
-    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
-  )
+  const requiredKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues(
-    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
-  )
+  const excludeKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -37,7 +33,7 @@ const YahooAuctionForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -45,7 +41,7 @@ const YahooAuctionForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -54,13 +50,13 @@ const YahooAuctionForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('yahooAuctionCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('janparaCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'yahooAuctionCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'janparaCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -83,7 +79,7 @@ const YahooAuctionForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
+              'janparaCrawlSetting.janparaCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -108,7 +104,7 @@ const YahooAuctionForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
+              'janparaCrawlSetting.janparaCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -117,25 +113,10 @@ const YahooAuctionForm = ({
       </div>
       <label className='form-control'>
         <div className='label'>
-          <span className='label-text'>検索カテゴリ</span>
-        </div>
-        <input
-          {...register('yahooAuctionCrawlSetting.categoryId', {
-            setValueAs: (v) => (v === '' ? null : v),
-          })}
-          onChange={(e) => {
-            const v = e.target.value
-            console.log(v === '' ? undefined : v)
-          }}
-          className='input input-bordered'
-        />
-      </label>
-      <label className='form-control'>
-        <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('yahooAuctionCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('janparaCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -143,7 +124,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'yahooAuctionCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'janparaCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -152,24 +133,21 @@ const YahooAuctionForm = ({
         <div className='label'>
           <span className='label-text'>最高価格</span>
         </div>
-        <input
-          {...register('yahooAuctionCrawlSetting.maxPrice', { valueAsNumber: true })}
-          className='input input-bordered'
-        />
+        <input {...register('janparaCrawlSetting.maxPrice')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'yahooAuctionCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'janparaCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='label cursor-pointer'>
+      <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('yahooAuctionCrawlSetting.enabled')}
+          {...register('janparaCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -178,4 +156,4 @@ const YahooAuctionForm = ({
   )
 }
 
-export default YahooAuctionForm
+export default JanparaForm

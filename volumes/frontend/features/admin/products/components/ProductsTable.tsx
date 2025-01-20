@@ -6,11 +6,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
-import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
+import UpdateProductModal from '../common/components/update-product-modal/UpdateProductModal'
+import { useUpdateProductModalState } from '../common/components/update-product-modal/hooks/useUpdateProductModalState'
 
-import CreateProductModal from './create-product-modal'
-import UpdateProductModal from './update-product-modal'
+import CreateProductModal from './create-product-modal/CreateProductModal'
+import { useCreateProductModalState } from './create-product-modal/hooks/useCreateProductModalState'
 
 import type { Category, ProductList } from '@/api'
 
