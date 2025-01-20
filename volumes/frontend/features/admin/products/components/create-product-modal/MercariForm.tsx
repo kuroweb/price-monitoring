@@ -6,7 +6,7 @@ import {
   copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from '../lib/copyFields'
+} from './lib/copyFields'
 
 import type { CreateProductData } from '@/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'

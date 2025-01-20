@@ -1,30 +1,30 @@
 'use client'
 
 import {
-  copyExcludeKeyword,
-  copyKeyword,
   copyMaxPrice,
   copyMinPrice,
+  copyKeyword,
+  copyExcludeKeyword,
   copyRequiredKeyword,
-} from '../lib/copyFields'
+} from './lib/copyFields'
 
-import type { UpdateProductData } from '@/api'
-import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
+import type { CreateProductData } from '@/api'
+import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const MercariForm = ({
+const IosysForm = ({
   register,
   getValues,
   setValue,
 }: {
-  register: UseFormRegister<UpdateProductData>
-  getValues: UseFormGetValues<UpdateProductData>
-  setValue: UseFormSetValue<UpdateProductData>
+  register: UseFormRegister<CreateProductData>
+  getValues: UseFormGetValues<CreateProductData>
+  setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords')
+  const requiredKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -33,7 +33,7 @@ const MercariForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -41,7 +41,7 @@ const MercariForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -50,13 +50,13 @@ const MercariForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('mercariCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('iosysCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'mercariCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'iosysCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -79,7 +79,7 @@ const MercariForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
+              'iosysCrawlSetting.iosysCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -104,7 +104,7 @@ const MercariForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
+              'iosysCrawlSetting.iosysCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -113,21 +113,10 @@ const MercariForm = ({
       </div>
       <label className='form-control'>
         <div className='label'>
-          <span className='label-text'>検索カテゴリ</span>
-        </div>
-        <input
-          {...register('mercariCrawlSetting.categoryId', {
-            setValueAs: (v) => (v === '' ? null : v),
-          })}
-          className='input input-bordered'
-        />
-      </label>
-      <label className='form-control'>
-        <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('mercariCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('iosysCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -135,7 +124,7 @@ const MercariForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'mercariCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'iosysCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -145,7 +134,7 @@ const MercariForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('mercariCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('iosysCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -153,15 +142,15 @@ const MercariForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'mercariCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'iosysCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='label cursor-pointer '>
+      <label className='label cursor-pointer'>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('mercariCrawlSetting.enabled')}
+          {...register('iosysCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -170,4 +159,4 @@ const MercariForm = ({
   )
 }
 
-export default MercariForm
+export default IosysForm

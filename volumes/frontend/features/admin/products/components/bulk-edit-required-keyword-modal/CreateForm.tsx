@@ -4,15 +4,16 @@ import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { createIosysCrawlSettingRequiredKeyword } from '../../../../../server-actions/iosysCrawlSettingRequiredKeywordQuery'
-import { createJanparaCrawlSettingRequiredKeyword } from '../../../../../server-actions/janparaCrawlSettingRequiredKeywordQuery'
-import { createMercariCrawlSettingRequiredKeyword } from '../../../../../server-actions/mercariCrawlSettingRequiredKeywordQuery'
-import { createPcKoubouCrawlSettingRequiredKeyword } from '../../../../../server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
-import { createUsedSofmapCrawlSettingRequiredKeyword } from '../../../../../server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
-import { createYahooAuctionCrawlSettingRequiredKeyword } from '../../../../../server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
-import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
+import { useBulkEditRequiredKeywordModalState } from './hooks/useBulkEditRequiredKeywordModalState'
 
 import type { SubmitHandler } from 'react-hook-form'
+
+import { createIosysCrawlSettingRequiredKeyword } from '@/server-actions/iosysCrawlSettingRequiredKeywordQuery'
+import { createJanparaCrawlSettingRequiredKeyword } from '@/server-actions/janparaCrawlSettingRequiredKeywordQuery'
+import { createMercariCrawlSettingRequiredKeyword } from '@/server-actions/mercariCrawlSettingRequiredKeywordQuery'
+import { createPcKoubouCrawlSettingRequiredKeyword } from '@/server-actions/pcKoubouCrawlSettingRequiredKeywordQuery'
+import { createUsedSofmapCrawlSettingRequiredKeyword } from '@/server-actions/usedSofmapCrawlSettingRequiredKeywordQuery'
+import { createYahooAuctionCrawlSettingRequiredKeyword } from '@/server-actions/yahooAuctionCrawlSettingRequiredKeywordQuery'
 
 type inputType = {
   keyword: string | null

@@ -4,10 +4,9 @@ import { useState } from 'react'
 
 import { Join } from 'react-daisyui'
 
-import { useBulkEditRequiredKeywordModalState } from '../../hooks/useBulkEditRequiredKeywordModalState'
-
 import CreateForm from './CreateForm'
 import DeleteForm from './DeleteForm'
+import { useBulkEditRequiredKeywordModalState } from './hooks/useBulkEditRequiredKeywordModalState'
 
 import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 

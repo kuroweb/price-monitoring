@@ -1,17 +1,17 @@
 'use client'
 
 import {
+  copyKeyword,
   copyRequiredKeyword,
   copyExcludeKeyword,
-  copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from '../lib/copyFields'
+} from './lib/copyFields'
 
 import type { CreateProductData } from '@/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const JanparaForm = ({
+const UsedSofmapForm = ({
   register,
   getValues,
   setValue,
@@ -20,11 +20,15 @@ const JanparaForm = ({
   getValues: UseFormGetValues<CreateProductData>
   setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords')
+  const requiredKeywordsText = getValues(
+    'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
+  )
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues(
+    'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
+  )
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -33,7 +37,7 @@ const JanparaForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -41,7 +45,7 @@ const JanparaForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -50,13 +54,13 @@ const JanparaForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('janparaCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('usedSofmapCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'janparaCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'usedSofmapCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -79,7 +83,7 @@ const JanparaForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'janparaCrawlSetting.janparaCrawlSettingRequiredKeywords',
+              'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -104,7 +108,7 @@ const JanparaForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'janparaCrawlSetting.janparaCrawlSettingExcludeKeywords',
+              'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -116,7 +120,7 @@ const JanparaForm = ({
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('janparaCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('usedSofmapCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -124,7 +128,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'janparaCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'usedSofmapCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -134,7 +138,7 @@ const JanparaForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('janparaCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('usedSofmapCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -142,7 +146,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'janparaCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'usedSofmapCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -150,7 +154,7 @@ const JanparaForm = ({
       <label className='label cursor-pointer'>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('janparaCrawlSetting.enabled')}
+          {...register('usedSofmapCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -159,4 +163,4 @@ const JanparaForm = ({
   )
 }
 
-export default JanparaForm
+export default UsedSofmapForm

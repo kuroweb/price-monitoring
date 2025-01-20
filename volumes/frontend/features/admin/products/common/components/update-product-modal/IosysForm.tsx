@@ -1,17 +1,17 @@
 'use client'
 
 import {
-  copyExcludeKeyword,
   copyKeyword,
-  copyMaxPrice,
-  copyMinPrice,
   copyRequiredKeyword,
-} from '../lib/copyFields'
+  copyExcludeKeyword,
+  copyMinPrice,
+  copyMaxPrice,
+} from './lib/copyFields'
 
 import type { UpdateProductData } from '@/api'
 import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
-const UsedSofmapForm = ({
+const IosysForm = ({
   register,
   getValues,
   setValue,
@@ -20,15 +20,11 @@ const UsedSofmapForm = ({
   getValues: UseFormGetValues<UpdateProductData>
   setValue: UseFormSetValue<UpdateProductData>
 }) => {
-  const requiredKeywordsText = getValues(
-    'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
-  )
+  const requiredKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues(
-    'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
-  )
+  const excludeKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -37,7 +33,7 @@ const UsedSofmapForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -45,7 +41,7 @@ const UsedSofmapForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -54,13 +50,13 @@ const UsedSofmapForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('usedSofmapCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('iosysCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'usedSofmapCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'iosysCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -83,7 +79,7 @@ const UsedSofmapForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
+              'iosysCrawlSetting.iosysCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -108,7 +104,7 @@ const UsedSofmapForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
+              'iosysCrawlSetting.iosysCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -120,7 +116,7 @@ const UsedSofmapForm = ({
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('usedSofmapCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('iosysCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -128,7 +124,7 @@ const UsedSofmapForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'usedSofmapCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'iosysCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -137,16 +133,13 @@ const UsedSofmapForm = ({
         <div className='label'>
           <span className='label-text'>最高価格</span>
         </div>
-        <input
-          {...register('usedSofmapCrawlSetting.maxPrice', { valueAsNumber: true })}
-          className='input input-bordered'
-        />
+        <input {...register('iosysCrawlSetting.maxPrice')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'usedSofmapCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'iosysCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -154,7 +147,7 @@ const UsedSofmapForm = ({
       <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('usedSofmapCrawlSetting.enabled')}
+          {...register('iosysCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -163,4 +156,4 @@ const UsedSofmapForm = ({
   )
 }
 
-export default UsedSofmapForm
+export default IosysForm

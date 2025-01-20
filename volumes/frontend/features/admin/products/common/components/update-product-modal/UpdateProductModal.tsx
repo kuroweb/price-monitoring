@@ -7,24 +7,30 @@ import { Join } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useCreateProductModalState } from '../../hooks/useCreateProductModalState'
+import IosysForm from './IosysForm'
+import JanparaForm from './JanparaForm'
+import MercariForm from './MercariForm'
+import PcKoubouForm from './PcKoubouForm'
+import UsedSofmapForm from './UsedSofmapForm'
+import YahooAuctionForm from './YahooAuctionForm'
+import { useUpdateProductModalState } from './hooks/useUpdateProductModalState'
 
-import IosysForm from './components/IosysForm'
-import JanparaForm from './components/JanparaForm'
-import MercariForm from './components/MercariForm'
-import PcKoubouForm from './components/PcKoubouForm'
-import UsedSofmapForm from './components/UsedSofmapForm'
-import YahooAuctionForm from './components/YahooAuctionForm'
-
-import type { Category, CreateProductData, ProductList } from '@/api'
+import type { Category, ProductList, UpdateProductData } from '@/api'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createProduct } from '@/server-actions/api'
+import { updateProduct } from '@/server-actions/api'
 
-const CreateProductModal = ({
+export type copyValueType = (
+  source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
+  property: 'keyword' | 'minPrice' | 'maxPrice',
+) => void
+
+const UpdateProductModal = ({
+  productId,
   product,
   categories,
 }: {
+  productId: number
   product: ProductList['products'][number] | undefined
   categories: Category[]
 }) => {
@@ -39,14 +45,14 @@ const CreateProductModal = ({
     | 'リコレ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
-  const [modal, setModal] = useCreateProductModalState()
+  const [modal, setModal] = useUpdateProductModalState()
 
   const defaultValues = {
-    name: product?.name|| '',
-    categoryId: product?.category?.id|| categories[0].id,
+    name: product?.name ?? '',
+    categoryId: product?.category?.id ?? categories[0].id,
     yahooAuctionCrawlSetting: {
-      keyword: product?.yahooAuctionCrawlSetting?.keyword|| '',
-      categoryId: product?.yahooAuctionCrawlSetting?.categoryId|| null,
+      keyword: product?.yahooAuctionCrawlSetting?.keyword ?? '',
+      categoryId: product?.yahooAuctionCrawlSetting?.categoryId ?? null,
       minPrice: product?.yahooAuctionCrawlSetting?.minPrice ?? 0,
       maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice ?? 0,
       enabled: product?.yahooAuctionCrawlSetting?.enabled ?? true,
@@ -108,13 +114,13 @@ const CreateProductModal = ({
     },
   }
 
-  const { register, handleSubmit, getValues, setValue } = useForm<CreateProductData>({
+  const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductData>({
     defaultValues,
     values: defaultValues,
   })
 
-  const onSubmit: SubmitHandler<CreateProductData> = async (data) => {
-    const res = await createProduct(data)
+  const onSubmit: SubmitHandler<UpdateProductData> = async (data) => {
+    const res = await updateProduct(productId, data)
 
     if (res.status === 200) {
       toast.success('success')
@@ -141,12 +147,12 @@ const CreateProductModal = ({
           >
             ✕
           </div>
-          <h3 className='text-lg font-bold'>計測設定を追加</h3>
+          <h3 className='text-lg font-bold'>計測設定を更新</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='divider py-2'>共通設定</div>
+            <div className='divider pt-6'>管理情報</div>
             <label className='form-control'>
               <div className='label'>
-                <span className='label-text'>管理コード</span>
+                <span className='label-text'>名称</span>
               </div>
               <input {...register('name')} className='input input-bordered' />
             </label>
@@ -162,31 +168,31 @@ const CreateProductModal = ({
                 ))}
               </select>
             </label>
-            <div className='divider py-6'>詳細設定</div>
+            <div className='divider py-6'>計測条件</div>
             <Join className='flex pb-2'>
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='ヤフオク'
-                checked={tab === 'ヤフオク'}
-                onClick={() => setTab('ヤフオク')}
+                checked={tab == 'ヤフオク'}
+                onChange={() => setTab('ヤフオク')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='メルカリ'
-                checked={tab === 'メルカリ'}
-                onClick={() => setTab('メルカリ')}
+                checked={tab == 'メルカリ'}
+                onChange={() => setTab('メルカリ')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='じゃんぱら'
-                checked={tab === 'じゃんぱら'}
-                onClick={() => setTab('じゃんぱら')}
+                checked={tab == 'じゃんぱら'}
+                onChange={() => setTab('じゃんぱら')}
               />
             </Join>
             <Join className='flex'>
@@ -195,60 +201,60 @@ const CreateProductModal = ({
                 type='radio'
                 name='options'
                 aria-label='イオシス'
-                checked={tab === 'イオシス'}
-                onClick={() => setTab('イオシス')}
+                checked={tab == 'イオシス'}
+                onChange={() => setTab('イオシス')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='パソコン工房'
-                checked={tab === 'パソコン工房'}
-                onClick={() => setTab('パソコン工房')}
+                checked={tab == 'パソコン工房'}
+                onChange={() => setTab('パソコン工房')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
                 name='options'
                 aria-label='リコレ'
-                checked={tab === 'リコレ'}
-                onClick={() => setTab('リコレ')}
+                checked={tab == 'リコレ'}
+                onChange={() => setTab('リコレ')}
               />
             </Join>
             <div>
-              {(tab === null|| tab === 'ヤフオク') && (
+              {tab == 'ヤフオク' && (
                 <div className='py-4'>
                   <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab === 'メルカリ' && (
+              {tab == 'メルカリ' && (
                 <div className='py-4'>
                   <MercariForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab === 'じゃんぱら' && (
+              {tab == 'じゃんぱら' && (
                 <div className='py-4'>
                   <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab === 'イオシス' && (
+              {tab == 'イオシス' && (
                 <div className='py-4'>
                   <IosysForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab === 'パソコン工房' && (
+              {tab == 'パソコン工房' && (
                 <div className='py-4'>
                   <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
-              {tab === 'リコレ' && (
+              {tab == 'リコレ' && (
                 <div className='py-4'>
                   <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
                 </div>
               )}
             </div>
             <button type='submit' className='btn btn-primary w-full'>
-              登録
+              更新
             </button>
           </form>
         </div>
@@ -258,4 +264,4 @@ const CreateProductModal = ({
   )
 }
 
-export default CreateProductModal
+export default UpdateProductModal

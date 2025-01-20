@@ -4,21 +4,21 @@ import {
   copyKeyword,
   copyRequiredKeyword,
   copyExcludeKeyword,
-  copyMaxPrice,
   copyMinPrice,
-} from '../lib/copyFields'
+  copyMaxPrice,
+} from './lib/copyFields'
 
-import type { CreateProductData } from '@/api'
-import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import type { UpdateProductData } from '@/api'
+import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
 const UsedSofmapForm = ({
   register,
   getValues,
   setValue,
 }: {
-  register: UseFormRegister<CreateProductData>
-  getValues: UseFormGetValues<CreateProductData>
-  setValue: UseFormSetValue<CreateProductData>
+  register: UseFormRegister<UpdateProductData>
+  getValues: UseFormGetValues<UpdateProductData>
+  setValue: UseFormSetValue<UpdateProductData>
 }) => {
   const requiredKeywordsText = getValues(
     'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
@@ -151,7 +151,7 @@ const UsedSofmapForm = ({
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='label cursor-pointer'>
+      <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>
         <input
           {...register('usedSofmapCrawlSetting.enabled')}

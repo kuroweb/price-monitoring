@@ -1,17 +1,17 @@
 'use client'
 
 import {
-  copyExcludeKeyword,
   copyKeyword,
-  copyMaxPrice,
-  copyMinPrice,
   copyRequiredKeyword,
-} from '../lib/copyFields'
+  copyExcludeKeyword,
+  copyMinPrice,
+  copyMaxPrice,
+} from './lib/copyFields'
 
 import type { UpdateProductData } from '@/api'
 import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
-const PcKoubouForm = ({
+const MercariForm = ({
   register,
   getValues,
   setValue,
@@ -20,13 +20,11 @@ const PcKoubouForm = ({
   getValues: UseFormGetValues<UpdateProductData>
   setValue: UseFormSetValue<UpdateProductData>
 }) => {
-  const requiredKeywordsText = getValues(
-    'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
-  )
+  const requiredKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -35,7 +33,7 @@ const PcKoubouForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -43,7 +41,7 @@ const PcKoubouForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -52,13 +50,13 @@ const PcKoubouForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('pcKoubouCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('mercariCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'pcKoubouCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'mercariCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -81,7 +79,7 @@ const PcKoubouForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
+              'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -106,7 +104,7 @@ const PcKoubouForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
+              'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -115,10 +113,21 @@ const PcKoubouForm = ({
       </div>
       <label className='form-control'>
         <div className='label'>
+          <span className='label-text'>検索カテゴリ</span>
+        </div>
+        <input
+          {...register('mercariCrawlSetting.categoryId', {
+            setValueAs: (v) => (v === '' ? null : v),
+          })}
+          className='input input-bordered'
+        />
+      </label>
+      <label className='form-control'>
+        <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('pcKoubouCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('mercariCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -126,7 +135,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'pcKoubouCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'mercariCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -136,7 +145,7 @@ const PcKoubouForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('pcKoubouCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('mercariCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -144,7 +153,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'pcKoubouCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'mercariCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -152,7 +161,7 @@ const PcKoubouForm = ({
       <label className='label cursor-pointer '>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('pcKoubouCrawlSetting.enabled')}
+          {...register('mercariCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -161,4 +170,4 @@ const PcKoubouForm = ({
   )
 }
 
-export default PcKoubouForm
+export default MercariForm

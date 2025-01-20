@@ -1,34 +1,32 @@
 'use client'
 
 import {
+  copyRequiredKeyword,
   copyExcludeKeyword,
   copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-  copyRequiredKeyword,
-} from '../lib/copyFields'
+} from './lib/copyFields'
 
-import type { UpdateProductData } from '@/api'
+import type { CreateProductData } from '@/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const YahooAuctionForm = ({
+const PcKoubouForm = ({
   register,
   getValues,
   setValue,
 }: {
-  register: UseFormRegister<UpdateProductData>
-  getValues: UseFormGetValues<UpdateProductData>
-  setValue: UseFormSetValue<UpdateProductData>
+  register: UseFormRegister<CreateProductData>
+  getValues: UseFormGetValues<CreateProductData>
+  setValue: UseFormSetValue<CreateProductData>
 }) => {
   const requiredKeywordsText = getValues(
-    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
+    'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
   )
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues(
-    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
-  )
+  const excludeKeywordsText = getValues('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -37,7 +35,7 @@ const YahooAuctionForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -45,7 +43,7 @@ const YahooAuctionForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
@@ -54,13 +52,13 @@ const YahooAuctionForm = ({
         <div className='label'>
           <span className='label-text'>検索キーワード</span>
         </div>
-        <input {...register('yahooAuctionCrawlSetting.keyword')} className='input input-bordered' />
+        <input {...register('pcKoubouCrawlSetting.keyword')} className='input input-bordered' />
       </label>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'yahooAuctionCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'pcKoubouCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -83,7 +81,7 @@ const YahooAuctionForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
+              'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -108,7 +106,7 @@ const YahooAuctionForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
+              'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -117,21 +115,10 @@ const YahooAuctionForm = ({
       </div>
       <label className='form-control'>
         <div className='label'>
-          <span className='label-text'>検索カテゴリ</span>
-        </div>
-        <input
-          {...register('yahooAuctionCrawlSetting.categoryId', {
-            setValueAs: (v) => (v === '' ? null : v),
-          })}
-          className='input input-bordered'
-        />
-      </label>
-      <label className='form-control'>
-        <div className='label'>
           <span className='label-text'>最低価格</span>
         </div>
         <input
-          {...register('yahooAuctionCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('pcKoubouCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -139,7 +126,7 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'yahooAuctionCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'pcKoubouCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -149,7 +136,7 @@ const YahooAuctionForm = ({
           <span className='label-text'>最高価格</span>
         </div>
         <input
-          {...register('yahooAuctionCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('pcKoubouCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input input-bordered'
         />
       </label>
@@ -157,15 +144,15 @@ const YahooAuctionForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'yahooAuctionCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'pcKoubouCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='label cursor-pointer '>
+      <label className='label cursor-pointer'>
         <span className='label-text'>自動計測</span>
         <input
-          {...register('yahooAuctionCrawlSetting.enabled')}
+          {...register('pcKoubouCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -174,4 +161,4 @@ const YahooAuctionForm = ({
   )
 }
 
-export default YahooAuctionForm
+export default PcKoubouForm

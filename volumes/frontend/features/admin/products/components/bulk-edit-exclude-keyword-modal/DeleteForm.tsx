@@ -4,16 +4,17 @@ import { useParams, useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { deleteIosysCrawlSettingExcludeKeyword } from '../../../../../server-actions/iosysCrawlSettingExcludeKeywordQuery'
-import { deleteJanparaCrawlSettingExcludeKeyword } from '../../../../../server-actions/janparaCrawlSettingExcludeKeywordQuery'
-import { deleteMercariCrawlSettingExcludeKeyword } from '../../../../../server-actions/mercariCrawlSettingExcludeKeywordQuery'
-import { deletePcKoubouCrawlSettingExcludeKeyword } from '../../../../../server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
-import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '../../../../../server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
-import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '../../../../../server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
-import { useBulkEditExcludeKeywordModalState } from '../../hooks/useBulkEditExcludeKeywordModalState'
+import { useBulkEditExcludeKeywordModalState } from './hooks/useBulkEditExcludeKeywordModalState'
 
 import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 import type { SubmitHandler } from 'react-hook-form'
+
+import { deleteIosysCrawlSettingExcludeKeyword } from '@/server-actions/iosysCrawlSettingExcludeKeywordQuery'
+import { deleteJanparaCrawlSettingExcludeKeyword } from '@/server-actions/janparaCrawlSettingExcludeKeywordQuery'
+import { deleteMercariCrawlSettingExcludeKeyword } from '@/server-actions/mercariCrawlSettingExcludeKeywordQuery'
+import { deletePcKoubouCrawlSettingExcludeKeyword } from '@/server-actions/pcKoubouCrawlSettingExcludeKeywordQuery'
+import { deleteUsedSofmapCrawlSettingExcludeKeyword } from '@/server-actions/usedSofmapCrawlSettingExcludeKeywordQuery'
+import { deleteYahooAuctionCrawlSettingExcludeKeyword } from '@/server-actions/yahooAuctionCrawlSettingExcludeKeywordQuery'
 
 type inputType = {
   keyword: string | null

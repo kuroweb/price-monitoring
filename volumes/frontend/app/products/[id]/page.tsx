@@ -1,18 +1,18 @@
 import Layout from '@/components/layouts/Layout'
-import AnalysisChart from '@/features/admin/products/components/AnalysisChart'
-import Pagination from '@/features/admin/products/components/Pagination'
-import SearchForm from '@/features/admin/products/components/SearchForm'
-import { pageStateCache, usePageStateQuery } from '@/features/admin/products/hooks/usePageState'
-import { usePerStateQuery, perStateCache } from '@/features/admin/products/hooks/usePerState'
+import AnalysisChart from '@/features/products/[id]/components/AnalysisChart'
+import Pagination from '@/features/products/[id]/components/Pagination'
+import SearchForm from '@/features/products/[id]/components/SearchForm'
+import { usePageStateQuery, pageStateCache } from '@/features/products/[id]/hooks/usePageState'
+import { usePerStateQuery, perStateCache } from '@/features/products/[id]/hooks/usePerState'
 import {
-  platformStateCache,
   usePlatformStateQuery,
-} from '@/features/admin/products/hooks/usePlatformState'
+  platformStateCache,
+} from '@/features/products/[id]/hooks/usePlatformState'
 import {
-  statusStateCache,
   useStatusStateQuery,
-} from '@/features/admin/products/hooks/useStatusState'
-import { makePlatformMask } from '@/features/admin/products/lib/makePlatformMask'
+  statusStateCache,
+} from '@/features/products/[id]/hooks/useStatusState'
+import { makePlatformMask } from '@/features/products/[id]/lib/makePlatformMask'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
 import { getProductPrice } from '@/server-actions/api/productPrices'
 

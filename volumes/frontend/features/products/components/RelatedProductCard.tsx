@@ -4,7 +4,7 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { useStatusState } from '../../admin/products/hooks/useStatusState'
+import { useStatusState } from '../[id]/hooks/useStatusState'
 
 import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
 
