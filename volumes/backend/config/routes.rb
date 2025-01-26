@@ -30,7 +30,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           end
         end
       end
-      resources :categories, only: %i[index]
+      resources :categories, only: %i[index show]
       resources :product_prices, only: %i[index show]
     end
   end
