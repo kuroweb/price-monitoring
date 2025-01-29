@@ -18,6 +18,7 @@ export type ProductPriceDetail = Product & {
 }
 
 export type GetProductPricesParams = {
+  categoryId: number | null
   platformMask: string
   sort: string
   order: string

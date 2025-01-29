@@ -2,20 +2,22 @@
 
 import Link from 'next/link'
 
+import type { Category } from '@/api'
+
 const CategoryNavigation = ({
-  parentCategoryName,
-  currentCategoryName,
-  childCategoryNames,
+  parentCategory,
+  currentCategory,
+  childCategories,
 }: {
-  parentCategoryName?: string
-  currentCategoryName?: string
-  childCategoryNames?: string[]
+  parentCategory?: Category
+  currentCategory?: Category
+  childCategories?: Category[]
 }) => {
   return (
     <>
       <div className='grid grid-cols-1 space-y-4'>
         <div>
-          {parentCategoryName ? (
+          {parentCategory ? (
             <>
               <span>...</span>
               <span className='px-1'>
@@ -32,7 +34,7 @@ const CategoryNavigation = ({
             </>
           ) : (
             <>
-              <Link href='/'>
+              <Link href='/products'>
                 <span>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -59,9 +61,9 @@ const CategoryNavigation = ({
               </span>
             </>
           )}
-          {parentCategoryName && (
+          {parentCategory && (
             <>
-              <Link href={`/products/categories/${parentCategoryName}`}>{parentCategoryName}</Link>
+              <Link href={`/products?category_id=${parentCategory.id}`}>{parentCategory.name}</Link>
               <span className='px-1'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -75,9 +77,9 @@ const CategoryNavigation = ({
               </span>
             </>
           )}
-          {currentCategoryName && (
+          {currentCategory && (
             <>
-              <span>{currentCategoryName}</span>
+              <span>{currentCategory.name}</span>
               <span className='px-1'>
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -92,17 +94,17 @@ const CategoryNavigation = ({
             </>
           )}
         </div>
-        {childCategoryNames && (
+        {childCategories && (
           <>
             <div className='flex flex-wrap gap-3'>
-              {childCategoryNames.map((categoryName) => {
+              {childCategories.map((childCategory) => {
                 return (
                   <>
                     <Link
-                      href={`/products/categories/${categoryName}`}
+                      href={`/products?category_id=${childCategory.id}`}
                       className='btn btn-outline btn-sm'
                     >
-                      {categoryName}
+                      {childCategory.name}
                     </Link>
                   </>
                 )
