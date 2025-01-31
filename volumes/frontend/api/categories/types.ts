@@ -18,7 +18,18 @@ export type GetCategoryStructuredSubtreeParams = {
   displayDepthLimit?: number
 }
 
+export type GetCategoriesStructured = {
+  categories: (Category & {
+    children: GetCategoriesStructured['categories'][number][]
+  })[]
+}
+
 export type GetCategoryStructuredSubtree = Category & {
   parent: Category | null
   children: Category[]
+}
+
+export type CreateCategoryData = {
+  parentId: number
+  name: string
 }

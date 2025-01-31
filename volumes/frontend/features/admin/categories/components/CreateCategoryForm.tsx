@@ -4,23 +4,19 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { createCategory } from '../../../../server-actions/categoryQuery'
-
-import type { CreateCategoryInput, AdminCategoriesPageDataQuery } from '@/graphql/dist/client'
+import type { Category, CreateCategoryData } from '@/api'
 import type { SubmitHandler } from 'react-hook-form'
 
-const CreateCategoryForm = ({
-  categories,
-}: {
-  categories: AdminCategoriesPageDataQuery['categories']
-}) => {
+import { createCategory } from '@/server-actions/api'
+
+const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
   const router = useRouter()
-  const { register, handleSubmit } = useForm<{ parentId: string; name: string }>()
+  const { register, handleSubmit } = useForm<CreateCategoryData>()
 
-  const onSubmit: SubmitHandler<CreateCategoryInput> = async (input) => {
-    const result = await createCategory(input)
+  const onSubmit: SubmitHandler<CreateCategoryData> = async (data) => {
+    const result = await createCategory(data)
 
-    if (result.data?.createCategory.ok) {
+    if (result.status === 200) {
       toast.success('success')
     } else {
       toast.error('error')

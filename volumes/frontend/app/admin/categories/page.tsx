@@ -1,14 +1,13 @@
-import type { AdminCategoriesPageDataQuery } from '@/graphql/dist/client'
-
 import Layout from '@/components/layouts/Layout'
 import CategoriesList from '@/features/admin/categories/components/CategoriesList'
 import CreateCategoryForm from '@/features/admin/categories/components/CreateCategoryForm'
-import { AdminCategoriesPageDataDocument } from '@/graphql/dist/client'
-import { getClient } from '@/lib/apollo-client-rsc'
+import { getCategories, getCategoriesStructured } from '@/server-actions/api'
 
 const Page = async () => {
-  const { data } = await getClient().query<AdminCategoriesPageDataQuery>({
-    query: AdminCategoriesPageDataDocument,
+  const categoriesResponse = await getCategories()
+  const categoriesStructuredResponse = await getCategoriesStructured({
+    rootOnly: true,
+    displayDepthLimit: 2,
   })
 
   return (
@@ -17,13 +16,15 @@ const Page = async () => {
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>カテゴリ追加</h2>
-            <CreateCategoryForm categories={data.categories} />
+            <CreateCategoryForm categories={categoriesResponse.data?.categories || []} />
           </div>
         </div>
         <div className='card w-full bg-neutral'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>カテゴリ一覧</h2>
-            <CategoriesList categoryTree={data.categoryTree} />
+            <CategoriesList
+              structuredCategories={categoriesStructuredResponse.data?.categories || []}
+            />
           </div>
         </div>
       </div>
