@@ -14,3 +14,11 @@ export async function getCategoryStructuredSubtree(
 ) {
   return await Api.getCategoryStructuredSubtree(categoryId, params)
 }
+
+export async function createCategory(data: Api.CreateCategoryData) {
+  return await Api.createCategory(data)
+}
+
+export async function destroyCategory(categoryId: number) {
+  return await Api.destroyCategory(categoryId)
+}
