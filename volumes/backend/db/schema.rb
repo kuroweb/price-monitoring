@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
+ActiveRecord::Schema[7.1].define(version: 2025_02_03_153236) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.integer "parent_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_iosys_products_on_external_id", unique: true
@@ -122,6 +123,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_janpara_products_on_external_id", unique: true
@@ -187,6 +189,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.integer "price", default: 0, null: false
     t.boolean "published", default: false, null: false
     t.datetime "bought_date"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id", "external_id"], name: "index_mercari_products_on_product_id_and_external_id", unique: true
@@ -237,6 +240,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_pc_koubou_products_on_external_id", unique: true
@@ -304,6 +308,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.string "name", null: false
     t.text "thumbnail_url"
     t.integer "price", default: 0, null: false
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_used_sofmap_products_on_external_id", unique: true
@@ -378,6 +383,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.boolean "published", default: false, null: false
     t.datetime "bought_date"
     t.datetime "end_date"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id", "external_id"], name: "index_yahoo_auction_products_on_product_id_and_external_id", unique: true
@@ -404,6 +410,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.integer "price", default: 0, null: false
     t.boolean "published", default: false, null: false
     t.datetime "bought_date"
+    t.boolean "hidden", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id", "external_id"], name: "index_yahoo_fleamarket_products_on_product_id_and_external_id", unique: true
