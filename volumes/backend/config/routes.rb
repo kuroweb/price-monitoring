@@ -6,7 +6,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   post "/graphql", to: "graphql#execute"
 
   namespace :api do # rubocop:disable Metrics/BlockLength
-    namespace :v1 do
+    namespace :v1 do # rubocop:disable Metrics/BlockLength
       resources :products, only: %i[index show create update destroy]
       namespace :products do
         scope path: ":product_id" do
