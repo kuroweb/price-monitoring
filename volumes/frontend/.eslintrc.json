@@ -61,5 +61,5 @@
       }
     ]
   },
-  "ignorePatterns": ["graphql/dist/*"]
+  "ignorePatterns": []
 }
