@@ -5,7 +5,6 @@ ruby "3.2.2"
 gem "bootsnap", require: false
 gem "bugsnag", "~> 6.27"
 gem "closure_tree"
-gem "graphql"
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"

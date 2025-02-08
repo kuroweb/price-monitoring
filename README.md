@@ -19,7 +19,6 @@ DatadogやBugSnagを導入して運用監視についてのキャッチアップ
 ### Backend
 
 - Rails
-- graphql-ruby（WebAPIでリプレース中）
 
 ### 運用監視
 
@@ -65,7 +64,7 @@ subgraph VPS
   proxy-1
 end
 
-client-->frontend--GraphQL-->price
+client-->frontend--WebAPI-->price
 price--proxy-->VPS
 ```
 
