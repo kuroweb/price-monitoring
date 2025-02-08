@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { useStatusState } from '../[id]/hooks/useStatusState'
 
-import type { ProductsIdPageDataQuery } from '@/graphql/dist/client'
+import type { RelatedProduct } from '@/api'
 
 import {
   createIosysCrawlSettingExcludeProduct,
@@ -17,11 +17,7 @@ import {
   createYahooAuctionCrawlSettingExcludeProduct,
 } from '@/server-actions/api'
 
-const RelatedProductCard = ({
-  relatedProduct,
-}: {
-  relatedProduct: ProductsIdPageDataQuery['product']['relatedProducts'][0]
-}) => {
+const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct }) => {
   const router = useRouter()
   const [status, _] = useStatusState()
 
