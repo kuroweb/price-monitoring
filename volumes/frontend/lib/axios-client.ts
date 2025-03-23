@@ -4,10 +4,11 @@ import snakecaseKeys from 'snakecase-keys'
 
 import type { AxiosRequestConfig, AxiosError, AxiosResponse } from 'axios'
 
-const API_URL =
-  typeof window === 'undefined'
+function getApiBaseUrl(): string {
+  return typeof window === 'undefined'
     ? process.env.NEXT_PRIVATE_API_URL!
     : process.env.NEXT_PUBLIC_API_URL!
+}
 
 export interface ApiResponse<T> {
   data: T | null
@@ -27,7 +28,7 @@ export async function http<T>(
 ): Promise<ApiResponse<T>> {
   try {
     const response = await axios({
-      baseURL: API_URL,
+      baseURL: getApiBaseUrl(),
       url: path,
       ...buildConfig(config),
     })
