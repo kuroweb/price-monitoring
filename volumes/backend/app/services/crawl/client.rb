@@ -121,15 +121,10 @@ module Crawl
       def execute # rubocop:disable Metrics/AbcSize
         Playwright.connect_to_playwright_server(ENV.fetch("PLAYWRIGHT_URL")) do |playwright|
           browser = playwright.chromium.launch(**launch_options)
-          begin
-            context = browser.new_context(**context_options)
-            page = context.new_page
-            page.route("**/*", ->(route, request) { blocked_request?(request.url) ? route.abort : route.fallback })
-            yield(page)
-          ensure
-            context&.close
-            browser&.close
-          end
+          context = browser.new_context(**context_options)
+          page = context.new_page
+          page.route("**/*", ->(route, request) { blocked_request?(request.url) ? route.abort : route.fallback })
+          yield(page)
         end
       end
 
