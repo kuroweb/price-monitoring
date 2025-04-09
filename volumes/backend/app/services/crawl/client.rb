@@ -118,7 +118,7 @@ module Crawl
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
 
     class << self
-      def execute # rubocop:disable Metrics/AbcSize
+      def execute
         Playwright.connect_to_playwright_server(ENV.fetch("PLAYWRIGHT_URL")) do |playwright|
           browser = playwright.chromium.launch(**launch_options)
           context = browser.new_context(**context_options)
