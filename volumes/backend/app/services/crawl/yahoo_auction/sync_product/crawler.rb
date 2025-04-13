@@ -1,7 +1,7 @@
 module Crawl
   module YahooAuction
     module SyncProduct
-      class Crawler # rubocop:disable Metrics/ClassLength
+      class Crawler
         RETRY_COUNT = 3
 
         def self.call(...)
@@ -16,8 +16,8 @@ module Crawl
           Crawl::Client.execute do |page|
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
-              load(page)
-              deletable?(page) ? deletable_crawl_result : upsertable_crawl_result(page)
+              json = item_json(page)
+              deletable?(json) ? deletable_crawl_result : upsertable_crawl_result(json)
             end
           end
         end
@@ -30,29 +30,27 @@ module Crawl
           "https://page.auctions.yahoo.co.jp/jp/auction/#{yahoo_auction_product.external_id}"
         end
 
-        def load(page)
-          sleep(2)
-          30.times do
-            page.mouse.wheel(0, 200)
-            sleep(0.005)
-          end
+        def item_json(page)
+          script_content = page.eval_on_selector("#__NEXT_DATA__", "el => el.textContent")
+          json = JSON.parse(script_content)
+          json.dig("props", "pageProps", "initialState", "item") || {}
         end
 
-        # 個別クロール処理を実装中
-        def deletable?(page)
-          rejected?(page) || (closed?(page) && no_bids?(page))
+        def deletable?(json)
+          rejected?(json) || (!open?(json) && no_bids?(json))
         end
 
-        def rejected?(page)
-          page.query_selector("#modAlertBox strong:has-text('指定されたドキュメントは存在しません。')").present?
+        def rejected?(json)
+          json["fetchItemDetailError"].present?
         end
 
-        def closed?(page)
-          page.query_selector(".ClosedHeader__tag").present?
+        def open?(json)
+          status = json.dig("detail", "status")
+          status == "open"
         end
 
-        def no_bids?(page)
-          page.query_selector(".Count__detail").inner_text.to_i.zero?
+        def no_bids?(json)
+          json.dig("detail", "bids").zero?
         end
 
         def deletable_crawl_result # rubocop:disable Metrics/AbcSize
@@ -73,17 +71,17 @@ module Crawl
           crawl_result
         end
 
-        def upsertable_crawl_result(page)
+        def upsertable_crawl_result(json)
           crawl_result = CrawlResult.new(
             external_id: yahoo_auction_product.external_id,
-            seller_id: seller_id(page),
-            name: name(page),
-            price: price(page),
-            buyout_price: buyout_price(page),
-            thumbnail_url: thumbnail_url(page),
-            published: published(page),
-            bought_date: bought_date(page),
-            end_date: end_date(page),
+            seller_id: seller_id(json),
+            name: name(json),
+            price: price(json),
+            buyout_price: buyout_price(json),
+            thumbnail_url: thumbnail_url(json),
+            published: open?(json),
+            bought_date: end_date(json),
+            end_date: end_date(json),
             deletable: false
           )
 
@@ -95,51 +93,28 @@ module Crawl
           raise StandardError, crawl_result.errors.full_messages.join(", ") unless crawl_result.valid?
         end
 
-        def seller_id(page)
-          href = page.query_selector(".Seller__name >> a").get_attribute("href")
-          href[%r{seller/([^/]+)}, 1]
+        def seller_id(json)
+          json.dig("detail", "seller", "aucUserId")
         end
 
-        def name(page)
-          page.query_selector(".ProductTitle__text").inner_text
+        def name(json)
+          json.dig("detail", "title")
         end
 
-        def price(page)
-          price_str = page.query_selector_all(".Price__value")[0].inner_text
-          price = price_str.match(/\d+,\d+|\d+/)[0].delete(",").to_i
-          tax_price = price_str.match(/(（税込 \d+,*\d+ 円）|（税 0 円）)/)[0].gsub(/（|）|,| |税込|円/, "").to_i
-
-          tax_price.nonzero? || price
-        rescue StandardError => e
-          Bugsnag.notify(e) { |event| event.add_tab(:debug, { price_str: }) }
-          raise e
+        def price(json)
+          json.dig("detail", "price")
         end
 
-        def buyout_price(page)
-          price_index = page.query_selector_all(".Price__title").find_index { |title| title.inner_text == "即決" }
-          return nil unless price_index
-
-          price_str = page.query_selector_all(".Price__value")[price_index].inner_text
-          price = price_str.match(/\d+,\d+|\d+/)[0].delete(",").to_i
-          tax_price = price_str.match(/(（税込 \d+,*\d+ 円）|（税 0 円）)/)[0].gsub(/（|）|,| |税込|円/, "").to_i
-
-          tax_price.nonzero? || price
+        def buyout_price(json)
+          json.dig("detail", "bidorbuy")
         end
 
-        def thumbnail_url(page)
-          page.query_selector(".ProductImage__inner > img").get_attribute("src")
+        def thumbnail_url(json)
+          json.dig("detail", "img")&.first&.[]("thumbnail")
         end
 
-        def published(page)
-          !closed?(page)
-        end
-
-        def bought_date(page)
-          end_date(page)
-        end
-
-        def end_date(page)
-          page.query_selector('.Section__table th:has-text("終了日時") + td').inner_text
+        def end_date(json)
+          json.dig("detail", "endTime")
         end
       end
     end
