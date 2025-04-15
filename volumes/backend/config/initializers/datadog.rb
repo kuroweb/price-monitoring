@@ -18,8 +18,7 @@ if Rails.env.production?
     c.use :http
 
     c.tracing.transport_options = proc do |t|
-      t.adapter
-        :net_http,
+      t.adapter :net_http,
         timeout: 1,
         # TODO: hostnameをENVに切り出す
         hostname: 'datadog-agent.datadog.svc.cluster.local',
