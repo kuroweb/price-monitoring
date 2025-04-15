@@ -10,13 +10,6 @@ if Rails.env.production?
     c.env = 'production'
     c.service = 'price-monitoring'
 
-    c.use :rails
-    c.use :rack
-    c.use :active_record
-    c.use :sidekiq
-    c.use :redis
-    c.use :http
-
     c.tracing.transport_options = proc do |t|
       t.adapter :net_http,
         timeout: 1,
