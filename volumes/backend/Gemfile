@@ -5,9 +5,11 @@ ruby "3.2.2"
 gem "bootsnap", require: false
 gem "bugsnag", "~> 6.27"
 gem "closure_tree"
+gem 'ddtrace', require: 'ddtrace/auto_instrument'
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
+gem "opentracing"
 gem "playwright-ruby-client", require: "playwright"
 gem "puma", ">= 5.0"
 gem "rack-cors"
