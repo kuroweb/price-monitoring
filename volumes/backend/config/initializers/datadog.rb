@@ -10,14 +10,6 @@ if Rails.env.production?
     c.env = "production"
     c.service = "price-monitoring"
 
-    c.tracing.transport_options = proc do |t|
-      t.adapter :net_http,
-                timeout: 1,
-                # TODO: hostnameをENVに切り出す
-                hostname: "datadog-agent.datadog.svc.cluster.local",
-                port: 8126
-    end
-
     c.tracing.instrument :rails
     c.tracing.instrument :rack
     c.tracing.instrument :sidekiq
