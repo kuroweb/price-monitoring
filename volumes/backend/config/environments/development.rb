@@ -74,5 +74,7 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.hosts << ENV.fetch("ALLOWED_ORIGIN")
+  ENV.fetch("ALLOWED_ORIGINS", "").split(",").each do |host|
+    config.hosts << host.strip
+  end
 end
