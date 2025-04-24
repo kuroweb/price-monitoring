@@ -11,14 +11,26 @@ jobs:
   check_changes:
     runs-on: ubuntu-latest
     outputs:
-      backend_ci: ${{ steps.filter.outputs.backend_ci }}
-      backend_cd: ${{ steps.filter.outputs.backend_cd }}
-      backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
-      frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
+      backend_ci: ${{ steps.set.outputs.backend_ci }}
+      backend_cd: ${{ steps.set.outputs.backend_cd }}
+      backend_playwright_cd: ${{ steps.set.outputs.backend_playwright_cd }}
+      frontend_cd: ${{ steps.set.outputs.frontend_cd }}
     steps:
+      - name: Force all outputs true when manually triggered
+        id: set
+        run: |
+          echo "backend_ci=true" >> $GITHUB_OUTPUT
+          echo "backend_cd=true" >> $GITHUB_OUTPUT
+          echo "backend_playwright_cd=true" >> $GITHUB_OUTPUT
+          echo "frontend_cd=true" >> $GITHUB_OUTPUT
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+
       - uses: actions/checkout@v4
+        if: ${{ github.event_name != 'workflow_dispatch' }}
+
       - uses: dorny/paths-filter@v3
         id: filter
+        if: ${{ github.event_name != 'workflow_dispatch' }}
         with:
           filters: |
             backend_ci:
