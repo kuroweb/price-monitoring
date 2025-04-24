@@ -70,7 +70,6 @@ function processResponse<T>(response: AxiosResponse): ApiResponse<T> {
 
 function handleAxiosError<T>(error: unknown): ApiResponse<T> {
   const axiosError = error as AxiosError<ErrorData>
-
   return {
     data: null,
     error: {
