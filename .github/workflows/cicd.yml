@@ -5,6 +5,7 @@ concurrency: production
 on:
   push:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   check_changes:
