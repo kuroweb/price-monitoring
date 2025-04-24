@@ -1,3 +1,5 @@
+import https from 'https'
+
 import axios, { isAxiosError } from 'axios'
 import camelcaseKeys from 'camelcase-keys'
 import snakecaseKeys from 'snakecase-keys'
@@ -40,8 +42,12 @@ export async function http<T>(
 }
 
 function buildConfig(config: AxiosRequestConfig) {
+  // 自己証明書によるTLS検証を無効化する
+  const httpsAgent =　new https.Agent({ rejectUnauthorized: false })
+
   return {
     ...config,
+    httpsAgent,
     headers: {
       'Content-Type': 'application/json',
       ...config.headers,
