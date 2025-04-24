@@ -24,10 +24,8 @@ jobs:
           echo "backend_playwright_cd=true" >> $GITHUB_OUTPUT
           echo "frontend_cd=true" >> $GITHUB_OUTPUT
         if: ${{ github.event_name == 'workflow_dispatch' }}
-
       - uses: actions/checkout@v4
         if: ${{ github.event_name != 'workflow_dispatch' }}
-
       - uses: dorny/paths-filter@v3
         id: filter
         if: ${{ github.event_name != 'workflow_dispatch' }}
