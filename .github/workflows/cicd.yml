@@ -11,24 +11,14 @@ jobs:
   check_changes:
     runs-on: ubuntu-latest
     outputs:
-      backend_ci: ${{ steps.set.outputs.backend_ci }}
-      backend_cd: ${{ steps.set.outputs.backend_cd }}
-      backend_playwright_cd: ${{ steps.set.outputs.backend_playwright_cd }}
-      frontend_cd: ${{ steps.set.outputs.frontend_cd }}
+      backend_ci: ${{ steps.filter.outputs.backend_ci }}
+      backend_cd: ${{ steps.filter.outputs.backend_cd }}
+      backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
+      frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
     steps:
-      - name: Force all outputs true when manually triggered
-        id: set
-        run: |
-          echo "backend_ci=true" >> $GITHUB_OUTPUT
-          echo "backend_cd=true" >> $GITHUB_OUTPUT
-          echo "backend_playwright_cd=true" >> $GITHUB_OUTPUT
-          echo "frontend_cd=true" >> $GITHUB_OUTPUT
-        if: ${{ github.event_name == 'workflow_dispatch' }}
       - uses: actions/checkout@v4
-        if: ${{ github.event_name != 'workflow_dispatch' }}
       - uses: dorny/paths-filter@v3
         id: filter
-        if: ${{ github.event_name != 'workflow_dispatch' }}
         with:
           filters: |
             backend_ci:
@@ -45,7 +35,7 @@ jobs:
 
   backend_ci:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend_ci == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_ci == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
@@ -65,7 +55,7 @@ jobs:
     needs:
       - check_changes
       - backend_ci
-    if: ${{ needs.check_changes.outputs.backend_cd == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_cd == 'true' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
@@ -88,7 +78,7 @@ jobs:
 
   backend_playwright_cd:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.backend_playwright_cd == 'true' }}
+    if: ${{ needs.check_changes.outputs.backend_playwright_cd == 'true' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
@@ -111,7 +101,7 @@ jobs:
 
   frontend_cd:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.frontend_cd == 'true' }}
+    if: ${{ needs.check_changes.outputs.frontend_cd == 'true' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
