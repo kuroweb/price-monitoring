@@ -9,7 +9,6 @@ Sidekiq.configure_server do |config|
 
   config.server_middleware do |chain|
     chain.add SidekiqUniqueJobs::Middleware::Server
-    chain.add SidekiqDatadogTracer
   end
 
   SidekiqUniqueJobs::Server.configure(config)
