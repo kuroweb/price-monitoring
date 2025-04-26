@@ -8,10 +8,9 @@ if Rails.env.production?
 
   Datadog.configure do |c|
     c.env = "production"
-    c.service = "price-monitoring"
 
-    c.tracing.instrument :rails
-    c.tracing.instrument :rack
-    c.tracing.instrument :sidekiq
+    c.tracing.instrument :rails, service_name: "price-monitoring-rails"
+    c.tracing.instrument :rack, service_name: "price-monitoring-http"
+    c.tracing.instrument :sidekiq, service_name: "price-monitoring-sidekiq"
   end
 end
