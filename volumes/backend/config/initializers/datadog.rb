@@ -3,17 +3,19 @@ if Rails.env.production?
   require "datadog/opentracer"
   require "ddtrace"
 
-  # Activate the Datadog tracer for OpenTracing
-  OpenTracing.global_tracer = Datadog::OpenTracer::Tracer.new
-
   Datadog.configure do |c|
-    c.env = "production"
+    app = "price-monitoring"
+    env = "production"
 
-    c.tracing.instrument :rails, service_name: "price-monitoring-rails"
-    c.tracing.instrument :rack, service_name: "price-monitoring-rack"
-    c.tracing.instrument :sidekiq, service_name: "price-monitoring-sidekiq"
-    c.tracing.instrument :mysql2, service_name: "price-monitoring-mysql"
-    c.tracing.instrument :http, service_name: "price-monitoring-http"
-    c.tracing.instrument :redis, service_name: "price-monitoring-redis"
+    c.env = env
+    c.tracer tags: { app:, env: }
+
+    c.tracing.instrument :rails, service_name: "#{app}-rails"
+    c.tracing.instrument :rack, service_name: "#{app}-rack"
+    c.tracing.instrument :sidekiq, service_name: "#{app}-sidekiq",
+                                   client_service_name: "#{app}-sidekiq-client",
+                                   tag_args: true
+    c.tracing.instrument :http, service_name: "#{app}-net/http"
+    c.tracing.instrument :redis, service_name: "#{app}-redis"
   end
 end
