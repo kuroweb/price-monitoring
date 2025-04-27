@@ -6,7 +6,7 @@ if Rails.env.production?
     env = "production"
 
     c.env = env
-    c.tracer tags: { app:, env: }
+    c.tags = { app:, env: }
 
     c.tracing.instrument :rails, service_name: "#{app}-rails"
     c.tracing.instrument :rack, service_name: "#{app}-rack"
