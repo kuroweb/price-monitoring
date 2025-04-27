@@ -1,6 +1,4 @@
 if Rails.env.production?
-  require "opentracing"
-  require "datadog/opentracer"
   require "ddtrace"
 
   Datadog.configure do |c|
