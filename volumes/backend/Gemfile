@@ -9,7 +9,6 @@ gem "ddtrace", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
-gem "opentracing"
 gem "playwright-ruby-client", require: "playwright"
 gem "puma", ">= 5.0"
 gem "rack-cors"
