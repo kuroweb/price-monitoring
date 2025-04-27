@@ -5,6 +5,7 @@ if Rails.env.production?
     app = "price-monitoring"
     env = "production"
 
+    c.service = app
     c.env = env
     c.tags = { app:, env: }
 
