@@ -13,7 +13,8 @@ if Rails.env.production?
     c.tracing.instrument :sidekiq, service_name: "#{app}-sidekiq",
                                    client_service_name: "#{app}-sidekiq-client",
                                    tag_args: true
-    c.tracing.instrument :http, service_name: "#{app}-net/http"
+    c.tracing.instrument :active_record, service_name: "#{app}-mysql"
+    c.tracing.instrument :http, service_name: "#{app}-http"
     c.tracing.instrument :redis, service_name: "#{app}-redis"
   end
 end
