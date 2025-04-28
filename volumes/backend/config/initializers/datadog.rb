@@ -9,7 +9,7 @@ if Rails.env.production?
     c.env = env
     c.tags = { app:, env: }
 
-    c.tracing.instrument :rails, service_name: "#{app}-rails"
+    c.tracing.instrument :rails, service_name: app
     c.tracing.instrument :sidekiq, service_name: "#{app}-sidekiq",
                                    client_service_name: "#{app}-sidekiq-client",
                                    tag_args: true
