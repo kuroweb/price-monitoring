@@ -16,6 +16,7 @@ if Rails.env.production?
                                    tag_args: true
     c.tracing.instrument :active_record, service_name: "#{app}-mysql"
     c.tracing.instrument :http, service_name: "#{app}-http"
-    c.tracing.instrument :redis, service_name: "#{app}-redis"
+    c.tracing.instrument :redis, service_name: "#{app}-redis",
+                                 peer_service: "#{app}-redis-primary"
   end
 end
