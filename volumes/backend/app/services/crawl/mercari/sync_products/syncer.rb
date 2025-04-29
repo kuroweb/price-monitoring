@@ -65,7 +65,11 @@ module Crawl
         end
 
         def crawl_results
-          @crawl_results ||= Crawler.new(product:).execute
+          @crawl_results ||= Datadog::Tracing.trace("mercari.crawl_results") do |span|
+            span.set_tag("product.id", product.id)
+            span.set_tag("product.name", product.name)
+            Crawler.new(product:).execute
+          end
         end
       end
     end
