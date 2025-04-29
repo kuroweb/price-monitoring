@@ -65,7 +65,7 @@ module Crawl
         end
 
         def crawl_results
-          @crawl_results ||= Datadog::Tracing.trace("#{self.class.name}.crawl_results") do |span|
+          @crawl_results ||= Datadog::Tracing.trace("#{self.class.name}.crawl_results") do
             Crawler.new(product:).execute
           end
         end
