@@ -10,7 +10,7 @@ x-backend: &backend
     DB_PASSWORD: ""
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
-    ALLOWED_ORIGINS: "backend"
+    ALLOWED_ORIGINS: "nginx"
   stdin_open: true
   tty: true
 
@@ -43,8 +43,8 @@ services:
     ports:
       - 8080:3000
     environment:
-      NEXT_PRIVATE_API_URL: "http://backend:3000"
-      NEXT_PUBLIC_API_URL: "http://localhost:3000"
+      NEXT_PRIVATE_API_URL: "https://nginx"
+      NEXT_PUBLIC_API_URL: "https://nginx"
     stdin_open: true
     tty: true
     volumes:
@@ -133,6 +133,18 @@ services:
       dockerfile: containers/backend_playwright/Dockerfile
     ports:
       - 8888:8888
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "443:443"
+    volumes:
+      - ./volumes/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./volumes/nginx/certs:/etc/nginx/certs:ro
+    depends_on:
+      - backend
+      - frontend
+    restart: unless-stopped
 
 volumes:
   frontend-node-modules:

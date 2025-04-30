@@ -5,3 +5,5 @@
 # vscode
 .vscode/*
 !.vscode/settings.json.template
+
+volumes/nginx/certs/server.*
