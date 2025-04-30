@@ -2,11 +2,11 @@
 
 [![CI/CD](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml)
 
-Web上にある商品の最安値を探したり、相場を把握するためのツール
+- Web上にある商品の最安値を探したり、相場を把握するためのツール
 
-Rails, TypeScriptのキャッチアップが主な開発目的
+- Rails, TypeScriptのキャッチアップが主な開発目的
 
-DatadogやBugSnagを導入して運用監視についてのキャッチアップも兼ねている
+- DatadogやBugSnagを導入して運用監視についてのキャッチアップも兼ねている
 
 ## 技術スタック
 
@@ -24,49 +24,133 @@ DatadogやBugSnagを導入して運用監視についてのキャッチアップ
 
 - Datadog
 - BugSnag
-- Slack
 
-## Infra
+## インフラ構成
 
 ### Development
 
 - Docker Compose
 
+  ```mermaid
+  flowchart LR
+  subgraph Docker Compose
+    subgraph proxy
+      nginx[Nginx]
+    end
+
+    subgraph Frontend
+      direction LR
+
+      Next.js
+    end
+
+    subgraph Backend API
+      direction LR
+
+      rails[Rails]
+    end
+
+    subgraph Backend Batch
+      direction LR
+
+      sidekiq[Sidekiq]
+      playwright[Playwright]
+    end
+
+    subgraph Databases
+      mysql[(MySQL)]
+      redis[(Redis)]
+    end
+  end
+
+  subgraph VPS
+    proxy-1
+  end
+
+  client-->nginx-->Next.js
+  nginx--WebAPI-->rails
+  sidekiq-->playwright-->VPS
+  rails-->Databases
+  sidekiq-->Databases
+  ```
+
 ### Production
 
 - 自宅Kubernetes (Master Node x 1, Worker Node x 3構成)
 
-## アーキテクチャ
+  ```mermaid
+  flowchart LR
+  subgraph Kubernetest Node
+    subgraph proxy
+      nginx[Ingress Nginx]
+    end
 
-```mermaid
-flowchart LR
-subgraph Kubernetest Node
-  subgraph frontend [Frontend]
-    direction LR
+    subgraph Frontend
+      direction LR
 
-    Next.js
+      Next.js
+    end
+
+    subgraph Backend API
+      direction LR
+
+      rails[Rails]
+    end
+
+    subgraph Backend Batch
+      direction LR
+
+      sidekiq[Sidekiq]
+      playwright[Playwright]
+    end
+
+    subgraph Databases
+      mysql[(MySQL)]
+      redis[(Redis)]
+    end
   end
 
-  subgraph price ["Backend"]
-    direction LR
-
-    price_rails[Rails]
-    price_rails_batch[Sidekiq]
-    price_rails_mysql[(MySQL)]
-    price_playwright[Playwright]
-
-    price_rails-->price_rails_mysql
-    price_rails_batch-->price_rails_mysql
+  subgraph VPS
+    proxy-1
   end
-end
 
-subgraph VPS
-  proxy-1
-end
+  client-->nginx-->Next.js
+  nginx--WebAPI-->rails
+  sidekiq-->playwright-->VPS
+  rails-->Databases
+  sidekiq-->Databases
+  ```
 
-client-->frontend--WebAPI-->price
-price--proxy-->VPS
-```
+## セットアップ手順
+
+- 自己証明書の作成
+
+  ```bash
+  $ cd volumes/nginx/certs
+  $ openssl req -x509 -nodes -days 365 \
+    -newkey rsa:2048 \
+    -keyout server.key \
+    -out server.crt \
+    -subj "/CN=localhost"
+  ```
+
+- Dockerイメージビルド
+
+  ```bash
+  $ docker compose build
+  ```
+
+- コンテナ起動
+
+  ```bash
+  $ just up
+  ```
+
+- コンテナ停止
+
+  ```bash
+  $ just down
+  ```
 
 ## ER
 
