@@ -123,15 +123,26 @@
 
 ## セットアップ手順
 
-- 自己証明書の作成
+- mkcertをインストール
 
   ```bash
-  $ cd volumes/nginx/certs
-  $ openssl req -x509 -nodes -days 365 \
-    -newkey rsa:2048 \
-    -keyout server.key \
-    -out server.crt \
-    -subj "/CN=localhost"
+  $ brew install mkcert
+  $ mkcert -install
+  ```
+
+- 証明書発行
+
+  ```bash
+  $ mkcert \
+    -cert-file ./volumes/nginx/certs/cert.pem \
+    -key-file ./volumes/nginx/certs/key.pem \
+    dev.price-monitoring.com
+  ```
+
+- /etc/hosts に以下を記述
+
+  ```bash
+  127.0.0.1 dev.price-monitoring.com
   ```
 
 - Dockerイメージビルド
@@ -151,6 +162,9 @@
   ```bash
   $ just down
   ```
+
+- ローカル環境
+  - https://dev.price-monitoring.com/
 
 ## ER
 
