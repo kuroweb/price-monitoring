@@ -134,8 +134,8 @@
 
   ```bash
   $ mkcert \
-    -cert-file ./volumes/nginx/certs/cert.pem \
-    -key-file ./volumes/nginx/certs/key.pem \
+    -cert-file ./volumes/nginx/certs/fullchain.pem \
+    -key-file ./volumes/nginx/certs/privkey.pem \
     dev.price-monitoring.com
   ```
 
