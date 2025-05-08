@@ -125,6 +125,7 @@ services:
       DB_USER_NAME: "root"
       DB_PASSWORD: ""
       ALLOWED_ORIGINS: "nginx,dev.price-monitoring.com"
+      DOMAIN_NAME: "dev.price-monitoring.com"
     stdin_open: true
     tty: true
     depends_on:
