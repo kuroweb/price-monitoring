@@ -13,6 +13,16 @@ x-backend: &backend
     ALLOWED_ORIGINS: "nginx"
   stdin_open: true
   tty: true
+  depends_on:
+    backend-db:
+      condition: service_healthy
+    backend-redis:
+      condition: service_healthy
+  volumes:
+    - ./volumes/backend:/app
+    - backend-bundle:/usr/local/bundle
+    # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
+    # - backend-node-modules:/app/node_modules
 
 x-mysql: &mysql
   image: mysql/mysql-server:8.0
@@ -53,65 +63,23 @@ services:
 
   backend:
     <<: *backend
-    depends_on:
-      backend-db:
-        condition: service_healthy
-      backend-redis:
-        condition: service_healthy
-    volumes:
-      - ./volumes/backend:/app
-      - backend-bundle:/usr/local/bundle
-      # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
-      # - backend-node-modules:/app/node_modules
     ports:
       - 3000:3000
 
   backend-batch-1:
     <<: *backend
-    depends_on:
-      backend-db:
-        condition: service_healthy
-      backend-redis:
-        condition: service_healthy
-    volumes:
-      - ./volumes/backend:/app
-      - backend-bundle:/usr/local/bundle
     command: sidekiq -C config/sidekiq/crawl_process.yml
 
   backend-batch-2:
     <<: *backend
-    depends_on:
-      backend-db:
-        condition: service_healthy
-      backend-redis:
-        condition: service_healthy
-    volumes:
-      - ./volumes/backend:/app
-      - backend-bundle:/usr/local/bundle
     command: sidekiq -C config/sidekiq/general_process.yml
 
   backend-batch-3:
     <<: *backend
-    depends_on:
-      backend-db:
-        condition: service_healthy
-      backend-redis:
-        condition: service_healthy
-    volumes:
-      - ./volumes/backend:/app
-      - backend-bundle:/usr/local/bundle
     command: sidekiq -C config/sidekiq/crawl_process_2.yml
 
   spring:
     <<: *backend
-    depends_on:
-      backend-db:
-        condition: service_healthy
-      backend-redis:
-        condition: service_healthy
-    volumes:
-      - ./volumes/backend:/app
-      - backend-bundle:/usr/local/bundle
     command: bundle exec spring server && tail -f /dev/null
 
   backend-db:
