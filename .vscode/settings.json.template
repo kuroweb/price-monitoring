@@ -1,6 +1,5 @@
 {
-    "ruby.rubocop.configFilePath": "/path/to/price-monitoring/volumes/backend/.rubocop.yml",
-    "ruby.rubocop.executePath": "/path/to/.rbenv/versions/3.2.2/bin/",
+    "rubyLsp.bundleGemfile": "/path/to/dotfiles/ruby/ruby-lsp/Gemfile",
     "eslint.workingDirectories": [{"mode": "auto"}],
     "files.associations": {"*.css": "tailwindcss"}
 }
