@@ -16,10 +16,10 @@ tag_suffix := $(shell git rev-parse --short HEAD)
 all: build-all push-all
 
 # Dockerイメージをビルドする
-build-all: build-backend build-backend-playwright build-frontend
+build-all: build-backend build-backend-playwright build-frontend build-auth-provider
 
 # Dockerイメージをプッシュする
-push-all: push-backend push-backend-playwright push-frontend
+push-all: push-backend push-backend-playwright push-frontend push-auth-provider
 
 #
 # backend
@@ -62,3 +62,18 @@ build-frontend:
 
 push-frontend:
 	docker push $(frontend_tag)
+
+#
+# auth-provider
+#
+
+auth_provider_tag := $(registry)/$(project)-auth-provider:$(tag_suffix)
+
+# TODO: k8s環境ができたら本番用のDockerfileに切り替える
+build-auth-provider:
+	docker build \
+	-t $(auth_provider_tag) \
+	-f containers/auth-provider/Dockerfile volumes/auth-provider
+
+push-auth-provider:
+	docker push $(auth_provider_tag)
