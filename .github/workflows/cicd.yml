@@ -15,6 +15,7 @@ jobs:
       backend_cd: ${{ steps.filter.outputs.backend_cd }}
       backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
       frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
+      auth_provider_cd: ${{ steps.filter.outputs.auth_provider_cd }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -108,6 +109,32 @@ jobs:
       build_command: "make build-frontend tag_suffix=${{ github.sha }}"
       push_command: "make push-frontend tag_suffix=${{ github.sha }}"
       apply_command: "make apply-frontend tag_suffix=${{ github.sha }}"
+    secrets:
+      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
+      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
+      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
+      CA_CRT: ${{ secrets.CA_CRT }}
+      CLIENT_CRT: ${{ secrets.CLIENT_CRT }}
+      CLIENT_KEY: ${{ secrets.CLIENT_KEY }}
+      SECRET_TEXT: ${{ secrets.SECRET_TEXT }}
+      VPN_OVPN: ${{ secrets.VPN_OVPN }}
+      GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
+      GIT_COMMIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL }}
+      GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+  auth_provider_cd:
+    needs:
+      - check_changes
+    if: ${{ needs.check_changes.outputs.auth_provider_cd == 'true' || github.event_name == 'workflow_dispatch' }}
+    uses: ./.github/workflows/reusable-cd.yml
+    with:
+      service_name: "k8s/manifests/price-monitoring"
+      build_command: "make build-auth_provider tag_suffix=${{ github.sha }}"
+      push_command: "make push-auth_provider tag_suffix=${{ github.sha }}"
+      # TODO: k8s環境を構築したら切り替える
+      apply_command: "echo execute blank apply_command."
+      # apply_command: "make apply-auth_provider tag_suffix=${{ github.sha }}"
     secrets:
       REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
       REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
