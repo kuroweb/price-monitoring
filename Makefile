@@ -69,11 +69,10 @@ push-frontend:
 
 auth_provider_tag := $(registry)/$(project)-auth-provider:$(tag_suffix)
 
-# TODO: k8s環境ができたら本番用のDockerfileに切り替える
 build-auth-provider:
 	docker build \
 	-t $(auth_provider_tag) \
-	-f containers/auth_provider/Dockerfile volumes/auth_provider
+	-f containers/auth_provider/Dockerfile.prod volumes/auth_provider
 
 push-auth-provider:
 	docker push $(auth_provider_tag)
