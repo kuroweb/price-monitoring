@@ -3,9 +3,7 @@
 [![CI/CD](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml)
 
 - Web上にある商品の最安値を探したり、相場を把握するためのツール
-
 - Rails, TypeScriptのキャッチアップが主な開発目的
-
 - DatadogやBugSnagを導入して運用監視についてのキャッチアップも兼ねている
 
 ## 技術スタック
@@ -19,6 +17,7 @@
 ### Backend
 
 - Rails
+- OpenID Connect（実装中）
 
 ### 運用監視
 
@@ -47,7 +46,7 @@
     subgraph Backend API
       direction LR
 
-      rails[Rails]
+      rails[Rails API]
     end
 
     subgraph Backend Batch
@@ -55,6 +54,10 @@
 
       sidekiq[Sidekiq]
       playwright[Playwright]
+    end
+
+    subgraph OpenID Provider
+      rails_auth[Rails Web]
     end
 
     subgraph Databases
@@ -69,8 +72,10 @@
 
   client-->nginx-->Next.js
   nginx--WebAPI-->rails
+  nginx-->rails_auth
   sidekiq-->playwright-->VPS
   rails-->Databases
+  rails_auth-->Databases
   sidekiq-->Databases
   ```
 
@@ -94,7 +99,7 @@
     subgraph Backend API
       direction LR
 
-      rails[Rails]
+      rails[Rails API]
     end
 
     subgraph Backend Batch
