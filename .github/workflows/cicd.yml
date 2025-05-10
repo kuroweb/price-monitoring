@@ -133,11 +133,11 @@ jobs:
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
-      build_command: "make build-auth_provider tag_suffix=${{ github.sha }}"
-      push_command: "make push-auth_provider tag_suffix=${{ github.sha }}"
+      build_command: "make build-auth-provider tag_suffix=${{ github.sha }}"
+      push_command: "make push-auth-provider tag_suffix=${{ github.sha }}"
       # TODO: k8s環境を構築したら切り替える
       apply_command: "echo execute blank apply_command."
-      # apply_command: "make apply-auth_provider tag_suffix=${{ github.sha }}"
+      # apply_command: "make apply-auth-provider tag_suffix=${{ github.sha }}"
     secrets:
       REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
       REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
