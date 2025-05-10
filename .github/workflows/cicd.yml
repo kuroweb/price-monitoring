@@ -33,6 +33,9 @@ jobs:
             frontend_cd:
               - './volumes/frontend/**'
               - './containers/frontend/**'
+            auth_provider_cd:
+              - './volumes/auth_provider/**'
+              - './containers/auth_provider/**'
 
   backend_ci:
     needs: check_changes
