@@ -10,7 +10,7 @@ x-backend: &backend
     DB_PASSWORD: ""
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
-    ALLOWED_ORIGINS: "nginx"
+    ALLOWED_ORIGINS: "nginx,dev.price-monitoring.com"
   stdin_open: true
   tty: true
   depends_on:
@@ -112,7 +112,36 @@ services:
     depends_on:
       - backend
       - frontend
+      - auth_provider
     restart: unless-stopped
+
+  auth_provider:
+    build:
+      context: .
+      dockerfile: containers/auth_provider/Dockerfile
+    env_file: .env
+    environment:
+      DB_HOST_NAME: "auth_provider-db"
+      DB_DATABASE_NAME: "rails"
+      DB_USER_NAME: "root"
+      DB_PASSWORD: ""
+      ALLOWED_ORIGINS: "nginx,dev.auth.price-monitoring.com"
+      DOMAIN_NAME: "dev.auth.price-monitoring.com"
+    stdin_open: true
+    tty: true
+    depends_on:
+      auth_provider-db:
+        condition: service_healthy
+    volumes:
+      - ./volumes/auth_provider:/app
+      - auth_provider-bundle:/usr/local/bundle
+    ports:
+      - 5050:3000
+
+  auth_provider-db:
+    <<: *mysql
+    volumes:
+      - auth_provider-db:/var/lib/mysql
 
 volumes:
   frontend-node-modules:
@@ -131,3 +160,5 @@ volumes:
   #     o: bind
   backend-db:
   backend-redis:
+  auth_provider-bundle:
+  auth_provider-db:
