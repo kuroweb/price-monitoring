@@ -73,7 +73,7 @@ auth_provider_tag := $(registry)/$(project)-auth-provider:$(tag_suffix)
 build-auth-provider:
 	docker build \
 	-t $(auth_provider_tag) \
-	-f containers/auth-provider/Dockerfile volumes/auth-provider
+	-f containers/auth_provider/Dockerfile volumes/auth_provider
 
 push-auth-provider:
 	docker push $(auth_provider_tag)
