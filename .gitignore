@@ -6,4 +6,7 @@
 .vscode/*
 !.vscode/settings.json.template
 
-volumes/nginx/certs/*
+volumes/nginx/certs/web/*
+!volumes/nginx/certs/web/.keep
+volumes/nginx/certs/auth/*
+!volumes/nginx/certs/auth/.keep

@@ -123,27 +123,50 @@
 
 ## セットアップ手順
 
-- mkcertをインストール
+- OpenID Provider(auth_providerコンテナ)の秘密鍵を作成
 
-  ```bash
-  $ brew install mkcert
-  $ mkcert -install
-  ```
+  - opensslをインストール（環境差異の大きなライブラリなので参考程度）
 
-- 証明書発行
+    ```bash
+    $ brew install openssl
+    ```
 
-  ```bash
-  $ mkcert \
-    -cert-file ./volumes/nginx/certs/fullchain.pem \
-    -key-file ./volumes/nginx/certs/privkey.pem \
-    dev.price-monitoring.com
-  ```
+  - 秘密鍵を作成
 
-- /etc/hosts に以下を記述
+    ```bash
+    $ openssl genrsa -out volumes/auth_provider/certs/private.pem 2048
+    ```
 
-  ```bash
-  127.0.0.1 dev.price-monitoring.com
-  ```
+- nginx用の証明書発行
+  - mkcertをインストール
+
+    ```bash
+    $ brew install mkcert
+    $ mkcert -install
+    ```
+
+  - 証明書発行
+
+    ```bash
+    $ mkcert \
+      -cert-file ./volumes/nginx/certs/web/fullchain.pem \
+      -key-file ./volumes/nginx/certs/web/privkey.pem \
+      dev.price-monitoring.com
+    ```
+
+    ```bash
+    $ mkcert \
+      -cert-file ./volumes/nginx/certs/auth/fullchain.pem \
+      -key-file ./volumes/nginx/certs/auth/privkey.pem \
+      dev.auth.price-monitoring.com
+    ```
+
+  - /etc/hosts に以下を記述
+
+    ```bash
+    127.0.0.1 dev.price-monitoring.com
+    127.0.0.1 dev.auth.price-monitoring.com
+    ```
 
 - Dockerイメージビルド
 

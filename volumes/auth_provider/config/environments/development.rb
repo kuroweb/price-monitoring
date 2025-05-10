@@ -73,4 +73,6 @@ Rails.application.configure do
   ENV.fetch("ALLOWED_ORIGINS", "").split(",").each do |host|
     config.hosts << host.strip
   end
+
+  config.force_ssl = true
 end
