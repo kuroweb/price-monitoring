@@ -75,3 +75,10 @@ production:
     username: <%= ENV.fetch("DB_USER_NAME") %>
     password: <%= ENV.fetch("DB_PASSWORD") %>
     host: <%= ENV.fetch("DB_HOST_NAME") %>
+
+  cable:
+    <<: *default
+    database: auth_provider_production
+    username: <%= ENV.fetch("DB_USER_NAME") %>
+    password: <%= ENV.fetch("DB_PASSWORD") %>
+    host: <%= ENV.fetch("DB_HOST_NAME") %>
