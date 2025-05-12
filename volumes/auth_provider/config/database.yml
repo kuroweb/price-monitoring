@@ -19,7 +19,7 @@ default: &default
 
 development:
   <<: *default
-  database: backend_development
+  database: auth_provider_development
   username: <%= ENV.fetch("DB_USER_NAME") %>
   password: <%= ENV.fetch("DB_PASSWORD") %>
   host: <%= ENV.fetch("DB_HOST_NAME") %>
@@ -29,7 +29,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: backend_test
+  database: auth_provider_test
   username: <%= ENV.fetch("DB_USER_NAME") %>
   password: <%= ENV.fetch("DB_PASSWORD") %>
   host: <%= ENV.fetch("DB_HOST_NAME") %>
@@ -57,14 +57,14 @@ test:
 production:
   primary:
     <<: *default
-    database: backend_production
+    database: auth_provider_production
     username: <%= ENV.fetch("DB_USER_NAME") %>
     password: <%= ENV.fetch("DB_PASSWORD") %>
     host: <%= ENV.fetch("DB_HOST_NAME") %>
 
   queue:
     <<: *default
-    database: backend_production  # 必要に応じて backend_queue_production に分離可能
+    database: auth_provider_production
     username: <%= ENV.fetch("DB_USER_NAME") %>
     password: <%= ENV.fetch("DB_PASSWORD") %>
     host: <%= ENV.fetch("DB_HOST_NAME") %>
