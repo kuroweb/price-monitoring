@@ -112,16 +112,16 @@ services:
     depends_on:
       - backend
       - frontend
-      - auth_provider
+      - auth-provider
     restart: unless-stopped
 
-  auth_provider:
+  auth-provider:
     build:
       context: .
       dockerfile: containers/auth_provider/Dockerfile
     env_file: .env
     environment:
-      DB_HOST_NAME: "auth_provider-db"
+      DB_HOST_NAME: "auth-provider-db"
       DB_DATABASE_NAME: "rails"
       DB_USER_NAME: "root"
       DB_PASSWORD: ""
@@ -130,18 +130,18 @@ services:
     stdin_open: true
     tty: true
     depends_on:
-      auth_provider-db:
+      auth-provider-db:
         condition: service_healthy
     volumes:
       - ./volumes/auth_provider:/app
-      - auth_provider-bundle:/usr/local/bundle
+      - auth-provider-bundle:/usr/local/bundle
     ports:
       - 5050:3000
 
-  auth_provider-db:
+  auth-provider-db:
     <<: *mysql
     volumes:
-      - auth_provider-db:/var/lib/mysql
+      - auth-provider-db:/var/lib/mysql
 
 volumes:
   frontend-node-modules:
@@ -160,5 +160,5 @@ volumes:
   #     o: bind
   backend-db:
   backend-redis:
-  auth_provider-bundle:
-  auth_provider-db:
+  auth-provider-bundle:
+  auth-provider-db:
