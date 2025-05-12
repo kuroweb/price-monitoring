@@ -55,8 +55,16 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: backend_production
-  username: <%= ENV.fetch("DB_USER_NAME") %>
-  password: <%= ENV.fetch("DB_PASSWORD") %>
-  host: <%= ENV.fetch("DB_HOST_NAME") %>
+  primary:
+    <<: *default
+    database: backend_production
+    username: <%= ENV.fetch("DB_USER_NAME") %>
+    password: <%= ENV.fetch("DB_PASSWORD") %>
+    host: <%= ENV.fetch("DB_HOST_NAME") %>
+
+  queue:
+    <<: *default
+    database: backend_production  # 必要に応じて backend_queue_production に分離可能
+    username: <%= ENV.fetch("DB_USER_NAME") %>
+    password: <%= ENV.fetch("DB_PASSWORD") %>
+    host: <%= ENV.fetch("DB_HOST_NAME") %>
