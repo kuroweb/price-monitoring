@@ -87,9 +87,9 @@
   ```mermaid
   flowchart LR
   subgraph Kubernetest Node
-    subgraph proxy
-      nginx_web[Ingress Nginx Web]
-      nginx_auth[Ingress Nginx Auth]
+    subgraph Ingress Controller
+      nginx_web[Nginx Web]
+      nginx_auth[Nginx Auth]
     end
 
     subgraph Frontend
