@@ -34,7 +34,8 @@
   flowchart LR
   subgraph Docker Compose
     subgraph proxy
-      nginx[Nginx]
+      nginx_web[Nginx Web]
+      nginx_auth[Nginx Auth]
     end
 
     subgraph Frontend
@@ -70,9 +71,9 @@
     proxy-1
   end
 
-  client-->nginx-->Next.js
-  nginx--WebAPI-->rails
-  nginx-->rails_auth
+  client-->nginx_web-->Next.js
+  client-->nginx_auth-->rails_auth
+  nginx_web--WebAPI-->rails
   sidekiq-->playwright-->VPS
   rails-->Databases
   rails_auth-->Databases
@@ -87,7 +88,8 @@
   flowchart LR
   subgraph Kubernetest Node
     subgraph proxy
-      nginx[Ingress Nginx]
+      nginx_web[Nginx Web]
+      nginx_auth[Nginx Auth]
     end
 
     subgraph Frontend
@@ -109,6 +111,10 @@
       playwright[Playwright]
     end
 
+    subgraph OpenID Provider
+      rails_auth[Rails Web]
+    end
+
     subgraph Databases
       mysql[(MySQL)]
       redis[(Redis)]
@@ -119,10 +125,12 @@
     proxy-1
   end
 
-  client-->nginx-->Next.js
-  nginx--WebAPI-->rails
+  client-->nginx_web-->Next.js
+  client-->nginx_auth-->rails_auth
+  nginx_web--WebAPI-->rails
   sidekiq-->playwright-->VPS
   rails-->Databases
+  rails_auth-->Databases
   sidekiq-->Databases
   ```
 
