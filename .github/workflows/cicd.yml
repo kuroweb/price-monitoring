@@ -16,26 +16,26 @@ jobs:
       backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
       frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
       auth_provider_cd: ${{ steps.filter.outputs.auth_provider_cd }}
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          filters: |
-            backend_ci:
-              - './volumes/backend/**'
-              - './containers/backend/**'
-            backend_cd:
-              - './volumes/backend/!(spec)/**'
-              - './containers/backend/**'
-            backend_playwright_cd:
-              - './containers/backend_playwright/**'
-            frontend_cd:
-              - './volumes/frontend/**'
-              - './containers/frontend/**'
-            auth_provider_cd:
-              - './volumes/auth_provider/**'
-              - './containers/auth_provider/**'
+    # steps:
+    #   - uses: actions/checkout@v4
+    #   - uses: dorny/paths-filter@v3
+    #     id: filter
+    #     with:
+    #       filters: |
+    #         backend_ci:
+    #           - './volumes/backend/**'
+    #           - './containers/backend/**'
+    #         backend_cd:
+    #           - './volumes/backend/!(spec)/**'
+    #           - './containers/backend/**'
+    #         backend_playwright_cd:
+    #           - './containers/backend_playwright/**'
+    #         frontend_cd:
+    #           - './volumes/frontend/**'
+    #           - './containers/frontend/**'
+    #         auth_provider_cd:
+    #           - './volumes/auth_provider/**'
+    #           - './containers/auth_provider/**'
 
   backend_ci:
     needs: check_changes
