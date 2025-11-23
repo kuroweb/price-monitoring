@@ -6,6 +6,9 @@
 .vscode/*
 !.vscode/settings.json.template
 
+# Cursor
+.cursor/rules/common
+
 volumes/nginx/certs/web/*
 !volumes/nginx/certs/web/.keep
 volumes/nginx/certs/auth/*
