@@ -22,15 +22,9 @@ on:
         required: true
       REGISTRY_KEY:
         required: true
-      CA_CRT:
+      TAILSCALE_OAUTH_CLIENT_ID:
         required: true
-      CLIENT_CRT:
-        required: true
-      CLIENT_KEY:
-        required: true
-      SECRET_TEXT:
-        required: true
-      VPN_OVPN:
+      TAILSCALE_OAUTH_CLIENT_SECRET:
         required: true
       GIT_COMMIT_USER:
         required: true
@@ -48,6 +42,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Setup Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
+          tags: tag:ci
+
       - name: Setup Docker Registry
         run: |
           echo "${{ secrets.REGISTRY_IP }} registry.local" | sudo tee -a /etc/hosts
@@ -60,33 +61,8 @@ jobs:
       - name: Build Docker Image
         run: ${{ inputs.build_command }}
 
-      - name: Install OpenVPN
-        run: |
-          sudo apt-get update
-          sudo apt-get --assume-yes --no-install-recommends install openvpn
-
-      - name: Setup VPN config
-        run: |
-          echo "${{ secrets.CA_CRT }}" > ca.crt
-          echo "${{ secrets.CLIENT_CRT }}" > client.crt
-          echo "${{ secrets.CLIENT_KEY }}" > client.key
-          echo "${{ secrets.SECRET_TEXT }}" > secret.txt
-          echo "${{ secrets.VPN_OVPN }}" > vpn.ovpn
-
-      - name: Connect VPN
-        run: sudo openvpn --config vpn.ovpn --daemon
-
-      - name: Wait for a VPN connection
-        timeout-minutes: 1
-        run: until ping -c1 192.168.0.10; do sleep 2; done
-
       - name: Push Docker Image
         run: ${{ inputs.push_command }}
-
-      - name: Kill VPN connection
-        if: always()
-        run: |
-          sudo killall openvpn
 
       - name: Update Kubernetes Manifest
         run: |
