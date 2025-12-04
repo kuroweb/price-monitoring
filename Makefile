@@ -76,3 +76,4 @@ build-auth-provider:
 
 push-auth-provider:
 	docker push $(auth_provider_tag)
+
