@@ -16,6 +16,7 @@ module Crawl
           Crawl::Client.execute do |page|
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
+              binding.pry
               json = item_json(page)
               deletable?(json) ? deletable_crawl_result : upsertable_crawl_result(json)
             end
@@ -45,12 +46,12 @@ module Crawl
         end
 
         def open?(json)
-          status = json.dig("detail", "status")
+          status = json.dig("detail", "item", "status")
           status == "open"
         end
 
         def no_bids?(json)
-          json.dig("detail", "bids").zero?
+          json.dig("detail", "item", "bids").zero?
         end
 
         def deletable_crawl_result # rubocop:disable Metrics/AbcSize
@@ -94,27 +95,27 @@ module Crawl
         end
 
         def seller_id(json)
-          json.dig("detail", "seller", "aucUserId")
+          json.dig("detail", "item", "seller", "aucUserId")
         end
 
         def name(json)
-          json.dig("detail", "title")
+          json.dig("detail", "item", "title")
         end
 
         def price(json)
-          json.dig("detail", "price")
+          json.dig("detail", "item", "price")
         end
 
         def buyout_price(json)
-          json.dig("detail", "bidorbuy")
+          json.dig("detail", "item", "bidorbuy")
         end
 
         def thumbnail_url(json)
-          json.dig("detail", "img")&.first&.[]("thumbnail")
+          json.dig("detail", "item", "img")&.first&.[]("thumbnail")
         end
 
         def end_date(json)
-          json.dig("detail", "endTime")
+          json.dig("detail", "item", "endTime")
         end
       end
     end
