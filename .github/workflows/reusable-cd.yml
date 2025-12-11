@@ -49,15 +49,6 @@ jobs:
           oauth-secret: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
           tags: tag:ci
 
-      - name: Setup Docker Registry
-        run: |
-          echo "${{ secrets.REGISTRY_IP }} registry.local" | sudo tee -a /etc/hosts
-          echo "${{ secrets.REGISTRY_CRT }}" > ~/registry.crt
-          echo "${{ secrets.REGISTRY_KEY }}" > ~/registry.key
-          sudo cp ~/registry.* /usr/local/share/ca-certificates/
-          sudo update-ca-certificates
-          sudo systemctl restart docker
-
       - name: Build Docker Image
         run: ${{ inputs.build_command }}
 
