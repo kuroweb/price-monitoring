@@ -16,7 +16,6 @@ module Crawl
           Crawl::Client.execute do |page|
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
-              binding.pry
               json = item_json(page)
               deletable?(json) ? deletable_crawl_result : upsertable_crawl_result(json)
             end
