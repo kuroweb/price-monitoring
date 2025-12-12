@@ -30,9 +30,9 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
     categoryId: categoryId === -1 ? null : categoryId,
     platformMask:
       'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all',
-    sort: 'price',
+    sort: 'updated_at',
     order: 'asc',
-    priceDisplayLimit: 10,
+    priceDisplayLimit: 20,
   })
   const productPrices = productPricesResponse.data || []
 
