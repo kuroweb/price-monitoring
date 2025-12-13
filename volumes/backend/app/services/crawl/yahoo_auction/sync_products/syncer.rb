@@ -13,11 +13,9 @@ module Crawl
         def call
           return unless yahoo_auction_crawl_setting.enabled?
 
-          YahooAuctionProduct.transaction do
-            upsert
-            inspect
-            enqueue_for_existence
-          end
+          upsert
+          inspect
+          enqueue_for_existence
         end
 
         private

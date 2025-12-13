@@ -12,11 +12,9 @@ module Crawl
       def call
         return unless janpara_crawl_setting.enabled?
 
-        JanparaProduct.transaction do
-          upsert
-          delete
-          inspect
-        end
+        upsert
+        delete
+        inspect
       end
 
       private

@@ -12,11 +12,9 @@ module Crawl
       def call
         return unless iosys_crawl_setting.enabled?
 
-        IosysProduct.transaction do
-          upsert
-          delete
-          inspect
-        end
+        upsert
+        delete
+        inspect
       end
 
       private

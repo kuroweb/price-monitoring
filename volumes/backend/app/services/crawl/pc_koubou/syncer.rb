@@ -12,11 +12,9 @@ module Crawl
       def call
         return unless pc_koubou_crawl_setting.enabled?
 
-        PcKoubouProduct.transaction do
-          upsert
-          delete
-          inspect
-        end
+        upsert
+        delete
+        inspect
       end
 
       private
