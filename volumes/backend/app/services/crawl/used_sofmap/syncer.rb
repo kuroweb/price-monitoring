@@ -12,11 +12,9 @@ module Crawl
       def call
         return unless used_sofmap_crawl_setting.enabled?
 
-        UsedSofmapProduct.transaction do
-          upsert
-          delete
-          inspect
-        end
+        upsert
+        delete
+        inspect
       end
 
       private

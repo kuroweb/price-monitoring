@@ -13,12 +13,10 @@ module Crawl
         def call
           return unless mercari_crawl_setting.enabled?
 
-          MercariProduct.transaction do
-            upsert
-            inspect
-            enqueue_for_existence
-            enqueue_for_bought_date
-          end
+          upsert
+          inspect
+          enqueue_for_existence
+          enqueue_for_bought_date
         end
 
         private
