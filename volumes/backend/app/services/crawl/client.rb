@@ -136,16 +136,14 @@ module Crawl
       end
 
       def context_options
-        # server, username, password = Proxy.get
-
         {
           userAgent: USER_AGENT,
-          # proxy: { server:, username:, password: }
-          proxy: {
-            server: ENV.fetch("PROXY_HOST"),
-            username: ENV.fetch("PROXY_USERNAME"),
-            password: ENV.fetch("PROXY_PASSWORD")
-          }
+          proxy: Proxy.get
+          # proxy: {
+          #   server: ENV.fetch("PROXY_HOST"),
+          #   username: ENV.fetch("PROXY_USERNAME"),
+          #   password: ENV.fetch("PROXY_PASSWORD")
+          # }
         }
       end
 
