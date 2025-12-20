@@ -31,7 +31,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
     platformMask:
       'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all',
     sort: 'updated_at',
-    order: 'asc',
+    order: 'desc',
     priceDisplayLimit: 20,
   })
   const productPrices = productPricesResponse.data || []
