@@ -50,6 +50,6 @@ Doorkeeper::OpenidConnect.configure do # rubocop:disable Metrics/BlockLength
 
   claims do
     normal_claim :email, &:email
-    normal_claim :name, &:name
+    # normal_claim :name, &:name  # TODO: nameカラム追加後に有効化
   end
 end
