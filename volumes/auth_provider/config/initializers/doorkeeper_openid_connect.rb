@@ -49,7 +49,12 @@ Doorkeeper::OpenidConnect.configure do # rubocop:disable Metrics/BlockLength
   expiration 600
 
   claims do
-    normal_claim :email, &:email
-    # normal_claim :name, &:name  # TODO: nameカラム追加後に有効化
+    normal_claim :email do |resource_owner|
+      resource_owner.email
+    end
+    # TODO: nameを追加する
+    # normal_claim :name do |resource_owner|
+    #   resource_owner.name
+    # end
   end
 end

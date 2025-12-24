@@ -9,9 +9,8 @@
 # Cursor
 .cursor/rules/common
 
-volumes/nginx/certs/web/*
-!volumes/nginx/certs/web/.keep
-volumes/nginx/certs/auth/*
-!volumes/nginx/certs/auth/.keep
+# credentials
+*.pem
+.env
 
 docs/draft/*

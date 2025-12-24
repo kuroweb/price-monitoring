@@ -9,6 +9,8 @@ gem "ddtrace", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
+gem "omniauth_openid_connect"
+gem "omniauth-rails_csrf_protection"
 gem "playwright-ruby-client", require: "playwright"
 gem "puma", ">= 5.0"
 gem "rack-cors"

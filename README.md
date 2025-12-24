@@ -162,23 +162,29 @@
 
     ```bash
     $ mkcert \
-      -cert-file ./volumes/nginx/certs/web/fullchain.pem \
-      -key-file ./volumes/nginx/certs/web/privkey.pem \
+      -cert-file ./volumes/nginx-web/certs/fullchain.pem \
+      -key-file ./volumes/nginx-web/certs/privkey.pem \
       dev.price-monitoring.com
     ```
 
     ```bash
     $ mkcert \
-      -cert-file ./volumes/nginx/certs/auth/fullchain.pem \
-      -key-file ./volumes/nginx/certs/auth/privkey.pem \
+      -cert-file ./volumes/nginx-auth/certs/fullchain.pem \
+      -key-file ./volumes/nginx-auth/certs/privkey.pem \
       dev.auth.price-monitoring.com
+    ```
+
+  - ループバックエイリアスを追加（TODO: just upで自動化）
+
+    ```bash
+    sudo ifconfig lo0 alias 127.0.0.2 up
     ```
 
   - /etc/hosts に以下を記述
 
     ```bash
     127.0.0.1 dev.price-monitoring.com
-    127.0.0.1 dev.auth.price-monitoring.com
+    127.0.0.2 dev.auth.price-monitoring.com
     ```
 
 - Dockerイメージビルド
@@ -200,7 +206,8 @@
   ```
 
 - ローカル環境
-  - https://dev.price-monitoring.com/
+  - メインアプリ: https://dev.price-monitoring.com/
+  - 認証プロバイダー: https://dev.auth.price-monitoring.com/
 
 ## ER
 
