@@ -41,6 +41,14 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
 
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # OmniAuth
+  get "/auth/:provider/callback", to: "sessions#create"
+  get "/auth/failure", to: "sessions#failure"
+  delete "/logout", to: "sessions#destroy"
+
+  # OIDC test page
+  get "/auth/test", to: "home#index"
+
   # TODO: ProductionでBasic認証をかける
   mount Sidekiq::Web, at: "/sidekiq"
 end
