@@ -1,7 +1,7 @@
 require "sidekiq-unique-jobs"
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: ENV.fetch("REDIS_URL") }
+  config.redis = { url: ENV.fetch("REDIS_URL", nil) }
 
   config.client_middleware do |chain|
     chain.add SidekiqUniqueJobs::Middleware::Client
@@ -15,7 +15,7 @@ Sidekiq.configure_server do |config|
 end
 
 Sidekiq.configure_client do |config|
-  config.redis = { url: ENV.fetch("REDIS_URL") }
+  config.redis = { url: ENV.fetch("REDIS_URL", nil) }
 
   config.client_middleware do |chain|
     chain.add SidekiqUniqueJobs::Middleware::Client
