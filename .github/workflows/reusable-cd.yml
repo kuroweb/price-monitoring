@@ -16,12 +16,6 @@ on:
         required: true
         type: string
     secrets:
-      REGISTRY_IP:
-        required: true
-      REGISTRY_CRT:
-        required: true
-      REGISTRY_KEY:
-        required: true
       TAILSCALE_OAUTH_CLIENT_ID:
         required: true
       TAILSCALE_OAUTH_CLIENT_SECRET:

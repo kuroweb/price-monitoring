@@ -67,9 +67,6 @@ jobs:
       push_command: "make push-backend tag_suffix=${{ github.sha }}"
       apply_command: "make apply-backend tag_suffix=${{ github.sha }}"
     secrets:
-      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
-      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
-      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
       TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
       GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
@@ -87,9 +84,6 @@ jobs:
       push_command: "make push-backend-playwright tag_suffix=${{ github.sha }}"
       apply_command: "make apply-backend-playwright tag_suffix=${{ github.sha }}"
     secrets:
-      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
-      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
-      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
       TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
       GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
@@ -107,9 +101,6 @@ jobs:
       push_command: "make push-frontend tag_suffix=${{ github.sha }}"
       apply_command: "make apply-frontend tag_suffix=${{ github.sha }}"
     secrets:
-      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
-      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
-      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
       TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
       GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
@@ -128,9 +119,6 @@ jobs:
       push_command: "make push-auth-provider tag_suffix=${{ github.sha }}"
       apply_command: "make apply-auth-provider tag_suffix=${{ github.sha }}"
     secrets:
-      REGISTRY_IP: ${{ secrets.REGISTRY_IP }}
-      REGISTRY_CRT: ${{ secrets.REGISTRY_CRT }}
-      REGISTRY_KEY: ${{ secrets.REGISTRY_KEY }}
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
       TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
       GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
