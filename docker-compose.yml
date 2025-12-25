@@ -10,7 +10,7 @@ x-backend: &backend
     DB_PASSWORD: ""
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
-    ALLOWED_ORIGINS: "nginx,dev.price-monitoring.com"
+    ALLOWED_ORIGINS: "nginx-web,dev.price-monitoring.com"
   stdin_open: true
   tty: true
   depends_on:
@@ -53,8 +53,8 @@ services:
     ports:
       - 8080:3000
     environment:
-      NEXT_PRIVATE_API_URL: "https://nginx"
-      NEXT_PUBLIC_API_URL: "https://nginx"
+      NEXT_PRIVATE_API_URL: "https://nginx-web"
+      NEXT_PUBLIC_API_URL: "https://dev.price-monitoring.com"
     stdin_open: true
     tty: true
     volumes:
