@@ -1,6 +1,5 @@
 OmniAuth.config.allowed_request_methods = %i[get post]
 
-# 開発環境では自己証明書のSSL検証をスキップ
 if Rails.env.development?
   OpenIDConnect.http_config do |config|
     config.ssl.verify = false
