@@ -12,12 +12,12 @@ Rails.application.config.middleware.use OmniAuth::Builder do
     name: :auth_provider,
     scope: %i[openid email profile],
     response_type: :code,
-    issuer: ENV.fetch("OIDC_ISSUER"),
+    issuer: ENV.fetch("OIDC_ISSUER", nil),
     discovery: true,
     client_options: {
-      identifier: ENV.fetch("OIDC_CLIENT_ID"),
-      secret: ENV.fetch("OIDC_CLIENT_SECRET"),
-      redirect_uri: ENV.fetch("OIDC_REDIRECT_URI")
+      identifier: ENV.fetch("OIDC_CLIENT_ID", nil),
+      secret: ENV.fetch("OIDC_CLIENT_SECRET", nil),
+      redirect_uri: ENV.fetch("OIDC_REDIRECT_URI", nil)
     }
   }
 end
