@@ -11,6 +11,8 @@ class SessionsController < ApplicationController
       email: auth.info.email
     }
 
+    reset_session
+
     session[:user_id] = auth.uid
     session[:user_info] = user_info
     session[:access_token] = auth.credentials.token
