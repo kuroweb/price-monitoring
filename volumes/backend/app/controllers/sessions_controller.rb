@@ -4,28 +4,18 @@ class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
-    # OmniAuthからユーザー情報を取得
     auth = request.env["omniauth.auth"]
-
-    # デバッグ用ログ
-    Rails.logger.info("OmniAuth Auth: #{auth.inspect}")
-
-    # ユーザー情報を取得
     user_info = {
       provider: auth.provider,
       uid: auth.uid,
-      email: auth.info.email,
-      name: auth.info.name
+      email: auth.info.email
     }
 
-    # セッションに保存
     session[:user_id] = auth.uid
     session[:user_info] = user_info
     session[:access_token] = auth.credentials.token
     session[:refresh_token] = auth.credentials.refresh_token
     session[:expires_at] = auth.credentials.expires_at
-
-    Rails.logger.info("Session created for user: #{user_info[:email]}")
 
     # TODO: 実際のユーザーモデルと連携する場合
     # user = User.find_or_create_by(email: auth.info.email) do |u|
