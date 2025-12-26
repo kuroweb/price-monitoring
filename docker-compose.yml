@@ -139,12 +139,15 @@ services:
       DB_DATABASE_NAME: "rails"
       DB_USER_NAME: "root"
       DB_PASSWORD: ""
+      REDIS_URL: "redis://auth-provider-redis:6379"
       ALLOWED_ORIGINS: "nginx,dev.auth.price-monitoring.com"
       DOMAIN_NAME: "dev.auth.price-monitoring.com"
     stdin_open: true
     tty: true
     depends_on:
       auth-provider-db:
+        condition: service_healthy
+      auth-provider-redis:
         condition: service_healthy
     volumes:
       - ./volumes/auth_provider:/app
@@ -156,6 +159,12 @@ services:
     <<: *mysql
     volumes:
       - auth-provider-db:/var/lib/mysql
+
+  auth-provider-redis:
+    <<: *redis
+    volumes:
+      - "auth-provider-redis:/data"
+    command: --appendonly yes
 
 volumes:
   frontend-node-modules:
@@ -176,3 +185,4 @@ volumes:
   backend-redis:
   auth-provider-bundle:
   auth-provider-db:
+  auth-provider-redis:
