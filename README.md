@@ -44,10 +44,10 @@
       Next.js
     end
 
-    subgraph Backend API
+    subgraph "Backend（BFF）"
       direction LR
 
-      rails[Rails API]
+      rails[Rails Web]
     end
 
     subgraph Backend Batch
@@ -73,7 +73,7 @@
 
   client-->nginx_web-->Next.js
   client-->nginx_auth-->rails_auth
-  nginx_web--WebAPI-->rails
+  nginx_web-->rails
   sidekiq-->playwright-->VPS
   rails-->Databases
   rails_auth-->Databases
@@ -98,10 +98,10 @@
       Next.js
     end
 
-    subgraph Backend API
+    subgraph "Backend（BFF）"
       direction LR
 
-      rails[Rails API]
+      rails[Rails Web]
     end
 
     subgraph Backend Batch
@@ -127,7 +127,7 @@
 
   client-->nginx_web-->Next.js
   client-->nginx_auth-->rails_auth
-  nginx_web--WebAPI-->rails
+  nginx_web-->rails
   sidekiq-->playwright-->VPS
   rails-->Databases
   rails_auth-->Databases
