@@ -136,15 +136,7 @@ module Crawl
       end
 
       def context_options
-        {
-          userAgent: USER_AGENT,
-          proxy: Proxy.get
-          # proxy: {
-          #   server: ENV.fetch("PROXY_HOST"),
-          #   username: ENV.fetch("PROXY_USERNAME"),
-          #   password: ENV.fetch("PROXY_PASSWORD")
-          # }
-        }
+        { userAgent: USER_AGENT, proxy: Proxy.get }
       end
 
       def blocked_request?(url)
