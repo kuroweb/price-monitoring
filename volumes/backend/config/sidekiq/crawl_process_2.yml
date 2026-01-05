@@ -1,5 +1,5 @@
 development:
-  :concurrency: 3
+  :concurrency: 1
 production:
   :concurrency: 3
 :queues:
