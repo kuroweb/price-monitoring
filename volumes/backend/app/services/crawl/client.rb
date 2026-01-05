@@ -44,6 +44,11 @@ module Crawl
       facebook.net
     ].freeze
 
+    PAYPAY_FLEAMARKET_BLOCKED_LIST = %w[
+      paypayfleamarket.c.yimg.jp
+      dsb.yahoo.co.jp
+    ].freeze
+
     JANPARA_BLOCKED_LIST = %w[
       www.janpara.co.jp/javascripts
       www.janpara.co.jp/common
@@ -143,6 +148,7 @@ module Crawl
         blocked_url?(COMMON_BLOCKED_LIST, url) \
           || blocked_url?(MERCARI_BLOCKED_LIST, url) \
           || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
+          || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url) \
           || blocked_url?(JANPARA_BLOCKED_LIST, url) \
           || blocked_url?(IOSYS_BLOCKED_LIST, url) \
           || blocked_url?(PC_KOUBOU_BLOCKED_LIST, url) \
