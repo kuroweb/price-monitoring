@@ -1,6 +1,6 @@
 development:
   :concurrency: 1
 production:
-  :concurrency: 1
+  :concurrency: 3
 :queues:
   - ['crawl_yahoo_fleamarket_sync_product_sync_job', 1]
