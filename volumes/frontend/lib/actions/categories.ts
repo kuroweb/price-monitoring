@@ -1,6 +1,6 @@
 'use server'
 
-import * as Api from '@/api'
+import * as Api from '@/lib/api'
 
 export async function getCategories(params?: Api.GetCategoriesParams) {
   return await Api.getCategories(params)

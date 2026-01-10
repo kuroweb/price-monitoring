@@ -1,6 +1,6 @@
 'use server'
 
-import * as Api from '@/api'
+import * as Api from '@/lib/api'
 import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
 export async function getProducts(params?: Api.GetProductsParams) {

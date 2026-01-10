@@ -1,6 +1,6 @@
 'use server'
 
-import * as Api from '@/api'
+import * as Api from '@/lib/api'
 
 export async function getProductPrices(params: Api.GetProductPricesParams) {
   return await Api.getProductPrices(params)

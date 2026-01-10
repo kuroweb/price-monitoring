@@ -3,7 +3,7 @@ import Link from 'next/link'
 import Layout from '@/components/layouts/Layout'
 import ProductsTable from '@/features/admin/products/components/ProductsTable'
 import { useCreateProductModalQuery } from '@/features/admin/products/components/create-product-modal/hooks/useCreateProductModalState'
-import { getCategories, getProducts } from '@/server-actions/api'
+import { getCategories, getProducts } from '@/lib/actions'
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const productResponse = await getProducts()

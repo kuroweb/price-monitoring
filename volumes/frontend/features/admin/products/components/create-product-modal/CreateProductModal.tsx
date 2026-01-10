@@ -15,10 +15,10 @@ import UsedSofmapForm from './UsedSofmapForm'
 import YahooAuctionForm from './YahooAuctionForm'
 import { useCreateProductModalState } from './hooks/useCreateProductModalState'
 
-import type { Category, CreateProductData, ProductList } from '@/api'
+import type { Category, CreateProductData, ProductList } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createProduct } from '@/server-actions/api'
+import { createProduct } from '@/lib/actions'
 
 const CreateProductModal = ({
   product,

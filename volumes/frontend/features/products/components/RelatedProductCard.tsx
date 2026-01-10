@@ -6,7 +6,7 @@ import { toast } from 'react-toastify'
 
 import { useStatusState } from '../[id]/hooks/useStatusState'
 
-import type { RelatedProduct } from '@/api'
+import type { RelatedProduct } from '@/lib/api'
 
 import {
   createIosysCrawlSettingExcludeProduct,
@@ -15,7 +15,7 @@ import {
   createPcKoubouCrawlSettingExcludeProduct,
   createUsedSofmapCrawlSettingExcludeProduct,
   createYahooAuctionCrawlSettingExcludeProduct,
-} from '@/server-actions/api'
+} from '@/lib/actions'
 
 const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct }) => {
   const router = useRouter()
