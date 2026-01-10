@@ -15,10 +15,10 @@ import UsedSofmapForm from './UsedSofmapForm'
 import YahooAuctionForm from './YahooAuctionForm'
 import { useUpdateProductModalState } from './hooks/useUpdateProductModalState'
 
-import type { Category, ProductList, UpdateProductData } from '@/api'
+import type { Category, ProductList, UpdateProductData } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { updateProduct } from '@/server-actions/api'
+import { updateProduct } from '@/lib/actions'
 
 export type copyValueType = (
   source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',

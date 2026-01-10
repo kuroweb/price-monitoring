@@ -1,4 +1,4 @@
-import type { UpdateProductData } from '@/api'
+import type { UpdateProductData } from '@/lib/api'
 import type { UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
 // 検索キーワードのコピー

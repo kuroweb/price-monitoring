@@ -8,7 +8,7 @@ import {
   copyMaxPrice,
 } from './lib/copyFields'
 
-import type { UpdateProductData } from '@/api'
+import type { UpdateProductData } from '@/lib/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 const YahooAuctionForm = ({

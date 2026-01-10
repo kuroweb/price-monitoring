@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import type { Category } from '@/api'
+import type { Category } from '@/lib/api'
 
 const CategoryNavigation = ({
   parentCategory,

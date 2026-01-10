@@ -15,7 +15,7 @@ import type {
   MercariDailyPurchaseSummary,
   YahooAuctionDailyPurchaseSummary,
   YahooFleamarketDailyPurchaseSummary,
-} from '@/api'
+} from '@/lib/api'
 
 const AnalysisChart = ({
   yahooAuctionData,

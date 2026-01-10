@@ -12,9 +12,9 @@ import { useUpdateProductModalState } from '../common/components/update-product-
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import { useCreateProductModalState } from './create-product-modal/hooks/useCreateProductModalState'
 
-import type { Category, ProductList } from '@/api'
+import type { Category, ProductList } from '@/lib/api'
 
-import { destroyProduct } from '@/server-actions/api'
+import { destroyProduct } from '@/lib/actions'
 
 interface Props {
   products: ProductList['products']

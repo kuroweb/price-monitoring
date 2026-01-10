@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import type { Category, CreateCategoryData } from '@/api'
+import type { Category, CreateCategoryData } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
 
-import { createCategory } from '@/server-actions/api'
+import { createCategory } from '@/lib/actions'
 
 const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
   const router = useRouter()

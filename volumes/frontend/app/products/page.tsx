@@ -7,8 +7,11 @@ import {
   categoryIdStateCache,
   useCategoryIdStateQuery,
 } from '@/features/products/hooks/useCategoryIdState'
-import { getCategoriesStructured, getCategoryStructuredSubtree } from '@/server-actions/api'
-import { getProductPrices } from '@/server-actions/api/productPrices'
+import {
+  getCategoriesStructured,
+  getCategoryStructuredSubtree,
+  getProductPrices,
+} from '@/lib/actions'
 
 const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const { [useCategoryIdStateQuery]: categoryId } = categoryIdStateCache.parse(searchParams)

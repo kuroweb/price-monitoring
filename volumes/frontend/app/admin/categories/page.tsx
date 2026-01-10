@@ -1,7 +1,7 @@
 import Layout from '@/components/layouts/Layout'
 import CategoriesList from '@/features/admin/categories/components/CategoriesList'
 import CreateCategoryForm from '@/features/admin/categories/components/CreateCategoryForm'
-import { getCategories, getCategoriesStructured } from '@/server-actions/api'
+import { getCategories, getCategoriesStructured } from '@/lib/actions'
 
 const Page = async () => {
   const categoriesResponse = await getCategories()

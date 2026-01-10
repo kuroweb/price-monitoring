@@ -14,7 +14,7 @@ import {
 } from '@/features/products/[id]/hooks/useStatusState'
 import { makePlatformMask } from '@/features/products/[id]/lib/makePlatformMask'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import { getProductPrice } from '@/server-actions/api/productPrices'
+import { getProductPrice } from '@/lib/actions'
 
 const Page = async ({
   params,

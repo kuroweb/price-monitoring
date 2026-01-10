@@ -8,7 +8,7 @@ import {
   copyMinPrice,
 } from './lib/copyFields'
 
-import type { CreateProductData } from '@/api'
+import type { CreateProductData } from '@/lib/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 const MercariForm = ({

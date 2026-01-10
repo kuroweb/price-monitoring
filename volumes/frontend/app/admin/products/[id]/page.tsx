@@ -5,7 +5,7 @@ import Layout from '@/components/layouts/Layout'
 import UpdateProductModal from '@/features/admin/products/common/components/update-product-modal/UpdateProductModal'
 import { useUpdateProductModalQuery } from '@/features/admin/products/common/components/update-product-modal/hooks/useUpdateProductModalState'
 import { useEditExcludeProductModalQuery } from '@/features/admin/products/components/edit-exclude-product-modal/hooks/useEditExcludeProductModalState'
-import { getCategories, getProduct } from '@/server-actions/api'
+import { getCategories, getProduct } from '@/lib/actions'
 
 const Page = async ({ params }: { params: { [key: string]: string | undefined } }) => {
   const productResponse = await getProduct(Number(params.id))

@@ -5,9 +5,9 @@ import { Fragment } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import type { GetCategoriesStructured } from '@/api'
+import type { GetCategoriesStructured } from '@/lib/api'
 
-import { destroyCategory } from '@/server-actions/api'
+import { destroyCategory } from '@/lib/actions'
 
 const CategoriesList = ({
   structuredCategories,

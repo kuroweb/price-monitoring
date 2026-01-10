@@ -8,7 +8,7 @@ import {
   copyMaxPrice,
 } from './lib/copyFields'
 
-import type { UpdateProductData } from '@/api'
+import type { UpdateProductData } from '@/lib/api'
 import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
 const UsedSofmapForm = ({
