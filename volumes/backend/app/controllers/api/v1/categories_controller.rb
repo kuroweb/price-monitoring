@@ -1,7 +1,7 @@
 module Api
   module V1
     class CategoriesController < Api::ApplicationController
-      before_action :set_category, only: %i[show structured_subtree destroy]
+      before_action :set_category, only: %i[show structured_subtree update destroy]
 
       def index
         categories = CategoryFinder.new(
@@ -38,6 +38,11 @@ module Api
         render json: category.as_json, status: :ok
       end
 
+      def update
+        ::Categories::Updater.call(category: @category, params: update_params)
+        render json: @category.as_json, status: :ok
+      end
+
       def destroy
         if @category.destroy
           render json: {}, status: :ok
@@ -65,6 +70,10 @@ module Api
       end
 
       def create_params
+        params.permit(:parent_id, :name)
+      end
+
+      def update_params
         params.permit(:parent_id, :name)
       end
 
