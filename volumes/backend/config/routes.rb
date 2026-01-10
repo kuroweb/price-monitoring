@@ -27,7 +27,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           end
         end
       end
-      resources :categories, only: %i[index show create destroy] do
+      resources :categories, only: %i[index show create update destroy] do
         collection do
           get :structured
         end
