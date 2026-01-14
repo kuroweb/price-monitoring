@@ -18,19 +18,16 @@ module Api
 
       def structured
         categories = CategoryFinder.new(
-          params: { name: structured_params[:name],
-                    root_only: structured_params[:root_only] == "true" }
+          params: { name: structured_params[:name], root_only: true }
         ).execute
 
         render json: {
-          categories: CategoryStructuredSerializer.new(categories, structured_params[:display_depth_limit])
+          categories: CategoryStructuredSerializer.new(categories).as_json
         }, status: :ok
       end
 
       def structured_subtree
-        render json: CategoryStructuredSubtreeSerializer.new(
-          @category, structured_subtree_params[:display_depth_limit]
-        ).as_json, status: :ok
+        render json: CategoryStructuredSubtreeSerializer.new(@category).as_json, status: :ok
       end
 
       def create
@@ -54,19 +51,15 @@ module Api
       private
 
       def index_params
-        params.permit(:name, :root_only, :display_depth_limit)
+        params.permit(:name, :root_only)
       end
 
       def show_params
-        params.permit(:id, :display_depth_limit)
+        params.permit(:id)
       end
 
       def structured_params
-        params.permit(:name, :root_only, :display_depth_limit)
-      end
-
-      def structured_subtree_params
-        params.permit(:display_depth_limit)
+        params.permit(:name)
       end
 
       def create_params
