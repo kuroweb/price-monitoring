@@ -33,3 +33,8 @@ export type CreateCategoryData = {
   parentId: number
   name: string
 }
+
+export type UpdateCategoryData = {
+  parentId?: number | null
+  name?: string
+}

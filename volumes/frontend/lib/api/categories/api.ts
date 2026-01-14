@@ -5,6 +5,7 @@ import type {
   GetCategoryStructuredSubtreeParams,
   GetCategoryStructuredSubtree,
   CreateCategoryData,
+  UpdateCategoryData,
   GetCategoriesStructured,
 } from './types'
 import type { Category } from '../models'
@@ -40,6 +41,13 @@ export async function getCategoryStructuredSubtree(
 export async function createCategory(data: CreateCategoryData) {
   return http<Category>(BASE_PATH, {
     method: 'POST',
+    data,
+  })
+}
+
+export async function updateCategory(categoryId: number, data: UpdateCategoryData) {
+  return http<Category>(`${BASE_PATH}/${categoryId}`, {
+    method: 'PATCH',
     data,
   })
 }

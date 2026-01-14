@@ -23,6 +23,7 @@ const Page = async () => {
             <h2 className='card-title pb-4'>カテゴリ一覧</h2>
             <CategoriesList
               structuredCategories={categoriesStructuredResponse.data?.categories || []}
+              categories={categoriesResponse.data?.categories || []}
             />
           </div>
         </div>
