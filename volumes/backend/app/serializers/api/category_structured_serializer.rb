@@ -1,8 +1,7 @@
 module Api
   class CategoryStructuredSerializer
-    def initialize(categories, display_depth_limit)
+    def initialize(categories)
       @categories = categories
-      @display_depth_limit = display_depth_limit.to_i
     end
 
     def as_json(_opts = {})
@@ -11,25 +10,13 @@ module Api
 
     private
 
-    attr_reader :categories, :display_depth_limit
+    attr_reader :categories
 
     def serialize(category)
       {
         **category.as_json.symbolize_keys,
-        children: children(category)
+        children: category.children.map { |child| serialize(child) }
       }
-    end
-
-    def children(category)
-      return [] if depth_exceeded?(category)
-
-      category.children.map { |child| serialize(child) }
-    end
-
-    def depth_exceeded?(category)
-      display_depth_limit.zero? ||
-        category.depth >= display_depth_limit ||
-        category.depth >= Category::DEPTH_LIMIT
     end
   end
 end
