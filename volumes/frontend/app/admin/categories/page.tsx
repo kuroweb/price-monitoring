@@ -7,7 +7,6 @@ const Page = async () => {
   const categoriesResponse = await getCategories()
   const categoriesStructuredResponse = await getCategoriesStructured({
     rootOnly: true,
-    displayDepthLimit: 2,
   })
 
   return (
