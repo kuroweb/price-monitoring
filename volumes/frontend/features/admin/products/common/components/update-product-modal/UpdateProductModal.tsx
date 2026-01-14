@@ -49,7 +49,7 @@ const UpdateProductModal = ({
 
   const defaultValues = {
     name: product?.name ?? '',
-    categoryId: product?.category?.id ?? categories[0].id,
+    categoryId: product?.category?.id ?? null,
     yahooAuctionCrawlSetting: {
       keyword: product?.yahooAuctionCrawlSetting?.keyword ?? '',
       categoryId: product?.yahooAuctionCrawlSetting?.categoryId ?? null,
@@ -160,7 +160,13 @@ const UpdateProductModal = ({
               <div className='label'>
                 <span className='label-text'>カテゴリ</span>
               </div>
-              <select {...register('categoryId')} className='input input-bordered'>
+              <select
+                {...register('categoryId', {
+                  setValueAs: (value) => (value === '' ? null : Number(value)),
+                })}
+                className='input input-bordered'
+              >
+                <option value=''>未設定</option>
                 {categories?.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}

@@ -91,7 +91,7 @@ export type GetProductsParams = {
 
 export type CreateProductData = {
   name: string
-  categoryId: number
+  categoryId: number | null
   yahooAuctionCrawlSetting: {
     categoryId: number | null
     enabled: boolean
@@ -146,7 +146,7 @@ export type CreateProductData = {
 
 export type UpdateProductData = {
   name: string
-  categoryId: number
+  categoryId: number | null
   yahooAuctionCrawlSetting: {
     categoryId: number | null
     enabled: boolean

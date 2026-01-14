@@ -1,6 +1,7 @@
 'use server'
 
 import * as Api from '@/lib/api'
+import { revalidateAdminCategoriesPaths } from '@/lib/revalidate-paths'
 
 export async function getCategories(params?: Api.GetCategoriesParams) {
   return await Api.getCategories(params)
@@ -18,9 +19,19 @@ export async function getCategoryStructuredSubtree(
 }
 
 export async function createCategory(data: Api.CreateCategoryData) {
-  return await Api.createCategory(data)
+  const result = await Api.createCategory(data)
+  revalidateAdminCategoriesPaths()
+  return result
+}
+
+export async function updateCategory(categoryId: number, data: Api.UpdateCategoryData) {
+  const result = await Api.updateCategory(categoryId, data)
+  revalidateAdminCategoriesPaths()
+  return result
 }
 
 export async function destroyCategory(categoryId: number) {
-  return await Api.destroyCategory(categoryId)
+  const result = await Api.destroyCategory(categoryId)
+  revalidateAdminCategoriesPaths()
+  return result
 }
