@@ -61,6 +61,11 @@ module Products
       end
 
       def update_category_association
+        if params[:category_id].blank?
+          product.product_category_map&.destroy
+          return
+        end
+
         category = Category.find(params[:category_id])
         product.category = category
       end

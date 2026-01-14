@@ -60,6 +60,8 @@ module Products
       end
 
       def create_category_association(product)
+        return if params[:category_id].blank?
+
         category = Category.find(params[:category_id])
         product.category = category
       end
