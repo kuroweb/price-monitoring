@@ -10,12 +10,10 @@ export type GetCategories = {
 
 export type GetCategoriesStructuredParams = {
   rootOnly?: boolean
-  displayDepthLimit?: number
 }
 
 export type GetCategoryStructuredSubtreeParams = {
   rootOnly?: boolean
-  displayDepthLimit?: number
 }
 
 export type GetCategoriesStructured = {

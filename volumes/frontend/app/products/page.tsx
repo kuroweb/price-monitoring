@@ -18,12 +18,12 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
 
   let currentCategory, parentCategory, childCategories
   if (categoryId === -1) {
-    const response = await getCategoriesStructured({ rootOnly: true, displayDepthLimit: 0 })
+    const response = await getCategoriesStructured({ rootOnly: true })
     currentCategory = undefined
     parentCategory = undefined
     childCategories = response.data?.categories || []
   } else {
-    const response = await getCategoryStructuredSubtree(categoryId, { displayDepthLimit: 1 })
+    const response = await getCategoryStructuredSubtree(categoryId)
     currentCategory = response.data || undefined
     parentCategory = response.data?.parent || undefined
     childCategories = response.data?.children || []
