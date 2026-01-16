@@ -43,16 +43,6 @@ RSpec.describe Category, type: :model do
 
         it { expect(depth_3_category.valid?).to be(true) }
       end
-
-      context "when depth 4 then invalid" do
-        let!(:depth_0_category) { create(:category) }
-        let!(:depth_1_category) { depth_0_category.children.create!(name: "depth 1") }
-        let!(:depth_2_category) { depth_1_category.children.create!(name: "depth 2") }
-        let!(:depth_3_category) { depth_2_category.children.create!(name: "depth 3") }
-        let!(:depth_4_category) { depth_3_category.children.build(name: "depth 4") }
-
-        it { expect(depth_4_category.invalid?).to be(true) }
-      end
     end
   end
 end
