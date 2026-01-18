@@ -132,7 +132,7 @@
       <p>Please log in to test the OIDC authentication flow.</p>
     </div>
     <div class="actions">
-      <%= link_to "Login with Auth Provider", "/auth/auth_provider", class: "btn btn-primary" %>
+      <%= link_to "Login with Auth Provider", "/auth/auth_provider", class: "btn btn-primary", data: { turbo: false } %>
     </div>
   <% end %>
   <hr style="margin: 40px 0;">
