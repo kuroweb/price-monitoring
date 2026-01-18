@@ -49,12 +49,11 @@ Doorkeeper::OpenidConnect.configure do # rubocop:disable Metrics/BlockLength
   expiration 600
 
   claims do
-    normal_claim :email do |resource_owner|
+    normal_claim :email do |resource_owner| # rubocop:disable Style/SymbolProc
       resource_owner.email
     end
-    # TODO: nameを追加する
-    # normal_claim :name do |resource_owner|
-    #   resource_owner.name
-    # end
+    normal_claim :name do |resource_owner| # rubocop:disable Style/SymbolProc
+      resource_owner.name
+    end
   end
 end

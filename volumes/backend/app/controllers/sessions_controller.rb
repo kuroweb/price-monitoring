@@ -3,12 +3,13 @@
 class SessionsController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     auth = request.env["omniauth.auth"]
     user_info = {
       provider: auth.provider,
       uid: auth.uid,
-      email: auth.info.email
+      email: auth.info.email,
+      name: auth.info.name
     }
 
     reset_session
