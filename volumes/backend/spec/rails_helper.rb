@@ -39,6 +39,11 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
+  # Bugsnagへのリクエストをデフォルトでモック
+  config.before do
+    stub_request(:post, "https://notify.bugsnag.com/").to_return(status: 200)
+  end
+
   # Request Specでsessionを利用できるようにする
   config.before(:each, type: :request) do
     # let(:rspec_session) で指定された値をセッションの初期値とする
