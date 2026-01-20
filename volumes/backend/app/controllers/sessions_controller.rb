@@ -7,28 +7,21 @@ class SessionsController < ApplicationController
 
   def create # rubocop:disable Metrics/AbcSize
     auth = request.env["omniauth.auth"]
-    user_info = {
-      provider: auth.provider,
-      uid: auth.uid,
-      email: auth.info.email,
-      name: auth.info.name
-    }
+    user = User.find_or_create_by!(
+      provider_name: User::ProviderName::AUTH_PROVIDER,
+      provider_uid: auth.uid
+    ) do |u|
+      u.name = auth.info.name
+      u.email = auth.info.email
+    end
 
     reset_session
-
-    session[:user_id] = auth.uid
-    session[:user_info] = user_info
+    session[:user_id] = user.id
     session[:access_token] = auth.credentials.token
     session[:refresh_token] = auth.credentials.refresh_token
     session[:expires_at] = Time.current.to_i + auth.credentials.expires_in
 
-    # TODO: 実際のユーザーモデルと連携する場合
-    # user = User.find_or_create_by(email: auth.info.email) do |u|
-    #   u.name = auth.info.name if auth.info.name
-    # end
-    # session[:user_id] = user.id
-
-    redirect_to "/auth/test", notice: "Logged in successfully as #{user_info[:email]}"
+    redirect_to "/auth/test", notice: "Logged in successfully as #{user.email}"
   end
 
   def failure

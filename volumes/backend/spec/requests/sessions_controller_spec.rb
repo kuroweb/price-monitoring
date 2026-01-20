@@ -2,25 +2,8 @@ require "rails_helper"
 
 RSpec.describe SessionsController, type: :request do
   describe "DELETE /logout" do
-    let(:user_info) do
-      {
-        email: "test@example.com",
-        name: "Test User",
-        provider: "auth_provider",
-        uid: "user_123"
-      }
-    end
-
     context "有効なトークンでログインしている場合" do
-      before do
-        get "/auth/test"
-        session = request.session
-        session[:user_id] = "user_123"
-        session[:user_info] = user_info
-        session[:access_token] = "test_access_token"
-        session[:refresh_token] = "test_refresh_token"
-        session[:expires_at] = 1.hour.from_now.to_i
-      end
+      login_with_session
 
       it "アクセストークンとリフレッシュトークンを失効させること" do
         stub_revoke = stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
@@ -57,15 +40,7 @@ RSpec.describe SessionsController, type: :request do
     end
 
     context "トークン失効が失敗した場合" do
-      before do
-        get "/auth/test"
-        session = request.session
-        session[:user_id] = "user_123"
-        session[:user_info] = user_info
-        session[:access_token] = "test_access_token"
-        session[:refresh_token] = "test_refresh_token"
-        session[:expires_at] = 1.hour.from_now.to_i
-      end
+      login_with_session
 
       it "失効に失敗してもセッションを削除すること" do
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
@@ -89,14 +64,7 @@ RSpec.describe SessionsController, type: :request do
     end
 
     context "リフレッシュトークンなしでログインしている場合" do
-      before do
-        get "/auth/test"
-        session = request.session
-        session[:user_id] = "user_123"
-        session[:user_info] = user_info
-        session[:access_token] = "test_access_token"
-        session[:expires_at] = 1.hour.from_now.to_i
-      end
+      login_with_session(refresh_token: nil)
 
       it "アクセストークンのみを失効させること" do
         stub_revoke = stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
