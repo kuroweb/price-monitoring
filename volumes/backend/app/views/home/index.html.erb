@@ -101,15 +101,17 @@
       <h3>User Information</h3>
       <dl>
         <dt>Provider:</dt>
-        <dd><%= current_user&.dig(:provider) || current_user&.[]('provider') %></dd>
-        <dt>User ID (sub):</dt>
-        <dd><%= current_user&.dig(:uid) || current_user&.[]('uid') %></dd>
+        <dd><%= current_user&.provider_name %></dd>
+        <dt>Provider User ID:</dt>
+        <dd><%= current_user&.provider_uid %></dd>
         <dt>Email:</dt>
-        <dd><%= current_user&.dig(:email) || current_user&.[]('email') %></dd>
-        <% if current_user&.dig(:name) || current_user&.[]('name') %>
+        <dd><%= current_user&.email %></dd>
+        <% if current_user&.name %>
           <dt>Name:</dt>
-          <dd><%= current_user&.dig(:name) || current_user&.[]('name') %></dd>
+          <dd><%= current_user&.name %></dd>
         <% end %>
+        <dt>Database ID:</dt>
+        <dd><%= current_user&.id %></dd>
       </dl>
     </div>
     <div class="user-info">

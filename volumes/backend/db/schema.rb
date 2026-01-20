@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
+ActiveRecord::Schema[7.1].define(version: 2026_01_20_162658) do
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.integer "parent_id"
@@ -315,6 +315,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_001708) do
     t.text "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "provider_name", default: "", null: false
+    t.string "provider_uid", default: "", null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["provider_name", "provider_uid"], name: "index_users_on_provider_name_and_provider_uid", unique: true
   end
 
   create_table "yahoo_auction_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
