@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
     session[:user_info] = user_info
     session[:access_token] = auth.credentials.token
     session[:refresh_token] = auth.credentials.refresh_token
-    session[:expires_at] = auth.credentials.expires_at
+    session[:expires_at] = Time.current.to_i + auth.credentials.expires_in
 
     # TODO: 実際のユーザーモデルと連携する場合
     # user = User.find_or_create_by(email: auth.info.email) do |u|

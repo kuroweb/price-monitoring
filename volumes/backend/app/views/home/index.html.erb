@@ -121,6 +121,20 @@
         <dd><%= session[:refresh_token]&.first(20) %>...</dd>
         <dt>Token Expires At:</dt>
         <dd><%= Time.at(session[:expires_at]).to_s if session[:expires_at] %></dd>
+        <% if session[:expires_at] %>
+          <dt>Time Until Expiration:</dt>
+          <dd>
+            <% remaining_seconds = session[:expires_at] - Time.current.to_i %>
+            <% if remaining_seconds > 0 %>
+              <%= Time.at(remaining_seconds).utc.strftime("%H:%M:%S") %>
+              <% if remaining_seconds < 300 %>
+                <span style="color: red;">(Expiring soon!)</span>
+              <% end %>
+            <% else %>
+              <span style="color: red;">Expired</span>
+            <% end %>
+          </dd>
+        <% end %>
       </dl>
     </div>
     <div class="actions">

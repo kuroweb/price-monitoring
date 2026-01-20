@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::Base
+  include OidcTokenControl
+
+  before_action :auto_refresh_oidc_token, if: :logged_in?
+
   helper_method :current_user, :logged_in?
 
   private
