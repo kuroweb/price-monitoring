@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  include OidcTokenControl
+
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create # rubocop:disable Metrics/AbcSize
@@ -36,29 +38,31 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    user_email = session.dig(:user_info, :email)
-
-    # TODO: OPのトークン無効化（将来実装）
-    # if session[:access_token]
-    #   revoke_token(session[:access_token])
-    # end
-
+    revoke_tokens if session[:access_token].present?
     reset_session
-
-    Rails.logger.info("Session destroyed for user: #{user_email}")
+    redirect_to "/auth/test", notice: "Logged out successfully"
+  rescue StandardError => e
+    Bugsnag.notify(e)
+    reset_session
     redirect_to "/auth/test", notice: "Logged out successfully"
   end
 
   private
 
-  # TODO: 将来実装
-  # def revoke_token(token)
-  #   uri = URI("#{ENV['OIDC_ISSUER']}/oauth/revoke")
-  #   response = Net::HTTP.post_form(uri,
-  #     'token' => token,
-  #     'client_id' => ENV['OIDC_CLIENT_ID'],
-  #     'client_secret' => ENV['OIDC_CLIENT_SECRET']
-  #   )
-  #   Rails.logger.info("Token revocation response: #{response.code}")
-  # end
+  def revoke_tokens
+    revoke_token(session[:access_token], "access_token")
+    revoke_token(session[:refresh_token], "refresh_token") if session[:refresh_token].present?
+  end
+
+  def revoke_token(token, token_type_hint)
+    oidc_http_client.post(
+      "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke",
+      {
+        token: token,
+        token_type_hint: token_type_hint,
+        client_id: ENV.fetch("OIDC_CLIENT_ID", nil),
+        client_secret: ENV.fetch("OIDC_CLIENT_SECRET", nil)
+      }
+    )
+  end
 end
