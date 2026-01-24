@@ -35,7 +35,6 @@
   subgraph Docker Compose
     subgraph proxy
       nginx_web[Nginx Web]
-      nginx_auth[Nginx Auth]
     end
 
     subgraph Frontend
@@ -57,14 +56,14 @@
       playwright[Playwright]
     end
 
-    subgraph OpenID Provider
-      rails_auth[Rails Web]
-    end
-
     subgraph Databases
       mysql[(MySQL)]
       redis[(Redis)]
     end
+  end
+
+  subgraph "Docker Compose"
+    auth_provider["OpenID Provider<br>（auth-providerリポジトリ）"]
   end
 
   subgraph VPS
@@ -72,11 +71,10 @@
   end
 
   client-->nginx_web-->Next.js
-  client-->nginx_auth-->rails_auth
   nginx_web-->rails
+  rails-->|OIDC|auth_provider
   sidekiq-->playwright-->VPS
   rails-->Databases
-  rails_auth-->Databases
   sidekiq-->Databases
   ```
 
@@ -89,7 +87,6 @@
   subgraph Kubernetest Node
     subgraph Ingress Controller
       nginx_web[Nginx Web]
-      nginx_auth[Nginx Auth]
     end
 
     subgraph Frontend
@@ -111,14 +108,14 @@
       playwright[Playwright]
     end
 
-    subgraph OpenID Provider
-      rails_auth[Rails Web]
-    end
-
     subgraph Databases
       mysql[(MySQL)]
       redis[(Redis)]
     end
+  end
+
+  subgraph Kubernetest Node
+    auth_provider["OpenID Provider<br>（auth-providerリポジトリ）"]
   end
 
   subgraph VPS
@@ -126,11 +123,10 @@
   end
 
   client-->nginx_web-->Next.js
-  client-->nginx_auth-->rails_auth
   nginx_web-->rails
+  rails-->|OIDC|auth_provider
   sidekiq-->playwright-->VPS
   rails-->Databases
-  rails_auth-->Databases
   sidekiq-->Databases
   ```
 
