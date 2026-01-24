@@ -47,12 +47,13 @@
 - `app/finders/`: 検索クエリロジック
 - `spec/`: RSpecテスト
 
-### Auth Provider (`volumes/auth_provider/`)
+### Auth Provider (別リポジトリ: `auth-provider/`)
 
 **Pattern**: Rails + Devise + Doorkeeper
 
-- OpenID Connect Provider
+- OpenID Connect Provider（別リポジトリで管理）
 - ユーザー認証・セッション管理
+- 本リポジトリ（price-monitoring）とは独立したデプロイ
 
 ## Naming Conventions
 
@@ -61,7 +62,7 @@
 - **ファイル**: PascalCase（コンポーネント）、camelCase（hooks/lib）
 - **コンポーネント**: `{Feature}{Component}.tsx`
 - **フック**: `use{State/Action}.ts`
-- **型定義**: `types.ts` にまとめる
+- **型定義**: 機能固有は `lib/api/{feature}/types.ts`、共通は `types/` ディレクトリ
 
 ### Backend
 
@@ -112,3 +113,5 @@ end
 
 ---
 _Document patterns, not file trees. New files following patterns shouldn't require updates_
+
+_Updated: 2026-01-25 - Auth Provider リポジトリ分離の明確化、型定義パターン追記_
