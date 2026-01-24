@@ -16,10 +16,10 @@ tag_suffix := $(shell git rev-parse --short HEAD)
 all: build-all push-all
 
 # Dockerイメージをビルドする
-build-all: build-backend build-backend-playwright build-frontend build-auth-provider
+build-all: build-backend build-backend-playwright build-frontend
 
 # Dockerイメージをプッシュする
-push-all: push-backend push-backend-playwright push-frontend push-auth-provider
+push-all: push-backend push-backend-playwright push-frontend
 
 #
 # backend
@@ -62,17 +62,3 @@ build-frontend:
 
 push-frontend:
 	docker push $(frontend_tag)
-
-#
-# auth-provider
-#
-
-auth_provider_tag := $(registry)/$(project)-auth-provider:$(tag_suffix)
-
-build-auth-provider:
-	docker build \
-	-t $(auth_provider_tag) \
-	-f containers/auth_provider/Dockerfile.prod volumes/auth_provider
-
-push-auth-provider:
-	docker push $(auth_provider_tag)

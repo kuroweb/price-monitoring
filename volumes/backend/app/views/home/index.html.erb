@@ -156,7 +156,7 @@
     <h3>OIDC Configuration</h3>
     <dl>
       <dt>Issuer:</dt>
-      <dd><%= ENV.fetch('OIDC_ISSUER', 'https://dev.auth.price-monitoring.com') %></dd>
+      <dd><%= ENV.fetch('OIDC_ISSUER', nil) %></dd>
       <dt>Client ID:</dt>
       <dd><%= ENV['OIDC_CLIENT_ID'] ? "Configured (#{ENV['OIDC_CLIENT_ID'][0..10]}...)" : "Not configured" %></dd>
       <dt>Scopes:</dt>
