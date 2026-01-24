@@ -65,6 +65,9 @@ services:
     <<: *backend
     ports:
       - 3000:3000
+    networks:
+      - default
+      - shared
 
   backend-batch-1:
     <<: *backend
@@ -114,58 +117,6 @@ services:
       - frontend
     restart: unless-stopped
 
-  nginx-auth:
-    image: nginx:latest
-    ports:
-      - "127.0.0.2:443:443"
-    volumes:
-      - ./volumes/nginx-auth/conf.d:/etc/nginx/conf.d:ro
-      - ./volumes/nginx-auth/certs:/etc/nginx/certs:ro
-    depends_on:
-      - auth-provider
-    restart: unless-stopped
-    networks:
-      default:
-        aliases:
-          - dev.auth.price-monitoring.com
-
-  auth-provider:
-    build:
-      context: .
-      dockerfile: containers/auth_provider/Dockerfile
-    env_file: .env
-    environment:
-      DB_HOST_NAME: "auth-provider-db"
-      DB_DATABASE_NAME: "rails"
-      DB_USER_NAME: "root"
-      DB_PASSWORD: ""
-      REDIS_URL: "redis://auth-provider-redis:6379"
-      ALLOWED_ORIGINS: "nginx,dev.auth.price-monitoring.com"
-      DOMAIN_NAME: "dev.auth.price-monitoring.com"
-    stdin_open: true
-    tty: true
-    depends_on:
-      auth-provider-db:
-        condition: service_healthy
-      auth-provider-redis:
-        condition: service_healthy
-    volumes:
-      - ./volumes/auth_provider:/app
-      - auth-provider-bundle:/usr/local/bundle
-    ports:
-      - 5050:3000
-
-  auth-provider-db:
-    <<: *mysql
-    volumes:
-      - auth-provider-db:/var/lib/mysql
-
-  auth-provider-redis:
-    <<: *redis
-    volumes:
-      - "auth-provider-redis:/data"
-    command: --appendonly yes
-
 volumes:
   frontend-node-modules:
     driver: local
@@ -183,6 +134,7 @@ volumes:
   #     o: bind
   backend-db:
   backend-redis:
-  auth-provider-bundle:
-  auth-provider-db:
-  auth-provider-redis:
+
+networks:
+  shared:
+    name: shared-network
