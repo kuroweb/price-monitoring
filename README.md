@@ -132,20 +132,6 @@
 
 ## セットアップ手順
 
-- OpenID Provider(auth_providerコンテナ)の秘密鍵を作成
-
-  - opensslをインストール（環境差異の大きなライブラリなので参考程度）
-
-    ```bash
-    $ brew install openssl
-    ```
-
-  - 秘密鍵を作成
-
-    ```bash
-    $ openssl genrsa -out volumes/auth_provider/certs/private.pem 2048
-    ```
-
 - nginx用の証明書発行
   - mkcertをインストール
 
@@ -163,24 +149,10 @@
       dev.price-monitoring.com
     ```
 
-    ```bash
-    $ mkcert \
-      -cert-file ./volumes/nginx-auth/certs/fullchain.pem \
-      -key-file ./volumes/nginx-auth/certs/privkey.pem \
-      dev.auth.price-monitoring.com
-    ```
-
-  - ループバックエイリアスを追加（TODO: just upで自動化）
-
-    ```bash
-    sudo ifconfig lo0 alias 127.0.0.2 up
-    ```
-
   - /etc/hosts に以下を記述
 
     ```bash
     127.0.0.1 dev.price-monitoring.com
-    127.0.0.2 dev.auth.price-monitoring.com
     ```
 
 - Dockerイメージビルド
