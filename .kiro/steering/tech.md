@@ -35,7 +35,7 @@
 - axios: HTTP クライアント
 - react-hook-form: フォーム管理
 - nuqs: URL クエリ状態管理
-- recharts: チャート描画
+- recharts: チャート描画（開発用依存）
 - react-toastify: 通知
 
 ### Backend
@@ -43,6 +43,7 @@
 - sidekiq / sidekiq-cron: ジョブ処理
 - playwright-ruby-client: Webスクレイピング
 - omniauth_openid_connect: OIDC認証
+- redis-session-store: Redisベースセッション管理
 - closure_tree: 階層構造カテゴリ
 - ddtrace / bugsnag: 監視・エラートラッキング
 
@@ -105,3 +106,5 @@ just attach {container-name}
 
 ---
 _Document standards and patterns, not every dependency_
+
+_Updated: 2026-01-25 - redis-session-store追加、recharts依存タイプ修正_
