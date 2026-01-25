@@ -13,7 +13,4 @@
 *.pem
 .env
 
-# Cursor
-.cursor/**/common
-
 docs/draft/*
