@@ -1,9 +1,9 @@
-if Rails.env.production?
+if Rails.env.production? || Rails.env.integration?
   require "ddtrace"
 
   Datadog.configure do |c|
     app = "price-monitoring"
-    env = "production"
+    env = Rails.env.production? ? "production" : "integration"
 
     c.env = env
     c.tags = { app:, env: }
