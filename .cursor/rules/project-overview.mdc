@@ -134,6 +134,9 @@ Batch Processing:
 
 ## CI/CD Pipeline
 
+- **本番**: `master` ブランチの push で price-monitoring / auth-provider の本番 namespace にデプロイ
+- **Integration**: `develop` ブランチの push で price-monitoring-integration / auth-provider-integration にデプロイ
+
 ```mermaid
 sequenceDiagram
   participant dev as Developer
@@ -190,6 +193,15 @@ graph LR
 | ArgoCD | https://argocd.kuroweb.net |
 | Longhorn | https://longhorn.kuroweb.net |
 | Portainer | https://portainer.kuroweb.net |
+
+### Integration
+
+| サービス | URL |
+| -- | -- |
+| price-monitoring | https://integration.price-monitoring.kuroweb.net |
+| Auth Provider | https://integration.auth-provider.kuroweb.net |
+
+- デプロイ: `develop` ブランチの push で integration に自動デプロイ。本番（`master`）は従来どおり。
 
 ### Development
 
