@@ -59,8 +59,8 @@ jobs:
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring-integration"
-      build_command: "make build-backend tag_suffix=${{ github.sha }}"
-      push_command: "make push-backend tag_suffix=${{ github.sha }}"
+      build_command: "make build-backend tag_suffix=${{ github.sha }} environment=integration"
+      push_command: "make push-backend tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make apply-backend tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
@@ -76,8 +76,8 @@ jobs:
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring-integration"
-      build_command: "make build-backend-playwright tag_suffix=${{ github.sha }}"
-      push_command: "make push-backend-playwright tag_suffix=${{ github.sha }}"
+      build_command: "make build-backend-playwright tag_suffix=${{ github.sha }} environment=integration"
+      push_command: "make push-backend-playwright tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make apply-backend-playwright tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
@@ -93,8 +93,8 @@ jobs:
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring-integration"
-      build_command: "make build-frontend tag_suffix=${{ github.sha }}"
-      push_command: "make push-frontend tag_suffix=${{ github.sha }}"
+      build_command: "make build-frontend tag_suffix=${{ github.sha }} environment=integration"
+      push_command: "make push-frontend tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make apply-frontend tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}

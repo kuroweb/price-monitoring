@@ -7,6 +7,7 @@
 registry := docker-registry.kuroweb.net
 project := price-monitoring
 tag_suffix := $(shell git rev-parse --short HEAD)
+environment ?= production
 
 #
 # util
@@ -25,12 +26,13 @@ push-all: push-backend push-backend-playwright push-frontend
 # backend
 #
 
-backend_tag := $(registry)/$(project)-backend:$(tag_suffix)
+backend_tag := $(registry)/$(project)-backend-$(environment):$(tag_suffix)
+backend_dockerfile := containers/backend/Dockerfile.$(environment)
 
 build-backend:
 	docker build \
 	-t $(backend_tag) \
-	-f containers/backend/Dockerfile.prod volumes/backend
+	-f $(backend_dockerfile) volumes/backend
 
 push-backend:
 	docker push $(backend_tag)
@@ -39,12 +41,13 @@ push-backend:
 # playwright
 #
 
-backend_playwright_tag := $(registry)/$(project)-backend-playwright:$(tag_suffix)
+backend_playwright_tag := $(registry)/$(project)-backend-playwright-$(environment):$(tag_suffix)
+backend_playwright_dockerfile := containers/backend_playwright/Dockerfile.$(environment)
 
 build-backend-playwright:
 	docker build \
 	-t $(backend_playwright_tag) \
-	-f containers/backend_playwright/Dockerfile .
+	-f $(backend_playwright_dockerfile) .
 
 push-backend-playwright:
 	docker push $(backend_playwright_tag)
@@ -53,12 +56,13 @@ push-backend-playwright:
 # frontend
 #
 
-frontend_tag := $(registry)/$(project)-frontend:$(tag_suffix)
+frontend_tag := $(registry)/$(project)-frontend-$(environment):$(tag_suffix)
+frontend_dockerfile := containers/frontend/Dockerfile.$(environment)
 
 build-frontend:
 	docker build \
 	-t $(frontend_tag) \
-	-f containers/frontend/Dockerfile.prod volumes/frontend
+	-f $(frontend_dockerfile) volumes/frontend
 
 push-frontend:
 	docker push $(frontend_tag)
