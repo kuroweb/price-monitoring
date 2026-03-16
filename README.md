@@ -1,6 +1,6 @@
 # price-monitoring
 
-[![CI/CD](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd.yml)
+[![CI/CD (Integration)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-integration.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-integration.yml) [![CI/CD (Production)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-production.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-production.yml)
 
 - Web上にある商品の最安値を探したり、相場を把握するためのツール
 - Rails, TypeScriptのキャッチアップが主な開発目的
