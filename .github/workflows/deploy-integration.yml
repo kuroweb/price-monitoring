@@ -34,9 +34,9 @@ jobs:
           git config --global user.name "${{ secrets.GIT_COMMIT_USER }}"
           git config --global user.email "${{ secrets.GIT_COMMIT_EMAIL }}"
           git clone https://${{ secrets.GIT_REPO_USER }}:${{ secrets.GIT_TOKEN }}@github.com/${{ secrets.GIT_REPO_USER }}/k8s
-          cd k8s/manifests/price-monitoring-integration
-          make apply-backend tag_suffix=${{ github.sha }}
-          make apply-backend-playwright tag_suffix=${{ github.sha }}
-          make apply-frontend tag_suffix=${{ github.sha }}
+          cd k8s/manifests/price-monitoring
+          make update-image ENV=integration IMAGE=price-monitoring-backend tag_suffix=${{ github.sha }}
+          make update-image ENV=integration IMAGE=price-monitoring-backend-playwright tag_suffix=${{ github.sha }}
+          make update-image ENV=integration IMAGE=price-monitoring-frontend tag_suffix=${{ github.sha }}
           make commit
           make push
