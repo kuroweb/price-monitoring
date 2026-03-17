@@ -11,6 +11,15 @@ import type { Category } from '@/lib/api'
 
 import { updateCategory } from '@/lib/actions'
 
+const normalizeParentId = (value: unknown): number | null => {
+  if (value === '' || value === null || value === undefined) return null
+
+  const id = Number(value)
+  if (!Number.isInteger(id) || id <= 0) return null
+
+  return id
+}
+
 const UpdateCategoryModal = ({
   category,
   categories,
@@ -46,7 +55,7 @@ const UpdateCategoryModal = ({
 
     const result = await updateCategory(category.id, {
       name: data.name,
-      parentId: data.parentId,
+      parentId: normalizeParentId(data.parentId),
     })
 
     if (result.status === 200) {
@@ -88,7 +97,7 @@ const UpdateCategoryModal = ({
               </div>
               <select
                 {...register('parentId', {
-                  setValueAs: (v) => (v === '' ? null : Number(v)),
+                  setValueAs: normalizeParentId,
                 })}
                 className='input input-bordered'
               >

@@ -9,6 +9,15 @@ import type { SubmitHandler } from 'react-hook-form'
 
 import { createCategory } from '@/lib/actions'
 
+const normalizeParentId = (value: unknown): number | null => {
+  if (value === '' || value === null || value === undefined) return null
+
+  const id = Number(value)
+  if (!Number.isInteger(id) || id <= 0) return null
+
+  return id
+}
+
 const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
   const router = useRouter()
   const { register, handleSubmit } = useForm<CreateCategoryData>()
@@ -31,7 +40,12 @@ const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
           <div className='label'>
             <span className='label-text'>親カテゴリ</span>
           </div>
-          <select {...register('parentId')} className='input input-bordered'>
+          <select
+            {...register('parentId', {
+              setValueAs: normalizeParentId,
+            })}
+            className='input input-bordered'
+          >
             <option value=''>なし</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>
