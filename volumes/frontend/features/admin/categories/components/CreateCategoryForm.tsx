@@ -10,12 +10,8 @@ import type { SubmitHandler } from 'react-hook-form'
 import { createCategory } from '@/lib/actions'
 
 const normalizeParentId = (value: unknown): number | null => {
-  if (value === '' || value === null || value === undefined) return null
-
   const id = Number(value)
-  if (!Number.isInteger(id) || id <= 0) return null
-
-  return id
+  return Number.isInteger(id) && id > 0 ? id : null
 }
 
 const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
