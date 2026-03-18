@@ -31,7 +31,15 @@ const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
           <div className='label'>
             <span className='label-text'>親カテゴリ</span>
           </div>
-          <select {...register('parentId')} className='input input-bordered'>
+          <select
+            {...register('parentId', {
+              setValueAs: (value) => {
+                const id = Number(value)
+                return Number.isInteger(id) && id > 0 ? id : null
+              },
+            })}
+            className='input input-bordered'
+          >
             <option value=''>なし</option>
             {categories.map((category) => (
               <option key={category.id} value={category.id}>

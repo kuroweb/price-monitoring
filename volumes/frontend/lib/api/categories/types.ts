@@ -28,7 +28,7 @@ export type GetCategoryStructuredSubtree = Category & {
 }
 
 export type CreateCategoryData = {
-  parentId: number
+  parentId?: number | null
   name: string
 }
 
