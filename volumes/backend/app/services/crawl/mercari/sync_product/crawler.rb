@@ -102,11 +102,13 @@ module Crawl
         end
 
         def bought_date(page)
-          date_str = page.query_selector("[data-testid='item-detail-container']")
-                         .query_selector_all("[class*='merText'][class*='body'][class*='secondary']")
-                         .find { |dom| TIME_UNITS.any? { |i| dom.inner_text&.include?(i) } }
-                         .inner_text
-          parse_bought_date(date_str)
+          area = page.query_selector("[data-testid='item-detail-container'] div[aligncontent='start']:has(svg)")
+          return nil unless area
+
+          text = area.inner_text.strip
+          return nil unless text.present? && TIME_UNITS.any? { |u| text.include?(u) } && text.length < 20
+
+          parse_bought_date(text)
         end
 
         def parse_bought_date(date_str)
