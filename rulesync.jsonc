@@ -1,0 +1,15 @@
+{
+  "targets": [
+    "cursor",
+    "claudecode",
+    "codexcli",
+    "geminicli"
+  ],
+  "features": [
+    "rules"
+  ],
+  "baseDirs": [
+    "."
+  ],
+  "delete": true
+}
