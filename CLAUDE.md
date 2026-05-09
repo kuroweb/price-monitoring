@@ -1,288 +1,79 @@
 # Project Overview
 
-- ワークスペース全体のプロジェクト概要
-- 5つのリポジトリで構成されるホームラボ環境
-
-## Workspace Structure
-
-| リポジトリ | 説明 | 主な内容 |
-| -- | -- | -- |
-| `price-monitoring` | メインアプリケーション | 価格監視Webアプリ（Frontend/Backend） |
-| `auth-provider` | 認証プロバイダー | OpenID Connect Provider（Rails + Devise + Doorkeeper） |
-| `infra` | インフラ設定管理 | Ansible Playbooks、サーバー設定ファイル、セットアップ手順 |
-| `k8s` | Kubernetesマニフェスト | 本番環境のk8sリソース定義（GitOps） |
-| `k8s-secret` | シークレット管理 | 公開できないSecretリソース（プライベートリポジトリ） |
-
-## System Architecture
-
-```mermaid
-graph TB
-  subgraph "開発環境"
-    docker[Docker Compose]
-  end
-
-  subgraph "本番環境 - 自宅Kubernetes"
-    subgraph "Control Plane"
-      master1[master-1<br/>10.15.100.10]
-    end
-
-    subgraph "Worker Nodes"
-      worker1[worker-1<br/>10.15.100.11]
-      worker2[worker-2<br/>10.15.100.12]
-      worker3[worker-3<br/>10.15.200.10]
-    end
-
-    subgraph "Infrastructure Components"
-      argocd[ArgoCD]
-      longhorn[Longhorn]
-      metallb[MetalLB]
-      cilium[Cilium CNI]
-      ingress[Ingress NGINX]
-    end
-
-    subgraph "Application Stack"
-      frontend[Next.js]
-      backend[Rails API]
-      sidekiq[Sidekiq]
-      playwright[Playwright]
-      auth[Auth Provider]
-    end
-
-    subgraph "Databases"
-      mysql[(MySQL)]
-      redis[(Redis)]
-    end
-  end
-
-  subgraph "External Services"
-    vps[VPS - proxy-1<br/>Squid Proxy]
-    datadog[Datadog]
-    bugsnag[BugSnag]
-    cloudflare[Cloudflare]
-  end
-
-  docker --> |CI/CD| argocd
-  argocd --> |GitOps| frontend & backend & sidekiq & auth
-  playwright --> |Scraping via Proxy| vps
-  frontend & backend --> datadog & bugsnag
-  ingress --> cloudflare
-```
-
-## Application Overview
-
-### price-monitoring
-
-- Web上の商品価格を収集・分析するツール
-- 対応プラットフォーム:
-  - ヤフオク、ヤフーフリマ、メルカリ（フリマ系）
-  - じゃんぱら、イオシス、パソコン工房、リコレ（中古PC系）
-- 主な機能:
-  - 商品価格のクロール・収集
-  - 相場分析・日次サマリー
-  - カテゴリ・商品管理
-
-### Technology Stack
-
-Frontend:
-
-- Next.js 14（App Router）+ TypeScript + TailwindCSS + daisyUI
-
-Backend:
-
-- Rails 7.1 + Ruby 3.2.2 + MySQL 8.0 + Redis
-
-Auth Provider:
-
-- Rails + Devise + Doorkeeper（OpenID Connect Provider）
-
-Batch Processing:
-
-- Sidekiq + Playwright（Chromiumベースのスクレイピング）
-
-## Infrastructure Overview
-
-### Proxmox VE Cluster
-
-- 2台の物理ノード（pve-1, pve-2）
-- EVPN Zoneによるオーバーレイネットワーク
-- VXLAN L2ネットワークで異なる物理ノード間のVM疎通
-
-### Kubernetes Cluster
-
-- Master Node x 1、Worker Node x 3 構成
-- CNI: Cilium
-- Storage: Longhorn（分散ストレージ）
-- Load Balancer: MetalLB
-- GitOps: ArgoCD
-
-### Network Configuration
-
-| サブネット | 用途 |
-| -- | -- |
-| 192.168.0.0/24 | 物理ネットワーク |
-| 10.15.100.0/24 | EVPN VNet (pve-1) |
-| 10.15.200.0/24 | EVPN VNet (pve-2) |
-
-### Access Control
-
-- Tailscaleによるセキュアなリモートアクセス
-- SSHポート変更によるセキュリティ強化
-
-## CI/CD Pipeline
-
-- **本番**: `master` ブランチの push で price-monitoring / auth-provider の本番 namespace にデプロイ
-- **Integration**: `develop` ブランチの push で price-monitoring-integration / auth-provider-integration にデプロイ
-
-```mermaid
-sequenceDiagram
-  participant dev as Developer
-  participant github as GitHub
-  participant actions as GitHub Actions
-  participant registry as Private Registry
-  participant argocd as ArgoCD
-  participant k8s as Kubernetes
-
-  dev->>github: git push
-  github->>actions: trigger CI/CD
-  actions->>actions: docker build
-  actions->>registry: docker push
-  actions->>github: update k8s manifests
-  argocd->>github: detect changes
-  argocd->>k8s: apply manifests
-```
-
-## Repository Relationships
-
-```mermaid
-graph LR
-  subgraph "アプリケーション開発"
-    pm[price-monitoring]
-    auth[auth-provider]
-  end
-
-  subgraph "インフラ管理"
-    infra[infra]
-    k8s[k8s]
-    k8s_secret[k8s-secret]
-  end
-
-  pm -->|CI/CD| k8s
-  auth -->|CI/CD| k8s
-  infra -->|Ansible| k8s
-  k8s_secret -->|Secrets| k8s
-
-  pm -.->|コードベース| pm
-  auth -.->|コードベース| auth
-  infra -.->|サーバー設定| infra
-  k8s -.->|マニフェスト| k8s
-  k8s_secret -.->|Secret定義| k8s_secret
-```
-
-## Key URLs
-
-### Production
-
-| サービス | URL |
-| -- | -- |
-| price-monitoring | https://price-monitoring.kuroweb.net |
-| Auth Provider | https://auth.price-monitoring.kuroweb.net |
-| ArgoCD | https://argocd.kuroweb.net |
-| Longhorn | https://longhorn.kuroweb.net |
-| Portainer | https://portainer.kuroweb.net |
-
-### Integration
-
-| サービス | URL |
-| -- | -- |
-| price-monitoring | https://integration.price-monitoring.kuroweb.net |
-| Auth Provider | https://integration.auth-provider.kuroweb.net |
-
-- デプロイ: `develop` ブランチの push で integration に自動デプロイ。本番（`master`）は従来どおり。
-
-### Development
-
-| サービス | URL |
-| -- | -- |
-| メインアプリ | https://dev.price-monitoring.com |
-| 認証プロバイダー | https://dev.auth.price-monitoring.com |
-
-## Development Workflow
-
-- ローカル開発: Docker Compose
-- タスクランナー: just
-- コマンド例:
-  - `just up` - コンテナ起動
-  - `just down` - コンテナ停止
-  - `just logs` - ログ確認
-  - `just rspec` - テスト実行
-
-## Command Execution Guide
-
-- **重要**: すべてのコマンドはDockerコンテナ経由で実行する
-- ホストマシンに直接 rails, rspec, npm 等はインストールされていない
-- 作業ディレクトリ: `price-monitoring/`（docker-compose.ymlがある場所）
-
-### Backend (Rails) コマンド
-
-```bash
-# RSpec テスト実行
-docker compose run --rm backend rspec
-
-# 特定のテストファイル実行
-docker compose run --rm backend rspec spec/path/to/spec.rb
-
-# Rails コンソール
-docker compose run --rm backend rails c
-
-# マイグレーション実行
-docker compose run --rm backend rails db:migrate
-
-# Seed データ投入
-docker compose run --rm backend rails db:seed
-
-# Bundler
-docker compose run --rm backend bundle install
-```
-
-### Frontend (Next.js) コマンド
-
-```bash
-# 依存関係インストール
-docker compose run --rm frontend npm install
-
-# ビルド
-docker compose run --rm frontend npm run build
-
-# Lint
-docker compose run --rm frontend npm run lint
-```
-
-### コンテナ名一覧
-
-| コンテナ名 | 用途 |
-| -- | -- |
-| `backend` | Rails API サーバー |
-| `frontend` | Next.js サーバー |
-| `sidekiq` | バックグラウンドジョブ |
-| `spring` | Rails プリローダー（テスト高速化） |
-| `mysql` | データベース |
-| `redis` | キャッシュ・ジョブキュー |
-
-### 起動中コンテナへのコマンド実行
-
-```bash
-# 起動中のコンテナ内でコマンド実行（exec）
-docker compose exec backend rails c
-
-# 新規コンテナを起動してコマンド実行（run --rm）
-docker compose run --rm backend rails c
-```
-
-- `exec`: 起動中のコンテナに接続（コンテナが起動していないとエラー）
-- `run --rm`: 新規コンテナを起動して実行後に削除（コンテナ停止中でも実行可能）
-
-## Monitoring & Observability
-
-- APM: Datadog
-- Error Tracking: BugSnag
-- Logging: 各コンテナのログ出力
+## 目的
+
+- Web上の商品の最安値探索と相場把握を支援する。
+- Rails / TypeScript の実践的なキャッチアップを兼ねる。
+- Datadog / BugSnag を使った運用監視の学習と実運用を行う。
+
+## システム構成
+
+- Frontend: Next.js / TypeScript / Tailwind CSS
+- Backend BFF: Rails
+- Batch: Sidekiq + Playwright
+- Data Store: MySQL / Redis
+- 認証: OpenID Connect（実装中）
+
+## 開発ワークフロー
+
+### 開発・運用環境
+
+- 開発環境は Docker Compose を基本とする。
+- 本番環境は自宅 Kubernetes（Master 1 / Worker 3）を利用する。
+- CI/CD は GitHub Actions で運用する。
+
+### ローカル開発ワークフロー
+
+1. 初回セットアップ: 証明書作成と `/etc/hosts` 設定を行う（README の手順に従う）。
+2. イメージ準備: `docker compose build`
+3. 起動: `just up`
+4. 状態確認: `just ps`（起動確認） / `just logs`（エラー確認）
+5. 実装・修正: 既存の責務境界（Frontend / BFF / Batch）を維持して変更
+6. 検証: 変更範囲に応じて `just rspec` などを実行
+7. 終了: `just down`
+
+### 主要コマンド
+
+- `just up`: Docker Compose の全サービスをバックグラウンド起動
+- `just down`: Docker Compose の全サービス停止とネットワーク破棄
+- `just ps`: コンテナ稼働状態の確認
+- `just logs`: 全サービスのログをフォロー表示
+- `just restart-all`: 全サービスを再起動
+- `just restart <container-name>`: 指定コンテナのみ再起動
+- `just attach <container-name>`: 指定コンテナにアタッチして対話確認
+- `just rspec [args...]`: Rails のテスト実行。引数で対象ファイル・行・オプションを指定可能（`spring` コンテナ経由）
+- `docker compose build`: ローカル開発用イメージ再ビルド
+- `make build-all` / `make push-all`: デプロイ用イメージのビルド・push（主に運用向け）
+
+### テスト実行ガイド
+
+- 前提: `just up` 後に `spring` コンテナが起動していることを `just ps` で確認する。
+- 全体実行: `just rspec`（ローカル反復向け。`spring` コンテナを利用）
+- 単一ファイル実行: `just rspec spec/models/<target>_spec.rb`
+- 行指定実行: `just rspec spec/models/<target>_spec.rb:42`
+- 失敗時の切り分け: まず対象 spec を単体で再実行し、必要に応じて `just logs` で依存サービスの状態を見る。
+
+### 実装時の判断基準
+
+- まず `just ps` で実行環境を確認し、未起動なら `just up` を優先する。
+- 不具合調査は `just logs` で事実確認してから修正に入る。
+- 変更対象は最小スコープに限定し、既存の責務分離（Frontend / BFF / Batch）を崩さない。
+- 変更は必要最小限にし、学習目的を踏まえて可読性を優先する。
+- 監視・運用影響がある変更では Datadog / BugSnag への影響も確認する。
+- コマンド追加や運用変更が必要な場合は、`README.md` / `justfile` / `Makefile` の整合を保つ。
+- デプロイ用の `make` タスクは、ローカル開発修正だけなら原則触らない。
+
+### 変更後チェックリスト
+
+- 変更ファイルが対象レイヤーに閉じているか
+- ローカル実行手順に影響がある場合、関連ドキュメントを更新したか
+- 必要なテストまたは最低限の動作確認を実施したか
+- 監視・運用影響がある変更かどうかを確認したか
+
+## エージェント設定
+
+- このリポジトリでは `.rulesync/` を正本として扱う。
+- ルール・スキル・サブエージェントを変更するときは `.rulesync/` のみ編集する。
+- `rulesync generate` の出力物（`AGENTS.md` / `CLAUDE.md` / `GEMINI.md`、各エージェント向け rules・memories など）は直接編集しない。
+- 内容を変更するときは `.rulesync/` を修正してから `rulesync generate` を実行する。
+- `.rulesync/` と生成物が矛盾する場合は `.rulesync/` を正とする。

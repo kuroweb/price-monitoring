@@ -1,3 +1,10 @@
+---
+root: true
+targets: ["*"]
+description: "price-monitoring の実装判断と開発ワークフローの共通前提"
+globs: ["**/*"]
+---
+
 # Project Overview
 
 ## 目的
