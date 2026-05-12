@@ -3,7 +3,6 @@
 import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
-import { Join } from 'react-daisyui'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -168,7 +167,7 @@ const CreateProductModal = ({
               </select>
             </label>
             <div className='divider py-6'>詳細設定</div>
-            <Join className='flex pb-2'>
+            <div className='join flex pb-2'>
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
@@ -193,8 +192,8 @@ const CreateProductModal = ({
                 checked={tab === 'じゃんぱら'}
                 onClick={() => setTab('じゃんぱら')}
               />
-            </Join>
-            <Join className='flex'>
+            </div>
+            <div className='join flex'>
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
@@ -219,7 +218,7 @@ const CreateProductModal = ({
                 checked={tab === 'リコレ'}
                 onClick={() => setTab('リコレ')}
               />
-            </Join>
+            </div>
             <div>
               {(tab === null || tab === 'ヤフオク') && (
                 <div className='py-4'>

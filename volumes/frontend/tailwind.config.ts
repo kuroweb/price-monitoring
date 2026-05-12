@@ -7,7 +7,6 @@ const config: Config = {
     './features/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     'node_modules/daisyui/dist/**/*.js',
-    'node_modules/react-daisyui/dist/**/*.js',
   ],
   theme: {
     extend: {

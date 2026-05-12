@@ -33,7 +33,6 @@ const nextConfig = {
       },
     ],
   },
-  transpilePackages: ['react-daisyui'],
 }
 
 module.exports = nextConfig
