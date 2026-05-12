@@ -5,7 +5,7 @@ import type {
   ProductPriceList,
 } from './types'
 
-import { http } from '@/lib/axios-client'
+import { http } from '@/lib/http-client'
 
 export async function getProductPrices(params: GetProductPricesParams) {
   return http<ProductPriceList>('/api/v1/product_prices', {

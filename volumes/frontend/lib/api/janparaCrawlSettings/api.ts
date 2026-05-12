@@ -1,7 +1,7 @@
 import type { CreateJanparaCrawlSettingExcludeProductData } from './types'
 import type { JanparaCrawlSettingExcludeProduct } from '../models'
 
-import { http } from '@/lib/axios-client'
+import { http } from '@/lib/http-client'
 
 const basePath = (productId: number) =>
   `/api/v1/products/${productId}/janpara_crawl_settings/janpara_crawl_setting_exclude_products`

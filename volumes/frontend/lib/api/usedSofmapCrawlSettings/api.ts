@@ -1,7 +1,7 @@
 import type { CreateUsedSofmapCrawlSettingExcludeProductData } from './types'
 import type { UsedSofmapCrawlSettingExcludeProduct } from '../models'
 
-import { http } from '@/lib/axios-client'
+import { http } from '@/lib/http-client'
 
 const basePath = (productId: number) =>
   `/api/v1/products/${productId}/used_sofmap_crawl_settings/used_sofmap_crawl_setting_exclude_products`

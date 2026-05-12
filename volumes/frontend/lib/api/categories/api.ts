@@ -10,7 +10,7 @@ import type {
 } from './types'
 import type { Category } from '../models'
 
-import { http } from '@/lib/axios-client'
+import { http } from '@/lib/http-client'
 
 const BASE_PATH = '/api/v1/categories'
 

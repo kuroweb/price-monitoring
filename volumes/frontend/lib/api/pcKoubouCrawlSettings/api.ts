@@ -1,7 +1,7 @@
 import type { CreatePcKoubouCrawlSettingExcludeProductData } from './types'
 import type { PcKoubouCrawlSettingExcludeProduct } from '../models'
 
-import { http } from '@/lib/axios-client'
+import { http } from '@/lib/http-client'
 
 const basePath = (productId: number) =>
   `/api/v1/products/${productId}/pc_koubou_crawl_settings/pc_koubou_crawl_setting_exclude_products`
