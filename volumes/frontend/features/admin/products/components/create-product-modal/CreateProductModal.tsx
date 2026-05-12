@@ -174,7 +174,7 @@ const CreateProductModal = ({
                 name='options'
                 aria-label='ヤフオク'
                 checked={tab === 'ヤフオク'}
-                onClick={() => setTab('ヤフオク')}
+                onChange={() => setTab('ヤフオク')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
@@ -182,7 +182,7 @@ const CreateProductModal = ({
                 name='options'
                 aria-label='メルカリ'
                 checked={tab === 'メルカリ'}
-                onClick={() => setTab('メルカリ')}
+                onChange={() => setTab('メルカリ')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
@@ -190,7 +190,7 @@ const CreateProductModal = ({
                 name='options'
                 aria-label='じゃんぱら'
                 checked={tab === 'じゃんぱら'}
-                onClick={() => setTab('じゃんぱら')}
+                onChange={() => setTab('じゃんぱら')}
               />
             </div>
             <div className='join flex'>
@@ -200,7 +200,7 @@ const CreateProductModal = ({
                 name='options'
                 aria-label='イオシス'
                 checked={tab === 'イオシス'}
-                onClick={() => setTab('イオシス')}
+                onChange={() => setTab('イオシス')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
@@ -208,7 +208,7 @@ const CreateProductModal = ({
                 name='options'
                 aria-label='パソコン工房'
                 checked={tab === 'パソコン工房'}
-                onClick={() => setTab('パソコン工房')}
+                onChange={() => setTab('パソコン工房')}
               />
               <input
                 className='btn join-item btn-md w-1/3'
@@ -216,7 +216,7 @@ const CreateProductModal = ({
                 name='options'
                 aria-label='リコレ'
                 checked={tab === 'リコレ'}
-                onClick={() => setTab('リコレ')}
+                onChange={() => setTab('リコレ')}
               />
             </div>
             <div>
