@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  allowedDevOrigins: ['dev.price-monitoring.com'],
   images: {
     remotePatterns: [
       {
@@ -31,10 +32,6 @@ const nextConfig = {
         hostname: 'image.sofmap.com',
       },
     ],
-  },
-  experimental: {
-    // TODO: 許可するオリジンを制限する
-    //       allowedOrigins: ['my-proxy.com', '*.my-proxy.com'],
   },
   transpilePackages: ['react-daisyui'],
 }
