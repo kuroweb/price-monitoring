@@ -6,6 +6,7 @@ FROM ruby:3.2.2
 RUN apt-get update && apt-get install -y \
   nodejs \
   npm \
+  python3-venv \
   default-mysql-client \
   less \
   vim \
@@ -13,6 +14,11 @@ RUN apt-get update && apt-get install -y \
   sudo
 
 RUN npm i -g n && n 20.0.0
+
+RUN python3 -m venv /opt/curlcffi-venv \
+  && /opt/curlcffi-venv/bin/pip install --no-cache-dir curl_cffi
+
+ENV CURL_CFFI_PYTHON_COMMAND=/opt/curlcffi-venv/bin/python
 
 #======================
 # プロジェクトセットアップ
