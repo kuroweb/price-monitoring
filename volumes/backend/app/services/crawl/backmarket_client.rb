@@ -28,7 +28,8 @@ module Crawl
           "TARGET_URL" => url,
           "IMPERSONATE" => IMPERSONATE,
           "TIMEOUT_SECONDS" => TIMEOUT_SECONDS.to_s,
-          "HEADERS_JSON" => HEADERS.to_json
+          "HEADERS_JSON" => HEADERS.to_json,
+          "PROXY_URL" => proxy_url.to_s
         }
 
         stdout, stderr, process_status = Open3.capture3(env, PYTHON_COMMAND, "-c", python_script)
@@ -50,6 +51,12 @@ module Crawl
         raise RequestError, stderr unless process_status.success?
       end
 
+      def proxy_url
+        proxy = Crawl::Proxy.get
+        credentials = "#{proxy[:username]}:#{proxy[:password]}@"
+        "http://#{credentials}#{proxy[:server]}"
+      end
+
       def python_script
         <<~PYTHON
           import json
@@ -60,15 +67,20 @@ module Crawl
           impersonate = os.environ["IMPERSONATE"]
           timeout_seconds = int(os.environ["TIMEOUT_SECONDS"])
           headers = json.loads(os.environ["HEADERS_JSON"])
+          proxy_url = os.environ.get("PROXY_URL")
 
           try:
-            response = requests.get(
-              url,
-              impersonate=impersonate,
-              headers=headers,
-              timeout=timeout_seconds,
-              allow_redirects=True
-            )
+            request_options = {
+              "impersonate": impersonate,
+              "headers": headers,
+              "timeout": timeout_seconds,
+              "allow_redirects": True
+            }
+
+            if proxy_url:
+              request_options["proxies"] = {"http": proxy_url, "https": proxy_url}
+
+            response = requests.get(url, **request_options)
             print(json.dumps({
               "status": response.status_code,
               "url": response.url,
