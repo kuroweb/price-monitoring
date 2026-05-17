@@ -39,7 +39,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
           監視対象を追加
         </button>
       </div>
-      <div className='overflow-x-auto overflow-y-hidden'>
+      <div className='overflow-x-auto'>
         <table className='table min-w-[720px]'>
           <thead>
             <tr>
@@ -50,67 +50,71 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
             </tr>
           </thead>
           <tbody>
-            {backmarketWatchTargets.map((target) => (
-              <tr key={target.id}>
-                <td className='whitespace-normal break-words'>{target.name}</td>
-                <td className='whitespace-nowrap'>{target.url}</td>
-                <td>{target.enabled ? '有効' : '無効'}</td>
-                <td className='w-1/12'>
-                  <div className='dropdown dropdown-left'>
-                    <div tabIndex={0} role='button' className='btn btn-square btn-md'>
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        className='inline-block size-5 stroke-current'
+            {backmarketWatchTargets.map((target, index) => {
+              const isLastRow = index === backmarketWatchTargets.length - 1
+
+              return (
+                <tr key={target.id}>
+                  <td className='whitespace-normal break-words'>{target.name}</td>
+                  <td className='whitespace-nowrap'>{target.url}</td>
+                  <td>{target.enabled ? '有効' : '無効'}</td>
+                  <td className='w-1/12'>
+                    <div className={`dropdown dropdown-left ${isLastRow ? 'dropdown-top' : ''}`}>
+                      <div tabIndex={0} role='button' className='btn btn-square btn-md'>
+                        <svg
+                          xmlns='http://www.w3.org/2000/svg'
+                          fill='none'
+                          viewBox='0 0 24 24'
+                          className='inline-block size-5 stroke-current'
+                        >
+                          <path
+                            strokeLinecap='round'
+                            strokeLinejoin='round'
+                            strokeWidth='2'
+                            d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
+                          ></path>
+                        </svg>
+                      </div>
+                      <ul
+                        tabIndex={0}
+                        className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
                       >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth='2'
-                          d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
-                        ></path>
-                      </svg>
+                        <li>
+                          <button
+                            className='btn btn-primary'
+                            onClick={() => {
+                              setSelectedTarget(target)
+                              setEditModalOpen(true)
+                            }}
+                          >
+                            編集
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className='btn btn-success'
+                            onClick={() => {
+                              setSelectedTarget(target)
+                              setCreateModalOpen(true)
+                            }}
+                          >
+                            複製
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            className='btn btn-error'
+                            onClick={() => submitDestroyBackmarketWatchTarget(target.id)}
+                          >
+                            削除
+                          </button>
+                        </li>
+                      </ul>
                     </div>
-                    <ul
-                      tabIndex={0}
-                      className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
-                    >
-                      <li>
-                        <button
-                          className='btn btn-primary'
-                          onClick={() => {
-                            setSelectedTarget(target)
-                            setEditModalOpen(true)
-                          }}
-                        >
-                          編集
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className='btn btn-success'
-                          onClick={() => {
-                            setSelectedTarget(target)
-                            setCreateModalOpen(true)
-                          }}
-                        >
-                          複製
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className='btn btn-error'
-                          onClick={() => submitDestroyBackmarketWatchTarget(target.id)}
-                        >
-                          削除
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </td>
-              </tr>
-            ))}
+                  </td>
+                </tr>
+              )
+            })}
           </tbody>
         </table>
       </div>

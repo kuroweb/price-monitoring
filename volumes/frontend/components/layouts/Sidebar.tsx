@@ -119,7 +119,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               </li>
               <li>
                 <Link
-                  href='/backmarket_watch'
+                  href='/backmarket_recents'
                   className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
                   <svg
