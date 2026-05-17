@@ -48,7 +48,7 @@ module Crawl
           "【Backmarket差分通知】",
           "検知時刻: #{backmarket_watch_result.crawled_at.iso8601}",
           "件数: 1",
-          "検知理由: #{reason_labels.join(" / ")}",
+          "検知理由: #{reason_labels.join(' / ')}",
           "商品名: #{backmarket_watch_result.name}",
           "価格: #{price_text}",
           "在庫状態: #{backmarket_watch_result.stock_status}",
