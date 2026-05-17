@@ -57,7 +57,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
                       d='M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3H3zm0 5h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm4 3v2h10v-2zm0 4v2h7v-2z'
                     />
                   </svg>
-                  <span className='ml-3'>Backmarket管理管理</span>
+                  <span className='ml-3'>Backmarket計測管理</span>
                 </Link>
               </li>
               <li>
