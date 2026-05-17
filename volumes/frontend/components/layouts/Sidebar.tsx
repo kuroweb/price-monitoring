@@ -42,6 +42,26 @@ const Sidebar = ({ open, setOpen }: Props) => {
               </li>
               <li>
                 <Link
+                  href='/admin/backmarket_watch'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                >
+                  <svg
+                    className='group-hover size-6 text-gray-500 transition duration-75'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='1em'
+                    height='1em'
+                    viewBox='0 0 24 24'
+                  >
+                    <path
+                      fill='currentColor'
+                      d='M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3H3zm0 5h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm4 3v2h10v-2zm0 4v2h7v-2z'
+                    />
+                  </svg>
+                  <span className='ml-3'>Backmarket管理管理</span>
+                </Link>
+              </li>
+              <li>
+                <Link
                   href='/admin/categories'
                   className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
                 >
@@ -114,7 +134,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
                       d='M3 4a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v3H3zm0 5h18v11a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1zm4 3v2h10v-2zm0 4v2h7v-2z'
                     />
                   </svg>
-                  <span className='ml-3'>Backmarket監視管理</span>
+                  <span className='ml-3'>Backmarket計測結果</span>
                 </Link>
               </li>
             </ul>
