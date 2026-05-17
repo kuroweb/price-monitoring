@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_01_20_162658) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_17_090001) do
+  create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "backmarket_watch_target_id", null: false
+    t.string "name", null: false
+    t.integer "price"
+    t.string "condition"
+    t.string "memory", null: false
+    t.string "storage", null: false
+    t.string "cpu", null: false
+    t.string "stock_status", null: false
+    t.datetime "crawled_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["backmarket_watch_target_id", "crawled_at"], name: "idx_on_backmarket_watch_target_id_crawled_at_47ae23aa26"
+    t.index ["backmarket_watch_target_id"], name: "index_backmarket_watch_results_on_backmarket_watch_target_id"
+  end
+
+  create_table "backmarket_watch_targets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "url", null: false
+    t.boolean "enabled", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.integer "parent_id"
@@ -415,6 +439,7 @@ ActiveRecord::Schema[7.1].define(version: 2026_01_20_162658) do
     t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
   end
 
+  add_foreign_key "backmarket_watch_results", "backmarket_watch_targets"
   add_foreign_key "iosys_crawl_setting_exclude_keywords", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_exclude_products", "iosys_crawl_settings"
   add_foreign_key "iosys_crawl_setting_required_keywords", "iosys_crawl_settings"

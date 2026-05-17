@@ -35,6 +35,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           get :structured_subtree
         end
       end
+      resources :backmarket_watch_targets, only: %i[index create update destroy]
+      resources :backmarket_watch_results, only: %i[index]
       resources :product_prices, only: %i[index show]
     end
   end
