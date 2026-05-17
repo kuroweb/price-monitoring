@@ -22,8 +22,12 @@ module Crawl
       def call
         return unless backmarket_watch_target.enabled?
 
+        previous_result = latest_result
         result = crawler_result
-        create_result!(result) unless unchanged?(result)
+        return if unchanged?(result:, previous_result:)
+
+        current_result = create_result!(result)
+        notify_diff_if_needed(previous_result:, current_result:)
       end
 
       private
@@ -36,12 +40,43 @@ module Crawl
         )
       end
 
-      def unchanged?(result)
-        return false if latest_result.blank?
+      def unchanged?(result:, previous_result:)
+        return false if previous_result.blank?
 
         COMPARISON_ATTRIBUTES.all? do |attribute|
-          latest_result.public_send(attribute) == result.public_send(attribute)
+          previous_result.public_send(attribute) == result.public_send(attribute)
         end
+      end
+
+      def notify_diff_if_needed(previous_result:, current_result:)
+        reasons = diff_reasons(previous_result:, current_result:)
+        return if reasons.empty?
+
+        DiscordNotifier.call(
+          backmarket_watch_target:,
+          backmarket_watch_result: current_result,
+          reasons:
+        )
+      end
+
+      def diff_reasons(previous_result:, current_result:)
+        return [] if previous_result.blank?
+
+        reasons = []
+        reasons << :price_dropped if price_dropped?(previous_result:, current_result:)
+        reasons << :restocked if restocked?(previous_result:, current_result:)
+        reasons
+      end
+
+      def price_dropped?(previous_result:, current_result:)
+        previous_result.price.present? &&
+          current_result.price.present? &&
+          current_result.price < previous_result.price
+      end
+
+      def restocked?(previous_result:, current_result:)
+        previous_result.stock_status == "out_of_stock" &&
+          current_result.stock_status == "in_stock"
       end
 
       def latest_result
