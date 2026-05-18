@@ -3,6 +3,7 @@ module Crawl
     PYTHON_COMMAND = ENV.fetch("CURL_CFFI_PYTHON_COMMAND").freeze
     TIMEOUT_SECONDS = 10
     IMPERSONATE = "chrome124".freeze
+    PROXY_INVALIDATION_STATUS_CODES = [403, 429].freeze
     HEADERS = {
       "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
       "Accept-Language" => "ja,en-US;q=0.9,en;q=0.8"
@@ -24,21 +25,29 @@ module Crawl
       private
 
       def execute_python(url:)
-        env = {
+        proxy = Crawl::DynamicProxy.get
+        env = python_env(url:, proxy:)
+
+        stdout, stderr, process_status = Open3.capture3(env, PYTHON_COMMAND, "-c", python_script)
+        payload = JSON.parse(stdout)
+
+        validate_dependency_availability!(stderr)
+        validate_command_status!(process_status, stderr)
+        proxy_invalidation!(payload:, proxy:)
+
+        payload
+      rescue JSON::ParserError => e
+        raise RequestError, "Failed to parse curl_cffi response: #{e.message}"
+      end
+
+      def python_env(url:, proxy:)
+        {
           "TARGET_URL" => url,
           "IMPERSONATE" => IMPERSONATE,
           "TIMEOUT_SECONDS" => TIMEOUT_SECONDS.to_s,
           "HEADERS_JSON" => HEADERS.to_json,
-          "PROXY_URL" => proxy_url.to_s
+          "PROXY_URL" => proxy_url(proxy).to_s
         }
-
-        stdout, stderr, process_status = Open3.capture3(env, PYTHON_COMMAND, "-c", python_script)
-        validate_dependency_availability!(stderr)
-        validate_command_status!(process_status, stderr)
-
-        JSON.parse(stdout)
-      rescue JSON::ParserError => e
-        raise RequestError, "Failed to parse curl_cffi response: #{e.message}"
       end
 
       def validate_dependency_availability!(stderr)
@@ -51,10 +60,15 @@ module Crawl
         raise RequestError, stderr unless process_status.success?
       end
 
-      def proxy_url
-        proxy = Crawl::Proxy.get
+      def proxy_url(proxy)
         credentials = "#{proxy[:username]}:#{proxy[:password]}@"
         "http://#{credentials}#{proxy[:server]}"
+      end
+
+      def proxy_invalidation!(payload:, proxy:)
+        return unless PROXY_INVALIDATION_STATUS_CODES.include?(payload["status"].to_i)
+
+        Crawl::DynamicProxy.remove(proxy:)
       end
 
       def python_script
