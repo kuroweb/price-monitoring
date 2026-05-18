@@ -1,7 +1,7 @@
 module Crawl
   module Backmarket
     class Crawler
-      RETRY_COUNT = 5
+      RETRY_COUNT = 2
 
       def self.call(...)
         new(...).call
