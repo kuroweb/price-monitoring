@@ -1,6 +1,3 @@
-require "net/http"
-require "uri"
-
 module Crawl
   class DynamicProxy
     CACHE_KEY = "crawl:dynamic_proxy:proxy_list".freeze
