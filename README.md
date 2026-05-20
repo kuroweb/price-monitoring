@@ -179,7 +179,8 @@
 
 ## ER
 
-- [`docs/er.md`](docs/er.md)
+- [`docs/er.md`](docs/er.md) — テーブル定義（カラム・インデックス）
+- [`docs/association.md`](docs/association.md) — テーブル間リレーション（Mermaid）
 
 ## 自動デプロイ
 

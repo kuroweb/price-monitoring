@@ -6,7 +6,8 @@
     "geminicli"
   ],
   "features": [
-    "rules"
+    "rules",
+    "skills"
   ],
   "outputRoots": [
     "."

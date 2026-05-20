@@ -1,408 +1,836 @@
 # ER
 
-## 計測対象管理
+## backmarket_watch_results
 
-### カテゴリ
+### カラム
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  product_category_map {
-    bigint id PK
-    bigint product_id FK
-    bigint category_id FK
-  }
-  categories {
-    bigint id PK
-    string name
-    int parent_id "closure_tree gemでの探索コスト削減カラム"
-  }
-  category_hierarchies {
-    bigint id PK
-    bigint ancestor_id FK "親カテゴリID (category_id)"
-    bigint descendant_id FK "子カテゴリID (category_id)"
-    int generations "親子関係のパスの深さ"
-  }
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| backmarket_watch_target_id | bigint | NOT NULL | FK |
+| name | string | NOT NULL |  |
+| price | integer |  |  |
+| condition | string |  |  |
+| memory | string | NOT NULL |  |
+| storage | string | NOT NULL |  |
+| cpu | string | NOT NULL |  |
+| stock_status | string | NOT NULL |  |
+| crawled_at | datetime | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
 
-  products ||--|| product_category_map : ""
-  product_category_map }o--|| categories : ""
-  categories ||--o{ category_hierarchies : "親カテゴリ"
-  categories ||--o{ category_hierarchies : "子カテゴリ"
-```
+### インデックス
 
-## クロール処理
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_backmarket_watch_results_on_backmarket_watch_target_id | backmarket_watch_target_id |  |
+| idx_on_backmarket_watch_target_id_crawled_at_47ae23aa26 | backmarket_watch_target_id, crawled_at |  |
 
-### ヤフオク
+## backmarket_watch_targets
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  yahoo_auction_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int category_id
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  yahoo_auction_crawl_setting_required_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string keyword
-  }
-  yahoo_auction_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string keyword
-  }
-  yahoo_auction_crawl_setting_exclude_products {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string external_id
-  }
-  yahoo_auction_products {
-    bigint id PK
-    string external_id
-    string seller_id
-    string name
-    text thumbnail_url
-    int price
-    int buyout_price
-    boolean published
-    datetime bought_date
-    datetime end_date
-  }
+### カラム
 
-  products ||--|| yahoo_auction_crawl_settings : "1:1"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_products : "1:N"
-  products ||--o{ yahoo_auction_products : "1:N"
-```
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | string | NOT NULL |  |
+| url | string | NOT NULL |  |
+| enabled | boolean | NOT NULL | default: true |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
 
-### ヤフーフリマ
+### インデックス
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  yahoo_auction_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int category_id
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  yahoo_auction_crawl_setting_required_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string keyword
-  }
-  yahoo_auction_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string keyword
-  }
-  yahoo_auction_crawl_setting_exclude_products {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-    string external_id
-  }
-  yahoo_fleamarket_products {
-    bigint id PK
-    string external_id
-    string seller_id
-    string name
-    text thumbnail_url
-    int price
-    boolean published
-    datetime bought_date
-  }
+なし
 
-  products ||--|| yahoo_auction_crawl_settings : "1:1"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : "1:N"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : "1:N"
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_products : "1:N"
-  products ||--o{ yahoo_fleamarket_products : "1:N"
+## categories
 
-```
+### カラム
 
-### メルカリ
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | string |  |  |
+| parent_id | integer |  | closure_tree |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  mercari_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int category_id
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  mercari_crawl_setting_required_keywords {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-    string keyword
-  }
-  mercari_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-    string keyword
-  }
-  mercari_crawl_setting_exclude_products {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-    string external_id
-  }
-  mercari_products {
-    bigint id PK
-    string external_id
-    string seller_id
-    string name
-    text thumbnail_url
-    int price
-    boolean published
-    datetime bought_date
-  }
+### インデックス
 
-  products ||--|| mercari_crawl_settings : "1:1"
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_required_keywords : "1:N"
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : "1:N"
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_products : "1:N"
-  products ||--o{ mercari_products : "1:N"
-```
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_categories_on_name | name | unique |
 
-### じゃんぱら
+## category_hierarchies
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  janpara_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  janpara_crawl_setting_required_keywords {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-    string keyword
-  }
-  janpara_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-    string keyword
-  }
-  janpara_crawl_setting_exclude_products {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-    string external_id
-  }
-  janpara_products {
-    bigint id PK
-    string external_id
-    string name
-    text thumbnail_url
-    int price
-  }
+### カラム
 
-  products ||--|| janpara_crawl_settings : "1:1"
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_required_keywords : "1:N"
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : "1:N"
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_products : "1:N"
-  products ||--o{ janpara_products : "1:N"
-```
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| ancestor_id | integer | NOT NULL |  |
+| descendant_id | integer | NOT NULL |  |
+| generations | integer | NOT NULL |  |
 
-### イオシス
+### インデックス
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  iosys_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  iosys_crawl_setting_required_keywords {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-    string keyword
-  }
-  iosys_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-    string keyword
-  }
-  iosys_crawl_setting_exclude_products {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-    string external_id
-  }
-  iosys_products {
-    bigint id PK
-    string external_id
-    string name
-    text thumbnail_url
-    int price
-  }
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| category_anc_desc_idx | ancestor_id, descendant_id, generations | unique |
+| category_desc_idx | descendant_id |  |
 
-  products ||--|| iosys_crawl_settings : "1:1"
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_required_keywords : "1:N"
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_keywords : "1:N"
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_products : "1:N"
-  products ||--o{ iosys_products : "1:N"
-```
+## iosys_crawl_setting_exclude_keywords
 
-### パソコン工房
+### カラム
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  pc_koubou_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  pc_koubou_crawl_setting_required_keywords {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-    string keyword
-  }
-  pc_koubou_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-    string keyword
-  }
-  pc_koubou_crawl_setting_exclude_products {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-    string external_id
-  }
-  pc_koubou_products {
-    bigint id PK
-    string external_id
-    string name
-    text thumbnail_url
-    int price
-  }
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| iosys_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
 
-  products ||--|| pc_koubou_crawl_settings : "1:1"
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_required_keywords : "1:N"
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_keywords : "1:N"
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_products : "1:N"
-  products ||--o{ pc_koubou_products : "1:N"
-```
+### インデックス
 
-### リコレ
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_iosys_crawl_setting_id_889c2c2e88 | iosys_crawl_setting_id |  |
+| idx_on_iosys_crawl_setting_id_keyword_2429715633 | iosys_crawl_setting_id, keyword | unique |
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  used_sofmap_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-    string keyword
-    int min_price
-    int max_price
-    boolean enabled
-  }
-  used_sofmap_crawl_setting_required_keywords {
-    bigint id PK
-    bigint used_sofmap_crawl_setting_id FK
-    string keyword
-  }
-  used_sofmap_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint used_sofmap_crawl_setting_id FK
-    string keyword
-  }
-  used_sofmap_crawl_setting_exclude_products {
-    bigint id PK
-    bigint used_sofmap_crawl_setting_id FK
-    string external_id
-  }
-  used_sofmap_products {
-    bigint id PK
-    string external_id
-    string name
-    text thumbnail_url
-    int price
-  }
+## iosys_crawl_setting_exclude_products
 
-  products ||--|| used_sofmap_crawl_settings : "1:1"
-  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_required_keywords : "1:N"
-  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_exclude_keywords : "1:N"
-  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_exclude_products : "1:N"
-  products ||--o{ used_sofmap_products : "1:N"
-```
+### カラム
 
-## 相場集計
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| iosys_crawl_setting_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
 
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-    string name
-  }
-  yahoo_auction_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
-  }
-  yahoo_fleamarket_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
-  }
-  mercari_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-    int average_purchase_price
-    int purchase_count
-    date date
-  }
+### インデックス
 
-  products ||--o{ yahoo_auction_daily_purchase_summaries : "1:N"
-  products ||--o{ yahoo_fleamarket_daily_purchase_summaries : "1:N"
-  products ||--o{ mercari_daily_purchase_summaries : "1:N"
-```
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_iosys_crawl_setting_id_180f55a37c | iosys_crawl_setting_id |  |
+| idx_on_iosys_crawl_setting_id_external_id_b0528c956e | iosys_crawl_setting_id, external_id | unique |
+
+## iosys_crawl_setting_required_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| iosys_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_iosys_crawl_setting_id_abd2c33544 | iosys_crawl_setting_id |  |
+| idx_on_iosys_crawl_setting_id_keyword_5beae71d90 | iosys_crawl_setting_id, keyword | unique |
+
+## iosys_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| min_price | integer | NOT NULL | default: 0 |
+| max_price | integer | NOT NULL | default: 0 |
+| enabled | boolean | NOT NULL | default: false |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_iosys_crawl_settings_on_product_id | product_id |  |
+
+## iosys_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_iosys_products_on_external_id | external_id | unique |
+| index_iosys_products_on_product_id | product_id |  |
+| index_iosys_products_on_product_id_and_external_id | product_id, external_id | unique |
+
+## janpara_crawl_setting_exclude_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| janpara_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_janpara_crawl_setting_id_e7210a8e11 | janpara_crawl_setting_id |  |
+| idx_on_janpara_crawl_setting_id_keyword_7074a129f7 | janpara_crawl_setting_id, keyword | unique |
+
+## janpara_crawl_setting_exclude_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| janpara_crawl_setting_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_janpara_crawl_setting_id_3d622eaffd | janpara_crawl_setting_id |  |
+| idx_on_janpara_crawl_setting_id_external_id_102eeb7612 | janpara_crawl_setting_id, external_id | unique |
+
+## janpara_crawl_setting_required_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| janpara_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_janpara_crawl_setting_id_e721383245 | janpara_crawl_setting_id |  |
+| idx_on_janpara_crawl_setting_id_keyword_198f4d9655 | janpara_crawl_setting_id, keyword | unique |
+
+## janpara_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| min_price | integer | NOT NULL | default: 0 |
+| max_price | integer | NOT NULL | default: 0 |
+| enabled | boolean | NOT NULL | default: false |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_janpara_crawl_settings_on_product_id | product_id |  |
+
+## janpara_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_janpara_products_on_external_id | external_id | unique |
+| index_janpara_products_on_product_id | product_id |  |
+| index_janpara_products_on_product_id_and_external_id | product_id, external_id | unique |
+
+## mercari_crawl_setting_exclude_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| mercari_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_mercari_crawl_setting_id_f56a952474 | mercari_crawl_setting_id |  |
+| idx_on_mercari_crawl_setting_id_keyword_4e4cc0381b | mercari_crawl_setting_id, keyword | unique |
+
+## mercari_crawl_setting_exclude_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| mercari_crawl_setting_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_mercari_crawl_setting_id_22de934ea6 | mercari_crawl_setting_id |  |
+| idx_on_mercari_crawl_setting_id_external_id_34002464be | mercari_crawl_setting_id, external_id | unique |
+
+## mercari_crawl_setting_required_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| mercari_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_mercari_crawl_setting_id_4659f97e15 | mercari_crawl_setting_id |  |
+| idx_on_mercari_crawl_setting_id_keyword_cc21910aea | mercari_crawl_setting_id, keyword | unique |
+
+## mercari_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| category_id | integer |  |  |
+| min_price | integer | NOT NULL | default: 0 |
+| max_price | integer | NOT NULL | default: 0 |
+| enabled | boolean | NOT NULL | default: false |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_mercari_crawl_settings_on_product_id | product_id |  |
+
+## mercari_daily_purchase_summaries
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| average_purchase_price | integer |  |  |
+| purchase_count | integer |  | default: 0 |
+| date | date | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_mercari_daily_purchase_summaries_on_product_id | product_id |  |
+| index_mercari_daily_purchase_summaries_on_product_id_and_date | product_id, date | unique |
+
+## mercari_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| published | boolean | NOT NULL | default: false |
+| bought_date | datetime |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_mercari_products_on_product_id | product_id |  |
+| index_mercari_products_on_product_id_and_external_id | product_id, external_id | unique |
+
+## pc_koubou_crawl_setting_exclude_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| pc_koubou_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_pc_koubou_crawl_setting_id_f8f5317000 | pc_koubou_crawl_setting_id |  |
+| idx_on_pc_koubou_crawl_setting_id_keyword_8c3917f08a | pc_koubou_crawl_setting_id, keyword | unique |
+
+## pc_koubou_crawl_setting_exclude_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| pc_koubou_crawl_setting_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_pc_koubou_crawl_setting_id_8b1b1a24af | pc_koubou_crawl_setting_id |  |
+| idx_on_pc_koubou_crawl_setting_id_external_id_96823e00f8 | pc_koubou_crawl_setting_id, external_id | unique |
+
+## pc_koubou_crawl_setting_required_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| pc_koubou_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_pc_koubou_crawl_setting_id_d2ecc2a271 | pc_koubou_crawl_setting_id |  |
+| idx_on_pc_koubou_crawl_setting_id_keyword_8e3b9acc35 | pc_koubou_crawl_setting_id, keyword | unique |
+
+## pc_koubou_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| min_price | integer | NOT NULL | default: 0 |
+| max_price | integer | NOT NULL | default: 0 |
+| enabled | boolean | NOT NULL | default: false |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_pc_koubou_crawl_settings_on_product_id | product_id |  |
+
+## pc_koubou_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_pc_koubou_products_on_external_id | external_id | unique |
+| index_pc_koubou_products_on_product_id | product_id |  |
+| index_pc_koubou_products_on_product_id_and_external_id | product_id, external_id | unique |
+
+## product_category_maps
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint | NOT NULL | FK |
+| category_id | bigint | NOT NULL | FK |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_product_category_maps_on_category_id | category_id |  |
+| index_product_category_maps_on_product_id | product_id |  |
+| index_product_category_maps_on_product_id_and_category_id | product_id, category_id | unique |
+
+## products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | string |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+なし
+
+## used_sofmap_crawl_setting_exclude_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| used_sofmap_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_used_sofmap_crawl_setting_id_7f42917bfe | used_sofmap_crawl_setting_id |  |
+| idx_on_used_sofmap_crawl_setting_id_keyword_7475198f68 | used_sofmap_crawl_setting_id, keyword | unique |
+
+## used_sofmap_crawl_setting_exclude_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| used_sofmap_crawl_setting_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_used_sofmap_crawl_setting_id_516fe376cb | used_sofmap_crawl_setting_id |  |
+| idx_on_used_sofmap_crawl_setting_id_external_id_d8c3f14b71 | used_sofmap_crawl_setting_id, external_id | unique |
+
+## used_sofmap_crawl_setting_required_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| used_sofmap_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_used_sofmap_crawl_setting_id_57a4411deb | used_sofmap_crawl_setting_id |  |
+| idx_on_used_sofmap_crawl_setting_id_keyword_7296d7cbc9 | used_sofmap_crawl_setting_id, keyword | unique |
+
+## used_sofmap_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| min_price | integer | NOT NULL | default: 0 |
+| max_price | integer | NOT NULL | default: 0 |
+| enabled | boolean | NOT NULL | default: false |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_used_sofmap_crawl_settings_on_product_id | product_id |  |
+
+## used_sofmap_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_used_sofmap_products_on_external_id | external_id | unique |
+| index_used_sofmap_products_on_product_id | product_id |  |
+| index_used_sofmap_products_on_product_id_and_external_id | product_id, external_id | unique |
+
+## users
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | text |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+| email | string | NOT NULL | default: "" |
+| provider_name | string | NOT NULL | default: "" |
+| provider_uid | string | NOT NULL | default: "" |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_users_on_email | email |  |
+| index_users_on_provider_name_and_provider_uid | provider_name, provider_uid | unique |
+
+## yahoo_auction_crawl_setting_exclude_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| yahoo_auction_crawl_setting_id | bigint |  | FK |
+| keyword | string |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_yahoo_auction_crawl_setting_id_fb93459e66 | yahoo_auction_crawl_setting_id |  |
+| idx_on_yahoo_auction_crawl_setting_id_keyword_9341e10548 | yahoo_auction_crawl_setting_id, keyword | unique |
+
+## yahoo_auction_crawl_setting_exclude_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| yahoo_auction_crawl_setting_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_yahoo_auction_crawl_setting_id_b30a20343c | yahoo_auction_crawl_setting_id |  |
+| idx_on_yahoo_auction_crawl_setting_id_external_id_c904750663 | yahoo_auction_crawl_setting_id, external_id | unique |
+
+## yahoo_auction_crawl_setting_required_keywords
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| yahoo_auction_crawl_setting_id | bigint |  | FK |
+| keyword | string | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_yahoo_auction_crawl_setting_id_49589afeb2 | yahoo_auction_crawl_setting_id |  |
+| idx_on_yahoo_auction_crawl_setting_id_keyword_daee6cea4b | yahoo_auction_crawl_setting_id, keyword | unique |
+
+## yahoo_auction_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| category_id | integer |  | default: 0 |
+| min_price | integer | NOT NULL | default: 0 |
+| max_price | integer | NOT NULL | default: 0 |
+| enabled | boolean | NOT NULL | default: false |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+| keyword | string | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_yahoo_auction_crawl_settings_on_product_id | product_id |  |
+
+## yahoo_auction_daily_purchase_summaries
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| average_purchase_price | integer |  |  |
+| purchase_count | integer |  | default: 0 |
+| date | date | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_yahoo_auction_daily_purchase_summaries_on_product_id | product_id |  |
+| idx_on_product_id_date_d63712c38b | product_id, date | unique |
+
+## yahoo_auction_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| seller_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| buyout_price | integer |  |  |
+| published | boolean | NOT NULL | default: false |
+| bought_date | datetime |  |  |
+| end_date | datetime |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_yahoo_auction_products_on_product_id | product_id |  |
+| index_yahoo_auction_products_on_product_id_and_external_id | product_id, external_id | unique |
+
+## yahoo_fleamarket_daily_purchase_summaries
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| average_purchase_price | integer |  |  |
+| purchase_count | integer |  | default: 0 |
+| date | date | NOT NULL |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_yahoo_fleamarket_daily_purchase_summaries_on_product_id | product_id |  |
+| idx_on_product_id_date_bd09f0e249 | product_id, date | unique |
+
+## yahoo_fleamarket_products
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_id | bigint |  | FK |
+| external_id | string | NOT NULL |  |
+| seller_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default: 0 |
+| published | boolean | NOT NULL | default: false |
+| bought_date | datetime |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_yahoo_fleamarket_products_on_product_id | product_id |  |
+| index_yahoo_fleamarket_products_on_product_id_and_external_id | product_id, external_id | unique |
