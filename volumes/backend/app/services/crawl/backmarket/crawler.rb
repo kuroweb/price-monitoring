@@ -2,6 +2,7 @@ module Crawl
   module Backmarket
     class Crawler
       RETRY_COUNT = 2
+      REQUEST_COUNT = 10
 
       def self.call(...)
         new(...).call
@@ -13,10 +14,19 @@ module Crawl
 
       def call
         Retryable.retryable(tries: RETRY_COUNT) do
-          response = Crawl::BackmarketClient.get(url:)
-          raise StandardError, "request failed: #{response.status}" unless response.success?
+          fallback_result = nil
 
-          return build_result(response.body)
+          REQUEST_COUNT.times do
+            response = Crawl::BackmarketClient.get(url:)
+            raise StandardError, "request failed: #{response.status}" unless response.success?
+
+            result = build_result(response.body)
+            fallback_result ||= result
+
+            return result if result.stock_status == "in_stock"
+          end
+
+          return fallback_result if fallback_result.present?
         end
 
         raise StandardError, "Backmarket crawl failed after retries"
