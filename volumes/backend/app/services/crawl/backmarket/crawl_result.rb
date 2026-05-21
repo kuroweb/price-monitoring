@@ -1,6 +1,8 @@
 module Crawl
   module Backmarket
     class CrawlResult
+      IN_STOCK_REQUIRED_FIELDS = %i[price condition memory storage cpu].freeze
+
       include ActiveModel::Model
       include ActiveModel::Attributes
 
@@ -12,7 +14,7 @@ module Crawl
       attribute :cpu, :string
       attribute :stock_status, :string
 
-      validates_presence_of :name, :memory, :storage, :cpu, :stock_status
+      validates_presence_of :name, :stock_status
       validates :stock_status, inclusion: { in: %w[in_stock out_of_stock] }
       validate :validate_in_stock_fields
 
@@ -21,8 +23,9 @@ module Crawl
       def validate_in_stock_fields
         return unless stock_status == "in_stock"
 
-        errors.add(:price, "can't be blank") if price.blank?
-        errors.add(:condition, "can't be blank") if condition.blank?
+        IN_STOCK_REQUIRED_FIELDS.each do |field|
+          errors.add(field, "can't be blank") if public_send(field).blank?
+        end
       end
     end
   end

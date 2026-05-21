@@ -10,15 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_17_090001) do
+ActiveRecord::Schema[7.1].define(version: 2026_05_21_122500) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
     t.integer "price"
     t.string "condition"
-    t.string "memory", null: false
-    t.string "storage", null: false
-    t.string "cpu", null: false
+    t.string "memory"
+    t.string "storage"
+    t.string "cpu"
     t.string "stock_status", null: false
     t.datetime "crawled_at", null: false
     t.datetime "created_at", null: false

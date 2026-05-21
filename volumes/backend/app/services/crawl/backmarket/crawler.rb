@@ -40,15 +40,17 @@ module Crawl
 
       def build_result(body)
         doc = Nokogiri::HTML(body)
+        current_stock_status = stock_status(doc:)
+        in_stock = current_stock_status == "in_stock"
 
         result = CrawlResult.new(
           name: product_name(doc:),
           price: price(doc:),
           condition: condition(doc:),
-          memory: spec_value(doc:, key: "メモリ"),
-          storage: spec_value(doc:, key: "容量 (GB)"),
-          cpu: cpu(doc:),
-          stock_status: stock_status(doc:)
+          memory: in_stock ? spec_value(doc:, key: "メモリ") : nil,
+          storage: in_stock ? spec_value(doc:, key: "容量 (GB)") : nil,
+          cpu: in_stock ? cpu(doc:) : nil,
+          stock_status: current_stock_status
         )
 
         raise StandardError, result.errors.full_messages.join(", ") unless result.valid?
