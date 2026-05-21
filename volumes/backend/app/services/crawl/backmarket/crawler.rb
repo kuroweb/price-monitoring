@@ -1,7 +1,7 @@
 module Crawl
   module Backmarket
     class Crawler
-      REQUEST_COUNT = 5
+      REQUEST_COUNT = 10
 
       def self.call(...)
         new(...).call
