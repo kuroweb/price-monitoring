@@ -1,6 +1,6 @@
-# docs/er.md 規約
+# docs/databases/er.md 規約
 
-テーブル定義専用。リレーション図は `docs/association.md`（`doc-association` スキル）。
+テーブル定義専用。リレーション図は `docs/databases/association.md`（`doc-association` スキル）。
 
 ## 見出し構成
 
@@ -51,7 +51,7 @@
 
 **型**
 
-| schema.rb | er.md |
+| schema.rb | docs/databases/er.md |
 |-----------|-------|
 | `bigint` | bigint |
 | `string` | string |
