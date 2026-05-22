@@ -177,10 +177,14 @@
   - メインアプリ: https://dev.price-monitoring.com/
   - 認証プロバイダー: https://dev.auth.price-monitoring.com/
 
-## ER
+## Docs
 
-- [`docs/er.md`](docs/er.md) — テーブル定義（カラム・インデックス）
-- [`docs/association.md`](docs/association.md) — テーブル間リレーション（Mermaid）
+- [`docs/README.md`](docs/README.md) — handbook の入口
+- [`docs/databases/overview.md`](docs/databases/overview.md) — database 設計の見取り図
+- [`docs/databases/er.md`](docs/databases/er.md) — テーブル定義（カラム・インデックス）
+- [`docs/databases/association.md`](docs/databases/association.md) — テーブル間リレーション（Mermaid）
+- [`docs/backend/architecture.md`](docs/backend/architecture.md) — Rails BFF / batch の責務分離
+- [`docs/frontend/architecture.md`](docs/frontend/architecture.md) — Next.js frontend の責務分離
 
 ## 自動デプロイ
 
