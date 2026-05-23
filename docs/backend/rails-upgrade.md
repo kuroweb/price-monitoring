@@ -26,8 +26,7 @@
    docker compose run --rm backend bin/rails app:update
    ```
 
-   - 既存の `config/application.rb` や `config/environments/*.rb` など、カスタムがあるファイルは **上書きせず** `n`（保持）または `d`（diff 確認）とする。
-   - 一括で既存を触らず新規ファイルだけ作る場合は `--skip` を使う（`new_framework_defaults_*` や `active_storage:update` の migration など）。
+   - 既存の `config/application.rb` や `config/environments/*.rb` など、カスタムがあるファイルは **上書きせず** `n`（保持）または `d`（diff 確認）で差分を取り込む。
    - `app:update` が生成したファイル（initializer、migration、`public/*`、`bin/*` など）は **削除しない**。不要かどうかは diff を見て判断する。
 5. **framework defaults**: `config/application.rb` の `config.load_defaults` を目標バージョンに合わせる。`config/initializers/new_framework_defaults_*` が作られたら、項目は段階的にコメントを外して有効化する。
 6. **migrate**: migration が増えたら実行する。
