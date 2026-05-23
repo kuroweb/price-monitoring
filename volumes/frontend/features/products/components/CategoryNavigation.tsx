@@ -97,18 +97,15 @@ const CategoryNavigation = ({
         {childCategories && (
           <>
             <div className='flex flex-wrap gap-3'>
-              {childCategories.map((childCategory) => {
-                return (
-                  <>
-                    <Link
-                      href={`/products?category_id=${childCategory.id}`}
-                      className='btn btn-outline btn-sm'
-                    >
-                      {childCategory.name}
-                    </Link>
-                  </>
-                )
-              })}
+              {childCategories.map((childCategory) => (
+                <Link
+                  key={childCategory.id}
+                  href={`/products?category_id=${childCategory.id}`}
+                  className='btn btn-outline btn-sm'
+                >
+                  {childCategory.name}
+                </Link>
+              ))}
             </div>
           </>
         )}

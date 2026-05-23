@@ -4,6 +4,53 @@ import { usePerState } from '../hooks/usePerState'
 import { usePlatformState } from '../hooks/usePlatformState'
 import { useStatusState } from '../hooks/useStatusState'
 
+type Option = {
+  value: string
+  label: string
+}
+
+type SelectFieldProps = {
+  label: string
+  value: string
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  options: Option[]
+}
+
+const platformOptions: Option[] = [
+  { value: 'all', label: 'すべて' },
+  { value: 'yahoo_auction', label: 'ヤフオク' },
+  { value: 'yahoo_fleamarket', label: 'ペイペイ' },
+  { value: 'mercari', label: 'メルカリ' },
+  { value: 'janpara', label: 'じゃんぱら' },
+  { value: 'iosys', label: 'イオシス' },
+  { value: 'pc_koubou', label: 'パソコン工房' },
+  { value: 'used_sofmap', label: 'リコレ' },
+]
+
+const statusOptions: Option[] = [
+  { value: 'published', label: '出品中' },
+  { value: 'unpublished', label: '売り切れ' },
+]
+
+const perOptions: Option[] = [
+  { value: '10', label: '10件' },
+  { value: '50', label: '50件' },
+  { value: '100', label: '100件' },
+]
+
+const SelectField = ({ label, value, onChange, options }: SelectFieldProps) => (
+  <fieldset className='fieldset w-32 pr-2'>
+    <legend className='fieldset-legend'>{label}</legend>
+    <select className='select w-full' onChange={onChange} value={value}>
+      {options.map((option) => (
+        <option key={option.value} value={option.value}>
+          {option.label}
+        </option>
+      ))}
+    </select>
+  </fieldset>
+)
+
 const SearchForm = () => {
   const [platform, setPlatform] = usePlatformState()
   const [status, setStatus] = useStatusState()
@@ -20,53 +67,6 @@ const SearchForm = () => {
   const handlePerChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setPer(Number(e.target.value))
   }
-
-  type Option = {
-    value: string
-    label: string
-  }
-
-  type SelectFieldProps = {
-    label: string
-    value: string
-    onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
-    options: Option[]
-  }
-
-  const platformOptions: Option[] = [
-    { value: 'all', label: 'すべて' },
-    { value: 'yahoo_auction', label: 'ヤフオク' },
-    { value: 'yahoo_fleamarket', label: 'ペイペイ' },
-    { value: 'mercari', label: 'メルカリ' },
-    { value: 'janpara', label: 'じゃんぱら' },
-    { value: 'iosys', label: 'イオシス' },
-    { value: 'pc_koubou', label: 'パソコン工房' },
-    { value: 'used_sofmap', label: 'リコレ' },
-  ]
-
-  const statusOptions: Option[] = [
-    { value: 'published', label: '出品中' },
-    { value: 'unpublished', label: '売り切れ' },
-  ]
-
-  const perOptions: Option[] = [
-    { value: '10', label: '10件' },
-    { value: '50', label: '50件' },
-    { value: '100', label: '100件' },
-  ]
-
-  const SelectField = ({ label, value, onChange, options }: SelectFieldProps) => (
-    <fieldset className='fieldset w-32 pr-2'>
-        <legend className='fieldset-legend'>{label}</legend>
-      <select className='select w-full' onChange={onChange} value={value}>
-        {options.map((option) => (
-          <option key={option.value} value={option.value}>
-            {option.label}
-          </option>
-        ))}
-      </select>
-        </fieldset>
-  )
 
   const showStatusField = ['all', 'yahoo_auction', 'yahoo_fleamarket', 'mercari'].includes(platform)
 

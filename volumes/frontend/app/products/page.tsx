@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
@@ -60,7 +62,7 @@ const Page = async ({
         <div className='card bg-base-300'>
           <div className='card-body'>
             {productPrices.map((product) => (
-              <>
+              <Fragment key={product.id}>
                 <Link className='card-title' href={`/products/${product.id}`}>
                   {product.name}
                 </Link>
@@ -73,7 +75,7 @@ const Page = async ({
                   ))}
                 </div>
                 <div className='divider my-1' />
-              </>
+              </Fragment>
             ))}
           </div>
         </div>
