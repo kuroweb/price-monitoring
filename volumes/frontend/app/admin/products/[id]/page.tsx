@@ -7,10 +7,15 @@ import { useUpdateProductModalQuery } from '@/features/admin/products/common/com
 import { useEditExcludeProductModalQuery } from '@/features/admin/products/components/edit-exclude-product-modal/hooks/useEditExcludeProductModalState'
 import { getCategories, getProduct } from '@/lib/actions'
 
-const Page = async ({ params }: { params: { [key: string]: string | undefined } }) => {
-  const productResponse = await getProduct(Number(params.id))
+const Page = async ({
+  params,
+}: {
+  params: Promise<{ [key: string]: string | undefined }>
+}) => {
+  const resolvedParams = await params
+  const productResponse = await getProduct(Number(resolvedParams.id))
   const categoryResponse = await getCategories({ rootOnly: false })
-  const currentPathname = `/admin/products/${params.id}`
+  const currentPathname = `/admin/products/${resolvedParams.id}`
 
   return (
     <>

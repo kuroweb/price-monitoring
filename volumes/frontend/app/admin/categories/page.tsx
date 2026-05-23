@@ -5,7 +5,12 @@ import CategoriesList from '@/features/admin/categories/components/CategoriesLis
 import { useCreateCategoryModalQuery } from '@/features/admin/categories/components/create-category-modal/hooks/useCreateCategoryModalState'
 import { getCategories, getCategoriesStructured } from '@/lib/actions'
 
-const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) => {
+  const resolvedSearchParams = await searchParams
   const categoriesResponse = await getCategories()
   const categoriesStructuredResponse = await getCategoriesStructured({
     rootOnly: true,
@@ -22,7 +27,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                 className='btn'
                 href={{
                   query: {
-                    ...searchParams,
+                    ...resolvedSearchParams,
                     [useCreateCategoryModalQuery]: 'true',
                   },
                 }}

@@ -5,7 +5,12 @@ import ProductsTable from '@/features/admin/products/components/ProductsTable'
 import { useCreateProductModalQuery } from '@/features/admin/products/components/create-product-modal/hooks/useCreateProductModalState'
 import { getCategories, getProducts } from '@/lib/actions'
 
-const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) => {
+  const resolvedSearchParams = await searchParams
   const productResponse = await getProducts()
   const categoryResponse = await getCategories({ rootOnly: false })
 
@@ -20,7 +25,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
                 className='btn'
                 href={{
                   query: {
-                    ...searchParams,
+                    ...resolvedSearchParams,
                     [useCreateProductModalQuery]: 'true',
                   },
                 }}

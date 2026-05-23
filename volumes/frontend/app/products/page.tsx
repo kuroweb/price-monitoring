@@ -13,8 +13,14 @@ import {
   getProductPrices,
 } from '@/lib/actions'
 
-const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
-  const { [useCategoryIdStateQuery]: categoryId } = categoryIdStateCache.parse(searchParams)
+const Page = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) => {
+  const resolvedSearchParams = await searchParams
+  const { [useCategoryIdStateQuery]: categoryId } =
+    categoryIdStateCache.parse(resolvedSearchParams)
 
   let currentCategory, parentCategory, childCategories
   if (categoryId === -1) {

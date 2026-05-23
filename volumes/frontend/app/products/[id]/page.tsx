@@ -20,15 +20,17 @@ const Page = async ({
   params,
   searchParams,
 }: {
-  params: { [key: string]: string | undefined }
-  searchParams: { [key: string]: string | undefined }
+  params: Promise<{ [key: string]: string | undefined }>
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) => {
-  const { [usePlatformStateQuery]: platform } = platformStateCache.parse(searchParams)
-  const { [useStatusStateQuery]: status } = statusStateCache.parse(searchParams)
-  const { [usePageStateQuery]: page } = pageStateCache.parse(searchParams)
-  const { [usePerStateQuery]: per } = perStateCache.parse(searchParams)
+  const resolvedParams = await params
+  const resolvedSearchParams = await searchParams
+  const { [usePlatformStateQuery]: platform } = platformStateCache.parse(resolvedSearchParams)
+  const { [useStatusStateQuery]: status } = statusStateCache.parse(resolvedSearchParams)
+  const { [usePageStateQuery]: page } = pageStateCache.parse(resolvedSearchParams)
+  const { [usePerStateQuery]: per } = perStateCache.parse(resolvedSearchParams)
 
-  const productPriceDetailResponse = await getProductPrice(Number(params.id), {
+  const productPriceDetailResponse = await getProductPrice(Number(resolvedParams.id), {
     platformMask: makePlatformMask(platform, status),
     sort: status == 'published' ? 'price' : 'bought_date',
     order: status == 'published' ? 'asc' : 'desc',

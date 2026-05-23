@@ -85,9 +85,8 @@ export type ProductList = {
   })[]
 }
 
-export type GetProductsParams = {
-  // TODO: 後で実装する
-}
+// TODO: 後で実装する
+export type GetProductsParams = Record<string, never>
 
 export type CreateProductData = {
   name: string

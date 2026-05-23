@@ -88,7 +88,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
         } else {
           toast.success('success')
         }
-      } catch (error) {
+      } catch {
         toast.error('An unexpected error occurred.')
       }
     } else {
