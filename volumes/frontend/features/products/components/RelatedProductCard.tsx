@@ -118,15 +118,14 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
           >
             {serviceNameMap[relatedProduct.platform]}
           </div>
-          <div className='badge badge-neutral absolute inset-e-2 top-24'>
-            <span className='pr-1 text-xs'>終了日:</span>
-            <span>{`${
+          <div className='badge badge-neutral absolute inset-e-2 top-24 whitespace-nowrap text-xs'>
+            {`終了日: ${
               status == 'published'
                 ? relatedProduct.endDate
                   ? parseDate(relatedProduct.endDate)
                   : '-'
                 : parseDate(relatedProduct.boughtDate)
-            }`}</span>
+            }`}
           </div>
           <div className='dropdown dropdown-left absolute inset-e-2 top-2'>
             <div tabIndex={0} role='button' className='btn btn-square btn-sm'>
@@ -174,28 +173,22 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             {status == 'published' && relatedProduct.platform == 'yahoo_auction' ? (
               <>
                 <div className='flex justify-end'>
-                  <div className='badge badge-outline'>
-                    <span className='text-xs'>現在:</span>
-                    <span className=''>{relatedProduct.price}</span>
-                    <span className='text-xs'>円</span>
+                  <div className='badge badge-outline whitespace-nowrap text-xs'>
+                    {`現在: ${relatedProduct.price}円`}
                   </div>
                 </div>
                 {relatedProduct.buyoutPrice && (
                   <div className='flex justify-end'>
-                    <div className='badge badge-outline'>
-                      <span className='text-xs'>即決:</span>
-                      <span className=''>{relatedProduct.buyoutPrice}</span>
-                      <span className='text-xs'>円</span>
+                    <div className='badge badge-outline whitespace-nowrap text-xs'>
+                      {`即決: ${relatedProduct.buyoutPrice}円`}
                     </div>
                   </div>
                 )}
               </>
             ) : (
               <div className='flex justify-end'>
-                <div className='badge badge-outline'>
-                  <span className='text-xs'>現在:</span>
-                  <span className=''>{relatedProduct.price}</span>
-                  <span className='text-xs'>円</span>
+                <div className='badge badge-outline whitespace-nowrap text-xs'>
+                  {`現在: ${relatedProduct.price}円`}
                 </div>
               </div>
             )}
