@@ -1,7 +1,7 @@
 # Rails バージョンアップ
 
 このページは、price-monitoring の Rails（BFF / batch）をメジャー・マイナー更新するときの手順をまとめた handbook です。
-責務境界は [`architecture.md`](./architecture.md) を参照する。
+責務境界は [`overview.md`](./overview.md) を参照する。
 
 ## 判断基準
 
@@ -53,7 +53,7 @@
 ## 関連 docs
 
 - [`../README.md`](../README.md)
-- [`./architecture.md`](./architecture.md)
+- [`./overview.md`](./overview.md)
 - [Upgrading Ruby on Rails](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html)（外部）
 
 ## 代表コード

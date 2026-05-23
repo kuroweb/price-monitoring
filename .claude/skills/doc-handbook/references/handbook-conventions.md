@@ -4,8 +4,8 @@
 
 - `docs/README.md`
 - `docs/databases/overview.md`
-- `docs/backend/architecture.md`
-- `docs/frontend/architecture.md`
+- `docs/backend/overview.md`
+- `docs/frontend/overview.md`
 
 `docs/databases/er.md` と `docs/databases/association.md` は詳細 docs であり、この規約の主対象ではない。
 
@@ -26,7 +26,7 @@
 - source of truth の線引き
 - index
 
-### architecture / overview 系ページ
+### overview 系ページ
 
 - 導入
 - `## 判断基準`

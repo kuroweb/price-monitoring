@@ -1,4 +1,4 @@
-# Frontend Architecture
+# Frontend Overview
 
 このページは Next.js 一般論ではなく、このプロジェクトの frontend で route / feature / data access をどう分けるかを揃えるための handbook です。
 実装時は `app` を入口、`features` を画面単位の UI、`lib/api` と `lib/actions` を通信境界として扱います。
@@ -8,8 +8,9 @@
 - `app/` は route entry と page composition に絞る
 - 画面固有の UI や state は `features/` に寄せる
 - 共通 layout は `components/layouts/` に寄せる
-- BFF 通信は `lib/api/` に寄せる
-- server action と revalidation は `lib/actions/` に寄せる
+- BFF 通信は `lib/api/` に寄せ、共通クライアントは `lib/http-client.ts` に寄せる
+- response 型は `lib/api/models/` に寄せる
+- server action と revalidation は `lib/actions/` に寄せ、revalidate 対象 path は `lib/revalidate-paths.ts` に寄せる
 
 ## 置いてよい責務
 
@@ -44,18 +45,21 @@
 
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
-- `app/admin/*` が管理画面の route を持つ
+- `app/backmarket_recents/page.tsx` が Backmarket 直近取得の入口
+- `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 監視など）の route を持つ
 
 ### feature 単位の UI
 
 - `features/products/` が商品一覧や詳細の UI と state を持つ
 - `features/admin/` が管理画面の機能ごとの UI を持つ
+- `features/backmarket-recents/` が Backmarket 直近取得画面の UI を持つ
 - page は feature を束ねる役に留める
 
 ### 通信境界
 
-- `lib/api/products/api.ts` のような単位で BFF 通信を閉じる
-- `lib/actions/products.ts` のような単位で server action と再検証を閉じる
+- `lib/http-client.ts` が共通 HTTP クライアント
+- `lib/api/<resource>/api.ts` の単位で BFF 通信を閉じ、`lib/api/models/` に response 型を置く
+- `lib/actions/<resource>.ts` の単位で server action と再検証を閉じ、`lib/revalidate-paths.ts` に path 定数を集約する
 
 ## 避けること
 
@@ -66,12 +70,13 @@
 ## 関連 docs
 
 - [`../README.md`](../README.md)
-- [`../backend/architecture.md`](../backend/architecture.md)
+- [`../backend/overview.md`](../backend/overview.md)
 
 ## 代表コード
 
 - [`volumes/frontend/app/products/page.tsx`](../../volumes/frontend/app/products/page.tsx)
 - [`volumes/frontend/features/products/components/CategoryNavigation.tsx`](../../volumes/frontend/features/products/components/CategoryNavigation.tsx)
+- [`volumes/frontend/lib/http-client.ts`](../../volumes/frontend/lib/http-client.ts)
 - [`volumes/frontend/lib/actions/products.ts`](../../volumes/frontend/lib/actions/products.ts)
 - [`volumes/frontend/lib/api/products/api.ts`](../../volumes/frontend/lib/api/products/api.ts)
 
@@ -80,5 +85,7 @@
 - `volumes/frontend/app/`
 - `volumes/frontend/features/`
 - `volumes/frontend/components/layouts/`
+- `volumes/frontend/lib/http-client.ts`
 - `volumes/frontend/lib/api/`
 - `volumes/frontend/lib/actions/`
+- `volumes/frontend/lib/revalidate-paths.ts`

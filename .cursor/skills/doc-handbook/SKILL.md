@@ -1,6 +1,6 @@
 ---
 name: doc-handbook
-description: price-monitoring の handbook docs（docs/README.md、docs/databases/overview.md、 docs/backend/architecture.md、docs/frontend/architecture.md）をメンテする。 docs をブラッシュアップしたい、backend/frontend/databases の設計判断を書きたい、 handbook を更新したい、AI が参照しやすい docs にしたい、docs の入口や関連リンクを整理したい、 という依頼では積極的に使う。schema 由来のテーブル定義やリレーション詳細そのものは doc-er / doc-association に委譲する。
+description: price-monitoring の handbook docs（docs/README.md、docs/databases/overview.md、 docs/backend/overview.md、docs/frontend/overview.md）をメンテする。 docs をブラッシュアップしたい、backend/frontend/databases の設計判断を書きたい、 handbook を更新したい、AI が参照しやすい docs にしたい、docs の入口や関連リンクを整理したい、 という依頼では積極的に使う。schema 由来のテーブル定義やリレーション詳細そのものは doc-er / doc-association に委譲する。
 ---
 # Handbook ドキュメント
 
@@ -13,8 +13,8 @@ price-monitoring の handbook docs を、実装判断に使える状態へ保つ
 
 - `docs/README.md`
 - `docs/databases/overview.md`
-- `docs/backend/architecture.md`
-- `docs/frontend/architecture.md`
+- `docs/backend/overview.md`
+- `docs/frontend/overview.md`
 
 ## 作業の流れ
 
@@ -41,8 +41,8 @@ price-monitoring の handbook docs を、実装判断に使える状態へ保つ
 - handbook は「実装判断の基準」を書く。実装の全文説明や一般論の教科書にしない
 - `docs/README.md` は入口と source of truth の線引きに集中させる
 - `docs/databases/overview.md` はテーブル一覧の転記ではなく、領域の切り方と詳細 docs への導線を書く
-- `docs/backend/architecture.md` は Rails 一般論ではなく、この repo の責務境界を書く
-- `docs/frontend/architecture.md` は Next.js 一般論ではなく、この repo の責務境界を書く
+- `docs/backend/overview.md` は Rails 一般論ではなく、この repo の責務境界を書く
+- `docs/frontend/overview.md` は Next.js 一般論ではなく、この repo の責務境界を書く
 - 代表コードリンクは少数に絞り、ラベルは `volumes/...` の実パスでそろえる
 
 ## やること

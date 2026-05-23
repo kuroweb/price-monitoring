@@ -20,10 +20,19 @@
 
 ### クロール設定と収集結果
 
-- `*_crawl_settings` はプラットフォームごとの検索条件を持つ
-- `*_crawl_setting_required_keywords` `*_crawl_setting_exclude_keywords` `*_crawl_setting_exclude_products` は条件の詳細を分離して持つ
-- `*_products` や `backmarket_watch_results` は収集済みデータを持つ
+- 多くのプラットフォームは `*_crawl_settings` で検索条件を持ち、`required` / `exclude` 系テーブルに詳細を分離する
+- `*_products` は収集済み商品データを持つ
 - クロール条件とクロール結果はライフサイクルが違うので、同じテーブルに置かない
+- Yahoo フリマ（`yahoo_fleamarket_*`）は `*_crawl_settings` を持たず、`yahoo_fleamarket_products` と日次集計だけを持つ
+
+### Backmarket 監視
+
+- `backmarket_watch_targets` が監視対象、`backmarket_watch_results` が取得結果を持つ
+- 他プラットフォームの `*_crawl_settings` / `*_products` とは別パターンとして扱う
+
+### 認証
+
+- `users` は OpenID Connect 連携用の identity を持つ（商品・クロール領域とは分離する）
 
 ### 集計データ
 

@@ -183,8 +183,8 @@
 - [`docs/databases/overview.md`](docs/databases/overview.md) — database 設計の見取り図
 - [`docs/databases/er.md`](docs/databases/er.md) — テーブル定義（カラム・インデックス）
 - [`docs/databases/association.md`](docs/databases/association.md) — テーブル間リレーション（Mermaid）
-- [`docs/backend/architecture.md`](docs/backend/architecture.md) — Rails BFF / batch の責務分離
-- [`docs/frontend/architecture.md`](docs/frontend/architecture.md) — Next.js frontend の責務分離
+- [`docs/backend/overview.md`](docs/backend/overview.md) — Rails BFF / batch の責務分離
+- [`docs/frontend/overview.md`](docs/frontend/overview.md) — Next.js frontend の責務分離
 
 ## 自動デプロイ
 
