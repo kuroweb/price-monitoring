@@ -31,7 +31,6 @@
     "eslint": "^9.39.0",
     "eslint-config-next": "16.2.6",
     "eslint-config-prettier": "^10.1.0",
-    "postcss": "^8",
     "recharts": "^2.12.0",
     "tailwindcss": "4.3.0",
     "typescript": "^5"
