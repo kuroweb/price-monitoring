@@ -1,7 +1,7 @@
 module Crawl
   module Backmarket
     class Crawler
-      RETRY_COUNT = 2
+      RETRY_COUNT = 5
       REQUEST_COUNT = 10
 
       def self.call(...)
@@ -17,7 +17,7 @@ module Crawl
           fallback_result = nil
 
           REQUEST_COUNT.times do
-            response = Crawl::BackmarketClient.get(url:)
+            response = Crawl::BackmarketClient.get(url: backmarket_watch_target.url)
             raise StandardError, "request failed: #{response.status}" unless response.success?
 
             result = build_result(response.body)
@@ -35,8 +35,6 @@ module Crawl
       private
 
       attr_reader :backmarket_watch_target
-
-      delegate :url, to: :backmarket_watch_target
 
       def build_result(body)
         doc = Nokogiri::HTML(body)
