@@ -32,9 +32,10 @@ As this project's AI coding tool, you must follow the additional conventions bel
 2. イメージ準備: `docker compose build`
 3. 起動: `just up`
 4. 状態確認: `just ps`（起動確認） / `just logs`（エラー確認）
-5. 実装・修正: 既存の責務境界（Frontend / BFF / Batch）を維持して変更
-6. 検証: 変更範囲に応じて `just rspec` などを実行
-7. 終了: `just down`
+5. 依存関係更新: npm パッケージを追加・更新する場合はホストで `npm i` せず、`docker compose run --rm frontend npm i` を使う
+6. 実装・修正: 既存の責務境界（Frontend / BFF / Batch）を維持して変更
+7. 検証: 変更範囲に応じて `just rspec` などを実行
+8. 終了: `just down`
 
 ### 主要コマンド
 
@@ -47,6 +48,7 @@ As this project's AI coding tool, you must follow the additional conventions bel
 - `just attach <container-name>`: 指定コンテナにアタッチして対話確認
 - `just rspec [args...]`: Rails のテスト実行。引数で対象ファイル・行・オプションを指定可能（`spring` コンテナ経由）
 - `docker compose build`: ローカル開発用イメージ再ビルド
+- `docker compose run --rm frontend npm i`: frontend の npm 依存関係を Docker 経由で追加・更新する。ホストで `npm i` は実行しない
 - `make build-all` / `make push-all`: デプロイ用イメージのビルド・push（主に運用向け）
 
 ### テスト実行ガイド
@@ -61,6 +63,7 @@ As this project's AI coding tool, you must follow the additional conventions bel
 
 - まず `just ps` で実行環境を確認し、未起動なら `just up` を優先する。
 - 不具合調査は `just logs` で事実確認してから修正に入る。
+- frontend の依存関係更新はホスト環境ではなく `frontend` コンテナ内で行う。
 - 変更対象は最小スコープに限定し、既存の責務分離（Frontend / BFF / Batch）を崩さない。
 - 変更は必要最小限にし、学習目的を踏まえて可読性を優先する。
 - 監視・運用影響がある変更では Datadog / BugSnag への影響も確認する。
