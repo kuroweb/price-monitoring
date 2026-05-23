@@ -4,6 +4,7 @@ import { Fragment, useState } from 'react'
 
 import { toast } from 'react-toastify'
 
+import CreateCategoryModal from './create-category-modal/CreateCategoryModal'
 import UpdateCategoryModal from './update-category-modal/UpdateCategoryModal'
 import { useUpdateCategoryModalState } from './update-category-modal/hooks/useUpdateCategoryModalState'
 
@@ -137,6 +138,7 @@ const CategoriesList = ({
           })}
         </tbody>
       </table>
+      <CreateCategoryModal categories={categories} />
       <UpdateCategoryModal category={selectedCategory} categories={categories} />
     </>
   )

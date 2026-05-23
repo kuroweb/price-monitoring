@@ -1,9 +1,11 @@
+import Link from 'next/link'
+
 import Layout from '@/components/layouts/Layout'
 import CategoriesList from '@/features/admin/categories/components/CategoriesList'
-import CreateCategoryForm from '@/features/admin/categories/components/CreateCategoryForm'
+import { useCreateCategoryModalQuery } from '@/features/admin/categories/components/create-category-modal/hooks/useCreateCategoryModalState'
 import { getCategories, getCategoriesStructured } from '@/lib/actions'
 
-const Page = async () => {
+const Page = async ({ searchParams }: { searchParams: { [key: string]: string | undefined } }) => {
   const categoriesResponse = await getCategories()
   const categoriesStructuredResponse = await getCategoriesStructured({
     rootOnly: true,
@@ -14,13 +16,20 @@ const Page = async () => {
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-base-300'>
           <div className='card-body'>
-            <h2 className='card-title pb-4'>カテゴリ追加</h2>
-            <CreateCategoryForm categories={categoriesResponse.data?.categories || []} />
-          </div>
-        </div>
-        <div className='card w-full bg-base-300'>
-          <div className='card-body'>
             <h2 className='card-title pb-4'>カテゴリ一覧</h2>
+            <div className='flex justify-end pb-2'>
+              <Link
+                className='btn'
+                href={{
+                  query: {
+                    ...searchParams,
+                    [useCreateCategoryModalQuery]: 'true',
+                  },
+                }}
+              >
+                カテゴリを追加
+              </Link>
+            </div>
             <CategoriesList
               structuredCategories={categoriesStructuredResponse.data?.categories || []}
               categories={categoriesResponse.data?.categories || []}
