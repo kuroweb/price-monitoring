@@ -149,21 +149,17 @@ const UpdateProductModal = ({
           <h3 className='text-lg font-bold'>計測設定を更新</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='divider pt-6'>管理情報</div>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>名称</span>
-              </div>
-              <input {...register('name')} className='input input-bordered' />
-            </label>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>カテゴリ</span>
-              </div>
+            <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>名称</legend>
+              <input {...register('name')} className='input w-full' />
+      </fieldset>
+            <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>カテゴリ</legend>
               <select
                 {...register('categoryId', {
                   setValueAs: (value) => (value === '' ? null : Number(value)),
                 })}
-                className='input input-bordered'
+                className='select w-full'
               >
                 <option value=''>未設定</option>
                 {categories?.map((category) => (
@@ -172,9 +168,9 @@ const UpdateProductModal = ({
                   </option>
                 ))}
               </select>
-            </label>
+        </fieldset>
             <div className='divider py-6'>計測条件</div>
-            <div className='join flex pb-2'>
+            <div className='join flex w-full flex-wrap pb-2'>
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'
@@ -200,7 +196,7 @@ const UpdateProductModal = ({
                 onChange={() => setTab('じゃんぱら')}
               />
             </div>
-            <div className='join flex'>
+            <div className='join flex w-full flex-wrap'>
               <input
                 className='btn join-item btn-md w-1/3'
                 type='radio'

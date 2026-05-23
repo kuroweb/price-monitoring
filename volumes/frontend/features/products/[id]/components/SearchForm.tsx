@@ -56,18 +56,16 @@ const SearchForm = () => {
   ]
 
   const SelectField = ({ label, value, onChange, options }: SelectFieldProps) => (
-    <label className='form-control w-32 pr-2'>
-      <div className='label'>
-        <span className='label-text'>{label}</span>
-      </div>
-      <select className='select select-bordered' onChange={onChange} value={value}>
+    <fieldset className='fieldset w-32 pr-2'>
+        <legend className='fieldset-legend'>{label}</legend>
+      <select className='select w-full' onChange={onChange} value={value}>
         {options.map((option) => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>
         ))}
       </select>
-    </label>
+        </fieldset>
   )
 
   const showStatusField = ['all', 'yahoo_auction', 'yahoo_fleamarket', 'mercari'].includes(platform)

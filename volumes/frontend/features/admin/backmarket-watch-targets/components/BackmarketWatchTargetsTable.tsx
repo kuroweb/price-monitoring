@@ -55,7 +55,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
 
               return (
                 <tr key={target.id}>
-                  <td className='whitespace-normal break-words'>{target.name}</td>
+                  <td className='whitespace-normal wrap-break-word'>{target.name}</td>
                   <td className='whitespace-nowrap'>{target.url}</td>
                   <td>{target.enabled ? '有効' : '無効'}</td>
                   <td className='w-1/12'>
@@ -77,7 +77,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                       </div>
                       <ul
                         tabIndex={0}
-                        className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
+                        className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
                       >
                         <li>
                           <button

@@ -8,7 +8,7 @@ const Page = async () => {
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>
-        <div className='card w-full bg-neutral'>
+        <div className='card w-full bg-base-300'>
           <div className='card-body'>
             <h2 className='card-title'>Backmarket計測管理</h2>
             <BackmarketWatchTargetsTable

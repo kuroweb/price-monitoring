@@ -16,7 +16,7 @@ const Page = async ({ params }: { params: { [key: string]: string | undefined } 
     <>
       <Layout>
         <div className='grid grid-cols-1 gap-4'>
-          <div className='card w-full bg-neutral'>
+          <div className='card w-full bg-base-300'>
             <div className='card-body'>
               <h2 className='card-title pb-4'>設定</h2>
               <div className='grid grid-cols-2 gap-4 md:grid-cols-4'>

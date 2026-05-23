@@ -17,7 +17,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
           open ? 'flex' : 'hidden'
         } transition-width fixed left-0 top-0 z-20 h-full w-64 shrink-0 flex-col pt-16 duration-75 md:flex`}
       >
-        <div className='flex h-full min-h-0 flex-1 flex-col bg-base-200'>
+        <div className='flex h-full min-h-0 flex-1 flex-col bg-base-300'>
           <div className='flex flex-1 flex-col overflow-y-auto pb-4 pt-5'>
             <ul className='space-y-2 pb-2'>
               <li className='px-4'>
@@ -26,7 +26,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               <li>
                 <Link
                   href='/admin/products'
-                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-200'
                 >
                   <svg
                     className='group-hover size-6 text-gray-500 transition duration-75'
@@ -43,7 +43,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               <li>
                 <Link
                   href='/admin/backmarket_watch'
-                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-200'
                 >
                   <svg
                     className='group-hover size-6 text-gray-500 transition duration-75'
@@ -63,7 +63,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               <li>
                 <Link
                   href='/admin/categories'
-                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-200'
                 >
                   <svg
                     className='group-hover size-6 text-gray-500 transition duration-75'
@@ -86,7 +86,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               <li>
                 <Link
                   href='/products'
-                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-200'
                 >
                   <svg
                     className='group-hover size-6 text-gray-500 transition duration-75'
@@ -120,7 +120,7 @@ const Sidebar = ({ open, setOpen }: Props) => {
               <li>
                 <Link
                   href='/backmarket_recents'
-                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-100'
+                  className='group flex items-center rounded-lg px-4 py-2 text-base font-normal hover:bg-base-200'
                 >
                   <svg
                     className='group-hover size-6 text-gray-500 transition duration-75'

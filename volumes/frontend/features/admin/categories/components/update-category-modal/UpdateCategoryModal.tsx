@@ -82,10 +82,8 @@ const UpdateCategoryModal = ({
           <h3 className='text-lg font-bold'>カテゴリを編集</h3>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='divider pt-6'>カテゴリ情報</div>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>親カテゴリ</span>
-              </div>
+            <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>親カテゴリ</legend>
               <select
                 {...register('parentId', {
                   setValueAs: (value) => {
@@ -93,7 +91,7 @@ const UpdateCategoryModal = ({
                     return Number.isInteger(id) && id > 0 ? id : null
                   },
                 })}
-                className='input input-bordered'
+                className='select w-full'
               >
                 <option value=''>なし</option>
                 {availableParentCategories.map((c) => (
@@ -102,17 +100,15 @@ const UpdateCategoryModal = ({
                   </option>
                 ))}
               </select>
-            </label>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>カテゴリ名</span>
-              </div>
+        </fieldset>
+            <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>カテゴリ名</legend>
               <input
                 {...register('name', { required: 'カテゴリ名は必須です' })}
-                className='input input-bordered'
+                className='input w-full'
               />
               {errors.name && <span className='text-sm text-error'>{errors.name.message}</span>}
-            </label>
+            </fieldset>
             <button type='submit' className='btn btn-primary mt-4 w-full'>
               更新
             </button>

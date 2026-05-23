@@ -40,7 +40,7 @@ const Page = async ({
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>
-        <div className='card w-full bg-neutral'>
+        <div className='card w-full bg-base-300'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>価格推移</h2>
             <AnalysisChart
@@ -50,7 +50,7 @@ const Page = async ({
             />
           </div>
         </div>
-        <div className='card w-full bg-neutral'>
+        <div className='card w-full bg-base-300'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>商品一覧</h2>
             <SearchForm />

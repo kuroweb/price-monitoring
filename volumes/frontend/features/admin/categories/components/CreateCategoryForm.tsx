@@ -27,10 +27,8 @@ const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
   return (
     <>
       <form onSubmit={handleSubmit(onSubmit)} className='w-full md:w-1/2'>
-        <label className='form-control'>
-          <div className='label'>
-            <span className='label-text'>親カテゴリ</span>
-          </div>
+        <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>親カテゴリ</legend>
           <select
             {...register('parentId', {
               setValueAs: (value) => {
@@ -38,7 +36,7 @@ const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
                 return Number.isInteger(id) && id > 0 ? id : null
               },
             })}
-            className='input input-bordered'
+            className='select w-full'
           >
             <option value=''>なし</option>
             {categories.map((category) => (
@@ -47,13 +45,11 @@ const CreateCategoryForm = ({ categories }: { categories: Category[] }) => {
               </option>
             ))}
           </select>
-        </label>
-        <label className='form-control'>
-          <div className='label'>
-            <span className='label-text'>カテゴリ名</span>
-          </div>
-          <input {...register('name')} className='input input-bordered' />
-        </label>
+        </fieldset>
+        <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>カテゴリ名</legend>
+          <input {...register('name')} className='input w-full' />
+      </fieldset>
         <button type='submit' className='btn btn-primary mt-4 w-full'>
           登録
         </button>

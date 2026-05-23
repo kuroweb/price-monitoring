@@ -42,7 +42,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
   return (
     <Layout>
       <div className='grid grid-cols-1 space-y-4'>
-        <div className='card bg-neutral'>
+        <div className='card bg-base-300'>
           <div className='card-body'>
             <CategoryNavigation
               currentCategory={currentCategory}
@@ -51,7 +51,7 @@ const Page = async ({ searchParams }: { searchParams: { [key: string]: string | 
             />
           </div>
         </div>
-        <div className='card bg-neutral'>
+        <div className='card bg-base-300'>
           <div className='card-body'>
             {productPrices.map((product) => (
               <>

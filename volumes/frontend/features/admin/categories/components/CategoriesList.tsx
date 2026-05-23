@@ -85,7 +85,7 @@ const CategoriesList = ({
         </div>
         <ul
           tabIndex={0}
-          className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
+          className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
         >
           <li>
             <button

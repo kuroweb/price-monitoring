@@ -26,7 +26,7 @@ const BackmarketRecentsTable = ({ backmarketRecents, watchUrl }: Props) => {
         <tbody>
           {backmarketRecents.map((result) => (
             <tr key={`${result.name}-${result.crawledAt}`}>
-              <td className='whitespace-normal break-words'>
+              <td className='whitespace-normal wrap-break-word'>
                 <Link
                   href={watchUrl}
                   target='_blank'
@@ -39,7 +39,7 @@ const BackmarketRecentsTable = ({ backmarketRecents, watchUrl }: Props) => {
               <td>{result.price ?? '-'}</td>
               <td>{result.memory ?? '-'}</td>
               <td>{result.storage ?? '-'}</td>
-              <td className='whitespace-normal break-words'>{result.cpu ?? '-'}</td>
+              <td className='whitespace-normal wrap-break-word'>{result.cpu ?? '-'}</td>
               <td>{result.condition ?? '-'}</td>
               <td>{result.stockStatus === 'in_stock' ? '在庫あり' : '在庫切れ'}</td>
               <td className='whitespace-nowrap'>

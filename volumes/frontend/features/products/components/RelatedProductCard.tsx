@@ -114,11 +114,11 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             />
           </div>
           <div
-            className={`badge ${serviceColorMap[relatedProduct.platform]} absolute start-2 top-2 text-black`}
+            className={`badge ${serviceColorMap[relatedProduct.platform]} absolute inset-s-2 top-2 text-black`}
           >
             {serviceNameMap[relatedProduct.platform]}
           </div>
-          <div className='badge badge-neutral absolute end-2 top-24'>
+          <div className='badge badge-neutral absolute inset-e-2 top-24'>
             <span className='pr-1 text-xs'>終了日:</span>
             <span>{`${
               status == 'published'
@@ -128,7 +128,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
                 : parseDate(relatedProduct.boughtDate)
             }`}</span>
           </div>
-          <div className='dropdown dropdown-left absolute end-2 top-2'>
+          <div className='dropdown dropdown-left absolute inset-e-2 top-2'>
             <div tabIndex={0} role='button' className='btn btn-square btn-sm'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -146,7 +146,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             </div>
             <ul
               tabIndex={0}
-              className='menu dropdown-content z-[1] w-20 space-y-2 rounded-box bg-base-200 shadow'
+              className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
             >
               <li>
                 <button
@@ -175,16 +175,16 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
               <>
                 <div className='flex justify-end'>
                   <div className='badge badge-outline'>
-                    <span className='pr-1 text-xs'>現在:</span>
-                    <span className='pr-1'>{relatedProduct.price}</span>
+                    <span className='text-xs'>現在:</span>
+                    <span className=''>{relatedProduct.price}</span>
                     <span className='text-xs'>円</span>
                   </div>
                 </div>
                 {relatedProduct.buyoutPrice && (
                   <div className='flex justify-end'>
                     <div className='badge badge-outline'>
-                      <span className='pr-1 text-xs'>即決:</span>
-                      <span className='pr-1'>{relatedProduct.buyoutPrice}</span>
+                      <span className='text-xs'>即決:</span>
+                      <span className=''>{relatedProduct.buyoutPrice}</span>
                       <span className='text-xs'>円</span>
                     </div>
                   </div>
@@ -193,8 +193,8 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             ) : (
               <div className='flex justify-end'>
                 <div className='badge badge-outline'>
-                  <span className='pr-1 text-xs'>現在:</span>
-                  <span className='pr-1'>{relatedProduct.price}</span>
+                  <span className='text-xs'>現在:</span>
+                  <span className=''>{relatedProduct.price}</span>
                   <span className='text-xs'>円</span>
                 </div>
               </div>

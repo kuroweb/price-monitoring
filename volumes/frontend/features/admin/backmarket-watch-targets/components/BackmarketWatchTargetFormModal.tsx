@@ -65,21 +65,17 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
           </button>
           <h3 className='text-lg font-bold'>{mode === 'create' ? '監視対象を追加' : '監視対象を更新'}</h3>
           <form onSubmit={handleSubmit(onSubmit)} className='space-y-3 pt-4'>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>名前</span>
-              </div>
-              <input {...register('name', { required: true })} className='input input-bordered' />
-            </label>
-            <label className='form-control'>
-              <div className='label'>
-                <span className='label-text'>URL</span>
-              </div>
-              <input {...register('url', { required: true })} className='input input-bordered' />
-            </label>
+            <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>名前</legend>
+              <input {...register('name', { required: true })} className='input w-full' />
+      </fieldset>
+            <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>URL</legend>
+              <input {...register('url', { required: true })} className='input w-full' />
+      </fieldset>
             <label className='label cursor-pointer justify-start gap-3'>
               <input type='checkbox' {...register('enabled')} className='checkbox checkbox-sm' />
-              <span className='label-text'>有効</span>
+              <span>有効</span>
             </label>
             <button type='submit' className='btn btn-primary w-full'>
               {mode === 'create' ? '登録' : '更新'}

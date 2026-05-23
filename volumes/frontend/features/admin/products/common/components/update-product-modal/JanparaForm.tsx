@@ -46,12 +46,10 @@ const JanparaForm = ({
 
   return (
     <>
-      <label className='form-control'>
-        <div className='label'>
-          <span className='label-text'>検索キーワード</span>
-        </div>
-        <input {...register('janparaCrawlSetting.keyword')} className='input input-bordered' />
-      </label>
+      <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>検索キーワード</legend>
+        <input {...register('janparaCrawlSetting.keyword')} className='input w-full' />
+      </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
@@ -61,16 +59,14 @@ const JanparaForm = ({
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='form-control'>
-        <div className='label'>
-          <span className='label-text'>必須キーワード</span>
-        </div>
+      <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>必須キーワード</legend>
         <textarea
           onChange={(e) => setRequiredKeywords(e.target.value)}
           defaultValue={requiredKeywordsText}
-          className='textarea textarea-bordered h-32 text-base'
+          className='textarea w-full h-32 text-base'
         />
-      </label>
+      </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
@@ -86,16 +82,14 @@ const JanparaForm = ({
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='form-control'>
-        <div className='label'>
-          <span className='label-text'>除外キーワード</span>
-        </div>
+      <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>除外キーワード</legend>
         <textarea
           onChange={(e) => setExcludeKeywords(e.target.value)}
           defaultValue={excludeKeywordsText}
-          className='textarea textarea-bordered h-32 text-base'
+          className='textarea w-full h-32 text-base'
         />
-      </label>
+      </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
@@ -111,15 +105,13 @@ const JanparaForm = ({
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='form-control'>
-        <div className='label'>
-          <span className='label-text'>最低価格</span>
-        </div>
+      <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>最低価格</legend>
         <input
           {...register('janparaCrawlSetting.minPrice', { valueAsNumber: true })}
-          className='input input-bordered'
+          className='input w-full'
         />
-      </label>
+      </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
@@ -129,12 +121,10 @@ const JanparaForm = ({
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='form-control'>
-        <div className='label'>
-          <span className='label-text'>最高価格</span>
-        </div>
-        <input {...register('janparaCrawlSetting.maxPrice')} className='input input-bordered' />
-      </label>
+      <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>最高価格</legend>
+        <input {...register('janparaCrawlSetting.maxPrice')} className='input w-full' />
+      </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
@@ -145,7 +135,7 @@ const JanparaForm = ({
         </button>
       </div>
       <label className='label cursor-pointer '>
-        <span className='label-text'>自動計測</span>
+        <span>自動計測</span>
         <input
           {...register('janparaCrawlSetting.enabled')}
           type='checkbox'
