@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2026_05_21_122500) do
+ActiveRecord::Schema[7.2].define(version: 2026_05_23_162406) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false

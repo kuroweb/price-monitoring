@@ -67,6 +67,7 @@
 
 - [`../README.md`](../README.md)
 - [`../databases/overview.md`](../databases/overview.md)
+- [`./rails-upgrade.md`](./rails-upgrade.md)
 
 ## 代表コード
 
