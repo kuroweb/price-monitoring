@@ -59,7 +59,6 @@ services:
     tty: true
     volumes:
       - ./volumes/frontend:/app
-      - frontend-node-modules:/app/node_modules
 
   backend:
     <<: *backend
@@ -118,20 +117,7 @@ services:
     restart: unless-stopped
 
 volumes:
-  frontend-node-modules:
-    driver: local
-    driver_opts:
-      type: none
-      device: ${PWD}/volumes/frontend/node_modules
-      o: bind
   backend-bundle:
-  # TODO: esbuildなどでnpmパッケージが必要になったタイミングで有効化
-  # backend-node-modules:
-  #   driver: local
-  #   driver_opts:
-  #     type: none
-  #     device: ${PWD}/volumes/backend/node_modules
-  #     o: bind
   backend-db:
   backend-redis:
 
