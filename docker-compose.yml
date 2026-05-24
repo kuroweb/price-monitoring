@@ -70,15 +70,15 @@ services:
 
   backend-batch-1:
     <<: *backend
-    command: sidekiq -C config/sidekiq/crawl_process.yml
+    command: bundle exec sidekiq -C config/sidekiq/crawl_process.yml
 
   backend-batch-2:
     <<: *backend
-    command: sidekiq -C config/sidekiq/general_process.yml
+    command: bundle exec sidekiq -C config/sidekiq/general_process.yml
 
   backend-batch-3:
     <<: *backend
-    command: sidekiq -C config/sidekiq/crawl_process_2.yml
+    command: bundle exec sidekiq -C config/sidekiq/crawl_process_2.yml
 
   spring:
     <<: *backend
