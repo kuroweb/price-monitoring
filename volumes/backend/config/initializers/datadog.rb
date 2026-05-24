@@ -1,5 +1,5 @@
 if Rails.env.production? || Rails.env.integration?
-  require "ddtrace"
+  require "datadog"
 
   Datadog.configure do |c|
     app = "price-monitoring"
@@ -11,7 +11,7 @@ if Rails.env.production? || Rails.env.integration?
     c.tracing.instrument :rails, service_name: app
     c.tracing.instrument :sidekiq, service_name: "#{app}-sidekiq",
                                    client_service_name: "#{app}-sidekiq-client",
-                                   tag_args: true
+                                   quantize: { args: { show: :all } }
     c.tracing.instrument :active_record, service_name: "#{app}-mysql"
     c.tracing.instrument :http, service_name: "#{app}-http"
     c.tracing.instrument :redis, service_name: "#{app}-redis",

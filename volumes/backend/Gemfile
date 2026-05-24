@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
-ruby "3.2.2"
+ruby "4.0.4"
 
 gem "bootsnap", require: false
 gem "bugsnag", "~> 6.27"
 gem "closure_tree"
-gem "ddtrace", require: false
+gem "datadog", "~> 2.0", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
@@ -30,6 +30,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 group :development, :test do
   gem "debug", platforms: %i[mri windows]
   gem "graphiql-rails"
+  gem "readline"
   gem "pry-byebug"
   gem "pry-doc"
   gem "pry-rails"

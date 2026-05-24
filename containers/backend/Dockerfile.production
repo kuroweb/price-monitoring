@@ -1,4 +1,4 @@
-FROM ruby:3.2.2
+FROM ruby:4.0.4
 
 #===================
 # packageセットアップ
@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
   npm \
   python3-venv \
   default-mysql-client \
+  libreadline-dev \
   less \
   vim \
   curl \
