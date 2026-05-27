@@ -16,11 +16,9 @@ module Discord
       value.delete("#").to_i(16)
     end
 
-    def initialize(payload:, dashboard_url: nil)
-      data = payload.is_a?(String) ? JSON.parse(payload) : payload
-      @event = data["events"]&.first
-      @exception = @event&.dig("exceptions", 0)
-      @dashboard_url = dashboard_url
+    def initialize(report:)
+      @report = report
+      @exception = report.exceptions&.first
     end
 
     def call
@@ -29,8 +27,10 @@ module Discord
 
     private
 
+    attr_reader :report, :exception
+
     def build
-      result = {
+      {
         title: error_class,
         color: color,
         description: error_message,
@@ -38,13 +38,11 @@ module Discord
         footer: footer,
         timestamp: Time.current.iso8601
       }
-      result[:url] = @dashboard_url if @dashboard_url.present?
-      result
     end
 
     def fields
       list = [
-        { name: "RELEASE STAGE", value: field(Rails.env), inline: true },
+        { name: "RELEASE STAGE", value: field(release_stage), inline: true },
         { name: "SEVERITY", value: field(severity_status), inline: true }
       ]
       list << { name: "Context", value: field(context), inline: false } if context.present?
@@ -55,11 +53,11 @@ module Discord
     end
 
     def footer
-      { text: "BugSnag · #{Rails.env}" }
+      { text: "BugSnag · #{release_stage}" }
     end
 
     def color
-      hex = if val("unhandled", from: @event) && severity == "error"
+      hex = if report.unhandled && severity == "error"
               UNHANDLED_ERROR_COLOR
             else
               SEVERITY_COLORS.fetch(severity, DEFAULT_COLOR)
@@ -68,24 +66,28 @@ module Discord
     end
 
     def error_class
-      val("errorClass") || "Error"
+      val(:errorClass) || "Error"
     end
 
     def error_message
-      val("message").presence || "-"
+      val(:message).presence || "-"
     end
 
     def severity
-      val("severity", from: @event).presence || "error"
+      report.severity.presence || "error"
     end
 
     def severity_status
-      label = val("unhandled", from: @event) == true ? "unhandled" : "handled"
+      label = report.unhandled ? "unhandled" : "handled"
       "[#{severity}] #{label}"
     end
 
     def context
-      val("context", from: @event)
+      report.context
+    end
+
+    def release_stage
+      report.release_stage.presence || Rails.env
     end
 
     def field(text)
@@ -93,19 +95,19 @@ module Discord
     end
 
     def stack_line
-      frame = Array(@exception&.dig("stacktrace")).first
+      frame = Array(exception&.dig(:stacktrace)).first
       return if frame.blank?
 
-      file = frame["file"] || frame[:file]
-      line = frame["lineNumber"] || frame[:lineNumber]
-      method_name = frame["method"] || frame[:method]
+      file = frame[:file] || frame["file"]
+      line = frame[:lineNumber] || frame["lineNumber"]
+      method_name = frame[:method] || frame["method"]
       "#{file}:#{line} in #{method_name}"
     end
 
-    def val(key, from: @exception)
-      return if from.blank?
+    def val(key)
+      return if exception.blank?
 
-      from[key] || from[key.to_sym]
+      exception[key] || exception[key.to_s]
     end
   end
 end

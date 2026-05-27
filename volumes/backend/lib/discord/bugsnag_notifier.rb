@@ -4,9 +4,8 @@ module Discord
       new(...).call
     end
 
-    def initialize(payload:, event_id: nil)
-      @payload = payload
-      @event_id = event_id
+    def initialize(report:)
+      @report = report
     end
 
     def call
@@ -32,7 +31,7 @@ module Discord
     end
 
     def embed
-      BugsnagEmbed.call(payload: @payload, dashboard_url: UrlResolver.call(event_id: @event_id))
+      BugsnagEmbed.call(report: @report)
     end
 
     def configured?
