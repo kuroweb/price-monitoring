@@ -5,7 +5,7 @@ module Crawl
       include Utils::TimeoutHandler
 
       sidekiq_options queue: :crawl_backmarket_sync_job,
-                      retry: 0, lock: :until_executed
+                      retry: 3, lock: :until_executed
 
       def perform(backmarket_watch_target_id)
         backmarket_watch_target = BackmarketWatchTarget.find(backmarket_watch_target_id)
