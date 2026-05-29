@@ -3,6 +3,7 @@ module Crawl
     class Crawler
       RETRY_COUNT = 5
       REQUEST_COUNT = 10
+      SLEEP_SECONDS = 5
 
       def self.call(...)
         new(...).call
@@ -17,6 +18,8 @@ module Crawl
           fallback_result = nil
 
           REQUEST_COUNT.times do
+            sleep SLEEP_SECONDS
+
             response = Crawl::BackmarketClient.get(url: backmarket_watch_target.url)
             raise StandardError, "request failed: #{response.status}" unless response.success?
 
