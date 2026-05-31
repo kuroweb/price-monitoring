@@ -54,6 +54,7 @@
 
       sidekiq[Sidekiq]
       playwright[Playwright]
+      camoufox[Camoufox]
     end
 
     subgraph Databases
@@ -74,6 +75,7 @@
   nginx_web-->rails
   rails-->|OIDC|auth_provider
   sidekiq-->playwright-->VPS
+  sidekiq-->camoufox-->VPS
   rails-->Databases
   sidekiq-->Databases
   ```
@@ -106,6 +108,7 @@
 
       sidekiq[Sidekiq]
       playwright[Playwright]
+      camoufox[Camoufox]
     end
 
     subgraph Databases
@@ -126,6 +129,7 @@
   nginx_web-->rails
   rails-->|OIDC|auth_provider
   sidekiq-->playwright-->VPS
+  sidekiq-->camoufox-->VPS
   rails-->Databases
   sidekiq-->Databases
   ```

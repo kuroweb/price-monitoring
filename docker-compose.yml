@@ -10,6 +10,7 @@ x-backend: &backend
     DB_PASSWORD: ""
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
+    CAMOUFOX_URL: "ws://backend-camoufox:8890/ws"
     ALLOWED_ORIGINS: "nginx,dev.price-monitoring.com"
   stdin_open: true
   tty: true
@@ -103,6 +104,13 @@ services:
       dockerfile: containers/backend_playwright/Dockerfile
     ports:
       - 8888:8888
+
+  backend-camoufox:
+    build:
+      context: .
+      dockerfile: containers/backend_camoufox/Dockerfile
+    ports:
+      - 8890:8890
 
   nginx:
     image: nginx:latest

@@ -1,9 +1,9 @@
 module Crawl
-  class Client
+  class CamoufoxClient
     class << self
       def execute
         Playwright.connect_to_playwright_server(server_url) do |playwright|
-          browser = playwright.chromium.launch(**launch_options)
+          browser = playwright.firefox.launch(headless: true)
           context = browser.new_context(**context_options)
           page = context.new_page
           page.route("**/*", ->(route, request) { RequestBlocklist.blocked_request?(request.url) ? route.abort : route.fallback })
@@ -11,19 +11,12 @@ module Crawl
         end
       end
 
-      def launch_options
-        {
-          headless: true,
-          args: ["--blink-settings=imagesEnabled=false", "--disable-remote-fonts"]
-        }
-      end
-
       def context_options
-        { userAgent: RequestBlocklist::USER_AGENT, proxy: Proxy.get }
+        { proxy: Proxy.get }
       end
 
       def server_url
-        "#{ENV.fetch('PLAYWRIGHT_URL')}?browser=chromium"
+        ENV.fetch("CAMOUFOX_URL")
       end
     end
   end
