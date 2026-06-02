@@ -21,12 +21,14 @@ jobs:
         run: |
           make build-backend tag_suffix=${{ github.sha }} environment=integration
           make build-backend-playwright tag_suffix=${{ github.sha }} environment=integration
+          make build-backend-camoufox tag_suffix=${{ github.sha }} environment=integration
           make build-frontend tag_suffix=${{ github.sha }} environment=integration
 
       - name: Push All Docker Images
         run: |
           make push-backend tag_suffix=${{ github.sha }} environment=integration
           make push-backend-playwright tag_suffix=${{ github.sha }} environment=integration
+          make push-backend-camoufox tag_suffix=${{ github.sha }} environment=integration
           make push-frontend tag_suffix=${{ github.sha }} environment=integration
 
       - name: Update Kubernetes Manifests

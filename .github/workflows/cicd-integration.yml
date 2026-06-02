@@ -14,6 +14,7 @@ jobs:
       backend_ci: ${{ steps.filter.outputs.backend_ci }}
       backend_cd: ${{ steps.filter.outputs.backend_cd }}
       backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
+      backend_camoufox_cd: ${{ steps.filter.outputs.backend_camoufox_cd }}
       frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
     steps:
       - uses: actions/checkout@v5
@@ -30,6 +31,8 @@ jobs:
               - './containers/backend/**'
             backend_playwright_cd:
               - './containers/backend_playwright/**'
+            backend_camoufox_cd:
+              - './containers/backend_camoufox/**'
             frontend_cd:
               - './volumes/frontend/**'
               - './containers/frontend/**'
@@ -80,6 +83,23 @@ jobs:
       build_command: "make build-backend-playwright tag_suffix=${{ github.sha }} environment=integration"
       push_command: "make push-backend-playwright tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make update-image ENV=integration IMAGE=price-monitoring-backend-playwright tag_suffix=${{ github.sha }}"
+    secrets:
+      TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
+      TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
+      GIT_COMMIT_USER: ${{ secrets.GIT_COMMIT_USER }}
+      GIT_COMMIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL }}
+      GIT_REPO_USER: ${{ secrets.GIT_REPO_USER }}
+      GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
+
+  backend_camoufox_cd:
+    needs: check_changes
+    if: ${{ needs.check_changes.outputs.backend_camoufox_cd == 'true' || github.event_name == 'workflow_dispatch' }}
+    uses: ./.github/workflows/reusable-cd.yml
+    with:
+      service_name: "k8s/manifests/price-monitoring"
+      build_command: "make build-backend-camoufox tag_suffix=${{ github.sha }} environment=integration"
+      push_command: "make push-backend-camoufox tag_suffix=${{ github.sha }} environment=integration"
+      apply_command: "make update-image ENV=integration IMAGE=price-monitoring-backend-camoufox tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
       TAILSCALE_OAUTH_CLIENT_SECRET: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}

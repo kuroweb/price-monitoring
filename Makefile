@@ -17,10 +17,10 @@ environment ?= production
 all: build-all push-all
 
 # Dockerイメージをビルドする
-build-all: build-backend build-backend-playwright build-frontend
+build-all: build-backend build-backend-playwright build-backend-camoufox build-frontend
 
 # Dockerイメージをプッシュする
-push-all: push-backend push-backend-playwright push-frontend
+push-all: push-backend push-backend-playwright push-backend-camoufox push-frontend
 
 #
 # backend
@@ -51,6 +51,21 @@ build-backend-playwright:
 
 push-backend-playwright:
 	docker push $(backend_playwright_tag)
+
+#
+# camoufox
+#
+
+backend_camoufox_tag := $(registry)/$(project)-backend-camoufox-$(environment):$(tag_suffix)
+backend_camoufox_dockerfile := containers/backend_camoufox/Dockerfile.$(environment)
+
+build-backend-camoufox:
+	docker build \
+	-t $(backend_camoufox_tag) \
+	-f $(backend_camoufox_dockerfile) .
+
+push-backend-camoufox:
+	docker push $(backend_camoufox_tag)
 
 #
 # frontend
