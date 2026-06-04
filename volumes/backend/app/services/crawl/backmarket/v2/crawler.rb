@@ -2,6 +2,7 @@ module Crawl
   module Backmarket
     module V2
       class Crawler
+        CHALLENGE_WAIT_SECONDS = 10
         RETRY_COUNT = 5
         REQUEST_COUNT = 10
         SLEEP_SECONDS = 5
@@ -24,6 +25,7 @@ module Crawl
                 sleep SLEEP_SECONDS
 
                 navigation.goto(url: backmarket_watch_target.url)
+                sleep CHALLENGE_WAIT_SECONDS
                 wait_for_stock_indicator(navigation.page)
 
                 result = build_result(navigation.page)
