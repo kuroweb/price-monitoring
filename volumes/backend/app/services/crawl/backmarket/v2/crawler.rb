@@ -3,7 +3,7 @@ module Crawl
     module V2
       class Crawler
         RETRY_COUNT = 3
-        REQUEST_COUNT = 10
+        REQUEST_COUNT = 5
         SLEEP_SECONDS = 5
         NAVIGATION_RETRY_COUNT = 3
         WAIT_TIMEOUT_MS = 15_000
