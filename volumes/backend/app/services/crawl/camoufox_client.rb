@@ -1,91 +1,54 @@
 module Crawl
   class CamoufoxClient
-    PROXY_INVALIDATION_STATUS_CODES = [403, 429].freeze
+    EXTRA_HTTP_HEADERS = {
+      "Accept" => "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "Accept-Language" => "ja,en-US;q=0.9,en;q=0.8",
+      "Upgrade-Insecure-Requests" => "1"
+    }.freeze
 
     class << self
-      def execute
+      def execute(proxy: nil)
         Playwright.connect_to_playwright_server(server_url) do |playwright|
           browser = playwright.firefox.launch(headless: true)
-          navigation = Navigation.new(browser:)
-
-          begin
-            yield(navigation)
-          ensure
-            navigation.close
-          end
+          context = browser.new_context(**context_options(proxy:))
+          page = context.new_page
+          setup_request_blocking!(page)
+          yield(page)
+        ensure
+          safely_close(page)
+          safely_close(context)
+          safely_close(browser)
         end
       end
 
       def server_url
         ENV.fetch("CAMOUFOX_URL")
       end
-    end
-
-    class Navigation
-      def initialize(browser:)
-        @browser = browser
-      end
-
-      attr_reader :page
-
-      def goto(url:)
-        rotate_context!
-        response = page.goto(url)
-        invalidate_proxy_if_needed!(response)
-        validate_response!(response)
-
-        response
-      end
-
-      def close
-        close_context
-      end
 
       private
 
-      attr_reader :browser, :proxy, :context
+      def context_options(proxy:)
+        options = {
+          locale: "ja-JP",
+          timezoneId: "Asia/Tokyo",
+          userAgent: RequestBlocklist::USER_AGENT,
+          extraHTTPHeaders: EXTRA_HTTP_HEADERS
+        }
+        return options unless proxy.present?
 
-      def rotate_context!
-        close_context
-        @proxy = DynamicProxy.get
-        @context = browser.new_context(**context_options)
-        @page = context.new_page
-        setup_request_blocking!
+        options.merge(proxy:)
       end
 
-      def context_options
-        proxy.present? ? { proxy: } : {}
-      end
-
-      def setup_request_blocking!
+      def setup_request_blocking!(page)
         page.route("**/*", lambda { |route, request|
           RequestBlocklist.blocked_request?(request.url) ? route.abort : route.fallback
         })
       end
 
-      def invalidate_proxy_if_needed!(response)
-        return if proxy.blank?
-        return if response.blank?
-
-        status = response.status.to_i
-        return unless PROXY_INVALIDATION_STATUS_CODES.include?(status)
-
-        DynamicProxy.remove(proxy:)
-      end
-
-      def validate_response!(response)
-        status = response&.status.to_i
-        return if status.between?(200, 299)
-
-        raise StandardError, "request failed: #{status}"
-      end
-
-      def close_context
-        page&.close
-        context&.close
-        @page = nil
-        @context = nil
-        @proxy = nil
+      def safely_close(target)
+        target&.close
+      rescue StandardError
+        nil
       end
     end
   end

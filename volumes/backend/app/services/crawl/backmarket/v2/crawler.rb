@@ -2,10 +2,17 @@ module Crawl
   module Backmarket
     module V2
       class Crawler
-        RETRY_COUNT = 5
+        RETRY_COUNT = 3
         REQUEST_COUNT = 10
         SLEEP_SECONDS = 5
+        NAVIGATION_RETRY_COUNT = 3
         WAIT_TIMEOUT_MS = 15_000
+        BACKMARKET_BASE_URL = "https://www.backmarket.co.jp".freeze
+        PROXY_INVALIDATION_STATUS_CODES = [403, 429].freeze
+        RETRYABLE_ERROR_MESSAGES = [
+          "Target page, context or browser has been closed",
+          "Execution context was destroyed"
+        ].freeze
 
         def self.call(...)
           new(...).call
@@ -19,18 +26,15 @@ module Crawl
           Retryable.retryable(tries: RETRY_COUNT) do
             fallback_result = nil
 
-            Crawl::CamoufoxClient.execute do |navigation|
-              REQUEST_COUNT.times do
-                sleep SLEEP_SECONDS
+            REQUEST_COUNT.times do
+              puts "run"
+              sleep SLEEP_SECONDS
 
-                navigation.goto(url: backmarket_watch_target.url)
-                wait_for_stock_indicator(navigation.page)
+              result = crawl_with_proxy_rotation
+              next if result.blank?
 
-                result = build_result(navigation.page)
-                fallback_result ||= result
-
-                return result if result.stock_status == "in_stock"
-              end
+              fallback_result ||= result
+              return result if result.stock_status == "in_stock"
             end
 
             return fallback_result if fallback_result.present?
@@ -42,6 +46,35 @@ module Crawl
         private
 
         attr_reader :backmarket_watch_target
+
+        def crawl_with_proxy_rotation
+          NAVIGATION_RETRY_COUNT.times do
+            proxy = Crawl::DynamicProxy.get
+
+            begin
+              return crawl_with_proxy(proxy:)
+            rescue StandardError => e
+              invalidate_proxy_if_needed(proxy:, error: e)
+              raise unless retryable_crawl_error?(e)
+            end
+          end
+
+          nil
+        end
+
+        def crawl_with_proxy(proxy:)
+          result = nil
+
+          Crawl::CamoufoxClient.execute(proxy:) do |page|
+            warmup_backmarket_session!(page)
+            response = page.goto(backmarket_watch_target.url, waitUntil: "domcontentloaded", referer: BACKMARKET_BASE_URL)
+            validate_response!(response)
+            wait_for_stock_indicator(page)
+            result = build_result(page)
+          end
+
+          result
+        end
 
         def wait_for_stock_indicator(page)
           page.wait_for_selector(
@@ -119,6 +152,45 @@ module Crawl
 
           matched = summary.match(/(Apple[^0-9]*M[0-9].*?GPU)/)
           matched&.captures&.first
+        end
+
+        def warmup_backmarket_session!(page)
+          response = page.goto(BACKMARKET_BASE_URL, waitUntil: "domcontentloaded")
+          validate_response!(response)
+        end
+
+        def validate_response!(response)
+          status = response&.status.to_i
+          return if status.between?(200, 299)
+
+          raise RequestFailedError.new(status:)
+        end
+
+        def invalidate_proxy_if_needed(proxy:, error:)
+          return if proxy.blank?
+          return unless request_failed_error?(error)
+          return unless PROXY_INVALIDATION_STATUS_CODES.include?(error.status)
+
+          Crawl::DynamicProxy.remove(proxy:)
+        end
+
+        def request_failed_error?(error)
+          error.is_a?(RequestFailedError)
+        end
+
+        def retryable_crawl_error?(error)
+          request_failed_error?(error) ||
+            error.class.name.include?("TargetClosedError") ||
+            RETRYABLE_ERROR_MESSAGES.any? { |message| error.message.include?(message) }
+        end
+
+        class RequestFailedError < StandardError
+          attr_reader :status
+
+          def initialize(status:)
+            @status = status.to_i
+            super("request failed: #{status}")
+          end
         end
       end
     end
