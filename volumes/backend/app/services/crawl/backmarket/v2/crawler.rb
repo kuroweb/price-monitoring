@@ -27,7 +27,6 @@ module Crawl
             fallback_result = nil
 
             REQUEST_COUNT.times do
-              puts "run"
               sleep SLEEP_SECONDS
 
               result = crawl_with_proxy_rotation
