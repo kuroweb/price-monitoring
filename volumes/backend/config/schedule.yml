@@ -20,7 +20,7 @@ crawl_used_sofmap_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::UsedSofmap::EnqueueSyncJob"
 crawl_backmarket_enqueue_sync_job:
-  cron: "*/10 * * * *"
+  cron: "*/15 * * * *"
   class: "Crawl::Backmarket::EnqueueSyncJob"
 products_calculate_daily_purchase_summary_calculator_job:
   cron: "0 0 * * *"
