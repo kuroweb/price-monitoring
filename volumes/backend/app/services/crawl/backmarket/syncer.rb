@@ -84,7 +84,7 @@ module Crawl
       end
 
       def crawler_result
-        @crawler_result ||= V2::Crawler.call(backmarket_watch_target:)
+        @crawler_result ||= Crawler.call(backmarket_watch_target:)
       end
     end
   end
