@@ -15,8 +15,6 @@ module Crawl
         current_result = ResultCreator.call(backmarket_watch_target:, crawl_result:)
         return if current_result.blank?
 
-        binding.pry
-
         DiffNotifier.call(backmarket_watch_target:, current_result:)
       end
 
