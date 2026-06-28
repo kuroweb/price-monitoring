@@ -34,6 +34,6 @@
 
 ## 委譲ルール
 
-- `docs/backend/*.md` の更新は `docs-updater-backend`
-- `docs/frontend/*.md` の更新は `docs-updater-frontend`
+- `docs/backend/*.md` の更新は `pj-docs-updater-backend`
+- `docs/frontend/*.md` の更新は `pj-docs-updater-frontend`
 - database docs 追加時は `docs/README.md` の Index / 使い方を更新する

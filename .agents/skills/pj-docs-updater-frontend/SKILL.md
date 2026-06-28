@@ -1,5 +1,5 @@
 ---
-name: docs-updater-frontend
+name: pj-docs-updater-frontend
 description: >-
   price-monitoring の docs/frontend/*.md（overview.md など）をメンテする。
   Next.js frontend の route / feature / data access の責務境界を実装判断に使える形で保つ。
@@ -25,8 +25,8 @@ Next.js frontend 側の handbook docs を、実装判断に使える状態へ保
 
 1. **依頼の種類を分ける**
    - 責務境界・置き場所 → `overview.md`
-   - `docs/backend/*.md` → `docs-updater-backend`
-   - `docs/database/*.md` → `docs-updater-database`
+   - `docs/backend/*.md` → `pj-docs-updater-backend`
+   - `docs/database/*.md` → `pj-docs-updater-database`
 2. **source of truth を読む**
    - `volumes/frontend/app/`
    - `volumes/frontend/features/`

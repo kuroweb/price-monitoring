@@ -6,7 +6,7 @@
 - `docs/backend/rails-upgrade.md`
 - `docs/backend/` 配下に追加される handbook docs
 
-`docs/database/*.md` は `docs-updater-database` スキルの対象。
+`docs/database/*.md` は `pj-docs-updater-database` スキルの対象。
 
 ## 基本方針
 
@@ -56,6 +56,6 @@
 
 ## 委譲ルール
 
-- `docs/database/*.md` の更新は `docs-updater-database`
-- `docs/frontend/*.md` の更新は `docs-updater-frontend`
+- `docs/database/*.md` の更新は `pj-docs-updater-database`
+- `docs/frontend/*.md` の更新は `pj-docs-updater-frontend`
 - backend docs 追加時は `docs/README.md` の Index / 使い方を更新する

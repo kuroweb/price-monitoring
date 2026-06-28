@@ -1,11 +1,11 @@
 ---
-name: docs-updater-database
+name: pj-docs-updater-database
 description: >-
   price-monitoring の docs/database/*.md（overview.md、er.md、association.md）をメンテする。
   overview は領域の切り方と導線、er はテーブル定義（## テーブル名 / ### カラム / ### インデックス）、
   association は PK/FK と Mermaid 線のみ。事実は volumes/backend/db/schema.rb から転記
   （編集しない）。スキーマ変更・ER 図・リレーション図・database docs 更新で使う。
-  docs/backend/*.md は docs-updater-backend、docs/frontend/*.md は docs-updater-frontend に委譲する。
+  docs/backend/*.md は pj-docs-updater-backend、docs/frontend/*.md は pj-docs-updater-frontend に委譲する。
 targets: ["*"]
 ---
 
