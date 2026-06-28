@@ -1,22 +1,5 @@
-# Additional Conventions Beyond the Built-in Functions
-
-As this project's AI coding tool, you must follow the additional conventions below, in addition to the built-in functions.
-
-# Project Overview
-
-## 目的
-
-- Web上の商品の最安値探索と相場把握を支援する。
-- Rails / TypeScript の実践的なキャッチアップを兼ねる。
-- Datadog / BugSnag を使った運用監視の学習と実運用を行う。
-
-## システム構成
-
-- Frontend: Next.js / TypeScript / Tailwind CSS
-- Backend BFF: Rails
-- Batch: Sidekiq + Playwright
-- Data Store: MySQL / Redis
-- 認証: OpenID Connect（実装中）
+---
+---
 
 ## 開発ワークフロー
 
@@ -76,11 +59,3 @@ As this project's AI coding tool, you must follow the additional conventions bel
 - ローカル実行手順に影響がある場合、関連ドキュメントを更新したか
 - 必要なテストまたは最低限の動作確認を実施したか
 - 監視・運用影響がある変更かどうかを確認したか
-
-## エージェント設定
-
-- このリポジトリでは `.rulesync/` を正本として扱う。
-- ルール・スキル・サブエージェントを変更するときは `.rulesync/` のみ編集する。
-- `rulesync generate` の出力物（`AGENTS.md` / `CLAUDE.md` / `GEMINI.md`、各エージェント向け rules・memories など）は直接編集しない。
-- 内容を変更するときは `.rulesync/` を修正してから `rulesync generate` を実行する。
-- `.rulesync/` と生成物が矛盾する場合は `.rulesync/` を正とする。
