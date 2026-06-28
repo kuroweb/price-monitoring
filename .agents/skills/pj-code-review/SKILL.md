@@ -104,6 +104,6 @@ description: |
 
 ## 委譲
 
-- セキュリティ特化の深掘り → `review-security` スキル（利用可能な場合）
+- セキュリティ特化の深掘り → `pj-security-review` スキル
 - Bugbot 形式の自動レビュー → `review-bugbot` スキル（利用可能な場合）
 - docs の更新判断 → `pj-docs-updater-*` スキル
