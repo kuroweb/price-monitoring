@@ -1,14 +1,22 @@
 {
-  "targets": [
-    "cursor",
-    "claudecode",
-    "codexcli"
-  ],
-  "features": [
-    "rules"
-  ],
+  "$schema": "https://github.com/dyoshikawa/rulesync/releases/latest/download/config-schema.json",
+  "targets": {
+    "cursor": [
+      "rules",
+      "skills"
+    ],
+    "claudecode": [
+      "rules",
+      "skills"
+    ],
+    "codexcli": [
+      "rules",
+      "skills"
+    ]
+  },
   "outputRoots": [
     "."
   ],
-  "delete": true
+  "delete": true,
+  "gitignoreTargetsOnly": true
 }

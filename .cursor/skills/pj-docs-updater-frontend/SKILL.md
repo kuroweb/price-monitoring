@@ -1,9 +1,6 @@
 ---
 name: pj-docs-updater-frontend
-description: >-
-  price-monitoring の docs/frontend/*.md（overview.md など）をメンテする。 Next.js frontend
-  の route / feature / data access の責務境界を実装判断に使える形で保つ。 frontend docs
-  更新、画面構成・通信境界の設計判断の文書化で使う。
+description: price-monitoring の docs/frontend/*.md（overview.md など）をメンテする。 Next.js frontend の route / feature / data access の責務境界を実装判断に使える形で保つ。 frontend docs 更新、画面構成・通信境界の設計判断の文書化で使う。
 ---
 # Frontend ドキュメント（docs/frontend/*.md）
 

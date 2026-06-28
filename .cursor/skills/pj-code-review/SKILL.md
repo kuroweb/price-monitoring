@@ -1,9 +1,6 @@
 ---
 name: pj-code-review
-description: |
-  コードレビュー。PR・変更差分・実装後のセルフレビューで使う。
-  トリガー: 「レビューして」「コードレビュー」「PR チェック」「pj-code-review」,
-  「この diff 見て」「マージ前に確認して」。
+description: 'コードレビュー。PR・変更差分・実装後のセルフレビューで使う。 トリガー: 「レビューして」「コードレビュー」「PR チェック」「pj-code-review」, 「この diff 見て」「マージ前に確認して」。'
 ---
 # Code Review
 

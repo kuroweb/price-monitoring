@@ -1,10 +1,6 @@
 ---
 name: pj-docs-updater-backend
-description: >-
-  price-monitoring の docs/backend/*.md（overview.md、rails-upgrade.md など）をメンテする。
-  Rails BFF / batch の責務境界・置き場所・運用手順を実装判断に使える形で保つ。 backend docs 更新、BFF
-  設計判断の文書化、Rails アップグレード手順の更新で使う。 docs/database/*.md は pj-docs-updater-database
-  に委譲する。
+description: price-monitoring の docs/backend/*.md（overview.md、rails-upgrade.md など）をメンテする。 Rails BFF / batch の責務境界・置き場所・運用手順を実装判断に使える形で保つ。 backend docs 更新、BFF 設計判断の文書化、Rails アップグレード手順の更新で使う。 docs/database/*.md は pj-docs-updater-database に委譲する。
 ---
 # Backend ドキュメント（docs/backend/*.md）
 

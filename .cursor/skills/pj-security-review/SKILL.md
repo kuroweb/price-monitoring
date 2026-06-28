@@ -1,9 +1,6 @@
 ---
 name: pj-security-review
-description: |
-  セキュリティレビュー。PR・変更差分・認証/API/infra 変更のマージ前確認で使う。
-  トリガー: 「セキュリティレビュー」「セキュリティチェック」「pj-security-review」,
-  「脆弱性」「認可漏れ」「シークレット漏洩」「マージ前にセキュリティ確認」。
+description: 'セキュリティレビュー。PR・変更差分・認証/API/infra 変更のマージ前確認で使う。 トリガー: 「セキュリティレビュー」「セキュリティチェック」「pj-security-review」, 「脆弱性」「認可漏れ」「シークレット漏洩」「マージ前にセキュリティ確認」。'
 ---
 # Security Review
 
