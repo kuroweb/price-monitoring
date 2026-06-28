@@ -8,3 +8,7 @@
 # credentials
 *.pem
 .env
+
+# plans
+.plans/*
+!.plans/.keep
