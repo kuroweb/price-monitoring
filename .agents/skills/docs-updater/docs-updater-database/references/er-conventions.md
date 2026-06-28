@@ -1,6 +1,6 @@
-# docs/databases/er.md 規約
+# docs/database/er.md 規約
 
-テーブル定義専用。リレーション図は `docs/databases/association.md`（`doc-association` スキル）。
+テーブル定義専用。リレーション図は `docs/database/association.md`（同一スキル内）。
 
 ## 見出し構成
 
@@ -51,8 +51,8 @@
 
 **型**
 
-| schema.rb | docs/databases/er.md |
-|-----------|-------|
+| schema.rb | docs/database/er.md |
+|-----------|---------------------|
 | `bigint` | bigint |
 | `string` | string |
 | `text` | text |
@@ -63,3 +63,5 @@
 
 - `null: false` → `NOT NULL`
 - `created_at` / `updated_at` は既存の同テーブル記載に合わせる
+
+FK を追加・変更したときは `association.md` も更新する。

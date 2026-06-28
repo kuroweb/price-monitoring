@@ -183,10 +183,9 @@
 
 ## Docs
 
-- [`docs/README.md`](docs/README.md) — handbook の入口
-- [`docs/databases/overview.md`](docs/databases/overview.md) — database 設計の見取り図
-- [`docs/databases/er.md`](docs/databases/er.md) — テーブル定義（カラム・インデックス）
-- [`docs/databases/association.md`](docs/databases/association.md) — テーブル間リレーション（Mermaid）
+- [`docs/database/overview.md`](docs/database/overview.md) — database 設計の見取り図
+- [`docs/database/er.md`](docs/database/er.md) — テーブル定義（カラム・インデックス）
+- [`docs/database/association.md`](docs/database/association.md) — テーブル間リレーション（Mermaid）
 - [`docs/backend/overview.md`](docs/backend/overview.md) — Rails BFF / batch の責務分離
 - [`docs/frontend/overview.md`](docs/frontend/overview.md) — Next.js frontend の責務分離
 

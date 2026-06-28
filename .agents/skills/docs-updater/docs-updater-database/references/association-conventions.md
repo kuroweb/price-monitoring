@@ -1,6 +1,6 @@
-# docs/databases/association.md 規約
+# docs/database/association.md 規約
 
-リレーション専用。カラム・インデックスの一覧は `docs/databases/er.md`（`doc-er` スキル）。
+リレーション専用。カラム・インデックスの一覧は `docs/database/er.md`（同一スキル内）。
 
 ## 見出し構成
 
@@ -64,4 +64,4 @@ erDiagram
 | PK | エンティティ内 `PK` |
 | `add_foreign_key` | エンティティ内 `FK` と線 |
 
-整合確認: `docs/databases/er.md` の該当テーブルの `### カラム`（FK 備考）と一致させる。
+整合確認: `docs/database/er.md` の該当テーブルの `### カラム`（FK 備考）と一致させる。

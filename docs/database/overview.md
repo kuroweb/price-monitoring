@@ -1,4 +1,4 @@
-# Databases Overview
+# Database Overview
 
 このプロジェクトの database docs は、テーブル一覧を読むためのものではなく、どの単位でデータを分けているかを判断するための入口です。
 詳細な定義は `er.md` と `association.md` に分離し、このページでは領域の切り方だけを扱います。
