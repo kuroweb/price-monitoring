@@ -1,3 +1,10 @@
+---
+root: true
+targets: ["*"]
+description: "price-monitoring の基本ルール"
+globs: ["**/*"]
+---
+
 # 基本ルール
 
 ## エージェント設定

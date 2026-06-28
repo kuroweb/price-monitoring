@@ -1,3 +1,10 @@
+---
+root: false
+targets: ["*"]
+description: "price-monitoring の開発ワークフロー"
+globs: ["**/*"]
+---
+
 ## 開発ワークフロー
 
 ### 開発・運用環境

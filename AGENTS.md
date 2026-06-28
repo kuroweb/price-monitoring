@@ -1,23 +1,14 @@
 Please also reference the following rules as needed. The list below is provided in TOON format, and `@` stands for the project root directory.
 
-rules[1]{path}:
-  @.codex/memories/dev-workflow.md
+rules[2]:
+  - path: @.codex/memories/dev-workflow.md
+    description: price-monitoring の開発ワークフロー
+    applyTo[1]: **/*
+  - path: @.codex/memories/project-overview.md
+    description: price-monitoring のプロジェクト概要
+    applyTo[1]: **/*
 
-# Project Overview
-
-## 目的
-
-- Web上の商品の最安値探索と相場把握を支援する。
-- Rails / TypeScript の実践的なキャッチアップを兼ねる。
-- Datadog / BugSnag を使った運用監視の学習と実運用を行う。
-
-## システム構成
-
-- Frontend: Next.js / TypeScript / Tailwind CSS
-- Backend BFF: Rails
-- Batch: Sidekiq + Playwright
-- Data Store: MySQL / Redis
-- 認証: OpenID Connect（実装中）
+# 基本ルール
 
 ## エージェント設定
 

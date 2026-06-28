@@ -1,8 +1,3 @@
----
-description: price-monitoring のプロジェクト概要
-globs: **/*
----
-
 # プロジェクト概要
 
 ## 目的
