@@ -9,6 +9,12 @@ import { useCreateCategoryModalState } from './hooks/useCreateCategoryModalState
 import type { Category, CreateCategoryData } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
 
+import {
+  ScrollableModalBody,
+  ScrollableModalBox,
+  ScrollableModalFooter,
+  ScrollableModalForm,
+} from '@/components/ui/ScrollableModalBox'
 import { createCategory } from '@/lib/actions'
 
 const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
@@ -44,15 +50,9 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
-          >
-            ✕
-          </div>
-          <h3 className='text-lg font-bold'>カテゴリを追加</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <ScrollableModalBox title='カテゴリを追加' onClose={() => setModal(false)}>
+          <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
+            <ScrollableModalBody>
             <div className='divider pt-6'>カテゴリ情報</div>
             <fieldset className='fieldset w-full'>
               <legend className='fieldset-legend'>親カテゴリ</legend>
@@ -77,11 +77,14 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
               <legend className='fieldset-legend'>カテゴリ名</legend>
               <input {...register('name', { required: true })} className='input w-full' />
             </fieldset>
-            <button type='submit' className='btn btn-primary mt-4 w-full'>
+            </ScrollableModalBody>
+            <ScrollableModalFooter>
+            <button type='submit' className='btn btn-primary mt-4 w-full max-sm:mt-0'>
               登録
             </button>
-          </form>
-        </div>
+            </ScrollableModalFooter>
+          </ScrollableModalForm>
+        </ScrollableModalBox>
         <div onClick={() => setModal(false)} className='modal-backdrop' />
       </div>
     </>

@@ -12,6 +12,12 @@ import type {
   UpdateBackmarketWatchTargetData,
 } from '@/lib/api'
 
+import {
+  ScrollableModalBody,
+  ScrollableModalBox,
+  ScrollableModalFooter,
+  ScrollableModalForm,
+} from '@/components/ui/ScrollableModalBox'
 import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/lib/actions'
 
 type Props = {
@@ -59,12 +65,13 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
     <>
       <input type='checkbox' className='modal-toggle' checked={isOpen} onChange={() => onClose()} />
       <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <button onClick={onClose} className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'>
-            ✕
-          </button>
-          <h3 className='text-lg font-bold'>{mode === 'create' ? '監視対象を追加' : '監視対象を更新'}</h3>
-          <form onSubmit={handleSubmit(onSubmit)} className='space-y-3 pt-4'>
+        <ScrollableModalBox
+          title={mode === 'create' ? '監視対象を追加' : '監視対象を更新'}
+          onClose={onClose}
+        >
+          <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
+            <ScrollableModalBody>
+            <div className='space-y-3 pt-4 max-sm:pt-0'>
             <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>名前</legend>
               <input {...register('name', { required: true })} className='input w-full' />
@@ -77,11 +84,15 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
               <input type='checkbox' {...register('enabled')} className='checkbox checkbox-sm' />
               <span>有効</span>
             </label>
+            </div>
+            </ScrollableModalBody>
+            <ScrollableModalFooter>
             <button type='submit' className='btn btn-primary w-full'>
               {mode === 'create' ? '登録' : '更新'}
             </button>
-          </form>
-        </div>
+            </ScrollableModalFooter>
+          </ScrollableModalForm>
+        </ScrollableModalBox>
         <div onClick={onClose} className='modal-backdrop' />
       </div>
     </>

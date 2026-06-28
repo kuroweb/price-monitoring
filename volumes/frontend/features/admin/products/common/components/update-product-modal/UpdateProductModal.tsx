@@ -17,6 +17,12 @@ import { useUpdateProductModalState } from './hooks/useUpdateProductModalState'
 import type { Category, ProductList, UpdateProductData } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
 
+import {
+  ScrollableModalBody,
+  ScrollableModalBox,
+  ScrollableModalFooter,
+  ScrollableModalForm,
+} from '@/components/ui/ScrollableModalBox'
 import { updateProduct } from '@/lib/actions'
 
 export type copyValueType = (
@@ -139,15 +145,9 @@ const UpdateProductModal = ({
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
-          >
-            ✕
-          </div>
-          <h3 className='text-lg font-bold'>計測設定を更新</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <ScrollableModalBox title='計測設定を更新' onClose={() => setModal(false)}>
+          <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
+            <ScrollableModalBody>
             <div className='divider pt-6'>管理情報</div>
             <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>名称</legend>
@@ -254,11 +254,14 @@ const UpdateProductModal = ({
                 </div>
               )}
             </div>
+            </ScrollableModalBody>
+            <ScrollableModalFooter>
             <button type='submit' className='btn btn-primary w-full'>
               更新
             </button>
-          </form>
-        </div>
+            </ScrollableModalFooter>
+          </ScrollableModalForm>
+        </ScrollableModalBox>
         <div onClick={() => setModal(false)} className='modal-backdrop' />
       </div>
     </>

@@ -9,6 +9,12 @@ import { useUpdateCategoryModalState } from './hooks/useUpdateCategoryModalState
 
 import type { Category } from '@/lib/api'
 
+import {
+  ScrollableModalBody,
+  ScrollableModalBox,
+  ScrollableModalFooter,
+  ScrollableModalForm,
+} from '@/components/ui/ScrollableModalBox'
 import { updateCategory } from '@/lib/actions'
 
 const UpdateCategoryModal = ({
@@ -72,15 +78,9 @@ const UpdateCategoryModal = ({
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
-          >
-            ✕
-          </div>
-          <h3 className='text-lg font-bold'>カテゴリを編集</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <ScrollableModalBox title='カテゴリを編集' onClose={() => setModal(false)}>
+          <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
+            <ScrollableModalBody>
             <div className='divider pt-6'>カテゴリ情報</div>
             <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>親カテゴリ</legend>
@@ -109,11 +109,14 @@ const UpdateCategoryModal = ({
               />
               {errors.name && <span className='text-sm text-error'>{errors.name.message}</span>}
             </fieldset>
-            <button type='submit' className='btn btn-primary mt-4 w-full'>
+            </ScrollableModalBody>
+            <ScrollableModalFooter>
+            <button type='submit' className='btn btn-primary mt-4 w-full max-sm:mt-0'>
               更新
             </button>
-          </form>
-        </div>
+            </ScrollableModalFooter>
+          </ScrollableModalForm>
+        </ScrollableModalBox>
         <div onClick={() => setModal(false)} className='modal-backdrop' />
       </div>
     </>
