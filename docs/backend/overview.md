@@ -9,7 +9,7 @@
 - 複数モデルにまたがる作成更新や業務手順は `services` に寄せる
 - Active Record の永続化責務は `models` に寄せる
 - 非同期実行の入口は `app/sidekiq` に寄せ、実際の処理本体は service に寄せる
-- JSON の整形は serializer に寄せ、 finder は取得条件の組み立てに絞る
+- read 系のレスポンス組み立ては serializer に寄せ、 finder は取得条件の組み立てに絞る
 
 ## 置いてよい責務
 
@@ -45,7 +45,7 @@
 - `Api::V1::*Controller` が frontend からの入口
 - 商品以外にも `categories` `product_prices` `backmarket_recents` `backmarket_watch_targets` など、リソース単位で controller を分ける
 - `ProductFinder` のような finder が一覧取得条件を組み立てる
-- `Api::*Serializer` が response shape を決める
+- `Api::*Serializer` が response shape を決め、`ProductPrice*Serializer` のような read 系では取得済みデータの束ね方も持つ
 
 ### 認証
 
@@ -74,8 +74,8 @@
 
 ## 関連 docs
 
-- [`../README.md`](../README.md)
-- [`../databases/overview.md`](../databases/overview.md)
+- [`../../README.md`](../../README.md)
+- [`../database/overview.md`](../database/overview.md)
 - [`./rails-upgrade.md`](./rails-upgrade.md)
 
 ## 代表コード

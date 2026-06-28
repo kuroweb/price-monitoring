@@ -52,7 +52,7 @@
 
 ## 関連 docs
 
-- [`../README.md`](../README.md)
+- [`../../README.md`](../../README.md)
 - [`./overview.md`](./overview.md)
 - [Upgrading Ruby on Rails](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html)（外部）
 
