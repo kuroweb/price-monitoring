@@ -12,3 +12,7 @@
 # plans
 .plans/*
 !.plans/.keep
+
+# workspace
+workspace/*
+!workspace/*.template
