@@ -16,3 +16,8 @@
 # workspaces
 workspaces/*
 !workspaces/*.template
+
+# agent skills
+.agents/skills
+.cursor/skills
+.claude/skills
