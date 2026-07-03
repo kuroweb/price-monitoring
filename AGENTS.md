@@ -75,10 +75,22 @@
 
 # エージェント設定
 
-- Rules は本ファイル（`AGENTS.md`）を正本とする。`CLAUDE.md` は `@AGENTS.md` でインポートするのみ。他ツール向けの Rules 生成物は持たない。
-- Skills の正本はリポジトリの `skills/`（`skills/*/SKILL.md`）。各エージェントツール向けの配置は `--all --scope project --agent <cursor|claude-code|codex>` を付けてプロジェクト配下に展開する（生成物は直接編集しない）。
-- リポジトリから取得: `gh skill install kuroweb/price-monitoring --all --scope project --agent <cursor|claude-code|codex>`
-- 作成中はローカルから配置: `gh skill install . --from-local --all --scope project --agent <cursor|claude-code|codex>`
-- スキル名は `pj-` プレフィックスを付ける（個人スキル・プラグインスキルとの衝突回避）。
-- Rules を変更するときは `AGENTS.md` を直接編集する。
-- Skills を変更するときは `skills/` を修正し、作成中は `--from-local` 付きコマンドに `--force` を付けて再展開する。
+## Rules
+
+- 正本は本ファイル（`AGENTS.md`）。`CLAUDE.md` は `@AGENTS.md` のインポートのみとし、他ツール向けの Rules 生成物は置かない。
+- 変更は `AGENTS.md` を直接編集する。
+
+## Skills
+
+- 正本はリポジトリの `skills/`（`skills/*/SKILL.md`）。エージェントツール向けの配置先（`.agents/skills/` 等）は生成物であり、直接編集しない。
+- 利用前に、リポジトリからプロジェクト配下へ展開する:
+
+  ```bash
+  gh skill install kuroweb/price-monitoring --all --scope project --agent <cursor|claude-code|codex>
+  ```
+
+- `skills/` を編集している最中は、ローカルから再展開する:
+
+  ```bash
+  gh skill install . --from-local --all --scope project --agent <cursor|claude-code|codex> --force
+  ```
