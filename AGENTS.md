@@ -86,11 +86,7 @@
 - 利用前に、リポジトリからプロジェクト配下へ展開する:
 
   ```bash
-  gh skill install kuroweb/price-monitoring --all --scope project --agent <cursor|claude-code|codex> --force
-  ```
-
-- `skills/` を編集している最中は、ローカルから再展開する:
-
-  ```bash
   gh skill install . --from-local --all --scope project --agent <cursor|claude-code|codex> --force
   ```
+
+- `skills/` を編集したら`gh skill install`を再実行すること
