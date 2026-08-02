@@ -46,7 +46,8 @@ module Crawl
         end
 
         def deleted?(page)
-          page.query_selector(".merEmptyState").present?
+          page.query_selector(".merEmptyState").present? ||
+            page.query_selector("text='ページが見つかりませんでした'").present?
         end
 
         def deleted_crawl_result
@@ -84,17 +85,18 @@ module Crawl
         end
 
         def name(page)
-          page.query_selector("[class*='heading'][class*='page']").inner_text
+          page.query_selector("[data-testid='name']")&.inner_text ||
+            page.query_selector("[class*='heading'][class*='page']")&.inner_text
         end
 
         def price(page)
-          page.query_selector("[data-testid='price']").inner_text.gsub(/¥|,/, "")
+          page.query_selector("[data-testid='price']")&.inner_text&.gsub(/¥|,/, "")
         end
 
         def thumbnail_url(page)
           doms = page.query_selector_all("img")
                      .reject { |dom| dom.get_attribute("src")&.include?("super_mercari_days") }
-          doms.first.get_attribute("src")
+          doms.first&.get_attribute("src")
         end
 
         def published(page)
