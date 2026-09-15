@@ -82,11 +82,6 @@
 
 ## Skills
 
-- 正本はリポジトリの `skills/`（`skills/*/SKILL.md`）。エージェントツール向けの配置先（`.agents/skills/` 等）は生成物であり、直接編集しない。
-- 利用前に、リポジトリからプロジェクト配下へ展開する:
-
-  ```bash
-  gh skill install . --from-local --all --scope project --agent <cursor|claude-code|codex> --force
-  ```
-
-- `skills/` を編集したら`gh skill install`を再実行すること
+- 正本は `.agents/skills/`（`.agents/skills/*/SKILL.md`）。変更はここを直接編集する。
+- `.claude/skills` は `.agents/skills` への symlink。直接編集しない。
+- `.cursor/skills` は生成物であり、git 管理しない。
