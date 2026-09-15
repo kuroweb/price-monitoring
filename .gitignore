@@ -9,10 +9,6 @@
 *.pem
 .env
 
-# plans
-.plans/*
-!.plans/.keep
-
 # workspaces
 workspaces/*
 !workspaces/*.template
