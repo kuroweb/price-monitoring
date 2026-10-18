@@ -8,12 +8,12 @@ registry := docker-registry.kuroweb.net
 project := price-monitoring
 tag_suffix := $(shell git rev-parse --short HEAD)
 environment ?= production
-# CIでBuildKitのレジストリキャッシュを使う場合は cache=true を渡す
+# CIでBuildKitのGitHub Actionsキャッシュを使う場合は cache=true を渡す
 cache ?= false
 
-# $(1): キャッシュを置くイメージ名（タグなし）
+# $(1): イメージ名（タグなし）。末尾の名前をキャッシュのscopeに使う
 ifeq ($(cache),true)
-cache_opts = --cache-from type=registry,ref=$(1):buildcache --cache-to type=registry,ref=$(1):buildcache,mode=max
+cache_opts = --cache-from type=gha,scope=$(notdir $(1)) --cache-to type=gha,scope=$(notdir $(1)),mode=max
 endif
 
 #

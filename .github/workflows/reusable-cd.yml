@@ -41,9 +41,13 @@ jobs:
           oauth-secret: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
           tags: tag:ci
 
-      # レジストリキャッシュを書き出せる docker-container ドライバを使う
+      # GHA キャッシュを書き出せる docker-container ドライバを使う
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
+
+      # make から呼ぶ docker buildx が GHA キャッシュへアクセスできるようにランタイムのトークンを公開する
+      - name: Expose GitHub Runtime
+        uses: crazy-max/ghaction-github-runtime@v3
 
       - name: Build Docker Image
         env:
