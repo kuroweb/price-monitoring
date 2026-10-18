@@ -1,18 +1,18 @@
 # Rails バージョンアップ
 
 このページは、price-monitoring の Rails（BFF / batch）をメジャー・マイナー更新するときの手順をまとめた handbook です。
-責務境界は [`overview.md`](./overview.md) を参照する。
+責務境界は [`overview.md`](../overview.md) を参照する。
 
 ## 判断基準
 
 - [Upgrading Ruby on Rails](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html) に沿う（`bundle update` → `app:update` → 検証）
-- gem の更新と設定生成は **Docker 経由**、検証は **`just rspec`**
+- gem の更新と設定生成は **Docker 経由**、検証は **`just rspec-backend`**
 - マイナーバージョンは一つずつ上げ、deprecation を潰してから次へ進む
 - `app:update` の生成物は正規手順の一部として残し、diff を見てから取捨選択する
 
 ## 手順
 
-1. **前提**: `just up` で DB / Redis / `spring` が起動していることを `just ps` で確認する。
+1. **前提**: `just up` で DB / Redis / `backend` が起動していることを `just ps` で確認する。
 2. **Gemfile**: `volumes/backend/Gemfile` の `rails` を目標バージョンに更新する。
 3. **bundle**: ホストではなくコンテナ内で更新する。
 
@@ -38,7 +38,7 @@
 7. **検証**: テストと起動確認。
 
    ```bash
-   just rspec
+   just rspec-backend
    docker compose run --rm backend bin/rails zeitwerk:check
    ```
 
@@ -52,14 +52,14 @@
 
 ## 関連 docs
 
-- [`../../README.md`](../../README.md)
-- [`./overview.md`](./overview.md)
+- [`../../../README.md`](../../../README.md)
+- [`../overview.md`](../overview.md)
 - [Upgrading Ruby on Rails](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html)（外部）
 
 ## 代表コード
 
-- [`volumes/backend/Gemfile`](../../volumes/backend/Gemfile)
-- [`volumes/backend/config/application.rb`](../../volumes/backend/config/application.rb)
+- [`volumes/backend/Gemfile`](../../../volumes/backend/Gemfile)
+- [`volumes/backend/config/application.rb`](../../../volumes/backend/config/application.rb)
 
 ## 更新時に確認する source of truth
 
