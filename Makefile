@@ -17,10 +17,10 @@ environment ?= production
 all: build-all push-all
 
 # Dockerイメージをビルドする
-build-all: build-backend build-backend-playwright build-backend-camoufox build-frontend
+build-all: build-backend build-backend-playwright build-backend-camoufox build-frontend build-auth-provider
 
 # Dockerイメージをプッシュする
-push-all: push-backend push-backend-playwright push-backend-camoufox push-frontend
+push-all: push-backend push-backend-playwright push-backend-camoufox push-frontend push-auth-provider
 
 #
 # backend
@@ -81,3 +81,18 @@ build-frontend:
 
 push-frontend:
 	docker push $(frontend_tag)
+
+#
+# auth-provider
+#
+
+auth_provider_tag := $(registry)/auth-provider-backend-$(environment):$(tag_suffix)
+auth_provider_dockerfile := containers/auth-provider/Dockerfile.$(environment)
+
+build-auth-provider:
+	docker build \
+	-t $(auth_provider_tag) \
+	-f $(auth_provider_dockerfile) volumes/auth-provider
+
+push-auth-provider:
+	docker push $(auth_provider_tag)

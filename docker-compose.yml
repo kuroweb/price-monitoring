@@ -65,9 +65,6 @@ services:
     <<: *backend
     ports:
       - 3000:3000
-    networks:
-      - default
-      - shared
 
   backend-batch-1:
     <<: *backend
@@ -80,10 +77,6 @@ services:
   backend-batch-3:
     <<: *backend
     command: bundle exec sidekiq -C config/sidekiq/crawl_process_2.yml
-
-  spring:
-    <<: *backend
-    command: bundle exec spring server && tail -f /dev/null
 
   backend-db:
     <<: *mysql
@@ -112,6 +105,45 @@ services:
     ports:
       - 8890:8890
 
+  auth-provider:
+    build:
+      context: .
+      dockerfile: containers/auth-provider/Dockerfile
+    env_file:
+      - path: ./volumes/auth-provider/.env
+        required: false
+    environment:
+      DB_HOST_NAME: "auth-provider-db"
+      DB_DATABASE_NAME: "rails"
+      DB_USER_NAME: "root"
+      DB_PASSWORD: ""
+      REDIS_URL: "redis://auth-provider-redis:6379"
+      ALLOWED_ORIGINS: "nginx,dev.auth-provider.com"
+      DOMAIN_NAME: "dev.auth-provider.com"
+    stdin_open: true
+    tty: true
+    depends_on:
+      auth-provider-db:
+        condition: service_healthy
+      auth-provider-redis:
+        condition: service_healthy
+    volumes:
+      - ./volumes/auth-provider:/app
+      - auth-provider-bundle:/usr/local/bundle
+    ports:
+      - 5050:3000
+
+  auth-provider-db:
+    <<: *mysql
+    volumes:
+      - auth-provider-db:/var/lib/mysql
+
+  auth-provider-redis:
+    <<: *redis
+    volumes:
+      - auth-provider-redis:/data
+    command: --appendonly yes
+
   nginx:
     image: nginx:latest
     ports:
@@ -122,13 +154,21 @@ services:
     depends_on:
       - backend
       - frontend
+      - auth-provider
     restart: unless-stopped
+    networks:
+      default:
+        aliases:
+          - dev.auth-provider.com
 
 volumes:
   backend-bundle:
   backend-db:
   backend-redis:
-
-networks:
-  shared:
-    name: shared-network
+  auth-provider-bundle:
+  auth-provider-db:
+    name: auth-provider_backend-db
+    external: ${AUTH_PROVIDER_EXISTING_VOLUMES:-false}
+  auth-provider-redis:
+    name: auth-provider_backend-redis
+    external: ${AUTH_PROVIDER_EXISTING_VOLUMES:-false}
