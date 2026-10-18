@@ -9,9 +9,6 @@ on:
       build_command:
         required: true
         type: string
-      push_command:
-        required: true
-        type: string
       apply_command:
         required: true
         type: string
@@ -49,13 +46,11 @@ jobs:
       - name: Expose GitHub Runtime
         uses: crazy-max/ghaction-github-runtime@v3
 
-      - name: Build Docker Image
+      - name: Build and Push Docker Image
         env:
           cache: "true"
+          push: "true"
         run: ${{ inputs.build_command }}
-
-      - name: Push Docker Image
-        run: ${{ inputs.push_command }}
 
       - name: Setup SSH for k8s Repository
         uses: webfactory/ssh-agent@v0.9.0

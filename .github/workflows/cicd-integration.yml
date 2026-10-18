@@ -69,7 +69,6 @@ jobs:
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-backend tag_suffix=${{ github.sha }} environment=integration"
-      push_command: "make push-backend tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make update-image ENV=integration IMAGE=price-monitoring-backend tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
@@ -85,7 +84,6 @@ jobs:
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-backend-playwright tag_suffix=${{ github.sha }} environment=integration"
-      push_command: "make push-backend-playwright tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make update-image ENV=integration IMAGE=price-monitoring-backend-playwright tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
@@ -101,7 +99,6 @@ jobs:
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-backend-camoufox tag_suffix=${{ github.sha }} environment=integration"
-      push_command: "make push-backend-camoufox tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make update-image ENV=integration IMAGE=price-monitoring-backend-camoufox tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
@@ -117,7 +114,6 @@ jobs:
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-frontend tag_suffix=${{ github.sha }} environment=integration"
-      push_command: "make push-frontend tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make update-image ENV=integration IMAGE=price-monitoring-frontend tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
@@ -149,7 +145,6 @@ jobs:
     with:
       service_name: "k8s/manifests/price-monitoring"
       build_command: "make build-auth-provider tag_suffix=${{ github.sha }} environment=integration"
-      push_command: "make push-auth-provider tag_suffix=${{ github.sha }} environment=integration"
       apply_command: "make update-image ENV=integration IMAGE=auth-provider-backend tag_suffix=${{ github.sha }}"
     secrets:
       TAILSCALE_OAUTH_CLIENT_ID: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
