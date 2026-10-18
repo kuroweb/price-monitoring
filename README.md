@@ -28,111 +28,117 @@
 
 ### Development
 
-- Docker Compose
+Docker Composeで各コンテナを起動する。
 
-  ```mermaid
-  flowchart LR
-  subgraph Docker Compose
-    subgraph proxy
-      nginx_web[Nginx Web]
+```mermaid
+flowchart LR
+  subgraph environment["Docker Compose"]
+    gateway["Nginx"]
+
+    subgraph frontend["Frontend"]
+      nextjs["Next.js"]
     end
 
-    subgraph Frontend
-      direction LR
-
-      Next.js
+    subgraph backend["Backend（BFF）"]
+      rails["Rails（OIDC Client）"]
     end
 
-    subgraph "Backend（BFF）"
-      direction LR
-
-      rails[Rails Web]
+    subgraph batch["Backend（Batch）"]
+      sidekiq["Sidekiq"]
+      playwright["Playwright"]
+      camoufox["Camoufox"]
     end
 
-    subgraph Backend Batch
-      direction LR
-
-      sidekiq[Sidekiq]
-      playwright[Playwright]
-      camoufox[Camoufox]
-    end
-
-    subgraph Databases
+    subgraph backend_data["BFF / Batch用データストア"]
       mysql[(MySQL)]
       redis[(Redis)]
     end
+
+    subgraph auth["Auth Provider"]
+      auth_rails["Rails（OIDC Provider）"]
+    end
+
+    subgraph auth_data["Auth Provider用データストア"]
+      auth_mysql[(MySQL)]
+      auth_redis[(Redis)]
+    end
   end
 
-  subgraph "Docker Compose"
-    auth_provider["OpenID Provider<br>（auth-providerリポジトリ）"]
+  subgraph vps["VPS"]
+    proxy["Proxy"]
   end
 
-  subgraph VPS
-    proxy-1
-  end
-
-  client-->nginx_web-->Next.js
-  nginx_web-->rails
-  rails-->|OIDC|auth_provider
-  sidekiq-->playwright-->VPS
-  sidekiq-->camoufox-->VPS
-  rails-->Databases
-  sidekiq-->Databases
-  ```
+  client["クライアント"] --> gateway
+  gateway --> nextjs
+  gateway --> rails
+  gateway -->|認証ホスト| auth_rails
+  rails -->|OIDC / HTTPS| gateway
+  rails --> backend_data
+  sidekiq --> backend_data
+  auth_rails --> auth_data
+  sidekiq --> playwright --> proxy
+  sidekiq --> camoufox --> proxy
+```
 
 ### Production
 
-- 自宅Kubernetes (Master Node x 1, Worker Node x 3構成)
+自宅のKubernetesクラスタ（Master Node × 1、Worker Node × 3）で稼働する。アプリは同じnamespaceで管理し、BFF / BatchとAuth ProviderのMySQL・Redisは分ける。
 
-  ```mermaid
-  flowchart LR
-  subgraph Kubernetest Node
-    subgraph Ingress Controller
-      nginx_web[Nginx Web]
+Integrationも同じ構成で、アプリのnamespaceは`price-monitoring-integration`を使用する。
+
+```mermaid
+flowchart LR
+  subgraph environment["Kubernetesクラスタ"]
+    subgraph ingress["ingress-nginx namespace"]
+      gateway["Nginx Ingress Controller"]
     end
 
-    subgraph Frontend
-      direction LR
+    subgraph application["price-monitoring-production namespace"]
+      subgraph frontend["Frontend"]
+        nextjs["Next.js"]
+      end
 
-      Next.js
-    end
+      subgraph backend["Backend（BFF）"]
+        rails["Rails（OIDC Client）"]
+      end
 
-    subgraph "Backend（BFF）"
-      direction LR
+      subgraph batch["Backend（Batch）"]
+        sidekiq["Sidekiq"]
+        playwright["Playwright"]
+        camoufox["Camoufox"]
+      end
 
-      rails[Rails Web]
-    end
+      subgraph backend_data["BFF / Batch用データストア"]
+        mysql[(MySQL)]
+        redis[(Redis)]
+      end
 
-    subgraph Backend Batch
-      direction LR
+      subgraph auth["Auth Provider"]
+        auth_rails["Rails（OIDC Provider）"]
+      end
 
-      sidekiq[Sidekiq]
-      playwright[Playwright]
-      camoufox[Camoufox]
-    end
-
-    subgraph Databases
-      mysql[(MySQL)]
-      redis[(Redis)]
+      subgraph auth_data["Auth Provider用データストア"]
+        auth_mysql[(MySQL)]
+        auth_redis[(Redis)]
+      end
     end
   end
 
-  subgraph Kubernetest Node
-    auth_provider["OpenID Provider<br>（auth-providerリポジトリ）"]
+  subgraph vps["VPS"]
+    proxy["Proxy"]
   end
 
-  subgraph VPS
-    proxy-1
-  end
-
-  client-->nginx_web-->Next.js
-  nginx_web-->rails
-  rails-->|OIDC|auth_provider
-  sidekiq-->playwright-->VPS
-  sidekiq-->camoufox-->VPS
-  rails-->Databases
-  sidekiq-->Databases
-  ```
+  client["クライアント"] --> gateway
+  gateway --> nextjs
+  gateway --> rails
+  gateway -->|認証ホスト| auth_rails
+  rails -->|OIDC / HTTPS| gateway
+  rails --> backend_data
+  sidekiq --> backend_data
+  auth_rails --> auth_data
+  sidekiq --> playwright --> proxy
+  sidekiq --> camoufox --> proxy
+```
 
 ## セットアップ手順
 
@@ -159,6 +165,8 @@
     127.0.0.1 dev.price-monitoring.com
     ```
 
+- 認証アプリの秘密鍵・証明書・hosts・OIDCクライアントを準備する。既存環境からの引き継ぎも含め、[認証基盤のセットアップ](docs/auth-provider/overview.md)を参照する。
+
 - Dockerイメージビルド
 
   ```bash
@@ -179,16 +187,38 @@
 
 - ローカル環境
   - メインアプリ: https://dev.price-monitoring.com/
-  - 認証プロバイダー: https://dev.auth.price-monitoring.com/
+  - 認証プロバイダー: https://dev.auth-provider.com/
+
+## テスト
+
+起動中の対象コンテナで RSpec を直接実行する。ファイル・行・RSpec オプションを引数で指定できる。
+
+```bash
+just rspec-backend
+just rspec-auth-provider
+```
+
+認証アプリのテスト DB・アセットの初回準備は[認証基盤のセットアップ](docs/auth-provider/overview.md)を参照する。
 
 ## Docs
 
-- [`docs/README.md`](docs/README.md) — handbook の入口
-- [`docs/databases/overview.md`](docs/databases/overview.md) — database 設計の見取り図
-- [`docs/databases/er.md`](docs/databases/er.md) — テーブル定義（カラム・インデックス）
-- [`docs/databases/association.md`](docs/databases/association.md) — テーブル間リレーション（Mermaid）
+- [`docs/database/overview.md`](docs/database/overview.md) — database 設計の見取り図
+- [`docs/database/er.md`](docs/database/er.md) — テーブル定義（カラム・インデックス）
+- [`docs/database/association.md`](docs/database/association.md) — テーブル間リレーション（Mermaid）
+- [`docs/auth-provider/overview.md`](docs/auth-provider/overview.md) — 認証基盤の配置・セットアップ・既存環境の引き継ぎ
 - [`docs/backend/overview.md`](docs/backend/overview.md) — Rails BFF / batch の責務分離
+- [`docs/backend/operations/rails-upgrade.md`](docs/backend/operations/rails-upgrade.md) — Rails バージョンアップ手順
 - [`docs/frontend/overview.md`](docs/frontend/overview.md) — Next.js frontend の責務分離
+
+## PR の自動レビュー
+
+`.github/workflows/claude-code-review.yml` で Claude Code による自動レビューを実行する。
+
+- PR の作成、更新、再オープン、Draft 解除時に実行する。Draft 中は実行しない。
+- `kuroweb/ai-manifest` の `gh-pr-review-ci` と `code-reviewing` スキルを使い、Sonnet が PR の説明と差分をレビューする。
+- レビュー結果は PR のコメントに投稿する。同じ PR に更新が入った場合、実行中のレビューをキャンセルする。
+
+事前にリポジトリの Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。`GITHUB_TOKEN` は GitHub Actions が自動発行するものを使う。
 
 ## 自動デプロイ
 

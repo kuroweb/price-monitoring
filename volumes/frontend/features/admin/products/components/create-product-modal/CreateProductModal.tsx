@@ -17,6 +17,12 @@ import { useCreateProductModalState } from './hooks/useCreateProductModalState'
 import type { Category, CreateProductData, ProductList } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
 
+import {
+  ScrollableModalBody,
+  ScrollableModalBox,
+  ScrollableModalFooter,
+  ScrollableModalForm,
+} from '@/components/ui/ScrollableModalBox'
 import { createProduct } from '@/lib/actions'
 
 const CreateProductModal = ({
@@ -132,15 +138,9 @@ const CreateProductModal = ({
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <div className='modal-box h-fit'>
-          <div
-            onClick={() => setModal(false)}
-            className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4'
-          >
-            ✕
-          </div>
-          <h3 className='text-lg font-bold'>計測設定を追加</h3>
-          <form onSubmit={handleSubmit(onSubmit)}>
+        <ScrollableModalBox title='計測設定を追加' onClose={() => setModal(false)}>
+          <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
+            <ScrollableModalBody>
             <div className='divider py-2'>共通設定</div>
             <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>管理コード</legend>
@@ -247,11 +247,14 @@ const CreateProductModal = ({
                 </div>
               )}
             </div>
+            </ScrollableModalBody>
+            <ScrollableModalFooter>
             <button type='submit' className='btn btn-primary w-full'>
               登録
             </button>
-          </form>
-        </div>
+            </ScrollableModalFooter>
+          </ScrollableModalForm>
+        </ScrollableModalBox>
         <div onClick={() => setModal(false)} className='modal-backdrop' />
       </div>
     </>

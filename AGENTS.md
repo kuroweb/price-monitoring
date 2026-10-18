@@ -1,4 +1,4 @@
-# Project Overview
+# プロジェクト概要
 
 ## 目的
 
@@ -12,17 +12,17 @@
 - Backend BFF: Rails
 - Batch: Sidekiq + Playwright
 - Data Store: MySQL / Redis
-- 認証: OpenID Connect（実装中）
+- 認証: OpenID Connect（実装中）。Provider は `volumes/auth-provider`、Client / BFF は `volumes/backend` の別 Rails アプリとして管理する。
 
-## 開発ワークフロー
+# 開発ワークフロー
 
-### 開発・運用環境
+## 開発・運用環境
 
 - 開発環境は Docker Compose を基本とする。
 - 本番環境は自宅 Kubernetes（Master 1 / Worker 3）を利用する。
 - CI/CD は GitHub Actions で運用する。
 
-### ローカル開発ワークフロー
+## ローカル開発ワークフロー
 
 1. 初回セットアップ: 証明書作成と `/etc/hosts` 設定を行う（README の手順に従う）。
 2. イメージ準備: `docker compose build`
@@ -30,10 +30,10 @@
 4. 状態確認: `just ps`（起動確認） / `just logs`（エラー確認）
 5. 依存関係更新: npm パッケージを追加・更新する場合はホストで `npm i` せず、`docker compose run --rm frontend npm i` を使う
 6. 実装・修正: 既存の責務境界（Frontend / BFF / Batch）を維持して変更
-7. 検証: 変更範囲に応じて `just rspec` などを実行
+7. 検証: 変更範囲に応じて `just rspec-backend` などを実行
 8. 終了: `just down`
 
-### 主要コマンド
+## 主要コマンド
 
 - `just up`: Docker Compose の全サービスをバックグラウンド起動
 - `just down`: Docker Compose の全サービス停止とネットワーク破棄
@@ -42,20 +42,21 @@
 - `just restart-all`: 全サービスを再起動
 - `just restart <container-name>`: 指定コンテナのみ再起動
 - `just attach <container-name>`: 指定コンテナにアタッチして対話確認
-- `just rspec [args...]`: Rails のテスト実行。引数で対象ファイル・行・オプションを指定可能（`spring` コンテナ経由）
+- `just rspec-auth-provider [args...]`: 認証アプリの RSpec 実行。対象ファイル・行・オプションを指定可能
+- `just rspec-backend [args...]`: Rails のテスト実行。引数で対象ファイル・行・オプションを指定可能（`backend` コンテナで直接実行）
 - `docker compose build`: ローカル開発用イメージ再ビルド
 - `docker compose run --rm frontend npm i`: frontend の npm 依存関係を Docker 経由で追加・更新する。ホストで `npm i` は実行しない
 - `make build-all` / `make push-all`: デプロイ用イメージのビルド・push（主に運用向け）
 
-### テスト実行ガイド
+## テスト実行ガイド
 
-- 前提: `just up` 後に `spring` コンテナが起動していることを `just ps` で確認する。
-- 全体実行: `just rspec`（ローカル反復向け。`spring` コンテナを利用）
-- 単一ファイル実行: `just rspec spec/models/<target>_spec.rb`
-- 行指定実行: `just rspec spec/models/<target>_spec.rb:42`
+- 前提: `just up` 後に `backend` コンテナが起動していることを `just ps` で確認する。
+- 全体実行: `just rspec-backend`（`backend` コンテナで直接実行）
+- 単一ファイル実行: `just rspec-backend spec/models/<target>_spec.rb`
+- 行指定実行: `just rspec-backend spec/models/<target>_spec.rb:42`
 - 失敗時の切り分け: まず対象 spec を単体で再実行し、必要に応じて `just logs` で依存サービスの状態を見る。
 
-### 実装時の判断基準
+## 実装時の判断基準
 
 - まず `just ps` で実行環境を確認し、未起動なら `just up` を優先する。
 - 不具合調査は `just logs` で事実確認してから修正に入る。
@@ -65,18 +66,25 @@
 - 監視・運用影響がある変更では Datadog / BugSnag への影響も確認する。
 - コマンド追加や運用変更が必要な場合は、`README.md` / `justfile` / `Makefile` の整合を保つ。
 - デプロイ用の `make` タスクは、ローカル開発修正だけなら原則触らない。
+- 認証アプリは `volumes/auth-provider`、コンテナ定義は `containers/auth-provider` に置く。ローカルの Nginx は `volumes/nginx` にまとめ、ホスト名で振り分ける。BFF とモデル・DB・Redis を共有しない。
+- OIDC endpoint / issuer / token / scope / session / 署名鍵に影響する変更では Provider と Client の両方を確認する。認証基盤の運用手順は `docs/auth-provider/overview.md` を参照する。
 
-### 変更後チェックリスト
+## 変更後チェックリスト
 
 - 変更ファイルが対象レイヤーに閉じているか
 - ローカル実行手順に影響がある場合、関連ドキュメントを更新したか
 - 必要なテストまたは最低限の動作確認を実施したか
 - 監視・運用影響がある変更かどうかを確認したか
 
-## エージェント設定
+# エージェント設定
 
-- このリポジトリでは `.rulesync/` を正本として扱う。
-- ルール・スキル・サブエージェントを変更するときは `.rulesync/` のみ編集する。
-- `rulesync generate` の出力物（`AGENTS.md` / `CLAUDE.md` / `GEMINI.md`、各エージェント向け rules・memories など）は直接編集しない。
-- 内容を変更するときは `.rulesync/` を修正してから `rulesync generate` を実行する。
-- `.rulesync/` と生成物が矛盾する場合は `.rulesync/` を正とする。
+## Rules
+
+- 正本は本ファイル（`AGENTS.md`）。`CLAUDE.md` は `@AGENTS.md` のインポートのみとし、他ツール向けの Rules 生成物は置かない。
+- 変更は `AGENTS.md` を直接編集する。
+
+## Skills
+
+- 正本は `.agents/skills/`（`.agents/skills/*/SKILL.md`）。変更はここを直接編集する。
+- `.claude/skills` は `.agents/skills` への symlink。直接編集しない。
+- `.cursor/skills` は生成物であり、git 管理しない。

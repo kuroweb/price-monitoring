@@ -116,9 +116,9 @@ const ProductsTable = ({ products, categories }: Props) => {
           ))}
         </tbody>
       </table>
-      <CreateProductModal key={product?.id} product={product} categories={categories} />
+      <CreateProductModal key={`create-${product?.id ?? 'none'}`} product={product} categories={categories} />
       <UpdateProductModal
-        key={product?.id}
+        key={`update-${product?.id ?? 'none'}`}
         productId={product?.id || 0}
         product={product}
         categories={categories}
