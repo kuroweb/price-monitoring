@@ -41,7 +41,13 @@ jobs:
           oauth-secret: ${{ secrets.TAILSCALE_OAUTH_CLIENT_SECRET }}
           tags: tag:ci
 
+      # レジストリキャッシュを書き出せる docker-container ドライバを使う
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
       - name: Build Docker Image
+        env:
+          cache: "true"
         run: ${{ inputs.build_command }}
 
       - name: Push Docker Image
