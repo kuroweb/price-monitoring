@@ -39,9 +39,10 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # Bugsnagへのリクエストをデフォルトでモック
+  # BugsnagとDiscordへの通知リクエストをデフォルトでモック
   config.before do
     stub_request(:post, "https://notify.bugsnag.com/").to_return(status: 200)
+    stub_request(:post, %r{\Ahttps://discord\.com/api/webhooks/}).to_return(status: 204)
   end
 
   # Request Specでsessionを利用できるようにする
