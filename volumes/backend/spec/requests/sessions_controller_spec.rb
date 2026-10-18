@@ -53,6 +53,8 @@ RSpec.describe SessionsController, type: :request do
       end
 
       it "ネットワークエラーが発生してもログアウトできること" do
+        webhook_url = "https://discord.com/api/webhooks/1/token"
+        stub_const("ENV", ENV.to_hash.merge("BUGSNAG_DISCORD_WEBHOOK_URL" => webhook_url))
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_raise(Faraday::ConnectionFailed.new("Connection failed"))
 
@@ -60,6 +62,7 @@ RSpec.describe SessionsController, type: :request do
 
         expect(response).to redirect_to("/auth/test")
         expect(flash[:notice]).to eq("Logged out successfully")
+        expect(a_request(:post, webhook_url)).to have_been_made.once
       end
     end
 
@@ -109,9 +112,11 @@ RSpec.describe SessionsController, type: :request do
     end
 
     it "認証失敗をログに記録すること" do
-      expect(Rails.logger).to receive(:error).with("Authentication failed: test_error")
+      allow(Rails.logger).to receive(:error)
 
       get "/auth/failure", params: { message: "test_error" }
+
+      expect(Rails.logger).to have_received(:error).with("Authentication failed: test_error")
     end
   end
 end
