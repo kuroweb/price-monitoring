@@ -53,8 +53,7 @@ RSpec.describe SessionsController, type: :request do
       end
 
       it "ネットワークエラーが発生してもログアウトできること" do
-        webhook_url = "https://discord.com/api/webhooks/1/token"
-        stub_const("ENV", ENV.to_hash.merge("BUGSNAG_DISCORD_WEBHOOK_URL" => webhook_url))
+        allow(Bugsnag).to receive(:notify)
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_raise(Faraday::ConnectionFailed.new("Connection failed"))
 
@@ -62,7 +61,7 @@ RSpec.describe SessionsController, type: :request do
 
         expect(response).to redirect_to("/auth/test")
         expect(flash[:notice]).to eq("Logged out successfully")
-        expect(a_request(:post, webhook_url)).to have_been_made.once
+        expect(Bugsnag).to have_received(:notify).with(an_instance_of(Faraday::ConnectionFailed))
       end
     end
 
