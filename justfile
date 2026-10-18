@@ -22,5 +22,8 @@ attach container-name:
 logs:
 	docker compose logs -f
 
-rspec *args:
-	docker compose exec spring rspec {{args}}
+rspec-backend *args:
+	docker compose exec backend bundle exec rspec {{args}}
+
+rspec-auth-provider *args:
+	docker compose exec auth-provider bundle exec rspec {{args}}
