@@ -54,6 +54,8 @@ jobs:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.backend_ci == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-24.04
+    outputs:
+      cd: ${{ needs.check_changes.outputs.backend_cd }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -64,15 +66,10 @@ jobs:
           docker compose run backend rails db:create
           docker compose run backend rails db:migrate
           docker compose run backend rspec
-      - name: Set CI Result
-        if: ${{ success() }}
-        run: echo "result=true" >> $GITHUB_OUTPUT
 
   backend_cd:
-    needs:
-      - check_changes
-      - backend_ci
-    if: ${{ needs.check_changes.outputs.backend_cd == 'true' || github.event_name == 'workflow_dispatch' }}
+    needs: backend_ci
+    if: ${{ needs.backend_ci.outputs.cd == 'true' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
@@ -138,6 +135,8 @@ jobs:
     needs: check_changes
     if: ${{ needs.check_changes.outputs.auth_provider_ci == 'true' || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-24.04
+    outputs:
+      cd: ${{ needs.check_changes.outputs.auth_provider_cd }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v5
@@ -149,10 +148,8 @@ jobs:
           docker compose run --rm -e RAILS_ENV=test auth-provider sh -c 'bundle exec rails db:prepare && bundle exec rails tailwindcss:build && bundle exec rspec'
 
   auth_provider_cd:
-    needs:
-      - check_changes
-      - auth_provider_ci
-    if: ${{ needs.check_changes.outputs.auth_provider_cd == 'true' || github.event_name == 'workflow_dispatch' }}
+    needs: auth_provider_ci
+    if: ${{ needs.auth_provider_ci.outputs.cd == 'true' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
