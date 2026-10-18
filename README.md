@@ -190,6 +190,16 @@
 - [`docs/backend/rails-upgrade.md`](docs/backend/rails-upgrade.md) — Rails バージョンアップ手順
 - [`docs/frontend/overview.md`](docs/frontend/overview.md) — Next.js frontend の責務分離
 
+## PR の自動レビュー
+
+`.github/workflows/claude-code-review.yml` で Claude Code による自動レビューを実行する。
+
+- PR の作成、更新、再オープン、Draft 解除時に実行する。Draft 中は実行しない。
+- `kuroweb/ai-manifest` の `gh-pr-review-ci` と `code-reviewing` スキルを使い、Sonnet が PR の説明と差分をレビューする。
+- レビュー結果は PR のコメントに投稿する。同じ PR に更新が入った場合、実行中のレビューをキャンセルする。
+
+事前にリポジトリの Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。`GITHUB_TOKEN` は GitHub Actions が自動発行するものを使う。
+
 ## 自動デプロイ
 
 - ArgoCDによるGitOps
