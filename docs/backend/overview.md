@@ -49,6 +49,9 @@
 
 ### 認証
 
+- `volumes/backend` は OIDC Client / BFF、`volumes/auth-provider` は Devise / Doorkeeper を使う OIDC Provider。別 Rails アプリとして扱い、モデル・DB・Redis を共有しない
+- Provider のセットアップ・運用は [`../auth-provider/overview.md`](../auth-provider/overview.md) を参照する
+
 - `SessionsController` と `OidcTokenControl` が OIDC ログイン・トークン検証の境界
 - 認可や session の扱いは controller / concern に閉じ、service へ散らさない
 
@@ -76,7 +79,7 @@
 
 - [`../../README.md`](../../README.md)
 - [`../database/overview.md`](../database/overview.md)
-- [`./rails-upgrade.md`](./rails-upgrade.md)
+- [`./operations/rails-upgrade.md`](./operations/rails-upgrade.md)
 
 ## 代表コード
 
