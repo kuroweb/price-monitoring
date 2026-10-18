@@ -38,14 +38,9 @@ jobs:
             auth_provider_ci:
               - './volumes/auth-provider/**'
               - './containers/auth-provider/**'
-              - './docker-compose.yml'
-              - './.dockerignore'
-              - './Makefile'
-              - './.github/workflows/cicd-production.yml'
             auth_provider_cd:
               - './volumes/auth-provider/!(spec)/**'
               - './containers/auth-provider/**'
-              - './Makefile'
             frontend_cd:
               - './volumes/frontend/**'
               - './containers/frontend/**'
