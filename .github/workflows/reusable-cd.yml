@@ -70,6 +70,9 @@ jobs:
             ${{ inputs.apply_command }}
             make commit
             make push && exit 0
-            sleep $((attempt * 3))
+            echo "k8s manifest push failed (attempt ${attempt}/5)"
+            if [ "$attempt" -lt 5 ]; then
+              sleep $((attempt * 3))
+            fi
           done
           exit 1
