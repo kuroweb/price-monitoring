@@ -23,6 +23,7 @@ jobs:
           make build-backend-playwright tag_suffix=${{ github.sha }} environment=integration
           make build-backend-camoufox tag_suffix=${{ github.sha }} environment=integration
           make build-frontend tag_suffix=${{ github.sha }} environment=integration
+          make build-auth-provider tag_suffix=${{ github.sha }} environment=integration
 
       - name: Push All Docker Images
         run: |
@@ -30,6 +31,7 @@ jobs:
           make push-backend-playwright tag_suffix=${{ github.sha }} environment=integration
           make push-backend-camoufox tag_suffix=${{ github.sha }} environment=integration
           make push-frontend tag_suffix=${{ github.sha }} environment=integration
+          make push-auth-provider tag_suffix=${{ github.sha }} environment=integration
 
       - name: Setup SSH for k8s Repository
         uses: webfactory/ssh-agent@v0.9.0

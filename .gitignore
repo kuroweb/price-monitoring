@@ -9,9 +9,5 @@
 *.pem
 .env
 
-# workspaces
-workspaces/*
-!workspaces/*.template
-
 # agent skills
 .cursor/skills
