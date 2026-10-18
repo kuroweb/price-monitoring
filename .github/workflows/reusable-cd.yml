@@ -57,12 +57,22 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.K8S_DEPLOY_KEY }}
 
+      # 複数のCDジョブが同時にk8sリポジトリへpushするため、拒否されたら最新を取り直してタグ更新からやり直す
       - name: Update Kubernetes Manifest
         run: |
           git config --global user.name "${{ secrets.GIT_COMMIT_USER }}"
           git config --global user.email "${{ secrets.GIT_COMMIT_EMAIL }}"
           git clone git@github.com:kuroweb/k8s.git
           cd ${{ inputs.service_name }}
-          ${{ inputs.apply_command }}
-          make commit
-          make push
+          for attempt in 1 2 3 4 5; do
+            git fetch origin master
+            git reset --hard origin/master
+            ${{ inputs.apply_command }}
+            make commit
+            make push && exit 0
+            echo "k8s manifest push failed (attempt ${attempt}/5)"
+            if [ "$attempt" -lt 5 ]; then
+              sleep $((attempt * 3))
+            fi
+          done
+          exit 1
