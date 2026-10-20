@@ -93,10 +93,49 @@ https://dev.price-monitoring.com/auth/test からログインし、Provider で�
 
 ## CI とデプロイ
 
-Integration / Production workflow は Provider の変更を検出し、専用の RSpec job を実行する。
+### CI/CD
+
+| 環境 | workflow | 自動実行の契機 |
+| --- | --- | --- |
+| Integration | [cicd-integration.yml](../../.github/workflows/cicd-integration.yml) | `develop` への push |
+| Production | [cicd-production.yml](../../.github/workflows/cicd-production.yml) | `master` への push |
+
+Provider の変更を検出すると、次の順に処理する。
+
+```mermaid
+flowchart TD
+  change["Provider の変更を検出"]
+  ci["auth_provider_ci<br/>RSpec を実行"]
+  cd["auth_provider_cd<br/>Provider イメージをビルド・push"]
+  manifest["k8s リポジトリのイメージタグを更新・push"]
+
+  change --> ci
+  ci -->|CI 成功かつ spec 以外の変更あり| cd
+  cd --> manifest
+```
+
+- CI の対象: `volumes/auth-provider/**` / `containers/auth-provider/**`。
+- CD の対象: spec を除くアプリ側のファイル、またはコンテナ定義の変更。
+- 手動実行（`workflow_dispatch`）: 変更の有無にかかわらず CI を実行し、成功後に CD を実行する。
+
+CD の共通処理は [reusable-cd.yml](../../.github/workflows/reusable-cd.yml) に定義している。
+`make build-auth-provider` を `push=true` で実行し、対象環境の `auth-provider-backend` イメージタグを更新する。
+
+### 全イメージの手動デプロイ
+
+Provider を含む全イメージのビルド・push と、マニフェストの更新をまとめて実行する。
+
+| 環境 | workflow |
+| --- | --- |
+| Integration | [deploy-integration.yml](../../.github/workflows/deploy-integration.yml) |
+| Production | [deploy-production.yml](../../.github/workflows/deploy-production.yml) |
+
+Provider のビルドには `make build-auth-provider`、push には `make push-auth-provider` を使う。
+
+### Kubernetes の配置と移行
 
 Kubernetes マニフェストは k8s リポジトリの `manifests/price-monitoring` に統合し、環境ごとに `price-monitoring-integration` / `price-monitoring-production` namespace を使う。認証用の DB・Redis・Secret は `auth-provider-*` として分離する。既存 PV の移行手順は k8s リポジトリの `docs/operations/auth-provider-namespace.md` を参照する。
 
-このリポジトリからの Provider 用イメージのビルド・push・CD job の統合は別作業。実クラスタへの namespace 移行も、バックアップと手順確認後に実施する。
+実クラスタへの namespace 移行も、バックアップと手順確認後に実施する。
 
 取り込み元: `kuroweb/auth-provider` の `870262c767aef54bab2ca00a03163f5152c312ff`。アプリのコードを取り込み、Git 履歴は統合していない。
