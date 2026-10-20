@@ -53,6 +53,7 @@ docker compose build
 ### 3. アプリの初期化
 
 BFF の DB を `backend` コンテナで準備する。関連 DB / Redis は Compose が起動する。
+Provider の署名鍵・DB の準備と OIDC クライアント登録は、このコマンドの前提ではない。先に BFF の DB を準備し、続いて Provider の初回準備を行う。
 
 ```bash
 docker compose run --rm backend bundle exec rails db:prepare
