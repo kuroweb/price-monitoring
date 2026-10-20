@@ -162,7 +162,7 @@ flowchart LR
   - /etc/hosts に以下を記述
 
     ```bash
-    127.0.0.1 dev.price-monitoring.com
+    127.0.0.1 dev.price-monitoring.com dev.auth-provider.com
     ```
 
 - 認証アプリの秘密鍵・証明書・hosts・OIDCクライアントを準備する。既存環境からの引き継ぎも含め、[認証基盤のセットアップ](docs/auth-provider/overview.md)を参照する。
