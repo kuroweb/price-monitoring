@@ -1,7 +1,9 @@
 # auth-provider
 
-Devise / Doorkeeper を使う OpenID Connect Provider。`volumes/backend` の OIDC Client / BFF とは別の Rails アプリとして管理する。
+このディレクトリを開いた開発者向けの入口。Devise / Doorkeeper を使う OpenID Connect Provider のコードを管理する。
 
-セットアップ・既存データの引き継ぎ・検証・CI/CD は [認証基盤のドキュメント](../../docs/auth-provider/overview.md) を参照する。
-
-リポジトリルートで `just up` を実行して起動し、`just rspec-auth-provider` でテストする。
+- [プロジェクト全体と開発の入口](../../README.md)
+- [認証固有の準備・クライアント登録・引き継ぎ・検証](../../docs/auth-provider/index.md)
+- [共通セットアップ・依存関係・テスト](../../docs/development/index.md)
+- [CI/CD](../../docs/cicd/index.md)
+- [文書の役割と正本](../../docs/index.md)

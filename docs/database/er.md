@@ -1,5 +1,8 @@
 # ER
 
+BFF / batch のテーブル定義を確認する開発者向けのリファレンス。Provider の DB は対象外。
+領域の分け方は [Database](index.md)、関連は [アソシエーション](association.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
+
 ## backmarket_watch_results
 
 ### カラム
