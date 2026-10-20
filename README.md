@@ -140,133 +140,21 @@ flowchart LR
   sidekiq --> camoufox --> proxy
 ```
 
-## セットアップ手順
+## 開発・運用の入口
 
-- nginx用の証明書発行
-  - mkcertをインストール
+初めて開発する場合は [ローカル開発ガイド](docs/development/index.md) の順に、証明書・hosts・環境変数・DB・認証クライアントを準備する。
+アプリのディレクトリから読み始める場合は [backend](volumes/backend/README.md) / [frontend](volumes/frontend/README.md) / [auth-provider](volumes/auth-provider/README.md) を参照する。
 
-    ```bash
-    $ brew install mkcert
-    $ mkcert -install
-    ```
-
-  - 証明書発行
-
-    ```bash
-    $ mkcert \
-      -cert-file ./volumes/nginx/certs/fullchain.pem \
-      -key-file ./volumes/nginx/certs/privkey.pem \
-      dev.price-monitoring.com
-    ```
-
-  - /etc/hosts に以下を記述
-
-    ```bash
-    127.0.0.1 dev.price-monitoring.com dev.auth-provider.com
-    ```
-
-- 認証アプリの秘密鍵・証明書・hosts・OIDCクライアントを準備する。既存環境からの引き継ぎも含め、[認証基盤のセットアップ](docs/auth-provider/overview.md)を参照する。
-
-- Dockerイメージビルド
-
-  ```bash
-  $ docker compose build
-  ```
-
-- コンテナ起動
-
-  ```bash
-  $ just up
-  ```
-
-- コンテナ停止
-
-  ```bash
-  $ just down
-  ```
-
-- ローカル環境
-  - メインアプリ: https://dev.price-monitoring.com/
-  - 認証プロバイダー: https://dev.auth-provider.com/
-
-## テスト
-
-起動中の対象コンテナで RSpec を直接実行する。ファイル・行・RSpec オプションを引数で指定できる。
-
-```bash
-just rspec-backend
-just rspec-auth-provider
-```
-
-認証アプリのテスト DB・アセットの初回準備は[認証基盤のセットアップ](docs/auth-provider/overview.md)を参照する。
+- [セットアップ・日常操作・依存関係・テスト](docs/development/index.md)
+- [認証固有の準備・既存環境の引き継ぎ・検証](docs/auth-provider/index.md)
+- [Seed データの投入](docs/backend/operations/seeds.md)
+- [CI/CD・PR 自動レビュー・手動デプロイ](docs/cicd/index.md)
 
 ## Docs
 
-- [`docs/database/overview.md`](docs/database/overview.md) — database 設計の見取り図
-- [`docs/database/er.md`](docs/database/er.md) — テーブル定義（カラム・インデックス）
-- [`docs/database/association.md`](docs/database/association.md) — テーブル間リレーション（Mermaid）
-- [`docs/auth-provider/overview.md`](docs/auth-provider/overview.md) — 認証基盤の配置・セットアップ・既存環境の引き継ぎ
-- [`docs/backend/overview.md`](docs/backend/overview.md) — Rails BFF / batch の責務分離
-- [`docs/backend/operations/rails-upgrade.md`](docs/backend/operations/rails-upgrade.md) — Rails バージョンアップ手順
-- [`docs/frontend/overview.md`](docs/frontend/overview.md) — Next.js frontend の責務分離
+[文書ガイド・索引](docs/index.md) に、README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、話題ごとの正本と外部事例の採用判断をまとめている。
 
-## PR の自動レビュー
-
-`.github/workflows/claude-code-review.yml` で Claude Code による自動レビューを実行する。
-
-- PR の作成、更新、再オープン、Draft 解除時に実行する。Draft 中は実行しない。
-- `kuroweb/ai-manifest` の `gh-pr-review-ci` と `code-reviewing` スキルを使い、Sonnet が PR の説明と差分をレビューする。
-- レビュー結果は PR のコメントに投稿する。同じ PR に更新が入った場合、実行中のレビューをキャンセルする。
-
-事前にリポジトリの Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。`GITHUB_TOKEN` は GitHub Actions が自動発行するものを使う。
-
-## 自動デプロイ
-
-- ArgoCDによるGitOps
-- [k8sマニフェスト](https://github.com/kuroweb/k8s)
-
-```mermaid
-sequenceDiagram
-  participant repo_pm as Repository - price-monitoring
-  participant repo_k8s as Repository - k8s
-  participant deploy as GitHub Actions - CI/CD
-  participant vpn as 自宅サーバ - OpenVPN
-  participant kp_registry as Kubernetes Pod - Docker Registry
-  participant kp_argocd as Kubernetes Pod - ArgoCD
-  participant kp_pm as Kubernetes Pod - price-monitoring
-
-  repo_pm->>repo_pm : commit
-  repo_pm->>deploy : execute
-  activate deploy
-  deploy->>deploy : docker build
-  deploy->>vpn : connect vpn
-  vpn-->>deploy :  
-  deploy->>kp_registry : docker push
-  kp_registry-->>deploy :  
-  deploy->>repo_k8s : update manifest
-  repo_k8s-->>deploy :  
-  deploy-->>repo_pm :  
-  deactivate deploy
-  kp_argocd->>repo_k8s : Auto Sync
-  activate kp_argocd
-  repo_k8s-->>kp_argocd :  
-  kp_argocd->>kp_pm : apply manifest
-  kp_pm-->>kp_argocd :  
-  deactivate kp_argocd
-```
-
-## Docs
-
-### seedファイル
-
-すべてのSeedを投入する
-
-```bash
-rails db:seed -e {environment}
-```
-
-特定のSeedを投入する([rakeタスク拡張](/volumes/backend/lib/tasks/seed.rake))
-
-```bash
-rails db:seed:{seed_name} -e {environment}
-```
+- [Backend の責務分離](docs/backend/index.md)
+- [Frontend の責務分離](docs/frontend/index.md)
+- [Database 設計](docs/database/index.md)
+- [AI エージェント向け開発規約](AGENTS.md)

@@ -1,7 +1,13 @@
-# Backend Overview
+# Backend
 
-このページは Rails 一般論ではなく、このプロジェクトの BFF / batch 側でどこに何を書くかを揃えるための handbook です。
+このページは BFF / batch を変更する開発者向けに、このプロジェクトでどこに何を書くかを揃えるための設計解説です。
 実装時は「controller で受ける」「service で組み立てる」「sidekiq で非同期化する」の境界を先に確認します。
+
+## 文書の案内
+
+- [運用手順](operations/index.md) — Rails 更新と Seed 投入
+- [共通のローカル開発手順](../development/index.md) — セットアップ・依存関係・テスト
+- [文書全体の索引](../index.md)
 
 ## 判断基準
 
@@ -49,8 +55,7 @@
 
 ### 認証
 
-- `volumes/backend` は OIDC Client / BFF、`volumes/auth-provider` は Devise / Doorkeeper を使う OIDC Provider。別 Rails アプリとして扱い、モデル・DB・Redis を共有しない
-- Provider のセットアップ・運用は [`../auth-provider/overview.md`](../auth-provider/overview.md) を参照する
+- Provider / Client の配置・境界と、Provider のセットアップ・運用は [認証基盤](../auth-provider/index.md) を参照する
 
 - `SessionsController` と `OidcTokenControl` が OIDC ログイン・トークン検証の境界
 - 認可や session の扱いは controller / concern に閉じ、service へ散らさない
@@ -78,8 +83,9 @@
 ## 関連 docs
 
 - [`../../README.md`](../../README.md)
-- [`../database/overview.md`](../database/overview.md)
+- [`../database/index.md`](../database/index.md)
 - [`./operations/rails-upgrade.md`](./operations/rails-upgrade.md)
+- [Seed データの投入](operations/seeds.md)
 
 ## 代表コード
 

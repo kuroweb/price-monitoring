@@ -1,5 +1,8 @@
 # アソシエーション
 
+BFF / batch のテーブル間関連を確認する開発者向けのリファレンス。Provider の DB は対象外。
+領域の分け方は [Database](index.md)、カラム・インデックスは [ER](er.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
+
 ## 計測対象管理
 
 ### カテゴリ

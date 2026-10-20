@@ -1,7 +1,13 @@
-# Database Overview
+# Database
 
-このプロジェクトの database docs は、テーブル一覧を読むためのものではなく、どの単位でデータを分けているかを判断するための入口です。
-詳細な定義は `er.md` と `association.md` に分離し、このページでは領域の切り方だけを扱います。
+BFF / batch のデータ設計を変更する開発者向けに、どの単位でデータを分けているかを解説するページです。Provider の DB は対象外です。
+詳細な定義は [ER](er.md) と [アソシエーション](association.md) に分離し、このページでは領域の切り方だけを扱います。
+
+## 文書の案内
+
+- [カラム・インデックス](er.md)
+- [テーブル間関連](association.md)
+- [文書全体の索引](../index.md)
 
 ## 判断基準
 
@@ -49,7 +55,7 @@
 
 - [`er.md`](./er.md)
 - [`association.md`](./association.md)
-- [`../README.md`](../README.md)
+- [プロジェクト README](../../README.md)
 
 ## 代表コード
 

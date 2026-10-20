@@ -1,7 +1,12 @@
-# Frontend Overview
+# Frontend
 
-このページは Next.js 一般論ではなく、このプロジェクトの frontend で route / feature / data access をどう分けるかを揃えるための handbook です。
+このページは frontend を変更する開発者向けに、このプロジェクトで route / feature / data access をどう分けるかを揃えるための設計解説です。
 実装時は `app` を入口、`features` を画面単位の UI、`lib/api` と `lib/actions` を通信境界として扱います。
+
+## 文書の案内
+
+- [共通のローカル開発手順](../development/index.md) — セットアップ・依存関係・静的検証
+- [文書全体の索引](../index.md)
 
 ## 判断基準
 
@@ -69,8 +74,8 @@
 
 ## 関連 docs
 
-- [`../README.md`](../README.md)
-- [`../backend/overview.md`](../backend/overview.md)
+- [プロジェクト README](../../README.md)
+- [`../backend/index.md`](../backend/index.md)
 
 ## 代表コード
 

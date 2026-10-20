@@ -1,89 +1,50 @@
-# プロジェクト概要
+# AGENTS.md
 
-## 目的
+このファイルは、このリポジトリを変更する AI エージェント向けの実行制約と判断基準の正本。
+プロジェクトの目的・構成は [README](README.md)、文書の読み手・配置・正本は [文書ガイド](docs/index.md) を参照する。
 
-- Web上の商品の最安値探索と相場把握を支援する。
-- Rails / TypeScript の実践的なキャッチアップを兼ねる。
-- Datadog / BugSnag を使った運用監視の学習と実運用を行う。
+## コマンドの実行場所
 
-## システム構成
+- 開発環境は Docker Compose を使う。アプリに対する言語ツールは、調査・バージョン確認を含め、必ず下表のコンテナで実行する。
+- ホストで `ruby` / `bundle` / `rails` / `rspec` / `node` / `npm` / `npx` / `python` / `pip` などを使ってアプリを調査・実行・更新しない。読み取り目的の `bundle show` などでも lockfile や依存関係が変わり得る。
+- ホストではファイルの編集・検索、Git / GitHub CLI、Docker Compose / just / make、証明書・hosts の準備を行える。ホストにアプリ用の依存関係をインストールしない。
+- コマンドはリポジトリルートから Docker Compose / just 経由で実行する。実行例は [ローカル開発ガイド](docs/development/index.md) を参照する。
 
-- Frontend: Next.js / TypeScript / Tailwind CSS
-- Backend BFF: Rails
-- Batch: Sidekiq + Playwright
-- Data Store: MySQL / Redis
-- 認証: OpenID Connect（実装中）。Provider は `volumes/auth-provider`、Client / BFF は `volumes/backend` の別 Rails アプリとして管理する。
+| 対象 | Compose service | コンテナで実行するツール |
+| --- | --- | --- |
+| Next.js / TypeScript | `frontend` | Node.js / npm / npx / Next.js / TypeScript / ESLint |
+| Rails BFF、batch と共通の依存関係・テスト | `backend` | Ruby / Bundler / Rails / RSpec、クロール補助の Python（`/opt/curlcffi-venv/bin/python`） |
+| Sidekiq の各プロセス固有の調査 | `backend-batch-1` / `backend-batch-2` / `backend-batch-3` | Ruby / Bundler / Sidekiq（アプリは `backend` と共通） |
+| OIDC Provider | `auth-provider` | Ruby / Bundler / Rails / RSpec、必要な Node.js / npm |
+| Playwright サーバー | `backend-playwright` | Node.js / npm / Playwright |
+| Camoufox サーバー | `backend-camoufox` | Python / pip / Camoufox / Playwright |
 
-# 開発ワークフロー
+## 作業時の判断基準
 
-## 開発・運用環境
-
-- 開発環境は Docker Compose を基本とする。
-- 本番環境は自宅 Kubernetes（Master 1 / Worker 3）を利用する。
-- CI/CD は GitHub Actions で運用する。
-
-## ローカル開発ワークフロー
-
-1. 初回セットアップ: 証明書作成と `/etc/hosts` 設定を行う（README の手順に従う）。
-2. イメージ準備: `docker compose build`
-3. 起動: `just up`
-4. 状態確認: `just ps`（起動確認） / `just logs`（エラー確認）
-5. 依存関係更新: npm パッケージを追加・更新する場合はホストで `npm i` せず、`docker compose run --rm frontend npm i` を使う
-6. 実装・修正: 既存の責務境界（Frontend / BFF / Batch）を維持して変更
-7. 検証: 変更範囲に応じて `just rspec-backend` などを実行
-8. 終了: `just down`
-
-## 主要コマンド
-
-- `just up`: Docker Compose の全サービスをバックグラウンド起動
-- `just down`: Docker Compose の全サービス停止とネットワーク破棄
-- `just ps`: コンテナ稼働状態の確認
-- `just logs`: 全サービスのログをフォロー表示
-- `just restart-all`: 全サービスを再起動
-- `just restart <container-name>`: 指定コンテナのみ再起動
-- `just attach <container-name>`: 指定コンテナにアタッチして対話確認
-- `just rspec-auth-provider [args...]`: 認証アプリの RSpec 実行。対象ファイル・行・オプションを指定可能
-- `just rspec-backend [args...]`: Rails のテスト実行。引数で対象ファイル・行・オプションを指定可能（`backend` コンテナで直接実行）
-- `docker compose build`: ローカル開発用イメージ再ビルド
-- `docker compose run --rm frontend npm i`: frontend の npm 依存関係を Docker 経由で追加・更新する。ホストで `npm i` は実行しない
-- `make build-all` / `make push-all`: デプロイ用イメージのビルド・push（主に運用向け）
-
-## テスト実行ガイド
-
-- 前提: `just up` 後に `backend` コンテナが起動していることを `just ps` で確認する。
-- 全体実行: `just rspec-backend`（`backend` コンテナで直接実行）
-- 単一ファイル実行: `just rspec-backend spec/models/<target>_spec.rb`
-- 行指定実行: `just rspec-backend spec/models/<target>_spec.rb:42`
-- 失敗時の切り分け: まず対象 spec を単体で再実行し、必要に応じて `just logs` で依存サービスの状態を見る。
-
-## 実装時の判断基準
-
-- まず `just ps` で実行環境を確認し、未起動なら `just up` を優先する。
-- 不具合調査は `just logs` で事実確認してから修正に入る。
-- frontend の依存関係更新はホスト環境ではなく `frontend` コンテナ内で行う。
-- 変更対象は最小スコープに限定し、既存の責務分離（Frontend / BFF / Batch）を崩さない。
-- 変更は必要最小限にし、学習目的を踏まえて可読性を優先する。
-- 監視・運用影響がある変更では Datadog / BugSnag への影響も確認する。
-- コマンド追加や運用変更が必要な場合は、`README.md` / `justfile` / `Makefile` の整合を保つ。
-- デプロイ用の `make` タスクは、ローカル開発修正だけなら原則触らない。
-- 認証アプリは `volumes/auth-provider`、コンテナ定義は `containers/auth-provider` に置く。ローカルの Nginx は `volumes/nginx` にまとめ、ホスト名で振り分ける。BFF とモデル・DB・Redis を共有しない。
-- OIDC endpoint / issuer / token / scope / session / 署名鍵に影響する変更では Provider と Client の両方を確認する。認証基盤の運用手順は `docs/auth-provider/overview.md` を参照する。
+- アプリの実行・検証の前に `just ps` で状態を確認し、未起動なら `just up` を使う。初回準備は [ローカル開発ガイド](docs/development/index.md) に従う。
+- 不具合調査は `just logs` などでログの事実を確認してから修正する。
+- 実装前に対象レイヤーの既存実装を読み、[backend](docs/backend/index.md) / [frontend](docs/frontend/index.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
+- 認証アプリと BFF の境界・配置は [認証基盤](docs/auth-provider/index.md) を参照する。OIDC endpoint / issuer / token / scope / session / 署名鍵に影響する変更では Provider と Client の両方を確認する。
+- 検証は [テスト手順](docs/development/index.md#テスト) に従い、変更範囲に応じて選ぶ。失敗時は対象だけを再実行し、依存サービスの状態を確認する。
+- 監視・運用に影響する変更では Datadog / BugSnag への影響を確認する。
+- 操作や構成を変えたら [文書ガイド](docs/index.md) で正本を特定して更新し、`justfile` / `Makefile` / workflow との整合を保つ。
+- デプロイ用の make タスクは、ローカル開発修正だけなら原則触らない。
 
 ## 変更後チェックリスト
 
-- 変更ファイルが対象レイヤーに閉じているか
-- ローカル実行手順に影響がある場合、関連ドキュメントを更新したか
+- 変更が対象レイヤーに閉じているか
+- 手順・構成に影響がある場合、正本の文書と参照リンクを更新したか
 - 必要なテストまたは最低限の動作確認を実施したか
-- 監視・運用影響がある変更かどうかを確認したか
+- 監視・運用への影響を確認したか
 
-# エージェント設定
+## エージェント設定
 
-## Rules
+### Rules
 
 - 正本は本ファイル（`AGENTS.md`）。`CLAUDE.md` は `@AGENTS.md` のインポートのみとし、他ツール向けの Rules 生成物は置かない。
 - 変更は `AGENTS.md` を直接編集する。
 
-## Skills
+### Skills
 
 - 正本は `.agents/skills/`（`.agents/skills/*/SKILL.md`）。変更はここを直接編集する。
 - `.claude/skills` は `.agents/skills` への symlink。直接編集しない。
