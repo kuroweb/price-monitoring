@@ -12,6 +12,20 @@
 
 CI/CD は `workflow_dispatch` による手動実行にも対応する。全イメージの手動デプロイは `workflow_dispatch` のみ。
 
+## Pull Request の自動テスト
+
+[ci-pr.yml](../../.github/workflows/ci-pr.yml) は、Pull Request の作成・更新・再オープン時に、変更されたアプリのテストを実行する。送信先ブランチや作成者による制限はなく、Dependabot が作成した Pull Request も対象となる。
+
+| 変更対象 | 実行するテスト |
+| --- | --- |
+| `volumes/backend/**` / `containers/backend/**` | `backend` コンテナでテスト DB を準備し、RSpec を実行 |
+| `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナでテスト DB と Tailwind アセットを準備し、RSpec を実行 |
+| `docker-compose.yml` / `.github/workflows/ci-pr.yml` | 上記両方のテストを実行 |
+
+Frontend・Playwright・Camoufox の独立したテストジョブは定義していない。同じ Pull Request に更新が入った場合は、実行中のテストをキャンセルして最新の変更を検証する。
+
+この workflow はリポジトリのシークレットを必要とせず、デプロイ処理を含まない。マージ後は「環境と実行契機」の push による CI/CD が実行される。
+
 ## 変更検出と CI/CD
 
 | 対象 | 変更検出するパス | CI | CD |
