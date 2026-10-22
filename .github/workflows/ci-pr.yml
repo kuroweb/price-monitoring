@@ -20,7 +20,7 @@ jobs:
       backend_ci: ${{ steps.filter.outputs.backend_ci }}
       auth_provider_ci: ${{ steps.filter.outputs.auth_provider_ci }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - uses: dorny/paths-filter@v4
         id: filter
         with:
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Execute CI
         run: |
           touch .env
@@ -55,7 +55,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: Execute Auth Provider CI
         run: |
           touch .env
