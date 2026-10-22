@@ -20,7 +20,7 @@ CI/CD は `workflow_dispatch` による手動実行にも対応する。全イ�
 | --- | --- |
 | `volumes/backend/**` / `containers/backend/**` | `backend` コンテナでテスト DB を準備し、RSpec を実行 |
 | `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナでテスト DB と Tailwind アセットを準備し、RSpec を実行 |
-| `volumes/frontend/**` / `containers/frontend/**` | `frontend` コンテナで `npm ci` 後、lint・型検査・Vitest を実行 |
+| `volumes/frontend/**` / `containers/frontend/**` / `.github/workflows/cicd-integration.yml` / `.github/workflows/cicd-production.yml` | `frontend` コンテナで `npm ci` 後、lint・型検査・Vitest を実行 |
 | `docker-compose.yml` / `.github/workflows/ci-pr.yml` | 上記すべての検証を実行 |
 
 Frontend CI は `--no-deps` で実行し、BFF・DB・認証の起動を必要としない。Playwright・Camoufox の独立したテストジョブは定義していない。同じ Pull Request に更新が入った場合は、実行中のテストをキャンセルして最新の変更を検証する。
@@ -52,11 +52,12 @@ Dependabot alerts とセキュリティ更新 PR の自動作成は、GitHub の
 | --- | --- | --- | --- |
 | BFF / batch | `volumes/backend/**` / `containers/backend/**` | `backend` コンテナで DB 作成・migration・RSpec | CI 成功後、spec 以外のアプリファイルまたはコンテナ定義の変更時 |
 | Provider | `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナでテスト DB・Tailwind アセット準備・RSpec | CI 成功後、spec 以外のアプリファイルまたはコンテナ定義の変更時 |
-| Frontend | `volumes/frontend/**` / `containers/frontend/**` | 独立した CI ジョブなし | 変更検出時 |
+| Frontend | `volumes/frontend/**` / `containers/frontend/**` | `frontend` コンテナで `npm ci`・lint・型検査・Vitest | CI 成功後、変更検出時 |
 | Playwright | `containers/backend_playwright/**` | 独立した CI ジョブなし | 変更検出時 |
 | Camoufox | `containers/backend_camoufox/**` | 独立した CI ジョブなし | 変更検出時 |
 
-CI/CD の手動実行では変更の有無にかかわらず各ジョブを実行する。BFF / Provider の CD はそれぞれの CI 成功が前提。
+CI/CD の手動実行では変更の有無にかかわらず各ジョブを実行する。BFF / Provider / Frontend の CD はそれぞれの CI 成功が前提。
+Frontend CI は `docker-compose.yml` と各環境自身の CI/CD workflow の変更時にも実行する。これらだけの変更では Frontend CD は実行しない。
 spec 以外の判定など正確な glob は workflow の `check_changes` を参照する。
 
 CD の共通処理は [reusable-cd.yml](../../.github/workflows/reusable-cd.yml) に定義している。

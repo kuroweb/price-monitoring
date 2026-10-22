@@ -15,6 +15,7 @@ jobs:
       backend_cd: ${{ steps.filter.outputs.backend_cd }}
       backend_playwright_cd: ${{ steps.filter.outputs.backend_playwright_cd }}
       backend_camoufox_cd: ${{ steps.filter.outputs.backend_camoufox_cd }}
+      frontend_ci: ${{ steps.filter.outputs.frontend_ci }}
       frontend_cd: ${{ steps.filter.outputs.frontend_cd }}
       auth_provider_ci: ${{ steps.filter.outputs.auth_provider_ci }}
       auth_provider_cd: ${{ steps.filter.outputs.auth_provider_cd }}
@@ -41,6 +42,11 @@ jobs:
             auth_provider_cd:
               - './volumes/auth-provider/!(spec)/**'
               - './containers/auth-provider/**'
+            frontend_ci:
+              - './volumes/frontend/**'
+              - './containers/frontend/**'
+              - './docker-compose.yml'
+              - './.github/workflows/cicd-production.yml'
             frontend_cd:
               - './volumes/frontend/**'
               - './containers/frontend/**'
@@ -107,9 +113,24 @@ jobs:
       GIT_COMMIT_EMAIL: ${{ secrets.GIT_COMMIT_EMAIL }}
       K8S_DEPLOY_KEY: ${{ secrets.K8S_DEPLOY_KEY }}
 
-  frontend_cd:
+  frontend_ci:
     needs: check_changes
-    if: ${{ needs.check_changes.outputs.frontend_cd == 'true' || github.event_name == 'workflow_dispatch' }}
+    if: ${{ needs.check_changes.outputs.frontend_ci == 'true' || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-24.04
+    outputs:
+      cd: ${{ needs.check_changes.outputs.frontend_cd }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+      - name: Execute Frontend CI
+        run: |
+          touch .env
+          docker compose build frontend
+          docker compose run --rm --no-deps frontend sh -c 'npm ci && npm run lint && npm run typecheck && npm test'
+
+  frontend_cd:
+    needs: frontend_ci
+    if: ${{ needs.frontend_ci.outputs.cd == 'true' || github.event_name == 'workflow_dispatch' }}
     uses: ./.github/workflows/reusable-cd.yml
     with:
       service_name: "k8s/manifests/price-monitoring"
