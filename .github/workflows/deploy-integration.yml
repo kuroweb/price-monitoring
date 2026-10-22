@@ -34,7 +34,7 @@ jobs:
           make push-auth-provider tag_suffix=${{ github.sha }} environment=integration
 
       - name: Setup SSH for k8s Repository
-        uses: webfactory/ssh-agent@v0.9.0
+        uses: webfactory/ssh-agent@v0.10.0
         with:
           ssh-private-key: ${{ secrets.K8S_DEPLOY_KEY }}
 
