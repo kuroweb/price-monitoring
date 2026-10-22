@@ -136,6 +136,26 @@ docker compose exec frontend npm run lint
 docker compose exec frontend npm run typecheck
 ```
 
+frontend の単体・コンポーネントテストは Vitest と React Testing Library を使う。初回導入時や依存関係更新後は、起動中の `frontend` コンテナで `docker compose exec frontend npm ci` を実行する。BFF や認証の接続は不要。
+
+```bash
+just test-frontend
+just test-frontend-watch
+just test-frontend-coverage
+```
+
+通常実行は一度で終了し、watch は変更時に再実行する。カバレッジはターミナルと `volumes/frontend/coverage/` に出力する。未テストの実装も集計するが、導入時点ではカバレッジの下限を設けない。
+
+対象ファイルやテスト名を絞る場合は引数を渡す。角括弧を含むパスはシェルの展開を避けるため引用する。
+
+```bash
+just test-frontend CategoryNavigation.test.tsx
+just test-frontend 'tests/features/products/[id]/lib/makePlatformMask.test.ts'
+just test-frontend -t '最初のページ'
+```
+
+テストの配置と対象範囲は [Frontend のテスト方針](../frontend/index.md#テスト方針)を参照する。PR では [Frontend CI](../cicd/index.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。
+
 ## 関連手順
 
 - [Seed データの投入](../backend/operations/seeds.md)

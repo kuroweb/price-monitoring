@@ -20,9 +20,10 @@ CI/CD は `workflow_dispatch` による手動実行にも対応する。全イ�
 | --- | --- |
 | `volumes/backend/**` / `containers/backend/**` | `backend` コンテナでテスト DB を準備し、RSpec を実行 |
 | `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナでテスト DB と Tailwind アセットを準備し、RSpec を実行 |
-| `docker-compose.yml` / `.github/workflows/ci-pr.yml` | 上記両方のテストを実行 |
+| `volumes/frontend/**` / `containers/frontend/**` | `frontend` コンテナで `npm ci` 後、lint・型検査・Vitest を実行 |
+| `docker-compose.yml` / `.github/workflows/ci-pr.yml` | 上記すべての検証を実行 |
 
-Frontend・Playwright・Camoufox の独立したテストジョブは定義していない。同じ Pull Request に更新が入った場合は、実行中のテストをキャンセルして最新の変更を検証する。
+Frontend CI は `--no-deps` で実行し、BFF・DB・認証の起動を必要としない。Playwright・Camoufox の独立したテストジョブは定義していない。同じ Pull Request に更新が入った場合は、実行中のテストをキャンセルして最新の変更を検証する。
 
 この workflow はリポジトリのシークレットを必要とせず、デプロイ処理を含まない。マージ後は「環境と実行契機」の push による CI/CD が実行される。
 
@@ -39,7 +40,7 @@ Frontend・Playwright・Camoufox の独立したテストジョブは定義し�
 
 マイナー・パッチ更新は対象ごとに一つの Pull Request にまとめ、メジャー更新は個別に作成する。通常のバージョン更新で同時に開く Pull Request は、各対象で最大 5 件とする。この上限と週次スケジュールはセキュリティ更新の実行頻度・件数を制御するものではない。
 
-BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動く。Frontend の更新には独立したテストジョブがないため、マージ前に [ローカル開発の静的検証](../development/index.md#テスト)を実行する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
+BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動き、Frontend の更新では lint・型検査・Vitest が動く。ローカルでの確認は [テスト手順](../development/index.md#テスト)を参照する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
 
 Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright は Ruby gem・イメージ・インストールコマンドにバージョン指定が分散しているため、`playwright-ruby-client` の更新では関連する指定の整合性も確認する。
 
