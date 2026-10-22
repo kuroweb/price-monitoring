@@ -1,0 +1,64 @@
+name: CI (Pull Request)
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  check_changes:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    outputs:
+      backend_ci: ${{ steps.filter.outputs.backend_ci }}
+      auth_provider_ci: ${{ steps.filter.outputs.auth_provider_ci }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dorny/paths-filter@v4
+        id: filter
+        with:
+          filters: |
+            backend_ci:
+              - 'volumes/backend/**'
+              - 'containers/backend/**'
+              - 'docker-compose.yml'
+              - '.github/workflows/ci-pr.yml'
+            auth_provider_ci:
+              - 'volumes/auth-provider/**'
+              - 'containers/auth-provider/**'
+              - 'docker-compose.yml'
+              - '.github/workflows/ci-pr.yml'
+
+  backend_ci:
+    needs: check_changes
+    if: needs.check_changes.outputs.backend_ci == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+      - name: Execute CI
+        run: |
+          touch .env
+          docker compose build backend
+          docker compose run --rm -e RAILS_ENV=test backend sh -c 'bundle exec rails db:prepare && bundle exec rspec'
+
+  auth_provider_ci:
+    needs: check_changes
+    if: needs.check_changes.outputs.auth_provider_ci == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v5
+      - name: Execute Auth Provider CI
+        run: |
+          touch .env
+          openssl genrsa -out volumes/auth-provider/certs/private.pem 2048
+          docker compose build auth-provider
+          docker compose run --rm -e RAILS_ENV=test auth-provider sh -c 'bundle exec rails db:prepare && bundle exec rails tailwindcss:build && bundle exec rspec'
