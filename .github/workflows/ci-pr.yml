@@ -31,6 +31,8 @@ jobs:
               - 'containers/frontend/**'
               - 'docker-compose.yml'
               - '.github/workflows/ci-pr.yml'
+              - '.github/workflows/cicd-integration.yml'
+              - '.github/workflows/cicd-production.yml'
             backend_ci:
               - 'volumes/backend/**'
               - 'containers/backend/**'
