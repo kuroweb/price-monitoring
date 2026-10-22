@@ -26,6 +26,25 @@ Frontend・Playwright・Camoufox の独立したテストジョブは定義し�
 
 この workflow はリポジトリのシークレットを必要とせず、デプロイ処理を含まない。マージ後は「環境と実行契機」の push による CI/CD が実行される。
 
+## Dependabot による依存関係の更新
+
+[dependabot.yml](../../.github/dependabot.yml) をデフォルトブランチの `master` に配置すると、以下の依存関係を週次で確認し、更新する Pull Request を `master` 向けに作成する。
+
+| 対象 | 依存関係ファイル |
+| --- | --- |
+| BFF / batch | `volumes/backend/Gemfile` / `Gemfile.lock` |
+| Provider | `volumes/auth-provider/Gemfile` / `Gemfile.lock` |
+| Frontend | `volumes/frontend/package.json` / `package-lock.json` |
+| GitHub Actions | `.github/workflows/*.yml` |
+
+マイナー・パッチ更新は対象ごとに一つの Pull Request にまとめ、メジャー更新は個別に作成する。通常のバージョン更新で同時に開く Pull Request は、各対象で最大 5 件とする。この上限と週次スケジュールはセキュリティ更新の実行頻度・件数を制御するものではない。
+
+BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動く。Frontend の更新には独立したテストジョブがないため、マージ前に [ローカル開発の静的検証](../development/index.md#テスト)を実行する。Claude の自動レビューは実行者を制限しているため、Dependabot による実行は対象外となる。
+
+Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright は Ruby gem・イメージ・インストールコマンドにバージョン指定が分散しているため、`playwright-ruby-client` の更新では関連する指定の整合性も確認する。
+
+Dependabot alerts とセキュリティ更新 PR の自動作成は、GitHub のリポジトリ設定で別途有効化する。設定項目の意味は [GitHub の公式資料](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)を参照する。
+
 ## 変更検出と CI/CD
 
 | 対象 | 変更検出するパス | CI | CD |
