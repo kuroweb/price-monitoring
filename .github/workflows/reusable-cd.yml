@@ -44,7 +44,7 @@ jobs:
 
       # make から呼ぶ docker buildx が GHA キャッシュへアクセスできるようにランタイムのトークンを公開する
       - name: Expose GitHub Runtime
-        uses: crazy-max/ghaction-github-runtime@v3
+        uses: crazy-max/ghaction-github-runtime@v4
 
       - name: Build and Push Docker Image
         env:
