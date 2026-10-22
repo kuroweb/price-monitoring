@@ -39,7 +39,7 @@ Frontend・Playwright・Camoufox の独立したテストジョブは定義し�
 
 マイナー・パッチ更新は対象ごとに一つの Pull Request にまとめ、メジャー更新は個別に作成する。通常のバージョン更新で同時に開く Pull Request は、各対象で最大 5 件とする。この上限と週次スケジュールはセキュリティ更新の実行頻度・件数を制御するものではない。
 
-BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動く。Frontend の更新には独立したテストジョブがないため、マージ前に [ローカル開発の静的検証](../development/index.md#テスト)を実行する。Claude の自動レビューは実行者を制限しているため、Dependabot による実行は対象外となる。
+BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動く。Frontend の更新には独立したテストジョブがないため、マージ前に [ローカル開発の静的検証](../development/index.md#テスト)を実行する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
 
 Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright は Ruby gem・イメージ・インストールコマンドにバージョン指定が分散しているため、`playwright-ruby-client` の更新では関連する指定の整合性も確認する。
 
@@ -95,8 +95,8 @@ Kubernetes の全体構成は [ルート README](../../README.md#production)、�
 
 [claude-code-review.yml](../../.github/workflows/claude-code-review.yml) で Claude Code による自動レビューを実行する。
 
-- PR の作成、更新、再オープン、Draft 解除時に実行する。Draft 中は実行せず、イベントの実行者が `kuroweb` の場合に限る。
+- PR の作成、更新、再オープン、Draft 解除時に実行する。Draft 中は実行せず、イベントの実行者が `kuroweb` または `dependabot[bot]` の場合に限る。Claude Action の `allowed_bots` でも `dependabot[bot]` を明示的に許可する。
 - `kuroweb/ai-manifest` の `gh-pr-review-ci` と `code-reviewing` スキルを runner にインストールし、Sonnet が PR の説明と差分をレビューする。
 - レビュー結果は PR のコメントに投稿する。同じ PR に更新が入った場合、実行中のレビューをキャンセルする。
 
-事前にリポジトリの Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。`GITHUB_TOKEN` は GitHub Actions が自動発行するものを使う。
+事前にリポジトリの Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。Dependabot が起動した workflow では Actions secrets を参照できないため、Settings → Secrets and variables → Dependabot にも同名のトークンを登録する。`GITHUB_TOKEN` は GitHub Actions が自動発行するものを使う。
