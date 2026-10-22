@@ -19,12 +19,18 @@ jobs:
     outputs:
       backend_ci: ${{ steps.filter.outputs.backend_ci }}
       auth_provider_ci: ${{ steps.filter.outputs.auth_provider_ci }}
+      frontend_ci: ${{ steps.filter.outputs.frontend_ci }}
     steps:
       - uses: actions/checkout@v7
       - uses: dorny/paths-filter@v4
         id: filter
         with:
           filters: |
+            frontend_ci:
+              - 'volumes/frontend/**'
+              - 'containers/frontend/**'
+              - 'docker-compose.yml'
+              - '.github/workflows/ci-pr.yml'
             backend_ci:
               - 'volumes/backend/**'
               - 'containers/backend/**'
@@ -35,6 +41,19 @@ jobs:
               - 'containers/auth-provider/**'
               - 'docker-compose.yml'
               - '.github/workflows/ci-pr.yml'
+
+  frontend_ci:
+    needs: check_changes
+    if: needs.check_changes.outputs.frontend_ci == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+      - name: Execute Frontend CI
+        run: |
+          touch .env
+          docker compose build frontend
+          docker compose run --rm --no-deps frontend sh -c 'npm ci && npm run lint && npm run typecheck && npm test'
 
   backend_ci:
     needs: check_changes
