@@ -1,11 +1,11 @@
+import { http } from '@/lib/http-client'
+
 import type {
   GetProductPriceParams,
   GetProductPricesParams,
   ProductPriceDetail,
   ProductPriceList,
 } from './types'
-
-import { http } from '@/lib/http-client'
 
 export async function getProductPrices(params: GetProductPricesParams) {
   return http<ProductPriceList>('/api/v1/product_prices', {

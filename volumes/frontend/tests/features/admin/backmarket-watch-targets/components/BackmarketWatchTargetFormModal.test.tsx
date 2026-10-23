@@ -2,10 +2,9 @@ import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import type { BackmarketWatchTarget } from '@/lib/api'
-
 import BackmarketWatchTargetFormModal from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetFormModal'
 import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/lib/actions'
+import type { BackmarketWatchTarget } from '@/lib/api'
 
 const { refresh, successToast, errorToast } = vi.hoisted(() => ({
   refresh: vi.fn(),
@@ -128,5 +127,17 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(onClose).toHaveBeenCalledOnce()
     expect(createBackmarketWatchTarget).not.toHaveBeenCalled()
     expect(refresh).not.toHaveBeenCalled()
+  })
+
+  it('背景の閉じるボタンをキーボードで操作できる', async () => {
+    const user = userEvent.setup()
+    const onClose = vi.fn()
+    render(<BackmarketWatchTargetFormModal isOpen mode='create' onClose={onClose} />)
+
+    screen.getByRole('button', { name: '背景から閉じる' }).focus()
+    await user.keyboard('{Enter}')
+
+    expect(onClose).toHaveBeenCalledOnce()
+    expect(createBackmarketWatchTarget).not.toHaveBeenCalled()
   })
 })

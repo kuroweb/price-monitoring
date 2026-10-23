@@ -1,5 +1,7 @@
 'use client'
 
+import type { UpdateProductData } from '@/lib/api'
+
 import {
   copyKeyword,
   copyRequiredKeyword,
@@ -8,7 +10,6 @@ import {
   copyMaxPrice,
 } from './lib/copyFields'
 
-import type { UpdateProductData } from '@/lib/api'
 import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 
 const IosysForm = ({

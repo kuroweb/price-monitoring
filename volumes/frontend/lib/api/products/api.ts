@@ -1,3 +1,5 @@
+import { http } from '@/lib/http-client'
+
 import type {
   CreateProductData,
   GetProductsParams,
@@ -6,8 +8,6 @@ import type {
   UpdateProductData,
 } from './types'
 import type { Product } from '../models'
-
-import { http } from '@/lib/http-client'
 
 export async function getProducts(params?: GetProductsParams) {
   return http<ProductList>('/api/v1/products', {

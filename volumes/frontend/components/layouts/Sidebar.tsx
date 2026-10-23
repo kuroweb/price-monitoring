@@ -141,10 +141,12 @@ const Sidebar = ({ open, setOpen }: Props) => {
           </div>
         </div>
       </aside>
-      <div
+      <button
+        type='button'
+        aria-label='サイドバーを閉じる'
         onClick={() => setOpen(!open)}
         className={`${open ? '' : 'hidden'} fixed inset-0 z-10 bg-gray-900 opacity-50`}
-      ></div>
+      />
     </>
   )
 }

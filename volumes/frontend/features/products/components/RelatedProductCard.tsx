@@ -4,10 +4,6 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { useStatusState } from '../[id]/hooks/useStatusState'
-
-import type { RelatedProduct } from '@/lib/api'
-
 import {
   createIosysCrawlSettingExcludeProduct,
   createJanparaCrawlSettingExcludeProduct,
@@ -16,6 +12,9 @@ import {
   createUsedSofmapCrawlSettingExcludeProduct,
   createYahooAuctionCrawlSettingExcludeProduct,
 } from '@/lib/actions'
+import type { RelatedProduct } from '@/lib/api'
+
+import { useStatusState } from '../[id]/hooks/useStatusState'
 
 const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct }) => {
   const router = useRouter()
@@ -51,9 +50,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     used_sofmap: 'bg-green-500',
   }
 
-  const openProductPage = async (platform: string, externalId: string) => {
-    window.open(`https://${serviceDomainMap[platform]}${externalId}`, '_blank')
-  }
+  const productUrl = `https://${serviceDomainMap[relatedProduct.platform]}${relatedProduct.externalId}`
 
   const parseDate = (date: string | null | undefined) => {
     // 暫定実装
@@ -102,7 +99,13 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     <>
       <div className='card bg-base-100 shadow-xl'>
         <figure>
-          <div className='relative h-32 w-full'>
+          <a
+            href={productUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            aria-label={`${relatedProduct.name}の商品ページを開く`}
+            className='relative h-32 w-full'
+          >
             <NextImage
               src={relatedProduct.thumbnailUrl}
               alt=''
@@ -110,9 +113,8 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
               sizes='100vh 100vw'
               style={{ objectFit: 'contain' }}
               className='cursor-pointer'
-              onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
             />
-          </div>
+          </a>
           <div
             className={`badge ${serviceColorMap[relatedProduct.platform]} absolute inset-s-2 top-2 text-black`}
           >
@@ -128,7 +130,11 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             }`}
           </div>
           <div className='dropdown dropdown-left absolute inset-e-2 top-2'>
-            <div tabIndex={0} role='button' className='btn btn-square btn-sm'>
+            <button
+              type='button'
+              aria-label={`${relatedProduct.name}の操作`}
+              className='btn btn-square btn-sm'
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -142,11 +148,8 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
                   d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
                 ></path>
               </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
-            >
+            </button>
+            <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
               <li>
                 <button
                   className='btn btn-error'
@@ -164,9 +167,11 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             </ul>
           </div>
         </figure>
-        <div
+        <a
+          href={productUrl}
+          target='_blank'
+          rel='noopener noreferrer'
           className='card-body cursor-pointer p-4'
-          onClick={() => openProductPage(relatedProduct.platform, relatedProduct.externalId)}
         >
           <p className='text-sm'>{`${relatedProduct.name.substring(0, 40)}...`}</p>
           <div className='flex-wrap space-y-2'>
@@ -193,7 +198,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
               </div>
             )}
           </div>
-        </div>
+        </a>
       </div>
     </>
   )

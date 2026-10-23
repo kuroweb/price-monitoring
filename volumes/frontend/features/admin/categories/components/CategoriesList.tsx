@@ -4,13 +4,12 @@ import { Fragment, useState } from 'react'
 
 import { toast } from 'react-toastify'
 
+import { destroyCategory } from '@/lib/actions'
+import type { Category, GetCategoriesStructured } from '@/lib/api'
+
 import CreateCategoryModal from './create-category-modal/CreateCategoryModal'
 import UpdateCategoryModal from './update-category-modal/UpdateCategoryModal'
 import { useUpdateCategoryModalState } from './update-category-modal/hooks/useUpdateCategoryModalState'
-
-import type { Category, GetCategoriesStructured } from '@/lib/api'
-
-import { destroyCategory } from '@/lib/actions'
 
 const CategoriesList = ({
   structuredCategories,
@@ -34,21 +33,20 @@ const CategoriesList = ({
 
   const renderChildren = (
     children: GetCategoriesStructured['categories'][number]['children'],
-    depth: number = 1,
-    isLastArray: boolean[] = [],
+    ancestors: { id: number; isLast: boolean }[],
   ) => {
     return children.map((child, index) => {
       const isLast = index === children.length - 1
-      const currentIsLastArray = [...isLastArray, isLast]
+      const childAncestors = [...ancestors, { id: child.id, isLast }]
 
       return (
         <Fragment key={child.id}>
           <tr>
             <td className='font-mono text-sm'>
               <div className='flex items-center'>
-                {isLastArray.map((isLastInLevel, idx) => (
-                  <span key={idx} className='inline-block w-4 text-base-content/30'>
-                    {isLastInLevel ? '  ' : '│ '}
+                {ancestors.map((ancestor) => (
+                  <span key={ancestor.id} className='inline-block w-4 text-base-content/30'>
+                    {ancestor.isLast ? '  ' : '│ '}
                   </span>
                 ))}
                 <span className='inline-block w-4 text-base-content/30'>
@@ -59,8 +57,7 @@ const CategoriesList = ({
             </td>
             <td className='w-1/12'>{actionButtons(child)}</td>
           </tr>
-          {child.children.length > 0 &&
-            renderChildren(child.children, depth + 1, currentIsLastArray)}
+          {child.children.length > 0 && renderChildren(child.children, childAncestors)}
         </Fragment>
       )
     })
@@ -69,7 +66,11 @@ const CategoriesList = ({
   const actionButtons = (category: Category) => {
     return (
       <div className='dropdown dropdown-left'>
-        <div tabIndex={0} role='button' className='btn btn-square btn-md'>
+        <button
+          type='button'
+          aria-label={`${category.name}の操作`}
+          className='btn btn-square btn-md'
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -83,11 +84,8 @@ const CategoriesList = ({
               d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
             ></path>
           </svg>
-        </div>
-        <ul
-          tabIndex={0}
-          className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
-        >
+        </button>
+        <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
           <li>
             <button
               className='btn btn-primary'
@@ -132,7 +130,8 @@ const CategoriesList = ({
                   </td>
                   <td className='w-1/12'>{actionButtons(category)}</td>
                 </tr>
-                {category.children.length > 0 && renderChildren(category.children, 1, [isLast])}
+                {category.children.length > 0 &&
+                  renderChildren(category.children, [{ id: category.id, isLast }])}
               </Fragment>
             )
           })}
