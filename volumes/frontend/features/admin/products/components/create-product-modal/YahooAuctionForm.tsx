@@ -1,5 +1,7 @@
 'use client'
 
+import type { CreateProductData } from '@/lib/api'
+
 import {
   copyExcludeKeyword,
   copyKeyword,
@@ -8,7 +10,6 @@ import {
   copyRequiredKeyword,
 } from './lib/copyFields'
 
-import type { CreateProductData } from '@/lib/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 const YahooAuctionForm = ({

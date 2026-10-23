@@ -1,11 +1,11 @@
+import { http } from '@/lib/http-client'
+
 import type {
   BackmarketWatchTargetList,
   CreateBackmarketWatchTargetData,
   UpdateBackmarketWatchTargetData,
 } from './types'
 import type { BackmarketWatchTarget } from '../models'
-
-import { http } from '@/lib/http-client'
 
 export async function getBackmarketWatchTargets() {
   return http<BackmarketWatchTargetList>('/api/v1/backmarket_watch_targets', {
@@ -24,10 +24,13 @@ export async function updateBackmarketWatchTarget(
   backmarketWatchTargetId: number,
   data: UpdateBackmarketWatchTargetData,
 ) {
-  return http<BackmarketWatchTarget>(`/api/v1/backmarket_watch_targets/${backmarketWatchTargetId}`, {
-    method: 'PUT',
-    data,
-  })
+  return http<BackmarketWatchTarget>(
+    `/api/v1/backmarket_watch_targets/${backmarketWatchTargetId}`,
+    {
+      method: 'PUT',
+      data,
+    },
+  )
 }
 
 export async function destroyBackmarketWatchTarget(backmarketWatchTargetId: number) {

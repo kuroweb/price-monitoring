@@ -1,9 +1,8 @@
 import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
-import type { Category } from '@/lib/api/models/categories'
-
 import CategoryNavigation from '@/features/products/components/CategoryNavigation'
+import type { Category } from '@/lib/api/models/categories'
 
 const category: Category = {
   id: 1,

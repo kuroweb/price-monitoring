@@ -6,6 +6,15 @@ import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import {
+  ScrollableModalBody,
+  ScrollableModalBox,
+  ScrollableModalFooter,
+  ScrollableModalForm,
+} from '@/components/ui/ScrollableModalBox'
+import { updateProduct } from '@/lib/actions'
+import type { Category, ProductList, UpdateProductData } from '@/lib/api'
+
 import IosysForm from './IosysForm'
 import JanparaForm from './JanparaForm'
 import MercariForm from './MercariForm'
@@ -14,16 +23,7 @@ import UsedSofmapForm from './UsedSofmapForm'
 import YahooAuctionForm from './YahooAuctionForm'
 import { useUpdateProductModalState } from './hooks/useUpdateProductModalState'
 
-import type { Category, ProductList, UpdateProductData } from '@/lib/api'
 import type { SubmitHandler } from 'react-hook-form'
-
-import {
-  ScrollableModalBody,
-  ScrollableModalBox,
-  ScrollableModalFooter,
-  ScrollableModalForm,
-} from '@/components/ui/ScrollableModalBox'
-import { updateProduct } from '@/lib/actions'
 
 export type copyValueType = (
   source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
@@ -42,12 +42,7 @@ const UpdateProductModal = ({
   const router = useRouter()
 
   type SectionTypes =
-    | 'ヤフオク'
-    | 'メルカリ'
-    | 'じゃんぱら'
-    | 'イオシス'
-    | 'パソコン工房'
-    | 'リコレ'
+    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useUpdateProductModalState()
@@ -148,121 +143,130 @@ const UpdateProductModal = ({
         <ScrollableModalBox title='計測設定を更新' onClose={() => setModal(false)}>
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
-            <div className='divider pt-6'>管理情報</div>
-            <fieldset className='fieldset w-full'>
-        <legend className='fieldset-legend'>名称</legend>
-              <input {...register('name')} className='input w-full' />
-      </fieldset>
-            <fieldset className='fieldset w-full'>
-        <legend className='fieldset-legend'>カテゴリ</legend>
-              <select
-                {...register('categoryId', {
-                  setValueAs: (value) => (value === '' ? null : Number(value)),
-                })}
-                className='select w-full'
-              >
-                <option value=''>未設定</option>
-                {categories?.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-        </fieldset>
-            <div className='divider py-6'>計測条件</div>
-            <div className='join flex w-full flex-wrap pb-2'>
-              <input
-                className='btn join-item btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='ヤフオク'
-                checked={tab == 'ヤフオク'}
-                onChange={() => setTab('ヤフオク')}
-              />
-              <input
-                className='btn join-item btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='メルカリ'
-                checked={tab == 'メルカリ'}
-                onChange={() => setTab('メルカリ')}
-              />
-              <input
-                className='btn join-item btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='じゃんぱら'
-                checked={tab == 'じゃんぱら'}
-                onChange={() => setTab('じゃんぱら')}
-              />
-            </div>
-            <div className='join flex w-full flex-wrap'>
-              <input
-                className='btn join-item btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='イオシス'
-                checked={tab == 'イオシス'}
-                onChange={() => setTab('イオシス')}
-              />
-              <input
-                className='btn join-item btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='パソコン工房'
-                checked={tab == 'パソコン工房'}
-                onChange={() => setTab('パソコン工房')}
-              />
-              <input
-                className='btn join-item btn-md w-1/3'
-                type='radio'
-                name='options'
-                aria-label='リコレ'
-                checked={tab == 'リコレ'}
-                onChange={() => setTab('リコレ')}
-              />
-            </div>
-            <div>
-              {tab == 'ヤフオク' && (
-                <div className='py-4'>
-                  <YahooAuctionForm register={register} getValues={getValues} setValue={setValue} />
-                </div>
-              )}
-              {tab == 'メルカリ' && (
-                <div className='py-4'>
-                  <MercariForm register={register} getValues={getValues} setValue={setValue} />
-                </div>
-              )}
-              {tab == 'じゃんぱら' && (
-                <div className='py-4'>
-                  <JanparaForm register={register} getValues={getValues} setValue={setValue} />
-                </div>
-              )}
-              {tab == 'イオシス' && (
-                <div className='py-4'>
-                  <IosysForm register={register} getValues={getValues} setValue={setValue} />
-                </div>
-              )}
-              {tab == 'パソコン工房' && (
-                <div className='py-4'>
-                  <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
-                </div>
-              )}
-              {tab == 'リコレ' && (
-                <div className='py-4'>
-                  <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
-                </div>
-              )}
-            </div>
+              <div className='divider pt-6'>管理情報</div>
+              <fieldset className='fieldset w-full'>
+                <legend className='fieldset-legend'>名称</legend>
+                <input {...register('name')} className='input w-full' />
+              </fieldset>
+              <fieldset className='fieldset w-full'>
+                <legend className='fieldset-legend'>カテゴリ</legend>
+                <select
+                  {...register('categoryId', {
+                    setValueAs: (value) => (value === '' ? null : Number(value)),
+                  })}
+                  className='select w-full'
+                >
+                  <option value=''>未設定</option>
+                  {categories?.map((category) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
+              <div className='divider py-6'>計測条件</div>
+              <div className='join flex w-full flex-wrap pb-2'>
+                <input
+                  className='btn join-item btn-md w-1/3'
+                  type='radio'
+                  name='options'
+                  aria-label='ヤフオク'
+                  checked={tab == 'ヤフオク'}
+                  onChange={() => setTab('ヤフオク')}
+                />
+                <input
+                  className='btn join-item btn-md w-1/3'
+                  type='radio'
+                  name='options'
+                  aria-label='メルカリ'
+                  checked={tab == 'メルカリ'}
+                  onChange={() => setTab('メルカリ')}
+                />
+                <input
+                  className='btn join-item btn-md w-1/3'
+                  type='radio'
+                  name='options'
+                  aria-label='じゃんぱら'
+                  checked={tab == 'じゃんぱら'}
+                  onChange={() => setTab('じゃんぱら')}
+                />
+              </div>
+              <div className='join flex w-full flex-wrap'>
+                <input
+                  className='btn join-item btn-md w-1/3'
+                  type='radio'
+                  name='options'
+                  aria-label='イオシス'
+                  checked={tab == 'イオシス'}
+                  onChange={() => setTab('イオシス')}
+                />
+                <input
+                  className='btn join-item btn-md w-1/3'
+                  type='radio'
+                  name='options'
+                  aria-label='パソコン工房'
+                  checked={tab == 'パソコン工房'}
+                  onChange={() => setTab('パソコン工房')}
+                />
+                <input
+                  className='btn join-item btn-md w-1/3'
+                  type='radio'
+                  name='options'
+                  aria-label='リコレ'
+                  checked={tab == 'リコレ'}
+                  onChange={() => setTab('リコレ')}
+                />
+              </div>
+              <div>
+                {tab == 'ヤフオク' && (
+                  <div className='py-4'>
+                    <YahooAuctionForm
+                      register={register}
+                      getValues={getValues}
+                      setValue={setValue}
+                    />
+                  </div>
+                )}
+                {tab == 'メルカリ' && (
+                  <div className='py-4'>
+                    <MercariForm register={register} getValues={getValues} setValue={setValue} />
+                  </div>
+                )}
+                {tab == 'じゃんぱら' && (
+                  <div className='py-4'>
+                    <JanparaForm register={register} getValues={getValues} setValue={setValue} />
+                  </div>
+                )}
+                {tab == 'イオシス' && (
+                  <div className='py-4'>
+                    <IosysForm register={register} getValues={getValues} setValue={setValue} />
+                  </div>
+                )}
+                {tab == 'パソコン工房' && (
+                  <div className='py-4'>
+                    <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
+                  </div>
+                )}
+                {tab == 'リコレ' && (
+                  <div className='py-4'>
+                    <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
+                  </div>
+                )}
+              </div>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-            <button type='submit' className='btn btn-primary w-full'>
-              更新
-            </button>
+              <button type='submit' className='btn btn-primary w-full'>
+                更新
+              </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>
         </ScrollableModalBox>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
+        <button
+          type='button'
+          onClick={() => setModal(false)}
+          className='modal-backdrop'
+          aria-label='背景から閉じる'
+        />
       </div>
     </>
   )

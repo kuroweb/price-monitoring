@@ -5,10 +5,6 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-import { useUpdateCategoryModalState } from './hooks/useUpdateCategoryModalState'
-
-import type { Category } from '@/lib/api'
-
 import {
   ScrollableModalBody,
   ScrollableModalBox,
@@ -16,6 +12,9 @@ import {
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
 import { updateCategory } from '@/lib/actions'
+import type { Category } from '@/lib/api'
+
+import { useUpdateCategoryModalState } from './hooks/useUpdateCategoryModalState'
 
 const UpdateCategoryModal = ({
   category,
@@ -81,43 +80,48 @@ const UpdateCategoryModal = ({
         <ScrollableModalBox title='カテゴリを編集' onClose={() => setModal(false)}>
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
-            <div className='divider pt-6'>カテゴリ情報</div>
-            <fieldset className='fieldset w-full'>
-        <legend className='fieldset-legend'>親カテゴリ</legend>
-              <select
-                {...register('parentId', {
-                  setValueAs: (value) => {
-                    const id = Number(value)
-                    return Number.isInteger(id) && id > 0 ? id : null
-                  },
-                })}
-                className='select w-full'
-              >
-                <option value=''>なし</option>
-                {availableParentCategories.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-        </fieldset>
-            <fieldset className='fieldset w-full'>
-        <legend className='fieldset-legend'>カテゴリ名</legend>
-              <input
-                {...register('name', { required: 'カテゴリ名は必須です' })}
-                className='input w-full'
-              />
-              {errors.name && <span className='text-sm text-error'>{errors.name.message}</span>}
-            </fieldset>
+              <div className='divider pt-6'>カテゴリ情報</div>
+              <fieldset className='fieldset w-full'>
+                <legend className='fieldset-legend'>親カテゴリ</legend>
+                <select
+                  {...register('parentId', {
+                    setValueAs: (value) => {
+                      const id = Number(value)
+                      return Number.isInteger(id) && id > 0 ? id : null
+                    },
+                  })}
+                  className='select w-full'
+                >
+                  <option value=''>なし</option>
+                  {availableParentCategories.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </fieldset>
+              <fieldset className='fieldset w-full'>
+                <legend className='fieldset-legend'>カテゴリ名</legend>
+                <input
+                  {...register('name', { required: 'カテゴリ名は必須です' })}
+                  className='input w-full'
+                />
+                {errors.name && <span className='text-sm text-error'>{errors.name.message}</span>}
+              </fieldset>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-            <button type='submit' className='btn btn-primary mt-4 w-full max-sm:mt-0'>
-              更新
-            </button>
+              <button type='submit' className='btn btn-primary mt-4 w-full max-sm:mt-0'>
+                更新
+              </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>
         </ScrollableModalBox>
-        <div onClick={() => setModal(false)} className='modal-backdrop' />
+        <button
+          type='button'
+          onClick={() => setModal(false)}
+          className='modal-backdrop'
+          aria-label='背景から閉じる'
+        />
       </div>
     </>
   )

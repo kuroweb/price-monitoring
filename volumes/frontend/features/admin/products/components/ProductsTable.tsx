@@ -6,15 +6,14 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
+import { destroyProduct } from '@/lib/actions'
+import type { Category, ProductList } from '@/lib/api'
+
 import UpdateProductModal from '../common/components/update-product-modal/UpdateProductModal'
 import { useUpdateProductModalState } from '../common/components/update-product-modal/hooks/useUpdateProductModalState'
 
 import CreateProductModal from './create-product-modal/CreateProductModal'
 import { useCreateProductModalState } from './create-product-modal/hooks/useCreateProductModalState'
-
-import type { Category, ProductList } from '@/lib/api'
-
-import { destroyProduct } from '@/lib/actions'
 
 interface Props {
   products: ProductList['products']
@@ -60,7 +59,11 @@ const ProductsTable = ({ products, categories }: Props) => {
               </td>
               <td className='w-1/12'>
                 <div className='dropdown dropdown-left'>
-                  <div tabIndex={0} role='button' className='btn btn-square btn-md'>
+                  <button
+                    type='button'
+                    aria-label={`${product.name}の操作`}
+                    className='btn btn-square btn-md'
+                  >
                     <svg
                       xmlns='http://www.w3.org/2000/svg'
                       fill='none'
@@ -74,11 +77,8 @@ const ProductsTable = ({ products, categories }: Props) => {
                         d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
                       ></path>
                     </svg>
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
-                  >
+                  </button>
+                  <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
                     <li>
                       <button
                         className='btn btn-primary'
@@ -116,7 +116,11 @@ const ProductsTable = ({ products, categories }: Props) => {
           ))}
         </tbody>
       </table>
-      <CreateProductModal key={`create-${product?.id ?? 'none'}`} product={product} categories={categories} />
+      <CreateProductModal
+        key={`create-${product?.id ?? 'none'}`}
+        product={product}
+        categories={categories}
+      />
       <UpdateProductModal
         key={`update-${product?.id ?? 'none'}`}
         productId={product?.id || 0}

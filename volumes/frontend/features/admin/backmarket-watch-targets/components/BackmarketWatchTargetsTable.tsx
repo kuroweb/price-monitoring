@@ -5,11 +5,10 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import BackmarketWatchTargetFormModal from './BackmarketWatchTargetFormModal'
-
+import { destroyBackmarketWatchTarget } from '@/lib/actions'
 import type { BackmarketWatchTarget, BackmarketWatchTargetList } from '@/lib/api'
 
-import { destroyBackmarketWatchTarget } from '@/lib/actions'
+import BackmarketWatchTargetFormModal from './BackmarketWatchTargetFormModal'
 
 interface Props {
   backmarketWatchTargets: BackmarketWatchTargetList['backmarketWatchTargets']
@@ -60,7 +59,11 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                   <td>{target.enabled ? '有効' : '無効'}</td>
                   <td className='w-1/12'>
                     <div className={`dropdown dropdown-left ${isLastRow ? 'dropdown-top' : ''}`}>
-                      <div tabIndex={0} role='button' className='btn btn-square btn-md'>
+                      <button
+                        type='button'
+                        aria-label={`${target.name}の操作`}
+                        className='btn btn-square btn-md'
+                      >
                         <svg
                           xmlns='http://www.w3.org/2000/svg'
                           fill='none'
@@ -74,11 +77,8 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                             d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
                           ></path>
                         </svg>
-                      </div>
-                      <ul
-                        tabIndex={0}
-                        className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'
-                      >
+                      </button>
+                      <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
                         <li>
                           <button
                             className='btn btn-primary'

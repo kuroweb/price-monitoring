@@ -1,5 +1,7 @@
 'use client'
 
+import type { UpdateProductData } from '@/lib/api'
+
 import {
   copyKeyword,
   copyRequiredKeyword,
@@ -8,7 +10,6 @@ import {
   copyMaxPrice,
 } from './lib/copyFields'
 
-import type { UpdateProductData } from '@/lib/api'
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 const YahooAuctionForm = ({
