@@ -3,15 +3,15 @@ source "https://rubygems.org"
 ruby "4.0.4"
 
 gem "bootsnap", require: false
-gem "bugsnag", "~> 6.27"
+gem "bugsnag", "~> 6.30"
 gem "closure_tree"
-gem "datadog", "~> 2.0", require: false
+gem "datadog", "~> 2.46", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
 gem "omniauth_openid_connect"
 gem "omniauth-rails_csrf_protection"
-gem "playwright-ruby-client", "~> 1.62.0", require: "playwright"
+gem "playwright-ruby-client", "~> 1.64.0", require: "playwright"
 gem "puma", ">= 5.0"
 gem "rack-cors"
 gem "rails", "~> 8.1.4"
