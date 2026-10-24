@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libnss3 \
   && rm -rf /var/lib/apt/lists/*
 
-RUN pip install --no-cache-dir "camoufox[geoip]==0.4.11" "playwright==1.53.0" \
+RUN pip install --no-cache-dir "camoufox[geoip]==0.5.8" "playwright==1.62.0" \
   && python -m playwright install \
   && python -m camoufox fetch
 

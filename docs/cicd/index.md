@@ -42,7 +42,7 @@ Frontend CI は `--no-deps` で実行し、BFF・DB・認証の起動を必要�
 
 BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動き、Frontend の更新では lint・型検査・Vitest が動く。ローカルでの確認は [テスト手順](../development/index.md#テスト)を参照する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
 
-Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright は Ruby gem・イメージ・インストールコマンドにバージョン指定が分散しているため、`playwright-ruby-client` の更新では関連する指定の整合性も確認する。
+Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright のクライアントとサーバーはメジャー・マイナーバージョンを揃える必要がある ([公式仕様](https://playwright.dev/docs/api/class-browsertype))。Camoufox 0.5.8 は Playwright 1.63 未満を要求するため ([依存要件](https://pypi.org/project/camoufox/0.5.8/))、`playwright-ruby-client` の更新では `containers/backend_playwright/**` と `containers/backend_camoufox/**` の指定、および `Crawl::Client` / `Crawl::CamoufoxClient` の接続APIを合わせて確認する。これらのイメージには独立したCIジョブがないため、各Dockerfileのビルドと両方の接続確認を行う。
 
 Dependabot alerts とセキュリティ更新 PR の自動作成は、GitHub のリポジトリ設定で別途有効化する。設定項目の意味は [GitHub の公式資料](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)を参照する。
 

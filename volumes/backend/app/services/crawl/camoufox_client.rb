@@ -8,8 +8,7 @@ module Crawl
 
     class << self
       def execute(proxy: nil)
-        Playwright.connect_to_playwright_server(server_url) do |playwright|
-          browser = playwright.firefox.launch(headless: true)
+        Playwright.connect_to_browser_server(server_url, browser_type: "firefox") do |browser|
           context = browser.new_context(**context_options(proxy:))
           page = context.new_page
           setup_request_blocking!(page)

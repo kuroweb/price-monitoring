@@ -2,20 +2,16 @@ module Crawl
   class Client
     class << self
       def execute
-        Playwright.connect_to_playwright_server(server_url) do |playwright|
-          browser = playwright.chromium.launch(**launch_options)
+        Playwright.connect_to_browser_server(server_url, browser_type: "chromium") do |browser|
           context = browser.new_context(**context_options)
           page = context.new_page
-          page.route("**/*", ->(route, request) { RequestBlocklist.blocked_request?(request.url) ? route.abort : route.fallback })
+          page.route("**/*", lambda { |route, request|
+            blocked_request = RequestBlocklist.blocked_request?(request.url)
+            blocked_resource = %w[image font].include?(request.resource_type)
+            blocked_request || blocked_resource ? route.abort : route.fallback
+          })
           yield(page)
         end
-      end
-
-      def launch_options
-        {
-          headless: true,
-          args: ["--blink-settings=imagesEnabled=false", "--disable-remote-fonts"]
-        }
       end
 
       def context_options
@@ -23,7 +19,7 @@ module Crawl
       end
 
       def server_url
-        "#{ENV.fetch('PLAYWRIGHT_URL')}?browser=chromium"
+        ENV.fetch("PLAYWRIGHT_URL")
       end
     end
   end
