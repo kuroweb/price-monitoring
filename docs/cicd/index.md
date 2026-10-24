@@ -99,6 +99,6 @@ Kubernetes の全体構成は [ルート README](../../README.md#production)、�
 
 - PR の作成、更新、再オープン、Draft 解除時に実行する。Draft 中は実行せず、イベントの実行者が `kuroweb` または `dependabot[bot]` の場合に限る。Claude Action の `allowed_bots` でも `dependabot[bot]` を明示的に許可する。
 - `kuroweb/ai-manifest` の `gh-pr-review-ci` と `code-reviewing` スキルを runner にインストールし、Sonnet が PR の説明と差分をレビューする。
-- レビュー結果は PR のコメントに投稿する。同じ PR に更新が入った場合、実行中のレビューをキャンセルする。
+- レビュー結果は `claude[bot]` が PR のコメントに投稿する。同じ PR に更新が入った場合、実行中のレビューをキャンセルする。
 
-事前にリポジトリの Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。Dependabot が起動した workflow では Actions secrets を参照できないため、Settings → Secrets and variables → Dependabot にも同名のトークンを登録する。`GITHUB_TOKEN` は GitHub Actions が自動発行するものを使う。
+事前にリポジトリへ [Claude GitHub App](https://github.com/apps/claude) をインストールする。Action は `github_token` を渡さず、この App のインストールトークンで投稿する。ジョブの `id-token: write` はそのトークン取得に使う。Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。Dependabot が起動した workflow では Actions secrets を参照できないため、Settings → Secrets and variables → Dependabot にも同名のトークンを登録する。
