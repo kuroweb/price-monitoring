@@ -257,7 +257,8 @@ GEM
     parser (3.3.8.0)
       ast (~> 2.4.1)
       racc
-    playwright-ruby-client (1.53.0)
+    playwright-ruby-client (1.62.0)
+      base64
       concurrent-ruby (>= 1.1.6)
       mime-types (>= 3.0)
     pp (0.6.4)
@@ -520,7 +521,7 @@ DEPENDENCIES
   mysql2 (~> 0.5)
   omniauth-rails_csrf_protection
   omniauth_openid_connect
-  playwright-ruby-client (~> 1.53.0)
+  playwright-ruby-client (~> 1.62.0)
   pry-byebug
   pry-doc
   pry-rails
