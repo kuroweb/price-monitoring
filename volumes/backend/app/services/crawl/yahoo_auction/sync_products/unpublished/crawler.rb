@@ -4,6 +4,8 @@ module Crawl
     module SyncProducts
       module Unpublished
         class Crawler
+          include ListPage
+
           RETRY_COUNT = 5
           MAX_SIZE = 500
 
@@ -11,7 +13,7 @@ module Crawl
             @product = product
           end
 
-          def execute
+          def execute # rubocop:disable Metrics/MethodLength
             Crawl::Client.execute do |page|
               start = 1
               loop do
@@ -19,9 +21,10 @@ module Crawl
 
                 Retryable.retryable(tries: RETRY_COUNT) do
                   page.goto(url(start))
+                  wait_for_list(page)
                   break if not_exist_results?(page)
 
-                  append_results(page)
+                  append_results(page, first_page: start == 1)
                 end
 
                 break if stop?(page)
@@ -39,23 +42,43 @@ module Crawl
 
           attr_reader :product
 
-          def append_results(page)
-            product_doms = page.query_selector_all("li.Product")
-            product_doms.each do |dom|
+          def append_results(page, first_page:) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+            items = product_items(page)
+            crawlable_count = 0
+            added_count = 0
+
+            items.each do |dom|
+              next if not_crawlable?(dom)
+
+              crawlable_count += 1
+              price = closed_price(dom)
+              next if price.nil?
+
+              bought_date = auction_end_datetime(dom, mode: :unpublished)
+
               result = Crawl::YahooAuction::SyncProducts::CrawlResult.new(
                 external_id: external_id(dom),
                 seller_id: seller_id(dom),
                 name: name(dom),
-                price: price(dom),
+                price:,
                 buyout_price: nil,
                 thumbnail_url: thumbnail_url(dom),
                 published: false,
-                bought_date: bought_date(dom),
-                end_date: end_date(dom)
+                bought_date:,
+                end_date: bought_date
               )
 
               crawl_results.add(result)
+              added_count += 1
             end
+
+            assert_first_page_products!(
+              page,
+              first_page:,
+              items_count: items.size,
+              crawlable_count:,
+              added_count:
+            )
           end
 
           def url(start)
@@ -64,45 +87,6 @@ module Crawl
 
           def stop?(page)
             not_exist_results?(page) || not_exist_next_page?(page)
-          end
-
-          def not_exist_results?(page)
-            page.query_selector(".Notice__wandQuery")
-          end
-
-          def not_exist_next_page?(page)
-            !page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
-          end
-
-          def external_id(dom)
-            dom.query_selector(".Product__titleLink").get_attribute("href").split("/")[-1]
-          end
-
-          def seller_id(dom)
-            href = dom.query_selector(".Product__sellerLink").get_attribute("href")
-            href[%r{seller/([^/]+)}, 1]
-          end
-
-          def name(dom)
-            dom.query_selector(".Product__titleLink").inner_text
-          end
-
-          def price(dom)
-            dom.query_selector(".Product__priceValue").inner_text.gsub(/,|円/, "")
-          end
-
-          def thumbnail_url(dom)
-            dom.eval_on_selector(".Product__imageData", "el => el.src")
-          end
-
-          def bought_date(dom)
-            date_str = dom.query_selector(".Product__time").inner_text
-            datetime = date_str.to_datetime
-            datetime > Time.current ? datetime.ago(1.year) : datetime
-          end
-
-          def end_date(dom)
-            bought_date(dom)
           end
 
           def crawl_results
