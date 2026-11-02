@@ -90,8 +90,9 @@ module Crawl
           skeleton?(dom) || shop_item?(dom)
         end
 
+        # 読み込み前のセルは商品リンクを持たない
         def skeleton?(dom)
-          dom.query_selector(".merSkeleton").present?
+          dom.query_selector("a").nil?
         end
 
         def shop_item?(dom)
@@ -109,15 +110,16 @@ module Crawl
         end
 
         def price(dom)
-          dom.query_selector("[class^='number']").inner_text.gsub(/,/, "")
+          dom.query_selector("[data-testid='item-tile-price']").inner_text.gsub(/¥|,/, "")
         end
 
+        # 画像リクエストを遮断すると img の src が設定されないため、external_id から組み立てる
         def thumbnail_url(dom)
-          dom.query_selector("img").get_attribute("src")
+          "https://static.mercdn.net/thumb/item/webp/#{external_id(dom)}_1.jpg"
         end
 
         def published(dom)
-          dom.query_selector("[aria-label='売り切れ']").blank?
+          dom.query_selector("img[alt$='売り切れ']").blank?
         end
 
         def crawl_results

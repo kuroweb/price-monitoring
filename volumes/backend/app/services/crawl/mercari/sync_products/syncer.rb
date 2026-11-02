@@ -63,9 +63,14 @@ module Crawl
         end
 
         def crawl_results
-          @crawl_results ||= Datadog::Tracing.trace("#{self.class.name}.crawl_results") do
-            Crawler.new(product:).execute
-          end
+          @crawl_results ||= trace_crawl { Crawler.new(product:).execute }
+        end
+
+        # Datadog は production / integration でのみ読み込まれる
+        def trace_crawl(&)
+          return yield unless defined?(Datadog::Tracing)
+
+          Datadog::Tracing.trace("#{self.class.name}.crawl_results", &)
         end
       end
     end
