@@ -22,10 +22,10 @@ module Crawl
                   page.reload
                   break if not_exist_results?(page)
 
-                  append_results(page)
+                  append_results(page, start:)
                 end
 
-                break if stop?(page)
+                break if stop?(page, start)
 
                 start += 100
               end
@@ -40,15 +40,17 @@ module Crawl
 
           attr_reader :product
 
-          def append_results(page)
-            product_doms = page.query_selector_all("li.Product")
-            product_doms.each do |dom|
+          def append_results(page, start:)
+            doms = Crawl::YahooFleamarket::SyncProducts::ListItem.product_doms(page)
+            raise Crawl::YahooFleamarket::ListStructureChanged if start == 1 && doms.empty?
+
+            doms.each do |dom|
               result = Crawl::YahooFleamarket::SyncProducts::CrawlResult.new(
-                external_id: external_id(dom),
-                seller_id: seller_id(dom),
-                name: name(dom),
-                price: price(dom),
-                thumbnail_url: thumbnail_url(dom),
+                external_id: Crawl::YahooFleamarket::SyncProducts::ListItem.external_id(dom),
+                seller_id: Crawl::YahooFleamarket::SyncProducts::ListItem.seller_id(dom),
+                name: Crawl::YahooFleamarket::SyncProducts::ListItem.name(dom),
+                price: Crawl::YahooFleamarket::SyncProducts::ListItem.price(dom),
+                thumbnail_url: Crawl::YahooFleamarket::SyncProducts::ListItem.thumbnail_url(dom),
                 published: true,
                 bought_date: nil
               )
@@ -61,37 +63,12 @@ module Crawl
             UrlGenerator.new(yahoo_auction_crawl_setting: product.yahoo_auction_crawl_setting, start:).generate
           end
 
-          def stop?(page)
-            not_exist_results?(page) || not_exist_next_page?(page)
+          def stop?(page, start)
+            not_exist_results?(page) || !Crawl::YahooFleamarket::SyncProducts::ListItem.next_page?(page, start)
           end
 
           def not_exist_results?(page)
             page.query_selector(".Notice__wandQuery")
-          end
-
-          def not_exist_next_page?(page)
-            !page.query_selector(".Pager__list.Pager__list--next > a.Pager__link")
-          end
-
-          def external_id(dom)
-            dom.query_selector(".Product__titleLink").get_attribute("data-auction-id")
-          end
-
-          def seller_id(dom)
-            href = dom.query_selector(".Product__sellerLink").get_attribute("href")
-            href[%r{user/([^/]+)}, 1]
-          end
-
-          def name(dom)
-            dom.query_selector(".Product__titleLink").inner_text
-          end
-
-          def price(dom)
-            dom.query_selector_all(".Product__priceValue")[0].inner_text.gsub(/,|円/, "")
-          end
-
-          def thumbnail_url(dom)
-            dom.eval_on_selector(".Product__imageData", "el => el.src")
           end
 
           def crawl_results

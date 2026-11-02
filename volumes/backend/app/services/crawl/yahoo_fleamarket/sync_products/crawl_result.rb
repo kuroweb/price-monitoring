@@ -16,6 +16,7 @@ module Crawl
 
         validates :published, inclusion: { in: [true, false] }
         validates_presence_of :external_id, :seller_id, :name, :price, :thumbnail_url
+        validates :bought_date, presence: true, if: -> { published == false }
       end
     end
   end
