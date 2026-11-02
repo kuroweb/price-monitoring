@@ -60,7 +60,17 @@ module Crawl
         end
 
         def thumbnail_url(item)
-          item.query_selector("img").get_attribute("src")
+          img = product_link_image(item) || item.query_selector("img")
+          img.get_attribute("src")
+        end
+
+        def product_link_image(item)
+          item.query_selector_all("a[href*=\"#{ITEM_LINK_SUBSTRING}\"]").each do |link|
+            img = link.query_selector("img")
+            return img if img
+          end
+
+          nil
         end
 
         def bought_date(item)
@@ -72,7 +82,11 @@ module Crawl
         end
 
         def next_page?(page, start)
-          page.query_selector("a[href*=\"b=#{start + 100}\"]").present?
+          target = start + 100
+          pattern = /[?&]b=#{target}(?:&|\z)/
+          page.query_selector_all('a[href*="b="]').any? do |link|
+            link.get_attribute("href").to_s.match?(pattern)
+          end
         end
       end
     end
