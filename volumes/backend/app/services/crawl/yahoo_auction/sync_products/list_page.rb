@@ -2,7 +2,7 @@
 module Crawl
   module YahooAuction
     module SyncProducts
-      module ListPage
+      module ListPage # rubocop:disable Metrics/ModuleLength -- 一覧 DOM パースの共通モジュール
         PRODUCT_ITEM_SELECTOR = 'li:has(> div a[href*="jp/auction/"])'.freeze
         TITLE_LINK_SELECTOR = 'a[href*="jp/auction/"].wb_break-all'.freeze
         SELLER_LINK_SELECTOR = 'a[href*="/seller/"]'.freeze
@@ -10,6 +10,7 @@ module Crawl
         NEXT_PAGE_SELECTOR = "a >> text=次へ".freeze
         LIST_LOAD_WAIT_SECONDS = 3
         END_TIME_PATTERN = %r{(\d{1,2}/\d{1,2})\s+(\d{1,2}:\d{2})終了}
+        REMAINING_TIME_ONLY_PATTERN = /\A(?:(\d+)時間)?(?:(\d+)分)?(?:(\d+)秒)\z/
 
         module_function
 
@@ -97,12 +98,31 @@ module Crawl
         def auction_end_datetime(dom, mode: :published)
           text = dom.inner_text
           matched = text.match(END_TIME_PATTERN)
-          return unless matched
+          if matched
+            datetime = Time.zone.parse("#{Time.current.year}/#{matched[1]} #{matched[2]}")
+            return adjust_year(datetime, mode:) if datetime
+          end
 
-          adjust_year(
-            Time.zone.parse("#{Time.current.year}/#{matched[1]} #{matched[2]}"),
-            mode:
-          )
+          remaining_seconds = remaining_seconds_from_dom(dom)
+          return Time.current + remaining_seconds.seconds if remaining_seconds&.positive?
+
+          nil
+        end
+
+        def remaining_seconds_from_dom(dom)
+          dom.query_selector_all("span").each do |element|
+            span_text = element.inner_text.strip
+            next if span_text.blank?
+
+            remaining = span_text.match(REMAINING_TIME_ONLY_PATTERN)
+            next unless remaining
+
+            hours, minutes, seconds = remaining.captures.map(&:to_i)
+            total = (hours * 3600) + (minutes * 60) + seconds
+            return total if total.positive?
+          end
+
+          nil
         end
 
         def adjust_year(datetime, mode:)
@@ -121,7 +141,7 @@ module Crawl
         def price_section_text(dom)
           dom.query_selector(PRICE_SECTION_SELECTOR)&.inner_text || dom.inner_text
         end
-      end
+      end # rubocop:enable Metrics/ModuleLength
     end
   end
 end
