@@ -1,0 +1,6 @@
+scripts:
+  setup: |
+    cp "$ORCA_ROOT_PATH/.env" "$ORCA_WORKTREE_PATH/.env"
+
+# .env のコピー完了後にエージェントを起動する
+setupAgentStartupPolicy: wait-for-setup
