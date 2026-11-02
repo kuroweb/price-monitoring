@@ -156,6 +156,12 @@ just test-frontend -t '最初のページ'
 
 テストの配置と対象範囲は [Frontend のテスト方針](../frontend/index.md#テスト方針)を参照する。PR では [Frontend CI](../cicd/index.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。
 
+## Orca の worktree
+
+Orca で worktree を作ると、gitignore 対象の `.env` が存在しないため、[orca.yaml](../../orca.yaml) の `scripts.setup` がメインのチェックアウトから `.env` をコピーする。コピーが終わってからエージェントが起動する。`orca.yaml` は初回と変更後に Orca の信頼確認が必要になる。
+
+コピーするのはルートの `.env` だけである。auth-provider の `.env` / `master.key` / 秘密鍵や nginx の証明書は、それらを扱う作業が必要になったときに手動で用意する。
+
 ## 関連手順
 
 - [Seed データの投入](../backend/operations/seeds.md)
