@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "playwright_css_compat"
+
 class CrawlFakePlaywrightPage
   class Element
     def initialize(node)
@@ -7,12 +9,12 @@ class CrawlFakePlaywrightPage
     end
 
     def query_selector(selector)
-      node = @node.at_css(selector)
+      node = PlaywrightCssCompat.query_nodes(@node, selector).first
       node ? self.class.new(node) : nil
     end
 
     def query_selector_all(selector)
-      @node.css(selector).map { |n| self.class.new(n) }
+      PlaywrightCssCompat.query_nodes(@node, selector).map { |n| self.class.new(n) }
     end
 
     def get_attribute(name)
@@ -37,11 +39,20 @@ class CrawlFakePlaywrightPage
   end
 
   def query_selector(selector)
-    node = @doc.at_css(selector)
+    node = PlaywrightCssCompat.query_nodes(@doc, selector).first
     node ? Element.new(node) : nil
+  end
+
+  def query_selector_all(selector)
+    PlaywrightCssCompat.query_nodes(@doc, selector).map { |n| Element.new(n) }
   end
 
   def goto(url)
     @goto_urls << url
+  end
+
+  def eval_on_selector(selector, _javascript)
+    node = @doc.at_css(selector)
+    node&.text
   end
 end
