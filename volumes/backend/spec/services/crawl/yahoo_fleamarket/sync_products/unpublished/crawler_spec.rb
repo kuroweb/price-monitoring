@@ -67,6 +67,29 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
       end
     end
 
+    context "年またぎで終了日時が未来に見える場合" do
+      let(:page_html) do
+        <<~HTML
+          <ul>
+            #{sold_item_row(
+              external_id: 'z556',
+              name: 'Year boundary item',
+              price: '1,000',
+              end_label: '12/31 23:00'
+            )}
+          </ul>
+        HTML
+      end
+
+      it "bought_date を 1 年戻した日時にすること" do
+        travel_to Time.zone.local(2027, 1, 2, 12, 0, 0) do
+          crawl_results = crawler.execute
+
+          expect(crawl_results.results[0].bought_date).to eq(Time.zone.local(2026, 12, 31, 23, 0, 0))
+        end
+      end
+    end
+
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div class="Notice__wandQuery">見つかりませんでした</div>' }
 

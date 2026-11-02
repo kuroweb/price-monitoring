@@ -32,6 +32,31 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
       HTML
     end
 
+    context "行内の先頭がバッジ img で商品リンク内に商品 img がある場合" do
+      let(:page_html) do
+        <<~HTML
+          <ul>
+            <li>
+              <img src="https://example.com/badge.png" alt="badge">
+              <a target="_blank" href="https://paypayfleamarket.yahoo.co.jp/item/z777">
+                <img src="https://example.com/z777.jpg" alt="Magic Keyboard">
+              </a>
+              <a href="https://paypayfleamarket.yahoo.co.jp/user/p777">seller</a>
+              <a target="_blank" href="https://paypayfleamarket.yahoo.co.jp/item/z777">Magic Keyboard</a>
+              <span>即決9,800円</span>
+            </li>
+          </ul>
+        HTML
+      end
+
+      it "商品リンク内の img を thumbnail_url にすること" do
+        crawl_results = crawler.execute
+
+        expect(crawl_results.results.size).to eq(1)
+        expect(crawl_results.results[0].thumbnail_url).to eq("https://example.com/z777.jpg")
+      end
+    end
+
     context "PayPayフリマ商品とスケルトン・価格なし行が混在する場合" do
       let(:page_html) do
         <<~HTML
