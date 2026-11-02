@@ -19,6 +19,7 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
       allow(Crawl::YahooAuction::SyncProducts::Unpublished::UrlGenerator).to receive(:new).and_return(url_generator)
       allow(Crawl::Client).to receive(:execute).and_yield(page)
       allow(crawler).to receive(:sleep)
+      allow(Retryable).to receive(:retryable).and_yield
     end
 
     def closed_item_li(external_id:, name:, price:, end_text:, seller_id: "closed_seller")
@@ -93,6 +94,52 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
           crawl_results = crawler.execute
 
           expect(crawl_results.results[0].bought_date).to eq(Time.zone.local(2025, 12, 28, 10, 0, 0))
+        end
+      end
+    end
+
+    context "旧 DOM (li.Product) で商品セルが 0 件の場合" do
+      let(:page_html) do
+        <<~HTML
+          <ul>
+            <li class="Product">
+              <a class="Product__titleLink" data-auction-id="old">旧 HTML</a>
+            </li>
+          </ul>
+        HTML
+      end
+
+      it "ProductListHtmlMismatchError を raise すること" do
+        expect { crawler.execute }.to raise_error(Crawl::YahooAuction::SyncProducts::ProductListHtmlMismatchError)
+      end
+    end
+
+    context "商品セルはあるが落札価格が解釈できず 0 件になる場合" do
+      let(:page_html) do
+        <<~HTML
+          <ul>
+            <li>
+              <div>
+                <div>
+                  <a href="https://auctions.yahoo.co.jp/jp/auction/b777">
+                    <img src="https://example.com/thumb/b777.jpg" alt="">
+                  </a>
+                </div>
+                <div class="lg:grid-tc_1fr_160px">
+                  <a class="wb_break-all" href="https://auctions.yahoo.co.jp/jp/auction/b777">落札価格不明</a>
+                  <span>送料無料のみ</span>
+                  <span>11/3 00:07終了</span>
+                  <a href="https://auctions.yahoo.co.jp/seller/closed_seller">出品者</a>
+                </div>
+              </div>
+            </li>
+          </ul>
+        HTML
+      end
+
+      it "ProductListHtmlMismatchError を raise すること" do
+        travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
+          expect { crawler.execute }.to raise_error(Crawl::YahooAuction::SyncProducts::ProductListHtmlMismatchError)
         end
       end
     end

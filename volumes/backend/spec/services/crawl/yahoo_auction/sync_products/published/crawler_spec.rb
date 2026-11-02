@@ -113,6 +113,58 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Published::Crawler, type: :ser
       end
     end
 
+    context "終了日時が相対表示（分・秒）のみの場合" do
+      let(:page_html) do
+        search_list(<<~HTML)
+          <li>
+            <div>
+              <div>
+                <a href="https://auctions.yahoo.co.jp/jp/auction/n888">
+                  <img src="https://example.com/thumb/n888.jpg" alt="">
+                </a>
+                <span>もうすぐ終了</span>
+              </div>
+              <div class="lg:grid-tc_1fr_160px">
+                <a class="wb_break-all" href="https://auctions.yahoo.co.jp/jp/auction/n888">iPad ケース</a>
+                <span>即決10,978円</span>
+                <span>21分40秒</span>
+                <a href="https://auctions.yahoo.co.jp/seller/seller123">出品者</a>
+              </div>
+            </div>
+          </li>
+        HTML
+      end
+
+      it "残り時間の葉要素から終了日時を算出すること" do
+        travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
+          crawl_results = crawler.execute
+
+          expect(crawl_results.results[0].end_date).to eq(Time.zone.local(2026, 11, 3, 12, 21, 40))
+        end
+      end
+    end
+
+    context "商品名に分表記があり、終了日時の葉要素が無い場合" do
+      let(:page_html) do
+        search_list(
+          published_item_li(
+            external_id: "n890",
+            name: "iPad 30分充電対応ケース",
+            price_text: "現在10,000円",
+            end_text: "送料無料"
+          )
+        )
+      end
+
+      it "商品名から終了日時を作らず end_date が nil のままであること" do
+        travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
+          crawl_results = crawler.execute
+
+          expect(crawl_results.results[0].end_date).to be_nil
+        end
+      end
+    end
+
     context "12 月に翌年 1 月終了の開催中商品がある場合" do
       let(:page_html) do
         search_list(
