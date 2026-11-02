@@ -1,6 +1,8 @@
 module Crawl
   module Mercari
     module SyncProduct
+      DELETED_TEXTS = ["ページが見つかりませんでした", "該当する商品は削除されています。"].freeze
+
       class Crawler
         RETRY_COUNT = 3
 
@@ -47,7 +49,7 @@ module Crawl
 
         def deleted?(page)
           page.query_selector(".merEmptyState").present? ||
-            page.query_selector("text='ページが見つかりませんでした'").present?
+            DELETED_TEXTS.any? { |text| page.query_selector("text='#{text}'").present? }
         end
 
         def deleted_crawl_result
