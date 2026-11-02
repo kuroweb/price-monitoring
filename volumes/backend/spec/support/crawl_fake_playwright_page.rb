@@ -47,6 +47,8 @@ class CrawlFakePlaywrightPage
     PlaywrightCssCompat.query_nodes(@doc, selector).map { |n| Element.new(n) }
   end
 
+  def reload; end
+
   def goto(url)
     @goto_urls << url
   end
