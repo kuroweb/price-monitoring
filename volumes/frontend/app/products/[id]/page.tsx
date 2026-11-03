@@ -1,4 +1,8 @@
+import Link from 'next/link'
+
 import Layout from '@/components/layouts/Layout'
+import UpdateProductModal from '@/features/admin/products/common/components/update-product-modal/UpdateProductModal'
+import { useUpdateProductModalQuery } from '@/features/admin/products/common/components/update-product-modal/hooks/useUpdateProductModalState'
 import AnalysisChart from '@/features/products/[id]/components/AnalysisChart'
 import Pagination from '@/features/products/[id]/components/Pagination'
 import SearchForm from '@/features/products/[id]/components/SearchForm'
@@ -14,7 +18,7 @@ import {
 } from '@/features/products/[id]/hooks/useStatusState'
 import { makePlatformMask } from '@/features/products/[id]/lib/makePlatformMask'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import { getProductPrice } from '@/lib/actions'
+import { getCategories, getProduct, getProductPrice } from '@/lib/actions'
 
 const Page = async ({
   params,
@@ -30,18 +34,39 @@ const Page = async ({
   const { [usePageStateQuery]: page } = pageStateCache.parse(resolvedSearchParams)
   const { [usePerStateQuery]: per } = perStateCache.parse(resolvedSearchParams)
 
-  const productPriceDetailResponse = await getProductPrice(Number(resolvedParams.id), {
-    platformMask: makePlatformMask(platform, status),
-    sort: status == 'published' ? 'price' : 'bought_date',
-    order: status == 'published' ? 'asc' : 'desc',
-    page,
-    per,
-  })
+  const productId = Number(resolvedParams.id)
+  const [productPriceDetailResponse, productResponse, categoryResponse] = await Promise.all([
+    getProductPrice(productId, {
+      platformMask: makePlatformMask(platform, status),
+      sort: status == 'published' ? 'price' : 'bought_date',
+      order: status == 'published' ? 'asc' : 'desc',
+      page,
+      per,
+    }),
+    getProduct(productId),
+    getCategories({ rootOnly: false }),
+  ])
   const productPriceDetail = productPriceDetailResponse.data
 
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>
+        <div className='card w-full bg-base-300'>
+          <div className='card-body flex-row flex-wrap items-center justify-between gap-4'>
+            <h1 className='card-title text-xl'>{productPriceDetail?.name}</h1>
+            <Link
+              className='btn'
+              href={{
+                query: {
+                  ...resolvedSearchParams,
+                  [useUpdateProductModalQuery]: 'true',
+                },
+              }}
+            >
+              計測設定
+            </Link>
+          </div>
+        </div>
         <div className='card w-full bg-base-300'>
           <div className='card-body'>
             <h2 className='card-title pb-4'>価格推移</h2>
@@ -68,6 +93,11 @@ const Page = async ({
           </div>
         </div>
       </div>
+      <UpdateProductModal
+        productId={productId}
+        product={productResponse?.data || undefined}
+        categories={categoryResponse?.data?.categories || []}
+      />
     </Layout>
   )
 }
