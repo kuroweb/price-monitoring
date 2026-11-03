@@ -144,5 +144,32 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
         )
       end
     end
+
+    context "商品を読んだあとの次ページ判定で失敗して再試行する場合" do
+      let(:page_html) do
+        item_html(
+          external_id: "smartphone/iphone/simfree/iphone15_a3089/286191",
+          name: "iPhone 15 128GB",
+          price: "89,800円",
+          thumbnail: "https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp"
+        )
+      end
+
+      before do
+        next_page_checks = 0
+        allow(page).to receive(:query_selector).and_call_original
+        allow(page).to receive(:query_selector).with(".page-link[rel='next']") do
+          next_page_checks += 1
+          raise StandardError, "Target closed" if next_page_checks == 1
+        end
+      end
+
+      it "同じページの商品を重複させずに返すこと" do
+        crawl_results = crawler.call
+
+        expect(page.goto_urls.size).to eq(2)
+        expect(crawl_results.results.size).to eq(1)
+      end
+    end
   end
 end
