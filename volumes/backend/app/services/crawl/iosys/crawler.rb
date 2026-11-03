@@ -12,27 +12,13 @@ module Crawl
         @product = product
       end
 
-      def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-        Crawl::Client.execute do |page|
-          page_count = 1
-          loop do
-            break if page_count > MAX_PAGE
+      def call
+        page_count = 1
+        loop do
+          break if page_count > MAX_PAGE
+          break unless fetch_page(page_count)
 
-            Retryable.retryable(tries: RETRY_COUNT) do
-              Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
-
-              page.goto(url(page_count), waitUntil: "domcontentloaded")
-              load(page)
-
-              break if no_results?(page)
-
-              append_results(page)
-            end
-
-            break unless exists_next_page?(page)
-
-            page_count += 1
-          end
+          page_count += 1
         end
 
         raise StandardError, crawl_results.errors unless crawl_results.valid?
@@ -43,6 +29,26 @@ module Crawl
       private
 
       attr_reader :product
+
+      def fetch_page(page_count)
+        has_next = false
+
+        Retryable.retryable(tries: RETRY_COUNT) do
+          Crawl::Client.execute do |page|
+            Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
+
+            response = page.goto(url(page_count), waitUntil: "domcontentloaded")
+            load(page)
+            ensure_results_page!(page, response)
+            next if no_results?(page)
+
+            append_results(page)
+            has_next = exists_next_page?(page)
+          end
+        end
+
+        has_next
+      end
 
       def url(page)
         UrlGenerator.new(iosys_crawl_setting:, page:).generate
@@ -56,12 +62,17 @@ module Crawl
         end
       end
 
-      def no_results?(page)
-        empty = page.query_selector("#empty")
-        return empty.inner_text.present? if empty
-        return false if item_doms(page).present?
+      def ensure_results_page!(page, response)
+        status = response&.status
+        raise StandardError, "Iosys search page returned HTTP #{status}" if status && status >= 400
+        return if page.query_selector("#empty")
+        return if item_doms(page).present?
 
         raise StandardError, "Iosys search page has neither #empty nor item results"
+      end
+
+      def no_results?(page)
+        page.query_selector("#empty")&.inner_text.present?
       end
 
       def exists_next_page?(page)
