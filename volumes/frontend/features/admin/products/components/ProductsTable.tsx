@@ -30,9 +30,9 @@ const ProductsTable = ({ products, categories }: Props) => {
     const res = await destroyProduct(productId)
 
     if (res.status === 200) {
-      toast.success('success')
+      toast.success('計測対象を削除しました')
     } else {
-      toast.error('error')
+      toast.error('計測対象の削除に失敗しました')
     }
     router.refresh()
   }
@@ -52,7 +52,7 @@ const ProductsTable = ({ products, categories }: Props) => {
               <td>
                 <Link
                   className='btn btn-ghost no-animation w-full justify-start'
-                  href={`/admin/products/${product.id}`}
+                  href={`/products/${product.id}`}
                 >
                   {product.name}
                 </Link>

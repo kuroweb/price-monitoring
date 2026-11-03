@@ -16,7 +16,7 @@ const Page = async () => {
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-base-300'>
           <div className='card-body'>
-            <h2 className='card-title'>Backmarket計測結果</h2>
+            <h2 className='card-title'>Backmarket 計測結果</h2>
             <div className='space-y-4 pt-6'>
               {backmarketRecentSections.map((section, index) => {
                 const target = backmarketWatchTargets.find(

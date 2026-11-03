@@ -24,9 +24,9 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
     const res = await destroyBackmarketWatchTarget(backmarketWatchTargetId)
 
     if (res.status === 200) {
-      toast.success('success')
+      toast.success('計測対象を削除しました')
     } else {
-      toast.error('error')
+      toast.error('計測対象の削除に失敗しました')
     }
     router.refresh()
   }
@@ -35,7 +35,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
     <>
       <div className='flex justify-end pb-2'>
         <button className='btn' onClick={() => setCreateModalOpen(true)}>
-          監視対象を追加
+          計測対象を追加
         </button>
       </div>
       <div className='overflow-x-auto'>

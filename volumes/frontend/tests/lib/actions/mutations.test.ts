@@ -60,32 +60,30 @@ describe('Server Action から API と再検証への連携', () => {
     expect(http).toHaveBeenCalledWith('/api/v1/products/4', { method: 'DELETE' })
     expect(vi.mocked(revalidatePath).mock.calls).toEqual([
       ['/admin/products', 'page'],
-      ['/admin/products/[id]', 'page'],
       ['/admin/categories', 'page'],
       ['/products', 'page'],
       ['/products/[id]', 'page'],
-      ['/products/categories/[category]', 'page'],
     ])
   })
 
-  it('監視対象を作成して監視管理画面を再検証する', async () => {
+  it('計測対象を作成して監視管理画面を再検証する', async () => {
     const data = { name: 'MacBook', url: 'https://example.test/macbook', enabled: true }
     expect(await createBackmarketWatchTarget(data)).toBe(success)
     expect(http).toHaveBeenCalledWith('/api/v1/backmarket_watch_targets', { method: 'POST', data })
-    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith('/admin/backmarket_watch', 'page')
+    expect(vi.mocked(revalidatePath).mock.calls).toEqual([['/admin/backmarket', 'page'], ['/backmarket', 'page']])
   })
 
-  it('監視対象の無効化は PUT で送り、監視管理画面を再検証する', async () => {
+  it('計測対象の無効化は PUT で送り、監視管理画面を再検証する', async () => {
     const data = { name: 'MacBook', url: 'https://example.test/macbook', enabled: false }
     await updateBackmarketWatchTarget(3, data)
     expect(http).toHaveBeenCalledWith('/api/v1/backmarket_watch_targets/3', { method: 'PUT', data })
-    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith('/admin/backmarket_watch', 'page')
+    expect(vi.mocked(revalidatePath).mock.calls).toEqual([['/admin/backmarket', 'page'], ['/backmarket', 'page']])
   })
 
-  it('監視対象削除後に監視管理画面を再検証する', async () => {
+  it('計測対象削除後に監視管理画面を再検証する', async () => {
     await destroyBackmarketWatchTarget(3)
     expect(http).toHaveBeenCalledWith('/api/v1/backmarket_watch_targets/3', { method: 'DELETE' })
-    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith('/admin/backmarket_watch', 'page')
+    expect(vi.mocked(revalidatePath).mock.calls).toEqual([['/admin/backmarket', 'page'], ['/backmarket', 'page']])
   })
 
   it('入力エラーを UI が判断できるようそのまま返す', async () => {

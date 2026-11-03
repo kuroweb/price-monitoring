@@ -50,8 +50,8 @@
 
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
-- `app/backmarket_recents/page.tsx` が Backmarket 直近取得の入口
-- `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 監視など）の route を持つ
+- `app/backmarket/page.tsx` が Backmarket 計測結果の入口
+- `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
 
 ### feature 単位の UI
 

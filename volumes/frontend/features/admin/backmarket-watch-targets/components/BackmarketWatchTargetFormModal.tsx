@@ -53,10 +53,10 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
         : await updateBackmarketWatchTarget(target.id, data)
 
     if (res.status === 200) {
-      toast.success('success')
+      toast.success(mode === 'create' ? '計測対象を追加しました' : '計測対象を更新しました')
       onClose()
     } else {
-      toast.error('error')
+      toast.error(mode === 'create' ? '計測対象の追加に失敗しました' : '計測対象の更新に失敗しました')
     }
     router.refresh()
   }
@@ -66,7 +66,7 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
       <input type='checkbox' className='modal-toggle' checked={isOpen} onChange={() => onClose()} />
       <div className='modal' role='dialog'>
         <ScrollableModalBox
-          title={mode === 'create' ? '監視対象を追加' : '監視対象を更新'}
+          title={mode === 'create' ? '計測対象を追加' : '計測対象を更新'}
           onClose={onClose}
         >
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>

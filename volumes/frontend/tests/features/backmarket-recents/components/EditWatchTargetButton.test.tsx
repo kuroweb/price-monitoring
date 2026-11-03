@@ -23,7 +23,7 @@ const target: BackmarketWatchTarget = {
 }
 
 describe('EditWatchTargetButton', () => {
-  it('結果画面から監視対象の編集モーダルを開き、保存すると閉じる', async () => {
+  it('結果画面から計測対象の編集モーダルを開き、保存すると閉じる', async () => {
     const user = userEvent.setup()
     vi.mocked(updateBackmarketWatchTarget).mockResolvedValue({
       data: null,
@@ -34,7 +34,7 @@ describe('EditWatchTargetButton', () => {
     const toggle = container.querySelector<HTMLInputElement>('.modal-toggle')
     expect(toggle).not.toBeChecked()
 
-    await user.click(screen.getByRole('button', { name: '監視設定' }))
+    await user.click(screen.getByRole('button', { name: '計測設定' }))
 
     expect(toggle).toBeChecked()
     expect(

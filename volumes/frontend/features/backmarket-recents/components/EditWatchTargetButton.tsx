@@ -15,7 +15,7 @@ const EditWatchTargetButton = ({ target }: Props) => {
   return (
     <>
       <button className='btn' onClick={() => setIsOpen(true)}>
-        監視設定
+        計測設定
       </button>
       <BackmarketWatchTargetFormModal
         isOpen={isOpen}
