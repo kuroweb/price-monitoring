@@ -39,11 +39,11 @@ const ProductsTable = ({ products, categories }: Props) => {
 
   return (
     <>
-      <table className='table'>
+      <table className='table w-full table-fixed'>
         <thead>
           <tr>
             <th>管理コード</th>
-            <th></th>
+            <th className='w-16'></th>
           </tr>
         </thead>
         <tbody>
@@ -51,13 +51,13 @@ const ProductsTable = ({ products, categories }: Props) => {
             <tr key={product.id} className=''>
               <td>
                 <Link
-                  className='btn btn-ghost no-animation w-full justify-start'
+                  className='btn btn-ghost no-animation h-auto min-h-10 w-full justify-start whitespace-normal wrap-anywhere py-2 text-left'
                   href={`/products/${product.id}`}
                 >
                   {product.name}
                 </Link>
               </td>
-              <td className='w-1/12'>
+              <td>
                 <div className='dropdown dropdown-left'>
                   <button
                     type='button'
