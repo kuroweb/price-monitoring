@@ -4,7 +4,7 @@ const nextConfig = {
     return [
       { source: '/backmarket_recents', destination: '/backmarket', permanent: true },
       { source: '/admin/backmarket_watch', destination: '/admin/backmarket', permanent: true },
-      { source: '/admin/products/:id', destination: '/products/:id', permanent: true },
+      { source: '/admin/products/:id(\\d+)', destination: '/products/:id', permanent: true },
     ]
   },
   allowedDevOrigins: ['dev.price-monitoring.com'],

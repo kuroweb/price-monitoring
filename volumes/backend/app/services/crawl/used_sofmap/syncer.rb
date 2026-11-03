@@ -10,7 +10,7 @@ module Crawl
       end
 
       def call
-        return unless used_sofmap_crawl_setting.enabled?
+        return unless used_sofmap_crawl_setting&.enabled?
 
         upsert
         delete

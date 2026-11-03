@@ -837,3 +837,16 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 |------|--------|------|
 | index_yahoo_fleamarket_products_on_product_id_and_external_id | product_id, external_id | unique |
 | index_yahoo_fleamarket_products_on_product_id | product_id |  |
+
+## Productの検索URL・共通条件（PoC）
+
+既存 `products` に `enabled`（boolean、NOT NULL、default false）、`min_price` / `max_price`（integer、NULL可）を追加する。既存サイト別設定・出品・日次集計は維持する。
+
+| 追加テーブル | 固有カラム（共通PK・timestampsを省略） | 制約・インデックス |
+| --- | --- | --- |
+| product_search_urls | product_id bigint、url text、enabled boolean default true | 全列NOT NULL。product_id FK/index |
+| product_required_keywords | product_id bigint、keyword string | 全列NOT NULL。product_id FK、UNIQUE(product_id, keyword) |
+| product_exclude_keywords | product_id bigint、keyword string | 全列NOT NULL。product_id FK、UNIQUE(product_id, keyword) |
+| product_excluded_listings | product_id bigint、platform string、external_id string | 全列NOT NULL。product_id FK、UNIQUE(product_id, platform, external_id) |
+
+検索URLのサイトは実行時に判定する。操作・制約は [Product計測PoC](../backend/product-search-poc.md)、現在の型・FK・インデックスは [schema.rb](../../volumes/backend/db/schema.rb) を参照する。

@@ -10,7 +10,7 @@ module Crawl
       end
 
       def call
-        return unless janpara_crawl_setting.enabled?
+        return unless janpara_crawl_setting&.enabled?
 
         upsert
         delete

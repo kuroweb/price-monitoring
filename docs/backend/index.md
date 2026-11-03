@@ -9,6 +9,8 @@
 - [共通のローカル開発手順](../development/index.md) — セットアップ・依存関係・テスト
 - [文書全体の索引](../index.md)
 
+- [検索URLによるProduct計測PoC](product-search-poc.md) — 操作・取得方式・制約
+
 ## 判断基準
 
 - `controllers` は HTTP の入出力、認可、パラメータ受け取り、レスポンス返却に寄せる

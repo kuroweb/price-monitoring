@@ -11,13 +11,13 @@ module Products
       end
 
       def call
-        InspectYahooAuctionProducts.call(product:)
-        InspectYahooFleamarketProducts.call(product:)
-        InspectMercariProducts.call(product:)
-        InspectJanparaProducts.call(product:)
-        InspectIosysProducts.call(product:)
-        InspectPcKoubouProducts.call(product:)
-        InspectUsedSofmapProducts.call(product:)
+        InspectYahooAuctionProducts.call(product:) if product.yahoo_auction_crawl_setting
+        InspectYahooFleamarketProducts.call(product:) if product.yahoo_auction_crawl_setting
+        InspectMercariProducts.call(product:) if product.mercari_crawl_setting
+        InspectJanparaProducts.call(product:) if product.janpara_crawl_setting
+        InspectIosysProducts.call(product:) if product.iosys_crawl_setting
+        InspectPcKoubouProducts.call(product:) if product.pc_koubou_crawl_setting
+        InspectUsedSofmapProducts.call(product:) if product.used_sofmap_crawl_setting
       end
 
       private

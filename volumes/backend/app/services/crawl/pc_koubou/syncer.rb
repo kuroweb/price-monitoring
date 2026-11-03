@@ -10,7 +10,7 @@ module Crawl
       end
 
       def call
-        return unless pc_koubou_crawl_setting.enabled?
+        return unless pc_koubou_crawl_setting&.enabled?
 
         upsert
         delete

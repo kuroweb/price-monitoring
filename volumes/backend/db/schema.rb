@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_23_162406) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_04_000001) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -278,10 +278,50 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_23_162406) do
     t.index ["product_id"], name: "index_product_category_maps_on_product_id"
   end
 
+  create_table "product_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "keyword", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "keyword"], name: "index_product_exclude_keywords_on_product_id_and_keyword", unique: true
+    t.index ["product_id"], name: "index_product_exclude_keywords_on_product_id"
+  end
+
+  create_table "product_excluded_listings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "platform", null: false
+    t.string "external_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "platform", "external_id"], name: "idx_on_product_id_platform_external_id_319b830d0f", unique: true
+    t.index ["product_id"], name: "index_product_excluded_listings_on_product_id"
+  end
+
+  create_table "product_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.string "keyword", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id", "keyword"], name: "index_product_required_keywords_on_product_id_and_keyword", unique: true
+    t.index ["product_id"], name: "index_product_required_keywords_on_product_id"
+  end
+
+  create_table "product_search_urls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_id", null: false
+    t.text "url", null: false
+    t.boolean "enabled", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_search_urls_on_product_id"
+  end
+
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "enabled", default: false, null: false
+    t.integer "min_price"
+    t.integer "max_price"
   end
 
   create_table "used_sofmap_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -463,6 +503,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_23_162406) do
   add_foreign_key "pc_koubou_products", "products"
   add_foreign_key "product_category_maps", "categories"
   add_foreign_key "product_category_maps", "products"
+  add_foreign_key "product_exclude_keywords", "products"
+  add_foreign_key "product_excluded_listings", "products"
+  add_foreign_key "product_required_keywords", "products"
+  add_foreign_key "product_search_urls", "products"
   add_foreign_key "used_sofmap_crawl_setting_exclude_keywords", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_exclude_products", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_required_keywords", "used_sofmap_crawl_settings"

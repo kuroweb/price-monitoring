@@ -11,7 +11,7 @@ module Crawl
         end
 
         def call
-          return unless yahoo_auction_crawl_setting.enabled?
+          return unless yahoo_auction_crawl_setting&.enabled?
 
           upsert
           inspect

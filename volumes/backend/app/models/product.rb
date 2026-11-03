@@ -8,6 +8,10 @@ class Product < ApplicationRecord
   has_one :used_sofmap_crawl_setting, dependent: :destroy
   has_one :product_category_map, dependent: :destroy
   has_one :category, through: :product_category_map
+  has_many :search_urls, class_name: "ProductSearchUrl", dependent: :destroy
+  has_many :required_keywords, class_name: "ProductRequiredKeyword", dependent: :destroy
+  has_many :exclude_keywords, class_name: "ProductExcludeKeyword", dependent: :destroy
+  has_many :excluded_listings, class_name: "ProductExcludedListing", dependent: :destroy
 
   has_many :yahoo_auction_products, dependent: :destroy
   has_many :yahoo_auction_daily_purchase_summaries, dependent: :destroy
@@ -22,6 +26,7 @@ class Product < ApplicationRecord
 
   ## validations ##
   validates :name, presence: true
+  validates :min_price, :max_price, numericality: { only_integer: true, greater_than_or_equal_to: 0 }, allow_nil: true
 
   ## methods ##
 end
