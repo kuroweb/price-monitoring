@@ -16,5 +16,8 @@ scripts:
       fi
     done
 
+    # メインのチェックアウトと公開ポートが衝突しないよう worktree 用の Compose 設定を重ねる
+    printf '\nCOMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml\n' >> "$ORCA_WORKTREE_PATH/.env"
+
 # コピー完了後にエージェントを起動する
 setupAgentStartupPolicy: wait-for-setup

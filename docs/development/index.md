@@ -164,6 +164,10 @@ Orca で worktree を作ると、gitignore 対象のファイルが存在しな�
 - auth-provider の `.env` / `certs/private.pem`
 - nginx の証明書（`volumes/nginx/certs/` 配下の `fullchain.pem` / `privkey.pem`）
 
+コピー後、worktree の `.env` に `COMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml` を追記する。Compose project 名は worktree のディレクトリ名になり、コンテナ・ネットワーク・ボリュームはメインのチェックアウトと分かれる。[docker-compose.worktree.yml](../../docker-compose.worktree.yml) は公開ポートをホストの空きポートに割り当て、メインのチェックアウトと同時に起動できるようにする。割り当て先は `docker compose port backend 3000` などで確認する。
+
+worktree の環境はコンテナの起動・テスト用である。`https://dev.price-monitoring.com/` からの OIDC ログインを確認できるのは、443 番を使うメインのチェックアウトだけである。worktree の auth-provider DB は空なので、必要に応じて [認証固有の初回準備](../auth-provider/setup.md#初回準備) を行う。
+
 ## 関連手順
 
 - [Seed データの投入](../backend/operations/seeds.md)

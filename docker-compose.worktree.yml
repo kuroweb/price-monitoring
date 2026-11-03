@@ -1,0 +1,30 @@
+# メインのチェックアウト以外の worktree で docker-compose.yml に重ねる設定
+# 公開ポートをホストの空きポートに割り当て、メインのチェックアウトと同時に起動できるようにする
+services:
+  frontend:
+    ports: !override
+      - "3000"
+
+  backend:
+    ports: !override
+      - "3000"
+
+  backend-redis:
+    ports: !override
+      - "6379"
+
+  backend-playwright:
+    ports: !override
+      - "8888"
+
+  backend-camoufox:
+    ports: !override
+      - "8890"
+
+  auth-provider:
+    ports: !override
+      - "3000"
+
+  nginx:
+    ports: !override
+      - "127.0.0.1::443"
