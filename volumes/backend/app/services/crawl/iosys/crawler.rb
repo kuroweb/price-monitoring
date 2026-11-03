@@ -57,7 +57,11 @@ module Crawl
       end
 
       def no_results?(page)
-        page.query_selector("#empty")&.inner_text.present?
+        empty = page.query_selector("#empty")
+        return empty.inner_text.present? if empty
+        return false if item_doms(page).present?
+
+        raise StandardError, "Iosys search page has neither #empty nor item results"
       end
 
       def exists_next_page?(page)

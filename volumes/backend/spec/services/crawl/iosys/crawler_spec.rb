@@ -71,7 +71,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
       end
     end
 
-    context "空結果の要素が無い場合" do
+    context "空結果の要素が無く商品がある場合" do
       let(:page_html) do
         item_html(
           external_id: "smartphone/iphone/simfree/iphone15_a3089/286191",
@@ -85,6 +85,18 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
         crawl_results = crawler.call
 
         expect(crawl_results.results.size).to eq(1)
+      end
+    end
+
+    context "空結果の要素も商品も無い場合" do
+      let(:page_html) { "<html><body></body></html>" }
+
+      it "再試行したあと例外になること" do
+        expect { crawler.call }.to raise_error(
+          StandardError,
+          "Iosys search page has neither #empty nor item results"
+        )
+        expect(page.goto_urls.size).to eq(described_class::RETRY_COUNT)
       end
     end
   end
