@@ -34,7 +34,7 @@ const UpdateCategoryModal = ({
     register,
     handleSubmit,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({ defaultValues })
 
   useEffect(() => {
@@ -49,15 +49,19 @@ const UpdateCategoryModal = ({
   const onSubmit = async (data: { name: string; parentId: number | null }) => {
     if (!category) return
 
-    const result = await updateCategory(category.id, {
-      name: data.name,
-      parentId: data.parentId,
-    })
+    try {
+      const result = await updateCategory(category.id, {
+        name: data.name,
+        parentId: data.parentId,
+      })
 
-    if (result.status === 200) {
-      toast.success('カテゴリを更新しました')
-      setModal(false)
-    } else {
+      if (result.status === 200) {
+        toast.success('カテゴリを更新しました')
+        setModal(false)
+      } else {
+        toast.error('更新に失敗しました')
+      }
+    } catch {
       toast.error('更新に失敗しました')
     }
   }
@@ -81,7 +85,7 @@ const UpdateCategoryModal = ({
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
               <div className='divider pt-6'>カテゴリ情報</div>
-              <fieldset className='fieldset w-full'>
+              <fieldset disabled={isSubmitting} className='fieldset w-full'>
                 <legend className='fieldset-legend'>親カテゴリ</legend>
                 <select
                   {...register('parentId', {
@@ -100,7 +104,7 @@ const UpdateCategoryModal = ({
                   ))}
                 </select>
               </fieldset>
-              <fieldset className='fieldset w-full'>
+              <fieldset disabled={isSubmitting} className='fieldset w-full'>
                 <legend className='fieldset-legend'>カテゴリ名</legend>
                 <input
                   {...register('name', { required: 'カテゴリ名は必須です' })}
@@ -110,8 +114,12 @@ const UpdateCategoryModal = ({
               </fieldset>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-              <button type='submit' className='btn btn-primary mt-4 w-full max-sm:mt-0'>
-                更新
+              <button
+                disabled={isSubmitting}
+                type='submit'
+                className='btn btn-primary mt-4 w-full max-sm:mt-0'
+              >
+                {isSubmitting ? '保存中…' : '更新'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>

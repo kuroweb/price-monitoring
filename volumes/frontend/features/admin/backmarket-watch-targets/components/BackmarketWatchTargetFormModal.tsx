@@ -28,7 +28,12 @@ type Props = {
 
 const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props) => {
   const router = useRouter()
-  const { register, handleSubmit, reset } = useForm<CreateBackmarketWatchTargetData>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<CreateBackmarketWatchTargetData>({
     defaultValues: {
       name: '',
       url: '',
@@ -47,18 +52,24 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
   const onSubmit = async (
     data: CreateBackmarketWatchTargetData | UpdateBackmarketWatchTargetData,
   ) => {
-    const res =
-      mode === 'create' || !target?.id
-        ? await createBackmarketWatchTarget(data)
-        : await updateBackmarketWatchTarget(target.id, data)
+    try {
+      const res =
+        mode === 'create' || !target?.id
+          ? await createBackmarketWatchTarget(data)
+          : await updateBackmarketWatchTarget(target.id, data)
 
-    if (res.status === 200) {
-      toast.success(mode === 'create' ? '計測対象を追加しました' : '計測対象を更新しました')
-      onClose()
-    } else {
-      toast.error(mode === 'create' ? '計測対象の追加に失敗しました' : '計測対象の更新に失敗しました')
+      if (res.status === 200) {
+        toast.success(mode === 'create' ? '計測対象を追加しました' : '計測対象を更新しました')
+        onClose()
+      } else {
+        toast.error(
+          mode === 'create' ? '計測対象の追加に失敗しました' : '計測対象の更新に失敗しました',
+        )
+      }
+      router.refresh()
+    } catch {
+      toast.error('計測対象の保存に失敗しました')
     }
-    router.refresh()
   }
 
   return (
@@ -72,17 +83,18 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
               <div className='space-y-3 pt-4 max-sm:pt-0'>
-                <fieldset className='fieldset w-full'>
+                <fieldset disabled={isSubmitting} className='fieldset w-full'>
                   <legend className='fieldset-legend'>名前</legend>
                   <input {...register('name', { required: true })} className='input w-full' />
                 </fieldset>
-                <fieldset className='fieldset w-full'>
+                <fieldset disabled={isSubmitting} className='fieldset w-full'>
                   <legend className='fieldset-legend'>URL</legend>
                   <input {...register('url', { required: true })} className='input w-full' />
                 </fieldset>
                 <label className='label cursor-pointer justify-start gap-3'>
                   <input
                     type='checkbox'
+                    disabled={isSubmitting}
                     {...register('enabled')}
                     className='checkbox checkbox-sm'
                   />
@@ -91,8 +103,14 @@ const BackmarketWatchTargetFormModal = ({ isOpen, onClose, target, mode }: Props
               </div>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-              <button type='submit' className='btn btn-primary w-full'>
-                {mode === 'create' ? '登録' : '更新'}
+              <button disabled={isSubmitting} type='submit' className='btn btn-primary w-full'>
+                {isSubmitting
+                  ? mode === 'create'
+                    ? '登録中…'
+                    : '保存中…'
+                  : mode === 'create'
+                    ? '登録'
+                    : '更新'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>

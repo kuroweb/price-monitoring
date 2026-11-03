@@ -48,7 +48,7 @@ describe('ProductPriceList', () => {
       expect.objectContaining({ queryString: '?update_product_modal=true' }),
     )
     expect(
-      within(screen.getByRole('group', { name: '名称' })).getByRole('textbox'),
+      within(screen.getByRole('group', { name: '管理コード' })).getByRole('textbox'),
     ).toHaveValue('iPhone 15')
     expect(screen.getByDisplayValue('iPhone 15 128GB')).toBeInTheDocument()
   })
