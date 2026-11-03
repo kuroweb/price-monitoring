@@ -37,10 +37,10 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
           <div id="empty"></div>
           <ul>
             #{item_html(
-              external_id: "smartphone/iphone/simfree/iphone15_a3089/286191",
-              name: "iPhone 15 128GB",
+              external_id: 'smartphone/iphone/simfree/iphone15_a3089/286191',
+              name: 'iPhone 15 128GB',
               price: "89,800円\n(税込)",
-              thumbnail: "https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp"
+              thumbnail: 'https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp'
             )}
           </ul>
         HTML
