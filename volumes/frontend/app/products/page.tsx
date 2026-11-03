@@ -19,17 +19,20 @@ const Page = async ({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) => {
   const resolvedSearchParams = await searchParams
-  const { [useCategoryIdStateQuery]: categoryId } =
-    categoryIdStateCache.parse(resolvedSearchParams)
+  const { [useCategoryIdStateQuery]: categoryId } = categoryIdStateCache.parse(resolvedSearchParams)
 
   let currentCategory, parentCategory, childCategories
   if (categoryId === -1) {
     const response = await getCategoriesStructured({ rootOnly: true })
+    if (response.status < 200 || response.status >= 300 || !response.data)
+      throw new Error('カテゴリを取得できませんでした')
     currentCategory = undefined
     parentCategory = undefined
     childCategories = response.data?.categories || []
   } else {
     const response = await getCategoryStructuredSubtree(categoryId)
+    if (response.status < 200 || response.status >= 300 || !response.data)
+      throw new Error('カテゴリを取得できませんでした')
     currentCategory = response.data || undefined
     parentCategory = response.data?.parent || undefined
     childCategories = response.data?.children || []
@@ -47,7 +50,13 @@ const Page = async ({
     getProducts(),
     getCategories({ rootOnly: false }),
   ])
-  const productPrices = productPricesResponse.data || []
+  if (
+    [productPricesResponse, productResponse, categoryResponse].some(
+      (response) => response.status < 200 || response.status >= 300 || !response.data,
+    )
+  )
+    throw new Error('商品情報を取得できませんでした')
+  const productPrices = productPricesResponse.data ?? []
 
   return (
     <Layout>
@@ -65,8 +74,8 @@ const Page = async ({
           <div className='card-body'>
             <ProductPriceList
               productPrices={productPrices}
-              products={productResponse?.data?.products || []}
-              categories={categoryResponse?.data?.categories || []}
+              products={productResponse.data?.products ?? []}
+              categories={categoryResponse.data?.categories ?? []}
             />
           </div>
         </div>

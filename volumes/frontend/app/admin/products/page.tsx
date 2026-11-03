@@ -14,6 +14,15 @@ const Page = async ({
   const productResponse = await getProducts()
   const categoryResponse = await getCategories({ rootOnly: false })
 
+  if (
+    productResponse.status !== 200 ||
+    !productResponse.data ||
+    categoryResponse.status !== 200 ||
+    !categoryResponse.data
+  ) {
+    throw new Error('計測対象の取得に失敗しました')
+  }
+
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>

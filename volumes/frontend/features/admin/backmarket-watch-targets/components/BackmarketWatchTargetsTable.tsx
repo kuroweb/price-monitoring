@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
@@ -19,15 +19,31 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
   const [selectedTarget, setSelectedTarget] = useState<BackmarketWatchTarget | undefined>(undefined)
   const [createModalOpen, setCreateModalOpen] = useState(false)
   const [editModalOpen, setEditModalOpen] = useState(false)
+  const [deletingTargetId, setDeletingTargetId] = useState<number | undefined>()
+  const deletingRef = useRef(false)
 
-  const submitDestroyBackmarketWatchTarget = async (backmarketWatchTargetId: number) => {
-    const res = await destroyBackmarketWatchTarget(backmarketWatchTargetId)
+  const submitDestroyBackmarketWatchTarget = async (target: BackmarketWatchTarget) => {
+    if (deletingRef.current) return
+    if (!window.confirm(`計測対象「${target.name}」を削除しますか？`)) return
+    deletingRef.current = true
+    setDeletingTargetId(target.id)
+    let succeeded = false
+    try {
+      const res = await destroyBackmarketWatchTarget(target.id)
 
-    if (res.status === 200) {
-      toast.success('計測対象を削除しました')
-    } else {
+      if (res.status === 200) {
+        toast.success('計測対象を削除しました')
+      } else {
+        toast.error('計測対象の削除に失敗しました')
+      }
+      succeeded = res.status === 200
+    } catch {
       toast.error('計測対象の削除に失敗しました')
+    } finally {
+      deletingRef.current = false
+      setDeletingTargetId(undefined)
     }
+    if (!succeeded) return
     router.refresh()
   }
 
@@ -45,7 +61,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
               <th>名前</th>
               <th>URL</th>
               <th>有効</th>
-              <th></th>
+              <th colSpan={2}>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -57,6 +73,18 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                   <td className='whitespace-normal wrap-break-word'>{target.name}</td>
                   <td className='whitespace-nowrap'>{target.url}</td>
                   <td>{target.enabled ? '有効' : '無効'}</td>
+                  <td>
+                    <button
+                      type='button'
+                      className='btn btn-primary btn-sm'
+                      onClick={() => {
+                        setSelectedTarget(target)
+                        setEditModalOpen(true)
+                      }}
+                    >
+                      計測設定
+                    </button>
+                  </td>
                   <td className='w-1/12'>
                     <div className={`dropdown dropdown-left ${isLastRow ? 'dropdown-top' : ''}`}>
                       <button
@@ -81,17 +109,6 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                       <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
                         <li>
                           <button
-                            className='btn btn-primary'
-                            onClick={() => {
-                              setSelectedTarget(target)
-                              setEditModalOpen(true)
-                            }}
-                          >
-                            編集
-                          </button>
-                        </li>
-                        <li>
-                          <button
                             className='btn btn-success'
                             onClick={() => {
                               setSelectedTarget(target)
@@ -104,7 +121,8 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                         <li>
                           <button
                             className='btn btn-error'
-                            onClick={() => submitDestroyBackmarketWatchTarget(target.id)}
+                            disabled={deletingTargetId !== undefined}
+                            onClick={() => submitDestroyBackmarketWatchTarget(target)}
                           >
                             削除
                           </button>
@@ -115,6 +133,13 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                 </tr>
               )
             })}
+            {backmarketWatchTargets.length === 0 && (
+              <tr>
+                <td colSpan={5} className='py-8 text-center'>
+                  計測対象はまだありません。「計測対象を追加」から登録してください。
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

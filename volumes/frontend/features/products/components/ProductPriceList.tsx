@@ -22,6 +22,9 @@ const ProductPriceList = ({ productPrices, products, categories }: Props) => {
 
   return (
     <>
+      {productPrices.length === 0 && (
+        <p>表示できる商品がありません。商品を追加するか、カテゴリを変更してください。</p>
+      )}
       {productPrices.map((productPrice) => (
         <Fragment key={productPrice.id}>
           <div className='flex items-center justify-between gap-4'>
@@ -39,6 +42,9 @@ const ProductPriceList = ({ productPrices, products, categories }: Props) => {
             </button>
           </div>
           <div className='grid auto-cols-[10rem] grid-flow-col gap-2 overflow-x-auto pt-4'>
+            {productPrice.relatedProducts.length === 0 && (
+              <p className='col-span-full'>関連商品の価格情報はまだありません。</p>
+            )}
             {productPrice.relatedProducts.map((relatedProduct) => (
               <RelatedProductCard key={relatedProduct.externalId} relatedProduct={relatedProduct} />
             ))}

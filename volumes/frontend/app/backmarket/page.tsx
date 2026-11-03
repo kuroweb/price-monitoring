@@ -10,6 +10,12 @@ const Page = async () => {
   ])
   const backmarketRecentSections = backmarketRecentsResponse?.data?.backmarketRecentSections || []
   const backmarketWatchTargets = backmarketWatchTargetResponse?.data?.backmarketWatchTargets || []
+  if (
+    [backmarketRecentsResponse, backmarketWatchTargetResponse].some(
+      (response) => response.status < 200 || response.status >= 300 || !response.data,
+    )
+  )
+    throw new Error('Backmarket情報を取得できませんでした')
 
   return (
     <Layout>
@@ -18,6 +24,9 @@ const Page = async () => {
           <div className='card-body'>
             <h2 className='card-title'>Backmarket 計測結果</h2>
             <div className='space-y-4 pt-6'>
+              {backmarketRecentSections.length === 0 && (
+                <p>計測結果はまだありません。管理画面で計測対象を追加してください。</p>
+              )}
               {backmarketRecentSections.map((section, index) => {
                 const target = backmarketWatchTargets.find(
                   (target) => target.id === section.backmarketWatchTargetId,
