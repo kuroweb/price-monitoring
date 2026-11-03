@@ -1,6 +1,20 @@
 scripts:
   setup: |
-    cp "$ORCA_ROOT_PATH/.env" "$ORCA_WORKTREE_PATH/.env"
+    # gitignore 対象の環境変数・鍵・証明書をメインのチェックアウトからコピーする
+    for file in \
+      .env \
+      volumes/auth-provider/.env \
+      volumes/auth-provider/certs/private.pem \
+      volumes/nginx/certs/fullchain.pem \
+      volumes/nginx/certs/privkey.pem \
+      volumes/nginx/certs/auth-provider/fullchain.pem \
+      volumes/nginx/certs/auth-provider/privkey.pem
+    do
+      if [ -f "$ORCA_ROOT_PATH/$file" ]; then
+        mkdir -p "$(dirname "$ORCA_WORKTREE_PATH/$file")"
+        cp "$ORCA_ROOT_PATH/$file" "$ORCA_WORKTREE_PATH/$file"
+      fi
+    done
 
-# .env のコピー完了後にエージェントを起動する
+# コピー完了後にエージェントを起動する
 setupAgentStartupPolicy: wait-for-setup
