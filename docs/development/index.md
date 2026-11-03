@@ -40,8 +40,6 @@ mkcert \
 cp .env.example .env
 ```
 
-旧 auth-provider 環境から移行する場合は、以降の新規準備の前に [既存環境の引き継ぎ](../auth-provider/migration.md) を行う。
-
 ### 2. イメージの準備
 
 ホストから Compose の開発用イメージをビルドする。
@@ -59,7 +57,7 @@ Provider の署名鍵・DB の準備と OIDC クライアント登録は、こ�
 docker compose run --rm backend bundle exec rails db:prepare
 ```
 
-Provider の新規環境では [認証固有の初回準備](../auth-provider/setup.md#初回準備) で署名鍵と DB を準備する。既存環境の引き継ぎでは署名鍵を作り直さない。
+Provider の新規環境では [認証固有の初回準備](../auth-provider/setup.md#初回準備) で署名鍵と DB を準備する。
 
 ### 4. 起動と認証クライアント登録
 
@@ -171,5 +169,5 @@ worktree の環境はコンテナの起動・テスト用である。`https://de
 ## 関連手順
 
 - [Seed データの投入](../backend/operations/seeds.md)
-- [認証基盤の準備・引き継ぎ・検証](../auth-provider/index.md)
+- [認証基盤の準備・検証](../auth-provider/index.md)
 - [CI/CD と自動レビュー](../cicd/index.md)

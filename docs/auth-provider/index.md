@@ -14,7 +14,6 @@
 ## 文書の案内
 
 - [初回セットアップ](setup.md) — 新規環境の署名鍵・DB 準備と OIDC クライアント登録
-- [既存環境の引き継ぎ](migration.md) — 旧 auth-provider の秘密情報・永続データの継承
 - [認証の検証](verification.md) — テスト準備とログイン・ログアウトの確認
 - [共通のローカル開発手順](../development/index.md) — 証明書・hosts・起動・共通テスト
 - [CI/CD と自動レビュー](../cicd/index.md)

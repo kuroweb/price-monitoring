@@ -34,7 +34,6 @@
 | frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |
 | Provider / Client の配置・境界 | [認証基盤](auth-provider/index.md) | 解説 |
 | 認証固有の初回準備・クライアント登録 | [認証の初回セットアップ](auth-provider/setup.md) | ハウツー |
-| 旧 auth-provider 環境からの引き継ぎ | [既存環境の引き継ぎ](auth-provider/migration.md) | ハウツー |
 | 認証固有のテスト準備・動作確認 | [認証の検証](auth-provider/verification.md) | ハウツー |
 | CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](cicd/index.md) | リファレンス |
 | BFF / batch のデータ領域の分け方 | [Database](database/index.md) | 解説 |

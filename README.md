@@ -146,7 +146,7 @@ flowchart LR
 アプリのディレクトリから読み始める場合は [backend](volumes/backend/README.md) / [frontend](volumes/frontend/README.md) / [auth-provider](volumes/auth-provider/README.md) を参照する。
 
 - [セットアップ・日常操作・依存関係・テスト](docs/development/index.md)
-- [認証固有の準備・既存環境の引き継ぎ・検証](docs/auth-provider/index.md)
+- [認証固有の準備・検証](docs/auth-provider/index.md)
 - [Seed データの投入](docs/backend/operations/seeds.md)
 - [CI/CD・PR 自動レビュー・手動デプロイ](docs/cicd/index.md)
 

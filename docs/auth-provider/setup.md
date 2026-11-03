@@ -6,7 +6,7 @@
 
 共通の証明書・hosts・環境変数・イメージは [ローカル開発の初回セットアップ](../development/index.md#初回セットアップ) で準備する。
 以下のシェル例はホストのリポジトリルートから実行する。署名鍵はホストで生成し、DB 準備は `auth-provider` コンテナで行う。
-新規環境でのみ実行し、既存環境から移行する場合は [引き継ぎ](migration.md) に従う。
+新規環境でのみ実行する。
 
 ```bash
 openssl genrsa -out volumes/auth-provider/certs/private.pem 2048
