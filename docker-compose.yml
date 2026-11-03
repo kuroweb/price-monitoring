@@ -167,8 +167,4 @@ volumes:
   backend-redis:
   auth-provider-bundle:
   auth-provider-db:
-    name: auth-provider_backend-db
-    external: ${AUTH_PROVIDER_EXISTING_VOLUMES:-false}
   auth-provider-redis:
-    name: auth-provider_backend-redis
-    external: ${AUTH_PROVIDER_EXISTING_VOLUMES:-false}

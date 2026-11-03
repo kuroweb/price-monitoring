@@ -15,6 +15,18 @@
 
 これらの秘密情報は Git に登録しない。BFF の `.env` にある OIDC クライアント情報はそのまま使う。
 
-Compose の永続ボリューム名は旧構成の `auth-provider_backend-db` / `auth-provider_backend-redis` を明示している。ホストで `docker volume ls` を実行して両方の既存ボリュームを確認し、ルート `.env` に `AUTH_PROVIDER_EXISTING_VOLUMES=true` を設定する。既存ボリュームを external として参照し、Compose による再作成を防ぐ。同じ Docker daemon 上では既存のユーザー・OAuth クライアント・トークンを引き継ぐ。セッションの継続には同じ `SECRET_KEY_BASE` も必要。旧環境で Compose project 名を変更していた場合は、実際のボリューム名に合わせてから起動する。
+永続データは、旧構成のボリューム `auth-provider_backend-db` / `auth-provider_backend-redis` から、このリポジトリの Compose project のボリューム（ディレクトリ名が `price-monitoring` なら `price-monitoring_auth-provider-db` / `price-monitoring_auth-provider-redis`）へコピーする。旧環境で Compose project 名を変更していた場合は、`docker volume ls` で実際のボリューム名を確認してから読み替える。コピー先のボリュームが既にある場合は、中身が不要なことを確認して削除してから行う。
+
+```bash
+docker compose stop auth-provider auth-provider-db auth-provider-redis
+for name in db redis; do
+  docker run --rm \
+    -v auth-provider_backend-${name}:/from:ro \
+    -v price-monitoring_auth-provider-${name}:/to \
+    alpine sh -c 'cp -a /from/. /to/'
+done
+```
+
+同じ Docker daemon 上では既存のユーザー・OAuth クライアント・トークンを引き継ぐ。セッションの継続には同じ `SECRET_KEY_BASE` も必要。
 
 別の Docker daemon に移す場合は MySQL のバックアップ・リストアが必要。`docker compose down -v` は認証データも削除するため、引き継ぎに使わない。
