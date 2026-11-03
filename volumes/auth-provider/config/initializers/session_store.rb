@@ -2,7 +2,7 @@
 
 Rails.application.config.session_store(
   :redis_session_store,
-  key: "_backend_session#{ENV.fetch("SESSION_COOKIE_SUFFIX", "")}",
+  key: "_auth_provider_session#{ENV.fetch("SESSION_COOKIE_SUFFIX", "")}",
   redis: {
     url: ENV.fetch("REDIS_URL", nil)
   },
