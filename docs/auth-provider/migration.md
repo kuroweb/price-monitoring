@@ -21,7 +21,7 @@
 
 ```bash
 docker compose stop auth-provider auth-provider-db auth-provider-redis
-docker ps --filter volume=auth-provider_backend-db --filter volume=auth-provider_backend-redis
+docker ps -q --filter volume=auth-provider_backend-db --filter volume=auth-provider_backend-redis
 docker compose create auth-provider-db auth-provider-redis
 for name in db redis; do
   docker run --rm \
