@@ -133,7 +133,7 @@ const ProductsTable = ({ products, categories }: Props) => {
         <thead>
           <tr>
             <th>管理コード</th>
-            <th className='w-24 sm:w-36'></th>
+            <th className='w-16'></th>
           </tr>
         </thead>
         <tbody>
@@ -148,60 +148,59 @@ const ProductsTable = ({ products, categories }: Props) => {
                 </Link>
               </td>
               <td>
-                <div className='flex flex-col items-center gap-1 sm:flex-row'>
+                <div className='dropdown dropdown-left'>
                   <button
                     type='button'
-                    className='btn btn-primary btn-sm whitespace-nowrap px-1 text-xs sm:px-2 sm:text-sm'
-                    onClick={() => {
-                      setProduct(product)
-                      setUpdateModal(true)
-                    }}
+                    aria-label={`${product.name}の操作`}
+                    className='btn btn-square btn-md'
                   >
-                    計測設定
-                  </button>
-                  <div className='dropdown dropdown-left'>
-                    <button
-                      type='button'
-                      aria-label={`${product.name}の操作`}
-                      className='btn btn-square btn-md'
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      className='inline-block size-5 stroke-current'
                     >
-                      <svg
-                        xmlns='http://www.w3.org/2000/svg'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                        className='inline-block size-5 stroke-current'
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
+                        d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
+                      ></path>
+                    </svg>
+                  </button>
+                  <ul className='menu dropdown-content z-1 w-32 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
+                    <li>
+                      <button
+                        className='btn btn-primary'
+                        onClick={() => {
+                          setProduct(product)
+                          setUpdateModal(true)
+                        }}
                       >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth='2'
-                          d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
-                        ></path>
-                      </svg>
-                    </button>
-                    <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
-                      <li>
-                        <button
-                          className='btn btn-success'
-                          onClick={() => {
-                            setProduct(product)
-                            setCreateModal(true)
-                          }}
-                        >
-                          複製
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className='btn btn-error'
-                          disabled={deletingId !== null}
-                          onClick={() => submitDeleteProduct(product)}
-                        >
-                          削除
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
+                        計測設定
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className='btn btn-success'
+                        onClick={() => {
+                          setProduct(product)
+                          setCreateModal(true)
+                        }}
+                      >
+                        複製
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className='btn btn-error'
+                        disabled={deletingId !== null}
+                        onClick={() => submitDeleteProduct(product)}
+                      >
+                        削除
+                      </button>
+                    </li>
+                  </ul>
                 </div>
               </td>
             </tr>

@@ -61,7 +61,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
               <th>名前</th>
               <th>URL</th>
               <th>有効</th>
-              <th colSpan={2}>操作</th>
+              <th>操作</th>
             </tr>
           </thead>
           <tbody>
@@ -73,18 +73,6 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                   <td className='whitespace-normal wrap-break-word'>{target.name}</td>
                   <td className='whitespace-nowrap'>{target.url}</td>
                   <td>{target.enabled ? '有効' : '無効'}</td>
-                  <td>
-                    <button
-                      type='button'
-                      className='btn btn-primary btn-sm'
-                      onClick={() => {
-                        setSelectedTarget(target)
-                        setEditModalOpen(true)
-                      }}
-                    >
-                      計測設定
-                    </button>
-                  </td>
                   <td className='w-1/12'>
                     <div className={`dropdown dropdown-left ${isLastRow ? 'dropdown-top' : ''}`}>
                       <button
@@ -106,7 +94,18 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
                           ></path>
                         </svg>
                       </button>
-                      <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
+                      <ul className='menu dropdown-content z-1 w-32 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
+                        <li>
+                          <button
+                            className='btn btn-primary'
+                            onClick={() => {
+                              setSelectedTarget(target)
+                              setEditModalOpen(true)
+                            }}
+                          >
+                            計測設定
+                          </button>
+                        </li>
                         <li>
                           <button
                             className='btn btn-success'
@@ -135,7 +134,7 @@ const BackmarketWatchTargetsTable = ({ backmarketWatchTargets }: Props) => {
             })}
             {backmarketWatchTargets.length === 0 && (
               <tr>
-                <td colSpan={5} className='py-8 text-center'>
+                <td colSpan={4} className='py-8 text-center'>
                   計測対象はまだありません。「計測対象を追加」から登録してください。
                 </td>
               </tr>

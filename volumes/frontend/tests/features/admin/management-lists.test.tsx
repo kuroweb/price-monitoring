@@ -150,8 +150,9 @@ describe('商品管理の絞り込みと設定', () => {
     await user.click(screen.getByRole('button', { name: '絞り込みをリセット' }))
     expect(screen.getByRole('status')).toHaveTextContent('3件 / 全3件')
   })
-  it('直接ボタンから対象の計測設定を開く', async () => {
+  it('操作メニューから対象の計測設定を開く', async () => {
     renderProducts()
+    await userEvent.click(screen.getByRole('button', { name: 'MacBookの操作' }))
     await userEvent.click(screen.getAllByRole('button', { name: '計測設定' })[0])
     const dialog = screen.getAllByRole('dialog').at(-1)!
     expect(within(dialog).getByDisplayValue('MacBook')).toBeInTheDocument()
