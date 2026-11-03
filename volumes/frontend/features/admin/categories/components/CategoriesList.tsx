@@ -1,6 +1,6 @@
 'use client'
 
-import { Fragment, useState } from 'react'
+import { Fragment, useRef, useState } from 'react'
 
 import { toast } from 'react-toastify'
 
@@ -20,14 +20,27 @@ const CategoriesList = ({
 }) => {
   const [_updateModal, setUpdateModal] = useUpdateCategoryModalState()
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>(undefined)
+  const [deletingCategoryId, setDeletingCategoryId] = useState<number | undefined>()
+  const deletingRef = useRef(false)
 
-  const submitDestroyCategory = async (categoryId: number) => {
-    const result = await destroyCategory(categoryId)
+  const submitDestroyCategory = async (category: Category) => {
+    if (deletingRef.current) return
+    if (!window.confirm(`カテゴリ「${category.name}」を削除しますか？`)) return
+    deletingRef.current = true
+    setDeletingCategoryId(category.id)
+    try {
+      const result = await destroyCategory(category.id)
 
-    if (result.status === 200) {
-      toast.success('success')
-    } else {
-      toast.error('error')
+      if (result.status === 200) {
+        toast.success('カテゴリを削除しました')
+      } else {
+        toast.error('カテゴリの削除に失敗しました')
+      }
+    } catch {
+      toast.error('カテゴリの削除に失敗しました')
+    } finally {
+      deletingRef.current = false
+      setDeletingCategoryId(undefined)
     }
   }
 
@@ -98,7 +111,11 @@ const CategoriesList = ({
             </button>
           </li>
           <li>
-            <button className='btn btn-error' onClick={() => submitDestroyCategory(category.id)}>
+            <button
+              disabled={deletingCategoryId !== undefined}
+              className='btn btn-error'
+              onClick={() => submitDestroyCategory(category)}
+            >
               削除
             </button>
           </li>
@@ -135,6 +152,13 @@ const CategoriesList = ({
               </Fragment>
             )
           })}
+          {structuredCategories.length === 0 && (
+            <tr>
+              <td colSpan={2} className='py-8 text-center'>
+                カテゴリはまだありません。カテゴリを追加してください。
+              </td>
+            </tr>
+          )}
         </tbody>
       </table>
       <CreateCategoryModal categories={categories} />

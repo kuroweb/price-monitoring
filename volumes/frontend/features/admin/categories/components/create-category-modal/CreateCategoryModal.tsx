@@ -21,7 +21,12 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
   const router = useRouter()
   const [modal, setModal] = useCreateCategoryModalState()
 
-  const { register, handleSubmit, reset } = useForm<CreateCategoryData>({
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<CreateCategoryData>({
     defaultValues: {
       name: '',
       parentId: null,
@@ -29,16 +34,20 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
   })
 
   const onSubmit: SubmitHandler<CreateCategoryData> = async (data) => {
-    const result = await createCategory(data)
+    try {
+      const result = await createCategory(data)
 
-    if (result.status === 200) {
-      toast.success('カテゴリを追加しました')
-      reset({ name: '', parentId: null })
-      setModal(false)
-    } else {
+      if (result.status === 200) {
+        toast.success('カテゴリを追加しました')
+        reset({ name: '', parentId: null })
+        setModal(false)
+      } else {
+        toast.error('追加に失敗しました')
+      }
+      router.refresh()
+    } catch {
       toast.error('追加に失敗しました')
     }
-    router.refresh()
   }
 
   return (
@@ -54,7 +63,7 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
               <div className='divider pt-6'>カテゴリ情報</div>
-              <fieldset className='fieldset w-full'>
+              <fieldset disabled={isSubmitting} className='fieldset w-full'>
                 <legend className='fieldset-legend'>親カテゴリ</legend>
                 <select
                   {...register('parentId', {
@@ -73,14 +82,18 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
                   ))}
                 </select>
               </fieldset>
-              <fieldset className='fieldset w-full'>
+              <fieldset disabled={isSubmitting} className='fieldset w-full'>
                 <legend className='fieldset-legend'>カテゴリ名</legend>
                 <input {...register('name', { required: true })} className='input w-full' />
               </fieldset>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-              <button type='submit' className='btn btn-primary mt-4 w-full max-sm:mt-0'>
-                登録
+              <button
+                disabled={isSubmitting}
+                type='submit'
+                className='btn btn-primary mt-4 w-full max-sm:mt-0'
+              >
+                {isSubmitting ? '登録中…' : '登録'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>

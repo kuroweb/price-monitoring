@@ -14,12 +14,21 @@ const Page = async ({
   const productResponse = await getProducts()
   const categoryResponse = await getCategories({ rootOnly: false })
 
+  if (
+    productResponse.status !== 200 ||
+    !productResponse.data ||
+    categoryResponse.status !== 200 ||
+    !categoryResponse.data
+  ) {
+    throw new Error('計測対象の取得に失敗しました')
+  }
+
   return (
     <Layout>
       <div className='grid grid-cols-1 gap-4'>
         <div className='card w-full bg-base-300'>
           <div className='card-body'>
-            <h2 className='card-title'>計測対象一覧</h2>
+            <h2 className='card-title'>計測対象の管理</h2>
             <div className='flex justify-end'>
               <Link
                 className='btn'

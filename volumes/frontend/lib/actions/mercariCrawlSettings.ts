@@ -13,11 +13,3 @@ export async function createMercariCrawlSettingExcludeProduct(
 
   return result
 }
-
-export async function deleteMercariCrawlSettingExcludeProduct(productId: number, id: number) {
-  const result = await Api.deleteMercariCrawlSettingExcludeProduct(productId, id)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}

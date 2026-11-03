@@ -15,9 +15,3 @@ export async function createMercariCrawlSettingExcludeProduct(
     data,
   })
 }
-
-export async function deleteMercariCrawlSettingExcludeProduct(productId: number, id: number) {
-  return http(`${basePath(productId)}/${id}`, {
-    method: 'DELETE',
-  })
-}

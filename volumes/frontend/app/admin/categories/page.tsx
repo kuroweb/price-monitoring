@@ -15,6 +15,12 @@ const Page = async ({
   const categoriesStructuredResponse = await getCategoriesStructured({
     rootOnly: true,
   })
+  if (
+    [categoriesResponse, categoriesStructuredResponse].some(
+      (response) => response.status < 200 || response.status >= 300 || !response.data,
+    )
+  )
+    throw new Error('カテゴリを取得できませんでした')
 
   return (
     <Layout>
@@ -36,8 +42,8 @@ const Page = async ({
               </Link>
             </div>
             <CategoriesList
-              structuredCategories={categoriesStructuredResponse.data?.categories || []}
-              categories={categoriesResponse.data?.categories || []}
+              structuredCategories={categoriesStructuredResponse.data?.categories ?? []}
+              categories={categoriesResponse.data?.categories ?? []}
             />
           </div>
         </div>

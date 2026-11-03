@@ -50,8 +50,8 @@
 
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
-- `app/backmarket_recents/page.tsx` が Backmarket 直近取得の入口
-- `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 監視など）の route を持つ
+- `app/backmarket/page.tsx` が Backmarket 計測結果の入口
+- `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
 
 ### feature 単位の UI
 
@@ -71,6 +71,13 @@
 - 新しい画面を足すたびに page ファイルを肥大化させる
 - API 型や endpoint の知識を component 側へ散らす
 - 似た UI を route ごとにコピペして feature 分割を崩す
+
+## 管理画面の操作と状態表示
+
+- 商品の計測対象一覧は管理コードの部分一致検索、カテゴリ、計測状態を組み合わせて絞り込む。計測状態は6サイトの設定のいずれかが有効なら「計測中」、すべて無効なら「停止中」とする。実際のジョブの実行状態を表すものではない。
+- 商品・Backmarket の一覧操作は「…」にまとめ、計測設定・複製・削除を選べるようにする。
+- 商品・カテゴリ・Backmarket の削除では対象名を確認し、処理中は削除の再操作を防ぐ。作成・更新フォームも送信中の表示とボタンの無効化で再送信を防ぐ。
+- API の取得失敗はエラー画面で再試行を案内し、取得成功時の空一覧と区別する。成功時に対象がなければ追加や絞り込み変更を案内する。
 
 ## Lint の構成
 

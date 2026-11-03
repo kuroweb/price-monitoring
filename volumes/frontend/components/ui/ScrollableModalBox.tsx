@@ -10,14 +10,14 @@ type ScrollableModalBoxProps = {
 
 export const ScrollableModalBox = ({ title, onClose, children }: ScrollableModalBoxProps) => {
   return (
-    <div className='modal-box relative h-fit max-sm:flex max-sm:max-h-[calc(100dvh-2rem)] max-sm:flex-col max-sm:p-0'>
-      <div className='max-sm:flex max-sm:shrink-0 max-sm:items-start max-sm:justify-between max-sm:gap-2 max-sm:px-6 max-sm:pt-6 max-sm:pb-2'>
+    <div className='modal-box flex max-h-[calc(100dvh-2rem)] flex-col p-0'>
+      <div className='flex shrink-0 items-start justify-between gap-2 px-6 pt-6 pb-2'>
         <h3 className='text-lg font-bold'>{title}</h3>
         <button
           type='button'
           onClick={onClose}
           aria-label='閉じる'
-          className='btn btn-circle btn-ghost btn-sm absolute right-4 top-4 max-sm:static max-sm:shrink-0'
+          className='btn btn-circle btn-ghost btn-sm shrink-0'
         >
           ✕
         </button>
@@ -33,7 +33,7 @@ export const ScrollableModalForm = ({
   ...props
 }: FormHTMLAttributes<HTMLFormElement>) => {
   return (
-    <form className={`max-sm:flex max-sm:min-h-0 max-sm:flex-1 max-sm:flex-col ${className}`} {...props}>
+    <form className={`flex min-h-0 flex-1 flex-col ${className}`} {...props}>
       {children}
     </form>
   )
@@ -41,7 +41,7 @@ export const ScrollableModalForm = ({
 
 export const ScrollableModalBody = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='max-sm:min-h-0 max-sm:flex-1 max-sm:overflow-y-auto max-sm:px-6 max-sm:pb-4'>
+    <div className='min-h-0 flex-1 overflow-y-auto px-6 pb-4'>
       {children}
     </div>
   )
@@ -49,7 +49,7 @@ export const ScrollableModalBody = ({ children }: { children: ReactNode }) => {
 
 export const ScrollableModalFooter = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='max-sm:shrink-0 max-sm:border-t max-sm:border-base-300 max-sm:px-6 max-sm:py-4'>
+    <div className='shrink-0 border-t border-base-300 px-6 py-4'>
       {children}
     </div>
   )

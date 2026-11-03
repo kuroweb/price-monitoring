@@ -48,7 +48,7 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(onClose).not.toHaveBeenCalled()
   })
 
-  it('入力した監視対象を登録し、成功通知・モーダル終了・画面更新を行う', async () => {
+  it('入力した計測対象を登録し、成功通知・モーダル終了・画面更新を行う', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     render(<BackmarketWatchTargetFormModal isOpen mode='create' onClose={onClose} />)
@@ -70,7 +70,7 @@ describe('BackmarketWatchTargetFormModal', () => {
       enabled: true,
     })
     expect(updateBackmarketWatchTarget).not.toHaveBeenCalled()
-    expect(successToast).toHaveBeenCalledWith('success')
+    expect(successToast).toHaveBeenCalledWith('計測対象を追加しました')
     expect(refresh).toHaveBeenCalledOnce()
   })
 
@@ -94,7 +94,7 @@ describe('BackmarketWatchTargetFormModal', () => {
       enabled: true,
     })
     expect(createBackmarketWatchTarget).not.toHaveBeenCalled()
-    expect(successToast).toHaveBeenCalledWith('success')
+    expect(successToast).toHaveBeenCalledWith('計測対象を更新しました')
     expect(refresh).toHaveBeenCalledOnce()
   })
 
@@ -110,7 +110,7 @@ describe('BackmarketWatchTargetFormModal', () => {
 
     await user.click(screen.getByRole('button', { name: '更新' }))
 
-    await waitFor(() => expect(errorToast).toHaveBeenCalledWith('error'))
+    await waitFor(() => expect(errorToast).toHaveBeenCalledWith('計測対象の更新に失敗しました'))
     expect(onClose).not.toHaveBeenCalled()
     expect(successToast).not.toHaveBeenCalled()
     expect(screen.getByDisplayValue('MacBook')).toBeInTheDocument()

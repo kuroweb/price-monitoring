@@ -15,9 +15,3 @@ export async function createYahooAuctionCrawlSettingExcludeProduct(
     data,
   })
 }
-
-export async function deleteYahooAuctionCrawlSettingExcludeProduct(productId: number, id: number) {
-  return http(`${basePath(productId)}/${id}`, {
-    method: 'DELETE',
-  })
-}

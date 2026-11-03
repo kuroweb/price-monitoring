@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -12,23 +12,18 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
+import IosysForm from '@/features/admin/products/common/components/product-form/IosysForm'
+import JanparaForm from '@/features/admin/products/common/components/product-form/JanparaForm'
+import MercariForm from '@/features/admin/products/common/components/product-form/MercariForm'
+import PcKoubouForm from '@/features/admin/products/common/components/product-form/PcKoubouForm'
+import UsedSofmapForm from '@/features/admin/products/common/components/product-form/UsedSofmapForm'
+import YahooAuctionForm from '@/features/admin/products/common/components/product-form/YahooAuctionForm'
 import { updateProduct } from '@/lib/actions'
 import type { Category, ProductList, UpdateProductData } from '@/lib/api'
 
-import IosysForm from './IosysForm'
-import JanparaForm from './JanparaForm'
-import MercariForm from './MercariForm'
-import PcKoubouForm from './PcKoubouForm'
-import UsedSofmapForm from './UsedSofmapForm'
-import YahooAuctionForm from './YahooAuctionForm'
 import { useUpdateProductModalState } from './hooks/useUpdateProductModalState'
 
 import type { SubmitHandler } from 'react-hook-form'
-
-export type copyValueType = (
-  source: 'yahooAuction' | 'mercari' | 'janpara' | 'iosys' | 'pcKoubou' | 'usedSofmap',
-  property: 'keyword' | 'minPrice' | 'maxPrice',
-) => void
 
 const UpdateProductModal = ({
   productId,
@@ -40,6 +35,7 @@ const UpdateProductModal = ({
   categories: Category[]
 }) => {
   const router = useRouter()
+  const submittingRef = useRef(false)
 
   type SectionTypes =
     'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
@@ -114,29 +110,45 @@ const UpdateProductModal = ({
     },
   }
 
-  const { register, handleSubmit, getValues, setValue } = useForm<UpdateProductData>({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm<UpdateProductData>({
     defaultValues,
     values: defaultValues,
   })
 
   const onSubmit: SubmitHandler<UpdateProductData> = async (data) => {
-    const res = await updateProduct(productId, data)
+    if (submittingRef.current) return
+    submittingRef.current = true
+    try {
+      const res = await updateProduct(productId, data)
 
-    if (res.status === 200) {
-      toast.success('success')
-      setModal(false)
-    } else {
-      toast.error('error')
+      if (res.status === 200) {
+        toast.success('計測設定を更新しました')
+        setModal(false)
+      } else {
+        toast.error('計測設定の更新に失敗しました')
+      }
+      router.refresh()
+    } catch {
+      toast.error('計測設定の更新に失敗しました')
+    } finally {
+      submittingRef.current = false
     }
-    router.refresh()
   }
+
+  if (!product) return null
 
   return (
     <>
       <input
         type='checkbox'
         className='modal-toggle'
-        checked={modal}
+        checked={modal && !!product}
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
@@ -145,7 +157,7 @@ const UpdateProductModal = ({
             <ScrollableModalBody>
               <div className='divider pt-6'>管理情報</div>
               <fieldset className='fieldset w-full'>
-                <legend className='fieldset-legend'>名称</legend>
+                <legend className='fieldset-legend'>管理コード</legend>
                 <input {...register('name')} className='input w-full' />
               </fieldset>
               <fieldset className='fieldset w-full'>
@@ -255,8 +267,8 @@ const UpdateProductModal = ({
               </div>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-              <button type='submit' className='btn btn-primary w-full'>
-                更新
+              <button type='submit' disabled={isSubmitting} className='btn btn-primary w-full'>
+                {isSubmitting ? '保存中…' : '保存'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>

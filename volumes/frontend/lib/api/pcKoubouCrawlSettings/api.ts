@@ -15,9 +15,3 @@ export async function createPcKoubouCrawlSettingExcludeProduct(
     data,
   })
 }
-
-export async function deletePcKoubouCrawlSettingExcludeProduct(productId: number, id: number) {
-  return http(`${basePath(productId)}/${id}`, {
-    method: 'DELETE',
-  })
-}

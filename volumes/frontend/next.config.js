@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      { source: '/backmarket_recents', destination: '/backmarket', permanent: true },
+      { source: '/admin/backmarket_watch', destination: '/admin/backmarket', permanent: true },
+      { source: '/admin/products/:id', destination: '/products/:id', permanent: true },
+    ]
+  },
   allowedDevOrigins: ['dev.price-monitoring.com'],
   images: {
     remotePatterns: [

@@ -13,11 +13,3 @@ export async function createIosysCrawlSettingExcludeProduct(
 
   return result
 }
-
-export async function deleteIosysCrawlSettingExcludeProduct(productId: number, id: number) {
-  const result = await Api.deleteIosysCrawlSettingExcludeProduct(productId, id)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}

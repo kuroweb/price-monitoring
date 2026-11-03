@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -12,15 +12,15 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
+import IosysForm from '@/features/admin/products/common/components/product-form/IosysForm'
+import JanparaForm from '@/features/admin/products/common/components/product-form/JanparaForm'
+import MercariForm from '@/features/admin/products/common/components/product-form/MercariForm'
+import PcKoubouForm from '@/features/admin/products/common/components/product-form/PcKoubouForm'
+import UsedSofmapForm from '@/features/admin/products/common/components/product-form/UsedSofmapForm'
+import YahooAuctionForm from '@/features/admin/products/common/components/product-form/YahooAuctionForm'
 import { createProduct } from '@/lib/actions'
 import type { Category, CreateProductData, ProductList } from '@/lib/api'
 
-import IosysForm from './IosysForm'
-import JanparaForm from './JanparaForm'
-import MercariForm from './MercariForm'
-import PcKoubouForm from './PcKoubouForm'
-import UsedSofmapForm from './UsedSofmapForm'
-import YahooAuctionForm from './YahooAuctionForm'
 import { useCreateProductModalState } from './hooks/useCreateProductModalState'
 
 import type { SubmitHandler } from 'react-hook-form'
@@ -33,6 +33,7 @@ const CreateProductModal = ({
   categories: Category[]
 }) => {
   const router = useRouter()
+  const submittingRef = useRef(false)
 
   type SectionTypes =
     'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
@@ -107,21 +108,35 @@ const CreateProductModal = ({
     },
   }
 
-  const { register, handleSubmit, getValues, setValue } = useForm<CreateProductData>({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { isSubmitting },
+  } = useForm<CreateProductData>({
     defaultValues,
     values: defaultValues,
   })
 
   const onSubmit: SubmitHandler<CreateProductData> = async (data) => {
-    const res = await createProduct(data)
+    if (submittingRef.current) return
+    submittingRef.current = true
+    try {
+      const res = await createProduct(data)
 
-    if (res.status === 200) {
-      toast.success('success')
-      setModal(false)
-    } else {
-      toast.error('error')
+      if (res.status === 200) {
+        toast.success('計測対象を追加しました')
+        setModal(false)
+      } else {
+        toast.error('計測対象の追加に失敗しました')
+      }
+      router.refresh()
+    } catch {
+      toast.error('計測対象の追加に失敗しました')
+    } finally {
+      submittingRef.current = false
     }
-    router.refresh()
   }
 
   return (
@@ -133,10 +148,10 @@ const CreateProductModal = ({
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <ScrollableModalBox title='計測設定を追加' onClose={() => setModal(false)}>
+        <ScrollableModalBox title='計測対象を追加' onClose={() => setModal(false)}>
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
-              <div className='divider py-2'>共通設定</div>
+              <div className='divider py-2'>管理情報</div>
               <fieldset className='fieldset w-full'>
                 <legend className='fieldset-legend'>管理コード</legend>
                 <input {...register('name')} className='input w-full' />
@@ -157,7 +172,7 @@ const CreateProductModal = ({
                   ))}
                 </select>
               </fieldset>
-              <div className='divider py-6'>詳細設定</div>
+              <div className='divider py-6'>計測条件</div>
               <div className='join flex w-full flex-wrap pb-2'>
                 <input
                   className='btn join-item btn-md w-1/3'
@@ -248,8 +263,8 @@ const CreateProductModal = ({
               </div>
             </ScrollableModalBody>
             <ScrollableModalFooter>
-              <button type='submit' className='btn btn-primary w-full'>
-                登録
+              <button type='submit' disabled={isSubmitting} className='btn btn-primary w-full'>
+                {isSubmitting ? '登録中…' : '登録'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>

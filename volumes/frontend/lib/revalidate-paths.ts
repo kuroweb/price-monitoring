@@ -23,7 +23,6 @@ export const revalidateAdminPaths = () => {
 export const revalidateAdminProductsPaths = () => {
   revalidatePaths([
     ['/admin/products', 'page'],
-    ['/admin/products/[id]', 'page'],
   ])
 }
 
@@ -40,6 +39,5 @@ export const revalidateProductsPaths = () => {
   revalidatePaths([
     ['/products', 'page'],
     ['/products/[id]', 'page'],
-    ['/products/categories/[category]', 'page'],
   ])
 }

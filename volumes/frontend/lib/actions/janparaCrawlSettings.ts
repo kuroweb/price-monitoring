@@ -13,11 +13,3 @@ export async function createJanparaCrawlSettingExcludeProduct(
 
   return result
 }
-
-export async function deleteJanparaCrawlSettingExcludeProduct(productId: number, id: number) {
-  const result = await Api.deleteJanparaCrawlSettingExcludeProduct(productId, id)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}

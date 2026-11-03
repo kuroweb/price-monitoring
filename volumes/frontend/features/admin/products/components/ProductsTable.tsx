@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -26,38 +26,128 @@ const ProductsTable = ({ products, categories }: Props) => {
   const [_updateModal, setUpdateModal] = useUpdateProductModalState()
   const [product, setProduct] = useState<ProductList['products'][number] | undefined>(undefined)
 
-  const submitDeleteProduct = async (productId: number) => {
-    const res = await destroyProduct(productId)
+  const [search, setSearch] = useState('')
+  const [category, setCategory] = useState('')
+  const [status, setStatus] = useState('')
+  const [deletingId, setDeletingId] = useState<number | null>(null)
+  const deletingRef = useRef(false)
+  const filteredProducts = products.filter((item) => {
+    const enabled = [
+      item.yahooAuctionCrawlSetting,
+      item.mercariCrawlSetting,
+      item.janparaCrawlSetting,
+      item.iosysCrawlSetting,
+      item.pcKoubouCrawlSetting,
+      item.usedSofmapCrawlSetting,
+    ].some((setting) => setting?.enabled)
+    return (
+      item.name.toLowerCase().includes(search.toLowerCase()) &&
+      (!category || String(item.category?.id) === category) &&
+      (!status || (status === 'enabled' ? enabled : !enabled))
+    )
+  })
 
-    if (res.status === 200) {
-      toast.success('success')
-    } else {
-      toast.error('error')
+  const submitDeleteProduct = async (item: Props['products'][number]) => {
+    if (
+      deletingRef.current ||
+      !window.confirm(`管理コード「${item.name}」の計測対象を削除しますか？`)
+    )
+      return
+    deletingRef.current = true
+    setDeletingId(item.id)
+    try {
+      const res = await destroyProduct(item.id)
+      if (res.status === 200) {
+        toast.success('計測対象を削除しました')
+        router.refresh()
+      } else {
+        toast.error('計測対象の削除に失敗しました')
+      }
+    } catch {
+      toast.error('計測対象の削除に失敗しました')
+    } finally {
+      deletingRef.current = false
+      setDeletingId(null)
     }
-    router.refresh()
   }
 
   return (
     <>
-      <table className='table'>
+      <div className='flex flex-wrap items-end gap-2'>
+        <label className='min-w-40 flex-1'>
+          <span className='label'>管理コード検索</span>
+          <input
+            className='input w-full'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </label>
+        <label>
+          <span className='label'>カテゴリ</span>
+          <select
+            className='select w-full'
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            <option value=''>すべて</option>
+            {categories.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          <span className='label'>計測状態</span>
+          <select
+            className='select w-full'
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value=''>すべて</option>
+            <option value='enabled'>計測中</option>
+            <option value='disabled'>停止中</option>
+          </select>
+        </label>
+        <button
+          type='button'
+          className='btn btn-ghost'
+          onClick={() => {
+            setSearch('')
+            setCategory('')
+            setStatus('')
+          }}
+        >
+          絞り込みをリセット
+        </button>
+      </div>
+      <p role='status'>
+        {filteredProducts.length}件 / 全{products.length}件
+      </p>
+      {products.length === 0 ? (
+        <p>計測対象がありません。「計測対象を追加」から登録してください。</p>
+      ) : filteredProducts.length === 0 ? (
+        <p>条件に一致する計測対象がありません。</p>
+      ) : null}
+      <table className='table w-full table-fixed'>
         <thead>
           <tr>
             <th>管理コード</th>
-            <th></th>
+            <th className='w-16'></th>
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {filteredProducts.map((product) => (
             <tr key={product.id} className=''>
               <td>
                 <Link
-                  className='btn btn-ghost no-animation w-full justify-start'
-                  href={`/admin/products/${product.id}`}
+                  className='btn btn-ghost no-animation h-auto min-h-10 w-full justify-start whitespace-normal wrap-anywhere py-2 text-left'
+                  href={`/products/${product.id}`}
                 >
                   {product.name}
                 </Link>
               </td>
-              <td className='w-1/12'>
+              <td>
                 <div className='dropdown dropdown-left'>
                   <button
                     type='button'
@@ -78,7 +168,7 @@ const ProductsTable = ({ products, categories }: Props) => {
                       ></path>
                     </svg>
                   </button>
-                  <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
+                  <ul className='menu dropdown-content z-1 w-32 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
                     <li>
                       <button
                         className='btn btn-primary'
@@ -87,7 +177,7 @@ const ProductsTable = ({ products, categories }: Props) => {
                           setUpdateModal(true)
                         }}
                       >
-                        編集
+                        計測設定
                       </button>
                     </li>
                     <li>
@@ -104,7 +194,8 @@ const ProductsTable = ({ products, categories }: Props) => {
                     <li>
                       <button
                         className='btn btn-error'
-                        onClick={() => submitDeleteProduct(product.id)}
+                        disabled={deletingId !== null}
+                        onClick={() => submitDeleteProduct(product)}
                       >
                         削除
                       </button>
