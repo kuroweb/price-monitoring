@@ -25,9 +25,9 @@ const CategoriesList = ({
     const result = await destroyCategory(categoryId)
 
     if (result.status === 200) {
-      toast.success('success')
+      toast.success('カテゴリを削除しました')
     } else {
-      toast.error('error')
+      toast.error('カテゴリの削除に失敗しました')
     }
   }
 

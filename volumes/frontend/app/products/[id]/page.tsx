@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 import Layout from '@/components/layouts/Layout'
 import UpdateProductModal from '@/features/admin/products/common/components/update-product-modal/UpdateProductModal'
@@ -35,6 +36,7 @@ const Page = async ({
   const { [usePerStateQuery]: per } = perStateCache.parse(resolvedSearchParams)
 
   const productId = Number(resolvedParams.id)
+  if (!resolvedParams.id || !/^\d+$/.test(resolvedParams.id) || !Number.isSafeInteger(productId) || productId < 1) notFound()
   const [productPriceDetailResponse, productResponse, categoryResponse] = await Promise.all([
     getProductPrice(productId, {
       platformMask: makePlatformMask(platform, status),
@@ -46,6 +48,10 @@ const Page = async ({
     getProduct(productId),
     getCategories({ rootOnly: false }),
   ])
+  if (productResponse.status === 404) notFound()
+  if (productResponse.status !== 200 || productPriceDetailResponse.status !== 200) {
+    throw new Error('商品情報の取得に失敗しました')
+  }
   const productPriceDetail = productPriceDetailResponse.data
 
   return (

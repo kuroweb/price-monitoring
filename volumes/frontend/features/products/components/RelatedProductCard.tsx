@@ -81,15 +81,15 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
       try {
         const result = await action(productId, { externalId })
         if (result.status !== 200 && result.status !== 409) {
-          toast.error('error')
+          toast.error('除外商品の追加に失敗しました')
         } else {
-          toast.success('success')
+          toast.success('除外商品を追加しました')
         }
       } catch {
-        toast.error('An unexpected error occurred.')
+        toast.error('除外商品の追加に失敗しました')
       }
     } else {
-      toast.error('Invalid platform')
+      toast.error('対応していないプラットフォームです')
     }
 
     router.refresh()
