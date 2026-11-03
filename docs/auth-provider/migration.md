@@ -17,8 +17,12 @@
 
 永続データは、旧構成のボリューム `auth-provider_backend-db` / `auth-provider_backend-redis` から、このリポジトリの Compose project のボリューム（ディレクトリ名が `price-monitoring` なら `price-monitoring_auth-provider-db` / `price-monitoring_auth-provider-redis`）へコピーする。旧環境で Compose project 名を変更していた場合は、`docker volume ls` で実際のボリューム名を確認してから読み替える。コピー先のボリュームが既にある場合は、中身が不要なことを確認して削除してから行う。
 
+旧ボリュームを使うコンテナが動いていると、書き込み途中のデータをコピーしてしまう。次の `docker ps` で何も表示されないことを確かめてからコピーする。コピー先のボリュームは、Compose 管理のラベルが付くよう `docker compose create` で作る。
+
 ```bash
 docker compose stop auth-provider auth-provider-db auth-provider-redis
+docker ps --filter volume=auth-provider_backend-db --filter volume=auth-provider_backend-redis
+docker compose create auth-provider-db auth-provider-redis
 for name in db redis; do
   docker run --rm \
     -v auth-provider_backend-${name}:/from:ro \

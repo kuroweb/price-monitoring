@@ -7,7 +7,7 @@
 
 ### 1. ホストの準備
 
-Docker Compose v2.24.0 以降（任意の `env_file` を利用するため）、just、mkcert を準備する。macOS で mkcert を導入する場合は、ホストで次を実行する。
+Docker Compose v2.24.0 以降（任意の `env_file` と、worktree 用の設定の `!override` を利用するため）、just、mkcert を準備する。macOS で mkcert を導入する場合は、ホストで次を実行する。
 
 ```bash
 brew install mkcert
