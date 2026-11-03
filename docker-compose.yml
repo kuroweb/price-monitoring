@@ -1,9 +1,14 @@
+x-oidc-client: &oidc-client
+  OIDC_CLIENT_ID: "price-monitoring-development"
+  OIDC_CLIENT_SECRET: "price-monitoring-development-secret"
+  OIDC_REDIRECT_URI: "https://dev.price-monitoring.com/auth/auth_provider/callback"
+
 x-backend: &backend
   build:
     context: .
     dockerfile: containers/backend/Dockerfile
   env_file: .env
-  environment:
+  environment: &backend-environment
     DB_HOST_NAME: "backend-db"
     DB_DATABASE_NAME: "rails"
     DB_USER_NAME: "root"
@@ -11,7 +16,7 @@ x-backend: &backend
     REDIS_URL: "redis://backend-redis:6379"
     PLAYWRIGHT_URL: "ws://backend-playwright:8888/ws"
     CAMOUFOX_URL: "ws://backend-camoufox:8890/ws"
-    ALLOWED_ORIGINS: "nginx,dev.price-monitoring.com"
+    ALLOWED_ORIGINS: "nginx,backend,dev.price-monitoring.com"
   stdin_open: true
   tty: true
   depends_on:
@@ -51,11 +56,8 @@ services:
     build:
       context: .
       dockerfile: containers/frontend/Dockerfile
-    ports:
-      - 8080:3000
     environment:
-      NEXT_PRIVATE_API_URL: "https://nginx"
-      NEXT_PUBLIC_API_URL: "https://dev.price-monitoring.com"
+      NEXT_PRIVATE_API_URL: "http://backend:3000"
     stdin_open: true
     tty: true
     volumes:
@@ -63,8 +65,9 @@ services:
 
   backend:
     <<: *backend
-    ports:
-      - 3000:3000
+    environment:
+      <<: [*backend-environment, *oidc-client]
+      OIDC_ISSUER: "https://dev.auth-provider.com"
 
   backend-batch-1:
     <<: *backend
@@ -85,8 +88,6 @@ services:
 
   backend-redis:
     <<: *redis
-    ports:
-      - "6379:6379"
     volumes:
       - "backend-redis:/data"
     command: --appendonly yes
@@ -95,15 +96,11 @@ services:
     build:
       context: .
       dockerfile: containers/backend_playwright/Dockerfile
-    ports:
-      - 8888:8888
 
   backend-camoufox:
     build:
       context: .
       dockerfile: containers/backend_camoufox/Dockerfile
-    ports:
-      - 8890:8890
 
   auth-provider:
     build:
@@ -113,6 +110,7 @@ services:
       - path: ./volumes/auth-provider/.env
         required: false
     environment:
+      <<: *oidc-client
       DB_HOST_NAME: "auth-provider-db"
       DB_DATABASE_NAME: "rails"
       DB_USER_NAME: "root"
@@ -120,10 +118,6 @@ services:
       REDIS_URL: "redis://auth-provider-redis:6379"
       ALLOWED_ORIGINS: "nginx,dev.auth-provider.com"
       DOMAIN_NAME: "dev.auth-provider.com"
-      # db/seeds.rb が BFF と同じ値で OIDC クライアントを登録するために渡す
-      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
-      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
-      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-}
     stdin_open: true
     tty: true
     depends_on:
@@ -134,8 +128,6 @@ services:
     volumes:
       - ./volumes/auth-provider:/app
       - auth-provider-bundle:/usr/local/bundle
-    ports:
-      - 5050:3000
 
   auth-provider-db:
     <<: *mysql
@@ -152,9 +144,13 @@ services:
     image: nginx:latest
     ports:
       - "127.0.0.1:443:443"
+    environment:
+      # nginx が listen するポート。公式イメージが起動時に templates へ埋め込む。worktree では WORKTREE_HTTPS_PORT で上書きする
+      NGINX_HTTPS_PORT: "443"
     volumes:
-      - ./volumes/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./volumes/nginx/templates:/etc/nginx/templates:ro
       - ./volumes/nginx/certs:/etc/nginx/certs:ro
+      - ./volumes/nginx/includes:/etc/nginx/includes:ro
     depends_on:
       - backend
       - frontend

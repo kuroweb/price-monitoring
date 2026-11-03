@@ -1,0 +1,55 @@
+server {
+  listen ${NGINX_HTTPS_PORT} ssl default_server;
+  server_name dev.price-monitoring.com;
+
+  ssl_certificate     /etc/nginx/certs/fullchain.pem;
+  ssl_certificate_key /etc/nginx/certs/privkey.pem;
+
+  location / {
+    proxy_pass http://frontend:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+
+    # WebSocket support for Next.js HMR
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
+
+  location /api {
+    proxy_pass http://backend:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+  }
+
+  location /sidekiq {
+    proxy_pass http://backend:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+  }
+
+  location /auth {
+    proxy_pass http://backend:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+  }
+
+  location /assets {
+    proxy_pass http://backend:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+  }
+
+  location /logout {
+    proxy_pass http://backend:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+  }
+}
+
+server {
+  listen ${NGINX_HTTPS_PORT} ssl;
+  server_name dev.auth-provider.com;
+
+  ssl_certificate     /etc/nginx/certs/auth-provider/fullchain.pem;
+  ssl_certificate_key /etc/nginx/certs/auth-provider/privkey.pem;
+
+  location / {
+    proxy_pass http://auth-provider:3000;
+    include /etc/nginx/includes/proxy-headers.conf;
+  }
+}

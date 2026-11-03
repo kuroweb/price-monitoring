@@ -7,7 +7,7 @@
 
 ### 1. ホストの準備
 
-Docker Compose v2.24.0 以降（任意の `env_file` と、worktree 用の設定の `!override` を利用するため）、just、mkcert を準備する。macOS で mkcert を導入する場合は、ホストで次を実行する。
+Docker Compose v2.24.4 以降（任意の `env_file` と、worktree 用の設定の `!override` を利用するため）、just、mkcert を準備する。macOS で mkcert を導入する場合は、ホストで次を実行する。
 
 ```bash
 brew install mkcert
@@ -48,27 +48,17 @@ cp .env.example .env
 docker compose build
 ```
 
-### 3. アプリの初期化
+### 3. アプリの初期化と起動
 
-BFF の DB を `backend` コンテナで準備する。関連 DB / Redis は Compose が起動する。
-Provider の署名鍵・DB の準備は、このコマンドの前提ではない。先に BFF の DB を準備し、続いて Provider の初回準備を行う。
-
-```bash
-docker compose run --rm backend bundle exec rails db:prepare
-```
-
-Provider の新規環境では [認証固有の初回準備](../auth-provider/setup.md#初回準備) で署名鍵と DB を準備する。
-
-### 4. 起動と認証クライアント登録
-
-ホストから全サービスをバックグラウンド起動し、状態を確認する。
+Provider の署名鍵が無い場合は、先に [認証の初回準備](../auth-provider/setup.md#初回準備) で生成する。worktree では、メインに鍵があれば setup がコピーする。コピーされた鍵は生成し直さない。ホストから状態を確認し、開発環境を準備する。
 
 ```bash
-just up
+just ps
+just prepare
 just ps
 ```
 
-新規環境では、Provider の初回準備の `db:prepare` で管理ユーザーと OIDC クライアントが登録される。内容は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
+`just prepare` は BFF の `db:prepare`、Provider の `db:prepare db:seed`、全サービスの起動の順に実行する。既存 DB は削除しない。Provider の登録内容と、設定変更時の再作成は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
 
 | 接続先 | URL |
 | --- | --- |
@@ -77,9 +67,11 @@ just ps
 
 ## 日常操作
 
-起動と状態確認は上の手順を使う。ログ確認・再起動・停止も、ホストから Compose 全体または指定 service に対して行う。
+日常の起動は `just up`、状態確認は `just ps` を使う。`just up` は DB の準備や削除を行わない。ログ確認・再起動・停止も、ホストから Compose 全体または指定 service に対して行う。
 
 ```bash
+just up
+just ps
 just logs
 just restart backend
 just restart-all
@@ -156,15 +148,27 @@ just test-frontend -t '最初のページ'
 
 ## Orca の worktree
 
-Orca で worktree を作ると、gitignore 対象のファイルが存在しないため、[orca.yaml](../../orca.yaml) の `scripts.setup` がメインのチェックアウトから次のファイルをコピーする。メインのチェックアウトに無いファイルは飛ばす。コピーが終わってからエージェントが起動する。`orca.yaml` は初回と変更後に Orca の信頼確認が必要になる。
+[orca.yaml](../../orca.yaml) の setup は、gitignore された環境変数・署名鍵・証明書をメインからコピーする。コピー先にあるファイルは上書きしない。setup はコピーした `.env` から `COMPOSE_PROJECT_NAME` と `COMPOSE_FILE` を消し、`COMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml` を書き込む。`COMPOSE_PROJECT_NAME` が残っていると、worktree の `just` がメインのコンテナを操作する。`orca.yaml` を初めて使うときと変更した後は、Orca の確認画面で setup の実行を許可する。
 
-- ルートの `.env`
-- auth-provider の `.env` / `certs/private.pem`
-- nginx の証明書（`volumes/nginx/certs/` 配下の `fullchain.pem` / `privkey.pem`）
+`WORKTREE_HTTPS_PORT` が無ければ 8443 から空きを割り当て、既存の値は維持する。setup が避けるのは他の worktree の `.env` にある番号だけで、他アプリが使っているポートは調べない。起動前に `docker compose config --quiet` がエラーなく終わることを確認する。`WORKTREE_HTTPS_PORT` が未設定ならここで失敗する。続けて `just ps` で、project 名が worktree のディレクトリ名になっていることを確認する。
 
-コピー後、worktree の `.env` に `COMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml` を追記する。Compose project 名は worktree のディレクトリ名になり、コンテナ・ネットワーク・ボリュームはメインのチェックアウトと分かれる。[docker-compose.worktree.yml](../../docker-compose.worktree.yml) は公開ポートをホストの空きポートに割り当て、メインのチェックアウトと同時に起動できるようにする。割り当て先は `docker compose port backend 3000` などで確認する。
+公開 URL は `https://dev.price-monitoring.com:<port>/` と `https://dev.auth-provider.com:<port>/` になる。ポートは `just ps` で確認する。
 
-worktree の環境はコンテナの起動・テスト用である。`https://dev.price-monitoring.com/` からの OIDC ログインを確認できるのは、443 番を使うメインのチェックアウトだけである。worktree の auth-provider DB は空なので、必要に応じて `docker compose run --rm auth-provider bundle exec rails db:prepare` を実行する。DB の作成時に [Seed](../auth-provider/setup.md#oidc-クライアント登録) が管理ユーザーと OIDC クライアントを登録する。
+### 新規 worktree の初期化
+
+DB はコピーされない。コピーされた鍵は生成し直さず、[アプリの初期化と起動](#3-アプリの初期化と起動) を実行する。既存 DB の認証設定を変えるときは [Provider DB の再作成](../auth-provider/setup.md#ローカル-provider-db-の再作成) を使う。
+
+### 設定変更と制約
+
+複数の worktree を同時に作ると、setup が同じ `WORKTREE_HTTPS_PORT` を割り当てることがある。`just up` でポートが衝突したら、`.env` の `WORKTREE_HTTPS_PORT` を空き番号に変える。DB への反映は [ポート変更](../auth-provider/setup.md#worktreeのポート変更) に従う。
+
+シェルで `export` した `COMPOSE_FILE` / `COMPOSE_PROJECT_NAME` / `WORKTREE_HTTPS_PORT` は `.env` より優先される。残っていると別の環境を操作するので、worktree で起動する前に `unset` する。`docker compose -p` も付けない。認証設定の詳細は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
+
+## API の接続経路
+
+ブラウザからの API リクエストは、`NEXT_PUBLIC_API_URL` が未設定ならページと同じ origin に送る。worktree ではポート付きになる。別 origin の API を使う環境だけ `NEXT_PUBLIC_API_URL` を設定する。
+
+Next.js サーバーは `NEXT_PRIVATE_API_URL` で Compose 内の `backend` に直接接続する。公開ポートを変えても、frontend のこの設定は変えなくてよい。development の CORS は `localhost:8080` を許可しないので、画面は nginx の URL から開く。
 
 ## 関連手順
 
