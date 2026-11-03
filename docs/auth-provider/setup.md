@@ -23,13 +23,14 @@ development の `db:prepare` は、DB を作成したときに [db/seeds.rb](../
 - 管理ユーザー: `admin@example.com` / `password`
 - BFF の OIDC クライアント: ルート `.env` の `OIDC_CLIENT_ID` / `OIDC_CLIENT_SECRET` / `OIDC_REDIRECT_URI` を使い、Scopes は `openid email profile`、Confidential は有効
 
-`OIDC_CLIENT_ID` / `OIDC_CLIENT_SECRET` が空ならクライアントは登録しない。既存の DB に登録するときや `.env` の値を変えたときは、ホストのリポジトリルートから Seed を投入する。登録済みのユーザー・クライアントは変更しない。
+`OIDC_CLIENT_ID` / `OIDC_CLIENT_SECRET` / `OIDC_REDIRECT_URI` のどれかが空ならクライアントは登録しない。既存の DB に登録するときは、ホストのリポジトリルートから Seed を投入する。
 
 ```bash
 docker compose run --rm auth-provider bundle exec rails db:seed
 ```
 
-`.env` の値を変えたときは、ホストのリポジトリルートから BFF を再作成して環境変数を反映する。
+Seed は登録済みのユーザー・クライアントを更新しない。同じ `OIDC_CLIENT_ID` のまま secret や redirect URI を変えても反映されず、ID を変えると古いクライアントが残る。`.env` の値を変えるときは、管理ユーザーで `/oauth/applications` を開いて既存のクライアントを更新するか、削除してから Seed を投入する。
+その後、ホストのリポジトリルートから BFF を再作成して環境変数を反映する。
 
 ```bash
 docker compose up -d backend
