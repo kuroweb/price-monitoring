@@ -30,11 +30,12 @@ class CrawlFakePlaywrightPage
     def wheel(*); end
   end
 
-  attr_reader :goto_urls, :mouse
+  attr_reader :goto_urls, :goto_options, :mouse
 
   def initialize(html)
     @doc = Nokogiri::HTML(html)
     @goto_urls = []
+    @goto_options = []
     @mouse = Mouse.new
   end
 
@@ -49,8 +50,9 @@ class CrawlFakePlaywrightPage
 
   def reload; end
 
-  def goto(url)
+  def goto(url, **options)
     @goto_urls << url
+    @goto_options << options
   end
 
   def eval_on_selector(selector, _javascript)
