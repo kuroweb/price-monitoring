@@ -12,27 +12,13 @@ module Crawl
         @product = product
       end
 
-      def call # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-        Crawl::Client.execute do |page|
-          page_count = 1
-          loop do
-            break if page_count > MAX_PAGE
+      def call
+        page_count = 1
+        loop do
+          break if page_count > MAX_PAGE
+          break unless fetch_page(page_count)
 
-            Retryable.retryable(tries: RETRY_COUNT) do
-              Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
-
-              page.goto(url(page_count), waitUntil: "domcontentloaded")
-              load(page)
-
-              break if no_results?(page)
-
-              append_results(page)
-            end
-
-            break unless exists_next_page?(page)
-
-            page_count += 1
-          end
+          page_count += 1
         end
 
         raise StandardError, crawl_results.errors unless crawl_results.valid?
@@ -43,6 +29,31 @@ module Crawl
       private
 
       attr_reader :product
+
+      def fetch_page(page_count)
+        page_results = []
+        has_next = false
+
+        Retryable.retryable(tries: RETRY_COUNT) do
+          Crawl::Client.execute do |page|
+            page_results, has_next = read_page(page, page_count)
+          end
+        end
+
+        page_results.each { |result| crawl_results.add(result) }
+        has_next
+      end
+
+      def read_page(page, page_count)
+        Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
+
+        response = page.goto(url(page_count), waitUntil: "domcontentloaded")
+        load(page)
+        ensure_results_page!(page, response)
+        return [[], false] if no_results?(page)
+
+        [build_results(page), exists_next_page?(page)]
+      end
 
       def url(page)
         UrlGenerator.new(iosys_crawl_setting:, page:).generate
@@ -56,29 +67,31 @@ module Crawl
         end
       end
 
-      def no_results?(page)
-        empty = page.query_selector("#empty")
-        return empty.inner_text.present? if empty
-        return false if item_doms(page).present?
+      def ensure_results_page!(page, response)
+        status = response&.status
+        raise StandardError, "Iosys search page returned HTTP #{status}" if status && status >= 400
+        return if page.query_selector("#empty")
+        return if item_doms(page).present?
 
         raise StandardError, "Iosys search page has neither #empty nor item results"
+      end
+
+      def no_results?(page)
+        page.query_selector("#empty")&.inner_text.present?
       end
 
       def exists_next_page?(page)
         page.query_selector(".page-link[rel='next']").present?
       end
 
-      def append_results(page)
-        doms = item_doms(page)
-
-        doms.each do |dom|
-          result = CrawlResult.new(
+      def build_results(page)
+        item_doms(page).map do |dom|
+          CrawlResult.new(
             external_id: external_id(dom),
             name: name(dom),
             price: price(dom),
             thumbnail_url: thumbnail_url(dom)
           )
-          crawl_results.add(result)
         end
       end
 

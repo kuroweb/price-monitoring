@@ -31,6 +31,7 @@ class CrawlFakePlaywrightPage
   end
 
   attr_reader :goto_urls, :goto_options, :mouse
+  attr_accessor :response_status
 
   def initialize(html)
     @doc = Nokogiri::HTML(html)
@@ -53,6 +54,7 @@ class CrawlFakePlaywrightPage
   def goto(url, **options)
     @goto_urls << url
     @goto_options << options
+    Struct.new(:status).new(response_status) if response_status
   end
 
   def eval_on_selector(selector, _javascript)

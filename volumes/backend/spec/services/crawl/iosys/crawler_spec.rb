@@ -37,10 +37,10 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
           <div id="empty"></div>
           <ul>
             #{item_html(
-              external_id: "smartphone/iphone/simfree/iphone15_a3089/286191",
-              name: "iPhone 15 128GB",
+              external_id: 'smartphone/iphone/simfree/iphone15_a3089/286191',
+              name: 'iPhone 15 128GB',
               price: "89,800円\n(税込)",
-              thumbnail: "https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp"
+              thumbnail: 'https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp'
             )}
           </ul>
         HTML
@@ -91,12 +91,84 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
     context "空結果の要素も商品も無い場合" do
       let(:page_html) { "<html><body></body></html>" }
 
-      it "再試行したあと例外になること" do
+      it "接続を引き直して再試行したあと例外になること" do
         expect { crawler.call }.to raise_error(
           StandardError,
           "Iosys search page has neither #empty nor item results"
         )
         expect(page.goto_urls.size).to eq(described_class::RETRY_COUNT)
+        expect(Crawl::Client).to have_received(:execute).exactly(described_class::RETRY_COUNT).times
+      end
+    end
+
+    context "プロキシが検索ページを拒否する場合" do
+      let(:page_html) { "<html><body><h1>403 Forbidden</h1></body></html>" }
+
+      before { page.response_status = 403 }
+
+      it "接続を引き直して再試行したあと例外になること" do
+        expect { crawler.call }.to raise_error(
+          StandardError,
+          "Iosys search page returned HTTP 403"
+        )
+        expect(Crawl::Client).to have_received(:execute).exactly(described_class::RETRY_COUNT).times
+      end
+    end
+
+    context "拒否された接続の次で検索結果がある場合" do
+      let(:forbidden_page) { CrawlFakePlaywrightPage.new("<html><body><h1>403 Forbidden</h1></body></html>") }
+      let(:page_html) do
+        item_html(
+          external_id: "smartphone/iphone/simfree/iphone15_a3089/286191",
+          name: "iPhone 15 128GB",
+          price: "89,800円",
+          thumbnail: "https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp"
+        )
+      end
+
+      before do
+        forbidden_page.response_status = 403
+        pages = [forbidden_page, page]
+        allow(Crawl::Client).to receive(:execute).and_invoke(
+          ->(&block) { block.call(pages.shift) },
+          ->(&block) { block.call(pages.shift) }
+        )
+      end
+
+      it "別の接続で商品を返すこと" do
+        crawl_results = crawler.call
+
+        expect(crawl_results.results.size).to eq(1)
+        expect(crawl_results.results.first.external_id).to eq(
+          "smartphone/iphone/simfree/iphone15_a3089/286191"
+        )
+      end
+    end
+
+    context "商品を読んだあとの次ページ判定で失敗して再試行する場合" do
+      let(:page_html) do
+        item_html(
+          external_id: "smartphone/iphone/simfree/iphone15_a3089/286191",
+          name: "iPhone 15 128GB",
+          price: "89,800円",
+          thumbnail: "https://d27ea4kkb8flj9.cloudfront.net/286191_1_S.webp"
+        )
+      end
+
+      before do
+        next_page_checks = 0
+        allow(page).to receive(:query_selector).and_call_original
+        allow(page).to receive(:query_selector).with(".page-link[rel='next']") do
+          next_page_checks += 1
+          raise StandardError, "Target closed" if next_page_checks == 1
+        end
+      end
+
+      it "同じページの商品を重複させずに返すこと" do
+        crawl_results = crawler.call
+
+        expect(page.goto_urls.size).to eq(2)
+        expect(crawl_results.results.size).to eq(1)
       end
     end
   end
