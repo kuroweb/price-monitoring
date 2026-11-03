@@ -37,7 +37,13 @@ const Header = (props: Props) => {
               <p className='px-4 text-xl'>Price Monitoring</p>
             </Link>
           </div>
-          <div className='flex-none'>{/* ヘッダー右側 */}</div>
+          <div className='flex-none'>
+            {process.env.NEXT_PUBLIC_COMPOSE_PROJECT_NAME && (
+              <span className='badge badge-outline mx-4'>
+                {process.env.NEXT_PUBLIC_COMPOSE_PROJECT_NAME}
+              </span>
+            )}
+          </div>
         </div>
       </header>
     </>
