@@ -15,7 +15,7 @@ module Crawl
       end
 
       def context_options
-        { userAgent: RequestBlocklist::USER_AGENT, proxy: Proxy.get }
+        { userAgent: RequestBlocklist::USER_AGENT, proxy: DynamicProxy.get }
       end
 
       def server_url
