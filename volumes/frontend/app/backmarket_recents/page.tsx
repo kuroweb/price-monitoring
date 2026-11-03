@@ -1,10 +1,15 @@
 import Layout from '@/components/layouts/Layout'
 import BackmarketRecentsTable from '@/features/backmarket-recents/components/BackmarketRecentsTable'
-import { getBackmarketRecents } from '@/lib/actions'
+import EditWatchTargetButton from '@/features/backmarket-recents/components/EditWatchTargetButton'
+import { getBackmarketRecents, getBackmarketWatchTargets } from '@/lib/actions'
 
 const Page = async () => {
-  const backmarketRecentsResponse = await getBackmarketRecents()
+  const [backmarketRecentsResponse, backmarketWatchTargetResponse] = await Promise.all([
+    getBackmarketRecents(),
+    getBackmarketWatchTargets(),
+  ])
   const backmarketRecentSections = backmarketRecentsResponse?.data?.backmarketRecentSections || []
+  const backmarketWatchTargets = backmarketWatchTargetResponse?.data?.backmarketWatchTargets || []
 
   return (
     <Layout>
@@ -13,16 +18,27 @@ const Page = async () => {
           <div className='card-body'>
             <h2 className='card-title'>Backmarket計測結果</h2>
             <div className='space-y-4 pt-6'>
-              {backmarketRecentSections.map((section, index) => (
-                <section key={section.backmarketWatchTargetId} className='space-y-3'>
-                  <h3 className='text-lg font-semibold leading-tight'>{section.watchName}</h3>
-                  <BackmarketRecentsTable
-                    backmarketRecents={section.results}
-                    watchUrl={section.url}
-                  />
-                  {index < backmarketRecentSections.length - 1 && <div className='divider py-4' />}
-                </section>
-              ))}
+              {backmarketRecentSections.map((section, index) => {
+                const target = backmarketWatchTargets.find(
+                  (target) => target.id === section.backmarketWatchTargetId,
+                )
+
+                return (
+                  <section key={section.backmarketWatchTargetId} className='space-y-3'>
+                    <div className='flex items-center justify-between gap-4'>
+                      <h3 className='text-lg font-semibold leading-tight'>{section.watchName}</h3>
+                      {target && <EditWatchTargetButton target={target} />}
+                    </div>
+                    <BackmarketRecentsTable
+                      backmarketRecents={section.results}
+                      watchUrl={section.url}
+                    />
+                    {index < backmarketRecentSections.length - 1 && (
+                      <div className='divider py-4' />
+                    )}
+                  </section>
+                )
+              })}
             </div>
           </div>
         </div>
