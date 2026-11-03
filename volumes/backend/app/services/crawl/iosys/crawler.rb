@@ -31,23 +31,28 @@ module Crawl
       attr_reader :product
 
       def fetch_page(page_count)
+        page_results = []
         has_next = false
 
         Retryable.retryable(tries: RETRY_COUNT) do
           Crawl::Client.execute do |page|
-            Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
-
-            response = page.goto(url(page_count), waitUntil: "domcontentloaded")
-            load(page)
-            ensure_results_page!(page, response)
-            next if no_results?(page)
-
-            append_results(page)
-            has_next = exists_next_page?(page)
+            page_results, has_next = read_page(page, page_count)
           end
         end
 
+        page_results.each { |result| crawl_results.add(result) }
         has_next
+      end
+
+      def read_page(page, page_count)
+        Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
+
+        response = page.goto(url(page_count), waitUntil: "domcontentloaded")
+        load(page)
+        ensure_results_page!(page, response)
+        return [[], false] if no_results?(page)
+
+        [build_results(page), exists_next_page?(page)]
       end
 
       def url(page)
@@ -79,17 +84,14 @@ module Crawl
         page.query_selector(".page-link[rel='next']").present?
       end
 
-      def append_results(page)
-        doms = item_doms(page)
-
-        doms.each do |dom|
-          result = CrawlResult.new(
+      def build_results(page)
+        item_doms(page).map do |dom|
+          CrawlResult.new(
             external_id: external_id(dom),
             name: name(dom),
             price: price(dom),
             thumbnail_url: thumbnail_url(dom)
           )
-          crawl_results.add(result)
         end
       end
 
