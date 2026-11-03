@@ -1,31 +1,35 @@
 'use client'
 
-import type { UpdateProductData } from '@/lib/api'
+import type { CreateProductData } from '@/lib/api'
 
 import {
-  copyKeyword,
-  copyRequiredKeyword,
   copyExcludeKeyword,
-  copyMinPrice,
+  copyKeyword,
   copyMaxPrice,
+  copyMinPrice,
+  copyRequiredKeyword,
 } from './lib/copyFields'
 
-import type { UseFormRegister, UseFormGetValues, UseFormSetValue } from 'react-hook-form'
+import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const MercariForm = ({
+const YahooAuctionForm = ({
   register,
   getValues,
   setValue,
 }: {
-  register: UseFormRegister<UpdateProductData>
-  getValues: UseFormGetValues<UpdateProductData>
-  setValue: UseFormSetValue<UpdateProductData>
+  register: UseFormRegister<CreateProductData>
+  getValues: UseFormGetValues<CreateProductData>
+  setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords')
+  const requiredKeywordsText = getValues(
+    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
+  )
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues(
+    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
+  )
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -34,7 +38,7 @@ const MercariForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -42,20 +46,20 @@ const MercariForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
     <>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索キーワード</legend>
-        <input {...register('mercariCrawlSetting.keyword')} className='input w-full' />
+        <input {...register('yahooAuctionCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'mercariCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'yahooAuctionCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -76,7 +80,7 @@ const MercariForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
+              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -99,7 +103,7 @@ const MercariForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
+              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -109,7 +113,7 @@ const MercariForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索カテゴリ</legend>
         <input
-          {...register('mercariCrawlSetting.categoryId', {
+          {...register('yahooAuctionCrawlSetting.categoryId', {
             setValueAs: (v) => (v === '' ? null : v),
           })}
           className='input w-full'
@@ -118,7 +122,7 @@ const MercariForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最低価格</legend>
         <input
-          {...register('mercariCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('yahooAuctionCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -126,7 +130,7 @@ const MercariForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'mercariCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'yahooAuctionCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -134,7 +138,7 @@ const MercariForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
-          {...register('mercariCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('yahooAuctionCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -142,15 +146,15 @@ const MercariForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'mercariCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'yahooAuctionCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
       </div>
-      <label className='label cursor-pointer '>
+      <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input
-          {...register('mercariCrawlSetting.enabled')}
+          {...register('yahooAuctionCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -159,4 +163,4 @@ const MercariForm = ({
   )
 }
 
-export default MercariForm
+export default YahooAuctionForm

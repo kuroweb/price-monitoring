@@ -13,11 +13,3 @@ export async function createUsedSofmapCrawlSettingExcludeProduct(
 
   return result
 }
-
-export async function deleteUsedSofmapCrawlSettingExcludeProduct(productId: number, id: number) {
-  const result = await Api.deleteUsedSofmapCrawlSettingExcludeProduct(productId, id)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}

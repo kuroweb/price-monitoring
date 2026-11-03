@@ -15,9 +15,3 @@ export async function createIosysCrawlSettingExcludeProduct(
     data,
   })
 }
-
-export async function deleteIosysCrawlSettingExcludeProduct(productId: number, id: number) {
-  return http(`${basePath(productId)}/${id}`, {
-    method: 'DELETE',
-  })
-}

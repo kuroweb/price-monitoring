@@ -20,7 +20,6 @@ export async function createProduct(data: Api.CreateProductData) {
 }
 
 export async function updateProduct(productId: number, data: Api.UpdateProductData) {
-  console.log(data)
   const result = await Api.updateProduct(productId, data)
   revalidateAdminPaths()
   revalidateProductsPaths()

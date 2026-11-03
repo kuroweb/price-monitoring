@@ -13,11 +13,3 @@ export async function createYahooAuctionCrawlSettingExcludeProduct(
 
   return result
 }
-
-export async function deleteYahooAuctionCrawlSettingExcludeProduct(productId: number, id: number) {
-  const result = await Api.deleteYahooAuctionCrawlSettingExcludeProduct(productId, id)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}

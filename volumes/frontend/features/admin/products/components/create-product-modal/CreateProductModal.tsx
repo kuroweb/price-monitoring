@@ -12,15 +12,15 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
+import IosysForm from '@/features/admin/products/common/components/product-form/IosysForm'
+import JanparaForm from '@/features/admin/products/common/components/product-form/JanparaForm'
+import MercariForm from '@/features/admin/products/common/components/product-form/MercariForm'
+import PcKoubouForm from '@/features/admin/products/common/components/product-form/PcKoubouForm'
+import UsedSofmapForm from '@/features/admin/products/common/components/product-form/UsedSofmapForm'
+import YahooAuctionForm from '@/features/admin/products/common/components/product-form/YahooAuctionForm'
 import { createProduct } from '@/lib/actions'
 import type { Category, CreateProductData, ProductList } from '@/lib/api'
 
-import IosysForm from './IosysForm'
-import JanparaForm from './JanparaForm'
-import MercariForm from './MercariForm'
-import PcKoubouForm from './PcKoubouForm'
-import UsedSofmapForm from './UsedSofmapForm'
-import YahooAuctionForm from './YahooAuctionForm'
 import { useCreateProductModalState } from './hooks/useCreateProductModalState'
 
 import type { SubmitHandler } from 'react-hook-form'
@@ -116,10 +116,10 @@ const CreateProductModal = ({
     const res = await createProduct(data)
 
     if (res.status === 200) {
-      toast.success('success')
+      toast.success('計測対象を追加しました')
       setModal(false)
     } else {
-      toast.error('error')
+      toast.error('計測対象の追加に失敗しました')
     }
     router.refresh()
   }

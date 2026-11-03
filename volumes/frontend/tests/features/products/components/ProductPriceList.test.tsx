@@ -21,6 +21,15 @@ const products = [
 ] as unknown as ProductList['products']
 
 describe('ProductPriceList', () => {
+  it('URLに開く指定があっても未選択ならモーダルを表示しない', () => {
+    render(
+      <NuqsTestingAdapter searchParams='?update_product_modal=true'>
+        <ProductPriceList productPrices={productPrices} products={products} categories={[]} />
+      </NuqsTestingAdapter>,
+    )
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
   it('押した商品の計測設定でモーダルを開く', async () => {
     const user = userEvent.setup()
     const onUrlUpdate = vi.fn()

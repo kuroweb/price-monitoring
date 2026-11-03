@@ -15,9 +15,3 @@ export async function createJanparaCrawlSettingExcludeProduct(
     data,
   })
 }
-
-export async function deleteJanparaCrawlSettingExcludeProduct(productId: number, id: number) {
-  return http(`${basePath(productId)}/${id}`, {
-    method: 'DELETE',
-  })
-}

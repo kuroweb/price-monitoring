@@ -13,11 +13,3 @@ export async function createPcKoubouCrawlSettingExcludeProduct(
 
   return result
 }
-
-export async function deletePcKoubouCrawlSettingExcludeProduct(productId: number, id: number) {
-  const result = await Api.deletePcKoubouCrawlSettingExcludeProduct(productId, id)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}

@@ -15,9 +15,3 @@ export async function createUsedSofmapCrawlSettingExcludeProduct(
     data,
   })
 }
-
-export async function deleteUsedSofmapCrawlSettingExcludeProduct(productId: number, id: number) {
-  return http(`${basePath(productId)}/${id}`, {
-    method: 'DELETE',
-  })
-}
