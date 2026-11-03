@@ -21,7 +21,7 @@ module Crawl
             Retryable.retryable(tries: RETRY_COUNT) do
               Rails.logger.info("Execute iosys crawl process. product_id: #{product.id} page: #{page_count}")
 
-              page.goto(url(page_count))
+              page.goto(url(page_count), waitUntil: "domcontentloaded")
               load(page)
 
               break if no_results?(page)
@@ -57,7 +57,7 @@ module Crawl
       end
 
       def no_results?(page)
-        page.query_selector("#empty").inner_text.present?
+        page.query_selector("#empty")&.inner_text.present?
       end
 
       def exists_next_page?(page)
