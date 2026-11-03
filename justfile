@@ -15,6 +15,17 @@ down:
 ps:
 	docker compose ps
 
+url:
+	#!/usr/bin/env sh
+	set -eu
+	config=$(docker compose config nginx)
+	project=$(printf '%s\n' "$config" | sed -n 's/^name: //p')
+	port=$(printf '%s\n' "$config" | sed -n 's/^ *NGINX_HTTPS_PORT: "*\([0-9]*\)"*$/\1/p')
+	suffix=$([ "$port" = 443 ] && echo "" || echo ":$port")
+	echo "project: $project"
+	echo "app:     https://dev.price-monitoring.com$suffix/"
+	echo "auth:    https://dev.auth-provider.com$suffix/"
+
 restart-all:
 	docker compose restart
 
