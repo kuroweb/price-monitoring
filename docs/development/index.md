@@ -53,7 +53,7 @@ docker compose build
 ### 3. アプリの初期化
 
 BFF の DB を `backend` コンテナで準備する。関連 DB / Redis は Compose が起動する。
-Provider の署名鍵・DB の準備と OIDC クライアント登録は、このコマンドの前提ではない。先に BFF の DB を準備し、続いて Provider の初回準備を行う。
+Provider の署名鍵・DB の準備は、このコマンドの前提ではない。先に BFF の DB を準備し、続いて Provider の初回準備を行う。
 
 ```bash
 docker compose run --rm backend bundle exec rails db:prepare
@@ -70,7 +70,7 @@ just up
 just ps
 ```
 
-新規環境では起動後に [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を行う。
+新規環境では、Provider の初回準備の `db:prepare` で管理ユーザーと OIDC クライアントが登録される。内容は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
 
 | 接続先 | URL |
 | --- | --- |
@@ -166,7 +166,7 @@ Orca で worktree を作ると、gitignore 対象のファイルが存在しな�
 
 コピー後、worktree の `.env` に `COMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml` を追記する。Compose project 名は worktree のディレクトリ名になり、コンテナ・ネットワーク・ボリュームはメインのチェックアウトと分かれる。[docker-compose.worktree.yml](../../docker-compose.worktree.yml) は公開ポートをホストの空きポートに割り当て、メインのチェックアウトと同時に起動できるようにする。割り当て先は `docker compose port backend 3000` などで確認する。
 
-worktree の環境はコンテナの起動・テスト用である。`https://dev.price-monitoring.com/` からの OIDC ログインを確認できるのは、443 番を使うメインのチェックアウトだけである。worktree の auth-provider DB は空なので、必要に応じて [認証固有の初回準備](../auth-provider/setup.md#初回準備) を行う。
+worktree の環境はコンテナの起動・テスト用である。`https://dev.price-monitoring.com/` からの OIDC ログインを確認できるのは、443 番を使うメインのチェックアウトだけである。worktree の auth-provider DB は空なので、必要に応じて `docker compose run --rm auth-provider bundle exec rails db:prepare` を実行する。DB の作成時に [Seed](../auth-provider/setup.md#oidc-クライアント登録) が管理ユーザーと OIDC クライアントを登録する。
 
 ## 関連手順
 

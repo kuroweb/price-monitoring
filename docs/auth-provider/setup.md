@@ -18,27 +18,18 @@ Provider 固有の環境変数が必要なら `volumes/auth-provider/.env` に�
 
 ## OIDC クライアント登録
 
-起動後、https://dev.auth-provider.com/ でユーザー登録し、必要なユーザーに管理権限を付与する。
-ホストのリポジトリルートから `auth-provider` コンテナの Rails コンソールを開く。
+development の `db:prepare` は、DB を作成したときに [db/seeds.rb](../../volumes/auth-provider/db/seeds.rb) で次のデータを登録する。
+
+- 管理ユーザー: `admin@example.com` / `password`
+- BFF の OIDC クライアント: ルート `.env` の `OIDC_CLIENT_ID` / `OIDC_CLIENT_SECRET` / `OIDC_REDIRECT_URI` を使い、Scopes は `openid email profile`、Confidential は有効
+
+`OIDC_CLIENT_ID` / `OIDC_CLIENT_SECRET` が空ならクライアントは登録しない。既存の DB に登録するときや `.env` の値を変えたときは、ホストのリポジトリルートから Seed を投入する。登録済みのユーザー・クライアントは変更しない。
 
 ```bash
-docker compose exec auth-provider bundle exec rails console
+docker compose run --rm auth-provider bundle exec rails db:seed
 ```
 
-このコンソール内で対象ユーザーを明示して管理権限を付与する。
-
-```ruby
-User.find_by!(email: "自分のメールアドレス").update!(admin: true)
-```
-
-管理ユーザーで `/oauth/applications` を開き、クライアントを登録する。
-
-- Redirect URI: `https://dev.price-monitoring.com/auth/auth_provider/callback`
-- Scopes: `openid email profile`
-- Confidential: 有効
-
-発行された値をルート `.env` の `OIDC_CLIENT_ID` / `OIDC_CLIENT_SECRET` に設定する。`OIDC_ISSUER` は `https://dev.auth-provider.com` を使う。
-ホストのリポジトリルートから BFF を再作成して環境変数を反映する。
+`.env` の値を変えたときは、ホストのリポジトリルートから BFF を再作成して環境変数を反映する。
 
 ```bash
 docker compose up -d backend
