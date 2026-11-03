@@ -72,6 +72,7 @@ just ps
 ```bash
 just up
 just ps
+just url
 just logs
 just restart backend
 just restart-all
@@ -79,7 +80,7 @@ just attach backend
 just down
 ```
 
-`logs` はログをフォローするため、終了時は Ctrl-C を使う。`attach` はコンテナのメインプロセスに接続する。シェルを開く用途には使わない。
+`url` は、実行したディレクトリの環境の project 名と、メインアプリ・認証プロバイダーの URL を表示する。画面のタブのタイトルとヘッダーにも project 名が出るので、メインと worktree のどちらを開いているかを見分けられる。`logs` はログをフォローするため、終了時は Ctrl-C を使う。`attach` はコンテナのメインプロセスに接続する。シェルを開く用途には使わない。
 全コマンドと引数の定義は [justfile](../../justfile) を参照する。
 
 ## 依存関係の更新・調査
@@ -152,7 +153,7 @@ just test-frontend -t '最初のページ'
 
 `WORKTREE_HTTPS_PORT` が無ければ 8443 から空きを割り当て、既存の値は維持する。setup が避けるのは他の worktree の `.env` にある番号だけで、他アプリが使っているポートは調べない。起動前に `docker compose config --quiet` がエラーなく終わることを確認する。`WORKTREE_HTTPS_PORT` が未設定ならここで失敗する。続けて `just ps` で、project 名が worktree のディレクトリ名になっていることを確認する。
 
-公開 URL は `https://dev.price-monitoring.com:<port>/` と `https://dev.auth-provider.com:<port>/` になる。ポートは `just ps` で確認する。
+公開 URL は `https://dev.price-monitoring.com:<port>/` と `https://dev.auth-provider.com:<port>/` になる。worktree で `just url` を実行すると、ポートを埋めた URL を表示する。
 
 ### 新規 worktree の初期化
 

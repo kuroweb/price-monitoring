@@ -58,6 +58,8 @@ services:
       dockerfile: containers/frontend/Dockerfile
     environment:
       NEXT_PRIVATE_API_URL: "http://backend:3000"
+      # メインと worktree の画面を見分けるため、タブとヘッダーに project 名を出す
+      NEXT_PUBLIC_COMPOSE_PROJECT_NAME: "${COMPOSE_PROJECT_NAME}"
     stdin_open: true
     tty: true
     volumes:
