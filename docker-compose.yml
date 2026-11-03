@@ -120,6 +120,10 @@ services:
       REDIS_URL: "redis://auth-provider-redis:6379"
       ALLOWED_ORIGINS: "nginx,dev.auth-provider.com"
       DOMAIN_NAME: "dev.auth-provider.com"
+      # db/seeds.rb が BFF と同じ値で OIDC クライアントを登録するために渡す
+      OIDC_CLIENT_ID: ${OIDC_CLIENT_ID:-}
+      OIDC_CLIENT_SECRET: ${OIDC_CLIENT_SECRET:-}
+      OIDC_REDIRECT_URI: ${OIDC_REDIRECT_URI:-}
     stdin_open: true
     tty: true
     depends_on:
