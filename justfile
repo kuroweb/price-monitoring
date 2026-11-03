@@ -1,6 +1,11 @@
 @_list:
 	just -l
 
+prepare:
+	docker compose run --rm backend bundle exec rails db:prepare
+	docker compose run --rm auth-provider bundle exec rails db:prepare db:seed
+	docker compose up -d
+
 up:
 	docker compose up -d
 

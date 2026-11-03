@@ -6,9 +6,10 @@ import camelcaseKeys from 'camelcase-keys'
 import snakecaseKeys from 'snakecase-keys'
 
 function getApiBaseUrl(): string {
-  return typeof window === 'undefined'
-    ? process.env.NEXT_PRIVATE_API_URL!
-    : process.env.NEXT_PUBLIC_API_URL!
+  if (typeof window === 'undefined') return process.env.NEXT_PRIVATE_API_URL!
+
+  // 公開 URL をビルド時に固定すると、worktree ごとに違うポートとずれる
+  return process.env.NEXT_PUBLIC_API_URL || window.location.origin
 }
 
 export interface ApiResponse<T> {

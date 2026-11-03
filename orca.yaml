@@ -1,6 +1,6 @@
 scripts:
   setup: |
-    # gitignore 対象の環境変数・鍵・証明書をメインのチェックアウトからコピーする
+    # gitignore されているので、メインのチェックアウトからコピーする
     for file in \
       .env \
       volumes/auth-provider/.env \
@@ -10,16 +10,34 @@ scripts:
       volumes/nginx/certs/auth-provider/fullchain.pem \
       volumes/nginx/certs/auth-provider/privkey.pem
     do
+      # worktree で変えた鍵や設定を、再実行で消さない
+      if [ -f "$ORCA_WORKTREE_PATH/$file" ]; then
+        continue
+      fi
       if [ -f "$ORCA_ROOT_PATH/$file" ]; then
         mkdir -p "$(dirname "$ORCA_WORKTREE_PATH/$file")"
         cp "$ORCA_ROOT_PATH/$file" "$ORCA_WORKTREE_PATH/$file"
       fi
     done
 
-    # メインのチェックアウトと公開ポートが衝突しないよう worktree 用の Compose 設定を重ねる
-    if ! grep -q '^COMPOSE_FILE=' "$ORCA_WORKTREE_PATH/.env" 2>/dev/null; then
-      printf '\nCOMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml\n' >> "$ORCA_WORKTREE_PATH/.env"
+    # コピーした COMPOSE_PROJECT_NAME が残るとメインの環境を操作するので消す。COMPOSE_FILE は worktree 用の上書きを読む値に書き直す
+    env_file="$ORCA_WORKTREE_PATH/.env"
+    touch "$env_file"
+    env_tmp=$(mktemp "$env_file.XXXXXX")
+    awk '!/^[[:space:]]*(export[[:space:]]+)?COMPOSE_(FILE|PROJECT_NAME)[[:space:]]*=/' "$env_file" > "$env_tmp"
+    printf 'COMPOSE_FILE=docker-compose.yml:docker-compose.worktree.yml\n' >> "$env_tmp"
+    mv "$env_tmp" "$env_file"
+
+    # 他アプリの使用中ポートは見ない。他 worktree の .env にある番号だけを避ける
+    if ! grep -Eq '^[[:space:]]*(export[[:space:]]+)?WORKTREE_HTTPS_PORT[[:space:]]*=' "$ORCA_WORKTREE_PATH/.env" 2>/dev/null; then
+      used_ports=$(git -C "$ORCA_ROOT_PATH" worktree list --porcelain | sed -n 's/^worktree //p' | while read -r path; do
+        sed -nE "s/^[[:space:]]*(export[[:space:]]+)?WORKTREE_HTTPS_PORT[[:space:]]*=[[:space:]]*[\"']?([0-9]+)[\"']?[[:space:]]*(#.*)?$/\\2/p" "$path/.env" 2>/dev/null
+      done)
+      port=8443
+      while printf '%s\n' "$used_ports" | grep -qx "$port"; do
+        port=$((port + 1))
+      done
+      printf 'WORKTREE_HTTPS_PORT=%s\n' "$port" >> "$ORCA_WORKTREE_PATH/.env"
     fi
 
-# コピー完了後にエージェントを起動する
 setupAgentStartupPolicy: wait-for-setup

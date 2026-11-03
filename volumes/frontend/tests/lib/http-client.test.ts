@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { http } from '@/lib/http-client'
 
@@ -11,7 +11,23 @@ beforeEach(() => {
   fetchMock.mockReset()
 })
 
+afterEach(() => {
+  vi.unstubAllGlobals()
+})
+
 describe('http（ブラウザー）', () => {
+  it.each([undefined, ''])('公開URLが %j のときはページのoriginとポートを使う', async (baseUrl) => {
+    vi.stubEnv('NEXT_PUBLIC_API_URL', baseUrl)
+    vi.stubGlobal('location', new URL('https://dev.price-monitoring.com:8443/products'))
+    fetchMock.mockResolvedValue(new Response('{}'))
+
+    await http('/api/v1/products', { params: { categoryId: 3 } })
+
+    expect(fetchMock.mock.calls[0][0]).toBe(
+      'https://dev.price-monitoring.com:8443/api/v1/products?category_id=3',
+    )
+  })
+
   it('公開 URL に GET し、未指定・null の検索条件を除いて snake_case にする', async () => {
     fetchMock.mockResolvedValue(new Response('{}'))
 
