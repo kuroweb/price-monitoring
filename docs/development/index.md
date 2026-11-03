@@ -7,7 +7,7 @@
 
 ### 1. ホストの準備
 
-Docker Compose v2.24.0 以降（任意の `env_file` を利用するため）、just、mkcert を準備する。macOS で mkcert を導入する場合は、ホストで次を実行する。
+Docker Compose v2.24.0 以降（任意の `env_file` と、worktree 用の設定の `!override` を利用するため）、just、mkcert を準備する。macOS で mkcert を導入する場合は、ホストで次を実行する。
 
 ```bash
 brew install mkcert
@@ -40,8 +40,6 @@ mkcert \
 cp .env.example .env
 ```
 
-旧 auth-provider 環境から移行する場合は、以降の新規準備の前に [既存環境の引き継ぎ](../auth-provider/migration.md) を行う。
-
 ### 2. イメージの準備
 
 ホストから Compose の開発用イメージをビルドする。
@@ -59,7 +57,7 @@ Provider の署名鍵・DB の準備は、このコマンドの前提ではな�
 docker compose run --rm backend bundle exec rails db:prepare
 ```
 
-Provider の新規環境では [認証固有の初回準備](../auth-provider/setup.md#初回準備) で署名鍵と DB を準備する。既存環境の引き継ぎでは署名鍵を作り直さない。
+Provider の新規環境では [認証固有の初回準備](../auth-provider/setup.md#初回準備) で署名鍵と DB を準備する。
 
 ### 4. 起動と認証クライアント登録
 
@@ -171,5 +169,5 @@ worktree の環境はコンテナの起動・テスト用である。`https://de
 ## 関連手順
 
 - [Seed データの投入](../backend/operations/seeds.md)
-- [認証基盤の準備・引き継ぎ・検証](../auth-provider/index.md)
+- [認証基盤の準備・検証](../auth-provider/index.md)
 - [CI/CD と自動レビュー](../cicd/index.md)
