@@ -4,5 +4,5 @@
 
 - [プロジェクト全体と開発の入口](../../README.md)
 - [frontend の責務分離](../../docs/frontend/index.md)
-- [セットアップ・依存関係・静的検証](../../docs/development/index.md)
+- [ローカル開発](../../docs/development/index.md) — セットアップ・日常操作・テストの案内
 - [文書の役割と正本](../../docs/index.md)

@@ -142,17 +142,17 @@ flowchart LR
 
 ## 開発・運用の入口
 
-初めて開発する場合は [ローカル開発ガイド](docs/development/index.md) の順に、証明書・hosts・環境変数・DB・認証クライアントを準備する。
+初めて開発する場合は [初回セットアップ](docs/development/setup.md) の順に、証明書・hosts・環境変数・DB・認証クライアントを準備する。
 アプリのディレクトリから読み始める場合は [backend](volumes/backend/README.md) / [frontend](volumes/frontend/README.md) / [auth-provider](volumes/auth-provider/README.md) を参照する。
 
-- [セットアップ・日常操作・依存関係・テスト](docs/development/index.md)
+- [ローカル開発](docs/development/index.md) — 環境の構成と、セットアップ・日常操作・テストの案内
 - [認証固有の準備・検証](docs/auth-provider/index.md)
 - [Seed データの投入](docs/backend/operations/seeds.md)
 - [CI/CD・PR 自動レビュー・手動デプロイ](docs/cicd/index.md)
 
 ## Docs
 
-[文書ガイド・索引](docs/index.md) に、README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、話題ごとの正本と外部事例の採用判断をまとめている。
+[文書ガイド・索引](docs/index.md) に、README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、話題ごとの正本、文書の更新規約・記述規約をまとめている。
 
 - [Backend の責務分離](docs/backend/index.md)
 - [Frontend の責務分離](docs/frontend/index.md)
