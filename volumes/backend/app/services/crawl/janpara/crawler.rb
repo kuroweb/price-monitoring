@@ -13,7 +13,7 @@ module Crawl
       end
 
       def call # rubocop:disable Metrics/MethodLength, Metrics/AbcSize
-        Crawl::Client.execute do |page|
+        Crawl::Client.execute(user_agent: Crawl::RequestBlocklist::JANPARA_USER_AGENT) do |page|
           page_count = 1
           loop do
             break if page_count > MAX_PAGE

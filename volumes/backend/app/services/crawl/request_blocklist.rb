@@ -65,6 +65,9 @@ module Crawl
       m.geniee-search.net
       pagead2.googlesyndication.com
       flux-cdn.com
+      youtube.com
+      googlevideo.com
+      doubleclick.net
     ].freeze
 
     IOSYS_BLOCKED_LIST = %w[
@@ -126,6 +129,10 @@ module Crawl
       www.promisejs.org
       cdnjs.cloudflare.com
     ].freeze
+
+    # じゃんぱらの WAF（SiteGuard）は古い UA を HTTP 500 で拒否するため、じゃんぱらだけ新しい UA を使う
+    JANPARA_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " \
+                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36".freeze
 
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
