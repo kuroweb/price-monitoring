@@ -13,7 +13,7 @@
 
 ## 手順
 
-1. **前提**: [ローカル開発](../../development/index.md#初回セットアップ) に従い DB / Redis / `backend` を起動して状態を確認する。
+1. **前提**: [初回セットアップ](../../development/setup.md) に従い DB / Redis / `backend` を起動して状態を確認する。
 2. **Gemfile**: `volumes/backend/Gemfile` の `rails` を目標バージョンに更新する。
 3. **bundle**: ホストではなくコンテナ内で更新する。
 
@@ -36,13 +36,13 @@
    docker compose run --rm backend bin/rails db:migrate
    ```
 
-7. **検証**: [共通テスト手順](../../development/index.md#テスト) の BFF 側 RSpec と、以下の自動読み込み確認を実行する。
+7. **検証**: [共通テスト手順](../../development/testing.md) の BFF 側 RSpec と、以下の自動読み込み確認を実行する。
 
    ```bash
    docker compose run --rm backend bin/rails zeitwerk:check
    ```
 
-8. **ローカルへの反映**: [日常操作](../../development/index.md#日常操作) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../development/index.md#2-イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
+8. **ローカルへの反映**: [日常操作](../../development/operations.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../development/setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
 
 ## 避けること
 
