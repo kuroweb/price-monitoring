@@ -20,6 +20,12 @@ scripts:
       fi
     done
 
+    # node_modules も gitignore されているので、メインからコピーする
+    modules=volumes/frontend/node_modules
+    if [ ! -d "$ORCA_WORKTREE_PATH/$modules" ] && [ -d "$ORCA_ROOT_PATH/$modules" ]; then
+      cp -Rc "$ORCA_ROOT_PATH/$modules" "$ORCA_WORKTREE_PATH/$modules"
+    fi
+
     # コピーした COMPOSE_PROJECT_NAME が残るとメインの環境を操作するので消す。COMPOSE_FILE は worktree 用の上書きを読む値に書き直す
     env_file="$ORCA_WORKTREE_PATH/.env"
     touch "$env_file"
