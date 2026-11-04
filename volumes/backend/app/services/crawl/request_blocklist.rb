@@ -29,6 +29,14 @@ module Crawl
       googletagmanager.com
       securepubads.g.doubleclick.net
       sentry.io
+      forter.com
+      analytics.tiktok.com
+      criteo.com
+      criteo.net
+      bat.bing.com
+      eagle-insight.com
+      jp.mercari.com/gtm/
+      d1qmrxg9gbf226.cloudfront.net
     ].freeze
 
     YAHOO_AUCTION_BLOCKED_LIST = %w[
