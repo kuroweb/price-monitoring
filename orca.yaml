@@ -1,6 +1,6 @@
 scripts:
   setup: |
-    # gitignore されているので、メインのチェックアウトからコピーする
+    # gitignore されているファイルをメインからコピーする
     for file in \
       .env \
       volumes/auth-provider/.env \
@@ -8,23 +8,18 @@ scripts:
       volumes/nginx/certs/fullchain.pem \
       volumes/nginx/certs/privkey.pem \
       volumes/nginx/certs/auth-provider/fullchain.pem \
-      volumes/nginx/certs/auth-provider/privkey.pem
+      volumes/nginx/certs/auth-provider/privkey.pem \
+      volumes/frontend/node_modules
     do
-      # worktree で変えた鍵や設定を、再実行で消さない
-      if [ -f "$ORCA_WORKTREE_PATH/$file" ]; then
+      # worktree で変えた鍵や設定、入れ直した依存関係を、再実行で消さない
+      if [ -e "$ORCA_WORKTREE_PATH/$file" ]; then
         continue
       fi
-      if [ -f "$ORCA_ROOT_PATH/$file" ]; then
+      if [ -e "$ORCA_ROOT_PATH/$file" ]; then
         mkdir -p "$(dirname "$ORCA_WORKTREE_PATH/$file")"
-        cp "$ORCA_ROOT_PATH/$file" "$ORCA_WORKTREE_PATH/$file"
+        cp -Rc "$ORCA_ROOT_PATH/$file" "$ORCA_WORKTREE_PATH/$file"
       fi
     done
-
-    # node_modules も gitignore されているので、メインからコピーする
-    modules=volumes/frontend/node_modules
-    if [ ! -d "$ORCA_WORKTREE_PATH/$modules" ] && [ -d "$ORCA_ROOT_PATH/$modules" ]; then
-      cp -Rc "$ORCA_ROOT_PATH/$modules" "$ORCA_WORKTREE_PATH/$modules"
-    fi
 
     # コピーした COMPOSE_PROJECT_NAME が残るとメインの環境を操作するので消す。COMPOSE_FILE は worktree 用の上書きを読む値に書き直す
     env_file="$ORCA_WORKTREE_PATH/.env"
