@@ -152,7 +152,7 @@ flowchart LR
 
 ## Docs
 
-[文書ガイド・索引](docs/index.md) に、README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、話題ごとの正本と外部事例の採用判断をまとめている。
+[文書ガイド・索引](docs/index.md) に、README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、話題ごとの正本、文書の更新規約・記述規約をまとめている。
 
 - [Backend の責務分離](docs/backend/index.md)
 - [Frontend の責務分離](docs/frontend/index.md)
