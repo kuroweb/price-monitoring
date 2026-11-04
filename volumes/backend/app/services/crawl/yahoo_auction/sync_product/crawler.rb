@@ -13,7 +13,8 @@ module Crawl
         end
 
         def call
-          Crawl::Client.execute do |page|
+          # 商品情報は HTML 内の __NEXT_DATA__ から読むので、スクリプトは不要
+          Crawl::Client.execute(block_scripts: true) do |page|
             Retryable.retryable(tries: RETRY_COUNT) do
               page.goto(url)
               json = item_json(page)
