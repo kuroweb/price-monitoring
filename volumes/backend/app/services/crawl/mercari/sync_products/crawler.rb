@@ -4,6 +4,15 @@ module Crawl
       class Crawler
         RETRY_COUNT = 5
         MAX_PAGE = 5
+        NEXT_BUTTON_SELECTOR = "[data-testid='pagination-next-button']".freeze
+        ITEM_LINK_SELECTOR = "li[data-testid='item-cell'] a".freeze
+        NEXT_PAGE_TIMEOUT_MS = 20_000
+        FIRST_ITEM_CHANGED_SCRIPT = <<~JS.squish.freeze
+          href => {
+            const a = document.querySelector("#{ITEM_LINK_SELECTOR}");
+            return a && a.getAttribute('href') !== href;
+          }
+        JS
 
         def initialize(product:)
           @product = product
@@ -15,10 +24,10 @@ module Crawl
             loop do
               break if start > MAX_PAGE
 
-              Retryable.retryable(tries: RETRY_COUNT) do
+              Retryable.retryable(tries: RETRY_COUNT) do |retries, _exception|
                 Rails.logger.info("Execute mercari crawl process. product_id: #{product.id} page: #{start}")
 
-                page.goto(url(start))
+                open_page(page, start, retried: retries.positive?)
                 load(page)
 
                 break if no_results?(page)
@@ -45,12 +54,29 @@ module Crawl
           ).generate
         end
 
+        # 2 ページ目以降は「次へ」で遷移する。URL を開き直すと、request の遮断で HTTP キャッシュが効かず全アセットを取り直す
+        def open_page(page, start, retried:)
+          return page.goto(url(start)) if start.zero? || retried
+
+          click_next(page)
+        end
+
+        def click_next(page)
+          first_href = first_item_href(page)
+          page.query_selector(NEXT_BUTTON_SELECTOR).click
+          page.wait_for_function(FIRST_ITEM_CHANGED_SCRIPT, arg: first_href, timeout: NEXT_PAGE_TIMEOUT_MS)
+        end
+
+        def first_item_href(page)
+          page.query_selector(ITEM_LINK_SELECTOR)&.get_attribute("href")
+        end
+
         def no_results?(page)
           page.query_selector(".merEmptyState")
         end
 
         def exists_next_page?(page)
-          page.query_selector("[data-testid='pagination-next-button']")
+          page.query_selector(NEXT_BUTTON_SELECTOR)
         end
 
         def load(page)
