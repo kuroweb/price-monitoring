@@ -11,7 +11,7 @@ module Crawl
         end
 
         def call
-          return unless mercari_crawl_setting&.enabled?
+          return unless mercari_crawl_setting.enabled?
 
           upsert
           inspect

@@ -32,16 +32,14 @@ const ProductsTable = ({ products, categories }: Props) => {
   const [deletingId, setDeletingId] = useState<number | null>(null)
   const deletingRef = useRef(false)
   const filteredProducts = products.filter((item) => {
-    const enabled =
-      (item.searchUrls?.length ? item.enabled : false) ||
-      [
-        item.yahooAuctionCrawlSetting,
-        item.mercariCrawlSetting,
-        item.janparaCrawlSetting,
-        item.iosysCrawlSetting,
-        item.pcKoubouCrawlSetting,
-        item.usedSofmapCrawlSetting,
-      ].some((setting) => setting?.enabled)
+    const enabled = [
+      item.yahooAuctionCrawlSetting,
+      item.mercariCrawlSetting,
+      item.janparaCrawlSetting,
+      item.iosysCrawlSetting,
+      item.pcKoubouCrawlSetting,
+      item.usedSofmapCrawlSetting,
+    ].some((setting) => setting?.enabled)
     return (
       item.name.toLowerCase().includes(search.toLowerCase()) &&
       (!category || String(item.category?.id) === category) &&
@@ -172,21 +170,15 @@ const ProductsTable = ({ products, categories }: Props) => {
                   </button>
                   <ul className='menu dropdown-content z-1 w-32 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
                     <li>
-                      {product.searchUrls?.length ? (
-                        <Link className='btn btn-primary' href='/admin/products/search-settings'>
-                          計測設定
-                        </Link>
-                      ) : (
-                        <button
-                          className='btn btn-primary'
-                          onClick={() => {
-                            setProduct(product)
-                            setUpdateModal(true)
-                          }}
-                        >
-                          計測設定
-                        </button>
-                      )}
+                      <button
+                        className='btn btn-primary'
+                        onClick={() => {
+                          setProduct(product)
+                          setUpdateModal(true)
+                        }}
+                      >
+                        計測設定
+                      </button>
                     </li>
                     <li>
                       <button

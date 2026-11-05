@@ -4,10 +4,6 @@ require "sidekiq/cron/web"
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   namespace :api do # rubocop:disable Metrics/BlockLength
     namespace :v1 do # rubocop:disable Metrics/BlockLength
-      get "products/search_settings", to: "product_search_settings#index"
-      post "products/search_settings", to: "product_search_settings#create"
-      put "products/:id/search_settings", to: "product_search_settings#update"
-      post "products/preview", to: "product_search_settings#preview"
       resources :products, only: %i[index show create update destroy]
       namespace :products do
         scope path: ":product_id" do

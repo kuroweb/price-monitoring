@@ -16,11 +16,6 @@ module Api
       end
 
       def update
-        if product.search_urls.exists?
-          render json: build_error_json(400, "URLで登録した計測対象は検索設定画面で更新してください", []), status: :bad_request
-          return
-        end
-
         ::Products::Updater::UpdateProduct.call(product:, params: upsert_product_params)
         ::Products::Inspector::InspectAll.call(product:)
         render json: product.as_json, status: :ok

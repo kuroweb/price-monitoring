@@ -6,7 +6,7 @@ module Crawl
       sidekiq_options queue: :crawl_pc_koubou_enqueue_sync_job, retry: 0
 
       def perform
-        job_params = Product.joins(:pc_koubou_crawl_setting).pluck(:id).map { |p| [p] }
+        job_params = Product.all.pluck(:id).map { |p| [p] }
         Crawl::PcKoubou::SyncJob.perform_bulk(job_params)
       end
     end

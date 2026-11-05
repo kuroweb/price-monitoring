@@ -288,7 +288,3 @@ erDiagram
   }
   backmarket_watch_targets ||--o{ backmarket_watch_results : ""
 ```
-
-## Productの検索URL・共通条件（PoC）
-
-ProductはProductSearchUrl・ProductRequiredKeyword・ProductExcludeKeyword・ProductExcludedListingを複数持つ。各子はproduct_idでProductへ属し、Product削除時に削除する。URLや語句ごとに別の計測エンティティは作らない。詳細は [Product計測PoC](../backend/product-search-poc.md) を参照する。

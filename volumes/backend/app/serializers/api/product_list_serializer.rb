@@ -2,7 +2,6 @@ module Api
   class ProductListSerializer
     JSON_OPTIONS = {
       include: [
-        search_urls: {},
         yahoo_auction_crawl_setting: {
           include: %i[
             yahoo_auction_crawl_setting_exclude_keywords
@@ -44,7 +43,6 @@ module Api
     }.freeze
 
     PRELOAD_OPTIONS = {
-      search_urls: [],
       yahoo_auction_crawl_setting: %i[
         yahoo_auction_crawl_setting_exclude_keywords
         yahoo_auction_crawl_setting_required_keywords

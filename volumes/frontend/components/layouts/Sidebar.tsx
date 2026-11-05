@@ -73,7 +73,6 @@ const menuGroups: { title: string; items: MenuItem[] }[] = [
     items: [
       { label: '最安値一覧', href: '/products', icon: trendIcon },
       { label: '計測対象の管理', href: '/admin/products', icon: settingsIcon },
-      { label: 'URLによる計測設定', href: '/admin/products/search-settings', icon: listIcon },
     ],
   },
   {
