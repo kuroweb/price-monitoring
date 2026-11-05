@@ -586,6 +586,7 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | sold | boolean |  | 販売状態を取得できないサイトは NULL |
 | bought_date | datetime |  |  |
 | end_date | datetime |  |  |
+| excluded_at | datetime |  | 除外した日時。NULL は除外していない |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 
@@ -609,7 +610,6 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | search_urls | json | NOT NULL | default `[]` |
 | required_keywords | json | NOT NULL | default `[]` |
 | exclude_keywords | json | NOT NULL | default `[]` |
-| exclude_external_ids | json | NOT NULL | default `[]` |
 | min_price | integer |  |  |
 | max_price | integer |  |  |
 | created_at | datetime | NOT NULL |  |

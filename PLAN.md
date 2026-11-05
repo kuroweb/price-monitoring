@@ -35,7 +35,6 @@ erDiagram
     json search_urls
     json required_keywords
     json exclude_keywords
-    json exclude_external_ids
     integer min_price "nullable"
     integer max_price "nullable"
   }
@@ -52,6 +51,7 @@ erDiagram
     boolean sold "nullable"
     datetime bought_date "nullable"
     datetime end_date "nullable"
+    datetime excluded_at "nullable"
   }
   product_aggregation_settings {
     bigint id PK
@@ -80,7 +80,7 @@ erDiagram
 2. 行を識別する値（名前・サイト・出品ID・集計日）と表示用の値（出品ページURL・サムネイル）
 3. 有効状態
 4. クロール対象（URL）
-5. 条件（必須語・除外語・除外出品ID・価格帯）。商品計測設定と商品相場設定で同じ順にする
+5. 条件（必須語・除外語・価格帯）。商品計測設定と商品相場設定で同じ順にする
 6. 取得・集計した値。意味の近い列をまとめる（価格と即決価格、販売状態と売れた日時）
 
 ### テーブル定義
@@ -97,7 +97,6 @@ erDiagram
 | `search_urls` | json | NO | `[]` | クロールする検索結果URLの文字列配列。設定内の重複は保存時にアプリで検証する |
 | `required_keywords` | json | NO | `[]` | 必須語の文字列配列。すべて含む結果だけを保存する |
 | `exclude_keywords` | json | NO | `[]` | 除外語の文字列配列。いずれかを含む結果は保存しない |
-| `exclude_external_ids` | json | NO | `[]` | 除外する出品IDの文字列配列 |
 | `min_price` | integer | YES | | 下限価格。null は制限なし |
 | `max_price` | integer | YES | | 上限価格。null は制限なし |
 
@@ -119,6 +118,7 @@ erDiagram
 | `sold` | boolean | YES | | 売り切れなら `true`、販売中なら `false`。販売状態を取得できないサイトは null |
 | `bought_date` | datetime | YES | | 売れた日時。集計に使う |
 | `end_date` | datetime | YES | | オークション終了日時。ヤフオクのみ |
+| `excluded_at` | datetime | YES | | 除外した日時。null なら除外していない。除外しても行は消さず、出品名・商品ページ・画像を残す |
 
 | インデックス | 列 | 一意 |
 | --- | --- | --- |
@@ -130,6 +130,8 @@ erDiagram
 | `product_crawl_setting_id` | `product_crawl_settings.id` |
 
 `sold: true` かつ `bought_date` が null の行は、個別ページを取得して `bought_date` を埋める対象になる。
+
+除外した出品は、取得し直しても `excluded_at` を残したまま価格などを更新する。結果画面と相場集計では `excluded_at` が null の行だけを使う。
 
 #### `product_aggregation_settings`（商品相場設定）
 
@@ -180,11 +182,12 @@ erDiagram
 | 画面 | 対象テーブル | 主な操作 |
 | --- | --- | --- |
 | 商品計測設定一覧 | `product_crawl_settings` | 一覧、有効状態の確認。「…」メニューから編集・削除 |
-| 商品計測設定の登録・編集（モーダル） | `product_crawl_settings` | 名前・URL・追加条件の入力、未保存の条件での取得確認、保存 |
-| 商品計測結果 | `product_crawl_results` | 全商品計測設定の結果を設定ごとのセクションにカードで表示。取得して保存、出品の除外 |
+| 商品計測設定の登録・編集（モーダル） | `product_crawl_settings` | 名前・URL・追加条件の入力、保存。更新では除外した出品の確認と取り消し |
+| 商品計測結果一覧 | `product_crawl_results` | 商品計測設定ごとに新着の数件をカードで表示。出品の除外、詳細へ遷移 |
+| 商品計測結果詳細 | `product_crawl_results` | 1つの商品計測設定の全件をカードで表示。販売状態の絞り込み、並び替え、取得して保存、出品の除外 |
 | 商品相場設定一覧 | `product_aggregation_settings` | 一覧。「…」メニューから編集・削除 |
 | 商品相場設定の登録・編集（モーダル） | `product_aggregation_settings` | 名前・フィルターの入力、保存 |
-| 商品相場 | `product_aggregation_results` | 全商品相場設定の日次推移を設定ごとのセクションで表示。集計の実行 |
+| 商品相場 | `product_aggregation_results` | 全商品相場設定の日次推移を設定ごとのセクションで表示。要約の数値、期間とグラフ・表の切り替え、集計の実行 |
 
 ### 商品計測設定一覧
 
@@ -205,13 +208,11 @@ erDiagram
 | 除外語 | `exclude_keywords` | 複数入力。いずれかを含む結果は保存しない |
 | 価格帯 | `min_price`・`max_price` | 上下限。空欄は制限なし |
 
-除外出品IDはこの画面では入力せず、取得確認と商品計測結果で出品を選んで追加する。
-
-PoCと同じく、未保存の条件で実際に取得して結果を確認できる。確認結果は保存しない。
+除外する出品はこの画面では入力せず、商品計測結果で出品を選ぶ。更新では除外した出品を画像・名前・商品ページへのリンクつきで並べ、その場で取り消せる。
 
 ### 商品計測結果
 
-設定画面とは別の画面。全商品計測設定の結果を、設定ごとのセクションにカードで並べる。
+設定画面とは別の画面。一覧では商品計測設定ごとに新着の数件を並べ、詳細で1つの設定の全件を並べる。
 
 | 表示項目 | 元の列 |
 | --- | --- |
@@ -222,7 +223,7 @@ PoCと同じく、未保存の条件で実際に取得して結果を確認で�
 | 販売状態・売れた日時 | `sold`・`bought_date` |
 | オークション終了日時 | `end_date` |
 
-各セクションから「取得して保存」を実行できる。カードの「…」メニューから出品を除外できる。除外すると商品計測設定の `exclude_external_ids` に追加する。
+各セクションから「取得して保存」を実行できる。カードの「…」メニューから出品を除外できる。除外すると商品計測結果の `excluded_at` に日時を入れる。行は消さない。
 
 ### 商品相場設定一覧・登録・編集
 
@@ -250,4 +251,3 @@ PoCと同じく、未保存の条件で実際に取得して結果を確認で�
 - 各画面のURLパスと、管理画面と利用者向け画面の分け方。PoCは設定画面を `/admin/product-crawl-settings`・`/admin/product-aggregation-settings`、結果画面を `/product-crawl-results`・`/product-aggregation-results` に置いている（[PoCの説明](docs/backend/product-search-poc.md)）。
 - 商品相場の表示形式（グラフ・表）と表示期間。
 - 商品相場で、集計対象になった商品計測結果も一覧で見せるか。
-- 商品計測結果で、除外した出品を表示するか、除外を解除できるようにするか。
