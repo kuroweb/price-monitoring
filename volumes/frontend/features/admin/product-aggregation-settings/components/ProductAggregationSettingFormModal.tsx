@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import { words } from '@/features/admin/product-crawl-settings/lib/platform'
 import { createProductAggregationSetting, updateProductAggregationSetting } from '@/lib/actions'
-import type { ProductAggregationSetting, ProductAggregationSettingDraft } from '@/lib/api'
+import type { ProductAggregationSetting, ProductAggregationSettingInput } from '@/lib/api'
 
 type Props = {
   onClose: () => void
@@ -23,7 +23,7 @@ type Props = {
 // 開くたびに描画し直し、編集対象の値で初期化する
 export default function ProductAggregationSettingFormModal({ onClose, setting }: Props) {
   const router = useRouter()
-  const [draft, setDraft] = useState<ProductAggregationSettingDraft>(() => ({
+  const [input, setInput] = useState<ProductAggregationSettingInput>(() => ({
     name: setting?.name ?? '',
     requiredKeywords: setting?.requiredKeywords ?? [],
     excludeKeywords: setting?.excludeKeywords ?? [],
@@ -35,16 +35,16 @@ export default function ProductAggregationSettingFormModal({ onClose, setting }:
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const inFlightRef = useRef(false)
-  const change = (patch: Partial<ProductAggregationSettingDraft>) =>
-    setDraft((value) => ({ ...value, ...patch }))
+  const change = (patch: Partial<ProductAggregationSettingInput>) =>
+    setInput((value) => ({ ...value, ...patch }))
 
   const submit = async () => {
     if (inFlightRef.current) return
-    if (!draft.name.trim()) {
+    if (!input.name.trim()) {
       setError('名前を入力してください')
       return
     }
-    if (draft.minPrice != null && draft.maxPrice != null && draft.minPrice > draft.maxPrice) {
+    if (input.minPrice != null && input.maxPrice != null && input.minPrice > input.maxPrice) {
       setError('最低価格は最高価格以下にしてください')
       return
     }
@@ -53,7 +53,7 @@ export default function ProductAggregationSettingFormModal({ onClose, setting }:
     setError('')
     try {
       const payload = {
-        ...draft,
+        ...input,
         requiredKeywords: words(required),
         excludeKeywords: words(excluded),
       }
@@ -96,7 +96,7 @@ export default function ProductAggregationSettingFormModal({ onClose, setting }:
                   <input
                     className='input w-full'
                     maxLength={255}
-                    value={draft.name}
+                    value={input.name}
                     onChange={(event) => change({ name: event.target.value })}
                   />
                 </label>
@@ -124,7 +124,7 @@ export default function ProductAggregationSettingFormModal({ onClose, setting }:
                       type='number'
                       min={0}
                       step={1}
-                      value={draft.minPrice ?? ''}
+                      value={input.minPrice ?? ''}
                       onChange={(event) =>
                         change({
                           minPrice: event.target.value === '' ? null : Number(event.target.value),
@@ -139,7 +139,7 @@ export default function ProductAggregationSettingFormModal({ onClose, setting }:
                       type='number'
                       min={0}
                       step={1}
-                      value={draft.maxPrice ?? ''}
+                      value={input.maxPrice ?? ''}
                       onChange={(event) =>
                         change({
                           maxPrice: event.target.value === '' ? null : Number(event.target.value),

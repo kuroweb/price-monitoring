@@ -6,25 +6,21 @@ import { revalidatePaths } from '@/lib/revalidate-paths'
 const revalidate = () =>
   revalidatePaths([
     ['/admin/product-crawl-settings', 'page'],
-    ['/product-crawl-results', 'page'],
+    ['/product-crawl-results', 'layout'],
   ])
 
 export async function getProductCrawlSettings() {
   return Api.getProductCrawlSettings()
 }
 
-export async function previewProductCrawlSetting(draft: Api.ProductCrawlSettingDraft) {
-  return Api.previewProductCrawlSetting(draft)
-}
-
-export async function createProductCrawlSetting(draft: Api.ProductCrawlSettingDraft) {
-  const result = await Api.createProductCrawlSetting(draft)
+export async function createProductCrawlSetting(input: Api.ProductCrawlSettingInput) {
+  const result = await Api.createProductCrawlSetting(input)
   if (result.data) revalidate()
   return result
 }
 
-export async function updateProductCrawlSetting(id: number, draft: Api.ProductCrawlSettingDraft) {
-  const result = await Api.updateProductCrawlSetting(id, draft)
+export async function updateProductCrawlSetting(id: number, input: Api.ProductCrawlSettingInput) {
+  const result = await Api.updateProductCrawlSetting(id, input)
   if (result.data) revalidate()
   return result
 }
@@ -41,12 +37,16 @@ export async function syncProductCrawlSetting(id: number) {
   return result
 }
 
-export async function excludeProductCrawlResult(id: number, externalId: string) {
-  const result = await Api.excludeProductCrawlResult(id, externalId)
+export async function setProductCrawlResultExcluded(id: number, excluded: boolean) {
+  const result = await Api.setProductCrawlResultExcluded(id, excluded)
   if (result.data) revalidate()
   return result
 }
 
-export async function getAllProductCrawlResults() {
-  return Api.getAllProductCrawlResults()
+export async function getProductCrawlSetting(id: number) {
+  return Api.getProductCrawlSetting(id)
+}
+
+export async function getProductCrawlResults(params?: Api.GetProductCrawlResultsParams) {
+  return Api.getProductCrawlResults(params)
 }

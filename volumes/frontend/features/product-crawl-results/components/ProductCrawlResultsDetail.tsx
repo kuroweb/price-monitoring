@@ -1,86 +1,133 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 
-import { useRouter } from 'next/navigation'
-import { toast } from 'react-toastify'
-
-import { excludeProductCrawlResult, syncProductCrawlSetting } from '@/lib/actions'
+import ProductCrawlSettingFormModal from '@/features/admin/product-crawl-settings/components/ProductCrawlSettingFormModal'
 import type { ProductCrawlResult, ProductCrawlSetting } from '@/lib/api'
 
+import { useProductCrawlResultActions } from '../hooks/useProductCrawlResultActions'
+
 import ProductCrawlResultCard from './ProductCrawlResultCard'
+
+const STATUS_FILTERS = [
+  ['all', 'すべて'],
+  ['on_sale', '販売中'],
+  ['sold', '売り切れ'],
+] as const
+type StatusFilter = (typeof STATUS_FILTERS)[number][0]
+
+const SORTS = [
+  ['newest', '新着順'],
+  ['price_asc', '価格の安い順'],
+  ['price_desc', '価格の高い順'],
+] as const
+type Sort = (typeof SORTS)[number][0]
+
+const matchesStatus = (item: ProductCrawlResult, filter: StatusFilter) =>
+  filter === 'all' || (filter === 'sold' ? item.sold === true : item.sold !== true)
+
+const sortResults = (items: ProductCrawlResult[], sort: Sort) =>
+  sort === 'newest'
+    ? items
+    : [...items].sort((a, b) => (sort === 'price_asc' ? a.price - b.price : b.price - a.price))
 
 interface Props {
   productCrawlSetting: ProductCrawlSetting
   productCrawlResults: ProductCrawlResult[]
 }
 
-export default function ProductCrawlResultsSection({
+export default function ProductCrawlResultsDetail({
   productCrawlSetting,
   productCrawlResults,
 }: Props) {
-  const router = useRouter()
-  const [busy, setBusy] = useState(false)
-  const inFlightRef = useRef(false)
-  const perform = async (action: () => Promise<boolean>) => {
-    if (inFlightRef.current) return
-    inFlightRef.current = true
-    setBusy(true)
-    try {
-      if (await action()) router.refresh()
-    } catch {
-      toast.error('通信に失敗しました')
-    } finally {
-      inFlightRef.current = false
-      setBusy(false)
-    }
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
+  const [sort, setSort] = useState<Sort>('newest')
+  const [editing, setEditing] = useState(false)
+  const { busy, sync, exclude } = useProductCrawlResultActions(productCrawlSetting)
+
+  const counts = {
+    all: productCrawlResults.length,
+    on_sale: productCrawlResults.filter((item) => matchesStatus(item, 'on_sale')).length,
+    sold: productCrawlResults.filter((item) => matchesStatus(item, 'sold')).length,
   }
-  const sync = () =>
-    perform(async () => {
-      const result = await syncProductCrawlSetting(productCrawlSetting.id)
-      if (!result.data) {
-        toast.error(result.error?.message ?? '取得に失敗しました')
-        return false
-      }
-      const failed = result.data.sources.filter((source) => source.status !== 'succeeded').length
-      toast.success(`取得して保存しました（採用 ${result.data.acceptedCount}件）`)
-      if (failed > 0) toast.error(`${failed}件のURLを取得できませんでした`)
-      return true
-    })
-  const exclude = (item: ProductCrawlResult) =>
-    perform(async () => {
-      if (!window.confirm(`「${item.name}」を除外しますか？`)) return false
-      const result = await excludeProductCrawlResult(productCrawlSetting.id, item.externalId)
-      if (!result.data) {
-        toast.error('除外に失敗しました')
-        return false
-      }
-      return true
-    })
+  const visibleResults = sortResults(
+    productCrawlResults.filter((item) => matchesStatus(item, statusFilter)),
+    sort,
+  )
 
   return (
-    <section className='space-y-3' aria-label={productCrawlSetting.name}>
-      <div className='flex flex-wrap items-center justify-between gap-2'>
-        <h3 className='text-lg font-semibold leading-tight'>
-          {productCrawlSetting.name}（{productCrawlResults.length}件）
-        </h3>
-        <button type='button' className='btn btn-sm btn-primary' disabled={busy} onClick={sync}>
-          {busy ? '処理中…' : '取得して保存'}
-        </button>
+    <section
+      className='space-y-4 rounded-box bg-base-200 p-4'
+      aria-label={productCrawlSetting.name}
+    >
+      <div className='flex flex-wrap items-center justify-between gap-3'>
+        <div>
+          <p className='text-sm opacity-70'>
+            {productCrawlSetting.searchUrls.length} URL・{counts.all}件
+          </p>
+        </div>
+        <div className='flex gap-2'>
+          <button type='button' className='btn btn-ghost btn-sm' onClick={() => setEditing(true)}>
+            設定を編集
+          </button>
+          <button type='button' className='btn btn-sm btn-primary' disabled={busy} onClick={sync}>
+            {busy ? '取得中…' : '取得して保存'}
+          </button>
+        </div>
       </div>
       {productCrawlResults.length === 0 ? (
-        <p>商品計測結果はありません。「取得して保存」で取得してください。</p>
+        <p className='text-sm'>商品計測結果はありません。「取得して保存」で取得してください。</p>
       ) : (
-        <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
-          {productCrawlResults.map((item) => (
-            <ProductCrawlResultCard
-              key={item.id}
-              productCrawlResult={item}
-              disabled={busy}
-              onExclude={exclude}
-            />
-          ))}
-        </div>
+        <>
+          <div className='flex flex-wrap items-center justify-between gap-2'>
+            <div className='join' role='group' aria-label='販売状態'>
+              {STATUS_FILTERS.map(([value, label]) => (
+                <button
+                  key={value}
+                  type='button'
+                  className={`btn join-item btn-sm ${statusFilter === value ? 'btn-primary' : 'btn-ghost'}`}
+                  aria-pressed={statusFilter === value}
+                  onClick={() => setStatusFilter(value)}
+                >
+                  {label}
+                  <span className='tabular-nums opacity-60'>{counts[value]}</span>
+                </button>
+              ))}
+            </div>
+            <select
+              className='select select-sm w-auto'
+              aria-label='並び順'
+              value={sort}
+              onChange={(event) => setSort(event.target.value as Sort)}
+            >
+              {SORTS.map(([value, label]) => (
+                <option key={value} value={value}>
+                  {label}
+                </option>
+              ))}
+            </select>
+          </div>
+          {visibleResults.length === 0 ? (
+            <p className='text-sm'>該当する出品はありません。</p>
+          ) : (
+            <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8'>
+              {visibleResults.map((item) => (
+                <ProductCrawlResultCard
+                  key={item.id}
+                  productCrawlResult={item}
+                  disabled={busy}
+                  onExclude={exclude}
+                />
+              ))}
+            </div>
+          )}
+        </>
+      )}
+      {editing && (
+        <ProductCrawlSettingFormModal
+          setting={productCrawlSetting}
+          onClose={() => setEditing(false)}
+        />
       )}
     </section>
   )

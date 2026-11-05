@@ -2,29 +2,30 @@ import { http } from '@/lib/http-client'
 
 import type {
   GetProductCrawlResults,
+  GetProductCrawlResultsParams,
   GetProductCrawlSettings,
-  ProductCrawlPreview,
+  ProductCrawlResult,
   ProductCrawlSetting,
-  ProductCrawlSettingDraft,
+  ProductCrawlSettingInput,
+  ProductCrawlSyncResult,
 } from './types'
 
 const BASE_PATH = '/api/v1/product_crawl_settings'
+const RESULTS_PATH = '/api/v1/product_crawl_results'
 
 export const getProductCrawlSettings = () => http<GetProductCrawlSettings>(BASE_PATH)
-export const createProductCrawlSetting = (draft: ProductCrawlSettingDraft) =>
-  http<ProductCrawlSetting>(BASE_PATH, { method: 'POST', data: draft })
-export const updateProductCrawlSetting = (id: number, draft: ProductCrawlSettingDraft) =>
-  http<ProductCrawlSetting>(`${BASE_PATH}/${id}`, { method: 'PUT', data: draft })
+export const getProductCrawlSetting = (id: number) =>
+  http<ProductCrawlSetting>(`${BASE_PATH}/${id}`)
+export const createProductCrawlSetting = (input: ProductCrawlSettingInput) =>
+  http<ProductCrawlSetting>(BASE_PATH, { method: 'POST', data: input })
+export const updateProductCrawlSetting = (id: number, input: ProductCrawlSettingInput) =>
+  http<ProductCrawlSetting>(`${BASE_PATH}/${id}`, { method: 'PUT', data: input })
 export const destroyProductCrawlSetting = (id: number) =>
   http(`${BASE_PATH}/${id}`, { method: 'DELETE' })
-export const previewProductCrawlSetting = (draft: ProductCrawlSettingDraft) =>
-  http<ProductCrawlPreview>(`${BASE_PATH}/preview`, { method: 'POST', data: draft })
 export const syncProductCrawlSetting = (id: number) =>
-  http<ProductCrawlPreview>(`${BASE_PATH}/${id}/sync`, { method: 'POST' })
-export const excludeProductCrawlResult = (id: number, externalId: string) =>
-  http<ProductCrawlSetting>(`${BASE_PATH}/${id}/exclude_external_ids`, {
-    method: 'POST',
-    data: { externalId },
-  })
-export const getAllProductCrawlResults = () =>
-  http<GetProductCrawlResults>('/api/v1/product_crawl_results')
+  http<ProductCrawlSyncResult>(`${BASE_PATH}/${id}/sync`, { method: 'POST' })
+export const getProductCrawlResults = (params?: GetProductCrawlResultsParams) =>
+  http<GetProductCrawlResults>(RESULTS_PATH, { params })
+// 除外と取り消し。行は消さず excluded_at で表す
+export const setProductCrawlResultExcluded = (id: number, excluded: boolean) =>
+  http<ProductCrawlResult>(`${RESULTS_PATH}/${id}`, { method: 'PATCH', data: { excluded } })

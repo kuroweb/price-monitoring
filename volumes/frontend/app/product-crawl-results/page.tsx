@@ -1,11 +1,11 @@
 import Layout from '@/components/layouts/Layout'
 import ProductCrawlResultsSection from '@/features/product-crawl-results/components/ProductCrawlResultsSection'
-import { getAllProductCrawlResults, getProductCrawlSettings } from '@/lib/actions'
+import { getProductCrawlResults, getProductCrawlSettings } from '@/lib/actions'
 
 const Page = async () => {
   const [settingsResponse, resultsResponse] = await Promise.all([
     getProductCrawlSettings(),
-    getAllProductCrawlResults(),
+    getProductCrawlResults(),
   ])
   if (!settingsResponse.data || !resultsResponse.data)
     throw new Error('商品計測結果を取得できませんでした')
@@ -18,7 +18,7 @@ const Page = async () => {
       <div className='card w-full bg-base-300'>
         <div className='card-body'>
           <h2 className='card-title'>商品計測結果</h2>
-          <div className='space-y-8 pt-4'>
+          <div className='divide-y divide-base-200 pt-2 [&>*]:py-5'>
             {productCrawlSettings.length === 0 && (
               <p>商品計測設定はまだありません。管理画面で商品計測設定を追加してください。</p>
             )}

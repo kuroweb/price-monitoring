@@ -1,15 +1,16 @@
 import type {
-  ProductCrawlPreview,
   ProductCrawlResult,
   ProductCrawlSetting,
-  ProductCrawlSettingDraft,
+  ProductCrawlSettingInput,
+  ProductCrawlSyncResult,
 } from '../models'
 
 export type GetProductCrawlSettings = { productCrawlSettings: ProductCrawlSetting[] }
 export type GetProductCrawlResults = { productCrawlResults: ProductCrawlResult[] }
+export type GetProductCrawlResultsParams = { productCrawlSettingId?: number; excluded?: boolean }
 export type {
-  ProductCrawlPreview,
   ProductCrawlResult,
   ProductCrawlSetting,
-  ProductCrawlSettingDraft,
+  ProductCrawlSettingInput,
+  ProductCrawlSyncResult,
 }

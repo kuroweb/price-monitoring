@@ -2,14 +2,20 @@ import NextImage from 'next/image'
 
 import { platformColors, platformName } from '@/features/admin/product-crawl-settings/lib/platform'
 import type { ProductCrawlResult } from '@/lib/api'
-
-const soldName = (sold: boolean | null) => (sold == null ? null : sold ? '売り切れ' : '販売中')
-const date = (value: string | null) => (value ? value.substring(0, 10) : null)
+import { formatDate, formatYen } from '@/lib/format'
 
 interface Props {
   productCrawlResult: ProductCrawlResult
   disabled?: boolean
-  onExclude: (item: ProductCrawlResult) => void
+  onExclude?: (item: ProductCrawlResult) => void
+}
+
+// 売れた日を優先し、オークションは終了日を出す。どちらもなければ出さない
+const dateLabel = (item: ProductCrawlResult) => {
+  if (item.boughtDate) return `${formatDate(item.boughtDate)} に売れた`
+  if (item.endDate) return `${formatDate(item.endDate)} 終了`
+  if (item.sold) return '売れた日は未取得'
+  return null
 }
 
 export default function ProductCrawlResultCard({
@@ -17,92 +23,90 @@ export default function ProductCrawlResultCard({
   disabled,
   onExclude,
 }: Props) {
-  const status = soldName(item.sold)
-  const boughtDate = date(item.boughtDate)
-  const endDate = date(item.endDate)
+  const date = dateLabel(item)
 
   return (
-    <article className='card bg-base-100 shadow-xl'>
-      <figure className='relative'>
+    <article className='card h-full overflow-hidden bg-base-100 shadow-md'>
+      <figure className='relative aspect-square bg-white'>
         <a
           href={item.productUrl}
           target='_blank'
           rel='noopener noreferrer'
           aria-label={`${item.name}の商品ページを開く`}
-          className='relative h-32 w-full'
+          className='relative block h-full w-full'
         >
           {item.thumbnailUrl ? (
             <NextImage
               src={item.thumbnailUrl}
               alt=''
               fill
-              sizes='(max-width: 640px) 50vw, 200px'
-              style={{ objectFit: 'contain' }}
+              sizes='(max-width: 640px) 50vw, 240px'
+              className={`object-contain p-2 ${item.sold ? 'opacity-50' : ''}`}
             />
           ) : (
-            <span className='flex h-full items-center justify-center bg-base-200 text-xs'>
+            <span className='flex h-full items-center justify-center bg-base-200 text-xs opacity-60'>
               画像なし
             </span>
           )}
         </a>
-        <div
-          className={`badge ${platformColors[item.platform] ?? 'badge-neutral'} absolute inset-s-2 top-2 text-black`}
+        <span
+          className={`badge badge-sm absolute top-2 left-2 border-0 text-black ${platformColors[item.platform] ?? 'badge-neutral'}`}
         >
           {platformName(item.platform)}
-        </div>
-        <div className='dropdown dropdown-left absolute inset-e-2 top-2'>
-          <button type='button' aria-label={`${item.name}の操作`} className='btn btn-square btn-sm'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              className='inline-block size-5 stroke-current'
+        </span>
+        {item.sold && (
+          <span className='badge badge-sm badge-neutral absolute bottom-2 left-2 font-semibold'>
+            売り切れ
+          </span>
+        )}
+        {onExclude && (
+          <div className='dropdown dropdown-left dropdown-start absolute top-1 right-1'>
+            <button
+              type='button'
+              aria-label={`${item.name}の操作`}
+              className='btn btn-square btn-ghost btn-sm bg-base-100/80'
             >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
-              ></path>
-            </svg>
-          </button>
-          <ul className='menu dropdown-content z-1 w-20 space-y-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
-            <li>
-              <button
-                type='button'
-                className='btn btn-error'
-                disabled={disabled}
-                onClick={() => onExclude(item)}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                fill='none'
+                viewBox='0 0 24 24'
+                className='inline-block size-5 stroke-current'
               >
-                除外
-              </button>
-            </li>
-          </ul>
-        </div>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth='2'
+                  d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
+                ></path>
+              </svg>
+            </button>
+            <ul className='menu dropdown-content invisible pointer-events-none [.dropdown:focus-within_&]:visible [.dropdown:focus-within_&]:pointer-events-auto z-1 w-max rounded-box border border-base-300 bg-base-100 p-2 shadow-lg'>
+              <li>
+                <button
+                  type='button'
+                  className='btn btn-error btn-sm'
+                  disabled={disabled}
+                  onClick={() => onExclude(item)}
+                >
+                  除外
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
       </figure>
       <a
         href={item.productUrl}
         target='_blank'
         rel='noopener noreferrer'
-        className='card-body cursor-pointer gap-2 p-4'
+        className='flex flex-1 flex-col gap-1 p-3'
       >
-        <p className='line-clamp-2 text-sm'>{item.name}</p>
-        <div className='flex flex-wrap justify-end gap-1'>
-          {status && <span className='badge badge-ghost text-xs'>{status}</span>}
-          <span className='badge badge-outline whitespace-nowrap text-xs'>
-            {`${item.price.toLocaleString()}円`}
-          </span>
-          {item.buyoutPrice != null && (
-            <span className='badge badge-outline whitespace-nowrap text-xs'>
-              {`即決: ${item.buyoutPrice.toLocaleString()}円`}
-            </span>
-          )}
-        </div>
-        {(boughtDate || endDate) && (
-          <p className='text-right text-xs'>
-            {boughtDate ? `売れた日: ${boughtDate}` : `終了日: ${endDate}`}
-          </p>
+        <p className='line-clamp-2 min-h-10 text-sm leading-5'>{item.name}</p>
+        <p className='mt-auto text-lg font-bold tabular-nums'>{formatYen(item.price)}</p>
+        {item.buyoutPrice != null && (
+          <p className='text-xs tabular-nums opacity-70'>即決 {formatYen(item.buyoutPrice)}</p>
         )}
+        {date && <p className='text-xs opacity-60'>{date}</p>}
       </a>
     </article>
   )

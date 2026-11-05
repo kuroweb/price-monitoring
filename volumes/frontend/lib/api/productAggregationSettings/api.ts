@@ -4,18 +4,18 @@ import type {
   GetProductAggregationResults,
   GetProductAggregationSettings,
   ProductAggregationSetting,
-  ProductAggregationSettingDraft,
+  ProductAggregationSettingInput,
 } from './types'
 
 const BASE_PATH = '/api/v1/product_aggregation_settings'
 
 export const getProductAggregationSettings = () => http<GetProductAggregationSettings>(BASE_PATH)
-export const createProductAggregationSetting = (draft: ProductAggregationSettingDraft) =>
-  http<ProductAggregationSetting>(BASE_PATH, { method: 'POST', data: draft })
+export const createProductAggregationSetting = (input: ProductAggregationSettingInput) =>
+  http<ProductAggregationSetting>(BASE_PATH, { method: 'POST', data: input })
 export const updateProductAggregationSetting = (
   id: number,
-  draft: ProductAggregationSettingDraft,
-) => http<ProductAggregationSetting>(`${BASE_PATH}/${id}`, { method: 'PUT', data: draft })
+  input: ProductAggregationSettingInput,
+) => http<ProductAggregationSetting>(`${BASE_PATH}/${id}`, { method: 'PUT', data: input })
 export const destroyProductAggregationSetting = (id: number) =>
   http(`${BASE_PATH}/${id}`, { method: 'DELETE' })
 export const calculateProductAggregationSetting = (id: number) =>

@@ -13,17 +13,17 @@ export async function getProductAggregationSettings() {
   return Api.getProductAggregationSettings()
 }
 
-export async function createProductAggregationSetting(draft: Api.ProductAggregationSettingDraft) {
-  const result = await Api.createProductAggregationSetting(draft)
+export async function createProductAggregationSetting(input: Api.ProductAggregationSettingInput) {
+  const result = await Api.createProductAggregationSetting(input)
   if (result.data) revalidate()
   return result
 }
 
 export async function updateProductAggregationSetting(
   id: number,
-  draft: Api.ProductAggregationSettingDraft,
+  input: Api.ProductAggregationSettingInput,
 ) {
-  const result = await Api.updateProductAggregationSetting(id, draft)
+  const result = await Api.updateProductAggregationSetting(id, input)
   if (result.data) revalidate()
   return result
 }

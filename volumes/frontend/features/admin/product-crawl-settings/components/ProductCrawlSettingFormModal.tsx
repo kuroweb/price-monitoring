@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
@@ -13,37 +13,27 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import {
   createProductCrawlSetting,
-  previewProductCrawlSetting,
+  getProductCrawlResults,
+  setProductCrawlResultExcluded,
   updateProductCrawlSetting,
 } from '@/lib/actions'
-import type { ProductCrawlPreview, ProductCrawlSetting, ProductCrawlSettingDraft } from '@/lib/api'
+import type { ProductCrawlResult, ProductCrawlSetting, ProductCrawlSettingInput } from '@/lib/api'
 
 import { platformName, searchUrlPlatform, words } from '../lib/platform'
 
+import ExcludedListings from './ExcludedListings'
+
 const MAX_SEARCH_URLS = 5
 
-const empty = (): ProductCrawlSettingDraft => ({
+const empty = (): ProductCrawlSettingInput => ({
   name: '',
   enabled: false,
   searchUrls: [''],
   requiredKeywords: [],
   excludeKeywords: [],
-  excludeExternalIds: [],
   minPrice: null,
   maxPrice: null,
 })
-const statusNames = {
-  succeeded: '取得成功',
-  failed: '取得失敗',
-  unsupported: '非対応URL',
-}
-const reasonNames: Record<string, string> = {
-  below_min_price: '最低価格未満・価格不明',
-  above_max_price: '最高価格超過・価格不明',
-  missing_required_keyword: '必須語に不一致',
-  excluded_keyword: '除外語に一致',
-  excluded_listing: '除外した出品',
-}
 
 type Props = {
   onClose: () => void
@@ -53,25 +43,31 @@ type Props = {
 // 開くたびに描画し直し、編集対象の値で初期化する
 export default function ProductCrawlSettingFormModal({ onClose, setting }: Props) {
   const router = useRouter()
-  const [draft, setDraft] = useState<ProductCrawlSettingDraft>(() =>
+  const [input, setInput] = useState<ProductCrawlSettingInput>(() =>
     setting
       ? { ...setting, searchUrls: setting.searchUrls.length ? setting.searchUrls : [''] }
       : empty(),
   )
   const [required, setRequired] = useState(setting?.requiredKeywords.join(', ') ?? '')
   const [excluded, setExcluded] = useState(setting?.excludeKeywords.join(', ') ?? '')
-  const nextKeyRef = useRef(draft.searchUrls.length)
-  const [rowKeys, setRowKeys] = useState(() => draft.searchUrls.map((_, i) => i))
-  const [preview, setPreview] = useState<ProductCrawlPreview | null>(null)
+  const nextKeyRef = useRef(input.searchUrls.length)
+  const [rowKeys, setRowKeys] = useState(() => input.searchUrls.map((_, i) => i))
   const [error, setError] = useState('')
+  // 更新では、保存済みの除外した出品を画像・名前・リンクつきで並べ、その場で取り消す
+  const [excludedResults, setExcludedResults] = useState<ProductCrawlResult[]>([])
   const [busy, setBusy] = useState(false)
   const inFlightRef = useRef(false)
-  const change = (patch: Partial<ProductCrawlSettingDraft>) => {
-    setDraft((value) => ({ ...value, ...patch }))
-    setPreview(null)
+  useEffect(() => {
+    if (!setting) return
+    getProductCrawlResults({ productCrawlSettingId: setting.id, excluded: true })
+      .then((result) => setExcludedResults(result.data?.productCrawlResults ?? []))
+      .catch(() => setError('除外した出品を取得できませんでした'))
+  }, [setting])
+  const change = (patch: Partial<ProductCrawlSettingInput>) => {
+    setInput((value) => ({ ...value, ...patch }))
   }
   const payload = () => ({
-    ...draft,
+    ...input,
     requiredKeywords: words(required),
     excludeKeywords: words(excluded),
   })
@@ -90,15 +86,15 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
     }
   }
   const valid = () => {
-    if (draft.searchUrls.length === 0 || draft.searchUrls.some((url) => !url.trim())) {
+    if (input.searchUrls.length === 0 || input.searchUrls.some((url) => !url.trim())) {
       setError(`検索結果URLを1〜${MAX_SEARCH_URLS}件入力してください`)
       return false
     }
     if (
-      [draft.minPrice, draft.maxPrice].some(
+      [input.minPrice, input.maxPrice].some(
         (price) => price != null && (!Number.isSafeInteger(price) || price < 0),
       ) ||
-      (draft.minPrice != null && draft.maxPrice != null && draft.minPrice > draft.maxPrice)
+      (input.minPrice != null && input.maxPrice != null && input.minPrice > input.maxPrice)
     ) {
       setError('価格は0以上の整数で、最低価格は最高価格以下にしてください')
       return false
@@ -108,7 +104,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
   const submit = () =>
     perform(async () => {
       if (!valid()) return
-      if (!draft.name.trim()) {
+      if (!input.name.trim()) {
         setError('名前を入力してください')
         return
       }
@@ -123,17 +119,17 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
       onClose()
       router.refresh()
     })
-  const runPreview = () =>
+  const restore = (key: string) =>
     perform(async () => {
-      if (!valid()) return
-      setPreview(null)
-      const result = await previewProductCrawlSetting(payload())
+      const result = await setProductCrawlResultExcluded(Number(key), false)
       if (!result.data) {
-        setError(result.error?.message ?? '取得に失敗しました')
+        setError('除外の取り消しに失敗しました')
         return
       }
-      setPreview(result.data)
+      setExcludedResults((values) => values.filter((value) => String(value.id) !== key))
+      router.refresh()
     })
+  const excludedItems = excludedResults.map((item) => ({ ...item, key: String(item.id) }))
 
   return (
     <>
@@ -156,7 +152,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                   <input
                     className='input w-full'
                     maxLength={255}
-                    value={draft.name}
+                    value={input.name}
                     onChange={(event) => change({ name: event.target.value })}
                   />
                 </label>
@@ -164,13 +160,13 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                   <input
                     type='checkbox'
                     className='checkbox checkbox-sm'
-                    checked={draft.enabled}
+                    checked={input.enabled}
                     onChange={(event) => change({ enabled: event.target.checked })}
                   />
                   計測を有効にする
                 </label>
                 <h4 className='font-semibold'>検索結果URL</h4>
-                {draft.searchUrls.map((url, index) => (
+                {input.searchUrls.map((url, index) => (
                   <div key={rowKeys[index]} className='flex flex-wrap items-end gap-2'>
                     <label className='min-w-0 flex-1'>
                       検索結果URL {index + 1}
@@ -180,7 +176,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                         placeholder='https://…'
                         onChange={(event) =>
                           change({
-                            searchUrls: draft.searchUrls.map((value, i) =>
+                            searchUrls: input.searchUrls.map((value, i) =>
                               i === index ? event.target.value : value,
                             ),
                           })
@@ -195,7 +191,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                       className='btn btn-sm mb-1'
                       aria-label={`検索結果URL ${index + 1}を削除`}
                       onClick={() => {
-                        change({ searchUrls: draft.searchUrls.filter((_, i) => i !== index) })
+                        change({ searchUrls: input.searchUrls.filter((_, i) => i !== index) })
                         setRowKeys((keys) => keys.filter((_, i) => i !== index))
                       }}
                     >
@@ -206,9 +202,9 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                 <button
                   type='button'
                   className='btn btn-sm'
-                  disabled={draft.searchUrls.length >= MAX_SEARCH_URLS}
+                  disabled={input.searchUrls.length >= MAX_SEARCH_URLS}
                   onClick={() => {
-                    change({ searchUrls: [...draft.searchUrls, ''] })
+                    change({ searchUrls: [...input.searchUrls, ''] })
                     setRowKeys((keys) => [...keys, nextKeyRef.current++])
                   }}
                 >
@@ -220,10 +216,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                   <textarea
                     className='textarea w-full'
                     value={required}
-                    onChange={(event) => {
-                      setRequired(event.target.value)
-                      setPreview(null)
-                    }}
+                    onChange={(event) => setRequired(event.target.value)}
                   />
                 </label>
                 <label className='block'>
@@ -231,10 +224,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                   <textarea
                     className='textarea w-full'
                     value={excluded}
-                    onChange={(event) => {
-                      setExcluded(event.target.value)
-                      setPreview(null)
-                    }}
+                    onChange={(event) => setExcluded(event.target.value)}
                   />
                 </label>
                 <div className='grid gap-3 sm:grid-cols-2'>
@@ -245,7 +235,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                       type='number'
                       min={0}
                       step={1}
-                      value={draft.minPrice ?? ''}
+                      value={input.minPrice ?? ''}
                       onChange={(event) =>
                         change({
                           minPrice: event.target.value === '' ? null : Number(event.target.value),
@@ -260,7 +250,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                       type='number'
                       min={0}
                       step={1}
-                      value={draft.maxPrice ?? ''}
+                      value={input.maxPrice ?? ''}
                       onChange={(event) =>
                         change({
                           maxPrice: event.target.value === '' ? null : Number(event.target.value),
@@ -269,82 +259,12 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                     />
                   </label>
                 </div>
-                {draft.excludeExternalIds.map((externalId) => (
-                  <div key={externalId} className='flex flex-wrap gap-2 break-all'>
-                    除外した出品: {externalId}
-                    <button
-                      type='button'
-                      className='link'
-                      onClick={() =>
-                        change({
-                          excludeExternalIds: draft.excludeExternalIds.filter(
-                            (value) => value !== externalId,
-                          ),
-                        })
-                      }
-                    >
-                      除外を取り消す
-                    </button>
-                  </div>
-                ))}
-                <button type='button' className='btn w-full' onClick={runPreview}>
-                  実際に取得して確認
-                </button>
+                <ExcludedListings items={excludedItems} disabled={busy} onRestore={restore} />
               </fieldset>
-              {busy && (
-                <p role='status' className='pt-3'>
-                  処理中です。取得には時間がかかることがあります。
-                </p>
-              )}
               {error && (
                 <p role='alert' className='pt-3 text-error'>
                   {error}
                 </p>
-              )}
-              {preview && (
-                <section className='space-y-3 pt-4' aria-label='取得結果'>
-                  <h4 className='font-semibold'>
-                    取得結果: {preview.fetchedCount}件 / 採用 {preview.acceptedCount}件
-                  </h4>
-                  {preview.sources.map((source) => (
-                    <div key={source.url} className='break-all border-b pb-2'>
-                      {platformName(source.platform)} / {statusNames[source.status]} /{' '}
-                      {source.fetchedCount}件<div>{source.url}</div>
-                      {source.error && <p className='text-error'>{source.error}</p>}
-                    </div>
-                  ))}
-                  {preview.results.map((item) => (
-                    <article className='space-y-2 border-b py-3' key={item.externalId}>
-                      <div>
-                        <a className='link' href={item.productUrl} target='_blank' rel='noreferrer'>
-                          {item.name}
-                        </a>{' '}
-                        / {item.price == null ? '価格不明' : `${item.price.toLocaleString()}円`} /{' '}
-                        {platformName(item.platform)}
-                      </div>
-                      <p>
-                        {item.accepted
-                          ? '採用'
-                          : `不採用: ${item.reasons.map((reason) => reasonNames[reason] ?? reason).join('、')}`}
-                      </p>
-                      {!draft.excludeExternalIds.includes(item.externalId) && (
-                        <button
-                          type='button'
-                          disabled={busy}
-                          className='btn btn-sm'
-                          onClick={() =>
-                            setDraft((value) => ({
-                              ...value,
-                              excludeExternalIds: [...value.excludeExternalIds, item.externalId],
-                            }))
-                          }
-                        >
-                          出品 {item.externalId} を除外
-                        </button>
-                      )}
-                    </article>
-                  ))}
-                </section>
               )}
             </ScrollableModalBody>
             <ScrollableModalFooter>

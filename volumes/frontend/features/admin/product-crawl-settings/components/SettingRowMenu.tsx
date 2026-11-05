@@ -25,7 +25,7 @@ export default function SettingRowMenu({ name, deleting, onEdit, onDestroy }: Pr
           ></path>
         </svg>
       </button>
-      <ul className='menu menu-horizontal dropdown-content z-1 w-max flex-nowrap gap-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
+      <ul className='menu menu-horizontal dropdown-content invisible pointer-events-none [.dropdown:focus-within_&]:visible [.dropdown:focus-within_&]:pointer-events-auto z-1 w-max flex-nowrap gap-2 rounded-box border border-base-300 bg-base-100 shadow-lg'>
         <li>
           <button type='button' className='btn btn-primary' onClick={onEdit}>
             編集

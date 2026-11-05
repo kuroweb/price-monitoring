@@ -1,15 +1,15 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import ProductCrawlSettings from '@/features/admin/product-crawl-settings/components/ProductCrawlSettings'
+import ProductCrawlResultsDetail from '@/features/product-crawl-results/components/ProductCrawlResultsDetail'
 import ProductCrawlResultsSection from '@/features/product-crawl-results/components/ProductCrawlResultsSection'
 import {
   createProductCrawlSetting,
-  excludeProductCrawlResult,
-  previewProductCrawlSetting,
+  getProductCrawlResults,
+  setProductCrawlResultExcluded,
   syncProductCrawlSetting,
-  updateProductCrawlSetting,
 } from '@/lib/actions'
 import type { ProductCrawlResult, ProductCrawlSetting } from '@/lib/api'
 
@@ -20,9 +20,9 @@ vi.mock('@/lib/actions', () => ({
   createProductCrawlSetting: vi.fn(),
   updateProductCrawlSetting: vi.fn(),
   destroyProductCrawlSetting: vi.fn(),
-  previewProductCrawlSetting: vi.fn(),
   syncProductCrawlSetting: vi.fn(),
-  excludeProductCrawlResult: vi.fn(),
+  setProductCrawlResultExcluded: vi.fn(),
+  getProductCrawlResults: vi.fn(),
 }))
 
 const mercariUrl = 'https://jp.mercari.com/search?keyword=phone'
@@ -34,7 +34,6 @@ const setting: ProductCrawlSetting = {
   searchUrls: [mercariUrl],
   requiredKeywords: [],
   excludeKeywords: [],
-  excludeExternalIds: [],
   minPrice: null,
   maxPrice: null,
 }
@@ -51,9 +50,17 @@ const result: ProductCrawlResult = {
   sold: true,
   boughtDate: null,
   endDate: null,
+  excludedAt: null,
 }
 
-beforeEach(() => vi.clearAllMocks())
+beforeEach(() => {
+  vi.clearAllMocks()
+  vi.mocked(getProductCrawlResults).mockResolvedValue({
+    data: { productCrawlResults: [] },
+    error: null,
+    status: 200,
+  })
+})
 
 describe('商品計測設定', () => {
   it('saves search URLs and shared keywords in one setting and shows each URL site', async () => {
@@ -85,54 +92,38 @@ describe('商品計測設定', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
-  it('keeps the preview while excluding a listing and saves the exclusion', async () => {
-    vi.mocked(previewProductCrawlSetting).mockResolvedValue({
+  it('lists excluded listings with links and restores one in place', async () => {
+    const user = userEvent.setup()
+    vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
+      data: { ...result, id: 2 },
+      error: null,
+      status: 200,
+    })
+    vi.mocked(getProductCrawlResults).mockResolvedValue({
       data: {
-        sources: [
-          {
-            url: mercariUrl,
-            platform: 'mercari',
-            status: 'failed',
-            error: 'Crawl failed',
-            fetchedCount: 0,
-          },
-        ],
-        results: [
-          {
-            platform: 'iosys',
-            externalId: 'item-1',
-            name: 'Phone blue',
-            price: 1200,
-            productUrl: 'https://iosys.co.jp/items/item-1',
-            accepted: true,
-            reasons: [],
-          },
-        ],
-        fetchedCount: 1,
-        acceptedCount: 1,
+        productCrawlResults: [1, 2, 3].map((id) => ({
+          ...result,
+          id,
+          externalId: `item-${id}`,
+          name: `Phone ${id}`,
+          excludedAt: '2026-11-06T00:00:00+09:00',
+        })),
       },
       error: null,
       status: 200,
     })
-    vi.mocked(updateProductCrawlSetting).mockResolvedValue({
-      data: setting,
-      error: null,
-      status: 200,
-    })
-    const user = userEvent.setup()
     render(<ProductCrawlSettings productCrawlSettings={[setting]} />)
     await user.click(screen.getByRole('button', { name: '編集' }))
-    await user.click(screen.getByRole('button', { name: '実際に取得して確認' }))
-    expect(await screen.findByText(/取得失敗/)).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: '出品 item-1 を除外' }))
-    expect(screen.getByRole('region', { name: '取得結果' })).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: '更新' }))
-    await waitFor(() =>
-      expect(updateProductCrawlSetting).toHaveBeenCalledWith(
-        1,
-        expect.objectContaining({ excludeExternalIds: ['item-1'] }),
-      ),
-    )
+    expect(getProductCrawlResults).toHaveBeenCalledWith({
+      productCrawlSettingId: 1,
+      excluded: true,
+    })
+    await user.click(await screen.findByText('除外した出品（3件）'))
+    expect(screen.getByRole('link', { name: 'Phone 2' })).toHaveAttribute('href', result.productUrl)
+    await user.click(screen.getByRole('button', { name: 'Phone 2の除外を取り消す' }))
+    await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(2, false))
+    expect(screen.getByText('除外した出品（2件）')).toBeInTheDocument()
+    expect(refresh).toHaveBeenCalled()
   })
 })
 
@@ -144,25 +135,65 @@ describe('商品計測結果', () => {
       error: null,
       status: 200,
     })
-    vi.mocked(excludeProductCrawlResult).mockResolvedValue({
-      data: setting,
+    vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
+      data: result,
       error: null,
       status: 200,
     })
     const user = userEvent.setup()
     render(
-      <ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={[result]} />,
+      <ProductCrawlResultsDetail productCrawlSetting={setting} productCrawlResults={[result]} />,
     )
     expect(screen.getByRole('link', { name: 'Phone blueの商品ページを開く' })).toHaveAttribute(
       'href',
       result.productUrl,
     )
     expect(screen.getByText('イオシス')).toBeInTheDocument()
-    expect(screen.getByText('売り切れ')).toBeInTheDocument()
+    const card = screen.getByRole('article')
+    expect(within(card).getByText('売り切れ')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /^販売中/ }))
+    expect(screen.queryByRole('article')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /^すべて/ }))
     await user.click(screen.getByRole('button', { name: '取得して保存' }))
     await waitFor(() => expect(syncProductCrawlSetting).toHaveBeenCalledWith(1))
     await user.click(screen.getByRole('button', { name: '除外' }))
-    await waitFor(() => expect(excludeProductCrawlResult).toHaveBeenCalledWith(1, 'item-1'))
+    await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(10, true))
     expect(refresh).toHaveBeenCalledTimes(2)
+  })
+})
+
+describe('商品計測結果の一覧', () => {
+  it('shows only the newest listings, excludes one and links to the detail page', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
+      data: result,
+      error: null,
+      status: 200,
+    })
+    const user = userEvent.setup()
+    const results = Array.from({ length: 10 }, (_, i) => ({
+      ...result,
+      id: i + 1,
+      externalId: `item-${i + 1}`,
+      name: `Phone ${i + 1}`,
+    }))
+    render(
+      <ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={results} />,
+    )
+    expect(screen.getAllByRole('article')).toHaveLength(8)
+    expect(screen.getAllByRole('button', { name: /の操作$/ })).toHaveLength(8)
+    expect(screen.getByRole('link', { name: /すべて見る/ })).toHaveAttribute(
+      'href',
+      '/product-crawl-results/1',
+    )
+    expect(screen.getByText('10件・販売中 0・売り切れ 10')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '設定を編集' }))
+    expect(screen.getByRole('dialog')).toHaveTextContent('商品計測設定を更新')
+    expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone')
+    await user.click(screen.getByRole('button', { name: '閉じる' }))
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    await user.click(screen.getAllByRole('button', { name: '除外' })[0])
+    await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(1, true))
+    expect(refresh).toHaveBeenCalled()
   })
 })

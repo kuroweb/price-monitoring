@@ -82,8 +82,13 @@ describe('商品相場設定', () => {
         ]}
       />,
     )
+    expect(screen.getByText('直近の平均購入価格').parentElement).toHaveTextContent('¥30011/2の購入')
+    expect(screen.getByText('購入件数', { selector: 'p.text-xs' }).parentElement).toHaveTextContent(
+      '2件',
+    )
+    await user.click(screen.getByRole('button', { name: '表' }))
     const rows = screen.getAllByRole('row')
-    expect(rows[1]).toHaveTextContent('2026-11-02300円2件')
+    expect(rows[1]).toHaveTextContent('2026-11-02¥3002件')
     expect(rows[2]).toHaveTextContent('2026-11-01-0件')
     await user.click(screen.getByRole('button', { name: '直近30日を集計' }))
     await waitFor(() => expect(calculateProductAggregationSetting).toHaveBeenCalledWith(1))

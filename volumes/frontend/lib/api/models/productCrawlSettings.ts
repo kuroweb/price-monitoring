@@ -1,15 +1,15 @@
-export type ProductCrawlSettingDraft = {
+export type ProductCrawlSettingInput = {
   name: string
   enabled: boolean
   searchUrls: string[]
   requiredKeywords: string[]
   excludeKeywords: string[]
-  excludeExternalIds: string[]
   minPrice: number | null
   maxPrice: number | null
 }
-export type ProductCrawlSetting = ProductCrawlSettingDraft & { id: number }
-export type ProductCrawlPreview = {
+export type ProductCrawlSetting = ProductCrawlSettingInput & { id: number }
+// 「取得して保存」の結果。URLごとの取得状況と、取得した出品の採否
+export type ProductCrawlSyncResult = {
   sources: {
     url: string
     platform: string | null
@@ -23,6 +23,7 @@ export type ProductCrawlPreview = {
     name: string
     price: number | null
     productUrl: string
+    thumbnailUrl: string | null
     accepted: boolean
     reasons: string[]
   }[]
@@ -42,4 +43,5 @@ export type ProductCrawlResult = {
   sold: boolean | null
   boughtDate: string | null
   endDate: string | null
+  excludedAt: string | null
 }
