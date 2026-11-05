@@ -288,3 +288,27 @@ erDiagram
   }
   backmarket_watch_targets ||--o{ backmarket_watch_results : ""
 ```
+
+## 商品計測・商品相場（PoC）
+
+既存の計測対象管理とは独立したテーブル群。商品相場設定は商品計測設定に外部キーを持たず、全商品計測設定の商品計測結果を条件でフィルターして集計する。設計は [PLAN.md](../../PLAN.md)、操作は [商品計測・商品相場PoC](../backend/product-search-poc.md) を参照する。
+
+```mermaid
+erDiagram
+  product_crawl_settings {
+    bigint id PK
+  }
+  product_crawl_results {
+    bigint id PK
+    bigint product_crawl_setting_id FK
+  }
+  product_aggregation_settings {
+    bigint id PK
+  }
+  product_aggregation_results {
+    bigint id PK
+    bigint product_aggregation_setting_id FK
+  }
+  product_crawl_settings ||--o{ product_crawl_results : ""
+  product_aggregation_settings ||--o{ product_aggregation_results : ""
+```

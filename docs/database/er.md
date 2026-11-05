@@ -508,6 +508,46 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | index_pc_koubou_products_on_product_id_and_external_id | product_id, external_id | unique |
 | index_pc_koubou_products_on_product_id | product_id |  |
 
+## product_aggregation_results
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_aggregation_setting_id | bigint | NOT NULL | FK |
+| date | date | NOT NULL |  |
+| average_purchase_price | integer |  | 購入0件の日は NULL |
+| purchase_count | integer | NOT NULL | default 0 |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| idx_on_product_aggregation_setting_id_date_0a5c5ca744 | product_aggregation_setting_id, date | unique |
+| idx_on_product_aggregation_setting_id_700a1849ac | product_aggregation_setting_id |  |
+
+## product_aggregation_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | string | NOT NULL |  |
+| required_keywords | json | NOT NULL | default `[]` |
+| exclude_keywords | json | NOT NULL | default `[]` |
+| min_price | integer |  |  |
+| max_price | integer |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+なし
+
 ## product_category_maps
 
 ### カラム
@@ -527,6 +567,57 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | index_product_category_maps_on_category_id | category_id |  |
 | index_product_category_maps_on_product_id_and_category_id | product_id, category_id | unique |
 | index_product_category_maps_on_product_id | product_id |  |
+
+## product_crawl_results
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| product_crawl_setting_id | bigint | NOT NULL | FK |
+| platform | string | NOT NULL |  |
+| external_id | string | NOT NULL |  |
+| name | string | NOT NULL |  |
+| product_url | text | NOT NULL |  |
+| thumbnail_url | text |  |  |
+| price | integer | NOT NULL | default 0 |
+| buyout_price | integer |  |  |
+| sold | boolean |  | 販売状態を取得できないサイトは NULL |
+| bought_date | datetime |  |  |
+| end_date | datetime |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+| 名前 | カラム | 備考 |
+|------|--------|------|
+| index_product_crawl_results_on_external_id | external_id |  |
+| idx_on_product_crawl_setting_id_external_id_a586e73ad6 | product_crawl_setting_id, external_id | unique |
+| index_product_crawl_results_on_product_crawl_setting_id | product_crawl_setting_id |  |
+
+## product_crawl_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | string | NOT NULL |  |
+| enabled | boolean | NOT NULL | default false |
+| search_urls | json | NOT NULL | default `[]` |
+| required_keywords | json | NOT NULL | default `[]` |
+| exclude_keywords | json | NOT NULL | default `[]` |
+| exclude_external_ids | json | NOT NULL | default `[]` |
+| min_price | integer |  |  |
+| max_price | integer |  |  |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+なし
 
 ## products
 
