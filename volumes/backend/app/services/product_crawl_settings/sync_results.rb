@@ -38,6 +38,7 @@ module ProductCrawlSettings
           external_id: result[:external_id],
           name: result[:name],
           product_url: result[:product_url],
+          thumbnail_url: result[:thumbnail_url],
           price: result[:price] || 0
         }
       end

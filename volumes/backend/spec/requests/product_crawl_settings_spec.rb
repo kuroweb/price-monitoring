@@ -44,7 +44,7 @@ RSpec.describe "Product crawl settings", type: :request do
     product_crawl_setting = create(:product_crawl_setting)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
     expect(response).to have_http_status(:ok)
-    get "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/product_crawl_results"
+    get "/api/v1/product_crawl_results"
     expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(["a"])
   end
 
@@ -55,5 +55,15 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(response).to have_http_status(:ok)
     expect(result.product_crawl_setting.reload.exclude_external_ids).to eq([result.external_id])
     expect(ProductCrawlResult.exists?(result.id)).to be(false)
+  end
+end
+
+RSpec.describe "Product crawl results", type: :request do
+  it "lists results across crawl settings" do
+    first = create(:product_crawl_result)
+    second = create(:product_crawl_result)
+    get "/api/v1/product_crawl_results"
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([second.id, first.id])
   end
 end

@@ -64,7 +64,15 @@ RSpec.describe Crawl::Search::Preview do
     allow(described_class).to receive(:fetch_pinned).and_return(Struct.new(:body).new(html))
     result = described_class.call(params: { search_urls: ["https://jp.mercari.com/search?q=phone&sort=price"] })
     expect(described_class).to have_received(:fetch_pinned).with(URI("https://jp.mercari.com/search?q=phone&sort=price"))
-    expect(result[:results].first).to include(external_id: "item-1", price: 1200, product_url: "https://jp.mercari.com/item/item-1")
+    expect(result[:results].first).to include(external_id: "item-1", price: 1200,
+                                                    thumbnail_url: "https://static.mercdn.net/thumb/item/webp/item-1_1.jpg", product_url: "https://jp.mercari.com/item/item-1")
+  end
+
+  it "reads the lazy-loaded iosys thumbnail" do
+    html = %(<li class="item"><a href="/items/phone/1"></a><img src="/dummy.gif" data-src="https://cdn.example/1_S.jpg"><span class="name">Phone</span><span class="price">1,000円</span></li>)
+    allow(described_class).to receive(:fetch_pinned).and_return(Struct.new(:body).new(html))
+    result = described_class.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
+    expect(result[:results].first).to include(external_id: "phone/1", thumbnail_url: "https://cdn.example/1_S.jpg")
   end
 
   it "recognizes explicit empty results and rejects an unknown page" do

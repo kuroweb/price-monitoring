@@ -27,10 +27,20 @@ RSpec.describe "Product aggregation settings", type: :request do
     post "/api/v1/product_aggregation_settings/#{product_aggregation_setting.id}/calculate"
     expect(response).to have_http_status(:ok)
 
-    get "/api/v1/product_aggregation_settings/#{product_aggregation_setting.id}/product_aggregation_results"
+    get "/api/v1/product_aggregation_results"
     results = response.parsed_body.fetch("product_aggregation_results")
     expect(results.size).to eq(30)
     expect(results.last).to include("date" => Time.zone.today.to_s, "average_purchase_price" => 500,
                                     "purchase_count" => 1)
+  end
+end
+
+RSpec.describe "Product aggregation results", type: :request do
+  it "lists daily results across aggregation settings" do
+    setting = create(:product_aggregation_setting)
+    ProductAggregationResult.create!(product_aggregation_setting: setting, date: Date.new(2026, 11, 2), purchase_count: 0)
+    ProductAggregationResult.create!(product_aggregation_setting: setting, date: Date.new(2026, 11, 1), purchase_count: 1)
+    get "/api/v1/product_aggregation_results"
+    expect(response.parsed_body.fetch("product_aggregation_results").pluck("date")).to eq(%w[2026-11-01 2026-11-02])
   end
 end

@@ -106,7 +106,9 @@ module Crawl::Search
         raise "Listing name is missing" if name.empty?
 
         price = parse_price(dom.at_css("[data-testid='item-tile-price']")&.text)
-        { external_id: id, name: name, price: price, product_url: "https://jp.mercari.com/item/#{id}" }
+        # 既存のメルカリクローラーと同じく、画像URLは external_id から組み立てる
+        { external_id: id, name: name, price: price, product_url: "https://jp.mercari.com/item/#{id}",
+          thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg" }
       end
     end
 
@@ -118,7 +120,9 @@ module Crawl::Search
         name = dom.at_css(".name")&.text.to_s.strip
         raise "Listing name is missing" if name.empty?
 
-        { external_id: id, name: name, price: parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}" }
+        image = dom.at_css("img")
+        { external_id: id, name: name, price: parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}",
+          thumbnail_url: image&.[]("data-src").presence || image&.[]("src") }
       end
     end
 

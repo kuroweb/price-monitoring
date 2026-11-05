@@ -8,7 +8,7 @@ RSpec.describe ProductCrawlSettings::SyncResults do
   before do
     allow(Crawl::Search::Preview).to receive(:fetch).and_return([
                                                                   { external_id: "a", name: "Phone blue", price: 100,
-                                                                    product_url: "https://iosys.co.jp/items/a" },
+                                                                    product_url: "https://iosys.co.jp/items/a", thumbnail_url: "https://iosys.co.jp/a.jpg" },
                                                                   { external_id: "b", name: "Case", price: 100,
                                                                     product_url: "https://iosys.co.jp/items/b" },
                                                                   { external_id: "excluded", name: "Phone red",
@@ -20,7 +20,7 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     described_class.call(product_crawl_setting:)
     results = product_crawl_setting.product_crawl_results
     expect(results.pluck(:external_id)).to eq(["a"])
-    expect(results.first).to have_attributes(platform: "iosys", product_url: "https://iosys.co.jp/items/a", price: 100)
+    expect(results.first).to have_attributes(platform: "iosys", product_url: "https://iosys.co.jp/items/a", price: 100, thumbnail_url: "https://iosys.co.jp/a.jpg")
   end
 
   it "keeps listings missing from the latest crawl and removes ones that no longer match" do

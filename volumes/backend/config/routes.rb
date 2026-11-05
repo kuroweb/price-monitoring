@@ -46,16 +46,14 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           post :sync
         end
         scope module: :product_crawl_settings do
-          resources :product_crawl_results, only: %i[index]
           resources :exclude_external_ids, only: %i[create]
         end
       end
+      resources :product_crawl_results, only: %i[index]
+      resources :product_aggregation_results, only: %i[index]
       resources :product_aggregation_settings, only: %i[index show create update destroy] do
         member do
           post :calculate
-        end
-        scope module: :product_aggregation_settings do
-          resources :product_aggregation_results, only: %i[index]
         end
       end
     end
