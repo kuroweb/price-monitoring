@@ -1,6 +1,12 @@
 module Crawl
   module RequestBlocklist
-    COMMON_BLOCKED_LIST = %w[.css].freeze
+    # blocked_request? は全サイトのリストを OR で評価するので、動画・広告の配信元は全クローラーで止める
+    COMMON_BLOCKED_LIST = %w[
+      .css
+      youtube.com
+      googlevideo.com
+      doubleclick.net
+    ].freeze
 
     MERCARI_BLOCKED_LIST = %w[
       api.mercari.jp/client_events
@@ -65,9 +71,6 @@ module Crawl
       m.geniee-search.net
       pagead2.googlesyndication.com
       flux-cdn.com
-      youtube.com
-      googlevideo.com
-      doubleclick.net
     ].freeze
 
     IOSYS_BLOCKED_LIST = %w[
