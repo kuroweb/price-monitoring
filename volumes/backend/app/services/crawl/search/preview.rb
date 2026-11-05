@@ -6,27 +6,22 @@ require "nokogiri"
 
 module Crawl::Search
   class Preview
-    MAX_URLS = 5
     TIMEOUT_SECONDS = 20
     TOTAL_TIMEOUT_SECONDS = 45
     MAX_RESPONSE_BYTES = 3 * 1024 * 1024
     MAX_RESULTS_PER_URL = 100
-    NON_PUBLIC_V4 = %w[0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16 172.16.0.0/12 192.0.0.0/24 192.0.2.0/24 192.168.0.0/16 198.18.0.0/15 198.51.100.0/24 203.0.113.0/24 224.0.0.0/4 240.0.0.0/4].map { |range| IPAddr.new(range) }.freeze
+    NON_PUBLIC_V4 = %w[0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16 172.16.0.0/12 192.0.0.0/24
+                       192.0.2.0/24 192.168.0.0/16 198.18.0.0/15 198.51.100.0/24 203.0.113.0/24 224.0.0.0/4 240.0.0.0/4].map do |range|
+      IPAddr.new(range)
+    end.freeze
 
     def self.call(params:)
       params = Input.call(params: params)
-      urls = params[:urls] || []
-      raise ArgumentError, "urls must be an array" unless urls.is_a?(Array)
-      raise ArgumentError, "at most #{MAX_URLS} URLs are allowed" if urls.size > MAX_URLS
+      urls = params[:search_urls]
       sources = []
       by_key = {}
       deadline = Process.clock_gettime(Process::CLOCK_MONOTONIC) + TOTAL_TIMEOUT_SECONDS
-      urls.each do |row|
-        row = row.to_h.deep_symbolize_keys
-        url = row[:url].to_s
-        unless ActiveModel::Type::Boolean.new.cast(row.fetch(:enabled, true))
-          sources << source(url, nil, "disabled", 0); next
-        end
+      urls.each do |url|
         begin
           target = UrlRouter.call(url: url)
         rescue ArgumentError
@@ -36,15 +31,18 @@ module Crawl::Search
         begin
           remaining = deadline - Process.clock_gettime(Process::CLOCK_MONOTONIC)
           raise Timeout::Error if remaining <= 0
+
           records = Timeout.timeout([remaining, TIMEOUT_SECONDS].min) { fetch(target) }
-          records.each { |record| by_key[[target[:platform], record[:external_id]]] ||= record.merge(platform: target[:platform]) }
+          records.each { |record| by_key[record[:external_id]] ||= record.merge(platform: target[:platform]) }
           sources << source(url, target[:platform], "succeeded", records.size)
         rescue StandardError
           sources << source(url, target[:platform], "failed", 0)
         end
       end
       results = by_key.values.map { |item| apply_filters(item, params) }
-      { sources: sources, results: results, fetched_count: results.size, accepted_count: results.count { |r| r[:accepted] } }
+      { sources: sources, results: results, fetched_count: results.size, accepted_count: results.count do |r|
+        r[:accepted]
+      end }
     end
 
     def self.fetch(target)
@@ -84,6 +82,7 @@ module Crawl::Search
         end
       end
       raise "Redirects and non-success HTTP responses are rejected" unless response.is_a?(Net::HTTPSuccess)
+
       response.body = body
       response
     end
@@ -102,11 +101,12 @@ module Crawl::Search
         href = dom.at_css("a")&.[]("href")
         id = href&.match(%r{/item/([^/?]+)})&.[](1)
         next unless id
+
         name = dom.at_css("[data-testid='thumbnail-item-name']")&.text.to_s.strip
         raise "Listing name is missing" if name.empty?
 
         price = parse_price(dom.at_css("[data-testid='item-tile-price']")&.text)
-        { external_id: id, name: name, price: price, url: "https://jp.mercari.com/item/#{id}" }
+        { external_id: id, name: name, price: price, product_url: "https://jp.mercari.com/item/#{id}" }
       end
     end
 
@@ -114,10 +114,11 @@ module Crawl::Search
       listing_nodes(page, "li.item").filter_map do |dom|
         id = dom.at_css("a")&.[]("href")&.match(%r{/items/([^?#]+)})&.[](1)
         next unless id
+
         name = dom.at_css(".name")&.text.to_s.strip
         raise "Listing name is missing" if name.empty?
 
-        { external_id: id, name: name, price: parse_price(dom.at_css(".price")&.text), url: "https://iosys.co.jp/items/#{id}" }
+        { external_id: id, name: name, price: parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}" }
       end
     end
 
@@ -131,20 +132,17 @@ module Crawl::Search
     end
 
     def self.apply_filters(item, params)
-      reasons = []
-      price = item[:price]
-      reasons << "below_min_price" if params[:min_price] && (price.nil? || price < params[:min_price].to_i)
-      reasons << "above_max_price" if params[:max_price] && (price.nil? || price > params[:max_price].to_i)
-      required = Array(params[:required_keywords]).map(&:to_s).reject(&:empty?)
-      reasons << "missing_required_keyword" unless required.all? { |word| item[:name].downcase.include?(word.downcase) }
-      excluded = Array(params[:exclude_keywords]).map(&:to_s)
-      reasons << "excluded_keyword" if excluded.any? { |word| item[:name].downcase.include?(word.downcase) }
-      reasons << "excluded_listing" if Array(params[:excluded_listings]).any? { |x| x.to_h.deep_symbolize_keys.slice(:platform, :external_id) == item.slice(:platform, :external_id) }
+      reasons = Filter.call(item:, params:)
       item.merge(accepted: reasons.empty?, reasons: reasons)
     end
 
     def self.source(url, platform, status, count)
-      { url: url, platform: platform, status: status, error: status == "failed" ? "Crawl failed" : (status == "unsupported" ? "Unsupported URL" : nil), fetched_count: count }
+      { url: url, platform: platform, status: status,
+        error: if status == "failed"
+                 "Crawl failed"
+               else
+                 (status == "unsupported" ? "Unsupported URL" : nil)
+               end, fetched_count: count }
     end
   end
 end

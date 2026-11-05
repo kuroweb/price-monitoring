@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_04_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_06_000001) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -268,6 +268,27 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000001) do
     t.index ["product_id"], name: "index_pc_koubou_products_on_product_id"
   end
 
+  create_table "product_aggregation_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_aggregation_setting_id", null: false
+    t.date "date", null: false
+    t.integer "average_purchase_price"
+    t.integer "purchase_count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_aggregation_setting_id", "date"], name: "idx_on_product_aggregation_setting_id_date_0a5c5ca744", unique: true
+    t.index ["product_aggregation_setting_id"], name: "idx_on_product_aggregation_setting_id_700a1849ac"
+  end
+
+  create_table "product_aggregation_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.json "required_keywords", default: -> { "(json_array())" }, null: false
+    t.json "exclude_keywords", default: -> { "(json_array())" }, null: false
+    t.integer "min_price"
+    t.integer "max_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "product_category_maps", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "category_id", null: false
@@ -278,50 +299,42 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000001) do
     t.index ["product_id"], name: "index_product_category_maps_on_product_id"
   end
 
-  create_table "product_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.string "keyword", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "keyword"], name: "index_product_exclude_keywords_on_product_id_and_keyword", unique: true
-    t.index ["product_id"], name: "index_product_exclude_keywords_on_product_id"
-  end
-
-  create_table "product_excluded_listings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
+  create_table "product_crawl_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "product_crawl_setting_id", null: false
     t.string "platform", null: false
     t.string "external_id", null: false
+    t.string "name", null: false
+    t.text "product_url", null: false
+    t.text "thumbnail_url"
+    t.integer "price", default: 0, null: false
+    t.integer "buyout_price"
+    t.boolean "sold"
+    t.datetime "bought_date"
+    t.datetime "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id", "platform", "external_id"], name: "idx_on_product_id_platform_external_id_319b830d0f", unique: true
-    t.index ["product_id"], name: "index_product_excluded_listings_on_product_id"
+    t.index ["external_id"], name: "index_product_crawl_results_on_external_id"
+    t.index ["product_crawl_setting_id", "external_id"], name: "idx_on_product_crawl_setting_id_external_id_a586e73ad6", unique: true
+    t.index ["product_crawl_setting_id"], name: "index_product_crawl_results_on_product_crawl_setting_id"
   end
 
-  create_table "product_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.string "keyword", null: false
+  create_table "product_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "enabled", default: false, null: false
+    t.json "search_urls", default: -> { "(json_array())" }, null: false
+    t.json "required_keywords", default: -> { "(json_array())" }, null: false
+    t.json "exclude_keywords", default: -> { "(json_array())" }, null: false
+    t.json "exclude_external_ids", default: -> { "(json_array())" }, null: false
+    t.integer "min_price"
+    t.integer "max_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["product_id", "keyword"], name: "index_product_required_keywords_on_product_id_and_keyword", unique: true
-    t.index ["product_id"], name: "index_product_required_keywords_on_product_id"
-  end
-
-  create_table "product_search_urls", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.text "url", null: false
-    t.boolean "enabled", default: true, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_product_search_urls_on_product_id"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "enabled", default: false, null: false
-    t.integer "min_price"
-    t.integer "max_price"
   end
 
   create_table "used_sofmap_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -501,12 +514,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_04_000001) do
   add_foreign_key "pc_koubou_crawl_setting_required_keywords", "pc_koubou_crawl_settings"
   add_foreign_key "pc_koubou_crawl_settings", "products"
   add_foreign_key "pc_koubou_products", "products"
+  add_foreign_key "product_aggregation_results", "product_aggregation_settings"
   add_foreign_key "product_category_maps", "categories"
   add_foreign_key "product_category_maps", "products"
-  add_foreign_key "product_exclude_keywords", "products"
-  add_foreign_key "product_excluded_listings", "products"
-  add_foreign_key "product_required_keywords", "products"
-  add_foreign_key "product_search_urls", "products"
+  add_foreign_key "product_crawl_results", "product_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_exclude_keywords", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_exclude_products", "used_sofmap_crawl_settings"
   add_foreign_key "used_sofmap_crawl_setting_required_keywords", "used_sofmap_crawl_settings"

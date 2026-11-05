@@ -11,7 +11,8 @@ RSpec.describe Crawl::Search::UrlRouter do
       )
     end
 
-    ["http://jp.mercari.com/search?q=x", "https://jp.mercari.com.evil/search?q=x", "https://user@jp.mercari.com/search?q=x", "https://jp.mercari.com:444/search?q=x", "https://jp.mercari.com/item/abc", "https://127.0.0.1/search?q=x"].each do |url|
+    ["http://jp.mercari.com/search?q=x", "https://jp.mercari.com.evil/search?q=x",
+     "https://user@jp.mercari.com/search?q=x", "https://jp.mercari.com:444/search?q=x", "https://jp.mercari.com/item/abc", "https://127.0.0.1/search?q=x"].each do |url|
       it "rejects unsafe URL #{url}" do
         expect { described_class.call(url: url) }.to raise_error(ArgumentError)
       end
