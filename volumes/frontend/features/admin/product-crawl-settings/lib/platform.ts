@@ -33,3 +33,14 @@ export const words = (value: string) => [
       .filter(Boolean),
   ),
 ]
+
+// 既存の出品カード（RelatedProductCard）と同じ配色
+export const platformColors: Record<string, string> = {
+  mercari: 'bg-red-500',
+  yahoo_auction: 'bg-yellow-600',
+  yahoo_fleamarket: 'bg-green-600',
+  janpara: 'bg-blue-500',
+  iosys: 'bg-blue-600',
+  pc_koubou: 'bg-blue-400',
+  used_sofmap: 'bg-green-500',
+}

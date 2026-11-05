@@ -12,7 +12,7 @@ const Page = async () => {
       <div className='card w-full bg-base-300'>
         <div className='card-body'>
           <h2 className='card-title'>商品計測設定</h2>
-          <ProductCrawlSettings initial={response.data.productCrawlSettings ?? []} />
+          <ProductCrawlSettings productCrawlSettings={response.data.productCrawlSettings ?? []} />
         </div>
       </div>
     </Layout>

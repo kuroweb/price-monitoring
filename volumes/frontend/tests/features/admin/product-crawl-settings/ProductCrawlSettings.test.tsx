@@ -2,8 +2,8 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import ProductCrawlResults from '@/features/admin/product-crawl-settings/components/ProductCrawlResults'
 import ProductCrawlSettings from '@/features/admin/product-crawl-settings/components/ProductCrawlSettings'
+import ProductCrawlResultsSection from '@/features/product-crawl-results/components/ProductCrawlResultsSection'
 import {
   createProductCrawlSetting,
   excludeProductCrawlResult,
@@ -63,7 +63,8 @@ describe('商品計測設定', () => {
       status: 200,
     })
     const user = userEvent.setup()
-    render(<ProductCrawlSettings initial={[]} />)
+    render(<ProductCrawlSettings productCrawlSettings={[]} />)
+    await user.click(screen.getByRole('button', { name: '商品計測設定を追加' }))
     await user.type(screen.getByRole('textbox', { name: '名前' }), 'phone')
     await user.type(screen.getByRole('textbox', { name: '検索結果URL 1' }), mercariUrl)
     await user.click(screen.getByRole('button', { name: 'URLを追加' }))
@@ -71,7 +72,7 @@ describe('商品計測設定', () => {
     expect(screen.getByText('メルカリ')).toBeInTheDocument()
     expect(screen.getByText('イオシス')).toBeInTheDocument()
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone, blue')
-    await user.click(screen.getByRole('button', { name: '保存' }))
+    await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createProductCrawlSetting).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -80,6 +81,8 @@ describe('商品計測設定', () => {
         }),
       ),
     )
+    expect(refresh).toHaveBeenCalled()
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
   it('keeps the preview while excluding a listing and saves the exclusion', async () => {
@@ -117,13 +120,13 @@ describe('商品計測設定', () => {
       status: 200,
     })
     const user = userEvent.setup()
-    render(<ProductCrawlSettings initial={[setting]} />)
+    render(<ProductCrawlSettings productCrawlSettings={[setting]} />)
     await user.click(screen.getByRole('button', { name: '編集' }))
     await user.click(screen.getByRole('button', { name: '実際に取得して確認' }))
     expect(await screen.findByText(/取得失敗/)).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: '出品 item-1 を除外' }))
     expect(screen.getByRole('region', { name: '取得結果' })).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: '保存' }))
+    await user.click(screen.getByRole('button', { name: '更新' }))
     await waitFor(() =>
       expect(updateProductCrawlSetting).toHaveBeenCalledWith(
         1,
@@ -147,11 +150,14 @@ describe('商品計測結果', () => {
       status: 200,
     })
     const user = userEvent.setup()
-    render(<ProductCrawlResults productCrawlSetting={setting} productCrawlResults={[result]} />)
-    expect(screen.getByRole('link', { name: 'Phone blue' })).toHaveAttribute(
+    render(
+      <ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={[result]} />,
+    )
+    expect(screen.getByRole('link', { name: 'Phone blueの商品ページを開く' })).toHaveAttribute(
       'href',
       result.productUrl,
     )
+    expect(screen.getByText('イオシス')).toBeInTheDocument()
     expect(screen.getByText('売り切れ')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: '取得して保存' }))
     await waitFor(() => expect(syncProductCrawlSetting).toHaveBeenCalledWith(1))

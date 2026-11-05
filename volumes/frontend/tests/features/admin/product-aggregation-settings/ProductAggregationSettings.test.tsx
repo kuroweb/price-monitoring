@@ -2,8 +2,8 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import ProductAggregationResults from '@/features/admin/product-aggregation-settings/components/ProductAggregationResults'
 import ProductAggregationSettings from '@/features/admin/product-aggregation-settings/components/ProductAggregationSettings'
+import ProductAggregationResultsSection from '@/features/product-aggregation-results/components/ProductAggregationResultsSection'
 import { calculateProductAggregationSetting, createProductAggregationSetting } from '@/lib/actions'
 import type { ProductAggregationSetting } from '@/lib/api'
 
@@ -36,12 +36,13 @@ describe('商品相場設定', () => {
       status: 200,
     })
     const user = userEvent.setup()
-    render(<ProductAggregationSettings initial={[]} />)
+    render(<ProductAggregationSettings productAggregationSettings={[]} />)
+    await user.click(screen.getByRole('button', { name: '商品相場設定を追加' }))
     await user.type(screen.getByRole('textbox', { name: '名前' }), 'phone')
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone')
     await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'case')
     await user.type(screen.getByRole('spinbutton', { name: '最高価格（円）' }), '1000')
-    await user.click(screen.getByRole('button', { name: '保存' }))
+    await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createProductAggregationSetting).toHaveBeenCalledWith({
         name: 'phone',
@@ -61,7 +62,7 @@ describe('商品相場設定', () => {
     })
     const user = userEvent.setup()
     render(
-      <ProductAggregationResults
+      <ProductAggregationResultsSection
         productAggregationSetting={setting}
         productAggregationResults={[
           {

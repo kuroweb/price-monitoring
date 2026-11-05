@@ -13,7 +13,7 @@ interface Props {
   productAggregationResults: ProductAggregationResult[]
 }
 
-export default function ProductAggregationResults({
+export default function ProductAggregationResultsSection({
   productAggregationSetting,
   productAggregationResults,
 }: Props) {
@@ -41,14 +41,20 @@ export default function ProductAggregationResults({
   }
 
   return (
-    <div className='space-y-4'>
-      <div className='flex justify-end'>
-        <button type='button' className='btn btn-primary' disabled={busy} onClick={calculate}>
-          直近30日を集計
+    <section className='space-y-3' aria-label={productAggregationSetting.name}>
+      <div className='flex flex-wrap items-center justify-between gap-2'>
+        <h3 className='text-lg font-semibold leading-tight'>{productAggregationSetting.name}</h3>
+        <button
+          type='button'
+          className='btn btn-sm btn-primary'
+          disabled={busy}
+          onClick={calculate}
+        >
+          {busy ? '集計中…' : '直近30日を集計'}
         </button>
       </div>
       {productAggregationResults.length === 0 ? (
-        <p>商品日次相場はありません。</p>
+        <p>商品日次相場はありません。「直近30日を集計」で集計してください。</p>
       ) : (
         <div className='overflow-x-auto'>
           <table className='table'>
@@ -75,6 +81,6 @@ export default function ProductAggregationResults({
           </table>
         </div>
       )}
-    </div>
+    </section>
   )
 }

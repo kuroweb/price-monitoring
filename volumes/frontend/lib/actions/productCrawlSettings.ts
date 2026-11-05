@@ -3,14 +3,14 @@
 import * as Api from '@/lib/api/productCrawlSettings'
 import { revalidatePaths } from '@/lib/revalidate-paths'
 
-const revalidate = () => revalidatePaths([['/admin/product-crawl-settings', 'layout']])
+const revalidate = () =>
+  revalidatePaths([
+    ['/admin/product-crawl-settings', 'page'],
+    ['/product-crawl-results', 'page'],
+  ])
 
 export async function getProductCrawlSettings() {
   return Api.getProductCrawlSettings()
-}
-
-export async function getProductCrawlSetting(id: number) {
-  return Api.getProductCrawlSetting(id)
 }
 
 export async function previewProductCrawlSetting(draft: Api.ProductCrawlSettingDraft) {
@@ -41,12 +41,12 @@ export async function syncProductCrawlSetting(id: number) {
   return result
 }
 
-export async function getProductCrawlResults(id: number) {
-  return Api.getProductCrawlResults(id)
-}
-
 export async function excludeProductCrawlResult(id: number, externalId: string) {
   const result = await Api.excludeProductCrawlResult(id, externalId)
   if (result.data) revalidate()
   return result
+}
+
+export async function getAllProductCrawlResults() {
+  return Api.getAllProductCrawlResults()
 }

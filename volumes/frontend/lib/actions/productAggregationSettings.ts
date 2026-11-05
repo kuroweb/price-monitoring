@@ -3,14 +3,14 @@
 import * as Api from '@/lib/api/productAggregationSettings'
 import { revalidatePaths } from '@/lib/revalidate-paths'
 
-const revalidate = () => revalidatePaths([['/admin/product-aggregation-settings', 'layout']])
+const revalidate = () =>
+  revalidatePaths([
+    ['/admin/product-aggregation-settings', 'page'],
+    ['/product-aggregation-results', 'page'],
+  ])
 
 export async function getProductAggregationSettings() {
   return Api.getProductAggregationSettings()
-}
-
-export async function getProductAggregationSetting(id: number) {
-  return Api.getProductAggregationSetting(id)
 }
 
 export async function createProductAggregationSetting(draft: Api.ProductAggregationSettingDraft) {
@@ -40,6 +40,6 @@ export async function calculateProductAggregationSetting(id: number) {
   return result
 }
 
-export async function getProductAggregationResults(id: number) {
-  return Api.getProductAggregationResults(id)
+export async function getAllProductAggregationResults() {
+  return Api.getAllProductAggregationResults()
 }

@@ -12,7 +12,9 @@ const Page = async () => {
       <div className='card w-full bg-base-300'>
         <div className='card-body'>
           <h2 className='card-title'>商品相場設定</h2>
-          <ProductAggregationSettings initial={response.data.productAggregationSettings ?? []} />
+          <ProductAggregationSettings
+            productAggregationSettings={response.data.productAggregationSettings ?? []}
+          />
         </div>
       </div>
     </Layout>
