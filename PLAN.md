@@ -179,12 +179,12 @@ erDiagram
 
 | 画面 | 対象テーブル | 主な操作 |
 | --- | --- | --- |
-| 商品計測設定一覧 | `product_crawl_settings` | 一覧、有効状態の確認、登録・編集・削除への遷移 |
-| 商品計測設定の登録・編集 | `product_crawl_settings` | 名前・URL・追加条件の入力、未保存の条件での取得確認、保存 |
-| 商品計測結果一覧 | `product_crawl_results` | 商品計測設定ごとの結果の確認、出品の除外 |
-| 商品相場設定一覧 | `product_aggregation_settings` | 一覧、登録・編集・削除への遷移 |
-| 商品相場設定の登録・編集 | `product_aggregation_settings` | 名前・フィルターの入力、保存 |
-| 商品相場 | `product_aggregation_results` | 商品相場設定ごとの日次推移の確認 |
+| 商品計測設定一覧 | `product_crawl_settings` | 一覧、有効状態の確認。「…」メニューから編集・削除 |
+| 商品計測設定の登録・編集（モーダル） | `product_crawl_settings` | 名前・URL・追加条件の入力、未保存の条件での取得確認、保存 |
+| 商品計測結果 | `product_crawl_results` | 全商品計測設定の結果を設定ごとのセクションにカードで表示。取得して保存、出品の除外 |
+| 商品相場設定一覧 | `product_aggregation_settings` | 一覧。「…」メニューから編集・削除 |
+| 商品相場設定の登録・編集（モーダル） | `product_aggregation_settings` | 名前・フィルターの入力、保存 |
+| 商品相場 | `product_aggregation_results` | 全商品相場設定の日次推移を設定ごとのセクションで表示。集計の実行 |
 
 ### 商品計測設定一覧
 
@@ -205,24 +205,24 @@ erDiagram
 | 除外語 | `exclude_keywords` | 複数入力。いずれかを含む結果は保存しない |
 | 価格帯 | `min_price`・`max_price` | 上下限。空欄は制限なし |
 
-除外出品IDはこの画面では入力せず、取得確認と商品計測結果一覧で出品を選んで追加する。
+除外出品IDはこの画面では入力せず、取得確認と商品計測結果で出品を選んで追加する。
 
 PoCと同じく、未保存の条件で実際に取得して結果を確認できる。確認結果は保存しない。
 
-### 商品計測結果一覧
+### 商品計測結果
 
-商品計測設定を1つ選んで、その結果を表示する。
+設定画面とは別の画面。全商品計測設定の結果を、設定ごとのセクションにカードで並べる。
 
 | 表示項目 | 元の列 |
 | --- | --- |
+| 画像 | `thumbnail_url` |
 | サイト | `platform` |
-| サムネイル | `thumbnail_url` |
 | 出品名 | `name`。`product_url` へのリンク |
 | 価格・即決価格 | `price`・`buyout_price` |
 | 販売状態・売れた日時 | `sold`・`bought_date` |
 | オークション終了日時 | `end_date` |
 
-各行から出品を除外できる。除外すると商品計測設定の `exclude_external_ids` に追加する。
+各セクションから「取得して保存」を実行できる。カードの「…」メニューから出品を除外できる。除外すると商品計測設定の `exclude_external_ids` に追加する。
 
 ### 商品相場設定一覧・登録・編集
 
@@ -233,11 +233,11 @@ PoCと同じく、未保存の条件で実際に取得して結果を確認で�
 | 除外語 | `exclude_keywords` | 複数入力 |
 | 価格帯 | `min_price`・`max_price` | 上下限。空欄は制限なし |
 
-一覧は名前を表示し、登録・編集・削除へ遷移する。
+一覧は名前・必須語・除外語を表示し、「…」メニューから編集・削除する。
 
 ### 商品相場
 
-商品相場設定を1つ選んで、日次の推移を表示する。
+設定画面とは別の画面。全商品相場設定の日次の推移を、設定ごとのセクションに表で並べる。各セクションから直近30日の集計を実行できる。
 
 | 表示項目 | 元の列 |
 | --- | --- |
@@ -247,7 +247,7 @@ PoCと同じく、未保存の条件で実際に取得して結果を確認で�
 
 ### 未決事項
 
-- 各画面のURLパスと、管理画面と利用者向け画面の分け方。PoCは全画面を `/admin/product-crawl-settings` と `/admin/product-aggregation-settings` 配下に置いている（[PoCの説明](docs/backend/product-search-poc.md)）。
+- 各画面のURLパスと、管理画面と利用者向け画面の分け方。PoCは設定画面を `/admin/product-crawl-settings`・`/admin/product-aggregation-settings`、結果画面を `/product-crawl-results`・`/product-aggregation-results` に置いている（[PoCの説明](docs/backend/product-search-poc.md)）。
 - 商品相場の表示形式（グラフ・表）と表示期間。
 - 商品相場で、集計対象になった商品計測結果も一覧で見せるか。
-- 商品計測結果一覧で、除外した出品を表示するか、除外を解除できるようにするか。
+- 商品計測結果で、除外した出品を表示するか、除外を解除できるようにするか。

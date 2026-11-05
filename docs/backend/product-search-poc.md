@@ -5,11 +5,12 @@
 ## 操作
 
 1. [開発手順](../development/index.md)に沿って起動・DB準備する。
-2. `/admin/product-crawl-settings` で名前と検索結果URLを入力する。メルカリの `/search?...`、イオシスの `/items?...` が対象。各URLの横にホスト名から判定したサイトを表示する。
+2. `/admin/product-crawl-settings` の「商品計測設定を追加」または各行の「…」メニューの「編集」でモーダルを開き、名前と検索結果URLを入力する。メルカリの `/search?...`、イオシスの `/items?...` が対象。各URLの横にホスト名から判定したサイトを表示する。
 3. 必要なら全URL共通の必須語・除外語・価格帯を設定し、「実際に取得して確認」で保存せずに結果を確認する。確認結果から出品を除外できる。
-4. 「保存」で商品計測設定を保存する。
-5. 一覧の「商品計測結果」から `/admin/product-crawl-settings/:id/results` を開き、「取得して保存」で採用した出品を商品計測結果に保存する。各行から出品を除外できる。
-6. `/admin/product-aggregation-settings` で名前・必須語・除外語・価格帯を登録する。「商品相場」から `/admin/product-aggregation-settings/:id` を開き、「直近30日を集計」で商品日次相場を計算する。
+4. モーダルの「登録」または「更新」で商品計測設定を保存する。
+5. サイドバーの「商品計測結果」から `/product-crawl-results` を開く。商品計測設定ごとのセクションに、画像・商品名・価格・サイト・販売状態をカードで並べる。各セクションの「取得して保存」で採用した出品を保存し、カードの「…」メニューから出品を除外できる。
+6. `/admin/product-aggregation-settings` の「商品相場設定を追加」または各行の「…」メニューの「編集」でモーダルを開き、名前・必須語・除外語・価格帯を登録する。
+7. サイドバーの「商品相場」から `/product-aggregation-results` を開き、商品相場設定ごとのセクションの「直近30日を集計」で商品日次相場を計算する。
 
 worktreeの接続先はルートから `just url` で確認する。言語ツールはbackend/frontendコンテナで実行する。
 
@@ -21,7 +22,7 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 - 出品の除外は `external_id` 単位。除外すると保存済みの商品計測結果からも削除する。
 - 取得して保存するとき、保存済みの結果のうち現在の条件に一致しないものを削除する。今回の検索結果に出なかった出品は残す。
 - 商品相場は、条件に一致する商品計測結果のうち `bought_date` が集計日に入るものを、`external_id` で1件にまとめて平均する。
-- 静的HTMLの一覧からは販売状態・売れた日時・サムネイルを取得しないため、`sold`・`bought_date`・`thumbnail_url` は保存されない。実データでは商品日次相場が0件になる。集計は `bought_date` を入れた検証データで確認する。
+- 静的HTMLの一覧からは販売状態・売れた日時を取得しないため、`sold`・`bought_date` は保存されない。サムネイルはイオシスの一覧の画像URL、メルカリは出品IDから組み立てたURLを保存する。実データでは商品日次相場が0件になる。集計は `bought_date` を入れた検証データで確認する。
 
 ## 取得方式と制限
 
@@ -39,12 +40,12 @@ URLをHTTPSの対応ホスト・検索パスに限定する。検索HTMLは名�
 | 商品計測設定の取得・更新・削除 | GET / PUT / DELETE `/api/v1/product_crawl_settings/:id` |
 | 保存していない条件で取得確認 | POST `/api/v1/product_crawl_settings/preview` |
 | 保存済みの条件で取得して保存 | POST `/api/v1/product_crawl_settings/:id/sync` |
-| 商品計測結果の一覧 | GET `/api/v1/product_crawl_settings/:id/product_crawl_results` |
+| 全商品計測設定の商品計測結果 | GET `/api/v1/product_crawl_results` |
 | 出品の除外 | POST `/api/v1/product_crawl_settings/:id/exclude_external_ids` |
 | 商品相場設定の一覧・登録 | GET / POST `/api/v1/product_aggregation_settings` |
 | 商品相場設定の取得・更新・削除 | GET / PUT / DELETE `/api/v1/product_aggregation_settings/:id` |
 | 直近30日の集計 | POST `/api/v1/product_aggregation_settings/:id/calculate` |
-| 商品日次相場の一覧 | GET `/api/v1/product_aggregation_settings/:id/product_aggregation_results` |
+| 全商品相場設定の商品日次相場 | GET `/api/v1/product_aggregation_results` |
 
 入力検証（`Crawl::Search::Input`）は保存と取得確認で共有する。必須語・除外語は各50件/各255文字、除外出品IDは100件。
 
