@@ -5,7 +5,7 @@ RSpec.describe "Product crawl settings", type: :request do
     {
       name: "phone", enabled: true, min_price: 100,
       search_urls: ["https://jp.mercari.com/search?keyword=phone", "https://iosys.co.jp/items?q=phone"],
-      required_keywords: ["phone"], exclude_keywords: [], exclude_external_ids: []
+      required_keywords: ["phone"], exclude_keywords: []
     }
   end
 
@@ -34,13 +34,9 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(product_crawl_setting.reload.name).to eq("phone")
   end
 
-  it "previews without saving and syncs saved settings" do
-    allow(Crawl::Search::Preview).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
+  it "syncs saved settings" do
+    allow(Crawl::Search::Crawler).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
                                                                    product_url: "https://iosys.co.jp/items/a" }])
-    post "/api/v1/product_crawl_settings/preview", params:, as: :json
-    expect(response.parsed_body.fetch("accepted_count")).to eq(1)
-    expect(ProductCrawlResult.count).to eq(0)
-
     product_crawl_setting = create(:product_crawl_setting)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
     expect(response).to have_http_status(:ok)
@@ -48,14 +44,21 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(["a"])
   end
 
-  it "excludes a listing and removes its saved result" do
+  it "excludes and restores a listing without deleting it" do
     result = create(:product_crawl_result)
-    post "/api/v1/product_crawl_settings/#{result.product_crawl_setting_id}/exclude_external_ids",
-         params: { external_id: result.external_id }, as: :json
+    patch "/api/v1/product_crawl_results/#{result.id}", params: { excluded: true }, as: :json
     expect(response).to have_http_status(:ok)
-    expect(result.product_crawl_setting.reload.exclude_external_ids).to eq([result.external_id])
-    expect(ProductCrawlResult.exists?(result.id)).to be(false)
+    expect(result.reload.excluded_at).to be_present
+
+    get "/api/v1/product_crawl_results"
+    expect(response.parsed_body.fetch("product_crawl_results")).to be_empty
+    get "/api/v1/product_crawl_results", params: { product_crawl_setting_id: result.product_crawl_setting_id, excluded: true }
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([result.id])
+
+    patch "/api/v1/product_crawl_results/#{result.id}", params: { excluded: false }, as: :json
+    expect(result.reload.excluded_at).to be_nil
   end
+
 end
 
 RSpec.describe "Product crawl results", type: :request do
@@ -65,5 +68,8 @@ RSpec.describe "Product crawl results", type: :request do
     get "/api/v1/product_crawl_results"
     expect(response).to have_http_status(:ok)
     expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([second.id, first.id])
+
+    get "/api/v1/product_crawl_results", params: { product_crawl_setting_id: first.product_crawl_setting_id }
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([first.id])
   end
 end

@@ -30,10 +30,11 @@ module ProductAggregationSettings
 
     attr_reader :product_aggregation_setting, :start_date, :end_date
 
-    # 複数の商品計測設定に同じ出品がある場合は external_id で1件にまとめる
+    # 除外した出品は対象外。複数の商品計測設定に同じ出品がある場合は external_id で1件にまとめる
     def purchases_by_date
       @purchases_by_date ||=
         ProductCrawlResult
+        .not_excluded
         .where(bought_date: start_date.in_time_zone.beginning_of_day..end_date.in_time_zone.end_of_day)
         .order(:id)
         .select { |result| Crawl::Search::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty? }

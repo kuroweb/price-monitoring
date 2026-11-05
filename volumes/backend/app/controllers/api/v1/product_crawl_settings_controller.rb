@@ -33,11 +33,6 @@ module Api
         end
       end
 
-      # 保存していない条件で取得し、結果を保存せずに返す
-      def preview
-        render json: Crawl::Search::Preview.call(params: upsert_params), status: :ok
-      end
-
       # 保存済みの条件で取得し、採用した出品を商品計測結果に保存する
       def sync
         render json: ::ProductCrawlSettings::SyncResults.call(product_crawl_setting: @product_crawl_setting),
@@ -48,7 +43,7 @@ module Api
 
       def upsert_params
         params.permit(:name, :enabled, :min_price, :max_price,
-                      search_urls: [], required_keywords: [], exclude_keywords: [], exclude_external_ids: [])
+                      search_urls: [], required_keywords: [], exclude_keywords: [])
       end
 
       def set_product_crawl_setting

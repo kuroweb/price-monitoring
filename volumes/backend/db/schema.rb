@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_06_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_06_000002) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -311,6 +311,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_06_000001) do
     t.boolean "sold"
     t.datetime "bought_date"
     t.datetime "end_date"
+    t.datetime "excluded_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["external_id"], name: "index_product_crawl_results_on_external_id"
@@ -324,7 +325,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_06_000001) do
     t.json "search_urls", default: -> { "(json_array())" }, null: false
     t.json "required_keywords", default: -> { "(json_array())" }, null: false
     t.json "exclude_keywords", default: -> { "(json_array())" }, null: false
-    t.json "exclude_external_ids", default: -> { "(json_array())" }, null: false
     t.integer "min_price"
     t.integer "max_price"
     t.datetime "created_at", null: false

@@ -17,6 +17,7 @@ RSpec.describe ProductAggregationSettings::CalculateResults do
     bought(external_id: "c", name: "Tablet", price: 100)
     bought(external_id: "d", name: "Phone", price: 5_000)
     create(:product_crawl_result, external_id: "e", name: "Phone", price: 300)
+    bought(external_id: "f", name: "Phone", price: 900, excluded_at: Time.current)
 
     described_class.call(product_aggregation_setting:, start_date: date - 1, end_date: date)
 

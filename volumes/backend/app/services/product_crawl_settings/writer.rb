@@ -5,8 +5,7 @@ module ProductCrawlSettings
       values[:search_urls].each { |url| Crawl::Search::UrlRouter.call(url:) }
 
       product_crawl_setting.update!(
-        values.slice(:name, :enabled, :search_urls, :required_keywords, :exclude_keywords, :exclude_external_ids,
-                     :min_price, :max_price)
+        values.slice(:name, :enabled, :search_urls, :required_keywords, :exclude_keywords, :min_price, :max_price)
       )
       product_crawl_setting
     end

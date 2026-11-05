@@ -5,7 +5,7 @@ require "timeout"
 require "nokogiri"
 
 module Crawl::Search
-  class Preview
+  class Crawler
     TIMEOUT_SECONDS = 20
     TOTAL_TIMEOUT_SECONDS = 45
     MAX_RESPONSE_BYTES = 3 * 1024 * 1024

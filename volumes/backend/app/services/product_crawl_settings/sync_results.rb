@@ -1,7 +1,7 @@
 module ProductCrawlSettings
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
   class SyncResults
-    FILTER_KEYS = %i[required_keywords exclude_keywords exclude_external_ids min_price max_price].freeze
+    FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
 
     def self.call(...)
       new(...).call
@@ -12,23 +12,31 @@ module ProductCrawlSettings
     end
 
     def call
-      preview = Crawl::Search::Preview.call(params: preview_params)
+      crawled = Crawl::Search::Crawler.call(params: crawl_params)
       ProductCrawlResult.transaction do
-        save_accepted(preview[:results].select { |result| result[:accepted] })
+        save_matched(crawled[:results].select { |result| (result[:reasons] - ["excluded_listing"]).empty? })
         delete_unmatched
       end
-      preview
+      crawled
     end
 
     private
 
     attr_reader :product_crawl_setting
 
-    def preview_params
-      product_crawl_setting.attributes.symbolize_keys.slice(:search_urls, *FILTER_KEYS)
+    def filter_params
+      product_crawl_setting.attributes.symbolize_keys.slice(*FILTER_KEYS)
     end
 
-    def save_accepted(results)
+    def crawl_params
+      filter_params.merge(
+        search_urls: product_crawl_setting.search_urls,
+        exclude_external_ids: product_crawl_setting.product_crawl_results.excluded.pluck(:external_id)
+      )
+    end
+
+    # 除外した出品も価格などは更新する。excluded_at は行に含めないので上書きしない
+    def save_matched(results)
       return if results.empty?
 
       rows = results.map do |result|
@@ -45,9 +53,8 @@ module ProductCrawlSettings
       ProductCrawlResult.upsert_all(rows, record_timestamps: true)
     end
 
-    # 条件の変更や出品の除外で一致しなくなった保存済みの結果を削除する
+    # 条件の変更で一致しなくなった保存済みの結果を削除する
     def delete_unmatched
-      filter_params = preview_params.slice(*FILTER_KEYS)
       ids = ProductCrawlResult.where(product_crawl_setting_id: product_crawl_setting.id).reject do |result|
         Crawl::Search::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty?
       end.map(&:id)
