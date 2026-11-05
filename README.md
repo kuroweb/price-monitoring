@@ -33,34 +33,38 @@ Docker Composeで各コンテナを起動する。
 ```mermaid
 flowchart LR
   subgraph environment["Docker Compose"]
-    gateway["Nginx"]
-
-    subgraph frontend["Frontend"]
-      nextjs["Next.js"]
+    subgraph ingress["Gateway"]
+      gateway["Nginx"]
     end
 
-    subgraph backend["Backend（BFF）"]
-      rails["Rails（OIDC Client）"]
-    end
+    subgraph application["アプリケーション"]
+      subgraph frontend["Frontend"]
+        nextjs["Next.js"]
+      end
 
-    subgraph batch["Backend（Batch）"]
-      sidekiq["Sidekiq"]
-      playwright["Playwright"]
-      camoufox["Camoufox"]
-    end
+      subgraph backend["Backend（BFF）"]
+        rails["Rails（OIDC Client）"]
+      end
 
-    subgraph backend_data["BFF / Batch用データストア"]
-      mysql[(MySQL)]
-      redis[(Redis)]
-    end
+      subgraph batch["Backend（Batch）"]
+        sidekiq["Sidekiq"]
+        playwright["Playwright"]
+        camoufox["Camoufox"]
+      end
 
-    subgraph auth["Auth Provider"]
-      auth_rails["Rails（OIDC Provider）"]
-    end
+      subgraph backend_data["BFF / Batch用データストア"]
+        mysql[(MySQL)]
+        redis[(Redis)]
+      end
 
-    subgraph auth_data["Auth Provider用データストア"]
-      auth_mysql[(MySQL)]
-      auth_redis[(Redis)]
+      subgraph auth["Auth Provider"]
+        auth_rails["Rails（OIDC Provider）"]
+      end
+
+      subgraph auth_data["Auth Provider用データストア"]
+        auth_mysql[(MySQL)]
+        auth_redis[(Redis)]
+      end
     end
   end
 
