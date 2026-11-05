@@ -1,9 +1,9 @@
 module Crawl
   class Client
     class << self
-      def execute(block_scripts: false)
+      def execute(block_scripts: false, user_agent: RequestBlocklist::USER_AGENT)
         Playwright.connect_to_browser_server(server_url, browser_type: "chromium") do |browser|
-          context = browser.new_context(**context_options)
+          context = browser.new_context(**context_options(user_agent:))
           page = context.new_page
           page.route("**/*", lambda { |route, request|
             blocked_request = RequestBlocklist.blocked_request?(request.url)
@@ -15,8 +15,8 @@ module Crawl
         end
       end
 
-      def context_options
-        { userAgent: RequestBlocklist::USER_AGENT, proxy: DynamicProxy.get }
+      def context_options(user_agent:)
+        { userAgent: user_agent, proxy: DynamicProxy.get }
       end
 
       def server_url

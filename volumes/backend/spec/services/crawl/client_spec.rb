@@ -41,6 +41,12 @@ RSpec.describe Crawl::Client, type: :service do
                        block_scripts: true)).to have_received(:fallback)
     end
 
+    it "user_agent を指定すると、そのユーザーエージェントでコンテキストを作る" do
+      route_for(url: "https://example.com/", resource_type: "document", user_agent: "custom-agent")
+
+      expect(browser).to have_received(:new_context).with(hash_including(userAgent: "custom-agent"))
+    end
+
     it "ブロックリストにある URL はブロックする" do
       expect(route_for(url: "https://analytics.tiktok.com/i18n/pixel/events.js",
                        resource_type: "script")).to have_received(:abort)
