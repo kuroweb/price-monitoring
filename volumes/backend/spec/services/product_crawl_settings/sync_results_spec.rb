@@ -46,4 +46,16 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       name: "Phone blue", price: 100
     )
   end
+
+  it "skips listings without a price while retaining existing rows and accepting zero" do
+    existing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", price: 50)
+    allow(Crawl::Search::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone new", price: nil, product_url: "https://iosys.co.jp/items/a" },
+      { external_id: "missing", name: "Phone", price: nil, product_url: "https://iosys.co.jp/items/missing" },
+      { external_id: "free", name: "Phone", price: 0, product_url: "https://iosys.co.jp/items/free" }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(existing.reload).to have_attributes(name: "Phone old", price: 50)
+    expect(product_crawl_setting.product_crawl_results.pluck(:external_id)).to contain_exactly("a", "free")
+  end
 end

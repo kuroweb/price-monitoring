@@ -62,7 +62,10 @@ export type ProductAggregationResult = {
 }
 
 export type GetProductCrawlSettings = { productCrawlSettings: ProductCrawlSetting[] }
-export type GetProductCrawlResults = { productCrawlResults: ProductCrawlResult[] }
+export type GetProductCrawlResults = {
+  productCrawlResults: ProductCrawlResult[]
+  counts?: { productCrawlSettingId: number; sold: boolean | null; count: number }[]
+}
 export type GetProductCrawlResultsParams = { productCrawlSettingId?: number; excluded?: boolean }
 export type GetProductAggregationSettings = {
   productAggregationSettings: ProductAggregationSetting[]

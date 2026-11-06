@@ -109,7 +109,7 @@ describe('商品計測結果の一覧', () => {
       name: `Phone ${i + 1}`,
     }))
     render(
-      <ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={results} />,
+      <ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={results.slice(0, 8)} counts={[{ sold: true, count: 10 }]} />,
     )
     expect(screen.getAllByRole('article')).toHaveLength(8)
     expect(screen.getAllByRole('button', { name: /の操作$/ })).toHaveLength(8)

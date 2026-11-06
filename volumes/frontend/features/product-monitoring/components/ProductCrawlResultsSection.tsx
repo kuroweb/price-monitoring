@@ -16,15 +16,18 @@ const PREVIEW_COUNT = 8
 interface Props {
   productCrawlSetting: ProductCrawlSetting
   productCrawlResults: ProductCrawlResult[]
+  counts: { sold: boolean | null; count: number }[]
 }
 
 // 一覧では新着の数件だけを横に並べ、除外はここでもできる。全件・絞り込み・取得は詳細画面に任せる
 export default function ProductCrawlResultsSection({
   productCrawlSetting,
   productCrawlResults,
+  counts,
 }: Props) {
   const href = `/product-crawl-results/${productCrawlSetting.id}`
-  const soldCount = productCrawlResults.filter((item) => item.sold === true).length
+  const totalCount = counts.reduce((total, item) => total + item.count, 0)
+  const soldCount = counts.find((item) => item.sold === true)?.count ?? 0
   const { busy, exclude } = useProductCrawlResultActions(productCrawlSetting)
   const [editing, setEditing] = useState(false)
 
@@ -38,7 +41,7 @@ export default function ProductCrawlResultsSection({
             </Link>
           </h3>
           <p className='text-xs opacity-70'>
-            {productCrawlResults.length}件・販売中 {productCrawlResults.length - soldCount}
+            {totalCount}件・販売中 {totalCount - soldCount}
             ・売り切れ {soldCount}
           </p>
         </div>

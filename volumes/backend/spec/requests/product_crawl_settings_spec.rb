@@ -62,6 +62,23 @@ RSpec.describe "Product crawl settings", type: :request do
 end
 
 RSpec.describe "Product crawl results", type: :request do
+  it "returns the newest eight per setting and full counts while detail remains unlimited" do
+    setting = create(:product_crawl_setting)
+    other = create(:product_crawl_setting)
+    results = Array.new(10) { |i| create(:product_crawl_result, product_crawl_setting: setting, sold: i.even?) }
+    excluded = create(:product_crawl_result, product_crawl_setting: setting, excluded_at: Time.current)
+    other_result = create(:product_crawl_result, product_crawl_setting: other)
+    get "/api/v1/product_crawl_results"
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([other_result.id] + results.last(8).reverse.map(&:id))
+    expect(response.parsed_body.fetch("counts")).to include(
+      { "product_crawl_setting_id" => setting.id, "sold" => true, "count" => 5 },
+      { "product_crawl_setting_id" => setting.id, "sold" => false, "count" => 5 }
+    )
+    get "/api/v1/product_crawl_results", params: { product_crawl_setting_id: setting.id }
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq(results.reverse.map(&:id))
+    get "/api/v1/product_crawl_results", params: { excluded: true }
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([excluded.id])
+  end
   it "lists results across crawl settings" do
     first = create(:product_crawl_result)
     second = create(:product_crawl_result)

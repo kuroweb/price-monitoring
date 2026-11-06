@@ -37,6 +37,7 @@ module ProductCrawlSettings
 
     # 除外した出品も価格などは更新する。excluded_at は行に含めないので上書きしない
     def save_matched(results)
+      results = results.reject { |result| result[:price].nil? }
       return if results.empty?
 
       rows = results.map do |result|
@@ -47,7 +48,7 @@ module ProductCrawlSettings
           name: result[:name],
           product_url: result[:product_url],
           thumbnail_url: result[:thumbnail_url],
-          price: result[:price] || 0
+          price: result[:price]
         }
       end
       ProductCrawlResult.upsert_all(rows, record_timestamps: true)

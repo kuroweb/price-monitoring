@@ -44,7 +44,8 @@ module Crawl
         records = Timeout.timeout([remaining, TIMEOUT_SECONDS].min) { self.class.fetch(target) }
         records.each { |record| by_key[record[:external_id]] ||= record.merge(platform: target[:platform]) }
         sources << self.class.source(url, target[:platform], "succeeded", records.size)
-      rescue StandardError
+      rescue StandardError => e
+        Rails.logger.warn("Crawl failed for #{url.split('?', 2).first}: #{e.class}: #{e.message}")
         sources << self.class.source(url, target[:platform], "failed", 0)
       end
 

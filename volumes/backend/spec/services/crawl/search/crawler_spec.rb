@@ -34,6 +34,14 @@ RSpec.describe Crawl::Search::Crawler do
     expect(result[:sources].map { |source| source[:status] }).to eq(%w[failed unsupported succeeded])
   end
 
+  it "logs the failure without the URL query and keeps the public error unchanged" do
+    allow(described_class).to receive(:fetch).and_raise(Timeout::Error, "timed out")
+    allow(Rails.logger).to receive(:warn)
+    result = described_class.call(params: { search_urls: ["https://jp.mercari.com/search?q=secret"] })
+    expect(Rails.logger).to have_received(:warn).with("Crawl failed for https://jp.mercari.com/search: Timeout::Error: timed out")
+    expect(result[:sources].first[:error]).to eq("Crawl failed")
+  end
+
   it "uses AND required words, OR excluded words, and listing exclusion" do
     allow(described_class).to receive(:fetch).and_return([
                                                            { external_id: "same", name: "Phone blue", price: 50,
