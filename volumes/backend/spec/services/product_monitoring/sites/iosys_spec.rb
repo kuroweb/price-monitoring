@@ -2,8 +2,11 @@ require "rails_helper"
 
 RSpec.describe ProductMonitoring::Sites::Iosys do
   it "reads the lazy-loaded iosys thumbnail" do
-    html = %(<li class="item"><a href="/items/phone/1"></a><img src="/dummy.gif" data-src="https://cdn.example/1_S.jpg"><span class="name">Phone</span><span class="price">1,000円</span></li>)
-    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
+    html = <<~HTML
+      <li class="item"><a href="/items/phone/1"></a><img src="/dummy.gif" data-src="https://cdn.example/1_S.jpg">
+      <span class="name">Phone</span><span class="price">1,000円</span></li>
+    HTML
+    allow(described_class).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
     result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
     expect(result[:results].first).to include(external_id: "phone/1", thumbnail_url: "https://cdn.example/1_S.jpg")
   end
@@ -13,7 +16,7 @@ RSpec.describe ProductMonitoring::Sites::Iosys do
       <li class="item"><a href="/items/phone/1"></a><img src="/photos/no_photo_S.jpg">
       <span class="name">Phone</span><div class="price"><span>65,800円</span>～<span>117,800円</span><p>(税込)</p></div></li>
     HTML
-    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
+    allow(described_class).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
     result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
     expect(result[:results].first).to include(price: nil, thumbnail_url: "https://iosys.co.jp/photos/no_photo_S.jpg")
     expect(ProductMonitoring::Crawler.parse_price("20,800円 (税込)")).to eq(20_800)
@@ -22,12 +25,14 @@ RSpec.describe ProductMonitoring::Sites::Iosys do
   end
 
   it "recognizes explicit empty results and rejects an unknown page" do
-    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new('<div id="empty">該当する商品がありません</div>'))
+    allow(described_class).to receive(:fetch_page)
+      .and_return(Struct.new(:body).new('<div id="empty">該当する商品がありません</div>'))
     result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=none"] })
     expect(result[:sources].first[:status]).to eq("succeeded")
     expect(result[:fetched_count]).to eq(0)
-    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new("<html>challenge</html>"))
-    expect(ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=none"] })[:sources].first[:status]).to eq("failed")
+    allow(described_class).to receive(:fetch_page).and_return(Struct.new(:body).new("<html>challenge</html>"))
+    failed = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=none"] })
+    expect(failed[:sources].first[:status]).to eq("failed")
   end
 
   it "connects with TLS verification and limits streamed response size" do
@@ -40,12 +45,13 @@ RSpec.describe ProductMonitoring::Sites::Iosys do
     response = Net::HTTPOK.new("1.1", "200", "OK")
     allow(response).to receive(:read_body) { |&block| block ? block.call("ok") : "ok" }
     allow(http).to receive(:request).and_yield(response).and_return(response)
-    expect(ProductMonitoring::Sites::Iosys.fetch_page(URI("https://iosys.co.jp/items?q=x")).body).to eq("ok")
-    allow(response).to receive(:read_body).and_yield("x" * (ProductMonitoring::Sites::Iosys::MAX_RESPONSE_BYTES + 1))
+    expect(described_class.fetch_page(URI("https://iosys.co.jp/items?q=x")).body).to eq("ok")
+    allow(response).to receive(:read_body).and_yield("x" * (described_class::MAX_RESPONSE_BYTES + 1))
     expect do
-      ProductMonitoring::Sites::Iosys.fetch_page(URI("https://iosys.co.jp/items?q=x"))
+      described_class.fetch_page(URI("https://iosys.co.jp/items?q=x"))
     end.to raise_error(/size limit/)
   end
+
   it "follows only an available next page and preserves other query parameters" do
     uri = URI("https://iosys.co.jp/items?q=ipad+mini&page=2")
     expect(described_class.next_url(uri, Nokogiri::HTML("<html></html>"))).to be_nil
