@@ -53,14 +53,28 @@ module Crawl
 
       def self.fetch(target)
         uri = URI.parse(target[:canonical_url])
-        response = fetch_page(uri)
-        page = Nokogiri::HTML(response.body)
+        html = target[:platform] == "mercari" ? fetch_mercari_page(uri) : fetch_page(uri).body
+        page = Nokogiri::HTML(html)
         results = target[:platform] == "mercari" ? mercari_results(page) : iosys_results(page)
         if results.empty?
           empty = page.at_css(target[:platform] == "mercari" ? ".merEmptyState" : "#empty")
           raise "Search page has no extractable listings" unless empty && !empty.text.strip.empty?
         end
         results
+      end
+
+      def self.fetch_mercari_page(uri)
+        Crawl::Client.execute do |page|
+          response = page.goto(uri.to_s)
+          raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
+
+          sleep(2)
+          30.times do
+            page.mouse.wheel(0, 200)
+            sleep(0.005)
+          end
+          page.content
+        end
       end
 
       # 取得先は UrlRouter で許可したホストの検索ページに限る。リダイレクトは追わず、応答は読み取り中に打ち切る
