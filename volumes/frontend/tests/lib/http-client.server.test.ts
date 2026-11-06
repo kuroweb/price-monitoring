@@ -84,6 +84,15 @@ describe('http（サーバー）', () => {
     })
   })
 
+  it('BFF の error オブジェクト内の入力エラーを保持する', async () => {
+    respond(400, ['{"error":{"code":400,"message":"個別出品の検索URLを指定してください","details":[]}}'])
+    expect(await http('/product_crawl_settings')).toEqual({
+      data: null,
+      status: 400,
+      error: { code: 400, message: '個別出品の検索URLを指定してください', details: [] },
+    })
+  })
+
   it('ステータス不明の応答を 500 として扱う', async () => {
     respond(undefined, [])
     expect(await http('/products')).toEqual({

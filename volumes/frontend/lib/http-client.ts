@@ -179,8 +179,9 @@ function handleHttpError<T>(error: HttpError): ApiResponse<T> {
 }
 
 function handleErrorResponse<T>(status: number, data: unknown): ApiResponse<T> {
-  const errorData = isErrorData(data)
-    ? (normalizeResponseData(data) as ErrorData)
+  const body = isErrorData(data) && 'error' in data ? data.error : data
+  const errorData = isErrorData(body)
+    ? (normalizeResponseData(body) as ErrorData)
     : null
 
   return {
