@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Crawl::ProductCrawlSettings::SyncJob do
+RSpec.describe ProductCrawlSettings::SyncJob do
   let(:setting) { create(:product_crawl_setting) }
 
   before { allow(ProductCrawlSettings::SyncResults).to receive(:call) }

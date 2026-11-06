@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Crawl::Search::UrlRouter do
+RSpec.describe ProductMonitoring::UrlRouter do
   describe ".call" do
     it "routes supported search pages" do
       expect(described_class.call(url: "https://jp.mercari.com/search?keyword=phone")).to eq(

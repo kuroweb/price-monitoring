@@ -47,7 +47,7 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 | 直近30日の集計 | POST `/api/v1/product_aggregation_settings/:id/calculate` |
 | 全商品相場設定の商品日次相場 | GET `/api/v1/product_aggregation_results` |
 
-入力検証（`Crawl::Search::Input`）は保存と「取得して保存」で共有する。必須語・除外語は各50件/各255文字。取得と採否の判定は `Crawl::Search::Crawler` が行う。
+入力検証（`ProductMonitoring::Input`）は保存と「取得して保存」で共有する。必須語・除外語は各50件/各255文字。取得と採否の判定は `ProductMonitoring::Crawler` が行う。
 
 ## 検証記録
 
@@ -56,7 +56,7 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 ## 別端末での再開
 
 - DB追加と除外管理の変更は `20261106000001_create_product_crawl_and_aggregation_tables.rb`、`20261106000002_move_exclusions_to_product_crawl_results.rb`。リポジトリルートで `docker compose exec backend bundle exec rails db:migrate` を実行する。
-- backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/crawl/search`
+- backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/product_monitoring`
 - frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/product-monitoring`。
 
 残作業は販売状態・売れた日時の取得、画面設計の未決事項。

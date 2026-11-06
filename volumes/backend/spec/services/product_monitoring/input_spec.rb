@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Crawl::Search::Input do
+RSpec.describe ProductMonitoring::Input do
   it "normalizes keywords, exclusions and search URLs" do
     result = described_class.call(params: {
                                     required_keywords: [" phone ", "phone", ""],

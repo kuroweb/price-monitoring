@@ -37,7 +37,7 @@ module ProductAggregationSettings
         .not_excluded
         .where(bought_date: start_date.in_time_zone.beginning_of_day..end_date.in_time_zone.end_of_day)
         .order(:id)
-        .select { |result| Crawl::Search::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty? }
+        .select { |result| ProductMonitoring::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty? }
         .uniq(&:external_id)
         .group_by { |result| result.bought_date.in_time_zone.to_date }
     end

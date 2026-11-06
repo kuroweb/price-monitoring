@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe Crawl::Search::Crawler do
+RSpec.describe ProductMonitoring::Crawler do
   it "deduplicates by external_id and applies common inclusive filters" do
     allow(described_class).to receive(:fetch).and_return([
                                                            { external_id: "a", name: "Phone blue", price: 100,

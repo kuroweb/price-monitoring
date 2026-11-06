@@ -44,7 +44,7 @@ RSpec.describe "Product crawl settings", type: :request do
   end
 
   it "syncs saved settings" do
-    allow(Crawl::Search::Crawler).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
                                                                    product_url: "https://iosys.co.jp/items/a" }])
     product_crawl_setting = create(:product_crawl_setting)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
