@@ -28,3 +28,6 @@ products_calculate_daily_purchase_summary_calculator_job:
 crawl_product_crawl_settings_enqueue_sync_job:
   cron: "*/20 * * * *"
   class: "Crawl::ProductCrawlSettings::EnqueueSyncJob"
+product_aggregation_settings_enqueue_calculate_results_job:
+  cron: "0 0 * * *"
+  class: "ProductAggregationSettings::EnqueueCalculateResultsJob"

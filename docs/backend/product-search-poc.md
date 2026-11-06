@@ -16,7 +16,7 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 
 ## 現在の範囲
 
-- 取得は画面からの手動実行に加え、有効な商品計測設定を20分ごとにSidekiqで実行する。集計は画面からの手動実行のみ。
+- 取得は画面からの手動実行に加え、有効な商品計測設定を20分ごとにSidekiqで実行する。集計は画面からの手動実行に加え、全商品相場設定について毎日0時に直近30日分をSidekiqで実行する。
 - 最大5 URL、1ページにつき最大100件。全体の取得時間は45秒、1 URLは20秒を上限とする。
 - 必須語はAND、除外語はOR。カンマ・改行で複数指定する。価格は上下限を含み、空欄は無制限。
 - 出品の除外は商品計測結果の行ごとに `excluded_at` を設定し、通常の結果表示と集計から除く。同じ設定で再取得するときは `external_id` で除外を判定する。
@@ -58,4 +58,4 @@ URLをHTTPSの対応ホスト・検索パスに限定する。検索HTMLは許�
 - backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/crawl/search`
 - frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/product-monitoring`。
 
-残作業はメルカリの動的描画への対応、販売状態・売れた日時の取得、商品相場の定期集計、画面設計の未決事項。
+残作業はメルカリの動的描画への対応、販売状態・売れた日時の取得、画面設計の未決事項。
