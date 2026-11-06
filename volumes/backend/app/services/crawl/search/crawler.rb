@@ -136,8 +136,9 @@ module Crawl
           raise "Listing name is missing" if name.empty?
 
           image = dom.at_css("img")
+          image_url = image&.[]("data-src").presence || image&.[]("src")
           { external_id: id, name: name, price: parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}",
-            thumbnail_url: image&.[]("data-src").presence || image&.[]("src") }
+            thumbnail_url: image_url.present? ? URI.join("https://iosys.co.jp", image_url).to_s : nil }
         end
       end
 
@@ -146,8 +147,9 @@ module Crawl
       end
 
       def self.parse_price(value)
-        digits = value.to_s.gsub(/[^0-9]/, "")
-        digits.empty? ? nil : digits.to_i
+        match = value.to_s.strip.match(/\A[¥￥]?\s*(\d[\d,]*)\s*(?:円)?\s*(?:\(税込\))?\z/)
+        price = match && match[1].delete(",").to_i
+        price if price && price <= Input::MAX_PRICE
       end
 
       def self.apply_filters(item, params)

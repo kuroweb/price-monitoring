@@ -25,6 +25,8 @@ module Crawl
         raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target[0])
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
 
+        validate_iosys_query(uri) if target[1] == "iosys"
+
         { platform: target[1], canonical_url: uri.to_s }
       rescue URI::InvalidURIError
         raise ArgumentError, "URL is malformed"
@@ -33,6 +35,12 @@ module Crawl
       private
 
       attr_reader :url
+
+      def validate_iosys_query(uri)
+        return unless URI.decode_www_form(uri.query).any? { |key, value| key == "t" && value == "g" }
+
+        raise ArgumentError, "イオシスは個別出品の検索URL（t=gなし）を指定してください"
+      end
 
       def validate_url
         return if url.is_a?(String) && url.bytesize <= 2048 && !url.match?(/[\x00-\x20\x7f]/)

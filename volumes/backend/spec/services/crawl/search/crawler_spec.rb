@@ -83,6 +83,19 @@ RSpec.describe Crawl::Search::Crawler do
     expect(result[:results].first).to include(external_id: "phone/1", thumbnail_url: "https://cdn.example/1_S.jpg")
   end
 
+  it "does not turn a price range into a single price and resolves relative iosys images" do
+    html = <<~HTML
+      <li class="item"><a href="/items/phone/1"></a><img src="/photos/no_photo_S.jpg">
+      <span class="name">Phone</span><div class="price"><span>65,800円</span>～<span>117,800円</span><p>(税込)</p></div></li>
+    HTML
+    allow(described_class).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
+    result = described_class.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
+    expect(result[:results].first).to include(price: nil, thumbnail_url: "https://iosys.co.jp/photos/no_photo_S.jpg")
+    expect(described_class.parse_price("20,800円 (税込)")).to eq(20_800)
+    expect(described_class.parse_price("¥1,200")).to eq(1200)
+    expect(described_class.parse_price("2,147,483,648円")).to be_nil
+  end
+
   it "renders the Mercari search page with the existing browser client" do
     page = instance_double(Playwright::Page, mouse: instance_double(Playwright::Mouse), content: "<html></html>")
     allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))

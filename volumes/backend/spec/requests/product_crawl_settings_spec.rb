@@ -34,6 +34,15 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(product_crawl_setting.reload.name).to eq("phone")
   end
 
+  it "rejects an iosys group search when registering a setting" do
+    expect do
+      post "/api/v1/product_crawl_settings",
+           params: params.merge(search_urls: ["https://iosys.co.jp/items?t=g&q=ipad"]), as: :json
+    end.not_to change(ProductCrawlSetting, :count)
+    expect(response).to have_http_status(:bad_request)
+    expect(response.parsed_body.to_s).to include("個別出品", "t=gなし")
+  end
+
   it "syncs saved settings" do
     allow(Crawl::Search::Crawler).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
                                                                    product_url: "https://iosys.co.jp/items/a" }])
