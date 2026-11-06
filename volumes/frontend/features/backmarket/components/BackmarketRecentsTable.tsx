@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import type { BackmarketRecent } from '@/lib/api'
+import type { BackmarketRecent } from '@/features/backmarket/api/types'
 
 interface Props {
   backmarketRecents: BackmarketRecent[]

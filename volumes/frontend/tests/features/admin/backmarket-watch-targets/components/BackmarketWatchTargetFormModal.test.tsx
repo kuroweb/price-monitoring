@@ -2,9 +2,9 @@ import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/features/backmarket/api/actions'
+import type { BackmarketWatchTarget } from '@/features/backmarket/api/types'
 import BackmarketWatchTargetFormModal from '@/features/backmarket/components/BackmarketWatchTargetFormModal'
-import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/lib/actions'
-import type { BackmarketWatchTarget } from '@/lib/api'
 
 const { refresh, successToast, errorToast } = vi.hoisted(() => ({
   refresh: vi.fn(),
@@ -14,6 +14,7 @@ const { refresh, successToast, errorToast } = vi.hoisted(() => ({
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }))
 vi.mock('react-toastify', () => ({ toast: { success: successToast, error: errorToast } }))
+vi.mock('@/features/backmarket/api/actions', () => ({ getBackmarketRecents: vi.fn(), getBackmarketWatchTargets: vi.fn(), createBackmarketWatchTarget: vi.fn(), updateBackmarketWatchTarget: vi.fn(), destroyBackmarketWatchTarget: vi.fn() }))
 vi.mock('@/lib/actions', () => ({
   createBackmarketWatchTarget: vi.fn(),
   updateBackmarketWatchTarget: vi.fn(),

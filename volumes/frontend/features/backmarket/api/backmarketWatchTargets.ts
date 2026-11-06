@@ -5,7 +5,7 @@ import type {
   CreateBackmarketWatchTargetData,
   UpdateBackmarketWatchTargetData,
 } from './types'
-import type { BackmarketWatchTarget } from '../models'
+import type { BackmarketWatchTarget } from './types'
 
 export async function getBackmarketWatchTargets() {
   return http<BackmarketWatchTargetList>('/api/v1/backmarket_watch_targets', {

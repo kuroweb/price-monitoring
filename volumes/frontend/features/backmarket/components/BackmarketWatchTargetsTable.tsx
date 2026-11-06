@@ -5,8 +5,8 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { destroyBackmarketWatchTarget } from '@/lib/actions'
-import type { BackmarketWatchTarget, BackmarketWatchTargetList } from '@/lib/api'
+import { destroyBackmarketWatchTarget } from '@/features/backmarket/api/actions'
+import type { BackmarketWatchTarget, BackmarketWatchTargetList } from '@/features/backmarket/api/types'
 
 import BackmarketWatchTargetFormModal from './BackmarketWatchTargetFormModal'
 

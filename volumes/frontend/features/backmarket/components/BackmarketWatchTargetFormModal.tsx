@@ -12,12 +12,8 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
-import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/lib/actions'
-import type {
-  BackmarketWatchTarget,
-  CreateBackmarketWatchTargetData,
-  UpdateBackmarketWatchTargetData,
-} from '@/lib/api'
+import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/features/backmarket/api/actions'
+import type { BackmarketWatchTarget, CreateBackmarketWatchTargetData, UpdateBackmarketWatchTargetData } from '@/features/backmarket/api/types'
 
 type Props = {
   isOpen: boolean

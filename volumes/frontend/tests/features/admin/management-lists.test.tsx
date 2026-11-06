@@ -3,15 +3,18 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
+import { destroyBackmarketWatchTarget } from '@/features/backmarket/api/actions'
+import type { BackmarketWatchTarget } from '@/features/backmarket/api/types'
 import BackmarketWatchTargetsTable from '@/features/backmarket/components/BackmarketWatchTargetsTable'
 import CategoriesList from '@/features/categories/components/CategoriesList'
 import ProductsTable from '@/features/products/components/ProductsTable'
-import { destroyBackmarketWatchTarget, destroyCategory, destroyProduct } from '@/lib/actions'
-import type { BackmarketWatchTarget, Category, ProductList } from '@/lib/api'
+import { destroyCategory, destroyProduct } from '@/lib/actions'
+import type { Category, ProductList } from '@/lib/api'
 
 const { refresh, errorToast } = vi.hoisted(() => ({ refresh: vi.fn(), errorToast: vi.fn() }))
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }))
 vi.mock('react-toastify', () => ({ toast: { success: vi.fn(), error: errorToast } }))
+vi.mock('@/features/backmarket/api/actions', () => ({ getBackmarketRecents: vi.fn(), getBackmarketWatchTargets: vi.fn(), createBackmarketWatchTarget: vi.fn(), updateBackmarketWatchTarget: vi.fn(), destroyBackmarketWatchTarget: vi.fn() }))
 vi.mock('@/lib/actions', () => ({
   destroyProduct: vi.fn(),
   destroyCategory: vi.fn(),

@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 
+import type { BackmarketWatchTarget } from '@/features/backmarket/api/types'
 import BackmarketWatchTargetFormModal from '@/features/backmarket/components/BackmarketWatchTargetFormModal'
-import type { BackmarketWatchTarget } from '@/lib/api'
 
 interface Props {
   target: BackmarketWatchTarget

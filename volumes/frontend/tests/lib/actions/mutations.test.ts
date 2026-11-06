@@ -1,11 +1,7 @@
 import { revalidatePath } from 'next/cache'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import {
-  createBackmarketWatchTarget,
-  updateBackmarketWatchTarget,
-  destroyBackmarketWatchTarget,
-} from '@/lib/actions/backmarketWatchTargets'
+import { createBackmarketWatchTarget, updateBackmarketWatchTarget, destroyBackmarketWatchTarget } from '@/features/backmarket/api/actions'
 import {
   createCategory,
   updateCategory,
