@@ -12,7 +12,7 @@ import {
   YAxis,
 } from 'recharts'
 
-import type { ProductAggregationResult } from '@/lib/api'
+import type { ProductAggregationResult } from '@/features/product-monitoring/api/types'
 import { formatDate, formatYen } from '@/lib/format'
 
 // 価格と件数は単位が違うため、縦軸を2本にせず別のグラフに分け、日付の位置とホバーを揃える。

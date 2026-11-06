@@ -45,3 +45,26 @@ export type ProductCrawlResult = {
   endDate: string | null
   excludedAt: string | null
 }
+export type ProductAggregationSettingInput = {
+  name: string
+  requiredKeywords: string[]
+  excludeKeywords: string[]
+  minPrice: number | null
+  maxPrice: number | null
+}
+export type ProductAggregationSetting = ProductAggregationSettingInput & { id: number }
+export type ProductAggregationResult = {
+  id: number
+  productAggregationSettingId: number
+  date: string
+  averagePurchasePrice: number | null
+  purchaseCount: number
+}
+
+export type GetProductCrawlSettings = { productCrawlSettings: ProductCrawlSetting[] }
+export type GetProductCrawlResults = { productCrawlResults: ProductCrawlResult[] }
+export type GetProductCrawlResultsParams = { productCrawlSettingId?: number; excluded?: boolean }
+export type GetProductAggregationSettings = {
+  productAggregationSettings: ProductAggregationSetting[]
+}
+export type GetProductAggregationResults = { productAggregationResults: ProductAggregationResult[] }

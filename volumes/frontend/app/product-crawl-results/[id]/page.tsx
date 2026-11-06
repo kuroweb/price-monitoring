@@ -2,8 +2,8 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import Layout from '@/components/layouts/Layout'
-import ProductCrawlResultsDetail from '@/features/product-crawl-results/components/ProductCrawlResultsDetail'
-import { getProductCrawlResults, getProductCrawlSetting } from '@/lib/actions'
+import { getProductCrawlResults, getProductCrawlSetting } from '@/features/product-monitoring/api/actions'
+import ProductCrawlResultsDetail from '@/features/product-monitoring/components/ProductCrawlResultsDetail'
 
 const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const id = Number((await params).id)

@@ -5,8 +5,8 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { setProductCrawlResultExcluded, syncProductCrawlSetting } from '@/lib/actions'
-import type { ProductCrawlResult, ProductCrawlSetting } from '@/lib/api'
+import { setProductCrawlResultExcluded, syncProductCrawlSetting } from '@/features/product-monitoring/api/actions'
+import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
 
 // 一覧と詳細で共有する「取得して保存」と「除外」。どちらかの実行中は二重に実行しない
 export const useProductCrawlResultActions = (productCrawlSetting: ProductCrawlSetting) => {

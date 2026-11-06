@@ -56,6 +56,6 @@ URLをHTTPSの対応ホスト・検索パスに限定する。検索HTMLは許�
 
 - DB追加と除外管理の変更は `20261106000001_create_product_crawl_and_aggregation_tables.rb`、`20261106000002_move_exclusions_to_product_crawl_results.rb`。リポジトリルートで `docker compose exec backend bundle exec rails db:migrate` を実行する。
 - backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/crawl/search`
-- frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/admin/product-crawl-settings tests/features/admin/product-aggregation-settings`。
+- frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/product-monitoring`。
 
 残作業はメルカリの動的描画への対応、販売状態・売れた日時の取得、定期実行、画面設計の未決事項。

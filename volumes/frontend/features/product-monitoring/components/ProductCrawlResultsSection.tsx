@@ -4,8 +4,8 @@ import { useState } from 'react'
 
 import Link from 'next/link'
 
-import ProductCrawlSettingFormModal from '@/features/admin/product-crawl-settings/components/ProductCrawlSettingFormModal'
-import type { ProductCrawlResult, ProductCrawlSetting } from '@/lib/api'
+import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
+import ProductCrawlSettingFormModal from '@/features/product-monitoring/components/ProductCrawlSettingFormModal'
 
 import { useProductCrawlResultActions } from '../hooks/useProductCrawlResultActions'
 

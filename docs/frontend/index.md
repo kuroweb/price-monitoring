@@ -31,11 +31,17 @@
 - 画面ごとの component
 - 画面ごとの hook や小さな補助関数
 - その画面だけで閉じる UI state
+- 置き場所は route ではなく機能で決める。`features/<機能>/` に置き、複数の route（管理画面と閲覧画面など）から使ってよい
+- `features/admin/` には、管理画面だけで使う UI を置く
+- 機能の中は種類で分ける。`api/`（型・API クライアント・server action）・`components/`（画面の部品）・`hooks/`・`lib/`（小さな補助関数）を置く。機能の中のファイルどうしは自由に読み込んでよい
+- `features` どうしは読み込まない。機能をまたいで使うものは `components/ui/` や `lib/` に置くか、`app` で組み立てる
+- どの機能にも依存しない汎用部品は `components/ui/` に置く
 
-### lib/api と lib/actions
+### features/<機能>/api と lib/api・lib/actions
 
-- `lib/api` には HTTP request / response の境界を置く
-- `lib/actions` には server action と path revalidation を置く
+- 機能の通信は `features/<機能>/api/` に置く。`types.ts` に request / response の型、リソースごとのファイルに HTTP request（`lib/http-client` を使う）、`actions.ts` に server action と path revalidation を置く
+- `lib/http-client` と `lib/revalidate-paths` は全機能で共有する土台として `lib/` に置く
+- 既存の機能（商品・カテゴリ・Backmarket）は、まだ `lib/api`（HTTP request / response の境界）と `lib/actions`（server action と path revalidation）を使っている。`features/product-monitoring/` は `features/<機能>/api/` に置いている
 - page や feature から直接 backend の details を広げすぎない
 
 ## 置かない責務
@@ -58,9 +64,9 @@
 ### feature 単位の UI
 
 - `features/products/` が商品一覧や詳細の UI と state を持つ
-- `features/admin/` が管理画面の機能ごとの UI を持つ
+- `features/admin/` が管理画面だけで使う UI（商品・カテゴリ・Backmarket 計測対象）を持つ
 - `features/backmarket-recents/` が Backmarket 直近取得画面の UI を持つ
-- `features/product-crawl-results/` と `features/product-aggregation-results/` が商品計測結果・商品相場の UI を持ち、設定画面の UI は `features/admin/` に置く
+- `features/product-monitoring/` が商品計測（計測設定・計測結果・相場設定・相場）の UI を持つ。結果画面から設定の編集モーダルを開く読み込みや、2つの設定で語句・価格帯の入力欄を共有する読み込みは、同じ機能の中に収まる
 - page は feature を束ねる役に留める
 
 ### 通信境界

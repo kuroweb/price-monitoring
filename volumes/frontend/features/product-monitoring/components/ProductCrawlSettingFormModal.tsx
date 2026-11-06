@@ -16,14 +16,16 @@ import {
   getProductCrawlResults,
   setProductCrawlResultExcluded,
   updateProductCrawlSetting,
-} from '@/lib/actions'
-import type { ProductCrawlResult, ProductCrawlSetting, ProductCrawlSettingInput } from '@/lib/api'
+} from '@/features/product-monitoring/api/actions'
+import type { ProductCrawlResult, ProductCrawlSetting, ProductCrawlSettingInput } from '@/features/product-monitoring/api/types'
+import ProductFilterFields from '@/features/product-monitoring/components/ProductFilterFields'
+import { words } from '@/features/product-monitoring/lib/words'
 import { platformName } from '@/lib/format'
 
-import { searchUrlPlatform, words } from '../lib/platform'
+import { searchUrlPlatform } from '../lib/platform'
 
 import ExcludedListings from './ExcludedListings'
-import ProductFilterFields from './ProductFilterFields'
+
 
 const MAX_SEARCH_URLS = 5
 

@@ -11,10 +11,10 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
-import ProductFilterFields from '@/features/admin/product-crawl-settings/components/ProductFilterFields'
-import { words } from '@/features/admin/product-crawl-settings/lib/platform'
-import { createProductAggregationSetting, updateProductAggregationSetting } from '@/lib/actions'
-import type { ProductAggregationSetting, ProductAggregationSettingInput } from '@/lib/api'
+import { createProductAggregationSetting, updateProductAggregationSetting } from '@/features/product-monitoring/api/actions'
+import type { ProductAggregationSetting, ProductAggregationSettingInput } from '@/features/product-monitoring/api/types'
+import ProductFilterFields from '@/features/product-monitoring/components/ProductFilterFields'
+import { words } from '@/features/product-monitoring/lib/words'
 
 type Props = {
   onClose: () => void

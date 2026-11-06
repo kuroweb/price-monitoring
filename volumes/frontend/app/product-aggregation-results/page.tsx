@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
-import ProductAggregationResultsSection from '@/features/product-aggregation-results/components/ProductAggregationResultsSection'
-import { getAllProductAggregationResults, getProductAggregationSettings } from '@/lib/actions'
+import { getAllProductAggregationResults, getProductAggregationSettings } from '@/features/product-monitoring/api/actions'
+import ProductAggregationResultsSection from '@/features/product-monitoring/components/ProductAggregationResultsSection'
 
 const Page = async () => {
   const [settingsResponse, resultsResponse] = await Promise.all([

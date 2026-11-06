@@ -5,9 +5,9 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import SettingRowMenu from '@/features/admin/product-crawl-settings/components/SettingRowMenu'
-import { destroyProductAggregationSetting } from '@/lib/actions'
-import type { ProductAggregationSetting } from '@/lib/api'
+import SettingRowMenu from '@/components/ui/SettingRowMenu'
+import { destroyProductAggregationSetting } from '@/features/product-monitoring/api/actions'
+import type { ProductAggregationSetting } from '@/features/product-monitoring/api/types'
 
 import ProductAggregationSettingFormModal from './ProductAggregationSettingFormModal'
 

@@ -5,11 +5,11 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { destroyProductCrawlSetting } from '@/lib/actions'
-import type { ProductCrawlSetting } from '@/lib/api'
+import SettingRowMenu from '@/components/ui/SettingRowMenu'
+import { destroyProductCrawlSetting } from '@/features/product-monitoring/api/actions'
+import type { ProductCrawlSetting } from '@/features/product-monitoring/api/types'
 
 import ProductCrawlSettingFormModal from './ProductCrawlSettingFormModal'
-import SettingRowMenu from './SettingRowMenu'
 
 type ModalState = { setting?: ProductCrawlSetting } | null
 

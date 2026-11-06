@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
-import ProductAggregationSettings from '@/features/admin/product-aggregation-settings/components/ProductAggregationSettings'
-import { getProductAggregationSettings } from '@/lib/actions'
+import { getProductAggregationSettings } from '@/features/product-monitoring/api/actions'
+import ProductAggregationSettings from '@/features/product-monitoring/components/ProductAggregationSettings'
 
 const Page = async () => {
   const response = await getProductAggregationSettings()

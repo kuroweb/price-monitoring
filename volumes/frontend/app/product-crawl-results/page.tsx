@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
-import ProductCrawlResultsSection from '@/features/product-crawl-results/components/ProductCrawlResultsSection'
-import { getProductCrawlResults, getProductCrawlSettings } from '@/lib/actions'
+import { getProductCrawlResults, getProductCrawlSettings } from '@/features/product-monitoring/api/actions'
+import ProductCrawlResultsSection from '@/features/product-monitoring/components/ProductCrawlResultsSection'
 
 const Page = async () => {
   const [settingsResponse, resultsResponse] = await Promise.all([

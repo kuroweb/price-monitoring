@@ -5,9 +5,9 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import ProductAggregationSettingFormModal from '@/features/admin/product-aggregation-settings/components/ProductAggregationSettingFormModal'
-import { calculateProductAggregationSetting } from '@/lib/actions'
-import type { ProductAggregationResult, ProductAggregationSetting } from '@/lib/api'
+import { calculateProductAggregationSetting } from '@/features/product-monitoring/api/actions'
+import type { ProductAggregationResult, ProductAggregationSetting } from '@/features/product-monitoring/api/types'
+import ProductAggregationSettingFormModal from '@/features/product-monitoring/components/ProductAggregationSettingFormModal'
 import { formatDate, formatYen } from '@/lib/format'
 
 import ProductAggregationChart from './ProductAggregationChart'

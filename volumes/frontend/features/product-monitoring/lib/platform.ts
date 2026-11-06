@@ -11,12 +11,3 @@ export const searchUrlPlatform = (url: string) => {
     return null
   }
 }
-
-export const words = (value: string) => [
-  ...new Set(
-    value
-      .split(/[\n,、]/)
-      .map((word) => word.trim())
-      .filter(Boolean),
-  ),
-]

@@ -1,7 +1,7 @@
 import NextImage from 'next/image'
 
-import MoreIcon from '@/features/admin/product-crawl-settings/components/MoreIcon'
-import type { ProductCrawlResult } from '@/lib/api'
+import MoreIcon from '@/components/ui/MoreIcon'
+import type { ProductCrawlResult } from '@/features/product-monitoring/api/types'
 import { formatDate, formatYen, platformColors, platformName } from '@/lib/format'
 
 interface Props {

@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
-import ProductCrawlSettings from '@/features/admin/product-crawl-settings/components/ProductCrawlSettings'
-import { getProductCrawlSettings } from '@/lib/actions'
+import { getProductCrawlSettings } from '@/features/product-monitoring/api/actions'
+import ProductCrawlSettings from '@/features/product-monitoring/components/ProductCrawlSettings'
 
 const Page = async () => {
   const response = await getProductCrawlSettings()
