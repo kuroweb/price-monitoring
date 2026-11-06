@@ -165,7 +165,7 @@ jobs:
         run: |
           touch .env
           docker compose build auth-provider
-          docker compose run --rm --no-deps -e RAILS_ENV=test auth-provider bundle exec rubocop
+          docker compose run --rm --no-deps auth-provider bundle exec rubocop
 
   auth_provider_rspec:
     needs: check_changes
