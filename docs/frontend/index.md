@@ -6,6 +6,7 @@
 ## 文書の案内
 
 - [共通のローカル開発手順](../development/index.md) — セットアップ・依存関係・静的検証
+- [商品計測・商品相場PoC](../backend/product-search-poc.md) — 画面の操作と制約
 - [文書全体の索引](../index.md)
 
 ## 判断基準
@@ -51,6 +52,7 @@
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
 - `app/backmarket/page.tsx` が Backmarket 計測結果の入口
+- `app/product-crawl-results/` と `app/product-aggregation-results/` が商品計測結果・商品相場の入口
 - `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
 
 ### feature 単位の UI
@@ -58,6 +60,7 @@
 - `features/products/` が商品一覧や詳細の UI と state を持つ
 - `features/admin/` が管理画面の機能ごとの UI を持つ
 - `features/backmarket-recents/` が Backmarket 直近取得画面の UI を持つ
+- `features/product-crawl-results/` と `features/product-aggregation-results/` が商品計測結果・商品相場の UI を持ち、設定画面の UI は `features/admin/` に置く
 - page は feature を束ねる役に留める
 
 ### 通信境界

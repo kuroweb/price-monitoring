@@ -6,10 +6,9 @@
 ## 文書の案内
 
 - [運用手順](operations/index.md) — Rails 更新と Seed 投入
+- [商品計測・商品相場PoC](product-search-poc.md) — 操作・API・取得方式・制約
 - [共通のローカル開発手順](../development/index.md) — セットアップ・依存関係・テスト
 - [文書全体の索引](../index.md)
-
-- [商品計測・商品相場PoC](product-search-poc.md) — 操作・取得方式・制約
 
 ## 判断基準
 

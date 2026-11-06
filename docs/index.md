@@ -29,6 +29,7 @@
 | 文書の配置・役割・参考事例 | このファイル | 文書規約・索引 |
 | 共通セットアップ、証明書・hosts、起動・停止、依存関係更新、テスト | [ローカル開発](development/index.md) | ハウツー |
 | BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
+| 商品計測・商品相場 PoC の操作・API・制約 | [商品計測・商品相場PoC](backend/product-search-poc.md) | ハウツー・リファレンス |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
 | frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |

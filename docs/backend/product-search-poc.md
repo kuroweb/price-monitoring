@@ -6,7 +6,7 @@
 
 1. [開発手順](../development/index.md)に沿って起動・DB準備する。
 2. `/admin/product-crawl-settings` の「商品計測設定を追加」または各行の「…」メニューの「編集」でモーダルを開き、名前と検索結果URLを入力する。メルカリの `/search?...`、イオシスの `/items?...` が対象。各URLの横にホスト名から判定したサイトを表示する。
-3. 必要なら全URL共通の必須語・除外語・価格帯を設定する。更新モーダルでは、除外した出品を画像・名前・商品ページへのリンクつきで、件数を示して折りたたんで表示し、その場で個別に取り消せる。除外しても結果の行は消さず `excluded_at` で表すため、取得し直しても戻らない。
+3. 必要なら全URL共通の必須語・除外語・価格帯を設定する。更新モーダルでは、除外した出品を画像・名前・商品ページへのリンクつきで、件数を示して折りたたんで表示し、その場で個別に取り消せる。除外は `excluded_at` で表し、条件に一致する行は取得し直しても除外されたままになる。
 4. モーダルの「登録」または「更新」で商品計測設定を保存する。
 5. サイドバーの「商品計測結果」から `/product-crawl-results` を開く。商品計測設定ごとに新着8件のカードを横に並べ、カードの「…」メニューから出品を除外できる。「すべて見る」で `/product-crawl-results/:id` の詳細を開く。詳細では販売状態の絞り込みと並び替えができ、「取得して保存」で採用した出品を保存し、カードの「…」メニューから出品を除外できる。一覧と詳細の「設定を編集」で、商品計測設定の更新モーダルを開ける。
 6. `/admin/product-aggregation-settings` の「商品相場設定を追加」または各行の「…」メニューの「編集」でモーダルを開き、名前・必須語・除外語・価格帯を登録する。
@@ -19,10 +19,10 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 - 取得と集計は画面からの手動実行だけ。Sidekiqの定期実行はない。
 - 最大5 URL、1ページにつき最大100件。全体の取得時間は45秒、1 URLは20秒を上限とする。
 - 必須語はAND、除外語はOR。カンマ・改行で複数指定する。価格は上下限を含み、空欄は無制限。
-- 出品の除外は `external_id` 単位。除外すると保存済みの商品計測結果からも削除する。
-- 取得して保存するとき、保存済みの結果のうち現在の条件に一致しないものを削除する。今回の検索結果に出なかった出品は残す。
-- 商品相場は、条件に一致する商品計測結果のうち `bought_date` が集計日に入るものを、`external_id` で1件にまとめて平均する。
-- 静的HTMLの一覧からは販売状態・売れた日時を取得しないため、`sold`・`bought_date` は保存されない。サムネイルはイオシスの一覧の画像URL、メルカリは出品IDから組み立てたURLを保存する。実データでは商品日次相場が0件になる。集計は `bought_date` を入れた検証データで確認する。
+- 出品の除外は商品計測結果の行ごとに `excluded_at` を設定し、通常の結果表示と集計から除く。同じ設定で再取得するときは `external_id` で除外を判定する。
+- 取得して保存するとき、保存済みの結果のうち現在の条件に一致しないものを、除外済みの行も含めて削除する。今回の検索結果に出なかった出品は、条件に一致していれば残す。
+- 商品相場は、除外されておらず条件に一致する商品計測結果のうち、`bought_date` が集計期間に入るものを `external_id` で1件にまとめ、日ごとに平均する。
+- 静的HTMLの一覧からは販売状態・売れた日時を取得しないため、新規に取得した結果には `sold`・`bought_date` が保存されない。サムネイルはイオシスの一覧の画像URL、メルカリは出品IDから組み立てたURLを保存する。実データだけでは各日の購入件数は0件になる。集計は `bought_date` を入れた検証データで確認する。
 
 ## 取得方式と制限
 
@@ -54,7 +54,7 @@ URLをHTTPSの対応ホスト・検索パスに限定する。検索HTMLは名�
 
 ## 別端末での再開
 
-- DB追加は `20261106000001_create_product_crawl_and_aggregation_tables.rb`。backendコンテナで `bundle exec rails db:migrate` を実行する。
+- DB追加と除外管理の変更は `20261106000001_create_product_crawl_and_aggregation_tables.rb`、`20261106000002_move_exclusions_to_product_crawl_results.rb`。リポジトリルートで `docker compose exec backend bundle exec rails db:migrate` を実行する。
 - backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/crawl/search`
 - frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/admin/product-crawl-settings tests/features/admin/product-aggregation-settings`。
 
