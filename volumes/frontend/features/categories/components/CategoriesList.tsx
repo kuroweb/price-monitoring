@@ -4,8 +4,9 @@ import { Fragment, useRef, useState } from 'react'
 
 import { toast } from 'react-toastify'
 
-import { destroyCategory } from '@/lib/actions'
-import type { Category, GetCategoriesStructured } from '@/lib/api'
+import { destroyCategory } from '@/features/categories/api/actions'
+import type { GetCategoriesStructured } from '@/features/categories/api/types'
+import type { Category } from '@/lib/api'
 
 import { useUpdateCategoryModalState } from '../hooks/useUpdateCategoryModalState'
 

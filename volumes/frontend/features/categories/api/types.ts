@@ -1,4 +1,4 @@
-import type { Category } from '../models'
+import type { Category } from '@/lib/api/models/categories'
 
 export type GetCategoriesParams = {
   rootOnly?: boolean

@@ -1,3 +1,4 @@
+import type { Category } from '@/lib/api/models/categories'
 import { http } from '@/lib/http-client'
 
 import type {
@@ -10,7 +11,6 @@ import type {
   UpdateCategoryData,
   GetCategoriesStructured,
 } from './types'
-import type { Category } from '../models'
 
 const BASE_PATH = '/api/v1/categories'
 

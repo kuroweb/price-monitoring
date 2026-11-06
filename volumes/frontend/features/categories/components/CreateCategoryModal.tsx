@@ -10,8 +10,9 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
-import { createCategory } from '@/lib/actions'
-import type { Category, CreateCategoryData } from '@/lib/api'
+import { createCategory } from '@/features/categories/api/actions'
+import type { CreateCategoryData } from '@/features/categories/api/types'
+import type { Category } from '@/lib/api'
 
 import { useCreateCategoryModalState } from '../hooks/useCreateCategoryModalState'
 

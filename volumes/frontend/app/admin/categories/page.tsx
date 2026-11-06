@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
+import { getCategories, getCategoriesStructured } from '@/features/categories/api/actions'
 import CategoriesList from '@/features/categories/components/CategoriesList'
 import { useCreateCategoryModalQuery } from '@/features/categories/hooks/useCreateCategoryModalState'
-import { getCategories, getCategoriesStructured } from '@/lib/actions'
 
 const Page = async ({
   searchParams,

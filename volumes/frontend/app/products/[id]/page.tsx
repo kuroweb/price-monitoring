@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import Layout from '@/components/layouts/Layout'
+import { getCategories } from '@/features/categories/api/actions'
 import AnalysisChart from '@/features/products/components/AnalysisChart'
 import Pagination from '@/features/products/components/Pagination'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
@@ -19,7 +20,7 @@ import {
 } from '@/features/products/hooks/useStatusState'
 import { useUpdateProductModalQuery } from '@/features/products/hooks/useUpdateProductModalState'
 import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
-import { getCategories, getProduct, getProductPrice } from '@/lib/actions'
+import { getProduct, getProductPrice } from '@/lib/actions'
 
 const Page = async ({
   params,

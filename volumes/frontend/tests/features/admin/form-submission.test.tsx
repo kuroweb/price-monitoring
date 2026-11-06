@@ -6,16 +6,18 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/features/backmarket/api/actions'
 import type { BackmarketWatchTarget } from '@/features/backmarket/api/types'
 import BackmarketWatchTargetFormModal from '@/features/backmarket/components/BackmarketWatchTargetFormModal'
+import { createCategory, updateCategory } from '@/features/categories/api/actions'
 import CreateCategoryModal from '@/features/categories/components/CreateCategoryModal'
 import UpdateCategoryModal from '@/features/categories/components/UpdateCategoryModal'
 import CreateProductModal from '@/features/products/components/CreateProductModal'
 import UpdateProductModal from '@/features/products/components/UpdateProductModal'
-import { createCategory, updateCategory, createProduct, updateProduct } from '@/lib/actions'
+import { createProduct, updateProduct } from '@/lib/actions'
 import type { Category, ProductList } from '@/lib/api'
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
 vi.mock('react-toastify', () => ({ toast: { success: vi.fn(), error: vi.fn() } }))
 vi.mock('@/features/backmarket/api/actions', () => ({ getBackmarketRecents: vi.fn(), getBackmarketWatchTargets: vi.fn(), createBackmarketWatchTarget: vi.fn(), updateBackmarketWatchTarget: vi.fn(), destroyBackmarketWatchTarget: vi.fn() }))
+vi.mock('@/features/categories/api/actions', () => ({ getCategories: vi.fn(), getCategoriesStructured: vi.fn(), createCategory: vi.fn(), updateCategory: vi.fn(), destroyCategory: vi.fn() }))
 vi.mock('@/lib/actions', () => ({
   createBackmarketWatchTarget: vi.fn(),
   updateBackmarketWatchTarget: vi.fn(),

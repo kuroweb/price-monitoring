@@ -1,6 +1,5 @@
 export * from './products'
 export * from './productPrices'
-export * from './categories'
 export * from './yahooAuctionCrawlSettings'
 export * from './mercariCrawlSettings'
 export * from './iosysCrawlSettings'
