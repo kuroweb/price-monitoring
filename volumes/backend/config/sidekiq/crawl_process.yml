@@ -19,3 +19,5 @@ production:
   - ['crawl_pc_koubou_sync_job', 1]
   - ['crawl_used_sofmap_enqueue_sync_job', 1]
   - ['crawl_used_sofmap_sync_job', 1]
+  - ['crawl_product_crawl_settings_enqueue_sync_job', 1]
+  - ['crawl_product_crawl_settings_sync_job', 1]
