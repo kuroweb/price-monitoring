@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
-import CategoriesList from '@/features/admin/categories/components/CategoriesList'
-import { useCreateCategoryModalQuery } from '@/features/admin/categories/components/create-category-modal/hooks/useCreateCategoryModalState'
+import CategoriesList from '@/features/categories/components/CategoriesList'
+import { useCreateCategoryModalQuery } from '@/features/categories/hooks/useCreateCategoryModalState'
 import { getCategories, getCategoriesStructured } from '@/lib/actions'
 
 const Page = async ({

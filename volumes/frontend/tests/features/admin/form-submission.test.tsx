@@ -4,10 +4,10 @@ import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import BackmarketWatchTargetFormModal from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetFormModal'
-import CreateCategoryModal from '@/features/admin/categories/components/create-category-modal/CreateCategoryModal'
-import UpdateCategoryModal from '@/features/admin/categories/components/update-category-modal/UpdateCategoryModal'
 import UpdateProductModal from '@/features/admin/products/common/components/update-product-modal/UpdateProductModal'
 import CreateProductModal from '@/features/admin/products/components/create-product-modal/CreateProductModal'
+import CreateCategoryModal from '@/features/categories/components/CreateCategoryModal'
+import UpdateCategoryModal from '@/features/categories/components/UpdateCategoryModal'
 import {
   createBackmarketWatchTarget,
   updateBackmarketWatchTarget,

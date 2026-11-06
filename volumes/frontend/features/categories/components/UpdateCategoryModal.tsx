@@ -1,6 +1,7 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
@@ -10,45 +11,66 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
-import { createCategory } from '@/lib/actions'
-import type { Category, CreateCategoryData } from '@/lib/api'
+import { updateCategory } from '@/lib/actions'
+import type { Category } from '@/lib/api'
 
-import { useCreateCategoryModalState } from './hooks/useCreateCategoryModalState'
+import { useUpdateCategoryModalState } from '../hooks/useUpdateCategoryModalState'
 
-import type { SubmitHandler } from 'react-hook-form'
+const UpdateCategoryModal = ({
+  category,
+  categories,
+}: {
+  category?: Category
+  categories: Category[]
+}) => {
+  const [modal, setModal] = useUpdateCategoryModalState()
 
-const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
-  const router = useRouter()
-  const [modal, setModal] = useCreateCategoryModalState()
+  const defaultValues = {
+    name: category?.name ?? '',
+    parentId: category?.parentId ?? null,
+  }
 
   const {
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting },
-  } = useForm<CreateCategoryData>({
-    defaultValues: {
-      name: '',
-      parentId: null,
-    },
-  })
+    formState: { errors, isSubmitting },
+  } = useForm({ defaultValues })
 
-  const onSubmit: SubmitHandler<CreateCategoryData> = async (data) => {
+  useEffect(() => {
+    if (category) {
+      reset({
+        name: category.name,
+        parentId: category.parentId,
+      })
+    }
+  }, [category, reset])
+
+  const onSubmit = async (data: { name: string; parentId: number | null }) => {
+    if (!category) return
+
     try {
-      const result = await createCategory(data)
+      const result = await updateCategory(category.id, {
+        name: data.name,
+        parentId: data.parentId,
+      })
 
       if (result.status === 200) {
-        toast.success('カテゴリを追加しました')
-        reset({ name: '', parentId: null })
+        toast.success('カテゴリを更新しました')
         setModal(false)
       } else {
-        toast.error('追加に失敗しました')
+        toast.error('更新に失敗しました')
       }
-      router.refresh()
     } catch {
-      toast.error('追加に失敗しました')
+      toast.error('更新に失敗しました')
     }
   }
+
+  const availableParentCategories = categories.filter((c) => {
+    if (!category) return true
+    if (c.id === category.id) return false
+    return true
+  })
 
   return (
     <>
@@ -59,7 +81,7 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <ScrollableModalBox title='カテゴリを追加' onClose={() => setModal(false)}>
+        <ScrollableModalBox title='カテゴリを編集' onClose={() => setModal(false)}>
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
               <div className='divider pt-6'>カテゴリ情報</div>
@@ -75,16 +97,20 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
                   className='select w-full'
                 >
                   <option value=''>なし</option>
-                  {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
+                  {availableParentCategories.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.name}
                     </option>
                   ))}
                 </select>
               </fieldset>
               <fieldset disabled={isSubmitting} className='fieldset w-full'>
                 <legend className='fieldset-legend'>カテゴリ名</legend>
-                <input {...register('name', { required: true })} className='input w-full' />
+                <input
+                  {...register('name', { required: 'カテゴリ名は必須です' })}
+                  className='input w-full'
+                />
+                {errors.name && <span className='text-sm text-error'>{errors.name.message}</span>}
               </fieldset>
             </ScrollableModalBody>
             <ScrollableModalFooter>
@@ -93,7 +119,7 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
                 type='submit'
                 className='btn btn-primary mt-4 w-full max-sm:mt-0'
               >
-                {isSubmitting ? '登録中…' : '登録'}
+                {isSubmitting ? '保存中…' : '更新'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>
@@ -109,4 +135,4 @@ const CreateCategoryModal = ({ categories }: { categories: Category[] }) => {
   )
 }
 
-export default CreateCategoryModal
+export default UpdateCategoryModal

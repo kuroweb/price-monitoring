@@ -3,7 +3,7 @@ import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
 import BackmarketWatchTargetsTable from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetsTable'
-import CategoriesList from '@/features/admin/categories/components/CategoriesList'
+import CategoriesList from '@/features/categories/components/CategoriesList'
 import ProductPriceList from '@/features/products/components/ProductPriceList'
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))

@@ -7,9 +7,10 @@ import { toast } from 'react-toastify'
 import { destroyCategory } from '@/lib/actions'
 import type { Category, GetCategoriesStructured } from '@/lib/api'
 
-import CreateCategoryModal from './create-category-modal/CreateCategoryModal'
-import UpdateCategoryModal from './update-category-modal/UpdateCategoryModal'
-import { useUpdateCategoryModalState } from './update-category-modal/hooks/useUpdateCategoryModalState'
+import { useUpdateCategoryModalState } from '../hooks/useUpdateCategoryModalState'
+
+import CreateCategoryModal from './CreateCategoryModal'
+import UpdateCategoryModal from './UpdateCategoryModal'
 
 const CategoriesList = ({
   structuredCategories,
