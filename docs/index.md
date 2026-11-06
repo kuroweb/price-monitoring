@@ -9,6 +9,7 @@
 | ルートの `README.md` | 初めてリポジトリを見る人、開発参加者 | 目的、技術スタック、全体構成、開発・設計・運用文書への入口 | 詳細な操作手順、AI 固有の制約 |
 | ルートの `AGENTS.md` | AI エージェント | 必ず守る実行制約、言語ツールの実行先、作業・検証の判断基準、エージェント設定の正本 | 初回セットアップ全文、コマンド一覧、詳細な設計解説 |
 | `docs/` | 対象領域を開発・運用する人と、その作業を行う AI | 領域別の設計解説、目的別の操作手順、参照資料。`index.md` を文書の入口とし、このファイルは索引と文書規約 | README の目的・全体構成の再掲、AI 固有の制約の複製 |
+| `docs/specs/` | 機能を検討・実装する開発者と、その作業を行う AI | 機能ごとの要件・設計（`specs/<機能名>/`）。実装前の検討から実装中の判断まで | 実装後に定着した操作手順・テーブル定義の正本（各領域の文書に置き、仕様からリンクする） |
 | `volumes/*/README.md` | アプリのディレクトリから読み始める人・AI | そのアプリの識別と、ルート README・担当領域の正本文書へのリンク | 起動・テスト・デプロイ手順の複製、フレームワーク生成時の一般的な案内 |
 
 ## 領域別の入口
@@ -19,6 +20,7 @@
 - [認証](auth-provider/index.md)
 - [Database](database/index.md)
 - [CI/CD と自動レビュー](cicd/index.md)
+- [仕様](specs/index.md)
 
 ## 話題ごとの正本と索引
 
@@ -34,6 +36,8 @@
 | Orca の worktree の setup・初期化・ポート | [Orca の worktree](development/worktree.md) | ハウツー |
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](development/remote.md) | ハウツー |
 | BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
+| 商品計測と相場集計の要件・テーブル設計・画面設計 | [商品計測と相場集計の仕様](specs/product-monitoring/index.md) | 仕様 |
+| 商品計測・商品相場 PoC の操作・API・制約 | [商品計測・商品相場PoC](backend/product-search-poc.md) | ハウツー・リファレンス |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
 | frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |
