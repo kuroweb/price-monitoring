@@ -5,6 +5,7 @@ module ProductMonitoring
     TIMEOUT_SECONDS = 20
     TOTAL_TIMEOUT_SECONDS = 45
     MAX_RESULTS_PER_URL = 100
+    MAX_PAGES_PER_URL = 5
 
     def self.call(...)
       new(...).call
@@ -48,7 +49,16 @@ module ProductMonitoring
     private :params, :sources, :by_key, :deadline, :crawl_url, :crawl_target
 
     def self.fetch(target)
-      target[:site].fetch(URI.parse(target[:canonical_url]))
+      uri = URI.parse(target[:canonical_url])
+      records = []
+      MAX_PAGES_PER_URL.times do
+        page_records, next_uri = target[:site].fetch(uri)
+        records.concat(page_records.first(MAX_RESULTS_PER_URL - records.size))
+        break if page_records.empty? || next_uri.nil? || records.size >= MAX_RESULTS_PER_URL
+
+        uri = next_uri
+      end
+      records
     end
 
     def self.listing_nodes(page, selector)

@@ -3,9 +3,9 @@ require "nokogiri"
 module ProductMonitoring
   module Sites
     class Mercari
-      HOST = "jp.mercari.com"
+      HOST = "jp.mercari.com".freeze
       PATH = %r{\A/search\z}
-      PLATFORM = "mercari"
+      PLATFORM = "mercari".freeze
 
       def self.validate_query(_uri); end
 
@@ -16,7 +16,17 @@ module ProductMonitoring
           empty = page.at_css(".merEmptyState")
           raise "Search page has no extractable listings" unless empty && !empty.text.strip.empty?
         end
-        results
+        [results, next_url(uri, page)]
+      end
+
+      def self.next_url(uri, page)
+        return unless page.at_css("[data-testid='pagination-next-button']")
+
+        query = URI.decode_www_form(uri.query)
+        current = query.to_h.fetch("page_token", "v1:0").delete_prefix("v1:").to_i
+        query.reject! { |key, _| key == "page_token" }
+        query << ["page_token", "v1:#{current + 1}"]
+        uri.dup.tap { |next_uri| next_uri.query = URI.encode_www_form(query) }
       end
 
       def self.fetch_mercari_page(uri)

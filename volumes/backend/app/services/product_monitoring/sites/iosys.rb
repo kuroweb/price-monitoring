@@ -4,9 +4,9 @@ require "nokogiri"
 module ProductMonitoring
   module Sites
     class Iosys
-      HOST = "iosys.co.jp"
+      HOST = "iosys.co.jp".freeze
       PATH = %r{\A/items/?\z}
-      PLATFORM = "iosys"
+      PLATFORM = "iosys".freeze
       MAX_RESPONSE_BYTES = 3 * 1024 * 1024
 
       def self.validate_query(uri)
@@ -22,7 +22,17 @@ module ProductMonitoring
           empty = page.at_css("#empty")
           raise "Search page has no extractable listings" unless empty && !empty.text.strip.empty?
         end
-        results
+        [results, next_url(uri, page)]
+      end
+
+      def self.next_url(uri, page)
+        return unless page.at_css(".page-link[rel='next']")
+
+        query = URI.decode_www_form(uri.query)
+        current = query.to_h.fetch("page", "1").to_i
+        query.reject! { |key, _| key == "page" }
+        query << ["page", [(current + 1), 2].max.to_s]
+        uri.dup.tap { |next_uri| next_uri.query = URI.encode_www_form(query) }
       end
 
       # 取得先は UrlRouter で許可したホストの検索ページに限る。リダイレクトは追わず、応答は読み取り中に打ち切る

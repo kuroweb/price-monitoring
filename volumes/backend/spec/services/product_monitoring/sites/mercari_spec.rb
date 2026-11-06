@@ -30,4 +30,19 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
     expect { ProductMonitoring::Sites::Mercari.fetch_mercari_page(URI("https://jp.mercari.com/search?q=phone")) }
       .to raise_error(/Non-success HTTP response/)
   end
+  it "follows only an available next page and preserves other query parameters" do
+    uri = URI("https://jp.mercari.com/search?keyword=ipad%20pro&page_token=v1%3A2")
+    expect(described_class.next_url(uri, Nokogiri::HTML("<html></html>"))).to be_nil
+    next_uri = described_class.next_url(uri, Nokogiri::HTML('<button data-testid="pagination-next-button"></button>'))
+    expect(URI.decode_www_form(next_uri.query).to_h).to include("page_token" => "v1:3")
+    expect(URI.decode_www_form(next_uri.query).to_h).to include("keyword" => "ipad pro")
+  end
+
+  it "stops after the maximum number of pages" do
+    uri = URI("https://jp.mercari.com/search?keyword=ipad%20pro&page_token=v1%3A2")
+    allow(described_class).to receive(:fetch).and_return([[{ external_id: "one" }], uri])
+    result = ProductMonitoring::Crawler.fetch(site: described_class, canonical_url: uri.to_s)
+    expect(described_class).to have_received(:fetch).exactly(ProductMonitoring::Crawler::MAX_PAGES_PER_URL).times
+    expect(result.size).to eq(ProductMonitoring::Crawler::MAX_PAGES_PER_URL)
+  end
 end
