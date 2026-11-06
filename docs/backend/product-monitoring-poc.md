@@ -29,6 +29,8 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 
 入力URLをHTTPSの対応ホスト・検索パスに限定する。イオシスはHTTPSで取得し、証明書のホスト検証を行い、リダイレクトを追わず、応答は読み取り中に3 MiBで打ち切る。メルカリは既存のPlaywrightクライアントでJavaScriptを実行して描画し、ブラウザのリダイレクトやサブリソース通信を許可する。メルカリの応答にはストリーミングのサイズ上限を適用しない。両者とも取得したHTMLはNokogiriで解析する。
 
+サイト固有のURL判定・取得・解析は `ProductMonitoring::Sites::Mercari` と `Sites::Iosys` にまとめ、共通処理は `ProductMonitoring::Crawler` が担う。サイトを追加するときはサイトクラスを追加し、`UrlRouter::SITES` に登録する。
+
 サイト側の拒否やDOMの不一致は失敗とし、成功したようなサンプル結果へ置き換えない。
 
 ログ・エラー通知へ入力URLを流さないため、取得失敗の表示は固定文言にしている。Datadog/BugSnagの既存設定は変更しない。

@@ -4,10 +4,10 @@ RSpec.describe ProductMonitoring::UrlRouter do
   describe ".call" do
     it "routes supported search pages" do
       expect(described_class.call(url: "https://jp.mercari.com/search?keyword=phone")).to eq(
-        platform: "mercari", canonical_url: "https://jp.mercari.com/search?keyword=phone"
+        platform: "mercari", canonical_url: "https://jp.mercari.com/search?keyword=phone", site: ProductMonitoring::Sites::Mercari
       )
       expect(described_class.call(url: "https://iosys.co.jp/items?q=phone")).to eq(
-        platform: "iosys", canonical_url: "https://iosys.co.jp/items?q=phone"
+        platform: "iosys", canonical_url: "https://iosys.co.jp/items?q=phone", site: ProductMonitoring::Sites::Iosys
       )
     end
 

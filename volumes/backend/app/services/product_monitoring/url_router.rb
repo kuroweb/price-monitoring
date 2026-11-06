@@ -2,10 +2,7 @@ require "uri"
 
 module ProductMonitoring
   class UrlRouter
-    TARGETS = {
-      "jp.mercari.com" => [%r{\A/search\z}, "mercari"],
-      "iosys.co.jp" => [%r{\A/items/?\z}, "iosys"]
-    }.freeze
+    SITES = [Sites::Mercari, Sites::Iosys].freeze
 
     def self.call(...)
       new(...).call
@@ -19,14 +16,14 @@ module ProductMonitoring
       validate_url
       uri = URI.parse(url)
       validate_uri(uri)
-      target = TARGETS[uri.host&.downcase]
+      target = SITES.find { |site| site::HOST == uri.host&.downcase }
       raise ArgumentError, "URL host is unsupported" unless target
-      raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target[0])
+      raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target::PATH)
       raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
 
-      validate_iosys_query(uri) if target[1] == "iosys"
+      target.validate_query(uri)
 
-      { platform: target[1], canonical_url: uri.to_s }
+      { platform: target::PLATFORM, canonical_url: uri.to_s, site: target }
     rescue URI::InvalidURIError
       raise ArgumentError, "URL is malformed"
     end
@@ -34,12 +31,6 @@ module ProductMonitoring
     private
 
     attr_reader :url
-
-    def validate_iosys_query(uri)
-      return unless URI.decode_www_form(uri.query).any? { |key, value| key == "t" && value == "g" }
-
-      raise ArgumentError, "イオシスは個別出品の検索URL（t=gなし）を指定してください"
-    end
 
     def validate_url
       return if url.is_a?(String) && url.bytesize <= 2048 && !url.match?(/[\x00-\x20\x7f]/)

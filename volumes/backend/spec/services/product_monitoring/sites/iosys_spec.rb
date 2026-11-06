@@ -1,0 +1,49 @@
+require "rails_helper"
+
+RSpec.describe ProductMonitoring::Sites::Iosys do
+  it "reads the lazy-loaded iosys thumbnail" do
+    html = %(<li class="item"><a href="/items/phone/1"></a><img src="/dummy.gif" data-src="https://cdn.example/1_S.jpg"><span class="name">Phone</span><span class="price">1,000円</span></li>)
+    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
+    result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
+    expect(result[:results].first).to include(external_id: "phone/1", thumbnail_url: "https://cdn.example/1_S.jpg")
+  end
+
+  it "does not turn a price range into a single price and resolves relative iosys images" do
+    html = <<~HTML
+      <li class="item"><a href="/items/phone/1"></a><img src="/photos/no_photo_S.jpg">
+      <span class="name">Phone</span><div class="price"><span>65,800円</span>～<span>117,800円</span><p>(税込)</p></div></li>
+    HTML
+    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
+    result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
+    expect(result[:results].first).to include(price: nil, thumbnail_url: "https://iosys.co.jp/photos/no_photo_S.jpg")
+    expect(ProductMonitoring::Crawler.parse_price("20,800円 (税込)")).to eq(20_800)
+    expect(ProductMonitoring::Crawler.parse_price("¥1,200")).to eq(1200)
+    expect(ProductMonitoring::Crawler.parse_price("2,147,483,648円")).to be_nil
+  end
+
+  it "recognizes explicit empty results and rejects an unknown page" do
+    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new('<div id="empty">該当する商品がありません</div>'))
+    result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=none"] })
+    expect(result[:sources].first[:status]).to eq("succeeded")
+    expect(result[:fetched_count]).to eq(0)
+    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch_page).and_return(Struct.new(:body).new("<html>challenge</html>"))
+    expect(ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=none"] })[:sources].first[:status]).to eq("failed")
+  end
+
+  it "connects with TLS verification and limits streamed response size" do
+    http = instance_double(Net::HTTP)
+    allow(Net::HTTP).to receive(:new).with("iosys.co.jp", 443, nil).and_return(http)
+    %i[use_ssl= verify_mode= open_timeout= read_timeout= write_timeout=].each do |method|
+      allow(http).to receive(method)
+    end
+    allow(http).to receive(:start).and_yield(http)
+    response = Net::HTTPOK.new("1.1", "200", "OK")
+    allow(response).to receive(:read_body) { |&block| block ? block.call("ok") : "ok" }
+    allow(http).to receive(:request).and_yield(response).and_return(response)
+    expect(ProductMonitoring::Sites::Iosys.fetch_page(URI("https://iosys.co.jp/items?q=x")).body).to eq("ok")
+    allow(response).to receive(:read_body).and_yield("x" * (ProductMonitoring::Sites::Iosys::MAX_RESPONSE_BYTES + 1))
+    expect do
+      ProductMonitoring::Sites::Iosys.fetch_page(URI("https://iosys.co.jp/items?q=x"))
+    end.to raise_error(/size limit/)
+  end
+end
