@@ -16,7 +16,7 @@ module ProductMonitoring
       validate_url
       uri = URI.parse(url)
       validate_uri(uri)
-      target = SITES.find { |site| site::HOST == uri.host&.downcase }
+      target = SITES.find { |site| uri.host&.downcase == site::HOST }
       raise ArgumentError, "URL host is unsupported" unless target
       raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target::PATH)
       raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
