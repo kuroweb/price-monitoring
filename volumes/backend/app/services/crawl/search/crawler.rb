@@ -1,5 +1,3 @@
-require "ipaddr"
-require "socket"
 require "net/http"
 require "timeout"
 require "nokogiri"
@@ -11,10 +9,6 @@ module Crawl
       TOTAL_TIMEOUT_SECONDS = 45
       MAX_RESPONSE_BYTES = 3 * 1024 * 1024
       MAX_RESULTS_PER_URL = 100
-      NON_PUBLIC_V4 = %w[0.0.0.0/8 10.0.0.0/8 100.64.0.0/10 127.0.0.0/8 169.254.0.0/16 172.16.0.0/12 192.0.0.0/24
-                         192.0.2.0/24 192.168.0.0/16 198.18.0.0/15 198.51.100.0/24 203.0.113.0/24 224.0.0.0/4 240.0.0.0/4].map do |range|
-        IPAddr.new(range)
-      end.freeze
 
       def self.call(...)
         new(...).call
@@ -58,7 +52,7 @@ module Crawl
 
       def self.fetch(target)
         uri = URI.parse(target[:canonical_url])
-        response = fetch_pinned(uri)
+        response = fetch_page(uri)
         page = Nokogiri::HTML(response.body)
         results = target[:platform] == "mercari" ? mercari_results(page) : iosys_results(page)
         if results.empty?
@@ -68,11 +62,9 @@ module Crawl
         results
       end
 
-      def self.fetch_pinned(uri)
-        addresses = Socket.getaddrinfo(uri.host, 443, nil, :STREAM).map { |entry| entry[3] }.uniq
-        raise "No public address" if addresses.empty? || addresses.any? { |address| !public_address?(address) }
-
-        http = pinned_http(uri, addresses.first)
+      # 取得先は UrlRouter で許可したホストの検索ページに限る。リダイレクトは追わず、応答は読み取り中に打ち切る
+      def self.fetch_page(uri)
+        http = build_http(uri)
         request = Net::HTTP::Get.new(uri.request_uri, { "User-Agent" => Crawl::RequestBlocklist::USER_AGENT })
         body = +""
         response = http.start do |connection|
@@ -84,9 +76,8 @@ module Crawl
         response
       end
 
-      def self.pinned_http(uri, address)
+      def self.build_http(uri)
         http = Net::HTTP.new(uri.host, 443, nil)
-        http.ipaddr = address
         http.use_ssl = true
         http.verify_mode = OpenSSL::SSL::VERIFY_PEER
         http.open_timeout = 5
@@ -103,15 +94,6 @@ module Crawl
 
           body << chunk
         end
-      end
-
-      def self.public_address?(address)
-        ip = IPAddr.new(address)
-        return NON_PUBLIC_V4.none? { |range| range.include?(ip) } if ip.ipv4?
-
-        IPAddr.new("2000::/3").include?(ip) && !IPAddr.new("2001:db8::/32").include?(ip)
-      rescue IPAddr::InvalidAddressError
-        false
       end
 
       def self.mercari_results(page)
