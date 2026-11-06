@@ -44,6 +44,14 @@ rspec-backend *args:
 rspec-auth-provider *args:
 	docker compose exec auth-provider bundle exec rspec {{args}}
 
+[positional-arguments]
+rubocop-backend *args:
+	docker compose exec backend bundle exec rubocop "$@"
+
+[positional-arguments]
+rubocop-auth-provider *args:
+	docker compose exec auth-provider bundle exec rubocop "$@"
+
 test-frontend *args:
 	docker compose exec frontend npm test -- {{args}}
 
