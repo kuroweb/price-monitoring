@@ -2,23 +2,23 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import Layout from '@/components/layouts/Layout'
-import UpdateProductModal from '@/features/admin/products/common/components/update-product-modal/UpdateProductModal'
-import { useUpdateProductModalQuery } from '@/features/admin/products/common/components/update-product-modal/hooks/useUpdateProductModalState'
-import AnalysisChart from '@/features/products/[id]/components/AnalysisChart'
-import Pagination from '@/features/products/[id]/components/Pagination'
-import SearchForm from '@/features/products/[id]/components/SearchForm'
-import { usePageStateQuery, pageStateCache } from '@/features/products/[id]/hooks/usePageState'
-import { usePerStateQuery, perStateCache } from '@/features/products/[id]/hooks/usePerState'
+import AnalysisChart from '@/features/products/components/AnalysisChart'
+import Pagination from '@/features/products/components/Pagination'
+import RelatedProductCard from '@/features/products/components/RelatedProductCard'
+import SearchForm from '@/features/products/components/SearchForm'
+import UpdateProductModal from '@/features/products/components/UpdateProductModal'
+import { usePageStateQuery, pageStateCache } from '@/features/products/hooks/usePageState'
+import { usePerStateQuery, perStateCache } from '@/features/products/hooks/usePerState'
 import {
   usePlatformStateQuery,
   platformStateCache,
-} from '@/features/products/[id]/hooks/usePlatformState'
+} from '@/features/products/hooks/usePlatformState'
 import {
   useStatusStateQuery,
   statusStateCache,
-} from '@/features/products/[id]/hooks/useStatusState'
-import { makePlatformMask } from '@/features/products/[id]/lib/makePlatformMask'
-import RelatedProductCard from '@/features/products/components/RelatedProductCard'
+} from '@/features/products/hooks/useStatusState'
+import { useUpdateProductModalQuery } from '@/features/products/hooks/useUpdateProductModalState'
+import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
 import { getCategories, getProduct, getProductPrice } from '@/lib/actions'
 
 const Page = async ({

@@ -12,23 +12,25 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
-import IosysForm from '@/features/admin/products/common/components/product-form/IosysForm'
-import JanparaForm from '@/features/admin/products/common/components/product-form/JanparaForm'
-import MercariForm from '@/features/admin/products/common/components/product-form/MercariForm'
-import PcKoubouForm from '@/features/admin/products/common/components/product-form/PcKoubouForm'
-import UsedSofmapForm from '@/features/admin/products/common/components/product-form/UsedSofmapForm'
-import YahooAuctionForm from '@/features/admin/products/common/components/product-form/YahooAuctionForm'
-import { createProduct } from '@/lib/actions'
-import type { Category, CreateProductData, ProductList } from '@/lib/api'
+import IosysForm from '@/features/products/components/IosysForm'
+import JanparaForm from '@/features/products/components/JanparaForm'
+import MercariForm from '@/features/products/components/MercariForm'
+import PcKoubouForm from '@/features/products/components/PcKoubouForm'
+import UsedSofmapForm from '@/features/products/components/UsedSofmapForm'
+import YahooAuctionForm from '@/features/products/components/YahooAuctionForm'
+import { updateProduct } from '@/lib/actions'
+import type { Category, ProductList, UpdateProductData } from '@/lib/api'
 
-import { useCreateProductModalState } from './hooks/useCreateProductModalState'
+import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'
 
 import type { SubmitHandler } from 'react-hook-form'
 
-const CreateProductModal = ({
+const UpdateProductModal = ({
+  productId,
   product,
   categories,
 }: {
+  productId: number
   product: ProductList['products'][number] | undefined
   categories: Category[]
 }) => {
@@ -39,14 +41,14 @@ const CreateProductModal = ({
     'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
-  const [modal, setModal] = useCreateProductModalState()
+  const [modal, setModal] = useUpdateProductModalState()
 
   const defaultValues = {
-    name: product?.name || '',
-    categoryId: product?.category?.id || categories[0]?.id || null,
+    name: product?.name ?? '',
+    categoryId: product?.category?.id ?? null,
     yahooAuctionCrawlSetting: {
-      keyword: product?.yahooAuctionCrawlSetting?.keyword || '',
-      categoryId: product?.yahooAuctionCrawlSetting?.categoryId || null,
+      keyword: product?.yahooAuctionCrawlSetting?.keyword ?? '',
+      categoryId: product?.yahooAuctionCrawlSetting?.categoryId ?? null,
       minPrice: product?.yahooAuctionCrawlSetting?.minPrice ?? 0,
       maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice ?? 0,
       enabled: product?.yahooAuctionCrawlSetting?.enabled ?? true,
@@ -114,44 +116,46 @@ const CreateProductModal = ({
     getValues,
     setValue,
     formState: { isSubmitting },
-  } = useForm<CreateProductData>({
+  } = useForm<UpdateProductData>({
     defaultValues,
     values: defaultValues,
   })
 
-  const onSubmit: SubmitHandler<CreateProductData> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateProductData> = async (data) => {
     if (submittingRef.current) return
     submittingRef.current = true
     try {
-      const res = await createProduct(data)
+      const res = await updateProduct(productId, data)
 
       if (res.status === 200) {
-        toast.success('計測対象を追加しました')
+        toast.success('計測設定を更新しました')
         setModal(false)
       } else {
-        toast.error('計測対象の追加に失敗しました')
+        toast.error('計測設定の更新に失敗しました')
       }
       router.refresh()
     } catch {
-      toast.error('計測対象の追加に失敗しました')
+      toast.error('計測設定の更新に失敗しました')
     } finally {
       submittingRef.current = false
     }
   }
+
+  if (!product) return null
 
   return (
     <>
       <input
         type='checkbox'
         className='modal-toggle'
-        checked={modal}
+        checked={modal && !!product}
         onChange={(e) => setModal(e.target.checked)}
       />
       <div className='modal' role='dialog'>
-        <ScrollableModalBox title='計測対象を追加' onClose={() => setModal(false)}>
+        <ScrollableModalBox title='計測設定を更新' onClose={() => setModal(false)}>
           <ScrollableModalForm onSubmit={handleSubmit(onSubmit)}>
             <ScrollableModalBody>
-              <div className='divider py-2'>管理情報</div>
+              <div className='divider pt-6'>管理情報</div>
               <fieldset className='fieldset w-full'>
                 <legend className='fieldset-legend'>管理コード</legend>
                 <input {...register('name')} className='input w-full' />
@@ -179,7 +183,7 @@ const CreateProductModal = ({
                   type='radio'
                   name='options'
                   aria-label='ヤフオク'
-                  checked={tab === 'ヤフオク'}
+                  checked={tab == 'ヤフオク'}
                   onChange={() => setTab('ヤフオク')}
                 />
                 <input
@@ -187,7 +191,7 @@ const CreateProductModal = ({
                   type='radio'
                   name='options'
                   aria-label='メルカリ'
-                  checked={tab === 'メルカリ'}
+                  checked={tab == 'メルカリ'}
                   onChange={() => setTab('メルカリ')}
                 />
                 <input
@@ -195,7 +199,7 @@ const CreateProductModal = ({
                   type='radio'
                   name='options'
                   aria-label='じゃんぱら'
-                  checked={tab === 'じゃんぱら'}
+                  checked={tab == 'じゃんぱら'}
                   onChange={() => setTab('じゃんぱら')}
                 />
               </div>
@@ -205,7 +209,7 @@ const CreateProductModal = ({
                   type='radio'
                   name='options'
                   aria-label='イオシス'
-                  checked={tab === 'イオシス'}
+                  checked={tab == 'イオシス'}
                   onChange={() => setTab('イオシス')}
                 />
                 <input
@@ -213,7 +217,7 @@ const CreateProductModal = ({
                   type='radio'
                   name='options'
                   aria-label='パソコン工房'
-                  checked={tab === 'パソコン工房'}
+                  checked={tab == 'パソコン工房'}
                   onChange={() => setTab('パソコン工房')}
                 />
                 <input
@@ -221,12 +225,12 @@ const CreateProductModal = ({
                   type='radio'
                   name='options'
                   aria-label='リコレ'
-                  checked={tab === 'リコレ'}
+                  checked={tab == 'リコレ'}
                   onChange={() => setTab('リコレ')}
                 />
               </div>
               <div>
-                {(tab === null || tab === 'ヤフオク') && (
+                {tab == 'ヤフオク' && (
                   <div className='py-4'>
                     <YahooAuctionForm
                       register={register}
@@ -235,27 +239,27 @@ const CreateProductModal = ({
                     />
                   </div>
                 )}
-                {tab === 'メルカリ' && (
+                {tab == 'メルカリ' && (
                   <div className='py-4'>
                     <MercariForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
-                {tab === 'じゃんぱら' && (
+                {tab == 'じゃんぱら' && (
                   <div className='py-4'>
                     <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
-                {tab === 'イオシス' && (
+                {tab == 'イオシス' && (
                   <div className='py-4'>
                     <IosysForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
-                {tab === 'パソコン工房' && (
+                {tab == 'パソコン工房' && (
                   <div className='py-4'>
                     <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
-                {tab === 'リコレ' && (
+                {tab == 'リコレ' && (
                   <div className='py-4'>
                     <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
@@ -264,7 +268,7 @@ const CreateProductModal = ({
             </ScrollableModalBody>
             <ScrollableModalFooter>
               <button type='submit' disabled={isSubmitting} className='btn btn-primary w-full'>
-                {isSubmitting ? '登録中…' : '登録'}
+                {isSubmitting ? '保存中…' : '保存'}
               </button>
             </ScrollableModalFooter>
           </ScrollableModalForm>
@@ -280,4 +284,4 @@ const CreateProductModal = ({
   )
 }
 
-export default CreateProductModal
+export default UpdateProductModal

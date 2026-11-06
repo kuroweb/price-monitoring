@@ -14,7 +14,7 @@ import {
 } from '@/lib/actions'
 import type { RelatedProduct } from '@/lib/api'
 
-import { useStatusState } from '../[id]/hooks/useStatusState'
+import { useStatusState } from '../hooks/useStatusState'
 
 const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct }) => {
   const router = useRouter()

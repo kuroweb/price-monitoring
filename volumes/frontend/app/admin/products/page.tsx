@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
-import ProductsTable from '@/features/admin/products/components/ProductsTable'
-import { useCreateProductModalQuery } from '@/features/admin/products/components/create-product-modal/hooks/useCreateProductModalState'
+import ProductsTable from '@/features/products/components/ProductsTable'
+import { useCreateProductModalQuery } from '@/features/products/hooks/useCreateProductModalState'
 import { getCategories, getProducts } from '@/lib/actions'
 
 const Page = async ({

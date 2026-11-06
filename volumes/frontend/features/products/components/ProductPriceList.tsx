@@ -4,8 +4,8 @@ import { Fragment, useState } from 'react'
 
 import Link from 'next/link'
 
-import UpdateProductModal from '@/features/admin/products/common/components/update-product-modal/UpdateProductModal'
-import { useUpdateProductModalState } from '@/features/admin/products/common/components/update-product-modal/hooks/useUpdateProductModalState'
+import UpdateProductModal from '@/features/products/components/UpdateProductModal'
+import { useUpdateProductModalState } from '@/features/products/hooks/useUpdateProductModalState'
 import type { Category, ProductList, ProductPriceList as ProductPrices } from '@/lib/api'
 
 import RelatedProductCard from './RelatedProductCard'

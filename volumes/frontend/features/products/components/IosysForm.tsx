@@ -3,16 +3,16 @@
 import type { CreateProductData } from '@/lib/api'
 
 import {
-  copyRequiredKeyword,
-  copyExcludeKeyword,
-  copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from './lib/copyFields'
+  copyKeyword,
+  copyExcludeKeyword,
+  copyRequiredKeyword,
+} from '../lib/copyFields'
 
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const MercariForm = ({
+const IosysForm = ({
   register,
   getValues,
   setValue,
@@ -21,11 +21,11 @@ const MercariForm = ({
   getValues: UseFormGetValues<CreateProductData>
   setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords')
+  const requiredKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -34,7 +34,7 @@ const MercariForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('mercariCrawlSetting.mercariCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -42,20 +42,20 @@ const MercariForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('mercariCrawlSetting.mercariCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
     <>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索キーワード</legend>
-        <input {...register('mercariCrawlSetting.keyword')} className='input w-full' />
+        <input {...register('iosysCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'mercariCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'iosysCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -76,7 +76,7 @@ const MercariForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
+              'iosysCrawlSetting.iosysCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -99,7 +99,7 @@ const MercariForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
+              'iosysCrawlSetting.iosysCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -107,18 +107,9 @@ const MercariForm = ({
         </button>
       </div>
       <fieldset className='fieldset w-full'>
-        <legend className='fieldset-legend'>検索カテゴリ</legend>
-        <input
-          {...register('mercariCrawlSetting.categoryId', {
-            setValueAs: (v) => (v === '' ? null : v),
-          })}
-          className='input w-full'
-        />
-      </fieldset>
-      <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最低価格</legend>
         <input
-          {...register('mercariCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('iosysCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -126,7 +117,7 @@ const MercariForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'mercariCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'iosysCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -134,7 +125,7 @@ const MercariForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
-          {...register('mercariCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('iosysCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -142,7 +133,7 @@ const MercariForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'mercariCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'iosysCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -150,7 +141,7 @@ const MercariForm = ({
       <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input
-          {...register('mercariCrawlSetting.enabled')}
+          {...register('iosysCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -159,4 +150,4 @@ const MercariForm = ({
   )
 }
 
-export default MercariForm
+export default IosysForm

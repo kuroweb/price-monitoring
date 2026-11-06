@@ -4,8 +4,8 @@ import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import BackmarketWatchTargetsTable from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetsTable'
-import ProductsTable from '@/features/admin/products/components/ProductsTable'
 import CategoriesList from '@/features/categories/components/CategoriesList'
+import ProductsTable from '@/features/products/components/ProductsTable'
 import { destroyBackmarketWatchTarget, destroyCategory, destroyProduct } from '@/lib/actions'
 import type { BackmarketWatchTarget, Category, ProductList } from '@/lib/api'
 

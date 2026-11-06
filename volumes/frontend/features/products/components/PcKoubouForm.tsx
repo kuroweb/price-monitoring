@@ -8,11 +8,11 @@ import {
   copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from './lib/copyFields'
+} from '../lib/copyFields'
 
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const JanparaForm = ({
+const PcKoubouForm = ({
   register,
   getValues,
   setValue,
@@ -21,11 +21,13 @@ const JanparaForm = ({
   getValues: UseFormGetValues<CreateProductData>
   setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords')
+  const requiredKeywordsText = getValues(
+    'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
+  )
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -34,7 +36,7 @@ const JanparaForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -42,20 +44,20 @@ const JanparaForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
     <>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索キーワード</legend>
-        <input {...register('janparaCrawlSetting.keyword')} className='input w-full' />
+        <input {...register('pcKoubouCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'janparaCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'pcKoubouCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -76,7 +78,7 @@ const JanparaForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'janparaCrawlSetting.janparaCrawlSettingRequiredKeywords',
+              'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -99,7 +101,7 @@ const JanparaForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'janparaCrawlSetting.janparaCrawlSettingExcludeKeywords',
+              'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -109,7 +111,7 @@ const JanparaForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最低価格</legend>
         <input
-          {...register('janparaCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('pcKoubouCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -117,7 +119,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'janparaCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'pcKoubouCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -125,7 +127,7 @@ const JanparaForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
-          {...register('janparaCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('pcKoubouCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -133,7 +135,7 @@ const JanparaForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'janparaCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'pcKoubouCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -141,7 +143,7 @@ const JanparaForm = ({
       <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input
-          {...register('janparaCrawlSetting.enabled')}
+          {...register('pcKoubouCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -150,4 +152,4 @@ const JanparaForm = ({
   )
 }
 
-export default JanparaForm
+export default PcKoubouForm

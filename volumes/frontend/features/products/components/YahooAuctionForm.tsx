@@ -3,16 +3,16 @@
 import type { CreateProductData } from '@/lib/api'
 
 import {
+  copyExcludeKeyword,
+  copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-  copyKeyword,
-  copyExcludeKeyword,
   copyRequiredKeyword,
-} from './lib/copyFields'
+} from '../lib/copyFields'
 
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const IosysForm = ({
+const YahooAuctionForm = ({
   register,
   getValues,
   setValue,
@@ -21,11 +21,15 @@ const IosysForm = ({
   getValues: UseFormGetValues<CreateProductData>
   setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords')
+  const requiredKeywordsText = getValues(
+    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
+  )
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues(
+    'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
+  )
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -34,7 +38,7 @@ const IosysForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('iosysCrawlSetting.iosysCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -42,20 +46,20 @@ const IosysForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('iosysCrawlSetting.iosysCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
     <>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索キーワード</legend>
-        <input {...register('iosysCrawlSetting.keyword')} className='input w-full' />
+        <input {...register('yahooAuctionCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'iosysCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'yahooAuctionCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -76,7 +80,7 @@ const IosysForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'iosysCrawlSetting.iosysCrawlSettingRequiredKeywords',
+              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -99,7 +103,7 @@ const IosysForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'iosysCrawlSetting.iosysCrawlSettingExcludeKeywords',
+              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -107,9 +111,18 @@ const IosysForm = ({
         </button>
       </div>
       <fieldset className='fieldset w-full'>
+        <legend className='fieldset-legend'>検索カテゴリ</legend>
+        <input
+          {...register('yahooAuctionCrawlSetting.categoryId', {
+            setValueAs: (v) => (v === '' ? null : v),
+          })}
+          className='input w-full'
+        />
+      </fieldset>
+      <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最低価格</legend>
         <input
-          {...register('iosysCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('yahooAuctionCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -117,7 +130,7 @@ const IosysForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'iosysCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'yahooAuctionCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -125,7 +138,7 @@ const IosysForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
-          {...register('iosysCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('yahooAuctionCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -133,7 +146,7 @@ const IosysForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'iosysCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'yahooAuctionCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -141,7 +154,7 @@ const IosysForm = ({
       <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input
-          {...register('iosysCrawlSetting.enabled')}
+          {...register('yahooAuctionCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -150,4 +163,4 @@ const IosysForm = ({
   )
 }
 
-export default IosysForm
+export default YahooAuctionForm

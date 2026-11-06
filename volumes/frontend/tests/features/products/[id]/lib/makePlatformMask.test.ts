@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { makePlatformMask } from '@/features/products/[id]/lib/makePlatformMask'
+import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
 
 describe('makePlatformMask', () => {
   it.each([

@@ -3,16 +3,16 @@
 import type { CreateProductData } from '@/lib/api'
 
 import {
-  copyKeyword,
   copyRequiredKeyword,
   copyExcludeKeyword,
+  copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from './lib/copyFields'
+} from '../lib/copyFields'
 
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const UsedSofmapForm = ({
+const JanparaForm = ({
   register,
   getValues,
   setValue,
@@ -21,15 +21,11 @@ const UsedSofmapForm = ({
   getValues: UseFormGetValues<CreateProductData>
   setValue: UseFormSetValue<CreateProductData>
 }) => {
-  const requiredKeywordsText = getValues(
-    'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
-  )
+  const requiredKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords')
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues(
-    'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
-  )
+  const excludeKeywordsText = getValues('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords')
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -38,7 +34,7 @@ const UsedSofmapForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('janparaCrawlSetting.janparaCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -46,20 +42,20 @@ const UsedSofmapForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('janparaCrawlSetting.janparaCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
     <>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索キーワード</legend>
-        <input {...register('usedSofmapCrawlSetting.keyword')} className='input w-full' />
+        <input {...register('janparaCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'usedSofmapCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'janparaCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -80,7 +76,7 @@ const UsedSofmapForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
+              'janparaCrawlSetting.janparaCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -103,7 +99,7 @@ const UsedSofmapForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
+              'janparaCrawlSetting.janparaCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -113,7 +109,7 @@ const UsedSofmapForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最低価格</legend>
         <input
-          {...register('usedSofmapCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('janparaCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -121,7 +117,7 @@ const UsedSofmapForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'usedSofmapCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'janparaCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -129,7 +125,7 @@ const UsedSofmapForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
-          {...register('usedSofmapCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('janparaCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -137,7 +133,7 @@ const UsedSofmapForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'usedSofmapCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'janparaCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -145,7 +141,7 @@ const UsedSofmapForm = ({
       <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input
-          {...register('usedSofmapCrawlSetting.enabled')}
+          {...register('janparaCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -154,4 +150,4 @@ const UsedSofmapForm = ({
   )
 }
 
-export default UsedSofmapForm
+export default JanparaForm

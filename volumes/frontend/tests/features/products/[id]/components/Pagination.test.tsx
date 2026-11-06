@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
-import Pagination from '@/features/products/[id]/components/Pagination'
+import Pagination from '@/features/products/components/Pagination'
 
 describe('Pagination', () => {
   it('最初のページでは前のページへ移動できない', () => {

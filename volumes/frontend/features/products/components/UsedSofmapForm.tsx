@@ -3,16 +3,16 @@
 import type { CreateProductData } from '@/lib/api'
 
 import {
+  copyKeyword,
   copyRequiredKeyword,
   copyExcludeKeyword,
-  copyKeyword,
   copyMaxPrice,
   copyMinPrice,
-} from './lib/copyFields'
+} from '../lib/copyFields'
 
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
-const PcKoubouForm = ({
+const UsedSofmapForm = ({
   register,
   getValues,
   setValue,
@@ -22,12 +22,14 @@ const PcKoubouForm = ({
   setValue: UseFormSetValue<CreateProductData>
 }) => {
   const requiredKeywordsText = getValues(
-    'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
+    'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
   )
     .map((requiredKeyword) => requiredKeyword.keyword)
     .join('\n')
 
-  const excludeKeywordsText = getValues('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords')
+  const excludeKeywordsText = getValues(
+    'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
+  )
     .map((excludeKeyword) => excludeKeyword.keyword)
     .join('\n')
 
@@ -36,7 +38,7 @@ const PcKoubouForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords', requiredKeywords)
+    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords', requiredKeywords)
   }
 
   const setExcludeKeywords = (value: string) => {
@@ -44,20 +46,20 @@ const PcKoubouForm = ({
       .split(/\r?\n/)
       .filter((value) => value.trim() !== '')
       .map((value) => ({ keyword: value }))
-    setValue('pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords', excludeKeywords)
+    setValue('usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords', excludeKeywords)
   }
 
   return (
     <>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索キーワード</legend>
-        <input {...register('pcKoubouCrawlSetting.keyword')} className='input w-full' />
+        <input {...register('usedSofmapCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
       <div className='flex flex-row justify-end'>
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'pcKoubouCrawlSetting.keyword')}
+          onClick={() => copyKeyword(getValues, setValue, 'usedSofmapCrawlSetting.keyword')}
         >
           他の検索サイトにコピー
         </button>
@@ -78,7 +80,7 @@ const PcKoubouForm = ({
             copyRequiredKeyword(
               getValues,
               setValue,
-              'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
+              'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
             )
           }
         >
@@ -101,7 +103,7 @@ const PcKoubouForm = ({
             copyExcludeKeyword(
               getValues,
               setValue,
-              'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
+              'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
             )
           }
         >
@@ -111,7 +113,7 @@ const PcKoubouForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最低価格</legend>
         <input
-          {...register('pcKoubouCrawlSetting.minPrice', { valueAsNumber: true })}
+          {...register('usedSofmapCrawlSetting.minPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -119,7 +121,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'pcKoubouCrawlSetting.minPrice')}
+          onClick={() => copyMinPrice(getValues, setValue, 'usedSofmapCrawlSetting.minPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -127,7 +129,7 @@ const PcKoubouForm = ({
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
-          {...register('pcKoubouCrawlSetting.maxPrice', { valueAsNumber: true })}
+          {...register('usedSofmapCrawlSetting.maxPrice', { valueAsNumber: true })}
           className='input w-full'
         />
       </fieldset>
@@ -135,7 +137,7 @@ const PcKoubouForm = ({
         <button
           className='btn btn-link btn-xs'
           type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'pcKoubouCrawlSetting.maxPrice')}
+          onClick={() => copyMaxPrice(getValues, setValue, 'usedSofmapCrawlSetting.maxPrice')}
         >
           他の検索サイトにコピー
         </button>
@@ -143,7 +145,7 @@ const PcKoubouForm = ({
       <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input
-          {...register('pcKoubouCrawlSetting.enabled')}
+          {...register('usedSofmapCrawlSetting.enabled')}
           type='checkbox'
           className='toggle toggle-primary'
         />
@@ -152,4 +154,4 @@ const PcKoubouForm = ({
   )
 }
 
-export default PcKoubouForm
+export default UsedSofmapForm
