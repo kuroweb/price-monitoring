@@ -65,7 +65,7 @@ RSpec.describe Crawl::Search::Crawler do
     result = described_class.call(params: { search_urls: ["https://jp.mercari.com/search?q=phone&sort=price"] })
     expect(described_class).to have_received(:fetch_pinned).with(URI("https://jp.mercari.com/search?q=phone&sort=price"))
     expect(result[:results].first).to include(external_id: "item-1", price: 1200,
-                                                    thumbnail_url: "https://static.mercdn.net/thumb/item/webp/item-1_1.jpg", product_url: "https://jp.mercari.com/item/item-1")
+                                              thumbnail_url: "https://static.mercdn.net/thumb/item/webp/item-1_1.jpg", product_url: "https://jp.mercari.com/item/item-1")
   end
 
   it "reads the lazy-loaded iosys thumbnail" do
