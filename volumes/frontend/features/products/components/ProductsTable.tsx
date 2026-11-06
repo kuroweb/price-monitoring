@@ -6,8 +6,9 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { destroyProduct } from '@/lib/actions'
-import type { Category, ProductList } from '@/lib/api'
+import { destroyProduct } from '@/features/products/api/actions'
+import type { ProductList } from '@/features/products/api/types'
+import type { Category } from '@/lib/category'
 
 import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 import { useUpdateProductModalState } from '../hooks/useUpdateProductModalState'

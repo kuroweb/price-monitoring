@@ -12,7 +12,8 @@ import {
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
 import { updateCategory } from '@/features/categories/api/actions'
-import type { Category } from '@/lib/api'
+import type { Category } from '@/lib/category'
+
 
 import { useUpdateCategoryModalState } from '../hooks/useUpdateCategoryModalState'
 

@@ -15,10 +15,6 @@ const { refresh, successToast, errorToast } = vi.hoisted(() => ({
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }))
 vi.mock('react-toastify', () => ({ toast: { success: successToast, error: errorToast } }))
 vi.mock('@/features/backmarket/api/actions', () => ({ getBackmarketRecents: vi.fn(), getBackmarketWatchTargets: vi.fn(), createBackmarketWatchTarget: vi.fn(), updateBackmarketWatchTarget: vi.fn(), destroyBackmarketWatchTarget: vi.fn() }))
-vi.mock('@/lib/actions', () => ({
-  createBackmarketWatchTarget: vi.fn(),
-  updateBackmarketWatchTarget: vi.fn(),
-}))
 
 const target: BackmarketWatchTarget = {
   id: 3,

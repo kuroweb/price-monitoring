@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
+import type { RelatedProduct } from '@/features/products/api/types'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import type { RelatedProduct } from '@/lib/api'
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
 

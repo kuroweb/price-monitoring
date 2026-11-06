@@ -1,4 +1,4 @@
-import type { CreateProductData } from '@/lib/api'
+import type { CreateProductData } from '@/features/products/api/types'
 
 import type { UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 

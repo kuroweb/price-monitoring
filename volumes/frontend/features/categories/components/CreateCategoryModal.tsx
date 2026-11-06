@@ -12,7 +12,8 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import { createCategory } from '@/features/categories/api/actions'
 import type { CreateCategoryData } from '@/features/categories/api/types'
-import type { Category } from '@/lib/api'
+import type { Category } from '@/lib/category'
+
 
 import { useCreateCategoryModalState } from '../hooks/useCreateCategoryModalState'
 

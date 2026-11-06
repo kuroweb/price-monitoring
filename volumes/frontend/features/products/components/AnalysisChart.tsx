@@ -11,11 +11,7 @@ import {
   ComposedChart,
 } from 'recharts'
 
-import type {
-  MercariDailyPurchaseSummary,
-  YahooAuctionDailyPurchaseSummary,
-  YahooFleamarketDailyPurchaseSummary,
-} from '@/lib/api'
+import type { MercariDailyPurchaseSummary, YahooAuctionDailyPurchaseSummary, YahooFleamarketDailyPurchaseSummary } from '@/features/products/api/types'
 
 const AnalysisChart = ({
   yahooAuctionData,

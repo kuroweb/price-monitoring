@@ -7,7 +7,7 @@ import type {
   ProductList,
   UpdateProductData,
 } from './types'
-import type { Product } from '../models'
+import type { Product } from './types'
 
 export async function getProducts(params?: GetProductsParams) {
   return http<ProductList>('/api/v1/products', {

@@ -6,7 +6,8 @@ import { toast } from 'react-toastify'
 
 import { destroyCategory } from '@/features/categories/api/actions'
 import type { GetCategoriesStructured } from '@/features/categories/api/types'
-import type { Category } from '@/lib/api'
+import type { Category } from '@/lib/category'
+
 
 import { useUpdateCategoryModalState } from '../hooks/useUpdateCategoryModalState'
 

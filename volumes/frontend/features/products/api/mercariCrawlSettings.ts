@@ -1,7 +1,7 @@
 import { http } from '@/lib/http-client'
 
 import type { CreateMercariCrawlSettingExcludeProductData } from './types'
-import type { MercariCrawlSettingExcludeProduct } from '../models'
+import type { MercariCrawlSettingExcludeProduct } from './types'
 
 const basePath = (productId: number) =>
   `/api/v1/products/${productId}/mercari_crawl_settings/mercari_crawl_setting_exclude_products`

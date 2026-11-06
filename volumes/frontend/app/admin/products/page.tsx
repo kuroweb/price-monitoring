@@ -2,9 +2,9 @@ import Link from 'next/link'
 
 import Layout from '@/components/layouts/Layout'
 import { getCategories } from '@/features/categories/api/actions'
+import { getProducts } from '@/features/products/api/actions'
 import ProductsTable from '@/features/products/components/ProductsTable'
 import { useCreateProductModalQuery } from '@/features/products/hooks/useCreateProductModalState'
-import { getProducts } from '@/lib/actions'
 
 const Page = async ({
   searchParams,

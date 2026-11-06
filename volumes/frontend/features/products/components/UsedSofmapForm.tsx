@@ -1,6 +1,6 @@
 'use client'
 
-import type { CreateProductData } from '@/lib/api'
+import type { CreateProductData } from '@/features/products/api/types'
 
 import {
   copyKeyword,

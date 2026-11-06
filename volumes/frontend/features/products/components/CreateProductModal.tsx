@@ -12,14 +12,15 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
+import { createProduct } from '@/features/products/api/actions'
+import type { CreateProductData, ProductList } from '@/features/products/api/types'
 import IosysForm from '@/features/products/components/IosysForm'
 import JanparaForm from '@/features/products/components/JanparaForm'
 import MercariForm from '@/features/products/components/MercariForm'
 import PcKoubouForm from '@/features/products/components/PcKoubouForm'
 import UsedSofmapForm from '@/features/products/components/UsedSofmapForm'
 import YahooAuctionForm from '@/features/products/components/YahooAuctionForm'
-import { createProduct } from '@/lib/actions'
-import type { Category, CreateProductData, ProductList } from '@/lib/api'
+import type { Category } from '@/lib/category'
 
 import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
 

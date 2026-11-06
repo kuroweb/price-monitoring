@@ -1,4 +1,4 @@
-import type { Category } from '@/lib/api/models/categories'
+import type { Category } from '@/lib/category'
 import { http } from '@/lib/http-client'
 
 import type {
