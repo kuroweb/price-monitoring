@@ -1,6 +1,12 @@
 module Crawl
   module RequestBlocklist
-    COMMON_BLOCKED_LIST = %w[.css].freeze
+    # blocked_request? は全サイトのリストを OR で評価するので、動画・広告の配信元は全クローラーで止める
+    COMMON_BLOCKED_LIST = %w[
+      .css
+      youtube.com
+      googlevideo.com
+      doubleclick.net
+    ].freeze
 
     MERCARI_BLOCKED_LIST = %w[
       api.mercari.jp/client_events
@@ -29,6 +35,14 @@ module Crawl
       googletagmanager.com
       securepubads.g.doubleclick.net
       sentry.io
+      forter.com
+      analytics.tiktok.com
+      criteo.com
+      criteo.net
+      bat.bing.com
+      eagle-insight.com
+      jp.mercari.com/gtm/
+      d1qmrxg9gbf226.cloudfront.net
     ].freeze
 
     YAHOO_AUCTION_BLOCKED_LIST = %w[
@@ -118,6 +132,10 @@ module Crawl
       www.promisejs.org
       cdnjs.cloudflare.com
     ].freeze
+
+    # じゃんぱらの WAF（SiteGuard）は古い UA を HTTP 500 で拒否するため、じゃんぱらだけ新しい UA を使う
+    JANPARA_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " \
+                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36".freeze
 
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze

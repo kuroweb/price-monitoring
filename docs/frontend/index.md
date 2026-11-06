@@ -5,7 +5,7 @@
 
 ## 文書の案内
 
-- [共通のローカル開発手順](../development/index.md) — セットアップ・依存関係・静的検証
+- [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
 - [商品計測・商品相場PoC](../backend/product-search-poc.md) — 画面の操作と制約
 - [文書全体の索引](../index.md)
 
@@ -112,7 +112,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 
 依存更新時は正常なコードの lint だけでなく、違反の報告と自動修正も確認する。
 `tests/tooling/eslint-config.test.ts` が実際の設定を読み込み、import、React、Hooks、Next.js、アクセシビリティ、JSX の代表入力を検証する。
-実行方法は [ローカル開発のテスト手順](../development/index.md#テスト) を参照する。
+実行方法は [ローカル開発のテスト手順](../development/testing.md) を参照する。
 
 ## テスト方針
 
@@ -128,7 +128,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 - フォームは実際の入力・送信を通して、必須項目、送信データ、成功時の終了、失敗時の入力保持を確認する
 - 非同期 Server Component、実ブラウザー上の画面遷移、OIDC 認証はこの基盤の対象外。これらを検証する E2E 基盤は未導入
 
-実行・watch・カバレッジ計測は [ローカル開発のテスト手順](../development/index.md#テスト)を参照する。
+実行・watch・カバレッジ計測は [ローカル開発のテスト手順](../development/testing.md)を参照する。
 
 ## 関連 docs
 

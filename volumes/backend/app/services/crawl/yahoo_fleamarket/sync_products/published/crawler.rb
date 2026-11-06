@@ -12,7 +12,8 @@ module Crawl
           end
 
           def execute # rubocop:disable Metrics/MethodLength
-            Crawl::Client.execute do |page|
+            # 一覧は SSR 済みの HTML から読むので、スクリプトは不要（動かすとサムネイルの src がエラー画像に書き換わる）
+            Crawl::Client.execute(block_scripts: true) do |page|
               start = 1
               loop do
                 break if start > MAX_SIZE

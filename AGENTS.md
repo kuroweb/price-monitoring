@@ -21,11 +21,11 @@
 
 ## 作業時の判断基準
 
-- アプリの実行・検証の前に `just ps` で状態を確認し、未起動なら `just up` を使う。初回準備は [ローカル開発ガイド](docs/development/index.md) に従う。
+- アプリの実行・検証の前に `just ps` で状態を確認し、未起動なら `just up` を使う。初回準備は [初回セットアップ](docs/development/setup.md) に従う。
 - 不具合調査は `just logs` などでログの事実を確認してから修正する。
 - 実装前に対象レイヤーの既存実装を読み、[backend](docs/backend/index.md) / [frontend](docs/frontend/index.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
 - 認証アプリと BFF の境界・配置は [認証基盤](docs/auth-provider/index.md) を参照する。OIDC endpoint / issuer / token / scope / session / 署名鍵に影響する変更では Provider と Client の両方を確認する。
-- 検証は [テスト手順](docs/development/index.md#テスト) に従い、変更範囲に応じて選ぶ。失敗時は対象だけを再実行し、依存サービスの状態を確認する。
+- 検証は [テスト手順](docs/development/testing.md) に従い、変更範囲に応じて選ぶ。失敗時は対象だけを再実行し、依存サービスの状態を確認する。
 - 監視・運用に影響する変更では Datadog / BugSnag への影響を確認する。
 - 操作や構成を変えたら [文書ガイド](docs/index.md) で正本を特定して更新し、`justfile` / `Makefile` / workflow との整合を保つ。
 - デプロイ用の make タスクは、ローカル開発修正だけなら原則触らない。

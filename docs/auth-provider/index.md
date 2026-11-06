@@ -15,7 +15,7 @@
 
 - [初回セットアップ](setup.md) — 新規環境の署名鍵・DB 準備と OIDC クライアント登録
 - [認証の検証](verification.md) — テスト準備とログイン・ログアウトの確認
-- [共通のローカル開発手順](../development/index.md) — 証明書・hosts・起動・共通テスト
+- [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
 - [CI/CD と自動レビュー](../cicd/index.md)
 - [文書全体の索引](../index.md)
 
