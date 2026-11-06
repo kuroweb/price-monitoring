@@ -11,6 +11,7 @@ import {
   ScrollableModalFooter,
   ScrollableModalForm,
 } from '@/components/ui/ScrollableModalBox'
+import ProductFilterFields from '@/features/admin/product-crawl-settings/components/ProductFilterFields'
 import { words } from '@/features/admin/product-crawl-settings/lib/platform'
 import { createProductAggregationSetting, updateProductAggregationSetting } from '@/lib/actions'
 import type { ProductAggregationSetting, ProductAggregationSettingInput } from '@/lib/api'
@@ -100,54 +101,15 @@ export default function ProductAggregationSettingFormModal({ onClose, setting }:
                     onChange={(event) => change({ name: event.target.value })}
                   />
                 </label>
-                <label className='block'>
-                  必須語（すべて含む・カンマ/改行区切り）
-                  <textarea
-                    className='textarea w-full'
-                    value={required}
-                    onChange={(event) => setRequired(event.target.value)}
-                  />
-                </label>
-                <label className='block'>
-                  除外語（いずれかを含む・カンマ/改行区切り）
-                  <textarea
-                    className='textarea w-full'
-                    value={excluded}
-                    onChange={(event) => setExcluded(event.target.value)}
-                  />
-                </label>
-                <div className='grid gap-3 sm:grid-cols-2'>
-                  <label>
-                    最低価格（円）
-                    <input
-                      className='input w-full'
-                      type='number'
-                      min={0}
-                      step={1}
-                      value={input.minPrice ?? ''}
-                      onChange={(event) =>
-                        change({
-                          minPrice: event.target.value === '' ? null : Number(event.target.value),
-                        })
-                      }
-                    />
-                  </label>
-                  <label>
-                    最高価格（円）
-                    <input
-                      className='input w-full'
-                      type='number'
-                      min={0}
-                      step={1}
-                      value={input.maxPrice ?? ''}
-                      onChange={(event) =>
-                        change({
-                          maxPrice: event.target.value === '' ? null : Number(event.target.value),
-                        })
-                      }
-                    />
-                  </label>
-                </div>
+                <ProductFilterFields
+                  required={required}
+                  excluded={excluded}
+                  minPrice={input.minPrice}
+                  maxPrice={input.maxPrice}
+                  onRequiredChange={setRequired}
+                  onExcludedChange={setExcluded}
+                  onPriceChange={change}
+                />
               </fieldset>
               {error && (
                 <p role='alert' className='pt-3 text-error'>

@@ -18,10 +18,12 @@ import {
   updateProductCrawlSetting,
 } from '@/lib/actions'
 import type { ProductCrawlResult, ProductCrawlSetting, ProductCrawlSettingInput } from '@/lib/api'
+import { platformName } from '@/lib/format'
 
-import { platformName, searchUrlPlatform, words } from '../lib/platform'
+import { searchUrlPlatform, words } from '../lib/platform'
 
 import ExcludedListings from './ExcludedListings'
+import ProductFilterFields from './ProductFilterFields'
 
 const MAX_SEARCH_URLS = 5
 
@@ -211,54 +213,15 @@ export default function ProductCrawlSettingFormModal({ onClose, setting }: Props
                   URLを追加
                 </button>
                 <h4 className='font-semibold'>全URL共通の追加条件（任意）</h4>
-                <label className='block'>
-                  必須語（すべて含む・カンマ/改行区切り）
-                  <textarea
-                    className='textarea w-full'
-                    value={required}
-                    onChange={(event) => setRequired(event.target.value)}
-                  />
-                </label>
-                <label className='block'>
-                  除外語（いずれかを含む・カンマ/改行区切り）
-                  <textarea
-                    className='textarea w-full'
-                    value={excluded}
-                    onChange={(event) => setExcluded(event.target.value)}
-                  />
-                </label>
-                <div className='grid gap-3 sm:grid-cols-2'>
-                  <label>
-                    最低価格（円）
-                    <input
-                      className='input w-full'
-                      type='number'
-                      min={0}
-                      step={1}
-                      value={input.minPrice ?? ''}
-                      onChange={(event) =>
-                        change({
-                          minPrice: event.target.value === '' ? null : Number(event.target.value),
-                        })
-                      }
-                    />
-                  </label>
-                  <label>
-                    最高価格（円）
-                    <input
-                      className='input w-full'
-                      type='number'
-                      min={0}
-                      step={1}
-                      value={input.maxPrice ?? ''}
-                      onChange={(event) =>
-                        change({
-                          maxPrice: event.target.value === '' ? null : Number(event.target.value),
-                        })
-                      }
-                    />
-                  </label>
-                </div>
+                <ProductFilterFields
+                  required={required}
+                  excluded={excluded}
+                  minPrice={input.minPrice}
+                  maxPrice={input.maxPrice}
+                  onRequiredChange={setRequired}
+                  onExcludedChange={setExcluded}
+                  onPriceChange={change}
+                />
                 <ExcludedListings items={excludedItems} disabled={busy} onRestore={restore} />
               </fieldset>
               {error && (

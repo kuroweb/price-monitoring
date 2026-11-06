@@ -1,8 +1,8 @@
 import NextImage from 'next/image'
 
-import { platformColors, platformName } from '@/features/admin/product-crawl-settings/lib/platform'
+import MoreIcon from '@/features/admin/product-crawl-settings/components/MoreIcon'
 import type { ProductCrawlResult } from '@/lib/api'
-import { formatDate, formatYen } from '@/lib/format'
+import { formatDate, formatYen, platformColors, platformName } from '@/lib/format'
 
 interface Props {
   productCrawlResult: ProductCrawlResult
@@ -66,19 +66,7 @@ export default function ProductCrawlResultCard({
               aria-label={`${item.name}の操作`}
               className='btn btn-square btn-ghost btn-sm bg-base-100/80'
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                className='inline-block size-5 stroke-current'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  strokeWidth='2'
-                  d='M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z'
-                ></path>
-              </svg>
+              <MoreIcon />
             </button>
             <ul className='menu dropdown-content invisible pointer-events-none [.dropdown:focus-within_&]:visible [.dropdown:focus-within_&]:pointer-events-auto z-1 w-max rounded-box border border-base-300 bg-base-100 p-2 shadow-lg'>
               <li>
