@@ -1,6 +1,6 @@
 import Layout from '@/components/layouts/Layout'
-import BackmarketRecentsTable from '@/features/backmarket-recents/components/BackmarketRecentsTable'
-import EditWatchTargetButton from '@/features/backmarket-recents/components/EditWatchTargetButton'
+import BackmarketRecentsTable from '@/features/backmarket/components/BackmarketRecentsTable'
+import EditWatchTargetButton from '@/features/backmarket/components/EditWatchTargetButton'
 import { getBackmarketRecents, getBackmarketWatchTargets } from '@/lib/actions'
 
 const Page = async () => {

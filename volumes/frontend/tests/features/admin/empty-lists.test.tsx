@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
-import BackmarketWatchTargetsTable from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetsTable'
+import BackmarketWatchTargetsTable from '@/features/backmarket/components/BackmarketWatchTargetsTable'
 import CategoriesList from '@/features/categories/components/CategoriesList'
 import ProductPriceList from '@/features/products/components/ProductPriceList'
 

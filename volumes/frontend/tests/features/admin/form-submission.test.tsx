@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import BackmarketWatchTargetFormModal from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetFormModal'
+import BackmarketWatchTargetFormModal from '@/features/backmarket/components/BackmarketWatchTargetFormModal'
 import CreateCategoryModal from '@/features/categories/components/CreateCategoryModal'
 import UpdateCategoryModal from '@/features/categories/components/UpdateCategoryModal'
 import CreateProductModal from '@/features/products/components/CreateProductModal'

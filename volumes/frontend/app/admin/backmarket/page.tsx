@@ -1,5 +1,5 @@
 import Layout from '@/components/layouts/Layout'
-import BackmarketWatchTargetsTable from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetsTable'
+import BackmarketWatchTargetsTable from '@/features/backmarket/components/BackmarketWatchTargetsTable'
 import { getBackmarketWatchTargets } from '@/lib/actions'
 
 const Page = async () => {

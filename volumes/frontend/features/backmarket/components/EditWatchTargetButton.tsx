@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import BackmarketWatchTargetFormModal from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetFormModal'
+import BackmarketWatchTargetFormModal from '@/features/backmarket/components/BackmarketWatchTargetFormModal'
 import type { BackmarketWatchTarget } from '@/lib/api'
 
 interface Props {

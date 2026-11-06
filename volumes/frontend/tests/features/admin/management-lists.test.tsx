@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import BackmarketWatchTargetsTable from '@/features/admin/backmarket-watch-targets/components/BackmarketWatchTargetsTable'
+import BackmarketWatchTargetsTable from '@/features/backmarket/components/BackmarketWatchTargetsTable'
 import CategoriesList from '@/features/categories/components/CategoriesList'
 import ProductsTable from '@/features/products/components/ProductsTable'
 import { destroyBackmarketWatchTarget, destroyCategory, destroyProduct } from '@/lib/actions'

@@ -2,7 +2,7 @@ import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 
-import EditWatchTargetButton from '@/features/backmarket-recents/components/EditWatchTargetButton'
+import EditWatchTargetButton from '@/features/backmarket/components/EditWatchTargetButton'
 import { updateBackmarketWatchTarget } from '@/lib/actions'
 import type { BackmarketWatchTarget } from '@/lib/api'
 
