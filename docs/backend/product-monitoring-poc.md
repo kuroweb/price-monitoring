@@ -35,6 +35,8 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 
 サイト固有のURL判定・取得・解析は `ProductMonitoring::Sites` のサイトクラスにまとめ、共通処理は `ProductMonitoring::Crawler` が担う。ブラウザ取得時の URL と HTML サイズの確認には `Sites::BrowserPage`、数値ページ番号の更新には `Sites::Pagination` を使う。サイトを追加するときはサイトクラスを追加し、サイトの検証条件を指定したうえで `UrlRouter::SITES` に登録する。
 
+`SyncCrawlResults` は一覧の保存と条件に合わない結果の削除を担当し、`DetailCandidates` が個別確認の候補選択とジョブ投入を担当する。
+
 Yahoo!フリマはメルカリと同じ Playwright クライアントを用い、遷移後の HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。更新日時の描画に必要な `paypayfleamarket.c.yimg.jp` のスクリプトを許可する。検索一覧の次ページリンクを確認してページ送りする。既存の `Crawl::YahooFleamarket` の一覧は Yahoo!オークションの検索結果を取得するため、本機能の Yahoo!フリマ検索とは取得元と DOM が異なる。
 
 ヤフオクは Playwright で JavaScript と画像の読み込みを許可し、最終 HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。画像を遮断するとサイトがサムネイルをエラー画像に置き換えるため画像の読み込みが必要。既存クローラーと同様に `abatch=1,2` で Yahoo!フリマを除き、一覧表示・100件単位のページ送りと共通の DOM 解析を使う。外部の表示変更や読み込み失敗により取得できない場合がある。
