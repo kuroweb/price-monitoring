@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::UrlRouter do
-  it "routes only Janpara searches with a nonempty keyword and never checks details" do
+  it "キーワードが空でない Janpara 検索だけを振り分け詳細は確認しないこと" do
     url = "https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad+Pro"
     expect(described_class.call(url: url)).to include(platform: "janpara", site: ProductMonitoring::Sites::Janpara)
     expect(described_class.detail_site("janpara")).to be_nil

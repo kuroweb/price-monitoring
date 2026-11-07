@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe ProductMonitoring::Sites::Janpara do
   let(:uri) { URI("https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad+Pro") }
 
-  it "extracts a product group and its lower price, preferring the second amount" do
+  it "商品グループと下限価格を抽出し 2 番目の金額を優先すること" do
     html = <<~HTML
       <div class="search_item_s"><a class="search_itemlink" href="/sale/search/detail/?ITMCODE=123&amp;KEYWORDS=x">
       <img src="/image.jpg"><div class="search_itemname">iPad Pro</div>
@@ -18,7 +18,7 @@ RSpec.describe ProductMonitoring::Sites::Janpara do
     expect(URI.decode_www_form(next_uri.query).to_h).to include("KEYWORDS" => "iPad Pro", "PAGE" => "2")
   end
 
-  it "rejects ranges with two prices and recognizes empty results" do
+  it "2 つの価格を持つ範囲を拒否し空結果を認識すること" do
     html = '<div class="search_item_s"><a class="search_itemlink" href="/sale/search/detail/?SRCODE=1"></a>' \
            '<div class="search_itemname">Phone</div><div class="item_amount">¥1,000～¥2,000</div></div>'
     allow(described_class).to receive(:fetch_page).and_return(html, '<div class="sorry"></div>', "<html></html>")
@@ -27,7 +27,7 @@ RSpec.describe ProductMonitoring::Sites::Janpara do
     expect { described_class.fetch(uri) }.to raise_error(/no extractable listings/)
   end
 
-  it "checks the browser response, final host, and HTML size" do
+  it "ブラウザの応答、最終ホスト、HTML サイズを確認すること" do
     page = instance_double(Playwright::Page, url: uri.to_s, content: "ok")
     response = instance_double(Playwright::Response, status: 200)
     allow(page).to receive_messages(goto: response)

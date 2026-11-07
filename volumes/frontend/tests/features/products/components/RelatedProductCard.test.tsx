@@ -24,7 +24,7 @@ const relatedProduct: RelatedProduct = {
 }
 
 describe('RelatedProductCard', () => {
-  it('画像と商品説明から外部の商品ページへリンクし、キーボードで移動できる', async () => {
+  it('画像と商品説明から外部の商品ページへリンクし、キーボードで移動できること', async () => {
     const user = userEvent.setup()
     render(
       <NuqsTestingAdapter>

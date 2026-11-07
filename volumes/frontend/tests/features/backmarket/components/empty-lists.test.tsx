@@ -9,7 +9,7 @@ vi.mock('@/features/categories/api/actions', () => ({ getCategories: vi.fn(), ge
 vi.mock('@/features/products/api/actions', () => ({}))
 
 describe('一覧の空状態', () => {
-  it('Backmarket計測対象なしの場合は追加ボタンと案内を表示する', () => {
+  it('Backmarket計測対象なしの場合は追加ボタンと案内を表示すること', () => {
     render(<BackmarketWatchTargetsTable backmarketWatchTargets={[]} />)
     expect(
       screen.getByText('計測対象はまだありません。「計測対象を追加」から登録してください。'),

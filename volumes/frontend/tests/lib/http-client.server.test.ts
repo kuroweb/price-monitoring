@@ -44,7 +44,7 @@ function respond(status: number | undefined, chunks: string[]) {
 }
 
 describe('http（サーバー）', () => {
-  it('非公開 URL に HTTPS で接続し、分割された本文を結合して変換する', async () => {
+  it('非公開 URL に HTTPS で接続し、分割された本文を結合して変換すること', async () => {
     const request = respond(200, ['{"product_', 'id":1}'])
 
     expect(await http('/products', { params: { categoryId: 2 } })).toEqual({
@@ -60,7 +60,7 @@ describe('http（サーバー）', () => {
     expect(request.end).toHaveBeenCalledOnce()
   })
 
-  it('HTTP URL では HTTP transport に変換済みの本文を送信する', async () => {
+  it('HTTP URL では HTTP transport に変換済みの本文を送信すること', async () => {
     vi.stubEnv('NEXT_PRIVATE_API_URL', 'http://backend.test:3000')
     const request = respond(201, ['{"product_id":1}'])
 
@@ -75,7 +75,7 @@ describe('http（サーバー）', () => {
     expect(request.write).toHaveBeenCalledWith('{"category_id":2}')
   })
 
-  it('本文がない 204 を正常に処理する', async () => {
+  it('本文がない 204 を正常に処理すること', async () => {
     respond(204, [])
     expect(await http('/products/1', { method: 'DELETE' })).toEqual({
       data: null,
@@ -84,7 +84,7 @@ describe('http（サーバー）', () => {
     })
   })
 
-  it('BFF の error オブジェクト内の入力エラーを保持する', async () => {
+  it('BFF の error オブジェクト内の入力エラーを保持すること', async () => {
     respond(400, ['{"error":{"code":400,"message":"個別出品の検索URLを指定してください","details":[]}}'])
     expect(await http('/product_crawl_settings')).toEqual({
       data: null,
@@ -93,7 +93,7 @@ describe('http（サーバー）', () => {
     })
   })
 
-  it('ステータス不明の応答を 500 として扱う', async () => {
+  it('ステータス不明の応答を 500 として扱うこと', async () => {
     respond(undefined, [])
     expect(await http('/products')).toEqual({
       data: null,
@@ -102,7 +102,7 @@ describe('http（サーバー）', () => {
     })
   })
 
-  it('サーバー側の接続エラーをエラーレスポンスにする', async () => {
+  it('サーバー側の接続エラーをエラーレスポンスにすること', async () => {
     const request = Object.assign(new EventEmitter(), {
       end: () => request.emit('error', new Error('ECONNREFUSED')),
     })

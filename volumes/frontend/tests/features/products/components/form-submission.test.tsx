@@ -53,7 +53,7 @@ beforeEach(() => {
   vi.clearAllMocks()
 })
 describe.each(cases)('$name: 送信中', ({ save, label, pending, mount, name }) => {
-  it('処理中は再送信できず、失敗後は入力を維持して再試行できる', async () => {
+  it('処理中は再送信できず、失敗後は入力を維持して再試行できること', async () => {
     let reject!: (error: Error) => void
     vi.mocked(save).mockImplementationOnce(
       () =>

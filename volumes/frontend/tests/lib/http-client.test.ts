@@ -16,7 +16,7 @@ afterEach(() => {
 })
 
 describe('http（ブラウザー）', () => {
-  it.each([undefined, ''])('公開URLが %j のときはページのoriginとポートを使う', async (baseUrl) => {
+  it.each([undefined, ''])('公開URLが %j のときはページのoriginとポートを使うこと', async (baseUrl) => {
     vi.stubEnv('NEXT_PUBLIC_API_URL', baseUrl)
     vi.stubGlobal('location', new URL('https://dev.price-monitoring.com:8443/products'))
     fetchMock.mockResolvedValue(new Response('{}'))
@@ -28,7 +28,7 @@ describe('http（ブラウザー）', () => {
     )
   })
 
-  it('公開 URL に GET し、未指定・null の検索条件を除いて snake_case にする', async () => {
+  it('公開 URL に GET し、未指定・null の検索条件を除いて snake_case にすること', async () => {
     fetchMock.mockResolvedValue(new Response('{}'))
 
     await http('/api/v1/products', {
@@ -53,7 +53,7 @@ describe('http（ブラウザー）', () => {
     })
   })
 
-  it('ネストした送信データを変換し、指定したメソッドとヘッダーを使う', async () => {
+  it('ネストした送信データを変換し、指定したメソッドとヘッダーを使うこと', async () => {
     fetchMock.mockResolvedValue(new Response('{}', { status: 201 }))
     const data = {
       categoryId: 1,
@@ -78,7 +78,7 @@ describe('http（ブラウザー）', () => {
     expect(result.status).toBe(201)
   })
 
-  it('レスポンス内のオブジェクトと配列を再帰的に camelCase にする', async () => {
+  it('レスポンス内のオブジェクトと配列を再帰的に camelCase にすること', async () => {
     fetchMock.mockResolvedValue(
       new Response(JSON.stringify({ product_id: 1, crawl_settings: [{ min_price: 10 }] })),
     )
@@ -90,13 +90,13 @@ describe('http（ブラウザー）', () => {
     })
   })
 
-  it('配列をトップレベルに持つレスポンスも変換する', async () => {
+  it('配列をトップレベルに持つレスポンスも変換すること', async () => {
     fetchMock.mockResolvedValue(new Response('[{"product_id":1}]'))
     expect((await http('/products')).data).toEqual([{ productId: 1 }])
   })
 
   it.each(['[]', '[1,2]', '"text"', 'false', '0', 'null', 'not json', ''])(
-    'オブジェクト以外の本文 %j を扱う',
+    'オブジェクト以外の本文 %j を扱うことこと',
     async (body) => {
       fetchMock.mockResolvedValue(new Response(body))
       let expected: unknown = body || null
@@ -105,7 +105,7 @@ describe('http（ブラウザー）', () => {
     },
   )
 
-  it('204 では data と error を null にする', async () => {
+  it('204 では data と error を null にすること', async () => {
     fetchMock.mockResolvedValue(new Response(null, { status: 204 }))
     expect(await http('/products/1', { method: 'DELETE' })).toEqual({
       data: null,
@@ -114,7 +114,7 @@ describe('http（ブラウザー）', () => {
     })
   })
 
-  it('入力エラーのコード・メッセージ・詳細を保持する', async () => {
+  it('入力エラーのコード・メッセージ・詳細を保持すること', async () => {
     fetchMock.mockResolvedValue(
       new Response(
         JSON.stringify({
@@ -137,7 +137,7 @@ describe('http（ブラウザー）', () => {
     })
   })
 
-  it('BFF の error オブジェクト内の入力エラーを表示できる', async () => {
+  it('BFF の error オブジェクト内の入力エラーを表示できること', async () => {
     fetchMock.mockResolvedValue(new Response(JSON.stringify({
       error: { code: 400, message: '個別出品の検索URLを指定してください', details: [] },
     }), { status: 400 }))
@@ -150,7 +150,7 @@ describe('http（ブラウザー）', () => {
   })
 
   it.each(['<html>Bad Gateway</html>', '', '{}'])(
-    'エラー本文 %j に詳細がなくても HTTP ステータスを返す',
+    'エラー本文 %j に詳細がなくても HTTP ステータスを返すことこと',
     async (body) => {
       fetchMock.mockResolvedValue(new Response(body, { status: 502 }))
       expect(await http('/products')).toEqual({
@@ -161,7 +161,7 @@ describe('http（ブラウザー）', () => {
     },
   )
 
-  it('接続失敗を呼び出し元が処理できるエラーレスポンスにする', async () => {
+  it('接続失敗を呼び出し元が処理できるエラーレスポンスにすること', async () => {
     fetchMock.mockRejectedValue(new Error('Failed to fetch'))
     expect(await http('/products')).toEqual({
       data: null,
@@ -170,7 +170,7 @@ describe('http（ブラウザー）', () => {
     })
   })
 
-  it('HTTP エラーに付与されたステータスと詳細を保持する', async () => {
+  it('HTTP エラーに付与されたステータスと詳細を保持すること', async () => {
     fetchMock.mockRejectedValue(
       Object.assign(new Error('Unauthorized'), {
         status: 401,
@@ -184,7 +184,7 @@ describe('http（ブラウザー）', () => {
     })
   })
 
-  it('Error 以外の例外は記録して再送出する', async () => {
+  it('Error 以外の例外は記録して再送出すること', async () => {
     const log = vi.spyOn(console, 'error').mockImplementation(() => {})
     fetchMock.mockRejectedValue('unexpected')
     await expect(http('/products')).rejects.toThrow('Unexpected error occurred.')

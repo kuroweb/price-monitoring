@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe SessionsController, type: :request do
-  describe "DELETE /logout" do
+  describe "DELETE /logout のリクエスト" do
     context "有効なトークンでログインしている場合" do
       login_with_session
 
@@ -95,7 +95,7 @@ RSpec.describe SessionsController, type: :request do
     end
   end
 
-  describe "GET /auth/failure" do
+  describe "GET /auth/failure のリクエスト" do
     it "エラーメッセージとともに /auth/test にリダイレクトすること" do
       get "/auth/failure", params: { message: "invalid_credentials" }
 

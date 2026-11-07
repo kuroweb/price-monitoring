@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe OidcTokenControl, type: :request do
-  describe "GET /auth/test" do
+  describe "GET /auth/test のリクエスト" do
     let(:oidc_token_endpoint) { "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/token" }
 
     context "ログインしていない場合" do

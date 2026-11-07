@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Crawler do
-  it "fetches up to five pages and limits each page to 100 listings" do
+  it "最大 5 ページを取得し各ページを 100 出品に制限すること" do
     site = class_double(ProductMonitoring::Sites::Mercari)
     allow(site).to receive(:fetch) { |uri| [Array.new(110) { |i| "#{uri.query}-#{i}" }, uri] }
     result = described_class.fetch(site: site, canonical_url: "https://jp.mercari.com/search?q=x")
@@ -9,7 +9,7 @@ RSpec.describe ProductMonitoring::Crawler do
     expect(site).to have_received(:fetch).exactly(5).times
   end
 
-  it "deduplicates by external_id and applies common inclusive filters" do
+  it "external_id で重複を除き共通の包含フィルターを適用すること" do
     allow(described_class).to receive(:fetch).and_return([
                                                            { external_id: "a", name: "Phone blue", price: 100,
                                                              product_url: "one" },
@@ -25,11 +25,11 @@ RSpec.describe ProductMonitoring::Crawler do
     expect(result[:accepted_count]).to eq(1)
   end
 
-  it "rejects malformed ranges" do
+  it "不正な範囲を拒否すること" do
     expect { described_class.call(params: { min_price: "x", search_urls: [] }) }.to raise_error(ArgumentError, /価格/)
   end
 
-  it "keeps source failures independent and reports unsupported URLs" do
+  it "取得元の失敗を分離し未対応の URL を報告すること" do
     allow(described_class).to receive(:fetch) do |target|
       raise Timeout::Error if target[:platform] == "mercari"
 
@@ -43,7 +43,7 @@ RSpec.describe ProductMonitoring::Crawler do
     expect(result[:sources].map { |source| source[:status] }).to eq(%w[failed unsupported succeeded])
   end
 
-  it "logs the failure without the URL query and keeps the public error unchanged" do
+  it "URL のクエリを除いて失敗を記録し公開エラーを維持すること" do
     allow(described_class).to receive(:fetch).and_raise(Timeout::Error, "timed out")
     allow(Rails.logger).to receive(:warn)
     result = described_class.call(params: { search_urls: ["https://jp.mercari.com/search?q=secret"] })
@@ -52,7 +52,7 @@ RSpec.describe ProductMonitoring::Crawler do
     expect(result[:sources].first[:error]).to eq("Crawl failed")
   end
 
-  it "uses AND required words, OR excluded words, and listing exclusion" do
+  it "必須ワードの AND、除外ワードの OR、出品の除外を適用すること" do
     allow(described_class).to receive(:fetch).and_return([
                                                            { external_id: "same", name: "Phone blue", price: 50,
                                                              product_url: "item" },
@@ -71,7 +71,7 @@ RSpec.describe ProductMonitoring::Crawler do
     expect(result[:results].last[:reasons]).to eq(["excluded_listing"])
   end
 
-  it "does not treat malformed keyword parameters as empty filters" do
+  it "不正なキーワードパラメータを空のフィルターとして扱わないこと" do
     expect do
       described_class.call(params: { required_keywords: "phone", search_urls: [] })
     end.to raise_error(ArgumentError)

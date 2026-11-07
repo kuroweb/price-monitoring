@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe RelatedProduct, type: :model do
-  describe "validations" do
+  describe "バリデーション" do
     it { is_expected.to allow_value(true).for(:published) }
     it { is_expected.to allow_value(false).for(:published) }
     it { is_expected.to validate_presence_of(:platform) }

@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe JanparaProduct, type: :model do
-  describe "associations" do
+  describe "関連付け" do
     it { is_expected.to belong_to(:product) }
   end
 
-  describe "validations" do
+  describe "バリデーション" do
     it { is_expected.to validate_presence_of(:external_id) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:thumbnail_url) }

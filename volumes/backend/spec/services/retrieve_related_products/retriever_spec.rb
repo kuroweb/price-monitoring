@@ -4,7 +4,7 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
   describe "#call" do
     let!(:product) { create(:product) }
 
-    context "platform_maskでのフィルタリングをテストする" do
+    context "platform_mask でフィルタリングするとき" do
       context "yahoo_auctionを指定した場合" do
         before do
           create(:yahoo_auction_crawl_setting, product:, max_price: 20_000)
@@ -337,8 +337,8 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
       end
     end
 
-    context "page, perでのページングをテストする"
+    context "page, per でページングするとき"
 
-    context "sort, orderでのソートをテストする"
+    context "sort, order でソートするとき"
   end
 end

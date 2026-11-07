@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Product crawl settings", type: :request do
+RSpec.describe "商品クロール設定", type: :request do
   let(:params) do
     {
       name: "phone", enabled: true, min_price: 100,
@@ -9,7 +9,7 @@ RSpec.describe "Product crawl settings", type: :request do
     }
   end
 
-  it "supports CRUD with search URLs and filters in one row" do
+  it "検索 URL とフィルターをまとめて作成・取得・更新・削除すること" do
     expect { post "/api/v1/product_crawl_settings", params:, as: :json }.to change(ProductCrawlSetting, :count).by(1)
     expect(response).to have_http_status(:ok)
     id = response.parsed_body.fetch("id")
@@ -26,7 +26,7 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(ProductCrawlSetting.exists?(id)).to be(false)
   end
 
-  it "rejects unsupported URLs without changing the saved setting" do
+  it "未対応の URL を拒否し保存済みの設定を変更しないこと" do
     product_crawl_setting = create(:product_crawl_setting, name: "phone")
     put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}",
         params: params.merge(name: "changed", search_urls: ["https://evil.example/search?q=x"]), as: :json
@@ -34,7 +34,7 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(product_crawl_setting.reload.name).to eq("phone")
   end
 
-  it "rejects an iosys group search when registering a setting" do
+  it "設定の登録時に iosys のグループ検索を拒否すること" do
     expect do
       post "/api/v1/product_crawl_settings",
            params: params.merge(search_urls: ["https://iosys.co.jp/items?t=g&q=ipad"]), as: :json
@@ -43,7 +43,7 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(response.parsed_body.to_s).to include("個別出品", "t=gなし")
   end
 
-  it "enqueues manual sync even for disabled settings" do
+  it "無効な設定でも手動同期を投入すること" do
     allow(ProductMonitoring::CrawlJob).to receive(:perform_async)
     product_crawl_setting = create(:product_crawl_setting, enabled: false)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
@@ -51,7 +51,7 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(ProductMonitoring::CrawlJob).to have_received(:perform_async).with(product_crawl_setting.id, true)
   end
 
-  it "excludes and restores a listing without deleting it" do
+  it "出品を削除せずに除外と復元を行うこと" do
     result = create(:product_crawl_result)
     patch "/api/v1/product_crawl_results/#{result.id}", params: { excluded: true }, as: :json
     expect(response).to have_http_status(:ok)
@@ -68,8 +68,8 @@ RSpec.describe "Product crawl settings", type: :request do
 
 end
 
-RSpec.describe "Product crawl results", type: :request do
-  it "returns the newest eight per setting and full counts while detail remains unlimited" do
+RSpec.describe "商品クロール結果", type: :request do
+  it "設定ごとに最新の 8 件と全件数を返し詳細は件数を制限しないこと" do
     setting = create(:product_crawl_setting)
     other = create(:product_crawl_setting)
     results = Array.new(10) { |i| create(:product_crawl_result, product_crawl_setting: setting, sold: i.even?) }
@@ -87,7 +87,7 @@ RSpec.describe "Product crawl results", type: :request do
     expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([excluded.id])
   end
 
-  it "lists results across crawl settings" do
+  it "クロール設定を横断して結果を一覧表示すること" do
     first = create(:product_crawl_result)
     second = create(:product_crawl_result)
     get "/api/v1/product_crawl_results"

@@ -6,7 +6,7 @@ import { describe, expect, it, vi } from 'vitest'
 import Pagination from '@/features/products/components/Pagination'
 
 describe('Pagination', () => {
-  it('最初のページでは前のページへ移動できない', () => {
+  it('最初のページでは前のページへ移動できないこと', () => {
     render(
       <NuqsTestingAdapter>
         <Pagination />
@@ -20,7 +20,7 @@ describe('Pagination', () => {
   it.each([
     ['»', '3'],
     ['«', null],
-  ])('%s を押すとページのクエリを %s に更新する（初期値は省略）', async (button, expectedPage) => {
+  ])('%s を押すとページのクエリを %s に更新する（初期値は省略）こと', async (button, expectedPage) => {
     const user = userEvent.setup()
     const onUrlUpdate = vi.fn()
     render(

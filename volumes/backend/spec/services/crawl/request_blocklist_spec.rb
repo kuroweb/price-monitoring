@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Crawl::RequestBlocklist do
   describe ".blocked_request?" do
-    it "YouTube・動画配信・広告のドメインへのリクエストをブロックする" do
+    it "YouTube・動画配信・広告のドメインへのリクエストをブロックすること" do
       %w[
         https://www.youtube.com/embed/kVNsK59ytMw
         https://rr3---sn-oguelnsl.googlevideo.com/videoplayback
@@ -12,7 +12,7 @@ RSpec.describe Crawl::RequestBlocklist do
       end
     end
 
-    it "商品一覧や商品詳細の取得に必要なリクエストはブロックしない" do
+    it "商品一覧や商品詳細の取得に必要なリクエストはブロックしないこと" do
       %w[
         https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iphone
         https://jp.mercari.com/search?keyword=iphone

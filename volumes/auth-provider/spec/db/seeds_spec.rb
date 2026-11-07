@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Development seeds" do
+RSpec.describe "開発環境のseed" do
   let(:seed_path) { Rails.root.join("db/seeds.rb") }
 
   before do
@@ -11,7 +11,7 @@ RSpec.describe "Development seeds" do
     allow(ENV).to receive(:fetch).with("OIDC_REDIRECT_URI", "").and_return("https://example.com/callback")
   end
 
-  it "registers the client and admin without duplicating them on a second run" do
+  it "2回実行してもクライアントと管理者を重複させずに登録すること" do
     load seed_path
     load seed_path
 
@@ -26,7 +26,7 @@ RSpec.describe "Development seeds" do
 
   %w[OIDC_CLIENT_ID OIDC_CLIENT_SECRET OIDC_REDIRECT_URI].each do |key|
     [nil, "", " "].each do |value|
-      it "fails explicitly when #{key} is #{value.inspect}" do
+      it "#{key}が#{value.inspect}の場合は明示的にエラーを出すこと" do
         allow(ENV).to receive(:fetch).with(key, "").and_return(value)
 
         expect { load seed_path }.to raise_error(ArgumentError, "#{key} is required")
@@ -35,7 +35,7 @@ RSpec.describe "Development seeds" do
     end
   end
 
-  it "does not initialize clients outside development" do
+  it "開発環境以外ではクライアントを初期化しないこと" do
     allow(Rails.env).to receive(:development?).and_return(false)
 
     expect { load seed_path }.not_to change(Doorkeeper::Application, :count)

@@ -3,6 +3,7 @@
 認証を変更する開発者向けの、テスト準備とログイン・ログアウトの確認手順。構成は [認証基盤](index.md) を参照する。
 
 共通の起動・状態確認・RSpec 実行方法は [ローカル開発のテスト手順](../development/testing.md) を参照する。
+
 Provider のテスト DB・アセットを初回または関連変更後に準備する。ホストのリポジトリルートから実行し、処理はテスト環境の `auth-provider` コンテナで行う。
 
 ```bash
@@ -45,3 +46,7 @@ worktree では [ローカル開発ガイドの Orca の worktree](../developmen
 - CORS を変更した場合は、development と production / integration の許可を分けて確認する。
 
 `just prepare` や API の成功だけでは、OIDC・Cookie 分離・HMR を確認したことにはならない。PR 本文に、確認した環境と未確認の項目を書く。
+
+## テスト方針
+
+- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。`it` は振る舞いを「〜こと」で終え、`context` は「〜とき」「〜場合」で書く。

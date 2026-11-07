@@ -9,7 +9,7 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     HTML
   end
 
-  it "extracts listings and the next search page" do
+  it "出品と次の検索ページを抽出すること" do
     allow(described_class).to receive(:fetch_page).and_return(html)
     results, next_url = described_class.fetch(url)
     expect(results).to contain_exactly(include(external_id: "z123", name: "iPad", price: 12_000, sold: true,
@@ -17,12 +17,12 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     expect(next_url.to_s).to eq("https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro?page=2")
   end
 
-  it "rejects a next page on another host" do
+  it "別ホストの次ページを拒否すること" do
     page = Nokogiri::HTML('<a href="https://evil.example/search/iPad%20Pro"><img alt="次へボタンアイコン"></a>')
     expect { described_class.next_url(url, page) }.to raise_error("Unexpected next page URL")
   end
 
-  it "rejects redirected pages and oversized rendered HTML" do
+  it "リダイレクト先のページと過大な描画済み HTML を拒否すること" do
     response = instance_double(Playwright::Response, status: 200)
     page = instance_double(Playwright::Page, url: "https://evil.example/", content: "ok")
     allow(page).to receive(:goto).and_return(response)
@@ -35,7 +35,7 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     expect { described_class.fetch_page(url) }.to raise_error("Response exceeds size limit")
   end
 
-  it "treats a verified empty 404 as success without saving suggested listings" do
+  it "空と確認された 404 を成功として扱いおすすめ出品を保存しないこと" do
     data = { props: { initialState: { searchState: { search: {
       searchParams: { query: "iPad Pro" }, result: { metadata: { retriedWithVectorSearch: true } }
     } } } } }
@@ -61,7 +61,7 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     expect { described_class.fetch(url) }.to raise_error("Response exceeds size limit")
   end
 
-  it "uses product structured data rather than seller text to determine availability" do
+  it "販売者の文言ではなく商品の構造化データから在庫状態を判定すること" do
     html = '<div>売り切れ</div><script type="application/ld+json">' \
            '{"@type":"Product","offers":{"availability":"https://schema.org/InStock"}}</script>'
     allow(described_class).to receive(:fetch_page).and_return(html)
@@ -69,7 +69,7 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     expect(described_class.detail_sold(Nokogiri::HTML("<div>売り切れ</div>"))).to be_nil
   end
 
-  it "reads the structured update time for sold listings" do
+  it "売却済み出品の構造化された更新日時を読み取ること" do
     html = '<script type="application/ld+json">' \
            '{"@type":"Product","offers":{"availability":"https://schema.org/OutOfStock"}}</script>' \
            '<aside><img alt="時計アイコン"><span>2日前に更新</span></aside>'
