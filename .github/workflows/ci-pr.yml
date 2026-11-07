@@ -38,11 +38,15 @@ jobs:
               - 'containers/backend/**'
               - 'docker-compose.yml'
               - '.github/workflows/ci-pr.yml'
+              - '.github/workflows/cicd-integration.yml'
+              - '.github/workflows/cicd-production.yml'
             auth_provider_ci:
               - 'volumes/auth-provider/**'
               - 'containers/auth-provider/**'
               - 'docker-compose.yml'
               - '.github/workflows/ci-pr.yml'
+              - '.github/workflows/cicd-integration.yml'
+              - '.github/workflows/cicd-production.yml'
 
   frontend_ci:
     needs: check_changes
@@ -57,27 +61,53 @@ jobs:
           docker compose build frontend
           docker compose run --rm --no-deps frontend sh -c 'npm ci && npm run lint && npm run typecheck && npm test'
 
-  backend_ci:
+  backend_rubocop:
     needs: check_changes
     if: needs.check_changes.outputs.backend_ci == 'true'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
-      - name: Execute CI
+      - name: Execute RuboCop
+        run: |
+          touch .env
+          docker compose build backend
+          docker compose run --rm --no-deps backend bundle exec rubocop
+
+  backend_rspec:
+    needs: check_changes
+    if: needs.check_changes.outputs.backend_ci == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+      - name: Execute RSpec
         run: |
           touch .env
           docker compose build backend
           docker compose run --rm -e RAILS_ENV=test backend sh -c 'bundle exec rails db:prepare && bundle exec rspec'
 
-  auth_provider_ci:
+  auth_provider_rubocop:
     needs: check_changes
     if: needs.check_changes.outputs.auth_provider_ci == 'true'
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
-      - name: Execute Auth Provider CI
+      - name: Execute RuboCop
+        run: |
+          touch .env
+          docker compose build auth-provider
+          docker compose run --rm --no-deps auth-provider bundle exec rubocop
+
+  auth_provider_rspec:
+    needs: check_changes
+    if: needs.check_changes.outputs.auth_provider_ci == 'true'
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v7
+      - name: Execute RSpec
         run: |
           touch .env
           openssl genrsa -out volumes/auth-provider/certs/private.pem 2048
