@@ -2,7 +2,7 @@ import NextImage from 'next/image'
 
 import { platformName } from '@/features/product-monitoring/lib/platform'
 
-export type ExcludedListingItem = {
+type ExcludedListingItem = {
   key: string
   platform: string
   name: string

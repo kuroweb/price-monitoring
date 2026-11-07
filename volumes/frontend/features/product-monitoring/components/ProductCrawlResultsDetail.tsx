@@ -26,10 +26,12 @@ type Sort = (typeof SORTS)[number][0]
 const matchesStatus = (item: ProductCrawlResult, filter: StatusFilter) =>
   filter === 'all' || (filter === 'sold' ? item.sold === true : item.sold !== true)
 
-const sortResults = (items: ProductCrawlResult[], sort: Sort) =>
-  sort === 'newest'
-    ? items
-    : [...items].sort((a, b) => (sort === 'price_asc' ? a.price - b.price : b.price - a.price))
+const sortResults = (items: ProductCrawlResult[], sort: Sort) => {
+  if (sort === 'newest') return items
+
+  const direction = sort === 'price_asc' ? 1 : -1
+  return [...items].sort((a, b) => direction * (a.price - b.price))
+}
 
 interface Props {
   productCrawlSetting: ProductCrawlSetting
