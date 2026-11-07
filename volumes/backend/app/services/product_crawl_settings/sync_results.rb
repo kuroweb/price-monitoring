@@ -95,8 +95,9 @@ module ProductCrawlSettings
 
       rows = results.map { |result| listing_row(result) }
       ProductCrawlResult.upsert_all(rows, record_timestamps: true,
-                                          update_only: %i[name product_url thumbnail_url price])
+                                          update_only: %i[name product_url thumbnail_url price end_date])
       update_sold(results)
+      update_buyout_prices(results)
     end
 
     def listing_row(result)
@@ -108,7 +109,10 @@ module ProductCrawlSettings
         product_url: result[:product_url],
         thumbnail_url: result[:thumbnail_url],
         price: result[:price],
-        sold: result[:sold]
+        sold: result[:sold],
+        buyout_price: result[:buyout_price],
+        end_date: result[:end_date],
+        bought_date: result[:bought_date]
       }
     end
 
@@ -118,6 +122,24 @@ module ProductCrawlSettings
       scope = product_crawl_setting.product_crawl_results
       scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
+      update_bought_dates(results, scope)
+    end
+
+    def update_bought_dates(results, scope)
+      results.each do |result|
+        next unless result[:sold] && result[:bought_date]
+
+        scope.where(external_id: result[:external_id], bought_date: nil).update_all(bought_date: result[:bought_date])
+      end
+    end
+
+    def update_buyout_prices(results)
+      results.each do |result|
+        next if result[:buyout_price].nil?
+
+        product_crawl_setting.product_crawl_results.where(external_id: result[:external_id])
+                             .update_all(buyout_price: result[:buyout_price])
+      end
     end
 
     # 条件の変更で一致しなくなった保存済みの結果を削除する

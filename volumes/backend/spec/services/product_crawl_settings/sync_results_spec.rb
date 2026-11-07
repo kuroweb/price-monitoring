@@ -12,6 +12,31 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     ])
   end
 
+  it "saves auction prices and dates without losing an existing sale" do
+    bought_date = 2.days.ago.change(usec: 0)
+    end_date = 1.day.from_now.change(usec: 0)
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: true,
+                                            bought_date:)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, buyout_price: 200, end_date:,
+        product_url: "https://iosys.co.jp/items/a", sold: false }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload).to have_attributes(sold: true, bought_date:, buyout_price: 200, end_date:)
+  end
+
+  it "records the sale date from a closed auction listing" do
+    bought_date = 2.days.ago.change(usec: 0)
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: false,
+                                            buyout_price: 200)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, end_date: bought_date, bought_date:,
+        product_url: "https://iosys.co.jp/items/a", sold: true }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload).to have_attributes(sold: true, bought_date:, end_date: bought_date, buyout_price: 200)
+  end
+
   it "saves only accepted listings with their platform" do
     described_class.call(product_crawl_setting:)
     results = product_crawl_setting.product_crawl_results
