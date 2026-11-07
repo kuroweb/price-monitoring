@@ -43,14 +43,12 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(response.parsed_body.to_s).to include("個別出品", "t=gなし")
   end
 
-  it "syncs saved settings" do
-    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
-                                                                   product_url: "https://iosys.co.jp/items/a" }])
-    product_crawl_setting = create(:product_crawl_setting)
+  it "enqueues manual sync even for disabled settings" do
+    allow(ProductCrawlSettings::SyncJob).to receive(:perform_async)
+    product_crawl_setting = create(:product_crawl_setting, enabled: false)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
-    expect(response).to have_http_status(:ok)
-    get "/api/v1/product_crawl_results"
-    expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(["a"])
+    expect(response).to have_http_status(:accepted)
+    expect(ProductCrawlSettings::SyncJob).to have_received(:perform_async).with(product_crawl_setting.id, true)
   end
 
   it "excludes and restores a listing without deleting it" do

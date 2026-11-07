@@ -1,6 +1,14 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Crawler do
+  it "fetches up to five pages and limits each page to 100 listings" do
+    site = class_double(ProductMonitoring::Sites::Mercari)
+    allow(site).to receive(:fetch) { |uri| [Array.new(110) { |i| "#{uri.query}-#{i}" }, uri] }
+    result = described_class.fetch(site: site, canonical_url: "https://jp.mercari.com/search?q=x")
+    expect(result.size).to eq(500)
+    expect(site).to have_received(:fetch).exactly(5).times
+  end
+
   it "deduplicates by external_id and applies common inclusive filters" do
     allow(described_class).to receive(:fetch).and_return([
                                                            { external_id: "a", name: "Phone blue", price: 100,

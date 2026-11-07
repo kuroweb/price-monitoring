@@ -2,9 +2,9 @@ require "timeout"
 
 module ProductMonitoring
   class Crawler
-    TIMEOUT_SECONDS = 20
-    TOTAL_TIMEOUT_SECONDS = 45
-    MAX_RESULTS_PER_URL = 100
+    TIMEOUT_SECONDS = 60
+    TOTAL_TIMEOUT_SECONDS = 300
+    MAX_RESULTS_PER_PAGE = 100
     MAX_PAGES_PER_URL = 5
 
     def self.call(...)
@@ -53,8 +53,8 @@ module ProductMonitoring
       records = []
       MAX_PAGES_PER_URL.times do
         page_records, next_uri = target[:site].fetch(uri)
-        records.concat(page_records.first(MAX_RESULTS_PER_URL - records.size))
-        break if page_records.empty? || next_uri.nil? || records.size >= MAX_RESULTS_PER_URL
+        records.concat(page_records.first(MAX_RESULTS_PER_PAGE))
+        break if page_records.empty? || next_uri.nil?
 
         uri = next_uri
       end
@@ -62,7 +62,7 @@ module ProductMonitoring
     end
 
     def self.listing_nodes(page, selector)
-      page.css(selector).first(MAX_RESULTS_PER_URL)
+      page.css(selector).first(MAX_RESULTS_PER_PAGE)
     end
 
     def self.parse_price(value)

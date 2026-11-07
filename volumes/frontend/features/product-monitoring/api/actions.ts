@@ -40,9 +40,7 @@ export async function destroyProductCrawlSetting(id: number) {
 }
 
 export async function syncProductCrawlSetting(id: number) {
-  const result = await CrawlApi.syncProductCrawlSetting(id)
-  if (result.data) revalidateCrawl()
-  return result
+  return CrawlApi.syncProductCrawlSetting(id)
 }
 
 export async function setProductCrawlResultExcluded(id: number, excluded: boolean) {

@@ -33,10 +33,8 @@ export const useProductCrawlResultActions = (productCrawlSetting: ProductCrawlSe
         toast.error(result.error?.message ?? '取得に失敗しました')
         return false
       }
-      const failed = result.data.sources.filter((source) => source.status !== 'succeeded').length
-      toast.success(`取得して保存しました（採用 ${result.data.acceptedCount}件）`)
-      if (failed > 0) toast.error(`${failed}件のURLを取得できませんでした`)
-      return true
+      toast.success('取得を開始しました。しばらくしてから再読み込みしてください')
+      return false
     })
   const exclude = (item: ProductCrawlResult) =>
     perform(async () => {

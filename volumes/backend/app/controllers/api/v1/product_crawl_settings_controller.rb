@@ -35,8 +35,8 @@ module Api
 
       # 保存済みの条件で取得し、採用した出品を商品計測結果に保存する
       def sync
-        render json: ::ProductCrawlSettings::SyncResults.call(product_crawl_setting: @product_crawl_setting),
-               status: :ok
+        ::ProductCrawlSettings::SyncJob.perform_async(@product_crawl_setting.id, true)
+        render json: {}, status: :accepted
       end
 
       private

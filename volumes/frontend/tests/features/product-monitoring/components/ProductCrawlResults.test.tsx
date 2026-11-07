@@ -1,5 +1,6 @@
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { toast } from 'react-toastify'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
@@ -62,9 +63,9 @@ describe('商品計測結果', () => {
   it('syncs saved settings and excludes a saved result', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(syncProductCrawlSetting).mockResolvedValue({
-      data: { sources: [], results: [], fetchedCount: 0, acceptedCount: 0 },
+      data: {},
       error: null,
-      status: 200,
+      status: 202,
     })
     vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
       data: result,
@@ -87,9 +88,10 @@ describe('商品計測結果', () => {
     await user.click(screen.getByRole('button', { name: /^すべて/ }))
     await user.click(screen.getByRole('button', { name: '取得して保存' }))
     await waitFor(() => expect(syncProductCrawlSetting).toHaveBeenCalledWith(1))
+    expect(toast.success).toHaveBeenCalledWith('取得を開始しました。しばらくしてから再読み込みしてください')
     await user.click(screen.getByRole('button', { name: '除外' }))
     await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(10, true))
-    expect(refresh).toHaveBeenCalledTimes(2)
+    expect(refresh).toHaveBeenCalledTimes(1)
   })
 })
 
