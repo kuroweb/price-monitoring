@@ -15,11 +15,13 @@ module ProductCrawlSettings
 
     def call
       crawled = ProductMonitoring::Crawler.call(params: crawl_params)
+      matched = crawled[:results].select { |result| (result[:reasons] - ["excluded_listing"]).empty? }
+      newly_sold_ids = newly_sold_ids(matched)
       ProductCrawlResult.transaction do
-        save_matched(crawled[:results].select { |result| (result[:reasons] - ["excluded_listing"]).empty? })
+        save_matched(matched)
         delete_unmatched
       end
-      enqueue_details(crawled) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
+      enqueue_details(crawled, newly_sold_ids) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
       crawled
     end
 
@@ -27,9 +29,18 @@ module ProductCrawlSettings
 
     attr_reader :product_crawl_setting
 
-    def enqueue_details(crawled)
+    def newly_sold_ids(results)
+      sold_ids = results.select do |result|
+        result[:platform] == "mercari" && result[:sold] && !result[:price].nil?
+      end.pluck(:external_id)
+      already_sold = product_crawl_setting.product_crawl_results
+                                          .where(platform: "mercari", external_id: sold_ids, sold: true)
+      sold_ids - already_sold.pluck(:external_id)
+    end
+
+    def enqueue_details(crawled, newly_sold_ids)
       seen_ids = crawled[:results].select { |result| result[:platform] == "mercari" }.pluck(:external_id)
-      candidates = detail_candidates(seen_ids).order(:updated_at).pluck(:external_id).uniq
+      candidates = detail_candidates(seen_ids, newly_sold_ids).order(:updated_at).pluck(:external_id).uniq
       ids = candidates.first(MAX_DETAIL_JOBS)
       log_detail_candidates(candidates.size, ids.size)
       ids.each do |external_id|
@@ -42,11 +53,12 @@ module ProductCrawlSettings
                         "candidates=#{candidate_count} enqueued=#{enqueued_count}")
     end
 
-    def detail_candidates(seen_ids)
+    def detail_candidates(seen_ids, newly_sold_ids)
       scope = product_crawl_setting.product_crawl_results.where(platform: "mercari")
-      missing = scope.where.not(sold: true).or(scope.where(sold: nil))
-                     .where.not(external_id: seen_ids).where(updated_at: ...DETAIL_RECHECK_INTERVAL.ago)
+      due = scope.where(updated_at: ...DETAIL_RECHECK_INTERVAL.ago)
+      missing = due.where.not(sold: true).or(due.where(sold: nil)).where.not(external_id: seen_ids)
       undated = scope.where(sold: true, bought_date: nil)
+      undated = undated.merge(due).or(undated.where(external_id: newly_sold_ids))
       missing.or(undated)
     end
 
