@@ -8,7 +8,7 @@ RSpec.describe ProductMonitoring::Sites::Iosys do
     HTML
     allow(described_class).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
     result = ProductMonitoring::Crawler.call(params: { search_urls: ["https://iosys.co.jp/items?q=phone"] })
-    expect(result[:results].first).to include(external_id: "phone/1", thumbnail_url: "https://cdn.example/1_S.jpg")
+    expect(result[:results].first).to include(external_id: "phone/1", sold: false, thumbnail_url: "https://cdn.example/1_S.jpg")
   end
 
   it "does not turn a price range into a single price and resolves relative iosys images" do

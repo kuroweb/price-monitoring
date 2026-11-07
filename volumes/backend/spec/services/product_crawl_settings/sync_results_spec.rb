@@ -47,6 +47,26 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     )
   end
 
+  it "preserves a sold listing and its bought date when the listing says it is available" do
+    bought_date = 2.days.ago.beginning_of_day
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: true,
+                                            bought_date:)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a", sold: false }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload).to have_attributes(sold: true, bought_date:)
+  end
+
+  it "records a sold marker on an existing listing" do
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: false)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a", sold: true }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload.sold).to be true
+  end
+
   it "skips listings without a price while retaining existing rows and accepting zero" do
     existing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", price: 50)
     allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([

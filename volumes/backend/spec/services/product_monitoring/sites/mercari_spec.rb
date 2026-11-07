@@ -4,13 +4,13 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
   it "extracts actual HTML and preserves the listing URL and query" do
     html = <<~HTML
       <li data-testid="item-cell"><a href="/item/item-1"></a><span data-testid="thumbnail-item-name">Phone</span>
-      <span data-testid="item-tile-price">¥1,200</span></li>
+      <span data-testid="item-tile-price">¥1,200</span><img alt="Phoneのサムネイル 売り切れ"></li>
     HTML
     allow(described_class).to receive(:fetch_mercari_page).and_return(html)
     url = "https://jp.mercari.com/search?q=phone&sort=price"
     result = ProductMonitoring::Crawler.call(params: { search_urls: [url] })
     expect(described_class).to have_received(:fetch_mercari_page).with(URI("https://jp.mercari.com/search?q=phone&sort=price"))
-    expect(result[:results].first).to include(external_id: "item-1", price: 1200,
+    expect(result[:results].first).to include(external_id: "item-1", price: 1200, sold: true,
                                               thumbnail_url: "https://static.mercdn.net/thumb/item/webp/item-1_1.jpg",
                                               product_url: "https://jp.mercari.com/item/item-1")
   end

@@ -40,18 +40,31 @@ module ProductCrawlSettings
       results = results.reject { |result| result[:price].nil? }
       return if results.empty?
 
-      rows = results.map do |result|
-        {
-          product_crawl_setting_id: product_crawl_setting.id,
-          platform: result[:platform],
-          external_id: result[:external_id],
-          name: result[:name],
-          product_url: result[:product_url],
-          thumbnail_url: result[:thumbnail_url],
-          price: result[:price]
-        }
-      end
-      ProductCrawlResult.upsert_all(rows, record_timestamps: true)
+      rows = results.map { |result| listing_row(result) }
+      ProductCrawlResult.upsert_all(rows, record_timestamps: true,
+                                          update_only: %i[name product_url thumbnail_url price])
+      update_sold(results)
+    end
+
+    def listing_row(result)
+      {
+        product_crawl_setting_id: product_crawl_setting.id,
+        platform: result[:platform],
+        external_id: result[:external_id],
+        name: result[:name],
+        product_url: result[:product_url],
+        thumbnail_url: result[:thumbnail_url],
+        price: result[:price],
+        sold: result[:sold]
+      }
+    end
+
+    def update_sold(results)
+      available_ids = results.select { |result| result[:sold] == false }.pluck(:external_id)
+      sold_ids = results.select { |result| result[:sold] }.pluck(:external_id)
+      scope = product_crawl_setting.product_crawl_results
+      scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
+      scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
     end
 
     # 条件の変更で一致しなくなった保存済みの結果を削除する

@@ -76,7 +76,8 @@ module ProductMonitoring
         price = Crawler.parse_price(dom.at_css("[data-testid='item-tile-price']")&.text)
         # 既存のメルカリクローラーと同じく、画像URLは external_id から組み立てる
         { external_id: id, name: name, price: price, product_url: "https://jp.mercari.com/item/#{id}",
-          thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg" }
+          thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg",
+          sold: dom.at_css("img[alt$='売り切れ']").present? }
       end
     end
   end
