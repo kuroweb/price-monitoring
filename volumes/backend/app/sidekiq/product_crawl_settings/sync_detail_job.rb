@@ -11,29 +11,27 @@ module ProductCrawlSettings
                         .update_all(updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
     end
 
-    def perform(external_id, platform = "mercari") # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
-      site = ProductMonitoring::UrlRouter::SITES.find do |candidate|
-        platform == candidate::PLATFORM && candidate.respond_to?(:fetch_detail)
-      end
+    def perform(external_id, platform = "mercari")
+      site = ProductMonitoring::UrlRouter.detail_site(platform)
       return unless site
 
       scope = ProductCrawlResult.where(platform: platform, external_id: external_id)
       return unless scope.exists?
 
-      handle_timeout do
-        detail = site.fetch_detail(external_id)
-        if detail[:deleted]
-          scope.delete_all
-        elsif detail.key?(:sold)
-          # 同一出品を一括更新し、並行処理で設定された売却日を上書きしない
-          scope.update_all(sold: detail[:sold], updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
-          if detail[:bought_date]
-            scope.where(bought_date: nil).update_all(bought_date: detail[:bought_date]) # rubocop:disable Rails/SkipsModelValidations
-          end
-        else
-          scope.update_all(updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
-        end
-      end
+      handle_timeout { update_results(scope, site.fetch_detail(external_id)) }
+    end
+
+    private
+
+    def update_results(scope, detail)
+      return scope.delete_all if detail[:deleted]
+      return scope.update_all(updated_at: Time.current) unless detail.key?(:sold) # rubocop:disable Rails/SkipsModelValidations
+
+      # 同一出品を一括更新し、並行処理で設定された売却日を上書きしない
+      scope.update_all(sold: detail[:sold], updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
+      return unless detail[:bought_date]
+
+      scope.where(bought_date: nil).update_all(bought_date: detail[:bought_date]) # rubocop:disable Rails/SkipsModelValidations
     end
   end
 end
