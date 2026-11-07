@@ -60,7 +60,7 @@ beforeEach(() => {
 })
 
 describe('商品計測設定', () => {
-  it('saves search URLs and shared keywords in one setting and shows each URL site', async () => {
+  it('検索 URL と共通キーワードを一つの設定に保存し、各 URL のサイトを表示する', async () => {
     vi.mocked(createProductCrawlSetting).mockResolvedValue({
       data: setting,
       error: null,
@@ -93,7 +93,7 @@ describe('商品計測設定', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
-  it('lists excluded listings with links and restores one in place', async () => {
+  it('除外した出品をリンク付きで一覧表示し、その場で復元する', async () => {
     const user = userEvent.setup()
     vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
       data: { ...result, id: 2 },

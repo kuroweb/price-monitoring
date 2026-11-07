@@ -28,7 +28,7 @@ const setting: ProductAggregationSetting = {
 beforeEach(() => vi.clearAllMocks())
 
 describe('商品相場', () => {
-  it('calculates and lists daily results from the newest date', async () => {
+  it('日ごとの結果を計算し、新しい日付から一覧表示する', async () => {
     vi.mocked(calculateProductAggregationSetting).mockResolvedValue({
       data: {},
       error: null,
