@@ -42,11 +42,8 @@ module ProductMonitoring
       end
 
       def self.validate_page(page)
-        uri = URI.parse(page.url)
-        unless uri.is_a?(URI::HTTPS) && uri.host == HOST && uri.port == 443 && uri.userinfo.nil?
-          raise "Unexpected page URL"
-        end
-        raise "Response exceeds size limit" if page.content.bytesize > MAX_RESPONSE_BYTES
+        BrowserPage.validate_url(page, host: HOST, port: true, userinfo: true)
+        BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
       end
 
       def self.listing(item, closed:)
@@ -67,11 +64,7 @@ module ProductMonitoring
       def self.next_url(uri, page)
         return if LIST.not_exist_next_page?(page)
 
-        query = URI.decode_www_form(uri.query)
-        current = query.to_h.fetch("b", "1").to_i
-        query.reject! { |key, _| key == "b" }
-        query << ["b", (current + 100).to_s]
-        uri.dup.tap { |result| result.query = URI.encode_www_form(query) }
+        Pagination.increment(uri, key: "b", default: "1", step: 100)
       end
     end
   end

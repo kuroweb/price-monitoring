@@ -30,11 +30,7 @@ module ProductMonitoring
       def self.next_url(uri, page)
         return unless page.at_css(".page-link[rel='next']")
 
-        query = URI.decode_www_form(uri.query)
-        current = query.to_h.fetch("page", "1").to_i
-        query.reject! { |key, _| key == "page" }
-        query << ["page", [(current + 1), 2].max.to_s]
-        uri.dup.tap { |next_uri| next_uri.query = URI.encode_www_form(query) }
+        Pagination.increment(uri, key: "page", default: "1", step: 1, minimum: 2)
       end
 
       # 取得先は UrlRouter で許可したホストの検索ページに限る。リダイレクトは追わず、応答は読み取り中に打ち切る

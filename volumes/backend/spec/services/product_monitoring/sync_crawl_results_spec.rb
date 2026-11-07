@@ -207,7 +207,7 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
     end
 
     it "limits detail jobs in oldest order" do
-      stub_const("ProductMonitoring::SyncCrawlResults::MAX_DETAIL_JOBS", 2)
+      stub_const("ProductMonitoring::DetailCandidates::MAX_DETAIL_JOBS", 2)
       allow(Rails.logger).to receive(:info).and_call_original
       3.times do |n|
         create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "m#{n}", sold: false,

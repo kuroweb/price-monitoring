@@ -13,37 +13,41 @@ module ProductMonitoring
         raise ArgumentError, "Invalid search keyword" if keyword.blank? || keyword.match?(%r{[/\x00-\x1f\x7f]})
       end
 
-      def self.fetch(uri) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      def self.fetch(uri)
         html = fetch_page(uri, allow_empty_search: true)
         return [[], nil] if html.nil?
 
         page = Nokogiri::HTML(html)
-        results = page.css('a[href^="/item/"]').filter_map do |link|
-          id = link["href"]&.match(%r{\A/item/([a-zA-Z0-9_-]+)\z})&.[](1)
-          image = link.at_css('img:not([alt="sold"])')
-          price = link.css("p").filter_map { |p| Crawler.parse_price(p.text) }.first
-          next unless id && image && price
-
-          { external_id: id, name: image["alt"].to_s.strip, price: price,
-            product_url: "https://#{HOST}/item/#{id}", thumbnail_url: image["src"],
-            sold: link.at_css('img[alt="sold"]').present? }
-        end
+        results = page.css('a[href^="/item/"]').filter_map { |link| listing(link) }
         raise "Search page has no extractable listings" if results.empty?
 
         [results, next_url(uri, page)]
       end
 
-      def self.next_url(uri, page) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+      def self.listing(link)
+        id = link["href"]&.match(%r{\A/item/([a-zA-Z0-9_-]+)\z})&.[](1)
+        image = link.at_css('img:not([alt="sold"])')
+        price = link.css("p").filter_map { |p| Crawler.parse_price(p.text) }.first
+        return unless id && image && price
+
+        { external_id: id, name: image["alt"].to_s.strip, price: price,
+          product_url: "https://#{HOST}/item/#{id}", thumbnail_url: image["src"],
+          sold: link.at_css('img[alt="sold"]').present? }
+      end
+
+      def self.next_url(uri, page)
         link = page.css("a[href]").find { |node| node.at_css('img[alt="次へボタンアイコン"]') }
         return unless link
 
         next_uri = URI.join(uri.to_s, link["href"])
-        unless next_uri.is_a?(URI::HTTPS) && next_uri.host == HOST && next_uri.port == 443 &&
-               next_uri.path == uri.path && next_uri.userinfo.nil?
-          raise "Unexpected next page URL"
-        end
+        raise "Unexpected next page URL" unless valid_next_url?(next_uri, uri)
 
         next_uri
+      end
+
+      def self.valid_next_url?(next_uri, uri)
+        next_uri.is_a?(URI::HTTPS) && next_uri.host == HOST && next_uri.port == 443 &&
+          next_uri.path == uri.path && next_uri.userinfo.nil?
       end
 
       def self.fetch_detail(external_id)
@@ -69,8 +73,12 @@ module ProductMonitoring
         nil
       end
 
-      def self.detail_bought_date(page) # rubocop:disable Metrics/AbcSize
+      def self.detail_bought_date(page)
         text = page.at_css('aside:has(> img[alt="時計アイコン"]) > span')&.text.to_s.strip
+        parse_detail_date(text)
+      end
+
+      def self.parse_detail_date(text)
         case text
         when /\A\d+(?:分前|時間前)に更新\z/ then Time.current.beginning_of_day
         when /\A(\d+)日前に更新\z/ then Time.current.days_ago(Regexp.last_match(1).to_i).beginning_of_day
@@ -88,8 +96,7 @@ module ProductMonitoring
           validate_page_url(page)
           sleep(2)
           validate_page_url(page)
-          html = page.content
-          raise "Response exceeds size limit" if html.bytesize > MAX_RESPONSE_BYTES
+          html = BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
 
           search_response(html, uri, status)
         end
@@ -119,10 +126,7 @@ module ProductMonitoring
       end
 
       def self.validate_page_url(page)
-        uri = URI.parse(page.url)
-        return if uri.scheme == "https" && uri.host == HOST && uri.port == 443 && uri.userinfo.nil?
-
-        raise "Unexpected page URL"
+        BrowserPage.validate_url(page, host: HOST, port: true, userinfo: true)
       end
     end
   end
