@@ -28,6 +28,18 @@ RSpec.describe ProductMonitoring::CalculateAggregationResults do
                                                                                            ])
   end
 
+  it "counts purchases whose name differs from the keyword only in width or spaces" do
+    product_aggregation_setting.update!(required_keywords: ["iPad Pro"])
+    bought(external_id: "a", name: "ｉＰａｄ Ｐｒｏ", price: 200)
+    bought(external_id: "b", name: "iPadPro", price: 400)
+
+    described_class.call(product_aggregation_setting:, start_date: date, end_date: date)
+
+    expect(product_aggregation_setting.product_aggregation_results.sole).to have_attributes(
+      average_purchase_price: 300, purchase_count: 2
+    )
+  end
+
   it "overwrites a day when calculated again" do
     bought(external_id: "a", name: "Phone", price: 200)
     described_class.call(product_aggregation_setting:, start_date: date, end_date: date)

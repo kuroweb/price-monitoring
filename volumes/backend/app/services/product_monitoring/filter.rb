@@ -32,16 +32,21 @@ module ProductMonitoring
 
     def keyword_reasons
       reasons = []
-      name = item[:name].to_s.downcase
+      name = normalize(item[:name])
       required = keywords(:required_keywords)
-      reasons << "missing_required_keyword" unless required.all? { |word| name.include?(word.downcase) }
+      reasons << "missing_required_keyword" unless required.all? { |word| name.include?(word) }
       excluded = keywords(:exclude_keywords)
-      reasons << "excluded_keyword" if excluded.any? { |word| name.include?(word.downcase) }
+      reasons << "excluded_keyword" if excluded.any? { |word| name.include?(word) }
       reasons
     end
 
     def keywords(key)
-      Array(params[key]).map(&:to_s).reject(&:empty?)
+      Array(params[key]).map { |word| normalize(word) }.reject(&:empty?)
+    end
+
+    # 全角半角・大文字小文字・空白の有無を区別せずに比べる
+    def normalize(value)
+      value.to_s.unicode_normalize(:nfkc).downcase.gsub(/[[:space:]]+/, "")
     end
   end
 end
