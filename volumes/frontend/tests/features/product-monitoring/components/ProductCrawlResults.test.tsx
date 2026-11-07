@@ -76,6 +76,11 @@ describe('商品計測結果', () => {
     render(
       <ProductCrawlResultsDetail productCrawlSetting={setting} productCrawlResults={[result]} />,
     )
+    const statusTabs = within(screen.getByRole('group', { name: '販売状態' })).getAllByRole('button')
+    expect(statusTabs.map((tab) => tab.textContent)).toEqual(['販売中0', '売り切れ1', 'すべて1'])
+    expect(statusTabs[0]).toHaveAttribute('aria-pressed', 'true')
+    expect(screen.queryByRole('article')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /^すべて/ }))
     expect(screen.getByRole('link', { name: 'Phone blueの商品ページを開く' })).toHaveAttribute(
       'href',
       result.productUrl,
@@ -83,9 +88,6 @@ describe('商品計測結果', () => {
     expect(screen.getByText('イオシス')).toBeInTheDocument()
     const card = screen.getByRole('article')
     expect(within(card).getByText('売り切れ')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: /^販売中/ }))
-    expect(screen.queryByRole('article')).not.toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: /^すべて/ }))
     await user.click(screen.getByRole('button', { name: '取得して保存' }))
     await waitFor(() => expect(syncProductCrawlSetting).toHaveBeenCalledWith(1))
     expect(toast.success).toHaveBeenCalledWith('取得を開始しました。しばらくしてから再読み込みしてください')

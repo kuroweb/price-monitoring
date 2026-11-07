@@ -10,9 +10,9 @@ import { useProductCrawlResultActions } from '../hooks/useProductCrawlResultActi
 import ProductCrawlResultCard from './ProductCrawlResultCard'
 
 const STATUS_FILTERS = [
-  ['all', 'すべて'],
   ['on_sale', '販売中'],
   ['sold', '売り切れ'],
+  ['all', 'すべて'],
 ] as const
 type StatusFilter = (typeof STATUS_FILTERS)[number][0]
 
@@ -40,7 +40,7 @@ export default function ProductCrawlResultsDetail({
   productCrawlSetting,
   productCrawlResults,
 }: Props) {
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('on_sale')
   const [sort, setSort] = useState<Sort>('newest')
   const [editing, setEditing] = useState(false)
   const { busy, sync, exclude } = useProductCrawlResultActions(productCrawlSetting)
