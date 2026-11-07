@@ -2,8 +2,6 @@ module ProductMonitoring
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
   class SyncCrawlResults
     FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
-    MAX_DETAIL_JOBS = 50
-    DETAIL_RECHECK_INTERVAL = 3.hours
 
     def self.call(...)
       new(...).call
@@ -22,9 +20,7 @@ module ProductMonitoring
         save_matched(matched)
         delete_unmatched
       end
-      if crawled[:sources].all? { |source| source[:status] == "succeeded" }
-        details.enqueue(crawled, newly_sold, max_jobs: MAX_DETAIL_JOBS)
-      end
+      details.enqueue(crawled, newly_sold) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
       crawled
     end
 
