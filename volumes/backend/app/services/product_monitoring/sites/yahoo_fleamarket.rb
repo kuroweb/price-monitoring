@@ -14,7 +14,10 @@ module ProductMonitoring
       end
 
       def self.fetch(uri) # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-        page = Nokogiri::HTML(fetch_page(uri))
+        html = fetch_page(uri, allow_empty_search: true)
+        return [[], nil] if html.nil?
+
+        page = Nokogiri::HTML(html)
         results = page.css('a[href^="/item/"]').filter_map do |link|
           id = link["href"]&.match(%r{\A/item/([a-zA-Z0-9_-]+)\z})&.[](1)
           image = link.at_css('img:not([alt="sold"])')
@@ -76,10 +79,11 @@ module ProductMonitoring
         end
       end
 
-      def self.fetch_page(uri)
+      def self.fetch_page(uri, allow_empty_search: false)
         Crawl::Client.execute(allow_script_host: "paypayfleamarket.c.yimg.jp") do |page|
           response = page.goto(uri.to_s)
-          raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
+          status = response&.status
+          validate_status(status, allow_empty_search)
 
           validate_page_url(page)
           sleep(2)
@@ -87,8 +91,31 @@ module ProductMonitoring
           html = page.content
           raise "Response exceeds size limit" if html.bytesize > MAX_RESPONSE_BYTES
 
-          html
+          search_response(html, uri, status)
         end
+      end
+
+      def self.validate_status(status, allow_empty_search)
+        return if status&.between?(200, 299) || (allow_empty_search && status == 404)
+
+        raise "Non-success HTTP response"
+      end
+
+      def self.search_response(html, uri, status)
+        return html unless status == 404
+        return nil if empty_search?(html, uri)
+
+        raise "Non-success HTTP response"
+      end
+
+      def self.empty_search?(html, uri)
+        data = JSON.parse(Nokogiri::HTML(html).at_css('script#__NEXT_DATA__[type="application/json"]')&.text.to_s)
+        search = data.dig("props", "initialState", "searchState", "search")
+        keyword = URI::DEFAULT_PARSER.unescape(uri.path.delete_prefix("/search/"))
+        search.dig("searchParams", "query") == keyword &&
+          search.dig("result", "metadata", "retriedWithVectorSearch") == true
+      rescue JSON::ParserError, TypeError, NoMethodError
+        false
       end
 
       def self.validate_page_url(page)

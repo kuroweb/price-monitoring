@@ -35,6 +35,32 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     expect { described_class.fetch_page(url) }.to raise_error("Response exceeds size limit")
   end
 
+  it "treats a verified empty 404 as success without saving suggested listings" do
+    data = { props: { initialState: { searchState: { search: {
+      searchParams: { query: "iPad Pro" }, result: { metadata: { retriedWithVectorSearch: true } }
+    } } } } }
+    empty_html = %(<script id="__NEXT_DATA__" type="application/json">#{data.to_json}</script>) + html
+    response = instance_double(Playwright::Response, status: 404)
+    page = instance_double(Playwright::Page, url: url.to_s, content: empty_html)
+    allow(page).to receive_messages(goto: response, content: empty_html, url: url.to_s)
+    allow(Crawl::Client).to receive(:execute).and_yield(page)
+    allow(described_class).to receive(:sleep)
+
+    expect(described_class.fetch(url)).to eq([[], nil])
+    other_url = URI("https://paypayfleamarket.yahoo.co.jp/search/other")
+    expect(described_class.empty_search?(empty_html, other_url)).to be(false)
+    ordinary_html = empty_html.sub('"retriedWithVectorSearch":true', '"retriedWithVectorSearch":false')
+    expect(described_class.empty_search?(ordinary_html, url)).to be(false)
+    expect { described_class.fetch_detail("z123") }.to raise_error("Non-success HTTP response")
+    allow(page).to receive_messages(content: html)
+    expect { described_class.fetch(url) }.to raise_error("Non-success HTTP response")
+    allow(page).to receive_messages(content: empty_html, url: "https://evil.example/")
+    expect { described_class.fetch(url) }.to raise_error("Unexpected page URL")
+    allow(page).to receive_messages(url: url.to_s)
+    stub_const("ProductMonitoring::Sites::YahooFleamarket::MAX_RESPONSE_BYTES", 10)
+    expect { described_class.fetch(url) }.to raise_error("Response exceeds size limit")
+  end
+
   it "uses product structured data rather than seller text to determine availability" do
     html = '<div>売り切れ</div><script type="application/ld+json">' \
            '{"@type":"Product","offers":{"availability":"https://schema.org/InStock"}}</script>'
