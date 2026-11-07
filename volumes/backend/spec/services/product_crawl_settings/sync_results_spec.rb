@@ -38,27 +38,33 @@ RSpec.describe ProductCrawlSettings::SyncResults do
   end
 
   it "batches auction price and sale date updates across listings" do
-    bought_date = 2.days.ago.change(usec: 0)
+    dates = Array.new(4) { |n| (2.days.ago + n.minutes).change(usec: 0) }
     listings = %w[a b c].map do |id|
       create(:product_crawl_result, product_crawl_setting:, external_id: id, name: "Phone old", sold: false)
     end
+    listings.first.update!(bought_date: 3.days.ago.change(usec: 0), buyout_price: 300)
+    original_date = listings.first.bought_date
     allow(ProductMonitoring::Crawler).to receive(:fetch).and_return(
-      %w[a b c].map do |id|
-        { external_id: id, name: "Phone blue", price: 100, buyout_price: 200, bought_date:,
+      %w[a b c d].each_with_index.map do |id, index|
+        { external_id: id, name: "Phone blue", price: 100, buyout_price: (index.zero? ? nil : 200),
+          bought_date: dates[index], end_date: dates[index],
           product_url: "https://iosys.co.jp/items/#{id}", sold: true }
       end
     )
     statements = []
     subscriber = lambda do |_name, _start, _finish, _id, payload|
-      statements << payload[:sql] if payload[:sql].match?(/\AUPDATE .*product_crawl_results/i)
+      statements << payload[:sql] if payload[:sql].match?(/\A(?:UPDATE|INSERT INTO) .*product_crawl_results/i)
     end
     ActiveSupport::Notifications.subscribed(subscriber, "sql.active_record") do
       described_class.call(product_crawl_setting:)
     end
-    expect(listings.map { |listing| listing.reload.attributes.values_at("buyout_price", "bought_date") })
-      .to all(eq([200, bought_date]))
-    expect(statements.count { |sql| sql.match?(/SET .*bought_date/i) }).to eq(1)
-    expect(statements.count { |sql| sql.match?(/SET .*buyout_price/i) }).to eq(0)
+    expect(listings.first.reload).to have_attributes(buyout_price: 300, bought_date: original_date)
+    expect(listings[1].reload).to have_attributes(buyout_price: 200, bought_date: dates[1])
+    expect(listings[2].reload).to have_attributes(buyout_price: 200, bought_date: dates[2])
+    expect(product_crawl_setting.product_crawl_results.find_by!(external_id: "d"))
+      .to have_attributes(buyout_price: 200, bought_date: dates[3])
+    expect(statements.count { |sql| sql.match?(/\AINSERT/i) }).to eq(1)
+    expect(statements.count { |sql| sql.match?(/\AUPDATE/i) }).to eq(1)
   end
 
   it "saves only accepted listings with their platform" do

@@ -98,14 +98,16 @@ module ProductCrawlSettings
     end
 
     def upsert_listings(rows)
-      with_buyout, without_buyout = rows.partition { |row| !row[:buyout_price].nil? }
-      columns = %i[name product_url thumbnail_url price end_date]
-      if without_buyout.any?
-        ProductCrawlResult.upsert_all(without_buyout, record_timestamps: true, update_only: columns)
-      end
-      return if with_buyout.empty?
-
-      ProductCrawlResult.upsert_all(with_buyout, record_timestamps: true, update_only: columns + [:buyout_price])
+      ProductCrawlResult.upsert_all(rows, record_timestamps: true, on_duplicate: Arel.sql(<<~SQL.squish))
+        updated_at = IF(name <=> VALUES(name) AND product_url <=> VALUES(product_url)
+          AND thumbnail_url <=> VALUES(thumbnail_url) AND price <=> VALUES(price)
+          AND end_date <=> VALUES(end_date) AND buyout_price <=> COALESCE(VALUES(buyout_price), buyout_price),
+          product_crawl_results.updated_at, VALUES(updated_at)),
+        name = VALUES(name), product_url = VALUES(product_url), thumbnail_url = VALUES(thumbnail_url),
+        price = VALUES(price), end_date = VALUES(end_date),
+        buyout_price = COALESCE(VALUES(buyout_price), product_crawl_results.buyout_price),
+        bought_date = COALESCE(product_crawl_results.bought_date, IF(VALUES(sold), VALUES(bought_date), NULL))
+      SQL
     end
 
     def listing_row(result)
@@ -130,14 +132,6 @@ module ProductCrawlSettings
       scope = product_crawl_setting.product_crawl_results
       scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
-      update_bought_dates(results, scope)
-    end
-
-    def update_bought_dates(results, scope)
-      dated = results.select { |result| result[:sold] && result[:bought_date] }
-      dated.group_by { |result| result[:bought_date] }.each do |date, listings|
-        scope.where(external_id: listings.pluck(:external_id), bought_date: nil).update_all(bought_date: date)
-      end
     end
 
     # 条件の変更で一致しなくなった保存済みの結果を削除する
