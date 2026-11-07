@@ -31,13 +31,19 @@ RSpec.describe "商品クロール設定", type: :request do
       create(:product_crawl_setting, params.slice(:name, :enabled, :min_price, :search_urls, :required_keywords))
     end
     let!(:kept) { create(:product_crawl_result, product_crawl_setting:, name: "phone pro", price: 500) }
-    let!(:unmatched) { create(:product_crawl_result, product_crawl_setting:, name: "phone case", price: 500) }
+    let!(:unmatched) { create(:product_crawl_result, product_crawl_setting:, name: "phone case", price: 200) }
 
-    it "条件を変えると新しい条件に一致しない結果を削除すること" do
-      put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}",
-          params: params.merge(exclude_keywords: ["case"]), as: :json
-      expect(response).to have_http_status(:ok)
-      expect(product_crawl_setting.product_crawl_results.pluck(:id)).to eq([kept.id])
+    {
+      required_keywords: [%w[phone pro], :kept],
+      exclude_keywords: [["case"], :kept],
+      min_price: [300, :kept],
+      max_price: [300, :unmatched]
+    }.each do |key, (value, remaining)|
+      it "#{key} を変えると新しい条件に一致しない結果を削除すること" do
+        put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}", params: params.merge(key => value), as: :json
+        expect(response).to have_http_status(:ok)
+        expect(product_crawl_setting.product_crawl_results.pluck(:id)).to eq([public_send(remaining).id])
+      end
     end
 
     it "条件以外だけを変えると結果を削除しないこと" do
