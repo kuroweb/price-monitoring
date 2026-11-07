@@ -24,7 +24,7 @@ down-orphans:
 			case "$files" in *docker-compose.worktree.yml*) ;; *) continue ;; esac
 			[ -d "$dir" ] && continue
 			echo "down: $project ($dir)"
-			docker compose -p "$project" down
+			docker compose -p "$project" down --remove-orphans
 		done
 
 url:
