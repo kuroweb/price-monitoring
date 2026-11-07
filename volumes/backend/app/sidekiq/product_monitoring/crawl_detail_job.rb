@@ -1,9 +1,9 @@
-module ProductCrawlSettings
-  class SyncDetailJob
+module ProductMonitoring
+  class CrawlDetailJob
     include Sidekiq::Job
     include Utils::TimeoutHandler
 
-    sidekiq_options queue: :product_crawl_settings_sync_detail_job,
+    sidekiq_options queue: :product_monitoring_crawl_detail_job,
                     retry: 2, lock: :until_executed
 
     sidekiq_retries_exhausted do |job, _exception|

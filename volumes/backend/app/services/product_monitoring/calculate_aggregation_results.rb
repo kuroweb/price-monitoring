@@ -1,6 +1,6 @@
-module ProductAggregationSettings
+module ProductMonitoring
   # 条件に一致する商品計測結果のうち、期間内に売れたものを日ごとに集計する
-  class CalculateResults
+  class CalculateAggregationResults
     FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
 
     def self.call(...)

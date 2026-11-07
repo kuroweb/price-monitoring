@@ -44,11 +44,11 @@ RSpec.describe "Product crawl settings", type: :request do
   end
 
   it "enqueues manual sync even for disabled settings" do
-    allow(ProductCrawlSettings::SyncJob).to receive(:perform_async)
+    allow(ProductMonitoring::CrawlJob).to receive(:perform_async)
     product_crawl_setting = create(:product_crawl_setting, enabled: false)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
     expect(response).to have_http_status(:accepted)
-    expect(ProductCrawlSettings::SyncJob).to have_received(:perform_async).with(product_crawl_setting.id, true)
+    expect(ProductMonitoring::CrawlJob).to have_received(:perform_async).with(product_crawl_setting.id, true)
   end
 
   it "excludes and restores a listing without deleting it" do

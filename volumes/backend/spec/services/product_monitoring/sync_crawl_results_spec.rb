@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProductCrawlSettings::SyncResults do
+RSpec.describe ProductMonitoring::SyncCrawlResults do
   let(:product_crawl_setting) { create(:product_crawl_setting, required_keywords: ["phone"]) }
 
   before do
@@ -141,7 +141,7 @@ RSpec.describe ProductCrawlSettings::SyncResults do
 
     before do
       allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources: sources, results: results)
-      allow(ProductCrawlSettings::SyncDetailJob).to receive(:perform_async)
+      allow(ProductMonitoring::CrawlDetailJob).to receive(:perform_async)
     end
 
     it "enqueues Yahoo missing and newly sold listings with their platform" do
@@ -150,8 +150,8 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       results << { platform: "yahoo_fleamarket", external_id: "sold-yahoo", reasons: [], price: 100, name: "Phone",
                    product_url: "https://paypayfleamarket.yahoo.co.jp/item/sold-yahoo", sold: true }
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("missing-yahoo", "yahoo_fleamarket")
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("sold-yahoo", "yahoo_fleamarket")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("missing-yahoo", "yahoo_fleamarket")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("sold-yahoo", "yahoo_fleamarket")
     end
 
     it "enqueues missing and undated sold listings, but not visible or iosys listings" do
@@ -161,10 +161,10 @@ RSpec.describe ProductCrawlSettings::SyncResults do
                                     updated_at: 4.hours.ago)
       create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "iosys", sold: false)
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("missing")
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("undated")
-      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("visible")
-      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("iosys")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("missing")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("undated")
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("visible")
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("iosys")
     end
 
     it "waits three hours before rechecking missing available listings" do
@@ -173,8 +173,8 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "old", sold: false,
                                     updated_at: 4.hours.ago)
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("recent")
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("old")
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("recent")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("old")
     end
 
     it "waits three hours before rechecking undated sold listings" do
@@ -183,8 +183,8 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "old", sold: true,
                                     updated_at: 4.hours.ago)
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("recent")
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("old")
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("recent")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("old")
     end
 
     it "immediately checks newly discovered and newly sold listings" do
@@ -194,8 +194,8 @@ RSpec.describe ProductCrawlSettings::SyncResults do
                      product_url: "https://jp.mercari.com/item/#{id}", sold: true }
       end
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("new")
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("changed")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("new")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("changed")
     end
 
     it "does not enqueue missing listings when any source fails" do
@@ -203,20 +203,20 @@ RSpec.describe ProductCrawlSettings::SyncResults do
                                     updated_at: 4.hours.ago)
       sources << { status: "failed" }
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async)
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async)
     end
 
     it "limits detail jobs in oldest order" do
-      stub_const("ProductCrawlSettings::SyncResults::MAX_DETAIL_JOBS", 2)
+      stub_const("ProductMonitoring::SyncCrawlResults::MAX_DETAIL_JOBS", 2)
       allow(Rails.logger).to receive(:info).and_call_original
       3.times do |n|
         create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "m#{n}", sold: false,
                                       updated_at: (3 - n).days.ago)
       end
       described_class.call(product_crawl_setting: setting)
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("m0")
-      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("m1")
-      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("m2")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("m0")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("m1")
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("m2")
       expect(Rails.logger).to have_received(:info).with("Product crawl detail candidates: setting_id=#{setting.id} candidates=3 enqueued=2")
     end
   end

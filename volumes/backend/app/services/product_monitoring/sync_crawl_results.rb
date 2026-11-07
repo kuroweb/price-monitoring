@@ -1,6 +1,6 @@
-module ProductCrawlSettings
+module ProductMonitoring
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
-  class SyncResults # rubocop:disable Metrics/ClassLength
+  class SyncCrawlResults # rubocop:disable Metrics/ClassLength
     FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
     MAX_DETAIL_JOBS = 50
     DETAIL_RECHECK_INTERVAL = 3.hours
@@ -56,9 +56,9 @@ module ProductCrawlSettings
       log_detail_candidates(candidates.size, selected.size)
       selected.each do |platform, external_id, _updated_at|
         if platform == "mercari"
-          ProductCrawlSettings::SyncDetailJob.perform_async(external_id)
+          ProductMonitoring::CrawlDetailJob.perform_async(external_id)
         else
-          ProductCrawlSettings::SyncDetailJob.perform_async(external_id, platform)
+          ProductMonitoring::CrawlDetailJob.perform_async(external_id, platform)
         end
       end
     end

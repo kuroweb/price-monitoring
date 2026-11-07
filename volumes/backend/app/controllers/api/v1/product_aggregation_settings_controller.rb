@@ -17,15 +17,16 @@ module Api
       end
 
       def create
-        product_aggregation_setting = ::ProductAggregationSettings::Writer.call(
+        product_aggregation_setting = ::ProductMonitoring::AggregationSettingWriter.call(
           product_aggregation_setting: ProductAggregationSetting.new, params: upsert_params
         )
         render json: product_aggregation_setting.as_json, status: :ok
       end
 
       def update
-        ::ProductAggregationSettings::Writer.call(product_aggregation_setting: @product_aggregation_setting,
-                                                  params: upsert_params)
+        ::ProductMonitoring::AggregationSettingWriter.call(
+          product_aggregation_setting: @product_aggregation_setting, params: upsert_params
+        )
         render json: @product_aggregation_setting.as_json, status: :ok
       end
 
@@ -40,7 +41,7 @@ module Api
       # 直近30日分の商品日次相場を計算し直す
       def calculate
         end_date = Time.zone.today
-        ::ProductAggregationSettings::CalculateResults.call(
+        ::ProductMonitoring::CalculateAggregationResults.call(
           product_aggregation_setting: @product_aggregation_setting,
           start_date: end_date - (CALCULATE_DAYS - 1),
           end_date:

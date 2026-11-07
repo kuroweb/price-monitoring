@@ -25,9 +25,9 @@ crawl_backmarket_enqueue_sync_job:
 products_calculate_daily_purchase_summary_calculator_job:
   cron: "0 0 * * *"
   class: "Products::CalculateDailyPurchaseSummary::CalculatorJob"
-product_crawl_settings_enqueue_sync_job:
+product_monitoring_enqueue_crawl_jobs_job:
   cron: "*/20 * * * *"
-  class: "ProductCrawlSettings::EnqueueSyncJob"
-product_aggregation_settings_enqueue_calculate_results_job:
+  class: "ProductMonitoring::EnqueueCrawlJobsJob"
+product_monitoring_enqueue_aggregation_jobs_job:
   cron: "0 0 * * *"
-  class: "ProductAggregationSettings::EnqueueCalculateResultsJob"
+  class: "ProductMonitoring::EnqueueAggregationJobsJob"

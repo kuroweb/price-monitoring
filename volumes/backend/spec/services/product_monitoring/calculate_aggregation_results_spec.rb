@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProductAggregationSettings::CalculateResults do
+RSpec.describe ProductMonitoring::CalculateAggregationResults do
   let(:product_aggregation_setting) do
     create(:product_aggregation_setting, required_keywords: ["phone"], max_price: 1_000)
   end
