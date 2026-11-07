@@ -15,6 +15,7 @@ const searchUrlHosts: Record<string, string> = {
   'www.janpara.co.jp': 'janpara',
   'paypayfleamarket.yahoo.co.jp': 'yahoo_fleamarket',
   'auctions.yahoo.co.jp': 'yahoo_auction',
+  'ec.treasure-f.com': 'treasure_factory',
 }
 
 export const searchUrlPlatform = (url: string) => {

@@ -16,3 +16,12 @@ describe('じゃんぱらのサイト表示', () => {
     expect(platformName('janpara')).toBe('じゃんぱら')
   })
 })
+
+describe('トレファクのサイト表示', () => {
+  it('検索 URL と出品元を判定すること', () => {
+    expect(searchUrlPlatform('https://ec.treasure-f.com/search?category=1029&word=macbook')).toBe(
+      'treasure_factory',
+    )
+    expect(platformName('treasure_factory')).toBe('トレファク')
+  })
+})

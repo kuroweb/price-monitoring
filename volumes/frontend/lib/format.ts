@@ -14,6 +14,7 @@ export const platformNames: Record<string, string> = {
   iosys: 'イオシス',
   pc_koubou: 'パソコン工房',
   used_sofmap: 'リコレ',
+  treasure_factory: 'トレファク',
 }
 
 export const platformName = (platform: string | null) =>
@@ -28,4 +29,5 @@ export const platformColors: Record<string, string> = {
   iosys: 'bg-blue-600',
   pc_koubou: 'bg-blue-400',
   used_sofmap: 'bg-green-500',
+  treasure_factory: 'bg-orange-500',
 }
