@@ -1,6 +1,8 @@
 import { http } from '@/lib/http-client'
 
 import type {
+  GetProductAggregationPurchases,
+  GetProductAggregationPurchasesParams,
   GetProductAggregationResults,
   GetProductAggregationSettings,
   ProductAggregationSetting,
@@ -20,5 +22,10 @@ export const destroyProductAggregationSetting = (id: number) =>
   http(`${BASE_PATH}/${id}`, { method: 'DELETE' })
 export const calculateProductAggregationSetting = (id: number) =>
   http(`${BASE_PATH}/${id}/calculate`, { method: 'POST' })
+// 期間内の集計対象になる購入
+export const getProductAggregationPurchases = (
+  id: number,
+  params: GetProductAggregationPurchasesParams,
+) => http<GetProductAggregationPurchases>(`${BASE_PATH}/${id}/purchases`, { params })
 export const getAllProductAggregationResults = () =>
   http<GetProductAggregationResults>('/api/v1/product_aggregation_results')
