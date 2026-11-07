@@ -15,7 +15,7 @@ const COPY_SUFFIX = '（コピー）'
 // 初期値には入力欄の maxLength が効かないため、name 列の上限 255 文字に収める
 const copyName = (name: string) => `${name.slice(0, 255 - COPY_SUFFIX.length)}${COPY_SUFFIX}`
 
-type ModalState ={ setting?: ProductCrawlSetting; initial?: ProductCrawlSettingInput } | null
+type ModalState = { setting?: ProductCrawlSetting; initial?: ProductCrawlSettingInput } | null
 
 export default function ProductCrawlSettings({
   productCrawlSettings,
