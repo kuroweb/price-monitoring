@@ -2,7 +2,11 @@ require "uri"
 
 module ProductMonitoring
   class UrlRouter
-    SITES = [Sites::Mercari, Sites::Iosys].freeze
+    SITES = [Sites::Mercari, Sites::Iosys, Sites::YahooFleamarket].freeze
+
+    def self.detail_site(platform)
+      SITES.find { |site| platform == site::PLATFORM && site.respond_to?(:fetch_detail) }
+    end
 
     def self.call(...)
       new(...).call
@@ -32,7 +36,6 @@ module ProductMonitoring
 
     def validate_target(uri, target)
       raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target::PATH)
-      raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
 
       target.validate_query(uri)
     end

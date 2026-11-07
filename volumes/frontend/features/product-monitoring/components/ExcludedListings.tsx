@@ -1,6 +1,6 @@
 import NextImage from 'next/image'
 
-import { platformName } from '@/lib/format'
+import { platformName } from '@/features/product-monitoring/lib/platform'
 
 export type ExcludedListingItem = {
   key: string

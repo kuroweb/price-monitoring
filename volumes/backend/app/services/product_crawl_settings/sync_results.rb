@@ -1,6 +1,6 @@
 module ProductCrawlSettings
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
-  class SyncResults
+  class SyncResults # rubocop:disable Metrics/ClassLength
     FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
     MAX_DETAIL_JOBS = 50
     DETAIL_RECHECK_INTERVAL = 3.hours
@@ -13,15 +13,15 @@ module ProductCrawlSettings
       @product_crawl_setting = product_crawl_setting
     end
 
-    def call
+    def call # rubocop:disable Metrics/AbcSize
       crawled = ProductMonitoring::Crawler.call(params: crawl_params)
       matched = crawled[:results].select { |result| (result[:reasons] - ["excluded_listing"]).empty? }
-      newly_sold_ids = newly_sold_ids(matched)
+      newly_sold = detail_sites.to_h { |site| [site::PLATFORM, newly_sold_ids(matched, site::PLATFORM)] }
       ProductCrawlResult.transaction do
         save_matched(matched)
         delete_unmatched
       end
-      enqueue_details(crawled, newly_sold_ids) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
+      enqueue_details(crawled, newly_sold) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
       crawled
     end
 
@@ -29,22 +29,37 @@ module ProductCrawlSettings
 
     attr_reader :product_crawl_setting
 
-    def newly_sold_ids(results)
+    def detail_sites
+      ProductMonitoring::UrlRouter::SITES.select { |site| site.respond_to?(:fetch_detail) }
+    end
+
+    def newly_sold_ids(results, platform)
       sold_ids = results.select do |result|
-        result[:platform] == "mercari" && result[:sold] && !result[:price].nil?
+        result[:platform] == platform && result[:sold] && !result[:price].nil?
       end.pluck(:external_id)
       already_sold = product_crawl_setting.product_crawl_results
-                                          .where(platform: "mercari", external_id: sold_ids, sold: true)
+                                          .where(platform: platform, external_id: sold_ids, sold: true)
       sold_ids - already_sold.pluck(:external_id)
     end
 
-    def enqueue_details(crawled, newly_sold_ids)
-      seen_ids = crawled[:results].select { |result| result[:platform] == "mercari" }.pluck(:external_id)
-      candidates = detail_candidates(seen_ids, newly_sold_ids).order(:updated_at).pluck(:external_id).uniq
-      ids = candidates.first(MAX_DETAIL_JOBS)
-      log_detail_candidates(candidates.size, ids.size)
-      ids.each do |external_id|
-        ProductCrawlSettings::SyncDetailJob.perform_async(external_id)
+    def enqueue_details(crawled, newly_sold) # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      candidates = detail_sites.flat_map do |site|
+        platform = site::PLATFORM
+        seen = crawled[:results].select { |result| result[:platform] == platform }.pluck(:external_id)
+        detail_candidates(platform, seen, newly_sold.fetch(platform)).order(:updated_at)
+                                                                     .pluck(:external_id, :updated_at)
+                                                                     .map do |id, updated_at|
+          [platform, id, updated_at]
+        end
+      end.sort_by(&:last)
+      selected = candidates.first(MAX_DETAIL_JOBS)
+      log_detail_candidates(candidates.size, selected.size)
+      selected.each do |platform, external_id, _updated_at|
+        if platform == "mercari"
+          ProductCrawlSettings::SyncDetailJob.perform_async(external_id)
+        else
+          ProductCrawlSettings::SyncDetailJob.perform_async(external_id, platform)
+        end
       end
     end
 
@@ -53,8 +68,8 @@ module ProductCrawlSettings
                         "candidates=#{candidate_count} enqueued=#{enqueued_count}")
     end
 
-    def detail_candidates(seen_ids, newly_sold_ids)
-      scope = product_crawl_setting.product_crawl_results.where(platform: "mercari")
+    def detail_candidates(platform, seen_ids, newly_sold_ids)
+      scope = product_crawl_setting.product_crawl_results.where(platform: platform)
       due = scope.where(updated_at: ...DETAIL_RECHECK_INTERVAL.ago)
       missing = due.where.not(sold: true).or(due.where(sold: nil)).where.not(external_id: seen_ids)
       undated = scope.where(sold: true, bought_date: nil)

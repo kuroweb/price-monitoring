@@ -9,7 +9,9 @@ module ProductMonitoring
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
       DELETED_TEXTS = ["ページが見つかりませんでした", "該当する商品は削除されています。"].freeze
 
-      def self.validate_query(_uri); end
+      def self.validate_query(uri)
+        raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
+      end
 
       def self.fetch(uri)
         page = Nokogiri::HTML(fetch_mercari_page(uri))

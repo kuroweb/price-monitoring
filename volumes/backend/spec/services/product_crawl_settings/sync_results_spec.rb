@@ -89,6 +89,16 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       allow(ProductCrawlSettings::SyncDetailJob).to receive(:perform_async)
     end
 
+    it "enqueues Yahoo missing and newly sold listings with their platform" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "yahoo_fleamarket",
+                                    external_id: "missing-yahoo", sold: false, updated_at: 4.hours.ago)
+      results << { platform: "yahoo_fleamarket", external_id: "sold-yahoo", reasons: [], price: 100, name: "Phone",
+                   product_url: "https://paypayfleamarket.yahoo.co.jp/item/sold-yahoo", sold: true }
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("missing-yahoo", "yahoo_fleamarket")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("sold-yahoo", "yahoo_fleamarket")
+    end
+
     it "enqueues missing and undated sold listings, but not visible or iosys listings" do
       create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
                                     updated_at: 4.hours.ago)

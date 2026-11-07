@@ -2,7 +2,8 @@ import NextImage from 'next/image'
 
 import MoreIcon from '@/components/ui/MoreIcon'
 import type { ProductCrawlResult } from '@/features/product-monitoring/api/types'
-import { formatDate, formatYen, platformColors, platformName } from '@/lib/format'
+import { platformName } from '@/features/product-monitoring/lib/platform'
+import { formatDate, formatYen, platformColors } from '@/lib/format'
 
 interface Props {
   productCrawlResult: ProductCrawlResult

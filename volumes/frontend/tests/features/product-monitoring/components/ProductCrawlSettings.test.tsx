@@ -73,14 +73,18 @@ describe('商品計測設定', () => {
     await user.type(screen.getByRole('textbox', { name: '検索結果URL 1' }), mercariUrl)
     await user.click(screen.getByRole('button', { name: 'URLを追加' }))
     await user.type(screen.getByRole('textbox', { name: '検索結果URL 2' }), iosysUrl)
+    await user.click(screen.getByRole('button', { name: 'URLを追加' }))
+    const yahooUrl = 'https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro'
+    await user.type(screen.getByRole('textbox', { name: '検索結果URL 3' }), yahooUrl)
     expect(screen.getByText('メルカリ')).toBeInTheDocument()
     expect(screen.getByText('イオシス')).toBeInTheDocument()
+    expect(screen.getByText('Yahoo!フリマ')).toBeInTheDocument()
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone, blue')
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createProductCrawlSetting).toHaveBeenCalledWith(
         expect.objectContaining({
-          searchUrls: [mercariUrl, iosysUrl],
+          searchUrls: [mercariUrl, iosysUrl, yahooUrl],
           requiredKeywords: ['phone', 'blue'],
         }),
       ),

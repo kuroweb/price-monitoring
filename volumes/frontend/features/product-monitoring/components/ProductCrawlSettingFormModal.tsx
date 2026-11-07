@@ -19,10 +19,8 @@ import {
 } from '@/features/product-monitoring/api/actions'
 import type { ProductCrawlResult, ProductCrawlSetting, ProductCrawlSettingInput } from '@/features/product-monitoring/api/types'
 import ProductFilterFields from '@/features/product-monitoring/components/ProductFilterFields'
+import { platformName, searchUrlPlatform } from '@/features/product-monitoring/lib/platform'
 import { words } from '@/features/product-monitoring/lib/words'
-import { platformName } from '@/lib/format'
-
-import { searchUrlPlatform } from '../lib/platform'
 
 import ExcludedListings from './ExcludedListings'
 
