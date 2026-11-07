@@ -93,11 +93,19 @@ module ProductCrawlSettings
       results = results.reject { |result| result[:price].nil? }
       return if results.empty?
 
-      rows = results.map { |result| listing_row(result) }
-      ProductCrawlResult.upsert_all(rows, record_timestamps: true,
-                                          update_only: %i[name product_url thumbnail_url price end_date])
+      upsert_listings(results.map { |result| listing_row(result) })
       update_sold(results)
-      update_buyout_prices(results)
+    end
+
+    def upsert_listings(rows)
+      with_buyout, without_buyout = rows.partition { |row| !row[:buyout_price].nil? }
+      columns = %i[name product_url thumbnail_url price end_date]
+      if without_buyout.any?
+        ProductCrawlResult.upsert_all(without_buyout, record_timestamps: true, update_only: columns)
+      end
+      return if with_buyout.empty?
+
+      ProductCrawlResult.upsert_all(with_buyout, record_timestamps: true, update_only: columns + [:buyout_price])
     end
 
     def listing_row(result)
@@ -126,19 +134,9 @@ module ProductCrawlSettings
     end
 
     def update_bought_dates(results, scope)
-      results.each do |result|
-        next unless result[:sold] && result[:bought_date]
-
-        scope.where(external_id: result[:external_id], bought_date: nil).update_all(bought_date: result[:bought_date])
-      end
-    end
-
-    def update_buyout_prices(results)
-      results.each do |result|
-        next if result[:buyout_price].nil?
-
-        product_crawl_setting.product_crawl_results.where(external_id: result[:external_id])
-                             .update_all(buyout_price: result[:buyout_price])
+      dated = results.select { |result| result[:sold] && result[:bought_date] }
+      dated.group_by { |result| result[:bought_date] }.each do |date, listings|
+        scope.where(external_id: listings.pluck(:external_id), bought_date: nil).update_all(bought_date: date)
       end
     end
 
