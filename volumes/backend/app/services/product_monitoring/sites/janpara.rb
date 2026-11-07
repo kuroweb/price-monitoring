@@ -32,25 +32,14 @@ module ProductMonitoring
       end
 
       def self.checked_content(page)
-        final_uri = URI.parse(page.url)
-        unless final_uri.scheme == "https" && final_uri.host == HOST && final_uri.port == 443
-          raise "Unexpected page URL"
-        end
-
-        html = page.content
-        raise "Response exceeds size limit" if html.bytesize > MAX_RESPONSE_BYTES
-
-        html
+        BrowserPage.validate_url(page, host: HOST, port: true)
+        BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
       end
 
       def self.next_url(uri, page)
         return unless page.at_css(".pageLink[title='次ページ']")
 
-        query = URI.decode_www_form(uri.query)
-        current = query.to_h.fetch("PAGE", "1").to_i
-        query.reject! { |key, _| key == "PAGE" }
-        query << ["PAGE", [current + 1, 2].max.to_s]
-        uri.dup.tap { |next_uri| next_uri.query = URI.encode_www_form(query) }
+        Pagination.increment(uri, key: "PAGE", default: "1", step: 1, minimum: 2)
       end
 
       def self.listings(page)

@@ -33,7 +33,7 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 
 じゃんぱらは既存クローラーと同じ Playwright クライアントを使用し、スクリプトを遮断して一覧を取得する。遷移後の HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。一覧の SRCODE または ITMCODE の商品グループを1出品とし、価格はグループの下限価格を保存する。個別の店舗在庫や販売状態は確認しない。
 
-サイト固有のURL判定・取得・解析は `ProductMonitoring::Sites` のサイトクラスにまとめ、共通処理は `ProductMonitoring::Crawler` が担う。サイトを追加するときはサイトクラスを追加し、`UrlRouter::SITES` に登録する。
+サイト固有のURL判定・取得・解析は `ProductMonitoring::Sites` のサイトクラスにまとめ、共通処理は `ProductMonitoring::Crawler` が担う。ブラウザ取得時の URL と HTML サイズの確認には `Sites::BrowserPage`、数値ページ番号の更新には `Sites::Pagination` を使う。サイトを追加するときはサイトクラスを追加し、サイトの検証条件を指定したうえで `UrlRouter::SITES` に登録する。
 
 Yahoo!フリマはメルカリと同じ Playwright クライアントを用い、遷移後の HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。更新日時の描画に必要な `paypayfleamarket.c.yimg.jp` のスクリプトを許可する。検索一覧の次ページリンクを確認してページ送りする。既存の `Crawl::YahooFleamarket` の一覧は Yahoo!オークションの検索結果を取得するため、本機能の Yahoo!フリマ検索とは取得元と DOM が異なる。
 

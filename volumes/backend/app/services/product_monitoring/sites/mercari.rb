@@ -108,15 +108,11 @@ module ProductMonitoring
 
       def self.checked_content(page)
         validate_page_url(page)
-        html = page.content
-        raise "Response exceeds size limit" if html.bytesize > MAX_RESPONSE_BYTES
-
-        html
+        BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
       end
 
       def self.validate_page_url(page)
-        final_uri = URI.parse(page.url)
-        raise "Unexpected page URL" unless final_uri.scheme == "https" && final_uri.host == HOST
+        BrowserPage.validate_url(page, host: HOST)
       end
 
       def self.mercari_results(page)

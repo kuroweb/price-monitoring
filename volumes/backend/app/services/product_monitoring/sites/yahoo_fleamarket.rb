@@ -88,8 +88,7 @@ module ProductMonitoring
           validate_page_url(page)
           sleep(2)
           validate_page_url(page)
-          html = page.content
-          raise "Response exceeds size limit" if html.bytesize > MAX_RESPONSE_BYTES
+          html = BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
 
           search_response(html, uri, status)
         end
@@ -119,10 +118,7 @@ module ProductMonitoring
       end
 
       def self.validate_page_url(page)
-        uri = URI.parse(page.url)
-        return if uri.scheme == "https" && uri.host == HOST && uri.port == 443 && uri.userinfo.nil?
-
-        raise "Unexpected page URL"
+        BrowserPage.validate_url(page, host: HOST, port: true, userinfo: true)
       end
     end
   end
