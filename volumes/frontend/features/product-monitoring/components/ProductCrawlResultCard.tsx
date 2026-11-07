@@ -90,7 +90,7 @@ export default function ProductCrawlResultCard({
         rel='noopener noreferrer'
         className='flex flex-1 flex-col gap-1 p-3'
       >
-        <p className='line-clamp-2 min-h-10 text-sm leading-5'>{item.name}</p>
+        <p className='line-clamp-3 min-h-15 text-sm leading-5'>{item.name}</p>
         <p className='mt-auto text-lg font-bold tabular-nums'>{formatYen(item.price)}</p>
         {item.buyoutPrice != null && (
           <p className='text-xs tabular-nums opacity-70'>即決 {formatYen(item.buyoutPrice)}</p>
