@@ -24,7 +24,8 @@ type View = 'chart' | 'table'
 interface Props {
   productAggregationSetting: ProductAggregationSetting
   productAggregationResults: ProductAggregationResult[]
-  productAggregationPurchases: ProductCrawlResult[]
+  // 取得に失敗したときは null
+  productAggregationPurchases: ProductCrawlResult[] | null
 }
 
 const conditionLabels = (setting: ProductAggregationSetting) => [
@@ -78,7 +79,7 @@ export default function ProductAggregationResultsSection({
   const results = productAggregationResults.slice(-period)
   const summary = summarize(results)
   // bought_date は日本時間の ISO 文字列なので、先頭の日付で表示期間と比べる
-  const purchases = productAggregationPurchases.filter(
+  const purchases = productAggregationPurchases?.filter(
     (item) => item.boughtDate != null && item.boughtDate.substring(0, 10) >= results[0]?.date,
   )
 
@@ -235,11 +236,17 @@ export default function ProductAggregationResultsSection({
           <div className='space-y-2'>
             <h4 className='font-semibold'>
               相場対象の商品
-              <span className='ml-2 text-xs font-normal opacity-70'>
-                直近{period}日・{purchases.length}件
-              </span>
+              {purchases && (
+                <span className='ml-2 text-xs font-normal opacity-70'>
+                  直近{period}日・{purchases.length}件
+                </span>
+              )}
             </h4>
-            {purchases.length === 0 ? (
+            {!purchases ? (
+              <p className='text-sm opacity-70'>
+                相場対象の商品を取得できませんでした。再読み込みしてください。
+              </p>
+            ) : purchases.length === 0 ? (
               <p className='text-sm opacity-70'>期間内に相場対象の商品はありません。</p>
             ) : (
               <ul className='flex snap-x gap-3 overflow-x-auto pb-2'>

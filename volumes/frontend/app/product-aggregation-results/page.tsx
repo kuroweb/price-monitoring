@@ -8,6 +8,7 @@ import type { ProductAggregationResult } from '@/features/product-monitoring/api
 import ProductAggregationResultsSection from '@/features/product-monitoring/components/ProductAggregationResultsSection'
 
 // 保存済みの商品日次相場と同じ期間の購入を取る。日次相場がなければ取らない
+// 取得に失敗しても日次相場は表示できるよう、ページ全体は失敗させず null を返す
 const getPurchases = async (id: number, results: ProductAggregationResult[]) => {
   if (results.length === 0) return []
 
@@ -15,8 +16,7 @@ const getPurchases = async (id: number, results: ProductAggregationResult[]) => 
     startDate: results[0].date,
     endDate: results[results.length - 1].date,
   })
-  if (!response.data) throw new Error('商品相場を取得できませんでした')
-  return response.data.productCrawlResults ?? []
+  return response.data ? (response.data.productCrawlResults ?? []) : null
 }
 
 const Page = async () => {

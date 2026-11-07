@@ -114,4 +114,29 @@ describe('商品相場', () => {
     expect(heading).toHaveTextContent('直近7日・1件')
     expect(screen.getByRole('article')).toHaveTextContent('phone 2')
   })
+
+  it('相場対象の商品を取得できなかったときも日次相場を表示し、取得失敗を伝えること', () => {
+    render(
+      <ProductAggregationResultsSection
+        productAggregationSetting={setting}
+        productAggregationResults={[
+          {
+            id: 1,
+            productAggregationSettingId: 1,
+            date: '2026-11-01',
+            averagePurchasePrice: 300,
+            purchaseCount: 1,
+          },
+        ]}
+        productAggregationPurchases={null}
+      />,
+    )
+    expect(screen.getByText('購入件数', { selector: 'p.text-xs' }).parentElement).toHaveTextContent(
+      '1件',
+    )
+    expect(
+      screen.getByText('相場対象の商品を取得できませんでした。再読み込みしてください。'),
+    ).toBeInTheDocument()
+    expect(screen.queryByRole('article')).not.toBeInTheDocument()
+  })
 })
