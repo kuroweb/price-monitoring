@@ -11,7 +11,11 @@ import type { ProductCrawlSetting, ProductCrawlSettingInput } from '@/features/p
 
 import ProductCrawlSettingFormModal from './ProductCrawlSettingFormModal'
 
-type ModalState = { setting?: ProductCrawlSetting; initial?: ProductCrawlSettingInput } | null
+const COPY_SUFFIX = '（コピー）'
+// 初期値には入力欄の maxLength が効かないため、name 列の上限 255 文字に収める
+const copyName = (name: string) => `${name.slice(0, 255 - COPY_SUFFIX.length)}${COPY_SUFFIX}`
+
+type ModalState ={ setting?: ProductCrawlSetting; initial?: ProductCrawlSettingInput } | null
 
 export default function ProductCrawlSettings({
   productCrawlSettings,
@@ -73,7 +77,7 @@ export default function ProductCrawlSettings({
                     deleting={deletingId !== undefined}
                     onEdit={() => setModal({ setting })}
                     onDuplicate={() =>
-                      setModal({ initial: { ...setting, name: `${setting.name}（コピー）` } })
+                      setModal({ initial: { ...setting, name: copyName(setting.name) } })
                     }
                     onDestroy={() => destroy(setting)}
                   />

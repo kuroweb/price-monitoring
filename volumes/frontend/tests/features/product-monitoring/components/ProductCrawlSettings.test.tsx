@@ -132,6 +132,13 @@ describe('商品計測設定', () => {
     expect(refresh).toHaveBeenCalled()
   })
 
+  it('keeps the duplicated name within 255 characters', async () => {
+    const user = userEvent.setup()
+    render(<ProductCrawlSettings productCrawlSettings={[{ ...setting, name: 'a'.repeat(255) }]} />)
+    await user.click(screen.getByRole('button', { name: '複製' }))
+    expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue(`${'a'.repeat(250)}（コピー）`)
+  })
+
   it('lists excluded listings with links and restores one in place', async () => {
     const user = userEvent.setup()
     vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
