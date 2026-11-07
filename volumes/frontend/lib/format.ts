@@ -9,7 +9,7 @@ export const formatDate = (value: string) => {
 export const platformNames: Record<string, string> = {
   mercari: 'メルカリ',
   yahoo_auction: 'ヤフオク',
-  yahoo_fleamarket: 'Yahoo!フリマ',
+  yahoo_fleamarket: 'ヤフーフリマ',
   janpara: 'じゃんぱら',
   iosys: 'イオシス',
   pc_koubou: 'パソコン工房',
