@@ -1,8 +1,6 @@
 module ProductMonitoring
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
   class SyncCrawlResults
-    FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
-
     def self.call(...)
       new(...).call
     end
@@ -18,7 +16,7 @@ module ProductMonitoring
       newly_sold = details.newly_sold(matched)
       ProductCrawlResult.transaction do
         save_matched(matched)
-        delete_unmatched
+        CleanseCrawlResults.call(product_crawl_setting:)
       end
       details.enqueue(crawled, newly_sold) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
       crawled
@@ -33,7 +31,8 @@ module ProductMonitoring
     end
 
     def filter_params
-      product_crawl_setting.attributes.symbolize_keys.slice(*FILTER_KEYS)
+      # 保存時と削除時で条件の項目を食い違わせないため、削除側の定義を使う
+      product_crawl_setting.attributes.symbolize_keys.slice(*CleanseCrawlResults::FILTER_KEYS)
     end
 
     def crawl_params
@@ -87,14 +86,6 @@ module ProductMonitoring
       scope = product_crawl_setting.product_crawl_results
       scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
-    end
-
-    # 条件の変更で一致しなくなった保存済みの結果を削除する
-    def delete_unmatched
-      ids = ProductCrawlResult.where(product_crawl_setting_id: product_crawl_setting.id).reject do |result|
-        ProductMonitoring::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty?
-      end.map(&:id)
-      ProductCrawlResult.where(id: ids).delete_all if ids.any?
     end
   end
 end
