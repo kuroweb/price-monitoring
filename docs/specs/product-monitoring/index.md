@@ -115,8 +115,8 @@ erDiagram
 | `thumbnail_url` | text | YES | | サムネイル画像URL |
 | `price` | integer | NO | `0` | 価格 |
 | `buyout_price` | integer | YES | | 即決価格。ヤフオクのみ |
-| `sold` | boolean | YES | | 売り切れなら `true`、販売中なら `false`。メルカリ・Yahoo!フリマは一覧の売り切れ表示と個別ページの在庫状態から取得し、イオシスは一覧に出ていれば `false`。ヤフオクは出品中の検索で `false`、落札相場で `true` |
-| `bought_date` | datetime | YES | | 売れた日。メルカリ・Yahoo!フリマは個別ページの相対表示から日単位で推定した値（各既存クローラーと同じ基準）。ヤフオクは落札相場の終了日時。表示がない場合とイオシスは取得しない |
+| `sold` | boolean | YES | | 売り切れなら `true`、販売中なら `false`。メルカリ・Yahoo!フリマは一覧の売り切れ表示と個別ページの在庫状態から取得し、イオシス・じゃんぱらは一覧に出ていれば `false`。ヤフオクは出品中の検索で `false`、落札相場で `true` |
+| `bought_date` | datetime | YES | | 売れた日。メルカリ・Yahoo!フリマは個別ページの相対表示から日単位で推定した値（各既存クローラーと同じ基準）。ヤフオクは落札相場の終了日時。表示がない場合とイオシス・じゃんぱらは取得しない |
 | `end_date` | datetime | YES | | オークション終了日時。ヤフオクのみ |
 | `excluded_at` | datetime | YES | | 除外した日時。null なら除外していない。除外しても行は消さず、出品名・商品ページ・画像を残す |
 
