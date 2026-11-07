@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe ProductCrawlSettings::SyncDetailJob do
+RSpec.describe ProductMonitoring::CrawlDetailJob do
   let!(:second) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
   let!(:first) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
 

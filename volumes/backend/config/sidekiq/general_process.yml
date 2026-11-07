@@ -4,5 +4,5 @@ production:
   :concurrency: 1
 :queues:
   - ['calculate_daily_purchase_summary', 1]
-  - ['product_aggregation_settings_enqueue_calculate_results', 1]
-  - ['product_aggregation_settings_calculate_results', 1]
+  - ['product_monitoring_enqueue_aggregation_jobs_job', 1]
+  - ['product_monitoring_aggregation_job', 1]

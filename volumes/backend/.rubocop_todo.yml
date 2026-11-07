@@ -20,7 +20,7 @@ Layout/EmptyLinesAroundBlockBody:
 # SupportedStyles: special_inside_parentheses, consistent, align_brackets
 Layout/FirstArrayElementIndentation:
   Exclude:
-    - 'spec/services/product_crawl_settings/sync_results_spec.rb'
+    - 'spec/services/product_monitoring/sync_crawl_results_spec.rb'
 
 # Offense count: 12
 # This cop supports safe autocorrection (--autocorrect).
@@ -42,7 +42,7 @@ Layout/LineLength:
     - 'app/controllers/api/v1/product_crawl_results_controller.rb'
     - 'spec/requests/product_aggregation_settings_spec.rb'
     - 'spec/requests/product_crawl_settings_spec.rb'
-    - 'spec/services/product_crawl_settings/sync_results_spec.rb'
+    - 'spec/services/product_monitoring/sync_crawl_results_spec.rb'
 
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
@@ -63,7 +63,7 @@ Layout/TrailingWhitespace:
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
   Exclude:
-    - 'app/services/product_aggregation_settings/calculate_results.rb'
+    - 'app/services/product_monitoring/calculate_aggregation_results.rb'
     - 'lib/discord/bugsnag_notifier.rb'
 
 # Offense count: 3
@@ -194,8 +194,8 @@ Rails/SkipsModelValidations:
     - 'app/services/crawl/used_sofmap/syncer.rb'
     - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_products/syncer.rb'
-    - 'app/services/product_aggregation_settings/calculate_results.rb'
-    - 'app/services/product_crawl_settings/sync_results.rb'
+    - 'app/services/product_monitoring/calculate_aggregation_results.rb'
+    - 'app/services/product_monitoring/sync_crawl_results.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_mercari_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'

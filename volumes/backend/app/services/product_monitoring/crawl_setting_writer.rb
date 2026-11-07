@@ -1,5 +1,5 @@
-module ProductCrawlSettings
-  class Writer
+module ProductMonitoring
+  class CrawlSettingWriter
     def self.call(product_crawl_setting:, params:)
       values = ProductMonitoring::Input.call(params:, require_name: true, require_search_urls: true)
       values[:search_urls].each { |url| ProductMonitoring::UrlRouter.call(url:) }

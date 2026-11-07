@@ -68,7 +68,7 @@ Yahoo!フリマとメルカリでは、個別ページが非2xxを返す削除�
 ## 別端末での再開
 
 - DB追加と除外管理の変更は `20261106000001_create_product_crawl_and_aggregation_tables.rb`、`20261106000002_move_exclusions_to_product_crawl_results.rb`。リポジトリルートで `docker compose exec backend bundle exec rails db:migrate` を実行する。
-- backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/product_monitoring`
+- backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_monitoring spec/sidekiq/product_monitoring`
 - frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/product-monitoring`。
 
 残作業は画面設計の未決事項。
