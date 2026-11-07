@@ -20,7 +20,7 @@
 
 ## テスト方針
 
-- RSpec の `describe`、`context`、`it`、`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。
+- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。
 - `it` は振る舞いを言い切り、`context` は「〜とき」「〜場合」で条件を表す。コード上の識別子や HTTP ステータスはそのまま使ってよい。
 
 ## 置いてよい責務
