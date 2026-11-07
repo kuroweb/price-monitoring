@@ -4,12 +4,14 @@ interface Props {
   name: string
   deleting: boolean
   onEdit: () => void
+  // 渡した一覧だけ「複製」を出す
+  onDuplicate?: () => void
   onDestroy: () => void
 }
 
 // 他の管理一覧と同じ「…」の操作メニュー。項目を横に並べてボタンの上下中央に揃え、閉じていても配置される
 // メニューが表の外枠からはみ出してスクロールバーを出さないようにする
-export default function SettingRowMenu({ name, deleting, onEdit, onDestroy }: Props) {
+export default function SettingRowMenu({ name, deleting, onEdit, onDuplicate, onDestroy }: Props) {
   return (
     <div className='dropdown dropdown-left dropdown-center'>
       <button type='button' aria-label={`${name}の操作`} className='btn btn-square btn-md'>
@@ -21,6 +23,13 @@ export default function SettingRowMenu({ name, deleting, onEdit, onDestroy }: Pr
             編集
           </button>
         </li>
+        {onDuplicate && (
+          <li>
+            <button type='button' className='btn' onClick={onDuplicate}>
+              複製
+            </button>
+          </li>
+        )}
         <li>
           <button type='button' className='btn btn-error' disabled={deleting} onClick={onDestroy}>
             削除

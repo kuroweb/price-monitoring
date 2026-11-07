@@ -7,11 +7,11 @@ import { toast } from 'react-toastify'
 
 import SettingRowMenu from '@/components/ui/SettingRowMenu'
 import { destroyProductCrawlSetting } from '@/features/product-monitoring/api/actions'
-import type { ProductCrawlSetting } from '@/features/product-monitoring/api/types'
+import type { ProductCrawlSetting, ProductCrawlSettingInput } from '@/features/product-monitoring/api/types'
 
 import ProductCrawlSettingFormModal from './ProductCrawlSettingFormModal'
 
-type ModalState = { setting?: ProductCrawlSetting } | null
+type ModalState = { setting?: ProductCrawlSetting; initial?: ProductCrawlSettingInput } | null
 
 export default function ProductCrawlSettings({
   productCrawlSettings,
@@ -72,6 +72,9 @@ export default function ProductCrawlSettings({
                     name={setting.name}
                     deleting={deletingId !== undefined}
                     onEdit={() => setModal({ setting })}
+                    onDuplicate={() =>
+                      setModal({ initial: { ...setting, name: `${setting.name}（コピー）` } })
+                    }
                     onDestroy={() => destroy(setting)}
                   />
                 </td>
@@ -88,7 +91,11 @@ export default function ProductCrawlSettings({
         </table>
       </div>
       {modal && (
-        <ProductCrawlSettingFormModal setting={modal.setting} onClose={() => setModal(null)} />
+        <ProductCrawlSettingFormModal
+          setting={modal.setting}
+          initial={modal.initial}
+          onClose={() => setModal(null)}
+        />
       )}
     </>
   )

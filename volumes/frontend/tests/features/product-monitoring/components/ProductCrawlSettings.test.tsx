@@ -6,6 +6,7 @@ import {
   createProductCrawlSetting,
   getProductCrawlResults,
   setProductCrawlResultExcluded,
+  updateProductCrawlSetting,
 } from '@/features/product-monitoring/api/actions'
 import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
 import ProductCrawlSettings from '@/features/product-monitoring/components/ProductCrawlSettings'
@@ -91,6 +92,44 @@ describe('商品計測設定', () => {
     )
     expect(refresh).toHaveBeenCalled()
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  it('duplicates a setting into the create modal and saves it as a new setting', async () => {
+    vi.mocked(createProductCrawlSetting).mockResolvedValue({
+      data: { ...setting, id: 2 },
+      error: null,
+      status: 200,
+    })
+    const user = userEvent.setup()
+    const source = {
+      ...setting,
+      searchUrls: [mercariUrl, iosysUrl],
+      requiredKeywords: ['phone', 'blue'],
+      excludeKeywords: ['junk'],
+      minPrice: 1000,
+      maxPrice: 5000,
+    }
+    render(<ProductCrawlSettings productCrawlSettings={[source]} />)
+    await user.click(screen.getByRole('button', { name: '複製' }))
+    expect(screen.getByRole('heading', { name: '商品計測設定を追加' })).toBeInTheDocument()
+    expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone（コピー）')
+    expect(getProductCrawlResults).not.toHaveBeenCalled()
+    await user.click(screen.getByRole('button', { name: '登録' }))
+    await waitFor(() =>
+      expect(createProductCrawlSetting).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: 'phone（コピー）',
+          enabled: true,
+          searchUrls: [mercariUrl, iosysUrl],
+          requiredKeywords: ['phone', 'blue'],
+          excludeKeywords: ['junk'],
+          minPrice: 1000,
+          maxPrice: 5000,
+        }),
+      ),
+    )
+    expect(updateProductCrawlSetting).not.toHaveBeenCalled()
+    expect(refresh).toHaveBeenCalled()
   })
 
   it('lists excluded listings with links and restores one in place', async () => {
