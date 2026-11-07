@@ -1,7 +1,12 @@
 import { platformName as sharedPlatformName } from '@/lib/format'
 
+const platformNames: Record<string, string> = {
+  yahoo_fleamarket: 'Yahoo!フリマ',
+  yahoo_auction: 'ヤフオク',
+}
+
 export const platformName = (platform: string | null) =>
-  platform === 'yahoo_fleamarket' ? 'Yahoo!フリマ' : platform === 'yahoo_auction' ? 'ヤフオク' : sharedPlatformName(platform)
+  (platform && platformNames[platform]) || sharedPlatformName(platform)
 
 // 登録画面で検索結果URLのサイトを表示するための対応表。取得可否の判定はバックエンドが行う
 const searchUrlHosts: Record<string, string> = {
