@@ -6,6 +6,7 @@ import * as AggregationApi from './aggregationSettings'
 import * as CrawlApi from './crawlSettings'
 
 import type {
+  GetProductAggregationPurchasesParams,
   GetProductCrawlResultsParams,
   ProductAggregationSettingInput,
   ProductCrawlSettingInput,
@@ -96,4 +97,11 @@ export async function calculateProductAggregationSetting(id: number) {
 
 export async function getAllProductAggregationResults() {
   return AggregationApi.getAllProductAggregationResults()
+}
+
+export async function getProductAggregationPurchases(
+  id: number,
+  params: GetProductAggregationPurchasesParams,
+) {
+  return AggregationApi.getProductAggregationPurchases(id, params)
 }

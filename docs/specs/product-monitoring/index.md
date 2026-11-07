@@ -189,7 +189,7 @@ erDiagram
 | 商品計測結果詳細 | `product_crawl_results` | 1つの商品計測設定の全件をカードで表示。販売状態の絞り込み、並び替え、取得して保存、出品の除外 |
 | 商品相場設定一覧 | `product_aggregation_settings` | 一覧。「…」メニューから編集・削除 |
 | 商品相場設定の登録・編集（モーダル） | `product_aggregation_settings` | 名前・フィルターの入力、保存 |
-| 商品相場 | `product_aggregation_results` | 全商品相場設定の日次推移を設定ごとのセクションで表示。要約の数値、期間とグラフ・表の切り替え、集計の実行 |
+| 商品相場 | `product_aggregation_results`・`product_crawl_results` | 全商品相場設定の日次推移を設定ごとのセクションで表示。要約の数値、期間とグラフ・表の切り替え、集計の実行、相場対象の商品のカード |
 
 ### 商品計測設定一覧
 
@@ -252,8 +252,9 @@ erDiagram
 | 平均購入価格 | `average_purchase_price` |
 | 購入件数 | `purchase_count` |
 
+日次推移の下に、表示期間（7・14・30日）に売れた相場対象の商品を、商品計測結果と同じカードで売れた日の新しい順に並べる。対象は[集計の手順](#集計の手順)の1〜3と同じ条件で、画面を開いたときの商品計測結果から取り出す。そのため集計後に売れた日が分かった出品などは、再集計するまで購入件数と一致しないことがある。
+
 ### 未決事項
 
 - 各画面のURLパスと、管理画面と利用者向け画面の分け方。PoCは設定画面を `/admin/product-crawl-settings`・`/admin/product-aggregation-settings`、結果画面を `/product-crawl-results`・`/product-aggregation-results` に置いている（[PoCの説明](../../backend/product-monitoring-poc.md)）。
 - 商品相場の表示形式（グラフ・表）と表示期間。
-- 商品相場で、集計対象になった商品計測結果も一覧で見せるか。

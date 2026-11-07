@@ -49,3 +49,5 @@ export type GetProductAggregationSettings = {
   productAggregationSettings: ProductAggregationSetting[]
 }
 export type GetProductAggregationResults = { productAggregationResults: ProductAggregationResult[] }
+export type GetProductAggregationPurchases = { productCrawlResults: ProductCrawlResult[] }
+export type GetProductAggregationPurchasesParams = { startDate: string; endDate: string }

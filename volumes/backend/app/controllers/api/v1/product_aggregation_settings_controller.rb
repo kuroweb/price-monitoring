@@ -5,7 +5,7 @@ module Api
 
       rescue_from ArgumentError, with: :invalid_settings
 
-      before_action :set_product_aggregation_setting, only: %i[show update destroy calculate]
+      before_action :set_product_aggregation_setting, only: %i[show update destroy calculate purchases]
 
       def index
         product_aggregation_settings = ProductAggregationSetting.order(id: :desc)
@@ -47,6 +47,17 @@ module Api
           end_date:
         )
         render json: {}, status: :ok
+      end
+
+      # start_date〜end_date の集計対象になる購入を、売れた日の新しい順に返す
+      def purchases
+        product_crawl_results = ::ProductMonitoring::AggregationPurchases.call(
+          product_aggregation_setting: @product_aggregation_setting,
+          start_date: Date.parse(params.require(:start_date)),
+          end_date: Date.parse(params.require(:end_date))
+        )
+        product_crawl_results = product_crawl_results.sort_by(&:bought_date).reverse
+        render json: { product_crawl_results: product_crawl_results.as_json }, status: :ok
       end
 
       private

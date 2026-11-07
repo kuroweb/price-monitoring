@@ -6,11 +6,16 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { calculateProductAggregationSetting } from '@/features/product-monitoring/api/actions'
-import type { ProductAggregationResult, ProductAggregationSetting } from '@/features/product-monitoring/api/types'
+import type {
+  ProductAggregationResult,
+  ProductAggregationSetting,
+  ProductCrawlResult,
+} from '@/features/product-monitoring/api/types'
 import ProductAggregationSettingFormModal from '@/features/product-monitoring/components/ProductAggregationSettingFormModal'
 import { formatDate, formatYen } from '@/lib/format'
 
 import ProductAggregationChart from './ProductAggregationChart'
+import ProductCrawlResultCard from './ProductCrawlResultCard'
 
 const PERIODS = [7, 14, 30] as const
 type Period = (typeof PERIODS)[number]
@@ -19,6 +24,8 @@ type View = 'chart' | 'table'
 interface Props {
   productAggregationSetting: ProductAggregationSetting
   productAggregationResults: ProductAggregationResult[]
+  // 取得に失敗したときは null
+  productAggregationPurchases: ProductCrawlResult[] | null
 }
 
 const conditionLabels = (setting: ProductAggregationSetting) => [
@@ -61,6 +68,7 @@ const summarize = (results: ProductAggregationResult[]) => {
 export default function ProductAggregationResultsSection({
   productAggregationSetting,
   productAggregationResults,
+  productAggregationPurchases,
 }: Props) {
   const router = useRouter()
   const [busy, setBusy] = useState(false)
@@ -70,6 +78,10 @@ export default function ProductAggregationResultsSection({
   const inFlightRef = useRef(false)
   const results = productAggregationResults.slice(-period)
   const summary = summarize(results)
+  // bought_date は日本時間の ISO 文字列なので、先頭の日付で表示期間と比べる
+  const purchases = productAggregationPurchases?.filter(
+    (item) => item.boughtDate != null && item.boughtDate.substring(0, 10) >= results[0]?.date,
+  )
 
   const calculate = async () => {
     if (inFlightRef.current) return
@@ -220,6 +232,32 @@ export default function ProductAggregationResultsSection({
               </table>
             </div>
           )}
+
+          <div className='space-y-2'>
+            <h4 className='font-semibold'>
+              相場対象の商品
+              {purchases && (
+                <span className='ml-2 text-xs font-normal opacity-70'>
+                  直近{period}日・{purchases.length}件
+                </span>
+              )}
+            </h4>
+            {!purchases ? (
+              <p className='text-sm opacity-70'>
+                相場対象の商品を取得できませんでした。再読み込みしてください。
+              </p>
+            ) : purchases.length === 0 ? (
+              <p className='text-sm opacity-70'>期間内に相場対象の商品はありません。</p>
+            ) : (
+              <ul className='flex snap-x gap-3 overflow-x-auto pb-2'>
+                {purchases.map((item) => (
+                  <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
+                    <ProductCrawlResultCard productCrawlResult={item} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </>
       )}
       {editing && (

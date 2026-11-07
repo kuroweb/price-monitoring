@@ -48,6 +48,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :product_aggregation_settings, only: %i[index show create update destroy] do
         member do
           post :calculate
+          get :purchases
         end
       end
     end

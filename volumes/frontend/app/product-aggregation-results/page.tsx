@@ -1,6 +1,23 @@
 import Layout from '@/components/layouts/Layout'
-import { getAllProductAggregationResults, getProductAggregationSettings } from '@/features/product-monitoring/api/actions'
+import {
+  getAllProductAggregationResults,
+  getProductAggregationPurchases,
+  getProductAggregationSettings,
+} from '@/features/product-monitoring/api/actions'
+import type { ProductAggregationResult } from '@/features/product-monitoring/api/types'
 import ProductAggregationResultsSection from '@/features/product-monitoring/components/ProductAggregationResultsSection'
+
+// 保存済みの商品日次相場と同じ期間の購入を取る。日次相場がなければ取らない
+// 取得に失敗しても日次相場は表示できるよう、ページ全体は失敗させず null を返す
+const getPurchases = async (id: number, results: ProductAggregationResult[]) => {
+  if (results.length === 0) return []
+
+  const response = await getProductAggregationPurchases(id, {
+    startDate: results[0].date,
+    endDate: results[results.length - 1].date,
+  })
+  return response.data ? (response.data.productCrawlResults ?? []) : null
+}
 
 const Page = async () => {
   const [settingsResponse, resultsResponse] = await Promise.all([
@@ -12,6 +29,14 @@ const Page = async () => {
 
   const productAggregationSettings = settingsResponse.data.productAggregationSettings ?? []
   const productAggregationResults = resultsResponse.data.productAggregationResults ?? []
+  const sections = await Promise.all(
+    productAggregationSettings.map(async (setting) => {
+      const results = productAggregationResults.filter(
+        (result) => result.productAggregationSettingId === setting.id,
+      )
+      return { setting, results, purchases: await getPurchases(setting.id, results) }
+    }),
+  )
 
   return (
     <Layout>
@@ -22,13 +47,12 @@ const Page = async () => {
             {productAggregationSettings.length === 0 && (
               <p>商品相場設定はまだありません。管理画面で商品相場設定を追加してください。</p>
             )}
-            {productAggregationSettings.map((setting) => (
+            {sections.map(({ setting, results, purchases }) => (
               <ProductAggregationResultsSection
                 key={setting.id}
                 productAggregationSetting={setting}
-                productAggregationResults={productAggregationResults.filter(
-                  (result) => result.productAggregationSettingId === setting.id,
-                )}
+                productAggregationResults={results}
+                productAggregationPurchases={purchases}
               />
             ))}
           </div>
