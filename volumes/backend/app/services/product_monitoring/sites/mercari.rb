@@ -6,6 +6,7 @@ module ProductMonitoring
       HOST = "jp.mercari.com".freeze
       PATH = %r{\A/search\z}
       PLATFORM = "mercari".freeze
+      MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
       def self.validate_query(_uri); end
 
@@ -34,13 +35,28 @@ module ProductMonitoring
           response = page.goto(uri.to_s)
           raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
 
+          validate_page_url(page)
+
           sleep(2)
           30.times do
             page.mouse.wheel(0, 200)
             sleep(0.005)
           end
-          page.content
+          checked_content(page)
         end
+      end
+
+      def self.checked_content(page)
+        validate_page_url(page)
+        html = page.content
+        raise "Response exceeds size limit" if html.bytesize > MAX_RESPONSE_BYTES
+
+        html
+      end
+
+      def self.validate_page_url(page)
+        final_uri = URI.parse(page.url)
+        raise "Unexpected page URL" unless final_uri.scheme == "https" && final_uri.host == HOST
       end
 
       def self.mercari_results(page)
