@@ -7,16 +7,21 @@ module ProductCrawlSettings
                     retry: 2, lock: :until_executed
 
     sidekiq_retries_exhausted do |job, _exception|
-      ProductCrawlResult.where(platform: "mercari", external_id: job["args"].first)
+      ProductCrawlResult.where(platform: job["args"][1] || "mercari", external_id: job["args"].first)
                         .update_all(updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
     end
 
-    def perform(external_id)
-      scope = ProductCrawlResult.where(platform: "mercari", external_id: external_id)
+    def perform(external_id, platform = "mercari") # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/MethodLength, Metrics/PerceivedComplexity
+      site = ProductMonitoring::UrlRouter::SITES.find do |candidate|
+        platform == candidate::PLATFORM && candidate.respond_to?(:fetch_detail)
+      end
+      return unless site
+
+      scope = ProductCrawlResult.where(platform: platform, external_id: external_id)
       return unless scope.exists?
 
       handle_timeout do
-        detail = ProductMonitoring::Sites::Mercari.fetch_detail(external_id)
+        detail = site.fetch_detail(external_id)
         if detail[:deleted]
           scope.delete_all
         elsif detail.key?(:sold)

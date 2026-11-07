@@ -10,6 +10,8 @@ module ProductMonitoring
       MAX_RESPONSE_BYTES = 3 * 1024 * 1024
 
       def self.validate_query(uri)
+        raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
+
         return unless URI.decode_www_form(uri.query).any? { |key, value| key == "t" && value == "g" }
 
         raise ArgumentError, "イオシスは個別出品の検索URL（t=gなし）を指定してください"

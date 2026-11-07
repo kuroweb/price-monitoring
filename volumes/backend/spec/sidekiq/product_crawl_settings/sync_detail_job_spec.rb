@@ -1,8 +1,16 @@
 require "rails_helper"
 
 RSpec.describe ProductCrawlSettings::SyncDetailJob do
-  let!(:first) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
   let!(:second) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
+  let!(:first) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
+
+  it "updates only the requested platform for a Yahoo listing" do
+    yahoo = create(:product_crawl_result, platform: "yahoo_fleamarket", external_id: "m123", sold: false)
+    allow(ProductMonitoring::Sites::YahooFleamarket).to receive(:fetch_detail).and_return(sold: true)
+    described_class.new.perform("m123", "yahoo_fleamarket")
+    expect(yahoo.reload.sold).to be true
+    expect(first.reload.sold).to be false
+  end
 
   it "updates all matching rows and preserves an existing bought date" do
     date = 2.days.ago.beginning_of_day

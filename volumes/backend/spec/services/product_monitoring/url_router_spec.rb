@@ -1,6 +1,17 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::UrlRouter do
+  it "accepts Yahoo search paths without a query and rejects invalid paths" do
+    url = "https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro"
+    expect(described_class.call(url: url)).to include(platform: "yahoo_fleamarket")
+    ["/search/", "/search/a/b", "/search/a%2Fb"].each do |path|
+      expect { described_class.call(url: "https://paypayfleamarket.yahoo.co.jp#{path}") }.to raise_error(ArgumentError)
+    end
+    ["https://jp.mercari.com/search", "https://iosys.co.jp/items"].each do |missing_query|
+      expect { described_class.call(url: missing_query) }.to raise_error(ArgumentError)
+    end
+  end
+
   describe ".call" do
     it "routes supported search pages" do
       expect(described_class.call(url: "https://jp.mercari.com/search?keyword=phone")).to eq(

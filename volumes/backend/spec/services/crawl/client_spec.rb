@@ -51,5 +51,15 @@ RSpec.describe Crawl::Client, type: :service do
       expect(route_for(url: "https://analytics.tiktok.com/i18n/pixel/events.js",
                        resource_type: "script")).to have_received(:abort)
     end
+
+    it "指定したホストのスクリプトだけを許可する" do
+      host = "paypayfleamarket.c.yimg.jp"
+      expect(route_for(url: "https://#{host}/app.js", resource_type: "script",
+                       allow_script_host: host)).to have_received(:fallback)
+      expect(route_for(url: "https://#{host}/image.png", resource_type: "image",
+                       allow_script_host: host)).to have_received(:abort)
+      expect(route_for(url: "https://evil.example/#{host}/app.js", resource_type: "script",
+                       allow_script_host: host)).to have_received(:abort)
+    end
   end
 end

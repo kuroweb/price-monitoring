@@ -2,6 +2,7 @@
 const searchUrlHosts: Record<string, string> = {
   'jp.mercari.com': 'mercari',
   'iosys.co.jp': 'iosys',
+  'paypayfleamarket.yahoo.co.jp': 'yahoo_fleamarket',
 }
 
 export const searchUrlPlatform = (url: string) => {
