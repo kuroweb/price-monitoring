@@ -25,6 +25,7 @@ module ProductMonitoring
         raise ArgumentError, "Invalid external ID" unless external_id.match?(/\A[a-zA-Z0-9_-]+\z/)
 
         page = Nokogiri::HTML(fetch_mercari_page(URI("https://#{HOST}/item/#{external_id}")))
+        page.css("script, style").remove
         return { deleted: true } if deleted_detail?(page)
         return {} unless page.at_css("[data-testid='item-detail-container']") &&
                          page.at_css("[data-testid='price']")

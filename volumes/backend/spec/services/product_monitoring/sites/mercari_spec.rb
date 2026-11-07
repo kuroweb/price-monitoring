@@ -82,6 +82,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
       html = <<~HTML
         <div data-testid="item-detail-container"><div data-testid="price">100</div>
         <div aligncontent="start"><svg></svg><span>2日前</span></div>※売り切れのためコメントできません</div>
+        <script>const text = "ページが見つかりませんでした";</script>
       HTML
       allow(described_class).to receive(:fetch_mercari_page).and_return(html)
       expect(described_class.fetch_detail("m123")).to eq(sold: true, bought_date: 2.days.ago.beginning_of_day)
