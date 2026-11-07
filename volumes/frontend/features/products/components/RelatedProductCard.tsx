@@ -11,10 +11,10 @@ import {
   createPcKoubouCrawlSettingExcludeProduct,
   createUsedSofmapCrawlSettingExcludeProduct,
   createYahooAuctionCrawlSettingExcludeProduct,
-} from '@/lib/actions'
-import type { RelatedProduct } from '@/lib/api'
+} from '@/features/products/api/actions'
+import type { RelatedProduct } from '@/features/products/api/types'
 
-import { useStatusState } from '../[id]/hooks/useStatusState'
+import { useStatusState } from '../hooks/useStatusState'
 
 const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct }) => {
   const router = useRouter()

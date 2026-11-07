@@ -7,7 +7,6 @@ import type {
   ProductCrawlResult,
   ProductCrawlSetting,
   ProductCrawlSettingInput,
-  ProductCrawlSyncResult,
 } from './types'
 
 const BASE_PATH = '/api/v1/product_crawl_settings'
@@ -23,7 +22,7 @@ export const updateProductCrawlSetting = (id: number, input: ProductCrawlSetting
 export const destroyProductCrawlSetting = (id: number) =>
   http(`${BASE_PATH}/${id}`, { method: 'DELETE' })
 export const syncProductCrawlSetting = (id: number) =>
-  http<ProductCrawlSyncResult>(`${BASE_PATH}/${id}/sync`, { method: 'POST' })
+  http<Record<string, never>>(`${BASE_PATH}/${id}/sync`, { method: 'POST' })
 export const getProductCrawlResults = (params?: GetProductCrawlResultsParams) =>
   http<GetProductCrawlResults>(RESULTS_PATH, { params })
 // 除外と取り消し。行は消さず excluded_at で表す

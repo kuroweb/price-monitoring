@@ -1,0 +1,38 @@
+import type { Category } from '@/lib/category'
+
+export type GetCategoriesParams = {
+  rootOnly?: boolean
+}
+
+export type GetCategories = {
+  categories: Category[]
+}
+
+export type GetCategoriesStructuredParams = {
+  rootOnly?: boolean
+}
+
+export type GetCategoryStructuredSubtreeParams = {
+  rootOnly?: boolean
+}
+
+export type GetCategoriesStructured = {
+  categories: (Category & {
+    children: GetCategoriesStructured['categories'][number][]
+  })[]
+}
+
+export type GetCategoryStructuredSubtree = Category & {
+  parent: Category | null
+  children: Category[]
+}
+
+export type CreateCategoryData = {
+  parentId?: number | null
+  name: string
+}
+
+export type UpdateCategoryData = {
+  parentId?: number | null
+  name?: string
+}

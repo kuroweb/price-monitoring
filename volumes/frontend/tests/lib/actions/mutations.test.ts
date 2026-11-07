@@ -1,18 +1,9 @@
 import { revalidatePath } from 'next/cache'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import {
-  createBackmarketWatchTarget,
-  updateBackmarketWatchTarget,
-  destroyBackmarketWatchTarget,
-} from '@/lib/actions/backmarketWatchTargets'
-import {
-  createCategory,
-  updateCategory,
-  destroyCategory,
-  getCategories,
-} from '@/lib/actions/categories'
-import { destroyProduct } from '@/lib/actions/products'
+import { createBackmarketWatchTarget, updateBackmarketWatchTarget, destroyBackmarketWatchTarget } from '@/features/backmarket/api/actions'
+import { createCategory, updateCategory, destroyCategory, getCategories } from '@/features/categories/api/actions'
+import { destroyProduct } from '@/features/products/api/actions'
 import { http } from '@/lib/http-client'
 
 vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }))

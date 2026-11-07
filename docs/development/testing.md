@@ -54,7 +54,7 @@ just test-frontend-coverage
 
 ```bash
 just test-frontend CategoryNavigation.test.tsx
-just test-frontend 'tests/features/products/[id]/lib/makePlatformMask.test.ts'
+just test-frontend 'tests/features/products/lib/makePlatformMask.test.ts'
 just test-frontend -t '最初のページ'
 ```
 

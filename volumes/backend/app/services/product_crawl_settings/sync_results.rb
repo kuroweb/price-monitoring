@@ -12,7 +12,7 @@ module ProductCrawlSettings
     end
 
     def call
-      crawled = Crawl::Search::Crawler.call(params: crawl_params)
+      crawled = ProductMonitoring::Crawler.call(params: crawl_params)
       ProductCrawlResult.transaction do
         save_matched(crawled[:results].select { |result| (result[:reasons] - ["excluded_listing"]).empty? })
         delete_unmatched
@@ -37,6 +37,7 @@ module ProductCrawlSettings
 
     # 除外した出品も価格などは更新する。excluded_at は行に含めないので上書きしない
     def save_matched(results)
+      results = results.reject { |result| result[:price].nil? }
       return if results.empty?
 
       rows = results.map do |result|
@@ -47,7 +48,7 @@ module ProductCrawlSettings
           name: result[:name],
           product_url: result[:product_url],
           thumbnail_url: result[:thumbnail_url],
-          price: result[:price] || 0
+          price: result[:price]
         }
       end
       ProductCrawlResult.upsert_all(rows, record_timestamps: true)
@@ -56,7 +57,7 @@ module ProductCrawlSettings
     # 条件の変更で一致しなくなった保存済みの結果を削除する
     def delete_unmatched
       ids = ProductCrawlResult.where(product_crawl_setting_id: product_crawl_setting.id).reject do |result|
-        Crawl::Search::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty?
+        ProductMonitoring::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty?
       end.map(&:id)
       ProductCrawlResult.where(id: ids).delete_all if ids.any?
     end

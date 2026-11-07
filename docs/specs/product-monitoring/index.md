@@ -175,7 +175,7 @@ erDiagram
 
 ## 画面設計（ドラフト）
 
-テーブル設計とPoC（[商品計測・商品相場PoC](../../backend/product-search-poc.md)）の操作から起こした叩き台。PoCで実装しながら詰める。
+テーブル設計とPoC（[商品計測・商品相場PoC](../../backend/product-monitoring-poc.md)）の操作から起こした叩き台。PoCで実装しながら詰める。
 
 ### 画面一覧
 
@@ -223,7 +223,7 @@ erDiagram
 | 販売状態・売れた日時 | `sold`・`bought_date` |
 | オークション終了日時 | `end_date` |
 
-各セクションから「取得して保存」を実行できる。カードの「…」メニューから出品を除外できる。除外すると商品計測結果の `excluded_at` に日時を入れる。行は消さない。
+詳細から「取得して保存」を実行できる。カードの「…」メニューから出品を除外できる。除外すると商品計測結果の `excluded_at` に日時を入れる。行は消さない。
 
 ### 商品相場設定一覧・登録・編集
 
@@ -248,6 +248,6 @@ erDiagram
 
 ### 未決事項
 
-- 各画面のURLパスと、管理画面と利用者向け画面の分け方。PoCは設定画面を `/admin/product-crawl-settings`・`/admin/product-aggregation-settings`、結果画面を `/product-crawl-results`・`/product-aggregation-results` に置いている（[PoCの説明](../../backend/product-search-poc.md)）。
+- 各画面のURLパスと、管理画面と利用者向け画面の分け方。PoCは設定画面を `/admin/product-crawl-settings`・`/admin/product-aggregation-settings`、結果画面を `/product-crawl-results`・`/product-aggregation-results` に置いている（[PoCの説明](../../backend/product-monitoring-poc.md)）。
 - 商品相場の表示形式（グラフ・表）と表示期間。
 - 商品相場で、集計対象になった商品計測結果も一覧で見せるか。

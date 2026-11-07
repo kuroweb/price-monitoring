@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
+import type { ProductList, ProductPriceList as ProductPrices } from '@/features/products/api/types'
 import ProductPriceList from '@/features/products/components/ProductPriceList'
-import type { ProductList, ProductPriceList as ProductPrices } from '@/lib/api'
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
 vi.mock('react-toastify', () => ({ toast: { success: vi.fn(), error: vi.fn() } }))
-vi.mock('@/lib/actions', () => ({ updateProduct: vi.fn() }))
+vi.mock('@/features/products/api/actions', () => ({ updateProduct: vi.fn() }))
 
 const productPrices = [
   { id: 1, name: 'MacBook Air', relatedProducts: [] },

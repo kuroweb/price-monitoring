@@ -34,14 +34,21 @@ RSpec.describe "Product crawl settings", type: :request do
     expect(product_crawl_setting.reload.name).to eq("phone")
   end
 
-  it "syncs saved settings" do
-    allow(Crawl::Search::Crawler).to receive(:fetch).and_return([{ external_id: "a", name: "phone", price: 200,
-                                                                   product_url: "https://iosys.co.jp/items/a" }])
-    product_crawl_setting = create(:product_crawl_setting)
+  it "rejects an iosys group search when registering a setting" do
+    expect do
+      post "/api/v1/product_crawl_settings",
+           params: params.merge(search_urls: ["https://iosys.co.jp/items?t=g&q=ipad"]), as: :json
+    end.not_to change(ProductCrawlSetting, :count)
+    expect(response).to have_http_status(:bad_request)
+    expect(response.parsed_body.to_s).to include("個別出品", "t=gなし")
+  end
+
+  it "enqueues manual sync even for disabled settings" do
+    allow(ProductCrawlSettings::SyncJob).to receive(:perform_async)
+    product_crawl_setting = create(:product_crawl_setting, enabled: false)
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
-    expect(response).to have_http_status(:ok)
-    get "/api/v1/product_crawl_results"
-    expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(["a"])
+    expect(response).to have_http_status(:accepted)
+    expect(ProductCrawlSettings::SyncJob).to have_received(:perform_async).with(product_crawl_setting.id, true)
   end
 
   it "excludes and restores a listing without deleting it" do
@@ -62,6 +69,24 @@ RSpec.describe "Product crawl settings", type: :request do
 end
 
 RSpec.describe "Product crawl results", type: :request do
+  it "returns the newest eight per setting and full counts while detail remains unlimited" do
+    setting = create(:product_crawl_setting)
+    other = create(:product_crawl_setting)
+    results = Array.new(10) { |i| create(:product_crawl_result, product_crawl_setting: setting, sold: i.even?) }
+    excluded = create(:product_crawl_result, product_crawl_setting: setting, excluded_at: Time.current)
+    other_result = create(:product_crawl_result, product_crawl_setting: other)
+    get "/api/v1/product_crawl_results"
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([other_result.id] + results.last(8).reverse.map(&:id))
+    expect(response.parsed_body.fetch("counts")).to include(
+      { "product_crawl_setting_id" => setting.id, "sold" => true, "count" => 5 },
+      { "product_crawl_setting_id" => setting.id, "sold" => false, "count" => 5 }
+    )
+    get "/api/v1/product_crawl_results", params: { product_crawl_setting_id: setting.id }
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq(results.reverse.map(&:id))
+    get "/api/v1/product_crawl_results", params: { excluded: true }
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([excluded.id])
+  end
+
   it "lists results across crawl settings" do
     first = create(:product_crawl_result)
     second = create(:product_crawl_result)

@@ -40,11 +40,8 @@ Layout/LineEndStringConcatenationIndentation:
 Layout/LineLength:
   Exclude:
     - 'app/controllers/api/v1/product_crawl_results_controller.rb'
-    - 'app/services/crawl/search/input.rb'
     - 'spec/requests/product_aggregation_settings_spec.rb'
     - 'spec/requests/product_crawl_settings_spec.rb'
-    - 'spec/services/crawl/search/crawler_spec.rb'
-    - 'spec/services/crawl/search/url_router_spec.rb'
     - 'spec/services/product_crawl_settings/sync_results_spec.rb'
 
 # Offense count: 6
@@ -66,10 +63,6 @@ Layout/TrailingWhitespace:
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
   Exclude:
-    - 'app/services/crawl/search/crawler.rb'
-    - 'app/services/crawl/search/filter.rb'
-    - 'app/services/crawl/search/input.rb'
-    - 'app/services/crawl/search/url_router.rb'
     - 'app/services/product_aggregation_settings/calculate_results.rb'
     - 'lib/discord/bugsnag_notifier.rb'
 
@@ -89,28 +82,18 @@ Metrics/ClassLength:
     - 'app/services/crawl/backmarket/crawler.rb'
     - 'app/services/crawl/mercari/sync_product/crawler.rb'
     - 'app/services/crawl/mercari/sync_products/crawler.rb'
-    - 'app/services/crawl/search/crawler.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedMethods, AllowedPatterns, Max.
 Metrics/CyclomaticComplexity:
   Exclude:
     - 'app/services/crawl/request_blocklist.rb'
-    - 'app/services/crawl/search/crawler.rb'
-    - 'app/services/crawl/search/input.rb'
 
 # Offense count: 1
 # Configuration parameters: CountComments, Max, CountAsOne.
 Metrics/ModuleLength:
   Exclude:
     - 'app/services/crawl/request_blocklist.rb'
-
-# Offense count: 3
-# Configuration parameters: AllowedMethods, AllowedPatterns, Max.
-Metrics/PerceivedComplexity:
-  Exclude:
-    - 'app/services/crawl/search/crawler.rb'
-    - 'app/services/crawl/search/input.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -306,12 +289,6 @@ Style/RedundantRegexpArgument:
   Exclude:
     - 'app/services/crawl/pc_koubou/crawler.rb'
     - 'app/services/crawl/used_sofmap/crawler.rb'
-
-# Offense count: 1
-# Configuration parameters: Max.
-Style/SafeNavigationChainLength:
-  Exclude:
-    - 'app/services/crawl/search/crawler.rb'
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).

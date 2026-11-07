@@ -1,17 +1,12 @@
 import Layout from '@/components/layouts/Layout'
+import { getCategories, getCategoriesStructured, getCategoryStructuredSubtree } from '@/features/categories/api/actions'
+import { getProductPrices, getProducts } from '@/features/products/api/actions'
 import CategoryNavigation from '@/features/products/components/CategoryNavigation'
 import ProductPriceList from '@/features/products/components/ProductPriceList'
 import {
   categoryIdStateCache,
   useCategoryIdStateQuery,
 } from '@/features/products/hooks/useCategoryIdState'
-import {
-  getCategories,
-  getCategoriesStructured,
-  getCategoryStructuredSubtree,
-  getProductPrices,
-  getProducts,
-} from '@/lib/actions'
 
 const Page = async ({
   searchParams,

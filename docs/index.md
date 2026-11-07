@@ -37,7 +37,7 @@
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](development/remote.md) | ハウツー |
 | BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
 | 商品計測と相場集計の要件・テーブル設計・画面設計 | [商品計測と相場集計の仕様](specs/product-monitoring/index.md) | 仕様 |
-| 商品計測・商品相場 PoC の操作・API・制約 | [商品計測・商品相場PoC](backend/product-search-poc.md) | ハウツー・リファレンス |
+| 商品計測・商品相場 PoC の操作・API・制約 | [商品計測・商品相場PoC](backend/product-monitoring-poc.md) | ハウツー・リファレンス |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
 | frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |

@@ -4,7 +4,7 @@ RSpec.describe ProductCrawlSettings::SyncResults do
   let(:product_crawl_setting) { create(:product_crawl_setting, required_keywords: ["phone"]) }
 
   before do
-    allow(Crawl::Search::Crawler).to receive(:fetch).and_return([
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
       { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a",
         thumbnail_url: "https://iosys.co.jp/a.jpg" },
       { external_id: "b", name: "Case", price: 100, product_url: "https://iosys.co.jp/items/b" },
@@ -45,5 +45,17 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     expect(product_crawl_setting.product_crawl_results.where(external_id: "a").sole).to have_attributes(
       name: "Phone blue", price: 100
     )
+  end
+
+  it "skips listings without a price while retaining existing rows and accepting zero" do
+    existing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", price: 50)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone new", price: nil, product_url: "https://iosys.co.jp/items/a" },
+      { external_id: "missing", name: "Phone", price: nil, product_url: "https://iosys.co.jp/items/missing" },
+      { external_id: "free", name: "Phone", price: 0, product_url: "https://iosys.co.jp/items/free" }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(existing.reload).to have_attributes(name: "Phone old", price: 50)
+    expect(product_crawl_setting.product_crawl_results.pluck(:external_id)).to contain_exactly("a", "free")
   end
 end

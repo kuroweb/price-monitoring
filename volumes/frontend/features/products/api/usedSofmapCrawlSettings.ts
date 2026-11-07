@@ -1,0 +1,17 @@
+import { http } from '@/lib/http-client'
+
+import type { CreateUsedSofmapCrawlSettingExcludeProductData } from './types'
+import type { UsedSofmapCrawlSettingExcludeProduct } from './types'
+
+const basePath = (productId: number) =>
+  `/api/v1/products/${productId}/used_sofmap_crawl_settings/used_sofmap_crawl_setting_exclude_products`
+
+export async function createUsedSofmapCrawlSettingExcludeProduct(
+  productId: number,
+  data: CreateUsedSofmapCrawlSettingExcludeProductData,
+) {
+  return http<UsedSofmapCrawlSettingExcludeProduct>(basePath(productId), {
+    method: 'POST',
+    data,
+  })
+}

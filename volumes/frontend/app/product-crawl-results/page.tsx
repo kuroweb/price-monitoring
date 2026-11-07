@@ -12,6 +12,7 @@ const Page = async () => {
 
   const productCrawlSettings = settingsResponse.data.productCrawlSettings ?? []
   const productCrawlResults = resultsResponse.data.productCrawlResults ?? []
+  const counts = resultsResponse.data.counts ?? []
 
   return (
     <Layout>
@@ -26,6 +27,9 @@ const Page = async () => {
               <ProductCrawlResultsSection
                 key={setting.id}
                 productCrawlSetting={setting}
+                counts={counts.filter(
+                  (count) => count.productCrawlSettingId === setting.id,
+                )}
                 productCrawlResults={productCrawlResults.filter(
                   (result) => result.productCrawlSettingId === setting.id,
                 )}

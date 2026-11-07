@@ -1,0 +1,17 @@
+import { http } from '@/lib/http-client'
+
+import type { CreatePcKoubouCrawlSettingExcludeProductData } from './types'
+import type { PcKoubouCrawlSettingExcludeProduct } from './types'
+
+const basePath = (productId: number) =>
+  `/api/v1/products/${productId}/pc_koubou_crawl_settings/pc_koubou_crawl_setting_exclude_products`
+
+export async function createPcKoubouCrawlSettingExcludeProduct(
+  productId: number,
+  data: CreatePcKoubouCrawlSettingExcludeProductData,
+) {
+  return http<PcKoubouCrawlSettingExcludeProduct>(basePath(productId), {
+    method: 'POST',
+    data,
+  })
+}

@@ -137,6 +137,18 @@ describe('http（ブラウザー）', () => {
     })
   })
 
+  it('BFF の error オブジェクト内の入力エラーを表示できる', async () => {
+    fetchMock.mockResolvedValue(new Response(JSON.stringify({
+      error: { code: 400, message: '個別出品の検索URLを指定してください', details: [] },
+    }), { status: 400 }))
+
+    expect(await http('/product_crawl_settings')).toEqual({
+      data: null,
+      status: 400,
+      error: { code: 400, message: '個別出品の検索URLを指定してください', details: [] },
+    })
+  })
+
   it.each(['<html>Bad Gateway</html>', '', '{}'])(
     'エラー本文 %j に詳細がなくても HTTP ステータスを返す',
     async (body) => {

@@ -2,13 +2,13 @@ import { act, renderHook } from '@testing-library/react'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
-import { useOrderState } from '@/features/products/[id]/hooks/useOrderState'
-import { usePageState } from '@/features/products/[id]/hooks/usePageState'
-import { usePerState } from '@/features/products/[id]/hooks/usePerState'
-import { usePlatformState } from '@/features/products/[id]/hooks/usePlatformState'
-import { useSortState } from '@/features/products/[id]/hooks/useSortState'
-import { useStatusState } from '@/features/products/[id]/hooks/useStatusState'
 import { useCategoryIdState } from '@/features/products/hooks/useCategoryIdState'
+import { useOrderState } from '@/features/products/hooks/useOrderState'
+import { usePageState } from '@/features/products/hooks/usePageState'
+import { usePerState } from '@/features/products/hooks/usePerState'
+import { usePlatformState } from '@/features/products/hooks/usePlatformState'
+import { useSortState } from '@/features/products/hooks/useSortState'
+import { useStatusState } from '@/features/products/hooks/useStatusState'
 
 describe.each([
   { key: 'page', useState: usePageState, initial: 1, selected: 3 },
