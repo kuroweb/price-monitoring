@@ -7,6 +7,7 @@ module ProductMonitoring
       PATH = %r{\A/search\z}
       PLATFORM = "mercari".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
+      DELETED_TEXTS = ["ページが見つかりませんでした", "該当する商品は削除されています。"].freeze
 
       def self.validate_query(_uri); end
 
@@ -18,6 +19,38 @@ module ProductMonitoring
           raise "Search page has no extractable listings" unless empty && !empty.text.strip.empty?
         end
         [results, next_url(uri, page)]
+      end
+
+      def self.fetch_detail(external_id)
+        raise ArgumentError, "Invalid external ID" unless external_id.match?(/\A[a-zA-Z0-9_-]+\z/)
+
+        page = Nokogiri::HTML(fetch_mercari_page(URI("https://#{HOST}/item/#{external_id}")))
+        return { deleted: true } if deleted_detail?(page)
+        return {} unless page.at_css("[data-testid='item-detail-container']") &&
+                         page.at_css("[data-testid='price']")
+
+        sold = page.text.include?("※売り切れのためコメントできません")
+        { sold: sold, bought_date: sold ? detail_bought_date(page) : nil }
+      end
+
+      def self.deleted_detail?(page)
+        page.at_css(".merEmptyState") || DELETED_TEXTS.any? { |text| page.text.include?(text) }
+      end
+
+      def self.detail_bought_date(page)
+        text = page.at_css("[data-testid='item-detail-container'] div[aligncontent='start']:has(svg)")&.text&.strip
+        return unless text && text.length < 20
+
+        parse_detail_date(text)
+      end
+
+      def self.parse_detail_date(text)
+        case text
+        when /\A\d+(?:分前|時間前)\z/ then Time.current.beginning_of_day
+        when /\A(\d+)日前\z/ then Time.current.days_ago(Regexp.last_match(1).to_i).beginning_of_day
+        when /\A(\d+)か月前\z/ then Time.current.months_ago(Regexp.last_match(1).to_i).beginning_of_day
+        when "半年以上前" then Time.current.months_ago(6).beginning_of_day
+        end
       end
 
       def self.next_url(uri, page)

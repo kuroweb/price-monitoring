@@ -2,6 +2,7 @@ module ProductCrawlSettings
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
   class SyncResults
     FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
+    MAX_DETAIL_JOBS = 50
 
     def self.call(...)
       new(...).call
@@ -17,12 +18,28 @@ module ProductCrawlSettings
         save_matched(crawled[:results].select { |result| (result[:reasons] - ["excluded_listing"]).empty? })
         delete_unmatched
       end
+      enqueue_details(crawled) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
       crawled
     end
 
     private
 
     attr_reader :product_crawl_setting
+
+    def enqueue_details(crawled)
+      seen_ids = crawled[:results].select { |result| result[:platform] == "mercari" }.pluck(:external_id)
+      ids = detail_candidates(seen_ids).order(:updated_at).pluck(:external_id).uniq.first(MAX_DETAIL_JOBS)
+      ids.each do |external_id|
+        ProductCrawlSettings::SyncDetailJob.perform_async(external_id)
+      end
+    end
+
+    def detail_candidates(seen_ids)
+      scope = product_crawl_setting.product_crawl_results.where(platform: "mercari")
+      missing = scope.where.not(sold: true).or(scope.where(sold: nil)).where.not(external_id: seen_ids)
+      undated = scope.where(sold: true, bought_date: nil)
+      missing.or(undated)
+    end
 
     def filter_params
       product_crawl_setting.attributes.symbolize_keys.slice(*FILTER_KEYS)

@@ -76,4 +76,30 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
     expect(described_class).to have_received(:fetch).exactly(ProductMonitoring::Crawler::MAX_PAGES_PER_URL).times
     expect(result.size).to eq(ProductMonitoring::Crawler::MAX_PAGES_PER_URL)
   end
+
+  describe ".fetch_detail" do
+    it "parses a sold listing and its relative date" do
+      html = <<~HTML
+        <div data-testid="item-detail-container"><div data-testid="price">100</div>
+        <div aligncontent="start"><svg></svg><span>2日前</span></div>※売り切れのためコメントできません</div>
+      HTML
+      allow(described_class).to receive(:fetch_mercari_page).and_return(html)
+      expect(described_class.fetch_detail("m123")).to eq(sold: true, bought_date: 2.days.ago.beginning_of_day)
+      expect(described_class).to have_received(:fetch_mercari_page).with(URI("https://jp.mercari.com/item/m123"))
+    end
+
+    it "distinguishes available, deleted, and unknown pages" do
+      allow(described_class).to receive(:fetch_mercari_page).and_return(
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>',
+        '<div class="merEmptyState">削除</div>', "<html></html>"
+      )
+      expect(described_class.fetch_detail("m123")).to eq(sold: false, bought_date: nil)
+      expect(described_class.fetch_detail("m123")).to eq(deleted: true)
+      expect(described_class.fetch_detail("m123")).to eq({})
+    end
+
+    it "rejects an unsafe external ID" do
+      expect { described_class.fetch_detail("../search") }.to raise_error(ArgumentError)
+    end
+  end
 end

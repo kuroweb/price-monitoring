@@ -23,7 +23,7 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 - 出品の除外は商品計測結果の行ごとに `excluded_at` を設定し、通常の結果表示と集計から除く。同じ設定で再取得するときは `external_id` で除外を判定する。
 - 取得して保存するとき、保存済みの結果のうち現在の条件に一致しないものを、除外済みの行も含めて削除する。今回の検索結果に出なかった出品は、条件に一致していれば残す。
 - 商品相場は、除外されておらず条件に一致する商品計測結果のうち、`bought_date` が集計期間に入るものを `external_id` で1件にまとめ、日ごとに平均する。
-- 一覧から販売状態・売れた日時を取得しないため、新規に取得した結果には `sold`・`bought_date` が保存されない。サムネイルはイオシスの一覧の画像URL、メルカリは出品IDから組み立てたURLを保存する。実データだけでは各日の購入件数は0件になる。集計は `bought_date` を入れた検証データで確認する。
+- メルカリは一覧の売り切れ表示と個別ページから販売状態を確認し、売れた日は相対表示から日単位で推定する。イオシスは一覧にある出品を販売中とし、売れた日は取得しない。サムネイルはイオシスの一覧の画像URL、メルカリは出品IDから組み立てたURLを保存する。
 
 ## 取得方式と制限
 
@@ -61,4 +61,4 @@ worktreeの接続先はルートから `just url` で確認する。言語ツー
 - backend対象検証: `docker compose exec backend bundle exec rspec spec/requests/product_crawl_settings_spec.rb spec/requests/product_aggregation_settings_spec.rb spec/services/product_crawl_settings spec/services/product_aggregation_settings spec/services/product_monitoring`
 - frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/product-monitoring`。
 
-残作業は販売状態・売れた日時の取得、画面設計の未決事項。
+残作業は画面設計の未決事項。
