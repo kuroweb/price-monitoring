@@ -40,18 +40,21 @@ const empty = (): ProductCrawlSettingInput => ({
 type Props = {
   onClose: () => void
   setting?: ProductCrawlSetting
+  // 複製では、元の設定値を入れた登録として開く
+  initial?: ProductCrawlSettingInput
 }
 
-// 開くたびに描画し直し、編集対象の値で初期化する
-export default function ProductCrawlSettingFormModal({ onClose, setting }: Props) {
+// 開くたびに描画し直し、編集対象か複製元の値で初期化する
+export default function ProductCrawlSettingFormModal({ onClose, setting, initial }: Props) {
   const router = useRouter()
+  const source = setting ?? initial
   const [input, setInput] = useState<ProductCrawlSettingInput>(() =>
-    setting
-      ? { ...setting, searchUrls: setting.searchUrls.length ? setting.searchUrls : [''] }
+    source
+      ? { ...source, searchUrls: source.searchUrls.length ? source.searchUrls : [''] }
       : empty(),
   )
-  const [required, setRequired] = useState(setting?.requiredKeywords.join(', ') ?? '')
-  const [excluded, setExcluded] = useState(setting?.excludeKeywords.join(', ') ?? '')
+  const [required, setRequired] = useState(source?.requiredKeywords.join(', ') ?? '')
+  const [excluded, setExcluded] = useState(source?.excludeKeywords.join(', ') ?? '')
   const nextKeyRef = useRef(input.searchUrls.length)
   const [rowKeys, setRowKeys] = useState(() => input.searchUrls.map((_, i) => i))
   const [error, setError] = useState('')
