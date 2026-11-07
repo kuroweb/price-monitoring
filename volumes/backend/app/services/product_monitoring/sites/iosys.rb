@@ -85,7 +85,7 @@ module ProductMonitoring
 
         image_url = thumbnail_url(dom)
         { external_id: id, name: name, price: Crawler.parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}",
-          thumbnail_url: image_url }
+          thumbnail_url: image_url, sold: false }
       end
 
       def self.thumbnail_url(dom)

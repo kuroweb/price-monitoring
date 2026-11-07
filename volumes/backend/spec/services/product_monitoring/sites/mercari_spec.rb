@@ -4,13 +4,13 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
   it "extracts actual HTML and preserves the listing URL and query" do
     html = <<~HTML
       <li data-testid="item-cell"><a href="/item/item-1"></a><span data-testid="thumbnail-item-name">Phone</span>
-      <span data-testid="item-tile-price">¥1,200</span></li>
+      <span data-testid="item-tile-price">¥1,200</span><img alt="Phoneのサムネイル 売り切れ"></li>
     HTML
     allow(described_class).to receive(:fetch_mercari_page).and_return(html)
     url = "https://jp.mercari.com/search?q=phone&sort=price"
     result = ProductMonitoring::Crawler.call(params: { search_urls: [url] })
     expect(described_class).to have_received(:fetch_mercari_page).with(URI("https://jp.mercari.com/search?q=phone&sort=price"))
-    expect(result[:results].first).to include(external_id: "item-1", price: 1200,
+    expect(result[:results].first).to include(external_id: "item-1", price: 1200, sold: true,
                                               thumbnail_url: "https://static.mercdn.net/thumb/item/webp/item-1_1.jpg",
                                               product_url: "https://jp.mercari.com/item/item-1")
   end
@@ -75,5 +75,46 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
     result = ProductMonitoring::Crawler.fetch(site: described_class, canonical_url: uri.to_s)
     expect(described_class).to have_received(:fetch).exactly(ProductMonitoring::Crawler::MAX_PAGES_PER_URL).times
     expect(result.size).to eq(ProductMonitoring::Crawler::MAX_PAGES_PER_URL)
+  end
+
+  describe ".fetch_detail" do
+    it "parses a sold listing and its relative date" do
+      html = <<~HTML
+        <script type="application/ld+json">{"@graph":[{"@type":"Product","offers":{"availability":"https://schema.org/SoldOut"}}]}</script>
+        <div data-testid="item-detail-container"><div data-testid="price">100</div>
+        <div aligncontent="start"><svg></svg><span>2日前</span></div>※売り切れのためコメントできません</div>
+        <script>const text = "ページが見つかりませんでした";</script>
+      HTML
+      allow(described_class).to receive(:fetch_mercari_page).and_return(html)
+      expect(described_class.fetch_detail("m123")).to eq(sold: true, bought_date: 2.days.ago.beginning_of_day)
+      expect(described_class).to have_received(:fetch_mercari_page).with(URI("https://jp.mercari.com/item/m123"))
+    end
+
+    it "distinguishes available, deleted, and unknown pages" do
+      allow(described_class).to receive(:fetch_mercari_page).and_return(
+        '<script type="application/ld+json">{"@type":"Product",' \
+        '"offers":{"availability":"https://schema.org/InStock"}}</script>' \
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div>' \
+        "<div>該当する商品は削除されています。 ページが見つかりませんでした ※売り切れのためコメントできません</div></div>",
+        '<div class="merEmptyState">削除</div>', "<html></html>"
+      )
+      expect(described_class.fetch_detail("m123")).to eq(sold: false, bought_date: nil)
+      expect(described_class.fetch_detail("m123")).to eq(deleted: true)
+      expect(described_class.fetch_detail("m123")).to eq({})
+    end
+
+    it "does not guess the state without readable product availability" do
+      allow(described_class).to receive(:fetch_mercari_page).and_return(
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>',
+        '<script type="application/ld+json">invalid</script>' \
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>'
+      )
+      expect(described_class.fetch_detail("m123")).to eq({})
+      expect(described_class.fetch_detail("m123")).to eq({})
+    end
+
+    it "rejects an unsafe external ID" do
+      expect { described_class.fetch_detail("../search") }.to raise_error(ArgumentError)
+    end
   end
 end

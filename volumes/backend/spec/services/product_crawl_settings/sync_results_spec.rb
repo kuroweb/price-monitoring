@@ -47,6 +47,26 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     )
   end
 
+  it "preserves a sold listing and its bought date when the listing says it is available" do
+    bought_date = 2.days.ago.beginning_of_day
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: true,
+                                            bought_date:)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a", sold: false }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload).to have_attributes(sold: true, bought_date:)
+  end
+
+  it "records a sold marker on an existing listing" do
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: false)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a", sold: true }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload.sold).to be true
+  end
+
   it "skips listings without a price while retaining existing rows and accepting zero" do
     existing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", price: 50)
     allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
@@ -57,5 +77,82 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     described_class.call(product_crawl_setting:)
     expect(existing.reload).to have_attributes(name: "Phone old", price: 50)
     expect(product_crawl_setting.product_crawl_results.pluck(:external_id)).to contain_exactly("a", "free")
+  end
+
+  describe ".call detail enqueue" do
+    let(:setting) { create(:product_crawl_setting) }
+    let(:sources) { [{ status: "succeeded" }] }
+    let(:results) { [{ platform: "mercari", external_id: "visible", reasons: [], price: 100, name: "Phone", product_url: "https://jp.mercari.com/item/visible", sold: false }] }
+
+    before do
+      allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources: sources, results: results)
+      allow(ProductCrawlSettings::SyncDetailJob).to receive(:perform_async)
+    end
+
+    it "enqueues missing and undated sold listings, but not visible or iosys listings" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
+                                    updated_at: 4.hours.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "undated", sold: true,
+                                    updated_at: 4.hours.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "iosys", sold: false)
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("missing")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("undated")
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("visible")
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("iosys")
+    end
+
+    it "waits three hours before rechecking missing available listings" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "recent", sold: false,
+                                    updated_at: 2.hours.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "old", sold: false,
+                                    updated_at: 4.hours.ago)
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("recent")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("old")
+    end
+
+    it "waits three hours before rechecking undated sold listings" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "recent", sold: true,
+                                    updated_at: 2.hours.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "old", sold: true,
+                                    updated_at: 4.hours.ago)
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("recent")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("old")
+    end
+
+    it "immediately checks newly discovered and newly sold listings" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "changed", sold: false)
+      %w[new changed].each do |id|
+        results << { platform: "mercari", external_id: id, reasons: [], price: 100, name: "Phone",
+                     product_url: "https://jp.mercari.com/item/#{id}", sold: true }
+      end
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("new")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("changed")
+    end
+
+    it "does not enqueue missing listings when any source fails" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
+                                    updated_at: 4.hours.ago)
+      sources << { status: "failed" }
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async)
+    end
+
+    it "limits detail jobs in oldest order" do
+      stub_const("ProductCrawlSettings::SyncResults::MAX_DETAIL_JOBS", 2)
+      allow(Rails.logger).to receive(:info).and_call_original
+      3.times do |n|
+        create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "m#{n}", sold: false,
+                                      updated_at: (3 - n).days.ago)
+      end
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("m0")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("m1")
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("m2")
+      expect(Rails.logger).to have_received(:info).with("Product crawl detail candidates: setting_id=#{setting.id} candidates=3 enqueued=2")
+    end
   end
 end
