@@ -28,9 +28,20 @@ RSpec.describe ProductCrawlSettings::SyncDetailJob do
     expect(ProductCrawlResult.where(id: [first.id, second.id])).to be_empty
   end
 
-  it "leaves an unknown result unchanged" do
+  it "updates only the timestamps for an unknown result" do
+    first.update!(updated_at: 1.day.ago, bought_date: 2.days.ago)
+    previous = first.reload.attributes
     allow(ProductMonitoring::Sites::Mercari).to receive(:fetch_detail).and_return({})
     described_class.new.perform("m123")
-    expect(first.reload.sold).to be false
+    expect(first.reload.updated_at).to be > previous["updated_at"]
+    expect(first.attributes.except("updated_at")).to eq(previous.except("updated_at"))
+  end
+
+  it "updates only the timestamps after retries are exhausted" do
+    first.update!(updated_at: 1.day.ago, bought_date: 2.days.ago)
+    previous = first.reload.attributes
+    described_class.sidekiq_retries_exhausted_block.call({ "args" => ["m123"] }, StandardError.new)
+    expect(first.reload.updated_at).to be > previous["updated_at"]
+    expect(first.attributes.except("updated_at")).to eq(previous.except("updated_at"))
   end
 end

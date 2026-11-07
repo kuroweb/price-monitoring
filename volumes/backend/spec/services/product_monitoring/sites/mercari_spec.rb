@@ -80,6 +80,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
   describe ".fetch_detail" do
     it "parses a sold listing and its relative date" do
       html = <<~HTML
+        <script type="application/ld+json">{"@graph":[{"@type":"Product","offers":{"availability":"https://schema.org/SoldOut"}}]}</script>
         <div data-testid="item-detail-container"><div data-testid="price">100</div>
         <div aligncontent="start"><svg></svg><span>2日前</span></div>※売り切れのためコメントできません</div>
         <script>const text = "ページが見つかりませんでした";</script>
@@ -91,11 +92,24 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
 
     it "distinguishes available, deleted, and unknown pages" do
       allow(described_class).to receive(:fetch_mercari_page).and_return(
-        '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>',
+        '<script type="application/ld+json">{"@type":"Product",' \
+        '"offers":{"availability":"https://schema.org/InStock"}}</script>' \
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div>' \
+        "<div>該当する商品は削除されています。 ページが見つかりませんでした ※売り切れのためコメントできません</div></div>",
         '<div class="merEmptyState">削除</div>', "<html></html>"
       )
       expect(described_class.fetch_detail("m123")).to eq(sold: false, bought_date: nil)
       expect(described_class.fetch_detail("m123")).to eq(deleted: true)
+      expect(described_class.fetch_detail("m123")).to eq({})
+    end
+
+    it "does not guess the state without readable product availability" do
+      allow(described_class).to receive(:fetch_mercari_page).and_return(
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>',
+        '<script type="application/ld+json">invalid</script>' \
+        '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>'
+      )
+      expect(described_class.fetch_detail("m123")).to eq({})
       expect(described_class.fetch_detail("m123")).to eq({})
     end
 

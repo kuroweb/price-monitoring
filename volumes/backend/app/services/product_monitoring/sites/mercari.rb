@@ -2,7 +2,7 @@ require "nokogiri"
 
 module ProductMonitoring
   module Sites
-    class Mercari
+    class Mercari # rubocop:disable Metrics/ClassLength
       HOST = "jp.mercari.com".freeze
       PATH = %r{\A/search\z}
       PLATFORM = "mercari".freeze
@@ -25,17 +25,41 @@ module ProductMonitoring
         raise ArgumentError, "Invalid external ID" unless external_id.match?(/\A[a-zA-Z0-9_-]+\z/)
 
         page = Nokogiri::HTML(fetch_mercari_page(URI("https://#{HOST}/item/#{external_id}")))
+        sold = detail_sold(page)
         page.css("script, style").remove
         return { deleted: true } if deleted_detail?(page)
         return {} unless page.at_css("[data-testid='item-detail-container']") &&
-                         page.at_css("[data-testid='price']")
+                         page.at_css("[data-testid='price']") && !sold.nil?
 
-        sold = page.text.include?("※売り切れのためコメントできません")
         { sold: sold, bought_date: sold ? detail_bought_date(page) : nil }
       end
 
       def self.deleted_detail?(page)
+        return false if page.at_css("[data-testid='item-detail-container']")
+
         page.at_css(".merEmptyState") || DELETED_TEXTS.any? { |text| page.text.include?(text) }
+      end
+
+      def self.detail_sold(page)
+        states = { "https://schema.org/SoldOut" => true, "https://schema.org/InStock" => false }
+        page.css("script[type='application/ld+json']").each do |script|
+          json_ld_products(script).each do |product|
+            next unless product.is_a?(Hash) && product["@type"] == "Product"
+
+            availability = product["offers"].is_a?(Hash) && product["offers"]["availability"]
+            result = states[availability]
+            return result unless result.nil?
+          end
+        end
+        nil
+      end
+
+      def self.json_ld_products(script)
+        data = JSON.parse(script.text)
+        data = data["@graph"] if data.is_a?(Hash) && data["@graph"].is_a?(Array)
+        data.is_a?(Array) ? data : [data]
+      rescue JSON::ParserError
+        []
       end
 
       def self.detail_bought_date(page)
