@@ -30,7 +30,7 @@ RSpec.describe Crawl::Mercari::SyncProduct::Crawler, type: :service do
         HTML
       end
 
-      it "ページ内容で CrawlResult を返す" do
+      it "ページ内容で CrawlResult を返すこと" do
         result = crawler.call
 
         expect(result).to have_attributes(
@@ -52,7 +52,7 @@ RSpec.describe Crawl::Mercari::SyncProduct::Crawler, type: :service do
         HTML
       end
 
-      it "保存済みの値で deleted=true を返す" do
+      it "保存済みの値で deleted=true を返すこと" do
         result = crawler.call
 
         expect(result).to have_attributes(
@@ -69,7 +69,7 @@ RSpec.describe Crawl::Mercari::SyncProduct::Crawler, type: :service do
     context "ページが見つかりませんでした、と表示される場合" do
       let(:page_html) { "<p>ページが見つかりませんでした</p>" }
 
-      it "deleted=true を返す" do
+      it "deleted=true を返すこと" do
         result = crawler.call
 
         expect(result.deleted).to be(true)

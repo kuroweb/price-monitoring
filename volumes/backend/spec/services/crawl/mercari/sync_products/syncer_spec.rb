@@ -14,7 +14,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Syncer, type: :service do
     context "Datadog が定義されていない場合" do
       before { hide_const("Datadog") if Object.const_defined?(:Datadog) }
 
-      it "NameError にならず Crawler の戻り値を返す" do
+      it "NameError にならず Crawler の戻り値を返すこと" do
         expect(syncer.send(:crawl_results)).to eq(crawl_results)
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Syncer, type: :service do
         allow(tracing_class).to receive(:trace).and_call_original
       end
 
-      it "trace が Syncer.crawl_results の名前で呼ばれブロックの結果を返す" do
+      it "trace が Syncer.crawl_results の名前で呼ばれブロックの結果を返すこと" do
         result = syncer.send(:crawl_results)
 
         expect(tracing_class).to have_received(:trace).with("Crawl::Mercari::SyncProducts::Syncer.crawl_results")
@@ -44,7 +44,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Syncer, type: :service do
       end
     end
 
-    it "2 回呼んでも Crawler.new は 1 回だけである" do
+    it "2 回呼んでも Crawler.new は 1 回だけであること" do
       syncer.send(:crawl_results)
       syncer.send(:crawl_results)
 

@@ -1,12 +1,12 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Sites::BrowserPage do
-  it "許可されたホストの HTTPS URL を受け入れる" do
+  it "許可されたホストの HTTPS URL を受け入れること" do
     page = instance_double(Playwright::Page, url: "https://jp.mercari.com/search?keyword=phone")
     expect { described_class.validate_url(page, host: "jp.mercari.com") }.not_to raise_error
   end
 
-  it "異なるホスト、スキーム、ポート、認証情報を拒否する" do
+  it "異なるホスト、スキーム、ポート、認証情報を拒否すること" do
     [
       "https://example.com/search",
       "http://jp.mercari.com/search",

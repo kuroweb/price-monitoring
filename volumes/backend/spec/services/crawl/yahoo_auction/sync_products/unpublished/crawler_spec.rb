@@ -56,7 +56,7 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
         HTML
       end
 
-      it "終了商品としてパースする" do
+      it "終了商品としてパースすること" do
         travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
           crawl_results = crawler.execute
 
@@ -89,7 +89,7 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
         HTML
       end
 
-      it "終了日時を前年として解釈する" do
+      it "終了日時を前年として解釈すること" do
         travel_to Time.zone.local(2026, 1, 5, 12, 0, 0) do
           crawl_results = crawler.execute
 
@@ -109,7 +109,7 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
         HTML
       end
 
-      it "ProductListHtmlMismatchError を raise する" do
+      it "ProductListHtmlMismatchError を raise すること" do
         expect { crawler.execute }.to raise_error(Crawl::YahooAuction::SyncProducts::ProductListHtmlMismatchError)
       end
     end
@@ -137,7 +137,7 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
         HTML
       end
 
-      it "ProductListHtmlMismatchError を raise する" do
+      it "ProductListHtmlMismatchError を raise すること" do
         travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
           expect { crawler.execute }.to raise_error(Crawl::YahooAuction::SyncProducts::ProductListHtmlMismatchError)
         end
@@ -147,7 +147,7 @@ RSpec.describe Crawl::YahooAuction::SyncProducts::Unpublished::Crawler, type: :s
     context "検索結果が 0 件の場合" do
       let(:page_html) { "<div>条件に一致する商品は見つかりませんでした</div>" }
 
-      it "空の結果を返し例外にならない" do
+      it "空の結果を返し例外にならないこと" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results).to be_empty

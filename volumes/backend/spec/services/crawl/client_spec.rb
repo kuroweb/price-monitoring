@@ -22,44 +22,44 @@ RSpec.describe Crawl::Client, type: :service do
       route
     end
 
-    it "画像とフォントは常にブロックする" do
+    it "画像とフォントは常にブロックすること" do
       expect(route_for(url: "https://example.com/a.png", resource_type: "image")).to have_received(:abort)
       expect(route_for(url: "https://example.com/a.woff2", resource_type: "font")).to have_received(:abort)
     end
 
-    it "指定された場合だけ画像を許可し、ブロックリストは維持する" do
+    it "指定された場合だけ画像を許可し、ブロックリストは維持すること" do
       expect(route_for(url: "https://example.com/a.png", resource_type: "image",
                        allow_images: true)).to have_received(:fallback)
       expect(route_for(url: "https://yads.c.yimg.jp/a.png", resource_type: "image",
                        allow_images: true)).to have_received(:abort)
     end
 
-    it "既定ではスクリプトをブロックしない" do
+    it "既定ではスクリプトをブロックしないこと" do
       expect(route_for(url: "https://example.com/app.js", resource_type: "script")).to have_received(:fallback)
     end
 
-    it "block_scripts: true ではスクリプトをブロックする" do
+    it "block_scripts: true ではスクリプトをブロックすること" do
       expect(route_for(url: "https://example.com/app.js", resource_type: "script",
                        block_scripts: true)).to have_received(:abort)
     end
 
-    it "block_scripts: true でも document はブロックしない" do
+    it "block_scripts: true でも document はブロックしないこと" do
       expect(route_for(url: "https://example.com/", resource_type: "document",
                        block_scripts: true)).to have_received(:fallback)
     end
 
-    it "user_agent を指定すると、そのユーザーエージェントでコンテキストを作る" do
+    it "user_agent を指定すると、そのユーザーエージェントでコンテキストを作ること" do
       route_for(url: "https://example.com/", resource_type: "document", user_agent: "custom-agent")
 
       expect(browser).to have_received(:new_context).with(hash_including(userAgent: "custom-agent"))
     end
 
-    it "ブロックリストにある URL はブロックする" do
+    it "ブロックリストにある URL はブロックすること" do
       expect(route_for(url: "https://analytics.tiktok.com/i18n/pixel/events.js",
                        resource_type: "script")).to have_received(:abort)
     end
 
-    it "指定したホストのスクリプトだけを許可する" do
+    it "指定したホストのスクリプトだけを許可すること" do
       host = "paypayfleamarket.c.yimg.jp"
       expect(route_for(url: "https://#{host}/app.js", resource_type: "script",
                        allow_script_host: host)).to have_received(:fallback)

@@ -212,7 +212,7 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
           let!(:platform_mask) { "janpara.all" }
           let!(:expected_products) { [janpara_product_a, janpara_product_b] }
 
-          it "すべてのJanparaProductの値を返却する" do
+          it "すべてのJanparaProductの値を返却すること" do
             service = described_class.new(
               params: {
                 product_id: product.id,
@@ -245,7 +245,7 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
           let!(:platform_mask) { "iosys.all" }
           let!(:expected_products) { [iosys_product_a, iosys_product_b] }
 
-          it "すべてのIosysProductの値を返却する" do
+          it "すべてのIosysProductの値を返却すること" do
             service = described_class.new(
               params: {
                 product_id: product.id,
@@ -278,7 +278,7 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
           let!(:platform_mask) { "pc_koubou.all" }
           let!(:expected_products) { [pc_koubou_product_a, pc_koubou_product_b] }
 
-          it "すべてのPcKoubouProductの値を返却する" do
+          it "すべてのPcKoubouProductの値を返却すること" do
             service = described_class.new(
               params: {
                 product_id: product.id,
@@ -311,7 +311,7 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
           let!(:platform_mask) { "used_sofmap.all" }
           let!(:expected_products) { [used_sofmap_product_a, used_sofmap_product_b] }
 
-          it "すべてのUsedSofmapProductの値を返却する" do
+          it "すべてのUsedSofmapProductの値を返却すること" do
             service = described_class.new(
               params: {
                 product_id: product.id,

@@ -5,7 +5,7 @@ RSpec.describe ProductMonitoring::AggregationJob do
 
   before { allow(ProductMonitoring::CalculateAggregationResults).to receive(:call) }
 
-  it "今日を含む直近 30 日を集計する" do
+  it "今日を含む直近 30 日を集計すること" do
     described_class.new.perform(setting.id)
 
     expect(ProductMonitoring::CalculateAggregationResults).to have_received(:call).with(
@@ -15,7 +15,7 @@ RSpec.describe ProductMonitoring::AggregationJob do
     )
   end
 
-  it "削除された設定をスキップする" do
+  it "削除された設定をスキップすること" do
     id = setting.id
     setting.destroy!
     described_class.new.perform(id)

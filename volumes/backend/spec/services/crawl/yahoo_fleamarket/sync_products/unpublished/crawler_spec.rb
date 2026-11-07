@@ -49,7 +49,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
         HTML
       end
 
-      it "published=false と落札日時を返す" do
+      it "published=false と落札日時を返すこと" do
         travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
           crawl_results = crawler.execute
 
@@ -81,7 +81,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
         HTML
       end
 
-      it "bought_date を 1 年戻した日時にする" do
+      it "bought_date を 1 年戻した日時にすること" do
         travel_to Time.zone.local(2027, 1, 2, 12, 0, 0) do
           crawl_results = crawler.execute
 
@@ -93,7 +93,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div class="Notice__wandQuery">見つかりませんでした</div>' }
 
-      it "空の結果を返し例外にならない" do
+      it "空の結果を返し例外にならないこと" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results).to be_empty
@@ -135,7 +135,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
         )
       end
 
-      it "2 ページ分を取得する" do
+      it "2 ページ分を取得すること" do
         travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
           crawl_results = crawler.execute
 
@@ -161,7 +161,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
         HTML
       end
 
-      it "CrawlResults の検証エラーを含む StandardError を raise する" do
+      it "CrawlResults の検証エラーを含む StandardError を raise すること" do
         travel_to Time.zone.local(2026, 11, 3, 12, 0, 0) do
           expect { crawler.execute }.to raise_error(StandardError, /CrawlResult 1:.*Seller/)
         end
@@ -184,7 +184,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
         HTML
       end
 
-      it "bought_date 欠落で StandardError を raise する" do
+      it "bought_date 欠落で StandardError を raise すること" do
         expect { crawler.execute }.to raise_error(StandardError, /CrawlResult 1:.*Bought date/)
       end
     end
@@ -207,7 +207,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Unpublished::Crawler, type:
         allow(Retryable).to receive(:retryable).and_yield
       end
 
-      it "ListStructureChanged を raise する" do
+      it "ListStructureChanged を raise すること" do
         expect { crawler.execute }.to raise_error(Crawl::YahooFleamarket::ListStructureChanged)
       end
     end

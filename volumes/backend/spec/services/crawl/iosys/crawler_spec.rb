@@ -46,7 +46,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
         HTML
       end
 
-      it "商品情報を返し、DOM 読み込み完了では待たない" do
+      it "商品情報を返し、DOM 読み込み完了では待たないこと" do
         crawl_results = crawler.call
 
         expect(crawl_results.results.size).to eq(1)
@@ -64,7 +64,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div id="empty">該当する商品が見つかりませんでした</div>' }
 
-      it "空の結果を返し例外にならない" do
+      it "空の結果を返し例外にならないこと" do
         crawl_results = crawler.call
 
         expect(crawl_results.results).to be_empty
@@ -81,7 +81,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
         )
       end
 
-      it "例外にせず商品を返す" do
+      it "例外にせず商品を返すこと" do
         crawl_results = crawler.call
 
         expect(crawl_results.results.size).to eq(1)
@@ -91,7 +91,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
     context "空結果の要素も商品も無い場合" do
       let(:page_html) { "<html><body></body></html>" }
 
-      it "接続を引き直して再試行したあと例外になる" do
+      it "接続を引き直して再試行したあと例外になること" do
         expect { crawler.call }.to raise_error(
           StandardError,
           "Iosys search page has neither #empty nor item results"
@@ -106,7 +106,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
 
       before { page.response_status = 403 }
 
-      it "接続を引き直して再試行したあと例外になる" do
+      it "接続を引き直して再試行したあと例外になること" do
         expect { crawler.call }.to raise_error(
           StandardError,
           "Iosys search page returned HTTP 403"
@@ -135,7 +135,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
         )
       end
 
-      it "別の接続で商品を返す" do
+      it "別の接続で商品を返すこと" do
         crawl_results = crawler.call
 
         expect(crawl_results.results.size).to eq(1)
@@ -164,7 +164,7 @@ RSpec.describe Crawl::Iosys::Crawler, type: :service do
         end
       end
 
-      it "同じページの商品を重複させずに返す" do
+      it "同じページの商品を重複させずに返すこと" do
         crawl_results = crawler.call
 
         expect(page.goto_urls.size).to eq(2)

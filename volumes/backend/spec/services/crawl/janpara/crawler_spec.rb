@@ -26,7 +26,7 @@ RSpec.describe Crawl::Janpara::Crawler, type: :service do
         HTML
       end
 
-      it "商品情報を返す" do
+      it "商品情報を返すこと" do
         crawl_results = crawler.call
 
         expect(crawl_results.results.first).to have_attributes(
@@ -37,7 +37,7 @@ RSpec.describe Crawl::Janpara::Crawler, type: :service do
         )
       end
 
-      it "WAF に拒否されないよう、じゃんぱら用の User-Agent で接続する" do
+      it "WAF に拒否されないよう、じゃんぱら用の User-Agent で接続すること" do
         crawler.call
 
         expect(Crawl::Client).to have_received(:execute)
@@ -48,7 +48,7 @@ RSpec.describe Crawl::Janpara::Crawler, type: :service do
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div class="sorry">該当する商品がありません</div>' }
 
-      it "空の結果を返し例外にならない" do
+      it "空の結果を返し例外にならないこと" do
         expect(crawler.call.results).to be_empty
       end
     end

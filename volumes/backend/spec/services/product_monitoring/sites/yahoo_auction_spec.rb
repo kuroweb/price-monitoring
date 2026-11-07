@@ -12,7 +12,7 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     HTML
   end
 
-  it "描画された検索結果を待って出品を抽出する" do
+  it "描画された検索結果を待って出品を抽出すること" do
     uri = URI("https://auctions.yahoo.co.jp/search/search?p=ipad")
     html = <<~HTML
       <li><div><a href="https://auctions.yahoo.co.jp/jp/auction/a123" class="wb_break-all">iPad</a>
@@ -32,7 +32,7 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     expect(next_uri).to be_nil
   end
 
-  it "検索結果を待った後の別ホストへのリダイレクトを拒否する" do
+  it "検索結果を待った後の別ホストへのリダイレクトを拒否すること" do
     uri = URI("https://auctions.yahoo.co.jp/search/search?p=ipad")
     page = instance_double(Playwright::Page, content: "<html></html>")
     allow(page).to receive(:url).and_return(uri.to_s, "https://example.com/")
@@ -44,7 +44,7 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     expect(page).to have_received(:wait_for_function).with(described_class::LIST_READY)
   end
 
-  it "開催中の価格と終了済みの売却日時を読み取る" do
+  it "開催中の価格と終了済みの売却日時を読み取ること" do
     travel_to Time.zone.parse("2026-11-07 10:00") do
       active = described_class.listing(item("現在1,200円 即決2,000円"), closed: false)
       closed = described_class.listing(item("落札1,500円"), closed: true)
@@ -56,11 +56,11 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     end
   end
 
-  it "即決価格のみの場合は現在価格として扱う" do
+  it "即決価格のみの場合は現在価格として扱うこと" do
     expect(described_class.listing(item("即決2,000円"), closed: false)).to include(price: 2000, buyout_price: nil)
   end
 
-  it "終了日時を取得できない場合は残り時間を使う" do
+  it "終了日時を取得できない場合は残り時間を使うこと" do
     travel_to Time.zone.parse("2026-11-07 10:00") do
       node = item("現在1,200円")
       node.at_css("span").content = "1時間2分3秒"
@@ -68,14 +68,14 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     end
   end
 
-  it "検索結果が空なら結果を返さず認識できないページを拒否する" do
+  it "検索結果が空なら結果を返さず認識できないページを拒否すること" do
     uri = URI("https://auctions.yahoo.co.jp/search/search?p=ipad")
     expect(described_class.page_results(uri, Nokogiri::HTML('<div class="Notice__wandQuery"></div>'))).to eq([[], nil])
     expect { described_class.page_results(uri, Nokogiri::HTML("<div>unexpected</div>")) }
       .to raise_error("Search page has no extractable listings")
   end
 
-  it "既存クローラーのオークション限定ページ送りを強制しつつ検索フィルターを保持する" do
+  it "既存クローラーのオークション限定ページ送りを強制しつつ検索フィルターを保持すること" do
     uri = described_class.search_uri(URI("https://auctions.yahoo.co.jp/search/search?p=ipad&n=50&abatch=3"))
     expect(URI.decode_www_form(uri.query).to_h).to include("p" => "ipad", "n" => "100", "abatch" => "1,2",
                                                            "mode" => "2")
@@ -83,7 +83,7 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     expect(URI.decode_www_form(described_class.next_url(uri, page).query).to_h).to include("b" => "101", "p" => "ipad")
   end
 
-  it "想定外の最終ホストと過大な応答を拒否する" do
+  it "想定外の最終ホストと過大な応答を拒否すること" do
     page = instance_double(Playwright::Page, url: "https://example.com/", content: "")
     expect { described_class.validate_page(page) }.to raise_error(/Unexpected page URL/)
     allow(page).to receive_messages(url: "https://auctions.yahoo.co.jp/search/search",

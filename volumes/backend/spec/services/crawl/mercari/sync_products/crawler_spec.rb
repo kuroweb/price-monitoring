@@ -59,7 +59,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         HTML
       end
 
-      it "出品中と売り切れだけが順序どおり返る" do
+      it "出品中と売り切れだけが順序どおり返ること" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results.size).to eq(2)
@@ -79,7 +79,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         )
       end
 
-      it "1 ページ分だけ goto する" do
+      it "1 ページ分だけ goto すること" do
         crawler.execute
 
         expect(page.goto_urls.size).to eq(1)
@@ -97,14 +97,14 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         HTML
       end
 
-      it "1 ページ目は URL を開く" do
+      it "1 ページ目は URL を開くこと" do
         crawler.open_page(page, 0, retried: false)
 
         expect(page.goto_urls).to eq(["https://jp.mercari.com/search?page=0"])
         expect(page.clicks).to be_empty
       end
 
-      it "2 ページ目以降は次へをクリックし、先頭商品が変わるまで待つ" do
+      it "2 ページ目以降は次へをクリックし、先頭商品が変わるまで待つこと" do
         crawler.open_page(page, 1, retried: false)
 
         expect(page.goto_urls).to be_empty
@@ -112,7 +112,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         expect(page.wait_for_function_calls.first.last).to include(arg: "/item/m111")
       end
 
-      it "リトライ時は URL を開き直す" do
+      it "リトライ時は URL を開き直すこと" do
         crawler.open_page(page, 2, retried: true)
 
         expect(page.goto_urls.size).to eq(1)
@@ -123,7 +123,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div class="merEmptyState">見つかりませんでした</div>' }
 
-      it "空の結果を返し例外にならない" do
+      it "空の結果を返し例外にならないこと" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results).to be_empty
@@ -146,7 +146,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         )
       end
 
-      it "CrawlResults の検証エラーを含む StandardError を raise する" do
+      it "CrawlResults の検証エラーを含む StandardError を raise すること" do
         expect { crawler.execute }.to raise_error(StandardError, /CrawlResult 1:/)
       end
     end

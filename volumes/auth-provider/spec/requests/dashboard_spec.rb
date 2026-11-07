@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "ダッシュボード", type: :request do
   describe "GET /" do
     context "ユーザーが認証されていないとき" do
-      it "ログインページにリダイレクトする" do
+      it "ログインページにリダイレクトすること" do
         get root_path
 
         expect(response).to redirect_to(new_user_session_path)
@@ -17,37 +17,37 @@ RSpec.describe "ダッシュボード", type: :request do
         sign_in user
       end
 
-      it "成功レスポンスを返す" do
+      it "成功レスポンスを返すこと" do
         get root_path
 
         expect(response).to have_http_status(:success)
       end
 
-      it "ユーザー名を表示する" do
+      it "ユーザー名を表示すること" do
         get root_path
 
         expect(response.body).to include("Test User")
       end
 
-      it "メールアドレスを表示する" do
+      it "メールアドレスを表示すること" do
         get root_path
 
         expect(response.body).to include("test@example.com")
       end
 
-      it "プロフィール編集リンクを表示する" do
+      it "プロフィール編集リンクを表示すること" do
         get root_path
 
         expect(response.body).to include("プロフィール編集")
       end
 
-      it "ログアウトボタンを表示する" do
+      it "ログアウトボタンを表示すること" do
         get root_path
 
         expect(response.body).to include("ログアウト")
       end
 
-      it "連携アプリケーションがない場合はその旨を表示する" do
+      it "連携アプリケーションがない場合はその旨を表示すること" do
         get root_path
 
         expect(response.body).to include("連携しているアプリケーションはありません")
@@ -68,7 +68,7 @@ RSpec.describe "ダッシュボード", type: :request do
         )
       end
 
-      it "連携アプリケーション名を表示する" do
+      it "連携アプリケーション名を表示すること" do
         get root_path
 
         expect(response.body).to include("Test App")

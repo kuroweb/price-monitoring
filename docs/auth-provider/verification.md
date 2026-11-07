@@ -49,4 +49,4 @@ worktree では [ローカル開発ガイドの Orca の worktree](../developmen
 
 ## テスト方針
 
-- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。`it` は振る舞いを言い切り、`context` は「〜とき」「〜場合」で書く。
+- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。`it` は振る舞いを「〜こと」で終え、`context` は「〜とき」「〜場合」で書く。

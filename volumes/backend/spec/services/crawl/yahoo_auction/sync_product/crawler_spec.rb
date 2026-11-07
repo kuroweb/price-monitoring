@@ -52,7 +52,7 @@ RSpec.describe Crawl::YahooAuction::SyncProduct::Crawler, type: :service do
         HTML
       end
 
-      it "JSON から出品中商品としてパースする" do
+      it "JSON から出品中商品としてパースすること" do
         crawl_result = described_class.call(yahoo_auction_product:)
 
         expect(crawl_result).to have_attributes(
@@ -78,7 +78,7 @@ RSpec.describe Crawl::YahooAuction::SyncProduct::Crawler, type: :service do
         HTML
       end
 
-      it "deletable な結果を返す" do
+      it "deletable な結果を返すこと" do
         crawl_result = described_class.call(yahoo_auction_product:)
 
         expect(crawl_result.deletable).to be(true)
