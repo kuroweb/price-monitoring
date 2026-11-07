@@ -12,6 +12,38 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     HTML
   end
 
+  it "waits for the rendered search results and extracts listings" do
+    uri = URI("https://auctions.yahoo.co.jp/search/search?p=ipad")
+    html = <<~HTML
+      <li><div><a href="https://auctions.yahoo.co.jp/jp/auction/a123" class="wb_break-all">iPad</a>
+      <a href="/seller/seller1">seller</a><div class="lg:grid-tc_1fr_160px">現在1,200円</div></div></li>
+    HTML
+    page = instance_double(Playwright::Page, url: uri.to_s)
+    allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))
+    allow(page).to receive(:content).and_return("<html></html>", html)
+    allow(page).to receive(:wait_for_function)
+    allow(Crawl::Client).to receive(:execute).with(allow_images: true).and_yield(page)
+
+    results, next_uri = described_class.fetch(uri)
+
+    expect(page).to have_received(:goto).with(described_class.search_uri(uri).to_s)
+    expect(page).to have_received(:wait_for_function).with(described_class::LIST_READY)
+    expect(results).to contain_exactly(include(external_id: "a123", price: 1200))
+    expect(next_uri).to be_nil
+  end
+
+  it "rejects a redirect to another host after waiting for results" do
+    uri = URI("https://auctions.yahoo.co.jp/search/search?p=ipad")
+    page = instance_double(Playwright::Page, content: "<html></html>")
+    allow(page).to receive(:url).and_return(uri.to_s, "https://example.com/")
+    allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))
+    allow(page).to receive(:wait_for_function)
+    allow(Crawl::Client).to receive(:execute).with(allow_images: true).and_yield(page)
+
+    expect { described_class.fetch(uri) }.to raise_error(/Unexpected page URL/)
+    expect(page).to have_received(:wait_for_function).with(described_class::LIST_READY)
+  end
+
   it "reads active prices and closed sale dates" do
     travel_to Time.zone.parse("2026-11-07 10:00") do
       active = described_class.listing(item("現在1,200円 即決2,000円"), closed: false)
