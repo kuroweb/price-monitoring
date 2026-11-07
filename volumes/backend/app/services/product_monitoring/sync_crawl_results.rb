@@ -1,8 +1,6 @@
 module ProductMonitoring
   # 保存済みの条件で検索結果URLを取得し、採用した出品を商品計測結果に保存する
   class SyncCrawlResults
-    FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
-
     def self.call(...)
       new(...).call
     end
@@ -33,7 +31,8 @@ module ProductMonitoring
     end
 
     def filter_params
-      product_crawl_setting.attributes.symbolize_keys.slice(*FILTER_KEYS)
+      # 保存時と削除時で条件の項目を食い違わせないため、削除側の定義を使う
+      product_crawl_setting.attributes.symbolize_keys.slice(*CleanseCrawlResults::FILTER_KEYS)
     end
 
     def crawl_params
