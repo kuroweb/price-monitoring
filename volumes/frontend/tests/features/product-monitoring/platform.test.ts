@@ -9,3 +9,10 @@ describe('ヤフオクのサイト表示', () => {
     expect(platformName('yahoo_auction')).toBe('ヤフオク')
   })
 })
+
+describe('じゃんぱらのサイト表示', () => {
+  it('検索 URL と出品元を判定する', () => {
+    expect(searchUrlPlatform('https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad')).toBe('janpara')
+    expect(platformName('janpara')).toBe('じゃんぱら')
+  })
+})

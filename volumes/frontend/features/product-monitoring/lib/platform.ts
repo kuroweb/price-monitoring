@@ -12,6 +12,7 @@ export const platformName = (platform: string | null) =>
 const searchUrlHosts: Record<string, string> = {
   'jp.mercari.com': 'mercari',
   'iosys.co.jp': 'iosys',
+  'www.janpara.co.jp': 'janpara',
   'paypayfleamarket.yahoo.co.jp': 'yahoo_fleamarket',
   'auctions.yahoo.co.jp': 'yahoo_auction',
 }
