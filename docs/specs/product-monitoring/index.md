@@ -108,7 +108,7 @@ erDiagram
 | --- | --- | --- | --- | --- |
 | `id` | bigint | NO | | 主キー |
 | `product_crawl_setting_id` | bigint | NO | | 収集元の `product_crawl_settings.id` |
-| `platform` | string | NO | | 出品元のサイト。`mercari`・`yahoo_auction`・`yahoo_fleamarket`・`iosys`・`janpara`・`pc_koubou`・`used_sofmap` など。表示とサイトごとの絞り込みに使う |
+| `platform` | string | NO | | 出品元のサイト。`mercari`・`yahoo_auction`・`yahoo_fleamarket`・`iosys`・`janpara`。表示とサイトごとの絞り込みに使う |
 | `external_id` | string | NO | | 出品ID。サイトをまたいでも重複しない |
 | `name` | string | NO | | 出品名 |
 | `product_url` | text | NO | | 出品ページのURL。クローラーが一覧ページのリンクから保存する |
