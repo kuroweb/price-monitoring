@@ -86,6 +86,7 @@ RSpec.describe "Product crawl results", type: :request do
     get "/api/v1/product_crawl_results", params: { excluded: true }
     expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([excluded.id])
   end
+
   it "lists results across crawl settings" do
     first = create(:product_crawl_result)
     second = create(:product_crawl_result)

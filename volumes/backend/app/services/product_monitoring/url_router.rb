@@ -18,10 +18,8 @@ module ProductMonitoring
       validate_uri(uri)
       target = SITES.find { |site| uri.host&.downcase == site::HOST }
       raise ArgumentError, "URL host is unsupported" unless target
-      raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target::PATH)
-      raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
 
-      target.validate_query(uri)
+      validate_target(uri, target)
 
       { platform: target::PLATFORM, canonical_url: uri.to_s, site: target }
     rescue URI::InvalidURIError
@@ -31,6 +29,13 @@ module ProductMonitoring
     private
 
     attr_reader :url
+
+    def validate_target(uri, target)
+      raise ArgumentError, "URL path is unsupported" unless uri.path.match?(target::PATH)
+      raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
+
+      target.validate_query(uri)
+    end
 
     def validate_url
       return if url.is_a?(String) && url.bytesize <= 2048 && !url.match?(/[\x00-\x20\x7f]/)

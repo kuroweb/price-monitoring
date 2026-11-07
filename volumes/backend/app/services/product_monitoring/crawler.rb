@@ -35,18 +35,31 @@ module ProductMonitoring
     end
 
     def crawl_target(url, target)
+      records = fetch_with_deadline(target)
+      store_records(records, target[:platform])
+      sources << self.class.source(url, target[:platform], "succeeded", records.size)
+    rescue StandardError => e
+      record_failure(url, target, e)
+    end
+
+    def fetch_with_deadline(target)
       remaining = deadline - Process.clock_gettime(Process::CLOCK_MONOTONIC)
       raise Timeout::Error if remaining <= 0
 
-      records = Timeout.timeout([remaining, TIMEOUT_SECONDS].min) { self.class.fetch(target) }
-      records.each { |record| by_key[record[:external_id]] ||= record.merge(platform: target[:platform]) }
-      sources << self.class.source(url, target[:platform], "succeeded", records.size)
-    rescue StandardError => e
-      Rails.logger.warn("Crawl failed for #{url.split('?', 2).first}: #{e.class}: #{e.message}")
+      Timeout.timeout([remaining, TIMEOUT_SECONDS].min) { self.class.fetch(target) }
+    end
+
+    def record_failure(url, target, error)
+      Rails.logger.warn("Crawl failed for #{url.split('?', 2).first}: #{error.class}: #{error.message}")
       sources << self.class.source(url, target[:platform], "failed", 0)
     end
 
-    private :params, :sources, :by_key, :deadline, :crawl_url, :crawl_target
+    def store_records(records, platform)
+      records.each { |record| by_key[record[:external_id]] ||= record.merge(platform: platform) }
+    end
+
+    private :params, :sources, :by_key, :deadline, :crawl_url, :crawl_target, :store_records, :fetch_with_deadline,
+            :record_failure
 
     def self.fetch(target)
       uri = URI.parse(target[:canonical_url])

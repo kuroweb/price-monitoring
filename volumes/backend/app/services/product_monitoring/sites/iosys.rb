@@ -71,17 +71,27 @@ module ProductMonitoring
 
       def self.iosys_results(page)
         Crawler.listing_nodes(page, "li.item").filter_map do |dom|
-          id = dom.at_css("a")&.[]("href")&.match(%r{/items/([^?#]+)})&.[](1)
+          href = dom.at_css("a")&.[]("href")
+          id = href&.match(%r{/items/([^?#]+)})&.[](1)
           next unless id
 
-          name = dom.at_css(".name")&.text.to_s.strip
-          raise "Listing name is missing" if name.empty?
-
-          image = dom.at_css("img")
-          image_url = image&.[]("data-src").presence || image&.[]("src")
-          { external_id: id, name: name, price: Crawler.parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}",
-            thumbnail_url: image_url.present? ? URI.join("https://iosys.co.jp", image_url).to_s : nil }
+          iosys_listing(dom, id)
         end
+      end
+
+      def self.iosys_listing(dom, id)
+        name = dom.at_css(".name")&.text.to_s.strip
+        raise "Listing name is missing" if name.empty?
+
+        image_url = thumbnail_url(dom)
+        { external_id: id, name: name, price: Crawler.parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}",
+          thumbnail_url: image_url }
+      end
+
+      def self.thumbnail_url(dom)
+        image = dom.at_css("img")
+        image_url = image&.[]("data-src").presence || image&.[]("src")
+        image_url.present? ? URI.join("https://iosys.co.jp", image_url).to_s : nil
       end
     end
   end

@@ -49,14 +49,18 @@ module ProductMonitoring
           id = href&.match(%r{/item/([^/?]+)})&.[](1)
           next unless id
 
-          name = dom.at_css("[data-testid='thumbnail-item-name']")&.text.to_s.strip
-          raise "Listing name is missing" if name.empty?
-
-          price = Crawler.parse_price(dom.at_css("[data-testid='item-tile-price']")&.text)
-          # 既存のメルカリクローラーと同じく、画像URLは external_id から組み立てる
-          { external_id: id, name: name, price: price, product_url: "https://jp.mercari.com/item/#{id}",
-            thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg" }
+          mercari_listing(dom, id)
         end
+      end
+
+      def self.mercari_listing(dom, id)
+        name = dom.at_css("[data-testid='thumbnail-item-name']")&.text.to_s.strip
+        raise "Listing name is missing" if name.empty?
+
+        price = Crawler.parse_price(dom.at_css("[data-testid='item-tile-price']")&.text)
+        # 既存のメルカリクローラーと同じく、画像URLは external_id から組み立てる
+        { external_id: id, name: name, price: price, product_url: "https://jp.mercari.com/item/#{id}",
+          thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg" }
       end
     end
   end

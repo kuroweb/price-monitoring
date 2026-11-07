@@ -23,8 +23,10 @@ module ProductMonitoring
     def price_reasons
       reasons = []
       price = item[:price]
-      reasons << "below_min_price" if params[:min_price] && (price.nil? || price < params[:min_price].to_i)
-      reasons << "above_max_price" if params[:max_price] && (price.nil? || price > params[:max_price].to_i)
+      min = params[:min_price]
+      max = params[:max_price]
+      reasons << "below_min_price" if min && (price.nil? || price < min.to_i)
+      reasons << "above_max_price" if max && (price.nil? || price > max.to_i)
       reasons
     end
 

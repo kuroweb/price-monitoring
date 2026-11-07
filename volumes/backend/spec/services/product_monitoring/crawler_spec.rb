@@ -18,7 +18,8 @@ RSpec.describe ProductMonitoring::Crawler do
                                                          ])
     result = described_class.call(params: {
                                     search_urls: ["https://jp.mercari.com/search?q=x",
-                                                  "https://jp.mercari.com/search?q=y"], min_price: "100", max_price: "100", required_keywords: ["phone"]
+                                                  "https://jp.mercari.com/search?q=y"],
+                                    min_price: "100", max_price: "100", required_keywords: ["phone"]
                                   })
     expect(result[:fetched_count]).to eq(1)
     expect(result[:accepted_count]).to eq(1)
@@ -46,7 +47,8 @@ RSpec.describe ProductMonitoring::Crawler do
     allow(described_class).to receive(:fetch).and_raise(Timeout::Error, "timed out")
     allow(Rails.logger).to receive(:warn)
     result = described_class.call(params: { search_urls: ["https://jp.mercari.com/search?q=secret"] })
-    expect(Rails.logger).to have_received(:warn).with("Crawl failed for https://jp.mercari.com/search: Timeout::Error: timed out")
+    expect(Rails.logger).to have_received(:warn)
+      .with("Crawl failed for https://jp.mercari.com/search: Timeout::Error: timed out")
     expect(result[:sources].first[:error]).to eq("Crawl failed")
   end
 
