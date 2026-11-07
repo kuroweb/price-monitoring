@@ -12,6 +12,61 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     ])
   end
 
+  it "saves auction prices and dates without losing an existing sale" do
+    bought_date = 2.days.ago.change(usec: 0)
+    end_date = 1.day.from_now.change(usec: 0)
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: true,
+                                            bought_date:)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, buyout_price: 200, end_date:,
+        product_url: "https://iosys.co.jp/items/a", sold: false }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload).to have_attributes(sold: true, bought_date:, buyout_price: 200, end_date:)
+  end
+
+  it "records the sale date from a closed auction listing" do
+    bought_date = 2.days.ago.change(usec: 0)
+    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: false,
+                                            buyout_price: 200)
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+      { external_id: "a", name: "Phone blue", price: 100, end_date: bought_date, bought_date:,
+        product_url: "https://iosys.co.jp/items/a", sold: true }
+    ])
+    described_class.call(product_crawl_setting:)
+    expect(listing.reload).to have_attributes(sold: true, bought_date:, end_date: bought_date, buyout_price: 200)
+  end
+
+  it "batches auction price and sale date updates across listings" do
+    dates = Array.new(4) { |n| (2.days.ago + n.minutes).change(usec: 0) }
+    listings = %w[a b c].map do |id|
+      create(:product_crawl_result, product_crawl_setting:, external_id: id, name: "Phone old", sold: false)
+    end
+    listings.first.update!(bought_date: 3.days.ago.change(usec: 0), buyout_price: 300)
+    original_date = listings.first.bought_date
+    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return(
+      %w[a b c d].each_with_index.map do |id, index|
+        { external_id: id, name: "Phone blue", price: 100, buyout_price: (index.zero? ? nil : 200),
+          bought_date: dates[index], end_date: dates[index],
+          product_url: "https://iosys.co.jp/items/#{id}", sold: true }
+      end
+    )
+    statements = []
+    subscriber = lambda do |_name, _start, _finish, _id, payload|
+      statements << payload[:sql] if payload[:sql].match?(/\A(?:UPDATE|INSERT INTO) .*product_crawl_results/i)
+    end
+    ActiveSupport::Notifications.subscribed(subscriber, "sql.active_record") do
+      described_class.call(product_crawl_setting:)
+    end
+    expect(listings.first.reload).to have_attributes(buyout_price: 300, bought_date: original_date)
+    expect(listings[1].reload).to have_attributes(buyout_price: 200, bought_date: dates[1])
+    expect(listings[2].reload).to have_attributes(buyout_price: 200, bought_date: dates[2])
+    expect(product_crawl_setting.product_crawl_results.find_by!(external_id: "d"))
+      .to have_attributes(buyout_price: 200, bought_date: dates[3])
+    expect(statements.count { |sql| sql.match?(/\AINSERT/i) }).to eq(1)
+    expect(statements.count { |sql| sql.match?(/\AUPDATE/i) }).to eq(1)
+  end
+
   it "saves only accepted listings with their platform" do
     described_class.call(product_crawl_setting:)
     results = product_crawl_setting.product_crawl_results

@@ -93,10 +93,21 @@ module ProductCrawlSettings
       results = results.reject { |result| result[:price].nil? }
       return if results.empty?
 
-      rows = results.map { |result| listing_row(result) }
-      ProductCrawlResult.upsert_all(rows, record_timestamps: true,
-                                          update_only: %i[name product_url thumbnail_url price])
+      upsert_listings(results.map { |result| listing_row(result) })
       update_sold(results)
+    end
+
+    def upsert_listings(rows)
+      ProductCrawlResult.upsert_all(rows, record_timestamps: true, on_duplicate: Arel.sql(<<~SQL.squish))
+        updated_at = IF(name <=> VALUES(name) AND product_url <=> VALUES(product_url)
+          AND thumbnail_url <=> VALUES(thumbnail_url) AND price <=> VALUES(price)
+          AND end_date <=> VALUES(end_date) AND buyout_price <=> COALESCE(VALUES(buyout_price), buyout_price),
+          product_crawl_results.updated_at, VALUES(updated_at)),
+        name = VALUES(name), product_url = VALUES(product_url), thumbnail_url = VALUES(thumbnail_url),
+        price = VALUES(price), end_date = VALUES(end_date),
+        buyout_price = COALESCE(VALUES(buyout_price), product_crawl_results.buyout_price),
+        bought_date = COALESCE(product_crawl_results.bought_date, IF(VALUES(sold), VALUES(bought_date), NULL))
+      SQL
     end
 
     def listing_row(result)
@@ -108,7 +119,10 @@ module ProductCrawlSettings
         product_url: result[:product_url],
         thumbnail_url: result[:thumbnail_url],
         price: result[:price],
-        sold: result[:sold]
+        sold: result[:sold],
+        buyout_price: result[:buyout_price],
+        end_date: result[:end_date],
+        bought_date: result[:bought_date]
       }
     end
 

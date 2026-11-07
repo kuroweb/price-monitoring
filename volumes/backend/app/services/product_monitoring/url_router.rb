@@ -2,7 +2,7 @@ require "uri"
 
 module ProductMonitoring
   class UrlRouter
-    SITES = [Sites::Mercari, Sites::Iosys, Sites::YahooFleamarket].freeze
+    SITES = [Sites::Mercari, Sites::Iosys, Sites::YahooFleamarket, Sites::YahooAuction].freeze
 
     def self.detail_site(platform)
       SITES.find { |site| platform == site::PLATFORM && site.respond_to?(:fetch_detail) }

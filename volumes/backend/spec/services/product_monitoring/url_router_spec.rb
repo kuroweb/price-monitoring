@@ -1,6 +1,15 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::UrlRouter do
+  it "routes both auction searches without scheduling detail checks" do
+    %w[search/search closedsearch/closedsearch].each do |path|
+      expect(described_class.call(url: "https://auctions.yahoo.co.jp/#{path}?p=ipad"))
+        .to include(platform: "yahoo_auction", site: ProductMonitoring::Sites::YahooAuction)
+      expect { described_class.call(url: "https://auctions.yahoo.co.jp/#{path}") }.to raise_error(ArgumentError)
+    end
+    expect(described_class.detail_site("yahoo_auction")).to be_nil
+  end
+
   it "accepts Yahoo search paths without a query and rejects invalid paths" do
     url = "https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro"
     expect(described_class.call(url: url)).to include(platform: "yahoo_fleamarket")

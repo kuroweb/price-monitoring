@@ -27,6 +27,13 @@ RSpec.describe Crawl::Client, type: :service do
       expect(route_for(url: "https://example.com/a.woff2", resource_type: "font")).to have_received(:abort)
     end
 
+    it "指定された場合だけ画像を許可し、ブロックリストは維持する" do
+      expect(route_for(url: "https://example.com/a.png", resource_type: "image",
+                       allow_images: true)).to have_received(:fallback)
+      expect(route_for(url: "https://yads.c.yimg.jp/a.png", resource_type: "image",
+                       allow_images: true)).to have_received(:abort)
+    end
+
     it "既定ではスクリプトをブロックしない" do
       expect(route_for(url: "https://example.com/app.js", resource_type: "script")).to have_received(:fallback)
     end
