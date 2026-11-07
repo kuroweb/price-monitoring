@@ -18,7 +18,7 @@ module ProductMonitoring
       newly_sold = details.newly_sold(matched)
       ProductCrawlResult.transaction do
         save_matched(matched)
-        delete_unmatched
+        CleanseCrawlResults.call(product_crawl_setting:)
       end
       details.enqueue(crawled, newly_sold) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
       crawled
@@ -87,14 +87,6 @@ module ProductMonitoring
       scope = product_crawl_setting.product_crawl_results
       scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
-    end
-
-    # 条件の変更で一致しなくなった保存済みの結果を削除する
-    def delete_unmatched
-      ids = ProductCrawlResult.where(product_crawl_setting_id: product_crawl_setting.id).reject do |result|
-        ProductMonitoring::Filter.call(item: result.attributes.symbolize_keys, params: filter_params).empty?
-      end.map(&:id)
-      ProductCrawlResult.where(id: ids).delete_all if ids.any?
     end
   end
 end
