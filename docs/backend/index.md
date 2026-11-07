@@ -18,6 +18,11 @@
 - 非同期実行の入口は `app/sidekiq` に寄せ、実際の処理本体は service に寄せる
 - read 系のレスポンス組み立ては serializer に寄せ、 finder は取得条件の組み立てに絞る
 
+## テスト方針
+
+- RSpec の `describe`、`context`、`it`、`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。
+- `it` は振る舞いを言い切り、`context` は「〜とき」「〜場合」で条件を表す。コード上の識別子や HTTP ステータスはそのまま使ってよい。
+
 ## 置いてよい責務
 
 ### controllers

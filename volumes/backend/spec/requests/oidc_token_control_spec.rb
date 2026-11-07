@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe OidcTokenControl, type: :request do
-  describe "GET /auth/test" do
+  describe "GET /auth/test のリクエスト" do
     let(:oidc_token_endpoint) { "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/token" }
 
     context "ログインしていない場合" do
-      it "正常にレスポンスを返すこと" do
+      it "正常にレスポンスを返す" do
         get "/auth/test"
 
         expect(response).to have_http_status(:ok)
@@ -30,7 +30,7 @@ RSpec.describe OidcTokenControl, type: :request do
             )
         end
 
-        it "正常にレスポンスを返すこと" do
+        it "正常にレスポンスを返す" do
           get "/auth/test"
 
           expect(response).to have_http_status(:ok)
@@ -43,7 +43,7 @@ RSpec.describe OidcTokenControl, type: :request do
             .to_return(status: 401)
         end
 
-        it "再ログインにリダイレクトすること" do
+        it "再ログインにリダイレクトする" do
           get "/auth/test"
 
           expect(response).to have_http_status(:redirect)
@@ -57,7 +57,7 @@ RSpec.describe OidcTokenControl, type: :request do
             .to_timeout
         end
 
-        it "再ログインにリダイレクトすること" do
+        it "再ログインにリダイレクトする" do
           get "/auth/test"
 
           expect(response).to have_http_status(:redirect)
@@ -80,7 +80,7 @@ RSpec.describe OidcTokenControl, type: :request do
             )
         end
 
-        it "正常にレスポンスを返すこと" do
+        it "正常にレスポンスを返す" do
           get "/auth/test"
 
           expect(response).to have_http_status(:ok)

@@ -6,42 +6,42 @@ RSpec.describe ProductFinder, type: :finder do
   let!(:product_c) { create(:product, name: "Product C", created_at: 1.day.ago, updated_at: 1.day.ago) }
 
   describe "#execute" do
-    it "フィルターが適用されていない場合、すべての商品を返すこと" do
+    it "フィルターが適用されていない場合、すべての商品を返す" do
       finder = described_class.new(params: {})
       expect(finder.execute).to contain_exactly(product_a, product_b, product_c)
     end
 
-    it "idでフィルターできること" do
+    it "idでフィルターできる" do
       finder = described_class.new(params: { id: product_a.id })
       expect(finder.execute).to contain_exactly(product_a)
     end
 
-    it "nameでフィルターできること" do
+    it "nameでフィルターできる" do
       finder = described_class.new(params: { name: "Product A" })
       expect(finder.execute).to contain_exactly(product_a)
     end
 
-    it "created_atで降順ソートできること" do
+    it "created_atで降順ソートできる" do
       finder = described_class.new(params: { sort: "created_at", order: "desc" })
       expect(finder.execute).to eq([product_c, product_b, product_a])
     end
 
-    it "created_atで昇順ソートできること" do
+    it "created_atで昇順ソートできる" do
       finder = described_class.new(params: { sort: "created_at", order: "asc" })
       expect(finder.execute).to eq([product_a, product_b, product_c])
     end
 
-    it "updated_atで降順ソートできること" do
+    it "updated_atで降順ソートできる" do
       finder = described_class.new(params: { sort: "updated_at", order: "desc" })
       expect(finder.execute).to eq([product_c, product_b, product_a])
     end
 
-    it "updated_atで昇順ソートできること" do
+    it "updated_atで昇順ソートできる" do
       finder = described_class.new(params: { sort: "updated_at", order: "asc" })
       expect(finder.execute).to eq([product_a, product_b, product_c])
     end
 
-    it "無効なソートまたは順序が指定された場合、デフォルトの順序で商品を返すこと" do
+    it "無効なソートまたは順序が指定された場合、デフォルトの順序で商品を返す" do
       finder = described_class.new(params: { sort: "invalid_column", order: "invalid_order" })
       expect(finder.execute).to eq([product_a, product_b, product_c])
     end

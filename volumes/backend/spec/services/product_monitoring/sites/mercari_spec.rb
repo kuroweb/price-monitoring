@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Sites::Mercari do
-  it "extracts actual HTML and preserves the listing URL and query" do
+  it "実際の HTML を抽出し出品 URL とクエリを保持する" do
     html = <<~HTML
       <li data-testid="item-cell"><a href="/item/item-1"></a><span data-testid="thumbnail-item-name">Phone</span>
       <span data-testid="item-tile-price">¥1,200</span><img alt="Phoneのサムネイル 売り切れ"></li>
@@ -15,7 +15,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
                                               product_url: "https://jp.mercari.com/item/item-1")
   end
 
-  it "renders the Mercari search page with the existing browser client" do
+  it "既存のブラウザクライアントで Mercari の検索ページを描画する" do
     page = instance_double(Playwright::Page, mouse: instance_double(Playwright::Mouse), content: "<html></html>",
                                              url: "https://jp.mercari.com/search?q=phone")
     allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))
@@ -28,7 +28,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
     expect(page.mouse).to have_received(:wheel).exactly(30).times
   end
 
-  it "fails the URL and logs a sanitized warning when redirected to another host" do
+  it "別ホストへのリダイレクト時に URL を失敗扱いにし加工済みの警告を記録する" do
     page = instance_double(Playwright::Page, url: "https://example.com/")
     allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))
     allow(Crawl::Client).to receive(:execute).and_yield(page)
@@ -40,7 +40,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
       .with("Crawl failed for https://jp.mercari.com/search: RuntimeError: Unexpected page URL")
   end
 
-  it "fails the URL when rendered HTML exceeds the size limit" do
+  it "描画済み HTML がサイズ制限を超えると URL を失敗扱いにする" do
     page = instance_double(Playwright::Page, mouse: instance_double(Playwright::Mouse), url: "https://jp.mercari.com/search",
                                              content: "a" * (described_class::MAX_RESPONSE_BYTES + 1))
     allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))
@@ -52,7 +52,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
     expect(result[:sources].first[:status]).to eq("failed")
   end
 
-  it "rejects a failed Mercari browser response" do
+  it "失敗した Mercari のブラウザ応答を拒否する" do
     page = instance_double(Playwright::Page)
     allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 403))
     allow(Crawl::Client).to receive(:execute).and_yield(page)
@@ -61,7 +61,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
       .to raise_error(/Non-success HTTP response/)
   end
 
-  it "follows only an available next page and preserves other query parameters" do
+  it "利用可能な次ページのみをたどり他のクエリパラメータを保持する" do
     uri = URI("https://jp.mercari.com/search?keyword=ipad%20pro&page_token=v1%3A2")
     expect(described_class.next_url(uri, Nokogiri::HTML("<html></html>"))).to be_nil
     next_uri = described_class.next_url(uri, Nokogiri::HTML('<button data-testid="pagination-next-button"></button>'))
@@ -69,7 +69,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
     expect(URI.decode_www_form(next_uri.query).to_h).to include("keyword" => "ipad pro")
   end
 
-  it "stops after the maximum number of pages" do
+  it "最大ページ数に達すると停止する" do
     uri = URI("https://jp.mercari.com/search?keyword=ipad%20pro&page_token=v1%3A2")
     allow(described_class).to receive(:fetch).and_return([[{ external_id: "one" }], uri])
     result = ProductMonitoring::Crawler.fetch(site: described_class, canonical_url: uri.to_s)
@@ -78,7 +78,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
   end
 
   describe ".fetch_detail" do
-    it "parses a sold listing and its relative date" do
+    it "売却済み出品と相対日時を解析する" do
       html = <<~HTML
         <script type="application/ld+json">{"@graph":[{"@type":"Product","offers":{"availability":"https://schema.org/SoldOut"}}]}</script>
         <div data-testid="item-detail-container"><div data-testid="price">100</div>
@@ -90,7 +90,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
       expect(described_class).to have_received(:fetch_mercari_page).with(URI("https://jp.mercari.com/item/m123"))
     end
 
-    it "distinguishes available, deleted, and unknown pages" do
+    it "出品中、削除済み、不明のページを区別する" do
       allow(described_class).to receive(:fetch_mercari_page).and_return(
         '<script type="application/ld+json">{"@type":"Product",' \
         '"offers":{"availability":"https://schema.org/InStock"}}</script>' \
@@ -103,7 +103,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
       expect(described_class.fetch_detail("m123")).to eq({})
     end
 
-    it "does not guess the state without readable product availability" do
+    it "商品の在庫状態を読み取れない場合は状態を推測しない" do
       allow(described_class).to receive(:fetch_mercari_page).and_return(
         '<div data-testid="item-detail-container"><div data-testid="price">100</div></div>',
         '<script type="application/ld+json">invalid</script>' \
@@ -113,7 +113,7 @@ RSpec.describe ProductMonitoring::Sites::Mercari do
       expect(described_class.fetch_detail("m123")).to eq({})
     end
 
-    it "rejects an unsafe external ID" do
+    it "安全でない external ID を拒否する" do
       expect { described_class.fetch_detail("../search") }.to raise_error(ArgumentError)
     end
   end

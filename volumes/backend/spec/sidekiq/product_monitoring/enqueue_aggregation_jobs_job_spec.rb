@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::EnqueueAggregationJobsJob do
-  it "enqueues every setting" do
+  it "すべての設定を投入する" do
     settings = create_list(:product_aggregation_setting, 2)
     allow(ProductMonitoring::AggregationJob).to receive(:perform_bulk)
 

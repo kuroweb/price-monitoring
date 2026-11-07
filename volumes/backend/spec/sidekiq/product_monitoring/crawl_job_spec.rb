@@ -5,24 +5,24 @@ RSpec.describe ProductMonitoring::CrawlJob do
 
   before { allow(ProductMonitoring::SyncCrawlResults).to receive(:call) }
 
-  it "syncs an enabled setting" do
+  it "有効な設定を同期する" do
     described_class.new.perform(setting.id)
     expect(ProductMonitoring::SyncCrawlResults).to have_received(:call).with(product_crawl_setting: setting)
   end
 
-  it "skips a setting disabled after enqueue" do
+  it "投入後に無効化された設定をスキップする" do
     setting.update!(enabled: false)
     described_class.new.perform(setting.id)
     expect(ProductMonitoring::SyncCrawlResults).not_to have_received(:call)
   end
 
-  it "syncs a disabled setting when requested manually" do
+  it "手動で要求された場合は無効な設定を同期する" do
     setting.update!(enabled: false)
     described_class.new.perform(setting.id, true)
     expect(ProductMonitoring::SyncCrawlResults).to have_received(:call).with(product_crawl_setting: setting)
   end
 
-  it "skips a deleted setting" do
+  it "削除された設定をスキップする" do
     id = setting.id
     setting.destroy!
     described_class.new.perform(id)

@@ -10,7 +10,7 @@ RSpec.describe ProductMonitoring::CalculateAggregationResults do
     create(:product_crawl_result, sold: true, bought_date: date.in_time_zone.change(hour: 12), **attributes)
   end
 
-  it "averages matching purchases per day and counts a listing found by several settings once" do
+  it "条件に合う購入を日ごとに平均し複数の設定で見つかった出品を一度だけ数える" do
     bought(external_id: "a", name: "Phone", price: 200)
     bought(external_id: "a", name: "Phone", price: 200)
     bought(external_id: "b", name: "phone case", price: 400)
@@ -28,7 +28,7 @@ RSpec.describe ProductMonitoring::CalculateAggregationResults do
                                                                                            ])
   end
 
-  it "overwrites a day when calculated again" do
+  it "再計算時にその日の結果を上書きする" do
     bought(external_id: "a", name: "Phone", price: 200)
     described_class.call(product_aggregation_setting:, start_date: date, end_date: date)
     bought(external_id: "b", name: "Phone", price: 400)

@@ -59,7 +59,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         HTML
       end
 
-      it "出品中と売り切れだけが順序どおり返ること" do
+      it "出品中と売り切れだけが順序どおり返る" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results.size).to eq(2)
@@ -79,7 +79,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         )
       end
 
-      it "1 ページ分だけ goto すること" do
+      it "1 ページ分だけ goto する" do
         crawler.execute
 
         expect(page.goto_urls.size).to eq(1)
@@ -123,7 +123,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div class="merEmptyState">見つかりませんでした</div>' }
 
-      it "空の結果を返し例外にならないこと" do
+      it "空の結果を返し例外にならない" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results).to be_empty
@@ -146,7 +146,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         )
       end
 
-      it "CrawlResults の検証エラーを含む StandardError を raise すること" do
+      it "CrawlResults の検証エラーを含む StandardError を raise する" do
         expect { crawler.execute }.to raise_error(StandardError, /CrawlResult 1:/)
       end
     end

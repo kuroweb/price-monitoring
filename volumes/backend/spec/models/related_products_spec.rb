@@ -5,7 +5,7 @@ RSpec.describe RelatedProducts, type: :model do
     let!(:related_product_a) { RelatedProduct.new }
     let!(:related_product_b) { RelatedProduct.new }
 
-    it "related_productを追加できること" do
+    it "related_productを追加できる" do
       related_products = described_class.new([related_product_a])
       related_products.add(related_product_b)
 
@@ -17,7 +17,7 @@ RSpec.describe RelatedProducts, type: :model do
     let!(:related_product_a) { RelatedProduct.new }
     let!(:related_product_b) { RelatedProduct.new }
 
-    it "productsがすべてvalidな場合、trueを返却すること" do
+    it "productsがすべてvalidな場合、trueを返却する" do
       allow(related_product_a).to receive(:valid?).and_return(true)
       allow(related_product_b).to receive(:valid?).and_return(true)
       related_products = described_class.new([related_product_a, related_product_b])
@@ -25,7 +25,7 @@ RSpec.describe RelatedProducts, type: :model do
       expect(related_products.valid?).to be(true)
     end
 
-    it "productsにinvalidを含む場合、falseを返却すること" do
+    it "productsにinvalidを含む場合、falseを返却する" do
       allow(related_product_a).to receive(:valid?).and_return(true)
       allow(related_product_b).to receive(:valid?).and_return(false)
       related_products = described_class.new([related_product_a, related_product_b])

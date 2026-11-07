@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe SessionsController, type: :request do
-  describe "DELETE /logout" do
+  describe "DELETE /logout のリクエスト" do
     context "有効なトークンでログインしている場合" do
       login_with_session
 
-      it "アクセストークンとリフレッシュトークンを失効させること" do
+      it "アクセストークンとリフレッシュトークンを失効させる" do
         stub_revoke = stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
                       .with(
                         body: hash_including(
@@ -28,7 +28,7 @@ RSpec.describe SessionsController, type: :request do
         expect(stub_revoke_refresh).to have_been_requested.once
       end
 
-      it "成功メッセージとともに /auth/test にリダイレクトすること" do
+      it "成功メッセージとともに /auth/test にリダイレクトする" do
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_return(status: 200)
 
@@ -42,7 +42,7 @@ RSpec.describe SessionsController, type: :request do
     context "トークン失効が失敗した場合" do
       login_with_session
 
-      it "失効に失敗してもセッションを削除すること" do
+      it "失効に失敗してもセッションを削除する" do
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_return(status: 500, body: "Internal Server Error")
 
@@ -52,7 +52,7 @@ RSpec.describe SessionsController, type: :request do
         expect(flash[:notice]).to eq("Logged out successfully")
       end
 
-      it "ネットワークエラーが発生してもログアウトできること" do
+      it "ネットワークエラーが発生してもログアウトできる" do
         allow(Bugsnag).to receive(:notify)
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_raise(Faraday::ConnectionFailed.new("Connection failed"))
@@ -68,7 +68,7 @@ RSpec.describe SessionsController, type: :request do
     context "リフレッシュトークンなしでログインしている場合" do
       login_with_session(refresh_token: nil)
 
-      it "アクセストークンのみを失効させること" do
+      it "アクセストークンのみを失効させる" do
         stub_revoke = stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
                       .with(
                         body: hash_including(
@@ -84,7 +84,7 @@ RSpec.describe SessionsController, type: :request do
     end
 
     context "ログインしていない場合" do
-      it "トークン失効を試みないこと" do
+      it "トークン失効を試みない" do
         stub_revoke = stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
 
         delete "/logout"
@@ -95,22 +95,22 @@ RSpec.describe SessionsController, type: :request do
     end
   end
 
-  describe "GET /auth/failure" do
-    it "エラーメッセージとともに /auth/test にリダイレクトすること" do
+  describe "GET /auth/failure のリクエスト" do
+    it "エラーメッセージとともに /auth/test にリダイレクトする" do
       get "/auth/failure", params: { message: "invalid_credentials" }
 
       expect(response).to redirect_to("/auth/test")
       expect(flash[:alert]).to eq("Authentication failed: invalid_credentials")
     end
 
-    it "エラーメッセージがない場合はデフォルトメッセージを表示すること" do
+    it "エラーメッセージがない場合はデフォルトメッセージを表示する" do
       get "/auth/failure"
 
       expect(response).to redirect_to("/auth/test")
       expect(flash[:alert]).to eq("Authentication failed: Unknown error")
     end
 
-    it "認証失敗をログに記録すること" do
+    it "認証失敗をログに記録する" do
       allow(Rails.logger).to receive(:error)
 
       get "/auth/failure", params: { message: "test_error" }

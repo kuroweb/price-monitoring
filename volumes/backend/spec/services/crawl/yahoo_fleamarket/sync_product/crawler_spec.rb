@@ -32,7 +32,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProduct::Crawler, type: :service do
         HTML
       end
 
-      it "ページ内容で CrawlResult を返すこと" do
+      it "ページ内容で CrawlResult を返す" do
         result = crawler.call
 
         expect(result).to have_attributes(
@@ -58,7 +58,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProduct::Crawler, type: :service do
         HTML
       end
 
-      it "published=false を返すこと" do
+      it "published=false を返す" do
         result = crawler.call
 
         expect(result.published).to be(false)
@@ -68,7 +68,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProduct::Crawler, type: :service do
     context "商品が存在しない場合" do
       let(:page_html) { "<span>この商品は存在しません</span>" }
 
-      it "deleted=true を返すこと" do
+      it "deleted=true を返す" do
         result = crawler.call
 
         expect(result).to have_attributes(deleted: true, external_id: "z100")

@@ -49,7 +49,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
         HTML
       end
 
-      it "商品リンク内の img を thumbnail_url にすること" do
+      it "商品リンク内の img を thumbnail_url にする" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results.size).to eq(1)
@@ -75,7 +75,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
         HTML
       end
 
-      it "出品中商品だけが順序どおり返ること" do
+      it "出品中商品だけが順序どおり返る" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results.size).to eq(2)
@@ -101,7 +101,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
     context "検索結果が 0 件の場合" do
       let(:page_html) { '<div class="Notice__wandQuery">見つかりませんでした</div>' }
 
-      it "空の結果を返し例外にならないこと" do
+      it "空の結果を返し例外にならない" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results).to be_empty
@@ -143,7 +143,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
         )
       end
 
-      it "2 ページ分を取得すること" do
+      it "2 ページ分を取得する" do
         crawl_results = crawler.execute
 
         expect(crawl_results.results.map(&:external_id)).to eq(%w[z111 z222])
@@ -164,7 +164,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
         HTML
       end
 
-      it "CrawlResults の検証エラーを含む StandardError を raise すること" do
+      it "CrawlResults の検証エラーを含む StandardError を raise する" do
         expect { crawler.execute }.to raise_error(StandardError, /CrawlResult 1:/)
       end
     end
@@ -187,7 +187,7 @@ RSpec.describe Crawl::YahooFleamarket::SyncProducts::Published::Crawler, type: :
         allow(Retryable).to receive(:retryable).and_yield
       end
 
-      it "ListStructureChanged を raise すること" do
+      it "ListStructureChanged を raise する" do
         expect { crawler.execute }.to raise_error(Crawl::YahooFleamarket::ListStructureChanged)
       end
     end

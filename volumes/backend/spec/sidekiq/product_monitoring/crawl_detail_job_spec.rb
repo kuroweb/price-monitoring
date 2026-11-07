@@ -4,7 +4,7 @@ RSpec.describe ProductMonitoring::CrawlDetailJob do
   let!(:second) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
   let!(:first) { create(:product_crawl_result, platform: "mercari", external_id: "m123", sold: false) }
 
-  it "updates only the requested platform for a Yahoo listing" do
+  it "Yahoo の出品について要求されたプラットフォームだけを更新する" do
     yahoo = create(:product_crawl_result, platform: "yahoo_fleamarket", external_id: "m123", sold: false)
     allow(ProductMonitoring::Sites::YahooFleamarket).to receive(:fetch_detail).and_return(sold: true)
     described_class.new.perform("m123", "yahoo_fleamarket")
@@ -12,7 +12,7 @@ RSpec.describe ProductMonitoring::CrawlDetailJob do
     expect(first.reload.sold).to be false
   end
 
-  it "updates all matching rows and preserves an existing bought date" do
+  it "一致するすべての行を更新し既存の購入日を保持する" do
     date = 2.days.ago.beginning_of_day
     first.update!(bought_date: date)
     allow(ProductMonitoring::Sites::Mercari).to receive(:fetch_detail)
@@ -23,20 +23,20 @@ RSpec.describe ProductMonitoring::CrawlDetailJob do
     expect(ProductMonitoring::Sites::Mercari).to have_received(:fetch_detail).once
   end
 
-  it "sets available listings to false" do
+  it "出品中の商品を false にする" do
     first.update!(sold: true)
     allow(ProductMonitoring::Sites::Mercari).to receive(:fetch_detail).and_return(sold: false)
     described_class.new.perform("m123")
     expect(first.reload.sold).to be false
   end
 
-  it "deletes all rows for a deleted listing" do
+  it "削除済み出品のすべての行を削除する" do
     allow(ProductMonitoring::Sites::Mercari).to receive(:fetch_detail).and_return(deleted: true)
     described_class.new.perform("m123")
     expect(ProductCrawlResult.where(id: [first.id, second.id])).to be_empty
   end
 
-  it "updates only the timestamps for an unknown result" do
+  it "不明な結果ではタイムスタンプだけを更新する" do
     first.update!(updated_at: 1.day.ago, bought_date: 2.days.ago)
     previous = first.reload.attributes
     allow(ProductMonitoring::Sites::Mercari).to receive(:fetch_detail).and_return({})
@@ -45,7 +45,7 @@ RSpec.describe ProductMonitoring::CrawlDetailJob do
     expect(first.attributes.except("updated_at")).to eq(previous.except("updated_at"))
   end
 
-  it "updates only the timestamps after retries are exhausted" do
+  it "再試行を使い切った後はタイムスタンプだけを更新する" do
     first.update!(updated_at: 1.day.ago, bought_date: 2.days.ago)
     previous = first.reload.attributes
     described_class.sidekiq_retries_exhausted_block.call({ "args" => ["m123"] }, StandardError.new)
