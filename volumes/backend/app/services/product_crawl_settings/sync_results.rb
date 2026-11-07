@@ -3,6 +3,7 @@ module ProductCrawlSettings
   class SyncResults
     FILTER_KEYS = %i[required_keywords exclude_keywords min_price max_price].freeze
     MAX_DETAIL_JOBS = 50
+    DETAIL_RECHECK_INTERVAL = 3.hours
 
     def self.call(...)
       new(...).call
@@ -28,15 +29,23 @@ module ProductCrawlSettings
 
     def enqueue_details(crawled)
       seen_ids = crawled[:results].select { |result| result[:platform] == "mercari" }.pluck(:external_id)
-      ids = detail_candidates(seen_ids).order(:updated_at).pluck(:external_id).uniq.first(MAX_DETAIL_JOBS)
+      candidates = detail_candidates(seen_ids).order(:updated_at).pluck(:external_id).uniq
+      ids = candidates.first(MAX_DETAIL_JOBS)
+      log_detail_candidates(candidates.size, ids.size)
       ids.each do |external_id|
         ProductCrawlSettings::SyncDetailJob.perform_async(external_id)
       end
     end
 
+    def log_detail_candidates(candidate_count, enqueued_count)
+      Rails.logger.info("Product crawl detail candidates: setting_id=#{product_crawl_setting.id} " \
+                        "candidates=#{candidate_count} enqueued=#{enqueued_count}")
+    end
+
     def detail_candidates(seen_ids)
       scope = product_crawl_setting.product_crawl_results.where(platform: "mercari")
-      missing = scope.where.not(sold: true).or(scope.where(sold: nil)).where.not(external_id: seen_ids)
+      missing = scope.where.not(sold: true).or(scope.where(sold: nil))
+                     .where.not(external_id: seen_ids).where(updated_at: ...DETAIL_RECHECK_INTERVAL.ago)
       undated = scope.where(sold: true, bought_date: nil)
       missing.or(undated)
     end

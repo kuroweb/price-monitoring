@@ -90,7 +90,8 @@ RSpec.describe ProductCrawlSettings::SyncResults do
     end
 
     it "enqueues missing and undated sold listings, but not visible or iosys listings" do
-      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
+                                    updated_at: 4.hours.ago)
       create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "undated", sold: true)
       create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "iosys", sold: false)
       described_class.call(product_crawl_setting: setting)
@@ -100,8 +101,19 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("iosys")
     end
 
+    it "waits three hours before rechecking missing available listings" do
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "recent", sold: false,
+                                    updated_at: 2.hours.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "old", sold: false,
+                                    updated_at: 4.hours.ago)
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("recent")
+      expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("old")
+    end
+
     it "does not enqueue missing listings when any source fails" do
-      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
+                                    updated_at: 4.hours.ago)
       sources << { status: "failed" }
       described_class.call(product_crawl_setting: setting)
       expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async)
@@ -109,6 +121,7 @@ RSpec.describe ProductCrawlSettings::SyncResults do
 
     it "limits detail jobs in oldest order" do
       stub_const("ProductCrawlSettings::SyncResults::MAX_DETAIL_JOBS", 2)
+      allow(Rails.logger).to receive(:info).and_call_original
       3.times do |n|
         create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "m#{n}", sold: false,
                                       updated_at: (3 - n).days.ago)
@@ -117,6 +130,7 @@ RSpec.describe ProductCrawlSettings::SyncResults do
       expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("m0")
       expect(ProductCrawlSettings::SyncDetailJob).to have_received(:perform_async).with("m1")
       expect(ProductCrawlSettings::SyncDetailJob).not_to have_received(:perform_async).with("m2")
+      expect(Rails.logger).to have_received(:info).with("Product crawl detail candidates: setting_id=#{setting.id} candidates=3 enqueued=2")
     end
   end
 end
