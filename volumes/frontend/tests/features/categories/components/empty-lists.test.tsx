@@ -10,7 +10,7 @@ vi.mock('@/features/categories/api/actions', () => ({ getCategories: vi.fn(), ge
 vi.mock('@/features/products/api/actions', () => ({}))
 
 describe('一覧の空状態', () => {
-  it('カテゴリなしの場合は追加を案内する', () => {
+  it('カテゴリなしの場合は追加を案内すること', () => {
     render(
       <NuqsTestingAdapter>
         <CategoriesList structuredCategories={[]} categories={[]} />

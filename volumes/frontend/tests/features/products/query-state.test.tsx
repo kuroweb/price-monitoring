@@ -15,7 +15,7 @@ describe.each([
   { key: 'per', useState: usePerState, initial: 100, selected: 50 },
   { key: 'category_id', useState: useCategoryIdState, initial: -1, selected: 7 },
 ])('数値の検索条件 $key', ({ key, useState, initial, selected }) => {
-  it.each(['', `?${key}=invalid`])('未指定・不正値 %s では初期値を使う', (searchParams) => {
+  it.each(['', `?${key}=invalid`])('未指定・不正値 %s では初期値を使うこと', (searchParams) => {
     const { result } = renderHook(useState, {
       wrapper: ({ children }) => (
         <NuqsTestingAdapter searchParams={searchParams}>{children}</NuqsTestingAdapter>
@@ -24,7 +24,7 @@ describe.each([
     expect(result.current[0]).toBe(initial)
   })
 
-  it('URL の値を読み取り、更新時は他の検索条件を保持してサーバー遷移する', async () => {
+  it('URL の値を読み取り、更新時は他の検索条件を保持してサーバー遷移すること', async () => {
     const onUrlUpdate = vi.fn()
     const { result } = renderHook(useState, {
       wrapper: ({ children }) => (
@@ -56,14 +56,14 @@ describe.each([
   { key: 'sort', useState: useSortState, initial: 'updated_at', selected: 'price' },
   { key: 'status', useState: useStatusState, initial: 'published', selected: 'unpublished' },
 ])('文字列の検索条件 $key', ({ key, useState, initial, selected }) => {
-  it('クエリ未指定では初期値を使う', () => {
+  it('クエリ未指定では初期値を使うこと', () => {
     const { result } = renderHook(useState, {
       wrapper: ({ children }) => <NuqsTestingAdapter>{children}</NuqsTestingAdapter>,
     })
     expect(result.current[0]).toBe(initial)
   })
 
-  it('URL の値を読み取り、初期値へ戻すとそのクエリだけを削除する', async () => {
+  it('URL の値を読み取り、初期値へ戻すとそのクエリだけを削除すること', async () => {
     const onUrlUpdate = vi.fn()
     const { result } = renderHook(useState, {
       wrapper: ({ children }) => (

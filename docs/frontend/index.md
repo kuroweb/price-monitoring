@@ -114,7 +114,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 
 ## テスト方針
 
-- Vitest の `describe`・`it`・`test` の説明文は日本語で書く。関数・コンポーネントを指す `describe` はそのまま使う。`it`・`test` は振る舞いを言い切る
+- Vitest の `describe`・`it`・`test` の説明文は日本語で書く。関数・コンポーネントを指す `describe` はそのまま使う。`it`・`test` は振る舞いを「〜こと」で終える
 - Vitest・React Testing Library・jsdom を使い、関数と同期 component、Client Component の振る舞いを検証する
 - テストは `tests/` 配下に、対象実装と同じディレクトリ構造で `*.test.ts` / `*.test.tsx` として置く。例: `features/products/components/CategoryNavigation.tsx` に対して `tests/features/products/components/CategoryNavigation.test.tsx`
 - `describe` / `it` / `expect` / `vi` は `vitest` から明示的に import する。`@/` エイリアスはアプリと同じ `tsconfig.json` を参照する

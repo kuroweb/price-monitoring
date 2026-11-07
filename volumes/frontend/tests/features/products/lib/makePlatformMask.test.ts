@@ -15,7 +15,7 @@ describe('makePlatformMask', () => {
       'unpublished',
       'yahoo_auction.unpublished,yahoo_fleamarket.unpublished,mercari.unpublished',
     ],
-  ])('%s / %s に対応する検索条件を返す', (platform, status, expected) => {
+  ])('%s / %s に対応する検索条件を返すこと', (platform, status, expected) => {
     expect(makePlatformMask(platform, status)).toBe(expected)
   })
 
@@ -23,7 +23,7 @@ describe('makePlatformMask', () => {
     ['all', 'published'],
     ['unknown', 'published'],
     ['mercari', 'unknown'],
-  ])('%s / %s では公開中の全プラットフォームを検索する', (platform, status) => {
+  ])('%s / %s では公開中の全プラットフォームを検索すること', (platform, status) => {
     expect(makePlatformMask(platform, status)).toBe(
       'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all',
     )

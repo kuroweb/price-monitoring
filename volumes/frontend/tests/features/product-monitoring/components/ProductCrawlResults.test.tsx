@@ -60,7 +60,7 @@ beforeEach(() => {
 })
 
 describe('商品計測結果', () => {
-  it('保存済みの設定を同期し、保存済みの結果を除外する', async () => {
+  it('保存済みの設定を同期し、保存済みの結果を除外すること', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(syncProductCrawlSetting).mockResolvedValue({
       data: {},
@@ -96,7 +96,7 @@ describe('商品計測結果', () => {
 })
 
 describe('商品計測結果の一覧', () => {
-  it('最新の出品だけを表示し、出品を除外して詳細ページへリンクする', async () => {
+  it('最新の出品だけを表示し、出品を除外して詳細ページへリンクすること', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
       data: result,

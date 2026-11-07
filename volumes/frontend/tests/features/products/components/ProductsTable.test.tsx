@@ -67,21 +67,21 @@ afterEach(() => {
 })
 
 describe.each(cases)('$name: 削除', ({ remove, mount, target }) => {
-  it('対象名を確認し、キャンセルなら削除しない', async () => {
+  it('対象名を確認し、キャンセルなら削除しないこと', async () => {
     const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false)
     mount()
     await userEvent.click(screen.getByRole('button', { name: '削除' }))
     expect(confirm).toHaveBeenCalledWith(expect.stringContaining(target))
     expect(remove).not.toHaveBeenCalled()
   })
-  it('確認後は選んだ対象だけを削除する', async () => {
+  it('確認後は選んだ対象だけを削除すること', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(remove).mockResolvedValueOnce({ data: null, error: null, status: 200 })
     mount()
     await userEvent.click(screen.getByRole('button', { name: '削除' }))
     await waitFor(() => expect(remove).toHaveBeenCalledExactlyOnceWith(1))
   })
-  it('処理中の再操作を防ぎ、失敗後に再操作できる', async () => {
+  it('処理中の再操作を防ぎ、失敗後に再操作できること', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     let reject!: (reason: Error) => void
     vi.mocked(remove).mockImplementationOnce(
@@ -102,7 +102,7 @@ describe.each(cases)('$name: 削除', ({ remove, mount, target }) => {
   })
 })
 describe('商品管理の絞り込みと設定', () => {
-  it('初期状態が空なら追加方法を案内する', () => {
+  it('初期状態が空なら追加方法を案内すること', () => {
     render(
       <NuqsTestingAdapter>
         <ProductsTable products={[]} categories={[]} />
@@ -113,7 +113,7 @@ describe('商品管理の絞り込みと設定', () => {
     ).toBeInTheDocument()
     expect(screen.queryByText('条件に一致する計測対象がありません。')).not.toBeInTheDocument()
   })
-  it('検索・カテゴリ・計測状態を組み合わせ、リセットで全件に戻る', async () => {
+  it('検索・カテゴリ・計測状態を組み合わせ、リセットで全件に戻ること', async () => {
     const user = userEvent.setup()
     renderProducts()
     await user.type(screen.getByRole('textbox', { name: '管理コード検索' }), 'macbook')
@@ -127,7 +127,7 @@ describe('商品管理の絞り込みと設定', () => {
     await user.click(screen.getByRole('button', { name: '絞り込みをリセット' }))
     expect(screen.getByRole('status')).toHaveTextContent('3件 / 全3件')
   })
-  it('操作メニューから対象の計測設定を開く', async () => {
+  it('操作メニューから対象の計測設定を開くこと', async () => {
     renderProducts()
     await userEvent.click(screen.getByRole('button', { name: 'MacBookの操作' }))
     await userEvent.click(screen.getAllByRole('button', { name: '計測設定' })[0])

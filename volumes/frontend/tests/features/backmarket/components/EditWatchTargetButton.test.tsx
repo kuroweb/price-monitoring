@@ -20,7 +20,7 @@ const target: BackmarketWatchTarget = {
 }
 
 describe('EditWatchTargetButton', () => {
-  it('結果画面から計測対象の編集モーダルを開き、保存すると閉じる', async () => {
+  it('結果画面から計測対象の編集モーダルを開き、保存すると閉じること', async () => {
     const user = userEvent.setup()
     vi.mocked(updateBackmarketWatchTarget).mockResolvedValue({
       data: null,

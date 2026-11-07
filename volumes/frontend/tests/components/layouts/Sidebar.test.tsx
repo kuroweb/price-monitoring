@@ -7,7 +7,7 @@ import Sidebar from '@/components/layouts/Sidebar'
 vi.mock('next/navigation', () => ({ usePathname: () => '/products/2' }))
 
 describe('Sidebar', () => {
-  it('詳細画面でも最安値一覧を強調し、項目を押すと閉じる', async () => {
+  it('詳細画面でも最安値一覧を強調し、項目を押すと閉じること', async () => {
     const close = vi.fn()
     const user = userEvent.setup()
     render(<Sidebar open setOpen={close} />)

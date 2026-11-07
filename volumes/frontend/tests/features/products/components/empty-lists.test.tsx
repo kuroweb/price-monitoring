@@ -10,7 +10,7 @@ vi.mock('@/features/categories/api/actions', () => ({ getCategories: vi.fn(), ge
 vi.mock('@/features/products/api/actions', () => ({}))
 
 describe('一覧の空状態', () => {
-  it('最安値一覧が空の場合は商品追加やカテゴリ変更を案内する', () => {
+  it('最安値一覧が空の場合は商品追加やカテゴリ変更を案内すること', () => {
     render(
       <NuqsTestingAdapter>
         <ProductPriceList productPrices={[]} products={[]} categories={[]} />
@@ -22,7 +22,7 @@ describe('一覧の空状態', () => {
       ),
     ).toBeInTheDocument()
   })
-  it('商品の価格が未取得の場合は対象名と価格情報待ちを表示する', () => {
+  it('商品の価格が未取得の場合は対象名と価格情報待ちを表示すること', () => {
     render(
       <NuqsTestingAdapter>
         <ProductPriceList

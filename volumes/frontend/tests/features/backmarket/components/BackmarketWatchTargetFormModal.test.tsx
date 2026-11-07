@@ -33,7 +33,7 @@ beforeEach(() => {
 })
 
 describe('BackmarketWatchTargetFormModal', () => {
-  it('必須項目が空なら送信しない', async () => {
+  it('必須項目が空なら送信しないこと', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     render(<BackmarketWatchTargetFormModal isOpen mode='create' onClose={onClose} />)
@@ -45,7 +45,7 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(onClose).not.toHaveBeenCalled()
   })
 
-  it('入力した計測対象を登録し、成功通知・モーダル終了・画面更新を行う', async () => {
+  it('入力した計測対象を登録し、成功通知・モーダル終了・画面更新を行うこと', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     render(<BackmarketWatchTargetFormModal isOpen mode='create' onClose={onClose} />)
@@ -71,7 +71,7 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(refresh).toHaveBeenCalledOnce()
   })
 
-  it('既存値を表示し、変更した内容を対象 ID とともに更新する', async () => {
+  it('既存値を表示し、変更した内容を対象 ID とともに更新すること', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     render(<BackmarketWatchTargetFormModal isOpen mode='edit' target={target} onClose={onClose} />)
@@ -95,7 +95,7 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(refresh).toHaveBeenCalledOnce()
   })
 
-  it('保存失敗では入力を保持し、モーダルを閉じずにエラーを通知する', async () => {
+  it('保存失敗では入力を保持し、モーダルを閉じずにエラーを通知すること', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     vi.mocked(updateBackmarketWatchTarget).mockResolvedValue({
@@ -114,7 +114,7 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(refresh).toHaveBeenCalledOnce()
   })
 
-  it('閉じる操作では保存せずにモーダルを閉じる', async () => {
+  it('閉じる操作では保存せずにモーダルを閉じること', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     render(<BackmarketWatchTargetFormModal isOpen mode='create' onClose={onClose} />)
@@ -126,7 +126,7 @@ describe('BackmarketWatchTargetFormModal', () => {
     expect(refresh).not.toHaveBeenCalled()
   })
 
-  it('背景の閉じるボタンをキーボードで操作できる', async () => {
+  it('背景の閉じるボタンをキーボードで操作できること', async () => {
     const user = userEvent.setup()
     const onClose = vi.fn()
     render(<BackmarketWatchTargetFormModal isOpen mode='create' onClose={onClose} />)

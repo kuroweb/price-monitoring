@@ -28,7 +28,7 @@ const setting: ProductAggregationSetting = {
 beforeEach(() => vi.clearAllMocks())
 
 describe('商品相場設定', () => {
-  it('計測結果の絞り込み条件を保存する', async () => {
+  it('計測結果の絞り込み条件を保存すること', async () => {
     vi.mocked(createProductAggregationSetting).mockResolvedValue({
       data: setting,
       error: null,

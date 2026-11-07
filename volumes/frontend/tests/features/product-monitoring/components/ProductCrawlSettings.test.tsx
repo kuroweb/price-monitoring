@@ -61,7 +61,7 @@ beforeEach(() => {
 })
 
 describe('商品計測設定', () => {
-  it('検索 URL と共通キーワードを一つの設定に保存し、各 URL のサイトを表示する', async () => {
+  it('検索 URL と共通キーワードを一つの設定に保存し、各 URL のサイトを表示すること', async () => {
     vi.mocked(createProductCrawlSetting).mockResolvedValue({
       data: setting,
       error: null,
@@ -94,7 +94,7 @@ describe('商品計測設定', () => {
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
   })
 
-  it('設定を複製して追加モーダルを開き、新しい設定として保存する', async () => {
+  it('設定を複製して追加モーダルを開き、新しい設定として保存すること', async () => {
     vi.mocked(createProductCrawlSetting).mockResolvedValue({
       data: { ...setting, id: 2 },
       error: null,
@@ -132,14 +132,14 @@ describe('商品計測設定', () => {
     expect(refresh).toHaveBeenCalled()
   })
 
-  it('複製した名前を255文字以内に収める', async () => {
+  it('複製した名前を255文字以内に収めること', async () => {
     const user = userEvent.setup()
     render(<ProductCrawlSettings productCrawlSettings={[{ ...setting, name: 'a'.repeat(255) }]} />)
     await user.click(screen.getByRole('button', { name: '複製' }))
     expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue(`${'a'.repeat(250)}（コピー）`)
   })
 
-  it('除外した出品をリンク付きで一覧表示し、その場で復元する', async () => {
+  it('除外した出品をリンク付きで一覧表示し、その場で復元すること', async () => {
     const user = userEvent.setup()
     vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({
       data: { ...result, id: 2 },
