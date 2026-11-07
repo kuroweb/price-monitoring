@@ -26,6 +26,36 @@ RSpec.describe "商品クロール設定", type: :request do
     expect(ProductCrawlSetting.exists?(id)).to be(false)
   end
 
+  context "保存済みの結果がある設定を更新するとき" do
+    let(:product_crawl_setting) do
+      create(:product_crawl_setting, params.slice(:name, :enabled, :min_price, :search_urls, :required_keywords))
+    end
+    let!(:kept) { create(:product_crawl_result, product_crawl_setting:, name: "phone pro", price: 500) }
+    let!(:unmatched) { create(:product_crawl_result, product_crawl_setting:, name: "phone case", price: 200) }
+
+    {
+      required_keywords: [%w[phone pro], :kept],
+      exclude_keywords: [["case"], :kept],
+      min_price: [300, :kept],
+      max_price: [300, :unmatched]
+    }.each do |key, (value, remaining)|
+      it "#{key} を変えると新しい条件に一致しない結果を削除すること" do
+        put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}", params: params.merge(key => value), as: :json
+        expect(response).to have_http_status(:ok)
+        expect(product_crawl_setting.product_crawl_results.pluck(:id)).to eq([public_send(remaining).id])
+      end
+    end
+
+    it "条件以外だけを変えると結果を削除しないこと" do
+      allow(ProductMonitoring::CleanseCrawlResults).to receive(:call)
+      put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}",
+          params: params.merge(name: "changed", enabled: false), as: :json
+      expect(response).to have_http_status(:ok)
+      expect(ProductMonitoring::CleanseCrawlResults).not_to have_received(:call)
+      expect(product_crawl_setting.product_crawl_results.pluck(:id)).to contain_exactly(kept.id, unmatched.id)
+    end
+  end
+
   it "未対応の URL を拒否し保存済みの設定を変更しないこと" do
     product_crawl_setting = create(:product_crawl_setting, name: "phone")
     put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}",
