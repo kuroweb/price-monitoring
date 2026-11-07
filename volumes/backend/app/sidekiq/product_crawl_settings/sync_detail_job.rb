@@ -16,7 +16,7 @@ module ProductCrawlSettings
           scope.delete_all
         elsif detail.key?(:sold)
           # 同一出品を一括更新し、並行処理で設定された売却日を上書きしない
-          scope.update_all(sold: detail[:sold]) # rubocop:disable Rails/SkipsModelValidations
+          scope.update_all(sold: detail[:sold], updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
           if detail[:bought_date]
             scope.where(bought_date: nil).update_all(bought_date: detail[:bought_date]) # rubocop:disable Rails/SkipsModelValidations
           end
