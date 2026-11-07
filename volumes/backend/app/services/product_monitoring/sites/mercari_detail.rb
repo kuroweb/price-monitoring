@@ -1,10 +1,12 @@
 module ProductMonitoring
   module Sites
     module MercariDetail
+      DELETED_TEXTS = ["ページが見つかりませんでした", "該当する商品は削除されています。"].freeze
+
       def deleted_detail?(page)
         return false if page.at_css("[data-testid='item-detail-container']")
 
-        page.at_css(".merEmptyState") || Mercari::DELETED_TEXTS.any? { |text| page.text.include?(text) }
+        page.at_css(".merEmptyState") || DELETED_TEXTS.any? { |text| page.text.include?(text) }
       end
 
       def detail_sold(page)

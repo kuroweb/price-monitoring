@@ -9,7 +9,6 @@ module ProductMonitoring
       PATH = %r{\A/search\z}
       PLATFORM = "mercari".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
-      DELETED_TEXTS = ["ページが見つかりませんでした", "該当する商品は削除されています。"].freeze
 
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
