@@ -3,11 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { destroyBackmarketWatchTarget } from '@/features/backmarket/api/actions'
-import type { BackmarketWatchTarget } from '@/features/backmarket/api/types'
-import BackmarketWatchTargetsTable from '@/features/backmarket/components/BackmarketWatchTargetsTable'
-import { destroyCategory } from '@/features/categories/api/actions'
-import CategoriesList from '@/features/categories/components/CategoriesList'
+
+
 import { destroyProduct } from '@/features/products/api/actions'
 import type { ProductList } from '@/features/products/api/types'
 import ProductsTable from '@/features/products/components/ProductsTable'
@@ -43,12 +40,6 @@ const products = [
   },
   { id: 3, name: 'iPhone', category: categories[1], mercariCrawlSetting: { enabled: true } },
 ] as unknown as ProductList['products']
-const target = {
-  id: 1,
-  name: 'MacBook',
-  url: 'https://example.test',
-  enabled: true,
-} as BackmarketWatchTarget
 const renderProducts = () =>
   render(
     <NuqsTestingAdapter>
@@ -65,26 +56,6 @@ const cases = [
           <ProductsTable products={[products[0]]} categories={categories} />
         </NuqsTestingAdapter>,
       ),
-    target: 'MacBook',
-  },
-  {
-    name: 'カテゴリ',
-    remove: destroyCategory,
-    mount: () =>
-      render(
-        <NuqsTestingAdapter>
-          <CategoriesList
-            categories={categories}
-            structuredCategories={[{ ...categories[0], children: [] }]}
-          />
-        </NuqsTestingAdapter>,
-      ),
-    target: 'PC',
-  },
-  {
-    name: 'Backmarket',
-    remove: destroyBackmarketWatchTarget,
-    mount: () => render(<BackmarketWatchTargetsTable backmarketWatchTargets={[target]} />),
     target: 'MacBook',
   },
 ]

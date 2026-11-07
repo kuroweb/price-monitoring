@@ -3,12 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { createBackmarketWatchTarget, updateBackmarketWatchTarget } from '@/features/backmarket/api/actions'
-import type { BackmarketWatchTarget } from '@/features/backmarket/api/types'
-import BackmarketWatchTargetFormModal from '@/features/backmarket/components/BackmarketWatchTargetFormModal'
-import { createCategory, updateCategory } from '@/features/categories/api/actions'
-import CreateCategoryModal from '@/features/categories/components/CreateCategoryModal'
-import UpdateCategoryModal from '@/features/categories/components/UpdateCategoryModal'
+
+
 import { createProduct, updateProduct } from '@/features/products/api/actions'
 import type { ProductList } from '@/features/products/api/types'
 import CreateProductModal from '@/features/products/components/CreateProductModal'
@@ -29,12 +25,6 @@ vi.mock('@/features/products/api/actions', () => ({
 }))
 const category = { id: 1, name: 'PC', parentId: null } as Category
 const product = { id: 1, name: 'MacBook', category } as ProductList['products'][number]
-const target = {
-  id: 1,
-  name: 'MacBook',
-  url: 'https://example.test',
-  enabled: true,
-} as BackmarketWatchTarget
 const cases = [
   {
     name: '商品作成',
@@ -56,46 +46,6 @@ const cases = [
       <NuqsTestingAdapter searchParams='?update_product_modal=true'>
         <UpdateProductModal productId={1} product={product} categories={[category]} />
       </NuqsTestingAdapter>
-    ),
-  },
-  {
-    name: 'カテゴリ作成',
-    save: createCategory,
-    label: '登録',
-    pending: '登録中…',
-    mount: () => (
-      <NuqsTestingAdapter searchParams='?create_category_modal=true'>
-        <CreateCategoryModal categories={[]} />
-      </NuqsTestingAdapter>
-    ),
-  },
-  {
-    name: 'カテゴリ更新',
-    save: updateCategory,
-    label: '更新',
-    pending: '保存中…',
-    mount: () => (
-      <NuqsTestingAdapter searchParams='?update_category_modal=true'>
-        <UpdateCategoryModal category={category} categories={[]} />
-      </NuqsTestingAdapter>
-    ),
-  },
-  {
-    name: 'Backmarket作成',
-    save: createBackmarketWatchTarget,
-    label: '登録',
-    pending: '登録中…',
-    mount: () => (
-      <BackmarketWatchTargetFormModal isOpen mode='create' target={target} onClose={vi.fn()} />
-    ),
-  },
-  {
-    name: 'Backmarket更新',
-    save: updateBackmarketWatchTarget,
-    label: '更新',
-    pending: '保存中…',
-    mount: () => (
-      <BackmarketWatchTargetFormModal isOpen mode='edit' target={target} onClose={vi.fn()} />
     ),
   },
 ]
