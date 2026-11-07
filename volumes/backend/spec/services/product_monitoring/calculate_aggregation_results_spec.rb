@@ -28,6 +28,18 @@ RSpec.describe ProductMonitoring::CalculateAggregationResults do
                                                                                            ])
   end
 
+  it "全角半角や空白の有無だけが必須語と異なる出品も購入件数に数える" do
+    product_aggregation_setting.update!(required_keywords: ["iPad Pro"])
+    bought(external_id: "a", name: "ｉＰａｄ Ｐｒｏ", price: 200)
+    bought(external_id: "b", name: "iPadPro", price: 400)
+
+    described_class.call(product_aggregation_setting:, start_date: date, end_date: date)
+
+    expect(product_aggregation_setting.product_aggregation_results.sole).to have_attributes(
+      average_purchase_price: 300, purchase_count: 2
+    )
+  end
+
   it "再計算時にその日の結果を上書きする" do
     bought(external_id: "a", name: "Phone", price: 200)
     described_class.call(product_aggregation_setting:, start_date: date, end_date: date)
