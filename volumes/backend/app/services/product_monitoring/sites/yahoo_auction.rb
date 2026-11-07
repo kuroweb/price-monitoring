@@ -42,7 +42,7 @@ module ProductMonitoring
       end
 
       def self.validate_page(page)
-        BrowserPage.validate_url(page, host: HOST, port: true, userinfo: true)
+        BrowserPage.validate_url(page, host: HOST)
         BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
       end
 

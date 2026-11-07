@@ -32,7 +32,7 @@ module ProductMonitoring
       end
 
       def self.checked_content(page)
-        BrowserPage.validate_url(page, host: HOST, port: true)
+        BrowserPage.validate_url(page, host: HOST)
         BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
       end
 

@@ -126,7 +126,7 @@ module ProductMonitoring
       end
 
       def self.validate_page_url(page)
-        BrowserPage.validate_url(page, host: HOST, port: true, userinfo: true)
+        BrowserPage.validate_url(page, host: HOST)
       end
     end
   end
