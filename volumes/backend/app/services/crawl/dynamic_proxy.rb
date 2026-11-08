@@ -1,5 +1,7 @@
 module Crawl
   class DynamicProxy
+    class Unavailable < StandardError; end
+
     CACHE_KEY = "crawl:dynamic_proxy:proxy_list".freeze
     CACHE_TTL = 1.day.to_i
     FETCH_TIMEOUT = 10
@@ -10,6 +12,11 @@ module Crawl
         return if proxy.blank?
 
         proxy
+      end
+
+      # サーバーのIPから直接サイトへ接続しないよう、プロキシが無ければ取得を止める
+      def get!
+        get || raise(Unavailable, "Dynamic proxy is unavailable")
       end
 
       def remove(proxy:)

@@ -6,10 +6,11 @@ RSpec.describe Crawl::Client, type: :service do
     let(:context) { instance_double(Playwright::BrowserContext, new_page: page) }
     let(:browser) { instance_double(Playwright::Browser, new_context: context) }
     let(:route_handler) { {} }
+    let(:proxy) { { server: "proxy.example:8080", username: "user", password: "pass" } }
 
     before do
       stub_const("ENV", ENV.to_h.merge("PLAYWRIGHT_URL" => "ws://playwright"))
-      allow(Crawl::DynamicProxy).to receive(:get).and_return(nil)
+      allow(Crawl::DynamicProxy).to receive(:get).and_return(proxy)
       allow(Playwright).to receive(:connect_to_browser_server).and_yield(browser)
       allow(page).to receive(:route) { |_pattern, handler| route_handler[:call] = handler }
     end
@@ -52,6 +53,19 @@ RSpec.describe Crawl::Client, type: :service do
       route_for(url: "https://example.com/", resource_type: "document", user_agent: "custom-agent")
 
       expect(browser).to have_received(:new_context).with(hash_including(userAgent: "custom-agent"))
+    end
+
+    it "動的プロキシを設定したコンテキストで接続すること" do
+      route_for(url: "https://example.com/", resource_type: "document")
+
+      expect(browser).to have_received(:new_context).with(hash_including(proxy:))
+    end
+
+    it "動的プロキシが無いときは接続せずに失敗すること" do
+      allow(Crawl::DynamicProxy).to receive(:get).and_return(nil)
+
+      expect { described_class.execute { nil } }.to raise_error(Crawl::DynamicProxy::Unavailable)
+      expect(browser).not_to have_received(:new_context)
     end
 
     it "ブロックリストにある URL はブロックすること" do
