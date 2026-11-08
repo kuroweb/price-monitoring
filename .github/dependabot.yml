@@ -6,6 +6,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # Playwright のサーバーと同じ minor バージョンに保つ。
+      - dependency-name: playwright-ruby-client
+        update-types: ["version-update:semver-minor", "version-update:semver-major"]
     groups:
       backend-minor-and-patch:
         patterns: ["*"]
