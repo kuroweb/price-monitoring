@@ -23,17 +23,8 @@ module ProductMonitoring
       end
 
       def self.fetch_page(uri)
-        Crawl::Client.execute(block_scripts: true, user_agent: Crawl::RequestBlocklist::JANPARA_USER_AGENT) do |page|
-          response = page.goto(uri.to_s)
-          raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
-
-          checked_content(page)
-        end
-      end
-
-      def self.checked_content(page)
-        BrowserPage.validate_url(page, host: HOST)
-        BrowserPage.content(page, max_bytes: MAX_RESPONSE_BYTES)
+        BrowserPage.fetch(uri, host: HOST, max_bytes: MAX_RESPONSE_BYTES,
+                               user_agent: Crawl::RequestBlocklist::JANPARA_USER_AGENT)
       end
 
       def self.next_url(uri, page)

@@ -1,6 +1,6 @@
 # 商品計測と相場集計の設計
 
-更新: 2026-11-06。
+更新: 2026-11-08。
 
 ## 方針
 
@@ -110,15 +110,15 @@ erDiagram
 | --- | --- | --- | --- | --- |
 | `id` | bigint | NO | | 主キー |
 | `product_crawl_setting_id` | bigint | NO | | 収集元の `product_crawl_settings.id` |
-| `platform` | string | NO | | 出品元のサイト。`mercari`・`yahoo_auction`・`yahoo_fleamarket`・`iosys`・`janpara`。表示とサイトごとの絞り込みに使う |
+| `platform` | string | NO | | 出品元のサイト。`mercari`・`yahoo_auction`・`yahoo_fleamarket`・`iosys`・`janpara`・`treasure_factory`。表示とサイトごとの絞り込みに使う |
 | `external_id` | string | NO | | 出品ID。サイトをまたいでも重複しない |
 | `name` | string | NO | | 出品名 |
 | `product_url` | text | NO | | 出品ページのURL。クローラーが一覧ページのリンクから保存する |
 | `thumbnail_url` | text | YES | | サムネイル画像URL |
 | `price` | integer | NO | `0` | 価格 |
 | `buyout_price` | integer | YES | | 即決価格。ヤフオクのみ |
-| `sold` | boolean | YES | | 売り切れなら `true`、販売中なら `false`。メルカリ・Yahoo!フリマは一覧の売り切れ表示と個別ページの在庫状態から取得し、イオシス・じゃんぱらは一覧に出ていれば `false`。ヤフオクは出品中の検索で `false`、落札相場で `true` |
-| `bought_date` | datetime | YES | | 売れた日。メルカリ・Yahoo!フリマは個別ページの相対表示から日単位で推定した値（各既存クローラーと同じ基準）。ヤフオクは落札相場の終了日時。表示がない場合とイオシス・じゃんぱらは取得しない |
+| `sold` | boolean | YES | | 売り切れなら `true`、販売中なら `false`。メルカリ・Yahoo!フリマは一覧の売り切れ表示と個別ページの在庫状態から取得し、イオシス・じゃんぱらは一覧に出ていれば `false`。トレファクは一覧に販売中として出ていれば `false` とし、一覧に価格のない売り切れの出品は取り込まない。ヤフオクは出品中の検索で `false`、落札相場で `true` |
+| `bought_date` | datetime | YES | | 売れた日。メルカリ・Yahoo!フリマは個別ページの相対表示から日単位で推定した値（各既存クローラーと同じ基準）。ヤフオクは落札相場の終了日時。表示がない場合とイオシス・じゃんぱら・トレファクは取得しない |
 | `end_date` | datetime | YES | | オークション終了日時。ヤフオクのみ |
 | `excluded_at` | datetime | YES | | 除外した日時。null なら除外していない。除外しても行は消さず、出品名・商品ページ・画像を残す |
 

@@ -24,7 +24,7 @@ module Crawl
       end
 
       def context_options(user_agent:)
-        { userAgent: user_agent, proxy: DynamicProxy.get }
+        { userAgent: user_agent, proxy: DynamicProxy.get! }
       end
 
       def server_url
