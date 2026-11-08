@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   use_doorkeeper_openid_connect
   use_doorkeeper
+  get "oauth/logout", to: "end_sessions#show", as: :end_session
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

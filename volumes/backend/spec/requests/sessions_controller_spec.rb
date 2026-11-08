@@ -6,7 +6,7 @@ RSpec.describe SessionsController, type: :request do
       OmniAuth::AuthHash.new(
         uid: "provider-user-1",
         info: { name: "会員", email: "member@example.com" },
-        credentials: { token: "access-token", refresh_token: "refresh-token", expires_in: 7200 }
+        credentials: { token: "access-token", refresh_token: "refresh-token", expires_in: 7200, id_token: "id-token" }
       )
     end
 
@@ -29,10 +29,36 @@ RSpec.describe SessionsController, type: :request do
         name: "会員", email: "member@example.com", provider_name: User::ProviderName::AUTH_PROVIDER
       )
       expect(response).to redirect_to("/")
+      expect(session[:id_token]).to eq("id-token")
     end
   end
 
   describe "DELETE /logout のリクエスト" do
+    context "ID トークンを持つセッションの場合" do
+      login_with_session(id_token: "id-token")
+
+      let(:provider_logout_url) do
+        "https://test-oidc.example.com/oauth/logout?id_token_hint=id-token&post_logout_redirect_uri=#{CGI.escape('https://app.example.com/')}"
+      end
+
+      before do
+        stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke").to_return(status: 200)
+      end
+
+      it "Provider のセッションも終了するため、Provider のログアウトへ移すこと" do
+        delete "/logout"
+
+        expect(response).to redirect_to(provider_logout_url)
+        expect(response).to have_http_status(:see_other)
+      end
+
+      it "JSON を求められたら、ブラウザを移す先を返すこと" do
+        delete "/logout", headers: { "Accept" => "application/json" }
+
+        expect(response.parsed_body).to eq("logout_url" => provider_logout_url)
+      end
+    end
+
     context "有効なトークンでログインしている場合" do
       login_with_session
 

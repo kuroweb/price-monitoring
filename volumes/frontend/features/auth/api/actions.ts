@@ -17,10 +17,11 @@ export async function logout() {
   const token = await http<{ csrfToken: string }>('/auth/csrf_token', { headers: { Cookie: cookie } })
   if (!token.data?.csrfToken) throw new Error('ログアウトできませんでした')
 
-  const response = await http('/logout', {
+  const response = await http<{ logoutUrl: string }>('/logout', {
     method: 'DELETE',
-    headers: { Cookie: cookie, 'X-CSRF-Token': token.data.csrfToken },
+    headers: { Cookie: cookie, 'X-CSRF-Token': token.data.csrfToken, Accept: 'application/json' },
   })
-  if (response.status !== 303) throw new Error('ログアウトできませんでした')
-  redirect('/')
+  if (!response.data?.logoutUrl) throw new Error('ログアウトできませんでした')
+  // Provider のセッションも終了するため、BFF が返した Provider のログアウトへブラウザを移す
+  redirect(response.data.logoutUrl)
 }
