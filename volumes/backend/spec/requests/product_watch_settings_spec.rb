@@ -21,7 +21,7 @@ RSpec.describe "商品モニタリング設定", type: :request do
     expect(ProductWatchSetting.exists?(id)).to be(false)
   end
 
-  it "全計測から条件に一致する販売中の同額最安を返す" do
+  it "全計測から条件に一致する販売中の商品を重複なく返す" do
     setting = ProductWatchSetting.create!(settings)
     create(:product_crawl_result, name: "phone", price: 500, sold: false, platform: "iosys", external_id: "one")
     create(:product_crawl_result, name: "phone", price: 500, sold: false, platform: "iosys", external_id: "one")
@@ -32,5 +32,18 @@ RSpec.describe "商品モニタリング設定", type: :request do
     create(:product_crawl_result, name: "phone", price: 1, sold: false, excluded_at: Time.current)
     get "/api/v1/product_watch_settings/#{setting.id}/results"
     expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(%w[one two])
+  end
+
+  it "条件に一致する商品を重複を除いて価格順に最大8件返す" do
+    setting = ProductWatchSetting.create!(settings)
+    create(:product_crawl_result, name: "phone case", price: 1, sold: false)
+    expected = (1..9).map do |price|
+      create(:product_crawl_result, name: "phone", price: price * 10, sold: false, external_id: "item-#{price}")
+    end
+    create(:product_crawl_result, name: "phone", price: 10, sold: false, external_id: "item-1")
+
+    get "/api/v1/product_watch_settings/#{setting.id}/results"
+
+    expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq(expected.first(8).map(&:id))
   end
 end
