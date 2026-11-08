@@ -9,6 +9,15 @@ RSpec.describe ProductMonitoring::Crawler do
     expect(site).to have_received(:fetch).exactly(5).times
   end
 
+  it "空のページでも次ページがあれば取得を続けること" do
+    site = class_double(ProductMonitoring::Sites::TreasureFactory)
+    second = URI("https://ec.treasure-f.com/search?word=x&page=2")
+    allow(site).to receive(:fetch).and_return([[], second], [[{ external_id: "a" }], nil])
+    result = described_class.fetch(site: site, canonical_url: "https://ec.treasure-f.com/search?word=x")
+    expect(result).to eq([{ external_id: "a" }])
+    expect(site).to have_received(:fetch).with(second)
+  end
+
   it "external_id で重複を除き共通の包含フィルターを適用すること" do
     allow(described_class).to receive(:fetch).and_return([
                                                            { external_id: "a", name: "Phone blue", price: 100,

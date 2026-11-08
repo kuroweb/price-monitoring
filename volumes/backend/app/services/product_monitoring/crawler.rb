@@ -67,7 +67,8 @@ module ProductMonitoring
       MAX_PAGES_PER_URL.times do
         page_records, next_uri = target[:site].fetch(uri)
         records.concat(page_records.first(MAX_RESULTS_PER_PAGE))
-        break if page_records.empty? || next_uri.nil?
+        # 売り切れだけのページなど、空のページの先にも出品があり得るので次ページの有無だけで止める
+        break if next_uri.nil?
 
         uri = next_uri
       end
