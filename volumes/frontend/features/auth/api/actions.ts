@@ -21,7 +21,7 @@ export async function logout() {
     method: 'DELETE',
     headers: { Cookie: cookie, 'X-CSRF-Token': token.data.csrfToken, Accept: 'application/json' },
   })
-  if (!response.data?.logoutUrl) throw new Error('ログアウトできませんでした')
-  // Provider のセッションも終了するため、BFF が返した Provider のログアウトへブラウザを移す
-  redirect(response.data.logoutUrl)
+  // Provider のセッションも終了するため、BFF が返した Provider のログアウトへブラウザを移す。
+  // BFF のセッションが既に失効していると CSRF 検証で失敗するが、終了すべきセッションは無いのでトップへ戻す
+  redirect(response.data?.logoutUrl ?? '/')
 }
