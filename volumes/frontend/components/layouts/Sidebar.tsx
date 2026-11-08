@@ -69,15 +69,9 @@ const categoryIcon = (
 
 const menuGroups: { title: string; items: MenuItem[] }[] = [
   {
-    title: '商品',
+    title: '商品計測',
     items: [
-      { label: '最安値一覧', href: '/products', icon: trendIcon },
-      { label: '計測対象の管理', href: '/admin/products', icon: settingsIcon },
-    ],
-  },
-  {
-    title: '商品計測（PoC）',
-    items: [
+      { label: '商品モニタリング', href: '/product-monitoring', icon: settingsIcon },
       { label: '商品計測結果', href: '/product-crawl-results', icon: listIcon },
       { label: '商品相場', href: '/product-aggregation-results', icon: trendIcon },
     ],
@@ -87,6 +81,13 @@ const menuGroups: { title: string; items: MenuItem[] }[] = [
     items: [
       { label: '計測結果', href: '/backmarket', icon: listIcon },
       { label: '計測対象の管理', href: '/admin/backmarket', icon: settingsIcon },
+    ],
+  },
+  {
+    title: '商品',
+    items: [
+      { label: '最安値一覧', href: '/products', icon: trendIcon },
+      { label: '計測対象の管理', href: '/admin/products', icon: settingsIcon },
     ],
   },
   {

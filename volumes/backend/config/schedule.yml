@@ -4,3 +4,6 @@ product_monitoring_enqueue_crawl_jobs_job:
 product_monitoring_enqueue_aggregation_jobs_job:
   cron: "0 0 * * *"
   class: "ProductMonitoring::EnqueueAggregationJobsJob"
+product_monitoring_evaluate_watch_settings_job:
+  cron: "*/10 * * * *"
+  class: "ProductMonitoring::EvaluateWatchSettingsJob"

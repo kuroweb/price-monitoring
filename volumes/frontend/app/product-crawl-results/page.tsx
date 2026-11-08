@@ -25,7 +25,7 @@ const Page = async () => {
             <h2 className='card-title'>商品計測結果</h2>
             <ProductCrawlSettingAddButton />
           </div>
-          <div className='divide-y divide-base-200 pt-2 [&>*]:py-5'>
+          <div className='divide-y divide-base-200 pt-4 [&>section]:py-5 [&>section:first-child]:pt-0'>
             {productCrawlSettings.length === 0 && (
               <div>
                 商品計測設定はまだありません。
