@@ -149,4 +149,20 @@ RSpec.describe "検索語による商品計測設定", type: :request do
       expect(response).to have_http_status(:bad_request)
     end
   end
+
+  it "Yahoo!フリマに使えない検索語を理由とともに拒否すること" do
+    ["iPad/Pro", "iPad\nPro"].each do |keyword|
+      post "/api/v1/product_crawl_settings",
+           params: { name: "検索", keyword: keyword, platforms: %w[iosys yahoo_fleamarket] }, as: :json
+      expect(response).to have_http_status(:bad_request)
+      expect(response.parsed_body.to_s).to include("Yahoo!フリマの検索語には / と制御文字を使用できません")
+    end
+  end
+
+  it "他のサイトではスラッシュを含む検索語を保存すること" do
+    post "/api/v1/product_crawl_settings",
+         params: { name: "検索", keyword: "iPad/Pro", platforms: ["iosys"] }, as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body.fetch("keyword")).to eq("iPad/Pro")
+  end
 end

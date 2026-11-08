@@ -15,7 +15,8 @@ module ProductMonitoring
 
       def self.validate_query(uri)
         keyword = URI::DEFAULT_PARSER.unescape(uri.path.delete_prefix("/search/"))
-        raise ArgumentError, "Invalid search keyword" if keyword.blank? || keyword.match?(%r{[/\x00-\x1f\x7f]})
+        raise ArgumentError, "Yahoo!フリマの検索語を入力してください" if keyword.blank?
+        raise ArgumentError, "Yahoo!フリマの検索語には / と制御文字を使用できません" if keyword.match?(%r{[/\x00-\x1f\x7f]})
       end
 
       def self.fetch(uri)
