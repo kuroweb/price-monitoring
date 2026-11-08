@@ -8,6 +8,10 @@ module ProductMonitoring
       PLATFORM = "janpara".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
+      def self.search_urls(keyword)
+        ["https://#{HOST}/sale/search/result/?#{URI.encode_www_form(KEYWORDS: keyword)}"]
+      end
+
       def self.validate_query(uri)
         return if URI.decode_www_form(uri.query.to_s).any? { |key, value| key == "KEYWORDS" && value.strip.present? }
 

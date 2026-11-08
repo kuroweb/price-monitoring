@@ -128,3 +128,41 @@ RSpec.describe "商品クロール結果", type: :request do
     expect(response.parsed_body.fetch("product_crawl_results").pluck("id")).to eq([first.id])
   end
 end
+
+RSpec.describe "検索語による商品計測設定", type: :request do
+  it "検索語とサイトを保存して取得・更新すること" do
+    post "/api/v1/product_crawl_settings", params: { name: "検索", keyword: " phone ", platforms: ["yahoo_auction"] }, as: :json
+    expect(response).to have_http_status(:ok)
+    id = response.parsed_body.fetch("id")
+    expect(response.parsed_body.slice("keyword", "platforms", "search_urls")).to eq(
+      "keyword" => "phone", "platforms" => ["yahoo_auction"], "search_urls" => []
+    )
+    put "/api/v1/product_crawl_settings/#{id}", params: { name: "検索", keyword: "tablet", platforms: ["iosys"] }, as: :json
+    expect(response).to have_http_status(:ok)
+    expect(ProductCrawlSetting.find(id).attributes.slice("keyword", "platforms")).to eq("keyword" => "tablet", "platforms" => ["iosys"])
+  end
+
+  it "片方だけの入力や未対応サイトを URL があっても拒否すること" do
+    base = { name: "検索", search_urls: ["https://iosys.co.jp/items?q=x"] }
+    [{ keyword: "phone" }, { platforms: ["iosys"] }, { keyword: "phone", platforms: ["unknown"] }].each do |values|
+      post "/api/v1/product_crawl_settings", params: base.merge(values), as: :json
+      expect(response).to have_http_status(:bad_request)
+    end
+  end
+
+  it "Yahoo!フリマに使えない検索語を理由とともに拒否すること" do
+    ["iPad/Pro", "iPad\nPro"].each do |keyword|
+      post "/api/v1/product_crawl_settings",
+           params: { name: "検索", keyword: keyword, platforms: %w[iosys yahoo_fleamarket] }, as: :json
+      expect(response).to have_http_status(:bad_request)
+      expect(response.parsed_body.to_s).to include("Yahoo!フリマの検索語には / と制御文字を使用できません")
+    end
+  end
+
+  it "他のサイトではスラッシュを含む検索語を保存すること" do
+    post "/api/v1/product_crawl_settings",
+         params: { name: "検索", keyword: "iPad/Pro", platforms: ["iosys"] }, as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body.fetch("keyword")).to eq("iPad/Pro")
+  end
+end

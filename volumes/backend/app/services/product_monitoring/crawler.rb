@@ -19,7 +19,12 @@ module ProductMonitoring
     end
 
     def call
-      params[:search_urls].each { |url| crawl_url(url) }
+      generated = UrlRouter.search_urls(keyword: params[:keyword], platforms: params[:platforms])
+      (generated + params[:search_urls]).each { |url| crawl_url(url) }
+      crawl_results
+    end
+
+    def crawl_results
       results = by_key.values.map { |item| self.class.apply_filters(item, params) }
       { sources: sources, results: results, fetched_count: results.size,
         accepted_count: results.count { |result| result[:accepted] } }
@@ -50,7 +55,12 @@ module ProductMonitoring
     end
 
     def record_failure(url, target, error)
-      Rails.logger.warn("Crawl failed for #{url.split('?', 2).first}: #{error.class}: #{error.message}")
+      safe_url = if target[:platform] == "yahoo_fleamarket"
+                   "https://#{Sites::YahooFleamarket::HOST}/search/[FILTERED]"
+                 else
+                   url.split("?", 2).first
+                 end
+      Rails.logger.warn("Crawl failed for #{safe_url}: #{error.class}: #{error.message}")
       sources << self.class.source(url, target[:platform], "failed", 0)
     end
 
@@ -58,8 +68,8 @@ module ProductMonitoring
       records.each { |record| by_key[record[:external_id]] ||= record.merge(platform: platform) }
     end
 
-    private :params, :sources, :by_key, :deadline, :crawl_url, :crawl_target, :store_records, :fetch_with_deadline,
-            :record_failure
+    private :params, :sources, :by_key, :deadline, :crawl_results, :crawl_url, :crawl_target, :store_records,
+            :fetch_with_deadline, :record_failure
 
     def self.fetch(target)
       uri = URI.parse(target[:canonical_url])

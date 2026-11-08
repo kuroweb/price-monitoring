@@ -45,8 +45,8 @@ module Api
       private
 
       def upsert_params
-        params.permit(:name, :enabled, :min_price, :max_price,
-                      search_urls: [], required_keywords: [], exclude_keywords: [])
+        params.permit(:name, :enabled, :keyword, :min_price, :max_price,
+                      platforms: [], search_urls: [], required_keywords: [], exclude_keywords: [])
       end
 
       def set_product_crawl_setting

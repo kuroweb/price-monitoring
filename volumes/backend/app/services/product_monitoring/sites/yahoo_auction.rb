@@ -2,7 +2,7 @@ require "nokogiri"
 
 module ProductMonitoring
   module Sites
-    class YahooAuction
+    class YahooAuction # rubocop:disable Metrics/ClassLength
       HOST = "auctions.yahoo.co.jp".freeze
       PATH = %r{\A/(?:search/search|closedsearch/closedsearch)\z}
       PLATFORM = "yahoo_auction".freeze
@@ -16,6 +16,11 @@ module ProductMonitoring
         () => document.querySelector('li:has(> div a[href*="jp/auction/"]), .Notice__wandQuery') ||
           document.body?.innerText.includes('条件に一致する商品は見つかりませんでした')
       JS
+
+      def self.search_urls(keyword)
+        query = URI.encode_www_form(p: keyword)
+        ["https://#{HOST}/search/search?#{query}", "https://#{HOST}/closedsearch/closedsearch?#{query}"]
+      end
 
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?

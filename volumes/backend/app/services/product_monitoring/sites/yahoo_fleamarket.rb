@@ -2,16 +2,21 @@ require "nokogiri"
 
 module ProductMonitoring
   module Sites
-    class YahooFleamarket
+    class YahooFleamarket # rubocop:disable Metrics/ClassLength
       HOST = "paypayfleamarket.yahoo.co.jp".freeze
       PATH = %r{\A/search/[^/]+\z}
       PLATFORM = "yahoo_fleamarket".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
       DETAIL_DATE_UNITS = { "日" => :days, "週間" => :weeks, "ヶ月" => :months }.freeze
 
+      def self.search_urls(keyword)
+        ["https://#{HOST}/search/#{URI.encode_www_form_component(keyword).gsub('+', '%20')}"]
+      end
+
       def self.validate_query(uri)
         keyword = URI::DEFAULT_PARSER.unescape(uri.path.delete_prefix("/search/"))
-        raise ArgumentError, "Invalid search keyword" if keyword.blank? || keyword.match?(%r{[/\x00-\x1f\x7f]})
+        raise ArgumentError, "Yahoo!フリマの検索語を入力してください" if keyword.blank?
+        raise ArgumentError, "Yahoo!フリマの検索語には / と制御文字を使用できません" if keyword.match?(%r{[/\x00-\x1f\x7f]})
       end
 
       def self.fetch(uri)

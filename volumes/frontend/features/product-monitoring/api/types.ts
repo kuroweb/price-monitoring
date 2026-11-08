@@ -1,6 +1,8 @@
 export type ProductCrawlSettingInput = {
   name: string
   enabled: boolean
+  keyword: string | null
+  platforms: string[]
   searchUrls: string[]
   requiredKeywords: string[]
   excludeKeywords: string[]

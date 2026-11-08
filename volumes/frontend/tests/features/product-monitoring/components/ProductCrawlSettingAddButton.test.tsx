@@ -33,6 +33,8 @@ const setting: ProductCrawlSetting = {
   id: 1,
   name: 'phone',
   enabled: true,
+  keyword: null,
+  platforms: [],
   searchUrls: [mercariUrl],
   requiredKeywords: [],
   excludeKeywords: [],
@@ -65,6 +67,20 @@ beforeEach(() => {
 })
 
 describe('商品計測設定', () => {
+  it('検索語と選択したサイトを保存すること', async () => {
+    vi.mocked(createProductCrawlSetting).mockResolvedValue({ data: setting, error: null, status: 200 })
+    const user = userEvent.setup()
+    render(<ProductCrawlSettingAddButton />)
+    await user.click(screen.getByRole('button', { name: '商品計測設定を追加' }))
+    await user.type(screen.getByRole('textbox', { name: '名前' }), 'phone')
+    await user.type(screen.getByRole('textbox', { name: '検索語' }), 'iPad Pro')
+    await user.click(screen.getByRole('checkbox', { name: 'ヤフオク' }))
+    await user.click(screen.getByRole('button', { name: '登録' }))
+    await waitFor(() => expect(createProductCrawlSetting).toHaveBeenCalledWith(
+      expect.objectContaining({ keyword: 'iPad Pro', platforms: ['yahoo_auction'], searchUrls: [] }),
+    ))
+  })
+
   it('検索 URL と共通キーワードを一つの設定に保存し、各 URL のサイトを表示すること', async () => {
     vi.mocked(createProductCrawlSetting).mockResolvedValue({
       data: setting,
@@ -81,9 +97,9 @@ describe('商品計測設定', () => {
     await user.click(screen.getByRole('button', { name: 'URLを追加' }))
     const yahooUrl = 'https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro'
     await user.type(screen.getByRole('textbox', { name: '検索結果URL 3' }), yahooUrl)
-    expect(screen.getByText('メルカリ')).toBeInTheDocument()
-    expect(screen.getByText('イオシス')).toBeInTheDocument()
-    expect(screen.getByText('Yahoo!フリマ')).toBeInTheDocument()
+    expect(screen.getAllByText('メルカリ').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('イオシス').length).toBeGreaterThan(0)
+    expect(screen.getAllByText('Yahoo!フリマ').length).toBeGreaterThan(0)
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone, blue')
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>

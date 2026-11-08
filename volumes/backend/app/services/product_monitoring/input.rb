@@ -40,6 +40,7 @@ module ProductMonitoring
       normalize_prices
       normalize_keywords
       normalize_urls
+      normalize_search
       values[:enabled] = self.class.boolean(values.fetch(:enabled, false))
       values
     end
@@ -96,8 +97,34 @@ module ProductMonitoring
     end
 
     def validate_normalized_urls
-      raise ArgumentError, "検索結果URLを1件以上指定してください" if require_search_urls && values[:search_urls].empty?
       raise ArgumentError, "同じ検索結果URLが重複しています" if values[:search_urls].uniq.size != values[:search_urls].size
+    end
+
+    def normalize_search
+      keyword = values[:keyword]
+      raise ArgumentError, "検索語は255文字以内で入力してください" unless keyword.nil? || self.class.valid_string?(keyword)
+
+      values[:keyword] = keyword.to_s.strip.presence
+      normalize_platforms
+      validate_search
+    end
+
+    def normalize_platforms
+      platforms = values.fetch(:platforms, [])
+      valid = platforms.is_a?(Array) &&
+              platforms.all? { |platform| UrlRouter::SITES.any? { |site| platform == site::PLATFORM } }
+      raise ArgumentError, "サイトの指定が不正です" unless valid
+
+      values[:platforms] = platforms.uniq
+    end
+
+    def validate_search
+      has_keyword = values[:keyword].present?
+      has_platforms = values[:platforms].any?
+      raise ArgumentError, "検索語とサイトを両方指定してください" if has_keyword != has_platforms
+      return unless require_search_urls && !has_keyword && values[:search_urls].empty?
+
+      raise ArgumentError, "検索語とサイト、または検索結果URLを1件以上指定してください"
     end
 
     def valid_urls?(urls)
