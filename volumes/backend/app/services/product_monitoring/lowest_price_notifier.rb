@@ -25,6 +25,7 @@ module ProductMonitoring
     end
 
     def call
+      # 比較から送信・基準更新まで直列化し、同じ変化の重複通知や条件変更との競合を防ぐ
       product_watch_setting.with_lock do
         return unless product_watch_setting.enabled?
 
