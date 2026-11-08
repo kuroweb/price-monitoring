@@ -220,16 +220,16 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       expect(Rails.logger).to have_received(:info).with("Product crawl detail candidates: setting_id=#{setting.id} candidates=3 enqueued=2")
     end
   end
-end
 
-RSpec.describe "検索語による商品計測結果の保存" do
-  it "保存済みの検索語とサイトから取得した出品を保存すること" do
-    setting = create(:product_crawl_setting, keyword: "phone", platforms: ["iosys"], search_urls: [])
-    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
-      { external_id: "keyword-test", name: "Phone", price: 100, product_url: "https://iosys.co.jp/items/1", sold: false }
-    ])
-    ProductMonitoring::SyncCrawlResults.call(product_crawl_setting: setting)
-    expect(setting.product_crawl_results.pluck(:external_id)).to eq(["keyword-test"])
-    expect(ProductMonitoring::Crawler).to have_received(:fetch).with(hash_including(canonical_url: "https://iosys.co.jp/items?q=phone"))
+  context "検索語による商品計測結果の保存" do
+    it "保存済みの検索語とサイトから取得した出品を保存すること" do
+      setting = create(:product_crawl_setting, keyword: "phone", platforms: ["iosys"], search_urls: [])
+      allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
+        { external_id: "keyword-test", name: "Phone", price: 100, product_url: "https://iosys.co.jp/items/1", sold: false }
+      ])
+      described_class.call(product_crawl_setting: setting)
+      expect(setting.product_crawl_results.pluck(:external_id)).to eq(["keyword-test"])
+      expect(ProductMonitoring::Crawler).to have_received(:fetch).with(hash_including(canonical_url: "https://iosys.co.jp/items?q=phone"))
+    end
   end
 end

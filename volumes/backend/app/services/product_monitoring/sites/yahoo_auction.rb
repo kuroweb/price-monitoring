@@ -2,7 +2,7 @@ require "nokogiri"
 
 module ProductMonitoring
   module Sites
-    class YahooAuction
+    class YahooAuction # rubocop:disable Metrics/ClassLength
       HOST = "auctions.yahoo.co.jp".freeze
       PATH = %r{\A/(?:search/search|closedsearch/closedsearch)\z}
       PLATFORM = "yahoo_auction".freeze

@@ -85,21 +85,22 @@ RSpec.describe ProductMonitoring::Crawler do
       described_class.call(params: { required_keywords: "phone", search_urls: [] })
     end.to raise_error(ArgumentError)
   end
-end
 
-RSpec.describe "検索語からのクロール" do
-  it "全サイトの URL を検証し、ヤフオクの両方と追加 URL を取得すること" do
-    allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([])
-    result = ProductMonitoring::Crawler.call(params: {
-      keyword: "iPad Pro &", platforms: ProductMonitoring::UrlRouter::SITES.map { |site| site::PLATFORM },
-      search_urls: ["https://iosys.co.jp/items?q=extra"], min_price: 100
-    })
-    expect(result[:sources].size).to eq(8)
-    expect(result[:sources].pluck(:status)).to all(eq("succeeded"))
-    urls = result[:sources].pluck(:url)
-    expect(urls).to include("https://auctions.yahoo.co.jp/search/search?p=iPad+Pro+%26",
-                            "https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=iPad+Pro+%26",
-                            "https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro%20%26")
-    expect(urls).to include("https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad+Pro+%26")
+  context "検索語からのクロール" do
+    it "全サイトの URL を検証し、ヤフオクの両方と追加 URL を取得すること" do
+      allow(described_class).to receive(:fetch).and_return([])
+      platforms = ProductMonitoring::UrlRouter::SITES.map { |site| site::PLATFORM }
+      result = described_class.call(params: {
+                                      keyword: "iPad Pro &", platforms: platforms,
+                                      search_urls: ["https://iosys.co.jp/items?q=extra"], min_price: 100
+                                    })
+      expect(result[:sources].size).to eq(8)
+      expect(result[:sources].pluck(:status)).to all(eq("succeeded"))
+      urls = result[:sources].pluck(:url)
+      expect(urls).to include("https://auctions.yahoo.co.jp/search/search?p=iPad+Pro+%26",
+                              "https://auctions.yahoo.co.jp/closedsearch/closedsearch?p=iPad+Pro+%26",
+                              "https://paypayfleamarket.yahoo.co.jp/search/iPad%20Pro%20%26")
+      expect(urls).to include("https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad+Pro+%26")
+    end
   end
 end

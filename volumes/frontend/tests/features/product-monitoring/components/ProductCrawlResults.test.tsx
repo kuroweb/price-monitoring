@@ -86,7 +86,7 @@ describe('商品計測結果', () => {
       result.productUrl,
     )
     expect(screen.getByText('イオシス')).toBeInTheDocument()
-    expect(screen.getByText('有効・1 URL・1件')).toBeInTheDocument()
+    expect(screen.getByText('有効・サイト0件・追加URL1件・1件')).toBeInTheDocument()
     const card = screen.getByRole('article')
     expect(within(card).getByText('売り切れ')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /^販売中/ }))
@@ -141,12 +141,12 @@ describe('商品計測結果の一覧', () => {
   })
 })
 
-it('詳細に無効状態と URL 数、結果件数を表示すること', () => {
+it('詳細に無効状態とサイト数、追加 URL 数、結果件数を表示すること', () => {
   render(
     <ProductCrawlResultsDetail
       productCrawlSetting={{ ...setting, enabled: false }}
       productCrawlResults={[]}
     />,
   )
-  expect(screen.getByText('無効・1 URL・0件')).toBeInTheDocument()
+  expect(screen.getByText('無効・サイト0件・追加URL1件・0件')).toBeInTheDocument()
 })

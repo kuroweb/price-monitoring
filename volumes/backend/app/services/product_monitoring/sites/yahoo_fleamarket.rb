@@ -2,7 +2,7 @@ require "nokogiri"
 
 module ProductMonitoring
   module Sites
-    class YahooFleamarket
+    class YahooFleamarket # rubocop:disable Metrics/ClassLength
       HOST = "paypayfleamarket.yahoo.co.jp".freeze
       PATH = %r{\A/search/[^/]+\z}
       PLATFORM = "yahoo_fleamarket".freeze
@@ -10,7 +10,7 @@ module ProductMonitoring
       DETAIL_DATE_UNITS = { "日" => :days, "週間" => :weeks, "ヶ月" => :months }.freeze
 
       def self.search_urls(keyword)
-        ["https://#{HOST}/search/#{URI.encode_www_form_component(keyword).gsub("+", "%20")}"]
+        ["https://#{HOST}/search/#{URI.encode_www_form_component(keyword).gsub('+', '%20')}"]
       end
 
       def self.validate_query(uri)

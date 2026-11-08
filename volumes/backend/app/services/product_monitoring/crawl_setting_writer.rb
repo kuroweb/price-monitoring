@@ -2,9 +2,7 @@ module ProductMonitoring
   class CrawlSettingWriter
     def self.call(product_crawl_setting:, params:)
       values = ProductMonitoring::Input.call(params:, require_name: true, require_search_urls: true)
-      generated = values[:platforms].flat_map do |platform|
-        UrlRouter::SITES.find { |site| site::PLATFORM == platform }.search_urls(values[:keyword])
-      end
+      generated = UrlRouter.search_urls(keyword: values[:keyword], platforms: values[:platforms])
       (generated + values[:search_urls]).each { |url| ProductMonitoring::UrlRouter.call(url:) }
 
       ProductCrawlSetting.transaction do

@@ -9,6 +9,10 @@ module ProductMonitoring
       SITES.find { |site| platform == site::PLATFORM && site.respond_to?(:fetch_detail) }
     end
 
+    def self.search_urls(keyword:, platforms:)
+      platforms.flat_map { |platform| SITES.find { |site| platform == site::PLATFORM }.search_urls(keyword) }
+    end
+
     def self.call(...)
       new(...).call
     end

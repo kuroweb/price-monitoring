@@ -143,8 +143,9 @@ RSpec.describe "検索語による商品計測設定", type: :request do
   end
 
   it "片方だけの入力や未対応サイトを URL があっても拒否すること" do
+    base = { name: "検索", search_urls: ["https://iosys.co.jp/items?q=x"] }
     [{ keyword: "phone" }, { platforms: ["iosys"] }, { keyword: "phone", platforms: ["unknown"] }].each do |values|
-      post "/api/v1/product_crawl_settings", params: { name: "検索", search_urls: ["https://iosys.co.jp/items?q=x"] }.merge(values), as: :json
+      post "/api/v1/product_crawl_settings", params: base.merge(values), as: :json
       expect(response).to have_http_status(:bad_request)
     end
   end

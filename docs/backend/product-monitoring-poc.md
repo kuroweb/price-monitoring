@@ -82,3 +82,5 @@ Yahoo!フリマとメルカリでは、個別ページが非2xxを返す削除�
 - frontend対象検証: frontendコンテナで `npm run typecheck`、`npm run lint`、`npx vitest run tests/features/product-monitoring`。
 
 残作業は画面設計の未決事項。
+
+2026-11-08: 検索語 `iPad` とイオシスを登録し、画面の「取得して保存」からプロキシ経由で120件を取得・保存した。登録・編集画面で検索語とサイトの入力・再表示を確認した。
