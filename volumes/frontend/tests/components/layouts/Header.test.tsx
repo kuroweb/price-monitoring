@@ -3,14 +3,13 @@ import { describe, expect, it, vi } from 'vitest'
 
 import Header from '@/components/layouts/Header'
 
+vi.mock('@/features/auth/components/AccountStatus', () => ({ default: () => <span>ログイン状態</span> }))
+
 describe('Header', () => {
-  it('ログインと新規登録の入口へ遷移できること', () => {
+  it('ログイン状態を表示すること', () => {
     render(<Header open={false} setOpen={vi.fn()} />)
 
-    expect(screen.getByRole('link', { name: 'ログイン・新規登録' })).toHaveAttribute(
-      'href',
-      '/auth/auth_provider',
-    )
+    expect(screen.getByText('ログイン状態')).toBeInTheDocument()
   })
 
   it('Compose の project 名があれば、どの環境の画面か分かるように表示すること', () => {

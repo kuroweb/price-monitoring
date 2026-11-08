@@ -1,0 +1,43 @@
+ja:
+  doorkeeper:
+    authorizations:
+      buttons:
+        authorize: '許可する'
+        deny: '拒否する'
+      error:
+        title: 'エラーが発生しました'
+      new:
+        title: '認可が必要です'
+        prompt: '%{client_name} にアカウントの利用を許可しますか？'
+        able_to: 'このアプリケーションは次の操作ができます'
+      show:
+        title: '認可コード'
+      form_post:
+        title: 'このフォームを送信してください'
+
+    errors:
+      messages:
+        invalid_request:
+          unknown: 'リクエストに必要なパラメーターが無いか、対応していない値が含まれているか、形式が正しくありません。'
+          missing_param: '必須パラメーターがありません: %{value}'
+          request_not_authorized: 'リクエストの認可に必要なパラメーターが無いか、正しくありません。'
+          invalid_code_challenge: 'code_challenge が必要です。'
+        invalid_redirect_uri: 'リダイレクト URI の形式が正しくないか、クライアントに登録されたリダイレクト URI と一致しません。'
+        unauthorized_client: 'クライアントにはこの方法でのリクエストが許可されていません。'
+        access_denied: 'リソースオーナーまたは認可サーバーがリクエストを拒否しました。'
+        invalid_scope: '要求されたスコープが正しくないか、不明か、形式が正しくありません。'
+        invalid_code_challenge_method:
+          zero: '利用できる code_challenge_method が無いため、認可サーバーは PKCE に対応していません。'
+          one: 'code_challenge_method は %{challenge_methods} を指定してください。'
+          other: 'code_challenge_method は %{challenge_methods} のいずれかを指定してください。'
+        server_error: '認可サーバーで予期しないエラーが発生したため、リクエストを処理できませんでした。'
+        temporarily_unavailable: '認可サーバーが一時的な過負荷またはメンテナンスのため、リクエストを処理できません。'
+        unsupported_response_type: '認可サーバーはこの response_type に対応していません。'
+        unsupported_response_mode: '認可サーバーはこの response_mode に対応していません。'
+        invalid_client: 'クライアントの認証に失敗しました。'
+        invalid_grant: '認可グラントが正しくないか、期限切れか、取り消されたか、リダイレクト URI が一致しないか、別のクライアントに発行されたものです。'
+        unsupported_grant_type: '認可サーバーはこのグラントタイプに対応していません。'
+
+    layouts:
+      application:
+        title: '認可'

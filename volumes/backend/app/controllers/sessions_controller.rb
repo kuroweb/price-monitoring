@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
     session[:access_token] = auth.credentials.token
     session[:refresh_token] = auth.credentials.refresh_token
     session[:expires_at] = Time.current.to_i + auth.credentials.expires_in
+    session[:id_token] = auth.credentials.id_token
 
     redirect_to "/"
   end
@@ -30,17 +31,40 @@ class SessionsController < ApplicationController
     redirect_to "/products?auth_error=1"
   end
 
+  def csrf_token
+    response.headers["Cache-Control"] = "no-store"
+    render json: { csrf_token: form_authenticity_token }
+  end
+
   def destroy
-    revoke_tokens if session[:access_token].present?
+    logout_url = provider_logout_url
+    begin
+      revoke_tokens if session[:access_token].present?
+    rescue StandardError => e
+      Bugsnag.notify(e)
+    end
     reset_session
-    redirect_to "/auth/test", notice: "Logged out successfully"
-  rescue StandardError => e
-    Bugsnag.notify(e)
-    reset_session
-    redirect_to "/auth/test", notice: "Logged out successfully"
+
+    # frontend は server action から呼ぶため、ブラウザを移す先を JSON で受け取る
+    respond_to do |format|
+      format.json { render json: { logout_url: } }
+      format.any { redirect_to logout_url, allow_other_host: true, status: :see_other }
+    end
   end
 
   private
+
+  # Provider のセッションも終了するため、Provider のログアウトを経てアプリのトップへ戻す
+  def provider_logout_url
+    # ID トークンを持たない古いセッションは Provider がログアウトを受け付けないので、トップへ戻すだけにする
+    return "/" if session[:id_token].blank?
+
+    query = {
+      id_token_hint: session[:id_token],
+      post_logout_redirect_uri: URI.join(ENV.fetch("OIDC_REDIRECT_URI", nil), "/").to_s
+    }.to_query
+    "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/logout?#{query}"
+  end
 
   def revoke_tokens
     revoke_token(session[:access_token], "access_token")
