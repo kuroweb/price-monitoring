@@ -305,6 +305,7 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   Exclude:
     - 'config/initializers/filter_parameter_logging.rb'
+
 # Offense count: 10
 # This cop supports unsafe autocorrection (--autocorrect-all).
 RSpec/IncludeExamples:
