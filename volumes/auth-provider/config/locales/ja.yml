@@ -1,0 +1,81 @@
+ja:
+  activerecord:
+    models:
+      user: アカウント
+    attributes:
+      user:
+        name: 名前
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        current_password: 現在のパスワード
+        reset_password_token: パスワード再設定用トークン
+  errors:
+    format: "%{attribute}%{message}"
+    messages:
+      blank: を入力してください
+      empty: を入力してください
+      invalid: は正しい値を入力してください
+      taken: は既に登録されています
+      confirmation: が一致しません
+      too_short: は%{count}文字以上で入力してください
+      too_long: は%{count}文字以内で入力してください
+      not_a_number: は数値で入力してください
+      not_saved: "%{count}件のエラーがあるため、%{resource}を保存できませんでした。"
+      already_confirmed: は確認済みです。ログインしてください
+      confirmation_period_expired: の確認期限（%{period}）が過ぎています。再送信してください
+      expired: の有効期限が切れています。再送信してください
+      not_found: が見つかりません
+      not_locked: はロックされていません
+  devise:
+    failure:
+      already_authenticated: 既にログインしています。
+      inactive: アカウントが有効になっていません。
+      invalid: メールアドレスまたはパスワードが正しくありません。
+      locked: アカウントはロックされています。
+      last_attempt: あと1回失敗するとアカウントがロックされます。
+      not_found_in_database: メールアドレスまたはパスワードが正しくありません。
+      timeout: セッションの有効期限が切れました。もう一度ログインしてください。
+      unauthenticated: ログインまたは新規登録してください。
+      unconfirmed: メールアドレスの確認を完了してください。
+    sessions:
+      signed_in: ログインしました。
+      signed_out: ログアウトしました。
+      already_signed_out: ログアウトしました。
+    registrations:
+      signed_up: 登録が完了しました。
+      signed_up_but_inactive: 登録しました。アカウントはまだ有効になっていません。
+      signed_up_but_locked: 登録しました。アカウントはロックされています。
+      signed_up_but_unconfirmed: 確認用メールを送信しました。メール内のリンクから登録を完了してください。
+      updated: アカウント情報を更新しました。
+      updated_but_not_signed_in: アカウント情報を更新しました。もう一度ログインしてください。
+      update_needs_confirmation: アカウント情報を更新しました。新しいメールアドレスの確認を完了してください。
+      destroyed: アカウントを削除しました。
+    passwords:
+      no_token: パスワード再設定メールに記載されたリンクからアクセスしてください。
+      send_instructions: パスワード再設定の案内をメールで送信しました。
+      send_paranoid_instructions: メールアドレスが登録されている場合、パスワード再設定の案内を送信します。
+      updated: パスワードを変更し、ログインしました。
+      updated_not_active: パスワードを変更しました。
+    confirmations:
+      confirmed: メールアドレスを確認しました。
+      send_instructions: 確認方法をメールで送信しました。
+      send_paranoid_instructions: メールアドレスが登録されている場合、確認方法を送信します。
+    unlocks:
+      send_instructions: ロック解除方法をメールで送信しました。
+      send_paranoid_instructions: アカウントが存在する場合、ロック解除方法を送信します。
+      unlocked: ロックを解除しました。ログインしてください。
+    omniauth_callbacks:
+      failure: "%{kind}で認証できませんでした（%{reason}）。"
+      success: "%{kind}で認証しました。"
+    mailer:
+      confirmation_instructions:
+        subject: メールアドレスの確認
+      reset_password_instructions:
+        subject: パスワードの再設定
+      unlock_instructions:
+        subject: アカウントのロック解除
+      email_changed:
+        subject: メールアドレスの変更
+      password_change:
+        subject: パスワードの変更
