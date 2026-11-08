@@ -11,7 +11,7 @@ describe('Sidebar', () => {
     const close = vi.fn()
     const user = userEvent.setup()
     render(<Sidebar open setOpen={close} />)
-    expect(screen.getAllByRole('link')).toHaveLength(9)
+    expect(screen.getAllByRole('link')).toHaveLength(7)
     const link = screen.getByRole('link', { name: '最安値一覧' })
     expect(link).toHaveAttribute('aria-current', 'page')
     expect(screen.getAllByRole('link').filter((item) => item.hasAttribute('aria-current'))).toEqual([link])
