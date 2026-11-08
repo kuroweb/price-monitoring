@@ -43,6 +43,9 @@ const Header = (props: Props) => {
                 {process.env.NEXT_PUBLIC_COMPOSE_PROJECT_NAME}
               </span>
             )}
+            <a href='/auth/auth_provider' className='btn btn-ghost btn-sm'>
+              ログイン・新規登録
+            </a>
           </div>
         </div>
       </header>

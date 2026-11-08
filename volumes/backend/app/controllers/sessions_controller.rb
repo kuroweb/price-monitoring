@@ -21,13 +21,13 @@ class SessionsController < ApplicationController
     session[:refresh_token] = auth.credentials.refresh_token
     session[:expires_at] = Time.current.to_i + auth.credentials.expires_in
 
-    redirect_to "/auth/test", notice: "Logged in successfully as #{user.email}"
+    redirect_to "/"
   end
 
   def failure
     error_message = params[:message] || "Unknown error"
     Rails.logger.error("Authentication failed: #{error_message}")
-    redirect_to "/auth/test", alert: "Authentication failed: #{error_message}"
+    redirect_to "/products?auth_error=1"
   end
 
   def destroy

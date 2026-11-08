@@ -1,4 +1,5 @@
 import Layout from '@/components/layouts/Layout'
+import AuthenticationError from '@/features/auth/components/AuthenticationError'
 import { getCategories, getCategoriesStructured, getCategoryStructuredSubtree } from '@/features/categories/api/actions'
 import { getProductPrices, getProducts } from '@/features/products/api/actions'
 import CategoryNavigation from '@/features/products/components/CategoryNavigation'
@@ -55,6 +56,7 @@ const Page = async ({
 
   return (
     <Layout>
+      {resolvedSearchParams.auth_error === '1' && <AuthenticationError />}
       <div className='grid grid-cols-1 space-y-4'>
         <div className='card bg-base-300'>
           <div className='card-body'>

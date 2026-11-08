@@ -7,6 +7,8 @@ RSpec.describe "ダッシュボード", type: :request do
         get root_path
 
         expect(response).to redirect_to(new_user_session_path)
+        follow_redirect!
+        expect(response.body).to include("ログインまたは新規登録してください。")
       end
     end
 
