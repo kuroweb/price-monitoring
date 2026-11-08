@@ -305,3 +305,31 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   Exclude:
     - 'config/initializers/filter_parameter_logging.rb'
+# Offense count: 10
+# This cop supports unsafe autocorrection (--autocorrect-all).
+RSpec/IncludeExamples:
+  Exclude:
+    - 'spec/services/retrieve_related_products/retriever_spec.rb'
+
+# Offense count: 2
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Rails/Pluck:
+  Exclude:
+    - 'spec/services/product_monitoring/crawler_spec.rb'
+
+# Offense count: 18
+# This cop supports unsafe autocorrection (--autocorrect-all).
+Rails/StrongParametersExpect:
+  Exclude:
+    - 'app/controllers/api/v1/backmarket_watch_targets_controller.rb'
+    - 'app/controllers/api/v1/categories_controller.rb'
+    - 'app/controllers/api/v1/product_aggregation_settings_controller.rb'
+    - 'app/controllers/api/v1/product_crawl_results_controller.rb'
+    - 'app/controllers/api/v1/product_crawl_settings_controller.rb'
+    - 'app/controllers/api/v1/products/iosys_crawl_settings/iosys_crawl_setting_exclude_products_controller.rb'
+    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
+    - 'app/controllers/api/v1/products/mercari_crawl_settings/mercari_crawl_setting_exclude_products_controller.rb'
+    - 'app/controllers/api/v1/products/pc_koubou_crawl_settings/pc_koubou_crawl_setting_exclude_products_controller.rb'
+    - 'app/controllers/api/v1/products/used_sofmap_crawl_settings/used_sofmap_crawl_setting_exclude_products_controller.rb'
+    - 'app/controllers/api/v1/products/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_products_controller.rb'
+    - 'app/controllers/api/v1/products_controller.rb'
