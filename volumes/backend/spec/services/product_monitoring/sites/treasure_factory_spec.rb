@@ -15,7 +15,7 @@ RSpec.describe ProductMonitoring::Sites::TreasureFactory do
   end
 
   def stub_page(html)
-    allow(described_class).to receive(:fetch_page).and_return(Struct.new(:body).new(html))
+    allow(described_class).to receive(:fetch_page).and_return(html)
   end
 
   it "販売中の出品を抽出し、売り切れの出品と次ページを判定すること" do
@@ -50,11 +50,11 @@ RSpec.describe ProductMonitoring::Sites::TreasureFactory do
     expect { described_class.fetch(uri) }.to raise_error(/no extractable listings/)
   end
 
-  it "サイズ上限つきで HTTPS の検索ページを取得すること" do
-    allow(ProductMonitoring::Sites::HttpPage).to receive(:fetch).and_return(:response)
-    expect(described_class.fetch_page(uri)).to eq(:response)
-    expect(ProductMonitoring::Sites::HttpPage).to have_received(:fetch)
-      .with(uri, max_bytes: described_class::MAX_RESPONSE_BYTES)
+  it "プロキシ経由のブラウザでトレファクのホストに限って取得すること" do
+    allow(ProductMonitoring::Sites::BrowserPage).to receive(:fetch).and_return("ok")
+    expect(described_class.fetch_page(uri)).to eq("ok")
+    expect(ProductMonitoring::Sites::BrowserPage).to have_received(:fetch)
+      .with(uri, host: "ec.treasure-f.com", max_bytes: described_class::MAX_RESPONSE_BYTES)
   end
 
   describe "URL の振り分け" do

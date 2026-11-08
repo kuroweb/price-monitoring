@@ -6,7 +6,7 @@ module ProductMonitoring
       HOST = "iosys.co.jp".freeze
       PATH = %r{\A/items/?\z}
       PLATFORM = "iosys".freeze
-      MAX_RESPONSE_BYTES = 3 * 1024 * 1024
+      MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
@@ -17,7 +17,7 @@ module ProductMonitoring
       end
 
       def self.fetch(uri)
-        page = Nokogiri::HTML(fetch_page(uri).body)
+        page = Nokogiri::HTML(fetch_page(uri))
         results = iosys_results(page)
         if results.empty?
           empty = page.at_css("#empty")
@@ -33,7 +33,7 @@ module ProductMonitoring
       end
 
       def self.fetch_page(uri)
-        HttpPage.fetch(uri, max_bytes: MAX_RESPONSE_BYTES)
+        BrowserPage.fetch(uri, host: HOST, max_bytes: MAX_RESPONSE_BYTES)
       end
 
       def self.iosys_results(page)

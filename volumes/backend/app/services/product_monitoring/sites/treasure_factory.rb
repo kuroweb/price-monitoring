@@ -6,14 +6,14 @@ module ProductMonitoring
       HOST = "ec.treasure-f.com".freeze
       PATH = %r{\A/search/?\z}
       PLATFORM = "treasure_factory".freeze
-      MAX_RESPONSE_BYTES = 3 * 1024 * 1024
+      MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
       end
 
       def self.fetch(uri)
-        page = Nokogiri::HTML(fetch_page(uri).body)
+        page = Nokogiri::HTML(fetch_page(uri))
         results = listings(page)
         # 売り切れだけのページは出品があっても結果が空になる
         if results.empty? && !page.at_css("li.pj-search_item, .pj-search_not_found")
@@ -24,7 +24,7 @@ module ProductMonitoring
       end
 
       def self.fetch_page(uri)
-        HttpPage.fetch(uri, max_bytes: MAX_RESPONSE_BYTES)
+        BrowserPage.fetch(uri, host: HOST, max_bytes: MAX_RESPONSE_BYTES)
       end
 
       def self.next_url(uri, page)
