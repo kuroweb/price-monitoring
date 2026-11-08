@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import { describe, expect, it } from 'vitest'
 
 import CategoryNavigation from '@/features/products/components/CategoryNavigation'
-import type { Category } from '@/lib/api/models/categories'
+import type { Category } from '@/lib/category'
 
 const category: Category = {
   id: 1,
@@ -13,13 +13,13 @@ const category: Category = {
 }
 
 describe('CategoryNavigation', () => {
-  it('カテゴリ未選択では商品一覧へのリンクを表示する', () => {
+  it('カテゴリ未選択では商品一覧へのリンクを表示すること', () => {
     render(<CategoryNavigation />)
 
     expect(screen.getByRole('link', { name: 'Home' })).toHaveAttribute('href', '/products')
   })
 
-  it('親カテゴリと子カテゴリへのリンクと、現在のカテゴリを表示する', () => {
+  it('親カテゴリと子カテゴリへのリンクと、現在のカテゴリを表示すること', () => {
     render(
       <CategoryNavigation
         parentCategory={category}

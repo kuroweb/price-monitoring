@@ -6,7 +6,7 @@ const eslint = new ESLint()
 const filePath = 'components/LintExample.tsx'
 
 describe('ESLint 設定', () => {
-  it('import の順序違反を例外にせず報告し、自動修正する', async () => {
+  it('import の順序違反を例外にせず報告し、自動修正すること', async () => {
     const code = "import z from 'zod'\nimport fs from 'node:fs'\nexport { z, fs }\n"
     const [result] = await eslint.lintText(code, { filePath })
 
@@ -46,7 +46,7 @@ describe('ESLint 設定', () => {
       rule: 'jsx-a11y-x/role-supports-aria-props',
       code: 'export default function Example() { return <div role="button" aria-checked="true" /> }',
     },
-  ])('$rule のアクセシビリティ違反をエラーにする', async ({ code, rule }) => {
+  ])('$rule のアクセシビリティ違反をエラーにすること', async ({ code, rule }) => {
     const [result] = await eslint.lintText(code, { filePath })
 
     expect(result.messages).toEqual(
@@ -71,7 +71,7 @@ describe('ESLint 設定', () => {
       rule: '@typescript-eslint/no-unused-vars',
       code: 'const unused = 1\nexport default function Example() { return null }',
     },
-  ])('$rule の違反をエラーにする', async ({ code, rule }) => {
+  ])('$rule の違反をエラーにすること', async ({ code, rule }) => {
     const [result] = await eslint.lintText(code, { filePath })
 
     expect(result.messages).toEqual(
@@ -79,7 +79,7 @@ describe('ESLint 設定', () => {
     )
   })
 
-  it('不要な JSX の波括弧と空のコンポーネントの閉じタグを自動修正する', async () => {
+  it('不要な JSX の波括弧と空のコンポーネントの閉じタグを自動修正すること', async () => {
     const code =
       'function Child({ title }: { title: string }) { return <div>{title}</div> }\nexport default function Example() { return <Child title={"sample"}></Child> }'
     const [result] = await eslint.lintText(code, { filePath })
@@ -98,7 +98,7 @@ describe('ESLint 設定', () => {
     expect(fixed.errorCount).toBe(0)
   })
 
-  it('JSX 内だけで使うコンポーネントと空の HTML 要素を許可する', async () => {
+  it('JSX 内だけで使うコンポーネントと空の HTML 要素を許可すること', async () => {
     const code =
       'function Child() { return <div></div> }\nexport default function Example() { return <><Child /><p>don&apos;t &quot;quote&quot; &gt; &rbrace;</p></> }'
     const [result] = await eslint.lintText(code, { filePath })
@@ -106,7 +106,7 @@ describe('ESLint 設定', () => {
     expect(result.messages).toEqual([])
   })
 
-  it('JavaScript の JSX でも未定義コンポーネントを検出する', async () => {
+  it('JavaScript の JSX でも未定義コンポーネントを検出すること', async () => {
     const [result] = await eslint.lintText(
       'export default function Example() { return <Missing /> }',
       { filePath: 'components/LintExample.jsx' },

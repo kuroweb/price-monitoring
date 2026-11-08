@@ -18,12 +18,14 @@ CI/CD は `workflow_dispatch` による手動実行にも対応する。全イ�
 
 | 変更対象 | 実行するテスト |
 | --- | --- |
-| `volumes/backend/**` / `containers/backend/**` | `backend` コンテナでテスト DB を準備し、RSpec を実行 |
-| `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナでテスト DB と Tailwind アセットを準備し、RSpec を実行 |
-| `volumes/frontend/**` / `containers/frontend/**` / `.github/workflows/cicd-integration.yml` / `.github/workflows/cicd-production.yml` | `frontend` コンテナで `npm ci` 後、lint・型検査・Vitest を実行 |
-| `docker-compose.yml` / `.github/workflows/ci-pr.yml` | 上記すべての検証を実行 |
+| `volumes/backend/**` / `containers/backend/**` | `backend` コンテナで RuboCop を実行し、テスト DB を準備して RSpec を実行 |
+| `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナで RuboCop を実行し、テスト DB と Tailwind アセットを準備して RSpec を実行 |
+| `volumes/frontend/**` / `containers/frontend/**` | `frontend` コンテナで `npm ci` 後、lint・型検査・Vitest を実行 |
+| `docker-compose.yml` / `.github/workflows/ci-pr.yml` / `.github/workflows/cicd-integration.yml` / `.github/workflows/cicd-production.yml` | 上記すべての検証を実行 |
 
-Frontend CI は `--no-deps` で実行し、BFF・DB・認証の起動を必要としない。Playwright・Camoufox の独立したテストジョブは定義していない。同じ Pull Request に更新が入った場合は、実行中のテストをキャンセルして最新の変更を検証する。
+Frontend CI は `--no-deps` で実行し、バックエンド・DB・認証アプリの起動を必要としない。Playwright・Camoufox の独立したテストジョブは定義していない。同じ Pull Request に更新が入った場合は、実行中のテストをキャンセルして最新の変更を検証する。
+
+バックエンドと認証アプリ の RuboCop と RSpec はそれぞれ別のジョブで並列実行する。RuboCop のジョブは依存サービスを起動しない。
 
 この workflow はリポジトリのシークレットを必要とせず、デプロイ処理を含まない。マージ後は「環境と実行契機」の push による CI/CD が実行される。
 
@@ -33,14 +35,14 @@ Frontend CI は `--no-deps` で実行し、BFF・DB・認証の起動を必要�
 
 | 対象 | 依存関係ファイル |
 | --- | --- |
-| BFF / batch | `volumes/backend/Gemfile` / `Gemfile.lock` |
-| Provider | `volumes/auth-provider/Gemfile` / `Gemfile.lock` |
+| バックエンド | `volumes/backend/Gemfile` / `Gemfile.lock` |
+| 認証アプリ | `volumes/auth-provider/Gemfile` / `Gemfile.lock` |
 | Frontend | `volumes/frontend/package.json` / `package-lock.json` |
 | GitHub Actions | `.github/workflows/*.yml` |
 
 マイナー・パッチ更新は対象ごとに一つの Pull Request にまとめ、メジャー更新は個別に作成する。通常のバージョン更新で同時に開く Pull Request は、各対象で最大 5 件とする。この上限と週次スケジュールはセキュリティ更新の実行頻度・件数を制御するものではない。
 
-BFF / batch と Provider の更新では「Pull Request の自動テスト」に従って RSpec が動き、Frontend の更新では lint・型検査・Vitest が動く。ローカルでの確認は [テスト手順](../development/testing.md)を参照する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
+バックエンドと認証アプリ の更新では「Pull Request の自動テスト」に従って RuboCop と RSpec が動き、Frontend の更新では lint・型検査・Vitest が動く。ローカルでの確認は [テスト手順](../development/testing.md)を参照する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
 
 Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright のクライアントとサーバーはメジャー・マイナーバージョンを揃える必要がある ([公式仕様](https://playwright.dev/docs/api/class-browsertype))。そのため `playwright-ruby-client` のメジャー・マイナー更新は Dependabot の対象から除外し、サーバーと合わせて手動で更新する。Camoufox 0.5.8 は Playwright 1.63 未満を要求するため ([依存要件](https://pypi.org/project/camoufox/0.5.8/))、更新時は `containers/backend_playwright/**` と `containers/backend_camoufox/**` の指定、および `Crawl::Client` / `Crawl::CamoufoxClient` の接続APIを合わせて確認する。これらのイメージには独立したCIジョブがないため、各Dockerfileのビルドと両方の接続確認を行う。
 
@@ -50,13 +52,13 @@ Dependabot alerts とセキュリティ更新 PR の自動作成は、GitHub の
 
 | 対象 | 変更検出するパス | CI | CD |
 | --- | --- | --- | --- |
-| BFF / batch | `volumes/backend/**` / `containers/backend/**` | `backend` コンテナで DB 作成・migration・RSpec | CI 成功後、spec 以外のアプリファイルまたはコンテナ定義の変更時 |
-| Provider | `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナでテスト DB・Tailwind アセット準備・RSpec | CI 成功後、spec 以外のアプリファイルまたはコンテナ定義の変更時 |
+| バックエンド | `volumes/backend/**` / `containers/backend/**` | `backend` コンテナで RuboCop・DB 作成・migration・RSpec | CI 成功後、spec 以外のアプリファイルまたはコンテナ定義の変更時 |
+| 認証アプリ | `volumes/auth-provider/**` / `containers/auth-provider/**` | `auth-provider` コンテナで RuboCop・テスト DB・Tailwind アセット準備・RSpec | CI 成功後、spec 以外のアプリファイルまたはコンテナ定義の変更時 |
 | Frontend | `volumes/frontend/**` / `containers/frontend/**` | `frontend` コンテナで `npm ci`・lint・型検査・Vitest | CI 成功後、変更検出時 |
 | Playwright | `containers/backend_playwright/**` | 独立した CI ジョブなし | 変更検出時 |
 | Camoufox | `containers/backend_camoufox/**` | 独立した CI ジョブなし | 変更検出時 |
 
-CI/CD の手動実行では変更の有無にかかわらず各ジョブを実行する。BFF / Provider / Frontend の CD はそれぞれの CI 成功が前提。
+CI/CD の手動実行では変更の有無にかかわらず各ジョブを実行する。バックエンドと認証アプリ の CD はそれぞれ RuboCop と RSpec の両ジョブの成功が前提。Frontend の CD は Frontend CI の成功が前提。
 Frontend CI は `docker-compose.yml` と各環境自身の CI/CD workflow の変更時にも実行する。これらだけの変更では Frontend CD は実行しない。
 spec 以外の判定など正確な glob は workflow の `check_changes` を参照する。
 
@@ -87,10 +89,10 @@ sequenceDiagram
 ## 全イメージの手動デプロイ
 
 各環境の `deploy-*.yml` は CI の実行を含まない。デプロイ対象の検証を済ませてから実行する。
-GitHub Actions runner を Tailscale に接続し、runner 上の make / Docker Buildx で BFF、Playwright、Camoufox、Frontend、Provider の全イメージをビルドする。
+GitHub Actions runner を Tailscale に接続し、runner 上の make / Docker Buildx で バックエンド、Playwright、Camoufox、Frontend、認証アプリ の全イメージをビルドする。
 この経路は再利用 CD と異なり、ビルド後に個別の push タスクを実行する。その後、対象環境の全イメージタグをまとめて更新し、k8s リポジトリへ commit / push する。
 
-ビルド・push タスクは [Makefile](../../Makefile) を参照する。Provider のイメージ名は `auth-provider-backend-<environment>`、マニフェスト更新時の `IMAGE` は `auth-provider-backend`。
+ビルド・push タスクは [Makefile](../../Makefile) を参照する。認証アプリのイメージ名は `auth-provider-backend-<environment>`、マニフェスト更新時の `IMAGE` は `auth-provider-backend`。
 Kubernetes の全体構成は [ルート README](../../README.md#production)、認証固有の移行情報は [認証基盤](../auth-provider/index.md#cicd-と-kubernetes) を参照する。
 
 ## PR の自動レビュー

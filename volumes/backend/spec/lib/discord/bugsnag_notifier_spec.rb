@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Discord::BugsnagEmbed do
   describe "#call" do
-    it "builds an embed from a Bugsnag report" do
+    it "Bugsnag のレポートから埋め込みを作成すること" do
       report = Bugsnag::Report.new(RuntimeError.new("boom"), Bugsnag.configuration, true)
       report.context = "Api::ProductsController#show"
 
@@ -23,7 +23,7 @@ end
 
 RSpec.describe Discord::BugsnagNotifier do
   describe "#call" do
-    it "posts an embed to Discord" do
+    it "Discord に埋め込みを投稿すること" do
       stub_const("ENV", ENV.to_hash.merge("BUGSNAG_DISCORD_WEBHOOK_URL" => "https://discord.com/api/webhooks/1/token"))
       stub_request(:post, %r{discord\.com/api/webhooks}).to_return(status: 204)
 
@@ -34,7 +34,7 @@ RSpec.describe Discord::BugsnagNotifier do
       expect(a_request(:post, %r{discord\.com/api/webhooks})).to have_been_made.once
     end
 
-    it "does not post when webhook URL is missing" do
+    it "webhook URL がない場合は投稿しないこと" do
       stub_const("ENV", ENV.to_hash.merge("BUGSNAG_DISCORD_WEBHOOK_URL" => ""))
       stub_request(:post, %r{discord\.com/api/webhooks}).to_return(status: 204)
 

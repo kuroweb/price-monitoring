@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { describe, expect, it, vi } from 'vitest'
 
+import type { RelatedProduct } from '@/features/products/api/types'
 import RelatedProductCard from '@/features/products/components/RelatedProductCard'
-import type { RelatedProduct } from '@/lib/api'
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
 
@@ -24,7 +24,7 @@ const relatedProduct: RelatedProduct = {
 }
 
 describe('RelatedProductCard', () => {
-  it('画像と商品説明から外部の商品ページへリンクし、キーボードで移動できる', async () => {
+  it('画像と商品説明から外部の商品ページへリンクし、キーボードで移動できること', async () => {
     const user = userEvent.setup()
     render(
       <NuqsTestingAdapter>

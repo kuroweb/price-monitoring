@@ -1,7 +1,64 @@
 require "rails_helper"
 
 RSpec.describe SessionsController, type: :request do
-  describe "DELETE /logout" do
+  describe "GET /auth/auth_provider/callback のリクエスト" do
+    let(:auth) do
+      OmniAuth::AuthHash.new(
+        uid: "provider-user-1",
+        info: { name: "会員", email: "member@example.com" },
+        credentials: { token: "access-token", refresh_token: "refresh-token", expires_in: 7200, id_token: "id-token" }
+      )
+    end
+
+    before do
+      OmniAuth.config.test_mode = true
+      OmniAuth.config.mock_auth[:auth_provider] = auth
+    end
+
+    after do
+      OmniAuth.config.mock_auth.delete(:auth_provider)
+      OmniAuth.config.test_mode = false
+    end
+
+    it "ユーザーを登録し、アプリのトップ画面に戻すこと" do
+      expect do
+        get "/auth/auth_provider/callback"
+      end.to change(User, :count).by(1)
+
+      expect(User.find_by!(provider_uid: "provider-user-1")).to have_attributes(
+        name: "会員", email: "member@example.com", provider_name: User::ProviderName::AUTH_PROVIDER
+      )
+      expect(response).to redirect_to("/")
+      expect(session[:id_token]).to eq("id-token")
+    end
+  end
+
+  describe "DELETE /logout のリクエスト" do
+    context "ID トークンを持つセッションの場合" do
+      login_with_session(id_token: "id-token")
+
+      let(:provider_logout_url) do
+        "https://test-oidc.example.com/oauth/logout?id_token_hint=id-token&post_logout_redirect_uri=#{CGI.escape('https://app.example.com/')}"
+      end
+
+      before do
+        stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke").to_return(status: 200)
+      end
+
+      it "Provider のセッションも終了するため、Provider のログアウトへ移すこと" do
+        delete "/logout"
+
+        expect(response).to redirect_to(provider_logout_url)
+        expect(response).to have_http_status(:see_other)
+      end
+
+      it "JSON を求められたら、ブラウザを移す先を返すこと" do
+        delete "/logout", headers: { "Accept" => "application/json" }
+
+        expect(response.parsed_body).to eq("logout_url" => provider_logout_url)
+      end
+    end
+
     context "有効なトークンでログインしている場合" do
       login_with_session
 
@@ -28,14 +85,14 @@ RSpec.describe SessionsController, type: :request do
         expect(stub_revoke_refresh).to have_been_requested.once
       end
 
-      it "成功メッセージとともに /auth/test にリダイレクトすること" do
+      it "アプリのトップ画面にリダイレクトすること" do
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_return(status: 200)
 
         delete "/logout"
 
-        expect(response).to redirect_to("/auth/test")
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(response).to redirect_to("/")
+        expect(response).to have_http_status(:see_other)
       end
     end
 
@@ -48,8 +105,7 @@ RSpec.describe SessionsController, type: :request do
 
         delete "/logout"
 
-        expect(response).to redirect_to("/auth/test")
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(response).to redirect_to("/")
       end
 
       it "ネットワークエラーが発生してもログアウトできること" do
@@ -59,8 +115,7 @@ RSpec.describe SessionsController, type: :request do
 
         delete "/logout"
 
-        expect(response).to redirect_to("/auth/test")
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(response).to redirect_to("/")
         expect(Bugsnag).to have_received(:notify).with(an_instance_of(Faraday::ConnectionFailed))
       end
     end
@@ -90,24 +145,54 @@ RSpec.describe SessionsController, type: :request do
         delete "/logout"
 
         expect(stub_revoke).not_to have_been_requested
-        expect(response).to redirect_to("/auth/test")
+        expect(response).to redirect_to("/")
       end
     end
   end
 
-  describe "GET /auth/failure" do
-    it "エラーメッセージとともに /auth/test にリダイレクトすること" do
-      get "/auth/failure", params: { message: "invalid_credentials" }
-
-      expect(response).to redirect_to("/auth/test")
-      expect(flash[:alert]).to eq("Authentication failed: invalid_credentials")
+  describe "ログアウトの CSRF 検証" do
+    around do |example|
+      previous = ActionController::Base.allow_forgery_protection
+      ActionController::Base.allow_forgery_protection = true
+      example.run
+    ensure
+      ActionController::Base.allow_forgery_protection = previous
     end
 
-    it "エラーメッセージがない場合はデフォルトメッセージを表示すること" do
+    it "トークンがないリクエストを拒否すること" do
+      delete "/logout"
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+
+    it "同じセッションのトークンでログアウトできること" do
+      get "/auth/csrf_token"
+      token = response.parsed_body.fetch("csrf_token")
+      expect(response.headers["Cache-Control"]).to include("no-store")
+      delete "/logout", headers: { "X-CSRF-Token" => token }
+      expect(response).to redirect_to("/")
+    end
+
+    it "別のセッションのトークンを拒否すること" do
+      get "/auth/csrf_token"
+      token = response.parsed_body.fetch("csrf_token")
+      request.session.clear
+      other_session = open_session
+      other_session.delete "/logout", headers: { "X-CSRF-Token" => token }
+      expect(other_session.response).to have_http_status(:unprocessable_content)
+    end
+  end
+
+  describe "GET /auth/failure のリクエスト" do
+    it "認証失敗を示してアプリのトップ画面にリダイレクトすること" do
+      get "/auth/failure", params: { message: "invalid_credentials" }
+
+      expect(response).to redirect_to("/products?auth_error=1")
+    end
+
+    it "エラーメッセージがない場合も認証失敗を示すこと" do
       get "/auth/failure"
 
-      expect(response).to redirect_to("/auth/test")
-      expect(flash[:alert]).to eq("Authentication failed: Unknown error")
+      expect(response).to redirect_to("/products?auth_error=1")
     end
 
     it "認証失敗をログに記録すること" do

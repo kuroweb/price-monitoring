@@ -1,11 +1,12 @@
 # Frontend
 
 このページは frontend を変更する開発者向けに、このプロジェクトで route / feature / data access をどう分けるかを揃えるための設計解説です。
-実装時は `app` を入口、`features` を画面単位の UI、`lib/api` と `lib/actions` を通信境界として扱います。
+実装時は `app` を入口、`features` を機能ごとの UI と通信境界として扱います。
 
 ## 文書の案内
 
 - [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
+- [商品計測・商品相場PoC](../backend/product-monitoring-poc.md) — 画面の操作と制約
 - [文書全体の索引](../index.md)
 
 ## 判断基準
@@ -13,9 +14,8 @@
 - `app/` は route entry と page composition に絞る
 - 画面固有の UI や state は `features/` に寄せる
 - 共通 layout は `components/layouts/` に寄せる
-- BFF 通信は `lib/api/` に寄せ、共通クライアントは `lib/http-client.ts` に寄せる
-- response 型は `lib/api/models/` に寄せる
-- server action と revalidation は `lib/actions/` に寄せ、revalidate 対象 path は `lib/revalidate-paths.ts` に寄せる
+- BFF 通信と response 型、server action は各機能の `api/` に寄せる
+- 共通クライアントは `lib/http-client.ts`、再検証対象の path は `lib/revalidate-paths.ts` に寄せる
 
 ## 置いてよい責務
 
@@ -30,18 +30,23 @@
 - 画面ごとの component
 - 画面ごとの hook や小さな補助関数
 - その画面だけで閉じる UI state
+- 置き場所は route ではなく機能で決める。`features/<機能>/` に置き、複数の route（管理画面と閲覧画面など）から使ってよい
+- 機能の中は種類で分ける。`api/`（型・API クライアント・server action）・`components/`（画面の部品）・`hooks/`・`lib/`（小さな補助関数）を置く。機能の中のファイルどうしは自由に読み込んでよい
+- `features` どうしは読み込まない。機能をまたいで使うものは `components/ui/` や `lib/` に置くか、`app` で組み立てる
+- どの機能にも依存しない汎用部品は `components/ui/` に置く
 
-### lib/api と lib/actions
+### features/<機能>/api と共有の土台
 
-- `lib/api` には HTTP request / response の境界を置く
-- `lib/actions` には server action と path revalidation を置く
+- 機能の通信は `features/<機能>/api/` に置く。`types.ts` に request / response の型、リソースごとのファイルに HTTP request（`lib/http-client` を使う）、`actions.ts` に server action と path revalidation を置く
+- `lib/http-client` と `lib/revalidate-paths` は全機能で共有する土台として `lib/` に置く
+- 商品とカテゴリの両方で使う `Category` 型は `lib/category.ts` に置き、カテゴリデータの取得は `app` で組み立てる
 - page や feature から直接 backend の details を広げすぎない
 
 ## 置かない責務
 
 - `app` に画面固有の細かい UI 実装をため込まない
 - `features` から直接 HTTP client の詳細を散らさない
-- `lib/api` に revalidation や UI 都合の処理を混ぜない
+- HTTP request に revalidation や UI 都合の処理を混ぜない
 - layout 共通部品に画面固有の条件分岐を持ち込まない
 
 ## このプロジェクトでの見方
@@ -51,20 +56,22 @@
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
 - `app/backmarket/page.tsx` が Backmarket 計測結果の入口
+- `app/product-crawl-results/` と `app/product-aggregation-results/` が商品計測結果・商品相場の入口
 - `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
 
 ### feature 単位の UI
 
 - `features/products/` が商品一覧や詳細の UI と state を持つ
-- `features/admin/` が管理画面の機能ごとの UI を持つ
-- `features/backmarket-recents/` が Backmarket 直近取得画面の UI を持つ
+- `features/categories/` がカテゴリ管理の UI と通信を持つ
+- `features/backmarket/` が計測対象の管理と直近取得画面の UI と通信を持つ
+- `features/product-monitoring/` が商品計測（計測設定・計測結果・相場設定・相場）の UI を持つ。結果画面から設定の登録・編集モーダルを開き、設定を管理する読み込みや、2つの設定で語句・価格帯の入力欄を共有する読み込みは、同じ機能の中に収まる
 - page は feature を束ねる役に留める
 
 ### 通信境界
 
 - `lib/http-client.ts` が共通 HTTP クライアント
-- `lib/api/<resource>/api.ts` の単位で BFF 通信を閉じ、`lib/api/models/` に response 型を置く
-- `lib/actions/<resource>.ts` の単位で server action と再検証を閉じ、`lib/revalidate-paths.ts` に path 定数を集約する
+- `features/<機能>/api/` のリソース単位のファイルで BFF 通信を閉じ、`types.ts` に型を置く
+- `features/<機能>/api/actions.ts` に server action と再検証を置き、`lib/revalidate-paths.ts` に path 定数を集約する
 
 ## 避けること
 
@@ -107,6 +114,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 
 ## テスト方針
 
+- Vitest の `describe`・`it`・`test` の説明文は日本語で書く。関数・コンポーネントを指す `describe` はそのまま使う。`it`・`test` は振る舞いを「〜こと」で終える
 - Vitest・React Testing Library・jsdom を使い、関数と同期 component、Client Component の振る舞いを検証する
 - テストは `tests/` 配下に、対象実装と同じディレクトリ構造で `*.test.ts` / `*.test.tsx` として置く。例: `features/products/components/CategoryNavigation.tsx` に対して `tests/features/products/components/CategoryNavigation.test.tsx`
 - `describe` / `it` / `expect` / `vi` は `vitest` から明示的に import する。`@/` エイリアスはアプリと同じ `tsconfig.json` を参照する
@@ -131,8 +139,8 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 - [`volumes/frontend/app/products/page.tsx`](../../volumes/frontend/app/products/page.tsx)
 - [`volumes/frontend/features/products/components/CategoryNavigation.tsx`](../../volumes/frontend/features/products/components/CategoryNavigation.tsx)
 - [`volumes/frontend/lib/http-client.ts`](../../volumes/frontend/lib/http-client.ts)
-- [`volumes/frontend/lib/actions/products.ts`](../../volumes/frontend/lib/actions/products.ts)
-- [`volumes/frontend/lib/api/products/api.ts`](../../volumes/frontend/lib/api/products/api.ts)
+- [`volumes/frontend/features/products/api/actions.ts`](../../volumes/frontend/features/products/api/actions.ts)
+- [`volumes/frontend/features/products/api/products.ts`](../../volumes/frontend/features/products/api/products.ts)
 
 ## 更新時に確認する source of truth
 
@@ -140,6 +148,5 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 - `volumes/frontend/features/`
 - `volumes/frontend/components/layouts/`
 - `volumes/frontend/lib/http-client.ts`
-- `volumes/frontend/lib/api/`
-- `volumes/frontend/lib/actions/`
+- `volumes/frontend/lib/category.ts`
 - `volumes/frontend/lib/revalidate-paths.ts`

@@ -2,9 +2,9 @@
 
 ローカルで RSpec・静的検証・frontend のテストを実行する開発者向けの手順。以下はホストのリポジトリルートで実行し、just / Docker Compose が起動中のコンテナ内でテストを実行する。先に [起動と状態確認](operations.md#起動と状態確認) で対象 service が起動していることを確認する。
 
-## BFF / Provider の RSpec
+## バックエンド / 認証アプリの RSpec
 
-Provider のテスト DB・アセットは、先に [認証の検証準備](../auth-provider/verification.md) を行う。
+認証アプリのテスト DB・アセットは、先に [認証の検証準備](../auth-provider/verification.md) を行う。
 
 ```bash
 just rspec-backend
@@ -20,6 +20,17 @@ just rspec-backend spec/models/<target>_spec.rb:42
 
 失敗したら対象の spec だけを再実行し、必要に応じて `just logs` で依存サービスの状態を確認する。
 
+## バックエンド / 認証アプリの静的検証
+
+```bash
+just rubocop-backend
+just rubocop-auth-provider
+```
+
+対象ファイルや RuboCop のオプションを引数として渡せる。
+
+既存の違反は各アプリの `.rubocop_todo.yml` で cop とファイルの組み合わせごとに除外している。同じファイルで同じ cop の違反が増えても検出されないため、修正時に除外を削除して再検査する。
+
 ## frontend の静的検証
 
 ```bash
@@ -29,7 +40,7 @@ docker compose exec frontend npm run typecheck
 
 ## frontend のテスト
 
-単体・コンポーネントテストは Vitest と React Testing Library を使う。BFF や認証の接続は不要。初回導入時や依存関係の更新後は、起動中の `frontend` コンテナで `docker compose exec frontend npm ci` を実行する。
+単体・コンポーネントテストは Vitest と React Testing Library を使う。バックエンドや認証アプリへの接続は不要。初回導入時や依存関係の更新後は、起動中の `frontend` コンテナで `docker compose exec frontend npm ci` を実行する。
 
 ```bash
 just test-frontend
@@ -43,7 +54,7 @@ just test-frontend-coverage
 
 ```bash
 just test-frontend CategoryNavigation.test.tsx
-just test-frontend 'tests/features/products/[id]/lib/makePlatformMask.test.ts'
+just test-frontend 'tests/features/products/lib/makePlatformMask.test.ts'
 just test-frontend -t '最初のページ'
 ```
 

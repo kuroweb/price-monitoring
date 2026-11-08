@@ -19,7 +19,8 @@ module RequestSpecHelpers
         user_id: test_user.id,
         access_token: options.key?(:access_token) ? options[:access_token] : "test_access_token",
         refresh_token: options.key?(:refresh_token) ? options[:refresh_token] : "test_refresh_token",
-        expires_at: options.key?(:expires_at) ? options[:expires_at] : 10.minutes.from_now.to_i
+        expires_at: options.key?(:expires_at) ? options[:expires_at] : 10.minutes.from_now.to_i,
+        id_token: options[:id_token]
       }
     end
   end
@@ -42,5 +43,6 @@ RSpec.configure do |config|
     ENV["OIDC_ISSUER"] = "https://test-oidc.example.com"
     ENV["OIDC_CLIENT_ID"] = "test_client_id"
     ENV["OIDC_CLIENT_SECRET"] = "test_client_secret"
+    ENV["OIDC_REDIRECT_URI"] = "https://app.example.com/auth/auth_provider/callback"
   end
 end

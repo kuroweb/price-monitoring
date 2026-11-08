@@ -3,6 +3,7 @@
 認証を変更する開発者向けの、テスト準備とログイン・ログアウトの確認手順。構成は [認証基盤](index.md) を参照する。
 
 共通の起動・状態確認・RSpec 実行方法は [ローカル開発のテスト手順](../development/testing.md) を参照する。
+
 Provider のテスト DB・アセットを初回または関連変更後に準備する。ホストのリポジトリルートから実行し、処理はテスト環境の `auth-provider` コンテナで行う。
 
 ```bash
@@ -22,9 +23,9 @@ just rspec-backend spec/requests/sessions_controller_spec.rb spec/requests/oidc_
 docker compose logs --tail=100 auth-provider nginx
 ```
 
-https://dev.price-monitoring.com/auth/test からログインし、Provider での認証後に BFF へ戻ること、ログアウト後に BFF のログイン状態が解除されることを確認する。
+アプリのヘッダーの「ログイン・新規登録」から Provider の新規登録へ進み、入力エラーの表示と、登録後にアプリのトップへ戻り、ヘッダーに登録した名前が表示されることを確認する。登録済みユーザーでもログインを確認する。ヘッダーの名前からマイページを開き、名前とメールアドレスを確認する。同じメニューのログアウトでトップへ戻り、ヘッダーにログインの入口が表示されることと、続けてログインすると Provider でパスワードを求められることを確認する。未ログインでマイページを開いた場合もログインの入口を表示する。BFF のログイン状態は https://dev.price-monitoring.com/auth/test でも確認できる。
 
-worktree では [ローカル開発ガイドの Orca の worktree](../development/worktree.md) に従い、`.env` の `WORKTREE_HTTPS_PORT` を URL に付ける（例: `https://dev.price-monitoring.com:8443/auth/test`）。メインと同じブラウザで両方にログインし、片方の BFF からログアウトしても他方はログイン状態を維持することを、両方向で確認する。Provider の「ログイン状態を保持する」を有効にしてログインした場合も、片方のログアウトが他方に影響しないことを確認する。BFF のログアウトは Provider のセッションを終了しないため、再ログイン時に Provider のパスワード入力が省略されることはある。
+worktree では [ローカル開発ガイドの Orca の worktree](../development/worktree.md) に従い、`.env` の `WORKTREE_HTTPS_PORT` を URL に付ける（例: `https://dev.price-monitoring.com:8443/auth/test`）。メインと同じブラウザで両方にログインし、片方の BFF からログアウトしても他方はログイン状態を維持することを、両方向で確認する。Provider の「ログイン状態を保持する」を有効にしてログインした場合も、片方のログアウトが他方に影響しないことを確認する。BFF のログアウトは、ログアウトした環境の Provider のセッションも終了する。
 
 ## proxy・ポート変更後の確認
 
@@ -45,3 +46,7 @@ worktree では [ローカル開発ガイドの Orca の worktree](../developmen
 - CORS を変更した場合は、development と production / integration の許可を分けて確認する。
 
 `just prepare` や API の成功だけでは、OIDC・Cookie 分離・HMR を確認したことにはならない。PR 本文に、確認した環境と未確認の項目を書く。
+
+## テスト方針
+
+- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。`it` は振る舞いを「〜こと」で終え、`context` は「〜とき」「〜場合」で書く。

@@ -7,11 +7,11 @@ import Sidebar from '@/components/layouts/Sidebar'
 vi.mock('next/navigation', () => ({ usePathname: () => '/products/2' }))
 
 describe('Sidebar', () => {
-  it('詳細画面でも最安値一覧を強調し、項目を押すと閉じる', async () => {
+  it('詳細画面でも最安値一覧を強調し、項目を押すと閉じること', async () => {
     const close = vi.fn()
     const user = userEvent.setup()
     render(<Sidebar open setOpen={close} />)
-    expect(screen.getAllByRole('link')).toHaveLength(5)
+    expect(screen.getAllByRole('link')).toHaveLength(7)
     const link = screen.getByRole('link', { name: '最安値一覧' })
     expect(link).toHaveAttribute('aria-current', 'page')
     expect(screen.getAllByRole('link').filter((item) => item.hasAttribute('aria-current'))).toEqual([link])

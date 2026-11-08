@@ -6,6 +6,7 @@
 ## 文書の案内
 
 - [運用手順](operations/index.md) — Rails 更新と Seed 投入
+- [商品計測・商品相場PoC](product-monitoring-poc.md) — 操作・API・取得方式・制約
 - [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
 - [文書全体の索引](../index.md)
 
@@ -16,6 +17,11 @@
 - Active Record の永続化責務は `models` に寄せる
 - 非同期実行の入口は `app/sidekiq` に寄せ、実際の処理本体は service に寄せる
 - read 系のレスポンス組み立ては serializer に寄せ、 finder は取得条件の組み立てに絞る
+
+## テスト方針
+
+- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。
+- `it` は振る舞いを「〜こと」で終え、`context` は「〜とき」「〜場合」で条件を表す。コード上の識別子や HTTP ステータスはそのまま使ってよい。
 
 ## 置いてよい責務
 

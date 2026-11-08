@@ -76,6 +76,13 @@ const menuGroups: { title: string; items: MenuItem[] }[] = [
     ],
   },
   {
+    title: '商品計測（PoC）',
+    items: [
+      { label: '商品計測結果', href: '/product-crawl-results', icon: listIcon },
+      { label: '商品相場', href: '/product-aggregation-results', icon: trendIcon },
+    ],
+  },
+  {
     title: 'Backmarket',
     items: [
       { label: '計測結果', href: '/backmarket', icon: listIcon },

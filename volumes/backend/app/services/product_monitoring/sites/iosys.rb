@@ -1,0 +1,69 @@
+require "nokogiri"
+
+module ProductMonitoring
+  module Sites
+    class Iosys
+      HOST = "iosys.co.jp".freeze
+      PATH = %r{\A/items/?\z}
+      PLATFORM = "iosys".freeze
+      MAX_RESPONSE_BYTES = 10 * 1024 * 1024
+
+      def self.search_urls(keyword)
+        ["https://#{HOST}/items?#{URI.encode_www_form(q: keyword)}"]
+      end
+
+      def self.validate_query(uri)
+        raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
+
+        return unless URI.decode_www_form(uri.query).any? { |key, value| key == "t" && value == "g" }
+
+        raise ArgumentError, "イオシスは個別出品の検索URL（t=gなし）を指定してください"
+      end
+
+      def self.fetch(uri)
+        page = Nokogiri::HTML(fetch_page(uri))
+        results = iosys_results(page)
+        if results.empty?
+          empty = page.at_css("#empty")
+          raise "Search page has no extractable listings" unless empty && !empty.text.strip.empty?
+        end
+        [results, next_url(uri, page)]
+      end
+
+      def self.next_url(uri, page)
+        return unless page.at_css(".page-link[rel='next']")
+
+        Pagination.increment(uri, key: "page", default: "1", step: 1, minimum: 2)
+      end
+
+      def self.fetch_page(uri)
+        BrowserPage.fetch(uri, host: HOST, max_bytes: MAX_RESPONSE_BYTES)
+      end
+
+      def self.iosys_results(page)
+        Crawler.listing_nodes(page, "li.item").filter_map do |dom|
+          href = dom.at_css("a")&.[]("href")
+          id = href&.match(%r{/items/([^?#]+)})&.[](1)
+          next unless id
+
+          iosys_listing(dom, id)
+        end
+      end
+
+      def self.iosys_listing(dom, id)
+        name = dom.at_css(".name")&.text.to_s.strip
+        raise "Listing name is missing" if name.empty?
+
+        image_url = thumbnail_url(dom)
+        { external_id: id, name: name, price: Crawler.parse_price(dom.at_css(".price")&.text), product_url: "https://iosys.co.jp/items/#{id}",
+          thumbnail_url: image_url, sold: false }
+      end
+
+      def self.thumbnail_url(dom)
+        image = dom.at_css("img")
+        image_url = image&.[]("data-src").presence || image&.[]("src")
+        image_url.present? ? URI.join("https://iosys.co.jp", image_url).to_s : nil
+      end
+    end
+  end
+end

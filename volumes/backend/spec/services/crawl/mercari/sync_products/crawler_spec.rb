@@ -97,14 +97,14 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         HTML
       end
 
-      it "1 ページ目は URL を開く" do
+      it "1 ページ目は URL を開くこと" do
         crawler.open_page(page, 0, retried: false)
 
         expect(page.goto_urls).to eq(["https://jp.mercari.com/search?page=0"])
         expect(page.clicks).to be_empty
       end
 
-      it "2 ページ目以降は次へをクリックし、先頭商品が変わるまで待つ" do
+      it "2 ページ目以降は次へをクリックし、先頭商品が変わるまで待つこと" do
         crawler.open_page(page, 1, retried: false)
 
         expect(page.goto_urls).to be_empty
@@ -112,7 +112,7 @@ RSpec.describe Crawl::Mercari::SyncProducts::Crawler, type: :service do
         expect(page.wait_for_function_calls.first.last).to include(arg: "/item/m111")
       end
 
-      it "リトライ時は URL を開き直す" do
+      it "リトライ時は URL を開き直すこと" do
         crawler.open_page(page, 2, retried: true)
 
         expect(page.goto_urls.size).to eq(1)

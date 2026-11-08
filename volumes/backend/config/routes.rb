@@ -4,6 +4,7 @@ require "sidekiq/cron/web"
 Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   namespace :api do # rubocop:disable Metrics/BlockLength
     namespace :v1 do # rubocop:disable Metrics/BlockLength
+      resource :current_user, only: %i[show]
       resources :products, only: %i[index show create update destroy]
       namespace :products do
         scope path: ":product_id" do
@@ -38,6 +39,19 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :backmarket_watch_targets, only: %i[index create update destroy]
       resources :backmarket_recents, only: %i[index]
       resources :product_prices, only: %i[index show]
+      resources :product_crawl_settings, only: %i[index show create update destroy] do
+        member do
+          post :sync
+        end
+      end
+      resources :product_crawl_results, only: %i[index update]
+      resources :product_aggregation_results, only: %i[index]
+      resources :product_aggregation_settings, only: %i[index show create update destroy] do
+        member do
+          post :calculate
+          get :purchases
+        end
+      end
     end
   end
 
@@ -46,6 +60,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   # OmniAuth
   get "/auth/:provider/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
+  get "/auth/csrf_token", to: "sessions#csrf_token"
   delete "/logout", to: "sessions#destroy"
 
   # OIDC test page

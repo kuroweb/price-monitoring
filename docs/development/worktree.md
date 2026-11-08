@@ -35,4 +35,6 @@ frontend はソースを `/app` にマウントしてイメージ内の `node_mo
 
 ## ポートの衝突
 
+worktree を削除してもコンテナは残る。setup は削除済み worktree のポートを空きとみなすので、新しい worktree の `just up` が残ったコンテナとポートで衝突する。`just down-orphans` で、ディレクトリが無くなった worktree の Compose project を `docker compose down` する。ボリュームは削除しない。
+
 複数の worktree を同時に作ると、setup が同じ `WORKTREE_HTTPS_PORT` を割り当てることがある。`just up` でポートが衝突したら、`.env` の `WORKTREE_HTTPS_PORT` を空き番号に変える。DB への反映は [ポート変更](../auth-provider/setup.md#worktreeのポート変更) に従う。

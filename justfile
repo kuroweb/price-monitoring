@@ -15,6 +15,18 @@ down:
 ps:
 	docker compose ps
 
+down-orphans:
+	#!/usr/bin/env sh
+	set -eu
+	docker ps -a --format '{{{{.Label "com.docker.compose.project"}}	{{{{.Label "com.docker.compose.project.working_dir"}}	{{{{.Label "com.docker.compose.project.config_files"}}' \
+		| sort -u \
+		| while IFS='	' read -r project dir files; do
+			case "$files" in *docker-compose.worktree.yml*) ;; *) continue ;; esac
+			[ -d "$dir" ] && continue
+			echo "down: $project ($dir)"
+			docker compose -p "$project" down --remove-orphans
+		done
+
 url:
 	#!/usr/bin/env sh
 	set -eu
@@ -43,6 +55,14 @@ rspec-backend *args:
 
 rspec-auth-provider *args:
 	docker compose exec auth-provider bundle exec rspec {{args}}
+
+[positional-arguments]
+rubocop-backend *args:
+	docker compose exec backend bundle exec rubocop "$@"
+
+[positional-arguments]
+rubocop-auth-provider *args:
+	docker compose exec auth-provider bundle exec rubocop "$@"
 
 test-frontend *args:
 	docker compose exec frontend npm test -- {{args}}

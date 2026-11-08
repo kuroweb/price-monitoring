@@ -10,6 +10,10 @@ Doorkeeper::OpenidConnect.configure do # rubocop:disable Metrics/BlockLength
 
   subject_types_supported [:public]
 
+  end_session_endpoint do
+    end_session_url
+  end
+
   resource_owner_from_access_token do |access_token|
     User.find_by(id: access_token.resource_owner_id)
   end
