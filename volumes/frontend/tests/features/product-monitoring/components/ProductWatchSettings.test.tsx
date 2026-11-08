@@ -101,7 +101,7 @@ describe('商品モニタリング', () => {
     const { rerender } = render(
       <ProductWatchSettings sections={[{ setting, results: null }]} />,
     )
-    expect(screen.getByText(/最安商品を取得できませんでした/)).toBeInTheDocument()
+    expect(screen.getByText(/商品を取得できませんでした/)).toBeInTheDocument()
     rerender(<ProductWatchSettings sections={[{ setting, results: [] }]} />)
     expect(screen.getByText('条件に一致する販売中の商品はありません。')).toBeInTheDocument()
   })

@@ -29,7 +29,7 @@ module Api
       end
 
       def results
-        results = ::ProductMonitoring::LowestListings.call(product_watch_setting: @product_watch_setting)
+        results = ::ProductMonitoring::WatchListings.call(product_watch_setting: @product_watch_setting)
         render json: { product_crawl_results: results.as_json }, status: :ok
       end
 

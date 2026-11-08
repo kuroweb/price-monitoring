@@ -86,9 +86,9 @@ function WatchSection({
           onDestroy={destroy}
         />
       </div>
-      <h4 className='font-semibold'>最安商品</h4>
+      <h4 className='font-semibold'>価格の安い商品（最大8件）</h4>
       {results === null ? (
-        <p className='text-sm'>最安商品を取得できませんでした。再読み込みしてください。</p>
+        <p className='text-sm'>商品を取得できませんでした。再読み込みしてください。</p>
       ) : results.length === 0 ? (
         <p className='text-sm'>条件に一致する販売中の商品はありません。</p>
       ) : (
