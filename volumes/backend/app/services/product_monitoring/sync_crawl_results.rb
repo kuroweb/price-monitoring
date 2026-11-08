@@ -37,6 +37,8 @@ module ProductMonitoring
 
     def crawl_params
       filter_params.merge(
+        keyword: product_crawl_setting.keyword,
+        platforms: product_crawl_setting.platforms,
         search_urls: product_crawl_setting.search_urls,
         exclude_external_ids: product_crawl_setting.product_crawl_results.excluded.pluck(:external_id)
       )

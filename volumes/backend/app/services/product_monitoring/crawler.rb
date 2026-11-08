@@ -19,7 +19,10 @@ module ProductMonitoring
     end
 
     def call
-      params[:search_urls].each { |url| crawl_url(url) }
+      generated = params[:platforms].flat_map do |platform|
+        UrlRouter::SITES.find { |site| site::PLATFORM == platform }.search_urls(params[:keyword])
+      end
+      (generated + params[:search_urls]).each { |url| crawl_url(url) }
       results = by_key.values.map { |item| self.class.apply_filters(item, params) }
       { sources: sources, results: results, fetched_count: results.size,
         accepted_count: results.count { |result| result[:accepted] } }
@@ -50,7 +53,8 @@ module ProductMonitoring
     end
 
     def record_failure(url, target, error)
-      Rails.logger.warn("Crawl failed for #{url.split('?', 2).first}: #{error.class}: #{error.message}")
+      safe_url = target[:platform] == "yahoo_fleamarket" ? "https://#{Sites::YahooFleamarket::HOST}/search/[FILTERED]" : url.split("?", 2).first
+      Rails.logger.warn("Crawl failed for #{safe_url}: #{error.class}: #{error.message}")
       sources << self.class.source(url, target[:platform], "failed", 0)
     end
 

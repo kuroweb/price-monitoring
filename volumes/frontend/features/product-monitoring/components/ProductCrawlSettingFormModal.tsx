@@ -30,6 +30,8 @@ const MAX_SEARCH_URLS = 5
 const empty = (): ProductCrawlSettingInput => ({
   name: '',
   enabled: false,
+  keyword: null,
+  platforms: [],
   searchUrls: [''],
   requiredKeywords: [],
   excludeKeywords: [],
@@ -73,6 +75,8 @@ export default function ProductCrawlSettingFormModal({ onClose, setting, initial
   }
   const payload = () => ({
     ...input,
+    keyword: input.keyword?.trim() || null,
+    searchUrls: input.searchUrls.map((url) => url.trim()).filter(Boolean),
     requiredKeywords: words(required),
     excludeKeywords: words(excluded),
   })
@@ -91,8 +95,10 @@ export default function ProductCrawlSettingFormModal({ onClose, setting, initial
     }
   }
   const valid = () => {
-    if (input.searchUrls.length === 0 || input.searchUrls.some((url) => !url.trim())) {
-      setError(`検索結果URLを1〜${MAX_SEARCH_URLS}件入力してください`)
+    const hasKeyword = Boolean(input.keyword?.trim())
+    const hasPlatforms = input.platforms.length > 0
+    if (hasKeyword !== hasPlatforms || (!hasKeyword && !input.searchUrls.some((url) => url.trim()))) {
+      setError('検索語とサイト、または追加の検索結果URLを入力してください')
       return false
     }
     if (
@@ -170,7 +176,24 @@ export default function ProductCrawlSettingFormModal({ onClose, setting, initial
                   />
                   計測を有効にする
                 </label>
-                <h4 className='font-semibold'>検索結果URL</h4>
+                <label className='block'>
+                  検索語
+                  <input className='input w-full' maxLength={255} value={input.keyword ?? ''}
+                    onChange={(event) => change({ keyword: event.target.value })} />
+                </label>
+                <fieldset>
+                  <legend className='font-semibold'>サイト</legend>
+                  <div className='flex flex-wrap gap-3'>
+                    {['mercari', 'yahoo_auction', 'yahoo_fleamarket', 'iosys', 'janpara', 'treasure_factory'].map((platform) => (
+                      <label key={platform} className='flex items-center gap-1'>
+                        <input type='checkbox' className='checkbox checkbox-sm' checked={input.platforms.includes(platform)}
+                          onChange={(event) => change({ platforms: event.target.checked ? [...input.platforms, platform] : input.platforms.filter((value) => value !== platform) })} />
+                        {platformName(platform)}
+                      </label>
+                    ))}
+                  </div>
+                </fieldset>
+                <h4 className='font-semibold'>追加の検索結果URL</h4>
                 {input.searchUrls.map((url, index) => (
                   <div key={rowKeys[index]} className='flex flex-wrap items-end gap-2'>
                     <label className='min-w-0 flex-1'>
@@ -215,7 +238,7 @@ export default function ProductCrawlSettingFormModal({ onClose, setting, initial
                 >
                   URLを追加
                 </button>
-                <h4 className='font-semibold'>全URL共通の追加条件（任意）</h4>
+                <h4 className='font-semibold'>全検索共通の追加条件（任意）</h4>
                 <ProductFilterFields
                   required={required}
                   excluded={excluded}

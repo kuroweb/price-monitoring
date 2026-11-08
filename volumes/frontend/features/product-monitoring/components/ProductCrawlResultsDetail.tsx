@@ -68,8 +68,7 @@ export default function ProductCrawlResultsDetail({
       <div className='flex flex-wrap items-center justify-between gap-3'>
         <div>
           <p className='text-sm opacity-70'>
-            {productCrawlSetting.enabled ? '有効' : '無効'}・{productCrawlSetting.searchUrls.length}{' '}
-            URL・{counts.all}件
+            {productCrawlSetting.enabled ? '有効' : '無効'}・サイト{productCrawlSetting.platforms.length}件・追加URL{productCrawlSetting.searchUrls.length}件・{counts.all}件
           </p>
         </div>
         <div className='flex gap-2'>

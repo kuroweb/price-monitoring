@@ -31,6 +31,8 @@ const setting: ProductCrawlSetting = {
   id: 1,
   name: 'phone',
   enabled: true,
+  keyword: null,
+  platforms: [],
   searchUrls: ['https://jp.mercari.com/search?keyword=phone'],
   requiredKeywords: [],
   excludeKeywords: [],

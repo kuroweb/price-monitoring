@@ -9,6 +9,10 @@ module ProductMonitoring
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
       DETAIL_DATE_UNITS = { "日" => :days, "週間" => :weeks, "ヶ月" => :months }.freeze
 
+      def self.search_urls(keyword)
+        ["https://#{HOST}/search/#{URI.encode_www_form_component(keyword).gsub("+", "%20")}"]
+      end
+
       def self.validate_query(uri)
         keyword = URI::DEFAULT_PARSER.unescape(uri.path.delete_prefix("/search/"))
         raise ArgumentError, "Invalid search keyword" if keyword.blank? || keyword.match?(%r{[/\x00-\x1f\x7f]})

@@ -8,6 +8,10 @@ module ProductMonitoring
       PLATFORM = "iosys".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
+      def self.search_urls(keyword)
+        ["https://#{HOST}/items?#{URI.encode_www_form(q: keyword)}"]
+      end
+
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
 

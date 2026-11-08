@@ -8,6 +8,10 @@ module ProductMonitoring
       PLATFORM = "treasure_factory".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
+      def self.search_urls(keyword)
+        ["https://#{HOST}/search?#{URI.encode_www_form(word: keyword)}"]
+      end
+
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
       end

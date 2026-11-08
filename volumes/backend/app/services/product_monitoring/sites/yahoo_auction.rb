@@ -17,6 +17,11 @@ module ProductMonitoring
           document.body?.innerText.includes('条件に一致する商品は見つかりませんでした')
       JS
 
+      def self.search_urls(keyword)
+        query = URI.encode_www_form(p: keyword)
+        ["https://#{HOST}/search/search?#{query}", "https://#{HOST}/closedsearch/closedsearch?#{query}"]
+      end
+
       def self.validate_query(uri)
         raise ArgumentError, "URL query is required" if uri.query.to_s.empty?
       end
