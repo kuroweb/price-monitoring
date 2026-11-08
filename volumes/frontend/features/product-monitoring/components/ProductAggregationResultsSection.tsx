@@ -5,7 +5,11 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { calculateProductAggregationSetting } from '@/features/product-monitoring/api/actions'
+import SettingRowMenu from '@/components/ui/SettingRowMenu'
+import {
+  calculateProductAggregationSetting,
+  destroyProductAggregationSetting,
+} from '@/features/product-monitoring/api/actions'
 import type {
   ProductAggregationResult,
   ProductAggregationSetting,
@@ -75,6 +79,8 @@ export default function ProductAggregationResultsSection({
   const [period, setPeriod] = useState<Period>(30)
   const [view, setView] = useState<View>('chart')
   const [editing, setEditing] = useState(false)
+  const [deleting, setDeleting] = useState(false)
+  const deletingRef = useRef(false)
   const inFlightRef = useRef(false)
   const results = productAggregationResults.slice(-period)
   const summary = summarize(results)
@@ -82,6 +88,30 @@ export default function ProductAggregationResultsSection({
   const purchases = productAggregationPurchases?.filter(
     (item) => item.boughtDate != null && item.boughtDate.substring(0, 10) >= results[0]?.date,
   )
+
+  const destroy = async () => {
+    if (
+      deletingRef.current ||
+      !window.confirm(`商品相場設定「${productAggregationSetting.name}」を削除しますか？`)
+    )
+      return
+    deletingRef.current = true
+    setDeleting(true)
+    try {
+      const result = await destroyProductAggregationSetting(productAggregationSetting.id)
+      if (result.status !== 200) {
+        toast.error('商品相場設定の削除に失敗しました')
+        return
+      }
+      toast.success('商品相場設定を削除しました')
+      router.refresh()
+    } catch {
+      toast.error('商品相場設定の削除に失敗しました')
+    } finally {
+      deletingRef.current = false
+      setDeleting(false)
+    }
+  }
 
   const calculate = async () => {
     if (inFlightRef.current) return
@@ -123,9 +153,12 @@ export default function ProductAggregationResultsSection({
           </div>
         </div>
         <div className='flex gap-2'>
-          <button type='button' className='btn btn-ghost btn-sm' onClick={() => setEditing(true)}>
-            設定を編集
-          </button>
+          <SettingRowMenu
+            name={productAggregationSetting.name}
+            deleting={deleting}
+            onEdit={() => setEditing(true)}
+            onDestroy={destroy}
+          />
           <button
             type='button'
             className='btn btn-sm btn-primary'
@@ -138,7 +171,7 @@ export default function ProductAggregationResultsSection({
       </div>
 
       {productAggregationResults.length === 0 ? (
-        <p className='text-sm'>商品日次相場はありません。「直近30日を集計」で集計してください。</p>
+        <p className='text-sm'>商品日次相場はありません。</p>
       ) : (
         <>
           <div className='grid grid-cols-1 gap-3 sm:grid-cols-3'>

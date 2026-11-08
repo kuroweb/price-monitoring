@@ -8,7 +8,10 @@ import {
   setProductCrawlResultExcluded,
   syncProductCrawlSetting,
 } from '@/features/product-monitoring/api/actions'
-import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
+import type {
+  ProductCrawlResult,
+  ProductCrawlSetting,
+} from '@/features/product-monitoring/api/types'
 import ProductCrawlResultsDetail from '@/features/product-monitoring/components/ProductCrawlResultsDetail'
 import ProductCrawlResultsSection from '@/features/product-monitoring/components/ProductCrawlResultsSection'
 
@@ -81,6 +84,7 @@ describe('商品計測結果', () => {
       result.productUrl,
     )
     expect(screen.getByText('イオシス')).toBeInTheDocument()
+    expect(screen.getByText('有効・1 URL・1件')).toBeInTheDocument()
     const card = screen.getByRole('article')
     expect(within(card).getByText('売り切れ')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: /^販売中/ }))
@@ -88,7 +92,9 @@ describe('商品計測結果', () => {
     await user.click(screen.getByRole('button', { name: /^すべて/ }))
     await user.click(screen.getByRole('button', { name: '取得して保存' }))
     await waitFor(() => expect(syncProductCrawlSetting).toHaveBeenCalledWith(1))
-    expect(toast.success).toHaveBeenCalledWith('取得を開始しました。しばらくしてから再読み込みしてください')
+    expect(toast.success).toHaveBeenCalledWith(
+      '取得を開始しました。しばらくしてから再読み込みしてください',
+    )
     await user.click(screen.getByRole('button', { name: '除外' }))
     await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(10, true))
     expect(refresh).toHaveBeenCalledTimes(1)
@@ -111,16 +117,18 @@ describe('商品計測結果の一覧', () => {
       name: `Phone ${i + 1}`,
     }))
     render(
-      <ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={results.slice(0, 8)} counts={[{ sold: true, count: 10 }]} />,
+      <ProductCrawlResultsSection
+        productCrawlSetting={setting}
+        productCrawlResults={results.slice(0, 8)}
+      />,
     )
     expect(screen.getAllByRole('article')).toHaveLength(8)
-    expect(screen.getAllByRole('button', { name: /の操作$/ })).toHaveLength(8)
-    expect(screen.getByRole('link', { name: /すべて見る/ })).toHaveAttribute(
+    expect(screen.getAllByRole('button', { name: /の操作$/ })).toHaveLength(9)
+    expect(screen.getByRole('link', { name: 'phone' })).toHaveAttribute(
       'href',
       '/product-crawl-results/1',
     )
-    expect(screen.getByText('10件・販売中 0・売り切れ 10')).toBeInTheDocument()
-    await user.click(screen.getByRole('button', { name: '設定を編集' }))
+    await user.click(screen.getByRole('button', { name: '編集' }))
     expect(screen.getByRole('dialog')).toHaveTextContent('商品計測設定を更新')
     expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone')
     await user.click(screen.getByRole('button', { name: '閉じる' }))
@@ -129,4 +137,14 @@ describe('商品計測結果の一覧', () => {
     await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(1, true))
     expect(refresh).toHaveBeenCalled()
   })
+})
+
+it('詳細に無効状態と URL 数、結果件数を表示すること', () => {
+  render(
+    <ProductCrawlResultsDetail
+      productCrawlSetting={{ ...setting, enabled: false }}
+      productCrawlResults={[]}
+    />,
+  )
+  expect(screen.getByText('無効・1 URL・0件')).toBeInTheDocument()
 })

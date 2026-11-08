@@ -12,11 +12,7 @@ import type {
   ProductCrawlSettingInput,
 } from './types'
 
-const revalidateCrawl = () =>
-  revalidatePaths([
-    ['/admin/product-crawl-settings', 'page'],
-    ['/product-crawl-results', 'layout'],
-  ])
+const revalidateCrawl = () => revalidatePaths([['/product-crawl-results', 'layout']])
 
 export async function getProductCrawlSettings() {
   return CrawlApi.getProductCrawlSettings()
@@ -58,11 +54,7 @@ export async function getProductCrawlResults(params?: GetProductCrawlResultsPara
   return CrawlApi.getProductCrawlResults(params)
 }
 
-const revalidateAggregation = () =>
-  revalidatePaths([
-    ['/admin/product-aggregation-settings', 'page'],
-    ['/product-aggregation-results', 'page'],
-  ])
+const revalidateAggregation = () => revalidatePaths([['/product-aggregation-results', 'page']])
 
 export async function getProductAggregationSettings() {
   return AggregationApi.getProductAggregationSettings()

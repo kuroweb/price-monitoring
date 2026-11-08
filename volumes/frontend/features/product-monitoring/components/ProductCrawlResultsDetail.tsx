@@ -2,7 +2,10 @@
 
 import { useState } from 'react'
 
-import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
+import type {
+  ProductCrawlResult,
+  ProductCrawlSetting,
+} from '@/features/product-monitoring/api/types'
 import ProductCrawlSettingFormModal from '@/features/product-monitoring/components/ProductCrawlSettingFormModal'
 
 import { useProductCrawlResultActions } from '../hooks/useProductCrawlResultActions'
@@ -65,7 +68,8 @@ export default function ProductCrawlResultsDetail({
       <div className='flex flex-wrap items-center justify-between gap-3'>
         <div>
           <p className='text-sm opacity-70'>
-            {productCrawlSetting.searchUrls.length} URL・{counts.all}件
+            {productCrawlSetting.enabled ? '有効' : '無効'}・{productCrawlSetting.searchUrls.length}{' '}
+            URL・{counts.all}件
           </p>
         </div>
         <div className='flex gap-2'>
