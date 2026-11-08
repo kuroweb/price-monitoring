@@ -548,6 +548,28 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 なし
 
+## product_watch_settings
+
+### カラム
+
+| カラム | 型 | NULL | 備考 |
+|--------|-----|------|------|
+| id | bigint | NOT NULL | PK |
+| name | string | NOT NULL |  |
+| enabled | boolean | NOT NULL | default `false` |
+| discord_enabled | boolean | NOT NULL | default `false` |
+| required_keywords | json | NOT NULL | default `[]` |
+| exclude_keywords | json | NOT NULL | default `[]` |
+| min_price | integer |  |  |
+| max_price | integer |  |  |
+| last_lowest_signature | string |  | 通知の比較基準 |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+### インデックス
+
+なし
+
 ## product_category_maps
 
 ### カラム
@@ -595,6 +617,7 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | 名前 | カラム | 備考 |
 |------|--------|------|
 | index_product_crawl_results_on_external_id | external_id |  |
+| index_product_crawl_results_on_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_product_crawl_setting_id_external_id_a586e73ad6 | product_crawl_setting_id, external_id | unique |
 | index_product_crawl_results_on_product_crawl_setting_id | product_crawl_setting_id |  |
 

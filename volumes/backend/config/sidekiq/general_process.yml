@@ -6,3 +6,4 @@ production:
   - ['calculate_daily_purchase_summary', 1]
   - ['product_monitoring_enqueue_aggregation_jobs_job', 1]
   - ['product_monitoring_aggregation_job', 1]
+  - ['product_monitoring_evaluate_watch_settings_job', 1]

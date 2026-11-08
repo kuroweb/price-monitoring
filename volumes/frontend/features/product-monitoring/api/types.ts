@@ -33,6 +33,20 @@ export type ProductAggregationSettingInput = {
   maxPrice: number | null
 }
 export type ProductAggregationSetting = ProductAggregationSettingInput & { id: number }
+export type ProductWatchSettingInput = {
+  name: string
+  enabled: boolean
+  requiredKeywords: string[]
+  excludeKeywords: string[]
+  minPrice: number | null
+  maxPrice: number | null
+  discordEnabled: boolean
+}
+export type ProductWatchSetting = ProductWatchSettingInput & { id: number }
+export type GetProductWatchSettings = {
+  productWatchSettings: ProductWatchSetting[]
+  discordConfigured: boolean
+}
 export type ProductAggregationResult = {
   id: number
   productAggregationSettingId: number

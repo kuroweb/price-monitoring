@@ -56,7 +56,7 @@
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
 - `app/backmarket/page.tsx` が Backmarket 計測結果の入口
-- `app/product-crawl-results/` と `app/product-aggregation-results/` が商品計測結果・商品相場の入口
+- `app/product-crawl-results/`、`app/product-aggregation-results/`、`app/product-monitoring/` が商品計測・商品相場・商品モニタリングの入口
 - `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
 
 ### feature 単位の UI
@@ -64,7 +64,7 @@
 - `features/products/` が商品一覧や詳細の UI と state を持つ
 - `features/categories/` がカテゴリ管理の UI と通信を持つ
 - `features/backmarket/` が計測対象の管理と直近取得画面の UI と通信を持つ
-- `features/product-monitoring/` が商品計測（計測設定・計測結果・相場設定・相場）の UI を持つ。結果画面から設定の登録・編集モーダルを開き、設定を管理する読み込みや、2つの設定で語句・価格帯の入力欄を共有する読み込みは、同じ機能の中に収まる
+- `features/product-monitoring/` が商品計測・相場・モニタリングの UI を持つ。各画面から設定の登録・編集モーダルを開き、語句・価格帯の入力欄を共有する
 - page は feature を束ねる役に留める
 
 ### 通信境界

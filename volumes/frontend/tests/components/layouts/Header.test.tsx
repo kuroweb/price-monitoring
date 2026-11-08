@@ -10,6 +10,7 @@ describe('Header', () => {
     render(<Header open={false} setOpen={vi.fn()} />)
 
     expect(screen.getByText('ログイン状態')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Price Monitoring' })).toHaveAttribute('href', '/product-monitoring')
   })
 
   it('Compose の project 名があれば、どの環境の画面か分かるように表示すること', () => {

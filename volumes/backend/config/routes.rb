@@ -45,6 +45,11 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         end
       end
       resources :product_crawl_results, only: %i[index update]
+      resources :product_watch_settings, only: %i[index create update destroy] do
+        member do
+          get :results
+        end
+      end
       resources :product_aggregation_results, only: %i[index]
       resources :product_aggregation_settings, only: %i[index show create update destroy] do
         member do

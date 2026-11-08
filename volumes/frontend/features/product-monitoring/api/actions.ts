@@ -4,12 +4,14 @@ import { revalidatePaths } from '@/lib/revalidate-paths'
 
 import * as AggregationApi from './aggregationSettings'
 import * as CrawlApi from './crawlSettings'
+import * as WatchApi from './watchSettings'
 
 import type {
   GetProductAggregationPurchasesParams,
   GetProductCrawlResultsParams,
   ProductAggregationSettingInput,
   ProductCrawlSettingInput,
+  ProductWatchSettingInput,
 } from './types'
 
 const revalidateCrawl = () => revalidatePaths([['/product-crawl-results', 'layout']])
@@ -96,4 +98,30 @@ export async function getProductAggregationPurchases(
   params: GetProductAggregationPurchasesParams,
 ) {
   return AggregationApi.getProductAggregationPurchases(id, params)
+}
+
+export async function getProductWatchSettings() {
+  return WatchApi.getProductWatchSettings()
+}
+
+export async function getProductWatchResults(id: number) {
+  return WatchApi.getProductWatchResults(id)
+}
+
+export async function createProductWatchSetting(input: ProductWatchSettingInput) {
+  const result = await WatchApi.createProductWatchSetting(input)
+  if (result.data) revalidatePaths([['/product-monitoring', 'page']])
+  return result
+}
+
+export async function updateProductWatchSetting(id: number, input: ProductWatchSettingInput) {
+  const result = await WatchApi.updateProductWatchSetting(id, input)
+  if (result.data) revalidatePaths([['/product-monitoring', 'page']])
+  return result
+}
+
+export async function destroyProductWatchSetting(id: number) {
+  const result = await WatchApi.destroyProductWatchSetting(id)
+  if (result.status === 200) revalidatePaths([['/product-monitoring', 'page']])
+  return result
 }

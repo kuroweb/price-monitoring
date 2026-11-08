@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_08_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_08_000003) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -317,6 +317,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_000001) do
     t.index ["external_id"], name: "index_product_crawl_results_on_external_id"
     t.index ["product_crawl_setting_id", "external_id"], name: "idx_on_product_crawl_setting_id_external_id_a586e73ad6", unique: true
     t.index ["product_crawl_setting_id"], name: "index_product_crawl_results_on_product_crawl_setting_id"
+    t.index ["sold", "excluded_at", "price", "id"], name: "index_product_crawl_results_on_lowest_price"
   end
 
   create_table "product_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -329,6 +330,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_08_000001) do
     t.json "exclude_keywords", default: -> { "(json_array())" }, null: false
     t.integer "min_price"
     t.integer "max_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "product_watch_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "name", null: false
+    t.boolean "enabled", default: false, null: false
+    t.boolean "discord_enabled", default: false, null: false
+    t.json "required_keywords", default: -> { "(json_array())" }, null: false
+    t.json "exclude_keywords", default: -> { "(json_array())" }, null: false
+    t.integer "min_price"
+    t.integer "max_price"
+    t.string "last_lowest_signature"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
