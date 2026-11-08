@@ -9,8 +9,6 @@ module ProductMonitoring
       return unless setting
 
       ProductMonitoring::LowestPriceNotifier.call(product_watch_setting: setting)
-    rescue StandardError => e
-      Rails.logger.error("[ProductMonitoring::EvaluateWatchSettingJob] Failed setting #{id}: #{e.class}")
     end
   end
 end

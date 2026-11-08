@@ -7,7 +7,7 @@ module ProductMonitoring
       filter = filter_params(product_watch_setting)
       lowest = []
       ProductCrawlResult.transaction do
-        ProductCrawlResult.not_excluded.where(sold: false).find_each(
+        candidates(filter).find_each(
           cursor: %i[price id], order: %i[asc asc], batch_size: BATCH_SIZE
         ) do |result|
           break if lowest.any? && result.price > lowest.first.price
@@ -17,6 +17,12 @@ module ProductMonitoring
         end
       end
       lowest.uniq { |result| [result.platform, result.external_id] }
+    end
+
+    def self.candidates(filter)
+      results = ProductCrawlResult.not_excluded.where(sold: false)
+      results = results.where(price: filter[:min_price]..filter[:max_price]) if filter[:min_price] || filter[:max_price]
+      results
     end
 
     def self.filter_params(setting)

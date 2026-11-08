@@ -17,4 +17,11 @@ RSpec.describe ProductMonitoring::EvaluateWatchSettingJob do
 
     expect(ProductMonitoring::LowestPriceNotifier).not_to have_received(:call)
   end
+
+  it "予期しない例外をSidekiqに伝播する" do
+    setting = ProductWatchSetting.create!(name: "監視", enabled: true)
+    allow(ProductMonitoring::LowestPriceNotifier).to receive(:call).and_raise(StandardError, "failure")
+
+    expect { described_class.new.perform(setting.id) }.to raise_error(StandardError, "failure")
+  end
 end

@@ -41,7 +41,7 @@ module ProductMonitoring
       signature = lowest_signature(results)
       previous = product_watch_setting.last_lowest_signature
       return if previous == signature
-      return if previous.present? && results.any? && !notify(results)
+      return if previous.present? && results.any? && self.class.configured? && !notify(results)
 
       product_watch_setting.update!(last_lowest_signature: signature)
     end

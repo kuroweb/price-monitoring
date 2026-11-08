@@ -40,6 +40,23 @@ RSpec.describe ProductMonitoring::LowestPriceNotifier do
     expect(setting.reload.last_lowest_signature).not_to eq(old_signature)
   end
 
+  it "Webhook未設定時は基準を更新し、設定後に過去の変化を通知しない" do
+    result = create(:product_crawl_result, sold: false, price: 100)
+    request = stub_request(:post, webhook).to_return(status: 204)
+    stub_const("ENV", ENV.to_hash.merge("PRODUCT_MONITORING_DISCORD_WEBHOOK_URL" => ""))
+    described_class.call(product_watch_setting: setting)
+    original_signature = setting.reload.last_lowest_signature
+    result.update!(price: 90)
+    described_class.call(product_watch_setting: setting)
+    expect(setting.reload.last_lowest_signature).not_to eq(original_signature)
+    stub_const("ENV", ENV.to_hash.merge("PRODUCT_MONITORING_DISCORD_WEBHOOK_URL" => webhook))
+    described_class.call(product_watch_setting: setting)
+    expect(request).not_to have_been_requested
+    result.update!(price: 80)
+    described_class.call(product_watch_setting: setting)
+    expect(request).to have_been_requested.once
+  end
+
   it "最安消失時は通知せず、再出現時に通知する" do
     result = create(:product_crawl_result, sold: false)
     request = stub_request(:post, webhook).to_return(status: 204)
