@@ -7,6 +7,7 @@ module ProductMonitoring
       PATH = %r{\A/search/[^/]+\z}
       PLATFORM = "yahoo_fleamarket".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
+      DETAIL_DATE_UNITS = { "日" => :days, "週間" => :weeks, "ヶ月" => :months }.freeze
 
       def self.validate_query(uri)
         keyword = URI::DEFAULT_PARSER.unescape(uri.path.delete_prefix("/search/"))
@@ -81,8 +82,8 @@ module ProductMonitoring
       def self.parse_detail_date(text)
         case text
         when /\A\d+(?:分前|時間前)に更新\z/ then Time.current.beginning_of_day
-        when /\A(\d+)日前に更新\z/ then Time.current.days_ago(Regexp.last_match(1).to_i).beginning_of_day
-        when /\A(\d+)ヶ月前に更新\z/ then Time.current.months_ago(Regexp.last_match(1).to_i).beginning_of_day
+        when /\A(\d+)(日|週間|ヶ月)前に更新\z/
+          Regexp.last_match(1).to_i.public_send(DETAIL_DATE_UNITS[Regexp.last_match(2)]).ago.beginning_of_day
         when /\A半年前以上に更新\z/, /\A半年以上前に更新\z/ then Time.current.months_ago(6).beginning_of_day
         end
       end

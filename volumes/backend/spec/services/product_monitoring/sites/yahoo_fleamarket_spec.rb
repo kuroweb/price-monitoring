@@ -76,4 +76,10 @@ RSpec.describe ProductMonitoring::Sites::YahooFleamarket do
     allow(described_class).to receive(:fetch_page).and_return(html)
     expect(described_class.fetch_detail("z123")).to eq(sold: true, bought_date: 2.days.ago.beginning_of_day)
   end
+
+  it "日・週・月単位の更新表示から売却日を推定すること" do
+    expect(described_class.parse_detail_date("2日前に更新")).to eq(Time.current.days_ago(2).beginning_of_day)
+    expect(described_class.parse_detail_date("3週間前に更新")).to eq(Time.current.weeks_ago(3).beginning_of_day)
+    expect(described_class.parse_detail_date("1ヶ月前に更新")).to eq(Time.current.months_ago(1).beginning_of_day)
+  end
 end
