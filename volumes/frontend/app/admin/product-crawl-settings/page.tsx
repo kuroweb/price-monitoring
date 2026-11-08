@@ -1,22 +1,5 @@
-import Layout from '@/components/layouts/Layout'
-import { getProductCrawlSettings } from '@/features/product-monitoring/api/actions'
-import ProductCrawlSettings from '@/features/product-monitoring/components/ProductCrawlSettings'
+import { redirect } from 'next/navigation'
 
-const Page = async () => {
-  const response = await getProductCrawlSettings()
-  if (response.status < 200 || response.status >= 300 || !response.data)
-    throw new Error('商品計測設定を取得できませんでした')
-
-  return (
-    <Layout>
-      <div className='card w-full bg-base-300'>
-        <div className='card-body'>
-          <h2 className='card-title'>商品計測設定</h2>
-          <ProductCrawlSettings productCrawlSettings={response.data.productCrawlSettings ?? []} />
-        </div>
-      </div>
-    </Layout>
-  )
+export default function Page() {
+  redirect('/product-crawl-results')
 }
-
-export default Page

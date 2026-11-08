@@ -140,3 +140,30 @@ describe('商品相場', () => {
     expect(screen.queryByRole('article')).not.toBeInTheDocument()
   })
 })
+
+it('相場画面から設定を編集・削除すること', async () => {
+  const { destroyProductAggregationSetting } =
+    await import('@/features/product-monitoring/api/actions')
+  vi.mocked(destroyProductAggregationSetting).mockResolvedValue({
+    data: {},
+    error: null,
+    status: 200,
+  })
+  vi.spyOn(window, 'confirm').mockReturnValue(true)
+  const user = userEvent.setup()
+  render(
+    <ProductAggregationResultsSection
+      productAggregationSetting={setting}
+      productAggregationResults={[]}
+      productAggregationPurchases={[]}
+    />,
+  )
+  expect(screen.getByText('phone', { selector: 'span' })).toBeInTheDocument()
+  expect(screen.getByText('case')).toHaveClass('line-through')
+  await user.click(screen.getByRole('button', { name: '編集' }))
+  expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone')
+  await user.click(screen.getByRole('button', { name: '閉じる' }))
+  await user.click(screen.getByRole('button', { name: '削除' }))
+  await waitFor(() => expect(destroyProductAggregationSetting).toHaveBeenCalledWith(1))
+  expect(refresh).toHaveBeenCalled()
+})

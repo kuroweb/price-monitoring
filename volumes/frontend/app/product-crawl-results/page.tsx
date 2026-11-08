@@ -1,6 +1,10 @@
 import Layout from '@/components/layouts/Layout'
-import { getProductCrawlResults, getProductCrawlSettings } from '@/features/product-monitoring/api/actions'
+import {
+  getProductCrawlResults,
+  getProductCrawlSettings,
+} from '@/features/product-monitoring/api/actions'
 import ProductCrawlResultsSection from '@/features/product-monitoring/components/ProductCrawlResultsSection'
+import ProductCrawlSettingAddButton from '@/features/product-monitoring/components/ProductCrawlSettingAddButton'
 
 const Page = async () => {
   const [settingsResponse, resultsResponse] = await Promise.all([
@@ -12,24 +16,27 @@ const Page = async () => {
 
   const productCrawlSettings = settingsResponse.data.productCrawlSettings ?? []
   const productCrawlResults = resultsResponse.data.productCrawlResults ?? []
-  const counts = resultsResponse.data.counts ?? []
 
   return (
     <Layout>
       <div className='card w-full bg-base-300'>
         <div className='card-body'>
-          <h2 className='card-title'>商品計測結果</h2>
+          <div className='flex flex-wrap items-center justify-between gap-2'>
+            <h2 className='card-title'>商品計測結果</h2>
+            <ProductCrawlSettingAddButton />
+          </div>
           <div className='divide-y divide-base-200 pt-2 [&>*]:py-5'>
             {productCrawlSettings.length === 0 && (
-              <p>商品計測設定はまだありません。管理画面で商品計測設定を追加してください。</p>
+              <div>
+                商品計測設定はまだありません。
+                <ProductCrawlSettingAddButton className='link' />
+                してください。
+              </div>
             )}
             {productCrawlSettings.map((setting) => (
               <ProductCrawlResultsSection
                 key={setting.id}
                 productCrawlSetting={setting}
-                counts={counts.filter(
-                  (count) => count.productCrawlSettingId === setting.id,
-                )}
                 productCrawlResults={productCrawlResults.filter(
                   (result) => result.productCrawlSettingId === setting.id,
                 )}

@@ -8,8 +8,12 @@ import {
   setProductCrawlResultExcluded,
   updateProductCrawlSetting,
 } from '@/features/product-monitoring/api/actions'
-import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
-import ProductCrawlSettings from '@/features/product-monitoring/components/ProductCrawlSettings'
+import type {
+  ProductCrawlResult,
+  ProductCrawlSetting,
+} from '@/features/product-monitoring/api/types'
+import ProductCrawlResultsSection from '@/features/product-monitoring/components/ProductCrawlResultsSection'
+import ProductCrawlSettingAddButton from '@/features/product-monitoring/components/ProductCrawlSettingAddButton'
 
 const { refresh } = vi.hoisted(() => ({ refresh: vi.fn() }))
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }))
@@ -68,7 +72,7 @@ describe('商品計測設定', () => {
       status: 200,
     })
     const user = userEvent.setup()
-    render(<ProductCrawlSettings productCrawlSettings={[]} />)
+    render(<ProductCrawlSettingAddButton />)
     await user.click(screen.getByRole('button', { name: '商品計測設定を追加' }))
     await user.type(screen.getByRole('textbox', { name: '名前' }), 'phone')
     await user.type(screen.getByRole('textbox', { name: '検索結果URL 1' }), mercariUrl)
@@ -109,7 +113,7 @@ describe('商品計測設定', () => {
       minPrice: 1000,
       maxPrice: 5000,
     }
-    render(<ProductCrawlSettings productCrawlSettings={[source]} />)
+    render(<ProductCrawlResultsSection productCrawlSetting={source} productCrawlResults={[]} />)
     await user.click(screen.getByRole('button', { name: '複製' }))
     expect(screen.getByRole('heading', { name: '商品計測設定を追加' })).toBeInTheDocument()
     expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone（コピー）')
@@ -134,9 +138,16 @@ describe('商品計測設定', () => {
 
   it('複製した名前を255文字以内に収めること', async () => {
     const user = userEvent.setup()
-    render(<ProductCrawlSettings productCrawlSettings={[{ ...setting, name: 'a'.repeat(255) }]} />)
+    render(
+      <ProductCrawlResultsSection
+        productCrawlSetting={{ ...setting, name: 'a'.repeat(255) }}
+        productCrawlResults={[]}
+      />,
+    )
     await user.click(screen.getByRole('button', { name: '複製' }))
-    expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue(`${'a'.repeat(250)}（コピー）`)
+    expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue(
+      `${'a'.repeat(250)}（コピー）`,
+    )
   })
 
   it('除外した出品をリンク付きで一覧表示し、その場で復元すること', async () => {
@@ -159,7 +170,7 @@ describe('商品計測設定', () => {
       error: null,
       status: 200,
     })
-    render(<ProductCrawlSettings productCrawlSettings={[setting]} />)
+    render(<ProductCrawlResultsSection productCrawlSetting={setting} productCrawlResults={[]} />)
     await user.click(screen.getByRole('button', { name: '編集' }))
     expect(getProductCrawlResults).toHaveBeenCalledWith({
       productCrawlSettingId: 1,
@@ -172,4 +183,20 @@ describe('商品計測設定', () => {
     expect(screen.getByText('除外した出品（2件）')).toBeInTheDocument()
     expect(refresh).toHaveBeenCalled()
   })
+})
+
+it('結果一覧から設定を削除すること', async () => {
+  const { destroyProductCrawlSetting } = await import('@/features/product-monitoring/api/actions')
+  vi.mocked(destroyProductCrawlSetting).mockResolvedValue({ data: {}, error: null, status: 200 })
+  vi.spyOn(window, 'confirm').mockReturnValue(true)
+  const user = userEvent.setup()
+  render(
+    <ProductCrawlResultsSection
+      productCrawlSetting={{ ...setting, enabled: false }}
+      productCrawlResults={[]}
+    />,
+  )
+  await user.click(screen.getByRole('button', { name: '削除' }))
+  await waitFor(() => expect(destroyProductCrawlSetting).toHaveBeenCalledWith(1))
+  expect(refresh).toHaveBeenCalled()
 })
