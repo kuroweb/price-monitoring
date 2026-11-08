@@ -23,7 +23,7 @@ just rspec-backend spec/requests/sessions_controller_spec.rb spec/requests/oidc_
 docker compose logs --tail=100 auth-provider nginx
 ```
 
-アプリのヘッダーの「ログイン・新規登録」から Provider の新規登録へ進み、入力エラーの表示と、登録後にアプリのトップへ戻り、ヘッダーに登録した名前が表示されることを確認する。登録済みユーザーでもログインを確認する。BFF のログイン状態とログアウトは https://dev.price-monitoring.com/auth/test で確認する。
+アプリのヘッダーの「ログイン・新規登録」から Provider の新規登録へ進み、入力エラーの表示と、登録後にアプリのトップへ戻り、ヘッダーに登録した名前が表示されることを確認する。登録済みユーザーでもログインを確認する。ヘッダーの名前からマイページを開き、名前とメールアドレスを確認する。同じメニューのログアウトでトップへ戻り、ヘッダーにログインの入口が表示されることを確認する。未ログインでマイページを開いた場合もログインの入口を表示する。BFF のログイン状態は https://dev.price-monitoring.com/auth/test でも確認できる。
 
 worktree では [ローカル開発ガイドの Orca の worktree](../development/worktree.md) に従い、`.env` の `WORKTREE_HTTPS_PORT` を URL に付ける（例: `https://dev.price-monitoring.com:8443/auth/test`）。メインと同じブラウザで両方にログインし、片方の BFF からログアウトしても他方はログイン状態を維持することを、両方向で確認する。Provider の「ログイン状態を保持する」を有効にしてログインした場合も、片方のログアウトが他方に影響しないことを確認する。BFF のログアウトは Provider のセッションを終了しないため、再ログイン時に Provider のパスワード入力が省略されることはある。
 

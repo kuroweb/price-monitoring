@@ -59,14 +59,14 @@ RSpec.describe SessionsController, type: :request do
         expect(stub_revoke_refresh).to have_been_requested.once
       end
 
-      it "成功メッセージとともに /auth/test にリダイレクトすること" do
+      it "アプリのトップ画面にリダイレクトすること" do
         stub_request(:post, "#{ENV.fetch('OIDC_ISSUER', nil)}/oauth/revoke")
           .to_return(status: 200)
 
         delete "/logout"
 
-        expect(response).to redirect_to("/auth/test")
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(response).to redirect_to("/")
+        expect(response).to have_http_status(:see_other)
       end
     end
 
@@ -79,8 +79,7 @@ RSpec.describe SessionsController, type: :request do
 
         delete "/logout"
 
-        expect(response).to redirect_to("/auth/test")
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(response).to redirect_to("/")
       end
 
       it "ネットワークエラーが発生してもログアウトできること" do
@@ -90,8 +89,7 @@ RSpec.describe SessionsController, type: :request do
 
         delete "/logout"
 
-        expect(response).to redirect_to("/auth/test")
-        expect(flash[:notice]).to eq("Logged out successfully")
+        expect(response).to redirect_to("/")
         expect(Bugsnag).to have_received(:notify).with(an_instance_of(Faraday::ConnectionFailed))
       end
     end
@@ -121,8 +119,40 @@ RSpec.describe SessionsController, type: :request do
         delete "/logout"
 
         expect(stub_revoke).not_to have_been_requested
-        expect(response).to redirect_to("/auth/test")
+        expect(response).to redirect_to("/")
       end
+    end
+  end
+
+  describe "ログアウトの CSRF 検証" do
+    around do |example|
+      previous = ActionController::Base.allow_forgery_protection
+      ActionController::Base.allow_forgery_protection = true
+      example.run
+    ensure
+      ActionController::Base.allow_forgery_protection = previous
+    end
+
+    it "トークンがないリクエストを拒否すること" do
+      delete "/logout"
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+
+    it "同じセッションのトークンでログアウトできること" do
+      get "/auth/csrf_token"
+      token = response.parsed_body.fetch("csrf_token")
+      expect(response.headers["Cache-Control"]).to include("no-store")
+      delete "/logout", headers: { "X-CSRF-Token" => token }
+      expect(response).to redirect_to("/")
+    end
+
+    it "別のセッションのトークンを拒否すること" do
+      get "/auth/csrf_token"
+      token = response.parsed_body.fetch("csrf_token")
+      request.session.clear
+      other_session = open_session
+      other_session.delete "/logout", headers: { "X-CSRF-Token" => token }
+      expect(other_session.response).to have_http_status(:unprocessable_content)
     end
   end
 

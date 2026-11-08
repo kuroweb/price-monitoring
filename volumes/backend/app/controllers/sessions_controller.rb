@@ -30,14 +30,19 @@ class SessionsController < ApplicationController
     redirect_to "/products?auth_error=1"
   end
 
+  def csrf_token
+    response.headers["Cache-Control"] = "no-store"
+    render json: { csrf_token: form_authenticity_token }
+  end
+
   def destroy
     revoke_tokens if session[:access_token].present?
     reset_session
-    redirect_to "/auth/test", notice: "Logged out successfully"
+    redirect_to "/", status: :see_other
   rescue StandardError => e
     Bugsnag.notify(e)
     reset_session
-    redirect_to "/auth/test", notice: "Logged out successfully"
+    redirect_to "/", status: :see_other
   end
 
   private

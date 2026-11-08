@@ -60,6 +60,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   # OmniAuth
   get "/auth/:provider/callback", to: "sessions#create"
   get "/auth/failure", to: "sessions#failure"
+  get "/auth/csrf_token", to: "sessions#csrf_token"
   delete "/logout", to: "sessions#destroy"
 
   # OIDC test page
