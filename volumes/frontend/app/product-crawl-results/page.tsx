@@ -37,7 +37,6 @@ const Page = async () => {
               <ProductCrawlResultsSection
                 key={setting.id}
                 productCrawlSetting={setting}
-
                 productCrawlResults={productCrawlResults.filter(
                   (result) => result.productCrawlSettingId === setting.id,
                 )}
