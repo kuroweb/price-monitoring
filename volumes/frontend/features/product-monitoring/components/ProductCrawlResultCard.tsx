@@ -72,21 +72,30 @@ export default function ProductCrawlResultCard({
               <MoreIcon />
             </button>
             <ul className='menu dropdown-content invisible pointer-events-none [.dropdown:focus-within_&]:visible [.dropdown:focus-within_&]:pointer-events-auto z-1 w-max rounded-box border border-base-300 bg-base-100 p-2 shadow-lg'>
-              {onExclude && <li>
-                <button
-                  type='button'
-                  className='btn btn-error btn-sm'
-                  disabled={disabled}
-                  onClick={() => onExclude(item)}
-                >
-                  除外
-                </button>
-              </li>}
-              {onDelete && <li>
-                <button type='button' className='btn btn-error btn-sm' disabled={disabled} onClick={() => onDelete(item)}>
-                  削除
-                </button>
-              </li>}
+              {onExclude && (
+                <li>
+                  <button
+                    type='button'
+                    className='btn btn-ghost btn-sm'
+                    disabled={disabled}
+                    onClick={() => onExclude(item)}
+                  >
+                    除外
+                  </button>
+                </li>
+              )}
+              {onDelete && (
+                <li>
+                  <button
+                    type='button'
+                    className='btn btn-error btn-sm'
+                    disabled={disabled}
+                    onClick={() => onDelete(item)}
+                  >
+                    削除
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         )}
