@@ -1,4 +1,7 @@
 scripts:
+  archive: |
+    cd "$ORCA_WORKTREE_PATH" && just down
+
   setup: |
     # gitignore されているファイルをメインからコピーする
     for file in \
