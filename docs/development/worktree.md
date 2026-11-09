@@ -12,11 +12,11 @@ Orca の worktree で、メインと並行して別の開発環境を動かす�
 
 setup が使うのは、作った worktree にある `orca.yaml`、つまり作成元のブランチにコミットされた内容になる。`orca.yaml` の変更は、作成元のブランチにコミットするまで新しい worktree に反映されない。`orca.yaml` を初めて使うときと変更した後は、Orca の確認画面で setup の実行を許可する。
 
+公開 URL は `https://dev.price-monitoring.com:<port>/` と `https://dev.auth-provider.com:<port>/` になる。worktree で `just url` を実行すると、ポートを埋めた URL を表示する。
+
 ## worktree 削除時の後片付け
 
 Orca の削除時には `orca.yaml` の `archive` が対象 worktree で `just down` を実行し、その Compose project のコンテナとネットワークを削除する。ボリュームは残す。削除時の確認画面で archive の実行を許可する。フックを実行しなかった場合、Orca 以外で worktree を削除した場合や、Compose 設定から削除済みのサービスのコンテナが残った場合は、[ポートの衝突](#ポートの衝突) の手順で確認する。
-
-公開 URL は `https://dev.price-monitoring.com:<port>/` と `https://dev.auth-provider.com:<port>/` になる。worktree で `just url` を実行すると、ポートを埋めた URL を表示する。
 
 ## 対象環境の確認
 
