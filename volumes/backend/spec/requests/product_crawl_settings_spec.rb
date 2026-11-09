@@ -99,6 +99,17 @@ RSpec.describe "商品クロール設定", type: :request do
 end
 
 RSpec.describe "商品クロール結果", type: :request do
+  it "指定した結果だけを削除し、別の設定の同じ出品を残すこと" do
+    result = create(:product_crawl_result, external_id: "same")
+    other = create(:product_crawl_result, external_id: "same")
+
+    delete "/api/v1/product_crawl_results/#{result.id}"
+
+    expect(response).to have_http_status(:ok)
+    expect(ProductCrawlResult.exists?(result.id)).to be(false)
+    expect(ProductCrawlResult.exists?(other.id)).to be(true)
+  end
+
   it "設定ごとに最新の 8 件と全件数を返し詳細は件数を制限しないこと" do
     setting = create(:product_crawl_setting)
     other = create(:product_crawl_setting)

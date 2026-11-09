@@ -48,7 +48,7 @@ export default function ProductCrawlResultsDetail({
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [sort, setSort] = useState<Sort>('newest')
   const [editing, setEditing] = useState(false)
-  const { busy, sync, exclude } = useProductCrawlResultActions()
+  const { busy, sync, exclude, remove } = useProductCrawlResultActions()
 
   const counts = {
     all: productCrawlResults.length,
@@ -122,6 +122,7 @@ export default function ProductCrawlResultsDetail({
                   productCrawlResult={item}
                   disabled={busy}
                   onExclude={exclude}
+                  onDelete={remove}
                 />
               ))}
             </div>

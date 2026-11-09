@@ -25,7 +25,7 @@ type Props = {
 
 export default function ProductWatchDetail({ setting, results, daily, purchases, discordConfigured }: Props) {
   const [editing, setEditing] = useState(false)
-  const { busy, exclude } = useProductCrawlResultActions()
+  const { busy, exclude, remove } = useProductCrawlResultActions()
   const priceRange = setting.minPrice != null || setting.maxPrice != null
     ? `${setting.minPrice != null ? formatYen(setting.minPrice) : '下限なし'} 〜 ${setting.maxPrice != null ? formatYen(setting.maxPrice) : '上限なし'}`
     : '指定なし'
@@ -78,7 +78,7 @@ export default function ProductWatchDetail({ setting, results, daily, purchases,
           <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
             {results.map((item) => (
               <li key={item.id} className='min-w-0'>
-                <ProductCrawlResultCard productCrawlResult={item} disabled={busy} onExclude={exclude} />
+                <ProductCrawlResultCard productCrawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
               </li>
             ))}
           </ul>

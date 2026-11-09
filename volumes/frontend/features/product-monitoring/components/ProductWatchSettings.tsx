@@ -23,7 +23,7 @@ function WatchSection({ setting, results, daily }: Section) {
   const [modal, setModal] = useState<{ setting?: ProductWatchSetting; initial?: ProductWatchSettingInput } | null>(null)
   const [deleting, setDeleting] = useState(false)
   const deletingRef = useRef(false)
-  const { busy, exclude } = useProductCrawlResultActions()
+  const { busy, exclude, remove } = useProductCrawlResultActions()
   const latest = daily?.filter((item) => item.averagePurchasePrice != null).at(-1)
 
   const destroy = async () => {
@@ -83,7 +83,7 @@ function WatchSection({ setting, results, daily }: Section) {
           <ol aria-label='販売中の商品を価格順に表示' className='flex w-full snap-x gap-3 overflow-x-auto pb-2'>
             {results.map((item) => (
               <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
-                <ProductCrawlResultCard productCrawlResult={item} disabled={busy} onExclude={exclude} />
+                <ProductCrawlResultCard productCrawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
               </li>
             ))}
           </ol>

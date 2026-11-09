@@ -76,6 +76,16 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
     )
   end
 
+  it "削除された出品を再取得すると再登録すること" do
+    result = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old")
+    result.destroy!
+
+    described_class.call(product_crawl_setting:)
+
+    expect(product_crawl_setting.product_crawl_results.find_by!(external_id: "a"))
+      .to have_attributes(name: "Phone blue", excluded_at: nil)
+  end
+
   it "除外済み出品の除外状態を保って価格を更新すること" do
     excluded_at = 1.day.ago.change(usec: 0)
     create(:product_crawl_result, product_crawl_setting:, external_id: "excluded", name: "Phone red", price: 100,

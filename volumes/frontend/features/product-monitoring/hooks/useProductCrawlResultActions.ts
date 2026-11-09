@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { setProductCrawlResultExcluded, syncProductCrawlSetting } from '@/features/product-monitoring/api/actions'
+import { destroyProductCrawlResult, setProductCrawlResultExcluded, syncProductCrawlSetting } from '@/features/product-monitoring/api/actions'
 import type { ProductCrawlResult } from '@/features/product-monitoring/api/types'
 
 // 一覧と詳細で共有する「取得して保存」と「除外」。どちらかの実行中は二重に実行しない
@@ -47,5 +47,16 @@ export const useProductCrawlResultActions = () => {
       return true
     })
 
-  return { busy, sync, exclude }
+  const remove = (item: ProductCrawlResult) =>
+    perform(async () => {
+      if (!window.confirm(`「${item.name}」を削除しますか？再取得時に再登録されることがあります。`)) return false
+      const result = await destroyProductCrawlResult(item.id)
+      if (result.status !== 200) {
+        toast.error('削除に失敗しました')
+        return false
+      }
+      return true
+    })
+
+  return { busy, sync, exclude, remove }
 }

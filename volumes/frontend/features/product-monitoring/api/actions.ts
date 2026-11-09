@@ -50,6 +50,15 @@ export async function setProductCrawlResultExcluded(id: number, excluded: boolea
   return result
 }
 
+export async function destroyProductCrawlResult(id: number) {
+  const result = await CrawlApi.destroyProductCrawlResult(id)
+  if (result.status === 200) {
+    revalidateCrawl()
+    revalidatePaths([['/product-monitoring', 'layout']])
+  }
+  return result
+}
+
 export async function getProductCrawlSetting(id: number) {
   return CrawlApi.getProductCrawlSetting(id)
 }

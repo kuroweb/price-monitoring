@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
   getProductCrawlResults,
+  destroyProductCrawlResult,
   setProductCrawlResultExcluded,
   syncProductCrawlSetting,
 } from '@/features/product-monitoring/api/actions'
@@ -22,6 +23,7 @@ vi.mock('@/features/product-monitoring/api/actions', () => ({
   createProductCrawlSetting: vi.fn(),
   updateProductCrawlSetting: vi.fn(),
   destroyProductCrawlSetting: vi.fn(),
+  destroyProductCrawlResult: vi.fn(),
   syncProductCrawlSetting: vi.fn(),
   setProductCrawlResultExcluded: vi.fn(),
   getProductCrawlResults: vi.fn(),
@@ -65,6 +67,23 @@ beforeEach(() => {
 })
 
 describe('商品計測結果', () => {
+  it('確認後に結果を削除し、失敗時は画面を更新しないこと', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValue(true)
+    vi.mocked(destroyProductCrawlResult)
+      .mockResolvedValueOnce({ data: null, error: { code: 500, message: 'error', details: [] }, status: 500 })
+      .mockResolvedValueOnce({ data: {}, error: null, status: 200 })
+    const user = userEvent.setup()
+    render(<ProductCrawlResultsDetail productCrawlSetting={setting} productCrawlResults={[result]} />)
+
+    await user.click(screen.getByRole('button', { name: '削除' }))
+    expect(destroyProductCrawlResult).not.toHaveBeenCalled()
+    await user.click(screen.getByRole('button', { name: '削除' }))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith('削除に失敗しました'))
+    expect(refresh).not.toHaveBeenCalled()
+    await user.click(screen.getByRole('button', { name: '削除' }))
+    await waitFor(() => expect(refresh).toHaveBeenCalledTimes(1))
+    expect(destroyProductCrawlResult).toHaveBeenCalledWith(result.id)
+  })
   it('保存済みの設定を同期し、保存済みの結果を除外すること', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(syncProductCrawlSetting).mockResolvedValue({
