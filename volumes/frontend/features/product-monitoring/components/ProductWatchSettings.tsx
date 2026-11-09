@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import SettingRowMenu from '@/components/ui/SettingRowMenu'
-import { destroyProductWatchSetting, setProductCrawlResultExcluded } from '@/features/product-monitoring/api/actions'
+import { destroyProductWatchSetting } from '@/features/product-monitoring/api/actions'
 import type {
   ProductCrawlResult,
   ProductWatchSetting,
@@ -14,6 +14,7 @@ import type {
 } from '@/features/product-monitoring/api/types'
 import ProductCrawlResultCard from '@/features/product-monitoring/components/ProductCrawlResultCard'
 import ProductWatchSettingFormModal from '@/features/product-monitoring/components/ProductWatchSettingFormModal'
+import { useProductCrawlResultActions } from '@/features/product-monitoring/hooks/useProductCrawlResultActions'
 import { formatYen } from '@/lib/format'
 
 type Section = { setting: ProductWatchSetting; results: ProductCrawlResult[] | null }
@@ -28,27 +29,7 @@ function WatchSection({
   const [modal, setModal] = useState<{ setting?: ProductWatchSetting; initial?: ProductWatchSettingInput } | null>(null)
   const [deleting, setDeleting] = useState(false)
   const deletingRef = useRef(false)
-  const [excluding, setExcluding] = useState(false)
-  const excludingRef = useRef(false)
-
-  const exclude = async (item: ProductCrawlResult) => {
-    if (excludingRef.current || !window.confirm(`「${item.name}」を除外しますか？`)) return
-    excludingRef.current = true
-    setExcluding(true)
-    try {
-      const result = await setProductCrawlResultExcluded(item.id, true)
-      if (!result.data) {
-        toast.error('除外に失敗しました')
-        return
-      }
-      router.refresh()
-    } catch {
-      toast.error('通信に失敗しました')
-    } finally {
-      excludingRef.current = false
-      setExcluding(false)
-    }
-  }
+  const { busy, exclude } = useProductCrawlResultActions()
 
   const destroy = async () => {
     if (
@@ -116,7 +97,7 @@ function WatchSection({
         <ul className='flex snap-x gap-3 overflow-x-auto pb-2'>
           {results.map((item) => (
             <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
-              <ProductCrawlResultCard productCrawlResult={item} disabled={excluding} onExclude={exclude} />
+              <ProductCrawlResultCard productCrawlResult={item} disabled={busy} onExclude={exclude} />
             </li>
           ))}
         </ul>
