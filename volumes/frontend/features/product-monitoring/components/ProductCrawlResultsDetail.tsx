@@ -48,7 +48,7 @@ export default function ProductCrawlResultsDetail({
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [sort, setSort] = useState<Sort>('newest')
   const [editing, setEditing] = useState(false)
-  const { busy, sync, exclude } = useProductCrawlResultActions(productCrawlSetting)
+  const { busy, sync, exclude } = useProductCrawlResultActions()
 
   const counts = {
     all: productCrawlResults.length,
@@ -75,7 +75,7 @@ export default function ProductCrawlResultsDetail({
           <button type='button' className='btn btn-ghost btn-sm' onClick={() => setEditing(true)}>
             設定を編集
           </button>
-          <button type='button' className='btn btn-sm btn-primary' disabled={busy} onClick={sync}>
+          <button type='button' className='btn btn-sm btn-primary' disabled={busy} onClick={() => sync(productCrawlSetting.id)}>
             {busy ? '取得中…' : '取得して保存'}
           </button>
         </div>

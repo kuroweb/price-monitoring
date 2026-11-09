@@ -6,10 +6,10 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import { setProductCrawlResultExcluded, syncProductCrawlSetting } from '@/features/product-monitoring/api/actions'
-import type { ProductCrawlResult, ProductCrawlSetting } from '@/features/product-monitoring/api/types'
+import type { ProductCrawlResult } from '@/features/product-monitoring/api/types'
 
 // 一覧と詳細で共有する「取得して保存」と「除外」。どちらかの実行中は二重に実行しない
-export const useProductCrawlResultActions = (productCrawlSetting: ProductCrawlSetting) => {
+export const useProductCrawlResultActions = () => {
   const router = useRouter()
   const [busy, setBusy] = useState(false)
   const inFlightRef = useRef(false)
@@ -26,9 +26,9 @@ export const useProductCrawlResultActions = (productCrawlSetting: ProductCrawlSe
       setBusy(false)
     }
   }
-  const sync = () =>
+  const sync = (productCrawlSettingId: number) =>
     perform(async () => {
-      const result = await syncProductCrawlSetting(productCrawlSetting.id)
+      const result = await syncProductCrawlSetting(productCrawlSettingId)
       if (!result.data) {
         toast.error(result.error?.message ?? '取得に失敗しました')
         return false
