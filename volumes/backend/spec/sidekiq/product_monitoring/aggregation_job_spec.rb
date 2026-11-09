@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::AggregationJob do
-  let(:setting) { create(:product_aggregation_setting) }
+  let(:setting) { create(:product_watch_setting) }
 
   before { allow(ProductMonitoring::CalculateAggregationResults).to receive(:call) }
 
@@ -9,7 +9,7 @@ RSpec.describe ProductMonitoring::AggregationJob do
     described_class.new.perform(setting.id)
 
     expect(ProductMonitoring::CalculateAggregationResults).to have_received(:call).with(
-      product_aggregation_setting: setting,
+      product_watch_setting: setting,
       start_date: Time.zone.today - 29,
       end_date: Time.zone.today
     )

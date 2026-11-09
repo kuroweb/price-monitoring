@@ -34,6 +34,18 @@ RSpec.describe "商品モニタリング設定", type: :request do
     expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(%w[one two])
   end
 
+  it "条件の変更時だけ古い相場を消し、設定削除時にも相場を削除する" do
+    setting = ProductWatchSetting.create!(settings)
+    setting.product_aggregation_results.create!(date: Date.current, purchase_count: 1)
+    put "/api/v1/product_watch_settings/#{setting.id}", params: settings.merge(name: "updated"), as: :json
+    expect(setting.product_aggregation_results.count).to eq(1)
+    put "/api/v1/product_watch_settings/#{setting.id}", params: settings.merge(max_price: 500), as: :json
+    expect(setting.product_aggregation_results.count).to eq(0)
+    setting.product_aggregation_results.create!(date: Date.current, purchase_count: 1)
+    delete "/api/v1/product_watch_settings/#{setting.id}"
+    expect(ProductAggregationResult.count).to eq(0)
+  end
+
   it "条件に一致する商品を重複を除いて価格順に最大8件返す" do
     setting = ProductWatchSetting.create!(settings)
     create(:product_crawl_result, name: "phone case", price: 1, sold: false)

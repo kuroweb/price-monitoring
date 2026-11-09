@@ -1,6 +1,6 @@
 class ProductAggregationResult < ApplicationRecord
   ## associations ##
-  belongs_to :product_aggregation_setting
+  belongs_to :product_watch_setting
 
   ## validations ##
   validates :date, presence: true

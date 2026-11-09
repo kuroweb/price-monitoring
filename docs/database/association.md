@@ -291,7 +291,7 @@ erDiagram
 
 ## 商品計測・商品相場（PoC）
 
-既存の計測対象管理とは独立したテーブル群。商品相場設定と商品モニタリング設定は商品計測設定に外部キーを持たず、全商品計測設定の商品計測結果を条件でフィルターする。設計は [商品計測と相場集計の仕様](../specs/product-monitoring/index.md)、操作は [商品計測・商品相場PoC](../backend/product-monitoring-poc.md) を参照する。
+既存の計測対象管理とは独立したテーブル群。商品モニタリング設定は商品計測設定に外部キーを持たず、全商品計測設定の商品計測結果を条件でフィルターする。設計は [商品計測と相場集計の仕様](../specs/product-monitoring/index.md)、操作は [商品計測・商品相場PoC](../backend/product-monitoring-poc.md) を参照する。
 
 ```mermaid
 erDiagram
@@ -302,16 +302,13 @@ erDiagram
     bigint id PK
     bigint product_crawl_setting_id FK
   }
-  product_aggregation_settings {
+  product_watch_settings {
     bigint id PK
   }
   product_aggregation_results {
     bigint id PK
-    bigint product_aggregation_setting_id FK
-  }
-  product_watch_settings {
-    bigint id PK
+    bigint product_watch_setting_id FK
   }
   product_crawl_settings ||--o{ product_crawl_results : ""
-  product_aggregation_settings ||--o{ product_aggregation_results : ""
+  product_watch_settings ||--o{ product_aggregation_results : ""
 ```

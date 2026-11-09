@@ -5,17 +5,14 @@ import { useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import SettingRowMenu from '@/components/ui/SettingRowMenu'
 import {
   calculateProductAggregationSetting,
-  destroyProductAggregationSetting,
 } from '@/features/product-monitoring/api/actions'
 import type {
   ProductAggregationResult,
   ProductAggregationSetting,
   ProductCrawlResult,
 } from '@/features/product-monitoring/api/types'
-import ProductAggregationSettingFormModal from '@/features/product-monitoring/components/ProductAggregationSettingFormModal'
 import { formatDate, formatYen } from '@/lib/format'
 
 import ProductAggregationChart from './ProductAggregationChart'
@@ -31,28 +28,6 @@ interface Props {
   // 取得に失敗したときは null
   productAggregationPurchases: ProductCrawlResult[] | null
 }
-
-const conditionLabels = (setting: ProductAggregationSetting) => [
-  ...setting.requiredKeywords.map((word) => ({
-    key: `r-${word}`,
-    label: word,
-    kind: 'required',
-  })),
-  ...setting.excludeKeywords.map((word) => ({
-    key: `e-${word}`,
-    label: word,
-    kind: 'exclude',
-  })),
-  ...(setting.minPrice != null || setting.maxPrice != null
-    ? [
-        {
-          key: 'price',
-          label: `${setting.minPrice != null ? formatYen(setting.minPrice) : ''}〜${setting.maxPrice != null ? formatYen(setting.maxPrice) : ''}`,
-          kind: 'price',
-        },
-      ]
-    : []),
-]
 
 // 期間内で購入があった日の件数で重み付けした平均
 const summarize = (results: ProductAggregationResult[]) => {
@@ -78,9 +53,6 @@ export default function ProductAggregationResultsSection({
   const [busy, setBusy] = useState(false)
   const [period, setPeriod] = useState<Period>(30)
   const [view, setView] = useState<View>('chart')
-  const [editing, setEditing] = useState(false)
-  const [deleting, setDeleting] = useState(false)
-  const deletingRef = useRef(false)
   const inFlightRef = useRef(false)
   const results = productAggregationResults.slice(-period)
   const summary = summarize(results)
@@ -88,30 +60,6 @@ export default function ProductAggregationResultsSection({
   const purchases = productAggregationPurchases?.filter(
     (item) => item.boughtDate != null && item.boughtDate.substring(0, 10) >= results[0]?.date,
   )
-
-  const destroy = async () => {
-    if (
-      deletingRef.current ||
-      !window.confirm(`商品相場設定「${productAggregationSetting.name}」を削除しますか？`)
-    )
-      return
-    deletingRef.current = true
-    setDeleting(true)
-    try {
-      const result = await destroyProductAggregationSetting(productAggregationSetting.id)
-      if (result.status !== 200) {
-        toast.error('商品相場設定の削除に失敗しました')
-        return
-      }
-      toast.success('商品相場設定を削除しました')
-      router.refresh()
-    } catch {
-      toast.error('商品相場設定の削除に失敗しました')
-    } finally {
-      deletingRef.current = false
-      setDeleting(false)
-    }
-  }
 
   const calculate = async () => {
     if (inFlightRef.current) return
@@ -136,29 +84,11 @@ export default function ProductAggregationResultsSection({
   return (
     <section
       className='space-y-4 rounded-box bg-base-200 p-4'
-      aria-label={productAggregationSetting.name}
+      aria-label={`${productAggregationSetting.name}の商品相場`}
     >
       <div className='flex flex-wrap items-start justify-between gap-3'>
-        <div className='space-y-2'>
-          <h3 className='text-lg font-semibold leading-tight'>{productAggregationSetting.name}</h3>
-          <div className='flex flex-wrap gap-1'>
-            {conditionLabels(productAggregationSetting).map((condition) => (
-              <span
-                key={condition.key}
-                className={`badge badge-sm badge-outline ${condition.kind === 'exclude' ? 'line-through decoration-2 opacity-70' : ''}`}
-              >
-                {condition.label}
-              </span>
-            ))}
-          </div>
-        </div>
+        <h4 className='font-semibold'>商品相場</h4>
         <div className='flex gap-2'>
-          <SettingRowMenu
-            name={productAggregationSetting.name}
-            deleting={deleting}
-            onEdit={() => setEditing(true)}
-            onDestroy={destroy}
-          />
           <button
             type='button'
             className='btn btn-sm btn-primary'
@@ -292,12 +222,6 @@ export default function ProductAggregationResultsSection({
             )}
           </div>
         </>
-      )}
-      {editing && (
-        <ProductAggregationSettingFormModal
-          setting={productAggregationSetting}
-          onClose={() => setEditing(false)}
-        />
       )}
     </section>
   )

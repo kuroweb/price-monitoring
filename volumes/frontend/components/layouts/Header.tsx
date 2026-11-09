@@ -17,6 +17,8 @@ const Header = (props: Props) => {
           <div className='flex-none'>
             <button
               className='btn btn-square btn-ghost flex md:hidden'
+              aria-label={props.open ? 'メニューを閉じる' : 'メニューを開く'}
+              aria-expanded={props.open}
               onClick={() => props.setOpen(!props.open)}
             >
               <svg
@@ -36,12 +38,12 @@ const Header = (props: Props) => {
           </div>
           <div className='flex-1'>
             <Link href='/product-monitoring'>
-              <p className='px-4 text-xl'>Price Monitoring</p>
+              <p className='whitespace-nowrap px-2 text-base sm:px-4 sm:text-xl'>Price Monitoring</p>
             </Link>
           </div>
           <div className='flex-none'>
             {process.env.NEXT_PUBLIC_COMPOSE_PROJECT_NAME && (
-              <span className='badge badge-outline mx-4'>
+              <span className='badge badge-outline mx-4 hidden lg:inline-flex'>
                 {process.env.NEXT_PUBLIC_COMPOSE_PROJECT_NAME}
               </span>
             )}

@@ -22,7 +22,7 @@ const Page = async () => {
       <div className='card w-full bg-base-300'>
         <div className='card-body'>
           <div className='flex flex-wrap items-center justify-between gap-2'>
-            <h2 className='card-title'>商品計測結果</h2>
+            <h2 className='card-title'>商品計測</h2>
             <ProductCrawlSettingAddButton />
           </div>
           <div className='divide-y divide-base-200 pt-4 [&>section]:py-5 [&>section:first-child]:pt-0'>

@@ -1,30 +1,11 @@
 require "rails_helper"
 
 RSpec.describe "商品集計設定", type: :request do
-  let(:params) do
-    { name: "phone", required_keywords: ["phone"], exclude_keywords: ["case"], min_price: nil, max_price: 1_000 }
-  end
-
-  it "作成・取得・更新・削除に対応すること" do
-    post "/api/v1/product_aggregation_settings", params:, as: :json
-    expect(response).to have_http_status(:ok)
-    id = response.parsed_body.fetch("id")
-
-    put "/api/v1/product_aggregation_settings/#{id}", params: params.merge(name: "updated"), as: :json
-    expect(response.parsed_body.fetch("name")).to eq("updated")
-
-    put "/api/v1/product_aggregation_settings/#{id}", params: params.merge(min_price: 2_000), as: :json
-    expect(response).to have_http_status(:bad_request)
-
-    delete "/api/v1/product_aggregation_settings/#{id}"
-    expect(ProductAggregationSetting.exists?(id)).to be(false)
-  end
-
   it "直近 30 日を集計し日ごとの結果を返すこと" do
-    product_aggregation_setting = create(:product_aggregation_setting, required_keywords: ["phone"])
+    product_watch_setting = create(:product_watch_setting, required_keywords: ["phone"])
     create(:product_crawl_result, name: "phone", price: 500, sold: true, bought_date: Time.zone.now)
 
-    post "/api/v1/product_aggregation_settings/#{product_aggregation_setting.id}/calculate"
+    post "/api/v1/product_watch_settings/#{product_watch_setting.id}/calculate"
     expect(response).to have_http_status(:ok)
 
     get "/api/v1/product_aggregation_results"
@@ -35,22 +16,22 @@ RSpec.describe "商品集計設定", type: :request do
   end
 
   it "期間内の集計対象になる購入を売れた日の新しい順に返すこと" do
-    product_aggregation_setting = create(:product_aggregation_setting, required_keywords: ["phone"])
+    product_watch_setting = create(:product_watch_setting, required_keywords: ["phone"])
     date = Date.new(2026, 11, 1)
     create(:product_crawl_result, external_id: "old", name: "phone", sold: true, bought_date: date.in_time_zone.change(hour: 12))
     create(:product_crawl_result, external_id: "new", name: "phone", sold: true, bought_date: (date + 1).in_time_zone)
     create(:product_crawl_result, external_id: "other", name: "tablet", sold: true, bought_date: date.in_time_zone)
     create(:product_crawl_result, external_id: "outside", name: "phone", sold: true, bought_date: (date - 1).in_time_zone)
 
-    get "/api/v1/product_aggregation_settings/#{product_aggregation_setting.id}/purchases",
+    get "/api/v1/product_watch_settings/#{product_watch_setting.id}/purchases",
         params: { start_date: date.to_s, end_date: (date + 1).to_s }
     expect(response).to have_http_status(:ok)
     expect(response.parsed_body.fetch("product_crawl_results").pluck("external_id")).to eq(%w[new old])
   end
 
   it "期間の日付が不正なとき 400 を返すこと" do
-    product_aggregation_setting = create(:product_aggregation_setting)
-    get "/api/v1/product_aggregation_settings/#{product_aggregation_setting.id}/purchases",
+    product_watch_setting = create(:product_watch_setting)
+    get "/api/v1/product_watch_settings/#{product_watch_setting.id}/purchases",
         params: { start_date: "invalid", end_date: "2026-11-01" }
     expect(response).to have_http_status(:bad_request)
   end
@@ -58,9 +39,9 @@ end
 
 RSpec.describe "商品集計結果", type: :request do
   it "集計設定を横断して日ごとの結果を一覧表示すること" do
-    setting = create(:product_aggregation_setting)
-    ProductAggregationResult.create!(product_aggregation_setting: setting, date: Date.new(2026, 11, 2), purchase_count: 0)
-    ProductAggregationResult.create!(product_aggregation_setting: setting, date: Date.new(2026, 11, 1), purchase_count: 1)
+    setting = create(:product_watch_setting)
+    ProductAggregationResult.create!(product_watch_setting: setting, date: Date.new(2026, 11, 2), purchase_count: 0)
+    ProductAggregationResult.create!(product_watch_setting: setting, date: Date.new(2026, 11, 1), purchase_count: 1)
     get "/api/v1/product_aggregation_results"
     expect(response.parsed_body.fetch("product_aggregation_results").pluck("date")).to eq(%w[2026-11-01 2026-11-02])
   end

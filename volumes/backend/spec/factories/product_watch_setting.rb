@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :product_aggregation_setting do
+  factory :product_watch_setting do
     name { "name" }
   end
 end

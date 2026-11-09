@@ -9,7 +9,6 @@ import * as WatchApi from './watchSettings'
 import type {
   GetProductAggregationPurchasesParams,
   GetProductCrawlResultsParams,
-  ProductAggregationSettingInput,
   ProductCrawlSettingInput,
   ProductWatchSettingInput,
 } from './types'
@@ -44,7 +43,10 @@ export async function syncProductCrawlSetting(id: number) {
 
 export async function setProductCrawlResultExcluded(id: number, excluded: boolean) {
   const result = await CrawlApi.setProductCrawlResultExcluded(id, excluded)
-  if (result.data) revalidateCrawl()
+  if (result.data) {
+    revalidateCrawl()
+    revalidatePaths([['/product-monitoring', 'layout']])
+  }
   return result
 }
 
@@ -56,32 +58,7 @@ export async function getProductCrawlResults(params?: GetProductCrawlResultsPara
   return CrawlApi.getProductCrawlResults(params)
 }
 
-const revalidateAggregation = () => revalidatePaths([['/product-aggregation-results', 'page']])
-
-export async function getProductAggregationSettings() {
-  return AggregationApi.getProductAggregationSettings()
-}
-
-export async function createProductAggregationSetting(input: ProductAggregationSettingInput) {
-  const result = await AggregationApi.createProductAggregationSetting(input)
-  if (result.data) revalidateAggregation()
-  return result
-}
-
-export async function updateProductAggregationSetting(
-  id: number,
-  input: ProductAggregationSettingInput,
-) {
-  const result = await AggregationApi.updateProductAggregationSetting(id, input)
-  if (result.data) revalidateAggregation()
-  return result
-}
-
-export async function destroyProductAggregationSetting(id: number) {
-  const result = await AggregationApi.destroyProductAggregationSetting(id)
-  if (result.status === 200) revalidateAggregation()
-  return result
-}
+const revalidateAggregation = () => revalidatePaths([['/product-monitoring', 'layout']])
 
 export async function calculateProductAggregationSetting(id: number) {
   const result = await AggregationApi.calculateProductAggregationSetting(id)
@@ -110,18 +87,18 @@ export async function getProductWatchResults(id: number) {
 
 export async function createProductWatchSetting(input: ProductWatchSettingInput) {
   const result = await WatchApi.createProductWatchSetting(input)
-  if (result.data) revalidatePaths([['/product-monitoring', 'page']])
+  if (result.data) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }
 
 export async function updateProductWatchSetting(id: number, input: ProductWatchSettingInput) {
   const result = await WatchApi.updateProductWatchSetting(id, input)
-  if (result.data) revalidatePaths([['/product-monitoring', 'page']])
+  if (result.data) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }
 
 export async function destroyProductWatchSetting(id: number) {
   const result = await WatchApi.destroyProductWatchSetting(id)
-  if (result.status === 200) revalidatePaths([['/product-monitoring', 'page']])
+  if (result.status === 200) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }

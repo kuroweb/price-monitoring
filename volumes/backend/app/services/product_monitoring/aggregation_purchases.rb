@@ -7,8 +7,8 @@ module ProductMonitoring
       new(...).call
     end
 
-    def initialize(product_aggregation_setting:, start_date:, end_date:)
-      @product_aggregation_setting = product_aggregation_setting
+    def initialize(product_watch_setting:, start_date:, end_date:)
+      @product_watch_setting = product_watch_setting
       @start_date = start_date.to_date
       @end_date = end_date.to_date
     end
@@ -25,10 +25,10 @@ module ProductMonitoring
 
     private
 
-    attr_reader :product_aggregation_setting, :start_date, :end_date
+    attr_reader :product_watch_setting, :start_date, :end_date
 
     def filter_params
-      product_aggregation_setting.attributes.symbolize_keys.slice(*FILTER_KEYS)
+      product_watch_setting.attributes.symbolize_keys.slice(*FILTER_KEYS)
     end
   end
 end
