@@ -22,6 +22,7 @@
 ## 作業時の判断基準
 
 - アプリの実行・検証の前に `just ps` で状態を確認し、未起動なら `just up` を使う。初回準備は [初回セットアップ](docs/development/setup.md) に従う。
+- Orca worktree で起動時にポート競合が起きた場合は、[ポートの衝突](docs/development/worktree.md#ポートの衝突) を確認する。削除済み worktree のコンテナが原因なら、同手順の対象と影響を確認して `just down-orphans` を実行する。
 - 不具合調査は `just logs` などでログの事実を確認してから修正する。
 - 実装前に対象レイヤーの既存実装を読み、[backend](docs/backend/index.md) / [frontend](docs/frontend/index.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
 - 認証アプリと BFF の境界・配置は [認証基盤](docs/auth-provider/index.md) を参照する。OIDC endpoint / issuer / token / scope / session / 署名鍵に影響する変更では Provider と Client の両方を確認する。

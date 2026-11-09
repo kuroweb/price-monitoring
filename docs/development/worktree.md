@@ -14,6 +14,10 @@ setup が使うのは、作った worktree にある `orca.yaml`、つまり作�
 
 公開 URL は `https://dev.price-monitoring.com:<port>/` と `https://dev.auth-provider.com:<port>/` になる。worktree で `just url` を実行すると、ポートを埋めた URL を表示する。
 
+## worktree 削除時の後片付け
+
+Orca の削除時には `orca.yaml` の `archive` が対象 worktree で `just down` を実行し、その Compose project のコンテナとネットワークを削除する。ボリュームは残す。削除時の確認画面で archive の実行を許可する。フックを実行しなかった場合、Orca 以外で worktree を削除した場合や、Compose 設定から削除済みのサービスのコンテナが残った場合は、[ポートの衝突](#ポートの衝突) の手順で確認する。
+
 ## 対象環境の確認
 
 シェルで `export` した `COMPOSE_FILE` / `COMPOSE_PROJECT_NAME` / `WORKTREE_HTTPS_PORT` は `.env` より優先される。残っていると別の環境を操作するので、worktree で Docker Compose / just を実行する前に `unset` する。`docker compose -p` も付けない。認証設定の詳細は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
@@ -27,6 +31,8 @@ docker compose config --quiet
 just ps
 ```
 
+削除済み worktree のコンテナが残っている場合は、起動前に [ポートの衝突](#ポートの衝突) の `just down-orphans` を実行する。
+
 `docker compose config --quiet` は `WORKTREE_HTTPS_PORT` が未設定なら失敗する。`just ps` では、project 名が worktree のディレクトリ名になっていることを確認する。
 
 DB はコピーされないので、[アプリの初期化と起動](setup.md#アプリの初期化と起動) の `just prepare` を実行する。コピーされた署名鍵は生成し直さない。既存 DB の認証設定を変えるときは [Provider DB の再作成](../auth-provider/setup.md#ローカル-provider-db-の再作成) を使う。
@@ -36,5 +42,13 @@ frontend はソースを `/app` にマウントしてイメージ内の `node_mo
 ## ポートの衝突
 
 worktree を削除してもコンテナは残る。setup は削除済み worktree のポートを空きとみなすので、新しい worktree の `just up` が残ったコンテナとポートで衝突する。`just down-orphans` で、ディレクトリが無くなった worktree の Compose project を `docker compose down` する。ボリュームは削除しない。
+
+実行前に次の一覧で、worktree 用設定を持つコンテナの project 名と作業ディレクトリを確認する。`down-orphans` は全 Compose project を調べ、該当する project 名を指定して停止する。同じ project 名が存在する別の worktree と共有されている場合、そのコンテナも停止するため実行しない。停止してよい対象か判断できない場合も実行しない。
+
+```bash
+docker ps -a --format '{{.Label "com.docker.compose.project"}} | {{.Label "com.docker.compose.project.working_dir"}} | {{.Label "com.docker.compose.project.config_files"}} | {{.Ports}}'
+```
+
+一覧で作業ディレクトリが存在することも確認する。worktree の削除・再作成と並行して実行しない。停止後は `just ps` で対象環境を確認し、起動をやり直す。
 
 複数の worktree を同時に作ると、setup が同じ `WORKTREE_HTTPS_PORT` を割り当てることがある。`just up` でポートが衝突したら、`.env` の `WORKTREE_HTTPS_PORT` を空き番号に変える。DB への反映は [ポート変更](../auth-provider/setup.md#worktreeのポート変更) に従う。
