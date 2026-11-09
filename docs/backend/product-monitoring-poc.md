@@ -69,7 +69,7 @@ Yahoo!フリマとメルカリでは、個別ページが非2xxを返す削除�
 | 商品計測結果（`product_crawl_setting_id` で絞り込み、`excluded=true` で除外した出品だけ） | GET `/api/v1/product_crawl_results` |
 | 出品の除外・取り消し（行は消さない） | PATCH `/api/v1/product_crawl_results/:id`（`excluded: true/false`） |
 | 直近30日の集計 | POST `/api/v1/product_watch_settings/:id/calculate` |
-| 期間内の相場対象の商品（`start_date`・`end_date` 必須） | GET `/api/v1/product_watch_settings/:id/purchases` |
+| 期間内の相場対象の商品（`start_date`・`end_date` 必須、最大90日） | GET `/api/v1/product_watch_settings/:id/purchases` |
 | 全商品モニタリング設定の商品日次相場 | GET `/api/v1/product_aggregation_results` |
 | 商品モニタリング設定の一覧・登録 | GET / POST `/api/v1/product_watch_settings` |
 | 商品モニタリング設定の更新・削除 | PUT / DELETE `/api/v1/product_watch_settings/:id` |

@@ -23,9 +23,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const setting = settingsResponse.data.productWatchSettings.find((item) => item.id === id)
   if (!setting) notFound()
 
-  const daily = aggregationResponse?.data
+  const allDaily = aggregationResponse?.data
     ? aggregationResponse.data.productAggregationResults.filter((item) => item.productWatchSettingId === id)
     : null
+  const latestDate = allDaily?.at(-1)?.date
+  const firstDate = latestDate ? new Date(`${latestDate}T00:00:00Z`) : null
+  firstDate?.setUTCDate(firstDate.getUTCDate() - 29)
+  const daily = allDaily?.filter((item) => item.date >= firstDate!.toISOString().slice(0, 10)) ?? null
   const purchases = daily?.length
     ? await getProductAggregationPurchases(id, {
         startDate: daily[0].date,

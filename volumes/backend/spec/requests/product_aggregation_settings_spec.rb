@@ -35,6 +35,17 @@ RSpec.describe "商品集計設定", type: :request do
         params: { start_date: "invalid", end_date: "2026-11-01" }
     expect(response).to have_http_status(:bad_request)
   end
+
+  it "購入商品の期間は90日以内で開始日以前に終了しないこと" do
+    setting = create(:product_watch_setting)
+    url = "/api/v1/product_watch_settings/#{setting.id}/purchases"
+    get url, params: { start_date: "2026-01-01", end_date: "2026-03-31" }
+    expect(response).to have_http_status(:ok)
+    get url, params: { start_date: "2026-01-01", end_date: "2026-04-01" }
+    expect(response).to have_http_status(:bad_request)
+    get url, params: { start_date: "2026-01-02", end_date: "2026-01-01" }
+    expect(response).to have_http_status(:bad_request)
+  end
 end
 
 RSpec.describe "商品集計結果", type: :request do

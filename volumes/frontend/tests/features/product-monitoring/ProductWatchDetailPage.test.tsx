@@ -68,4 +68,18 @@ describe('商品モニタリング詳細ページ', () => {
     vi.mocked(getProductWatchSettings).mockResolvedValueOnce({ data: null, status: 500, error: null })
     await expect(Page({ params: Promise.resolve({ id: '1' }) })).rejects.toThrow('商品モニタリング設定を取得できませんでした')
   })
+
+  it('古い日次相場が残っていても直近30日だけの商品を取得する', async () => {
+    vi.mocked(getAllProductAggregationResults).mockResolvedValueOnce({
+      data: { productAggregationResults: [
+        { id: 1, productWatchSettingId: 1, date: '2026-01-01', averagePurchasePrice: 100, purchaseCount: 1 },
+        { id: 2, productWatchSettingId: 1, date: '2026-10-11', averagePurchasePrice: 200, purchaseCount: 1 },
+        { id: 3, productWatchSettingId: 1, date: '2026-11-09', averagePurchasePrice: 300, purchaseCount: 1 },
+      ] }, status: 200, error: null,
+    })
+    vi.mocked(getProductAggregationPurchases).mockResolvedValueOnce({ data: { productCrawlResults: [] }, status: 200, error: null })
+    render(await Page({ params: Promise.resolve({ id: '1' }) }))
+    expect(getProductAggregationPurchases).toHaveBeenCalledWith(1, { startDate: '2026-10-11', endDate: '2026-11-09' })
+    expect(screen.getByText(/2026-10-11/)).not.toHaveTextContent('2026-01-01')
+  })
 })
