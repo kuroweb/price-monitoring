@@ -9,6 +9,7 @@ interface Props {
   productCrawlResult: ProductCrawlResult
   disabled?: boolean
   onExclude?: (item: ProductCrawlResult) => void
+  onDelete?: (item: ProductCrawlResult) => void
 }
 
 // 売れた日を優先し、オークションは終了日を出す。どちらもなければ出さない
@@ -23,6 +24,7 @@ export default function ProductCrawlResultCard({
   productCrawlResult: item,
   disabled,
   onExclude,
+  onDelete,
 }: Props) {
   const date = dateLabel(item)
 
@@ -60,7 +62,7 @@ export default function ProductCrawlResultCard({
             売り切れ
           </span>
         )}
-        {onExclude && (
+        {(onExclude || onDelete) && (
           <div className='dropdown dropdown-left dropdown-start absolute top-1 right-1'>
             <button
               type='button'
@@ -70,16 +72,30 @@ export default function ProductCrawlResultCard({
               <MoreIcon />
             </button>
             <ul className='menu dropdown-content invisible pointer-events-none [.dropdown:focus-within_&]:visible [.dropdown:focus-within_&]:pointer-events-auto z-1 w-max rounded-box border border-base-300 bg-base-100 p-2 shadow-lg'>
-              <li>
-                <button
-                  type='button'
-                  className='btn btn-error btn-sm'
-                  disabled={disabled}
-                  onClick={() => onExclude(item)}
-                >
-                  除外
-                </button>
-              </li>
+              {onExclude && (
+                <li>
+                  <button
+                    type='button'
+                    className='btn btn-ghost btn-sm'
+                    disabled={disabled}
+                    onClick={() => onExclude(item)}
+                  >
+                    除外
+                  </button>
+                </li>
+              )}
+              {onDelete && (
+                <li>
+                  <button
+                    type='button'
+                    className='btn btn-error btn-sm'
+                    disabled={disabled}
+                    onClick={() => onDelete(item)}
+                  >
+                    削除
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         )}

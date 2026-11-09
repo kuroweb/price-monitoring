@@ -94,8 +94,9 @@ describe('商品モニタリング', () => {
       />,
     )
     expect(screen.getAllByText('¥800')).toHaveLength(2)
-    await user.click(screen.getByRole('button', { name: 'phoneの操作' }))
-    await user.click(screen.getByRole('button', { name: '削除' }))
+    const menuButton = screen.getByRole('button', { name: 'phoneの操作' })
+    await user.click(menuButton)
+    await user.click(within(menuButton.parentElement!).getByRole('button', { name: '削除' }))
     await waitFor(() => expect(destroyProductWatchSetting).toHaveBeenCalledWith(1))
   })
 

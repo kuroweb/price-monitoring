@@ -35,7 +35,7 @@ export default function ProductCrawlResultsSection({
   productCrawlResults,
 }: Props) {
   const href = `/product-crawl-results/${productCrawlSetting.id}`
-  const { busy, exclude } = useProductCrawlResultActions()
+  const { busy, exclude, remove } = useProductCrawlResultActions()
   const router = useRouter()
   const [modal, setModal] = useState<{
     setting?: ProductCrawlSetting
@@ -105,6 +105,7 @@ export default function ProductCrawlResultsSection({
                 productCrawlResult={item}
                 disabled={busy}
                 onExclude={exclude}
+                onDelete={remove}
               />
             </li>
           ))}

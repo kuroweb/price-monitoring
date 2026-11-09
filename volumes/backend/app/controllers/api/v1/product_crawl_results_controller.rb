@@ -22,6 +22,11 @@ module Api
         render json: product_crawl_result.as_json, status: :ok
       end
 
+      def destroy
+        ProductCrawlResult.find(params[:id]).destroy!
+        render json: {}, status: :ok
+      end
+
       private
 
       def filtered_results

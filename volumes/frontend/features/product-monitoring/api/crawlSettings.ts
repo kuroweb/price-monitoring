@@ -28,3 +28,5 @@ export const getProductCrawlResults = (params?: GetProductCrawlResultsParams) =>
 // 除外と取り消し。行は消さず excluded_at で表す
 export const setProductCrawlResultExcluded = (id: number, excluded: boolean) =>
   http<ProductCrawlResult>(`${RESULTS_PATH}/${id}`, { method: 'PATCH', data: { excluded } })
+export const destroyProductCrawlResult = (id: number) =>
+  http(`${RESULTS_PATH}/${id}`, { method: 'DELETE' })
