@@ -206,6 +206,28 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async)
     end
 
+    it "他サイトの取得が失敗しても成功したサイトの出品と売却日不明の出品を確認すること" do
+      sources.replace([{ platform: "mercari", status: "succeeded" }, { platform: "yahoo_auction", status: "failed" }])
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing",
+                                    sold: false, updated_at: 4.hours.ago)
+      results << { platform: "mercari", external_id: "new-sold", reasons: [], price: 100, name: "Phone",
+                   product_url: "https://jp.mercari.com/item/new-sold", sold: true }
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("missing")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("new-sold")
+    end
+
+    it "同じサイトの取得が失敗した場合は売却日不明の出品だけを確認すること" do
+      sources.replace([{ platform: "mercari", status: "failed" }])
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing",
+                                    sold: false, updated_at: 4.hours.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "undated",
+                                    sold: true, updated_at: 4.hours.ago)
+      described_class.call(product_crawl_setting: setting)
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("missing")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("undated")
+    end
+
     it "詳細取得ジョブを古い順に制限すること" do
       stub_const("ProductMonitoring::DetailCandidates::MAX_DETAIL_JOBS", 2)
       allow(Rails.logger).to receive(:info).and_call_original

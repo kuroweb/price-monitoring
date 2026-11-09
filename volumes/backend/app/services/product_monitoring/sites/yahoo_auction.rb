@@ -103,7 +103,7 @@ module ProductMonitoring
       end
 
       def self.end_datetime(item, closed:)
-        matched = item.text.match(END_TIME_PATTERN)
+        matched = item.css("span").reverse_each.filter_map { |span| span.text.match(END_TIME_PATTERN) }.first
         datetime = parse_end_datetime(matched, closed:) if matched
         return datetime if datetime
 

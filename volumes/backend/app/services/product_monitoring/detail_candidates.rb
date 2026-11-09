@@ -48,9 +48,22 @@ module ProductMonitoring
     def site_candidates(site, crawled, newly_sold)
       platform = site::PLATFORM
       seen = crawled[:results].select { |result| result[:platform] == platform }.pluck(:external_id)
-      detail_candidates(platform, seen, newly_sold.fetch(platform)).order(:updated_at)
-                                                                   .pluck(:external_id, :updated_at)
-                                                                   .map { |id, updated_at| [platform, id, updated_at] }
+      complete = complete_sources?(crawled[:sources], platform)
+      detail_candidates(platform, seen, newly_sold.fetch(platform), complete:).order(:updated_at)
+                                                                              .pluck(:external_id, :updated_at)
+                                                                              .map { |id, time| [platform, id, time] }
+    end
+
+    def complete_sources?(sources, platform)
+      return true if successful_sources?(sources)
+      return false if sources.any? { |source| source[:platform].nil? }
+
+      site_sources = sources.select { |source| source[:platform] == platform }
+      site_sources.any? && successful_sources?(site_sources)
+    end
+
+    def successful_sources?(sources)
+      sources.all? { |source| source[:status] == "succeeded" }
     end
 
     def log_detail_candidates(candidate_count, enqueued_count)
@@ -58,13 +71,13 @@ module ProductMonitoring
                         "candidates=#{candidate_count} enqueued=#{enqueued_count}")
     end
 
-    def detail_candidates(platform, seen_ids, newly_sold_ids)
+    def detail_candidates(platform, seen_ids, newly_sold_ids, complete:)
       scope = product_crawl_setting.product_crawl_results.where(platform: platform)
       due = scope.where(updated_at: ...DETAIL_RECHECK_INTERVAL.ago)
       missing = due.where.not(sold: true).or(due.where(sold: nil)).where.not(external_id: seen_ids)
       undated = scope.where(sold: true, bought_date: nil)
       undated = undated.merge(due).or(undated.where(external_id: newly_sold_ids))
-      missing.or(undated)
+      complete ? missing.or(undated) : undated
     end
   end
 end

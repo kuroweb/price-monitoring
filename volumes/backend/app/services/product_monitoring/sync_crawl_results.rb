@@ -18,7 +18,7 @@ module ProductMonitoring
         save_matched(matched)
         CleanseCrawlResults.call(product_crawl_setting:)
       end
-      details.enqueue(crawled, newly_sold) if crawled[:sources].all? { |source| source[:status] == "succeeded" }
+      details.enqueue(crawled, newly_sold)
       crawled
     end
 
