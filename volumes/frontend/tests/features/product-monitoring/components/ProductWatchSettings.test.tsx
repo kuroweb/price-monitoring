@@ -1,10 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { toast } from 'react-toastify'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
   createProductWatchSetting,
   destroyProductWatchSetting,
+  setProductCrawlResultExcluded,
 } from '@/features/product-monitoring/api/actions'
 import type {
   ProductCrawlResult,
@@ -19,6 +21,7 @@ vi.mock('@/features/product-monitoring/api/actions', () => ({
   createProductWatchSetting: vi.fn(),
   updateProductWatchSetting: vi.fn(),
   destroyProductWatchSetting: vi.fn(),
+  setProductCrawlResultExcluded: vi.fn(),
 }))
 
 const setting: ProductWatchSetting = {
@@ -36,7 +39,7 @@ const result: ProductCrawlResult = {
   productCrawlSettingId: 1,
   platform: 'iosys',
   externalId: '1',
-  name: 'phone',
+  name: 'phone listing',
   productUrl: 'https://iosys.co.jp/item/1',
   thumbnailUrl: null,
   price: 800,
@@ -104,6 +107,38 @@ describe('商品モニタリング', () => {
     expect(screen.getByText(/商品を取得できませんでした/)).toBeInTheDocument()
     rerender(<ProductWatchSettings sections={[{ setting, results: [] }]} />)
     expect(screen.getByText('条件に一致する販売中の商品はありません。')).toBeInTheDocument()
+  })
+
+  it('確認後に出品を除外し、結果を再取得する', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({ data: result, error: null, status: 200 })
+    const user = userEvent.setup()
+    render(<ProductWatchSettings sections={[{ setting, results: [result] }]} />)
+    await user.click(screen.getByRole('button', { name: 'phone listingの操作' }))
+    await user.click(screen.getByRole('button', { name: '除外' }))
+    await waitFor(() => expect(setProductCrawlResultExcluded).toHaveBeenCalledWith(result.id, true))
+    expect(refresh).toHaveBeenCalled()
+  })
+
+  it('除外をキャンセルした場合は更新しない', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(false)
+    const user = userEvent.setup()
+    render(<ProductWatchSettings sections={[{ setting, results: [result] }]} />)
+    await user.click(screen.getByRole('button', { name: 'phone listingの操作' }))
+    await user.click(screen.getByRole('button', { name: '除外' }))
+    expect(setProductCrawlResultExcluded).not.toHaveBeenCalled()
+    expect(refresh).not.toHaveBeenCalled()
+  })
+
+  it('除外に失敗した場合はエラーを表示する', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    vi.mocked(setProductCrawlResultExcluded).mockResolvedValue({ data: null, error: null, status: 500 })
+    const user = userEvent.setup()
+    render(<ProductWatchSettings sections={[{ setting, results: [result] }]} />)
+    await user.click(screen.getByRole('button', { name: 'phone listingの操作' }))
+    await user.click(screen.getByRole('button', { name: '除外' }))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith('除外に失敗しました'))
+    expect(refresh).not.toHaveBeenCalled()
   })
 
   it('既存の条件を引き継いで新しい設定を複製する', async () => {
