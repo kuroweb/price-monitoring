@@ -68,6 +68,15 @@ RSpec.describe ProductMonitoring::Sites::YahooAuction do
     end
   end
 
+  it "入札件数と日付が隣接していても終了日時だけを読み取ること" do
+    travel_to Time.zone.parse("2026-11-09 10:00") do
+      node = item("落札1,000円")
+      node.at_css("span").replace("<span>1</span><span><span>8/27 19:32<!-- -->終了</span></span>")
+      result = described_class.listing(node, closed: true)
+      expect(result[:bought_date]).to eq(Time.zone.parse("2026-08-27 19:32"))
+    end
+  end
+
   it "検索結果が空なら結果を返さず認識できないページを拒否すること" do
     uri = URI("https://auctions.yahoo.co.jp/search/search?p=ipad")
     expect(described_class.page_results(uri, Nokogiri::HTML('<div class="Notice__wandQuery"></div>'))).to eq([[], nil])
