@@ -49,7 +49,7 @@ export type GetProductWatchSettings = {
 }
 export type ProductAggregationResult = {
   id: number
-  productAggregationSettingId: number
+  productWatchSettingId: number
   date: string
   averagePurchasePrice: number | null
   purchaseCount: number

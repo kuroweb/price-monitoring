@@ -42,7 +42,7 @@ export default function ProductWatchSettingFormModal({
     excludeKeywords: values?.excludeKeywords ?? [],
     minPrice: values?.minPrice ?? null,
     maxPrice: values?.maxPrice ?? null,
-    discordEnabled: true,
+    discordEnabled: values?.discordEnabled ?? true,
   }))
   const [required, setRequired] = useState(values?.requiredKeywords.join(', ') ?? '')
   const [excluded, setExcluded] = useState(values?.excludeKeywords.join(', ') ?? '')
@@ -125,6 +125,7 @@ export default function ProductWatchSettingFormModal({
                   onExcludedChange={setExcluded}
                   onPriceChange={change}
                 />
+                {setting && <p className='text-sm opacity-65'>絞り込み条件を変更すると、現在の相場は消去され、次の集計で更新されます。</p>}
                 <label className='flex items-center gap-2'>
                   <input
                     type='checkbox'
@@ -132,7 +133,7 @@ export default function ProductWatchSettingFormModal({
                     checked={input.enabled}
                     onChange={(event) => change({ enabled: event.target.checked })}
                   />
-                  モニタリングを有効にする
+                  最安値の変化を通知する
                 </label>
               </fieldset>
               {error && (

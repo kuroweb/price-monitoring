@@ -4,7 +4,7 @@
 
 ## 方針
 
-- 商品計測設定に検索語とサイト、または追加の検索結果URLを登録し、その結果を商品相場設定ごとに集計する。
+- 商品計測設定に検索語とサイト、または追加の検索結果URLを登録し、その結果を商品モニタリング設定ごとに集計する。
 - 既存テーブルとは独立した、完全に新規のテーブル群として作る。既存テーブルは参照せず、後で削除する（本計画の範囲外）。
 - カテゴリは撤廃する。
 - 将来の賃貸ページのクロールと区別するため、テーブル名は `product_`、ドメイン名は「商品」で始める。
@@ -19,15 +19,15 @@
 | --- | --- | --- |
 | `product_crawl_settings` | 商品計測設定 | 名前・有効状態、検索語・サイト・追加の検索結果URL、URLだけでは絞り込めない追加条件。条件は登録した全URLで共有する |
 | `product_crawl_results` | 商品計測結果 | 商品計測設定ごとのクロール結果 |
-| `product_aggregation_settings` | 商品相場設定 | 商品計測結果をフィルターする相場集計の条件 |
-| `product_aggregation_results` | 商品日次相場 | 商品相場設定ごとの日次集計結果 |
+| `product_watch_settings` | 商品モニタリング設定 | 商品計測結果をフィルターする相場集計の条件 |
+| `product_aggregation_results` | 商品日次相場 | 商品モニタリング設定ごとの日次集計結果 |
 
 ### ER図
 
 ```mermaid
 erDiagram
   product_crawl_settings ||--o{ product_crawl_results : collects
-  product_aggregation_settings ||--o{ product_aggregation_results : summarizes
+  product_watch_settings ||--o{ product_aggregation_results : summarizes
   product_crawl_settings {
     bigint id PK
     string name
@@ -55,7 +55,7 @@ erDiagram
     datetime end_date "nullable"
     datetime excluded_at "nullable"
   }
-  product_aggregation_settings {
+  product_watch_settings {
     bigint id PK
     string name
     json required_keywords
@@ -65,7 +65,7 @@ erDiagram
   }
   product_aggregation_results {
     bigint id PK
-    bigint product_aggregation_setting_id FK
+    bigint product_watch_setting_id FK
     date date
     integer average_purchase_price "nullable"
     integer purchase_count
@@ -82,10 +82,10 @@ erDiagram
 2. 行を識別する値（名前・サイト・出品ID・集計日）と表示用の値（出品ページURL・サムネイル）
 3. 有効状態
 4. クロール対象（検索語・サイト・追加URL）
-5. 条件（必須語・除外語・価格帯）。商品計測設定と商品相場設定で同じ順にする
+5. 条件（必須語・除外語・価格帯）。商品計測設定と商品モニタリング設定で同じ順にする
 6. 取得・集計した値。意味の近い列をまとめる（価格と即決価格、販売状態と売れた日時）
 
-必須語・除外語は出品名との部分一致で判定する。商品計測設定と商品相場設定で同じ判定を使う。比べる前に出品名と語句の両方をNFKCで正規化し、小文字にして空白を除く。そのため全角半角・大文字小文字・空白の有無は区別しない（`iPad Pro` は `ｉＰａｄＰｒｏ` に一致する）。
+必須語・除外語は出品名との部分一致で判定する。商品計測設定と商品モニタリング設定で同じ判定を使う。比べる前に出品名と語句の両方をNFKCで正規化し、小文字にして空白を除く。そのため全角半角・大文字小文字・空白の有無は区別しない（`iPad Pro` は `ｉＰａｄＰｒｏ` に一致する）。
 
 ### テーブル定義
 
@@ -139,45 +139,48 @@ erDiagram
 
 除外した出品は、取得し直しても `excluded_at` を残したまま価格などを更新する。結果画面と相場集計では `excluded_at` が null の行だけを使う。
 
-#### `product_aggregation_settings`（商品相場設定）
+#### `product_watch_settings`（商品モニタリング設定）
 
 商品計測設定には紐付けず、全商品計測設定の商品計測結果をフィルターする。フィルターの意味は商品計測設定の追加条件と同じ。
 
 | 列 | 型 | NULL | 既定値 | 説明 |
 | --- | --- | --- | --- | --- |
 | `id` | bigint | NO | | 主キー |
-| `name` | string | NO | | 商品相場設定名 |
+| `name` | string | NO | | 商品モニタリング設定名 |
 | `required_keywords` | json | NO | `[]` | 必須語の文字列配列 |
 | `exclude_keywords` | json | NO | `[]` | 除外語の文字列配列 |
 | `min_price` | integer | YES | | 下限価格。null は制限なし |
 | `max_price` | integer | YES | | 上限価格。null は制限なし |
+| `enabled` | boolean | NO | false | 最安値の定期評価を有効にする |
+| `discord_enabled` | boolean | NO | false | Discord 通知を有効にする |
+| `last_lowest_signature` | string | YES | | 通知の比較基準 |
 
 #### `product_aggregation_results`（商品日次相場）
 
-商品相場設定ごとの日次集計結果。
+商品モニタリング設定ごとの日次集計結果。
 
 | 列 | 型 | NULL | 既定値 | 説明 |
 | --- | --- | --- | --- | --- |
 | `id` | bigint | NO | | 主キー |
-| `product_aggregation_setting_id` | bigint | NO | | 集計元の `product_aggregation_settings.id` |
+| `product_watch_setting_id` | bigint | NO | | 集計元の `product_watch_settings.id` |
 | `date` | date | NO | | 集計日 |
 | `average_purchase_price` | integer | YES | | 平均購入価格。購入が0件の日は null |
 | `purchase_count` | integer | NO | `0` | 購入件数 |
 
 | インデックス | 列 | 一意 |
 | --- | --- | --- |
-| 商品相場設定と集計日 | `(product_aggregation_setting_id, date)` | YES |
+| 商品モニタリング設定と集計日 | `(product_watch_setting_id, date)` | YES |
 
 | 外部キー | 参照先 |
 | --- | --- |
-| `product_aggregation_setting_id` | `product_aggregation_settings.id` |
+| `product_watch_setting_id` | `product_watch_settings.id` |
 
 ### 集計の手順
 
-1. 商品相場設定のフィルターに一致する商品計測結果を、全商品計測設定から取り出す。
+1. 商品モニタリング設定のフィルターに一致する商品計測結果を、全商品計測設定から取り出す。
 2. そのうち `bought_date` が集計日に入る行を対象にする。
 3. 複数の商品計測設定に同じ出品の行がある場合は、`external_id` で1件にまとめる。
-4. 平均価格と件数を商品日次相場に `(product_aggregation_setting_id, date)` 単位で保存する。
+4. 平均価格と件数を商品日次相場に `(product_watch_setting_id, date)` 単位で保存する。
 
 ## 画面設計（ドラフト）
 
@@ -190,8 +193,8 @@ erDiagram
 | 商品計測設定の登録・編集（モーダル） | `product_crawl_settings` | 名前・検索語・サイト・追加URL・追加条件の入力、保存。更新では除外した出品の確認と取り消し |
 | 商品計測結果一覧 | `product_crawl_results` | 設定の追加・編集・複製・削除。設定ごとに新着の数件を表示し、出品の除外と詳細への遷移 |
 | 商品計測結果詳細 | `product_crawl_results` | 有効状態・サイト数・追加URL数・件数と1つの商品計測設定の全件を表示。販売状態の絞り込み、並び替え、取得して保存、出品の除外 |
-| 商品相場設定の登録・編集（モーダル） | `product_aggregation_settings` | 名前・フィルターの入力、保存 |
-| 商品相場 | `product_aggregation_results`・`product_crawl_results` | 設定の追加・編集・削除と条件のバッジ表示。全商品相場設定の日次推移を設定ごとのセクションで表示。要約の数値、期間とグラフ・表の切り替え、集計の実行、相場対象の商品のカード |
+| 商品モニタリング一覧 | `product_watch_settings`・`product_aggregation_results`・`product_crawl_results` | 設定の登録・編集・複製・削除、最安値と直近相場の要約、詳細への遷移 |
+| 商品モニタリング詳細 | 同上 | 条件の編集、販売中の商品と日次相場の表示、出品の除外と集計 |
 
 ### 商品計測結果詳細の設定表示
 
@@ -241,20 +244,13 @@ Yahoo!フリマの検索語には `/` と制御文字を使えない。該当す
 
 詳細から「取得して保存」を実行できる。カードの「…」メニューから出品を除外できる。除外すると商品計測結果の `excluded_at` に日時を入れる。行は消さない。
 
-### 商品相場設定の登録・編集
+### 商品モニタリング設定の登録・編集
 
-| 入力項目 | 元の列 | 入力方法 |
-| --- | --- | --- |
-| 名前 | `name` | 必須 |
-| 必須語 | `required_keywords` | 複数入力 |
-| 除外語 | `exclude_keywords` | 複数入力 |
-| 価格帯 | `min_price`・`max_price` | 上下限。空欄は制限なし |
-
-相場画面の各セクションは名前と条件のバッジ（必須語・除外語・価格帯）を表示し、「…」メニューから編集・削除する。
+名前・必須語・除外語・価格帯・モニタリング有効状態を設定する。同じ条件で販売中の商品と売却相場を表示する。
 
 ### 商品相場
 
-全商品相場設定の日次の推移を、設定ごとのセクションに表示する。設定の追加と各設定の編集・削除ができる。各セクションから直近30日の集計を実行できる。
+商品モニタリング詳細に対象設定の日次推移を表示する。詳細から直近30日の集計を実行できる。
 
 | 表示項目 | 元の列 |
 | --- | --- |
@@ -266,5 +262,5 @@ Yahoo!フリマの検索語には `/` と制御文字を使えない。該当す
 
 ### 未決事項
 
-- 旧設定画面のURL `/admin/product-crawl-settings`・`/admin/product-aggregation-settings` は、それぞれ `/product-crawl-results`・`/product-aggregation-results` へリダイレクトする。
+- 旧設定画面のURL `/admin/product-crawl-settings`・`/admin/product-aggregation-settings` は、それぞれ `/product-crawl-results`・`/product-monitoring` へリダイレクトする。
 - 商品相場の表示形式（グラフ・表）と表示期間。

@@ -24,7 +24,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <div className='breadcrumbs p-0 text-sm'>
             <ul>
               <li>
-                <Link href='/product-crawl-results'>商品計測結果</Link>
+                <Link href='/product-crawl-results'>商品計測</Link>
               </li>
               <li>{settingResponse.data.name}</li>
             </ul>
