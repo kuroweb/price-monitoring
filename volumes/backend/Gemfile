@@ -5,7 +5,7 @@ ruby "4.0.4"
 gem "bootsnap", require: false
 gem "bugsnag", "~> 6.30"
 gem "closure_tree"
-gem "datadog", "~> 2.47", require: false
+gem "datadog", "~> 2.48", require: false
 gem "importmap-rails"
 gem "jbuilder"
 gem "mysql2", "~> 0.5"
