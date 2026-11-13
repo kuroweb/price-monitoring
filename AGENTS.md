@@ -7,7 +7,7 @@
 
 - 開発環境は Docker Compose を使う。アプリに対する言語ツールは、調査・バージョン確認を含め、必ず下表のコンテナで実行する。
 - ホストで `ruby` / `bundle` / `rails` / `rspec` / `node` / `npm` / `npx` / `python` / `pip` などを使ってアプリを調査・実行・更新しない。読み取り目的の `bundle show` などでも lockfile や依存関係が変わり得る。
-- ホストではファイルの編集・検索、Git / GitHub CLI、Docker Compose / just / make、証明書・hosts の準備を行える。ホストにアプリ用の依存関係をインストールしない。
+- ホストではファイルの編集・検索、Git / GitHub CLI、Docker Compose / just / make、pre-commit、証明書・hosts の準備を行える。ホストにアプリ用の依存関係をインストールしない。
 - コマンドはリポジトリルートから Docker Compose / just 経由で実行する。実行例は [ローカル開発ガイド](docs/development/index.md) を参照する。
 
 | 対象 | Compose service | コンテナで実行するツール |

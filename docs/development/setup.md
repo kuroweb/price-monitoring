@@ -11,6 +11,17 @@ brew install mkcert
 mkcert -install
 ```
 
+## コミット前のシークレット検査
+
+このリポジトリは public なので、コミットの前に、ステージした差分にシークレットがないかを gitleaks で検査する。フックは pre-commit が [.pre-commit-config.yaml](../../.pre-commit-config.yaml) から入れ、gitleaks の版も同じファイルで固定する。pre-commit は開発補助ツールで、アプリの依存関係ではない。ホストで次を実行する。
+
+```bash
+brew install pre-commit
+pre-commit install --allow-missing-config
+```
+
+フックは git の共通ディレクトリに入るので、メインと Orca の worktree のどちらで実行しても、すべての worktree に効く。`--allow-missing-config` を付けるのは、`.pre-commit-config.yaml` がまだないブランチでのコミットを止めないためなので、省略しない。gitleaks は、最初のコミットで pre-commit が固定された版をビルドして用意する。検査に止められたら、`--no-verify` で回避せず、該当箇所を取り除く。
+
 ## 証明書と hosts
 
 共通の Nginx が使う BFF / Provider 両方の開発用証明書を、ホストで作成する。

@@ -30,7 +30,7 @@
 | AI の実行制約と作業判断 | [AGENTS.md](../AGENTS.md) | エージェント向け規約 |
 | 文書の配置・役割・更新規約・記述規約 | このファイル | 文書規約・索引 |
 | ローカル開発環境の構成・用語・接続先 | [ローカル開発](development/index.md) | 入口・解説 |
-| 共通セットアップ、証明書・hosts、イメージ、DB の準備 | [初回セットアップ](development/setup.md) | ハウツー |
+| 共通セットアップ、コミット前のシークレット検査、証明書・hosts、イメージ、DB の準備 | [初回セットアップ](development/setup.md) | ハウツー |
 | 起動・停止・ログ確認、依存関係の更新 | [日常操作](development/operations.md) | ハウツー |
 | RSpec・静的検証・frontend のテスト | [テスト](development/testing.md) | ハウツー |
 | Orca の worktree の setup・初期化・ポート | [Orca の worktree](development/worktree.md) | ハウツー |
