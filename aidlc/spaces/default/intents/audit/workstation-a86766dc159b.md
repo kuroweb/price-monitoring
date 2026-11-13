@@ -111,3 +111,20 @@
 **Details**: 63 passed, 0 failed
 
 ---
+
+## Guardrail Loaded
+**Timestamp**: 2026-11-13T14:47:49Z
+**Event**: GUARDRAIL_LOADED
+**Scope**: all
+**Path**: .codex/aidlc-rules/
+**Rule count**: 7
+
+---
+
+## Health Check
+**Timestamp**: 2026-11-13T14:47:49Z
+**Event**: HEALTH_CHECKED
+**Request**: /aidlc --doctor
+**Details**: 63 passed, 0 failed
+
+---
