@@ -20,6 +20,8 @@ AI-DLC の考え方とステージの一覧は [公式ドキュメント](https:
 
 前提として、ホストに `aidlc` があり、`.aidlc-version` の版が入っていること（`aidlc version`）。
 
+初回起動前に [監査ログに使う端末名](setup.md#ai-dlc-の監査ログに使う端末名) を `workstation` に設定する。新しいクローンや worktree でも、そのチェックアウトの `.aidlc-clone-id` を確認する。
+
 | ツール | 開始・再開 | 状態の確認 | 設定の確認 |
 | --- | --- | --- | --- |
 | Claude Code | `/aidlc <やりたいこと>` | `/aidlc --status` | `/aidlc --doctor` |
