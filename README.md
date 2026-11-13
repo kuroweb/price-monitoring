@@ -162,3 +162,4 @@ flowchart LR
 - [Frontend の責務分離](docs/frontend/index.md)
 - [Database 設計](docs/database/index.md)
 - [AI エージェント向け開発規約](AGENTS.md)
+- [AI-DLC での開発](docs/development/ai-dlc.md)

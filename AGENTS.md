@@ -5,9 +5,10 @@
 
 ## コマンドの実行場所
 
-- 開発環境は Docker Compose を使う。アプリに対する言語ツールは、調査・バージョン確認を含め、必ず下表のコンテナで実行する。
-- ホストで `ruby` / `bundle` / `rails` / `rspec` / `node` / `npm` / `npx` / `python` / `pip` などを使ってアプリを調査・実行・更新しない。読み取り目的の `bundle show` などでも lockfile や依存関係が変わり得る。
-- ホストではファイルの編集・検索、Git / GitHub CLI、Docker Compose / just / make、pre-commit、証明書・hosts の準備を行える。ホストにアプリ用の依存関係をインストールしない。
+- 開発環境は Docker Compose を使う。依存関係のインストール・更新・調査、アプリの起動、テストは、下表のコンテナで実行する。
+- ホストで `bundle` / `npm` / `npx` / `pip` などを使って依存関係を入れ替えたり、`rails` / `rspec` などでアプリを起動・テストしたりしない。読み取り目的の `bundle show` などでも lockfile や依存関係が変わり得る。
+- lint・型検査は、ホストでも実行できる。AI-DLC のセンサーは、ホストでプロジェクトの `eslint`・`tsc`（`volumes/frontend/node_modules`）を使う。
+- ホストではファイルの編集・検索、Git / GitHub CLI、Docker Compose / just / make、pre-commit、AI-DLC の `aidlc`、証明書・hosts の準備を行える。ホストにアプリ用の依存関係をインストールしない。
 - コマンドはリポジトリルートから Docker Compose / just 経由で実行する。実行例は [ローカル開発ガイド](docs/development/index.md) を参照する。
 
 | 対象 | Compose service | コンテナで実行するツール |
@@ -24,9 +25,7 @@
 - アプリの実行・検証の前に `just ps` で状態を確認し、未起動なら `just up` を使う。初回準備は [初回セットアップ](docs/development/setup.md) に従う。
 - Orca worktree で起動時にポート競合が起きた場合は、[ポートの衝突](docs/development/worktree.md#ポートの衝突) を確認する。削除済み worktree のコンテナが原因なら、同手順の対象と影響を確認して `just down-orphans` を実行する。
 - 不具合調査は `just logs` などでログの事実を確認してから修正する。
-- 実装前に対象レイヤーの既存実装を読み、[backend](docs/backend/index.md) / [frontend](docs/frontend/index.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
 - 認証アプリと BFF の境界・配置は [認証基盤](docs/auth-provider/index.md) を参照する。OIDC endpoint / issuer / token / scope / session / 署名鍵に影響する変更では Provider と Client の両方を確認する。
-- 検証は [テスト手順](docs/development/testing.md) に従い、変更範囲に応じて選ぶ。失敗時は対象だけを再実行し、依存サービスの状態を確認する。
 - 監視・運用に影響する変更では Datadog / BugSnag への影響を確認する。
 - 操作や構成を変えたら [文書ガイド](docs/index.md) で正本を特定して更新し、`justfile` / `Makefile` / workflow との整合を保つ。
 - デプロイ用の make タスクは、ローカル開発修正だけなら原則触らない。
@@ -42,14 +41,23 @@
 
 ### Rules
 
-- 正本は本ファイル（`AGENTS.md`）。`CLAUDE.md` は `@AGENTS.md` のインポートのみとし、他ツール向けの Rules 生成物は置かない。
-- 変更は `AGENTS.md` を直接編集する。
+- 正本は本ファイル（`AGENTS.md`）。ルートの `CLAUDE.md` は `@AGENTS.md` のインポートのみとし、他ツール向けの Rules 生成物は置かない。
+- 変更は `AGENTS.md` を直接編集する。末尾の `BEGIN AI-DLC:agents` から `END AI-DLC:agents` までは AI-DLC が管理するので、その外に書く。
 
-### Skills
+### AI-DLC
 
-- 正本は `.agents/skills/`（`.agents/skills/*/SKILL.md`）。変更はここを直接編集する。
-- `.claude/skills` は `.agents/skills` への symlink。直接編集しない。
-- `.cursor/skills` は生成物であり、git 管理しない。
+- AI-DLC の起動・承認・更新の手順の正本は [AI-DLC](docs/development/ai-dlc.md)。
+- AI-DLC が管理するファイルは編集しない。対象は `.claude/`・`.codex/`・`.cursor/`・`.agents/skills/` の AI-DLC のファイル、`.claude/CLAUDE.md`、本ファイルと `.gitignore` の AI-DLC ブロック。編集すると次の `aidlc config` が止まる。
+- スキルは、各ハーネスの置き場所（`.claude/skills/`・`.agents/skills/`・`.cursor/skills/`）に AI-DLC が生成する。
+- AI-DLC のルール（プロジェクト固有の指示）は `aidlc/spaces/default/memory/project.md` に書く。
+- Construction で検証コマンドの承認を求められたら、「コマンドの実行場所」の表どおりコンテナ経由のコマンドにする。
+
+### シークレット
+
+- シークレット（トークン・鍵・パスワード・Cookie・接続文字列）を、コミット・AI-DLC の成果物・チャットに含めない。AI-DLC の監査ログには、ワークフロー中に入力したメッセージが残り、このリポジトリは public。
+- ログやエラーを貼る・引用するときは、トークン・Cookie・認可コード・個人情報・プロキシなどの接続先を伏せる。
+- `.env`・証明書・鍵のファイルは読まない。値が必要なときは人に尋ねる。
+- pre-commit の gitleaks や GitHub の push protection に止められたら、`--no-verify` やバイパスで回避せず、該当箇所を取り除く。
 
 <!-- BEGIN AI-DLC:agents -->
 This project uses AI-DLC (AI-Driven Development Life Cycle) for structured development. Harness-specific setup, commands, and prerequisites live in each harness's own onboarding file (see Harness onboarding below).

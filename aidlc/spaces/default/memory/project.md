@@ -11,6 +11,9 @@
 
 ## Way of Working
 
+- 質問・成果物・承認の案内は日本語で書く。
+- 作業は [AGENTS.md](../../../../AGENTS.md) の実行制約に従う。
+
 <!-- Project-specific specialisation. Example: -->
 <!-- This monorepo requires package-scoped branch names and a package owner -->
 <!-- review in addition to the team's normal merge policy. -->
@@ -25,7 +28,8 @@
 
 ## Testing Posture
 
-<!-- Project-specific specialisation. -->
+- 検証は [テスト手順](../../../../docs/development/testing.md) に従い、変更範囲に応じて選ぶ。失敗時は対象だけを再実行し、依存サービスの状態を確認する。
+- アプリの起動・テストと依存関係の更新は、Compose service 経由で実行する（[AGENTS.md](../../../../AGENTS.md#コマンドの実行場所)）。
 
 ## Guard Policy
 
@@ -33,15 +37,15 @@
 
 ## Deployment
 
-<!-- Project-specific specialisation. -->
+- デプロイは [CI/CD](../../../../docs/cicd/index.md) が行う。本番は自宅の Kubernetes と ArgoCD で、AWS は使わない。
 
 ## Code Style
 
-<!-- Project-specific specialisation. -->
+- 実装前に対象レイヤーの既存実装を読み、[Backend](../../../../docs/backend/index.md) / [Frontend](../../../../docs/frontend/index.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
 
 ## Tech Stack
 
-<!-- Technology choices locked for this project. -->
+- 技術スタックと全体構成は [README](../../../../README.md) を参照する。
 
 ## Decided
 

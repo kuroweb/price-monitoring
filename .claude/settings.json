@@ -49,6 +49,11 @@
       "Bash(aidlc config flags --clear-bypass AIDLC_DISABLE_SENSORS --yes)",
       "Bash(aidlc config flags --clear-bypass AIDLC_DISABLE_LEARNINGS --yes)",
       "Bash(aidlc config flags --clear-bypass AIDLC_DISABLE_SUMMARY_CONFIRMATION --yes)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./**/.env)",
+      "Read(./**/*.pem)"
     ]
   },
   "env": {
