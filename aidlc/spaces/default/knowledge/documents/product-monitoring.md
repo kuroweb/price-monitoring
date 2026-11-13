@@ -184,7 +184,7 @@ erDiagram
 
 ## 画面設計（ドラフト）
 
-テーブル設計とPoC（[商品計測・商品相場PoC](../../backend/product-monitoring-poc.md)）の操作から起こした叩き台。PoCで実装しながら詰める。
+テーブル設計とPoC（[商品計測・商品相場PoC](../../../../../docs/backend/product-monitoring-poc.md)）の操作から起こした叩き台。PoCで実装しながら詰める。
 
 ### 画面一覧
 
