@@ -2,9 +2,11 @@
 
 [![CI/CD (Integration)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-integration.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-integration.yml) [![CI/CD (Production)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-production.yml/badge.svg)](https://github.com/kuroweb/price-monitoring/actions/workflows/cicd-production.yml)
 
-- Web上にある商品の最安値を探したり、相場を把握するためのツール
-- Rails, TypeScriptのキャッチアップが主な開発目的
-- DatadogやBugSnagを導入して運用監視についてのキャッチアップも兼ねている
+Web上の商品の最安値と相場を調べるツールで、自宅のホームラボで動かしている。
+
+要件定義、設計、開発、デプロイ、運用監視まで、このリポジトリで一通り検証できる。
+
+AI 駆動開発の実験もしていて、いまは AI-DLC（方法論と aidlc-workflows）を試している。手順は [AI-DLC での開発](docs/development/ai-dlc.md) にある。
 
 ## 技術スタック
 
@@ -162,3 +164,4 @@ flowchart LR
 - [Frontend の責務分離](docs/frontend/index.md)
 - [Database 設計](docs/database/index.md)
 - [AI エージェント向け開発規約](AGENTS.md)
+- [AI-DLC での開発](docs/development/ai-dlc.md)

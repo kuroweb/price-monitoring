@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "id": "01a1d54f-09bb-7d54-b742-dbe96793f853",
+      "source": {
+        "kind": "managed",
+        "path": "documents/product-monitoring.md"
+      },
+      "sha256": "c01127866ede3ef2ea9264c89d7a3c1f1b4d65c92560dc33615cf233328a8d02",
+      "bytes": 15955,
+      "indexed_at": "2026-11-13T14:28:09.273Z",
+      "extraction": {
+        "state": "extracted",
+        "extractor": {
+          "name": "builtin-text",
+          "version": "1"
+        },
+        "chars": 8891,
+        "truncated": false,
+        "source_revision": "c01127866ede3ef2ea9264c89d7a3c1f1b4d65c92560dc33615cf233328a8d02"
+      },
+      "summary": {
+        "state": "absent"
+      },
+      "content": "documentkb/01a1d54f-09bb-7d54-b742-dbe96793f853/content.md",
+      "content_sha256": "c01127866ede3ef2ea9264c89d7a3c1f1b4d65c92560dc33615cf233328a8d02"
+    }
+  ]
+}

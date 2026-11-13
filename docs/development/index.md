@@ -12,6 +12,7 @@
 | RSpec・静的検証・frontend のテスト | [テスト](testing.md) |
 | Orca の worktree でメインと並行して動かす | [Orca の worktree](worktree.md) |
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](remote.md) |
+| AI-DLC で機能の検討・実装を進める | [AI-DLC](ai-dlc.md) |
 
 関連する手順:
 
