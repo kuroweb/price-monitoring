@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "distribution": "cursor",
+  "productName": "Cursor",
+  "configNextStep": "open this project in Cursor, then run `/aidlc --doctor`",
+  "name": "cursor",
+  "harnessDir": ".cursor",
+  "rulesSubdir": "rules",
+  "runnerFrontmatterAdditions": [
+    "disable-model-invocation: true"
+  ],
+  "newChatStep": {
+    "text": "open a new chat, then type <entry>"
+  },
+  "hostShell": {
+    "env": [
+      "CURSOR_AGENT"
+    ]
+  }
+}
