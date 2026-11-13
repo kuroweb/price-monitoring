@@ -51,6 +51,7 @@
 - スキルは、各ハーネスの置き場所（`.claude/skills/`・`.agents/skills/`・`.cursor/skills/`）に AI-DLC が生成する。
 - AI-DLC のルール（プロジェクト固有の指示）は `aidlc/spaces/default/memory/project.md` に書く。
 - Construction で検証コマンドの承認を求められたら、「コマンドの実行場所」の表どおりコンテナ経由のコマンドにする。
+- Orca ワーカーへ AI-DLC の実行を依頼するときは、AI-DLC の手順が指定するサブエージェントの利用を許可する旨を依頼文に明記する。人への質問・承認ゲートはコーディネーターへ転送し、承認を代行しない。
 
 ### シークレット
 
