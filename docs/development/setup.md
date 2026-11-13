@@ -13,20 +13,20 @@ mkcert -install
 
 ## コミット前のシークレット検査
 
-このリポジトリは public なので、コミットの前に、ステージした差分にシークレットがないかを gitleaks で検査する。フックは pre-commit が [.pre-commit-config.yaml](../../.pre-commit-config.yaml) から入れ、gitleaks の版も同じファイルで固定する。pre-commit は開発補助ツールで、アプリの依存関係ではない。ホストで次を実行する。
+このリポジトリは public なので、コミットの前に、ステージした差分にシークレットがないかを gitleaks で検査する。フックは pre-commit が [.pre-commit-config.yaml](../../.pre-commit-config.yaml) から入れ、gitleaks のバージョンも同じファイルで固定する。pre-commit は開発補助ツールで、アプリの依存関係ではない。ホストで次を実行する。
 
 ```bash
 brew install pre-commit
 pre-commit install --allow-missing-config
 ```
 
-フックは git の共通ディレクトリに入るので、メインと Orca の worktree のどちらで実行しても、すべての worktree に効く。`--allow-missing-config` を付けるのは、`.pre-commit-config.yaml` がまだないブランチでのコミットを止めないためなので、省略しない。gitleaks は、最初のコミットで pre-commit が固定された版をビルドして用意する。検査に止められたら、`--no-verify` で回避せず、該当箇所を取り除く。
+フックは git の共通ディレクトリに入るので、メインと Orca の worktree のどちらで実行しても、すべての worktree に効く。`--allow-missing-config` を付けるのは、`.pre-commit-config.yaml` がまだないブランチでのコミットを止めないためなので、省略しない。gitleaks は、最初のコミットで pre-commit が固定されたバージョンをビルドして用意する。検査に止められたら、`--no-verify` で回避せず、該当箇所を取り除く。
 
 ## AI-DLC の監査ログに使う端末名
 
 このリポジトリは public なので、監査ログのファイル名に hostname を載せないよう、端末名を `workstation` にする。AI-DLC 2.11.4 は、Git 管理外の `aidlc/.aidlc-clone-id` の1行目をクローン固有の識別子、2行目を端末名として使い、監査ログを `<端末名>-<識別子>.md` に追記する。端末名が同じでも識別子で区別できるため、このファイルを他のクローンへコピーしない。
 
-これは公式の設定コマンドではなく、2.11.4 のファイル形式に基づく手順。版を上げたときは、形式と書き込み先を確認する。
+これは公式の設定コマンドではなく、2.11.4 のファイル形式に基づく手順。バージョンを更新したときは、形式と書き込み先を確認する。
 
 AI ツールをこのチェックアウトで初めて起動する前に、次を行う。すでに起動している場合は、このチェックアウトを使うエージェントとワーカーをすべて終了してから変更する。
 

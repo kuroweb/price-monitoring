@@ -12,13 +12,13 @@ AI-DLC の考え方とステージの一覧は [公式ドキュメント](https:
 | `aidlc/spaces/default/memory/` | ルール。プロジェクト固有の指示は `project.md` に書く | する |
 | `aidlc/spaces/default/knowledge/documents/` | チームの文書の原本 | する |
 | `aidlc/spaces/default/intents/` | 作業（intent）ごとの状態・監査ログ・要件・設計の記録 | しない。AI-DLC が書く |
-| `.aidlc-version` | このプロジェクトで使う `aidlc` の版 | 版を上げるときだけ |
+| `.aidlc-version` | このプロジェクトで使う `aidlc` のバージョン | バージョンを更新するときだけ |
 
 `aidlc/` は 3 つのツールで共有する。どのツールで進めた intent も同じ記録に残る。
 
 ## 起動と再開
 
-前提として、ホストに `aidlc` があり、`.aidlc-version` の版が入っていること（`aidlc version`）。
+前提として、ホストに `aidlc` があり、`.aidlc-version` に書いたバージョンが入っていること（`aidlc version`）。
 
 初回起動前に [監査ログに使う端末名](setup.md#ai-dlc-の監査ログに使う端末名) を `workstation` に設定する。新しいクローンや worktree でも、そのチェックアウトの `.aidlc-clone-id` を確認する。
 
@@ -44,7 +44,7 @@ worktree の準備と起動は [Orca の worktree](worktree.md) に従う。AI-D
 
 AI-DLC のエージェントに読ませたい文書は、`aidlc/spaces/default/knowledge/documents/` に置き、Claude Code で `/aidlc-knowledge` から登録する。登録した文書は list・show で確かめ、原本を変えたら sync で反映する。
 
-## 版を上げる
+## aidlc のバージョンを更新する
 
 複数のツールを入れているので、`aidlc config` には必ず `--harness` を付ける。付けないと `multiple project harnesses are present` で止まる。
 
