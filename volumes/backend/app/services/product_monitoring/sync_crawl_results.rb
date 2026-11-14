@@ -92,7 +92,8 @@ module ProductMonitoring
     end
 
     # 詳細取得の無いじゃんぱらだけ、成功した検索から消えた行を売り切れにする。
-    # 成功の判定は DetailCandidates#complete_sources? と同じ。価格が無く保存しない出品も検索結果に含める。
+    # じゃんぱらの source が 1 件以上あり、そのすべてが成功しているときだけ対象にする。
+    # 価格が無く保存しない出品も検索結果に含める。
     def sync_janpara_sold(crawled)
       platform = Sites::Janpara::PLATFORM
       returned_ids = crawled[:results].select { |result| result[:platform] == platform }.pluck(:external_id)
@@ -111,9 +112,6 @@ module ProductMonitoring
     end
 
     def janpara_fetch_succeeded?(sources, platform)
-      return true if sources_succeeded?(sources)
-      return false if sources.any? { |source| source[:platform].nil? }
-
       site_sources = sources.select { |source| source[:platform] == platform }
       site_sources.any? && sources_succeeded?(site_sources)
     end

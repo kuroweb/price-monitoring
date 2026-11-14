@@ -277,6 +277,20 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       expect(other.reload.sold).to be false
     end
 
+    it "じゃんぱらの source が無い取得では売り切れにしないこと" do
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-missing", name: "Phone missing", sold: false, updated_at: 4.hours.ago)
+      sources.replace([])
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+
+      sources.replace([{ platform: "mercari", status: "succeeded" }])
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+    end
+
     it "じゃんぱらの取得が成功していないときは売り切れにしないこと" do
       sources.replace([{ platform: "janpara", status: "failed" }])
       listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-missing", name: "Phone missing", sold: false, updated_at: 4.hours.ago)
