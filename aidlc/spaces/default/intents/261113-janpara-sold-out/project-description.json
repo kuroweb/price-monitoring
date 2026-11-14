@@ -1,0 +1,1 @@
+"売り切れたじゃんぱらの商品が、商品計測結果にいつまでも販売中として残る不具合を直す。じゃんぱらの検索結果は売り切れた商品を載せず、ProductMonitoring::Sites::Janpara は常に sold: false を返す。売り切れの確認は fetch_detail を持つサイトでしか行わないので、検索結果から消えたじゃんぱらの商品は ProductMonitoring::DetailCandidates により更新されない。販売中の商品を誤って売り切れ扱いにしない。"
