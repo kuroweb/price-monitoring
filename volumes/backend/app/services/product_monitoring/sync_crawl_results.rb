@@ -16,6 +16,7 @@ module ProductMonitoring
       newly_sold = details.newly_sold(matched)
       ProductCrawlResult.transaction do
         save_matched(matched)
+        sync_janpara_sold(crawled)
         CleanseCrawlResults.call(product_crawl_setting:)
       end
       details.enqueue(crawled, newly_sold)
@@ -88,6 +89,37 @@ module ProductMonitoring
       scope = product_crawl_setting.product_crawl_results
       scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
+    end
+
+    # 詳細取得の無いじゃんぱらだけ、成功した検索から消えた行を売り切れにする。
+    # 成功の判定は DetailCandidates#complete_sources? と同じ。価格が無く保存しない出品も検索結果に含める。
+    def sync_janpara_sold(crawled)
+      platform = Sites::Janpara::PLATFORM
+      returned_ids = crawled[:results].select { |result| result[:platform] == platform }.pluck(:external_id)
+      scope = product_crawl_setting.product_crawl_results.where(platform:)
+      returned = scope.where(external_id: returned_ids)
+      returned.update_all(sold: false) if returned_ids.any? && returned.exists?
+      sell_out_missing_janpara(scope, returned_ids, crawled[:sources], platform)
+    end
+
+    def sell_out_missing_janpara(scope, returned_ids, sources, platform)
+      return unless janpara_fetch_succeeded?(sources, platform)
+
+      missing = scope.where(updated_at: ..DetailCandidates::DETAIL_RECHECK_INTERVAL.ago)
+      missing = missing.where.not(external_id: returned_ids) if returned_ids.any?
+      missing.update_all(sold: true) if missing.exists?
+    end
+
+    def janpara_fetch_succeeded?(sources, platform)
+      return true if sources_succeeded?(sources)
+      return false if sources.any? { |source| source[:platform].nil? }
+
+      site_sources = sources.select { |source| source[:platform] == platform }
+      site_sources.any? && sources_succeeded?(site_sources)
+    end
+
+    def sources_succeeded?(sources)
+      sources.all? { |source| source[:status] == "succeeded" }
     end
   end
 end

@@ -253,6 +253,58 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
     end
   end
 
+  describe "じゃんぱらの売り切れ" do
+    let(:setting) { create(:product_crawl_setting) }
+    let(:sources) { [{ platform: "janpara", status: "succeeded" }] }
+    let(:results) { [] }
+
+    before do
+      allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources:, results:)
+    end
+
+    it "検索から消えたじゃんぱらを売り切れにし他サイトと価格なしの出品は変えないこと" do
+      updated_at = 4.hours.ago.change(usec: 0)
+      missing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-missing", name: "Phone missing", sold: false, updated_at:)
+      unpriced = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-unpriced", name: "Phone unpriced", sold: false, updated_at:)
+      other = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "iosys-kept", name: "Phone iosys", sold: false, updated_at:)
+      results << { platform: "janpara", external_id: "jp-unpriced", reasons: [], price: nil, name: "Phone unpriced", product_url: "https://www.janpara.co.jp/sale/search/detail/?ITMCODE=1", sold: false }
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(missing.reload).to have_attributes(sold: true, bought_date: nil)
+      expect(missing.updated_at).to be_within(1.second).of(updated_at)
+      expect(unpriced.reload.sold).to be false
+      expect(other.reload.sold).to be false
+    end
+
+    it "じゃんぱらの取得が成功していないときは売り切れにしないこと" do
+      sources.replace([{ platform: "janpara", status: "failed" }])
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-missing", name: "Phone missing", sold: false, updated_at: 4.hours.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+    end
+
+    it "最終更新から 3 時間未満のじゃんぱらは売り切れにしないこと" do
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-recent", name: "Phone recent", sold: false, updated_at: 2.hours.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+    end
+
+    it "検索結果にあるじゃんぱらは売却済みでも販売中に戻すこと" do
+      bought_date = 2.days.ago.change(usec: 0)
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-visible", name: "Phone old", sold: true, bought_date:, updated_at: 1.hour.ago)
+      results << { platform: "janpara", external_id: "jp-visible", reasons: [], price: 100, name: "Phone blue", product_url: "https://www.janpara.co.jp/sale/search/detail/?SRCODE=1", sold: false }
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload).to have_attributes(sold: false, bought_date:)
+    end
+  end
+
   context "検索語による商品計測結果の保存" do
     it "保存済みの検索語とサイトから取得した出品を保存すること" do
       setting = create(:product_crawl_setting, keyword: "phone", platforms: ["iosys"], search_urls: [])
