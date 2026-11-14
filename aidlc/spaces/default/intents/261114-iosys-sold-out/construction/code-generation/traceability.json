@@ -1,0 +1,43 @@
+{
+  "stage": "code-generation",
+  "upstream_ids": [
+    "FR1",
+    "FR2",
+    "FR3",
+    "FR4",
+    "NFR1",
+    "NFR2"
+  ],
+  "coverage": [
+    {
+      "id": "FR1",
+      "status": "OK",
+      "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb"
+    },
+    {
+      "id": "FR2",
+      "status": "OK",
+      "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb"
+    },
+    {
+      "id": "FR3",
+      "status": "OK",
+      "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb"
+    },
+    {
+      "id": "FR4",
+      "status": "OK",
+      "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb"
+    },
+    {
+      "id": "NFR1",
+      "status": "OK",
+      "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb"
+    },
+    {
+      "id": "NFR2",
+      "status": "OK",
+      "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb"
+    }
+  ]
+}

@@ -16,7 +16,9 @@ module ProductMonitoring
       newly_sold = details.newly_sold(matched)
       ProductCrawlResult.transaction do
         save_matched(matched)
-        sync_janpara_sold(crawled)
+        [Sites::Janpara::PLATFORM, Sites::Iosys::PLATFORM].each do |platform|
+          sync_search_sold(crawled, platform)
+        end
         CleanseCrawlResults.call(product_crawl_setting:)
       end
       details.enqueue(crawled, newly_sold)
@@ -91,27 +93,26 @@ module ProductMonitoring
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
     end
 
-    # 詳細取得の無いじゃんぱらだけ、成功した検索から消えた行を売り切れにする。
-    # じゃんぱらの source が 1 件以上あり、そのすべてが成功しているときだけ対象にする。
+    # 詳細取得の無いサイトは、成功した検索から消えた行を売り切れにする。
+    # 対象サイトの source が 1 件以上あり、そのすべてが成功しているときだけ対象にする。
     # 価格が無く保存しない出品も検索結果に含める。
-    def sync_janpara_sold(crawled)
-      platform = Sites::Janpara::PLATFORM
+    def sync_search_sold(crawled, platform)
       returned_ids = crawled[:results].select { |result| result[:platform] == platform }.pluck(:external_id)
       scope = product_crawl_setting.product_crawl_results.where(platform:)
       returned = scope.where(external_id: returned_ids)
       returned.update_all(sold: false) if returned_ids.any? && returned.exists?
-      sell_out_missing_janpara(scope, returned_ids, crawled[:sources], platform)
+      sell_out_missing(scope, returned_ids, crawled[:sources], platform)
     end
 
-    def sell_out_missing_janpara(scope, returned_ids, sources, platform)
-      return unless janpara_fetch_succeeded?(sources, platform)
+    def sell_out_missing(scope, returned_ids, sources, platform)
+      return unless site_fetch_succeeded?(sources, platform)
 
       missing = scope.where(updated_at: ..DetailCandidates::DETAIL_RECHECK_INTERVAL.ago)
       missing = missing.where.not(external_id: returned_ids) if returned_ids.any?
       missing.update_all(sold: true) if missing.exists?
     end
 
-    def janpara_fetch_succeeded?(sources, platform)
+    def site_fetch_succeeded?(sources, platform)
       site_sources = sources.select { |source| source[:platform] == platform }
       site_sources.any? && sources_succeeded?(site_sources)
     end
