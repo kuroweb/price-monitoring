@@ -1,0 +1,31 @@
+{
+  "stage": "code-generation",
+  "upstream_ids": [
+    "FR1.1",
+    "FR1.2",
+    "FR1.3",
+    "NFR1"
+  ],
+  "coverage": [
+    {
+      "id": "FR1.1",
+      "status": "OK",
+      "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb"
+    },
+    {
+      "id": "FR1.2",
+      "status": "OK",
+      "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb"
+    },
+    {
+      "id": "FR1.3",
+      "status": "OK",
+      "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb"
+    },
+    {
+      "id": "NFR1",
+      "status": "OK",
+      "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb"
+    }
+  ]
+}

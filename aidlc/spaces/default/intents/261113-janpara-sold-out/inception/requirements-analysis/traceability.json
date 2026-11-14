@@ -1,0 +1,10 @@
+{
+  "stage": "requirements-analysis",
+  "ids": [
+    { "id": "FR1", "kind": "functional" },
+    { "id": "FR1.1", "kind": "functional", "of": "FR1" },
+    { "id": "FR1.2", "kind": "functional", "of": "FR1" },
+    { "id": "FR1.3", "kind": "functional", "of": "FR1" },
+    { "id": "NFR1", "kind": "non-functional" }
+  ]
+}
