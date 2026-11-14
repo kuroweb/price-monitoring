@@ -13,9 +13,10 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
   end
 
   it "既存の売却情報を保持してオークションの価格と日時を保存すること" do
+    product_crawl_setting.update!(search_urls: ["https://auctions.yahoo.co.jp/search/search?p=phone"])
     bought_date = 2.days.ago.change(usec: 0)
     end_date = 1.day.from_now.change(usec: 0)
-    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: true,
+    listing = create(:product_crawl_result, product_crawl_setting:, platform: "yahoo_auction", external_id: "a", name: "Phone old", sold: true,
                                             bought_date:)
     allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
       { external_id: "a", name: "Phone blue", price: 100, buyout_price: 200, end_date:,
@@ -26,8 +27,9 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
   end
 
   it "終了したオークションの出品から売却日時を記録すること" do
+    product_crawl_setting.update!(search_urls: ["https://auctions.yahoo.co.jp/search/search?p=phone"])
     bought_date = 2.days.ago.change(usec: 0)
-    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: false,
+    listing = create(:product_crawl_result, product_crawl_setting:, platform: "yahoo_auction", external_id: "a", name: "Phone old", sold: false,
                                             buyout_price: 200)
     allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
       { external_id: "a", name: "Phone blue", price: 100, end_date: bought_date, bought_date:,
@@ -38,9 +40,10 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
   end
 
   it "出品のオークション価格と売却日時をまとめて更新すること" do
+    product_crawl_setting.update!(search_urls: ["https://auctions.yahoo.co.jp/search/search?p=phone"])
     dates = Array.new(4) { |n| (2.days.ago + n.minutes).change(usec: 0) }
     listings = %w[a b c].map do |id|
-      create(:product_crawl_result, product_crawl_setting:, external_id: id, name: "Phone old", sold: false)
+      create(:product_crawl_result, product_crawl_setting:, platform: "yahoo_auction", external_id: id, name: "Phone old", sold: false)
     end
     listings.first.update!(bought_date: 3.days.ago.change(usec: 0), buyout_price: 300)
     original_date = listings.first.bought_date
@@ -112,7 +115,7 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
     )
   end
 
-  it "出品中と表示されても売却済みの出品と購入日を保持すること" do
+  it "検索結果に再出現した出品を販売中に戻し購入日を保持すること" do
     bought_date = 2.days.ago.beginning_of_day
     listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: true,
                                             bought_date:)
@@ -120,11 +123,12 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a", sold: false }
     ])
     described_class.call(product_crawl_setting:)
-    expect(listing.reload).to have_attributes(sold: true, bought_date:)
+    expect(listing.reload).to have_attributes(sold: false, bought_date:)
   end
 
   it "既存の出品に売却済みの印を記録すること" do
-    listing = create(:product_crawl_result, product_crawl_setting:, external_id: "a", name: "Phone old", sold: false)
+    product_crawl_setting.update!(search_urls: ["https://auctions.yahoo.co.jp/search/search?p=phone"])
+    listing = create(:product_crawl_result, product_crawl_setting:, platform: "yahoo_auction", external_id: "a", name: "Phone old", sold: false)
     allow(ProductMonitoring::Crawler).to receive(:fetch).and_return([
       { external_id: "a", name: "Phone blue", price: 100, product_url: "https://iosys.co.jp/items/a", sold: true }
     ])
@@ -316,6 +320,80 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       described_class.call(product_crawl_setting: setting)
 
       expect(listing.reload).to have_attributes(sold: false, bought_date:)
+    end
+  end
+
+  describe "イオシスの売り切れ" do
+    include ActiveSupport::Testing::TimeHelpers
+
+    let(:setting) { create(:product_crawl_setting) }
+    let(:sources) { [{ platform: "iosys", status: "succeeded" }] }
+    let(:results) { [] }
+
+    before do
+      allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources:, results:)
+    end
+
+    it "検索から消えた古い出品を売り切れにし、日時と他のサイト・設定を維持すること" do
+      updated_at = 4.hours.ago.change(usec: 0)
+      missing = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "missing", sold: false, updated_at:)
+      other_site = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "other", sold: false, updated_at:)
+      other_setting = create(:product_crawl_result, platform: "iosys", external_id: "elsewhere", sold: false, updated_at:)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(missing.reload).to have_attributes(sold: true, bought_date: nil, updated_at:)
+      expect(other_site.reload.sold).to be false
+      expect(other_setting.reload.sold).to be false
+    end
+
+    it "検索に戻った売り切れ商品を販売中にし購入日を維持すること" do
+      bought_date = 2.days.ago.change(usec: 0)
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "visible", sold: true, bought_date:)
+      results << { platform: "iosys", external_id: "visible", reasons: [], price: 100, name: "Phone", product_url: "https://iosys.co.jp/items/visible", sold: false }
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload).to have_attributes(sold: false, bought_date:)
+    end
+
+    it "価格なしでも検索結果に存在する商品を売り切れにしないこと" do
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", external_id: "unpriced", sold: false, updated_at: 4.hours.ago)
+      results << { platform: "iosys", external_id: "unpriced", reasons: [], price: nil, name: "Phone", product_url: "https://iosys.co.jp/items/unpriced", sold: false }
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+    end
+
+    it "取得元が存在しない場合は消えた商品を売り切れにしないこと" do
+      sources.clear
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", sold: false, updated_at: 4.hours.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+    end
+
+    it "複数の取得元のうち1件でも失敗した場合は売り切れにしないこと" do
+      sources << { platform: "iosys", status: "failed" }
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", sold: false, updated_at: 4.hours.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
+    end
+
+    it "3時間ちょうどで売り切れにし、それより新しい商品は維持すること" do
+      travel_to Time.current.change(usec: 0) do
+        old = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", sold: false, updated_at: 3.hours.ago)
+        recent = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", sold: false, updated_at: 3.hours.ago + 1.second)
+
+        described_class.call(product_crawl_setting: setting)
+
+        expect(old.reload.sold).to be true
+        expect(recent.reload.sold).to be false
+      end
     end
   end
 

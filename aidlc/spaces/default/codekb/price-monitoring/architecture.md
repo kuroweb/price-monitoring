@@ -49,7 +49,7 @@ flowchart LR
 - コントローラは入出力、複数モデルの手順は service、非同期の入口は `app/sidekiq`（`docs/backend/index.md`）
 - 商品計測のサイト差は `ProductMonitoring::Sites` に閉じ、共通のページ送りとブラウザ取得は `Crawler`、`Sites::BrowserPage`、`Sites::Pagination`
 - 個別確認の対象サイトは、クラスが `fetch_detail` を持つかどうかだけで決まる
-- 検索結果に出なかった出品は、条件に合っていれば残す（`docs/backend/product-monitoring-poc.md`）
+- 検索結果に出なかった出品は原則残すが、じゃんぱらは取得成功と時間条件を満たすと売り切れにする（`SyncCrawlResults`）
 - じゃんぱらの一覧解析は販売状態を見ず、抽出した出品へ `sold: false` を付ける
 
 ### Improvement Opportunities
@@ -66,17 +66,17 @@ sequenceDiagram
   participant sync as SyncCrawlResults
   participant site as SitesJanpara
   participant db as ProductCrawlResult
-  participant details as DetailCandidates
+  participant candidates as DetailCandidates
   participant ui as Frontend
   job->>sync: call
   sync->>site: fetch
   site-->>sync: sold false
-  sync->>db: upsert and update_sold
-  sync->>details: enqueue
-  details-->>job: no fetch_detail
+  sync->>db: upsert and sync Janpara sold
+  sync->>candidates: enqueue
+  candidates-->>job: no fetch_detail
   ui->>db: WatchListings sold false
 ```
 
-<!-- text fallback: CrawlJob が SyncCrawlResults を呼ぶ。Sites::Janpara は sold false の出品を返す。SyncCrawlResults は ProductCrawlResult を upsert し、今回の ID だけ update_sold する。DetailCandidates は fetch_detail の無いじゃんぱらを個別確認へ入れない。Frontend の商品モニタリングは sold false の行を販売中として読む。 -->
+<!-- text fallback: CrawlJob が SyncCrawlResults を呼ぶ。Sites::Janpara は sold false の出品を返す。SyncCrawlResults は ProductCrawlResult を upsert し、じゃんぱらの取得成功と経過時間に基づき検索から消えた行を売り切れにする。DetailCandidates は fetch_detail の無いじゃんぱらを個別確認へ入れない。Frontend の商品モニタリングは sold false の行を販売中として読む。 -->
 
 メルカリと Yahoo!フリマでは、一覧のあと `CrawlDetailJob` が `fetch_detail` を呼び、同じ `platform` と `external_id` の行の `sold` を一括更新する。`deleted: true` のときは行を消す。`sold` キーが無いときは `updated_at` だけを進める。

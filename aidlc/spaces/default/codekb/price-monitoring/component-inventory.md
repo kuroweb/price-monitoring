@@ -31,7 +31,7 @@ Playwright サーバー（イメージ `mcr.microsoft.com/playwright:v1.62.0-jam
 `volumes/backend/app/services/product_monitoring` と `app/sidekiq/product_monitoring`。Backend のプロセス内コンポーネント。
 
 - `UrlRouter` が検索 URL とサイトクラスを対応させる
-- `Sites::Janpara` は一覧だけを解析し、`sold: false` を返す。`fetch_detail` は無い
+- `Sites::Janpara` と `Sites::Iosys` は一覧を解析し `sold: false` を返す。`fetch_detail` は無い。じゃんぱらは保存処理で検索から消えた行を売り切れにする
 - `Sites::Mercari` と `Sites::YahooFleamarket` だけが `fetch_detail` を持つ
 - `SyncCrawlResults` が結果を保存し、`DetailCandidates` が個別確認を積む
 - `CrawlDetailJob` が詳細の `sold` を同じ外部 ID の行へ書く

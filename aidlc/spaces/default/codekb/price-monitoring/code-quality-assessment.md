@@ -7,7 +7,7 @@
 | Naming clarity | good | `sold`、`fetch_detail`、`DetailCandidates`、サイトクラス名が処理と対応する |
 | Function size | fair | サイトクラスと `SyncCrawlResults` の upsert SQL は長い。`routes.rb` は `Metrics/BlockLength` を無効にしている |
 | Error handling | fair | クロール失敗は source を `failed` にする。詳細が `sold` を返せないときは状態を変えない。API の未捕捉は 503。プロキシが無いときの失敗は文書どおり |
-| Test presence | fair | `janpara_spec.rb` は一覧の `sold: false` を期待する。`sync_crawl_results_spec.rb` と `crawl_detail_job_spec.rb` はメルカリと Yahoo!フリマの個別確認を持つ。検索結果から消えたじゃんぱらが `sold: false` のまま残る例は、開いた spec には無い |
+| Test presence | fair | `janpara_spec.rb` は一覧の `sold: false` を期待する。`sync_crawl_results_spec.rb` と `crawl_detail_job_spec.rb` はメルカリと Yahoo!フリマの個別確認を持つ。検索結果から消えたじゃんぱらの売り切れ・失敗時・再出現を検証する spec がある |
 | Duplication | fair | プラットフォームごとの従来 `Crawl::*` と、商品計測の `Sites::*` が併存する |
 | Dead code | fair | 未使用の全件探索はしていない。`require_login` は定義だけで、開いたコントローラからは呼ばれていない |
 
@@ -24,7 +24,7 @@
 
 ## 技術的負債
 
-- じゃんぱらの `sold: false` は、一覧に残っているあいだの値であり、一覧から消えたあとも `DetailCandidates` が更新しない
+- イオシスは一覧から消えたあとも `DetailCandidates` が更新せず、じゃんぱらと異なり専用の売り切れ同期もない
 - 同じ「`fetch_detail` が無い」グループにイオシスとトレファクがある。トレファクは売り切れ DOM を保存しない
 - `.rubocop_todo.yml` が残っており、`SyncCrawlResults` も対象に含まれる
 - Sidekiq Web の本番 Basic 認証は TODO のまま
