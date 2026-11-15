@@ -1,5 +1,7 @@
 # Business Overview
 
+> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/backend/product-monitoring-poc.md` を参照する。
+
 Web 上の商品の最安値と相場を、自宅のホームラボで調べる。画面は Next.js、API と取得バッチは Rails、ログインは別 Rails の OIDC Provider である。
 
 ## 利用者が行うこと

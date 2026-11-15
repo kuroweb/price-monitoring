@@ -1,5 +1,7 @@
 # Architecture
 
+> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/backend/product-monitoring-poc.md` を参照する。
+
 ## Architecture Analysis
 
 ### System Overview
@@ -79,7 +81,7 @@ sequenceDiagram
   participant crawler as Crawler
   participant site as SitesJanpara
   participant db as ProductCrawlResult
-  participant details as DetailCandidates
+  participant candidates as DetailCandidates
   participant ui as Frontend
   job->>sync: call
   sync->>crawler: call with search urls
@@ -89,8 +91,8 @@ sequenceDiagram
   sync->>db: save_matched upsert and update_sold
   sync->>db: sync_janpara_sold
   sync->>db: CleanseCrawlResults
-  sync->>details: enqueue
-  details-->>job: no fetch_detail for janpara
+  sync->>candidates: enqueue
+  candidates-->>job: no fetch_detail for janpara
   ui->>db: WatchListings sold false
 ```
 
@@ -105,7 +107,7 @@ flowchart TD
   any -- yes --> reset[update_all sold false]
   any -- no --> check
   reset --> check{janpara sources exist and all succeeded}
-  check -- no --> done[end]
+  check -- no --> done[Finished]
   check -- yes --> missing[rows not returned and updated_at 3 hours ago or older]
   missing --> sell[update_all sold true]
   sell --> done

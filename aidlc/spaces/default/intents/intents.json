@@ -8,6 +8,14 @@
     "request": "86b10043"
   },
   {
+    "uuid": "01a1d887-44a4-7b05-a511-87174183c67a",
+    "slug": "iosys-sold-out",
+    "dirName": "261114-iosys-sold-out",
+    "scope": "express",
+    "status": "complete",
+    "request": "1d7670f4"
+  },
+  {
     "uuid": "01a1d91a-ca27-75e5-b4e4-8cd5439ba2a1",
     "slug": "janpara-listed-sold",
     "dirName": "261114-janpara-listed-sold",

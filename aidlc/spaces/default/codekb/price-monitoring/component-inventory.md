@@ -1,5 +1,7 @@
 # Component Inventory
 
+> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/backend/product-monitoring-poc.md` を参照する。
+
 構成要素はデプロイと責務の単位で挙げる。ファイル一覧は `code-structure.md`、HTTP の一覧は `api-documentation.md` にある。
 
 ## Frontend
