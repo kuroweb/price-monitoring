@@ -289,9 +289,9 @@ erDiagram
   backmarket_watch_targets ||--o{ backmarket_watch_results : ""
 ```
 
-## 商品計測・商品相場（PoC）
+## 商品計測・商品相場
 
-既存の計測対象管理とは独立したテーブル群。商品モニタリング設定は商品計測設定に外部キーを持たず、全商品計測設定の商品計測結果を条件でフィルターする。設計は [商品計測と相場集計の設計](../../aidlc/spaces/default/knowledge/documents/product-monitoring.md)、操作は [商品計測・商品相場PoC](../backend/product-monitoring-poc.md) を参照する。
+既存の計測対象管理とは独立したテーブル群。商品モニタリング設定は商品計測設定に外部キーを持たず、全商品計測設定の商品計測結果を条件でフィルターする。設計は [商品計測と相場集計の設計](../../aidlc/spaces/default/knowledge/documents/product-monitoring.md)、仕様は [商品計測と商品相場](../backend/product-monitoring.md) を参照する。
 
 ```mermaid
 erDiagram

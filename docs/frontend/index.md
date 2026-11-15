@@ -6,7 +6,7 @@
 ## 文書の案内
 
 - [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
-- [商品計測・商品相場PoC](../backend/product-monitoring-poc.md) — 画面の操作と制約
+- [商品計測・商品モニタリングの操作](../backend/operations/product-monitoring.md) — 画面の操作
 - [文書全体の索引](../index.md)
 
 ## 判断基準
