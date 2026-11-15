@@ -1,0 +1,41 @@
+{
+  "stage": "code-generation",
+  "upstream_ids": [
+    "FR1.1",
+    "FR1.2",
+    "FR1.3",
+    "FR2.1",
+    "FR2.2",
+    "FR2.3",
+    "FR2.4",
+    "FR2.5",
+    "FR3.1",
+    "FR3.2",
+    "FR4.1",
+    "FR4.2",
+    "NFR1",
+    "NFR2",
+    "NFR3",
+    "NFR4",
+    "NFR5"
+  ],
+  "coverage": [
+    { "id": "FR1.1", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sites/janpara.rb" },
+    { "id": "FR1.2", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sites/janpara.rb" },
+    { "id": "FR1.3", "status": "OK", "target": "volumes/backend/spec/services/product_monitoring/sites/janpara_spec.rb" },
+    { "id": "FR2.1", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb" },
+    { "id": "FR2.2", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb" },
+    { "id": "FR2.3", "status": "OK", "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb" },
+    { "id": "FR2.4", "status": "OK", "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb" },
+    { "id": "FR2.5", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb" },
+    { "id": "FR3.1", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb" },
+    { "id": "FR3.2", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb" },
+    { "id": "FR4.1", "status": "OK", "target": "docs/backend/product-monitoring-poc.md" },
+    { "id": "FR4.2", "status": "OK", "target": "docs/backend/product-monitoring-poc.md" },
+    { "id": "NFR1", "status": "OK", "target": "volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb" },
+    { "id": "NFR2", "status": "OK", "target": "volumes/backend/spec/services/product_monitoring/sites/janpara_spec.rb" },
+    { "id": "NFR3", "status": "OK", "target": "aidlc/spaces/default/intents/261114-janpara-listed-sold/construction/code-generation/code-summary.md" },
+    { "id": "NFR4", "status": "OK", "target": "docs/development/testing.md" },
+    { "id": "NFR5", "status": "OK", "target": "volumes/backend/app/services/product_monitoring/sync_crawl_results.rb" }
+  ]
+}
