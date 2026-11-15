@@ -16,8 +16,10 @@ module ProductMonitoring
       newly_sold = details.newly_sold(matched)
       ProductCrawlResult.transaction do
         save_matched(matched)
-        [Sites::Janpara::PLATFORM, Sites::Iosys::PLATFORM].each do |platform|
-          sync_search_sold(crawled, platform)
+        UrlRouter::SITES.each do |site|
+          next unless site.respond_to?(:sync_search_sold_status)
+
+          site.sync_search_sold_status(product_crawl_setting:, crawled:)
         end
         CleanseCrawlResults.call(product_crawl_setting:)
       end
@@ -91,38 +93,6 @@ module ProductMonitoring
       scope = product_crawl_setting.product_crawl_results
       scope.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any?
       scope.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any?
-    end
-
-    # 詳細取得の無いサイトは、成功した検索から消えた行を売り切れにする。
-    # 対象サイトの source が 1 件以上あり、そのすべてが成功しているときだけ対象にする。
-    # 価格が無く保存しない出品も検索結果に含める。
-    def sync_search_sold(crawled, platform)
-      results = crawled[:results].select { |result| result[:platform] == platform }
-      scope = product_crawl_setting.product_crawl_results.where(platform:)
-      update_search_sold(scope, results)
-      sell_out_missing(scope, results.pluck(:external_id), crawled[:sources], platform)
-    end
-
-    # 検索結果にある既存の行へは、一覧の売り切れ表示を価格が無くてもそのまま反映する。
-    # 同じ出品が売り切れと販売中の両方で返るときは、販売中を後に適用する。
-    def update_search_sold(scope, results)
-      [true, false].each do |sold|
-        ids = results.select { |result| result[:sold] == sold }.pluck(:external_id)
-        scope.where(external_id: ids).update_all(sold:) if ids.any?
-      end
-    end
-
-    def sell_out_missing(scope, returned_ids, sources, platform)
-      return unless site_fetch_succeeded?(sources, platform)
-
-      missing = scope.where(updated_at: ..DetailCandidates::DETAIL_RECHECK_INTERVAL.ago)
-      missing = missing.where.not(external_id: returned_ids) if returned_ids.any?
-      missing.update_all(sold: true) if missing.exists?
-    end
-
-    def site_fetch_succeeded?(sources, platform)
-      site_sources = sources.select { |source| source[:platform] == platform }
-      site_sources.any? && site_sources.all? { |source| source[:status] == "succeeded" && !source[:truncated] }
     end
   end
 end

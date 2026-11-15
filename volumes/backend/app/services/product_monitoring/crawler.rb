@@ -1,5 +1,3 @@
-require "timeout"
-
 module ProductMonitoring
   class Crawler
     TIMEOUT_SECONDS = 60

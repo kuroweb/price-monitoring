@@ -1,5 +1,3 @@
-require "nokogiri"
-
 module ProductMonitoring
   module Sites
     class Mercari

@@ -122,7 +122,7 @@ sequenceDiagram
 
 サイト固有のURL判定・取得・解析は `ProductMonitoring::Sites` のサイトクラスにまとめ、共通処理は `ProductMonitoring::Crawler` が担う。ブラウザでの取得と、URL・HTML サイズの確認には `Sites::BrowserPage`、数値ページ番号の更新には `Sites::Pagination` を使う。サイトを追加するときはサイトクラスを追加し、サイトの検証条件を指定したうえで `UrlRouter::SITES` に登録する。
 
-`SyncCrawlResults` は一覧の保存を担当し、条件に合わない結果の削除は取得時と設定更新時の両方から `CleanseCrawlResults` を呼ぶ。`DetailCandidates` が個別確認の候補選択とジョブ投入を担当する。
+`SyncCrawlResults` は一覧の保存を担当し、一覧から販売状態を反映するサイトの `sync_search_sold_status` を呼ぶ。イオシスとじゃんぱらは共通の `SyncSearchSoldStatus` を使い、一覧の状態と完全取得後の消失を反映する。対応サイトを追加するときは、そのサイトの状態判定に必要な場合だけ同メソッドを定義する。条件に合わない結果の削除は取得時と設定更新時の両方から `CleanseCrawlResults` を呼ぶ。`DetailCandidates` が個別確認の候補選択とジョブ投入を担当する。
 
 Yahoo!フリマはメルカリと同じ Playwright クライアントを用い、遷移後の HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。更新日時の描画に必要な `paypayfleamarket.c.yimg.jp` のスクリプトを許可する。検索一覧の次ページリンクを確認してページ送りする。既存の `Crawl::YahooFleamarket` の一覧は Yahoo!オークションの検索結果を取得するため、本機能の Yahoo!フリマ検索とは取得元と DOM が異なる。
 

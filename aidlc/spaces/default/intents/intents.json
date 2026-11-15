@@ -22,5 +22,13 @@
     "scope": "bugfix",
     "status": "complete",
     "request": "d000423c"
+  },
+  {
+    "uuid": "01a1ddd2-39d2-74f2-bf8a-d1214c932682",
+    "slug": "measurement-refactoring",
+    "dirName": "261115-measurement-refactoring",
+    "scope": "express",
+    "status": "in-flight",
+    "request": "46f7c265"
   }
 ]

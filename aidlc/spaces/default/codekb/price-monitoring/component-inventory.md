@@ -1,6 +1,6 @@
 # Component Inventory
-
-> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/features/product-monitoring/index.md` を参照する。
+ 
+2026-11-15 の重点再調査で確認した範囲は reverse-engineering-timestamp.md を参照。それ以外の記述は以前の調査記録であり、今回の深い検証対象外。
 
 構成要素はデプロイと責務の単位で挙げる。ファイル一覧は `code-structure.md`、HTTP の一覧は `api-documentation.md` にある。
 
@@ -30,19 +30,12 @@ Playwright サーバー（イメージ `mcr.microsoft.com/playwright:v1.62.0-jam
 
 ## Product Monitoring
 
-`volumes/backend/app/services/product_monitoring` と `app/sidekiq/product_monitoring`。Backend のプロセス内コンポーネント。
+`volumes/backend/app/services/product_monitoring` と `app/sidekiq/product_monitoring` に配置。
 
-- `UrlRouter` が検索 URL とサイトクラスを対応させる
-- `Crawler` が URL ごとに最大 5 ページ・各 100 件を取得し、重複を除き、`Filter` の理由を付けて取得元の状態（source）と一緒に返す
-- `Sites::Janpara` は一覧だけを解析し、`sold: false` を固定で返す。`fetch_detail` は無い。売り切れ表示の DOM は参照しない
-- `Sites::Iosys` と `Sites::TreasureFactory` も `sold: false` 固定で、`fetch_detail` は無い。トレファクは売り切れの出品を一覧から外す
-- `Sites::YahooAuction` は落札相場の一覧を `sold: true` にし、終了日時を `bought_date` にする
-- `Sites::Mercari` と `Sites::YahooFleamarket` だけが `fetch_detail` を持つ
-- `SyncCrawlResults` が結果を保存する。価格のある結果を `upsert_all` と `update_sold` で保存し、じゃんぱらだけ `sync_janpara_sold` で、検索に返った行を `false`、取得が成功したのに返らず 3 時間以上たった行を `true` にする。最後に `CleanseCrawlResults` が条件に合わない行を消す
-- `DetailCandidates` が `fetch_detail` を持つサイトの個別確認を積む（1 回最大 50 件、再確認の間隔は 3 時間）。その定数はじゃんぱらの売り切れ化も使う
-- `CrawlDetailJob` が詳細の `sold` を同じ外部 ID の行へ書く
-- `Filter` が価格帯・必須語・除外語・除外 ID の理由を返す。`CleanseCrawlResults` は同じ `Filter` で保存済みの行を判定する
-- `LowestListings` と `WatchListings` が `sold: false` を販売中として読む
-- `LowestPriceNotifier` が最安の変化を Discord へ送る。Webhook が未設定なら送らない
+- `UrlRouter` は URL を検証しサイトを選択する。`Crawler` はページ取得、取得元の成否、重複排除、フィルタ結果をまとめる。
+- `Sites::Janpara` は一覧の売り切れ表示を解析し、`Sites::Iosys` は一覧を販売中として扱う。メルカリと Yahoo!フリマは詳細取得にも対応。
+- `SyncCrawlResults` は保存、イオシスとじゃんぱらの販売状態更新、条件外削除を行う。`DetailCandidates` が詳細確認候補を選び、`CrawlDetailJob` が同一 platform・external_id の各行を更新する。
+- `Filter` は価格・キーワード・除外 ID を判定する。`AggregationPurchases` は売却日時のある出品をフィルタし、external_id で重複排除する。
+- 表示は `LowestListings` と `WatchListings`、通知は `LowestPriceNotifier` が担当する。
 
 依存先は Datastores、Batch Browsers、外部サイト、任意の Discord Webhook。

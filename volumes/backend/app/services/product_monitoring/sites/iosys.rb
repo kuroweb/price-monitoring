@@ -1,5 +1,3 @@
-require "nokogiri"
-
 module ProductMonitoring
   module Sites
     class Iosys
@@ -7,6 +5,10 @@ module ProductMonitoring
       PATH = %r{\A/items/?\z}
       PLATFORM = "iosys".freeze
       MAX_RESPONSE_BYTES = 10 * 1024 * 1024
+
+      def self.sync_search_sold_status(product_crawl_setting:, crawled:)
+        SyncSearchSoldStatus.call(product_crawl_setting:, crawled:, platform: PLATFORM)
+      end
 
       def self.search_urls(keyword)
         ["https://#{HOST}/items?#{URI.encode_www_form(q: keyword)}"]
