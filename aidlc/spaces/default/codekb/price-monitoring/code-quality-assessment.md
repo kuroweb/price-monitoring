@@ -1,6 +1,6 @@
 # Code Quality Assessment
 
-> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/backend/product-monitoring-poc.md` を参照する。
+> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/features/product-monitoring/index.md` を参照する。
 
 評価は、商品計測の販売状態と、その周囲で開いたファイルに限る。三点は good / fair / poor。
 
