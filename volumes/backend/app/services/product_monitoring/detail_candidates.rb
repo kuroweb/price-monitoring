@@ -63,7 +63,7 @@ module ProductMonitoring
     end
 
     def successful_sources?(sources)
-      sources.all? { |source| source[:status] == "succeeded" && !source[:truncated] }
+      sources.all? { |source| source[:status] == "succeeded" }
     end
 
     def log_detail_candidates(candidate_count, enqueued_count)

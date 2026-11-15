@@ -220,14 +220,14 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async)
     end
 
-    it "取得がページ上限で打ち切られた場合は見つからない出品を投入しないこと" do
+    it "取得がページ上限で打ち切られても見つからない出品を個別確認すること" do
       sources.first[:truncated] = true
       create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
                                     updated_at: 4.hours.ago)
 
       described_class.call(product_crawl_setting: setting)
 
-      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async)
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("missing")
     end
 
     it "他サイトの取得が失敗しても成功したサイトの出品と売却日不明の出品を確認すること" do
