@@ -1,4 +1,6 @@
 # Code Structure
+ 
+2026-11-15 の重点再調査で確認した範囲は reverse-engineering-timestamp.md を参照。それ以外の記述は以前の調査記録であり、今回の深い検証対象外。
 
 アプリのソースは `volumes/` にあり、イメージ定義は `containers/`、開発の入口はルートの `docker-compose.yml` と `justfile` にある。文書の入口は `docs/index.md`。
 
@@ -47,10 +49,10 @@
 
 ## パターン
 
-- サイト追加はサイトクラスと `UrlRouter::SITES` への登録（`docs/backend/product-monitoring-poc.md`）
+- サイト追加はサイトクラスと `UrlRouter::SITES` への登録（`docs/features/product-monitoring/index.md`）
 - 個別確認ができるサイトだけが `self.fetch_detail` を定義する。呼び出し側は `respond_to?(:fetch_detail)` で選ぶ
 - サイトクラスは全て class method の集まりで、状態を持たない。`fetch(uri)` は `[records, next_uri]` を返す
-- 出品ハッシュの `sold` はサイトクラスが付け、保存側の `update_sold` が使う。じゃんぱらは例外で、保存側の `sync_janpara_sold` が別に調整する
+- 出品ハッシュの `sold` はサイトクラスが付け、保存側の `update_sold` が使う。イオシスとじゃんぱらは `sync_search_sold` が検索結果と取得の完全性に基づき別途調整する
 - ジョブは薄く、本体は service に委譲する。`CrawlJob` は `SyncCrawlResults.call` を呼ぶだけである
 - コメントは日本語で、変更の理由を書く
 - Frontend の `lib/http-client.ts` は JSON のキーを camelCase と snake_case で変換する

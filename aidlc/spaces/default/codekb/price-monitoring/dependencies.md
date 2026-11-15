@@ -1,4 +1,6 @@
 # Dependencies
+ 
+2026-11-15 の重点再調査で確認した範囲は reverse-engineering-timestamp.md を参照。それ以外の記述は以前の調査記録であり、今回の深い検証対象外。
 
 版の表は `technology-stack.md`。ここは依存の向きだけを書く。
 
@@ -24,21 +26,6 @@
 - 従来の `Crawl::*` は `*_products` テーブルへ書き、`product_crawl_results` とは別経路
 - Auth Provider は Backend のテーブルを参照しない
 
-## Product Monitoring の呼び出し関係（2026-11-14 の focused scan）
+## Product Monitoring の呼び出し関係（2026-11-15 focused scan）
 
-隣接リスト。矢印は呼び出し先を表す。
-
-- `SyncCrawlResults` → `Crawler`、`DetailCandidates`、`CleanseCrawlResults`、`ProductCrawlResult`、`Sites::Janpara::PLATFORM`
-- `SyncCrawlResults` → `CleanseCrawlResults::FILTER_KEYS`（保存時と削除時で条件の項目を揃える）
-- `SyncCrawlResults` → `DetailCandidates::DETAIL_RECHECK_INTERVAL`（じゃんぱらの売り切れ化の待ち時間）
-- `Crawler` → `Input`、`UrlRouter`、`Filter`、`Sites::*`（`target[:site].fetch`）
-- `DetailCandidates` → `UrlRouter::SITES`、`ProductMonitoring::CrawlDetailJob`、`ProductCrawlResult`
-- `UrlRouter` → `Sites::*`（`SITES` に登録された全サイトクラス）
-- `Sites::{Iosys,Janpara,TreasureFactory}` → `BrowserPage`、`Pagination`、`Crawler.listing_nodes`、`Crawler.parse_price`
-- `Sites::YahooAuction` → `BrowserPage`、`Pagination`、`Crawl::Client`、従来の `Crawl::YahooAuction::SyncProducts::ListPage`
-- `CleanseCrawlResults` → `Filter`
-- `LowestListings` → `Filter`、`ProductCrawlResult`
-
-`Crawler` はサイトクラスから `listing_nodes` と `parse_price` を呼ばれる一方で、`Sites::*` を `UrlRouter` 経由で呼ぶ。この相互参照は、Ruby の定数が実行時に解決されるため成立している。そのほかに循環 import は見つからなかった。範囲外のファイルの隣接リストは作っていない。
-
-循環 import は、今回読んだ商品計測の Ruby ではサービスがモデルとジョブを呼ぶ一方向だった。Frontend の `features` 間参照は方針として禁止されている。
+`CrawlJob → SyncCrawlResults → Crawler → UrlRouter → Sites`。保存中は `CleanseCrawlResults → Filter`、保存後は `DetailCandidates → CrawlDetailJob → Sites.fetch_detail`。相場は `CalculateAggregationResults → AggregationPurchases → Filter`。サイト実装はブラウザ取得基盤と DOM に依存する。

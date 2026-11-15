@@ -1,4 +1,6 @@
 # API Documentation
+ 
+2026-11-15 の重点再調査で確認した範囲は reverse-engineering-timestamp.md を参照。それ以外の記述は以前の調査記録であり、今回の深い検証対象外。
 
 BFF の JSON は `/api/v1`。開発時は Nginx の `location /api` が `backend:3000` へ渡す。Frontend のサーバー側は `NEXT_PRIVATE_API_URL`（Compose では `http://backend:3000`）へ直接出す。
 
@@ -33,7 +35,7 @@ BFF の JSON は `/api/v1`。開発時は Nginx の `location /api` が `backend
 | `PUT/DELETE /api/v1/product_watch_settings/:id` | 更新と削除 |
 | `GET /api/v1/product_watch_settings/:id/results` | 条件に合う販売中を最大 8 件 |
 | `POST /api/v1/product_watch_settings/:id/calculate` | 直近 30 日を集計 |
-| `GET /api/v1/product_watch_settings/:id/purchases` | `start_date` と `end_date` が必須。90 日未満 |
+| `GET /api/v1/product_watch_settings/:id/purchases` | `start_date` と `end_date` が必須。最大 90 日 |
 | `GET /api/v1/product_aggregation_results` | 日次相場 |
 
 結果 JSON の `sold` は boolean または null。画面の絞り込みは `sold === true` を売り切れ、それ以外を販売中側に数える（`ProductCrawlResultsDetail.tsx`）。モニタリング API の results はサーバー側で `sold: false` に絞ったあと返す。

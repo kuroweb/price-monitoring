@@ -1,5 +1,3 @@
-require "nokogiri"
-
 module ProductMonitoring
   module Sites
     class YahooFleamarket # rubocop:disable Metrics/ClassLength

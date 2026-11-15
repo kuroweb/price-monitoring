@@ -12,6 +12,39 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
     ])
   end
 
+  it "一覧の状態反映は対応する2サイトだけに委ねること" do
+    crawled = { sources: [], results: [] }
+    allow(ProductMonitoring::Crawler).to receive(:call).and_return(crawled)
+    allow(ProductMonitoring::Sites::Janpara).to receive(:sync_search_sold_status).and_call_original
+    allow(ProductMonitoring::Sites::Iosys).to receive(:sync_search_sold_status).and_call_original
+    other_sites = [ProductMonitoring::Sites::Mercari, ProductMonitoring::Sites::YahooFleamarket,
+                   ProductMonitoring::Sites::YahooAuction, ProductMonitoring::Sites::TreasureFactory]
+    expect(other_sites).to all(satisfy { |site| !site.respond_to?(:sync_search_sold_status) })
+
+    described_class.call(product_crawl_setting:)
+
+    expect(ProductMonitoring::Sites::Janpara).to have_received(:sync_search_sold_status)
+    expect(ProductMonitoring::Sites::Iosys).to have_received(:sync_search_sold_status)
+  end
+
+  it "一覧の状態反映が途中で失敗した場合は先に行った状態更新を戻すこと" do
+    listing = create(
+      :product_crawl_result,
+      product_crawl_setting:, platform: "iosys", external_id: "missing", name: "Phone",
+      sold: false, updated_at: 4.hours.ago
+    )
+    allow(ProductMonitoring::Crawler).to receive(:call).and_return(
+      sources: [{ platform: "iosys", status: "succeeded" }], results: []
+    )
+    allow(ProductMonitoring::Sites::Janpara).to receive(:sync_search_sold_status) do
+      expect(listing.reload.sold).to be true
+      raise "failed"
+    end
+
+    expect { described_class.call(product_crawl_setting:) }.to raise_error("failed")
+    expect(listing.reload.sold).to be false
+  end
+
   it "既存の売却情報を保持してオークションの価格と日時を保存すること" do
     product_crawl_setting.update!(search_urls: ["https://auctions.yahoo.co.jp/search/search?p=phone"])
     bought_date = 2.days.ago.change(usec: 0)
@@ -264,6 +297,22 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("m1")
       expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("m2")
       expect(Rails.logger).to have_received(:info).with("Product crawl detail candidates: setting_id=#{setting.id} candidates=3 enqueued=2")
+    end
+
+    it "サイトをまたいで古い順に詳細確認を制限し、各サイトのジョブ引数を維持すること" do
+      stub_const("ProductMonitoring::DetailCandidates::MAX_DETAIL_JOBS", 2)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "yahoo_fleamarket",
+                                    external_id: "old-yahoo", sold: false, updated_at: 6.days.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari",
+                                    external_id: "old-mercari", sold: false, updated_at: 5.days.ago)
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "yahoo_fleamarket",
+                                    external_id: "new-yahoo", sold: false, updated_at: 4.days.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("old-yahoo", "yahoo_fleamarket")
+      expect(ProductMonitoring::CrawlDetailJob).to have_received(:perform_async).with("old-mercari")
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async).with("new-yahoo", "yahoo_fleamarket")
     end
   end
 

@@ -1,6 +1,3 @@
-require "digest"
-require "net/http"
-
 module ProductMonitoring
   class LowestPriceNotifier
     def self.call(product_watch_setting:)

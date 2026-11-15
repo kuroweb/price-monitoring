@@ -1,4 +1,6 @@
 # Technology Stack
+ 
+2026-11-15 の重点再調査で確認した範囲は reverse-engineering-timestamp.md を参照。それ以外の記述は以前の調査記録であり、今回の深い検証対象外。
 
 版はマニフェストと lockfile、Dockerfile の固定指定から写した。lock に無いものは「固定なし」と書く。
 

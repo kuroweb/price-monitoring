@@ -1,5 +1,3 @@
-require "uri"
-
 module ProductMonitoring
   class UrlRouter
     SITES = [Sites::Mercari, Sites::Iosys, Sites::Janpara, Sites::YahooFleamarket, Sites::YahooAuction,
