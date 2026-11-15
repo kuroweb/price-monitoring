@@ -262,6 +262,19 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources:, results:)
     end
 
+    it "検索結果で価格のない売り切れ商品を即時に売り切れにし日時と他サイトを保持すること" do
+      updated_at = 1.hour.ago.change(usec: 0)
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "ITMCODE=313448", sold: false, updated_at:)
+      # 設定内で external_id は一意なので、別サイトの同じ external_id は別の設定の行で用意する
+      other = create(:product_crawl_result, platform: "iosys", external_id: "ITMCODE=313448", sold: false)
+      results << { platform: "janpara", external_id: "ITMCODE=313448", reasons: [], price: nil, sold: true }
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload).to have_attributes(sold: true, bought_date: nil, updated_at:)
+      expect(other.reload.sold).to be false
+    end
+
     it "検索から消えたじゃんぱらを売り切れにし他サイトと価格なしの出品は変えないこと" do
       updated_at = 4.hours.ago.change(usec: 0)
       missing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "jp-missing", name: "Phone missing", sold: false, updated_at:)
