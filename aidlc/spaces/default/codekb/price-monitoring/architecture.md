@@ -1,6 +1,6 @@
 # Architecture
 
-> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/backend/product-monitoring-poc.md` を参照する。
+> この文書は調査時点の記録であり、その後の販売状態同期の変更を反映していない。現行動作は `docs/features/product-monitoring/index.md` を参照する。
 
 ## Architecture Analysis
 
