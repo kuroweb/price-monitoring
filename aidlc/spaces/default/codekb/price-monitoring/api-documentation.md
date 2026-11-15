@@ -40,6 +40,19 @@ BFF の JSON は `/api/v1`。開発時は Nginx の `location /api` が `backend
 
 入力の共通検証は `ProductMonitoring::Input`。必須語・除外語は各 50 件、各 255 文字、と PoC 文書にある。
 
+## 内部の契約（商品計測の取得）
+
+HTTP ではなく、`ProductMonitoring` 内の呼び出し契約。
+
+| 入口 | 入力 | 出力 |
+| --- | --- | --- |
+| `SyncCrawlResults.call(product_crawl_setting:)` | 保存済みの設定 | `Crawler` の戻り値（`{ sources, results, fetched_count, accepted_count }`）。DB の保存・更新・削除を副作用に持つ |
+| `Crawler.call(params:)` | 検索語、サイト、追加 URL、必須語・除外語・価格帯、除外 ID | `sources`（`url`、`platform`、`status` は `succeeded`・`failed`・`unsupported`、`fetched_count`）と `results`（出品ハッシュに `accepted` と `reasons` を足したもの） |
+| `Sites::<Site>.fetch(uri)` | 検索 URL 1 ページ | `[出品ハッシュの配列, 次ページ URI または nil]`。画面の構造を読めないときは例外 |
+| `Sites::<Site>.fetch_detail(external_id)` | メルカリと Yahoo!フリマだけ | `{ sold:, bought_date: }`、削除済みは `deleted: true`、判定できないときは空 |
+
+出品ハッシュのキーは `external_id`、`name`、`price`、`product_url`、`thumbnail_url`、`sold`。ヤフオクは `buyout_price`、`end_date`、`bought_date` も付ける。`Sites::Janpara` の `fetch` は、結果が空で `.sorry` も無いページを「抽出できる出品が無い」例外として失敗にする。
+
 ## 認証と健康確認
 
 | メソッドとパス | 役割 |

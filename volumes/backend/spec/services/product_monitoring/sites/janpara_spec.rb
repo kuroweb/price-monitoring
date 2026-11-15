@@ -18,6 +18,14 @@ RSpec.describe ProductMonitoring::Sites::Janpara do
     expect(URI.decode_www_form(next_uri.query).to_h).to include("KEYWORDS" => "iPad Pro", "PAGE" => "2")
   end
 
+  it "価格のない SOLD OUT 表示を売り切れとして取得すること" do
+    html = '<div class="search_item_s"><a class="search_itemlink" href="/sale/search/detail/?ITMCODE=313448">' \
+           '<div class="search_itemname">Mac Studio</div><div class="search_nostock">SOLD OUT</div></a></div>'
+    allow(described_class).to receive(:fetch_page).and_return(html)
+
+    expect(described_class.fetch(uri).first.first).to include(external_id: "ITMCODE=313448", price: nil, sold: true)
+  end
+
   it "2 つの価格を持つ範囲を拒否し空結果を認識すること" do
     html = '<div class="search_item_s"><a class="search_itemlink" href="/sale/search/detail/?SRCODE=1"></a>' \
            '<div class="search_itemname">Phone</div><div class="item_amount">¥1,000～¥2,000</div></div>'
