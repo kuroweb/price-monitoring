@@ -515,38 +515,19 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | カラム | 型 | NULL | 備考 |
 |--------|-----|------|------|
 | id | bigint | NOT NULL | PK |
-| product_aggregation_setting_id | bigint | NOT NULL | FK |
 | date | date | NOT NULL |  |
 | average_purchase_price | integer |  | 購入0件の日は NULL |
 | purchase_count | integer | NOT NULL | default 0 |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
+| product_watch_setting_id | bigint | NOT NULL | FK |
 
 ### インデックス
 
 | 名前 | カラム | 備考 |
 |------|--------|------|
-| idx_on_product_aggregation_setting_id_date_0a5c5ca744 | product_aggregation_setting_id, date | unique |
-| idx_on_product_aggregation_setting_id_700a1849ac | product_aggregation_setting_id |  |
-
-## product_aggregation_settings
-
-### カラム
-
-| カラム | 型 | NULL | 備考 |
-|--------|-----|------|------|
-| id | bigint | NOT NULL | PK |
-| name | string | NOT NULL |  |
-| required_keywords | json | NOT NULL | default `[]` |
-| exclude_keywords | json | NOT NULL | default `[]` |
-| min_price | integer |  |  |
-| max_price | integer |  |  |
-| created_at | datetime | NOT NULL |  |
-| updated_at | datetime | NOT NULL |  |
-
-### インデックス
-
-なし
+| idx_on_product_watch_setting_id_date_845c1a0634 | product_watch_setting_id, date | unique |
+| index_product_aggregation_results_on_product_watch_setting_id | product_watch_setting_id |  |
 
 ## product_watch_settings
 
@@ -630,6 +611,8 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | id | bigint | NOT NULL | PK |
 | name | string | NOT NULL |  |
 | enabled | boolean | NOT NULL | default false |
+| keyword | string |  |  |
+| platforms | json | NOT NULL | default `[]` |
 | search_urls | json | NOT NULL | default `[]` |
 | required_keywords | json | NOT NULL | default `[]` |
 | exclude_keywords | json | NOT NULL | default `[]` |

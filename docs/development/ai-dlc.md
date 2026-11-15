@@ -10,7 +10,7 @@ AI-DLC の考え方とステージの一覧は [公式ドキュメント](https:
 | --- | --- | --- |
 | `.claude/`・`.codex/`・`.agents/skills/`・`.cursor/` | Claude Code・Codex・Cursor ごとのエンジン（エージェント、ステージ、フック、センサー、スキル） | しない。`aidlc config` が生成する |
 | `aidlc/spaces/default/memory/` | ルール。プロジェクト固有の指示は `project.md` に書く | する |
-| `aidlc/spaces/default/knowledge/documents/` | チームの文書の原本 | する |
+| `aidlc/spaces/default/knowledge/documents/` | リポジトリの外から持ち込む資料の原本 | する |
 | `aidlc/spaces/default/intents/` | 作業（intent）ごとの状態・監査ログ・要件・設計の記録 | しない。AI-DLC が書く |
 | `.aidlc-version` | このプロジェクトで使う `aidlc` のバージョン | バージョンを更新するときだけ |
 
@@ -38,9 +38,17 @@ worktree の準備と起動は [Orca の worktree](worktree.md) に従う。AI-D
 
 各ステージの最後に、AI-DLC が成果物を示して承認を求める。承認するまで次のステージには進まない。人が確かめるのは、意図が反映されているか（ユーザーストーリー、画面モック、設計の図、ユニットテストの意図）。直してほしいときは「Request Changes」を選ぶ。
 
-## 既存の文書を知識として登録する
+## 文書の置き場所
 
-AI-DLC のエージェントに読ませたい文書は、`aidlc/spaces/default/knowledge/documents/` に置き、Claude Code で `/aidlc-knowledge` から登録する。登録した文書は list・show で確かめ、原本を変えたら sync で反映する。
+| 文書 | 置き場所 |
+| --- | --- |
+| 作業ごとの要件・設計・判断 | `aidlc/spaces/default/intents/`。AI-DLC が書く |
+| 実装後に定着した仕様・操作手順・テーブル定義 | `docs/` |
+| リポジトリの外の資料（外部の仕様書・規約・PDF など） | `aidlc/spaces/default/knowledge/documents/` |
+
+`docs/` の文書は知識として登録しない。エージェントはリポジトリから直接読め、登録すると `documents/` にコピーができて原本と食い違う。
+
+リポジトリの外の資料は `aidlc/spaces/default/knowledge/documents/` に置き、Claude Code で `/aidlc-knowledge` から登録する。登録した文書は list・show で確かめ、原本を変えたら sync で反映する。
 
 ## aidlc のバージョンを更新する
 

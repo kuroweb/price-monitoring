@@ -36,8 +36,7 @@
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](development/remote.md) | ハウツー |
 | AI-DLC の起動・再開・知識の登録・更新 | [AI-DLC](development/ai-dlc.md) | ハウツー |
 | BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
-| 商品計測と相場集計の要件・テーブル設計・画面設計 | [商品計測と相場集計の設計](../aidlc/spaces/default/knowledge/documents/product-monitoring.md) | AI-DLC のチーム知識 |
-| 商品計測・商品相場の仕様・API・制約 | [商品計測と商品相場](backend/product-monitoring.md) | 解説・リファレンス |
+| 商品計測・商品相場の設計方針・仕様・API・制約 | [商品計測と商品相場](backend/product-monitoring.md) | 解説・リファレンス |
 | 商品計測・商品モニタリングの操作 | [商品計測・商品モニタリングの操作](backend/operations/product-monitoring.md) | ハウツー |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
