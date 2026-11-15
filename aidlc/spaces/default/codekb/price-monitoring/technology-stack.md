@@ -40,3 +40,5 @@
 | 本番 | Kubernetes / ArgoCD | クラスタ構成は README。マニフェストは別リポジトリ | `docs/cicd/index.md` |
 
 テストは実行していない。ここに書いた版はファイル上の指定である。
+
+2026-11-14 の focused scan（intent `janpara-listed-sold`）は、`volumes/backend/app/services/product_monitoring` の Ruby ソースと spec、PoC 文書だけを読んだ。この表の版は前回の scan から変えていない。ソースが使う Ruby の機能のうち、保存側の重複更新は MySQL 固有の `ON DUPLICATE KEY UPDATE`（`upsert_all` の `on_duplicate` に `VALUES()` を書いた SQL）に依存する。

@@ -97,11 +97,19 @@ module ProductMonitoring
     # 対象サイトの source が 1 件以上あり、そのすべてが成功しているときだけ対象にする。
     # 価格が無く保存しない出品も検索結果に含める。
     def sync_search_sold(crawled, platform)
-      returned_ids = crawled[:results].select { |result| result[:platform] == platform }.pluck(:external_id)
+      results = crawled[:results].select { |result| result[:platform] == platform }
       scope = product_crawl_setting.product_crawl_results.where(platform:)
-      returned = scope.where(external_id: returned_ids)
-      returned.update_all(sold: false) if returned_ids.any? && returned.exists?
-      sell_out_missing(scope, returned_ids, crawled[:sources], platform)
+      update_search_sold(scope, results)
+      sell_out_missing(scope, results.pluck(:external_id), crawled[:sources], platform)
+    end
+
+    # 検索結果にある既存の行へは、一覧の売り切れ表示を価格が無くてもそのまま反映する。
+    # 同じ出品が売り切れと販売中の両方で返るときは、販売中を後に適用する。
+    def update_search_sold(scope, results)
+      [true, false].each do |sold|
+        ids = results.select { |result| result[:sold] == sold }.pluck(:external_id)
+        scope.where(external_id: ids).update_all(sold:) if ids.any?
+      end
     end
 
     def sell_out_missing(scope, returned_ids, sources, platform)
@@ -114,11 +122,7 @@ module ProductMonitoring
 
     def site_fetch_succeeded?(sources, platform)
       site_sources = sources.select { |source| source[:platform] == platform }
-      site_sources.any? && sources_succeeded?(site_sources)
-    end
-
-    def sources_succeeded?(sources)
-      sources.all? { |source| source[:status] == "succeeded" }
+      site_sources.any? && site_sources.all? { |source| source[:status] == "succeeded" && !source[:truncated] }
     end
   end
 end

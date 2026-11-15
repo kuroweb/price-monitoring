@@ -1,6 +1,27 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Crawler do
+  it "最終取得ページに次ページがある場合は取得元を打ち切りとして結果を保持すること" do
+    uri = URI("https://iosys.co.jp/items?q=phone")
+    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch)
+      .and_return([[{ external_id: "one", name: "Phone", price: 100 }], uri])
+
+    result = described_class.call(params: { search_urls: [uri.to_s] })
+
+    expect(result[:sources].first).to include(status: "succeeded", truncated: true)
+    expect(result[:results].pluck(:external_id)).to eq(["one"])
+  end
+
+  it "上限ページで取得が終われば打ち切りとしないこと" do
+    uri = URI("https://iosys.co.jp/items?q=phone")
+    allow(ProductMonitoring::Sites::Iosys).to receive(:fetch).and_return(*Array.new(4) { [[], uri] }, [[], nil])
+
+    result = described_class.call(params: { search_urls: [uri.to_s] })
+
+    expect(result[:sources].first).to include(status: "succeeded")
+    expect(result[:sources].first).not_to have_key(:truncated)
+  end
+
   it "最大 5 ページを取得し各ページを 100 出品に制限すること" do
     site = class_double(ProductMonitoring::Sites::Mercari)
     allow(site).to receive(:fetch) { |uri| [Array.new(110) { |i| "#{uri.query}-#{i}" }, uri] }

@@ -220,6 +220,16 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
       expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async)
     end
 
+    it "取得がページ上限で打ち切られた場合は見つからない出品を投入しないこと" do
+      sources.first[:truncated] = true
+      create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing", sold: false,
+                                    updated_at: 4.hours.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(ProductMonitoring::CrawlDetailJob).not_to have_received(:perform_async)
+    end
+
     it "他サイトの取得が失敗しても成功したサイトの出品と売却日不明の出品を確認すること" do
       sources.replace([{ platform: "mercari", status: "succeeded" }, { platform: "yahoo_auction", status: "failed" }])
       create(:product_crawl_result, product_crawl_setting: setting, platform: "mercari", external_id: "missing",
@@ -264,6 +274,19 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
 
     before do
       allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources:, results:)
+    end
+
+    it "検索結果で価格のない売り切れ商品を即時に売り切れにし日時と他サイトを保持すること" do
+      updated_at = 1.hour.ago.change(usec: 0)
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "janpara", external_id: "ITMCODE=313448", sold: false, updated_at:)
+      # 設定内で external_id は一意なので、別サイトの同じ external_id は別の設定の行で用意する
+      other = create(:product_crawl_result, platform: "iosys", external_id: "ITMCODE=313448", sold: false)
+      results << { platform: "janpara", external_id: "ITMCODE=313448", reasons: [], price: nil, sold: true }
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload).to have_attributes(sold: true, bought_date: nil, updated_at:)
+      expect(other.reload.sold).to be false
     end
 
     it "検索から消えたじゃんぱらを売り切れにし他サイトと価格なしの出品は変えないこと" do
@@ -332,6 +355,15 @@ RSpec.describe ProductMonitoring::SyncCrawlResults do
 
     before do
       allow(ProductMonitoring::Crawler).to receive(:call).and_return(sources:, results:)
+    end
+
+    it "検索がページ上限で打ち切られた場合は消失商品を売り切れにしないこと" do
+      sources.first[:truncated] = true
+      listing = create(:product_crawl_result, product_crawl_setting: setting, platform: "iosys", sold: false, updated_at: 4.hours.ago)
+
+      described_class.call(product_crawl_setting: setting)
+
+      expect(listing.reload.sold).to be false
     end
 
     it "検索から消えた古い出品を売り切れにし、日時と他のサイト・設定を維持すること" do

@@ -40,18 +40,21 @@ module ProductMonitoring
     end
 
     def crawl_target(url, target)
-      records = fetch_with_deadline(target)
+      truncated = false
+      records = fetch_with_deadline(target) { truncated = true }
       store_records(records, target[:platform])
-      sources << self.class.source(url, target[:platform], "succeeded", records.size)
+      source = self.class.source(url, target[:platform], "succeeded", records.size)
+      source[:truncated] = true if truncated
+      sources << source
     rescue StandardError => e
       record_failure(url, target, e)
     end
 
-    def fetch_with_deadline(target)
+    def fetch_with_deadline(target, &)
       remaining = deadline - Process.clock_gettime(Process::CLOCK_MONOTONIC)
       raise Timeout::Error if remaining <= 0
 
-      Timeout.timeout([remaining, TIMEOUT_SECONDS].min) { self.class.fetch(target) }
+      Timeout.timeout([remaining, TIMEOUT_SECONDS].min) { self.class.fetch(target, &) }
     end
 
     def record_failure(url, target, error)
@@ -74,12 +77,13 @@ module ProductMonitoring
     def self.fetch(target)
       uri = URI.parse(target[:canonical_url])
       records = []
-      MAX_PAGES_PER_URL.times do
+      MAX_PAGES_PER_URL.times do |index|
         page_records, next_uri = target[:site].fetch(uri)
         records.concat(page_records.first(MAX_RESULTS_PER_PAGE))
         # 売り切れだけのページなど、空のページの先にも出品があり得るので次ページの有無だけで止める
         break if next_uri.nil?
 
+        yield if index == MAX_PAGES_PER_URL - 1 && block_given?
         uri = next_uri
       end
       records

@@ -66,7 +66,8 @@ module ProductMonitoring
         external_id = id.join("=")
         { external_id: external_id, name: name, price: listing_price(dom),
           product_url: "https://#{HOST}/sale/search/detail/?#{external_id}",
-          thumbnail_url: image.present? ? URI.join("https://#{HOST}", image).to_s : nil, sold: false }
+          thumbnail_url: image.present? ? URI.join("https://#{HOST}", image).to_s : nil,
+          sold: dom.at_css(".search_nostock").present? }
       end
 
       def self.listing_price(dom)

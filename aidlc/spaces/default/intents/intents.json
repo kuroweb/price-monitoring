@@ -14,5 +14,13 @@
     "scope": "express",
     "status": "complete",
     "request": "1d7670f4"
+  },
+  {
+    "uuid": "01a1d91a-ca27-75e5-b4e4-8cd5439ba2a1",
+    "slug": "janpara-listed-sold",
+    "dirName": "261114-janpara-listed-sold",
+    "scope": "bugfix",
+    "status": "complete",
+    "request": "d000423c"
   }
 ]
