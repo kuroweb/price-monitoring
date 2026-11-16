@@ -26,16 +26,16 @@ BFF 用 MySQL 8.0 と Redis、Provider 用 MySQL 8.0 と Redis。Compose サー�
 
 ## Batch Browsers
 
-Playwright サーバー（イメージ `mcr.microsoft.com/playwright:v1.62.0-jammy`、ポート 8888）と Camoufox サーバー（Python 3.12、Camoufox 0.5.8、ポート 8890）。Sidekiq が WebSocket で使う。商品計測の一覧取得は Playwright 側の `Crawl::Client` と `Crawl::DynamicProxy` を通る。
+Playwright サーバー（イメージ `mcr.microsoft.com/playwright:v1.62.0-jammy`、ポート 8888）と Camoufox サーバー（Python 3.12、Camoufox 0.5.8、ポート 8890）。Sidekiq が WebSocket で使う。商品計測の取得は `ProductMonitoring::Crawling::Client` と `Crawling::Proxy` を通る。
 
 ## Product Monitoring
 
 `volumes/backend/app/services/product_monitoring` と `app/sidekiq/product_monitoring` に配置。
 
-- `UrlRouter` は URL を検証しサイトを選択する。`Crawler` はページ取得、取得元の成否、重複排除、フィルタ結果をまとめる。
-- `Sites::Janpara` は一覧の売り切れ表示を解析し、`Sites::Iosys` は一覧を販売中として扱う。メルカリと Yahoo!フリマは詳細取得にも対応。
-- `SyncCrawlResults` は保存、イオシスとじゃんぱらの販売状態更新、条件外削除を行う。`DetailCandidates` が詳細確認候補を選び、`CrawlDetailJob` が同一 platform・external_id の各行を更新する。
-- `Filter` は価格・キーワード・除外 ID を判定する。`AggregationPurchases` は売却日時のある出品をフィルタし、external_id で重複排除する。
+- `UrlRouter` は計測設定の URL を検証し、サイトの `Listing` ごとに振り分ける。サイトごとの `Listing::Crawler` は、そのサイトの検索結果URLのページ取得、重複排除、取得の完全性をまとめる。
+- `Janpara::Listing::Crawler` は一覧の売り切れ表示を解析し、`Iosys::Listing::Crawler` は一覧を販売中として扱う。メルカリと Yahoo!フリマは `Detail::Crawler` で詳細取得にも対応。
+- サイトごとの `Listing::Syncer` は保存（upsert と販売状態の更新）と条件外削除を行う。イオシスとじゃんぱらの `Syncer` は販売状態を更新し、メルカリと Yahoo!フリマの `Syncer` は詳細確認候補を選ぶ。サイトごとの `Detail::Syncer` が同一 platform・external_id の各行を更新する。
+- 価格・キーワードの判定は `ProductMonitoring::CrawlSettings::Matcher` と `ProductMonitoring::WatchSettings::Matcher` が別々に持つ。`AggregationPurchases` は売却日時のある出品をモニタリング設定の条件で絞り込み、external_id で重複排除する。
 - 表示は `LowestListings` と `WatchListings`、通知は `LowestPriceNotifier` が担当する。
 
 依存先は Datastores、Batch Browsers、外部サイト、任意の Discord Webhook。

@@ -15,14 +15,14 @@ module Api
       end
 
       def create
-        product_crawl_setting = ::ProductMonitoring::CrawlSettingWriter.call(
+        product_crawl_setting = ::ProductMonitoring::CrawlSettings::Writer.call(
           product_crawl_setting: ProductCrawlSetting.new, params: upsert_params
         )
         render json: product_crawl_setting.as_json, status: :ok
       end
 
       def update
-        ::ProductMonitoring::CrawlSettingWriter.call(
+        ::ProductMonitoring::CrawlSettings::Writer.call(
           product_crawl_setting: @product_crawl_setting, params: upsert_params
         )
         render json: @product_crawl_setting.as_json, status: :ok
@@ -38,7 +38,8 @@ module Api
 
       # 保存済みの条件で取得し、採用した出品を商品計測結果に保存する
       def sync
-        ::ProductMonitoring::CrawlJob.perform_async(@product_crawl_setting.id, true)
+        urls_by_platform = ::ProductMonitoring::Crawling::UrlRouter.call(product_crawl_setting: @product_crawl_setting)
+        urls_by_platform.each_key { |platform| platform::Listing::SyncJob.perform_async(@product_crawl_setting.id, true) }
         render json: {}, status: :accepted
       end
 

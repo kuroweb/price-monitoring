@@ -42,7 +42,7 @@ flowchart LR
 
 ### Data Flow
 
-`CrawlJob` は保存済み設定で `SyncCrawlResults` を呼ぶ。`Crawler` は `UrlRouter` とサイトクラスを使って取得元ごとに最大5ページを取得し、取得状況と出品にフィルタ判定を付ける。保存処理は条件に合う出品の upsert、サイト別の売切れ同期、条件外行の削除をトランザクションで行い、その後、個別確認を投入する。
+`Crawling::EnqueueSyncJob`（定期）と手動取得の API は、設定の対象サイトごとに一覧ジョブ（`Crawling::<Site>::Listing::SyncJob`）を積む。一覧ジョブはそのサイトの `Listing::Syncer` を呼ぶ。`Syncer` はそのサイトの `Listing::Crawler` で、設定の検索結果URLのうちそのサイトの分を最大5ページずつ取得する。`CrawlSettings::Matcher` で条件に合う出品を upsert し、イオシスとじゃんぱらは売切れを同期し、条件外行を削除するまでをトランザクションで行う。メルカリと Yahoo!フリマはその後、そのサイトの詳細ジョブ（`Crawling::<Site>::Detail::SyncJob`）を積む。
 
 ### Key Design Decisions
 
@@ -56,19 +56,18 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-  participant job as CrawlJob
-  participant sync as SyncCrawlResults
-  participant crawler as Crawler
-  participant site as Site
+  participant job as Crawling::EnqueueSyncJob
+  participant listing as Site Listing SyncJob
+  participant sync as Site Listing Syncer
+  participant crawler as Site Listing Crawler
   participant db as ProductCrawlResult
-  participant detail as DetailCandidates
-  job->>sync: call
-  sync->>crawler: fetch
-  crawler->>site: fetch pages
-  site-->>crawler: listings and next page
-  crawler-->>sync: sources and results
+  participant detail as Site Detail SyncJob
+  job->>listing: perform_async per site
+  listing->>sync: call
+  sync->>crawler: call
+  crawler-->>sync: listings and completeness
   sync->>db: upsert and reconcile and cleanse
-  sync->>detail: enqueue after transaction
+  sync->>detail: perform_async after transaction
 ```
 
-<!-- Text fallback: ジョブが取得と保存を呼び、サイト別取得の結果を保存してから個別確認を投入する。 -->
+<!-- Text fallback: Crawling::EnqueueSyncJob がサイトごとの一覧ジョブを投入し、一覧ジョブがそのサイトの取得結果を保存してから、そのサイトの詳細ジョブを投入する。 -->

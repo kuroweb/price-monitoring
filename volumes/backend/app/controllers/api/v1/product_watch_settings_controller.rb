@@ -9,19 +9,19 @@ module Api
       def index
         render json: {
           product_watch_settings: ProductWatchSetting.order(id: :desc).as_json(except: :last_lowest_signature),
-          discord_configured: ::ProductMonitoring::LowestPriceNotifier.configured?
+          discord_configured: ::ProductMonitoring::Watching::LowestPriceNotifier.configured?
         }, status: :ok
       end
 
       def create
-        setting = ::ProductMonitoring::WatchSettingWriter.call(product_watch_setting: ProductWatchSetting.new,
-                                                               params: upsert_params)
+        setting = ::ProductMonitoring::WatchSettings::Writer.call(product_watch_setting: ProductWatchSetting.new,
+                                                                  params: upsert_params)
         render json: setting.as_json(except: :last_lowest_signature), status: :ok
       end
 
       def update
-        ::ProductMonitoring::WatchSettingWriter.call(product_watch_setting: @product_watch_setting,
-                                                     params: upsert_params)
+        ::ProductMonitoring::WatchSettings::Writer.call(product_watch_setting: @product_watch_setting,
+                                                        params: upsert_params)
         render json: @product_watch_setting.as_json(except: :last_lowest_signature), status: :ok
       end
 
@@ -31,13 +31,13 @@ module Api
       end
 
       def results
-        results = ::ProductMonitoring::WatchListings.call(product_watch_setting: @product_watch_setting)
+        results = ::ProductMonitoring::Watching::WatchListings.call(product_watch_setting: @product_watch_setting)
         render json: { product_crawl_results: results.as_json }, status: :ok
       end
 
       def calculate
         end_date = Time.zone.today
-        ::ProductMonitoring::CalculateAggregationResults.call(
+        ::ProductMonitoring::Watching::CalculateAggregationResults.call(
           product_watch_setting: @product_watch_setting, start_date: end_date - 29, end_date:
         )
         render json: {}, status: :ok
@@ -50,8 +50,9 @@ module Api
           raise ArgumentError, "期間は開始日から#{PURCHASES_MAX_DAYS}日以内で指定してください"
         end
 
-        results = ::ProductMonitoring::AggregationPurchases.call(product_watch_setting: @product_watch_setting,
-                                                                 start_date:, end_date:)
+        results = ::ProductMonitoring::Watching::AggregationPurchases.call(
+          product_watch_setting: @product_watch_setting, start_date:, end_date:
+        )
         render json: { product_crawl_results: results.sort_by(&:bought_date).reverse.as_json }, status: :ok
       end
 

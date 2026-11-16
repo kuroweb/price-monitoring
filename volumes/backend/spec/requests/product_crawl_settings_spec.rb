@@ -47,11 +47,11 @@ RSpec.describe "商品クロール設定", type: :request do
     end
 
     it "条件以外だけを変えると結果を削除しないこと" do
-      allow(ProductMonitoring::CleanseCrawlResults).to receive(:call)
+      allow(ProductMonitoring::Crawling::CrawlResultCleaner).to receive(:call)
       put "/api/v1/product_crawl_settings/#{product_crawl_setting.id}",
           params: params.merge(name: "changed", enabled: false), as: :json
       expect(response).to have_http_status(:ok)
-      expect(ProductMonitoring::CleanseCrawlResults).not_to have_received(:call)
+      expect(ProductMonitoring::Crawling::CrawlResultCleaner).not_to have_received(:call)
       expect(product_crawl_setting.product_crawl_results.pluck(:id)).to contain_exactly(kept.id, unmatched.id)
     end
   end
@@ -74,11 +74,12 @@ RSpec.describe "商品クロール設定", type: :request do
   end
 
   it "無効な設定でも手動同期を投入すること" do
-    allow(ProductMonitoring::CrawlJob).to receive(:perform_async)
-    product_crawl_setting = create(:product_crawl_setting, enabled: false)
+    sync_job = ProductMonitoring::Crawling::Iosys::Listing::SyncJob
+    allow(sync_job).to receive(:perform_async)
+    product_crawl_setting = create(:product_crawl_setting, enabled: false, search_urls: ["https://iosys.co.jp/items?q=x"])
     post "/api/v1/product_crawl_settings/#{product_crawl_setting.id}/sync"
     expect(response).to have_http_status(:accepted)
-    expect(ProductMonitoring::CrawlJob).to have_received(:perform_async).with(product_crawl_setting.id, true)
+    expect(sync_job).to have_received(:perform_async).with(product_crawl_setting.id, true)
   end
 
   it "出品を削除せずに除外と復元を行うこと" do
