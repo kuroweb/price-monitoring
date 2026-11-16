@@ -4,8 +4,6 @@ module ProductMonitoring
       module Listing
         # 検索結果1ページを解析し、出品と次ページのURLを返す
         class ListPage
-          MAX_RESULTS_PER_PAGE = 100
-
           def self.call(...)
             new(...).call
           end
@@ -16,7 +14,7 @@ module ProductMonitoring
           end
 
           def call
-            results = page.css(".search_item_s").first(MAX_RESULTS_PER_PAGE).filter_map do |dom|
+            results = page.css(".search_item_s").filter_map do |dom|
               id = listing_id(dom)
               listing(dom, id) if id
             end

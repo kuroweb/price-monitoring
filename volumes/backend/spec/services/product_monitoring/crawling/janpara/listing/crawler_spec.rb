@@ -41,6 +41,16 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::Listing::Crawler do
       .with(block_scripts: true, user_agent: described_class::USER_AGENT).twice
   end
 
+  it "1ページの上限を超えた分は取得せず、一覧を最後まで取得できなかったとすること" do
+    max = described_class::MAX_RESULTS_PER_PAGE
+    item = '<div class="search_item_s"><a class="search_itemlink" href="/sale/search/detail/?ITMCODE=%d">' \
+           '<div class="search_itemname">Phone</div><div class="item_amount">¥1,000</div></a></div>'
+    stub_pages(Array.new(max + 1) { |n| format(item, n) }.join)
+    result = described_class.call(product_crawl_setting: setting)
+    expect(result[:listings].size).to eq(max)
+    expect(result[:complete]).to be false
+  end
+
   it "価格のない SOLD OUT 表示を売り切れとして読み取ること" do
     stub_pages('<div class="search_item_s"><a class="search_itemlink" href="/sale/search/detail/?ITMCODE=313448">' \
                '<div class="search_itemname">Mac Studio</div><div class="search_nostock">SOLD OUT</div></a></div>')

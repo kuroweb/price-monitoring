@@ -4,7 +4,8 @@ module ProductMonitoring
       module Listing
         class Crawler
           MAX_PAGES = 5
-          MAX_RESULTS_PER_PAGE = 100
+          # 実際の1ページの件数（Yahoo!フリマは100件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
+          MAX_RESULTS_PER_PAGE = 200
           TIMEOUT_SECONDS = 60
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
@@ -82,10 +83,11 @@ module ProductMonitoring
           end
 
           def checked_results(page)
-            results = page.css('a[href^="/item/"]').filter_map { |link| listing(link) }.first(MAX_RESULTS_PER_PAGE)
+            results = page.css('a[href^="/item/"]').filter_map { |link| listing(link) }
             raise "Search page has no extractable listings" if results.empty?
 
-            results
+            @truncated = true if results.size > MAX_RESULTS_PER_PAGE
+            results.first(MAX_RESULTS_PER_PAGE)
           end
 
           def listing(link)

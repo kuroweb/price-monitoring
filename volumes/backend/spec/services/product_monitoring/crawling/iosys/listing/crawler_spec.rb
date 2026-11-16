@@ -89,6 +89,14 @@ RSpec.describe ProductMonitoring::Crawling::Iosys::Listing::Crawler do
     expect(result[:complete]).to be false
   end
 
+  it "1ページの上限を超えた分は取得せず、一覧を最後まで取得できなかったとすること" do
+    max = described_class::MAX_RESULTS_PER_PAGE
+    pages["1"] = Array.new(max + 1) { |n| item("over-#{n}") }.join
+    result = described_class.call(product_crawl_setting: setting)
+    expect(result[:listings].size).to eq(max)
+    expect(result[:complete]).to be false
+  end
+
   it "検索語のURLと追加URLのうちイオシスの分だけを取得すること" do
     setting.update!(keyword: "phone", platforms: %w[iosys mercari],
                     search_urls: ["https://iosys.co.jp/items?q=phone", "https://jp.mercari.com/search?keyword=x"])

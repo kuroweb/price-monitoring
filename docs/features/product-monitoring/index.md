@@ -130,7 +130,7 @@ sequenceDiagram
 
 | サイト | 一覧（`<サイト>::Listing::`） | 個別確認（`<サイト>::Detail::`） |
 | --- | --- | --- |
-| メルカリ（`Mercari`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
+| メルカリ（`Mercari`） | `SearchUrl` / `Crawler` / `ListPage` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
 | Yahoo!フリマ（`YahooFleamarket`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
 | ヤフオク（`YahooAuction`） | `SearchUrl` / `Crawler` / `ListPage` / `Syncer` / `SyncJob` | なし |
 | イオシス（`Iosys`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | なし |
@@ -138,7 +138,7 @@ sequenceDiagram
 | トレファク（`TreasureFactory`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | なし |
 
 - `SearchUrl` は、ホスト・検索パス・サイト名と、検索語からの検索結果URLの組み立て、登録する検索結果URLの検証を持つ。
-- 一覧の `Crawler` は、設定の検索結果URLのうちそのサイトの分を、ページを送りながら取得して出品を返す。失敗したURLはログに残して次のURLへ進み、全URLが失敗したらジョブを失敗にして再試行する。イオシス・じゃんぱら・メルカリ・Yahoo!フリマは、全URLを最後のページまで取得できたかも返す。ヤフオクとじゃんぱらは1ページの解析を `ListPage` に分ける。
+- 一覧の `Crawler` は、設定の検索結果URLのうちそのサイトの分を、ページを送りながら取得して出品を返す。失敗したURLはログに残して次のURLへ進み、全URLが失敗したらジョブを失敗にして再試行する。イオシス・じゃんぱら・メルカリ・Yahoo!フリマは、全URLを最後のページまで取得できたかも返す。メルカリ・ヤフオク・じゃんぱらは1ページの解析を `ListPage` に分ける。1ページの件数が上限（実際の件数より大きい値）を超えたときと、メルカリで全セルを描画しきれなかったときも、一覧を最後まで取得できなかったとする。
 - 一覧の `Syncer` は、取得した出品のうち計測設定の条件に一致するものを保存（upsert と販売状態の更新）し、`CrawlResultCleaner` で条件外を削除する。保存の処理はサイトごとの `Syncer` に置く。イオシス・じゃんぱらの `Syncer` は一覧の売り切れ表示と一覧から消えた出品を販売状態に反映し、メルカリ・Yahoo!フリマの `Syncer` は個別確認の候補を選んで詳細ジョブを積む。
 - 個別確認の `Crawler` は個別ページから販売状態と売れた日を返し、個別確認の `Syncer` が同じ出品の行に反映する。詳細ジョブは `Syncer` を呼ぶだけである。
 - 条件外の削除は設定更新時にも `CrawlResultCleaner` で行う。

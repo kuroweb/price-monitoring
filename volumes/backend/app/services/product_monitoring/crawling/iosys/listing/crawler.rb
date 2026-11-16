@@ -6,7 +6,8 @@ module ProductMonitoring
           class NonSuccessResponse < StandardError; end
 
           MAX_PAGES = 5
-          MAX_RESULTS_PER_PAGE = 100
+          # 実際の1ページの件数（イオシスは24件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
+          MAX_RESULTS_PER_PAGE = 200
           TIMEOUT_SECONDS = 60
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           # プロキシの約3割が 403 を返す
@@ -79,7 +80,9 @@ module ProductMonitoring
           end
 
           def page_results(page)
-            page.css("li.item").first(MAX_RESULTS_PER_PAGE).filter_map do |dom|
+            items = page.css("li.item")
+            @truncated = true if items.size > MAX_RESULTS_PER_PAGE
+            items.first(MAX_RESULTS_PER_PAGE).filter_map do |dom|
               id = listing_id(dom)
               listing(dom, id) if id
             end

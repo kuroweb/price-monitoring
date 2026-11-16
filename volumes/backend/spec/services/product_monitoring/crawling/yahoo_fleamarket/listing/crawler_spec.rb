@@ -46,13 +46,19 @@ RSpec.describe ProductMonitoring::Crawling::YahooFleamarket::Listing::Crawler do
     expect(page).to have_received(:goto).exactly(5).times
   end
 
-  it "画像や価格のないリンクを除いてから、1ページ100件に絞ること" do
+  it "画像や価格のないリンクを除いてから1ページの上限に絞り、上限を超えたら一覧を最後まで取得できなかったとすること" do
+    max = described_class::MAX_RESULTS_PER_PAGE
     invalid = '<a href="/item/noimage"><p>1,000円</p></a>' * 5
-    valid = Array.new(100) { |n| %(<a href="/item/v#{n}"><img src="https://example.com/#{n}.jpg" alt="iPad"><p>1,000円</p></a>) }
+    valid = Array.new(max) { |n| %(<a href="/item/v#{n}"><img src="https://example.com/#{n}.jpg" alt="iPad"><p>1,000円</p></a>) }
     allow(page).to receive(:content).and_return("#{invalid}#{valid.join}")
-    listings = described_class.call(product_crawl_setting: setting)[:listings]
-    expect(listings.size).to eq(100)
-    expect(listings.pluck(:external_id)).not_to include("noimage")
+    result = described_class.call(product_crawl_setting: setting)
+    expect(result[:listings].size).to eq(max)
+    expect(result[:listings].pluck(:external_id)).not_to include("noimage")
+    expect(result[:complete]).to be true
+
+    over = %(<a href="/item/over"><img src="https://example.com/over.jpg" alt="iPad"><p>1,000円</p></a>)
+    allow(page).to receive(:content).and_return("#{valid.join}#{over}")
+    expect(described_class.call(product_crawl_setting: setting)).to include(complete: false)
   end
 
   it "別ホストの次ページは、検索語を伏せたURLで失敗として記録すること" do

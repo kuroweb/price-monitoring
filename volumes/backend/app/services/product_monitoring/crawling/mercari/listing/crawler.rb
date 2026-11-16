@@ -4,8 +4,19 @@ module ProductMonitoring
       module Listing
         class Crawler
           MAX_PAGES = 5
-          MAX_RESULTS_PER_PAGE = 100
-          TIMEOUT_SECONDS = 60
+          # 実際の1ページの件数（メルカリは120件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
+          MAX_RESULTS_PER_PAGE = 200
+          # 1ページの描画とスクロールに十数秒かかる
+          TIMEOUT_SECONDS = 150
+          MAX_SCROLLS = 60
+          # 出品のセルは表示範囲に入ってから中身が描画される。セルが1つも無いうちは、空結果の表示が出るまで待つ
+          RENDERED_SCRIPT = <<~JS.freeze
+            () => {
+              const cells = [...document.querySelectorAll("li[data-testid='item-cell']")];
+              if (cells.length === 0) return document.querySelector(".merEmptyState") !== null;
+              return cells.every((cell) => cell.querySelector("a"));
+            }
+          JS
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
           def self.call(...)
@@ -44,9 +55,9 @@ module ProductMonitoring
             results = []
             Timeout.timeout(TIMEOUT_SECONDS) do
               MAX_PAGES.times do
-                page = Nokogiri::HTML(fetch_page(uri))
-                results.concat(checked_results(page))
-                uri = next_url(uri, page)
+                page_results, uri = ListPage.call(uri, Nokogiri::HTML(fetch_page(uri)))
+                @truncated = true if page_results.size > MAX_RESULTS_PER_PAGE
+                results.concat(page_results.first(MAX_RESULTS_PER_PAGE))
                 return results if uri.nil?
               end
               @truncated = true
@@ -62,57 +73,20 @@ module ProductMonitoring
 
               validate_url(page)
               Kernel.sleep(2)
-              30.times do
-                page.mouse.wheel(0, 200)
-                Kernel.sleep(0.005)
-              end
+              render_all(page)
               checked_content(page)
             end
           end
 
-          def checked_results(page)
-            results = page.css("li[data-testid='item-cell']").first(MAX_RESULTS_PER_PAGE).filter_map do |dom|
-              id = listing_id(dom)
-              listing(dom, id) if id
+          # すべてのセルが描画されるまで下へスクロールする。描画しきれなければ一覧を最後まで取得できなかったとする
+          def render_all(page)
+            MAX_SCROLLS.times do
+              return if page.evaluate(RENDERED_SCRIPT)
+
+              page.mouse.wheel(0, 800)
+              Kernel.sleep(0.2)
             end
-            empty_state = page.at_css(".merEmptyState")
-            raise "Search page has no extractable listings" if results.empty? && empty_state&.text.blank?
-
-            results
-          end
-
-          def listing_id(dom)
-            href = dom.at_css("a")&.[]("href")
-            href&.match(%r{/item/([^/?]+)})&.[](1)
-          end
-
-          def listing(dom, id)
-            name = dom.at_css("[data-testid='thumbnail-item-name']")&.text.to_s.strip
-            raise "Listing name is missing" if name.empty?
-
-            # 既存のメルカリクローラーと同じく、画像URLは external_id から組み立てる
-            { platform: SearchUrl::PLATFORM, external_id: id, name: name,
-              price: price(dom.at_css("[data-testid='item-tile-price']")&.text),
-              product_url: "https://#{SearchUrl::HOST}/item/#{id}",
-              thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg",
-              sold: dom.at_css("img[alt$='売り切れ']").present? }
-          end
-
-          # 「¥1,200」などの表示価格を整数にする。DBの整数の上限を超える値は価格なしとする
-          def price(text)
-            match = text.to_s.strip.match(/\A[¥￥]?\s*(\d[\d,]*)\s*(?:円)?\s*(?:\(税込\))?\z/)
-            value = match && match[1].delete(",").to_i
-            value if value && value <= ProductCrawlResult::MAX_PRICE
-          end
-
-          def next_url(uri, page)
-            return unless page.at_css("[data-testid='pagination-next-button']")
-
-            query = URI.decode_www_form(uri.query)
-            current = query.to_h.fetch("page_token", "v1:0").delete_prefix("v1:").to_i
-            query.reject! { |key, _| key == "page_token" }
-            query << ["page_token", "v1:#{current + 1}"]
-            uri.dup.tap { |next_uri| next_uri.query = URI.encode_www_form(query) }
+            @truncated = true
           end
 
           # リダイレクトで別のホストへ移っていないことを確かめる

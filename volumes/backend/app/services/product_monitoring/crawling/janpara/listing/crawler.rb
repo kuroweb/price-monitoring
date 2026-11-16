@@ -6,6 +6,8 @@ module ProductMonitoring
           class NonSuccessResponse < StandardError; end
 
           MAX_PAGES = 5
+          # 実際の1ページの件数（じゃんぱらは12件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
+          MAX_RESULTS_PER_PAGE = 200
           TIMEOUT_SECONDS = 60
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           FETCH_TRIES = 5
@@ -50,7 +52,8 @@ module ProductMonitoring
             Timeout.timeout(TIMEOUT_SECONDS) do
               MAX_PAGES.times do
                 page_results, uri = ListPage.call(uri, Nokogiri::HTML(fetch_page(uri)))
-                results.concat(page_results)
+                @truncated = true if page_results.size > MAX_RESULTS_PER_PAGE
+                results.concat(page_results.first(MAX_RESULTS_PER_PAGE))
                 return results if uri.nil?
               end
               @truncated = true
