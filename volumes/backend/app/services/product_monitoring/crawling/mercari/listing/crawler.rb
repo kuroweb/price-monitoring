@@ -7,7 +7,7 @@ module ProductMonitoring
           # 実際の1ページの件数（メルカリは120件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
           MAX_RESULTS_PER_PAGE = 200
           # 1ページの描画とスクロールに十数秒かかる
-          TIMEOUT_SECONDS = 150
+          TIMEOUT_SECONDS = 180
           MAX_SCROLLS = 60
           # 出品のセルは表示範囲に入ってから中身が描画される。セルが1つも無いうちは、空結果の表示が出るまで待つ
           RENDERED_SCRIPT = <<~JS.freeze

@@ -8,7 +8,7 @@ module ProductMonitoring
           MAX_PAGES = 5
           # 実際の1ページの件数（イオシスは24件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
           MAX_RESULTS_PER_PAGE = 200
-          TIMEOUT_SECONDS = 60
+          TIMEOUT_SECONDS = 180
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           # プロキシの約3割が 403 を返す
           FETCH_TRIES = 5

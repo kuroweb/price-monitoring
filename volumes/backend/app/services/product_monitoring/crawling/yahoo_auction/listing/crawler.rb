@@ -5,7 +5,7 @@ module ProductMonitoring
         class Crawler
           MAX_PAGES = 5
           MAX_RESULTS_PER_PAGE = 100
-          TIMEOUT_SECONDS = 60
+          TIMEOUT_SECONDS = 180
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           LIST_READY = <<~JS.freeze
             () => document.querySelector('li:has(> div a[href*="jp/auction/"]), .Notice__wandQuery') ||
