@@ -27,7 +27,7 @@ BFF の JSON は `/api/v1`。開発時は Nginx の `location /api` が `backend
 | --- | --- |
 | `GET/POST /api/v1/product_crawl_settings` | 設定の一覧と登録 |
 | `GET/PUT/DELETE /api/v1/product_crawl_settings/:id` | 取得、更新、削除 |
-| `POST /api/v1/product_crawl_settings/:id/sync` | `CrawlJob` を手動投入。202 |
+| `POST /api/v1/product_crawl_settings/:id/sync` | 設定の対象サイトの一覧ジョブ（`Crawling::<Site>::Listing::SyncJob`）を手動投入。202 |
 | `GET /api/v1/product_crawl_results` | 結果。`product_crawl_setting_id` で設定に絞る。`excluded=true` で除外行だけ |
 | `PATCH /api/v1/product_crawl_results/:id` | `excluded` で `excluded_at` を立てる、または消す |
 | `DELETE /api/v1/product_crawl_results/:id` | その行だけ削除 |
@@ -40,7 +40,7 @@ BFF の JSON は `/api/v1`。開発時は Nginx の `location /api` が `backend
 
 結果 JSON の `sold` は boolean または null。画面の絞り込みは `sold === true` を売り切れ、それ以外を販売中側に数える（`ProductCrawlResultsDetail.tsx`）。モニタリング API の results はサーバー側で `sold: false` に絞ったあと返す。
 
-入力の共通検証は `ProductMonitoring::Input`。必須語・除外語は各 50 件、各 255 文字、と PoC 文書にある。
+入力の検証は設定ごとの Writer（`ProductMonitoring::CrawlSettings::Writer`・`ProductMonitoring::WatchSettings::Writer`）が行う。必須語・除外語は各 50 件、各 255 文字、と PoC 文書にある。
 
 ## 内部の契約（商品計測の取得）
 
@@ -48,12 +48,11 @@ HTTP ではなく、`ProductMonitoring` 内の呼び出し契約。
 
 | 入口 | 入力 | 出力 |
 | --- | --- | --- |
-| `SyncCrawlResults.call(product_crawl_setting:)` | 保存済みの設定 | `Crawler` の戻り値（`{ sources, results, fetched_count, accepted_count }`）。DB の保存・更新・削除を副作用に持つ |
-| `Crawler.call(params:)` | 検索語、サイト、追加 URL、必須語・除外語・価格帯、除外 ID | `sources`（`url`、`platform`、`status` は `succeeded`・`failed`・`unsupported`、`fetched_count`）と `results`（出品ハッシュに `accepted` と `reasons` を足したもの） |
-| `Sites::<Site>.fetch(uri)` | 検索 URL 1 ページ | `[出品ハッシュの配列, 次ページ URI または nil]`。画面の構造を読めないときは例外 |
-| `Sites::<Site>.fetch_detail(external_id)` | メルカリと Yahoo!フリマだけ | `{ sold:, bought_date: }`、削除済みは `deleted: true`、判定できないときは空 |
+| `Crawling::<Site>::Listing::Syncer.call(product_crawl_setting:)` | 保存済みの設定 | なし。DB の保存・更新・削除と詳細ジョブの投入を副作用に持つ |
+| `Crawling::<Site>::Listing::Crawler.call(product_crawl_setting:)` | 保存済みの設定 | そのサイトの出品ハッシュの配列。イオシス・じゃんぱら・メルカリ・Yahoo!フリマは `{ listings:, complete: }` で、取得の完全性も返す |
+| `Crawling::<Site>::Detail::Crawler.call(external_id)` | メルカリと Yahoo!フリマだけ | `{ sold:, bought_date: }`、削除済みは `deleted: true`、判定できないときは空 |
 
-出品ハッシュのキーは `external_id`、`name`、`price`、`product_url`、`thumbnail_url`、`sold`。ヤフオクは `buyout_price`、`end_date`、`bought_date` も付ける。`Sites::Janpara` の `fetch` は、結果が空で `.sorry` も無いページを「抽出できる出品が無い」例外として失敗にする。
+出品ハッシュのキーは `platform`、`external_id`、`name`、`price`、`product_url`、`thumbnail_url`、`sold`。ヤフオクは `buyout_price`、`end_date`、`bought_date` も付ける。`Janpara::Listing::Crawler` は、結果が空で `.sorry` も無いページを「抽出できる出品が無い」例外として失敗にする。
 
 ## 認証と健康確認
 

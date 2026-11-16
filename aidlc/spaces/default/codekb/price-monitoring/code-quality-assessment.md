@@ -14,4 +14,4 @@
 
 ## 技術的負債
 
-`Crawler` は取得元と結果をハッシュで渡し、`SyncCrawlResults` は MySQL 固有 upsert とサイト別状態遷移を一箇所で扱う。サイトを跨ぐ external_id の衝突可能性、設定更新と取得の並行性、`updated_at` の意味について詳細確認が必要。発生実績は未確認。
+サイトごとの `Listing::Crawler` は出品をハッシュで渡す。MySQL 固有 upsert とサイト別状態遷移は、サイトごとの `Listing::Syncer` が扱う。サイトを跨ぐ external_id の衝突可能性、設定更新と取得の並行性、`updated_at` の意味について詳細確認が必要。発生実績は未確認。
