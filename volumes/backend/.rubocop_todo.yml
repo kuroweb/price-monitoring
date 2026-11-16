@@ -14,14 +14,6 @@ Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'spec/requests/product_crawl_settings_spec.rb'
 
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: special_inside_parentheses, consistent, align_brackets
-Layout/FirstArrayElementIndentation:
-  Exclude:
-    - 'spec/services/product_monitoring/sync_crawl_results_spec.rb'
-
 # Offense count: 12
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle, IndentationWidth.
@@ -42,7 +34,6 @@ Layout/LineLength:
     - 'app/controllers/api/v1/product_crawl_results_controller.rb'
     - 'spec/requests/product_aggregation_settings_spec.rb'
     - 'spec/requests/product_crawl_settings_spec.rb'
-    - 'spec/services/product_monitoring/sync_crawl_results_spec.rb'
 
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
@@ -63,7 +54,6 @@ Layout/TrailingWhitespace:
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
   Exclude:
-    - 'app/services/product_monitoring/calculate_aggregation_results.rb'
     - 'lib/discord/bugsnag_notifier.rb'
 
 # Offense count: 3
@@ -194,8 +184,6 @@ Rails/SkipsModelValidations:
     - 'app/services/crawl/used_sofmap/syncer.rb'
     - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_products/syncer.rb'
-    - 'app/services/product_monitoring/calculate_aggregation_results.rb'
-    - 'app/services/product_monitoring/sync_crawl_results.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_mercari_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
@@ -311,12 +299,6 @@ Style/SymbolArray:
 RSpec/IncludeExamples:
   Exclude:
     - 'spec/services/retrieve_related_products/retriever_spec.rb'
-
-# Offense count: 2
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/Pluck:
-  Exclude:
-    - 'spec/services/product_monitoring/crawler_spec.rb'
 
 # Offense count: 18
 # This cop supports unsafe autocorrection (--autocorrect-all).
