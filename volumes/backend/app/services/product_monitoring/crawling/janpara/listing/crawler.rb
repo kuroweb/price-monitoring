@@ -8,7 +8,7 @@ module ProductMonitoring
           MAX_PAGES = 5
           # 実際の1ページの件数（じゃんぱらは12件）より大きくする。超えた分は取得しないので、一覧を最後まで取得できなかったとする
           MAX_RESULTS_PER_PAGE = 200
-          TIMEOUT_SECONDS = 60
+          TIMEOUT_SECONDS = 180
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           FETCH_TRIES = 5
           # WAF（SiteGuard）が古い User-Agent を HTTP 500 で拒否するため、新しい User-Agent で取得する

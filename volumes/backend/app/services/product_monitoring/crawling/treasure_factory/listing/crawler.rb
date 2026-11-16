@@ -7,7 +7,7 @@ module ProductMonitoring
 
           MAX_PAGES = 5
           MAX_RESULTS_PER_PAGE = 100
-          TIMEOUT_SECONDS = 60
+          TIMEOUT_SECONDS = 180
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           FETCH_TRIES = 5
 
