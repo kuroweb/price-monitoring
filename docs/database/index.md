@@ -7,13 +7,13 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 
 - [カラム・インデックス](er.md)
 - [テーブル間関連](association.md)
-- [商品計測と商品相場](../features/product-monitoring/index.md) — 商品計測結果とモニタリング・集計の振る舞い
+- [商品モニタリング](../features/product-monitoring/index.md) — 収集結果とモニタリング・集計の振る舞い
 - [文書全体の索引](../index.md)
 
 ## 判断基準
 
 - 従来の計測対象管理では `products` が中心で、各プラットフォーム固有の収集結果は別テーブルに分ける
-- 商品計測・商品モニタリングは独立したテーブル群を使う。振る舞いは[商品計測と商品相場](../features/product-monitoring/index.md)、関連は[アソシエーション](association.md)を参照する
+- 商品モニタリングは独立したテーブル群を使う。振る舞いは[商品モニタリング](../features/product-monitoring/index.md)、関連は[アソシエーション](association.md)を参照する
 - 従来の計測対象管理では、クロール条件を `*_crawl_settings` と、その配下の required / exclude 系テーブルに分ける
 - カテゴリや関連付けのような横断的な概念は、プラットフォーム固有テーブルへ閉じ込めず共通テーブルで管理する
 - 日次集計のような派生データは、元データと別テーブルに分けて保存する

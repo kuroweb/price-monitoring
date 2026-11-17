@@ -251,7 +251,7 @@ erDiagram
   products ||--o{ used_sofmap_products : ""
 ```
 
-## 相場集計
+## 日次相場の集計
 
 ```mermaid
 erDiagram
@@ -289,26 +289,26 @@ erDiagram
   backmarket_watch_targets ||--o{ backmarket_watch_results : ""
 ```
 
-## 商品計測・商品相場
+## 商品モニタリング
 
-既存の計測対象管理とは独立したテーブル群。商品モニタリング設定は商品計測設定に外部キーを持たず、全商品計測設定の商品計測結果を条件でフィルターする。設計方針と仕様は [商品計測と商品相場](../features/product-monitoring/index.md) を参照する。
+既存の計測対象管理とは独立したテーブル群。モニタリング設定は収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする。設計方針と仕様は [商品モニタリング](../features/product-monitoring/index.md) を参照する。
 
 ```mermaid
 erDiagram
-  product_crawl_settings {
+  product_monitoring_crawl_settings {
     bigint id PK
   }
-  product_crawl_results {
+  product_monitoring_crawl_results {
     bigint id PK
-    bigint product_crawl_setting_id FK
+    bigint crawl_setting_id FK
   }
-  product_watch_settings {
+  product_monitoring_monitors {
     bigint id PK
   }
-  product_aggregation_results {
+  product_monitoring_daily_market_prices {
     bigint id PK
-    bigint product_watch_setting_id FK
+    bigint monitor_id FK
   }
-  product_crawl_settings ||--o{ product_crawl_results : ""
-  product_watch_settings ||--o{ product_aggregation_results : ""
+  product_monitoring_crawl_settings ||--o{ product_monitoring_crawl_results : ""
+  product_monitoring_monitors ||--o{ product_monitoring_daily_market_prices : ""
 ```

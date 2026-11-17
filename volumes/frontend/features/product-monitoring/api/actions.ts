@@ -2,47 +2,48 @@
 
 import { revalidatePaths } from '@/lib/revalidate-paths'
 
-import * as AggregationApi from './aggregationSettings'
+import * as CrawlResultApi from './crawlResults'
 import * as CrawlApi from './crawlSettings'
-import * as WatchApi from './watchSettings'
+import * as DailyMarketPriceApi from './dailyMarketPrices'
+import * as MonitorApi from './monitors'
 
 import type {
-  GetProductAggregationPurchasesParams,
-  GetProductCrawlResultsParams,
-  ProductCrawlSettingInput,
-  ProductWatchSettingInput,
+  GetMonitorTransactionsParams,
+  GetCrawlResultsParams,
+  CrawlSettingInput,
+  MonitorInput,
 } from './types'
 
-const revalidateCrawl = () => revalidatePaths([['/product-crawl-results', 'layout']])
+const revalidateCrawl = () => revalidatePaths([['/product-monitoring/crawl-settings', 'layout']])
 
-export async function getProductCrawlSettings() {
-  return CrawlApi.getProductCrawlSettings()
+export async function getCrawlSettings() {
+  return CrawlApi.getCrawlSettings()
 }
 
-export async function createProductCrawlSetting(input: ProductCrawlSettingInput) {
-  const result = await CrawlApi.createProductCrawlSetting(input)
+export async function createCrawlSetting(input: CrawlSettingInput) {
+  const result = await CrawlApi.createCrawlSetting(input)
   if (result.data) revalidateCrawl()
   return result
 }
 
-export async function updateProductCrawlSetting(id: number, input: ProductCrawlSettingInput) {
-  const result = await CrawlApi.updateProductCrawlSetting(id, input)
+export async function updateCrawlSetting(id: number, input: CrawlSettingInput) {
+  const result = await CrawlApi.updateCrawlSetting(id, input)
   if (result.data) revalidateCrawl()
   return result
 }
 
-export async function destroyProductCrawlSetting(id: number) {
-  const result = await CrawlApi.destroyProductCrawlSetting(id)
+export async function destroyCrawlSetting(id: number) {
+  const result = await CrawlApi.destroyCrawlSetting(id)
   if (result.status === 200) revalidateCrawl()
   return result
 }
 
-export async function syncProductCrawlSetting(id: number) {
-  return CrawlApi.syncProductCrawlSetting(id)
+export async function syncCrawlSetting(id: number) {
+  return CrawlApi.syncCrawlSetting(id)
 }
 
-export async function setProductCrawlResultExcluded(id: number, excluded: boolean) {
-  const result = await CrawlApi.setProductCrawlResultExcluded(id, excluded)
+export async function setCrawlResultExcluded(id: number, excluded: boolean) {
+  const result = await CrawlResultApi.setCrawlResultExcluded(id, excluded)
   if (result.data) {
     revalidateCrawl()
     revalidatePaths([['/product-monitoring', 'layout']])
@@ -50,8 +51,8 @@ export async function setProductCrawlResultExcluded(id: number, excluded: boolea
   return result
 }
 
-export async function destroyProductCrawlResult(id: number) {
-  const result = await CrawlApi.destroyProductCrawlResult(id)
+export async function destroyCrawlResult(id: number) {
+  const result = await CrawlResultApi.destroyCrawlResult(id)
   if (result.status === 200) {
     revalidateCrawl()
     revalidatePaths([['/product-monitoring', 'layout']])
@@ -59,55 +60,55 @@ export async function destroyProductCrawlResult(id: number) {
   return result
 }
 
-export async function getProductCrawlSetting(id: number) {
-  return CrawlApi.getProductCrawlSetting(id)
+export async function getCrawlSetting(id: number) {
+  return CrawlApi.getCrawlSetting(id)
 }
 
-export async function getProductCrawlResults(params?: GetProductCrawlResultsParams) {
-  return CrawlApi.getProductCrawlResults(params)
+export async function getCrawlResults(params?: GetCrawlResultsParams) {
+  return CrawlResultApi.getCrawlResults(params)
 }
 
 const revalidateAggregation = () => revalidatePaths([['/product-monitoring', 'layout']])
 
-export async function calculateProductAggregationSetting(id: number) {
-  const result = await AggregationApi.calculateProductAggregationSetting(id)
+export async function aggregateDailyMarketPrices(id: number) {
+  const result = await MonitorApi.aggregateDailyMarketPrices(id)
   if (result.status === 200) revalidateAggregation()
   return result
 }
 
-export async function getAllProductAggregationResults() {
-  return AggregationApi.getAllProductAggregationResults()
+export async function getDailyMarketPrices() {
+  return DailyMarketPriceApi.getDailyMarketPrices()
 }
 
-export async function getProductAggregationPurchases(
+export async function getMonitorTransactions(
   id: number,
-  params: GetProductAggregationPurchasesParams,
+  params: GetMonitorTransactionsParams,
 ) {
-  return AggregationApi.getProductAggregationPurchases(id, params)
+  return MonitorApi.getMonitorTransactions(id, params)
 }
 
-export async function getProductWatchSettings() {
-  return WatchApi.getProductWatchSettings()
+export async function getMonitors() {
+  return MonitorApi.getMonitors()
 }
 
-export async function getProductWatchResults(id: number) {
-  return WatchApi.getProductWatchResults(id)
+export async function getMonitorCrawlResults(id: number) {
+  return MonitorApi.getMonitorCrawlResults(id)
 }
 
-export async function createProductWatchSetting(input: ProductWatchSettingInput) {
-  const result = await WatchApi.createProductWatchSetting(input)
+export async function createMonitor(input: MonitorInput) {
+  const result = await MonitorApi.createMonitor(input)
   if (result.data) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }
 
-export async function updateProductWatchSetting(id: number, input: ProductWatchSettingInput) {
-  const result = await WatchApi.updateProductWatchSetting(id, input)
+export async function updateMonitor(id: number, input: MonitorInput) {
+  const result = await MonitorApi.updateMonitor(id, input)
   if (result.data) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }
 
-export async function destroyProductWatchSetting(id: number) {
-  const result = await WatchApi.destroyProductWatchSetting(id)
+export async function destroyMonitor(id: number) {
+  const result = await MonitorApi.destroyMonitor(id)
   if (result.status === 200) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }

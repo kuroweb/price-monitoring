@@ -1,18 +1,18 @@
-export type ProductCrawlSettingInput = {
+export type CrawlSettingInput = {
   name: string
   enabled: boolean
-  keyword: string | null
+  searchKeyword: string | null
   platforms: string[]
   searchUrls: string[]
   requiredKeywords: string[]
-  excludeKeywords: string[]
+  negativeKeywords: string[]
   minPrice: number | null
   maxPrice: number | null
 }
-export type ProductCrawlSetting = ProductCrawlSettingInput & { id: number }
-export type ProductCrawlResult = {
+export type CrawlSetting = CrawlSettingInput & { id: number }
+export type CrawlResult = {
   id: number
-  productCrawlSettingId: number
+  crawlSettingId: number
   platform: string
   externalId: string
   name: string
@@ -21,49 +21,38 @@ export type ProductCrawlResult = {
   price: number
   buyoutPrice: number | null
   sold: boolean | null
-  boughtDate: string | null
-  endDate: string | null
+  soldAt: string | null
+  endsAt: string | null
   excludedAt: string | null
 }
-export type ProductAggregationSettingInput = {
-  name: string
-  requiredKeywords: string[]
-  excludeKeywords: string[]
-  minPrice: number | null
-  maxPrice: number | null
-}
-export type ProductAggregationSetting = ProductAggregationSettingInput & { id: number }
-export type ProductWatchSettingInput = {
+export type MonitorInput = {
   name: string
   enabled: boolean
   requiredKeywords: string[]
-  excludeKeywords: string[]
+  negativeKeywords: string[]
   minPrice: number | null
   maxPrice: number | null
   discordEnabled: boolean
 }
-export type ProductWatchSetting = ProductWatchSettingInput & { id: number }
-export type GetProductWatchSettings = {
-  productWatchSettings: ProductWatchSetting[]
+export type Monitor = MonitorInput & { id: number }
+export type GetMonitors = {
+  monitors: Monitor[]
   discordConfigured: boolean
 }
-export type ProductAggregationResult = {
+export type DailyMarketPrice = {
   id: number
-  productWatchSettingId: number
+  monitorId: number
   date: string
-  averagePurchasePrice: number | null
-  purchaseCount: number
+  averageTransactionPrice: number | null
+  transactionCount: number
 }
 
-export type GetProductCrawlSettings = { productCrawlSettings: ProductCrawlSetting[] }
-export type GetProductCrawlResults = {
-  productCrawlResults: ProductCrawlResult[]
-  counts?: { productCrawlSettingId: number; sold: boolean | null; count: number }[]
+export type GetCrawlSettings = { crawlSettings: CrawlSetting[] }
+export type GetCrawlResults = {
+  crawlResults: CrawlResult[]
+  counts?: { crawlSettingId: number; sold: boolean | null; count: number }[]
 }
-export type GetProductCrawlResultsParams = { productCrawlSettingId?: number; excluded?: boolean }
-export type GetProductAggregationSettings = {
-  productAggregationSettings: ProductAggregationSetting[]
-}
-export type GetProductAggregationResults = { productAggregationResults: ProductAggregationResult[] }
-export type GetProductAggregationPurchases = { productCrawlResults: ProductCrawlResult[] }
-export type GetProductAggregationPurchasesParams = { startDate: string; endDate: string }
+export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolean }
+export type GetDailyMarketPrices = { dailyMarketPrices: DailyMarketPrice[] }
+export type GetMonitorTransactions = { transactions: CrawlResult[] }
+export type GetMonitorTransactionsParams = { startDate: string; endDate: string }

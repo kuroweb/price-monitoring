@@ -37,7 +37,7 @@ const Header = (props: Props) => {
             </button>
           </div>
           <div className='flex-1'>
-            <Link href='/product-monitoring'>
+            <Link href='/product-monitoring/monitors'>
               <p className='whitespace-nowrap px-2 text-base sm:px-4 sm:text-xl'>Price Monitoring</p>
             </Link>
           </div>

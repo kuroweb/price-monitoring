@@ -6,7 +6,7 @@
 ## 文書の案内
 
 - [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
-- [商品計測と商品相場](../features/product-monitoring/index.md) — 機能の仕様と操作手順
+- [商品モニタリング](../features/product-monitoring/index.md) — 機能の仕様と操作手順
 - [文書全体の索引](../index.md)
 
 ## 判断基準
@@ -56,7 +56,7 @@
 - `app/products/page.tsx` が category 付き一覧の入口
 - `app/products/[id]/page.tsx` が商品詳細の入口
 - `app/backmarket/page.tsx` が Backmarket 計測結果の入口
-- `app/product-crawl-results/` と `app/product-monitoring/` が商品計測と商品モニタリング・商品相場の入口。旧相場URLは商品モニタリングへリダイレクトする
+- `app/product-monitoring/` が商品モニタリングの入口。`monitors/` にモニタリング設定、`crawl-settings/` に収集設定の一覧・詳細を置く。入口はモニタリング設定の一覧へリダイレクトする
 - `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
 
 ### feature 単位の UI
@@ -64,7 +64,7 @@
 - `features/products/` が商品一覧や詳細の UI と state を持つ
 - `features/categories/` がカテゴリ管理の UI と通信を持つ
 - `features/backmarket/` が計測対象の管理と直近取得画面の UI と通信を持つ
-- `features/product-monitoring/` が商品計測・相場・モニタリングの UI を持つ。各画面から設定の登録・編集モーダルを開き、語句・価格帯の入力欄を共有する
+- `features/product-monitoring/` が商品モニタリングの UI を持つ。各画面から設定の登録・編集モーダルを開き、保存条件と抽出条件の入力欄はそれぞれ分ける
 - page は feature を束ねる役に留める
 
 ### 通信境界

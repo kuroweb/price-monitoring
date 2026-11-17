@@ -1,7 +1,7 @@
 module ProductMonitoring
   module Crawling
-    # 計測設定の検索語・サイト・検索結果URLを検証し、プラットフォーム（Listing と Detail を持つ名前空間）ごとのURLに振り分ける。
-    # 検索語から作ったURLのあとに、そのプラットフォームの検索結果URLを並べる
+    # 収集設定の検索ワード・サイト・検索結果URLを検証し、プラットフォーム（ListPage と DetailPage を持つ名前空間）ごとのURLに振り分ける。
+    # 検索ワードから作ったURLのあとに、そのプラットフォームの検索結果URLを並べる
     class UrlRouter
       PLATFORMS = [Mercari, Iosys, Janpara, YahooFleamarket, YahooAuction, TreasureFactory].freeze
 
@@ -9,25 +9,25 @@ module ProductMonitoring
         new(...).call
       end
 
-      def initialize(product_crawl_setting:)
-        @product_crawl_setting = product_crawl_setting
+      def initialize(crawl_setting:)
+        @crawl_setting = crawl_setting
       end
 
-      # 検索語から作るURLも、サイトの条件（Yahoo!フリマの検索語など）で検証する
+      # 検索ワードから作るURLも、サイトの条件（Yahoo!フリマの検索ワードなど）で検証する
       def call
-        (generated_urls + product_crawl_setting.search_urls).each_with_object({}) do |url, urls_by_platform|
+        (generated_urls + crawl_setting.search_urls).each_with_object({}) do |url, urls_by_platform|
           (urls_by_platform[route(url)] ||= []) << url
         end
       end
 
       private
 
-      attr_reader :product_crawl_setting
+      attr_reader :crawl_setting
 
       def generated_urls
-        product_crawl_setting.platforms.flat_map do |name|
-          search_url = PLATFORMS.find { |platform| name == platform::Listing::SearchUrl::PLATFORM }::Listing::SearchUrl
-          search_url.build(product_crawl_setting.keyword)
+        crawl_setting.platforms.flat_map do |name|
+          search_url = PLATFORMS.find { |platform| name == platform::ListPage::SearchUrl::PLATFORM }::ListPage::SearchUrl
+          search_url.build(crawl_setting.search_keyword)
         end
       end
 
@@ -35,10 +35,10 @@ module ProductMonitoring
         validate_url(url)
         uri = URI.parse(url)
         validate_uri(uri)
-        platform = PLATFORMS.find { |candidate| uri.host&.downcase == candidate::Listing::SearchUrl::HOST }
+        platform = PLATFORMS.find { |candidate| uri.host&.downcase == candidate::ListPage::SearchUrl::HOST }
         raise ArgumentError, "URL host is unsupported" unless platform
 
-        search_url = platform::Listing::SearchUrl
+        search_url = platform::ListPage::SearchUrl
         raise ArgumentError, "URL path is unsupported" unless uri.path.match?(search_url::PATH)
 
         search_url.validate(uri)

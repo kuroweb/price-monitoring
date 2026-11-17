@@ -142,7 +142,7 @@ describe('http（ブラウザー）', () => {
       error: { code: 400, message: '個別出品の検索URLを指定してください', details: [] },
     }), { status: 400 }))
 
-    expect(await http('/product_crawl_settings')).toEqual({
+    expect(await http('/product_monitoring/crawl_settings')).toEqual({
       data: null,
       status: 400,
       error: { code: 400, message: '個別出品の検索URLを指定してください', details: [] },
