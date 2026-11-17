@@ -69,10 +69,10 @@ const categoryIcon = (
 
 const menuGroups: { title: string; items: MenuItem[] }[] = [
   {
-    title: '商品計測',
+    title: '商品モニタリング',
     items: [
-      { label: '商品モニタリング', href: '/product-monitoring', icon: settingsIcon },
-      { label: '商品計測', href: '/product-crawl-results', icon: listIcon },
+      { label: 'モニタリング設定', href: '/product-monitoring/monitors', icon: settingsIcon },
+      { label: '収集設定', href: '/product-monitoring/crawl-settings', icon: listIcon },
     ],
   },
   {

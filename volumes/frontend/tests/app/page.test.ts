@@ -9,6 +9,6 @@ describe('トップページ', () => {
   it('商品モニタリングへ移動すること', async () => {
     await Page()
 
-    expect(redirect).toHaveBeenCalledWith('/product-monitoring')
+    expect(redirect).toHaveBeenCalledWith('/product-monitoring/monitors')
   })
 })

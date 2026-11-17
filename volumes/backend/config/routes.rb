@@ -39,20 +39,20 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
       resources :backmarket_watch_targets, only: %i[index create update destroy]
       resources :backmarket_recents, only: %i[index]
       resources :product_prices, only: %i[index show]
-      resources :product_crawl_settings, only: %i[index show create update destroy] do
-        member do
-          post :sync
+      namespace :product_monitoring do
+        resources :crawl_settings, only: %i[index show create update destroy] do
+          post :sync, on: :member
         end
-      end
-      resources :product_crawl_results, only: %i[index update destroy]
-      resources :product_watch_settings, only: %i[index create update destroy] do
-        member do
-          get :results
-          post :calculate
-          get :purchases
+        resources :crawl_results, only: %i[index update destroy]
+        resources :monitors, only: %i[index create update destroy] do
+          member do
+            get :crawl_results
+            post :aggregate_daily_market_prices
+            get :transactions
+          end
         end
+        resources :daily_market_prices, only: %i[index]
       end
-      resources :product_aggregation_results, only: %i[index]
     end
   end
 

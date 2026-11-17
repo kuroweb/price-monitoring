@@ -12,7 +12,7 @@
 # SupportedStyles: empty_lines, no_empty_lines
 Layout/EmptyLinesAroundBlockBody:
   Exclude:
-    - 'spec/requests/product_crawl_settings_spec.rb'
+    - 'spec/requests/product_monitoring/crawl_settings_spec.rb'
 
 # Offense count: 12
 # This cop supports safe autocorrection (--autocorrect).
@@ -31,9 +31,9 @@ Layout/LineEndStringConcatenationIndentation:
 # URISchemes: http, https
 Layout/LineLength:
   Exclude:
-    - 'app/controllers/api/v1/product_crawl_results_controller.rb'
-    - 'spec/requests/product_aggregation_settings_spec.rb'
-    - 'spec/requests/product_crawl_settings_spec.rb'
+    - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
+    - 'spec/requests/product_monitoring/daily_market_prices_spec.rb'
+    - 'spec/requests/product_monitoring/crawl_settings_spec.rb'
 
 # Offense count: 6
 # This cop supports safe autocorrection (--autocorrect).
@@ -134,8 +134,8 @@ Performance/ZipWithoutBlock:
 RSpec/MultipleDescribes:
   Exclude:
     - 'spec/lib/discord/bugsnag_notifier_spec.rb'
-    - 'spec/requests/product_aggregation_settings_spec.rb'
-    - 'spec/requests/product_crawl_settings_spec.rb'
+    - 'spec/requests/product_monitoring/daily_market_prices_spec.rb'
+    - 'spec/requests/product_monitoring/crawl_settings_spec.rb'
 
 # Offense count: 1
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -306,9 +306,8 @@ Rails/StrongParametersExpect:
   Exclude:
     - 'app/controllers/api/v1/backmarket_watch_targets_controller.rb'
     - 'app/controllers/api/v1/categories_controller.rb'
-    - 'app/controllers/api/v1/product_aggregation_settings_controller.rb'
-    - 'app/controllers/api/v1/product_crawl_results_controller.rb'
-    - 'app/controllers/api/v1/product_crawl_settings_controller.rb'
+    - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
+    - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
     - 'app/controllers/api/v1/products/iosys_crawl_settings/iosys_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/mercari_crawl_settings/mercari_crawl_setting_exclude_products_controller.rb'
