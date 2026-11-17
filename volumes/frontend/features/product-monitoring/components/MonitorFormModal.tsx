@@ -43,6 +43,7 @@ export default function MonitorFormModal({
     minPrice: values?.minPrice ?? null,
     maxPrice: values?.maxPrice ?? null,
     discordEnabled: values?.discordEnabled ?? true,
+    newestNotificationEnabled: values?.newestNotificationEnabled ?? false,
   }))
   const [required, setRequired] = useState(values?.requiredKeywords.join(', ') ?? '')
   const [excluded, setExcluded] = useState(values?.negativeKeywords.join(', ') ?? '')
@@ -134,6 +135,15 @@ export default function MonitorFormModal({
                     onChange={(event) => change({ enabled: event.target.checked })}
                   />
                   最安値の変化を通知する
+                </label>
+                <label className='flex items-center gap-2'>
+                  <input
+                    type='checkbox'
+                    className='checkbox'
+                    checked={input.newestNotificationEnabled}
+                    onChange={(event) => change({ newestNotificationEnabled: event.target.checked })}
+                  />
+                  新着を通知する
                 </label>
               </fieldset>
               {error && (

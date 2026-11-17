@@ -21,7 +21,7 @@ RSpec.describe "モニタリング設定", type: :request do
     expect(ProductMonitoring::Monitor.exists?(id)).to be(false)
   end
 
-  it "全計測から条件に一致する販売中の商品を重複なく返す" do
+  it "全計測から条件に一致する商品を売り切れも含めて新着順に重複なく返す" do
     setting = ProductMonitoring::Monitor.create!(settings)
     create(:product_monitoring_crawl_result, name: "phone", price: 500, sold: false, platform: "iosys",
                                              external_id: "one")
@@ -30,11 +30,10 @@ RSpec.describe "モニタリング設定", type: :request do
     create(:product_monitoring_crawl_result, name: "phone", price: 500, sold: false, platform: "mercari",
                                              external_id: "two")
     create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false)
-    create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: true)
-    create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: nil)
+    create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: true, external_id: "sold")
     create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: false, excluded_at: Time.current)
     get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
-    expect(response.parsed_body.fetch("crawl_results").pluck("external_id")).to eq(%w[one two])
+    expect(response.parsed_body.fetch("crawl_results").pluck("external_id")).to eq(%w[sold two one])
   end
 
   it "条件の変更時だけ古い相場を消し、設定削除時にも相場を削除する" do
@@ -49,18 +48,73 @@ RSpec.describe "モニタリング設定", type: :request do
     expect(ProductMonitoring::DailyMarketPrice.count).to eq(0)
   end
 
-  it "条件に一致する商品を重複を除いて価格順に最大8件返す" do
+  it "新着通知の指定を保存し、条件か新着通知の指定を変えたときだけ新着通知の基準を取り直す" do
+    post "/api/v1/product_monitoring/monitors", params: settings.merge(newest_notification_enabled: true), as: :json
+    expect(response.parsed_body).to include("newest_notification_enabled" => true)
+    expect(response.parsed_body).not_to have_key("newest_notified_until")
+    setting = ProductMonitoring::Monitor.find(response.parsed_body.fetch("id"))
+    url = "/api/v1/product_monitoring/monitors/#{setting.id}"
+    base = settings.merge(newest_notification_enabled: true)
+
+    setting.update!(newest_notified_until: Time.current)
+    put url, params: base.merge(name: "updated"), as: :json
+    expect(setting.reload.newest_notified_until).not_to be_nil
+    put url, params: base.merge(max_price: 500), as: :json
+    expect(setting.reload.newest_notified_until).to be_nil
+
+    setting.update!(newest_notified_until: Time.current)
+    put url, params: base.merge(max_price: 500, newest_notification_enabled: false), as: :json
+    expect(setting.reload).to have_attributes(newest_notification_enabled: false, newest_notified_until: nil)
+  end
+
+  it "条件に一致する商品を重複を除いて新着順に最大8件返す" do
     setting = ProductMonitoring::Monitor.create!(settings)
-    create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false)
-    expected = (1..9).map do |price|
-      create(:product_monitoring_crawl_result, name: "phone", price: price * 10, sold: false,
+    create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: false, external_id: "item-0")
+    expected = (1..8).map do |price|
+      create(:product_monitoring_crawl_result, name: "phone", price: price * 10, sold: price.even?,
                                                external_id: "item-#{price}")
     end
-    create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: false, external_id: "item-1")
+    create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false)
 
     get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
-    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.first(8).map(&:id))
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
+  end
+
+  describe "最安値と直近の平均取引価格" do
+    it "収集結果の8件の外も含めた販売中の最安値と、平均取引価格のある最新の日の値を返すこと" do
+      setting = ProductMonitoring::Monitor.create!(settings)
+      create(:product_monitoring_crawl_result, name: "phone", price: 300, sold: false)
+      9.times { create(:product_monitoring_crawl_result, name: "phone", price: 900, sold: false) }
+      create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: true)
+      create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false, excluded_at: Time.current)
+      create(:product_monitoring_crawl_result, name: "phone case", price: 100, sold: false)
+      setting.daily_market_prices.create!(date: Date.current - 2, average_transaction_price: 700,
+                                          transaction_count: 1)
+      setting.daily_market_prices.create!(date: Date.current - 1, average_transaction_price: 800,
+                                          transaction_count: 1)
+      setting.daily_market_prices.create!(date: Date.current, transaction_count: 0)
+
+      get "/api/v1/product_monitoring/monitors/#{setting.id}/summary"
+
+      expect(response).to have_http_status(:ok)
+      expect(response.parsed_body).to eq("lowest_price" => 300, "latest_average_transaction_price" => 800)
+    end
+
+    it "該当がなければ null を返すこと" do
+      setting = ProductMonitoring::Monitor.create!(settings)
+      create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: true)
+      setting.daily_market_prices.create!(date: Date.current, transaction_count: 0)
+
+      get "/api/v1/product_monitoring/monitors/#{setting.id}/summary"
+
+      expect(response.parsed_body).to eq("lowest_price" => nil, "latest_average_transaction_price" => nil)
+    end
+
+    it "存在しないモニタリング設定は 404 を返すこと" do
+      get "/api/v1/product_monitoring/monitors/0/summary"
+      expect(response).to have_http_status(:not_found)
+    end
   end
 
   describe "日次相場の集計" do

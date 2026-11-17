@@ -6,9 +6,11 @@ import {
   createMonitor,
   destroyMonitor,
   setCrawlResultExcluded,
+  updateMonitor,
 } from '@/features/product-monitoring/api/actions'
 import type {
   CrawlResult,
+  GetMonitorSummary,
   Monitor,
 } from '@/features/product-monitoring/api/types'
 import MonitorList from '@/features/product-monitoring/components/MonitorList'
@@ -28,11 +30,13 @@ const monitor: Monitor = {
   name: 'phone',
   enabled: true,
   discordEnabled: true,
+  newestNotificationEnabled: false,
   requiredKeywords: ['phone'],
   negativeKeywords: ['case'],
   minPrice: null,
   maxPrice: 1000,
 }
+const summary: GetMonitorSummary = { lowestPrice: 700, latestAverageTransactionPrice: 900 }
 const result: CrawlResult = {
   id: 1,
   crawlSettingId: 1,
@@ -65,12 +69,14 @@ describe('商品モニタリング', () => {
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone')
     await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'case')
     await user.type(screen.getByRole('spinbutton', { name: '最高価格（円）' }), '1000')
+    await user.click(screen.getByRole('checkbox', { name: '新着を通知する' }))
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createMonitor).toHaveBeenCalledWith({
         name: 'phone',
         enabled: true,
         discordEnabled: true,
+        newestNotificationEnabled: true,
         requiredKeywords: ['phone'],
         negativeKeywords: ['case'],
         minPrice: null,
@@ -80,7 +86,7 @@ describe('商品モニタリング', () => {
     expect(refresh).toHaveBeenCalled()
   })
 
-  it('最安価格を表示し、確認後に設定を削除する', async () => {
+  it('最安値と直近の平均取引価格を summary から表示し、確認後に設定を削除する', async () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(destroyMonitor).mockResolvedValue({
       data: null,
@@ -90,31 +96,45 @@ describe('商品モニタリング', () => {
     const user = userEvent.setup()
     render(
       <MonitorList
-        sections={[{ monitor, crawlResults: [result], dailyMarketPrices: [] }]}
+        sections={[{ monitor, crawlResults: [result], summary }]}
       />,
     )
-    expect(screen.getAllByText('¥800')).toHaveLength(2)
+    expect(screen.getByText('¥700')).toBeInTheDocument()
+    expect(screen.getByText('¥900')).toBeInTheDocument()
     const menuButton = screen.getByRole('button', { name: 'phoneの操作' })
     await user.click(menuButton)
     await user.click(within(menuButton.parentElement!).getByRole('button', { name: '削除' }))
     await waitFor(() => expect(destroyMonitor).toHaveBeenCalledWith(1))
   })
 
-  it('取得失敗と一致する商品がない場合を区別する', () => {
+  it('summary の取得失敗と該当なしを区別する', () => {
     const { rerender } = render(
-      <MonitorList sections={[{ monitor, crawlResults: null, dailyMarketPrices: [] }]} />,
+      <MonitorList sections={[{ monitor, crawlResults: [result], summary: null }]} />,
     )
-    expect(screen.getByText('取得失敗')).toBeInTheDocument()
-    rerender(<MonitorList sections={[{ monitor, crawlResults: [], dailyMarketPrices: [] }]} />)
+    expect(screen.getAllByText('取得失敗')).toHaveLength(2)
+    expect(screen.getByRole('list', { name: '収集結果を新着順に表示' })).toBeInTheDocument()
+    rerender(
+      <MonitorList
+        sections={[{ monitor, crawlResults: [], summary: { lowestPrice: null, latestAverageTransactionPrice: null } }]}
+      />,
+    )
     expect(screen.getByText('該当する収集結果なし')).toBeInTheDocument()
+    expect(screen.getByText('集計データなし')).toBeInTheDocument()
   })
 
-  it('販売中の収集結果を価格順のプレビューで表示し、詳細へ移動できる', () => {
-    const second = { ...result, id: 2, name: 'phone second', price: 900 }
-    render(<MonitorList sections={[{ monitor, crawlResults: [result, second], dailyMarketPrices: [] }]} />)
-    const items = within(screen.getByRole('list', { name: '販売中の収集結果を価格順に表示' })).getAllByRole('listitem').filter((item) => item.querySelector('a'))
-    expect(items[0]).toHaveTextContent('phone listing')
-    expect(items[1]).toHaveTextContent('phone second')
+  it('収集結果の取得失敗を示し、最安値と平均取引価格は表示する', () => {
+    render(<MonitorList sections={[{ monitor, crawlResults: null, summary }]} />)
+    expect(screen.getByRole('alert')).toHaveTextContent('収集結果を取得できませんでした。再読み込みしてください。')
+    expect(screen.getByText('¥700')).toBeInTheDocument()
+    expect(screen.getByText('¥900')).toBeInTheDocument()
+  })
+
+  it('売り切れを含む収集結果を新着順のプレビューで表示し、詳細へ移動できる', () => {
+    const second = { ...result, id: 2, name: 'phone second', price: 900, sold: true }
+    render(<MonitorList sections={[{ monitor, crawlResults: [second, result], summary }]} />)
+    const items = within(screen.getByRole('list', { name: '収集結果を新着順に表示' })).getAllByRole('listitem').filter((item) => item.querySelector('a'))
+    expect(items[0]).toHaveTextContent('phone second')
+    expect(items[1]).toHaveTextContent('phone listing')
     expect(screen.getByRole('link', { name: 'phone' })).toHaveAttribute('href', '/product-monitoring/monitors/1')
   })
 
@@ -122,17 +142,37 @@ describe('商品モニタリング', () => {
     vi.spyOn(window, 'confirm').mockReturnValue(true)
     vi.mocked(setCrawlResultExcluded).mockResolvedValue({ data: result, error: null, status: 200 })
     const user = userEvent.setup()
-    render(<MonitorList sections={[{ monitor, crawlResults: [result], dailyMarketPrices: [] }]} />)
+    render(<MonitorList sections={[{ monitor, crawlResults: [result], summary }]} />)
     await user.click(screen.getByRole('button', { name: 'phone listingの操作' }))
     await user.click(screen.getByRole('button', { name: '除外' }))
     await waitFor(() => expect(setCrawlResultExcluded).toHaveBeenCalledWith(result.id, true))
     expect(refresh).toHaveBeenCalled()
   })
 
+  it('編集と複製で新着通知の指定を引き継ぐ', async () => {
+    const newest = { ...monitor, newestNotificationEnabled: true }
+    vi.mocked(updateMonitor).mockResolvedValue({ data: newest, error: null, status: 200 })
+    vi.mocked(createMonitor).mockResolvedValue({ data: newest, error: null, status: 200 })
+    const user = userEvent.setup()
+    render(<MonitorList sections={[{ monitor: newest, crawlResults: [], summary }]} />)
+
+    await user.click(screen.getByRole('button', { name: 'phoneの操作' }))
+    await user.click(screen.getByRole('button', { name: '編集' }))
+    expect(screen.getByRole('checkbox', { name: '新着を通知する' })).toBeChecked()
+    await user.click(screen.getByRole('button', { name: '更新' }))
+    await waitFor(() => expect(updateMonitor).toHaveBeenCalledWith(1, expect.objectContaining({ newestNotificationEnabled: true })))
+
+    await user.click(screen.getByRole('button', { name: 'phoneの操作' }))
+    await user.click(screen.getByRole('button', { name: '複製' }))
+    expect(screen.getByRole('checkbox', { name: '新着を通知する' })).toBeChecked()
+    await user.click(screen.getByRole('button', { name: '登録' }))
+    await waitFor(() => expect(createMonitor).toHaveBeenCalledWith(expect.objectContaining({ newestNotificationEnabled: true })))
+  })
+
    it('既存の条件を引き継いで新しい設定を複製する', async () => {
     vi.mocked(createMonitor).mockResolvedValue({ data: monitor, error: null, status: 200 })
     const user = userEvent.setup()
-    render(<MonitorList sections={[{ monitor, crawlResults: [], dailyMarketPrices: [] }]} />)
+    render(<MonitorList sections={[{ monitor, crawlResults: [], summary }]} />)
     await user.click(screen.getByRole('button', { name: 'phoneの操作' }))
     await user.click(screen.getByRole('button', { name: '複製' }))
     expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone（コピー）')

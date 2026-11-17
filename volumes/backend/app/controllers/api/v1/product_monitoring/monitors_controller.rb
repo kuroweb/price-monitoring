@@ -3,27 +3,29 @@ module Api
     module ProductMonitoring
       class MonitorsController < Api::ApplicationController
         PURCHASES_MAX_DAYS = 90
+        HIDDEN_COLUMNS = %i[last_lowest_signature newest_notified_until].freeze
 
         rescue_from ArgumentError, with: :invalid_settings
-        before_action :set_monitor, only: %i[update destroy crawl_results aggregate_daily_market_prices transactions]
+        before_action :set_monitor,
+                      only: %i[update destroy crawl_results summary aggregate_daily_market_prices transactions]
 
         def index
           render json: {
-            monitors: ::ProductMonitoring::Monitor.order(id: :desc).as_json(except: :last_lowest_signature),
-            discord_configured: ::ProductMonitoring::Notification::LowestPriceNotifier.configured?
+            monitors: ::ProductMonitoring::Monitor.order(id: :desc).as_json(except: HIDDEN_COLUMNS),
+            discord_configured: ::ProductMonitoring::Notification::DiscordWebhook.configured?
           }, status: :ok
         end
 
         def create
           setting = ::ProductMonitoring::Monitor::Writer.call(monitor: ::ProductMonitoring::Monitor.new,
                                                               params: upsert_params)
-          render json: setting.as_json(except: :last_lowest_signature), status: :ok
+          render json: setting.as_json(except: HIDDEN_COLUMNS), status: :ok
         end
 
         def update
           ::ProductMonitoring::Monitor::Writer.call(monitor: @monitor,
                                                     params: upsert_params)
-          render json: @monitor.as_json(except: :last_lowest_signature), status: :ok
+          render json: @monitor.as_json(except: HIDDEN_COLUMNS), status: :ok
         end
 
         def destroy
@@ -32,8 +34,15 @@ module Api
         end
 
         def crawl_results
-          results = ::ProductMonitoring::Search::MonitorCrawlResults.call(monitor: @monitor)
+          results = ::ProductMonitoring::Search::NewestCrawlResults.call(monitor: @monitor)
           render json: { crawl_results: results.as_json }, status: :ok
+        end
+
+        def summary
+          lowest = ::ProductMonitoring::Search::LowestCrawlResults.call(monitor: @monitor).first
+          latest = @monitor.daily_market_prices.where.not(average_transaction_price: nil).order(:date).last
+          render json: { lowest_price: lowest&.price,
+                         latest_average_transaction_price: latest&.average_transaction_price }, status: :ok
         end
 
         def aggregate_daily_market_prices
@@ -60,8 +69,8 @@ module Api
         private
 
         def upsert_params
-          params.permit(:name, :enabled, :discord_enabled, :min_price, :max_price, required_keywords: [],
-                                                                                   negative_keywords: [])
+          params.permit(:name, :enabled, :discord_enabled, :newest_notification_enabled, :min_price, :max_price,
+                        required_keywords: [], negative_keywords: [])
         end
 
         def set_monitor

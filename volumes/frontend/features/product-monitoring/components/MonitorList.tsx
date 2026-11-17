@@ -8,23 +8,24 @@ import { toast } from 'react-toastify'
 
 import SettingRowMenu from '@/components/ui/SettingRowMenu'
 import { destroyMonitor } from '@/features/product-monitoring/api/actions'
-import type { DailyMarketPrice, CrawlResult, Monitor, MonitorInput } from '@/features/product-monitoring/api/types'
+import type { CrawlResult, GetMonitorSummary, Monitor, MonitorInput } from '@/features/product-monitoring/api/types'
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
 import { useCrawlResultActions } from '@/features/product-monitoring/hooks/useCrawlResultActions'
 import { formatYen } from '@/lib/format'
 
-type Section = { monitor: Monitor; crawlResults: CrawlResult[] | null; dailyMarketPrices: DailyMarketPrice[] | null }
+type Section = { monitor: Monitor; crawlResults: CrawlResult[] | null; summary: GetMonitorSummary | null }
 type Props = { sections: Section[] }
 const COPY_SUFFIX = '（コピー）'
 
-function WatchSection({ monitor, crawlResults, dailyMarketPrices }: Section) {
+function WatchSection({ monitor, crawlResults, summary }: Section) {
   const router = useRouter()
   const [modal, setModal] = useState<{ monitor?: Monitor; initial?: MonitorInput } | null>(null)
   const [deleting, setDeleting] = useState(false)
   const deletingRef = useRef(false)
   const { busy, exclude, remove } = useCrawlResultActions()
-  const latest = dailyMarketPrices?.filter((item) => item.averageTransactionPrice != null).at(-1)
+  const lowest = summary?.lowestPrice
+  const average = summary?.latestAverageTransactionPrice
 
   const destroy = async () => {
     if (deletingRef.current || !window.confirm(`モニタリング設定「${monitor.name}」を削除しますか？`)) return
@@ -64,23 +65,26 @@ function WatchSection({ monitor, crawlResults, dailyMarketPrices }: Section) {
         <div>
           <dt className='text-xs opacity-60'>販売中の最安値</dt>
           <dd className='mt-1 text-xl font-semibold tabular-nums'>
-            {crawlResults === null ? '取得失敗' : crawlResults.length ? formatYen(crawlResults[0].price) : '—'}
+            {summary === null ? '取得失敗' : lowest != null ? formatYen(lowest) : '—'}
           </dd>
-          {(crawlResults === null || crawlResults.length === 0) && (
-            <p className='mt-1 text-xs opacity-55'>{crawlResults === null ? '再読み込みしてください' : '該当する収集結果なし'}</p>
+          {lowest == null && (
+            <p className='mt-1 text-xs opacity-55'>{summary === null ? '再読み込みしてください' : '該当する収集結果なし'}</p>
           )}
         </div>
         <div>
           <dt className='text-xs opacity-60'>直近の平均取引価格</dt>
           <dd className='mt-1 text-xl font-semibold tabular-nums'>
-            {dailyMarketPrices === null ? '取得失敗' : latest ? formatYen(latest.averageTransactionPrice!) : '—'}
+            {summary === null ? '取得失敗' : average != null ? formatYen(average) : '—'}
           </dd>
-          {!latest && <p className='mt-1 text-xs opacity-55'>{dailyMarketPrices === null ? '再読み込みしてください' : '集計データなし'}</p>}
+          {average == null && <p className='mt-1 text-xs opacity-55'>{summary === null ? '再読み込みしてください' : '集計データなし'}</p>}
         </div>
       </dl>
+      {crawlResults === null && (
+        <p role='alert' className='text-sm text-error'>収集結果を取得できませんでした。再読み込みしてください。</p>
+      )}
       {crawlResults && crawlResults.length > 0 && (
         <div className='min-w-0'>
-          <ol aria-label='販売中の収集結果を価格順に表示' className='flex w-full snap-x gap-3 overflow-x-auto pb-2'>
+          <ol aria-label='収集結果を新着順に表示' className='flex w-full snap-x gap-3 overflow-x-auto pb-2'>
             {crawlResults.map((item) => (
               <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
                 <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />

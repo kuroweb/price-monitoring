@@ -543,9 +543,11 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | negative_keywords | json | NOT NULL | default `[]` |
 | min_price | integer |  |  |
 | max_price | integer |  |  |
-| last_lowest_signature | string |  | 通知の比較基準 |
+| last_lowest_signature | string |  | 最安値通知の比較基準 |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
+| newest_notification_enabled | boolean | NOT NULL | default `false` |
+| newest_notified_until | datetime |  | 新着通知で評価した範囲の終わり |
 
 ### インデックス
 
@@ -597,6 +599,7 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 | 名前 | カラム | 備考 |
 |------|--------|------|
+| index_product_monitoring_crawl_results_on_created_at | created_at |  |
 | index_product_monitoring_crawl_results_on_external_id | external_id |  |
 | idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |

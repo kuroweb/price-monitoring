@@ -33,6 +33,7 @@ export type MonitorInput = {
   minPrice: number | null
   maxPrice: number | null
   discordEnabled: boolean
+  newestNotificationEnabled: boolean
 }
 export type Monitor = MonitorInput & { id: number }
 export type GetMonitors = {
@@ -55,4 +56,8 @@ export type GetCrawlResults = {
 export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolean }
 export type GetDailyMarketPrices = { dailyMarketPrices: DailyMarketPrice[] }
 export type GetMonitorTransactions = { transactions: CrawlResult[] }
+export type GetMonitorSummary = {
+  lowestPrice: number | null
+  latestAverageTransactionPrice: number | null
+}
 export type GetMonitorTransactionsParams = { startDate: string; endDate: string }

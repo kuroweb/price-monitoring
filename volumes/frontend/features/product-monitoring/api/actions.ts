@@ -95,6 +95,10 @@ export async function getMonitorCrawlResults(id: number) {
   return MonitorApi.getMonitorCrawlResults(id)
 }
 
+export async function getMonitorSummary(id: number) {
+  return MonitorApi.getMonitorSummary(id)
+}
+
 export async function createMonitor(input: MonitorInput) {
   const result = await MonitorApi.createMonitor(input)
   if (result.data) revalidatePaths([['/product-monitoring', 'layout']])

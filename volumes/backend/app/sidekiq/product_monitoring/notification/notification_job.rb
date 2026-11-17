@@ -10,6 +10,7 @@ module ProductMonitoring
         return unless setting
 
         LowestPriceNotifier.call(monitor: setting)
+        NewestNotifier.call(monitor: setting)
       end
     end
   end
