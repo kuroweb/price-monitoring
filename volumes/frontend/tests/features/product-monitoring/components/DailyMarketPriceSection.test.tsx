@@ -21,7 +21,7 @@ vi.mock('@/features/product-monitoring/api/actions', () => ({
 
 const setting: Monitor = {
   id: 1,
-  enabled: true, discordEnabled: false,
+  enabled: true, discordEnabled: false, newestNotificationEnabled: false,
   name: 'phone',
   requiredKeywords: ['phone'],
   negativeKeywords: ['case'],

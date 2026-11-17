@@ -27,7 +27,7 @@ vi.mock('@/features/product-monitoring/components/MonitorDetail', () => ({
 }))
 
 const monitor: Monitor = {
-  id: 1, name: 'iPad', enabled: false, discordEnabled: false,
+  id: 1, name: 'iPad', enabled: false, discordEnabled: false, newestNotificationEnabled: false,
   requiredKeywords: [], negativeKeywords: [], minPrice: null, maxPrice: null,
 }
 

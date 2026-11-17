@@ -2,6 +2,7 @@ import { http } from '@/lib/http-client'
 
 import type {
   GetCrawlResults,
+  GetMonitorSummary,
   GetMonitorTransactions,
   GetMonitorTransactionsParams,
   GetMonitors,
@@ -14,6 +15,9 @@ const BASE_PATH = '/api/v1/product_monitoring/monitors'
 export const getMonitors = () => http<GetMonitors>(BASE_PATH)
 export const getMonitorCrawlResults = (id: number) =>
   http<GetCrawlResults>(`${BASE_PATH}/${id}/crawl_results`)
+// 一覧に出す最安値と直近の平均取引価格
+export const getMonitorSummary = (id: number) =>
+  http<GetMonitorSummary>(`${BASE_PATH}/${id}/summary`)
 export const createMonitor = (input: MonitorInput) =>
   http<Monitor>(BASE_PATH, { method: 'POST', data: input })
 export const updateMonitor = (id: number, input: MonitorInput) =>

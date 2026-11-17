@@ -24,6 +24,7 @@ const monitor: Monitor = {
   name: 'iPad',
   enabled: false,
   discordEnabled: false,
+  newestNotificationEnabled: false,
   requiredKeywords: ['iPad'],
   negativeKeywords: ['ケース'],
   minPrice: 10000,
@@ -43,6 +44,8 @@ describe('商品モニタリング詳細', () => {
 
     expect(screen.getByRole('heading', { name: 'iPad' })).toBeInTheDocument()
     expect(screen.getByText('最安値の通知評価：停止中')).toBeInTheDocument()
+    expect(screen.getByText('新着の通知評価：停止中')).toBeInTheDocument()
+    expect(screen.getByText('条件に一致する収集結果はありません。')).toBeInTheDocument()
     expect(screen.getByText('ケース')).toBeInTheDocument()
     expect(screen.getByText('相場グラフ')).toBeInTheDocument()
     await userEvent.click(screen.getByRole('button', { name: '条件を編集' }))
@@ -54,7 +57,17 @@ describe('商品モニタリング詳細', () => {
 
     expect(screen.getByText('収集結果を取得できませんでした。再読み込みしてください。')).toBeInTheDocument()
     expect(screen.getByText('日次相場を取得できませんでした。再読み込みしてください。')).toBeInTheDocument()
-    expect(screen.queryByText('条件に一致する販売中の収集結果はありません。')).not.toBeInTheDocument()
+    expect(screen.queryByText('条件に一致する収集結果はありません。')).not.toBeInTheDocument()
+  })
+
+  it('新着通知だけが有効でも、送信先が使えないことを示す', () => {
+    render(
+      <MonitorDetail monitor={{ ...monitor, newestNotificationEnabled: true }} crawlResults={[]} dailyMarketPrices={[]}
+        transactions={[]} discordConfigured={false} />,
+    )
+
+    expect(screen.getByText('新着の通知評価：有効')).toBeInTheDocument()
+    expect(screen.getByText('Discord通知は利用できません。送信先を確認してください。')).toBeInTheDocument()
   })
 
   it('確認後に販売中の収集結果を除外し画面を更新する', async () => {
