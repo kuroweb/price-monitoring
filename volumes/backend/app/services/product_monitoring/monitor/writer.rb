@@ -37,7 +37,8 @@ module ProductMonitoring
         normalize_condition
         values.slice(:name, *CONDITION_COLUMNS.map(&:to_sym)).merge(
           enabled: boolean(values.fetch(:enabled, false)),
-          discord_enabled: boolean(values.fetch(:discord_enabled, false))
+          discord_enabled: boolean(values.fetch(:discord_enabled, false)),
+          newest_notification_enabled: boolean(values.fetch(:newest_notification_enabled, false))
         )
       end
 
@@ -48,6 +49,7 @@ module ProductMonitoring
         changed = setting.changes.keys
         condition_changed = setting.persisted? && changed.intersect?(CONDITION_COLUMNS)
         setting.last_lowest_signature = nil if changed.intersect?(%w[enabled discord_enabled] + CONDITION_COLUMNS)
+        setting.newest_notified_until = nil if changed.intersect?(%w[newest_notification_enabled] + CONDITION_COLUMNS)
         setting.save!
         setting.daily_market_prices.delete_all if condition_changed
       end

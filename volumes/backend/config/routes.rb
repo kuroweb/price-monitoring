@@ -47,6 +47,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         resources :monitors, only: %i[index create update destroy] do
           member do
             get :crawl_results
+            get :summary
             post :aggregate_daily_market_prices
             get :transactions
           end

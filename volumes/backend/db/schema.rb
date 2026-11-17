@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_18_000000) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_18_000001) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -295,6 +295,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_000000) do
     t.datetime "updated_at", null: false
     t.index ["crawl_setting_id", "external_id"], name: "idx_on_crawl_setting_id_external_id_a6fd3476b8", unique: true
     t.index ["crawl_setting_id"], name: "index_product_monitoring_crawl_results_on_crawl_setting_id"
+    t.index ["created_at"], name: "index_product_monitoring_crawl_results_on_created_at"
     t.index ["external_id"], name: "index_product_monitoring_crawl_results_on_external_id"
     t.index ["sold", "excluded_at", "price", "id"], name: "idx_monitoring_crawl_results_lowest_price"
   end
@@ -335,6 +336,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_18_000000) do
     t.string "last_lowest_signature"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "newest_notification_enabled", default: false, null: false
+    t.datetime "newest_notified_until"
   end
 
   create_table "products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

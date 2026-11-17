@@ -1,13 +1,16 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Notification::NotificationJob do
-  it "存在する設定を評価する" do
+  it "存在する設定の最安値通知と新着通知を評価する" do
     setting = ProductMonitoring::Monitor.create!(name: "監視", enabled: true)
     allow(ProductMonitoring::Notification::LowestPriceNotifier).to receive(:call)
+    allow(ProductMonitoring::Notification::NewestNotifier).to receive(:call)
 
     described_class.new.perform(setting.id)
 
     expect(ProductMonitoring::Notification::LowestPriceNotifier).to have_received(:call)
+      .with(monitor: setting)
+    expect(ProductMonitoring::Notification::NewestNotifier).to have_received(:call)
       .with(monitor: setting)
   end
 
