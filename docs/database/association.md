@@ -251,7 +251,7 @@ erDiagram
   products ||--o{ used_sofmap_products : ""
 ```
 
-## 相場集計
+## 日次相場の集計
 
 ```mermaid
 erDiagram
