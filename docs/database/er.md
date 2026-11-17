@@ -508,7 +508,7 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | index_pc_koubou_products_on_product_id_and_external_id | product_id, external_id | unique |
 | index_pc_koubou_products_on_product_id | product_id |  |
 
-## product_aggregation_results
+## product_monitoring_daily_market_prices
 
 ### カラム
 
@@ -516,20 +516,20 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 |--------|-----|------|------|
 | id | bigint | NOT NULL | PK |
 | date | date | NOT NULL |  |
-| average_purchase_price | integer |  | 購入0件の日は NULL |
-| purchase_count | integer | NOT NULL | default 0 |
+| average_transaction_price | integer |  | 取引0件の日は NULL |
+| transaction_count | integer | NOT NULL | default 0 |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
-| product_watch_setting_id | bigint | NOT NULL | FK |
+| monitor_id | bigint | NOT NULL | FK |
 
 ### インデックス
 
 | 名前 | カラム | 備考 |
 |------|--------|------|
-| idx_on_product_watch_setting_id_date_845c1a0634 | product_watch_setting_id, date | unique |
-| index_product_aggregation_results_on_product_watch_setting_id | product_watch_setting_id |  |
+| idx_on_monitor_id_date_df939332ac | monitor_id, date | unique |
+| index_product_monitoring_daily_market_prices_on_monitor_id | monitor_id |  |
 
-## product_watch_settings
+## product_monitoring_monitors
 
 ### カラム
 
@@ -540,7 +540,7 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | enabled | boolean | NOT NULL | default `false` |
 | discord_enabled | boolean | NOT NULL | default `false` |
 | required_keywords | json | NOT NULL | default `[]` |
-| exclude_keywords | json | NOT NULL | default `[]` |
+| negative_keywords | json | NOT NULL | default `[]` |
 | min_price | integer |  |  |
 | max_price | integer |  |  |
 | last_lowest_signature | string |  | 通知の比較基準 |
@@ -571,14 +571,14 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | index_product_category_maps_on_product_id_and_category_id | product_id, category_id | unique |
 | index_product_category_maps_on_product_id | product_id |  |
 
-## product_crawl_results
+## product_monitoring_crawl_results
 
 ### カラム
 
 | カラム | 型 | NULL | 備考 |
 |--------|-----|------|------|
 | id | bigint | NOT NULL | PK |
-| product_crawl_setting_id | bigint | NOT NULL | FK |
+| crawl_setting_id | bigint | NOT NULL | FK |
 | platform | string | NOT NULL |  |
 | external_id | string | NOT NULL |  |
 | name | string | NOT NULL |  |
@@ -587,8 +587,8 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | price | integer | NOT NULL | default 0 |
 | buyout_price | integer |  |  |
 | sold | boolean |  | 販売状態を取得できないサイトは NULL |
-| bought_date | datetime |  |  |
-| end_date | datetime |  |  |
+| sold_at | datetime |  |  |
+| ends_at | datetime |  |  |
 | excluded_at | datetime |  | 除外した日時。NULL は除外していない |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
@@ -597,12 +597,12 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 | 名前 | カラム | 備考 |
 |------|--------|------|
-| index_product_crawl_results_on_external_id | external_id |  |
-| index_product_crawl_results_on_lowest_price | sold, excluded_at, price, id |  |
-| idx_on_product_crawl_setting_id_external_id_a586e73ad6 | product_crawl_setting_id, external_id | unique |
-| index_product_crawl_results_on_product_crawl_setting_id | product_crawl_setting_id |  |
+| index_product_monitoring_crawl_results_on_external_id | external_id |  |
+| idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
+| idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
+| index_product_monitoring_crawl_results_on_crawl_setting_id | crawl_setting_id |  |
 
-## product_crawl_settings
+## product_monitoring_crawl_settings
 
 ### カラム
 
@@ -611,11 +611,11 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 | id | bigint | NOT NULL | PK |
 | name | string | NOT NULL |  |
 | enabled | boolean | NOT NULL | default false |
-| keyword | string |  |  |
+| search_keyword | string |  |  |
 | platforms | json | NOT NULL | default `[]` |
 | search_urls | json | NOT NULL | default `[]` |
 | required_keywords | json | NOT NULL | default `[]` |
-| exclude_keywords | json | NOT NULL | default `[]` |
+| negative_keywords | json | NOT NULL | default `[]` |
 | min_price | integer |  |  |
 | max_price | integer |  |  |
 | created_at | datetime | NOT NULL |  |
