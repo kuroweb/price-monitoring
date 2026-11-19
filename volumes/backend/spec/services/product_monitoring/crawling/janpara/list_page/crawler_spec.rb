@@ -15,8 +15,8 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::ListPage::Crawler do
 
   def browser_page(html)
     page = instance_double(Playwright::Page, content: html)
-    allow(page).to receive(:goto) do |url|
-      visited << url
+    allow(page).to receive(:goto) do |url, **options|
+      visited << [url, options]
       allow(page).to receive(:url).and_return(url)
       instance_double(Playwright::Response, status: 200)
     end
@@ -36,7 +36,13 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::ListPage::Crawler do
               product_url: "https://www.janpara.co.jp/sale/search/detail/?ITMCODE=123",
               thumbnail_url: "https://www.janpara.co.jp/image.jpg")
     )
-    expect(visited).to include("https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad+Pro&PAGE=2")
+    expect(visited).to eq(
+      [
+        [url, { referer: "https://www.janpara.co.jp/" }],
+        ["https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iPad+Pro&PAGE=2",
+         { referer: "https://www.janpara.co.jp/" }]
+      ]
+    )
     expect(ProductMonitoring::Crawling::Client).to have_received(:execute)
       .with(block_scripts: true, user_agent: described_class::USER_AGENT).twice
   end
@@ -69,5 +75,18 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::ListPage::Crawler do
     expect(described_class.call(crawl_setting: setting)).to eq(listings: [], complete: true)
     stub_pages("<html></html>")
     expect { described_class.call(crawl_setting: setting) }.to raise_error("All search URLs failed")
+  end
+
+  it "非 2xx の応答では Referer を付けて接続し直し、上限回数で失敗にすること" do
+    allow(Kernel).to receive(:sleep)
+    page = instance_double(Playwright::Page)
+    allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 403))
+    allow(ProductMonitoring::Crawling::Client).to receive(:execute) { |**, &block| block.call(page) }
+
+    expect { described_class.call(crawl_setting: setting) }.to raise_error("All search URLs failed")
+    expect(ProductMonitoring::Crawling::Client).to have_received(:execute)
+      .with(block_scripts: true, user_agent: described_class::USER_AGENT).exactly(described_class::FETCH_TRIES).times
+    expect(page).to have_received(:goto)
+      .with(url, referer: "https://www.janpara.co.jp/").exactly(described_class::FETCH_TRIES).times
   end
 end

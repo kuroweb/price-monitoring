@@ -66,7 +66,7 @@ module ProductMonitoring
           def fetch_page(uri)
             Retryable.retryable(tries: FETCH_TRIES, on: NonSuccessResponse) do
               Client.execute(block_scripts: true, user_agent: USER_AGENT) do |page|
-                response = page.goto(uri.to_s)
+                response = page.goto(uri.to_s, referer: "https://#{SearchUrl::HOST}/")
                 raise NonSuccessResponse, "Non-success HTTP response" unless response&.status&.between?(200, 299)
 
                 checked_content(page)
