@@ -4,20 +4,6 @@
 
 ## アソシエーション
 
-### 関係
-
-| から | へ | 対応 | 外部キー | 意味 |
-| --- | --- | --- | --- | --- |
-| 収集設定 | 収集結果 | 1 対 0..多 | あり | 収集結果は一つの収集設定に属する |
-| モニタリング設定 | 日次相場 | 1 対 0..多 | あり | 日次相場は一つのモニタリング設定に属する |
-| モニタリング設定 | 収集結果 | 条件で抽出 | なし | 収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする |
-| 収集結果 | URL | 属さない | なし | 収集結果は URL に属さない |
-| 同じ収集設定の複数 URL | 収集結果 | 1行 | なし | 見つかった出品は1行 |
-| 別の収集設定 | 収集結果 | 行が分かれる | なし | 設定ごとに行ができる |
-| 商品モニタリング | 計測対象管理 | 関連がない | なし | 既存の計測対象管理とは独立したテーブル群である |
-
-### 図
-
 ```mermaid
 erDiagram
   product_monitoring_crawl_settings {
@@ -38,19 +24,10 @@ erDiagram
   }
   product_monitoring_crawl_settings ||--o{ product_monitoring_crawl_results : "1 対 0..多"
   product_monitoring_monitors ||--o{ product_monitoring_daily_market_prices : "1 対 0..多"
-  product_monitoring_monitors }o..o{ product_monitoring_crawl_results : "条件で抽出"
+  product_monitoring_monitors }o..o{ product_monitoring_crawl_results : "外部キーのない条件抽出"
 ```
 
 ## スキーマ
-
-### テーブル
-
-| データ | テーブル | 役割 |
-| --- | --- | --- |
-| 収集設定 | `product_monitoring_crawl_settings` | 検索元と取得結果に適用する条件を持つ |
-| 収集結果 | `product_monitoring_crawl_results` | 収集設定ごとの出品、価格、販売状態、除外状態を持つ |
-| モニタリング設定 | `product_monitoring_monitors` | 複数の収集設定にまたがる表示・集計・通知の条件を持つ |
-| 日次相場 | `product_monitoring_daily_market_prices` | モニタリング設定ごとの日次集計を持つ |
 
 ### product_monitoring_crawl_settings
 
