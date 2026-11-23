@@ -26,4 +26,15 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::DetailPage::Syncer do
 
     expect(result.reload).to have_attributes(sold: true, sold_at: nil, recency_at: nil)
   end
+
+  it "既に売れた日がある行は、詳細で売れた日が取れなくても並び時刻を売れた日のままにする" do
+    sold_at = Time.zone.parse("2026-11-09 00:00:00")
+    result = create(:product_monitoring_crawl_result, platform: "mercari", external_id: "m1", sold: true,
+                                                      sold_at:, recency_at: sold_at)
+    stub_detail(sold: true)
+
+    described_class.call(external_id: "m1")
+
+    expect(result.reload).to have_attributes(sold: true, sold_at:, recency_at: sold_at)
+  end
 end

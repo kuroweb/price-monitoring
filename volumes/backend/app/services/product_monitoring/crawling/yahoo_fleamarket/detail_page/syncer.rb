@@ -32,7 +32,7 @@ module ProductMonitoring
               results.update_all(sold: detail[:sold], updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
               update_sold_at(detail[:sold_at])
             elsif detail[:sold]
-              results.update_all(sold: true, recency_at: nil, updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
+              results.update_all(["sold = TRUE, recency_at = sold_at, updated_at = ?", Time.current]) # rubocop:disable Rails/SkipsModelValidations
             else
               results.update_all(["sold = ?, recency_at = created_at, updated_at = ?", detail[:sold], Time.current]) # rubocop:disable Rails/SkipsModelValidations
             end
