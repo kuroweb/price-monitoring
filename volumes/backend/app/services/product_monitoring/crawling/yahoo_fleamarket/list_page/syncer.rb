@@ -53,7 +53,10 @@ module ProductMonitoring
                 name = VALUES(name), product_url = VALUES(product_url), thumbnail_url = VALUES(thumbnail_url),
                 price = VALUES(price), ends_at = VALUES(ends_at),
                 buyout_price = COALESCE(VALUES(buyout_price), product_monitoring_crawl_results.buyout_price),
-                sold_at = COALESCE(product_monitoring_crawl_results.sold_at, IF(VALUES(sold), VALUES(sold_at), NULL))
+                sold_at = COALESCE(product_monitoring_crawl_results.sold_at, IF(VALUES(sold), VALUES(sold_at), NULL)),
+                recency_at = IF(IFNULL(VALUES(sold), 0),
+                  COALESCE(product_monitoring_crawl_results.sold_at, VALUES(sold_at)),
+                  product_monitoring_crawl_results.recency_at)
               SQL
           end
 
@@ -62,7 +65,15 @@ module ProductMonitoring
               ends_at: nil, sold_at: nil }.merge(
                 listing.slice(:platform, :external_id, :name, :product_url, :thumbnail_url, :price, :sold,
                               :buyout_price, :ends_at, :sold_at)
-              )
+              ).merge(recency_at: inserted_recency(listing))
+          end
+
+          # 販売中と販売状態不明は初回保存時刻。売り切れは売れた日、売れた日が無ければ空
+          def inserted_recency(listing)
+            return listing[:sold_at] if listing[:sold] && listing[:sold_at]
+            return nil if listing[:sold]
+
+            Arel.sql("CURRENT_TIMESTAMP(6)")
           end
 
           # 販売状態の不明な既存の出品は一覧の販売中を反映し、一覧の売り切れは常に反映する
@@ -71,7 +82,9 @@ module ProductMonitoring
             sold_ids = priced.select { |listing| listing[:sold] }.pluck(:external_id)
             results = crawl_setting.crawl_results
             results.where(external_id: available_ids, sold: nil).update_all(sold: false) if available_ids.any? # rubocop:disable Rails/SkipsModelValidations
-            results.where(external_id: sold_ids).update_all(sold: true) if sold_ids.any? # rubocop:disable Rails/SkipsModelValidations
+            if sold_ids.any? # rubocop:disable Style/GuardClause
+              results.where(external_id: sold_ids).update_all("sold = TRUE, recency_at = sold_at") # rubocop:disable Rails/SkipsModelValidations
+            end
           end
 
           def listings

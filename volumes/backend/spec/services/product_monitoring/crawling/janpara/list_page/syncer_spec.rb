@@ -26,7 +26,7 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::ListPage::Syncer do
 
     described_class.call(crawl_setting: setting)
 
-    expect(saved.reload).to have_attributes(sold: true, sold_at: nil, updated_at:)
+    expect(saved.reload).to have_attributes(sold: true, sold_at: nil, updated_at:, recency_at: nil)
     expect(other.reload.sold).to be false
   end
 
@@ -42,7 +42,7 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::ListPage::Syncer do
 
     described_class.call(crawl_setting: setting)
 
-    expect(missing.reload).to have_attributes(sold: true, sold_at: nil)
+    expect(missing.reload).to have_attributes(sold: true, sold_at: nil, recency_at: nil)
     expect(missing.updated_at).to be_within(1.second).of(updated_at)
     expect(unpriced.reload.sold).to be false
     expect(other.reload.sold).to be false
@@ -62,7 +62,7 @@ RSpec.describe ProductMonitoring::Crawling::Janpara::ListPage::Syncer do
 
     described_class.call(crawl_setting: setting)
 
-    expect(saved.reload).to have_attributes(sold: false, sold_at:)
+    expect(saved.reload).to have_attributes(sold: false, sold_at:, recency_at: saved.created_at)
   end
 
   it "同じ出品が両方の状態で返る場合は販売中を優先すること" do

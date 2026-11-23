@@ -1,6 +1,7 @@
 module ProductMonitoring
   module Search
-    # 条件に一致する出品を、売り切れも含めて新着順に重複なく最大8件返す。画面の表示に使う
+    # 条件に一致する出品を、重複なく最大8件返す。モニタリング設定のカードに使う。
+    # 並びは recency_at の降順、同じ時刻は id の降順。recency_at がない行は出さない。
     class NewestCrawlResults
       LIMIT = 8
       BATCH_SIZE = 100
@@ -17,13 +18,8 @@ module ProductMonitoring
         listings = []
         seen = Set.new
         ProductMonitoring::CrawlResult.transaction do
-          candidates.find_each(order: :desc, batch_size: BATCH_SIZE) do |result|
-            next unless Monitor::Matcher.call(monitor:, listing: result)
-            next unless seen.add?([result.platform, result.external_id])
-
-            listings << result
-            break if listings.size == LIMIT
-          end
+          collect(listings, seen, candidates.where.not(recency_at: nil),
+                  cursor: %i[recency_at id], order: %i[desc desc])
         end
         listings
       end
@@ -40,6 +36,16 @@ module ProductMonitoring
         return results unless min_price || max_price
 
         results.where(price: min_price..max_price)
+      end
+
+      def collect(listings, seen, scope, **batch)
+        scope.find_each(batch_size: BATCH_SIZE, **batch) do |result|
+          next unless Monitor::Matcher.call(monitor:, listing: result)
+          next unless seen.add?([result.platform, result.external_id])
+
+          listings << result
+          break if listings.size == LIMIT
+        end
       end
     end
   end

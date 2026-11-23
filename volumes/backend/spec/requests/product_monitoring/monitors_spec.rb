@@ -30,7 +30,8 @@ RSpec.describe "モニタリング設定", type: :request do
     create(:product_monitoring_crawl_result, name: "phone", price: 500, sold: false, platform: "mercari",
                                              external_id: "two")
     create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false)
-    create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: true, external_id: "sold")
+    create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: true, sold_at: Time.current,
+                                             external_id: "sold")
     create(:product_monitoring_crawl_result, name: "phone", price: 1, sold: false, excluded_at: Time.current)
     get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
     expect(response.parsed_body.fetch("crawl_results").pluck("external_id")).to eq(%w[sold two one])
@@ -72,7 +73,7 @@ RSpec.describe "モニタリング設定", type: :request do
     create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: false, external_id: "item-0")
     expected = (1..8).map do |price|
       create(:product_monitoring_crawl_result, name: "phone", price: price * 10, sold: price.even?,
-                                               external_id: "item-#{price}")
+                                               sold_at: (Time.current if price.even?), external_id: "item-#{price}")
     end
     create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false)
 

@@ -68,6 +68,19 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Syncer do
     expect(detail_job).to have_received(:perform_async).with("old")
   end
 
+  it "販売中の再保存では並び時刻を進めず、売れた日のない売り切れは空にすること" do
+    saved_at = Time.zone.parse("2026-11-01 12:00:00")
+    kept = listing("visible", sold: false, created_at: saved_at, recency_at: saved_at)
+    listings << { external_id: "undated-sold", price: 100, name: "Phone", sold: true,
+                  product_url: "https://jp.mercari.com/item/undated-sold" }
+
+    described_class.call(crawl_setting: setting)
+
+    expect(kept.reload.recency_at).to eq(saved_at)
+    expect(setting.crawl_results.find_by!(external_id: "undated-sold"))
+      .to have_attributes(sold: true, sold_at: nil, recency_at: nil)
+  end
+
   it "一覧で初めて売り切れになった出品はすぐ確かめること" do
     listing("changed", sold: false)
     %w[new changed].each do |id|
