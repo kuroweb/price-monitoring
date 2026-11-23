@@ -1,6 +1,6 @@
 # テスト
 
-ローカルで RSpec・静的検証・frontend のテストを実行する開発者向けの手順。以下はホストのリポジトリルートで実行し、just / Docker Compose が起動中のコンテナ内でテストを実行する。先に [起動と状態確認](operations.md#起動と状態確認) で対象 service が起動していることを確認する。
+ローカルで RSpec・静的検証・frontend のテストを実行する開発者向けの手順。以下はホストのリポジトリルートで実行し、just / Docker Compose が起動中のコンテナ内でテストを実行する。先に [起動と状態確認](operations/local-environment.md) で対象 service が起動していることを確認する。
 
 ## バックエンド / 認証アプリの RSpec
 
