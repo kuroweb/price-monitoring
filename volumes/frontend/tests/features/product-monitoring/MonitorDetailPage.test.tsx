@@ -61,6 +61,7 @@ describe('商品モニタリング詳細ページ', () => {
     vi.mocked(getMonitorTransactions).mockRejectedValueOnce(new Error('network'))
     render(await Page({ params: Promise.resolve({ id: '1' }) }))
     expect(screen.getByText(/dailyMarketPrices:\[.*transactions:null/)).toBeInTheDocument()
+    expect(getMonitorCrawlResults).toHaveBeenCalledWith(1, { all: true })
     expect(getMonitorTransactions).toHaveBeenCalledWith(1, { startDate: '2026-11-09', endDate: '2026-11-09' })
   })
 

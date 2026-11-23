@@ -16,7 +16,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const [settingsResponse, resultsResponse, aggregationResponse] = await Promise.all([
     getMonitors(),
-    getMonitorCrawlResults(id).catch(() => null),
+    getMonitorCrawlResults(id, { all: true }).catch(() => null),
     getDailyMarketPrices().catch(() => null),
   ])
   if (!settingsResponse.data) throw new Error('モニタリング設定を取得できませんでした')

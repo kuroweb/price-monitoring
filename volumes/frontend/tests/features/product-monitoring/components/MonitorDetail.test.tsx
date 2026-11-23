@@ -82,6 +82,55 @@ describe('商品モニタリング詳細', () => {
     expect(refresh).toHaveBeenCalled()
   })
 
+  it('販売状態と並びで、売れた日が古い売り切れ、売れた日が無い売り切れ、販売中、価格の前後を分ける', async () => {
+    const newerOnSale = { ...listing, id: 2, name: '新しい販売中', price: 300, sold: false, soldAt: null }
+    const unknown = { ...listing, id: 6, name: '状態不明', price: 250, sold: null, soldAt: null }
+    const olderOnSale = { ...listing, id: 5, name: '古い販売中', price: 100, sold: false, soldAt: null }
+    const oldSold = { ...listing, id: 4, name: '古い売り切れ', price: 100, sold: true, soldAt: '2026-01-01T00:00:00.000Z' }
+    const undatedSold = { ...listing, id: 9, name: '日付なし売り切れ', price: 800, sold: true, soldAt: null }
+    const user = userEvent.setup()
+    render(
+      <MonitorDetail
+        monitor={monitor}
+        crawlResults={[newerOnSale, unknown, olderOnSale, oldSold, undatedSold]}
+        dailyMarketPrices={[]}
+        transactions={[]}
+        discordConfigured={false}
+      />,
+    )
+
+    const expectOrder = (...expected: string[]) => {
+      const articles = screen.getAllByRole('article')
+      expect(articles).toHaveLength(expected.length)
+      expected.forEach((name, index) => expect(articles[index]).toHaveTextContent(name))
+    }
+
+    expect(screen.getByRole('button', { name: /^すべて/ })).toHaveTextContent('5')
+    expect(screen.getByRole('button', { name: /^販売中/ })).toHaveTextContent('3')
+    expect(screen.getByRole('button', { name: /^売り切れ/ })).toHaveTextContent('2')
+    expectOrder('新しい販売中', '状態不明', '古い販売中', '古い売り切れ', '日付なし売り切れ')
+
+    await user.click(screen.getByRole('button', { name: /^販売中/ }))
+    expectOrder('新しい販売中', '状態不明', '古い販売中')
+    expect(screen.queryByText('古い売り切れ')).not.toBeInTheDocument()
+    expect(screen.queryByText('日付なし売り切れ')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: /^売り切れ/ }))
+    expectOrder('古い売り切れ', '日付なし売り切れ')
+
+    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'price_desc')
+    expectOrder('日付なし売り切れ', '古い売り切れ')
+
+    await user.click(screen.getByRole('button', { name: /^すべて/ }))
+    expectOrder('日付なし売り切れ', '新しい販売中', '状態不明', '古い販売中', '古い売り切れ')
+
+    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'price_asc')
+    expectOrder('古い販売中', '古い売り切れ', '状態不明', '新しい販売中', '日付なし売り切れ')
+
+    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'newest')
+    expectOrder('新しい販売中', '状態不明', '古い販売中', '古い売り切れ', '日付なし売り切れ')
+  })
+
   it('除外に失敗した場合はエラーを示し画面を更新しない', async () => {
     vi.spyOn(window, 'confirm').mockReturnValueOnce(true)
     vi.mocked(setCrawlResultExcluded).mockResolvedValueOnce({ data: null, status: 500, error: null })

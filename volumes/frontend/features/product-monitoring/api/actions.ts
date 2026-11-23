@@ -9,6 +9,7 @@ import * as MonitorApi from './monitors'
 
 import type {
   GetMonitorTransactionsParams,
+  GetMonitorCrawlResultsParams,
   GetCrawlResultsParams,
   CrawlSettingInput,
   MonitorInput,
@@ -91,8 +92,8 @@ export async function getMonitors() {
   return MonitorApi.getMonitors()
 }
 
-export async function getMonitorCrawlResults(id: number) {
-  return MonitorApi.getMonitorCrawlResults(id)
+export async function getMonitorCrawlResults(id: number, params?: GetMonitorCrawlResultsParams) {
+  return MonitorApi.getMonitorCrawlResults(id, params)
 }
 
 export async function getMonitorSummary(id: number) {

@@ -45,6 +45,7 @@ describe('商品モニタリング一覧ページ', () => {
     render(await Page())
     expect(screen.getByText(`crawlResults:[];summary:${JSON.stringify(summary)}`)).toBeInTheDocument()
     expect(getMonitorSummary).toHaveBeenCalledWith(1)
+    expect(getMonitorCrawlResults).toHaveBeenCalledWith(1)
     expect(getDailyMarketPrices).not.toHaveBeenCalled()
   })
 

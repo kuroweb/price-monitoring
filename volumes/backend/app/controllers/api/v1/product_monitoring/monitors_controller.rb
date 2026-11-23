@@ -33,8 +33,13 @@ module Api
           render json: {}, status: :ok
         end
 
+        # all=true は詳細向けに、抽出条件に合う保存済みを新着順ですべて返す。省略時は一覧の8件
         def crawl_results
-          results = ::ProductMonitoring::Search::NewestCrawlResults.call(monitor: @monitor)
+          results = if ActiveModel::Type::Boolean.new.cast(params[:all])
+                      ::ProductMonitoring::Search::MatchingCrawlResults.call(monitor: @monitor)
+                    else
+                      ::ProductMonitoring::Search::NewestCrawlResults.call(monitor: @monitor)
+                    end
           render json: { crawl_results: results.as_json }, status: :ok
         end
 

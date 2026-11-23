@@ -15,6 +15,33 @@ import MonitorFormModal from '@/features/product-monitoring/components/MonitorFo
 import { useCrawlResultActions } from '@/features/product-monitoring/hooks/useCrawlResultActions'
 import { formatYen } from '@/lib/format'
 
+const STATUS_FILTERS = [
+  ['all', 'すべて'],
+  ['on_sale', '販売中'],
+  ['sold', '売り切れ'],
+] as const
+type StatusFilter = (typeof STATUS_FILTERS)[number][0]
+
+const SORTS = [
+  ['newest', '新着順'],
+  ['price_asc', '価格の安い順'],
+  ['price_desc', '価格の高い順'],
+] as const
+type Sort = (typeof SORTS)[number][0]
+
+const matchesStatus = (item: CrawlResult, filter: StatusFilter) =>
+  filter === 'all' || (filter === 'sold' ? item.sold === true : item.sold !== true)
+
+const sortResults = (items: CrawlResult[], sort: Sort) => {
+  if (sort === 'newest') return items
+
+  const direction = sort === 'price_asc' ? 1 : -1
+  return [...items].sort((left, right) => {
+    if (left.price !== right.price) return direction * (left.price - right.price)
+    return right.id - left.id
+  })
+}
+
 type Props = {
   monitor: Monitor
   crawlResults: CrawlResult[] | null
@@ -25,7 +52,17 @@ type Props = {
 
 export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices, transactions, discordConfigured }: Props) {
   const [editing, setEditing] = useState(false)
+  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
+  const [sort, setSort] = useState<Sort>('newest')
   const { busy, exclude, remove } = useCrawlResultActions()
+  const counts = {
+    all: crawlResults?.length ?? 0,
+    on_sale: crawlResults?.filter((item) => matchesStatus(item, 'on_sale')).length ?? 0,
+    sold: crawlResults?.filter((item) => matchesStatus(item, 'sold')).length ?? 0,
+  }
+  const visibleResults = crawlResults
+    ? sortResults(crawlResults.filter((item) => matchesStatus(item, statusFilter)), sort)
+    : []
   const priceRange = monitor.minPrice != null || monitor.maxPrice != null
     ? `${monitor.minPrice != null ? formatYen(monitor.minPrice) : '下限なし'} 〜 ${monitor.maxPrice != null ? formatYen(monitor.maxPrice) : '上限なし'}`
     : '指定なし'
@@ -73,20 +110,54 @@ export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices
       <section className='space-y-4 rounded-box bg-base-200 p-4' aria-labelledby='watch-listings'>
         <div>
           <h2 id='watch-listings' className='text-lg font-semibold'>新着の収集結果</h2>
-          <p className='mt-1 text-sm text-base-content/60'>保存済みの収集結果から、売り切れを含めて新着順に最大8件を表示します。在庫はリアルタイムではありません。</p>
+          <p className='mt-1 text-sm text-base-content/60'>抽出条件に合う保存済みの収集結果を、売り切れも含めて表示します。新着順では、売れた日が未取得の売り切れを末尾に置きます。在庫はリアルタイムではありません。</p>
         </div>
         {crawlResults === null ? (
           <p role='alert' className='text-sm text-error'>収集結果を取得できませんでした。再読み込みしてください。</p>
         ) : crawlResults.length === 0 ? (
           <p className='rounded-box bg-base-200 px-4 py-8 text-center text-sm text-base-content/70'>条件に一致する収集結果はありません。</p>
         ) : (
-          <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
-            {crawlResults.map((item) => (
-              <li key={item.id} className='min-w-0'>
-                <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
-              </li>
-            ))}
-          </ul>
+          <>
+            <div className='flex flex-wrap items-center justify-between gap-2'>
+              <div className='join' role='group' aria-label='販売状態'>
+                {STATUS_FILTERS.map(([value, label]) => (
+                  <button
+                    key={value}
+                    type='button'
+                    className={`btn join-item btn-sm ${statusFilter === value ? 'btn-primary' : 'btn-ghost'}`}
+                    aria-pressed={statusFilter === value}
+                    onClick={() => setStatusFilter(value)}
+                  >
+                    {label}
+                    <span className='tabular-nums opacity-60'>{counts[value]}</span>
+                  </button>
+                ))}
+              </div>
+              <select
+                className='select select-sm w-auto'
+                aria-label='並び順'
+                value={sort}
+                onChange={(event) => setSort(event.target.value as Sort)}
+              >
+                {SORTS.map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {visibleResults.length === 0 ? (
+              <p className='text-sm'>該当する収集結果はありません。</p>
+            ) : (
+              <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
+                {visibleResults.map((item) => (
+                  <li key={item.id} className='min-w-0'>
+                    <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </>
         )}
       </section>
 

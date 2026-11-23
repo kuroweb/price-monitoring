@@ -54,6 +54,7 @@ export type GetCrawlResults = {
   counts?: { crawlSettingId: number; sold: boolean | null; count: number }[]
 }
 export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolean }
+export type GetMonitorCrawlResultsParams = { all?: boolean }
 export type GetDailyMarketPrices = { dailyMarketPrices: DailyMarketPrice[] }
 export type GetMonitorTransactions = { transactions: CrawlResult[] }
 export type GetMonitorSummary = {

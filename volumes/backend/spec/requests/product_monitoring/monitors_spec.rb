@@ -82,6 +82,31 @@ RSpec.describe "モニタリング設定", type: :request do
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
   end
 
+  it "all=true では8件で打ち切らず、売れた日が古い売り切れと売れた日がない売り切れを新着順の位置に含める" do
+    setting = ProductMonitoring::Monitor.create!(settings)
+    undated = create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: true, external_id: "undated")
+    old_sold = create(:product_monitoring_crawl_result, name: "phone", price: 20, sold: true,
+                                                        sold_at: Time.zone.parse("2026-01-01 09:00:00"),
+                                                        recency_at: Time.zone.parse("2026-01-01 09:00:00"),
+                                                        external_id: "old-sold")
+    on_sale = create(:product_monitoring_crawl_result, name: "phone", price: 30, sold: false,
+                                                       recency_at: Time.zone.parse("2026-06-01 09:00:00"),
+                                                       external_id: "on-sale")
+    newest = Array.new(8) do |index|
+      create(:product_monitoring_crawl_result, name: "phone", price: 40, sold: false, external_id: "new-#{index}",
+                                               recency_at: Time.zone.parse("2026-11-20 09:00:00") + index.hours)
+    end
+    create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false, external_id: "other")
+
+    get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(newest.reverse.map(&:id))
+
+    get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results", params: { all: true }
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(
+      [*newest.reverse, on_sale, old_sold, undated].map(&:id)
+    )
+  end
+
   describe "最安値と直近の平均取引価格" do
     it "収集結果の8件の外も含めた販売中の最安値と、平均取引価格のある最新の日の値を返すこと" do
       setting = ProductMonitoring::Monitor.create!(settings)
