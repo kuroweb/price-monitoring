@@ -1,27 +1,22 @@
 # 商品モニタリングの DB
 
-この機能のテーブル定義とテーブル間の関連を書く。画面から見える規則は [外部仕様](external-spec.md)、保存の仕方は [内部仕様](internal-spec.md)、現在のスキーマは [schema.rb](../../../volumes/backend/db/schema.rb) を参照する。
+画面から見える規則は [外部仕様](external-spec.md)、保存の仕方は [内部仕様](internal-spec.md) を参照する。
 
-## テーブル
+## アソシエーション
 
-| データ | テーブル | 役割 |
-| --- | --- | --- |
-| 収集設定 | `product_monitoring_crawl_settings` | 検索元と取得結果に適用する条件を持つ |
-| 収集結果 | `product_monitoring_crawl_results` | 収集設定ごとの出品、価格、販売状態、除外状態を持つ |
-| モニタリング設定 | `product_monitoring_monitors` | 複数の収集設定にまたがる表示・集計・通知の条件を持つ |
-| 日次相場 | `product_monitoring_daily_market_prices` | モニタリング設定ごとの日次集計を持つ |
+### 関係
 
 | から | へ | 対応 | 外部キー | 意味 |
 | --- | --- | --- | --- | --- |
 | 収集設定 | 収集結果 | 1 対 0..多 | あり | 収集結果は一つの収集設定に属する |
 | モニタリング設定 | 日次相場 | 1 対 0..多 | あり | 日次相場は一つのモニタリング設定に属する |
 | モニタリング設定 | 収集結果 | 条件で抽出 | なし | 収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする |
+| 収集結果 | URL | 属さない | なし | 収集結果は URL に属さない |
+| 同じ収集設定の複数 URL | 収集結果 | 1行 | なし | 見つかった出品は1行 |
+| 別の収集設定 | 収集結果 | 行が分かれる | なし | 設定ごとに行ができる |
+| 商品モニタリング | 計測対象管理 | 関連がない | なし | 既存の計測対象管理とは独立したテーブル群である |
 
-| 対象 | 内容 |
-| --- | --- |
-| URL | 収集結果は属さない |
-| 同じ収集設定の複数 URL | 見つかった出品は1行 |
-| 別の収集設定 | 設定ごとに行ができる |
+### 図
 
 ```mermaid
 erDiagram
@@ -46,11 +41,20 @@ erDiagram
   product_monitoring_monitors }o..o{ product_monitoring_crawl_results : "条件で抽出"
 ```
 
-既存の計測対象管理とは独立したテーブル群である。
+## スキーマ
 
-## product_monitoring_crawl_settings
+### テーブル
 
-### カラム
+| データ | テーブル | 役割 |
+| --- | --- | --- |
+| 収集設定 | `product_monitoring_crawl_settings` | 検索元と取得結果に適用する条件を持つ |
+| 収集結果 | `product_monitoring_crawl_results` | 収集設定ごとの出品、価格、販売状態、除外状態を持つ |
+| モニタリング設定 | `product_monitoring_monitors` | 複数の収集設定にまたがる表示・集計・通知の条件を持つ |
+| 日次相場 | `product_monitoring_daily_market_prices` | モニタリング設定ごとの日次集計を持つ |
+
+### product_monitoring_crawl_settings
+
+#### カラム
 
 | カラム | 型 | NULL | 備考 |
 | --- | --- | --- | --- |
@@ -67,13 +71,13 @@ erDiagram
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 
-### インデックス
+#### インデックス
 
 なし
 
-## product_monitoring_crawl_results
+### product_monitoring_crawl_results
 
-### カラム
+#### カラム
 
 | カラム | 型 | NULL | 備考 |
 | --- | --- | --- | --- |
@@ -90,25 +94,25 @@ erDiagram
 | sold_at | datetime |  |  |
 | recency_at | datetime |  | NULL を許す |
 | ends_at | datetime |  |  |
-| excluded_at | datetime |  | 除外した日時。NULL は除外していない |
+| excluded_at | datetime |  | NULL を許す |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 
-### インデックス
+#### インデックス
 
 | 名前 | カラム | 備考 |
 | --- | --- | --- |
 | index_product_monitoring_crawl_results_on_created_at | created_at |  |
 | index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
-| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | どちらも降順 |
+| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | 降順 |
 | index_product_monitoring_crawl_results_on_external_id | external_id |  |
 | idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
 | index_product_monitoring_crawl_results_on_crawl_setting_id | crawl_setting_id |  |
 
-## product_monitoring_monitors
+### product_monitoring_monitors
 
-### カラム
+#### カラム
 
 | カラム | 型 | NULL | 備考 |
 | --- | --- | --- | --- |
@@ -120,31 +124,31 @@ erDiagram
 | negative_keywords | json | NOT NULL | default `[]` |
 | min_price | integer |  |  |
 | max_price | integer |  |  |
-| last_lowest_signature | string |  | 最安値通知の比較基準 |
+| last_lowest_signature | string |  |  |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 | newest_notification_enabled | boolean | NOT NULL | default `false` |
-| newest_notified_until | datetime |  | 新着通知で評価した範囲の終わり |
+| newest_notified_until | datetime |  |  |
 
-### インデックス
+#### インデックス
 
 なし
 
-## product_monitoring_daily_market_prices
+### product_monitoring_daily_market_prices
 
-### カラム
+#### カラム
 
 | カラム | 型 | NULL | 備考 |
 | --- | --- | --- | --- |
 | id | bigint | NOT NULL | PK |
 | date | date | NOT NULL |  |
-| average_transaction_price | integer |  | 取引0件の日は NULL |
+| average_transaction_price | integer |  | NULL を許す |
 | transaction_count | integer | NOT NULL | default 0 |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 | monitor_id | bigint | NOT NULL | FK |
 
-### インデックス
+#### インデックス
 
 | 名前 | カラム | 備考 |
 | --- | --- | --- |
