@@ -28,8 +28,14 @@ module ProductMonitoring
           attr_reader :external_id
 
           def update_sold(detail)
-            results.update_all(sold: detail[:sold], updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
-            update_sold_at(detail[:sold_at]) if detail[:sold_at]
+            if detail[:sold_at]
+              results.update_all(sold: detail[:sold], updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
+              update_sold_at(detail[:sold_at])
+            elsif detail[:sold]
+              results.update_all(sold: true, recency_at: nil, updated_at: Time.current) # rubocop:disable Rails/SkipsModelValidations
+            else
+              results.update_all(["sold = ?, recency_at = created_at, updated_at = ?", detail[:sold], Time.current]) # rubocop:disable Rails/SkipsModelValidations
+            end
           end
 
           def results
@@ -38,7 +44,8 @@ module ProductMonitoring
 
           # 並行処理で記録された売れた日は上書きしない
           def update_sold_at(sold_at)
-            results.where(sold_at: nil).update_all(sold_at:) # rubocop:disable Rails/SkipsModelValidations
+            results.where(sold_at: nil).update_all(sold_at:, recency_at: sold_at) # rubocop:disable Rails/SkipsModelValidations
+            results.where.not(sold_at: nil).update_all(recency_at: Arel.sql("sold_at")) # rubocop:disable Rails/SkipsModelValidations
           end
         end
       end

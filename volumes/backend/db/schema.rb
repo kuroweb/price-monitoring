@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_23_000001) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_23_000002) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -291,12 +291,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_000001) do
     t.datetime "sold_at"
     t.datetime "ends_at"
     t.datetime "excluded_at"
-    t.datetime "created_at"
+    t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "recency_at"
     t.index ["crawl_setting_id", "external_id"], name: "idx_on_crawl_setting_id_external_id_a6fd3476b8", unique: true
     t.index ["crawl_setting_id"], name: "index_product_monitoring_crawl_results_on_crawl_setting_id"
     t.index ["created_at"], name: "index_product_monitoring_crawl_results_on_created_at"
     t.index ["external_id"], name: "index_product_monitoring_crawl_results_on_external_id"
+    t.index ["recency_at"], name: "index_product_monitoring_crawl_results_on_recency_at"
     t.index ["sold", "excluded_at", "price", "id"], name: "idx_monitoring_crawl_results_lowest_price"
   end
 

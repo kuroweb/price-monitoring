@@ -39,7 +39,8 @@ RSpec.describe ProductMonitoring::Crawling::YahooAuction::ListPage::Syncer do
       sold: true
     }
     described_class.call(crawl_setting:)
-    expect(saved.reload).to have_attributes(sold: true, sold_at:, ends_at: sold_at, buyout_price: 200)
+    expect(saved.reload).to have_attributes(sold: true, sold_at:, ends_at: sold_at, buyout_price: 200,
+                                            recency_at: sold_at)
   end
 
   it "オークションの価格と売れた日をまとめて更新すること" do

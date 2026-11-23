@@ -1,8 +1,7 @@
 module ProductMonitoring
   module Search
-    # 条件に一致する出品を、売り切れも含めて新着順に重複なく最大8件返す。画面の表示に使う。
-    # 新着は初めて保存した日時（created_at）の降順。id は並列な保存で日時と前後するので使わない。
-    # 同じ日時は id の降順。created_at がない行は末尾で、その中も id の降順。
+    # 条件に一致する出品を、重複なく最大8件返す。モニタリング設定のカードに使う。
+    # 並びは recency_at の降順、同じ時刻は id の降順。recency_at がない行は出さない。
     class NewestCrawlResults
       LIMIT = 8
       BATCH_SIZE = 100
@@ -19,10 +18,8 @@ module ProductMonitoring
         listings = []
         seen = Set.new
         ProductMonitoring::CrawlResult.transaction do
-          # created_at が null の行は find_each のカーソルにできないので、日時がある行のあとで読む
-          collect(listings, seen, candidates.where.not(created_at: nil),
-                  cursor: %i[created_at id], order: %i[desc desc])
-          collect(listings, seen, candidates.where(created_at: nil), order: :desc) if listings.size < LIMIT
+          collect(listings, seen, candidates.where.not(recency_at: nil),
+                  cursor: %i[recency_at id], order: %i[desc desc])
         end
         listings
       end
