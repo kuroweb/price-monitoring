@@ -31,6 +31,7 @@ erDiagram
   product_monitoring_crawl_results {
     bigint id PK
     bigint crawl_setting_id FK
+    string platform
     string external_id
   }
   product_monitoring_monitors {
@@ -85,9 +86,9 @@ erDiagram
 | thumbnail_url | text |  |  |
 | price | integer | NOT NULL | default 0 |
 | buyout_price | integer |  |  |
-| sold | boolean |  | 販売状態を取得できないサイトは NULL |
+| sold | boolean |  | NULL を許す |
 | sold_at | datetime |  |  |
-| recency_at | datetime |  | カードの並び。販売中は初回保存時刻、売れた日がある売り切れは sold_at、売れた日がない売り切れは NULL |
+| recency_at | datetime |  | NULL を許す |
 | ends_at | datetime |  |  |
 | excluded_at | datetime |  | 除外した日時。NULL は除外していない |
 | created_at | datetime | NOT NULL |  |
@@ -99,7 +100,7 @@ erDiagram
 | --- | --- | --- |
 | index_product_monitoring_crawl_results_on_created_at | created_at |  |
 | index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
-| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | どちらも降順。詳細の新着順 |
+| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | どちらも降順 |
 | index_product_monitoring_crawl_results_on_external_id | external_id |  |
 | idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
