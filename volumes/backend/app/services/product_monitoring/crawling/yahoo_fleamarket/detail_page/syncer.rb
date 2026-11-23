@@ -44,8 +44,8 @@ module ProductMonitoring
 
           # 並行処理で記録された売れた日は上書きしない
           def update_sold_at(sold_at)
-            results.where(sold_at: nil).update_all(sold_at:, recency_at: sold_at) # rubocop:disable Rails/SkipsModelValidations
-            results.where.not(sold_at: nil).update_all(recency_at: Arel.sql("sold_at")) # rubocop:disable Rails/SkipsModelValidations
+            results.where(sold_at: nil).update_all(sold_at:) # rubocop:disable Rails/SkipsModelValidations
+            results.update_all("recency_at = sold_at") # rubocop:disable Rails/SkipsModelValidations
           end
         end
       end
