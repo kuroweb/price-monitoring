@@ -6,7 +6,7 @@
 ## 文書の案内
 
 - [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
-- [商品モニタリング](../features/product-monitoring/index.md) — 入口。画面の振る舞いは [外部仕様](../features/product-monitoring/behavior.md)、手順は [オペレーション](../features/product-monitoring/operations.md)
+- [商品モニタリング](../features/product-monitoring/index.md) — 入口。画面の振る舞いは [外部仕様](../features/product-monitoring/external-spec.md)、手順は [オペレーション](../features/product-monitoring/operations.md)
 - [文書全体の索引](../index.md)
 
 ## 判断基準

@@ -43,9 +43,9 @@
 | AI-DLC の起動・再開・知識の登録・更新 | [AI-DLC](development/ai-dlc.md) | ハウツー |
 | BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
 | 商品モニタリングの概要 | [商品モニタリング](features/product-monitoring/index.md) | 入口 |
-| 商品モニタリングの外部仕様 | [商品モニタリングの外部仕様](features/product-monitoring/behavior.md) | 解説 |
+| 商品モニタリングの外部仕様 | [商品モニタリングの外部仕様](features/product-monitoring/external-spec.md) | 解説 |
 | 商品モニタリングの API | [商品モニタリングの API](features/product-monitoring/api.md) | リファレンス |
-| 商品モニタリングの内部仕様 | [商品モニタリングの内部仕様](features/product-monitoring/implementation.md) | 解説 |
+| 商品モニタリングの内部仕様 | [商品モニタリングの内部仕様](features/product-monitoring/internal-spec.md) | 解説 |
 | 商品モニタリングのオペレーション | [商品モニタリングのオペレーション](features/product-monitoring/operations.md) | ハウツー |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
