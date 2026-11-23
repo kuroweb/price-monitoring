@@ -9,7 +9,6 @@ import type {
   CrawlResult,
   DailyMarketPrice,
   Monitor,
-  MonitorCrawlResultCursor,
   MonitorCrawlResultSort,
   MonitorSaleStatus,
 } from '@/features/product-monitoring/api/types'
@@ -37,7 +36,6 @@ type Props = {
   monitor: Monitor
   crawlResults: CrawlResult[] | null
   hasMore: boolean
-  cursor?: MonitorCrawlResultCursor | null
   dailyMarketPrices: DailyMarketPrice[] | null
   transactions: CrawlResult[] | null
   discordConfigured: boolean
@@ -47,7 +45,6 @@ export default function MonitorDetail({
   monitor,
   crawlResults,
   hasMore: initialHasMore,
-  cursor: initialCursor = null,
   dailyMarketPrices,
   transactions,
   discordConfigured,
@@ -56,75 +53,50 @@ export default function MonitorDetail({
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [sort, setSort] = useState<Sort>('newest')
   const [items, setItems] = useState<CrawlResult[] | null>(crawlResults)
-  const [cursor, setCursor] = useState<MonitorCrawlResultCursor | null>(initialCursor)
+  const [page, setPage] = useState(1)
   const [hasMore, setHasMore] = useState(initialHasMore)
   const [loading, setLoading] = useState(false)
   const [failed, setFailed] = useState(false)
-  const [loadMoreFailed, setLoadMoreFailed] = useState(false)
-  const [serverPage, setServerPage] = useState({ crawlResults, hasMore: initialHasMore, cursor: initialCursor })
+  const [serverPage, setServerPage] = useState({ crawlResults, hasMore: initialHasMore })
   const requestSeqRef = useRef(0)
   const { busy, exclude, remove } = useCrawlResultActions()
 
-  if (
-    crawlResults !== serverPage.crawlResults
-    || initialHasMore !== serverPage.hasMore
-    || initialCursor !== serverPage.cursor
-  ) {
+  if (crawlResults !== serverPage.crawlResults || initialHasMore !== serverPage.hasMore) {
     requestSeqRef.current += 1
-    setServerPage({ crawlResults, hasMore: initialHasMore, cursor: initialCursor })
+    setServerPage({ crawlResults, hasMore: initialHasMore })
     setStatusFilter('all')
     setSort('newest')
     setItems(crawlResults)
-    setCursor(initialCursor)
+    setPage(1)
     setHasMore(initialHasMore)
     setLoading(false)
     setFailed(false)
-    setLoadMoreFailed(false)
   }
 
-  const failFetch = (append: boolean) => {
-    if (append) {
-      setLoadMoreFailed(true)
-      return
-    }
-    setFailed(true)
-    setItems([])
-    setHasMore(false)
-    setCursor(null)
-  }
-
-  const fetchPage = async (
-    nextStatus: StatusFilter,
-    nextSort: Sort,
-    nextCursor: MonitorCrawlResultCursor | null,
-    append: boolean,
-  ) => {
+  const fetchPage = async (nextStatus: StatusFilter, nextSort: Sort, nextPage: number) => {
     const seq = ++requestSeqRef.current
     setLoading(true)
     setFailed(false)
-    setLoadMoreFailed(false)
     try {
       const result = await getMonitorCrawlResults(monitor.id, {
         saleStatus: nextStatus,
         sort: nextSort,
-        ...(nextCursor ? { cursor: nextCursor } : {}),
+        page: nextPage,
       })
       if (seq !== requestSeqRef.current) return
       const data = result.data
       if (!data) {
-        failFetch(append)
+        setFailed(true)
         return
       }
-      setItems((current) => {
-        if (!append || !current) return data.crawlResults
-        const seen = new Set(current.map((item) => item.id))
-        return [...current, ...data.crawlResults.filter((item) => !seen.has(item.id))]
-      })
-      setCursor(data.cursor ?? null)
+      setItems(data.crawlResults)
+      setStatusFilter(nextStatus)
+      setSort(nextSort)
+      setPage(nextPage)
       setHasMore(Boolean(data.hasMore))
     } catch {
       if (seq !== requestSeqRef.current) return
-      failFetch(append)
+      setFailed(true)
     } finally {
       if (seq === requestSeqRef.current) setLoading(false)
     }
@@ -132,25 +104,26 @@ export default function MonitorDetail({
 
   const changeStatus = (value: StatusFilter) => {
     if (loading || value === statusFilter) return
-    setStatusFilter(value)
-    return fetchPage(value, sort, null, false)
+    return fetchPage(value, sort, 1)
   }
 
   const changeSort = (value: Sort) => {
     if (loading || value === sort) return
-    setSort(value)
-    return fetchPage(statusFilter, value, null, false)
+    return fetchPage(statusFilter, value, 1)
   }
 
-  const loadMore = () => {
-    if (loading || !hasMore || !cursor) return
-    return fetchPage(statusFilter, sort, cursor, true)
+  const changePage = (nextPage: number) => {
+    if (loading || nextPage < 1 || nextPage === page || (nextPage > page && !hasMore)) return
+    return fetchPage(statusFilter, sort, nextPage)
   }
+  const pageNumbers = [page - 1, page, page + 1].filter(
+    (number) => number >= 1 && (number <= page || hasMore),
+  )
 
   const priceRange = monitor.minPrice != null || monitor.maxPrice != null
     ? `${monitor.minPrice != null ? formatYen(monitor.minPrice) : '下限なし'} 〜 ${monitor.maxPrice != null ? formatYen(monitor.maxPrice) : '上限なし'}`
     : '指定なし'
-  const untouched = statusFilter === 'all' && sort === 'newest' && !failed
+  const untouched = statusFilter === 'all' && sort === 'newest' && page === 1 && !failed
 
   return (
     <div className='space-y-4'>
@@ -234,18 +207,13 @@ export default function MonitorDetail({
                 ))}
               </select>
             </div>
-            {(failed || loadMoreFailed) && (
-              <p role='alert' className='text-sm text-error'>
-                {loadMoreFailed
-                  ? '収集結果を取得できませんでした。もう一度試してください。'
-                  : '収集結果を取得できませんでした。再読み込みしてください。'}
-              </p>
+            {failed && (
+              <p role='alert' className='text-sm text-error'>収集結果を取得できませんでした。もう一度試してください。</p>
             )}
             {!failed && items.length === 0 && (
               <p className='text-sm'>該当する収集結果はありません。</p>
             )}
             {items.length > 0 && (
-              // 最も広い段は 6 列。詳細 API も一度に 6 件
               <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
                 {items.map((item) => (
                   <li key={item.id} className='min-w-0'>
@@ -254,10 +222,32 @@ export default function MonitorDetail({
                 ))}
               </ul>
             )}
-            {hasMore && cursor && !failed && (
-              <button type='button' className='btn btn-ghost btn-sm' disabled={loading} onClick={loadMore}>
-                もっと見る
-              </button>
+            {(page > 1 || hasMore) && (
+              <nav className='join flex-wrap' aria-label='収集結果のページ'>
+                {page > 1 && (
+                  <button type='button' className='btn join-item btn-sm' disabled={loading} onClick={() => changePage(page - 1)}>
+                    前へ
+                  </button>
+                )}
+                {pageNumbers.map((number) => (
+                  <button
+                    key={number}
+                    type='button'
+                    className={`btn join-item btn-sm ${number === page ? 'btn-active' : ''}`}
+                    aria-label={`${number}ページ`}
+                    aria-current={number === page ? 'page' : undefined}
+                    disabled={loading || number === page}
+                    onClick={() => changePage(number)}
+                  >
+                    {number}
+                  </button>
+                ))}
+                {hasMore && (
+                  <button type='button' className='btn join-item btn-sm' disabled={loading} onClick={() => changePage(page + 1)}>
+                    次へ
+                  </button>
+                )}
+              </nav>
             )}
           </>
         )}

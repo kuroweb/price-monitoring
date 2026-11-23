@@ -77,68 +77,34 @@ RSpec.describe "モニタリング設定", type: :request do
     end
     create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false)
 
-    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
-    get path
+    get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
     expect(response.parsed_body.keys).to eq(["crawl_results"])
-    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
-
-    get path, params: { page: 2 }
-    expect(response.parsed_body.keys).to eq(["crawl_results"])
-    expect(response.parsed_body.fetch("crawl_results").size).to eq(8)
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
   end
 
-  it "詳細は6件ずつ、前の最後の行のカーソルから続きを返す" do
+  it "詳細は12件ずつ返し、次のページは同じ条件の続きである" do
     setting = ProductMonitoring::Monitor.create!(settings)
     undated = create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: true, external_id: "undated")
-    items = Array.new(7) do |index|
+    items = Array.new(23) do |index|
       create(:product_monitoring_crawl_result, name: "phone", price: 100 + index, sold: false,
                                                external_id: "item-#{index}",
                                                recency_at: Time.zone.parse("2026-11-01 09:00:00") + index.hours)
     end
     path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
-    get path, params: { sale_status: "all", sort: "newest" }
+    get path, params: { sale_status: "all", sort: "newest", page: 1 }
     expect(response).to have_http_status(:ok)
-    body = response.parsed_body
-    expect(body.keys).to contain_exactly("crawl_results", "per_page", "has_more", "cursor")
-    expect(body).to include("per_page" => 6, "has_more" => true)
-    ids = body.fetch("crawl_results").pluck("id")
-    expect(ids).to eq(items.last(6).reverse.map(&:id))
-    expect(body.fetch("cursor")).to include(
-      "id" => ids.last, "recency_at" => ProductMonitoring::CrawlResult.find(ids.last).recency_at.iso8601(6)
-    )
+    expect(response.parsed_body).to include("page" => 1, "per_page" => 12, "has_more" => true)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(items.last(12).reverse.map(&:id))
 
-    get path, params: { sale_status: "all", sort: "newest", page: 99 }
-    expect(response.parsed_body).not_to have_key("page")
-    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(ids)
+    get path, params: { sale_status: "all", sort: "newest", page: 2 }
+    expect(response.parsed_body).to include("page" => 2, "per_page" => 12, "has_more" => false)
+    expected = items.first(11).reverse.map(&:id) + [undated.id]
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected)
 
-    get path, params: { sale_status: "all", sort: "newest", cursor: body.fetch("cursor") }
-    rest = response.parsed_body
-    expect(rest.fetch("has_more")).to be(false)
-    expect(rest.fetch("crawl_results").pluck("id")).to eq([items.first.id, undated.id])
-    expect(rest.fetch("cursor")).to include("id" => undated.id, "recency_at" => nil)
-  end
-
-  it "新着カーソルはマイクロ秒を保ち、同時刻の続きと新規追加を取り違えない" do
-    stub_const("ProductMonitoring::Search::MatchingCrawlResults::PAGE_SIZE", 1)
-    setting = ProductMonitoring::Monitor.create!(settings)
-    time = Time.zone.parse("2026-11-01 09:00:00.123456")
-    older = create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
-                                                     recency_at: time, external_id: "older")
-    newer = create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
-                                                     recency_at: time, external_id: "newer")
-    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
-    get path, params: { sort: "newest" }
-    cursor = response.parsed_body.fetch("cursor")
-    expect(cursor).to eq("id" => newer.id, "recency_at" => time.iso8601(6))
-    create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
-                                             recency_at: time + 1.second, external_id: "added")
-
-    get path, params: { sort: "newest", cursor: }
-    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([older.id])
-    expect(response.parsed_body.fetch("has_more")).to be(false)
+    get path, params: { page: 3 }
+    expect(response.parsed_body).to include("page" => 3, "crawl_results" => [], "has_more" => false)
   end
 
   it "販売状態と並びを変えると、その条件の先頭ページを返す" do
@@ -155,28 +121,26 @@ RSpec.describe "モニタリング設定", type: :request do
                                                            recency_at: Time.zone.parse("2026-06-01 09:00:00"))
     path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
-    get path, params: { sale_status: "sold", sort: "price_desc" }
+    get path, params: { sale_status: "sold", sort: "price_desc", page: 1 }
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([undated.id, pricey_sold.id])
-    expect(response.parsed_body.fetch("cursor")).to include("id" => pricey_sold.id, "price" => pricey_sold.price)
-    expect(response.parsed_body.fetch("cursor")).not_to have_key("recency_at")
 
-    get path, params: { sale_status: "on_sale", sort: "price_asc" }
+    get path, params: { sale_status: "on_sale", sort: "price_asc", page: 1 }
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([cheap_on_sale.id, unknown.id])
     expect(response.parsed_body.fetch("has_more")).to be(false)
   end
 
-  it "詳細の販売状態、並び、カーソルが不正なら 400 を返す" do
+  it "詳細の販売状態、並び、page が不正なら 400 を返す" do
     setting = ProductMonitoring::Monitor.create!(settings)
     path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
-    get path, params: { sale_status: "other", sort: "newest" }
+    get path, params: { sale_status: "other", sort: "newest", page: 1 }
     expect(response).to have_http_status(:bad_request)
-    get path, params: { sale_status: "all", sort: "name" }
+    get path, params: { sale_status: "all", sort: "name", page: 1 }
     expect(response).to have_http_status(:bad_request)
-    get path, params: { sale_status: "all", sort: "newest", cursor: { id: 0 } }
-    expect(response).to have_http_status(:bad_request)
-    get path, params: { sale_status: "all", sort: "newest", cursor: "next" }
-    expect(response).to have_http_status(:bad_request)
+    [0, -1, "", "1.5", "0x2", "1_2", ["2"], { value: "2" }].each do |page|
+      get path, params: { page: }
+      expect(response).to have_http_status(:bad_request)
+    end
   end
 
   describe "最安値と直近の平均取引価格" do

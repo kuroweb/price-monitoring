@@ -1,119 +1,99 @@
 module ProductMonitoring
   module Search
-    # 抽出条件に合う保存済みの収集結果を、詳細向けに6件返す。
-    # 販売状態と並びはサーバで決める。続きは前の最後の行の並びキーと id から読み、ページ番号は受け取らない。
-    # 新着順のカーソルは recency_at と id。recency_at が空の行は、空のグループの中の id。
-    # 価格順のカーソルは price と id。
-    # 新着順は recency_at の降順、空は末尾、同じ位置は id の降順。
+    # 抽出条件に合う保存済みの収集結果を、詳細向けに1ページ返す。
+    # 販売状態と並びはサーバで決める。新着順は recency_at の降順、空は末尾、同じ位置は id の降順。
     # 価格順は価格の昇順または降順で、同じ価格は id の降順。
     # 売れた日が無い売り切れは末尾に残し、売り切れとすべてから落とさない。
-    # 走査は6件と、続きがあるかの確認までで止める。一覧の8件は NewestCrawlResults のまま。
+    # 走査は指定ページと、次のページがあるかの確認までで止める。一覧の8件は NewestCrawlResults のまま。
     class MatchingCrawlResults
       BATCH_SIZE = 100
-      # 詳細のグリッドは最も広いとき 6 列。一度に返す件数はその一段に収まる数。
-      PAGE_SIZE = 6
+      PAGE_SIZE = 12
       SALE_STATUSES = %w[all on_sale sold].freeze
       SORTS = %w[newest price_asc price_desc].freeze
-      Page = Struct.new(:listings, :per_page, :has_more, :cursor, keyword_init: true)
+      Page = Struct.new(:listings, :page, :per_page, :has_more, keyword_init: true)
 
       def self.call(...)
         new(...).call
       end
 
-      def initialize(monitor:, sale_status: "all", sort: "newest", cursor: nil)
+      def initialize(monitor:, sale_status: "all", sort: "newest", page: 1)
         @monitor = monitor
         @sale_status = sale_status.to_s
         @sort = sort.to_s
-        @raw_cursor = cursor
+        @page = parse_page(page)
       end
 
       def call
         validate!
-        @cursor = CrawlResultCursor.parse(sort:, raw: @raw_cursor)
         prepare
         ProductMonitoring::CrawlResult.transaction { walk }
-        Page.new(listings: @listings, per_page: PAGE_SIZE, has_more: @has_more,
-                 cursor: CrawlResultCursor.payload(sort:, listing: @listings.last))
+        build_page
       end
 
       private
 
-      attr_reader :monitor, :sale_status, :sort, :cursor
+      attr_reader :monitor, :sale_status, :sort, :page
+
+      def parse_page(value)
+        text = value.to_s
+        return Integer(text, 10) if /\A[0-9]+\z/.match?(text)
+
+        raise ArgumentError, "page は1以上の整数で指定してください"
+      end
 
       def validate!
         raise ArgumentError, "販売状態が不正です" unless SALE_STATUSES.include?(sale_status)
         raise ArgumentError, "並びが不正です" unless SORTS.include?(sort)
+        raise ArgumentError, "page は1以上の整数で指定してください" if page < 1
       end
 
       def prepare
         @listings = []
         @seen = Set.new
+        @matched = 0
         @has_more = false
       end
 
       def walk
-        catch(:done) { ordered_scopes.each { |scope, batch, start| read_scope(scope, batch, start) } }
+        catch(:done) { ordered_scopes.each { |scope, batch| read_scope(scope, batch) } }
       end
 
-      def read_scope(scope, batch, start)
-        relation = start ? scope.where(after_clause(batch.fetch(:cursor), batch.fetch(:order), start)) : scope
-        relation.find_each(batch_size: BATCH_SIZE, **batch) { |result| consider(result) }
-      end
-
-      # 並びのその位置より後ろ。前の行自体は含まない。
-      def after_clause(columns, orders, values)
-        parts = Array(columns).zip(Array(orders), Array(values))
-        column, order, value = parts.pop
-        clause = past(column, order, value)
-        parts.reverse_each do |col, ord, val|
-          clause = past(col, ord, val).or(table[col].eq(val).and(clause))
-        end
-        clause
-      end
-
-      def past(column, order, value)
-        node = table[column]
-        order.to_sym == :desc ? node.lt(value) : node.gt(value)
-      end
-
-      def table
-        ProductMonitoring::CrawlResult.arel_table
+      def read_scope(scope, batch)
+        scope.find_each(batch_size: BATCH_SIZE, **batch) { |result| consider(result) }
       end
 
       def consider(result)
         return unless Monitor::Matcher.call(monitor:, listing: result)
         return unless @seen.add?([result.platform, result.external_id])
+
+        @matched += 1
+        return if @matched <= offset
         return @listings << result if @listings.size < PAGE_SIZE
 
         @has_more = true
         throw :done
       end
 
+      def offset
+        (page - 1) * PAGE_SIZE
+      end
+
       def ordered_scopes
         return price_scopes unless sort == "newest"
 
-        newest_scopes
-      end
-
-      def newest_scopes
-        return [undated_scope([cursor[:id]])] if cursor&.[](:group) == :undated
-
-        dated_start = cursor ? [cursor[:recency_at], cursor[:id]] : nil
-        [dated_scope(dated_start), undated_scope(nil)]
-      end
-
-      def dated_scope(start)
-        [candidates.where.not(recency_at: nil), { cursor: %i[recency_at id], order: %i[desc desc] }, start]
-      end
-
-      def undated_scope(start)
-        [candidates.where(recency_at: nil), { cursor: :id, order: :desc }, start]
+        [
+          [candidates.where.not(recency_at: nil), { cursor: %i[recency_at id], order: %i[desc desc] }],
+          [candidates.where(recency_at: nil), { cursor: :id, order: :desc }]
+        ]
       end
 
       def price_scopes
         direction = sort == "price_asc" ? :asc : :desc
-        start = cursor ? [cursor[:price], cursor[:id]] : nil
-        [[candidates, { cursor: %i[price id], order: [direction, :desc] }, start]]
+        [[candidates, { cursor: %i[price id], order: [direction, :desc] }]]
+      end
+
+      def build_page
+        Page.new(listings: @listings, page:, per_page: PAGE_SIZE, has_more: @has_more)
       end
 
       # 価格帯は SQL で先に絞る。語句は Monitor::Matcher で判定する

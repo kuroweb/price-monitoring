@@ -70,7 +70,8 @@ function buildUrl(path: string, params?: unknown): string {
 
   const searchParams = new URLSearchParams()
   for (const [key, value] of Object.entries(params as Record<string, unknown>)) {
-    appendQuery(searchParams, key, value)
+    if (value === undefined || value === null) continue
+    searchParams.set(key, String(value))
   }
 
   url.search = searchParams.toString()
@@ -196,21 +197,6 @@ function handleErrorResponse<T>(status: number, data: unknown): ApiResponse<T> {
 
 function isErrorData(data: unknown): data is ErrorData {
   return typeof data === 'object' && data !== null
-}
-
-function isPlainObject(value: unknown): value is Record<string, unknown> {
-  return Object.prototype.toString.call(value) === '[object Object]'
-}
-
-function appendQuery(searchParams: URLSearchParams, key: string, value: unknown) {
-  if (value === undefined || value === null) return
-  if (isPlainObject(value)) {
-    for (const [childKey, child] of Object.entries(value)) {
-      appendQuery(searchParams, `${key}[${childKey}]`, child)
-    }
-    return
-  }
-  searchParams.set(key, String(value))
 }
 
 function normalizeResponseData(data: unknown) {

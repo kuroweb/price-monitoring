@@ -33,7 +33,7 @@ module Api
           render json: {}, status: :ok
         end
 
-        # 販売状態・並び・カーソルがあるときは詳細の6件。無いときは一覧の8件。page は受け取らない
+        # 販売状態・並び・page があるときは詳細の1ページ。無いときは一覧の8件
         def crawl_results
           render json: (detail_request? ? detail_crawl_results : list_crawl_results), status: :ok
         end
@@ -69,7 +69,7 @@ module Api
         private
 
         def detail_request?
-          params[:sale_status].present? || params[:sort].present? || params[:cursor].present?
+          params[:sale_status].present? || params[:sort].present? || params.key?(:page)
         end
 
         def detail_crawl_results
@@ -77,18 +77,10 @@ module Api
             monitor: @monitor,
             sale_status: params[:sale_status].presence || "all",
             sort: params[:sort].presence || "newest",
-            cursor: cursor_param
+            page: params.fetch(:page, 1)
           )
-          { crawl_results: result.listings.as_json, per_page: result.per_page,
-            has_more: result.has_more, cursor: result.cursor }
-        end
-
-        def cursor_param
-          raw = params[:cursor]
-          return if raw.blank?
-          raise ArgumentError, "カーソルが不正です" unless raw.respond_to?(:permit)
-
-          raw.permit(:id, :recency_at, :price).to_h
+          { crawl_results: result.listings.as_json, page: result.page, per_page: result.per_page,
+            has_more: result.has_more }
         end
 
         def list_crawl_results
