@@ -45,4 +45,19 @@ RSpec.describe ProductMonitoring::Search::NewestCrawlResults do
 
     expect(described_class.call(monitor: setting)).to eq([])
   end
+
+  # id の採番は並列な保存で created_at と前後する。画面の新着順は保存日時なので、id が大きくても古い日時は後ろ
+  it "保存日時が古い出品や保存日時がない出品を、id が大きくても新しい出品より後ろに置く" do
+    stub_const("ProductMonitoring::Search::NewestCrawlResults::BATCH_SIZE", 2)
+    setting = ProductMonitoring::Monitor.create!(name: "phone", required_keywords: ["phone"])
+    tied_at = Time.zone.parse("2026-11-01 12:00:00")
+    newer = create(:product_monitoring_crawl_result, name: "phone", created_at: Time.zone.parse("2026-11-20 09:00:00"))
+    tied_low_id = create(:product_monitoring_crawl_result, name: "phone", created_at: tied_at)
+    tied_high_id = create(:product_monitoring_crawl_result, name: "phone", created_at: tied_at)
+    older = create(:product_monitoring_crawl_result, name: "phone", created_at: Time.zone.parse("2026-05-01 09:00:00"))
+    undated = create(:product_monitoring_crawl_result, name: "phone")
+    undated.update_columns(created_at: nil) # rubocop:disable Rails/SkipsModelValidations
+
+    expect(described_class.call(monitor: setting)).to eq([newer, tied_high_id, tied_low_id, older, undated])
+  end
 end
