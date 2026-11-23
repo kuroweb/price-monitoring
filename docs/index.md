@@ -32,7 +32,11 @@
 | 文書の配置・役割・更新規約・記述規約 | このファイル | 文書規約・索引 |
 | ローカル開発環境の構成・用語・接続先 | [ローカル開発](development/index.md) | 入口・解説 |
 | 共通セットアップ、コミット前のシークレット検査、証明書・hosts、イメージ、DB の準備 | [初回セットアップ](development/setup.md) | ハウツー |
-| 起動・停止・ログ確認、依存関係の更新 | [日常操作](development/operations.md) | ハウツー |
+| 開発環境の操作・本番調査の手順一覧 | [日常操作](development/operations/index.md) | 入口 |
+| 起動・停止・ローカルログの確認 | [ローカル環境の起動と状態確認](development/operations/local-environment.md) | ハウツー |
+| アプリの依存関係の更新・調査 | [依存関係の更新・調査](development/operations/dependencies.md) | ハウツー |
+| 本番ログの読み取り調査 | [本番ログの調査](development/operations/production-logs.md) | ハウツー |
+| Claude Code・Codex・Cursor のログ調査用 MCP 導入 | [本番ログ調査用 MCP のセットアップ](development/operations/mcp-setup.md) | ハウツー |
 | RSpec・静的検証・frontend のテスト | [テスト](development/testing.md) | ハウツー |
 | Orca の worktree の setup・初期化・ポート | [Orca の worktree](development/worktree.md) | ハウツー |
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](development/remote.md) | ハウツー |

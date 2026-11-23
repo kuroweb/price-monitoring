@@ -29,4 +29,4 @@ sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keyc
 
 ## 開発ホストの再起動
 
-再起動後、開発ホストの画面にログインするまでは、SSH から Docker Desktop を起動できない（`open -a Docker` が `Launch failed.` で失敗する）。開発ホストの画面にログインしてから Docker Desktop を起動し、[日常操作](operations.md#起動と状態確認) の `just up` を実行する。画面にログインした後なら、SSH から `open -a Docker` でも起動できる。
+再起動後、開発ホストの画面にログインするまでは、SSH から Docker Desktop を起動できない（`open -a Docker` が `Launch failed.` で失敗する）。開発ホストの画面にログインしてから Docker Desktop を起動し、[ローカル環境の起動と状態確認](operations/local-environment.md) の `just up` を実行する。画面にログインした後なら、SSH から `open -a Docker` でも起動できる。

@@ -8,7 +8,7 @@
 | 目的 | 文書 |
 | --- | --- |
 | 新しいチェックアウトで環境を準備する | [初回セットアップ](setup.md) |
-| 起動・停止・ログ確認、依存関係の更新 | [日常操作](operations.md) |
+| 起動・停止、依存関係の更新、本番ログ調査、MCP の初回導入 | [日常操作](operations/index.md) |
 | RSpec・静的検証・frontend のテスト | [テスト](testing.md) |
 | Orca の worktree でメインと並行して動かす | [Orca の worktree](worktree.md) |
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](remote.md) |
