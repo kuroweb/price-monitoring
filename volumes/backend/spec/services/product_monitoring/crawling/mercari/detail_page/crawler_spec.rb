@@ -1,12 +1,13 @@
 require "rails_helper"
 
 RSpec.describe ProductMonitoring::Crawling::Mercari::DetailPage::Crawler do
+  let(:status) { 200 }
   let(:page) do
     instance_double(Playwright::Page, mouse: instance_double(Playwright::Mouse), url: "https://jp.mercari.com/item/m123")
   end
 
   before do
-    allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status: 200))
+    allow(page).to receive(:goto).and_return(instance_double(Playwright::Response, status:))
     allow(page.mouse).to receive(:wheel)
     allow(ProductMonitoring::Crawling::Client).to receive(:execute).and_yield(page)
     allow(Kernel).to receive(:sleep)
@@ -52,5 +53,54 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::DetailPage::Crawler do
 
   it "安全でない出品IDを拒否すること" do
     expect { described_class.call(external_id: "../search") }.to raise_error(ArgumentError)
+  end
+
+  context "個別ページが404を返したとき" do
+    let(:status) { 404 }
+    let(:not_found_html) do
+      <<~HTML
+        <h1>ページが見つかりませんでした</h1>
+        <p>お探しのページはURLが間違っているか、削除された可能性があります。</p>
+      HTML
+    end
+
+    it "対象出品の不存在表示を確認できたときだけ削除結果を返すこと" do
+      stub_contents(not_found_html)
+      expect(described_class.call(external_id: "m123")).to eq(deleted: true)
+    end
+
+    it "汎用の404、スクリプト内の文言、商品詳細がある画面では失敗すること" do
+      [
+        '<div class="merEmptyState">ページが見つかりませんでした</div>',
+        "<script>#{not_found_html}</script>",
+        "#{not_found_html}<div data-testid='item-detail-container'></div>"
+      ].each do |html|
+        stub_contents(html)
+        expect { described_class.call(external_id: "m123") }.to raise_error("Non-success HTTP response")
+      end
+    end
+
+    it "別の出品へ遷移したときは削除結果を返さないこと" do
+      allow(page).to receive(:url).and_return("https://jp.mercari.com/item/m456")
+      stub_contents(not_found_html)
+      expect { described_class.call(external_id: "m123") }.to raise_error("Unexpected page URL")
+    end
+
+    it "応答がサイズ上限を超えるときは失敗すること" do
+      stub_contents(not_found_html + (" " * described_class::MAX_RESPONSE_BYTES))
+      expect { described_class.call(external_id: "m123") }.to raise_error("Response exceeds size limit")
+    end
+  end
+
+  [403, 429, 500].each do |error_status|
+    context "個別ページが#{error_status}を返したとき" do
+      let(:status) { error_status }
+
+      it "本文を判定せず失敗すること" do
+        allow(page).to receive(:content)
+        expect { described_class.call(external_id: "m123") }.to raise_error("Non-success HTTP response")
+        expect(page).not_to have_received(:content)
+      end
+    end
   end
 end
