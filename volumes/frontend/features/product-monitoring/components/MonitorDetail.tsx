@@ -164,12 +164,7 @@ export default function MonitorDetail({
       </section>
 
       <section className='space-y-4 rounded-box bg-base-200 p-4' aria-labelledby='watch-listings'>
-        <div>
-          <h2 id='watch-listings' className='text-lg font-semibold'>新着の収集結果</h2>
-          <p className='mt-1 text-sm text-base-content/60'>
-            在庫は集めた時点のものです。新着順では、売れた日が未取得の売り切れを末尾に置きます。
-          </p>
-        </div>
+        <h2 id='watch-listings' className='text-lg font-semibold'>収集結果</h2>
         {items === null ? (
           <p role='alert' className='text-sm text-error'>収集結果を取得できませんでした。再読み込みしてください。</p>
         ) : items.length === 0 && untouched ? (
