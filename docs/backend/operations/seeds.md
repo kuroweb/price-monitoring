@@ -8,15 +8,15 @@ BFF / batch の開発者向けの投入手順。共通セットアップと起�
 開発環境の DB に全 Seed を投入する。
 
 ```bash
-docker compose exec backend bundle exec env RAILS_ENV=development rails db:seed
+docker compose exec backend bundle exec rails db:seed -e development
 ```
 
 ## 特定の Seed の投入
 
-`<seed_name>` は `volumes/backend/db/seeds/` にある対象ファイルの拡張子を除く名前に置き換える。`product_monitoring` は development だけで、画面確認用の収集設定とモニタリング設定を入れる。本番の起動では呼ばない。入れると、標準エラーにモニタリング設定の詳細のパスが出る。
+`<seed_name>` は `volumes/backend/db/seeds/` にある対象ファイルの拡張子を除く名前に置き換える。現在このディレクトリは `.keep` のみで、投入データはない。Seed ファイルを追加すると対応するタスクが定義される。
 
 ```bash
-docker compose exec backend bundle exec env RAILS_ENV=development rails db:seed:<seed_name>
+docker compose exec backend bundle exec rails db:seed:<seed_name> -e development
 ```
 
 全投入の入口は [db/seeds.rb](../../../volumes/backend/db/seeds.rb)、個別投入は [seed.rake](../../../volumes/backend/lib/tasks/seed.rake) に定義している。
