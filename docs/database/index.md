@@ -1,20 +1,20 @@
 # Database
 
 BFF / batch のデータ設計を変更する開発者向けに、どの単位でデータを分けているかを解説するページです。Provider の DB は対象外です。
-カラムとインデックスは [ER](er.md)、機能文書がまだ無い領域のテーブル間関連は [アソシエーション](association.md) に置きます。このページでは領域の切り方だけを扱います。商品モニタリングの関連は [商品モニタリングの DB](../features/product-monitoring/database.md) を参照します。
+カラムとインデックスは [ER](er.md)、機能文書がまだ無い領域のテーブル間関連は [アソシエーション](association.md) に置きます。このページでは領域の切り方だけを扱います。商品モニタリングのテーブル定義と関連は [商品モニタリングの DB](../features/product-monitoring/database.md) を参照します。
 
 ## 文書の案内
 
 - [カラム・インデックス](er.md)
 - [テーブル間関連](association.md) — 機能文書がまだ無い領域
 - [商品モニタリング](../features/product-monitoring/external-spec.md) — 収集結果とモニタリング・集計の振る舞い
-- [商品モニタリングの DB](../features/product-monitoring/database.md) — この機能のテーブル、振る舞いに効く列、テーブル間の関連
+- [商品モニタリングの DB](../features/product-monitoring/database.md) — この機能のテーブル定義とテーブル間の関連
 - [文書全体の索引](../index.md)
 
 ## 判断基準
 
 - 従来の計測対象管理では `products` が中心で、各プラットフォーム固有の収集結果は別テーブルに分ける
-- 商品モニタリングは独立したテーブル群を使う。テーブルの役割、列の意味、関連は[商品モニタリングの DB](../features/product-monitoring/database.md)、振る舞いは[商品モニタリングの外部仕様](../features/product-monitoring/external-spec.md)を参照する
+- 商品モニタリングは独立したテーブル群を使う。テーブル定義と関連は[商品モニタリングの DB](../features/product-monitoring/database.md)、振る舞いは[商品モニタリングの外部仕様](../features/product-monitoring/external-spec.md)を参照する
 - 従来の計測対象管理では、クロール条件を `*_crawl_settings` と、その配下の required / exclude 系テーブルに分ける
 - カテゴリや関連付けのような横断的な概念は、プラットフォーム固有テーブルへ閉じ込めず共通テーブルで管理する
 - 日次集計のような派生データは、元データと別テーブルに分けて保存する
