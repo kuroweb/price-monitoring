@@ -2,7 +2,7 @@ import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
-import { setCrawlResultExcluded } from '@/features/product-monitoring/api/actions'
+import { getMonitorCrawlResults, setCrawlResultExcluded } from '@/features/product-monitoring/api/actions'
 import type { CrawlResult, Monitor } from '@/features/product-monitoring/api/types'
 import MonitorDetail from '@/features/product-monitoring/components/MonitorDetail'
 
@@ -11,6 +11,7 @@ vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }))
 vi.mock('react-toastify', () => ({ toast: { error: toastError, success: vi.fn() } }))
 vi.mock('@/features/product-monitoring/api/actions', () => ({
   setCrawlResultExcluded: vi.fn(),
+  getMonitorCrawlResults: vi.fn(),
 }))
 vi.mock('@/features/product-monitoring/components/MonitorFormModal', () => ({
   default: ({ onClose }: { onClose: () => void }) => <button onClick={onClose}>編集を閉じる</button>,
@@ -40,7 +41,7 @@ beforeEach(() => vi.clearAllMocks())
 
 describe('商品モニタリング詳細', () => {
   it('通知評価が停止中でも条件と相場を表示し、編集を開ける', async () => {
-    render(<MonitorDetail monitor={monitor} crawlResults={[]} dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />)
+    render(<MonitorDetail monitor={monitor} crawlResults={[]} hasMore={false} dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />)
 
     expect(screen.getByRole('heading', { name: 'iPad' })).toBeInTheDocument()
     expect(screen.getByText('最安値の通知評価：停止中')).toBeInTheDocument()
@@ -53,7 +54,7 @@ describe('商品モニタリング詳細', () => {
   })
 
   it('商品と相場の取得失敗を空データと区別する', () => {
-    render(<MonitorDetail monitor={monitor} crawlResults={null} dailyMarketPrices={null} transactions={null} discordConfigured={false} />)
+    render(<MonitorDetail monitor={monitor} crawlResults={null} hasMore={false} dailyMarketPrices={null} transactions={null} discordConfigured={false} />)
 
     expect(screen.getByText('収集結果を取得できませんでした。再読み込みしてください。')).toBeInTheDocument()
     expect(screen.getByText('日次相場を取得できませんでした。再読み込みしてください。')).toBeInTheDocument()
@@ -62,8 +63,8 @@ describe('商品モニタリング詳細', () => {
 
   it('新着通知だけが有効でも、送信先が使えないことを示す', () => {
     render(
-      <MonitorDetail monitor={{ ...monitor, newestNotificationEnabled: true }} crawlResults={[]} dailyMarketPrices={[]}
-        transactions={[]} discordConfigured={false} />,
+      <MonitorDetail monitor={{ ...monitor, newestNotificationEnabled: true }} crawlResults={[]} hasMore={false}
+        dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />,
     )
 
     expect(screen.getByText('新着の通知評価：有効')).toBeInTheDocument()
@@ -73,7 +74,7 @@ describe('商品モニタリング詳細', () => {
   it('確認後に販売中の収集結果を除外し画面を更新する', async () => {
     vi.spyOn(window, 'confirm').mockReturnValueOnce(true)
     vi.mocked(setCrawlResultExcluded).mockResolvedValueOnce({ data: listing, status: 200, error: null })
-    render(<MonitorDetail monitor={monitor} crawlResults={[listing]} dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />)
+    render(<MonitorDetail monitor={monitor} crawlResults={[listing]} hasMore={false} dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />)
 
     const user = userEvent.setup()
     await user.click(screen.getByRole('button', { name: 'iPad 128GBの操作' }))
@@ -82,59 +83,56 @@ describe('商品モニタリング詳細', () => {
     expect(refresh).toHaveBeenCalled()
   })
 
-  it('販売状態と並びで、売れた日が古い売り切れ、売れた日が無い売り切れ、販売中、価格の前後を分ける', async () => {
-    const newerOnSale = { ...listing, id: 2, name: '新しい販売中', price: 300, sold: false, soldAt: null }
-    const unknown = { ...listing, id: 6, name: '状態不明', price: 250, sold: null, soldAt: null }
-    const olderOnSale = { ...listing, id: 5, name: '古い販売中', price: 100, sold: false, soldAt: null }
-    const oldSold = { ...listing, id: 4, name: '古い売り切れ', price: 100, sold: true, soldAt: '2026-01-01T00:00:00.000Z' }
-    const undatedSold = { ...listing, id: 9, name: '日付なし売り切れ', price: 800, sold: true, soldAt: null }
+  it('もっと見るで続きを足し、販売状態と並びを変えると先頭から取り直す', async () => {
+    const result = (items: CrawlResult[], hasMore: boolean) => ({
+      data: { crawlResults: items, page: 1, perPage: 6, hasMore }, status: 200 as const, error: null,
+    })
+    const first = { ...listing, id: 1, name: '先頭' }
+    const more = { ...listing, id: 2, name: '続き' }
+    const soldFirst = { ...listing, id: 3, name: '売り切れの先頭', sold: true }
+    const soldMore = { ...listing, id: 4, name: '売り切れの続き', sold: true }
+    const pricey = { ...listing, id: 5, name: '高い順の先頭', price: 90_000, sold: true }
+    vi.mocked(getMonitorCrawlResults)
+      .mockResolvedValueOnce(result([more], false))
+      .mockResolvedValueOnce(result([soldFirst], true))
+      .mockResolvedValueOnce(result([soldMore], false))
+      .mockResolvedValueOnce(result([pricey], false))
     const user = userEvent.setup()
     render(
-      <MonitorDetail
-        monitor={monitor}
-        crawlResults={[newerOnSale, unknown, olderOnSale, oldSold, undatedSold]}
-        dailyMarketPrices={[]}
-        transactions={[]}
-        discordConfigured={false}
-      />,
+      <MonitorDetail monitor={monitor} crawlResults={[first]} hasMore dailyMarketPrices={[]} transactions={[]}
+        discordConfigured={false} />,
     )
 
-    const expectOrder = (...expected: string[]) => {
-      const articles = screen.getAllByRole('article')
-      expect(articles).toHaveLength(expected.length)
-      expected.forEach((name, index) => expect(articles[index]).toHaveTextContent(name))
-    }
+    expect(screen.getByText('先頭')).toBeInTheDocument()
+    expect(getMonitorCrawlResults).not.toHaveBeenCalled()
 
-    expect(screen.getByRole('button', { name: /^すべて/ })).toHaveTextContent('5')
-    expect(screen.getByRole('button', { name: /^販売中/ })).toHaveTextContent('3')
-    expect(screen.getByRole('button', { name: /^売り切れ/ })).toHaveTextContent('2')
-    expectOrder('新しい販売中', '状態不明', '古い販売中', '古い売り切れ', '日付なし売り切れ')
+    await user.click(screen.getByRole('button', { name: 'もっと見る' }))
+    await waitFor(() => expect(screen.getByText('続き')).toBeInTheDocument())
+    expect(screen.getByText('先頭')).toBeInTheDocument()
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'all', sort: 'newest', page: 2 })
 
-    await user.click(screen.getByRole('button', { name: /^販売中/ }))
-    expectOrder('新しい販売中', '状態不明', '古い販売中')
-    expect(screen.queryByText('古い売り切れ')).not.toBeInTheDocument()
-    expect(screen.queryByText('日付なし売り切れ')).not.toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: '売り切れ' }))
+    await waitFor(() => expect(screen.getByText('売り切れの先頭')).toBeInTheDocument())
+    expect(screen.queryByText('先頭')).not.toBeInTheDocument()
+    expect(screen.queryByText('続き')).not.toBeInTheDocument()
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'newest', page: 1 })
 
-    await user.click(screen.getByRole('button', { name: /^売り切れ/ }))
-    expectOrder('古い売り切れ', '日付なし売り切れ')
+    await user.click(screen.getByRole('button', { name: 'もっと見る' }))
+    await waitFor(() => expect(screen.getByText('売り切れの続き')).toBeInTheDocument())
+    expect(screen.getByText('売り切れの先頭')).toBeInTheDocument()
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'newest', page: 2 })
 
     await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'price_desc')
-    expectOrder('日付なし売り切れ', '古い売り切れ')
-
-    await user.click(screen.getByRole('button', { name: /^すべて/ }))
-    expectOrder('日付なし売り切れ', '新しい販売中', '状態不明', '古い販売中', '古い売り切れ')
-
-    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'price_asc')
-    expectOrder('古い販売中', '古い売り切れ', '状態不明', '新しい販売中', '日付なし売り切れ')
-
-    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'newest')
-    expectOrder('新しい販売中', '状態不明', '古い販売中', '古い売り切れ', '日付なし売り切れ')
+    await waitFor(() => expect(screen.getByText('高い順の先頭')).toBeInTheDocument())
+    expect(screen.queryByText('売り切れの先頭')).not.toBeInTheDocument()
+    expect(screen.queryByText('売り切れの続き')).not.toBeInTheDocument()
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'price_desc', page: 1 })
   })
 
   it('除外に失敗した場合はエラーを示し画面を更新しない', async () => {
     vi.spyOn(window, 'confirm').mockReturnValueOnce(true)
     vi.mocked(setCrawlResultExcluded).mockResolvedValueOnce({ data: null, status: 500, error: null })
-    render(<MonitorDetail monitor={monitor} crawlResults={[listing]} dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />)
+    render(<MonitorDetail monitor={monitor} crawlResults={[listing]} hasMore={false} dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />)
 
     const user = userEvent.setup()
     await user.click(screen.getByRole('button', { name: 'iPad 128GBの操作' }))

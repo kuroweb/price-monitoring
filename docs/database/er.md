@@ -602,6 +602,7 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 |------|--------|------|
 | index_product_monitoring_crawl_results_on_created_at | created_at |  |
 | index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
+| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | どちらも降順。詳細の新着順 |
 | index_product_monitoring_crawl_results_on_external_id | external_id |  |
 | idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |

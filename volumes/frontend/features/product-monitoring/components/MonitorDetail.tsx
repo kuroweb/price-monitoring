@@ -1,13 +1,16 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import Link from 'next/link'
 
+import { getMonitorCrawlResults } from '@/features/product-monitoring/api/actions'
 import type {
-  DailyMarketPrice,
   CrawlResult,
+  DailyMarketPrice,
   Monitor,
+  MonitorCrawlResultSort,
+  MonitorSaleStatus,
 } from '@/features/product-monitoring/api/types'
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
 import DailyMarketPriceSection from '@/features/product-monitoring/components/DailyMarketPriceSection'
@@ -20,52 +23,105 @@ const STATUS_FILTERS = [
   ['on_sale', '販売中'],
   ['sold', '売り切れ'],
 ] as const
-type StatusFilter = (typeof STATUS_FILTERS)[number][0]
+type StatusFilter = MonitorSaleStatus
 
 const SORTS = [
   ['newest', '新着順'],
   ['price_asc', '価格の安い順'],
   ['price_desc', '価格の高い順'],
 ] as const
-type Sort = (typeof SORTS)[number][0]
-
-const matchesStatus = (item: CrawlResult, filter: StatusFilter) =>
-  filter === 'all' || (filter === 'sold' ? item.sold === true : item.sold !== true)
-
-const sortResults = (items: CrawlResult[], sort: Sort) => {
-  if (sort === 'newest') return items
-
-  const direction = sort === 'price_asc' ? 1 : -1
-  return [...items].sort((left, right) => {
-    if (left.price !== right.price) return direction * (left.price - right.price)
-    return right.id - left.id
-  })
-}
+type Sort = MonitorCrawlResultSort
 
 type Props = {
   monitor: Monitor
   crawlResults: CrawlResult[] | null
+  hasMore: boolean
   dailyMarketPrices: DailyMarketPrice[] | null
   transactions: CrawlResult[] | null
   discordConfigured: boolean
 }
 
-export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices, transactions, discordConfigured }: Props) {
+export default function MonitorDetail({
+  monitor,
+  crawlResults,
+  hasMore: initialHasMore,
+  dailyMarketPrices,
+  transactions,
+  discordConfigured,
+}: Props) {
   const [editing, setEditing] = useState(false)
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [sort, setSort] = useState<Sort>('newest')
+  const [items, setItems] = useState<CrawlResult[] | null>(crawlResults)
+  const [page, setPage] = useState(1)
+  const [hasMore, setHasMore] = useState(initialHasMore)
+  const [loading, setLoading] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const [serverPage, setServerPage] = useState({ crawlResults, hasMore: initialHasMore })
+  const requestSeqRef = useRef(0)
   const { busy, exclude, remove } = useCrawlResultActions()
-  const counts = {
-    all: crawlResults?.length ?? 0,
-    on_sale: crawlResults?.filter((item) => matchesStatus(item, 'on_sale')).length ?? 0,
-    sold: crawlResults?.filter((item) => matchesStatus(item, 'sold')).length ?? 0,
+
+  if (crawlResults !== serverPage.crawlResults || initialHasMore !== serverPage.hasMore) {
+    setServerPage({ crawlResults, hasMore: initialHasMore })
+    setStatusFilter('all')
+    setSort('newest')
+    setItems(crawlResults)
+    setPage(1)
+    setHasMore(initialHasMore)
+    setLoading(false)
+    setFailed(false)
   }
-  const visibleResults = crawlResults
-    ? sortResults(crawlResults.filter((item) => matchesStatus(item, statusFilter)), sort)
-    : []
+
+  const fetchPage = async (nextStatus: StatusFilter, nextSort: Sort, nextPage: number, append: boolean) => {
+    const seq = ++requestSeqRef.current
+    setLoading(true)
+    setFailed(false)
+    try {
+      const result = await getMonitorCrawlResults(monitor.id, {
+        saleStatus: nextStatus,
+        sort: nextSort,
+        page: nextPage,
+      })
+      if (seq !== requestSeqRef.current) return
+      const data = result.data
+      if (!data) {
+        setFailed(true)
+        if (!append) setItems([])
+        return
+      }
+      setItems((current) => (append && current ? [...current, ...data.crawlResults] : data.crawlResults))
+      setPage(nextPage)
+      setHasMore(Boolean(data.hasMore))
+    } catch {
+      if (seq !== requestSeqRef.current) return
+      setFailed(true)
+      if (!append) setItems([])
+    } finally {
+      if (seq === requestSeqRef.current) setLoading(false)
+    }
+  }
+
+  const changeStatus = (value: StatusFilter) => {
+    if (loading || value === statusFilter) return
+    setStatusFilter(value)
+    return fetchPage(value, sort, 1, false)
+  }
+
+  const changeSort = (value: Sort) => {
+    if (loading || value === sort) return
+    setSort(value)
+    return fetchPage(statusFilter, value, 1, false)
+  }
+
+  const loadMore = () => {
+    if (loading || !hasMore) return
+    return fetchPage(statusFilter, sort, page + 1, true)
+  }
+
   const priceRange = monitor.minPrice != null || monitor.maxPrice != null
     ? `${monitor.minPrice != null ? formatYen(monitor.minPrice) : '下限なし'} 〜 ${monitor.maxPrice != null ? formatYen(monitor.maxPrice) : '上限なし'}`
     : '指定なし'
+  const untouched = statusFilter === 'all' && sort === 'newest' && page === 1 && !failed
 
   return (
     <div className='space-y-4'>
@@ -110,11 +166,13 @@ export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices
       <section className='space-y-4 rounded-box bg-base-200 p-4' aria-labelledby='watch-listings'>
         <div>
           <h2 id='watch-listings' className='text-lg font-semibold'>新着の収集結果</h2>
-          <p className='mt-1 text-sm text-base-content/60'>抽出条件に合う保存済みの収集結果を、売り切れも含めて表示します。新着順では、売れた日が未取得の売り切れを末尾に置きます。在庫はリアルタイムではありません。</p>
+          <p className='mt-1 text-sm text-base-content/60'>
+            抽出条件に合う保存済みの収集結果を、売り切れも含めて表示します。一度に全件は出さず、続きは「もっと見る」で足します。新着順では、売れた日が未取得の売り切れを末尾に置きます。在庫はリアルタイムではありません。
+          </p>
         </div>
-        {crawlResults === null ? (
+        {items === null ? (
           <p role='alert' className='text-sm text-error'>収集結果を取得できませんでした。再読み込みしてください。</p>
-        ) : crawlResults.length === 0 ? (
+        ) : items.length === 0 && untouched ? (
           <p className='rounded-box bg-base-200 px-4 py-8 text-center text-sm text-base-content/70'>条件に一致する収集結果はありません。</p>
         ) : (
           <>
@@ -126,10 +184,10 @@ export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices
                     type='button'
                     className={`btn join-item btn-sm ${statusFilter === value ? 'btn-primary' : 'btn-ghost'}`}
                     aria-pressed={statusFilter === value}
-                    onClick={() => setStatusFilter(value)}
+                    disabled={loading}
+                    onClick={() => changeStatus(value)}
                   >
                     {label}
-                    <span className='tabular-nums opacity-60'>{counts[value]}</span>
                   </button>
                 ))}
               </div>
@@ -137,7 +195,8 @@ export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices
                 className='select select-sm w-auto'
                 aria-label='並び順'
                 value={sort}
-                onChange={(event) => setSort(event.target.value as Sort)}
+                disabled={loading}
+                onChange={(event) => changeSort(event.target.value as Sort)}
               >
                 {SORTS.map(([value, label]) => (
                   <option key={value} value={value}>
@@ -146,16 +205,26 @@ export default function MonitorDetail({ monitor, crawlResults, dailyMarketPrices
                 ))}
               </select>
             </div>
-            {visibleResults.length === 0 ? (
+            {failed && (
+              <p role='alert' className='text-sm text-error'>収集結果を取得できませんでした。再読み込みしてください。</p>
+            )}
+            {!failed && items.length === 0 && (
               <p className='text-sm'>該当する収集結果はありません。</p>
-            ) : (
+            )}
+            {items.length > 0 && (
+              // 最も広い段は 6 列。詳細 API の 1 ページも 6 件
               <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
-                {visibleResults.map((item) => (
+                {items.map((item) => (
                   <li key={item.id} className='min-w-0'>
                     <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
                   </li>
                 ))}
               </ul>
+            )}
+            {hasMore && !failed && (
+              <button type='button' className='btn btn-ghost btn-sm' disabled={loading} onClick={loadMore}>
+                もっと見る
+              </button>
             )}
           </>
         )}

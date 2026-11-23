@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_23_000002) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_24_000001) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -298,6 +298,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_23_000002) do
     t.index ["crawl_setting_id"], name: "index_product_monitoring_crawl_results_on_crawl_setting_id"
     t.index ["created_at"], name: "index_product_monitoring_crawl_results_on_created_at"
     t.index ["external_id"], name: "index_product_monitoring_crawl_results_on_external_id"
+    t.index ["recency_at", "id"], name: "index_product_monitoring_crawl_results_on_recency_at_and_id", order: :desc
     t.index ["recency_at"], name: "index_product_monitoring_crawl_results_on_recency_at"
     t.index ["sold", "excluded_at", "price", "id"], name: "idx_monitoring_crawl_results_lowest_price"
   end

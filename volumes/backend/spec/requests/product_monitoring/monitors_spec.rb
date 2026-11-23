@@ -79,32 +79,62 @@ RSpec.describe "モニタリング設定", type: :request do
 
     get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
+    expect(response.parsed_body.keys).to eq(["crawl_results"])
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
   end
 
-  it "all=true では8件で打ち切らず、売れた日が古い売り切れと売れた日がない売り切れを新着順の位置に含める" do
+  it "詳細は6件ずつ返し、次のページは同じ条件の続きである" do
     setting = ProductMonitoring::Monitor.create!(settings)
     undated = create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: true, external_id: "undated")
-    old_sold = create(:product_monitoring_crawl_result, name: "phone", price: 20, sold: true,
-                                                        sold_at: Time.zone.parse("2026-01-01 09:00:00"),
-                                                        recency_at: Time.zone.parse("2026-01-01 09:00:00"),
-                                                        external_id: "old-sold")
-    on_sale = create(:product_monitoring_crawl_result, name: "phone", price: 30, sold: false,
-                                                       recency_at: Time.zone.parse("2026-06-01 09:00:00"),
-                                                       external_id: "on-sale")
-    newest = Array.new(8) do |index|
-      create(:product_monitoring_crawl_result, name: "phone", price: 40, sold: false, external_id: "new-#{index}",
-                                               recency_at: Time.zone.parse("2026-11-20 09:00:00") + index.hours)
+    items = Array.new(7) do |index|
+      create(:product_monitoring_crawl_result, name: "phone", price: 100 + index, sold: false,
+                                               external_id: "item-#{index}",
+                                               recency_at: Time.zone.parse("2026-11-01 09:00:00") + index.hours)
     end
-    create(:product_monitoring_crawl_result, name: "phone case", price: 1, sold: false, external_id: "other")
+    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
-    get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
-    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(newest.reverse.map(&:id))
+    get path, params: { sale_status: "all", sort: "newest", page: 1 }
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body).to include("page" => 1, "per_page" => 6, "has_more" => true)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(items.last(6).reverse.map(&:id))
 
-    get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results", params: { all: true }
-    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(
-      [*newest.reverse, on_sale, old_sold, undated].map(&:id)
-    )
+    get path, params: { sale_status: "all", sort: "newest", page: 2 }
+    expect(response.parsed_body).to include("page" => 2, "per_page" => 6, "has_more" => false)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([items.first.id, undated.id])
+  end
+
+  it "販売状態と並びを変えると、その条件の先頭ページを返す" do
+    setting = ProductMonitoring::Monitor.create!(settings)
+    undated = create(:product_monitoring_crawl_result, name: "phone", price: 900, sold: true, external_id: "undated")
+    cheap_on_sale = create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
+                                                             external_id: "cheap",
+                                                             recency_at: Time.zone.parse("2026-11-01 09:00:00"))
+    unknown = create(:product_monitoring_crawl_result, name: "phone", price: 150, sold: nil, external_id: "unknown",
+                                                       recency_at: Time.zone.parse("2026-11-02 09:00:00"))
+    pricey_sold = create(:product_monitoring_crawl_result, name: "phone", price: 800, sold: true,
+                                                           external_id: "pricey",
+                                                           sold_at: Time.zone.parse("2026-06-01 09:00:00"),
+                                                           recency_at: Time.zone.parse("2026-06-01 09:00:00"))
+    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
+
+    get path, params: { sale_status: "sold", sort: "price_desc", page: 1 }
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([undated.id, pricey_sold.id])
+
+    get path, params: { sale_status: "on_sale", sort: "price_asc", page: 1 }
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([cheap_on_sale.id, unknown.id])
+    expect(response.parsed_body.fetch("has_more")).to be(false)
+  end
+
+  it "詳細の販売状態、並び、page が不正なら 400 を返す" do
+    setting = ProductMonitoring::Monitor.create!(settings)
+    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
+
+    get path, params: { sale_status: "other", sort: "newest", page: 1 }
+    expect(response).to have_http_status(:bad_request)
+    get path, params: { sale_status: "all", sort: "name", page: 1 }
+    expect(response).to have_http_status(:bad_request)
+    get path, params: { sale_status: "all", sort: "newest", page: 0 }
+    expect(response).to have_http_status(:bad_request)
   end
 
   describe "最安値と直近の平均取引価格" do
