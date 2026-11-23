@@ -42,7 +42,7 @@
    docker compose run --rm backend bin/rails zeitwerk:check
    ```
 
-8. **ローカルへの反映**: [日常操作](../../development/operations.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../development/setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
+8. **ローカルへの反映**: [ローカル環境の再起動手順](../../development/operations/local-environment.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../development/setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
 
 ## 避けること
 
