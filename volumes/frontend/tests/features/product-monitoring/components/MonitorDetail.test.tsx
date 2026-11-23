@@ -122,7 +122,7 @@ describe('商品モニタリング詳細', () => {
     await waitFor(() => expect(screen.getAllByText(/^2ページ目 /)).toHaveLength(12))
 
     await user.click(screen.getByRole('button', { name: '売り切れ' }))
-    await waitFor(() => expect(screen.queryByText('売り切れの先頭')).not.toBeInTheDocument())
+    await waitFor(() => expect(screen.getByText('売り切れの先頭')).toBeInTheDocument())
     expect(screen.queryByText(/^先頭 /)).not.toBeInTheDocument()
     expect(screen.queryByText(/^2ページ目 /)).not.toBeInTheDocument()
     expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'newest', page: 1 })

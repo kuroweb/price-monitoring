@@ -15,6 +15,7 @@ import type {
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
 import DailyMarketPriceSection from '@/features/product-monitoring/components/DailyMarketPriceSection'
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
+import ResultPagination from '@/features/product-monitoring/components/ResultPagination'
 import { useCrawlResultActions } from '@/features/product-monitoring/hooks/useCrawlResultActions'
 import { formatYen } from '@/lib/format'
 
@@ -116,9 +117,6 @@ export default function MonitorDetail({
     if (loading || nextPage < 1 || nextPage === page || (nextPage > page && !hasMore)) return
     return fetchPage(statusFilter, sort, nextPage)
   }
-  const pageNumbers = [page - 1, page, page + 1].filter(
-    (number) => number >= 1 && (number <= page || hasMore),
-  )
 
   const priceRange = monitor.minPrice != null || monitor.maxPrice != null
     ? `${monitor.minPrice != null ? formatYen(monitor.minPrice) : '下限なし'} 〜 ${monitor.maxPrice != null ? formatYen(monitor.maxPrice) : '上限なし'}`
@@ -169,7 +167,7 @@ export default function MonitorDetail({
         <div>
           <h2 id='watch-listings' className='text-lg font-semibold'>新着の収集結果</h2>
           <p className='mt-1 text-sm text-base-content/60'>
-            抽出条件に合う保存済みの収集結果を、売り切れも含めて表示します。一度に全件は出さず、続きは「もっと見る」で足します。新着順では、売れた日が未取得の売り切れを末尾に置きます。在庫はリアルタイムではありません。
+            抽出条件に合う保存済みの収集結果を、売り切れも含めて表示します。1ページに最大12件を表示します。新着順では、売れた日が未取得の売り切れを末尾に置きます。在庫はリアルタイムではありません。
           </p>
         </div>
         {items === null ? (
@@ -222,33 +220,7 @@ export default function MonitorDetail({
                 ))}
               </ul>
             )}
-            {(page > 1 || hasMore) && (
-              <nav className='join flex-wrap' aria-label='収集結果のページ'>
-                {page > 1 && (
-                  <button type='button' className='btn join-item btn-sm' disabled={loading} onClick={() => changePage(page - 1)}>
-                    前へ
-                  </button>
-                )}
-                {pageNumbers.map((number) => (
-                  <button
-                    key={number}
-                    type='button'
-                    className={`btn join-item btn-sm ${number === page ? 'btn-active' : ''}`}
-                    aria-label={`${number}ページ`}
-                    aria-current={number === page ? 'page' : undefined}
-                    disabled={loading || number === page}
-                    onClick={() => changePage(number)}
-                  >
-                    {number}
-                  </button>
-                ))}
-                {hasMore && (
-                  <button type='button' className='btn join-item btn-sm' disabled={loading} onClick={() => changePage(page + 1)}>
-                    次へ
-                  </button>
-                )}
-              </nav>
-            )}
+            <ResultPagination label='収集結果のページ' page={page} hasMore={hasMore} disabled={loading} onChange={changePage} />
           </>
         )}
       </section>

@@ -17,7 +17,9 @@ import { formatDate, formatYen } from '@/lib/format'
 
 import CrawlResultCard from './CrawlResultCard'
 import DailyMarketPriceChart from './DailyMarketPriceChart'
+import ResultPagination from './ResultPagination'
 
+const TRANSACTIONS_PER_PAGE = 12
 const PERIODS = [7, 14, 30] as const
 type Period = (typeof PERIODS)[number]
 type View = 'chart' | 'table'
@@ -52,6 +54,7 @@ export default function DailyMarketPriceSection({
   const router = useRouter()
   const [busy, setBusy] = useState(false)
   const [period, setPeriod] = useState<Period>(30)
+  const [transactionPage, setTransactionPage] = useState(1)
   const [view, setView] = useState<View>('chart')
   const inFlightRef = useRef(false)
   const results = dailyMarketPrices.slice(-period)
@@ -60,6 +63,10 @@ export default function DailyMarketPriceSection({
   const purchases = transactions?.filter(
     (item) => item.soldAt != null && item.soldAt.substring(0, 10) >= results[0]?.date,
   )
+
+  const lastPage = Math.max(1, Math.ceil((purchases?.length ?? 0) / TRANSACTIONS_PER_PAGE))
+  const page = Math.min(transactionPage, lastPage)
+  const start = (page - 1) * TRANSACTIONS_PER_PAGE
 
   const calculate = async () => {
     if (inFlightRef.current) return
@@ -136,7 +143,11 @@ export default function DailyMarketPriceSection({
                   type='button'
                   className={`btn join-item btn-sm ${period === value ? 'btn-primary' : 'btn-ghost'}`}
                   aria-pressed={period === value}
-                  onClick={() => setPeriod(value)}
+                  onClick={() => {
+                    if (value === period) return
+                    setPeriod(value)
+                    setTransactionPage(1)
+                  }}
                 >
                   {value}日
                 </button>
@@ -212,13 +223,16 @@ export default function DailyMarketPriceSection({
             ) : purchases.length === 0 ? (
               <p className='text-sm opacity-70'>期間内に取引はありません。</p>
             ) : (
-              <ul className='flex snap-x gap-3 overflow-x-auto pb-2'>
-                {purchases.map((item) => (
-                  <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
-                    <CrawlResultCard crawlResult={item} />
-                  </li>
-                ))}
-              </ul>
+              <>
+                <ul key={page} className='flex snap-x gap-3 overflow-x-auto pb-2'>
+                  {purchases.slice(start, start + TRANSACTIONS_PER_PAGE).map((item) => (
+                    <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
+                      <CrawlResultCard crawlResult={item} />
+                    </li>
+                  ))}
+                </ul>
+                <ResultPagination label='取引のページ' page={page} hasMore={page < lastPage} onChange={setTransactionPage} />
+              </>
             )}
           </div>
         </>
