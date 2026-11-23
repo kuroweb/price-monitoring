@@ -20,7 +20,7 @@ sequenceDiagram
         crawl->>result: 収集結果を保存
     end
     user->>monitor: 抽出条件と通知を登録
-    loop 通知を選んだモニタリング設定を10分ごと
+    loop 通知を選んだモニタリング設定を1分ごと
         notify->>result: 抽出条件で収集結果を選ぶ
         notify->>discord: 最安値の変化・新着を通知
     end
@@ -80,14 +80,14 @@ sequenceDiagram
 | 「最安値の変化を通知する」 | 最安値通知 | 販売中の最安値、または最安値に並ぶ収集結果の組が変わったとき | 最安値の収集結果（最大 5 件） |
 | 「新着を通知する」 | 新着通知 | 抽出条件に一致する販売中の収集結果が新しく保存されたとき | 新着の件数と、新しい順に最大 5 件 |
 
-新着通知は、取得と通知の評価がそれぞれ10分ごとに動き、保存から5分たった収集結果だけを評価するため、取得から最大で約15分遅れて届く。
+新着通知は、取得が10分ごと、通知の評価が1分ごとに動き、保存から5分たった収集結果だけを評価するため、保存から約5〜6分後に届く。取得やジョブの処理待ち、送信に時間がかかる場合は、さらに遅れる。
 
 ```mermaid
 sequenceDiagram
     participant site as サイト
     participant crawl as 取得（10分ごと）
     participant db as 収集結果
-    participant eval as 通知の評価（10分ごと）
+    participant eval as 通知の評価（1分ごと）
     participant discord as Discord
     crawl->>site: 検索結果を取得
     crawl->>db: 新しい出品を保存

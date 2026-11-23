@@ -5,5 +5,5 @@ product_monitoring_enqueue_aggregation_job:
   cron: "0 0 * * *"
   class: "ProductMonitoring::Aggregation::EnqueueAggregationJob"
 product_monitoring_enqueue_notification_job:
-  cron: "*/10 * * * *"
+  cron: "* * * * *"
   class: "ProductMonitoring::Notification::EnqueueNotificationJob"
