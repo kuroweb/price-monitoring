@@ -20,7 +20,7 @@ sequenceDiagram
         crawl->>result: 収集結果を保存
     end
     user->>monitor: 抽出条件と通知を登録
-    loop 通知を選んだモニタリング設定を10分ごと
+    loop 通知を選んだモニタリング設定を1分ごと
         notify->>result: 抽出条件で収集結果を選ぶ
         notify->>discord: 最安値の変化・新着を通知
     end
@@ -87,7 +87,7 @@ sequenceDiagram
     participant site as サイト
     participant crawl as 取得（10分ごと）
     participant db as 収集結果
-    participant eval as 通知の評価（10分ごと）
+    participant eval as 通知の評価（1分ごと）
     participant discord as Discord
     crawl->>site: 検索結果を取得
     crawl->>db: 新しい出品を保存
