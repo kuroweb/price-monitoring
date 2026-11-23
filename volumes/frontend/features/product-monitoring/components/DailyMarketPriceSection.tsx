@@ -224,9 +224,9 @@ export default function DailyMarketPriceSection({
               <p className='text-sm opacity-70'>期間内に取引はありません。</p>
             ) : (
               <>
-                <ul key={page} className='flex snap-x gap-3 overflow-x-auto pb-2'>
+                <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
                   {purchases.slice(start, start + TRANSACTIONS_PER_PAGE).map((item) => (
-                    <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
+                    <li key={item.id} className='min-w-0'>
                       <CrawlResultCard crawlResult={item} />
                     </li>
                   ))}
