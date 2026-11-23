@@ -6,7 +6,7 @@
 ## 文書の案内
 
 - [運用手順](operations/index.md) — Rails 更新・Seed 投入
-- [商品モニタリング](../features/product-monitoring/index.md) — 仕様・API・取得方式・制約
+- [商品モニタリング](../features/product-monitoring/index.md) — 入口。API は [API](../features/product-monitoring/api.md)、取得方式は [内部仕様](../features/product-monitoring/internal-spec.md)
 - [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
 - [文書全体の索引](../index.md)
 

@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -114,6 +114,41 @@ describe('日次相場', () => {
     await user.click(screen.getByRole('button', { name: '7日' }))
     expect(heading).toHaveTextContent('直近7日・1件')
     expect(screen.getByRole('article')).toHaveTextContent('phone 2')
+  })
+
+  it('取引を新しい順に12件ずつ切り替え、表示期間を変えると1ページ目に戻る', async () => {
+    const user = userEvent.setup()
+    const dates = Array.from({ length: 14 }, (_, i) => `2026-11-${String(i + 1).padStart(2, '0')}`)
+    render(
+      <DailyMarketPriceSection
+        monitor={setting}
+        dailyMarketPrices={dates.map((date, i) => ({
+          id: i + 1, monitorId: 1, date, averageTransactionPrice: 300, transactionCount: 2,
+        }))}
+        transactions={dates.slice().reverse().flatMap((date, i) => [
+          purchase(28 - i * 2, `${date}T12:00:00.000+09:00`),
+          purchase(27 - i * 2, `${date}T11:00:00.000+09:00`),
+        ])}
+      />,
+    )
+
+    const pages = within(screen.getByRole('navigation', { name: '取引のページ' }))
+    const expectCards = (count: number, firstId: number) => {
+      const cards = screen.getAllByRole('article')
+      expect(cards).toHaveLength(count)
+      cards.forEach((card, i) => expect(within(card).getByText(`phone ${firstId - i}`)).toBeInTheDocument())
+    }
+    expectCards(12, 28)
+    await user.click(pages.getByRole('button', { name: '次へ' }))
+    expectCards(12, 16)
+    await user.click(pages.getByRole('button', { name: '3ページ' }))
+    expectCards(4, 4)
+    expect(pages.queryByRole('button', { name: '次へ' })).not.toBeInTheDocument()
+    await user.click(pages.getByRole('button', { name: '前へ' }))
+    expectCards(12, 16)
+    await user.click(screen.getByRole('button', { name: '7日' }))
+    expectCards(12, 28)
+    expect(pages.getByRole('button', { name: '1ページ' })).toHaveAttribute('aria-current', 'page')
   })
 
   it('取引を取得できなかったときも日次相場を表示し、取得失敗を伝えること', () => {

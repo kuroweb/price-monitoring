@@ -67,6 +67,35 @@ beforeEach(() => {
 })
 
 describe('収集結果', () => {
+  it('収集設定の詳細は12件ずつ表示し、販売状態と並びを変えると先頭に戻る', async () => {
+    const user = userEvent.setup()
+    const listings = Array.from({ length: 26 }, (_, i) => ({
+      ...result, id: i + 1, name: `出品 ${i + 1}`, price: 26 - i, sold: i % 2 === 0,
+    }))
+    render(<CrawlSettingDetail crawlSetting={setting} crawlResults={listings} />)
+
+    const pages = within(screen.getByRole('navigation', { name: '収集結果のページ' }))
+    expect(screen.getAllByRole('article')).toHaveLength(12)
+    await user.click(pages.getByRole('button', { name: '2ページ' }))
+    expect(screen.getAllByRole('article')).toHaveLength(12)
+    expect(screen.getByText('出品 13')).toBeInTheDocument()
+    expect(screen.queryByText('出品 1')).not.toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: /^売り切れ/ }))
+    expect(screen.getAllByRole('article')).toHaveLength(12)
+    expect(screen.getByText('出品 1')).toBeInTheDocument()
+    expect(screen.queryByText('出品 2')).not.toBeInTheDocument()
+    await user.click(pages.getByRole('button', { name: '次へ' }))
+    expect(screen.getByRole('article')).toHaveTextContent('出品 25')
+    expect(pages.queryByRole('button', { name: '次へ' })).not.toBeInTheDocument()
+
+    await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'price_asc')
+    const cards = screen.getAllByRole('article')
+    expect(cards).toHaveLength(12)
+    expect(cards[0]).toHaveTextContent('出品 25')
+    expect(pages.getByRole('button', { name: '1ページ' })).toHaveAttribute('aria-current', 'page')
+  })
+
   it('確認後に結果を削除し、失敗時は画面を更新しないこと', async () => {
     vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValue(true)
     vi.mocked(destroyCrawlResult)

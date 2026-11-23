@@ -33,9 +33,9 @@ module Api
           render json: {}, status: :ok
         end
 
+        # 販売状態・並び・page があるときは詳細の1ページ。無いときは一覧の8件
         def crawl_results
-          results = ::ProductMonitoring::Search::NewestCrawlResults.call(monitor: @monitor)
-          render json: { crawl_results: results.as_json }, status: :ok
+          render json: (detail_request? ? detail_crawl_results : list_crawl_results), status: :ok
         end
 
         def summary
@@ -67,6 +67,25 @@ module Api
         end
 
         private
+
+        def detail_request?
+          params[:sale_status].present? || params[:sort].present? || params.key?(:page)
+        end
+
+        def detail_crawl_results
+          result = ::ProductMonitoring::Search::MatchingCrawlResults.call(
+            monitor: @monitor,
+            sale_status: params[:sale_status].presence || "all",
+            sort: params[:sort].presence || "newest",
+            page: params.fetch(:page, 1)
+          )
+          { crawl_results: result.listings.as_json, page: result.page, per_page: result.per_page,
+            has_more: result.has_more }
+        end
+
+        def list_crawl_results
+          { crawl_results: ::ProductMonitoring::Search::NewestCrawlResults.call(monitor: @monitor).as_json }
+        end
 
         def upsert_params
           params.permit(:name, :enabled, :discord_enabled, :newest_notification_enabled, :min_price, :max_price,

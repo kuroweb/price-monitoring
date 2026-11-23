@@ -1,10 +1,11 @@
 import { http } from '@/lib/http-client'
 
 import type {
-  GetCrawlResults,
   GetMonitorSummary,
   GetMonitorTransactions,
   GetMonitorTransactionsParams,
+  GetMonitorCrawlResults,
+  GetMonitorCrawlResultsParams,
   GetMonitors,
   Monitor,
   MonitorInput,
@@ -13,8 +14,8 @@ import type {
 const BASE_PATH = '/api/v1/product_monitoring/monitors'
 
 export const getMonitors = () => http<GetMonitors>(BASE_PATH)
-export const getMonitorCrawlResults = (id: number) =>
-  http<GetCrawlResults>(`${BASE_PATH}/${id}/crawl_results`)
+export const getMonitorCrawlResults = (id: number, params?: GetMonitorCrawlResultsParams) =>
+  http<GetMonitorCrawlResults>(`${BASE_PATH}/${id}/crawl_results`, { params })
 // 一覧に出す最安値と直近の平均取引価格
 export const getMonitorSummary = (id: number) =>
   http<GetMonitorSummary>(`${BASE_PATH}/${id}/summary`)

@@ -11,6 +11,9 @@ import CrawlSettingFormModal from '@/features/product-monitoring/components/Craw
 import { useCrawlResultActions } from '../hooks/useCrawlResultActions'
 
 import CrawlResultCard from './CrawlResultCard'
+import ResultPagination from './ResultPagination'
+
+const RESULTS_PER_PAGE = 12
 
 const STATUS_FILTERS = [
   ['all', 'すべて'],
@@ -47,6 +50,7 @@ export default function CrawlSettingDetail({
 }: Props) {
   const [statusFilter, setStatusFilter] = useState<StatusFilter>('all')
   const [sort, setSort] = useState<Sort>('newest')
+  const [selectedPage, setSelectedPage] = useState(1)
   const [editing, setEditing] = useState(false)
   const { busy, sync, exclude, remove } = useCrawlResultActions()
 
@@ -55,10 +59,14 @@ export default function CrawlSettingDetail({
     on_sale: crawlResults.filter((item) => matchesStatus(item, 'on_sale')).length,
     sold: crawlResults.filter((item) => matchesStatus(item, 'sold')).length,
   }
-  const visibleResults = sortResults(
+  const matchingResults = sortResults(
     crawlResults.filter((item) => matchesStatus(item, statusFilter)),
     sort,
   )
+  const lastPage = Math.max(1, Math.ceil(matchingResults.length / RESULTS_PER_PAGE))
+  const page = Math.min(selectedPage, lastPage)
+  const start = (page - 1) * RESULTS_PER_PAGE
+  const visibleResults = matchingResults.slice(start, start + RESULTS_PER_PAGE)
 
   return (
     <section
@@ -92,7 +100,11 @@ export default function CrawlSettingDetail({
                   type='button'
                   className={`btn join-item btn-sm ${statusFilter === value ? 'btn-primary' : 'btn-ghost'}`}
                   aria-pressed={statusFilter === value}
-                  onClick={() => setStatusFilter(value)}
+                  onClick={() => {
+                    if (value === statusFilter) return
+                    setStatusFilter(value)
+                    setSelectedPage(1)
+                  }}
                 >
                   {label}
                   <span className='tabular-nums opacity-60'>{counts[value]}</span>
@@ -103,7 +115,10 @@ export default function CrawlSettingDetail({
               className='select select-sm w-auto'
               aria-label='並び順'
               value={sort}
-              onChange={(event) => setSort(event.target.value as Sort)}
+              onChange={(event) => {
+                setSort(event.target.value as Sort)
+                setSelectedPage(1)
+              }}
             >
               {SORTS.map(([value, label]) => (
                 <option key={value} value={value}>
@@ -127,6 +142,7 @@ export default function CrawlSettingDetail({
               ))}
             </div>
           )}
+          <ResultPagination label='収集結果のページ' page={page} hasMore={page < lastPage} onChange={setSelectedPage} />
         </>
       )}
       {editing && (

@@ -1,7 +1,7 @@
 # ER
 
 BFF / batch のテーブル定義を確認する開発者向けのリファレンス。Provider の DB は対象外。
-領域の分け方は [Database](index.md)、関連は [アソシエーション](association.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
+領域の分け方は [Database](index.md)、機能文書がまだ無い領域の関連は [アソシエーション](association.md)、商品モニタリングのテーブル定義と関連は [商品モニタリングの DB](../features/product-monitoring/database.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
 
 ## backmarket_watch_results
 
@@ -510,48 +510,11 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 ## product_monitoring_daily_market_prices
 
-### カラム
-
-| カラム | 型 | NULL | 備考 |
-|--------|-----|------|------|
-| id | bigint | NOT NULL | PK |
-| date | date | NOT NULL |  |
-| average_transaction_price | integer |  | 取引0件の日は NULL |
-| transaction_count | integer | NOT NULL | default 0 |
-| created_at | datetime | NOT NULL |  |
-| updated_at | datetime | NOT NULL |  |
-| monitor_id | bigint | NOT NULL | FK |
-
-### インデックス
-
-| 名前 | カラム | 備考 |
-|------|--------|------|
-| idx_on_monitor_id_date_df939332ac | monitor_id, date | unique |
-| index_product_monitoring_daily_market_prices_on_monitor_id | monitor_id |  |
+定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_daily_market_prices) を参照する。
 
 ## product_monitoring_monitors
 
-### カラム
-
-| カラム | 型 | NULL | 備考 |
-|--------|-----|------|------|
-| id | bigint | NOT NULL | PK |
-| name | string | NOT NULL |  |
-| enabled | boolean | NOT NULL | default `false` |
-| discord_enabled | boolean | NOT NULL | default `false` |
-| required_keywords | json | NOT NULL | default `[]` |
-| negative_keywords | json | NOT NULL | default `[]` |
-| min_price | integer |  |  |
-| max_price | integer |  |  |
-| last_lowest_signature | string |  | 最安値通知の比較基準 |
-| created_at | datetime | NOT NULL |  |
-| updated_at | datetime | NOT NULL |  |
-| newest_notification_enabled | boolean | NOT NULL | default `false` |
-| newest_notified_until | datetime |  | 新着通知で評価した範囲の終わり |
-
-### インデックス
-
-なし
+定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_monitors) を参照する。
 
 ## product_category_maps
 
@@ -575,60 +538,11 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 ## product_monitoring_crawl_results
 
-### カラム
-
-| カラム | 型 | NULL | 備考 |
-|--------|-----|------|------|
-| id | bigint | NOT NULL | PK |
-| crawl_setting_id | bigint | NOT NULL | FK |
-| platform | string | NOT NULL |  |
-| external_id | string | NOT NULL |  |
-| name | string | NOT NULL |  |
-| product_url | text | NOT NULL |  |
-| thumbnail_url | text |  |  |
-| price | integer | NOT NULL | default 0 |
-| buyout_price | integer |  |  |
-| sold | boolean |  | 販売状態を取得できないサイトは NULL |
-| sold_at | datetime |  |  |
-| recency_at | datetime |  | カードの並び。販売中は初回保存時刻、売れた日がある売り切れは sold_at、売れた日がない売り切れは NULL |
-| ends_at | datetime |  |  |
-| excluded_at | datetime |  | 除外した日時。NULL は除外していない |
-| created_at | datetime | NOT NULL |  |
-| updated_at | datetime | NOT NULL |  |
-
-### インデックス
-
-| 名前 | カラム | 備考 |
-|------|--------|------|
-| index_product_monitoring_crawl_results_on_created_at | created_at |  |
-| index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
-| index_product_monitoring_crawl_results_on_external_id | external_id |  |
-| idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
-| idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
-| index_product_monitoring_crawl_results_on_crawl_setting_id | crawl_setting_id |  |
+定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_crawl_results) を参照する。
 
 ## product_monitoring_crawl_settings
 
-### カラム
-
-| カラム | 型 | NULL | 備考 |
-|--------|-----|------|------|
-| id | bigint | NOT NULL | PK |
-| name | string | NOT NULL |  |
-| enabled | boolean | NOT NULL | default false |
-| search_keyword | string |  |  |
-| platforms | json | NOT NULL | default `[]` |
-| search_urls | json | NOT NULL | default `[]` |
-| required_keywords | json | NOT NULL | default `[]` |
-| negative_keywords | json | NOT NULL | default `[]` |
-| min_price | integer |  |  |
-| max_price | integer |  |  |
-| created_at | datetime | NOT NULL |  |
-| updated_at | datetime | NOT NULL |  |
-
-### インデックス
-
-なし
+定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_crawl_settings) を参照する。
 
 ## products
 

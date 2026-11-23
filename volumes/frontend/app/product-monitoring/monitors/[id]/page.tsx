@@ -16,7 +16,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
   const [settingsResponse, resultsResponse, aggregationResponse] = await Promise.all([
     getMonitors(),
-    getMonitorCrawlResults(id).catch(() => null),
+    getMonitorCrawlResults(id, { saleStatus: 'all', sort: 'newest', page: 1 }).catch(() => null),
     getDailyMarketPrices().catch(() => null),
   ])
   if (!settingsResponse.data) throw new Error('モニタリング設定を取得できませんでした')
@@ -44,6 +44,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
           <MonitorDetail
             monitor={monitor}
             crawlResults={resultsResponse?.data?.crawlResults ?? null}
+            hasMore={resultsResponse?.data?.hasMore ?? false}
             dailyMarketPrices={dailyMarketPrices}
             transactions={dailyMarketPrices?.length ? (transactions?.data?.transactions ?? null) : []}
             discordConfigured={settingsResponse.data.discordConfigured}
