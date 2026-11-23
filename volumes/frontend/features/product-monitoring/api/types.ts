@@ -54,6 +54,19 @@ export type GetCrawlResults = {
   counts?: { crawlSettingId: number; sold: boolean | null; count: number }[]
 }
 export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolean }
+export type MonitorSaleStatus = 'all' | 'on_sale' | 'sold'
+export type MonitorCrawlResultSort = 'newest' | 'price_asc' | 'price_desc'
+export type GetMonitorCrawlResultsParams = {
+  saleStatus?: MonitorSaleStatus
+  sort?: MonitorCrawlResultSort
+  page?: number
+}
+export type GetMonitorCrawlResults = {
+  crawlResults: CrawlResult[]
+  page?: number
+  perPage?: number
+  hasMore?: boolean
+}
 export type GetDailyMarketPrices = { dailyMarketPrices: DailyMarketPrice[] }
 export type GetMonitorTransactions = { transactions: CrawlResult[] }
 export type GetMonitorSummary = {

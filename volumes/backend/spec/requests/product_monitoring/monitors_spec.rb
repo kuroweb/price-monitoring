@@ -79,7 +79,72 @@ RSpec.describe "モニタリング設定", type: :request do
 
     get "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
+    expect(response.parsed_body.keys).to eq(["crawl_results"])
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
+  end
+
+  it "詳細は出品をページ間でも重複させずに12件ずつ返す" do
+    setting = ProductMonitoring::Monitor.create!(settings)
+    undated = create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: true, external_id: "undated")
+    items = Array.new(23) do |index|
+      create(:product_monitoring_crawl_result, name: "phone", price: 100 + index, sold: false,
+                                               external_id: "item-#{index}",
+                                               recency_at: Time.zone.parse("2026-11-01 09:00:00") + index.hours)
+    end
+    first_listing = items.last
+    create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
+                                             platform: first_listing.platform, external_id: first_listing.external_id,
+                                             recency_at: items.first.recency_at + 1.minute)
+    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
+
+    get path, params: { sale_status: "all", sort: "newest", page: 1 }
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body).to include("page" => 1, "per_page" => 12, "has_more" => true)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(items.last(12).reverse.map(&:id))
+
+    get path, params: { sale_status: "all", sort: "newest", page: 2 }
+    expect(response.parsed_body).to include("page" => 2, "per_page" => 12, "has_more" => false)
+    expected = items.first(11).reverse.map(&:id) + [undated.id]
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected)
+
+    get path, params: { page: 3 }
+    expect(response.parsed_body).to include("page" => 3, "crawl_results" => [], "has_more" => false)
+  end
+
+  it "販売状態と並びを変えると、その条件の先頭ページを返す" do
+    setting = ProductMonitoring::Monitor.create!(settings)
+    undated = create(:product_monitoring_crawl_result, name: "phone", price: 900, sold: true, external_id: "undated")
+    cheap_on_sale = create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
+                                                             external_id: "cheap",
+                                                             recency_at: Time.zone.parse("2026-11-01 09:00:00"))
+    unknown = create(:product_monitoring_crawl_result, name: "phone", price: 150, sold: nil, external_id: "unknown",
+                                                       recency_at: Time.zone.parse("2026-11-02 09:00:00"))
+    pricey_sold = create(:product_monitoring_crawl_result, name: "phone", price: 800, sold: true,
+                                                           external_id: "pricey",
+                                                           sold_at: Time.zone.parse("2026-06-01 09:00:00"),
+                                                           recency_at: Time.zone.parse("2026-06-01 09:00:00"))
+    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
+
+    get path, params: { sale_status: "sold", sort: "price_desc", page: 1 }
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([undated.id, pricey_sold.id])
+
+    get path, params: { sale_status: "on_sale", sort: "price_asc", page: 1 }
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([cheap_on_sale.id, unknown.id])
+    expect(response.parsed_body.fetch("has_more")).to be(false)
+  end
+
+  it "詳細の販売状態、並び、page が不正なら 400 を返す" do
+    setting = ProductMonitoring::Monitor.create!(settings)
+    path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
+
+    get path, params: { sale_status: "other", sort: "newest", page: 1 }
+    expect(response).to have_http_status(:bad_request)
+    get path, params: { sale_status: "all", sort: "name", page: 1 }
+    expect(response).to have_http_status(:bad_request)
+    [0, -1, "", "1.5", "0x2", "1_2", ["2"], { value: "2" }].each do |page|
+      get path, params: { page: }
+      expect(response).to have_http_status(:bad_request)
+    end
   end
 
   describe "最安値と直近の平均取引価格" do

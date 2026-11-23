@@ -42,8 +42,12 @@
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](development/remote.md) | ハウツー |
 | AI-DLC の起動・再開・知識の登録・更新 | [AI-DLC](development/ai-dlc.md) | ハウツー |
 | BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
-| 商品モニタリングの設計方針・仕様・API・制約 | [商品モニタリング](features/product-monitoring/index.md) | 解説・リファレンス |
-| 商品モニタリングの操作 | [商品モニタリングの操作](features/product-monitoring/operations.md) | ハウツー |
+| 商品モニタリングの概要 | [商品モニタリング](features/product-monitoring/index.md) | 入口 |
+| 商品モニタリングの外部仕様 | [商品モニタリングの外部仕様](features/product-monitoring/external-spec.md) | 解説 |
+| 商品モニタリングの API | [商品モニタリングの API](features/product-monitoring/api.md) | リファレンス |
+| 商品モニタリングの内部仕様 | [商品モニタリングの内部仕様](features/product-monitoring/internal-spec.md) | 解説 |
+| 商品モニタリングのオペレーション | [商品モニタリングのオペレーション](features/product-monitoring/operations.md) | ハウツー |
+| 商品モニタリングの DB | [商品モニタリングの DB](features/product-monitoring/database.md) | 解説 |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
 | frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |
@@ -53,11 +57,11 @@
 | CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](cicd/index.md) | リファレンス |
 | BFF / batch のデータ領域の分け方 | [Database](database/index.md) | 解説 |
 | BFF / batch のカラム・インデックス | [ER](database/er.md) | リファレンス |
-| BFF / batch のテーブル間関連 | [アソシエーション](database/association.md) | リファレンス |
+| 機能文書がまだ無い領域のテーブル間関連 | [アソシエーション](database/association.md) | リファレンス |
 
 ## 機能文書の設計
 
-機能文書は、その機能を開発・運用する人が、目的、振る舞い、画面からデータの取得・保存・利用までの流れ、変更時の影響を理解するために書く。領域をまたぐ仕様と設計判断を正本とし、機能一覧の入口を `docs/features/index.md` に置く。機能の範囲は利用者から見た一連の目的とデータのつながりで判断し、画面・API・テーブルごとに機械的に分けない。現状は商品モニタリングを一体として `product-monitoring` にまとめる。すべての機能に文書や同じ章立てを先回りして作る必要はない。
+機能文書は、その機能を開発・運用する人が、目的、振る舞い、画面からデータの取得・保存・利用までの流れ、変更時の影響を理解するために書く。区分は外部仕様、内部仕様、API、オペレーション、DB の5つである。外部仕様は画面と通知から見える振る舞いである。内部仕様は保存、抽出、取得、ジョブの実装である。API は外部仕様ではなく、内部仕様のファイルにも混ぜない。エンドポイントごとに表と JSON 例を持つ契約として独立させる。オペレーションは手順だけを書き、仕様の本文は複製しない。DB は、その機能のテーブル定義とテーブル間の関連である。商品モニタリングのカラムとインデックスは、その DB 文書を正本とし、ER には節ごとの参照だけを残す。機能文書がまだ無い領域のカラムとインデックスは ER を正本とする。機能文書がある領域のテーブル間関連は、その機能の DB 文書を正本にする。機能の DB 文書は「アソシエーション」と「スキーマ」の二見出しをこの順で置き、表の形は [商品モニタリングの DB](features/product-monitoring/database.md) を見本にする。アソシエーションは、機能文書がまだ無い領域の関連だけを置く。短い機能は一つの index にこの順でまとめてよい。商品モニタリングは入口に加え、外部仕様、内部仕様、API、オペレーション、DB である。領域をまたぐ仕様と設計判断を正本とし、機能一覧の入口を `docs/features/index.md` に置く。すべての機能に文書や同じ章立てを先回りして作る必要はない。
 
 | 知りたいこと | 正本と境界 |
 | --- | --- |
@@ -65,7 +69,7 @@
 | 商品モニタリングの用語 | [GLOSSARY.md](../GLOSSARY.md) |
 | 機能の操作手順 | 機能文書内、または同じ機能配下の目的別文書。仕様を複製せず、操作に必要な注意と仕様へのリンクを書く |
 | Backend / Frontend の実装上の責務と共通規約 | 各レイヤーの文書。機能固有の振る舞いは機能文書へリンクする |
-| DB のカラム・インデックス・テーブル間の関連 | [ER](database/er.md)・[アソシエーション](database/association.md)。機能文書には処理の理解に必要な関係を絞って示し、定義の詳細はリンクする |
+| DB のカラム・インデックス・テーブル間の関連 | 商品モニタリングのカラム・インデックス・テーブル間関連は [商品モニタリングの DB](features/product-monitoring/database.md) が正本。それ以外のカラムとインデックスは [ER](database/er.md) が正本。機能文書がまだ無い領域の関連は [アソシエーション](database/association.md) に置く |
 | 個別の作業時点の要件・判断・検証記録 | AI-DLC の intent。実装後の現行仕様や手順は `docs/` に置く |
 
 コードとスキーマは実際の動作・定義の一次情報とし、現行文書と食い違う場合は実装を確認して関係する文書を更新する。図や説明中の概念上の関連は、外部キーなどの物理的な関連と区別する。

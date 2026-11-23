@@ -1,7 +1,7 @@
 # アソシエーション
 
-BFF / batch のテーブル間関連を確認する開発者向けのリファレンス。Provider の DB は対象外。
-領域の分け方は [Database](index.md)、カラム・インデックスは [ER](er.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
+機能文書がまだ無い領域について、BFF / batch のテーブル間関連を確認する開発者向けのリファレンス。Provider の DB は対象外。機能文書がある領域のテーブル間関連は、その機能の DB 文書を正本とする。
+領域の分け方は [Database](index.md)、カラム・インデックスは [ER](er.md)、商品モニタリングのテーブル定義は [商品モニタリングの DB](../features/product-monitoring/database.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
 
 ## 計測対象管理
 
@@ -287,28 +287,4 @@ erDiagram
     bigint backmarket_watch_target_id FK
   }
   backmarket_watch_targets ||--o{ backmarket_watch_results : ""
-```
-
-## 商品モニタリング
-
-既存の計測対象管理とは独立したテーブル群。モニタリング設定は収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする。設計方針と仕様は [商品モニタリング](../features/product-monitoring/index.md) を参照する。
-
-```mermaid
-erDiagram
-  product_monitoring_crawl_settings {
-    bigint id PK
-  }
-  product_monitoring_crawl_results {
-    bigint id PK
-    bigint crawl_setting_id FK
-  }
-  product_monitoring_monitors {
-    bigint id PK
-  }
-  product_monitoring_daily_market_prices {
-    bigint id PK
-    bigint monitor_id FK
-  }
-  product_monitoring_crawl_settings ||--o{ product_monitoring_crawl_results : ""
-  product_monitoring_monitors ||--o{ product_monitoring_daily_market_prices : ""
 ```
