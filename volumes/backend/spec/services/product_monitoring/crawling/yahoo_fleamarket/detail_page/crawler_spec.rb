@@ -37,9 +37,38 @@ RSpec.describe ProductMonitoring::Crawling::YahooFleamarket::DetailPage::Crawler
 
   context "個別ページが 404 を返したとき" do
     let(:status) { 404 }
+    let(:not_found_html) { "<main><aside><div><span>この商品は存在しません</span></div></aside></main>" }
 
-    it "削除済みと判定せずに失敗にすること" do
+    it "対象出品の不存在表示を確認できたときに削除結果を返すこと" do
+      allow(page).to receive(:content).and_return(not_found_html)
+      expect(described_class.call(external_id: "z123")).to eq(deleted: true)
+    end
+
+    it "汎用の404、表示領域外やスクリプト内の文言、商品データがあるページでは失敗すること" do
+      [
+        "<main><aside><span>Not Found</span></aside></main>",
+        "<main><article><span>この商品は存在しません</span></article></main>",
+        "<main><aside><span><script>この商品は存在しません</script></span></aside></main>",
+        %(#{not_found_html}<script type="application/ld+json">{"@type":"Product"}</script>)
+      ].each do |html|
+        allow(page).to receive(:content).and_return(html)
+        expect { described_class.call(external_id: "z123") }.to raise_error("Non-success HTTP response")
+      end
+    end
+
+    it "別の出品へ遷移したときは失敗すること" do
+      allow(page).to receive(:url).and_return("https://paypayfleamarket.yahoo.co.jp/item/z456")
+      expect { described_class.call(external_id: "z123") }.to raise_error("Unexpected page URL")
+    end
+  end
+
+  context "個別ページが 429 を返したとき" do
+    let(:status) { 429 }
+
+    it "本文を判定せず失敗すること" do
+      allow(page).to receive(:content)
       expect { described_class.call(external_id: "z123") }.to raise_error("Non-success HTTP response")
+      expect(page).not_to have_received(:content)
     end
   end
 end

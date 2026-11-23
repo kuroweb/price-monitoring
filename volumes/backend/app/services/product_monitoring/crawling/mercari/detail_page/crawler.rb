@@ -5,6 +5,8 @@ module ProductMonitoring
         class Crawler
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
           DELETED_TEXTS = ["ページが見つかりませんでした", "該当する商品は削除されています。"].freeze
+          NOT_FOUND_TEXTS = ["ページが見つかりませんでした",
+                             "お探しのページはURLが間違っているか、削除された可能性があります。"].freeze
 
           def self.call(...)
             new(...).call
@@ -18,7 +20,10 @@ module ProductMonitoring
           def call
             raise ArgumentError, "Invalid external ID" unless external_id.match?(/\A[a-zA-Z0-9_-]+\z/)
 
-            page = Nokogiri::HTML(fetch_page(URI("https://#{ListPage::SearchUrl::HOST}/item/#{external_id}")))
+            html, status = fetch_page
+            page = Nokogiri::HTML(html)
+            return not_found_result(page) if status == 404
+
             sold = sold_state(page)
             page.css("script, style").remove
             return { deleted: true } if deleted?(page)
@@ -39,6 +44,16 @@ module ProductMonitoring
             return false if page.at_css("[data-testid='item-detail-container']")
 
             page.at_css(".merEmptyState") || DELETED_TEXTS.any? { |text| page.text.include?(text) }
+          end
+
+          def not_found_result(page)
+            page.css("script, style").remove
+            body = page.at_css("body")&.text.to_s
+            found = !page.at_css("[data-testid='item-detail-container']") &&
+                    NOT_FOUND_TEXTS.all? { |text| body.include?(text) }
+            raise "Non-success HTTP response" unless found
+
+            { deleted: true }
           end
 
           def sold_state(page)
@@ -79,19 +94,28 @@ module ProductMonitoring
             end
           end
 
-          def fetch_page(uri)
+          def fetch_page
+            url = "https://#{ListPage::SearchUrl::HOST}/item/#{external_id}"
             Client.execute do |page|
-              response = page.goto(uri.to_s)
-              raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
+              status = page.goto(url)&.status
+              raise "Non-success HTTP response" unless status == 404 || status&.between?(200, 299)
 
               validate_url(page)
+              next [checked_not_found_content(page, url), status] if status == 404
+
               Kernel.sleep(2)
               30.times do
                 page.mouse.wheel(0, 200)
                 Kernel.sleep(0.005)
               end
-              checked_content(page)
+              [checked_content(page), status]
             end
+          end
+
+          def checked_not_found_content(page, url)
+            raise "Unexpected page URL" unless page.url == url
+
+            checked_content(page).tap { raise "Unexpected page URL" unless page.url == url }
           end
 
           # リダイレクトで別のホストへ移っていないことを確かめる

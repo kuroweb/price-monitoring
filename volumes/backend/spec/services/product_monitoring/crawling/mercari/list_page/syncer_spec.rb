@@ -41,6 +41,25 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Syncer do
     expect(detail_job).to have_received(:perform_async).with("old")
   end
 
+  it "詳細で削除された出品はどの収集設定からも再確認せず、同じIDの別サイトの行は保持すること" do
+    other_setting = create(:product_monitoring_crawl_setting)
+    first = listing("missing", sold: false, updated_at: 4.hours.ago)
+    second = listing("missing", crawl_setting: other_setting, sold: true, sold_at: 2.days.ago)
+    other_site = listing("missing", crawl_setting: create(:product_monitoring_crawl_setting),
+                                    platform: "yahoo_fleamarket", sold: false, updated_at: 4.hours.ago)
+    listing("still_due", sold: false, updated_at: 4.hours.ago)
+    allow(ProductMonitoring::Crawling::Mercari::DetailPage::Crawler).to receive(:call)
+      .with(external_id: "missing").and_return(deleted: true)
+
+    detail_job.new.perform("missing")
+    expect(ProductMonitoring::CrawlResult.where(id: [first.id, second.id])).to be_empty
+    expect(other_site.reload.sold).to be false
+
+    [setting, other_setting].each { |target| described_class.call(crawl_setting: target) }
+    expect(detail_job).not_to have_received(:perform_async).with("missing")
+    expect(detail_job).to have_received(:perform_async).with("still_due")
+  end
+
   it "売れた日のない出品は3時間待ってから確かめること" do
     listing("recent", sold: true, updated_at: 2.hours.ago)
     listing("old", sold: true, updated_at: 4.hours.ago)

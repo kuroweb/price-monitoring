@@ -4,6 +4,7 @@ module ProductMonitoring
       module DetailPage
         class Crawler
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
+          NOT_FOUND_TEXT = "この商品は存在しません".freeze
           DATE_UNITS = { "日" => :days, "週間" => :weeks, "ヶ月" => :months }.freeze
 
           def self.call(...)
@@ -18,7 +19,10 @@ module ProductMonitoring
           def call
             raise ArgumentError, "Invalid external ID" unless external_id.match?(/\A[a-zA-Z0-9_-]+\z/)
 
-            page = Nokogiri::HTML(fetch_page(URI("https://#{ListPage::SearchUrl::HOST}/item/#{external_id}")))
+            html, status = fetch_page("https://#{ListPage::SearchUrl::HOST}/item/#{external_id}")
+            page = Nokogiri::HTML(html)
+            return not_found_result(page) if status == 404
+
             sold = sold_state(page)
             return {} if sold.nil?
 
@@ -31,15 +35,28 @@ module ProductMonitoring
 
           def sold_state(page)
             states = { "https://schema.org/OutOfStock" => true, "https://schema.org/InStock" => false }
-            page.css('script[type="application/ld+json"]').each do |script|
-              json_ld_products(script).each do |product|
-                next unless product.is_a?(Hash) && product["@type"] == "Product" && product["offers"].is_a?(Hash)
+            products(page).each do |product|
+              next unless product["offers"].is_a?(Hash)
 
-                result = states[product["offers"]["availability"]]
-                return result unless result.nil?
-              end
+              result = states[product["offers"]["availability"]]
+              return result unless result.nil?
             end
             nil
+          end
+
+          def not_found_result(page)
+            raise "Non-success HTTP response" if products(page).any?
+
+            page.css("main > aside script, main > aside style").remove
+            found = page.css("main > aside span").any? { |node| node.text.strip == NOT_FOUND_TEXT }
+            raise "Non-success HTTP response" unless found
+
+            { deleted: true }
+          end
+
+          def products(page)
+            page.css('script[type="application/ld+json"]').flat_map { |script| json_ld_products(script) }
+                .select { |product| product.is_a?(Hash) && product["@type"] == "Product" }
           end
 
           def json_ld_products(script)
@@ -64,15 +81,23 @@ module ProductMonitoring
             end
           end
 
-          def fetch_page(uri)
+          def fetch_page(url)
             Client.execute(allow_script_host: "paypayfleamarket.c.yimg.jp") do |page|
-              response = page.goto(uri.to_s)
-              raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
+              status = page.goto(url)&.status
+              raise "Non-success HTTP response" unless status == 404 || status&.between?(200, 299)
 
               validate_url(page)
+              next [checked_not_found_content(page, url), status] if status == 404
+
               Kernel.sleep(2)
-              checked_content(page)
+              [checked_content(page), status]
             end
+          end
+
+          def checked_not_found_content(page, url)
+            raise "Unexpected page URL" unless page.url == url
+
+            checked_content(page).tap { raise "Unexpected page URL" unless page.url == url }
           end
 
           # リダイレクトで別のホストへ移っていないことを確かめる
