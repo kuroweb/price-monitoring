@@ -45,8 +45,8 @@
 | 商品モニタリングの概要 | [商品モニタリング](features/product-monitoring/index.md) | 入口 |
 | 商品モニタリングの外部仕様 | [商品モニタリングの外部仕様](features/product-monitoring/behavior.md) | 解説 |
 | 商品モニタリングの API | [商品モニタリングの API](features/product-monitoring/api.md) | リファレンス |
-| 商品モニタリングの実装 | [商品モニタリングの実装](features/product-monitoring/implementation.md) | 解説 |
-| 商品モニタリングの操作 | [商品モニタリングの操作](features/product-monitoring/operations.md) | ハウツー |
+| 商品モニタリングの内部仕様 | [商品モニタリングの内部仕様](features/product-monitoring/implementation.md) | 解説 |
+| 商品モニタリングのオペレーション | [商品モニタリングのオペレーション](features/product-monitoring/operations.md) | ハウツー |
 | Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
 | frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |
@@ -60,7 +60,7 @@
 
 ## 機能文書の設計
 
-機能文書は、その機能を開発・運用する人が、目的、振る舞い、画面からデータの取得・保存・利用までの流れ、変更時の影響を理解するために書く。機能文書は外部仕様と内部仕様に分ける。外部仕様はビジネス要件で、画面と通知から見える振る舞いである。内部仕様はシステムの契約と実装で、API と実装に分ける。API はエンドポイントごとに表と JSON 例を持つ参照にし、外部仕様には混ぜない。短い機能は一つの index にこの順でまとめてよい。商品モニタリングは概要、外部仕様、API、実装の4ファイルである。領域をまたぐ仕様と設計判断を正本とし、機能一覧の入口を `docs/features/index.md` に置く。すべての機能に文書や同じ章立てを先回りして作る必要はない。
+機能文書は、その機能を開発・運用する人が、目的、振る舞い、画面からデータの取得・保存・利用までの流れ、変更時の影響を理解するために書く。区分は外部仕様、内部仕様、API、オペレーションの4つである。外部仕様は画面と通知から見える振る舞いである。内部仕様は保存、抽出、取得、ジョブの実装である。API は外部仕様ではなく、内部仕様のファイルにも混ぜない。エンドポイントごとに表と JSON 例を持つ契約として独立させる。オペレーションは手順だけを書き、仕様の本文は複製しない。短い機能は一つの index にこの順でまとめてよい。商品モニタリングはこの4ファイルと、入口の index である。領域をまたぐ仕様と設計判断を正本とし、機能一覧の入口を `docs/features/index.md` に置く。すべての機能に文書や同じ章立てを先回りして作る必要はない。
 
 | 知りたいこと | 正本と境界 |
 | --- | --- |

@@ -291,7 +291,7 @@ erDiagram
 
 ## 商品モニタリング
 
-既存の計測対象管理とは独立したテーブル群。モニタリング設定は収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする。設計方針は [商品モニタリングの実装](../features/product-monitoring/implementation.md)、概要は [商品モニタリング](../features/product-monitoring/index.md) を参照する。
+既存の計測対象管理とは独立したテーブル群。モニタリング設定は収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする。設計方針は [商品モニタリングの内部仕様](../features/product-monitoring/implementation.md)、入口は [商品モニタリング](../features/product-monitoring/index.md) を参照する。
 
 ```mermaid
 erDiagram
