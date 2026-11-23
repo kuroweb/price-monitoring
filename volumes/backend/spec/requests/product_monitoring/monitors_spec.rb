@@ -83,7 +83,7 @@ RSpec.describe "モニタリング設定", type: :request do
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(expected.reverse.map(&:id))
   end
 
-  it "詳細は12件ずつ返し、次のページは同じ条件の続きである" do
+  it "詳細は出品をページ間でも重複させずに12件ずつ返す" do
     setting = ProductMonitoring::Monitor.create!(settings)
     undated = create(:product_monitoring_crawl_result, name: "phone", price: 10, sold: true, external_id: "undated")
     items = Array.new(23) do |index|
@@ -91,6 +91,10 @@ RSpec.describe "モニタリング設定", type: :request do
                                                external_id: "item-#{index}",
                                                recency_at: Time.zone.parse("2026-11-01 09:00:00") + index.hours)
     end
+    first_listing = items.last
+    create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false,
+                                             platform: first_listing.platform, external_id: first_listing.external_id,
+                                             recency_at: items.first.recency_at + 1.minute)
     path = "/api/v1/product_monitoring/monitors/#{setting.id}/crawl_results"
 
     get path, params: { sale_status: "all", sort: "newest", page: 1 }

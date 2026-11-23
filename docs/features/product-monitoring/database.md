@@ -83,6 +83,7 @@ erDiagram
 | index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
 | index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | 降順 |
 | index_product_monitoring_crawl_results_on_price_and_id | price, id | id 降順 |
+| idx_product_monitoring_crawl_results_price_id_desc | price, id | 降順 |
 | index_product_monitoring_crawl_results_on_external_id | external_id |  |
 | idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
