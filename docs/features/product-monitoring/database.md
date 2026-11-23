@@ -1,6 +1,6 @@
 # 商品モニタリングの DB
 
-この機能が持つテーブルと、振る舞いに効く列の意味を書く。カラムとインデックスの定義は [ER](../../database/er.md)、テーブル間の外部キーは [アソシエーション](../../database/association.md#商品モニタリング) を正本とする。取得の手順とジョブは [内部仕様](internal-spec.md)、画面から見える規則は [外部仕様](external-spec.md) を参照する。
+この機能が持つテーブル、振る舞いに効く列の意味、テーブル間の関連を書く。関連の正本はこの文書とし、カラムとインデックスの定義は [ER](../../database/er.md) を正本とする。取得の手順とジョブは [内部仕様](internal-spec.md)、画面から見える規則は [外部仕様](external-spec.md) を参照する。
 
 ## テーブル
 
@@ -11,16 +11,29 @@
 | モニタリング設定 | `product_monitoring_monitors` | 複数の収集設定にまたがる表示・集計・通知の条件を持つ |
 | 日次相場 | `product_monitoring_daily_market_prices` | モニタリング設定ごとの日次集計を持つ |
 
-収集設定、収集結果、モニタリング設定、日次相場のつながり。点線は外部キーではない。
+既存の計測対象管理とは独立したテーブル群である。モニタリング設定は収集設定に外部キーを持たず、全収集設定の収集結果を条件でフィルターする。
 
 ```mermaid
-flowchart LR
-    crawl["収集設定"] -->|"1 対 0..多"| result["収集結果"]
-    watch["モニタリング設定"] -->|"1 対 0..多"| daily["日次相場"]
-    watch -. "条件で抽出（外部キーではない）" .-> result
+erDiagram
+  product_monitoring_crawl_settings {
+    bigint id PK
+  }
+  product_monitoring_crawl_results {
+    bigint id PK
+    bigint crawl_setting_id FK
+  }
+  product_monitoring_monitors {
+    bigint id PK
+  }
+  product_monitoring_daily_market_prices {
+    bigint id PK
+    bigint monitor_id FK
+  }
+  product_monitoring_crawl_settings ||--o{ product_monitoring_crawl_results : ""
+  product_monitoring_monitors ||--o{ product_monitoring_daily_market_prices : ""
 ```
 
-収集結果は一つの収集設定に属し、日次相場は一つのモニタリング設定に属する。モニタリング設定と収集設定の間に外部キーはなく、全設定の収集結果を条件で選ぶ。収集結果は URL には属さない。同じ収集設定の複数 URL で見つかった出品は1行にし、別の収集設定で見つかれば設定ごとに行ができる。
+収集結果は一つの収集設定に属し、日次相場は一つのモニタリング設定に属する。収集結果は URL には属さない。同じ収集設定の複数 URL で見つかった出品は1行にし、別の収集設定で見つかれば設定ごとに行ができる。
 
 ## 収集結果の列
 
