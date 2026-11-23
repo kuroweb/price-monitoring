@@ -167,7 +167,7 @@ export default function MonitorDetail({
         <div>
           <h2 id='watch-listings' className='text-lg font-semibold'>新着の収集結果</h2>
           <p className='mt-1 text-sm text-base-content/60'>
-            抽出条件に合う保存済みの収集結果を、売り切れも含めて表示します。1ページに最大12件を表示します。新着順では、売れた日が未取得の売り切れを末尾に置きます。在庫はリアルタイムではありません。
+            在庫は集めた時点のものです。新着順では、売れた日が未取得の売り切れを末尾に置きます。
           </p>
         </div>
         {items === null ? (
