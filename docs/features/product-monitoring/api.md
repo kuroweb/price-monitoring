@@ -958,17 +958,20 @@ id で指定したモニタリング設定と、その日次相場を削除す�
 
 ## `GET /api/v1/product_monitoring/monitors/:id/crawl_results`
 
-抽出条件に合う、除外されていない収集結果を返す。同じ出品は1件。`sale_status`、`sort`、`page` のいずれもないときは、新着順の最大8件で、売れた日が無い売り切れは含まない。いずれかがあるときは詳細の1ページで、売れた日が無い売り切れは新着順の末尾に含む。1ページは6件。詳細は一度に全件を返さない。
+抽出条件に合う、除外されていない収集結果を返す。同じ出品は1件。`sale_status`、`sort`、`cursor` のいずれもないときは、新着順の最大8件で、売れた日が無い売り切れは含まない。いずれかがあるときは詳細の6件で、売れた日が無い売り切れは新着順の末尾に含む。続きはページ番号ではなく、前の最後の行のカーソルから取る。新着順のカーソルは `recency_at` と `id`。`recency_at` が空の行は、空のグループの中の `id`。価格順のカーソルは `price` と `id`。`page` は受け取らない。詳細は一度に全件を返さない。
 
 | 場所 | 名前 | 型 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
 | path | id | integer | 必須 | モニタリング設定の id |
-| query | sale_status | string | 任意 | 詳細の販売状態。`all`（すべて）、`on_sale`（販売中。`sold` が true でないもの）、`sold`（売り切れ）。省略時は `all`。この項目、`sort`、`page` のいずれかがあると詳細の1ページを返す |
+| query | sale_status | string | 任意 | 詳細の販売状態。`all`（すべて）、`on_sale`（販売中。`sold` が true でないもの）、`sold`（売り切れ）。省略時は `all`。この項目、`sort`、`cursor` のいずれかがあると詳細の6件を返す |
 | query | sort | string | 任意 | 詳細の並び。`newest`（新着順。`recency_at` の降順、空は末尾、同じ位置は id の降順）、`price_asc`（価格の安い順）、`price_desc`（価格の高い順）。価格が同じときは id の降順。省略時は `newest` |
-| query | page | integer | 任意 | 詳細のページ。1から。省略時は 1 |
+| query | cursor[id] | integer | 任意 | 続きの起点の id。前に返した `cursor.id`。無いときは先頭から |
+| query | cursor[recency_at] | string | 任意 | 新着順の続き。前の最後の `recency_at`（小数秒を省略せず、そのまま送る）。空のグループの続きでは送らない |
+| query | cursor[price] | integer | 任意 | 価格順の続き。前の最後の `price` |
 
 ```
-/api/v1/product_monitoring/monitors/1/crawl_results?sale_status=all&sort=newest&page=1
+/api/v1/product_monitoring/monitors/1/crawl_results?sale_status=all&sort=newest
+/api/v1/product_monitoring/monitors/1/crawl_results?sale_status=all&sort=newest&cursor[id]=10&cursor[recency_at]=2026-11-20T09:00:00.000%2B09:00
 ```
 
 リクエストボディなし。
@@ -977,7 +980,7 @@ id で指定したモニタリング設定と、その日次相場を削除す�
 
 | 名前 | 型 | 説明 |
 | --- | --- | --- |
-| crawl_results | array | 収集結果。詳細のときは指定した並びの1ページ、一覧のときは新着の新しい順で最大8件 |
+| crawl_results | array | 収集結果。詳細のときは指定した並びの6件、一覧のときは新着の新しい順で最大8件 |
 | crawl_results[].id | integer | 収集結果の id |
 | crawl_results[].crawl_setting_id | integer | 収集設定の id |
 | crawl_results[].platform | string | サイト |
@@ -994,9 +997,12 @@ id で指定したモニタリング設定と、その日次相場を削除す�
 | crawl_results[].created_at | string | 作成日時。ISO 8601 |
 | crawl_results[].updated_at | string | 更新日時。ISO 8601 |
 | crawl_results[].recency_at | string または null | 新着順の時刻。売れた日が無い売り切れは null |
-| page | integer | 詳細のページ。1から。一覧のときは無い |
-| per_page | integer | 詳細の1ページの件数。6。一覧のときは無い |
+| per_page | integer | 詳細の件数。6。一覧のときは無い |
 | has_more | boolean | 詳細で、同じ条件の続きがあるとき true。一覧のときは無い |
+| cursor | object または null | 詳細で、この応答の最後の行の並びキーと id。結果が空のときは null。一覧のときは無い |
+| cursor.id | integer | 最後の行の id |
+| cursor.recency_at | string または null | 新着順のとき。売れた日が無い売り切れは null |
+| cursor.price | integer | 価格順のとき |
 
 ```json
 {
@@ -1020,9 +1026,12 @@ id で指定したモニタリング設定と、その日次相場を削除す�
       "recency_at": "2026-11-20T09:00:00.000+09:00"
     }
   ],
-  "page": 1,
   "per_page": 6,
-  "has_more": false
+  "has_more": false,
+  "cursor": {
+    "recency_at": "2026-11-20T09:00:00.000+09:00",
+    "id": 10
+  }
 }
 ```
 
@@ -1046,19 +1055,19 @@ id で指定したモニタリング設定と、その日次相場を削除す�
 
 **400**
 
-`sale_status`、`sort`、`page` のいずれかが不正なとき。
+`sale_status`、`sort`、`cursor` のいずれかが不正なとき。
 
 | 名前 | 型 | 説明 |
 | --- | --- | --- |
 | error.code | integer | 400 |
-| error.message | string | `販売状態が不正です`、`並びが不正です`、`page は1以上の整数で指定してください` のいずれか |
+| error.message | string | `販売状態が不正です`、`並びが不正です`、`カーソルが不正です` のいずれか |
 | error.details | array | 空配列 |
 
 ```json
 {
   "error": {
     "code": 400,
-    "message": "page は1以上の整数で指定してください",
+    "message": "カーソルが不正です",
     "details": []
   }
 }

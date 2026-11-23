@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react'
+import { act, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
@@ -84,23 +84,29 @@ describe('商品モニタリング詳細', () => {
   })
 
   it('もっと見るで続きを足し、販売状態と並びを変えると先頭から取り直す', async () => {
-    const result = (items: CrawlResult[], hasMore: boolean) => ({
-      data: { crawlResults: items, page: 1, perPage: 6, hasMore }, status: 200 as const, error: null,
+    const result = (
+      items: CrawlResult[],
+      hasMore: boolean,
+      cursor: { id: number; recencyAt?: string | null; price?: number } | null,
+    ) => ({
+      data: { crawlResults: items, perPage: 6, hasMore, cursor }, status: 200 as const, error: null,
     })
     const first = { ...listing, id: 1, name: '先頭' }
+    const firstCursor = { id: 1, recencyAt: '2026-11-20T09:00:00.000+09:00' }
     const more = { ...listing, id: 2, name: '続き' }
     const soldFirst = { ...listing, id: 3, name: '売り切れの先頭', sold: true }
+    const soldCursor = { id: 3, recencyAt: '2026-11-22T09:00:00.000+09:00' }
     const soldMore = { ...listing, id: 4, name: '売り切れの続き', sold: true }
     const pricey = { ...listing, id: 5, name: '高い順の先頭', price: 90_000, sold: true }
     vi.mocked(getMonitorCrawlResults)
-      .mockResolvedValueOnce(result([more], false))
-      .mockResolvedValueOnce(result([soldFirst], true))
-      .mockResolvedValueOnce(result([soldMore], false))
-      .mockResolvedValueOnce(result([pricey], false))
+      .mockResolvedValueOnce(result([more], false, { id: 2, recencyAt: '2026-11-21T09:00:00.000+09:00' }))
+      .mockResolvedValueOnce(result([soldFirst], true, soldCursor))
+      .mockResolvedValueOnce(result([soldMore], false, { id: 4, recencyAt: null }))
+      .mockResolvedValueOnce(result([pricey], false, { id: 5, price: 90_000 }))
     const user = userEvent.setup()
     render(
-      <MonitorDetail monitor={monitor} crawlResults={[first]} hasMore dailyMarketPrices={[]} transactions={[]}
-        discordConfigured={false} />,
+      <MonitorDetail monitor={monitor} crawlResults={[first]} hasMore cursor={firstCursor}
+        dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />,
     )
 
     expect(screen.getByText('先頭')).toBeInTheDocument()
@@ -109,24 +115,111 @@ describe('商品モニタリング詳細', () => {
     await user.click(screen.getByRole('button', { name: 'もっと見る' }))
     await waitFor(() => expect(screen.getByText('続き')).toBeInTheDocument())
     expect(screen.getByText('先頭')).toBeInTheDocument()
-    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'all', sort: 'newest', page: 2 })
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, {
+      saleStatus: 'all', sort: 'newest', cursor: firstCursor,
+    })
 
     await user.click(screen.getByRole('button', { name: '売り切れ' }))
     await waitFor(() => expect(screen.getByText('売り切れの先頭')).toBeInTheDocument())
     expect(screen.queryByText('先頭')).not.toBeInTheDocument()
     expect(screen.queryByText('続き')).not.toBeInTheDocument()
-    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'newest', page: 1 })
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'newest' })
 
     await user.click(screen.getByRole('button', { name: 'もっと見る' }))
     await waitFor(() => expect(screen.getByText('売り切れの続き')).toBeInTheDocument())
     expect(screen.getByText('売り切れの先頭')).toBeInTheDocument()
-    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'newest', page: 2 })
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, {
+      saleStatus: 'sold', sort: 'newest', cursor: soldCursor,
+    })
 
     await user.selectOptions(screen.getByRole('combobox', { name: '並び順' }), 'price_desc')
     await waitFor(() => expect(screen.getByText('高い順の先頭')).toBeInTheDocument())
     expect(screen.queryByText('売り切れの先頭')).not.toBeInTheDocument()
     expect(screen.queryByText('売り切れの続き')).not.toBeInTheDocument()
-    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'price_desc', page: 1 })
+    expect(getMonitorCrawlResults).toHaveBeenLastCalledWith(1, { saleStatus: 'sold', sort: 'price_desc' })
+  })
+
+  it('もっと見るは画面にある id を足さない', async () => {
+    const first = { ...listing, id: 1, name: '先頭' }
+    const more = { ...listing, id: 2, name: '続き' }
+    vi.mocked(getMonitorCrawlResults).mockResolvedValueOnce({
+      data: {
+        crawlResults: [first, more],
+        perPage: 6,
+        hasMore: false,
+        cursor: { id: 2, recencyAt: '2026-11-21T09:00:00.000+09:00' },
+      },
+      status: 200,
+      error: null,
+    })
+    const user = userEvent.setup()
+    render(
+      <MonitorDetail monitor={monitor} crawlResults={[first]} hasMore
+        cursor={{ id: 1, recencyAt: '2026-11-20T09:00:00.000+09:00' }}
+        dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />,
+    )
+
+    await user.click(screen.getByRole('button', { name: 'もっと見る' }))
+    await waitFor(() => expect(screen.getByText('続き')).toBeInTheDocument())
+    expect(screen.getAllByText('先頭')).toHaveLength(1)
+  })
+
+  it.each(['response', 'exception'])('もっと見るが失敗しても同じカーソルで再試行できる: %s', async (failure) => {
+    const cursor = { id: listing.id, recencyAt: '2026-11-20T09:00:00.000+09:00' }
+    const more = { ...listing, id: 8, name: '続き' }
+    if (failure === 'exception') {
+      vi.mocked(getMonitorCrawlResults).mockRejectedValueOnce(new Error('network'))
+    } else {
+      vi.mocked(getMonitorCrawlResults).mockResolvedValueOnce({ data: null, status: 500, error: null })
+  }
+  vi.mocked(getMonitorCrawlResults).mockResolvedValueOnce({
+      data: {
+        crawlResults: [more],
+        perPage: 6,
+        hasMore: false,
+        cursor: { id: more.id, recencyAt: '2026-11-21T09:00:00.000+09:00' },
+      },
+      status: 200,
+      error: null,
+    })
+    const user = userEvent.setup()
+    render(
+      <MonitorDetail monitor={monitor} crawlResults={[listing]} hasMore cursor={cursor}
+        dailyMarketPrices={[]} transactions={[]} discordConfigured={false} />,
+    )
+
+    await user.click(screen.getByRole('button', { name: 'もっと見る' }))
+    await waitFor(() => {
+      expect(screen.getByRole('alert')).toHaveTextContent('収集結果を取得できませんでした。もう一度試してください。')
+    })
+    expect(screen.getByRole('button', { name: 'もっと見る' })).toBeEnabled()
+    expect(screen.getByText('iPad 128GB')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'もっと見る' }))
+    await waitFor(() => expect(screen.getByText('続き')).toBeInTheDocument())
+    expect(getMonitorCrawlResults).toHaveBeenNthCalledWith(1, 1, { saleStatus: 'all', sort: 'newest', cursor })
+    expect(getMonitorCrawlResults).toHaveBeenNthCalledWith(2, 1, { saleStatus: 'all', sort: 'newest', cursor })
+  })
+
+  it('再読み込み後に古い続きの応答が戻っても更新済みの表示を保つ', async () => {
+    let resolve!: (value: Awaited<ReturnType<typeof getMonitorCrawlResults>>) => void
+    vi.mocked(getMonitorCrawlResults).mockReturnValueOnce(new Promise((done) => { resolve = done }))
+    const props = {
+      monitor, crawlResults: [listing], hasMore: true,
+      cursor: { id: listing.id, recencyAt: null },
+      dailyMarketPrices: [], transactions: [], discordConfigured: false,
+    }
+    const { rerender } = render(<MonitorDetail {...props} />)
+    await userEvent.click(screen.getByRole('button', { name: 'もっと見る' }))
+    const refreshed = { ...listing, id: 9, name: '更新済み' }
+    rerender(<MonitorDetail {...props} crawlResults={[refreshed]} hasMore={false} cursor={null} />)
+
+    await act(async () => resolve({
+      data: { crawlResults: [listing], hasMore: true, cursor: props.cursor }, status: 200, error: null,
+    }))
+    expect(screen.getByText('更新済み')).toBeInTheDocument()
+    expect(screen.queryByText(listing.name)).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'もっと見る' })).not.toBeInTheDocument()
   })
 
   it('除外に失敗した場合はエラーを示し画面を更新しない', async () => {

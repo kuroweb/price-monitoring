@@ -53,6 +53,25 @@ describe('http（ブラウザー）', () => {
     })
   })
 
+  it('ネストした検索条件を送り、null は除くこと', async () => {
+    fetchMock.mockResolvedValue(new Response('{}'))
+
+    await http('/api/v1/product_monitoring/monitors/1/crawl_results', {
+      params: {
+        saleStatus: 'all',
+        sort: 'newest',
+        cursor: { id: 10, recencyAt: '2026-11-20T09:00:00.000+09:00', price: null },
+      },
+    })
+
+    const url = new URL(String(fetchMock.mock.calls[0][0]))
+    expect(url.searchParams.get('sale_status')).toBe('all')
+    expect(url.searchParams.get('sort')).toBe('newest')
+    expect(url.searchParams.get('cursor[id]')).toBe('10')
+    expect(url.searchParams.get('cursor[recency_at]')).toBe('2026-11-20T09:00:00.000+09:00')
+    expect(url.searchParams.has('cursor[price]')).toBe(false)
+  })
+
   it('ネストした送信データを変換し、指定したメソッドとヘッダーを使うこと', async () => {
     fetchMock.mockResolvedValue(new Response('{}', { status: 201 }))
     const data = {

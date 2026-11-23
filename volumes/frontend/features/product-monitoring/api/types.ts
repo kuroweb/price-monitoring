@@ -56,16 +56,21 @@ export type GetCrawlResults = {
 export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolean }
 export type MonitorSaleStatus = 'all' | 'on_sale' | 'sold'
 export type MonitorCrawlResultSort = 'newest' | 'price_asc' | 'price_desc'
+export type MonitorCrawlResultCursor = {
+  id: number
+  recencyAt?: string | null
+  price?: number
+}
 export type GetMonitorCrawlResultsParams = {
   saleStatus?: MonitorSaleStatus
   sort?: MonitorCrawlResultSort
-  page?: number
+  cursor?: MonitorCrawlResultCursor
 }
 export type GetMonitorCrawlResults = {
   crawlResults: CrawlResult[]
-  page?: number
   perPage?: number
   hasMore?: boolean
+  cursor?: MonitorCrawlResultCursor | null
 }
 export type GetDailyMarketPrices = { dailyMarketPrices: DailyMarketPrice[] }
 export type GetMonitorTransactions = { transactions: CrawlResult[] }
