@@ -6,6 +6,7 @@ import { searchCrawlResults } from '@/features/product-monitoring/api/actions'
 import type {
   ExtractionCriteria,
   MonitorCrawlResultSort,
+  MonitorSaleStatus,
   SearchCrawlResultsPage,
 } from '@/features/product-monitoring/api/types'
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
@@ -14,6 +15,11 @@ import ResultPagination from '@/features/product-monitoring/components/ResultPag
 import { words } from '@/features/product-monitoring/lib/words'
 import { formatYen } from '@/lib/format'
 
+const STATUS_FILTERS = [
+  ['all', 'すべて'],
+  ['on_sale', '販売中'],
+  ['sold', '売り切れ'],
+] as const
 const SORTS = [
   ['newest', '新着順'],
   ['price_asc', '価格の安い順'],
@@ -29,7 +35,12 @@ type SearchInput = Pick<ExtractionCriteria, 'minPrice' | 'maxPrice'> & {
   excluded: string
 }
 
-type DisplayedSearch = { input: SearchInput; sort: MonitorCrawlResultSort; results: SearchCrawlResultsPage }
+type DisplayedSearch = {
+  input: SearchInput
+  saleStatus: MonitorSaleStatus
+  sort: MonitorCrawlResultSort
+  results: SearchCrawlResultsPage
+}
 
 function extractionCriteria({ required, excluded, minPrice, maxPrice }: SearchInput): ExtractionCriteria {
   return { requiredKeywords: words(required), negativeKeywords: words(excluded), minPrice, maxPrice }
@@ -94,16 +105,18 @@ export default function CrawlResultSearch() {
     filterToggleRef.current?.focus()
   }
 
-  const search = async (submitted: SearchInput, sort: MonitorCrawlResultSort, page: number) => {
+  const search = async (
+    submitted: SearchInput, saleStatus: MonitorSaleStatus, sort: MonitorCrawlResultSort, page: number,
+  ) => {
     if (inFlightRef.current) return
 
     inFlightRef.current = true
     setLoading(true)
     setError('')
     try {
-      const response = await searchCrawlResults({ ...extractionCriteria(submitted), sort, page })
+      const response = await searchCrawlResults({ ...extractionCriteria(submitted), saleStatus, sort, page })
       if (response.data) {
-        setDisplayed({ input: submitted, sort, results: response.data })
+        setDisplayed({ input: submitted, saleStatus, sort, results: response.data })
       } else {
         setError(response.error?.message ?? '収集結果を取得できませんでした。')
       }
@@ -123,7 +136,7 @@ export default function CrawlResultSearch() {
           aria-label='検索条件'
           onSubmit={(event) => {
             event.preventDefault()
-            void search(input, displayed?.sort ?? 'newest', 1)
+            void search(input, displayed?.saleStatus ?? 'all', displayed?.sort ?? 'newest', 1)
           }}
         >
           <fieldset disabled={loading} className='grid min-w-0 gap-3'>
@@ -212,7 +225,9 @@ export default function CrawlResultSearch() {
                   aria-label='並び順'
                   value={displayed.sort}
                   disabled={loading}
-                  onChange={(event) => void search(displayed.input, event.target.value as MonitorCrawlResultSort, 1)}
+                  onChange={(event) => void search(
+                    displayed.input, displayed.saleStatus, event.target.value as MonitorCrawlResultSort, 1,
+                  )}
                 >
                   {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
                 </select>
@@ -227,6 +242,25 @@ export default function CrawlResultSearch() {
               </>
             )}
           </header>
+          {displayed && (
+            <div className='join' role='group' aria-label='販売状態'>
+              {STATUS_FILTERS.map(([value, label]) => (
+                <button
+                  key={value}
+                  type='button'
+                  className={`btn join-item btn-sm ${displayed.saleStatus === value ? 'btn-primary' : 'btn-ghost'}`}
+                  aria-pressed={displayed.saleStatus === value}
+                  disabled={loading}
+                  onClick={() => {
+                    if (value === displayed.saleStatus) return
+                    void search(displayed.input, value, displayed.sort, 1)
+                  }}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+          )}
           {loading && <p role='status' className='text-sm text-base-content/70'>検索中…</p>}
           {error && <p role='alert' className='text-sm text-error'>{error}</p>}
           {displayed && appliedLabels.length > 0 && <CriteriaSummary label='適用中' values={appliedLabels} />}
@@ -251,7 +285,7 @@ export default function CrawlResultSearch() {
                 page={displayed.results.page}
                 hasMore={displayed.results.hasMore}
                 disabled={loading}
-                onChange={(page) => void search(displayed.input, displayed.sort, page)}
+                onChange={(page) => void search(displayed.input, displayed.saleStatus, displayed.sort, page)}
               />
               {creatingMonitor && (
                 <MonitorFormModal
