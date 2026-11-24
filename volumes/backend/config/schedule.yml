@@ -1,6 +1,28 @@
-product_monitoring_enqueue_sync_job:
+# 定期取得はサイトごとに登録し、cron でサイトごとの頻度を決める。サイトを追加したら、ここにも登録する
+product_monitoring_mercari_enqueue_sync_job:
   cron: "*/10 * * * *"
   class: "ProductMonitoring::Crawling::EnqueueSyncJob"
+  args: ["mercari"]
+product_monitoring_iosys_enqueue_sync_job:
+  cron: "*/10 * * * *"
+  class: "ProductMonitoring::Crawling::EnqueueSyncJob"
+  args: ["iosys"]
+product_monitoring_janpara_enqueue_sync_job:
+  cron: "*/15 * * * *"
+  class: "ProductMonitoring::Crawling::EnqueueSyncJob"
+  args: ["janpara"]
+product_monitoring_yahoo_fleamarket_enqueue_sync_job:
+  cron: "*/10 * * * *"
+  class: "ProductMonitoring::Crawling::EnqueueSyncJob"
+  args: ["yahoo_fleamarket"]
+product_monitoring_yahoo_auction_enqueue_sync_job:
+  cron: "*/10 * * * *"
+  class: "ProductMonitoring::Crawling::EnqueueSyncJob"
+  args: ["yahoo_auction"]
+product_monitoring_treasure_factory_enqueue_sync_job:
+  cron: "*/10 * * * *"
+  class: "ProductMonitoring::Crawling::EnqueueSyncJob"
+  args: ["treasure_factory"]
 product_monitoring_enqueue_aggregation_job:
   cron: "0 0 * * *"
   class: "ProductMonitoring::Aggregation::EnqueueAggregationJob"
