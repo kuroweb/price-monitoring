@@ -541,7 +541,7 @@ id で指定した収集設定を削除する。
 
 ## `POST /api/v1/product_monitoring/crawl_results/search`
 
-共有の保存済み収集結果から、抽出条件に一致する除外されていない出品を1ページ返す。収集や保存は実行しない。
+共有の保存済み収集結果から、抽出条件に一致する除外されていない出品を1ページ返す。販売状態はモニタリング設定の詳細と同じ意味で、`sold` が true のものを売り切れ、true でないもの（不明を含む）を販売中とする。収集や保存は実行しない。
 
 | body | 型 | 説明 |
 | --- | --- | --- |
@@ -549,11 +549,12 @@ id で指定した収集設定を削除する。
 | negative_keywords | string の配列 | 各255文字、50件まで。省略時は空 |
 | min_price | integer または null | 0以上2147483647以下。省略または null は下限なし |
 | max_price | integer または null | 0以上2147483647以下。省略または null は上限なし。下限以上 |
+| sale_status | string | `all`（すべて）、`on_sale`（販売中。`sold` が true でないもの。不明を含む）、`sold`（売り切れ。`sold` が true）。省略時は `all`。モニタリング設定の詳細と同じ |
 | sort | string | `newest`、`price_asc`、`price_desc`。省略時は `newest` |
 | page | integer | 1以上。省略時は1 |
 
 ```json
-{ "required_keywords": ["iPad", "Pro"], "negative_keywords": ["ケース"], "min_price": 1000, "page": 1 }
+{ "required_keywords": ["iPad", "Pro"], "negative_keywords": ["ケース"], "min_price": 1000, "sale_status": "on_sale", "sort": "newest", "page": 1 }
 ```
 
 **200**
@@ -569,7 +570,7 @@ id で指定した収集設定を削除する。
 { "crawl_results": [], "page": 1, "per_page": 12, "has_more": false }
 ```
 
-抽出条件・並び順・ページが不正な場合は400を返す。
+抽出条件・販売状態・並び順・ページが不正な場合は400を返す。
 
 ## `PATCH /api/v1/product_monitoring/crawl_results/:id`
 

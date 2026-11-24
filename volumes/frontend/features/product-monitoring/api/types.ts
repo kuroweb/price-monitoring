@@ -59,6 +59,7 @@ export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolea
 export type MonitorSaleStatus = 'all' | 'on_sale' | 'sold'
 export type MonitorCrawlResultSort = 'newest' | 'price_asc' | 'price_desc'
 export type SearchCrawlResultsParams = ExtractionCriteria & {
+  saleStatus: MonitorSaleStatus
   sort: MonitorCrawlResultSort
   page: number
 }

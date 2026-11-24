@@ -15,7 +15,7 @@ sequenceDiagram
     participant daily as 日次相場の集計
     participant discord as Discord
     user->>crawl: 収集設定を登録し「取得して保存」
-    loop 有効な収集設定を10分ごと
+    loop 有効な収集設定をサイトごとの頻度（10分または15分ごと）
         crawl->>site: 検索結果を取得
         crawl->>result: 収集結果を保存
     end
@@ -39,7 +39,7 @@ sequenceDiagram
 | --- | --- | --- | --- |
 | 収集設定の一覧 | `/product-monitoring/crawl-settings` | 設定ごとの新着最大 8 件の収集結果 | 追加・編集・複製・削除 |
 | 収集設定の詳細 | `/product-monitoring/crawl-settings/<id>` | 有効状態・サイト数・検索結果 URL 数・件数、収集結果（販売状態の絞り込みと並び替え） | 設定の編集、取得して保存、収集結果の除外・削除 |
-| 収集結果を検索 | `/product-monitoring/crawl-results/search` | 全収集設定の保存済み結果 | 抽出条件による検索、並び替え、検索条件を引き継いだモニタリング設定の登録 |
+| 収集結果を検索 | `/product-monitoring/crawl-results/search` | 全収集設定の保存済み結果 | 抽出条件による検索、販売状態の切り替え、並び替え、ページ切り替え、検索条件を引き継いだモニタリング設定の登録 |
 | モニタリング設定の一覧 | `/product-monitoring/monitors` | 販売中の最安値、直近の平均取引価格、新着順の収集結果 | 追加・編集・複製・削除、収集結果の除外・削除 |
 | モニタリング設定の詳細 | `/product-monitoring/monitors/<id>` | 抽出条件、通知の評価状態、収集結果、日次相場 | 条件の編集、販売状態の切り替え、並び替え、もっと見る、直近30日の集計、収集結果の除外・削除 |
 
@@ -65,7 +65,7 @@ sequenceDiagram
 
 ## モニタリング設定と日次相場の確認
 
-検索から登録する場合は、サイドバーの「収集結果を検索」を開いて必須語を入力する。除外語や価格帯を指定するときは「絞り込み」を開き、「絞り込んで検索」を選ぶ。検索結果の「この条件でモニタリングを作成」を選ぶと、適用中の検索条件が登録欄に入る。名前を入力し、必要に応じて条件と通知を編集して「登録」を選ぶ。
+検索から登録する場合は、サイドバーの「収集結果を検索」を開いて必須語を入力する。除外語や価格帯を指定するときは「絞り込み」を開き、「絞り込んで検索」を選ぶ。検索結果の「すべて」「販売中」「売り切れ」で販売状態を切り替える。件数、並び、売れた日が無い売り切れの扱いは[外部仕様](external-spec.md#収集結果の検索)を参照する。「この条件でモニタリングを作成」を選ぶと、適用中の検索条件が登録欄に入る。名前を入力し、必要に応じて条件と通知を編集して「登録」を選ぶ。
 
 1. サイドバーの「モニタリング設定」から `/product-monitoring/monitors` を開き、「モニタリング設定を追加」を選ぶ。
 2. 名前と抽出条件（必須語・除外語・価格帯）を入力し、受け取りたい通知のチェックボックスを選ぶ。通知は[Discord 通知の受け取り](#discord-通知の受け取り)を参照する。
@@ -88,7 +88,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant site as サイト
-    participant crawl as 取得（10分ごと）
+    participant crawl as 取得（サイトごとに10分または15分ごと）
     participant db as 収集結果
     participant eval as 通知の評価（1分ごと）
     participant discord as Discord
