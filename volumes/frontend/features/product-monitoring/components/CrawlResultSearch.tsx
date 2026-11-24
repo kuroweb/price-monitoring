@@ -23,8 +23,9 @@ const SORTS = [
 type SearchInput = Pick<ExtractionCriteria, 'minPrice' | 'maxPrice'> & {
   required: string
   excluded: string
-  sort: MonitorCrawlResultSort
 }
+
+type DisplayedSearch = { input: SearchInput; sort: MonitorCrawlResultSort; results: SearchCrawlResultsPage }
 
 function extractionCriteria({ required, excluded, minPrice, maxPrice }: SearchInput): ExtractionCriteria {
   return { requiredKeywords: words(required), negativeKeywords: words(excluded), minPrice, maxPrice }
@@ -32,26 +33,30 @@ function extractionCriteria({ required, excluded, minPrice, maxPrice }: SearchIn
 
 export default function CrawlResultSearch() {
   const [input, setInput] = useState<SearchInput>({
-    required: '', excluded: '', minPrice: null, maxPrice: null, sort: 'newest',
+    required: '', excluded: '', minPrice: null, maxPrice: null,
   })
-  const [displayed, setDisplayed] = useState<{ input: SearchInput; results: SearchCrawlResultsPage } | null>(null)
+  const [displayed, setDisplayed] = useState<DisplayedSearch | null>(null)
   const [creatingMonitor, setCreatingMonitor] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const inFlightRef = useRef(false)
+  const hasDraftChanges = displayed && (
+    input.required !== displayed.input.required || input.excluded !== displayed.input.excluded ||
+    input.minPrice !== displayed.input.minPrice || input.maxPrice !== displayed.input.maxPrice
+  )
 
   const change = (patch: Partial<SearchInput>) => setInput((value) => ({ ...value, ...patch }))
 
-  const search = async (submitted: SearchInput, page: number) => {
+  const search = async (submitted: SearchInput, sort: MonitorCrawlResultSort, page: number) => {
     if (inFlightRef.current) return
 
     inFlightRef.current = true
     setLoading(true)
     setError('')
     try {
-      const response = await searchCrawlResults({ ...extractionCriteria(submitted), sort: submitted.sort, page })
+      const response = await searchCrawlResults({ ...extractionCriteria(submitted), sort, page })
       if (response.data) {
-        setDisplayed({ input: submitted, results: response.data })
+        setDisplayed({ input: submitted, sort, results: response.data })
       } else {
         setError(response.error?.message ?? '収集結果を取得できませんでした。')
       }
@@ -66,12 +71,18 @@ export default function CrawlResultSearch() {
   return (
     <>
       <h1 className='card-title'>収集結果を検索</h1>
-      <form onSubmit={(event) => {
-        event.preventDefault()
-        void search(input, 1)
-      }}>
-        <fieldset disabled={loading} className='space-y-3'>
+      <form
+        aria-labelledby='search-criteria'
+        className='rounded-box bg-base-200 p-4'
+        onSubmit={(event) => {
+          event.preventDefault()
+          void search(input, displayed?.sort ?? 'newest', 1)
+        }}
+      >
+        <h2 id='search-criteria' className='mb-4 font-semibold'>検索条件</h2>
+        <fieldset disabled={loading} className='min-w-0 space-y-4'>
           <ExtractionCriteriaFields
+            className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'
             required={input.required}
             excluded={input.excluded}
             minPrice={input.minPrice}
@@ -80,57 +91,77 @@ export default function CrawlResultSearch() {
             onExcludedChange={(excluded) => change({ excluded })}
             onPriceChange={change}
           />
-          <div className='flex flex-wrap items-end gap-3'>
-            <label>
-              並び順
-              <select
-                className='select block w-auto'
-                value={input.sort}
-                onChange={(event) => change({ sort: event.target.value as MonitorCrawlResultSort })}
-              >
-                {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-              </select>
-            </label>
-            <button type='submit' className='btn btn-primary'>{loading ? '検索中…' : '検索'}</button>
+          <div className='flex justify-end border-t border-base-content/10 pt-3'>
+            <button type='submit' className='btn btn-primary w-full sm:w-auto sm:min-w-28'>検索</button>
           </div>
         </fieldset>
       </form>
-      {error && <p role='alert' className='text-error'>{error}</p>}
-      {!displayed && !error && !loading && <p>「検索」を押すと、保存済みの収集結果を表示します。</p>}
-      {displayed && (
-        <section className='space-y-3 pt-3' aria-label='検索結果' aria-busy={loading}>
-          <div className='flex flex-wrap items-center justify-between gap-2'>
+      {(displayed || loading || error) && (
+        <section className='space-y-4 rounded-box bg-base-200 p-4' aria-label='検索結果'>
+          <header className='grid grid-cols-[1fr_auto] items-center gap-3 sm:grid-cols-[1fr_auto_auto]'>
             <h2 className='text-lg font-semibold'>検索結果</h2>
-            <button type='button' className='btn' disabled={loading} onClick={() => setCreatingMonitor(true)}>
-              この条件でモニタリングを作成
-            </button>
-          </div>
-          {displayed.input !== input && <p className='text-sm'>表示中の結果とモニタリング設定には、前回の検索条件が使われます。</p>}
-          {displayed.results.crawlResults.length === 0 ? (
-            <p>該当する収集結果はありません。</p>
-          ) : (
-            <div className='grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8'>
-              {displayed.results.crawlResults.map((item) => <CrawlResultCard key={item.id} crawlResult={item} />)}
-            </div>
+            {displayed && (
+              <>
+                <select
+                  className='select select-sm w-auto max-sm:min-h-10'
+                  aria-label='並び順'
+                  value={displayed.sort}
+                  disabled={loading}
+                  onChange={(event) => void search(displayed.input, event.target.value as MonitorCrawlResultSort, 1)}
+                >
+                  {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+                </select>
+                <button
+                  type='button'
+                  className='btn btn-outline btn-primary col-span-2 h-auto min-h-10 w-full py-2 whitespace-normal text-base-content sm:col-span-1 sm:w-auto'
+                  disabled={loading}
+                  onClick={() => setCreatingMonitor(true)}
+                >
+                  この条件でモニタリングを作成
+                </button>
+              </>
+            )}
+          </header>
+          {loading && <p role='status' className='text-sm text-base-content/70'>検索中…</p>}
+          {error && <p role='alert' className='text-sm text-error'>{error}</p>}
+          {hasDraftChanges && (
+            <p className='text-sm text-base-content/70'>
+              編集中の条件は未反映です。モニタリングの作成には表示中の検索条件を使います。
+            </p>
           )}
-          <ResultPagination
-            label='検索結果のページ'
-            page={displayed.results.page}
-            hasMore={displayed.results.hasMore}
-            disabled={loading}
-            onChange={(page) => void search(displayed.input, page)}
-          />
-          {creatingMonitor && (
-            <MonitorFormModal
-              initial={{
-                ...extractionCriteria(displayed.input),
-                name: '',
-                enabled: false,
-                discordEnabled: true,
-                newestNotificationEnabled: false,
-              }}
-              onClose={() => setCreatingMonitor(false)}
-            />
+          {displayed && (
+            <>
+              {displayed.results.crawlResults.length === 0 ? (
+                <p className='rounded-box bg-base-300 px-3 py-6 text-center text-sm text-base-content/70'>
+                  該当する収集結果はありません。
+                </p>
+              ) : (
+                <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
+                  {displayed.results.crawlResults.map((item) => (
+                    <li key={item.id} className='min-w-0'><CrawlResultCard crawlResult={item} /></li>
+                  ))}
+                </ul>
+              )}
+              <ResultPagination
+                label='検索結果のページ'
+                page={displayed.results.page}
+                hasMore={displayed.results.hasMore}
+                disabled={loading}
+                onChange={(page) => void search(displayed.input, displayed.sort, page)}
+              />
+              {creatingMonitor && (
+                <MonitorFormModal
+                  initial={{
+                    ...extractionCriteria(displayed.input),
+                    name: '',
+                    enabled: false,
+                    discordEnabled: true,
+                    newestNotificationEnabled: false,
+                  }}
+                  onClose={() => setCreatingMonitor(false)}
+                />
+              )}
+            </>
           )}
         </section>
       )}

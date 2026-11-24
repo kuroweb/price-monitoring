@@ -38,6 +38,9 @@ it('ページ切り替えと新規登録に表示中の検索条件を使う', a
       data: { crawlResults: [listing], page: 1, perPage: 12, hasMore: true }, error: null, status: 200,
     })
     .mockResolvedValueOnce({
+      data: { crawlResults: [listing], page: 1, perPage: 12, hasMore: true }, error: null, status: 200,
+    })
+    .mockResolvedValueOnce({
       data: { crawlResults: [{ ...listing, id: 2, name: 'iPad Pro 2' }], page: 2, perPage: 12, hasMore: false },
       error: null,
       status: 200,
@@ -52,14 +55,18 @@ it('ページ切り替えと新規登録に表示中の検索条件を使う', a
   await user.type(screen.getByLabelText(/除外語/), 'ケース')
   await user.type(screen.getByLabelText(/最低価格/), '1000')
   await user.type(screen.getByLabelText(/最高価格/), '2000')
-  await user.selectOptions(screen.getByLabelText('並び順'), 'price_asc')
   await user.click(screen.getByRole('button', { name: '検索' }))
   expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
   const criteria = { requiredKeywords: ['iPad', 'Pro'], negativeKeywords: ['ケース'], minPrice: 1000, maxPrice: 2000 }
-  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'price_asc', page: 1 })
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'newest', page: 1 })
 
   await user.clear(required)
   await user.type(required, '未実行の入力')
+  const results = within(screen.getByRole('region', { name: '検索結果' }))
+  expect(results.getByText(/編集中の条件は未反映/)).toBeInTheDocument()
+  await user.selectOptions(results.getByLabelText('並び順'), 'price_asc')
+  await waitFor(() => expect(results.getByLabelText('並び順')).toHaveValue('price_asc'))
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'price_asc', page: 1 })
   await user.click(screen.getByRole('button', { name: '次へ' }))
   expect(await screen.findByText('iPad Pro 2')).toBeInTheDocument()
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'price_asc', page: 2 })
@@ -88,7 +95,8 @@ it('検索前、失敗、0件を区別し、結果が0件でも条件を引き�
     })
   render(<CrawlResultSearch />)
 
-  expect(screen.getByText(/保存済みの収集結果を表示/)).toBeInTheDocument()
+  expect(screen.getByRole('form', { name: '検索条件' })).toBeInTheDocument()
+  expect(screen.queryByRole('region', { name: '検索結果' })).not.toBeInTheDocument()
   expect(screen.queryByRole('button', createButton)).not.toBeInTheDocument()
   await user.click(screen.getByRole('button', { name: '検索' }))
   expect(await screen.findByRole('alert')).toHaveTextContent('収集結果を取得できませんでした。')
