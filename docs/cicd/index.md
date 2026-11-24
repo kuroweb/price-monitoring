@@ -64,7 +64,7 @@ spec 以外の判定など正確な glob は workflow の `check_changes` を参
 
 CD の共通処理は [reusable-cd.yml](../../.github/workflows/reusable-cd.yml) に定義している。
 
-1. GitHub Actions runner を Tailscale に接続する。
+1. GitHub Actions runner を Tailscale に接続し、レジストリまでの経路（直接接続か DERP 中継か）を `tailscale ping` でジョブログに残す。public リポジトリのため、宛先の IP:ポートは伏せる。経路確認が失敗してもデプロイは続ける。
 2. runner の make / Docker Buildx で対象イメージをビルドする。`cache=true` / `push=true` により GitHub Actions キャッシュを利用し、レジストリへ直接 push する。
 3. [k8s リポジトリ](https://github.com/kuroweb/k8s) の `manifests/price-monitoring` で対象環境のイメージタグを更新し、commit / push する。競合時は最新の `master` を取り直し、更新から最大 5 回試行する。
 4. ArgoCD がマニフェストを同期し、クラスタへ適用する。
