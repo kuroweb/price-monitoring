@@ -15,7 +15,7 @@ sequenceDiagram
     participant daily as 日次相場の集計
     participant discord as Discord
     user->>crawl: 収集設定を登録し「取得して保存」
-    loop 有効な収集設定を10分ごと
+    loop 有効な収集設定をサイトごとの頻度（10分または15分ごと）
         crawl->>site: 検索結果を取得
         crawl->>result: 収集結果を保存
     end
@@ -88,7 +88,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant site as サイト
-    participant crawl as 取得（10分ごと）
+    participant crawl as 取得（サイトごとに10分または15分ごと）
     participant db as 収集結果
     participant eval as 通知の評価（1分ごと）
     participant discord as Discord

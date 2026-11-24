@@ -54,7 +54,7 @@ sequenceDiagram
 
 手動操作では API がジョブを投入した後に `202` を返し、取得と保存は非同期に行う。取得と保存はサイトごとの一覧ジョブが行い、個別確認もサイトごとのジョブで行う。図は処理の関係を示しており、`202` の応答とジョブの開始の前後は保証されず、再読み込み時にジョブが完了しているとも限らない。取得後は条件に合う結果を保存し、必要な出品について個別確認ジョブを投入する。定期取得も同じ保存処理を使う。個別確認の対象や取得の失敗時の扱いは[サイトごとの取得](#サイトごとの取得)に記す。
 
-- 取得は画面からの手動実行に加え、有効な収集設定を10分ごとにSidekiqで実行する。集計は画面からの手動実行に加え、全モニタリング設定について毎日0時に直近30日分をSidekiqで実行する。
+- 取得は画面からの手動実行に加え、有効な収集設定をサイトごとの頻度でSidekiqで実行する。頻度は `config/schedule.yml` にサイトごとの cron 式で置き、じゃんぱらは15分ごと、ほかのサイトは10分ごとである。集計は画面からの手動実行に加え、全モニタリング設定について毎日0時に直近30日分をSidekiqで実行する。
 - 検索結果URLは最大5件。検索ワードからは選択サイトごとにURLを組み立て、ヤフオクは出品中と落札相場の2件を検索する。組み立てたURLに価格帯は含めず、画面にも表示しない。1 URLにつき最大5ページ・1ページ100件（最大500件）。次ページがない場合に終了する。結果が0件のページでも次ページがあれば続ける。途中の取得が失敗したURLは失敗とする。1 URLの取得は60秒を上限とする。取得はサイトごとのジョブで行い、ジョブ全体は30分を上限とする。手動取得は設定の有効・無効にかかわらず実行する。
 - イオシスの機種グループ検索（`t=g`）は登録できない。`t=g` のない個別出品の検索URLを使う。単一の価格として解釈できない出品は保存しない。
 
@@ -126,9 +126,9 @@ sequenceDiagram
 - 個別確認の `Crawler` は個別ページから販売状態と売れた日を返し、個別確認の `Syncer` が同じ出品の行に反映する。詳細ジョブは `Syncer` を呼ぶだけである。
 - 条件外の削除は設定更新時にも `CrawlResultCleaner` で行う。
 - `UrlRouter` は、収集設定の検索ワード・サイト・検索結果URLを、`PLATFORMS` に並べた各プラットフォームの `SearchUrl` で検証し、サイトごとに取得するURLへ振り分ける。定期取得・手動取得が対象サイトを、各サイトの `Crawler` が取得するURLを、設定の保存時は URL の検証を、これで行う。対応しない URL は取得時も失敗にする。
-- 定期取得（`Crawling::EnqueueSyncJob`）は有効な設定ごとに、手動取得（`POST /api/v1/product_monitoring/crawl_settings/:id/sync`）はその設定について、対象サイトの一覧ジョブを直接積む。ジョブもサービスと同じく、集める側は `Crawling`、モニタリングする側は `Notification`・`Aggregation` の下に置く。
+- 定期取得（`Crawling::EnqueueSyncJob`）は引数で受けたサイトについて有効な設定ごとに、手動取得（`POST /api/v1/product_monitoring/crawl_settings/:id/sync`）はその設定について、対象サイトの一覧ジョブを直接積む。ジョブもサービスと同じく、集める側は `Crawling`、モニタリングする側は `Notification`・`Aggregation` の下に置く。
 - キューはジョブごとに分かれ、名前はクラス名から `Crawling`・`Notification`・`Aggregation` を除いて作る（`Crawling::Mercari::ListPage::SyncJob` なら `product_monitoring_mercari_list_page_sync_job`）。Sidekiq のダッシュボードや Datadog で、サイトと一覧・個別確認の別を見分けられる。定期取得と一覧ジョブは `crawl_process`、詳細ジョブは `crawl_process_2`、集計と通知は `general_process` の設定で処理する。
-- ブラウザの接続は `Client` を使う。遷移後の URL と HTML サイズの確認、失敗の判定は各サイトの `Crawler` が行う。サイトを追加するときは、そのサイトの `ListPage` 一式を追加して `UrlRouter::PLATFORMS` に登録し、ジョブのキューを `config/sidekiq` に追加する。
+- ブラウザの接続は `Client` を使う。遷移後の URL と HTML サイズの確認、失敗の判定は各サイトの `Crawler` が行う。サイトを追加するときは、そのサイトの `ListPage` 一式を追加して `UrlRouter::PLATFORMS` に登録し、ジョブのキューを `config/sidekiq` に、定期取得のスケジュールを `config/schedule.yml` に追加する。
 
 Yahoo!フリマはメルカリと同じく JavaScript を実行して描画し、遷移後の HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。更新日時の描画に必要な `paypayfleamarket.c.yimg.jp` のスクリプトを許可する。検索一覧の次ページリンクを確認してページ送りする。既存の `Crawl::YahooFleamarket` の一覧は Yahoo!オークションの検索結果を取得するため、本機能の Yahoo!フリマ検索とは取得元と DOM が異なる。
 
