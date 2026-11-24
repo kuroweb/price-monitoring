@@ -40,10 +40,11 @@ jobs:
 
       # push がたまに遅く、Tailscale が DERP 中継になった回だけ遅いと見ているので、レジストリまでの経路をログに残して切り分ける
       # 直接接続なら via <宛先>、中継なら via DERP(<リージョン>) と出る。public リポジトリでログも公開されるため、宛先の IP:ポートは伏せる
+      # 直接接続の確立には数秒かかり、回数が少ないと確立前の DERP 表示で終わって中継と読み違えるため、確立した時点で止まる前提で回数を多めにする
       # 直接接続にならないと tailscale ping は失敗で終わるが、経路の記録が目的なのでデプロイは止めない
       - name: Check Tailscale Route to Registry
         run: |
-          (sudo tailscale ping -c 3 docker-registry.kuroweb.net 2>&1 || true) \
+          (sudo tailscale ping -c 10 docker-registry.kuroweb.net 2>&1 || true) \
             | sed -E 's/([0-9]+\.){3}[0-9]+:[0-9]+|\[[0-9a-fA-F:]+\]:[0-9]+/<masked>/g'
 
       # GHA キャッシュを書き出せる docker-container ドライバを使う
