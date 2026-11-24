@@ -114,33 +114,6 @@ it('検索前、失敗、0件を区別し、結果が0件でも条件を引き�
   expect(within(screen.getByRole('dialog')).getByLabelText(/必須語/)).toHaveValue('未入荷')
 })
 
-it('旧形式に見える入力に案内を出し、カンマと読点を保持して検索する', async () => {
-  const user = userEvent.setup()
-  const hint = /語句を分けるにはスペースを使います/
-  vi.mocked(searchCrawlResults).mockResolvedValue({
-    data: { crawlResults: [], page: 1, perPage: 12, hasMore: false }, error: null, status: 200,
-  })
-  render(<CrawlResultSearch />)
-
-  const required = screen.getByLabelText('必須語')
-  await user.type(required, 'A,B "iPad," 64GB')
-  expect(screen.queryByText(hint)).not.toBeInTheDocument()
-  await user.clear(required)
-  await user.type(required, 'iPad, 64GB')
-  expect(screen.getByText(hint)).toBeVisible()
-  await user.click(screen.getByRole('button', { name: '絞り込み' }))
-  expect(screen.queryByText(hint)).not.toBeInTheDocument()
-
-  const excluded = screen.getByLabelText('除外語')
-  await user.type(excluded, '傷、　割れ')
-  expect(screen.getByText(hint)).toBeVisible()
-  await user.click(screen.getByRole('button', { name: '絞り込んで検索' }))
-  expect(searchCrawlResults).toHaveBeenCalledWith({
-    requiredKeywords: ['iPad,', '64GB'], negativeKeywords: ['傷、', '割れ'], minPrice: null, maxPrice: null,
-    sort: 'newest', page: 1,
-  })
-})
-
 it('必須語が空でも、閉じた絞り込みを検索に使える', async () => {
   const user = userEvent.setup()
   vi.mocked(searchCrawlResults).mockResolvedValue({

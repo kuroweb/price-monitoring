@@ -66,8 +66,7 @@ describe('商品モニタリング', () => {
     render(<MonitorList sections={[]} />)
     await user.click(screen.getByRole('button', { name: 'モニタリング設定を追加' }))
     await user.type(screen.getByRole('textbox', { name: '名前' }), 'phone')
-    await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone、 blue')
-    expect(screen.getByText(/語句を分けるにはスペースを使います/)).toBeVisible()
+    await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone')
     await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'case')
     await user.type(screen.getByRole('spinbutton', { name: '最高価格（円）' }), '1000')
     await user.click(screen.getByRole('checkbox', { name: '新着を通知する' }))
@@ -78,7 +77,7 @@ describe('商品モニタリング', () => {
         enabled: true,
         discordEnabled: true,
         newestNotificationEnabled: true,
-        requiredKeywords: ['phone、', 'blue'],
+        requiredKeywords: ['phone'],
         negativeKeywords: ['case'],
         minPrice: null,
         maxPrice: 1000,

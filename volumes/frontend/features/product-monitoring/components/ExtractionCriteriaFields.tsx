@@ -1,7 +1,5 @@
 import { useId } from 'react'
 
-import KeywordTextarea from '@/features/product-monitoring/components/KeywordTextarea'
-
 type Props = {
   required: string
   excluded: string
@@ -30,7 +28,7 @@ export default function ExtractionCriteriaFields({
         <p id={`${id}-required-hint`} className='text-xs text-base-content/70'>
           すべて含む。スペースまたは改行区切り。スペースを含む語句は半角の「&quot;」で囲みます
         </p>
-        <KeywordTextarea
+        <textarea
           id={`${id}-required`}
           aria-describedby={`${id}-required-hint`}
           className='textarea block min-h-16 w-full resize-y'
@@ -45,7 +43,7 @@ export default function ExtractionCriteriaFields({
         <p id={`${id}-excluded-hint`} className='text-xs text-base-content/70'>
           いずれかを含むと除外。スペースまたは改行区切り。スペースを含む語句は半角の「&quot;」で囲みます
         </p>
-        <KeywordTextarea
+        <textarea
           id={`${id}-excluded`}
           aria-describedby={`${id}-excluded-hint`}
           className='textarea block min-h-16 w-full resize-y'
