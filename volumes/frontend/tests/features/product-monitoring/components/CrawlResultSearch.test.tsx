@@ -1,16 +1,19 @@
 import { render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { toast } from 'react-toastify'
 import { beforeEach, expect, it, vi } from 'vitest'
 
-import { createMonitor, searchCrawlResults } from '@/features/product-monitoring/api/actions'
+import { createMonitor, destroyCrawlResult, searchCrawlResults, setCrawlResultExcluded } from '@/features/product-monitoring/api/actions'
 import type { CrawlResult } from '@/features/product-monitoring/api/types'
 import CrawlResultSearch from '@/features/product-monitoring/components/CrawlResultSearch'
 
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
-vi.mock('react-toastify', () => ({ toast: { success: vi.fn() } }))
+vi.mock('react-toastify', () => ({ toast: { success: vi.fn(), error: vi.fn() } }))
 vi.mock('@/features/product-monitoring/api/actions', () => ({
   searchCrawlResults: vi.fn(),
   createMonitor: vi.fn(),
+  setCrawlResultExcluded: vi.fn(),
+  destroyCrawlResult: vi.fn(),
 }))
 
 const listing: CrawlResult = {
@@ -207,4 +210,144 @@ it('販売状態を切り替えると、売り切れ・販売中・すべての�
     requiredKeywords: [], negativeKeywords: [], minPrice: null, maxPrice: null,
     saleStatus: 'all', sort: 'newest', page: 1,
   })
+})
+
+const resultPage = (items: CrawlResult[], current: number, hasMore: boolean) => ({
+  data: { crawlResults: items, page: current, perPage: 12, hasMore }, error: null, status: 200,
+})
+
+const appliedQuery = {
+  requiredKeywords: ['iPad'],
+  negativeKeywords: ['ジャンク'],
+  minPrice: 1000,
+  maxPrice: null,
+  saleStatus: 'sold' as const,
+  sort: 'price_desc' as const,
+  page: 2,
+}
+
+const cardFor = (name: string) => {
+  const article = screen.getByText(name).closest('article')
+  if (!(article instanceof HTMLElement)) throw new Error(`${name}のカードがありません`)
+  return within(article)
+}
+
+it('確認後にその収集結果だけを除外・削除し、同じ条件のページを検索し直してカードを消す', async () => {
+  const user = userEvent.setup()
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false)
+  const target = { ...listing, id: 11, name: '対象の出品', crawlSettingId: 4, externalId: 'target' }
+  const other = { ...listing, id: 22, name: '残る出品', crawlSettingId: 9, externalId: 'other' }
+  vi.mocked(searchCrawlResults)
+    .mockResolvedValueOnce(resultPage([target, other], 1, true))
+    .mockResolvedValueOnce(resultPage([target, other], 1, true))
+    .mockResolvedValueOnce(resultPage([target, other], 1, true))
+    .mockResolvedValueOnce(resultPage([target, other], 2, false))
+    .mockResolvedValueOnce(resultPage([other], 2, false))
+    .mockResolvedValueOnce(resultPage([], 2, false))
+  vi.mocked(setCrawlResultExcluded).mockResolvedValue({
+    data: { ...target, excludedAt: '2026-11-25T00:00:00Z' }, error: null, status: 200,
+  })
+  vi.mocked(destroyCrawlResult).mockResolvedValue({ data: {}, error: null, status: 200 })
+  render(<CrawlResultSearch />)
+
+  try {
+    await user.type(screen.getByLabelText(/必須語/), 'iPad')
+    await user.click(screen.getByRole('button', { name: '絞り込み' }))
+    await user.type(screen.getByLabelText('除外語'), 'ジャンク')
+    await user.type(screen.getByLabelText(/最低価格/), '1000')
+    await user.click(screen.getByRole('button', { name: '絞り込んで検索' }))
+    const results = within(await screen.findByRole('region', { name: '検索結果' }))
+    await user.click(results.getByRole('button', { name: '売り切れ' }))
+    await waitFor(() => {
+      expect(results.getByRole('button', { name: '売り切れ' })).toHaveAttribute('aria-pressed', 'true')
+    })
+    await user.selectOptions(results.getByLabelText('並び順'), 'price_desc')
+    await waitFor(() => expect(results.getByLabelText('並び順')).toHaveValue('price_desc'))
+    await user.click(results.getByRole('button', { name: '次へ' }))
+    expect(await results.findByText('対象の出品')).toBeInTheDocument()
+    expect(searchCrawlResults).toHaveBeenLastCalledWith(appliedQuery)
+
+    await user.clear(screen.getByLabelText(/必須語/))
+    await user.type(screen.getByLabelText(/必須語/), '未実行の入力')
+    expect(screen.queryByText(/編集中の条件は未反映/)).not.toBeInTheDocument()
+
+    const searches = vi.mocked(searchCrawlResults).mock.calls.length
+    await user.click(cardFor('対象の出品').getByRole('button', { name: '除外' }))
+    expect(confirm).toHaveBeenCalledWith('「対象の出品」を除外しますか？')
+    expect(setCrawlResultExcluded).not.toHaveBeenCalled()
+    expect(destroyCrawlResult).not.toHaveBeenCalled()
+    expect(searchCrawlResults).toHaveBeenCalledTimes(searches)
+    expect(results.getByText('対象の出品')).toBeInTheDocument()
+
+    confirm.mockReturnValue(true)
+    await user.click(cardFor('対象の出品').getByRole('button', { name: '除外' }))
+    await waitFor(() => expect(setCrawlResultExcluded).toHaveBeenCalledWith(target.id, true))
+    expect(setCrawlResultExcluded).toHaveBeenCalledTimes(1)
+    expect(setCrawlResultExcluded).not.toHaveBeenCalledWith(other.id, true)
+    expect(searchCrawlResults).toHaveBeenLastCalledWith(appliedQuery)
+    await waitFor(() => expect(results.queryByText('対象の出品')).not.toBeInTheDocument())
+    expect(results.getByText('残る出品')).toBeInTheDocument()
+    expect(results.getByRole('button', { name: '2ページ' })).toHaveAttribute('aria-current', 'page')
+
+    confirm.mockReturnValue(false)
+    const searchesAfterExclude = vi.mocked(searchCrawlResults).mock.calls.length
+    await user.click(cardFor('残る出品').getByRole('button', { name: '削除' }))
+    expect(confirm).toHaveBeenCalledWith('「残る出品」を削除しますか？再取得時に再登録されることがあります。')
+    expect(destroyCrawlResult).not.toHaveBeenCalled()
+    expect(searchCrawlResults).toHaveBeenCalledTimes(searchesAfterExclude)
+    expect(results.getByText('残る出品')).toBeInTheDocument()
+
+    confirm.mockReturnValue(true)
+    await user.click(cardFor('残る出品').getByRole('button', { name: '削除' }))
+    await waitFor(() => expect(destroyCrawlResult).toHaveBeenCalledWith(other.id))
+    expect(destroyCrawlResult).toHaveBeenCalledTimes(1)
+    expect(destroyCrawlResult).not.toHaveBeenCalledWith(target.id)
+    expect(setCrawlResultExcluded).toHaveBeenCalledTimes(1)
+    expect(searchCrawlResults).toHaveBeenLastCalledWith(appliedQuery)
+    expect(await results.findByText('該当する収集結果はありません。')).toBeInTheDocument()
+    expect(results.queryByText('残る出品')).not.toBeInTheDocument()
+    expect(results.getByRole('button', { name: '2ページ' })).toHaveAttribute('aria-current', 'page')
+  } finally {
+    confirm.mockRestore()
+  }
+})
+
+it('除外と削除に失敗したときは検索をやり直さず、カードを残す', async () => {
+  const user = userEvent.setup()
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true)
+  vi.mocked(searchCrawlResults).mockResolvedValue(resultPage([listing], 1, false))
+  vi.mocked(setCrawlResultExcluded)
+    .mockResolvedValueOnce({ data: null, error: null, status: 500 })
+    .mockRejectedValueOnce(new Error('network'))
+  vi.mocked(destroyCrawlResult)
+    .mockResolvedValueOnce({ data: null, error: null, status: 500 })
+    .mockRejectedValueOnce(new Error('network'))
+  render(<CrawlResultSearch />)
+
+  try {
+    await user.click(screen.getByRole('button', { name: '検索' }))
+    expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '除外' }))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith('除外に失敗しました'))
+    expect(setCrawlResultExcluded).toHaveBeenCalledWith(listing.id, true)
+    expect(searchCrawlResults).toHaveBeenCalledTimes(1)
+    expect(screen.getByText('iPad Pro')).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: '除外' }))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith('通信に失敗しました'))
+    expect(searchCrawlResults).toHaveBeenCalledTimes(1)
+
+    await user.click(screen.getByRole('button', { name: '削除' }))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith('削除に失敗しました'))
+    expect(destroyCrawlResult).toHaveBeenCalledWith(listing.id)
+    expect(searchCrawlResults).toHaveBeenCalledTimes(1)
+
+    await user.click(screen.getByRole('button', { name: '削除' }))
+    await waitFor(() => expect(toast.error).toHaveBeenLastCalledWith('通信に失敗しました'))
+    expect(searchCrawlResults).toHaveBeenCalledTimes(1)
+    expect(screen.getByText('iPad Pro')).toBeInTheDocument()
+  } finally {
+    confirm.mockRestore()
+  }
 })
