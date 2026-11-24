@@ -21,7 +21,6 @@ export default function RetentionCriteriaFields({
     <>
       <label className='block'>
         必須語（すべて含む・スペース区切り）
-        <span className='block text-xs text-base-content/70'>スペースを含む語句は半角の「&quot;」で囲みます</span>
         <input
           className='input w-full'
           type='text'
@@ -32,7 +31,6 @@ export default function RetentionCriteriaFields({
       </label>
       <label className='block'>
         除外語（いずれかを含む・スペース区切り）
-        <span className='block text-xs text-base-content/70'>スペースを含む語句は半角の「&quot;」で囲みます</span>
         <input
           className='input w-full'
           type='text'

@@ -126,7 +126,6 @@ export default function MonitorFormModal({
                   onExcludedChange={setExcluded}
                   onPriceChange={change}
                 />
-                {monitor && <p className='text-sm opacity-65'>抽出条件を変更すると、現在の日次相場は消去され、次の集計で更新されます。</p>}
                 <label className='flex items-center gap-2'>
                   <input
                     type='checkbox'

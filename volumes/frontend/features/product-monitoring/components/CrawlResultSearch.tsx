@@ -149,7 +149,7 @@ export default function CrawlResultSearch() {
                   onChange={(event) => change({ required: event.target.value })}
                 />
                 <span id='search-keyword-help' className='sr-only'>
-                  スペースで区切った語句をすべて含む商品を検索します。スペースを含む語句は半角の「&quot;」で囲みます。
+                  スペースで区切った語句をすべて含む商品を検索します。
                 </span>
               </div>
               <button type='submit' className='btn btn-primary h-11 px-3 sm:min-w-24'>検索</button>
