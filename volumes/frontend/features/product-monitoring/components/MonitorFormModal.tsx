@@ -20,7 +20,7 @@ import type {
   MonitorInput,
 } from '@/features/product-monitoring/api/types'
 import ExtractionCriteriaFields from '@/features/product-monitoring/components/ExtractionCriteriaFields'
-import { words } from '@/features/product-monitoring/lib/words'
+import { formatWords, words } from '@/features/product-monitoring/lib/words'
 
 type Props = {
   onClose: () => void
@@ -45,8 +45,8 @@ export default function MonitorFormModal({
     discordEnabled: values?.discordEnabled ?? true,
     newestNotificationEnabled: values?.newestNotificationEnabled ?? false,
   }))
-  const [required, setRequired] = useState(values?.requiredKeywords.join(', ') ?? '')
-  const [excluded, setExcluded] = useState(values?.negativeKeywords.join(', ') ?? '')
+  const [required, setRequired] = useState(() => formatWords(input.requiredKeywords))
+  const [excluded, setExcluded] = useState(() => formatWords(input.negativeKeywords))
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const inFlightRef = useRef(false)
@@ -126,7 +126,6 @@ export default function MonitorFormModal({
                   onExcludedChange={setExcluded}
                   onPriceChange={change}
                 />
-                {monitor && <p className='text-sm opacity-65'>抽出条件を変更すると、現在の日次相場は消去され、次の集計で更新されます。</p>}
                 <label className='flex items-center gap-2'>
                   <input
                     type='checkbox'

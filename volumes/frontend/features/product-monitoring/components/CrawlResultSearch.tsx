@@ -12,7 +12,7 @@ import type {
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
 import ResultPagination from '@/features/product-monitoring/components/ResultPagination'
-import { words } from '@/features/product-monitoring/lib/words'
+import { formatWords, words } from '@/features/product-monitoring/lib/words'
 import { formatYen } from '@/lib/format'
 
 const STATUS_FILTERS = [
@@ -48,7 +48,7 @@ function extractionCriteria({ required, excluded, minPrice, maxPrice }: SearchIn
 
 function filterLabels({ negativeKeywords, minPrice, maxPrice }: ExtractionCriteria) {
   const labels = []
-  if (negativeKeywords.length) labels.push(`除外：${negativeKeywords.join('、')}`)
+  if (negativeKeywords.length) labels.push(`除外：${formatWords(negativeKeywords)}`)
   if (minPrice != null || maxPrice != null) {
     labels.push(`価格：${minPrice == null ? '下限なし' : formatYen(minPrice)}〜${maxPrice == null ? '上限なし' : formatYen(maxPrice)}`)
   }
@@ -84,7 +84,7 @@ export default function CrawlResultSearch() {
   const draftFilters = filterLabels(extractionCriteria(input))
   const appliedCriteria = displayed && extractionCriteria(displayed.input)
   const appliedLabels = appliedCriteria
-    ? [...(appliedCriteria.requiredKeywords.length ? [`必須：${appliedCriteria.requiredKeywords.join('、')}`] : []),
+    ? [...(appliedCriteria.requiredKeywords.length ? [`必須：${formatWords(appliedCriteria.requiredKeywords)}`] : []),
       ...filterLabels(appliedCriteria)]
     : []
   const showDraftFilters = !filtersOpen && draftFilters.length > 0 &&
@@ -139,24 +139,17 @@ export default function CrawlResultSearch() {
             <div className='grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-2'>
               <div className='min-w-0'>
                 <label htmlFor='search-keywords' className='sr-only'>必須語</label>
-                <textarea
+                <input
                   id='search-keywords'
-                  className='textarea block min-h-11 w-full resize-none py-2.5 text-base sm:text-sm'
-                  rows={Math.min(4, input.required.split('\n').length)}
-                  placeholder='例：iPad Air, 64GB'
+                  className='input h-11 w-full text-base sm:text-sm'
+                  type='text'
+                  placeholder='例：iPad 64GB'
                   aria-describedby='search-keyword-help'
                   value={input.required}
                   onChange={(event) => change({ required: event.target.value })}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing &&
-                        event.nativeEvent.keyCode !== 229) {
-                      event.preventDefault()
-                      event.currentTarget.form?.requestSubmit()
-                    }
-                  }}
                 />
                 <span id='search-keyword-help' className='sr-only'>
-                  カンマ・読点・改行で区切った語句をすべて含む商品を検索します。Shift と Enter で改行します。
+                  スペースで区切った語句をすべて含む商品を検索します。
                 </span>
               </div>
               <button type='submit' className='btn btn-primary h-11 px-3 sm:min-w-24'>検索</button>
@@ -177,10 +170,10 @@ export default function CrawlResultSearch() {
                 <div className='grid grid-cols-2 gap-3 sm:grid-cols-[minmax(0,2fr)_1fr_1fr]'>
                   <label className='col-span-2 min-w-0 space-y-1 sm:col-span-1'>
                     <span className='block text-sm font-medium'>除外語</span>
-                    <textarea
-                      className='textarea block min-h-10 w-full resize-y text-base sm:text-sm'
-                      rows={1}
-                      placeholder='例：ジャンク, ケース'
+                    <input
+                      className='input w-full text-base sm:text-sm'
+                      type='text'
+                      placeholder='例：ジャンク ケース'
                       value={input.excluded}
                       onChange={(event) => change({ excluded: event.target.value })}
                       onKeyDown={dismissFilters}

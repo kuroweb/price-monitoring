@@ -150,7 +150,12 @@ describe('商品モニタリング', () => {
   })
 
   it('編集と複製で新着通知の指定を引き継ぐ', async () => {
-    const newest = { ...monitor, newestNotificationEnabled: true }
+    const newest = {
+      ...monitor,
+      newestNotificationEnabled: true,
+      requiredKeywords: ['phone blue', 'A,B'],
+      negativeKeywords: ['broken case', '箱、説明書'],
+    }
     vi.mocked(updateMonitor).mockResolvedValue({ data: newest, error: null, status: 200 })
     vi.mocked(createMonitor).mockResolvedValue({ data: newest, error: null, status: 200 })
     const user = userEvent.setup()
@@ -159,8 +164,14 @@ describe('商品モニタリング', () => {
     await user.click(screen.getByRole('button', { name: 'phoneの操作' }))
     await user.click(screen.getByRole('button', { name: '編集' }))
     expect(screen.getByRole('checkbox', { name: '新着を通知する' })).toBeChecked()
+    expect(screen.getByRole('textbox', { name: '必須語' })).toHaveValue('"phone blue" A,B')
+    expect(screen.getByRole('textbox', { name: '除外語' })).toHaveValue('"broken case" 箱、説明書')
     await user.click(screen.getByRole('button', { name: '更新' }))
-    await waitFor(() => expect(updateMonitor).toHaveBeenCalledWith(1, expect.objectContaining({ newestNotificationEnabled: true })))
+    await waitFor(() => expect(updateMonitor).toHaveBeenCalledWith(1, expect.objectContaining({
+      newestNotificationEnabled: true,
+      requiredKeywords: newest.requiredKeywords,
+      negativeKeywords: newest.negativeKeywords,
+    })))
 
     await user.click(screen.getByRole('button', { name: 'phoneの操作' }))
     await user.click(screen.getByRole('button', { name: '複製' }))

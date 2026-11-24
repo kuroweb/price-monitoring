@@ -51,17 +51,18 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   render(<CrawlResultSearch />)
 
   const required = screen.getByLabelText(/必須語/)
-  await user.type(required, 'iPad、{Shift>}{Enter}{/Shift}Pro')
+  await user.type(required, '  "iPad Pro"　64GB Wi-Fi  ')
   await user.click(screen.getByRole('button', { name: '絞り込み' }))
-  await user.type(screen.getByLabelText(/除外語/), 'ケース')
+  await user.type(screen.getByLabelText(/除外語/), '傷,割れ　箱、説明書')
   await user.type(screen.getByLabelText(/最低価格/), '1000')
   await user.type(screen.getByLabelText(/最高価格/), '2000{enter}')
   expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
-  const criteria = { requiredKeywords: ['iPad', 'Pro'], negativeKeywords: ['ケース'], minPrice: 1000, maxPrice: 2000 }
+  const criteria = { requiredKeywords: ['iPad Pro', '64GB', 'Wi-Fi'], negativeKeywords: ['傷,割れ', '箱、説明書'], minPrice: 1000, maxPrice: 2000 }
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'newest', page: 1 })
   await user.keyboard('{Escape}')
   expect(screen.getByRole('button', { name: '絞り込み' })).toHaveFocus()
-  expect(screen.getByText('除外：ケース')).toBeInTheDocument()
+  expect(screen.getByText('必須："iPad Pro" 64GB Wi-Fi')).toBeInTheDocument()
+  expect(screen.getByText('除外：傷,割れ 箱、説明書')).toBeInTheDocument()
 
   await user.clear(required)
   await user.type(required, '未実行の入力')
@@ -76,7 +77,8 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   await user.click(screen.getByRole('button', { name: 'この条件でモニタリングを作成' }))
 
   const modal = within(screen.getByRole('dialog'))
-  expect(modal.getByLabelText(/必須語/)).toHaveValue('iPad, Pro')
+  expect(modal.getByLabelText(/必須語/)).toHaveValue('"iPad Pro" 64GB Wi-Fi')
+  expect(modal.getByLabelText(/除外語/)).toHaveValue('傷,割れ 箱、説明書')
   expect(modal.getByLabelText(/最安値の変化を通知/)).not.toBeChecked()
   expect(modal.getByLabelText(/新着を通知/)).not.toBeChecked()
   expect(createMonitor).not.toHaveBeenCalled()
