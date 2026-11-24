@@ -116,3 +116,25 @@ sequenceDiagram
 | 削除 | 収集結果の行を消す | 取り消せない。サイトの検索結果に残っていれば、次の取得で再び保存される |
 
 同じ出品を別の収集設定も保存していると、そちらの行は除外・削除されないため、モニタリング設定に再び表示されることがある。再取得や日次相場への反映は[抽出と並び](internal-spec.md#抽出と並び)を参照する。
+
+## 旧形式の語句を移行する
+
+対象は `product_monitoring_crawl_settings` と `product_monitoring_monitors` の `required_keywords` と `negative_keywords`。通常の保存経路は以前から配列を保存している。まず対象環境の接続先を確認し、バックアップを取得したうえで、隔離した DB コピーに対して確認する。以下はホストのリポジトリルートから Compose のテスト DB に対して実行する。
+
+```bash
+docker compose exec -T -e RAILS_ENV=test backend bundle exec rake product_monitoring:migrate_legacy_keywords
+```
+
+このコマンドは列ごとに JSON 文字列の件数を表示する。0 件なら作業は完了。候補がある場合は、対象列を `JSON_TYPE(列名) = 'STRING'` で絞り、id と元の JSON 値を確認する。区切り付きの旧入力原文だと記録などから確認できた値だけ進める。カンマの有無だけでは判別できない。
+
+対象のテーブル名、id、列名、元の JSON 値を控え、元の値を JSON 文字列のまま `verified-keywords.json` に保存する。次の例のテーブル名、id、列名を対象に置き換える。
+
+```bash
+docker compose exec -T -e RAILS_ENV=test backend bundle exec rake \
+  'product_monitoring:migrate_legacy_keywords:apply[product_monitoring_crawl_settings,123,required_keywords]' \
+  < verified-keywords.json
+```
+
+指定した1列を行ロック下で比較し、現値が控えと一致する場合にだけ旧入力を語句配列へ変換する。同じ指定での再実行は更新済みとして終わる。現値が控えとも変換後の配列とも異なる場合は更新せず終了する。変換後は同じ列を読み取り、想定した配列であることを確認する。
+
+復旧が必要な場合は、バックアップから元の JSON 値を隔離 DB に復元して確認する。対象環境のデータを戻す場合は、保守手順に従い対象行をロックし、現値がこの作業で書いた配列と一致するときだけ、控えた JSON 値を同じ列に戻す。後続の編集があるときは上書きせず、バックアップと変更履歴を照合する。
