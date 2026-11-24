@@ -51,7 +51,7 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   render(<CrawlResultSearch />)
 
   const required = screen.getByLabelText(/必須語/)
-  await user.type(required, '  "iPad Pro"　64GB{Shift>}{Enter}{/Shift}Wi-Fi  ')
+  await user.type(required, '  "iPad Pro"　64GB Wi-Fi  ')
   await user.click(screen.getByRole('button', { name: '絞り込み' }))
   await user.type(screen.getByLabelText(/除外語/), '傷,割れ　箱、説明書')
   await user.type(screen.getByLabelText(/最低価格/), '1000')

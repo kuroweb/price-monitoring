@@ -26,13 +26,13 @@ export default function ExtractionCriteriaFields({
       <div className='min-w-0 space-y-1'>
         <label className='block font-medium' htmlFor={`${id}-required`}>必須語</label>
         <p id={`${id}-required-hint`} className='text-xs text-base-content/70'>
-          すべて含む。スペースまたは改行区切り。スペースを含む語句は半角の「&quot;」で囲みます
+          すべて含む。スペース区切り。スペースを含む語句は半角の「&quot;」で囲みます
         </p>
-        <textarea
+        <input
           id={`${id}-required`}
           aria-describedby={`${id}-required-hint`}
-          className='textarea block min-h-16 w-full resize-y'
-          rows={2}
+          className='input w-full'
+          type='text'
           placeholder='例：iPad 64GB'
           value={required}
           onChange={(event) => onRequiredChange(event.target.value)}
@@ -41,13 +41,13 @@ export default function ExtractionCriteriaFields({
       <div className='min-w-0 space-y-1'>
         <label className='block font-medium' htmlFor={`${id}-excluded`}>除外語</label>
         <p id={`${id}-excluded-hint`} className='text-xs text-base-content/70'>
-          いずれかを含むと除外。スペースまたは改行区切り。スペースを含む語句は半角の「&quot;」で囲みます
+          いずれかを含むと除外。スペース区切り。スペースを含む語句は半角の「&quot;」で囲みます
         </p>
-        <textarea
+        <input
           id={`${id}-excluded`}
           aria-describedby={`${id}-excluded-hint`}
-          className='textarea block min-h-16 w-full resize-y'
-          rows={2}
+          className='input w-full'
+          type='text'
           placeholder='例：ジャンク ケース'
           value={excluded}
           onChange={(event) => onExcludedChange(event.target.value)}

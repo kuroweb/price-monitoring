@@ -139,25 +139,17 @@ export default function CrawlResultSearch() {
             <div className='grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-2'>
               <div className='min-w-0'>
                 <label htmlFor='search-keywords' className='sr-only'>必須語</label>
-                <textarea
+                <input
                   id='search-keywords'
-                  className='textarea block min-h-11 w-full resize-none py-2.5 text-base sm:text-sm'
-                  rows={Math.min(4, input.required.split('\n').length)}
+                  className='input h-11 w-full text-base sm:text-sm'
+                  type='text'
                   placeholder='例：iPad 64GB'
                   aria-describedby='search-keyword-help'
                   value={input.required}
                   onChange={(event) => change({ required: event.target.value })}
-                  onKeyDown={(event) => {
-                    if (event.key === 'Enter' && !event.shiftKey && !event.nativeEvent.isComposing &&
-                        event.nativeEvent.keyCode !== 229) {
-                      event.preventDefault()
-                      event.currentTarget.form?.requestSubmit()
-                    }
-                  }}
                 />
                 <span id='search-keyword-help' className='sr-only'>
-                  スペースまたは改行で区切った語句をすべて含む商品を検索します。
-                  スペースを含む語句は半角の「&quot;」で囲みます。Shift と Enter で改行します。
+                  スペースで区切った語句をすべて含む商品を検索します。スペースを含む語句は半角の「&quot;」で囲みます。
                 </span>
               </div>
               <button type='submit' className='btn btn-primary h-11 px-3 sm:min-w-24'>検索</button>
@@ -178,9 +170,9 @@ export default function CrawlResultSearch() {
                 <div className='grid grid-cols-2 gap-3 sm:grid-cols-[minmax(0,2fr)_1fr_1fr]'>
                   <label className='col-span-2 min-w-0 space-y-1 sm:col-span-1'>
                     <span className='block text-sm font-medium'>除外語</span>
-                    <textarea
-                      className='textarea block min-h-10 w-full resize-y text-base sm:text-sm'
-                      rows={1}
+                    <input
+                      className='input w-full text-base sm:text-sm'
+                      type='text'
                       placeholder='例：ジャンク ケース'
                       value={input.excluded}
                       onChange={(event) => change({ excluded: event.target.value })}

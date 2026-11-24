@@ -101,7 +101,7 @@ describe('収集設定', () => {
     expect(screen.getAllByText('イオシス').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Yahoo!フリマ').length).toBeGreaterThan(0)
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), '　phone  blue ')
-    await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'junk{Enter}case')
+    await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'junk　case')
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createCrawlSetting).toHaveBeenCalledWith(

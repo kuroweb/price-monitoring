@@ -2,9 +2,9 @@ import { expect, it } from 'vitest'
 
 import { formatWords, words } from '@/features/product-monitoring/lib/words'
 
-it('半角・全角スペースと改行で分け、空欄と重複を除く', () => {
-  expect(words('  iPad　　Pro\r\n64GB\n iPad　')).toEqual(['iPad', 'Pro', '64GB'])
-  expect(words('　 \r\n')).toEqual([])
+it('半角・全角スペースで分け、空欄と重複を除く', () => {
+  expect(words('  iPad　　Pro 64GB  iPad　')).toEqual(['iPad', 'Pro', '64GB'])
+  expect(words('　 ')).toEqual([])
 })
 
 it('カンマと読点を語句の一部として扱う', () => {
