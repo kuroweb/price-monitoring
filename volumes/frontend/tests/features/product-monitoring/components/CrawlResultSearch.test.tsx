@@ -66,7 +66,10 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   await user.clear(required)
   await user.type(required, '未実行の入力')
   const results = within(screen.getByRole('region', { name: '検索結果' }))
-  expect(results.getByText(/編集中の条件は未反映/)).toBeInTheDocument()
+  const draft = results.getByText(/編集中の条件は未反映/)
+  expect(draft.compareDocumentPosition(results.getByRole('group', { name: '販売状態' }))).toBe(
+    Node.DOCUMENT_POSITION_FOLLOWING,
+  )
   await user.selectOptions(results.getByLabelText('並び順'), 'price_asc')
   await waitFor(() => expect(results.getByLabelText('並び順')).toHaveValue('price_asc'))
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'price_asc', page: 1 })
@@ -133,7 +136,10 @@ it('必須語が空でも、閉じた絞り込みを検索に使える', async (
 
   await user.click(screen.getByRole('button', { name: '検索' }))
   const results = within(await screen.findByRole('region', { name: '検索結果' }))
-  expect(await results.findByText('適用中')).toBeInTheDocument()
+  const applied = await results.findByText('適用中')
+  expect(applied.compareDocumentPosition(results.getByRole('group', { name: '販売状態' }))).toBe(
+    Node.DOCUMENT_POSITION_FOLLOWING,
+  )
   expect(results.getByText('除外：ジャンク')).toBeInTheDocument()
   expect(searchCrawlResults).toHaveBeenCalledWith({
     requiredKeywords: [], negativeKeywords: ['ジャンク'], minPrice: 1000, maxPrice: null,
