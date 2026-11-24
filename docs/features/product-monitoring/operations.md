@@ -116,13 +116,3 @@ sequenceDiagram
 | 削除 | 収集結果の行を消す | 取り消せない。サイトの検索結果に残っていれば、次の取得で再び保存される |
 
 同じ出品を別の収集設定も保存していると、そちらの行は除外・削除されないため、モニタリング設定に再び表示されることがある。再取得や日次相場への反映は[抽出と並び](internal-spec.md#抽出と並び)を参照する。
-
-## 旧形式の語句を移行する
-
-旧形式のカンマ区切りの文字列で保存された必須語・除外語を、語句の配列に移行する。ホストのリポジトリルートから次のコマンドを1回実行する。
-
-```bash
-docker compose exec -T backend bin/rails runner script/migrate_legacy_keywords.rb
-```
-
-対象は `product_monitoring_crawl_settings` と `product_monitoring_monitors` の `required_keywords` と `negative_keywords`。JSON 文字列で保存された値をカンマ（`,`・`、`）と改行で分け、前後の空白と空の語句を除いた配列に更新し、列ごとに更新件数を表示する。すでに配列の値は変えないため、再実行しても結果は変わらない。
