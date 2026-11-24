@@ -6,6 +6,8 @@ module ProductMonitoring
     # 売れた日が無い売り切れは末尾に残し、売り切れとすべてから落とさない。
     # 走査は指定ページと、次のページがあるかの確認までで止める。一覧の8件は NewestCrawlResults のまま。
     class MatchingCrawlResults
+      class InvalidQuery < ArgumentError; end
+
       BATCH_SIZE = 100
       PAGE_SIZE = 12
       SALE_STATUSES = %w[all on_sale sold].freeze
@@ -38,13 +40,13 @@ module ProductMonitoring
         text = value.to_s
         return Integer(text, 10) if /\A[0-9]+\z/.match?(text)
 
-        raise ArgumentError, "page は1以上の整数で指定してください"
+        raise InvalidQuery, "page は1以上の整数で指定してください"
       end
 
       def validate!
-        raise ArgumentError, "販売状態が不正です" unless SALE_STATUSES.include?(sale_status)
-        raise ArgumentError, "並びが不正です" unless SORTS.include?(sort)
-        raise ArgumentError, "page は1以上の整数で指定してください" if page < 1
+        raise InvalidQuery, "販売状態が不正です" unless SALE_STATUSES.include?(sale_status)
+        raise InvalidQuery, "並びが不正です" unless SORTS.include?(sort)
+        raise InvalidQuery, "page は1以上の整数で指定してください" if page < 1
       end
 
       def prepare

@@ -82,4 +82,13 @@ RSpec.describe "商品クロール結果", type: :request do
       expect(response.parsed_body.fetch("error").fetch("message")).to be_present
     end
   end
+
+  it "検索処理の想定外の例外はサーバーエラーとして扱い、詳細を返さないこと" do
+    allow(ProductMonitoring::Search::MatchingCrawlResults).to receive(:call).and_raise(ArgumentError, "internal detail")
+
+    post "/api/v1/product_monitoring/crawl_results/search", params: {}, as: :json
+
+    expect(response).to have_http_status(:service_unavailable)
+    expect(response.parsed_body.fetch("error").fetch("message")).to eq("Internal Server Error.")
+  end
 end

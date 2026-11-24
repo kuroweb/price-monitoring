@@ -5,8 +5,7 @@ module Api
       class CrawlResultsController < Api::ApplicationController
         PREVIEW_COUNT = 8
         ExtractionCriteria = ::ProductMonitoring::Monitor::ExtractionCriteria
-
-        rescue_from ArgumentError, with: :invalid_search
+        MatchingCrawlResults = ::ProductMonitoring::Search::MatchingCrawlResults
 
         def index
           crawl_results = filtered_results
@@ -20,11 +19,13 @@ module Api
 
         def search
           monitor = ::ProductMonitoring::Monitor.new(search_criteria)
-          result = ::ProductMonitoring::Search::MatchingCrawlResults.call(
+          result = MatchingCrawlResults.call(
             monitor:, sort: params.fetch(:sort, "newest"), page: params.fetch(:page, 1)
           )
           render json: { crawl_results: result.listings.as_json, page: result.page, per_page: result.per_page,
                          has_more: result.has_more }, status: :ok
+        rescue ExtractionCriteria::Invalid, MatchingCrawlResults::InvalidQuery => e
+          render json: build_error_json(400, e.message, []), status: :bad_request
         end
 
         # 除外と取り消し。行は消さず excluded_at で表す
@@ -45,10 +46,6 @@ module Api
         def search_criteria
           filters = ExtractionCriteria::FIELDS.select { |key| params.key?(key) }.index_with { |key| params[key] }
           ExtractionCriteria.normalize(filters)
-        end
-
-        def invalid_search(error)
-          render json: build_error_json(400, error.message, []), status: :bad_request
         end
 
         def filtered_results
