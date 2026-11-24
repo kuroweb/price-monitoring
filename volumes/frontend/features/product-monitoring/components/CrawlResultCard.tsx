@@ -7,6 +7,7 @@ import { formatDate, formatYen, platformColors } from '@/lib/format'
 
 interface Props {
   crawlResult: CrawlResult
+  alignPrice?: boolean
   disabled?: boolean
   onExclude?: (item: CrawlResult) => void
   onDelete?: (item: CrawlResult) => void
@@ -22,6 +23,7 @@ const dateLabel = (item: CrawlResult) => {
 
 export default function CrawlResultCard({
   crawlResult: item,
+  alignPrice,
   disabled,
   onExclude,
   onDelete,
@@ -106,8 +108,8 @@ export default function CrawlResultCard({
         rel='noopener noreferrer'
         className='flex flex-1 flex-col gap-1 p-3'
       >
-        <p className='line-clamp-3 min-h-15 text-sm leading-5'>{item.name}</p>
-        <p className='mt-auto text-lg font-bold tabular-nums'>{formatYen(item.price)}</p>
+        <p className={`line-clamp-3 min-h-15 text-sm leading-5 ${alignPrice ? 'flex-none' : ''}`}>{item.name}</p>
+        <p className={`text-lg font-bold tabular-nums ${alignPrice ? 'flex-none' : 'mt-auto'}`}>{formatYen(item.price)}</p>
         {item.buyoutPrice != null && (
           <p className='text-xs tabular-nums opacity-70'>即決 {formatYen(item.buyoutPrice)}</p>
         )}

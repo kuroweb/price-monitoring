@@ -82,7 +82,7 @@ export default function CrawlResultSearch() {
         <h2 id='search-criteria' className='mb-4 font-semibold'>検索条件</h2>
         <fieldset disabled={loading} className='min-w-0 space-y-4'>
           <ExtractionCriteriaFields
-            className='grid gap-4 sm:grid-cols-2 lg:grid-cols-3'
+            className='grid gap-4 lg:grid-cols-2'
             required={input.required}
             excluded={input.excluded}
             minPrice={input.minPrice}
@@ -103,7 +103,7 @@ export default function CrawlResultSearch() {
             {displayed && (
               <>
                 <select
-                  className='select select-sm w-auto max-sm:min-h-10'
+                  className='select select-sm min-h-10 w-auto'
                   aria-label='並び順'
                   value={displayed.sort}
                   disabled={loading}
@@ -138,7 +138,9 @@ export default function CrawlResultSearch() {
               ) : (
                 <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
                   {displayed.results.crawlResults.map((item) => (
-                    <li key={item.id} className='min-w-0'><CrawlResultCard crawlResult={item} /></li>
+                    <li key={item.id} className='min-w-0'>
+                      <CrawlResultCard crawlResult={item} alignPrice />
+                    </li>
                   ))}
                 </ul>
               )}
