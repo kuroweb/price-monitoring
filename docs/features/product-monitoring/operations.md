@@ -119,21 +119,10 @@ sequenceDiagram
 
 ## 旧形式の語句を移行する
 
-対象は `product_monitoring_crawl_settings` と `product_monitoring_monitors` の `required_keywords` と `negative_keywords`。通常の保存経路は以前から配列を保存している。まず対象環境の接続先を確認し、バックアップを取得したうえで、隔離した DB コピーに対して確認する。以下はホストのリポジトリルートから Compose のテスト DB に対して実行する。
+旧形式のカンマ区切りの文字列で保存された必須語・除外語を、語句の配列に移行する。ホストのリポジトリルートから次のコマンドを1回実行する。
 
 ```bash
-docker compose exec -T -e RAILS_ENV=test backend bin/rails runner script/migrate_legacy_keywords.rb
+docker compose exec -T backend bin/rails runner script/migrate_legacy_keywords.rb
 ```
 
-このスクリプトは引数なしで実行すると書き込まず、列ごとに JSON 文字列の件数を表示する。0 件なら作業は完了。候補がある場合は、対象列を `JSON_TYPE(列名) = 'STRING'` で絞り、id と元の JSON 値を確認する。区切り付きの旧入力原文だと記録などから確認できた値だけ進める。カンマの有無だけでは判別できない。
-
-対象のテーブル名、id、列名、元の JSON 値を控え、元の値を JSON 文字列のまま `verified-keywords.json` に保存する。`apply` に続けてテーブル名、id、列名を指定し、控えを標準入力で渡す。次の例のテーブル名、id、列名を対象に置き換える。
-
-```bash
-docker compose exec -T -e RAILS_ENV=test backend bin/rails runner script/migrate_legacy_keywords.rb \
-  apply product_monitoring_crawl_settings 123 required_keywords < verified-keywords.json
-```
-
-指定した1列を行ロック下で比較し、現値が控えと一致する場合にだけ旧入力を語句配列へ変換する。同じ指定での再実行は更新済みとして終わる。現値が控えとも変換後の配列とも異なる場合は更新せず終了する。変換後は同じ列を読み取り、想定した配列であることを確認する。
-
-復旧が必要な場合は、バックアップから元の JSON 値を隔離 DB に復元して確認する。対象環境のデータを戻す場合は、保守手順に従い対象行をロックし、現値がこの作業で書いた配列と一致するときだけ、控えた JSON 値を同じ列に戻す。後続の編集があるときは上書きせず、バックアップと変更履歴を照合する。
+対象は `product_monitoring_crawl_settings` と `product_monitoring_monitors` の `required_keywords` と `negative_keywords`。JSON 文字列で保存された値をカンマ（`,`・`、`）と改行で分け、前後の空白と空の語句を除いた配列に更新し、列ごとに更新件数を表示する。すでに配列の値は変えないため、再実行しても結果は変わらない。
