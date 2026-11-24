@@ -7,7 +7,7 @@ import { formatDate, formatYen, platformColors } from '@/lib/format'
 
 interface Props {
   crawlResult: CrawlResult
-  alignPrice?: boolean
+  variant?: 'search'
   disabled?: boolean
   onExclude?: (item: CrawlResult) => void
   onDelete?: (item: CrawlResult) => void
@@ -23,16 +23,17 @@ const dateLabel = (item: CrawlResult) => {
 
 export default function CrawlResultCard({
   crawlResult: item,
-  alignPrice,
+  variant,
   disabled,
   onExclude,
   onDelete,
 }: Props) {
   const date = dateLabel(item)
+  const search = variant === 'search'
 
   return (
     <article className='card h-full overflow-hidden bg-base-100 shadow-md'>
-      <figure className='relative aspect-square bg-white'>
+      <figure className={`relative aspect-square ${search && !item.thumbnailUrl ? 'bg-base-300' : 'bg-white'}`}>
         <a
           href={item.productUrl}
           target='_blank'
@@ -49,7 +50,7 @@ export default function CrawlResultCard({
               className={`object-contain p-2 ${item.sold ? 'opacity-50' : ''}`}
             />
           ) : (
-            <span className='flex h-full items-center justify-center bg-base-200 text-xs opacity-60'>
+            <span className={`flex h-full items-center justify-center text-xs ${search ? 'text-base-content/65' : 'bg-base-200 opacity-60'}`}>
               画像なし
             </span>
           )}
@@ -108,8 +109,8 @@ export default function CrawlResultCard({
         rel='noopener noreferrer'
         className='flex flex-1 flex-col gap-1 p-3'
       >
-        <p className={`line-clamp-3 min-h-15 text-sm leading-5 ${alignPrice ? 'flex-none' : ''}`}>{item.name}</p>
-        <p className={`text-lg font-bold tabular-nums ${alignPrice ? 'flex-none' : 'mt-auto'}`}>{formatYen(item.price)}</p>
+        <p className={`line-clamp-3 min-h-15 text-sm leading-5 ${search ? 'flex-none' : ''}`}>{item.name}</p>
+        <p className={`text-lg font-bold tabular-nums ${search ? 'flex-none' : 'mt-auto'}`}>{formatYen(item.price)}</p>
         {item.buyoutPrice != null && (
           <p className='text-xs tabular-nums opacity-70'>即決 {formatYen(item.buyoutPrice)}</p>
         )}

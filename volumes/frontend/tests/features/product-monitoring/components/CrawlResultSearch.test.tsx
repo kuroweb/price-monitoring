@@ -51,13 +51,17 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   render(<CrawlResultSearch />)
 
   const required = screen.getByLabelText(/必須語/)
-  await user.type(required, 'iPad、Pro')
+  await user.type(required, 'iPad、{Shift>}{Enter}{/Shift}Pro')
+  await user.click(screen.getByRole('button', { name: '絞り込み' }))
   await user.type(screen.getByLabelText(/除外語/), 'ケース')
   await user.type(screen.getByLabelText(/最低価格/), '1000')
   await user.type(screen.getByLabelText(/最高価格/), '2000{enter}')
   expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
   const criteria = { requiredKeywords: ['iPad', 'Pro'], negativeKeywords: ['ケース'], minPrice: 1000, maxPrice: 2000 }
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'newest', page: 1 })
+  await user.keyboard('{Escape}')
+  expect(screen.getByRole('button', { name: '絞り込み' })).toHaveFocus()
+  expect(screen.getByText('除外：ケース')).toBeInTheDocument()
 
   await user.clear(required)
   await user.type(required, '未実行の入力')
@@ -102,8 +106,37 @@ it('検索前、失敗、0件を区別し、結果が0件でも条件を引き�
   expect(screen.queryByRole('button', createButton)).not.toBeInTheDocument()
 
   await user.type(screen.getByLabelText(/必須語/), '未入荷')
-  await user.click(screen.getByRole('button', { name: '検索' }))
+  await user.keyboard('{Enter}')
   expect(await screen.findByText('該当する収集結果はありません。')).toBeInTheDocument()
   await user.click(screen.getByRole('button', createButton))
   expect(within(screen.getByRole('dialog')).getByLabelText(/必須語/)).toHaveValue('未入荷')
+})
+
+it('必須語が空でも、閉じた絞り込みを検索に使える', async () => {
+  const user = userEvent.setup()
+  vi.mocked(searchCrawlResults).mockResolvedValue({
+    data: { crawlResults: [], page: 1, perPage: 12, hasMore: false },
+    error: null,
+    status: 200,
+  })
+  render(<CrawlResultSearch />)
+
+  const toggle = screen.getByRole('button', { name: '絞り込み' })
+  expect(toggle).toHaveAttribute('aria-expanded', 'false')
+  expect(screen.getByLabelText('除外語')).not.toBeVisible()
+  await user.click(toggle)
+  await user.type(screen.getByLabelText('除外語'), 'ジャンク')
+  await user.type(screen.getByLabelText(/最低価格/), '1000')
+  await user.click(toggle)
+  expect(screen.getByText('未送信の絞り込み')).toBeInTheDocument()
+  expect(searchCrawlResults).not.toHaveBeenCalled()
+
+  await user.click(screen.getByRole('button', { name: '検索' }))
+  const results = within(await screen.findByRole('region', { name: '検索結果' }))
+  expect(await results.findByText('適用中')).toBeInTheDocument()
+  expect(results.getByText('除外：ジャンク')).toBeInTheDocument()
+  expect(searchCrawlResults).toHaveBeenCalledWith({
+    requiredKeywords: [], negativeKeywords: ['ジャンク'], minPrice: 1000, maxPrice: null,
+    sort: 'newest', page: 1,
+  })
 })

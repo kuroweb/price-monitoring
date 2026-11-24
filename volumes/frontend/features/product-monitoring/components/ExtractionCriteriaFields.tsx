@@ -1,7 +1,6 @@
 import { useId } from 'react'
 
 type Props = {
-  className?: string
   required: string
   excluded: string
   minPrice: number | null
@@ -12,7 +11,6 @@ type Props = {
 }
 
 export default function ExtractionCriteriaFields({
-  className = 'grid gap-4',
   required,
   excluded,
   minPrice,
@@ -24,7 +22,7 @@ export default function ExtractionCriteriaFields({
   const id = useId()
 
   return (
-    <div className={className}>
+    <div className='grid gap-4'>
       <div className='min-w-0 space-y-1'>
         <label className='block font-medium' htmlFor={`${id}-required`}>必須語</label>
         <p id={`${id}-required-hint`} className='text-xs text-base-content/70'>

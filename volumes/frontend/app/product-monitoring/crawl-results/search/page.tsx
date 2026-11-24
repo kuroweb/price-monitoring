@@ -4,10 +4,8 @@ import CrawlResultSearch from '@/features/product-monitoring/components/CrawlRes
 export default function Page() {
   return (
     <Layout>
-      <div className='card w-full bg-base-300'>
-        <div className='card-body gap-4 p-4 sm:p-6'>
-          <CrawlResultSearch />
-        </div>
+      <div className='mx-auto w-full max-w-7xl space-y-6'>
+        <CrawlResultSearch />
       </div>
     </Layout>
   )
