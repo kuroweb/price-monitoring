@@ -20,7 +20,7 @@ import type {
   MonitorInput,
 } from '@/features/product-monitoring/api/types'
 import ExtractionCriteriaFields from '@/features/product-monitoring/components/ExtractionCriteriaFields'
-import { words } from '@/features/product-monitoring/lib/words'
+import { formatWords, words } from '@/features/product-monitoring/lib/words'
 
 type Props = {
   onClose: () => void
@@ -45,8 +45,8 @@ export default function MonitorFormModal({
     discordEnabled: values?.discordEnabled ?? true,
     newestNotificationEnabled: values?.newestNotificationEnabled ?? false,
   }))
-  const [required, setRequired] = useState(values?.requiredKeywords.join(', ') ?? '')
-  const [excluded, setExcluded] = useState(values?.negativeKeywords.join(', ') ?? '')
+  const [required, setRequired] = useState(() => formatWords(input.requiredKeywords))
+  const [excluded, setExcluded] = useState(() => formatWords(input.negativeKeywords))
   const [error, setError] = useState('')
   const [busy, setBusy] = useState(false)
   const inFlightRef = useRef(false)

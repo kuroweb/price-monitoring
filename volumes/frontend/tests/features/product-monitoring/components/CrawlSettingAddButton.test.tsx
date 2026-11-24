@@ -100,13 +100,15 @@ describe('収集設定', () => {
     expect(screen.getAllByText('メルカリ').length).toBeGreaterThan(0)
     expect(screen.getAllByText('イオシス').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Yahoo!フリマ').length).toBeGreaterThan(0)
-    await user.type(screen.getByRole('textbox', { name: /必須語/ }), 'phone, blue')
+    await user.type(screen.getByRole('textbox', { name: /必須語/ }), '　phone  blue ')
+    await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'junk{Enter}case')
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createCrawlSetting).toHaveBeenCalledWith(
         expect.objectContaining({
           searchUrls: [mercariUrl, iosysUrl, yahooUrl],
           requiredKeywords: ['phone', 'blue'],
+          negativeKeywords: ['junk', 'case'],
         }),
       ),
     )
@@ -124,8 +126,8 @@ describe('収集設定', () => {
     const source = {
       ...setting,
       searchUrls: [mercariUrl, iosysUrl],
-      requiredKeywords: ['phone', 'blue'],
-      negativeKeywords: ['junk'],
+      requiredKeywords: ['phone blue', 'A,B'],
+      negativeKeywords: ['junk', '箱、説明書'],
       minPrice: 1000,
       maxPrice: 5000,
     }
@@ -133,6 +135,7 @@ describe('収集設定', () => {
     await user.click(screen.getByRole('button', { name: '複製' }))
     expect(screen.getByRole('heading', { name: '収集設定を追加' })).toBeInTheDocument()
     expect(screen.getByRole('textbox', { name: '名前' })).toHaveValue('phone（コピー）')
+    expect(screen.getByRole('textbox', { name: /必須語/ })).toHaveValue('"phone blue" A,B')
     expect(getCrawlResults).not.toHaveBeenCalled()
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
@@ -141,8 +144,8 @@ describe('収集設定', () => {
           name: 'phone（コピー）',
           enabled: true,
           searchUrls: [mercariUrl, iosysUrl],
-          requiredKeywords: ['phone', 'blue'],
-          negativeKeywords: ['junk'],
+          requiredKeywords: source.requiredKeywords,
+          negativeKeywords: source.negativeKeywords,
           minPrice: 1000,
           maxPrice: 5000,
         }),
@@ -150,6 +153,24 @@ describe('収集設定', () => {
     )
     expect(updateCrawlSetting).not.toHaveBeenCalled()
     expect(refresh).toHaveBeenCalled()
+  })
+
+  it.each([
+    ['', ['phone blue', 'A,B']],
+    ['　64GB', ['phone blue', 'A,B', '64GB']],
+  ])('既存の収集設定の語句を保って更新する（追記: %s）', async (addition, requiredKeywords) => {
+    const source = { ...setting, requiredKeywords: ['phone blue', 'A,B'], negativeKeywords: ['broken case'] }
+    vi.mocked(updateCrawlSetting).mockResolvedValue({ data: source, error: null, status: 200 })
+    const user = userEvent.setup()
+    render(<CrawlSettingSection crawlSetting={source} crawlResults={[]} />)
+    await user.click(screen.getByRole('button', { name: '編集' }))
+    const required = screen.getByRole('textbox', { name: /必須語/ })
+    expect(required).toHaveValue('"phone blue" A,B')
+    if (addition) await user.type(required, addition)
+    await user.click(screen.getByRole('button', { name: '更新' }))
+    expect(updateCrawlSetting).toHaveBeenCalledWith(1, expect.objectContaining({
+      requiredKeywords, negativeKeywords: source.negativeKeywords,
+    }))
   })
 
   it('複製した名前を255文字以内に収めること', async () => {

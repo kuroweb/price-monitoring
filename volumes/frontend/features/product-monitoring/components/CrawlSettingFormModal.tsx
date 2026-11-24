@@ -20,7 +20,7 @@ import {
 import type { CrawlResult, CrawlSetting, CrawlSettingInput } from '@/features/product-monitoring/api/types'
 import RetentionCriteriaFields from '@/features/product-monitoring/components/RetentionCriteriaFields'
 import { platformName, searchUrlPlatform } from '@/features/product-monitoring/lib/platform'
-import { words } from '@/features/product-monitoring/lib/words'
+import { formatWords, words } from '@/features/product-monitoring/lib/words'
 
 import ExcludedCrawlResults from './ExcludedCrawlResults'
 
@@ -55,8 +55,8 @@ export default function CrawlSettingFormModal({ onClose, setting, initial }: Pro
       ? { ...source, searchUrls: source.searchUrls.length ? source.searchUrls : [''] }
       : empty(),
   )
-  const [required, setRequired] = useState(source?.requiredKeywords.join(', ') ?? '')
-  const [excluded, setExcluded] = useState(source?.negativeKeywords.join(', ') ?? '')
+  const [required, setRequired] = useState(() => formatWords(input.requiredKeywords))
+  const [excluded, setExcluded] = useState(() => formatWords(input.negativeKeywords))
   const nextKeyRef = useRef(input.searchUrls.length)
   const [rowKeys, setRowKeys] = useState(() => input.searchUrls.map((_, i) => i))
   const [error, setError] = useState('')

@@ -134,7 +134,7 @@ export default function CrawlResultSearch() {
                   id='search-keywords'
                   className='textarea block min-h-11 w-full resize-none py-2.5 text-base sm:text-sm'
                   rows={Math.min(4, input.required.split('\n').length)}
-                  placeholder='例：iPad Air, 64GB'
+                  placeholder='例：iPad Air 64GB'
                   aria-describedby='search-keyword-help'
                   value={input.required}
                   onChange={(event) => change({ required: event.target.value })}
@@ -147,7 +147,8 @@ export default function CrawlResultSearch() {
                   }}
                 />
                 <span id='search-keyword-help' className='sr-only'>
-                  カンマ・読点・改行で区切った語句をすべて含む商品を検索します。Shift と Enter で改行します。
+                  スペースまたは改行で区切った語句をすべて含む商品を検索します。
+                  スペースを含む語句は半角の「&quot;」で囲みます。Shift と Enter で改行します。
                 </span>
               </div>
               <button type='submit' className='btn btn-primary h-11 px-3 sm:min-w-24'>検索</button>
@@ -171,7 +172,7 @@ export default function CrawlResultSearch() {
                     <textarea
                       className='textarea block min-h-10 w-full resize-y text-base sm:text-sm'
                       rows={1}
-                      placeholder='例：ジャンク, ケース'
+                      placeholder='例：ジャンク ケース'
                       value={input.excluded}
                       onChange={(event) => change({ excluded: event.target.value })}
                       onKeyDown={dismissFilters}

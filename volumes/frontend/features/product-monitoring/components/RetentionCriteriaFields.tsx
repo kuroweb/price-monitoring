@@ -20,7 +20,8 @@ export default function RetentionCriteriaFields({
   return (
     <>
       <label className='block'>
-        必須語（すべて含む・カンマ/改行区切り）
+        必須語（すべて含む・スペースまたは改行区切り）
+        <span className='block text-xs text-base-content/70'>スペースを含む語句は半角の「&quot;」で囲みます</span>
         <textarea
           className='textarea w-full'
           value={required}
@@ -28,7 +29,8 @@ export default function RetentionCriteriaFields({
         />
       </label>
       <label className='block'>
-        除外語（いずれかを含む・カンマ/改行区切り）
+        除外語（いずれかを含む・スペースまたは改行区切り）
+        <span className='block text-xs text-base-content/70'>スペースを含む語句は半角の「&quot;」で囲みます</span>
         <textarea
           className='textarea w-full'
           value={excluded}
