@@ -101,14 +101,15 @@ describe('収集設定', () => {
     expect(screen.getAllByText('イオシス').length).toBeGreaterThan(0)
     expect(screen.getAllByText('Yahoo!フリマ').length).toBeGreaterThan(0)
     await user.type(screen.getByRole('textbox', { name: /必須語/ }), '　phone  blue ')
-    await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'junk{Enter}case')
+    await user.type(screen.getByRole('textbox', { name: /除外語/ }), 'junk,{Enter}case')
+    expect(screen.getByText(/語句を分けるにはスペースを使います/)).toBeVisible()
     await user.click(screen.getByRole('button', { name: '登録' }))
     await waitFor(() =>
       expect(createCrawlSetting).toHaveBeenCalledWith(
         expect.objectContaining({
           searchUrls: [mercariUrl, iosysUrl, yahooUrl],
           requiredKeywords: ['phone', 'blue'],
-          negativeKeywords: ['junk', 'case'],
+          negativeKeywords: ['junk,', 'case'],
         }),
       ),
     )
@@ -156,16 +157,18 @@ describe('収集設定', () => {
   })
 
   it.each([
-    ['', ['phone blue', 'A,B']],
-    ['　64GB', ['phone blue', 'A,B', '64GB']],
+    ['', ['phone blue', 'A,B', '在庫、', '新品']],
+    ['　64GB', ['phone blue', 'A,B', '在庫、', '新品', '64GB']],
   ])('既存の収集設定の語句を保って更新する（追記: %s）', async (addition, requiredKeywords) => {
-    const source = { ...setting, requiredKeywords: ['phone blue', 'A,B'], negativeKeywords: ['broken case'] }
+    const source = { ...setting, requiredKeywords: ['phone blue', 'A,B', '在庫、', '新品'], negativeKeywords: ['broken case'] }
     vi.mocked(updateCrawlSetting).mockResolvedValue({ data: source, error: null, status: 200 })
     const user = userEvent.setup()
     render(<CrawlSettingSection crawlSetting={source} crawlResults={[]} />)
     await user.click(screen.getByRole('button', { name: '編集' }))
     const required = screen.getByRole('textbox', { name: /必須語/ })
-    expect(required).toHaveValue('"phone blue" A,B')
+    expect(required).toHaveValue('"phone blue" A,B 在庫、 新品')
+    await user.click(required)
+    expect(screen.queryByText(/語句を分けるにはスペースを使います/)).not.toBeInTheDocument()
     if (addition) await user.type(required, addition)
     await user.click(screen.getByRole('button', { name: '更新' }))
     expect(updateCrawlSetting).toHaveBeenCalledWith(1, expect.objectContaining({

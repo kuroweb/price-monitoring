@@ -9,6 +9,7 @@ import type {
   SearchCrawlResultsPage,
 } from '@/features/product-monitoring/api/types'
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
+import KeywordTextarea from '@/features/product-monitoring/components/KeywordTextarea'
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
 import ResultPagination from '@/features/product-monitoring/components/ResultPagination'
 import { formatWords, words } from '@/features/product-monitoring/lib/words'
@@ -130,11 +131,11 @@ export default function CrawlResultSearch() {
             <div className='grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-2'>
               <div className='min-w-0'>
                 <label htmlFor='search-keywords' className='sr-only'>必須語</label>
-                <textarea
+                <KeywordTextarea
                   id='search-keywords'
                   className='textarea block min-h-11 w-full resize-none py-2.5 text-base sm:text-sm'
                   rows={Math.min(4, input.required.split('\n').length)}
-                  placeholder='例：iPad Air 64GB'
+                  placeholder='スペース区切り（例：iPad 64GB）'
                   aria-describedby='search-keyword-help'
                   value={input.required}
                   onChange={(event) => change({ required: event.target.value })}
@@ -167,17 +168,18 @@ export default function CrawlResultSearch() {
             <fieldset id='search-optional-filters' className='min-w-0' disabled={!filtersOpen} hidden={!filtersOpen}>
               <div className='space-y-3 rounded-box bg-base-200 p-3 sm:p-4'>
                 <div className='grid grid-cols-2 gap-3 sm:grid-cols-[minmax(0,2fr)_1fr_1fr]'>
-                  <label className='col-span-2 min-w-0 space-y-1 sm:col-span-1'>
-                    <span className='block text-sm font-medium'>除外語</span>
-                    <textarea
+                  <div className='col-span-2 min-w-0 space-y-1 sm:col-span-1'>
+                    <label htmlFor='search-excluded-keywords' className='block text-sm font-medium'>除外語</label>
+                    <KeywordTextarea
+                      id='search-excluded-keywords'
                       className='textarea block min-h-10 w-full resize-y text-base sm:text-sm'
                       rows={1}
-                      placeholder='例：ジャンク ケース'
+                      placeholder='スペース区切り（例：ジャンク ケース）'
                       value={input.excluded}
                       onChange={(event) => change({ excluded: event.target.value })}
                       onKeyDown={dismissFilters}
                     />
-                  </label>
+                  </div>
                   {PRICE_FIELDS.map(([field, label]) => (
                     <label key={field} className='min-w-0 space-y-1'>
                       <span className='block text-sm font-medium'>{label}</span>
