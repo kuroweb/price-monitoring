@@ -80,9 +80,9 @@ export default function CrawlResultSearch() {
         }}
       >
         <h2 id='search-criteria' className='mb-4 font-semibold'>検索条件</h2>
-        <fieldset disabled={loading} className='min-w-0 space-y-4'>
+        <fieldset disabled={loading} className='grid min-w-0 gap-4 lg:grid-cols-2'>
           <ExtractionCriteriaFields
-            className='grid gap-4 lg:grid-cols-2'
+            className='contents'
             required={input.required}
             excluded={input.excluded}
             minPrice={input.minPrice}
@@ -91,9 +91,9 @@ export default function CrawlResultSearch() {
             onExcludedChange={(excluded) => change({ excluded })}
             onPriceChange={change}
           />
-          <div className='flex justify-end border-t border-base-content/10 pt-3'>
-            <button type='submit' className='btn btn-primary w-full sm:w-auto sm:min-w-28'>検索</button>
-          </div>
+          <button type='submit' className='btn btn-primary w-full self-end lg:w-auto lg:min-w-28 lg:justify-self-start'>
+            検索
+          </button>
         </fieldset>
       </form>
       {(displayed || loading || error) && (

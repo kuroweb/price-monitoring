@@ -31,7 +31,7 @@ const listing: CrawlResult = {
 
 beforeEach(() => vi.resetAllMocks())
 
-it('ページ切り替えと新規登録に表示中の検索条件を使う', async () => {
+it('Enter で検索し、結果の操作と新規登録に表示中の検索条件を使う', async () => {
   const user = userEvent.setup()
   vi.mocked(searchCrawlResults)
     .mockResolvedValueOnce({
@@ -54,8 +54,7 @@ it('ページ切り替えと新規登録に表示中の検索条件を使う', a
   await user.type(required, 'iPad、Pro')
   await user.type(screen.getByLabelText(/除外語/), 'ケース')
   await user.type(screen.getByLabelText(/最低価格/), '1000')
-  await user.type(screen.getByLabelText(/最高価格/), '2000')
-  await user.click(screen.getByRole('button', { name: '検索' }))
+  await user.type(screen.getByLabelText(/最高価格/), '2000{enter}')
   expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
   const criteria = { requiredKeywords: ['iPad', 'Pro'], negativeKeywords: ['ケース'], minPrice: 1000, maxPrice: 2000 }
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'newest', page: 1 })
