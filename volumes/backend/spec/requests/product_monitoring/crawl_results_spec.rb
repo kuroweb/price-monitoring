@@ -71,11 +71,32 @@ RSpec.describe "商品クロール結果", type: :request do
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([results.last.id])
   end
 
+  it "販売状態で売り切れ、販売中、すべてを分けること" do
+    path = "/api/v1/product_monitoring/crawl_results/search"
+    on_sale = create(:product_monitoring_crawl_result, name: "phone", price: 100, sold: false)
+    unknown = create(:product_monitoring_crawl_result, name: "phone", price: 150, sold: nil)
+    sold = create(:product_monitoring_crawl_result, name: "phone", price: 200, sold: true)
+    create(:product_monitoring_crawl_result, name: "phone", price: 50, sold: true, excluded_at: Time.current)
+    filters = { required_keywords: ["phone"], sort: "price_asc" }
+
+    post path, params: filters.merge(sale_status: "sold", page: 1), as: :json
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body).to include("page" => 1, "per_page" => 12, "has_more" => false)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([sold.id])
+
+    post path, params: filters.merge(sale_status: "on_sale", page: 1), as: :json
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([on_sale.id, unknown.id])
+
+    post path, params: filters.merge(sale_status: "all", page: 1), as: :json
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([on_sale.id, unknown.id, sold.id])
+  end
+
   it "抽出条件の値やページ指定が不正なら検索せず400を返すこと" do
     path = "/api/v1/product_monitoring/crawl_results/search"
     [
       { required_keywords: "phone" }, { negative_keywords: ["x" * 256] },
-      { min_price: -1 }, { min_price: 2, max_price: 1 }, { page: 0 }, { sort: "unknown" }
+      { min_price: -1 }, { min_price: 2, max_price: 1 }, { page: 0 }, { sort: "unknown" },
+      { sale_status: "other" }
     ].each do |filters|
       post path, params: filters, as: :json
       expect(response).to have_http_status(:bad_request)

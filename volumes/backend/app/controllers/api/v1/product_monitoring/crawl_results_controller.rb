@@ -19,9 +19,7 @@ module Api
 
         def search
           monitor = ::ProductMonitoring::Monitor.new(search_criteria)
-          result = MatchingCrawlResults.call(
-            monitor:, sort: params.fetch(:sort, "newest"), page: params.fetch(:page, 1)
-          )
+          result = MatchingCrawlResults.call(monitor:, **search_query)
           render json: { crawl_results: result.listings.as_json, page: result.page, per_page: result.per_page,
                          has_more: result.has_more }, status: :ok
         rescue ExtractionCriteria::Invalid, MatchingCrawlResults::InvalidQuery => e
@@ -46,6 +44,14 @@ module Api
         def search_criteria
           filters = ExtractionCriteria::FIELDS.select { |key| params.key?(key) }.index_with { |key| params[key] }
           ExtractionCriteria.normalize(filters)
+        end
+
+        def search_query
+          {
+            sale_status: params[:sale_status].presence || "all",
+            sort: params.fetch(:sort, "newest"),
+            page: params.fetch(:page, 1)
+          }
         end
 
         def filtered_results

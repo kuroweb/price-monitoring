@@ -58,7 +58,7 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   await user.type(screen.getByLabelText(/最高価格/), '2000{enter}')
   expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
   const criteria = { requiredKeywords: ['iPad', 'Pro'], negativeKeywords: ['ケース'], minPrice: 1000, maxPrice: 2000 }
-  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'newest', page: 1 })
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'newest', page: 1 })
   await user.keyboard('{Escape}')
   expect(screen.getByRole('button', { name: '絞り込み' })).toHaveFocus()
   expect(screen.getByText('除外：ケース')).toBeInTheDocument()
@@ -66,13 +66,13 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   await user.clear(required)
   await user.type(required, '未実行の入力')
   const results = within(screen.getByRole('region', { name: '検索結果' }))
-  expect(results.getByText(/編集中の条件は未反映/)).toBeInTheDocument()
+  expect(results.queryByText(/編集中の条件は未反映/)).not.toBeInTheDocument()
   await user.selectOptions(results.getByLabelText('並び順'), 'price_asc')
   await waitFor(() => expect(results.getByLabelText('並び順')).toHaveValue('price_asc'))
-  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'price_asc', page: 1 })
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'price_asc', page: 1 })
   await user.click(screen.getByRole('button', { name: '次へ' }))
   expect(await screen.findByText('iPad Pro 2')).toBeInTheDocument()
-  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, sort: 'price_asc', page: 2 })
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'price_asc', page: 2 })
   await user.click(screen.getByRole('button', { name: 'この条件でモニタリングを作成' }))
 
   const modal = within(screen.getByRole('dialog'))
@@ -133,10 +133,76 @@ it('必須語が空でも、閉じた絞り込みを検索に使える', async (
 
   await user.click(screen.getByRole('button', { name: '検索' }))
   const results = within(await screen.findByRole('region', { name: '検索結果' }))
-  expect(await results.findByText('適用中')).toBeInTheDocument()
+  const applied = await results.findByText('適用中')
+  expect(applied.compareDocumentPosition(results.getByRole('group', { name: '販売状態' }))).toBe(
+    Node.DOCUMENT_POSITION_FOLLOWING,
+  )
   expect(results.getByText('除外：ジャンク')).toBeInTheDocument()
   expect(searchCrawlResults).toHaveBeenCalledWith({
     requiredKeywords: [], negativeKeywords: ['ジャンク'], minPrice: 1000, maxPrice: null,
-    sort: 'newest', page: 1,
+    saleStatus: 'all', sort: 'newest', page: 1,
+  })
+})
+
+it('販売状態を切り替えると、売り切れ・販売中・すべての結果を分け、1ページ目に戻す', async () => {
+  const user = userEvent.setup()
+  const onSale = { ...listing, id: 1, name: '販売中の出品', sold: false }
+  const unknown = { ...listing, id: 2, name: '状態不明の出品', sold: null }
+  const sold = { ...listing, id: 3, name: '売り切れの出品', sold: true }
+  const soldNext = { ...listing, id: 4, name: '売り切れの2ページ目', sold: true }
+  const page = (items: CrawlResult[], current: number, hasMore: boolean) => ({
+    data: { crawlResults: items, page: current, perPage: 12, hasMore }, error: null, status: 200,
+  })
+  vi.mocked(searchCrawlResults)
+    .mockResolvedValueOnce(page([onSale, unknown, sold], 1, true))
+    .mockResolvedValueOnce(page([soldNext], 2, false))
+    .mockResolvedValueOnce(page([sold], 1, false))
+    .mockResolvedValueOnce(page([onSale, unknown], 1, false))
+    .mockResolvedValueOnce(page([onSale, unknown, sold], 1, true))
+  render(<CrawlResultSearch />)
+
+  await user.click(screen.getByRole('button', { name: '検索' }))
+  const results = within(await screen.findByRole('region', { name: '検索結果' }))
+  expect(results.getByRole('button', { name: /^すべて$/ })).toHaveAttribute('aria-pressed', 'true')
+  expect(results.getByRole('button', { name: /^販売中$/ })).toBeInTheDocument()
+  expect(results.getByRole('button', { name: /^売り切れ$/ })).toBeInTheDocument()
+  expect(results.getByText('販売中の出品')).toBeInTheDocument()
+  expect(results.getByText('状態不明の出品')).toBeInTheDocument()
+  expect(results.getByText('売り切れの出品')).toBeInTheDocument()
+
+  await user.click(results.getByRole('button', { name: '次へ' }))
+  expect(await results.findByText('売り切れの2ページ目')).toBeInTheDocument()
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({
+    requiredKeywords: [], negativeKeywords: [], minPrice: null, maxPrice: null,
+    saleStatus: 'all', sort: 'newest', page: 2,
+  })
+
+  await user.click(results.getByRole('button', { name: '売り切れ' }))
+  expect(await results.findByText('売り切れの出品')).toBeInTheDocument()
+  expect(results.queryByText('売り切れの2ページ目')).not.toBeInTheDocument()
+  expect(results.queryByText('販売中の出品')).not.toBeInTheDocument()
+  expect(results.queryByText('状態不明の出品')).not.toBeInTheDocument()
+  expect(results.getByRole('button', { name: '売り切れ' })).toHaveAttribute('aria-pressed', 'true')
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({
+    requiredKeywords: [], negativeKeywords: [], minPrice: null, maxPrice: null,
+    saleStatus: 'sold', sort: 'newest', page: 1,
+  })
+
+  await user.click(results.getByRole('button', { name: '販売中' }))
+  expect(await results.findByText('販売中の出品')).toBeInTheDocument()
+  expect(results.getByText('状態不明の出品')).toBeInTheDocument()
+  expect(results.queryByText('売り切れの出品')).not.toBeInTheDocument()
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({
+    requiredKeywords: [], negativeKeywords: [], minPrice: null, maxPrice: null,
+    saleStatus: 'on_sale', sort: 'newest', page: 1,
+  })
+
+  await user.click(results.getByRole('button', { name: 'すべて' }))
+  expect(await results.findByText('売り切れの出品')).toBeInTheDocument()
+  expect(results.getByText('販売中の出品')).toBeInTheDocument()
+  expect(results.getByText('状態不明の出品')).toBeInTheDocument()
+  expect(searchCrawlResults).toHaveBeenLastCalledWith({
+    requiredKeywords: [], negativeKeywords: [], minPrice: null, maxPrice: null,
+    saleStatus: 'all', sort: 'newest', page: 1,
   })
 })
