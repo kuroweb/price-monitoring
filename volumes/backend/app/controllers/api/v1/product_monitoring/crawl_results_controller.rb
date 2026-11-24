@@ -4,6 +4,8 @@ module Api
       # 収集結果。crawl_setting_id でその収集設定の収集結果に絞り、excluded=true で除外した収集結果だけを返す
       class CrawlResultsController < Api::ApplicationController
         PREVIEW_COUNT = 8
+        ExtractionCriteria = ::ProductMonitoring::Monitor::ExtractionCriteria
+        MatchingCrawlResults = ::ProductMonitoring::Search::MatchingCrawlResults
 
         def index
           crawl_results = filtered_results
@@ -13,6 +15,17 @@ module Api
           else
             render json: preview_results(crawl_results), status: :ok
           end
+        end
+
+        def search
+          monitor = ::ProductMonitoring::Monitor.new(search_criteria)
+          result = MatchingCrawlResults.call(
+            monitor:, sort: params.fetch(:sort, "newest"), page: params.fetch(:page, 1)
+          )
+          render json: { crawl_results: result.listings.as_json, page: result.page, per_page: result.per_page,
+                         has_more: result.has_more }, status: :ok
+        rescue ExtractionCriteria::Invalid, MatchingCrawlResults::InvalidQuery => e
+          render json: build_error_json(400, e.message, []), status: :bad_request
         end
 
         # 除外と取り消し。行は消さず excluded_at で表す
@@ -29,6 +42,11 @@ module Api
         end
 
         private
+
+        def search_criteria
+          filters = ExtractionCriteria::FIELDS.select { |key| params.key?(key) }.index_with { |key| params[key] }
+          ExtractionCriteria.normalize(filters)
+        end
 
         def filtered_results
           if ActiveModel::Type::Boolean.new.cast(params[:excluded])

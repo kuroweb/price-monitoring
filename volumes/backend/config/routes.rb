@@ -43,7 +43,9 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
         resources :crawl_settings, only: %i[index show create update destroy] do
           post :sync, on: :member
         end
-        resources :crawl_results, only: %i[index update destroy]
+        resources :crawl_results, only: %i[index update destroy] do
+          post :search, on: :collection
+        end
         resources :monitors, only: %i[index create update destroy] do
           member do
             get :crawl_results

@@ -539,6 +539,38 @@ id で指定した収集設定を削除する。
 }
 ```
 
+## `POST /api/v1/product_monitoring/crawl_results/search`
+
+共有の保存済み収集結果から、抽出条件に一致する除外されていない出品を1ページ返す。収集や保存は実行しない。
+
+| body | 型 | 説明 |
+| --- | --- | --- |
+| required_keywords | string の配列 | 各255文字、50件まで。省略時は空 |
+| negative_keywords | string の配列 | 各255文字、50件まで。省略時は空 |
+| min_price | integer または null | 0以上2147483647以下。省略または null は下限なし |
+| max_price | integer または null | 0以上2147483647以下。省略または null は上限なし。下限以上 |
+| sort | string | `newest`、`price_asc`、`price_desc`。省略時は `newest` |
+| page | integer | 1以上。省略時は1 |
+
+```json
+{ "required_keywords": ["iPad", "Pro"], "negative_keywords": ["ケース"], "min_price": 1000, "page": 1 }
+```
+
+**200**
+
+| 名前 | 型 | 説明 |
+| --- | --- | --- |
+| crawl_results | array | 収集結果。要素は収集結果一覧と同じ。該当なしは空の配列 |
+| page | integer | 指定ページ |
+| per_page | integer | 1ページの上限（12件） |
+| has_more | boolean | 次のページがあるか |
+
+```json
+{ "crawl_results": [], "page": 1, "per_page": 12, "has_more": false }
+```
+
+抽出条件・並び順・ページが不正な場合は400を返す。
+
 ## `PATCH /api/v1/product_monitoring/crawl_results/:id`
 
 収集結果の行は残し、除外するか取り消す。

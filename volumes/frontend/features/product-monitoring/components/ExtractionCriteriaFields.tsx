@@ -1,3 +1,5 @@
+import { useId } from 'react'
+
 type Props = {
   required: string
   excluded: string
@@ -17,27 +19,41 @@ export default function ExtractionCriteriaFields({
   onExcludedChange,
   onPriceChange,
 }: Props) {
+  const id = useId()
+
   return (
-    <>
-      <label className='block'>
-        必須語（すべて含む・カンマ/改行区切り）
+    <div className='grid gap-4'>
+      <div className='min-w-0 space-y-1'>
+        <label className='block font-medium' htmlFor={`${id}-required`}>必須語</label>
+        <p id={`${id}-required-hint`} className='text-xs text-base-content/70'>
+          すべて含む。カンマ・改行区切り
+        </p>
         <textarea
-          className='textarea w-full'
+          id={`${id}-required`}
+          aria-describedby={`${id}-required-hint`}
+          className='textarea block min-h-16 w-full resize-y'
+          rows={2}
           value={required}
           onChange={(event) => onRequiredChange(event.target.value)}
         />
-      </label>
-      <label className='block'>
-        除外語（いずれかを含む・カンマ/改行区切り）
+      </div>
+      <div className='min-w-0 space-y-1'>
+        <label className='block font-medium' htmlFor={`${id}-excluded`}>除外語</label>
+        <p id={`${id}-excluded-hint`} className='text-xs text-base-content/70'>
+          いずれかを含むと除外。カンマ・改行区切り
+        </p>
         <textarea
-          className='textarea w-full'
+          id={`${id}-excluded`}
+          aria-describedby={`${id}-excluded-hint`}
+          className='textarea block min-h-16 w-full resize-y'
+          rows={2}
           value={excluded}
           onChange={(event) => onExcludedChange(event.target.value)}
         />
-      </label>
-      <div className='grid gap-3 sm:grid-cols-2'>
-        <label>
-          最低価格（円）
+      </div>
+      <div className='grid min-w-0 grid-cols-2 items-end gap-3'>
+        <label className='min-w-0 space-y-1'>
+          <span className='block font-medium'>最低価格（円）</span>
           <input
             className='input w-full'
             type='number'
@@ -51,8 +67,8 @@ export default function ExtractionCriteriaFields({
             }
           />
         </label>
-        <label>
-          最高価格（円）
+        <label className='min-w-0 space-y-1'>
+          <span className='block font-medium'>最高価格（円）</span>
           <input
             className='input w-full'
             type='number'
@@ -67,6 +83,6 @@ export default function ExtractionCriteriaFields({
           />
         </label>
       </div>
-    </>
+    </div>
   )
 }
