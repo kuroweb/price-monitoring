@@ -81,10 +81,6 @@ export default function CrawlResultSearch() {
   const [error, setError] = useState('')
   const inFlightRef = useRef(false)
   const filterToggleRef = useRef<HTMLButtonElement>(null)
-  const hasDraftChanges = displayed && (
-    input.required !== displayed.input.required || input.excluded !== displayed.input.excluded ||
-    input.minPrice !== displayed.input.minPrice || input.maxPrice !== displayed.input.maxPrice
-  )
   const draftFilters = filterLabels(extractionCriteria(input))
   const appliedCriteria = displayed && extractionCriteria(displayed.input)
   const appliedLabels = appliedCriteria
@@ -245,7 +241,6 @@ export default function CrawlResultSearch() {
           {loading && <p role='status' className='text-sm text-base-content/70'>検索中…</p>}
           {error && <p role='alert' className='text-sm text-error'>{error}</p>}
           {displayed && appliedLabels.length > 0 && <CriteriaSummary label='適用中' values={appliedLabels} />}
-          {hasDraftChanges && <p className='text-sm text-base-content/70'>編集中の条件は未反映です。</p>}
           {displayed && (
             <div className='join' role='group' aria-label='販売状態'>
               {STATUS_FILTERS.map(([value, label]) => (

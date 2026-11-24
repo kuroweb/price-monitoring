@@ -66,10 +66,7 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   await user.clear(required)
   await user.type(required, '未実行の入力')
   const results = within(screen.getByRole('region', { name: '検索結果' }))
-  const draft = results.getByText(/編集中の条件は未反映/)
-  expect(draft.compareDocumentPosition(results.getByRole('group', { name: '販売状態' }))).toBe(
-    Node.DOCUMENT_POSITION_FOLLOWING,
-  )
+  expect(results.queryByText(/編集中の条件は未反映/)).not.toBeInTheDocument()
   await user.selectOptions(results.getByLabelText('並び順'), 'price_asc')
   await waitFor(() => expect(results.getByLabelText('並び順')).toHaveValue('price_asc'))
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'price_asc', page: 1 })
