@@ -11,7 +11,7 @@ import type {
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
 import ResultPagination from '@/features/product-monitoring/components/ResultPagination'
-import { words } from '@/features/product-monitoring/lib/words'
+import { formatWords, words } from '@/features/product-monitoring/lib/words'
 import { formatYen } from '@/lib/format'
 
 const SORTS = [
@@ -37,7 +37,7 @@ function extractionCriteria({ required, excluded, minPrice, maxPrice }: SearchIn
 
 function filterLabels({ negativeKeywords, minPrice, maxPrice }: ExtractionCriteria) {
   const labels = []
-  if (negativeKeywords.length) labels.push(`除外：${negativeKeywords.join('、')}`)
+  if (negativeKeywords.length) labels.push(`除外：${formatWords(negativeKeywords)}`)
   if (minPrice != null || maxPrice != null) {
     labels.push(`価格：${minPrice == null ? '下限なし' : formatYen(minPrice)}〜${maxPrice == null ? '上限なし' : formatYen(maxPrice)}`)
   }
@@ -77,7 +77,7 @@ export default function CrawlResultSearch() {
   const draftFilters = filterLabels(extractionCriteria(input))
   const appliedCriteria = displayed && extractionCriteria(displayed.input)
   const appliedLabels = appliedCriteria
-    ? [...(appliedCriteria.requiredKeywords.length ? [`必須：${appliedCriteria.requiredKeywords.join('、')}`] : []),
+    ? [...(appliedCriteria.requiredKeywords.length ? [`必須：${formatWords(appliedCriteria.requiredKeywords)}`] : []),
       ...filterLabels(appliedCriteria)]
     : []
   const showDraftFilters = !filtersOpen && draftFilters.length > 0 &&
