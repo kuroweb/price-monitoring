@@ -73,6 +73,7 @@ const menuGroups: { title: string; items: MenuItem[] }[] = [
     items: [
       { label: 'モニタリング設定', href: '/product-monitoring/monitors', icon: settingsIcon },
       { label: '収集設定', href: '/product-monitoring/crawl-settings', icon: listIcon },
+      { label: '収集結果を検索', href: '/product-monitoring/crawl-results/search', icon: listIcon },
     ],
   },
   {

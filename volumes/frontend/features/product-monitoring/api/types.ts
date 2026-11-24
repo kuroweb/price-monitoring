@@ -25,13 +25,15 @@ export type CrawlResult = {
   endsAt: string | null
   excludedAt: string | null
 }
-export type MonitorInput = {
-  name: string
-  enabled: boolean
+export type ExtractionCriteria = {
   requiredKeywords: string[]
   negativeKeywords: string[]
   minPrice: number | null
   maxPrice: number | null
+}
+export type MonitorInput = ExtractionCriteria & {
+  name: string
+  enabled: boolean
   discordEnabled: boolean
   newestNotificationEnabled: boolean
 }
@@ -56,6 +58,11 @@ export type GetCrawlResults = {
 export type GetCrawlResultsParams = { crawlSettingId?: number; excluded?: boolean }
 export type MonitorSaleStatus = 'all' | 'on_sale' | 'sold'
 export type MonitorCrawlResultSort = 'newest' | 'price_asc' | 'price_desc'
+export type SearchCrawlResultsParams = ExtractionCriteria & {
+  sort: MonitorCrawlResultSort
+  page: number
+}
+export type SearchCrawlResultsPage = Required<GetMonitorCrawlResults>
 export type GetMonitorCrawlResultsParams = {
   saleStatus?: MonitorSaleStatus
   sort?: MonitorCrawlResultSort

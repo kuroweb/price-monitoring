@@ -41,4 +41,45 @@ RSpec.describe "商品クロール結果", type: :request do
     get "/api/v1/product_monitoring/crawl_results", params: { crawl_setting_id: first.crawl_setting_id }
     expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([first.id])
   end
+
+  it "設定を横断して抽出条件に一致する保存済みの出品だけをページ単位で返すこと" do
+    path = "/api/v1/product_monitoring/crawl_results/search"
+    filters = { required_keywords: %w[iPad Pro], negative_keywords: ["ケース"],
+                min_price: 100, max_price: 120, sort: "price_asc" }
+    results = (100..112).map do |price|
+      create(:product_monitoring_crawl_result, name: "ｉＰａｄ Ｐｒｏ", price:, sold: price.even?)
+    end
+    create(:product_monitoring_crawl_result, name: "iPad Pro", price: 120,
+                                             platform: results.first.platform, external_id: results.first.external_id)
+    create(:product_monitoring_crawl_result, name: "iPad Pro", price: 99)
+    create(:product_monitoring_crawl_result, name: "iPad Pro", price: 121)
+    create(:product_monitoring_crawl_result, name: "iPad", price: 100)
+    create(:product_monitoring_crawl_result, name: "iPad Pro ケース", price: 100)
+    create(:product_monitoring_crawl_result, name: "iPad Pro", price: 100, excluded_at: Time.current)
+
+    expect do
+      post path, params: filters, as: :json
+    end.not_to change(ProductMonitoring::Monitor, :count)
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body).to include("page" => 1, "per_page" => 12, "has_more" => true)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq(results.first(12).map(&:id))
+
+    post path, params: filters.merge(page: 2), as: :json
+
+    expect(response).to have_http_status(:ok)
+    expect(response.parsed_body).to include("page" => 2, "has_more" => false)
+    expect(response.parsed_body.fetch("crawl_results").pluck("id")).to eq([results.last.id])
+  end
+
+  it "抽出条件の値やページ指定が不正なら検索せず400を返すこと" do
+    path = "/api/v1/product_monitoring/crawl_results/search"
+    [
+      { required_keywords: "phone" }, { negative_keywords: ["x" * 256] },
+      { min_price: -1 }, { min_price: 2, max_price: 1 }, { page: 0 }, { sort: "unknown" }
+    ].each do |filters|
+      post path, params: filters, as: :json
+      expect(response).to have_http_status(:bad_request)
+      expect(response.parsed_body.fetch("error").fetch("message")).to be_present
+    end
+  end
 end

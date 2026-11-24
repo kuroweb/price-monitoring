@@ -11,6 +11,7 @@ import type {
   GetMonitorTransactionsParams,
   GetMonitorCrawlResultsParams,
   GetCrawlResultsParams,
+  SearchCrawlResultsParams,
   CrawlSettingInput,
   MonitorInput,
 } from './types'
@@ -67,6 +68,10 @@ export async function getCrawlSetting(id: number) {
 
 export async function getCrawlResults(params?: GetCrawlResultsParams) {
   return CrawlResultApi.getCrawlResults(params)
+}
+
+export async function searchCrawlResults(params: SearchCrawlResultsParams) {
+  return CrawlResultApi.searchCrawlResults(params)
 }
 
 const revalidateAggregation = () => revalidatePaths([['/product-monitoring', 'layout']])
