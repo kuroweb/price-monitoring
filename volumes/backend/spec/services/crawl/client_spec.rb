@@ -31,7 +31,7 @@ RSpec.describe Crawl::Client, type: :service do
     it "指定された場合だけ画像を許可し、ブロックリストは維持すること" do
       expect(route_for(url: "https://example.com/a.png", resource_type: "image",
                        allow_images: true)).to have_received(:fallback)
-      expect(route_for(url: "https://yads.c.yimg.jp/a.png", resource_type: "image",
+      expect(route_for(url: "https://analytics.tiktok.com/a.png", resource_type: "image",
                        allow_images: true)).to have_received(:abort)
     end
 
@@ -74,7 +74,7 @@ RSpec.describe Crawl::Client, type: :service do
     end
 
     it "指定したホストのスクリプトだけを許可すること" do
-      host = "yads.c.yimg.jp"
+      host = "analytics.tiktok.com"
       expect(route_for(url: "https://#{host}/app.js", resource_type: "script",
                        allow_script_host: host)).to have_received(:fallback)
       expect(route_for(url: "https://#{host}/image.png", resource_type: "image",

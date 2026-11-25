@@ -40,32 +40,11 @@ module Api
       end
 
       def upsert_product_params
-        params.permit(
-          product_attributes + [
-            yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes + [
-              {
-                yahoo_auction_crawl_setting_exclude_keywords: yahoo_auction_crawl_setting_exclude_keyword_attributes,
-                yahoo_auction_crawl_setting_required_keywords: yahoo_auction_crawl_setting_required_keyword_attributes
-              }
-            ]
-          ] + [:category_id]
-        )
+        params.permit(product_attributes + [:category_id])
       end
 
       def product_attributes
         %i[name]
-      end
-
-      def yahoo_auction_crawl_setting_attributes
-        %i[keyword category_id min_price max_price enabled]
-      end
-
-      def yahoo_auction_crawl_setting_exclude_keyword_attributes
-        %i[keyword]
-      end
-
-      def yahoo_auction_crawl_setting_required_keyword_attributes
-        %i[keyword]
       end
 
       def external_attributes

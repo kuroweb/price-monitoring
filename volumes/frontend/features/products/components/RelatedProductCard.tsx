@@ -4,7 +4,6 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import { createYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/api/actions'
 import type { RelatedProduct } from '@/features/products/api/types'
 
 import { useStatusState } from '../hooks/useStatusState'
@@ -13,19 +12,14 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
   const router = useRouter()
   const [status, _] = useStatusState()
 
-  const serviceDomainMap: { [key: string]: string } = {
-    yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
-  }
+  const serviceDomainMap: { [key: string]: string } = {}
 
-  const serviceNameMap: { [key: string]: string } = {
-    yahoo_auction: 'ヤフオク',
-  }
+  const serviceNameMap: { [key: string]: string } = {}
 
-  const serviceColorMap: { [key: string]: string } = {
-    yahoo_auction: 'bg-yellow-600',
-  }
+  const serviceColorMap: { [key: string]: string } = {}
 
-  const productUrl = `https://${serviceDomainMap[relatedProduct.platform]}${relatedProduct.externalId}`
+  const domain = serviceDomainMap[relatedProduct.platform]
+  const productUrl = domain ? `https://${domain}${relatedProduct.externalId}` : '#'
 
   const parseDate = (date: string | null | undefined) => {
     // 暫定実装
@@ -40,9 +34,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
         productId: number,
         data: { externalId: string },
       ) => Promise<ExcludeProductResponse>
-    } = {
-      yahoo_auction: createYahooAuctionCrawlSettingExcludeProduct,
-    }
+    } = {}
 
     const action = platformActions[platform]
 
@@ -85,7 +77,7 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
             />
           </a>
           <div
-            className={`badge ${serviceColorMap[relatedProduct.platform]} absolute inset-s-2 top-2 text-black`}
+            className={`badge ${serviceColorMap[relatedProduct.platform] ?? ''} absolute inset-s-2 top-2 text-black`}
           >
             {serviceNameMap[relatedProduct.platform]}
           </div>
@@ -144,28 +136,11 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
         >
           <p className='text-sm'>{`${relatedProduct.name.substring(0, 40)}...`}</p>
           <div className='flex-wrap space-y-2'>
-            {status == 'published' && relatedProduct.platform == 'yahoo_auction' ? (
-              <>
-                <div className='flex justify-end'>
-                  <div className='badge badge-outline whitespace-nowrap text-xs'>
-                    {`現在: ${relatedProduct.price}円`}
-                  </div>
-                </div>
-                {relatedProduct.buyoutPrice && (
-                  <div className='flex justify-end'>
-                    <div className='badge badge-outline whitespace-nowrap text-xs'>
-                      {`即決: ${relatedProduct.buyoutPrice}円`}
-                    </div>
-                  </div>
-                )}
-              </>
-            ) : (
-              <div className='flex justify-end'>
-                <div className='badge badge-outline whitespace-nowrap text-xs'>
-                  {`現在: ${relatedProduct.price}円`}
-                </div>
+            <div className='flex justify-end'>
+              <div className='badge badge-outline whitespace-nowrap text-xs'>
+                {`現在: ${relatedProduct.price}円`}
               </div>
-            )}
+            </div>
           </div>
         </a>
       </div>

@@ -2,12 +2,8 @@ require "rails_helper"
 
 RSpec.describe Product, type: :model do
   describe "関連付け" do
-    it { is_expected.to have_one(:yahoo_auction_crawl_setting).dependent(:destroy) }
     it { is_expected.to have_one(:product_category_map).dependent(:destroy) }
     it { is_expected.to have_one(:category).through(:product_category_map) }
-
-    it { is_expected.to have_many(:yahoo_auction_products).dependent(:destroy) }
-    it { is_expected.to have_many(:yahoo_auction_daily_purchase_summaries).dependent(:destroy) }
   end
 
   describe "バリデーション" do

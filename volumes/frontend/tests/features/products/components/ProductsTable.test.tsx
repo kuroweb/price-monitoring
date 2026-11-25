@@ -31,14 +31,9 @@ const categories = [
   { id: 2, name: 'スマートフォン', parentId: null },
 ] as Category[]
 const products = [
-  { id: 1, name: 'MacBook', category: categories[0], yahooAuctionCrawlSetting: { enabled: true } },
-  {
-    id: 2,
-    name: 'MacBook Pro',
-    category: categories[0],
-    yahooAuctionCrawlSetting: { enabled: false },
-  },
-  { id: 3, name: 'iPhone', category: categories[1], yahooAuctionCrawlSetting: { enabled: true } },
+  { id: 1, name: 'MacBook', category: categories[0] },
+  { id: 2, name: 'MacBook Pro', category: categories[0] },
+  { id: 3, name: 'iPhone', category: categories[1] },
 ] as unknown as ProductList['products']
 const renderProducts = () =>
   render(
@@ -113,15 +108,14 @@ describe('商品管理の絞り込みと設定', () => {
     ).toBeInTheDocument()
     expect(screen.queryByText('条件に一致する計測対象がありません。')).not.toBeInTheDocument()
   })
-  it('検索・カテゴリ・計測状態を組み合わせ、リセットで全件に戻ること', async () => {
+  it('検索とカテゴリを組み合わせ、リセットで全件に戻ること', async () => {
     const user = userEvent.setup()
     renderProducts()
     await user.type(screen.getByRole('textbox', { name: '管理コード検索' }), 'macbook')
     await user.selectOptions(screen.getByRole('combobox', { name: 'カテゴリ' }), '1')
-    await user.selectOptions(screen.getByRole('combobox', { name: '計測状態' }), 'disabled')
-    expect(screen.getByRole('status')).toHaveTextContent('1件 / 全3件')
+    expect(screen.getByRole('status')).toHaveTextContent('2件 / 全3件')
     expect(screen.getByRole('link', { name: 'MacBook Pro' })).toHaveAttribute('href', '/products/2')
-    expect(screen.queryByRole('link', { name: 'MacBook' })).not.toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'MacBook' })).toHaveAttribute('href', '/products/1')
     await user.selectOptions(screen.getByRole('combobox', { name: 'カテゴリ' }), '2')
     expect(screen.getByText('条件に一致する計測対象がありません。')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: '絞り込みをリセット' }))

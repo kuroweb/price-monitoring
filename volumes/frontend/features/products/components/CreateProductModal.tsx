@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import { createProduct } from '@/features/products/api/actions'
 import type { CreateProductData, ProductList } from '@/features/products/api/types'
-import YahooAuctionForm from '@/features/products/components/YahooAuctionForm'
 import type { Category } from '@/lib/category'
 
 import { useCreateProductModalState } from '../hooks/useCreateProductModalState'
@@ -36,24 +35,11 @@ const CreateProductModal = ({
   const defaultValues = {
     name: product?.name || '',
     categoryId: product?.category?.id || categories[0]?.id || null,
-    yahooAuctionCrawlSetting: {
-      keyword: product?.yahooAuctionCrawlSetting?.keyword || '',
-      categoryId: product?.yahooAuctionCrawlSetting?.categoryId || null,
-      minPrice: product?.yahooAuctionCrawlSetting?.minPrice ?? 0,
-      maxPrice: product?.yahooAuctionCrawlSetting?.maxPrice ?? 0,
-      enabled: product?.yahooAuctionCrawlSetting?.enabled ?? true,
-      yahooAuctionCrawlSettingExcludeKeywords:
-        product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords ?? [],
-      yahooAuctionCrawlSettingRequiredKeywords:
-        product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords ?? [],
-    },
   }
 
   const {
     register,
     handleSubmit,
-    getValues,
-    setValue,
     formState: { isSubmitting },
   } = useForm<CreateProductData>({
     defaultValues,
@@ -113,16 +99,6 @@ const CreateProductModal = ({
                   ))}
                 </select>
               </fieldset>
-              <div className='divider py-6'>計測条件</div>
-              <div>
-                <div className='py-4'>
-                  <YahooAuctionForm
-                    register={register}
-                    getValues={getValues}
-                    setValue={setValue}
-                  />
-                </div>
-              </div>
             </ScrollableModalBody>
             <ScrollableModalFooter>
               <button type='submit' disabled={isSubmitting} className='btn btn-primary w-full'>

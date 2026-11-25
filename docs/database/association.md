@@ -31,56 +31,6 @@ erDiagram
   categories ||--o{ category_hierarchies : "descendant"
 ```
 
-## クロール処理
-
-### ヤフオク
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  yahoo_auction_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-  }
-  yahoo_auction_crawl_setting_required_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-  }
-  yahoo_auction_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-  }
-  yahoo_auction_crawl_setting_exclude_products {
-    bigint id PK
-    bigint yahoo_auction_crawl_setting_id FK
-  }
-  yahoo_auction_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ yahoo_auction_crawl_settings : ""
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_required_keywords : ""
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_keywords : ""
-  yahoo_auction_crawl_settings ||--o{ yahoo_auction_crawl_setting_exclude_products : ""
-  products ||--o{ yahoo_auction_products : ""
-```
-
-## 日次相場の集計
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  yahoo_auction_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ yahoo_auction_daily_purchase_summaries : ""
-```
-
 ## Backmarket監視
 
 ```mermaid
