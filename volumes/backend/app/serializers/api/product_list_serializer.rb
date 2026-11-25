@@ -20,12 +20,6 @@ module Api
             janpara_crawl_setting_required_keywords
           ]
         },
-        iosys_crawl_setting: {
-          include: %i[
-            iosys_crawl_setting_exclude_keywords
-            iosys_crawl_setting_required_keywords
-          ]
-        },
         pc_koubou_crawl_setting: {
           include: %i[
             pc_koubou_crawl_setting_exclude_keywords
@@ -54,10 +48,6 @@ module Api
       janpara_crawl_setting: %i[
         janpara_crawl_setting_exclude_keywords
         janpara_crawl_setting_required_keywords
-      ],
-      iosys_crawl_setting: %i[
-        iosys_crawl_setting_exclude_keywords
-        iosys_crawl_setting_required_keywords
       ],
       pc_koubou_crawl_setting: %i[
         pc_koubou_crawl_setting_exclude_keywords

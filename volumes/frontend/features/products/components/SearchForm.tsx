@@ -22,7 +22,6 @@ const platformOptions: Option[] = [
   { value: 'yahoo_fleamarket', label: 'ペイペイ' },
   { value: 'mercari', label: 'メルカリ' },
   { value: 'janpara', label: 'じゃんぱら' },
-  { value: 'iosys', label: 'イオシス' },
   { value: 'pc_koubou', label: 'パソコン工房' },
   { value: 'used_sofmap', label: 'リコレ' },
 ]

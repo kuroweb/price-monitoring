@@ -17,7 +17,6 @@ module Products
           update_product
           update_yahoo_auction_crawl_settings
           update_mercari_crawl_settings
-          update_iosys_crawl_settings
           update_janpara_crawl_settings
           update_pc_koubou_crawl_settings
           update_used_sofmap_crawl_settings
@@ -42,10 +41,6 @@ module Products
 
       def update_mercari_crawl_settings
         UpdateMercariCrawlSettings.call(product:, params:)
-      end
-
-      def update_iosys_crawl_settings
-        UpdateIosysCrawlSettings.call(product:, params:)
       end
 
       def update_janpara_crawl_settings

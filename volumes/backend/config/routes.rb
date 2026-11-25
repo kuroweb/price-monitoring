@@ -14,9 +14,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           namespace :mercari_crawl_settings do
             resources :mercari_crawl_setting_exclude_products, only: %i[create destroy]
           end
-          namespace :iosys_crawl_settings do
-            resources :iosys_crawl_setting_exclude_products, only: %i[create destroy]
-          end
           namespace :janpara_crawl_settings do
             resources :janpara_crawl_setting_exclude_products, only: %i[create destroy]
           end

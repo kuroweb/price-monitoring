@@ -1,9 +1,5 @@
 import type { Category } from '@/lib/category'
 
-export type CreateIosysCrawlSettingExcludeProductData = {
-  externalId: string
-}
-
 export type CreateJanparaCrawlSettingExcludeProductData = {
   externalId: string
 }
@@ -38,41 +34,6 @@ export type MercariDailyPurchaseSummary = {
   averagePurchasePrice: number
   purchaseCount: number
   date: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type IosysCrawlSetting = {
-  id: number
-  productId: number
-  keyword: string
-  minPrice: number
-  maxPrice: number
-  enabled: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export type IosysCrawlSettingExcludeKeyword = {
-  id: number
-  iosysCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type IosysCrawlSettingRequiredKeyword = {
-  id: number
-  iosysCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type IosysCrawlSettingExcludeProduct = {
-  id: number
-  iosysCrawlSettingId: number
-  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -316,10 +277,6 @@ export type ProductDetail = Product & {
     mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
     mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
   }
-  iosysCrawlSetting: IosysCrawlSetting & {
-    iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
-    iosysCrawlSettingRequiredKeywords: IosysCrawlSettingRequiredKeyword[]
-  }
   janparaCrawlSetting: JanparaCrawlSetting & {
     janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
     janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
@@ -347,10 +304,6 @@ export type ProductList = {
     mercariCrawlSetting: MercariCrawlSetting & {
       mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
       mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
-    }
-    iosysCrawlSetting: IosysCrawlSetting & {
-      iosysCrawlSettingExcludeKeywords: IosysCrawlSettingExcludeKeyword[]
-      iosysCrawlSettingRequiredKeywords: IosysCrawlSettingRequiredKeyword[]
     }
     janparaCrawlSetting: JanparaCrawlSetting & {
       janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
@@ -391,14 +344,6 @@ export type CreateProductData = {
     minPrice: number
     mercariCrawlSettingExcludeKeywords: { keyword: string }[]
     mercariCrawlSettingRequiredKeywords: { keyword: string }[]
-  }
-  iosysCrawlSetting: {
-    enabled: boolean
-    keyword: string
-    maxPrice: number
-    minPrice: number
-    iosysCrawlSettingExcludeKeywords: { keyword: string }[]
-    iosysCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   janparaCrawlSetting: {
     enabled: boolean

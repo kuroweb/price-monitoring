@@ -149,40 +149,6 @@ erDiagram
   products ||--o{ janpara_products : ""
 ```
 
-### イオシス
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  iosys_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-  }
-  iosys_crawl_setting_required_keywords {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-  }
-  iosys_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-  }
-  iosys_crawl_setting_exclude_products {
-    bigint id PK
-    bigint iosys_crawl_setting_id FK
-  }
-  iosys_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ iosys_crawl_settings : ""
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_required_keywords : ""
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_keywords : ""
-  iosys_crawl_settings ||--o{ iosys_crawl_setting_exclude_products : ""
-  products ||--o{ iosys_products : ""
-```
-
 ### パソコン工房
 
 ```mermaid

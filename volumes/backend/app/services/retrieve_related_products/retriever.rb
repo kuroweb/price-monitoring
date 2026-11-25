@@ -13,7 +13,6 @@ module RetrieveRelatedProducts
         mercari.published
         mercari.unpublished
         janpara.all
-        iosys.all
         pc_koubou.all
         used_sofmap.all
       ].freeze

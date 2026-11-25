@@ -38,7 +38,7 @@ const Page = async ({
     getProductPrices({
       categoryId: categoryId === -1 ? null : categoryId,
       platformMask:
-        'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all',
+        'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,pc_koubou.all',
       sort: 'price',
       order: 'asc',
       priceDisplayLimit: 20,

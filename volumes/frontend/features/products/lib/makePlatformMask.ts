@@ -1,6 +1,6 @@
 export const makePlatformMask = (platform: string, status: string) => {
   const defaultMask =
-    'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,iosys.all,pc_koubou.all'
+    'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,janpara.all,pc_koubou.all'
 
   const platformMaskMap: { [key: string]: { [key: string]: string } } = {
     all: {
@@ -14,7 +14,6 @@ export const makePlatformMask = (platform: string, status: string) => {
     },
     mercari: { published: 'mercari.published', unpublished: 'mercari.unpublished' },
     janpara: { published: 'janpara.all', unpublished: 'janpara.all' },
-    iosys: { published: 'iosys.all', unpublished: 'iosys.all' },
     pc_koubou: { published: 'pc_koubou.all', unpublished: 'pc_koubou.all' },
   }
 

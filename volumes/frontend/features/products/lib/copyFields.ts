@@ -8,7 +8,6 @@ const keywordFields = [
   'yahooAuctionCrawlSetting.keyword',
   'mercariCrawlSetting.keyword',
   'janparaCrawlSetting.keyword',
-  'iosysCrawlSetting.keyword',
   'pcKoubouCrawlSetting.keyword',
   'usedSofmapCrawlSetting.keyword',
 ] as const
@@ -28,7 +27,6 @@ const requiredKeywordFields = [
   'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
   'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
   'janparaCrawlSetting.janparaCrawlSettingRequiredKeywords',
-  'iosysCrawlSetting.iosysCrawlSettingRequiredKeywords',
   'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
   'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
 ] as const
@@ -50,7 +48,6 @@ const excludeKeywordFields = [
   'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
   'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
   'janparaCrawlSetting.janparaCrawlSettingExcludeKeywords',
-  'iosysCrawlSetting.iosysCrawlSettingExcludeKeywords',
   'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
   'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
 ] as const
@@ -72,7 +69,6 @@ const minPriceFields = [
   'yahooAuctionCrawlSetting.minPrice',
   'mercariCrawlSetting.minPrice',
   'janparaCrawlSetting.minPrice',
-  'iosysCrawlSetting.minPrice',
   'pcKoubouCrawlSetting.minPrice',
   'usedSofmapCrawlSetting.minPrice',
 ] as const
@@ -92,7 +88,6 @@ const maxPriceFields = [
   'yahooAuctionCrawlSetting.maxPrice',
   'mercariCrawlSetting.maxPrice',
   'janparaCrawlSetting.maxPrice',
-  'iosysCrawlSetting.maxPrice',
   'pcKoubouCrawlSetting.maxPrice',
   'usedSofmapCrawlSetting.maxPrice',
 ] as const

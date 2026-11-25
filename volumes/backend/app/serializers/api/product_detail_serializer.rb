@@ -24,13 +24,6 @@ module Api
               janpara_crawl_setting_exclude_products
             ]
           },
-          iosys_crawl_setting: {
-            include: %i[
-              iosys_crawl_setting_exclude_keywords
-              iosys_crawl_setting_required_keywords
-              iosys_crawl_setting_exclude_products
-            ]
-          },
           pc_koubou_crawl_setting: {
             include: %i[
               pc_koubou_crawl_setting_exclude_keywords
