@@ -12,7 +12,6 @@ module Products
 
       def call
         InspectYahooAuctionProducts.call(product:)
-        InspectYahooFleamarketProducts.call(product:)
       end
 
       private

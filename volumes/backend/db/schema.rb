@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_26_000004) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_000005) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -212,32 +212,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_26_000004) do
     t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
   end
 
-  create_table "yahoo_fleamarket_daily_purchase_summaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.integer "average_purchase_price"
-    t.integer "purchase_count", default: 0
-    t.date "date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "date"], name: "idx_on_product_id_date_bd09f0e249", unique: true
-    t.index ["product_id"], name: "index_yahoo_fleamarket_daily_purchase_summaries_on_product_id"
-  end
-
-  create_table "yahoo_fleamarket_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.string "external_id", null: false
-    t.string "seller_id", null: false
-    t.string "name", null: false
-    t.text "thumbnail_url"
-    t.integer "price", default: 0, null: false
-    t.boolean "published", default: false, null: false
-    t.datetime "bought_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "external_id"], name: "index_yahoo_fleamarket_products_on_product_id_and_external_id", unique: true
-    t.index ["product_id"], name: "index_yahoo_fleamarket_products_on_product_id"
-  end
-
   add_foreign_key "backmarket_watch_results", "backmarket_watch_targets"
   add_foreign_key "product_category_maps", "categories"
   add_foreign_key "product_category_maps", "products"
@@ -249,6 +223,4 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_26_000004) do
   add_foreign_key "yahoo_auction_crawl_settings", "products"
   add_foreign_key "yahoo_auction_daily_purchase_summaries", "products"
   add_foreign_key "yahoo_auction_products", "products"
-  add_foreign_key "yahoo_fleamarket_daily_purchase_summaries", "products"
-  add_foreign_key "yahoo_fleamarket_products", "products"
 end

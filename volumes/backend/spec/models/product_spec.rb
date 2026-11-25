@@ -8,8 +8,6 @@ RSpec.describe Product, type: :model do
 
     it { is_expected.to have_many(:yahoo_auction_products).dependent(:destroy) }
     it { is_expected.to have_many(:yahoo_auction_daily_purchase_summaries).dependent(:destroy) }
-    it { is_expected.to have_many(:yahoo_fleamarket_products).dependent(:destroy) }
-    it { is_expected.to have_many(:yahoo_fleamarket_daily_purchase_summaries).dependent(:destroy) }
   end
 
   describe "バリデーション" do

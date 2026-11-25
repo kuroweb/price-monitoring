@@ -3,7 +3,6 @@ module Api
     JSON_OPTIONS = {
       include: %i[
         yahoo_auction_daily_purchase_summaries
-        yahoo_fleamarket_daily_purchase_summaries
       ]
     }.freeze
 

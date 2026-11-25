@@ -22,8 +22,6 @@ Layout/LineEndStringConcatenationIndentation:
   Exclude:
     - 'app/services/crawl/yahoo_auction/sync_products/published/url_generator.rb'
     - 'app/services/crawl/yahoo_auction/sync_products/unpublished/url_generator.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_products/published/url_generator.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_products/unpublished/url_generator.rb'
 
 # Offense count: 14
 # This cop supports safe autocorrection (--autocorrect).
@@ -84,26 +82,11 @@ Naming/BlockForwarding:
   Exclude:
     - 'app/sidekiq/utils/timeout_handler.rb'
 
-# Offense count: 4
-# Configuration parameters: Mode, AllowedMethods, AllowedPatterns, AllowBangMethods, WaywardPredicates.
-# AllowedMethods: call
-# WaywardPredicates: infinite?, nonzero?
-Naming/PredicateMethod:
-  Exclude:
-    - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
-
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-Performance/ConstantRegexp:
-  Exclude:
-    - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
-
 # Offense count: 7
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Performance/ZipWithoutBlock:
   Exclude:
     - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
 
 # Offense count: 3
 RSpec/MultipleDescribes:
@@ -133,7 +116,6 @@ Rails/I18nLocaleTexts:
 Rails/RedundantActiveRecordAllMethod:
   Exclude:
     - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -148,16 +130,13 @@ Rails/RootPathnameMethods:
 Rails/SkipsModelValidations:
   Exclude:
     - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_products/syncer.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
 
 # Offense count: 3
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Rails/SquishedSQLHeredocs:
   Exclude:
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).

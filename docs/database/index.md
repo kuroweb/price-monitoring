@@ -32,7 +32,6 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 - 多くのプラットフォームは `*_crawl_settings` で検索条件を持ち、`required` / `exclude` 系テーブルに詳細を分離する
 - `*_products` は収集済み商品データを持つ
 - クロール条件とクロール結果はライフサイクルが違うので、同じテーブルに置かない
-- Yahoo フリマ（`yahoo_fleamarket_*`）は `*_crawl_settings` を持たず、`yahoo_fleamarket_products` と日次集計だけを持つ
 
 ### Backmarket 監視
 

@@ -12,7 +12,6 @@ module Api
           def create
             exclude_product = exclude_products.create!(exclude_product_params)
             ::Products::Inspector::InspectYahooAuctionProducts.call(product:)
-            ::Products::Inspector::InspectYahooFleamarketProducts.call(product:)
             render json: exclude_product.as_json, status: :ok
           end
 

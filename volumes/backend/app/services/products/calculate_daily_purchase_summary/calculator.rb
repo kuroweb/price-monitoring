@@ -14,7 +14,6 @@ module Products
 
       def call
         CalculateYahooAuctionProduct.call(product:, start_date:, end_date:)
-        CalculateYahooFleamarketProduct.call(product:, start_date:, end_date:)
       end
 
       private

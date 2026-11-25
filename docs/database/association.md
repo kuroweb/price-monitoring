@@ -67,20 +67,6 @@ erDiagram
   products ||--o{ yahoo_auction_products : ""
 ```
 
-### ヤフーフリマ
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  yahoo_fleamarket_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ yahoo_fleamarket_products : ""
-```
-
 ## 日次相場の集計
 
 ```mermaid
@@ -92,12 +78,7 @@ erDiagram
     bigint id PK
     bigint product_id FK
   }
-  yahoo_fleamarket_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-  }
   products ||--o{ yahoo_auction_daily_purchase_summaries : ""
-  products ||--o{ yahoo_fleamarket_daily_purchase_summaries : ""
 ```
 
 ## Backmarket監視
