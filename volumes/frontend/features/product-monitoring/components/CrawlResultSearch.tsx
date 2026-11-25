@@ -120,7 +120,8 @@ export default function CrawlResultSearch() {
       if (response.data) {
         setDisplayed({ input: submitted, saleStatus, sort, results: response.data })
         // 成功した検索だけを残す。初期値は nuqs がクエリから外す。
-        await setQuery({
+        // 待たない。待つと検索中の無効化がフォーカスを外し、失敗すると成功した検索まで失敗になる。
+        void setQuery({
           required: submitted.required,
           excluded: submitted.excluded,
           min_price: submitted.minPrice,
@@ -128,6 +129,8 @@ export default function CrawlResultSearch() {
           sale_status: saleStatus,
           sort,
           page,
+        }).catch(() => {
+          // 結果は出ている。アドレスの更新失敗では検索を失敗にしない。
         })
         return response.data
       }
