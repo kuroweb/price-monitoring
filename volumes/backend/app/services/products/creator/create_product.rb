@@ -14,7 +14,6 @@ module Products
       def call
         ApplicationRecord.transaction do
           product = create_product
-          create_yahoo_auction_crawl_settings(product)
           create_category_association(product)
 
           product
@@ -28,10 +27,6 @@ module Products
       def create_product
         attributes = params.slice(*PRODUCT_ATTRIBUTES) || {}
         Product.create!(attributes)
-      end
-
-      def create_yahoo_auction_crawl_settings(product)
-        CreateYahooAuctionCrawlSettings.call(product:, params:)
       end
 
       def create_category_association(product)

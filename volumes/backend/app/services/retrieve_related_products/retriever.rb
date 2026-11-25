@@ -1,12 +1,7 @@
 module RetrieveRelatedProducts
   class Retriever
     module ParamsType
-      PLATFORM_MASK = %w[
-        yahoo_auction.all
-        yahoo_auction.published
-        yahoo_auction.unpublished
-        yahoo_auction.buyable
-      ].freeze
+      PLATFORM_MASK = [].freeze
 
       SORT = %w[price bought_date created_at updated_at].freeze
       ORDER = %w[desc asc].freeze
@@ -26,6 +21,8 @@ module RetrieveRelatedProducts
     end
 
     def call
+      return ::RelatedProducts.new([]) if selected_platform_masks.empty?
+
       query_result = exec_query
       build_related_products(query_result)
     end
@@ -55,14 +52,18 @@ module RetrieveRelatedProducts
     end
 
     def platform_mask
-      raise ArgumentError, "Invalid platform_mask" if @platform_mask.blank?
-
-      masks = @platform_mask.split(",")
-                            .select { |mask| ParamsType::PLATFORM_MASK.include?(mask) }
-                            .uniq
+      masks = selected_platform_masks
       raise ArgumentError, "Invalid platform_mask" if masks.blank?
 
       masks.join(",")
+    end
+
+    def selected_platform_masks
+      return [] if @platform_mask.blank?
+
+      @platform_mask.split(",")
+                    .select { |mask| ParamsType::PLATFORM_MASK.include?(mask) }
+                    .uniq
     end
 
     def page

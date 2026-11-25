@@ -16,10 +16,7 @@ type SelectFieldProps = {
   options: Option[]
 }
 
-const platformOptions: Option[] = [
-  { value: 'all', label: 'すべて' },
-  { value: 'yahoo_auction', label: 'ヤフオク' },
-]
+const platformOptions: Option[] = [{ value: 'all', label: 'すべて' }]
 
 const statusOptions: Option[] = [
   { value: 'published', label: '出品中' },
@@ -62,7 +59,7 @@ const SearchForm = () => {
     setPer(Number(e.target.value))
   }
 
-  const showStatusField = ['all', 'yahoo_auction'].includes(platform)
+  const showStatusField = ['all'].includes(platform)
 
   return (
     <div className='flex flex-wrap'>

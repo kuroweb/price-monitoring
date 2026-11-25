@@ -16,8 +16,8 @@ const productPrices = [
 ] as unknown as ProductPrices
 
 const products = [
-  { id: 1, name: 'MacBook Air', yahooAuctionCrawlSetting: { keyword: 'MacBook Air M1' } },
-  { id: 2, name: 'iPhone 15', yahooAuctionCrawlSetting: { keyword: 'iPhone 15 128GB' } },
+  { id: 1, name: 'MacBook Air' },
+  { id: 2, name: 'iPhone 15' },
 ] as unknown as ProductList['products']
 
 describe('ProductPriceList', () => {
@@ -50,6 +50,5 @@ describe('ProductPriceList', () => {
     expect(
       within(screen.getByRole('group', { name: '管理コード' })).getByRole('textbox'),
     ).toHaveValue('iPhone 15')
-    expect(screen.getByDisplayValue('iPhone 15 128GB')).toBeInTheDocument()
   })
 })

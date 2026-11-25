@@ -1,7 +1,6 @@
 'use client'
 
 import {
-  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -11,23 +10,12 @@ import {
   ComposedChart,
 } from 'recharts'
 
-import type { YahooAuctionDailyPurchaseSummary } from '@/features/products/api/types'
-
-const AnalysisChart = ({
-  yahooAuctionData,
-}: {
-  yahooAuctionData: YahooAuctionDailyPurchaseSummary[]
-}) => {
-  const mergedData = yahooAuctionData.map((data) => ({
-    date: data.date,
-    yahooAuctionAveragePurchasePrice: data.averagePurchasePrice!,
-  }))
-
+const AnalysisChart = () => {
   return (
     <>
       <ResponsiveContainer width='100%' height={300}>
         <ComposedChart
-          data={mergedData}
+          data={[]}
           margin={{
             top: 5,
             right: 30,
@@ -40,16 +28,6 @@ const AnalysisChart = ({
           <YAxis yAxisId={1} orientation='left' />
           <Tooltip />
           <Legend />
-          <Line
-            yAxisId={1}
-            type='monotone'
-            dataKey='yahooAuctionAveragePurchasePrice'
-            name='ヤフオク'
-            stroke='orange'
-            fill='orange'
-            activeDot={{ r: 8 }}
-            animationDuration={100}
-          />
         </ComposedChart>
       </ResponsiveContainer>
     </>

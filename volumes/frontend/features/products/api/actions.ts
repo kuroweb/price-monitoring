@@ -4,7 +4,6 @@ import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-
 
 import * as PricesApi from './productPrices'
 import * as ProductsApi from './products'
-import * as YahooAuctionApi from './yahooAuctionCrawlSettings'
 
 import type * as Types from './types'
 
@@ -46,16 +45,5 @@ export async function getProductPrices(params: Types.GetProductPricesParams) {
 
 export async function getProductPrice(productId: number, params: Types.GetProductPriceParams) {
   return await PricesApi.getProductPrice(productId, params)
-}
-
-export async function createYahooAuctionCrawlSettingExcludeProduct(
-  productId: number,
-  data: Types.CreateYahooAuctionCrawlSettingExcludeProductData,
-) {
-  const result = await YahooAuctionApi.createYahooAuctionCrawlSettingExcludeProduct(productId, data)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
 }
 

@@ -1,17 +1,11 @@
 module Api
   class ProductPriceDetailSerializer
-    JSON_OPTIONS = {
-      include: %i[
-        yahoo_auction_daily_purchase_summaries
-      ]
-    }.freeze
-
     def initialize(params)
       @params = params.as_json.symbolize_keys
     end
 
     def as_json(_opts = {})
-      product.as_json(JSON_OPTIONS).merge("related_products" => related_products)
+      product.as_json.merge("related_products" => related_products)
     end
 
     private

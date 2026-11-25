@@ -14,15 +14,6 @@ Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'spec/requests/product_monitoring/crawl_settings_spec.rb'
 
-# Offense count: 12
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented
-Layout/LineEndStringConcatenationIndentation:
-  Exclude:
-    - 'app/services/crawl/yahoo_auction/sync_products/published/url_generator.rb'
-    - 'app/services/crawl/yahoo_auction/sync_products/unpublished/url_generator.rb'
-
 # Offense count: 14
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: Max, AllowHeredoc, AllowURI, AllowQualifiedName, URISchemes, AllowRBSInlineAnnotation, AllowCopDirectives, AllowedPatterns, SplitStrings.
@@ -82,12 +73,6 @@ Naming/BlockForwarding:
   Exclude:
     - 'app/sidekiq/utils/timeout_handler.rb'
 
-# Offense count: 7
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Performance/ZipWithoutBlock:
-  Exclude:
-    - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
-
 # Offense count: 3
 RSpec/MultipleDescribes:
   Exclude:
@@ -109,34 +94,12 @@ Rails/I18nLocaleTexts:
     - 'app/controllers/concerns/oidc_token_control.rb'
     - 'app/controllers/sessions_controller.rb'
 
-# Offense count: 7
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowedReceivers.
-# AllowedReceivers: ActionMailer::Preview, ActiveSupport::TimeZone
-Rails/RedundantActiveRecordAllMethod:
-  Exclude:
-    - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
-
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Rails/RootPathnameMethods:
   Exclude:
     - 'db/seeds.rb'
     - 'lib/tasks/seed.rake'
-
-# Offense count: 12
-# Configuration parameters: ForbiddenMethods, AllowedMethods.
-# ForbiddenMethods: decrement!, decrement_counter, increment!, increment_counter, insert, insert!, insert_all, insert_all!, toggle!, touch, touch_all, update_all, update_attribute, update_column, update_columns, update_counters, upsert, upsert_all
-Rails/SkipsModelValidations:
-  Exclude:
-    - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/SquishedSQLHeredocs:
-  Exclude:
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
@@ -221,12 +184,6 @@ Style/SymbolArray:
   Exclude:
     - 'config/initializers/filter_parameter_logging.rb'
 
-# Offense count: 10
-# This cop supports unsafe autocorrection (--autocorrect-all).
-RSpec/IncludeExamples:
-  Exclude:
-    - 'spec/services/retrieve_related_products/retriever_spec.rb'
-
 # Offense count: 18
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Rails/StrongParametersExpect:
@@ -235,5 +192,4 @@ Rails/StrongParametersExpect:
     - 'app/controllers/api/v1/categories_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
-    - 'app/controllers/api/v1/products/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products_controller.rb'

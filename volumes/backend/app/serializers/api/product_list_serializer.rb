@@ -2,21 +2,11 @@ module Api
   class ProductListSerializer
     JSON_OPTIONS = {
       include: [
-        yahoo_auction_crawl_setting: {
-          include: %i[
-            yahoo_auction_crawl_setting_exclude_keywords
-            yahoo_auction_crawl_setting_required_keywords
-          ]
-        },
         category: {}
       ]
     }.freeze
 
     PRELOAD_OPTIONS = {
-      yahoo_auction_crawl_setting: %i[
-        yahoo_auction_crawl_setting_exclude_keywords
-        yahoo_auction_crawl_setting_required_keywords
-      ],
       category: []
     }.freeze
 

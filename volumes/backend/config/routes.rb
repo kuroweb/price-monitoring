@@ -6,13 +6,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
     namespace :v1 do # rubocop:disable Metrics/BlockLength
       resource :current_user, only: %i[show]
       resources :products, only: %i[index show create update destroy]
-      namespace :products do
-        scope path: ":product_id" do
-          namespace :yahoo_auction_crawl_settings do
-            resources :yahoo_auction_crawl_setting_exclude_products, only: %i[create destroy]
-          end
-        end
-      end
       resources :categories, only: %i[index show create update destroy] do
         collection do
           get :structured

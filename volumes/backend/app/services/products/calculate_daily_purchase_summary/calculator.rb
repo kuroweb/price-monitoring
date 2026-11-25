@@ -13,7 +13,7 @@ module Products
       end
 
       def call
-        CalculateYahooAuctionProduct.call(product:, start_date:, end_date:)
+        nil
       end
 
       private

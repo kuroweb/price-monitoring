@@ -15,7 +15,6 @@ module Products
       def call
         ApplicationRecord.transaction do
           update_product
-          update_yahoo_auction_crawl_settings
           update_category_association
 
           product
@@ -29,10 +28,6 @@ module Products
       def update_product
         attributes = params.slice(*PRODUCT_ATTRIBUTES) || {}
         product.update!(attributes)
-      end
-
-      def update_yahoo_auction_crawl_settings
-        UpdateYahooAuctionCrawlSettings.call(product:, params:)
       end
 
       def update_category_association

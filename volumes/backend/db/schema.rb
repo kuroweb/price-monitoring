@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_26_000005) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_000006) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -145,82 +145,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_26_000005) do
     t.index ["provider_name", "provider_uid"], name: "index_users_on_provider_name_and_provider_uid", unique: true
   end
 
-  create_table "yahoo_auction_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "yahoo_auction_crawl_setting_id"
-    t.string "keyword"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["yahoo_auction_crawl_setting_id", "keyword"], name: "idx_on_yahoo_auction_crawl_setting_id_keyword_9341e10548", unique: true
-    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_fb93459e66"
-  end
-
-  create_table "yahoo_auction_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "yahoo_auction_crawl_setting_id"
-    t.string "external_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["yahoo_auction_crawl_setting_id", "external_id"], name: "idx_on_yahoo_auction_crawl_setting_id_external_id_c904750663", unique: true
-    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_b30a20343c"
-  end
-
-  create_table "yahoo_auction_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "yahoo_auction_crawl_setting_id"
-    t.string "keyword", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["yahoo_auction_crawl_setting_id", "keyword"], name: "idx_on_yahoo_auction_crawl_setting_id_keyword_daee6cea4b", unique: true
-    t.index ["yahoo_auction_crawl_setting_id"], name: "idx_on_yahoo_auction_crawl_setting_id_49589afeb2"
-  end
-
-  create_table "yahoo_auction_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.integer "category_id", default: 0
-    t.integer "min_price", default: 0, null: false
-    t.integer "max_price", default: 0, null: false
-    t.boolean "enabled", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "keyword", null: false
-    t.index ["product_id"], name: "index_yahoo_auction_crawl_settings_on_product_id"
-  end
-
-  create_table "yahoo_auction_daily_purchase_summaries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.integer "average_purchase_price"
-    t.integer "purchase_count", default: 0
-    t.date "date", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "date"], name: "idx_on_product_id_date_d63712c38b", unique: true
-    t.index ["product_id"], name: "index_yahoo_auction_daily_purchase_summaries_on_product_id"
-  end
-
-  create_table "yahoo_auction_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.string "external_id", null: false
-    t.string "seller_id", null: false
-    t.string "name", null: false
-    t.text "thumbnail_url"
-    t.integer "price", default: 0, null: false
-    t.integer "buyout_price"
-    t.boolean "published", default: false, null: false
-    t.datetime "bought_date"
-    t.datetime "end_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id", "external_id"], name: "index_yahoo_auction_products_on_product_id_and_external_id", unique: true
-    t.index ["product_id"], name: "index_yahoo_auction_products_on_product_id"
-  end
-
   add_foreign_key "backmarket_watch_results", "backmarket_watch_targets"
   add_foreign_key "product_category_maps", "categories"
   add_foreign_key "product_category_maps", "products"
   add_foreign_key "product_monitoring_crawl_results", "product_monitoring_crawl_settings", column: "crawl_setting_id"
   add_foreign_key "product_monitoring_daily_market_prices", "product_monitoring_monitors", column: "monitor_id"
-  add_foreign_key "yahoo_auction_crawl_setting_exclude_keywords", "yahoo_auction_crawl_settings"
-  add_foreign_key "yahoo_auction_crawl_setting_exclude_products", "yahoo_auction_crawl_settings"
-  add_foreign_key "yahoo_auction_crawl_setting_required_keywords", "yahoo_auction_crawl_settings"
-  add_foreign_key "yahoo_auction_crawl_settings", "products"
-  add_foreign_key "yahoo_auction_daily_purchase_summaries", "products"
-  add_foreign_key "yahoo_auction_products", "products"
 end

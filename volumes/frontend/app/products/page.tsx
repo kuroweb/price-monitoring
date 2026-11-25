@@ -37,8 +37,7 @@ const Page = async ({
   const [productPricesResponse, productResponse, categoryResponse] = await Promise.all([
     getProductPrices({
       categoryId: categoryId === -1 ? null : categoryId,
-      platformMask:
-        'yahoo_auction.buyable',
+      platformMask: '',
       sort: 'price',
       order: 'asc',
       priceDisplayLimit: 20,

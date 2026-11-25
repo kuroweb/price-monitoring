@@ -85,19 +85,13 @@ module RetrieveRelatedProducts
       ]
     end
 
-    def additional_columns(platform)
-      columns = []
-
-      columns <<
-        if platform == "yahoo_auction"
-          %w[buyout_price end_date]
-        else
-          ["NULL AS buyout_price", "NULL AS end_date"]
-        end
-
-      columns << %w[published bought_date]
-
-      columns.flatten
+    def additional_columns(_platform)
+      [
+        "NULL AS buyout_price",
+        "NULL AS end_date",
+        "published",
+        "bought_date"
+      ]
     end
 
     def published_condition(condition, published)
@@ -105,10 +99,7 @@ module RetrieveRelatedProducts
     end
 
     def buyable_condition(condition)
-      condition.where(
-        "(end_date <= ?) OR (buyout_price IS NOT NULL AND buyout_price <= ?)",
-        Time.current.since(1.day), product.yahoo_auction_crawl_setting.max_price
-      )
+      condition.where(end_date: ..Time.current.since(1.day))
     end
 
     def product

@@ -35,7 +35,7 @@ describe('RelatedProductCard', () => {
     const links = screen.getAllByRole('link')
     expect(links).toHaveLength(2)
     for (const link of links) {
-      expect(link).toHaveAttribute('href', 'https://page.auctions.yahoo.co.jp/jp/auction/m123')
+      expect(link).toHaveAttribute('href', '#')
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     }

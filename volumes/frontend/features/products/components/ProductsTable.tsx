@@ -31,15 +31,12 @@ const ProductsTable = ({ products, categories }: Props) => {
 
   const [search, setSearch] = useState('')
   const [category, setCategory] = useState('')
-  const [status, setStatus] = useState('')
   const [deletingId, setDeletingId] = useState<number | null>(null)
   const deletingRef = useRef(false)
   const filteredProducts = products.filter((item) => {
-    const enabled = [item.yahooAuctionCrawlSetting].some((setting) => setting?.enabled)
     return (
       item.name.toLowerCase().includes(search.toLowerCase()) &&
-      (!category || String(item.category?.id) === category) &&
-      (!status || (status === 'enabled' ? enabled : !enabled))
+      (!category || String(item.category?.id) === category)
     )
   })
 
@@ -93,25 +90,12 @@ const ProductsTable = ({ products, categories }: Props) => {
             ))}
           </select>
         </label>
-        <label>
-          <span className='label'>計測状態</span>
-          <select
-            className='select w-full'
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-          >
-            <option value=''>すべて</option>
-            <option value='enabled'>計測中</option>
-            <option value='disabled'>停止中</option>
-          </select>
-        </label>
         <button
           type='button'
           className='btn btn-ghost'
           onClick={() => {
             setSearch('')
             setCategory('')
-            setStatus('')
           }}
         >
           絞り込みをリセット
