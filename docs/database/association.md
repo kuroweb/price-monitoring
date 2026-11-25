@@ -115,40 +115,6 @@ erDiagram
   products ||--o{ mercari_products : ""
 ```
 
-### じゃんぱら
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  janpara_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-  }
-  janpara_crawl_setting_required_keywords {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-  }
-  janpara_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-  }
-  janpara_crawl_setting_exclude_products {
-    bigint id PK
-    bigint janpara_crawl_setting_id FK
-  }
-  janpara_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ janpara_crawl_settings : ""
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_required_keywords : ""
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_keywords : ""
-  janpara_crawl_settings ||--o{ janpara_crawl_setting_exclude_products : ""
-  products ||--o{ janpara_products : ""
-```
-
 ### パソコン工房
 
 ```mermaid

@@ -1,9 +1,5 @@
 import type { Category } from '@/lib/category'
 
-export type CreateJanparaCrawlSettingExcludeProductData = {
-  externalId: string
-}
-
 export type CreateMercariCrawlSettingExcludeProductData = {
   externalId: string
 }
@@ -34,41 +30,6 @@ export type MercariDailyPurchaseSummary = {
   averagePurchasePrice: number
   purchaseCount: number
   date: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type JanparaCrawlSetting = {
-  id: number
-  productId: number
-  keyword: string
-  minPrice: number
-  maxPrice: number
-  enabled: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export type JanparaCrawlSettingExcludeKeyword = {
-  id: number
-  janparaCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type JanparaCrawlSettingRequiredKeyword = {
-  id: number
-  janparaCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type JanparaCrawlSettingExcludeProduct = {
-  id: number
-  janparaCrawlSettingId: number
-  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -277,10 +238,6 @@ export type ProductDetail = Product & {
     mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
     mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
   }
-  janparaCrawlSetting: JanparaCrawlSetting & {
-    janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
-    janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
-  }
   pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
     pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
     pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
@@ -304,10 +261,6 @@ export type ProductList = {
     mercariCrawlSetting: MercariCrawlSetting & {
       mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
       mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
-    }
-    janparaCrawlSetting: JanparaCrawlSetting & {
-      janparaCrawlSettingExcludeKeywords: JanparaCrawlSettingExcludeKeyword[]
-      janparaCrawlSettingRequiredKeywords: JanparaCrawlSettingRequiredKeyword[]
     }
     pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
       pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
@@ -344,14 +297,6 @@ export type CreateProductData = {
     minPrice: number
     mercariCrawlSettingExcludeKeywords: { keyword: string }[]
     mercariCrawlSettingRequiredKeywords: { keyword: string }[]
-  }
-  janparaCrawlSetting: {
-    enabled: boolean
-    keyword: string
-    maxPrice: number
-    minPrice: number
-    janparaCrawlSettingExcludeKeywords: { keyword: string }[]
-    janparaCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   pcKoubouCrawlSetting: {
     enabled: boolean

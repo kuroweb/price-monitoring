@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
 import {
-  createJanparaCrawlSettingExcludeProduct,
   createMercariCrawlSettingExcludeProduct,
   createPcKoubouCrawlSettingExcludeProduct,
   createUsedSofmapCrawlSettingExcludeProduct,
@@ -23,7 +22,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     mercari: 'jp.mercari.com/item/',
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
     yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
-    janpara: 'www.janpara.co.jp/sale/search/detail/?',
     pc_koubou: 'www.pc-koubou.jp/products/detail.php?product_id=',
     used_sofmap: 'used.sofmap.com',
   }
@@ -32,7 +30,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     mercari: 'メルカリ',
     yahoo_auction: 'ヤフオク',
     yahoo_fleamarket: 'ペイペイ',
-    janpara: 'じゃんぱら',
     pc_koubou: 'パソコン工房',
     used_sofmap: 'リコレ',
   }
@@ -41,7 +38,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     mercari: 'bg-red-500',
     yahoo_auction: 'bg-yellow-600',
     yahoo_fleamarket: 'bg-green-600',
-    janpara: 'bg-blue-500',
     pc_koubou: 'bg-blue-400',
     used_sofmap: 'bg-green-500',
   }
@@ -65,7 +61,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
       yahoo_auction: createYahooAuctionCrawlSettingExcludeProduct,
       yahoo_fleamarket: createYahooAuctionCrawlSettingExcludeProduct,
       mercari: createMercariCrawlSettingExcludeProduct,
-      janpara: createJanparaCrawlSettingExcludeProduct,
       pc_koubou: createPcKoubouCrawlSettingExcludeProduct,
       used_sofmap: createUsedSofmapCrawlSettingExcludeProduct,
     }

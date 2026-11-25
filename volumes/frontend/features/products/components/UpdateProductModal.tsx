@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import { updateProduct } from '@/features/products/api/actions'
 import type { ProductList, UpdateProductData } from '@/features/products/api/types'
-import JanparaForm from '@/features/products/components/JanparaForm'
 import MercariForm from '@/features/products/components/MercariForm'
 import PcKoubouForm from '@/features/products/components/PcKoubouForm'
 import UsedSofmapForm from '@/features/products/components/UsedSofmapForm'
@@ -38,7 +37,7 @@ const UpdateProductModal = ({
   const submittingRef = useRef(false)
 
   type SectionTypes =
-    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'パソコン工房' | 'リコレ'
+    'ヤフオク' | 'メルカリ' | 'パソコン工房' | 'リコレ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useUpdateProductModalState()
@@ -67,16 +66,6 @@ const UpdateProductModal = ({
         product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords ?? [],
       mercariCrawlSettingRequiredKeywords:
         product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords ?? [],
-    },
-    janparaCrawlSetting: {
-      keyword: product?.janparaCrawlSetting?.keyword ?? '',
-      minPrice: product?.janparaCrawlSetting?.minPrice ?? 0,
-      maxPrice: product?.janparaCrawlSetting?.maxPrice ?? 0,
-      enabled: product?.janparaCrawlSetting?.enabled ?? true,
-      janparaCrawlSettingExcludeKeywords:
-        product?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords ?? [],
-      janparaCrawlSettingRequiredKeywords:
-        product?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords ?? [],
     },
     pcKoubouCrawlSetting: {
       keyword: product?.pcKoubouCrawlSetting?.keyword ?? '',
@@ -184,14 +173,6 @@ const UpdateProductModal = ({
                   checked={tab == 'メルカリ'}
                   onChange={() => setTab('メルカリ')}
                 />
-                <input
-                  className='btn join-item btn-md w-1/3'
-                  type='radio'
-                  name='options'
-                  aria-label='じゃんぱら'
-                  checked={tab == 'じゃんぱら'}
-                  onChange={() => setTab('じゃんぱら')}
-                />
               </div>
               <div className='join flex w-full flex-wrap'>
                 <input
@@ -224,11 +205,6 @@ const UpdateProductModal = ({
                 {tab == 'メルカリ' && (
                   <div className='py-4'>
                     <MercariForm register={register} getValues={getValues} setValue={setValue} />
-                  </div>
-                )}
-                {tab == 'じゃんぱら' && (
-                  <div className='py-4'>
-                    <JanparaForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
                 {tab == 'パソコン工房' && (

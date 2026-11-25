@@ -2,7 +2,6 @@
 
 import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
-import * as JanparaApi from './janparaCrawlSettings'
 import * as MercariApi from './mercariCrawlSettings'
 import * as PcKoubouApi from './pcKoubouCrawlSettings'
 import * as PricesApi from './productPrices'
@@ -50,17 +49,6 @@ export async function getProductPrices(params: Types.GetProductPricesParams) {
 
 export async function getProductPrice(productId: number, params: Types.GetProductPriceParams) {
   return await PricesApi.getProductPrice(productId, params)
-}
-
-export async function createJanparaCrawlSettingExcludeProduct(
-  productId: number,
-  data: Types.CreateJanparaCrawlSettingExcludeProductData,
-) {
-  const result = await JanparaApi.createJanparaCrawlSettingExcludeProduct(productId, data)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
 }
 
 export async function createMercariCrawlSettingExcludeProduct(

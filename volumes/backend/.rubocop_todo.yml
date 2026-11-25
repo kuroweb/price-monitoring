@@ -43,13 +43,6 @@ Layout/MultilineMethodCallIndentation:
   Exclude:
     - 'app/services/crawl/backmarket/diff_notifier.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
-
 # Offense count: 10
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
 Metrics/AbcSize:
@@ -99,7 +92,6 @@ Naming/BlockForwarding:
 # WaywardPredicates: infinite?, nonzero?
 Naming/PredicateMethod:
   Exclude:
-    - 'app/services/crawl/janpara/crawler.rb'
     - 'app/services/crawl/mercari/sync_product/crawler.rb'
     - 'app/services/crawl/mercari/sync_products/crawler.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
@@ -122,7 +114,6 @@ Performance/StringReplacement:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Performance/ZipWithoutBlock:
   Exclude:
-    - 'app/sidekiq/crawl/janpara/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/pc_koubou/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/used_sofmap/enqueue_sync_job.rb'
@@ -156,7 +147,6 @@ Rails/I18nLocaleTexts:
 # AllowedReceivers: ActionMailer::Preview, ActiveSupport::TimeZone
 Rails/RedundantActiveRecordAllMethod:
   Exclude:
-    - 'app/sidekiq/crawl/janpara/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/pc_koubou/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/used_sofmap/enqueue_sync_job.rb'
@@ -175,7 +165,6 @@ Rails/RootPathnameMethods:
 # ForbiddenMethods: decrement!, decrement_counter, increment!, increment_counter, insert, insert!, insert_all, insert_all!, toggle!, touch, touch_all, update_all, update_attribute, update_column, update_columns, update_counters, upsert, upsert_all
 Rails/SkipsModelValidations:
   Exclude:
-    - 'app/services/crawl/janpara/syncer.rb'
     - 'app/services/crawl/mercari/sync_products/syncer.rb'
     - 'app/services/crawl/pc_koubou/syncer.rb'
     - 'app/services/crawl/used_sofmap/syncer.rb'
@@ -209,14 +198,6 @@ Style/ArgumentsForwarding:
 Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Exclude:
-    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -305,7 +286,6 @@ Rails/StrongParametersExpect:
     - 'app/controllers/api/v1/categories_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
-    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/mercari_crawl_settings/mercari_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/pc_koubou_crawl_settings/pc_koubou_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/used_sofmap_crawl_settings/used_sofmap_crawl_setting_exclude_products_controller.rb'

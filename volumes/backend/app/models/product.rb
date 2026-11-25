@@ -2,7 +2,6 @@ class Product < ApplicationRecord
   ## associations ##
   has_one :yahoo_auction_crawl_setting, dependent: :destroy
   has_one :mercari_crawl_setting, dependent: :destroy
-  has_one :janpara_crawl_setting, dependent: :destroy
   has_one :pc_koubou_crawl_setting, dependent: :destroy
   has_one :used_sofmap_crawl_setting, dependent: :destroy
   has_one :product_category_map, dependent: :destroy
@@ -14,7 +13,6 @@ class Product < ApplicationRecord
   has_many :yahoo_fleamarket_daily_purchase_summaries, dependent: :destroy
   has_many :mercari_products, dependent: :destroy
   has_many :mercari_daily_purchase_summaries, dependent: :destroy
-  has_many :janpara_products, dependent: :destroy
   has_many :pc_koubou_products, dependent: :destroy
   has_many :used_sofmap_products, dependent: :destroy
 
