@@ -5,18 +5,8 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
   namespace :api do # rubocop:disable Metrics/BlockLength
     namespace :v1 do # rubocop:disable Metrics/BlockLength
       resource :current_user, only: %i[show]
-      resources :products, only: %i[index show create update destroy]
-      resources :categories, only: %i[index show create update destroy] do
-        collection do
-          get :structured
-        end
-        member do
-          get :structured_subtree
-        end
-      end
       resources :backmarket_watch_targets, only: %i[index create update destroy]
       resources :backmarket_recents, only: %i[index]
-      resources :product_prices, only: %i[index show]
       namespace :product_monitoring do
         resources :crawl_settings, only: %i[index show create update destroy] do
           post :sync, on: :member

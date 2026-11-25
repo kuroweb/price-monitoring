@@ -2,8 +2,6 @@ import { revalidatePath } from 'next/cache'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { createBackmarketWatchTarget, updateBackmarketWatchTarget, destroyBackmarketWatchTarget } from '@/features/backmarket/api/actions'
-import { createCategory, updateCategory, destroyCategory, getCategories } from '@/features/categories/api/actions'
-import { destroyProduct } from '@/features/products/api/actions'
 import { http } from '@/lib/http-client'
 
 vi.mock('next/cache', () => ({ revalidatePath: vi.fn() }))
@@ -17,46 +15,6 @@ beforeEach(() => {
 })
 
 describe('Server Action から API と再検証への連携', () => {
-  it('カテゴリ作成後にカテゴリ管理画面を再検証し、API の結果を返すこと', async () => {
-    const data = { name: 'ノートパソコン', parentId: 1 }
-    expect(await createCategory(data)).toBe(success)
-    expect(http).toHaveBeenCalledWith('/api/v1/categories', { method: 'POST', data })
-    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith('/admin/categories', 'page')
-  })
-
-  it('カテゴリの更新は PATCH で送り、管理画面を再検証すること', async () => {
-    const data = { parentId: null }
-    await updateCategory(2, data)
-    expect(http).toHaveBeenCalledWith('/api/v1/categories/2', { method: 'PATCH', data })
-    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith('/admin/categories', 'page')
-  })
-
-  it('カテゴリ削除後に管理画面を再検証すること', async () => {
-    await destroyCategory(2)
-    expect(http).toHaveBeenCalledWith('/api/v1/categories/2', { method: 'DELETE' })
-    expect(revalidatePath).toHaveBeenCalledExactlyOnceWith('/admin/categories', 'page')
-  })
-
-  it('参照操作は検索条件を渡し、再検証しないこと', async () => {
-    expect(await getCategories({ rootOnly: true })).toBe(success)
-    expect(http).toHaveBeenCalledWith('/api/v1/categories', {
-      method: 'GET',
-      params: { rootOnly: true },
-    })
-    expect(revalidatePath).not.toHaveBeenCalled()
-  })
-
-  it('商品削除後は管理・公開側の関連画面を再検証すること', async () => {
-    await destroyProduct(4)
-    expect(http).toHaveBeenCalledWith('/api/v1/products/4', { method: 'DELETE' })
-    expect(vi.mocked(revalidatePath).mock.calls).toEqual([
-      ['/admin/products', 'page'],
-      ['/admin/categories', 'page'],
-      ['/products', 'page'],
-      ['/products/[id]', 'page'],
-    ])
-  })
-
   it('計測対象を作成して監視管理画面を再検証すること', async () => {
     const data = { name: 'MacBook', url: 'https://example.test/macbook', enabled: true }
     expect(await createBackmarketWatchTarget(data)).toBe(success)
@@ -84,12 +42,12 @@ describe('Server Action から API と再検証への連携', () => {
       error: { code: 422, message: '名前が必要です', details: [] },
     }
     vi.mocked(http).mockResolvedValue(failure)
-    expect(await createCategory({ name: '' })).toBe(failure)
+    expect(await createBackmarketWatchTarget({ name: '', url: '', enabled: true })).toBe(failure)
   })
 
   it('API 呼び出しが例外になった場合は再検証せず例外を伝えること', async () => {
     vi.mocked(http).mockRejectedValue(new Error('unexpected'))
-    await expect(destroyProduct(4)).rejects.toThrow('unexpected')
+    await expect(destroyBackmarketWatchTarget(3)).rejects.toThrow('unexpected')
     expect(revalidatePath).not.toHaveBeenCalled()
   })
 })

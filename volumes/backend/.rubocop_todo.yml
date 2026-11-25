@@ -126,15 +126,6 @@ Style/GlobalStdStream:
     - 'config/environments/production.rb'
 
 # Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: braces, no_braces
-Style/HashAsLastArrayItem:
-  Exclude:
-    - 'app/controllers/api/v1/products_controller.rb'
-    - 'app/serializers/api/product_list_serializer.rb'
-
-# Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: EnforcedStyle, Recursive.
 # SupportedStyles: literals, strict
@@ -189,7 +180,5 @@ Style/SymbolArray:
 Rails/StrongParametersExpect:
   Exclude:
     - 'app/controllers/api/v1/backmarket_watch_targets_controller.rb'
-    - 'app/controllers/api/v1/categories_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
-    - 'app/controllers/api/v1/products_controller.rb'

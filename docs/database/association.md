@@ -3,34 +3,6 @@
 機能文書がまだ無い領域について、BFF / batch のテーブル間関連を確認する開発者向けのリファレンス。Provider の DB は対象外。機能文書がある領域のテーブル間関連は、その機能の DB 文書を正本とする。
 領域の分け方は [Database](index.md)、カラム・インデックスは [ER](er.md)、商品モニタリングのテーブル定義は [商品モニタリングの DB](../features/product-monitoring/database.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
 
-## 計測対象管理
-
-### カテゴリ
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  categories {
-    bigint id PK
-  }
-  category_hierarchies {
-    integer ancestor_id FK
-    integer descendant_id FK
-    integer generations PK
-  }
-  product_category_maps {
-    bigint id PK
-    bigint product_id FK
-    bigint category_id FK
-  }
-  products ||--o{ product_category_maps : ""
-  categories ||--o{ product_category_maps : ""
-  categories ||--o{ category_hierarchies : "ancestor"
-  categories ||--o{ category_hierarchies : "descendant"
-```
-
 ## Backmarket監視
 
 ```mermaid
