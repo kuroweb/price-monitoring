@@ -6,6 +6,15 @@ module Crawl
       youtube.com
       googlevideo.com
       doubleclick.net
+      www.google.com
+      googletagmanager.com
+      sentry.io
+      forter.com
+      analytics.tiktok.com
+      criteo.com
+      criteo.net
+      bat.bing.com
+      eagle-insight.com
     ].freeze
 
     YAHOO_AUCTION_BLOCKED_LIST = %w[
