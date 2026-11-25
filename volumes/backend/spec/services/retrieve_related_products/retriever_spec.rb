@@ -93,61 +93,6 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
           include_examples "フィルタリングのテスト", "すぐに購入可能（即決価格がmax_price以下 OR 1日以内に終了）なYahooAuctionProductの値を返却すること"
         end
       end
-
-      context "yahoo_fleamarketを指定した場合" do
-        let!(:yahoo_fleamarket_product_published) do
-          create(:yahoo_fleamarket_product, product:, name: "published", published: true)
-        end
-        let!(:yahoo_fleamarket_product_unpublished) do
-          create(:yahoo_fleamarket_product, product:, name: "unpublished", published: false)
-        end
-
-        shared_examples "フィルタリングのテスト" do |description|
-          it description do
-            service = described_class.new(
-              params: {
-                product_id: product.id,
-                platform_mask:,
-                page: 1,
-                per: 10,
-                sort: "created_at",
-                order: "asc"
-              }
-            )
-            actual_array = service.call.products
-            expected_array = expected_products.map do |product|
-              product.attributes
-                     .slice(*RelatedProduct.attribute_names)
-                     .merge("platform" => "yahoo_fleamarket")
-            end
-
-            expected_array.each_with_index do |expected, index|
-              expect(actual_array[index]).to have_attributes(expected)
-            end
-          end
-        end
-
-        context "yahoo_fleamarket.allの場合" do
-          let(:platform_mask) { "yahoo_fleamarket.all" }
-          let(:expected_products) { [yahoo_fleamarket_product_published, yahoo_fleamarket_product_unpublished] }
-
-          include_examples "フィルタリングのテスト", "すべてのYahooFleamarketProductの値を返却すること"
-        end
-
-        context "yahoo_fleamarket.publishedの場合" do
-          let(:platform_mask) { "yahoo_fleamarket.published" }
-          let(:expected_products) { [yahoo_fleamarket_product_published] }
-
-          include_examples "フィルタリングのテスト", "出品中のYahooFleamarketProductの値を返却すること"
-        end
-
-        context "yahoo_fleamarket.unpublishedの場合" do
-          let(:platform_mask) { "yahoo_fleamarket.unpublished" }
-          let(:expected_products) { [yahoo_fleamarket_product_unpublished] }
-
-          include_examples "フィルタリングのテスト", "出品終了済みのYahooFleamarketProductの値を返却すること"
-        end
-      end
     end
 
     context "page, per でページングするとき"

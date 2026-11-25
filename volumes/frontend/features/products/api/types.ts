@@ -10,16 +10,6 @@ export type YahooAuctionDailyPurchaseSummary = {
   updatedAt: string
 }
 
-export type YahooFleamarketDailyPurchaseSummary = {
-  id: number
-  productId: number
-  averagePurchasePrice: number
-  purchaseCount: number
-  date: string
-  createdAt: string
-  updatedAt: string
-}
-
 export type Product = {
   id: number
   name: string
@@ -85,7 +75,6 @@ export type ProductPriceList = (Product & {
 export type ProductPriceDetail = Product & {
   relatedProducts: RelatedProduct[]
   yahooAuctionDailyPurchaseSummaries: YahooAuctionDailyPurchaseSummary[]
-  yahooFleamarketDailyPurchaseSummaries: YahooFleamarketDailyPurchaseSummary[]
 }
 
 export type GetProductPricesParams = {
@@ -111,7 +100,6 @@ export type ProductDetail = Product & {
   }
   category: Category
   yahoo_auction_daily_purchase_summaries: YahooAuctionDailyPurchaseSummary[]
-  yahoo_fleamarket_daily_purchase_summaries: YahooFleamarketDailyPurchaseSummary[]
 }
 
 export type ProductList = {

@@ -30,11 +30,6 @@ module Crawl
       facebook.net
     ].freeze
 
-    PAYPAY_FLEAMARKET_BLOCKED_LIST = %w[
-      paypayfleamarket.c.yimg.jp
-      dsb.yahoo.co.jp
-    ].freeze
-
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
 
@@ -42,8 +37,7 @@ module Crawl
 
     def blocked_request?(url)
       blocked_url?(COMMON_BLOCKED_LIST, url) \
-        || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
-        || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url)
+        || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url)
     end
 
     def blocked_url?(blocked_list, url)

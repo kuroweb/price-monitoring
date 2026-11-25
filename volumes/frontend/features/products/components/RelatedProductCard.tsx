@@ -15,17 +15,14 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
 
   const serviceDomainMap: { [key: string]: string } = {
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
-    yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
   }
 
   const serviceNameMap: { [key: string]: string } = {
     yahoo_auction: 'ヤフオク',
-    yahoo_fleamarket: 'ペイペイ',
   }
 
   const serviceColorMap: { [key: string]: string } = {
     yahoo_auction: 'bg-yellow-600',
-    yahoo_fleamarket: 'bg-green-600',
   }
 
   const productUrl = `https://${serviceDomainMap[relatedProduct.platform]}${relatedProduct.externalId}`
@@ -45,7 +42,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
       ) => Promise<ExcludeProductResponse>
     } = {
       yahoo_auction: createYahooAuctionCrawlSettingExcludeProduct,
-      yahoo_fleamarket: createYahooAuctionCrawlSettingExcludeProduct,
     }
 
     const action = platformActions[platform]

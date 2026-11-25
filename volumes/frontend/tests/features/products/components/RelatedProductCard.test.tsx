@@ -9,7 +9,7 @@ import RelatedProductCard from '@/features/products/components/RelatedProductCar
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
 
 const relatedProduct: RelatedProduct = {
-  platform: 'yahoo_fleamarket',
+  platform: 'yahoo_auction',
   productId: 1,
   externalId: 'm123',
   name: 'MacBook',
@@ -35,7 +35,7 @@ describe('RelatedProductCard', () => {
     const links = screen.getAllByRole('link')
     expect(links).toHaveLength(2)
     for (const link of links) {
-      expect(link).toHaveAttribute('href', 'https://paypayfleamarket.yahoo.co.jp/item/m123')
+      expect(link).toHaveAttribute('href', 'https://page.auctions.yahoo.co.jp/jp/auction/m123')
       expect(link).toHaveAttribute('target', '_blank')
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     }

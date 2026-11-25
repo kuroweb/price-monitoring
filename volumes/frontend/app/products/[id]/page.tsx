@@ -79,7 +79,6 @@ const Page = async ({
             <h2 className='card-title pb-4'>価格推移</h2>
             <AnalysisChart
               yahooAuctionData={productPriceDetail?.yahooAuctionDailyPurchaseSummaries || []}
-              yahooFleamarketData={productPriceDetail?.yahooFleamarketDailyPurchaseSummaries || []}
             />
           </div>
         </div>
