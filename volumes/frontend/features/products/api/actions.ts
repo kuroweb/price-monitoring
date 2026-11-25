@@ -2,7 +2,6 @@
 
 import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
-import * as IosysApi from './iosysCrawlSettings'
 import * as JanparaApi from './janparaCrawlSettings'
 import * as MercariApi from './mercariCrawlSettings'
 import * as PcKoubouApi from './pcKoubouCrawlSettings'
@@ -51,17 +50,6 @@ export async function getProductPrices(params: Types.GetProductPricesParams) {
 
 export async function getProductPrice(productId: number, params: Types.GetProductPriceParams) {
   return await PricesApi.getProductPrice(productId, params)
-}
-
-export async function createIosysCrawlSettingExcludeProduct(
-  productId: number,
-  data: Types.CreateIosysCrawlSettingExcludeProductData,
-) {
-  const result = await IosysApi.createIosysCrawlSettingExcludeProduct(productId, data)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
 }
 
 export async function createJanparaCrawlSettingExcludeProduct(

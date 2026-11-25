@@ -60,12 +60,6 @@ module Api
                 janpara_crawl_setting_required_keywords: janpara_crawl_setting_required_keyword_attributes
               }
             ],
-            iosys_crawl_setting: iosys_crawl_setting_attributes + [
-              {
-                iosys_crawl_setting_exclude_keywords: iosys_crawl_setting_exclude_keyword_attributes,
-                iosys_crawl_setting_required_keywords: iosys_crawl_setting_required_keyword_attributes
-              }
-            ],
             pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes + [
               {
                 pc_koubou_crawl_setting_exclude_keywords: pc_koubou_crawl_setting_exclude_keyword_attributes,
@@ -119,18 +113,6 @@ module Api
       end
 
       def janpara_crawl_setting_required_keyword_attributes
-        %i[keyword]
-      end
-
-      def iosys_crawl_setting_attributes
-        %i[keyword min_price max_price enabled]
-      end
-
-      def iosys_crawl_setting_exclude_keyword_attributes
-        %i[keyword]
-      end
-
-      def iosys_crawl_setting_required_keyword_attributes
         %i[keyword]
       end
 

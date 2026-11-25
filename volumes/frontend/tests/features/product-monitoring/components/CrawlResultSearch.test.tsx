@@ -77,6 +77,7 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
   const criteria = { requiredKeywords: ['iPad Pro', '64GB', 'Wi-Fi'], negativeKeywords: ['傷,割れ', '箱、説明書'], minPrice: 1000, maxPrice: 2000 }
   expect(searchCrawlResults).toHaveBeenLastCalledWith({ ...criteria, saleStatus: 'all', sort: 'newest', page: 1 })
+  screen.getByLabelText(/最高価格/).focus()
   await user.keyboard('{Escape}')
   expect(screen.getByRole('button', { name: '絞り込み' })).toHaveFocus()
   expect(screen.getByText('必須："iPad Pro" 64GB Wi-Fi')).toBeInTheDocument()

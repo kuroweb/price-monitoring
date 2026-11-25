@@ -39,7 +39,6 @@ const ProductsTable = ({ products, categories }: Props) => {
       item.yahooAuctionCrawlSetting,
       item.mercariCrawlSetting,
       item.janparaCrawlSetting,
-      item.iosysCrawlSetting,
       item.pcKoubouCrawlSetting,
       item.usedSofmapCrawlSetting,
     ].some((setting) => setting?.enabled)

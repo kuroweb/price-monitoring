@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import { updateProduct } from '@/features/products/api/actions'
 import type { ProductList, UpdateProductData } from '@/features/products/api/types'
-import IosysForm from '@/features/products/components/IosysForm'
 import JanparaForm from '@/features/products/components/JanparaForm'
 import MercariForm from '@/features/products/components/MercariForm'
 import PcKoubouForm from '@/features/products/components/PcKoubouForm'
@@ -39,7 +38,7 @@ const UpdateProductModal = ({
   const submittingRef = useRef(false)
 
   type SectionTypes =
-    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'イオシス' | 'パソコン工房' | 'リコレ'
+    'ヤフオク' | 'メルカリ' | 'じゃんぱら' | 'パソコン工房' | 'リコレ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useUpdateProductModalState()
@@ -78,16 +77,6 @@ const UpdateProductModal = ({
         product?.janparaCrawlSetting?.janparaCrawlSettingExcludeKeywords ?? [],
       janparaCrawlSettingRequiredKeywords:
         product?.janparaCrawlSetting?.janparaCrawlSettingRequiredKeywords ?? [],
-    },
-    iosysCrawlSetting: {
-      keyword: product?.iosysCrawlSetting?.keyword ?? '',
-      minPrice: product?.iosysCrawlSetting?.minPrice ?? 0,
-      maxPrice: product?.iosysCrawlSetting?.maxPrice ?? 0,
-      enabled: product?.iosysCrawlSetting?.enabled ?? true,
-      iosysCrawlSettingExcludeKeywords:
-        product?.iosysCrawlSetting?.iosysCrawlSettingExcludeKeywords ?? [],
-      iosysCrawlSettingRequiredKeywords:
-        product?.iosysCrawlSetting?.iosysCrawlSettingRequiredKeywords ?? [],
     },
     pcKoubouCrawlSetting: {
       keyword: product?.pcKoubouCrawlSetting?.keyword ?? '',
@@ -209,14 +198,6 @@ const UpdateProductModal = ({
                   className='btn join-item btn-md w-1/3'
                   type='radio'
                   name='options'
-                  aria-label='イオシス'
-                  checked={tab == 'イオシス'}
-                  onChange={() => setTab('イオシス')}
-                />
-                <input
-                  className='btn join-item btn-md w-1/3'
-                  type='radio'
-                  name='options'
                   aria-label='パソコン工房'
                   checked={tab == 'パソコン工房'}
                   onChange={() => setTab('パソコン工房')}
@@ -248,11 +229,6 @@ const UpdateProductModal = ({
                 {tab == 'じゃんぱら' && (
                   <div className='py-4'>
                     <JanparaForm register={register} getValues={getValues} setValue={setValue} />
-                  </div>
-                )}
-                {tab == 'イオシス' && (
-                  <div className='py-4'>
-                    <IosysForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
                 {tab == 'パソコン工房' && (

@@ -117,7 +117,7 @@ module RetrieveRelatedProducts
     end
 
     def shop_platform?(platform)
-      %w[janpara iosys pc_koubou used_sofmap].include?(platform)
+      %w[janpara pc_koubou used_sofmap].include?(platform)
     end
 
     def product

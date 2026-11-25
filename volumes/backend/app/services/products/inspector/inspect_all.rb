@@ -15,7 +15,6 @@ module Products
         InspectYahooFleamarketProducts.call(product:)
         InspectMercariProducts.call(product:)
         InspectJanparaProducts.call(product:)
-        InspectIosysProducts.call(product:)
         InspectPcKoubouProducts.call(product:)
         InspectUsedSofmapProducts.call(product:)
       end

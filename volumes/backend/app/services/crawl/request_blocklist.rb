@@ -73,31 +73,6 @@ module Crawl
       flux-cdn.com
     ].freeze
 
-    IOSYS_BLOCKED_LIST = %w[
-      iosys.co.jp/fonts/vendor/font-awesome/fontawesome-webfont.woff2
-      iosys.co.jp/js/nouislider.min.js
-      iosys.co.jp/js/favorites/localforage.js
-      iosys.co.jp/js/searches/nouislider.js
-      iosys.co.jp/js/favorites/favorite.js
-      iosys.co.jp/js/scripts.js
-      iosys.co.jp/js/searches/pc-easy-search.js
-      iosys.co.jp/js/favorites/sweetalert.min.js
-      iosys.co.jp/js/swiper.ver6.min.js
-      iosys.co.jp/js/histories/browsing-list.js
-      iosys.co.jp/js/search.js
-      iosys.co.jp/js/histories/browsing.js
-      iosys.co.jp/js/jquery-numerator.js
-      iosys.co.jp/js/searches/refine-search.js
-      iosys.co.jp/js/searches/refine-tab.js
-      iosys.co.jp/js/sliders/itemlist.js
-      polyfill.io/v2/polyfill.min.js
-      www.google-analytics.com
-      checkout-api.worldshopping.jp
-      statics.a8.net
-      code.jquery.com
-      maxcdn.bootstrapcdn.com
-    ].freeze
-
     PC_KOUBOU_BLOCKED_LIST = %w[
       www.pc-koubou.jp/pwa.js
       www.pc-koubou.jp/user_data/root_alias/basestyle/js/cssrelpreload.js
@@ -148,7 +123,6 @@ module Crawl
         || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
         || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url) \
         || blocked_url?(JANPARA_BLOCKED_LIST, url) \
-        || blocked_url?(IOSYS_BLOCKED_LIST, url) \
         || blocked_url?(PC_KOUBOU_BLOCKED_LIST, url) \
         || blocked_url?(USED_SOFMAP_BLOCKED_LIST, url)
     end
