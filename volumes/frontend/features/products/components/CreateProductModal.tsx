@@ -15,7 +15,6 @@ import {
 import { createProduct } from '@/features/products/api/actions'
 import type { CreateProductData, ProductList } from '@/features/products/api/types'
 import MercariForm from '@/features/products/components/MercariForm'
-import UsedSofmapForm from '@/features/products/components/UsedSofmapForm'
 import YahooAuctionForm from '@/features/products/components/YahooAuctionForm'
 import type { Category } from '@/lib/category'
 
@@ -34,7 +33,7 @@ const CreateProductModal = ({
   const submittingRef = useRef(false)
 
   type SectionTypes =
-    'ヤフオク' | 'メルカリ' | 'リコレ'
+    'ヤフオク' | 'メルカリ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useCreateProductModalState()
@@ -63,16 +62,6 @@ const CreateProductModal = ({
         product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords ?? [],
       mercariCrawlSettingRequiredKeywords:
         product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords ?? [],
-    },
-    usedSofmapCrawlSetting: {
-      keyword: product?.usedSofmapCrawlSetting?.keyword ?? '',
-      minPrice: product?.usedSofmapCrawlSetting?.minPrice ?? 0,
-      maxPrice: product?.usedSofmapCrawlSetting?.maxPrice ?? 0,
-      enabled: product?.usedSofmapCrawlSetting?.enabled ?? true,
-      usedSofmapCrawlSettingExcludeKeywords:
-        product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingExcludeKeywords ?? [],
-      usedSofmapCrawlSettingRequiredKeywords:
-        product?.usedSofmapCrawlSetting?.usedSofmapCrawlSettingRequiredKeywords ?? [],
     },
   }
 
@@ -141,9 +130,9 @@ const CreateProductModal = ({
                 </select>
               </fieldset>
               <div className='divider py-6'>計測条件</div>
-              <div className='join flex w-full flex-wrap pb-2'>
+              <div className='join flex w-full flex-wrap'>
                 <input
-                  className='btn join-item btn-md w-1/3'
+                  className='btn join-item btn-md w-1/2'
                   type='radio'
                   name='options'
                   aria-label='ヤフオク'
@@ -151,22 +140,12 @@ const CreateProductModal = ({
                   onChange={() => setTab('ヤフオク')}
                 />
                 <input
-                  className='btn join-item btn-md w-1/3'
+                  className='btn join-item btn-md w-1/2'
                   type='radio'
                   name='options'
                   aria-label='メルカリ'
                   checked={tab === 'メルカリ'}
                   onChange={() => setTab('メルカリ')}
-                />
-              </div>
-              <div className='join flex w-full flex-wrap'>
-                <input
-                  className='btn join-item btn-md w-1/3'
-                  type='radio'
-                  name='options'
-                  aria-label='リコレ'
-                  checked={tab === 'リコレ'}
-                  onChange={() => setTab('リコレ')}
                 />
               </div>
               <div>
@@ -182,11 +161,6 @@ const CreateProductModal = ({
                 {tab === 'メルカリ' && (
                   <div className='py-4'>
                     <MercariForm register={register} getValues={getValues} setValue={setValue} />
-                  </div>
-                )}
-                {tab === 'リコレ' && (
-                  <div className='py-4'>
-                    <UsedSofmapForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
               </div>

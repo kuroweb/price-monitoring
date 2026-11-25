@@ -53,12 +53,6 @@ module Api
                 mercari_crawl_setting_exclude_keywords: mercari_crawl_setting_exclude_keyword_attributes,
                 mercari_crawl_setting_required_keywords: mercari_crawl_setting_required_keyword_attributes
               }
-            ],
-            used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes + [
-              {
-                used_sofmap_crawl_setting_exclude_keywords: used_sofmap_crawl_setting_exclude_keyword_attributes,
-                used_sofmap_crawl_setting_required_keywords: used_sofmap_crawl_setting_required_keyword_attributes
-              }
             ]
           ] + [:category_id]
         )
@@ -89,18 +83,6 @@ module Api
       end
 
       def mercari_crawl_setting_required_keyword_attributes
-        %i[keyword]
-      end
-
-      def used_sofmap_crawl_setting_attributes
-        %i[keyword min_price max_price enabled]
-      end
-
-      def used_sofmap_crawl_setting_exclude_keyword_attributes
-        %i[keyword]
-      end
-
-      def used_sofmap_crawl_setting_required_keyword_attributes
         %i[keyword]
       end
 

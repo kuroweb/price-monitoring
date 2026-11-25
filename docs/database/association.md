@@ -115,40 +115,6 @@ erDiagram
   products ||--o{ mercari_products : ""
 ```
 
-### リコレ
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  used_sofmap_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-  }
-  used_sofmap_crawl_setting_required_keywords {
-    bigint id PK
-    bigint used_sofmap_crawl_setting_id FK
-  }
-  used_sofmap_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint used_sofmap_crawl_setting_id FK
-  }
-  used_sofmap_crawl_setting_exclude_products {
-    bigint id PK
-    bigint used_sofmap_crawl_setting_id FK
-  }
-  used_sofmap_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ used_sofmap_crawl_settings : ""
-  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_required_keywords : ""
-  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_exclude_keywords : ""
-  used_sofmap_crawl_settings ||--o{ used_sofmap_crawl_setting_exclude_products : ""
-  products ||--o{ used_sofmap_products : ""
-```
-
 ## 日次相場の集計
 
 ```mermaid

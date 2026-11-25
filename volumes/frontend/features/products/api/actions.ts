@@ -5,7 +5,6 @@ import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-
 import * as MercariApi from './mercariCrawlSettings'
 import * as PricesApi from './productPrices'
 import * as ProductsApi from './products'
-import * as UsedSofmapApi from './usedSofmapCrawlSettings'
 import * as YahooAuctionApi from './yahooAuctionCrawlSettings'
 
 import type * as Types from './types'
@@ -55,17 +54,6 @@ export async function createMercariCrawlSettingExcludeProduct(
   data: Types.CreateMercariCrawlSettingExcludeProductData,
 ) {
   const result = await MercariApi.createMercariCrawlSettingExcludeProduct(productId, data)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}
-
-export async function createUsedSofmapCrawlSettingExcludeProduct(
-  productId: number,
-  data: Types.CreateUsedSofmapCrawlSettingExcludeProductData,
-) {
-  const result = await UsedSofmapApi.createUsedSofmapCrawlSettingExcludeProduct(productId, data)
   revalidateAdminPaths()
   revalidateProductsPaths()
 

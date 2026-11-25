@@ -17,7 +17,6 @@ module Products
           update_product
           update_yahoo_auction_crawl_settings
           update_mercari_crawl_settings
-          update_used_sofmap_crawl_settings
           update_category_association
 
           product
@@ -39,10 +38,6 @@ module Products
 
       def update_mercari_crawl_settings
         UpdateMercariCrawlSettings.call(product:, params:)
-      end
-
-      def update_used_sofmap_crawl_settings
-        UpdateUsedSofmapCrawlSettings.call(product:, params:)
       end
 
       def update_category_association

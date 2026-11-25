@@ -32,10 +32,6 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'image.sofmap.com',
-      },
-      {
-        protocol: 'https',
         hostname: 'ec.treasure-f.com',
       },
     ],

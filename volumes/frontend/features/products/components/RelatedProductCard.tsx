@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 
 import {
   createMercariCrawlSettingExcludeProduct,
-  createUsedSofmapCrawlSettingExcludeProduct,
   createYahooAuctionCrawlSettingExcludeProduct,
 } from '@/features/products/api/actions'
 import type { RelatedProduct } from '@/features/products/api/types'
@@ -21,21 +20,18 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     mercari: 'jp.mercari.com/item/',
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
     yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
-    used_sofmap: 'used.sofmap.com',
   }
 
   const serviceNameMap: { [key: string]: string } = {
     mercari: 'メルカリ',
     yahoo_auction: 'ヤフオク',
     yahoo_fleamarket: 'ペイペイ',
-    used_sofmap: 'リコレ',
   }
 
   const serviceColorMap: { [key: string]: string } = {
     mercari: 'bg-red-500',
     yahoo_auction: 'bg-yellow-600',
     yahoo_fleamarket: 'bg-green-600',
-    used_sofmap: 'bg-green-500',
   }
 
   const productUrl = `https://${serviceDomainMap[relatedProduct.platform]}${relatedProduct.externalId}`
@@ -57,7 +53,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
       yahoo_auction: createYahooAuctionCrawlSettingExcludeProduct,
       yahoo_fleamarket: createYahooAuctionCrawlSettingExcludeProduct,
       mercari: createMercariCrawlSettingExcludeProduct,
-      used_sofmap: createUsedSofmapCrawlSettingExcludeProduct,
     }
 
     const action = platformActions[platform]

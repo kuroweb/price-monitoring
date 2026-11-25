@@ -92,41 +92,6 @@ export type RelatedProduct = {
   updatedAt: string
 }
 
-export type UsedSofmapCrawlSetting = {
-  id: number
-  productId: number
-  keyword: string
-  minPrice: number
-  maxPrice: number
-  enabled: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export type UsedSofmapCrawlSettingExcludeKeyword = {
-  id: number
-  usedSofmapCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type UsedSofmapCrawlSettingRequiredKeyword = {
-  id: number
-  usedSofmapCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type UsedSofmapCrawlSettingExcludeProduct = {
-  id: number
-  usedSofmapCrawlSettingId: number
-  externalId: string
-  createdAt: string
-  updatedAt: string
-}
-
 export type YahooAuctionCrawlSetting = {
   id: number
   productId: number
@@ -199,10 +164,6 @@ export type ProductDetail = Product & {
     mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
     mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
   }
-  usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
-    usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
-    usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
-  }
   category: Category
   yahoo_auction_daily_purchase_summaries: YahooAuctionDailyPurchaseSummary[]
   yahoo_fleamarket_daily_purchase_summaries: YahooFleamarketDailyPurchaseSummary[]
@@ -218,10 +179,6 @@ export type ProductList = {
     mercariCrawlSetting: MercariCrawlSetting & {
       mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
       mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
-    }
-    usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
-      usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
-      usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
     }
     category: Category
   })[]
@@ -251,21 +208,9 @@ export type CreateProductData = {
     mercariCrawlSettingExcludeKeywords: { keyword: string }[]
     mercariCrawlSettingRequiredKeywords: { keyword: string }[]
   }
-  usedSofmapCrawlSetting: {
-    enabled: boolean
-    keyword: string
-    maxPrice: number
-    minPrice: number
-    usedSofmapCrawlSettingExcludeKeywords: { keyword: string }[]
-    usedSofmapCrawlSettingRequiredKeywords: { keyword: string }[]
-  }
 }
 
 export type UpdateProductData = CreateProductData
-
-export type CreateUsedSofmapCrawlSettingExcludeProductData = {
-  externalId: string
-}
 
 export type CreateYahooAuctionCrawlSettingExcludeProductData = {
   externalId: string

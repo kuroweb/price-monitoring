@@ -21,7 +21,6 @@ const platformOptions: Option[] = [
   { value: 'yahoo_auction', label: 'ヤフオク' },
   { value: 'yahoo_fleamarket', label: 'ペイペイ' },
   { value: 'mercari', label: 'メルカリ' },
-  { value: 'used_sofmap', label: 'リコレ' },
 ]
 
 const statusOptions: Option[] = [
