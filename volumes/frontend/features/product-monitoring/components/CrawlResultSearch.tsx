@@ -12,6 +12,7 @@ import type {
 import CrawlResultCard from '@/features/product-monitoring/components/CrawlResultCard'
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
 import ResultPagination from '@/features/product-monitoring/components/ResultPagination'
+import { useCrawlResultActions } from '@/features/product-monitoring/hooks/useCrawlResultActions'
 import { formatWords, words } from '@/features/product-monitoring/lib/words'
 import { formatYen } from '@/lib/format'
 
@@ -113,9 +114,9 @@ export default function CrawlResultSearch() {
       const response = await searchCrawlResults({ ...extractionCriteria(submitted), saleStatus, sort, page })
       if (response.data) {
         setDisplayed({ input: submitted, saleStatus, sort, results: response.data })
-      } else {
-        setError(response.error?.message ?? '収集結果を取得できませんでした。')
+        return response.data
       }
+      setError(response.error?.message ?? '収集結果を取得できませんでした。')
     } catch {
       setError('収集結果を取得できませんでした。再試行してください。')
     } finally {
@@ -123,6 +124,17 @@ export default function CrawlResultSearch() {
       inFlightRef.current = false
     }
   }
+
+  const { busy, exclude, remove } = useCrawlResultActions(async () => {
+    if (!displayed) return
+    const { input, saleStatus, sort } = displayed
+    const results = await search(input, saleStatus, sort, displayed.results.page)
+    // 空のページが残ると前のページへ戻れない。遡るのは一度だけで、1ページ目は戻らない。
+    if (results && results.crawlResults.length === 0 && results.page > 1) {
+      await search(input, saleStatus, sort, results.page - 1)
+    }
+  })
+  const pending = loading || busy
 
   return (
     <>
@@ -135,7 +147,7 @@ export default function CrawlResultSearch() {
             void search(input, displayed?.saleStatus ?? 'all', displayed?.sort ?? 'newest', 1)
           }}
         >
-          <fieldset disabled={loading} className='grid min-w-0 gap-3'>
+          <fieldset disabled={pending} className='grid min-w-0 gap-3'>
             <div className='grid grid-cols-[minmax(0,1fr)_auto_auto] items-start gap-2'>
               <div className='min-w-0'>
                 <label htmlFor='search-keywords' className='sr-only'>必須語</label>
@@ -213,7 +225,7 @@ export default function CrawlResultSearch() {
                   className='select select-sm min-h-10 w-auto'
                   aria-label='並び順'
                   value={displayed.sort}
-                  disabled={loading}
+                  disabled={pending}
                   onChange={(event) => void search(
                     displayed.input, displayed.saleStatus, event.target.value as MonitorCrawlResultSort, 1,
                   )}
@@ -223,7 +235,7 @@ export default function CrawlResultSearch() {
                 <button
                   type='button'
                   className='btn btn-outline btn-primary col-span-2 h-auto min-h-10 w-full py-2 whitespace-normal text-base-content sm:col-span-1 sm:w-auto'
-                  disabled={loading}
+                  disabled={pending}
                   onClick={() => setCreatingMonitor(true)}
                 >
                   この条件でモニタリングを作成
@@ -242,7 +254,7 @@ export default function CrawlResultSearch() {
                   type='button'
                   className={`btn join-item btn-sm ${displayed.saleStatus === value ? 'btn-primary' : 'btn-ghost'}`}
                   aria-pressed={displayed.saleStatus === value}
-                  disabled={loading}
+                  disabled={pending}
                   onClick={() => {
                     if (value === displayed.saleStatus) return
                     void search(displayed.input, value, displayed.sort, 1)
@@ -263,7 +275,13 @@ export default function CrawlResultSearch() {
                 <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
                   {displayed.results.crawlResults.map((item) => (
                     <li key={item.id} className='min-w-0'>
-                      <CrawlResultCard crawlResult={item} variant='search' />
+                      <CrawlResultCard
+                        crawlResult={item}
+                        variant='search'
+                        disabled={pending}
+                        onExclude={exclude}
+                        onDelete={remove}
+                      />
                     </li>
                   ))}
                 </ul>
@@ -272,7 +290,7 @@ export default function CrawlResultSearch() {
                 label='検索結果のページ'
                 page={displayed.results.page}
                 hasMore={displayed.results.hasMore}
-                disabled={loading}
+                disabled={pending}
                 onChange={(page) => void search(displayed.input, displayed.saleStatus, displayed.sort, page)}
               />
               {creatingMonitor && (
