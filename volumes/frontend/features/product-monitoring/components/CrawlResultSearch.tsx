@@ -114,9 +114,9 @@ export default function CrawlResultSearch() {
       const response = await searchCrawlResults({ ...extractionCriteria(submitted), saleStatus, sort, page })
       if (response.data) {
         setDisplayed({ input: submitted, saleStatus, sort, results: response.data })
-      } else {
-        setError(response.error?.message ?? '収集結果を取得できませんでした。')
+        return response.data
       }
+      setError(response.error?.message ?? '収集結果を取得できませんでした。')
     } catch {
       setError('収集結果を取得できませんでした。再試行してください。')
     } finally {
@@ -125,9 +125,14 @@ export default function CrawlResultSearch() {
     }
   }
 
-  const { busy, exclude, remove } = useCrawlResultActions(() => {
+  const { busy, exclude, remove } = useCrawlResultActions(async () => {
     if (!displayed) return
-    return search(displayed.input, displayed.saleStatus, displayed.sort, displayed.results.page)
+    const { input, saleStatus, sort } = displayed
+    const results = await search(input, saleStatus, sort, displayed.results.page)
+    // 空のページが残ると前のページへ戻れない。遡るのは一度だけで、1ページ目は戻らない。
+    if (results && results.crawlResults.length === 0 && results.page > 1) {
+      await search(input, saleStatus, sort, results.page - 1)
+    }
   })
   const pending = loading || busy
 

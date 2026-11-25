@@ -232,11 +232,12 @@ const cardFor = (name: string) => {
   return within(article)
 }
 
-it('確認後にその収集結果だけを除外・削除し、同じ条件のページを検索し直してカードを消す', async () => {
+it('確認後にその収集結果だけを除外・削除し、残りがあればページを維持し、空なら1つ前を検索し直す', async () => {
   const user = userEvent.setup()
   const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false)
   const target = { ...listing, id: 11, name: '対象の出品', crawlSettingId: 4, externalId: 'target' }
   const other = { ...listing, id: 22, name: '残る出品', crawlSettingId: 9, externalId: 'other' }
+  const earlier = { ...listing, id: 7, name: '1ページ目の出品', crawlSettingId: 3, externalId: 'earlier' }
   vi.mocked(searchCrawlResults)
     .mockResolvedValueOnce(resultPage([target, other], 1, true))
     .mockResolvedValueOnce(resultPage([target, other], 1, true))
@@ -244,6 +245,7 @@ it('確認後にその収集結果だけを除外・削除し、同じ条件の�
     .mockResolvedValueOnce(resultPage([target, other], 2, false))
     .mockResolvedValueOnce(resultPage([other], 2, false))
     .mockResolvedValueOnce(resultPage([], 2, false))
+    .mockResolvedValueOnce(resultPage([earlier], 1, true))
   vi.mocked(setCrawlResultExcluded).mockResolvedValue({
     data: { ...target, excludedAt: '2026-11-25T00:00:00Z' }, error: null, status: 200,
   })
@@ -303,10 +305,15 @@ it('確認後にその収集結果だけを除外・削除し、同じ条件の�
     expect(destroyCrawlResult).toHaveBeenCalledTimes(1)
     expect(destroyCrawlResult).not.toHaveBeenCalledWith(target.id)
     expect(setCrawlResultExcluded).toHaveBeenCalledTimes(1)
-    expect(searchCrawlResults).toHaveBeenLastCalledWith(appliedQuery)
-    expect(await results.findByText('該当する収集結果はありません。')).toBeInTheDocument()
+    const previousPage = { ...appliedQuery, page: 1 }
+    await waitFor(() => expect(searchCrawlResults).toHaveBeenLastCalledWith(previousPage))
+    const queries = vi.mocked(searchCrawlResults).mock.calls.map(([query]) => query)
+    expect(queries.at(-2)).toEqual(appliedQuery)
+    expect(queries.filter((query) => query.page < 1)).toEqual([])
+    expect(await results.findByText('1ページ目の出品')).toBeInTheDocument()
     expect(results.queryByText('残る出品')).not.toBeInTheDocument()
-    expect(results.getByRole('button', { name: '2ページ' })).toHaveAttribute('aria-current', 'page')
+    expect(results.queryByText('該当する収集結果はありません。')).not.toBeInTheDocument()
+    expect(results.getByRole('button', { name: '1ページ' })).toHaveAttribute('aria-current', 'page')
   } finally {
     confirm.mockRestore()
   }
