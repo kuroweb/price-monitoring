@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 
 import { searchCrawlResults } from '@/features/product-monitoring/api/actions'
 import type {
@@ -13,6 +13,10 @@ import CrawlResultCard from '@/features/product-monitoring/components/CrawlResul
 import MonitorFormModal from '@/features/product-monitoring/components/MonitorFormModal'
 import ResultPagination from '@/features/product-monitoring/components/ResultPagination'
 import { useCrawlResultActions } from '@/features/product-monitoring/hooks/useCrawlResultActions'
+import {
+  isInitialCrawlResultSearchQuery,
+  useCrawlResultSearchQuery,
+} from '@/features/product-monitoring/hooks/useCrawlResultSearchQuery'
 import { formatWords, words } from '@/features/product-monitoring/lib/words'
 import { formatYen } from '@/lib/format'
 
@@ -72,8 +76,9 @@ function CriteriaSummary({ label, values }: { label: string; values: string[] })
 }
 
 export default function CrawlResultSearch() {
+  const [query, setQuery] = useCrawlResultSearchQuery()
   const [input, setInput] = useState<SearchInput>({
-    required: '', excluded: '', minPrice: null, maxPrice: null,
+    required: query.required, excluded: query.excluded, minPrice: query.min_price, maxPrice: query.max_price,
   })
   const [displayed, setDisplayed] = useState<DisplayedSearch | null>(null)
   const [filtersOpen, setFiltersOpen] = useState(false)
@@ -114,6 +119,16 @@ export default function CrawlResultSearch() {
       const response = await searchCrawlResults({ ...extractionCriteria(submitted), saleStatus, sort, page })
       if (response.data) {
         setDisplayed({ input: submitted, saleStatus, sort, results: response.data })
+        // 成功した検索だけを残す。初期値は nuqs がクエリから外す。
+        await setQuery({
+          required: submitted.required,
+          excluded: submitted.excluded,
+          min_price: submitted.minPrice,
+          max_price: submitted.maxPrice,
+          sale_status: saleStatus,
+          sort,
+          page,
+        })
         return response.data
       }
       setError(response.error?.message ?? '収集結果を取得できませんでした。')
@@ -124,6 +139,24 @@ export default function CrawlResultSearch() {
       inFlightRef.current = false
     }
   }
+
+  const restoreQueryRef = useRef(query)
+  const searchRef = useRef(search)
+  useEffect(() => {
+    const initial = restoreQueryRef.current
+    if (isInitialCrawlResultSearchQuery(initial)) return
+    void searchRef.current(
+      {
+        required: initial.required,
+        excluded: initial.excluded,
+        minPrice: initial.min_price,
+        maxPrice: initial.max_price,
+      },
+      initial.sale_status,
+      initial.sort,
+      initial.page,
+    )
+  }, [])
 
   const { busy, exclude, remove } = useCrawlResultActions(async () => {
     if (!displayed) return

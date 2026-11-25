@@ -1,5 +1,6 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { toast } from 'react-toastify'
 import { beforeEach, expect, it, vi } from 'vitest'
 
@@ -15,6 +16,20 @@ vi.mock('@/features/product-monitoring/api/actions', () => ({
   setCrawlResultExcluded: vi.fn(),
   destroyCrawlResult: vi.fn(),
 }))
+
+function renderSearch(searchParams = '') {
+  const onUrlUpdate = vi.fn()
+  const view = render(
+    <NuqsTestingAdapter searchParams={searchParams} onUrlUpdate={onUrlUpdate}>
+      <CrawlResultSearch />
+    </NuqsTestingAdapter>,
+  )
+  return { ...view, onUrlUpdate }
+}
+
+function latestParams(onUrlUpdate: ReturnType<typeof vi.fn>) {
+  return onUrlUpdate.mock.calls.at(-1)?.[0].searchParams as URLSearchParams
+}
 
 const listing: CrawlResult = {
   id: 1,
@@ -51,7 +66,7 @@ it('Enter で検索し、結果の操作と新規登録に表示中の検索条�
   vi.mocked(createMonitor).mockImplementation(async (input) => ({
     data: { ...input, id: 2 }, error: null, status: 200,
   }))
-  render(<CrawlResultSearch />)
+  renderSearch()
 
   const required = screen.getByLabelText(/必須語/)
   await user.type(required, '  "iPad Pro"　64GB Wi-Fi  ')
@@ -101,7 +116,7 @@ it('検索前、失敗、0件を区別し、結果が0件でも条件を引き�
     .mockResolvedValueOnce({
       data: { crawlResults: [], page: 1, perPage: 12, hasMore: false }, error: null, status: 200,
     })
-  render(<CrawlResultSearch />)
+  renderSearch()
 
   expect(screen.getByRole('form', { name: '検索条件' })).toBeInTheDocument()
   expect(screen.queryByRole('region', { name: '検索結果' })).not.toBeInTheDocument()
@@ -124,7 +139,7 @@ it('必須語が空でも、閉じた絞り込みを検索に使える', async (
     error: null,
     status: 200,
   })
-  render(<CrawlResultSearch />)
+  renderSearch()
 
   const toggle = screen.getByRole('button', { name: '絞り込み' })
   expect(toggle).toHaveAttribute('aria-expanded', 'false')
@@ -164,7 +179,7 @@ it('販売状態を切り替えると、売り切れ・販売中・すべての�
     .mockResolvedValueOnce(page([sold], 1, false))
     .mockResolvedValueOnce(page([onSale, unknown], 1, false))
     .mockResolvedValueOnce(page([onSale, unknown, sold], 1, true))
-  render(<CrawlResultSearch />)
+  renderSearch()
 
   await user.click(screen.getByRole('button', { name: '検索' }))
   const results = within(await screen.findByRole('region', { name: '検索結果' }))
@@ -250,7 +265,7 @@ it('確認後にその収集結果だけを除外・削除し、残りがあれ�
     data: { ...target, excludedAt: '2026-11-25T00:00:00Z' }, error: null, status: 200,
   })
   vi.mocked(destroyCrawlResult).mockResolvedValue({ data: {}, error: null, status: 200 })
-  render(<CrawlResultSearch />)
+  renderSearch()
 
   try {
     await user.type(screen.getByLabelText(/必須語/), 'iPad')
@@ -329,7 +344,7 @@ it('除外と削除に失敗したときは検索をやり直さず、カード�
   vi.mocked(destroyCrawlResult)
     .mockResolvedValueOnce({ data: null, error: null, status: 500 })
     .mockRejectedValueOnce(new Error('network'))
-  render(<CrawlResultSearch />)
+  renderSearch()
 
   try {
     await user.click(screen.getByRole('button', { name: '検索' }))
@@ -357,4 +372,126 @@ it('除外と削除に失敗したときは検索をやり直さず、カード�
   } finally {
     confirm.mockRestore()
   }
+})
+
+it('初期状態の検索ではアドレスにクエリを付けない', async () => {
+  const user = userEvent.setup()
+  vi.mocked(searchCrawlResults).mockResolvedValue(resultPage([listing], 1, false))
+  const { onUrlUpdate } = renderSearch()
+
+  await user.click(screen.getByRole('button', { name: '検索' }))
+  expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
+  await waitFor(() => expect(latestParams(onUrlUpdate).toString()).toBe(''))
+})
+
+it('不正なクエリは初期値として扱い、検索しない', async () => {
+  renderSearch('?sale_status=nope&sort=nope&page=0&min_price=10abc')
+  await act(async () => {})
+  expect(searchCrawlResults).not.toHaveBeenCalled()
+  expect(screen.queryByRole('region', { name: '検索結果' })).not.toBeInTheDocument()
+  expect(screen.getByLabelText(/必須語/)).toHaveValue('')
+})
+
+it('検索条件とページをアドレスに残し、再読み込み後も同じ条件と結果を出す', async () => {
+  const user = userEvent.setup()
+  const required = '  "iPad Pro"　64GB  '
+  vi.mocked(searchCrawlResults).mockImplementation(async (query) => (
+    resultPage([listing], query.page, query.page === 1)
+  ))
+  const { onUrlUpdate, unmount } = renderSearch()
+
+  await user.type(screen.getByLabelText(/必須語/), required)
+  await user.click(screen.getByRole('button', { name: '絞り込み' }))
+  await user.type(screen.getByLabelText('除外語'), 'ジャンク')
+  await user.type(screen.getByLabelText(/最低価格/), '1000')
+  await user.click(screen.getByRole('button', { name: '絞り込んで検索' }))
+  const results = within(await screen.findByRole('region', { name: '検索結果' }))
+  await user.click(results.getByRole('button', { name: '売り切れ' }))
+  await waitFor(() => {
+    expect(results.getByRole('button', { name: '売り切れ' })).toHaveAttribute('aria-pressed', 'true')
+  })
+  await user.selectOptions(results.getByLabelText('並び順'), 'price_desc')
+  await waitFor(() => expect(results.getByLabelText('並び順')).toHaveValue('price_desc'))
+  await user.click(results.getByRole('button', { name: '次へ' }))
+  await waitFor(() => expect(results.getByRole('button', { name: '2ページ' })).toHaveAttribute('aria-current', 'page'))
+
+  const searched = {
+    requiredKeywords: ['iPad Pro', '64GB'],
+    negativeKeywords: ['ジャンク'],
+    minPrice: 1000,
+    maxPrice: null,
+    saleStatus: 'sold' as const,
+    sort: 'price_desc' as const,
+    page: 2,
+  }
+  expect(searchCrawlResults).toHaveBeenLastCalledWith(searched)
+  await waitFor(() => {
+    const params = latestParams(onUrlUpdate)
+    expect(params.get('required')).toBe(required)
+    expect(params.get('excluded')).toBe('ジャンク')
+    expect(params.get('min_price')).toBe('1000')
+    expect(params.has('max_price')).toBe(false)
+    expect(params.get('sale_status')).toBe('sold')
+    expect(params.get('sort')).toBe('price_desc')
+    expect(params.get('page')).toBe('2')
+  })
+  const persisted = latestParams(onUrlUpdate).toString()
+  const updates = onUrlUpdate.mock.calls.length
+  await user.clear(screen.getByLabelText(/必須語/))
+  await user.type(screen.getByLabelText(/必須語/), '未実行の入力')
+  expect(onUrlUpdate).toHaveBeenCalledTimes(updates)
+  expect(latestParams(onUrlUpdate).get('required')).toBe(required)
+
+  unmount()
+  vi.mocked(searchCrawlResults).mockClear()
+  const restored = renderSearch(`?${persisted}`)
+  expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
+  expect(screen.getByLabelText(/必須語/)).toHaveValue(required)
+  expect(screen.getByLabelText('除外語')).toHaveValue('ジャンク')
+  expect(screen.getByLabelText(/最低価格/)).toHaveValue(1000)
+  expect(screen.getByLabelText(/最高価格/)).toHaveValue(null)
+  const restoredResults = within(screen.getByRole('region', { name: '検索結果' }))
+  expect(restoredResults.getByText('必須："iPad Pro" 64GB')).toBeInTheDocument()
+  expect(restoredResults.getByText('除外：ジャンク')).toBeInTheDocument()
+  expect(restoredResults.getByRole('button', { name: '売り切れ' })).toHaveAttribute('aria-pressed', 'true')
+  expect(restoredResults.getByLabelText('並び順')).toHaveValue('price_desc')
+  expect(restoredResults.getByRole('button', { name: '2ページ' })).toHaveAttribute('aria-current', 'page')
+  expect(searchCrawlResults).toHaveBeenCalledTimes(1)
+  expect(searchCrawlResults).toHaveBeenCalledWith(searched)
+
+  await user.click(restoredResults.getByRole('button', { name: 'すべて' }))
+  await waitFor(() => {
+    const params = latestParams(restored.onUrlUpdate)
+    expect(params.has('sale_status')).toBe(false)
+    expect(params.has('page')).toBe(false)
+    expect(params.get('required')).toBe(required)
+    expect(params.get('sort')).toBe('price_desc')
+  })
+  await user.selectOptions(restoredResults.getByLabelText('並び順'), 'newest')
+  await waitFor(() => {
+    const params = latestParams(restored.onUrlUpdate)
+    expect(params.has('sort')).toBe(false)
+    expect(params.get('excluded')).toBe('ジャンク')
+    expect(params.get('min_price')).toBe('1000')
+    expect(params.has('max_price')).toBe(false)
+  })
+})
+
+it('価格 0 とページは初期値ではないので再読み込みで同じ検索を出す', async () => {
+  vi.mocked(searchCrawlResults).mockResolvedValue(resultPage([listing], 3, false))
+  renderSearch('?min_price=0&page=3')
+
+  expect(await screen.findByText('iPad Pro')).toBeInTheDocument()
+  expect(searchCrawlResults).toHaveBeenCalledTimes(1)
+  expect(searchCrawlResults).toHaveBeenCalledWith({
+    requiredKeywords: [],
+    negativeKeywords: [],
+    minPrice: 0,
+    maxPrice: null,
+    saleStatus: 'all',
+    sort: 'newest',
+    page: 3,
+  })
+  expect(screen.getByLabelText(/最低価格/)).toHaveValue(0)
+  expect(screen.getByRole('button', { name: '3ページ' })).toHaveAttribute('aria-current', 'page')
 })
