@@ -63,16 +63,6 @@ module Crawl
       dsb.yahoo.co.jp
     ].freeze
 
-    JANPARA_BLOCKED_LIST = %w[
-      www.janpara.co.jp/javascripts
-      www.janpara.co.jp/common
-      www.janpara.co.jp/poplink
-      apis.google.com
-      m.geniee-search.net
-      pagead2.googlesyndication.com
-      flux-cdn.com
-    ].freeze
-
     PC_KOUBOU_BLOCKED_LIST = %w[
       www.pc-koubou.jp/pwa.js
       www.pc-koubou.jp/user_data/root_alias/basestyle/js/cssrelpreload.js
@@ -108,10 +98,6 @@ module Crawl
       cdnjs.cloudflare.com
     ].freeze
 
-    # じゃんぱらの WAF（SiteGuard）は古い UA を HTTP 500 で拒否するため、じゃんぱらだけ新しい UA を使う
-    JANPARA_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) " \
-                         "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36".freeze
-
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
 
@@ -122,7 +108,6 @@ module Crawl
         || blocked_url?(MERCARI_BLOCKED_LIST, url) \
         || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
         || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url) \
-        || blocked_url?(JANPARA_BLOCKED_LIST, url) \
         || blocked_url?(PC_KOUBOU_BLOCKED_LIST, url) \
         || blocked_url?(USED_SOFMAP_BLOCKED_LIST, url)
     end

@@ -17,13 +17,6 @@ module Api
               mercari_crawl_setting_exclude_products
             ]
           },
-          janpara_crawl_setting: {
-            include: %i[
-              janpara_crawl_setting_exclude_keywords
-              janpara_crawl_setting_required_keywords
-              janpara_crawl_setting_exclude_products
-            ]
-          },
           pc_koubou_crawl_setting: {
             include: %i[
               pc_koubou_crawl_setting_exclude_keywords

@@ -12,7 +12,6 @@ module RetrieveRelatedProducts
         mercari.all
         mercari.published
         mercari.unpublished
-        janpara.all
         pc_koubou.all
         used_sofmap.all
       ].freeze

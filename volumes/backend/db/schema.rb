@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_25_000003) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_26_000001) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -49,57 +49,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_25_000003) do
     t.integer "generations", null: false
     t.index ["ancestor_id", "descendant_id", "generations"], name: "category_anc_desc_idx", unique: true
     t.index ["descendant_id"], name: "category_desc_idx"
-  end
-
-  create_table "janpara_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "janpara_crawl_setting_id"
-    t.string "keyword", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["janpara_crawl_setting_id", "keyword"], name: "idx_on_janpara_crawl_setting_id_keyword_7074a129f7", unique: true
-    t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_e7210a8e11"
-  end
-
-  create_table "janpara_crawl_setting_exclude_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "janpara_crawl_setting_id"
-    t.string "external_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["janpara_crawl_setting_id", "external_id"], name: "idx_on_janpara_crawl_setting_id_external_id_102eeb7612", unique: true
-    t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_3d622eaffd"
-  end
-
-  create_table "janpara_crawl_setting_required_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "janpara_crawl_setting_id"
-    t.string "keyword", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["janpara_crawl_setting_id", "keyword"], name: "idx_on_janpara_crawl_setting_id_keyword_198f4d9655", unique: true
-    t.index ["janpara_crawl_setting_id"], name: "idx_on_janpara_crawl_setting_id_e721383245"
-  end
-
-  create_table "janpara_crawl_settings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.string "keyword", null: false
-    t.integer "min_price", default: 0, null: false
-    t.integer "max_price", default: 0, null: false
-    t.boolean "enabled", default: false, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["product_id"], name: "index_janpara_crawl_settings_on_product_id"
-  end
-
-  create_table "janpara_products", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "product_id"
-    t.string "external_id", null: false
-    t.string "name", null: false
-    t.text "thumbnail_url"
-    t.integer "price", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["external_id"], name: "index_janpara_products_on_external_id", unique: true
-    t.index ["product_id", "external_id"], name: "index_janpara_products_on_product_id_and_external_id", unique: true
-    t.index ["product_id"], name: "index_janpara_products_on_product_id"
   end
 
   create_table "mercari_crawl_setting_exclude_keywords", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -456,11 +405,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_25_000003) do
   end
 
   add_foreign_key "backmarket_watch_results", "backmarket_watch_targets"
-  add_foreign_key "janpara_crawl_setting_exclude_keywords", "janpara_crawl_settings"
-  add_foreign_key "janpara_crawl_setting_exclude_products", "janpara_crawl_settings"
-  add_foreign_key "janpara_crawl_setting_required_keywords", "janpara_crawl_settings"
-  add_foreign_key "janpara_crawl_settings", "products"
-  add_foreign_key "janpara_products", "products"
   add_foreign_key "mercari_crawl_setting_exclude_keywords", "mercari_crawl_settings"
   add_foreign_key "mercari_crawl_setting_exclude_products", "mercari_crawl_settings"
   add_foreign_key "mercari_crawl_setting_required_keywords", "mercari_crawl_settings"

@@ -14,7 +14,6 @@ RSpec.describe Crawl::RequestBlocklist do
 
     it "商品一覧や商品詳細の取得に必要なリクエストはブロックしないこと" do
       %w[
-        https://www.janpara.co.jp/sale/search/result/?KEYWORDS=iphone
         https://jp.mercari.com/search?keyword=iphone
         https://auctions.yahoo.co.jp/search/search?p=iphone
       ].each do |url|
