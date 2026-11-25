@@ -12,7 +12,7 @@
 
 ### Architectural Style
 
-モジュラモノリスに、認証とブラウザ取得を別プロセスで足した構成。画面と BFF はデプロイ単位が分かれる。商品計測・従来クロール・Backmarket は同じ Rails プロセスと同じ MySQL に同居する。
+モジュラモノリスに、認証とブラウザ取得を別プロセスで足した構成。画面と BFF はデプロイ単位が分かれる。商品モニタリングと Backmarket は同じ Rails プロセスと同じ MySQL に同居する。
 
 ### Component Relationships
 

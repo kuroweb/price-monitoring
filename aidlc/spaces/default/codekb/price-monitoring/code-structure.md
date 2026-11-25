@@ -13,13 +13,13 @@
 | `volumes/frontend/lib` | HTTP クライアントと表示の補助 |
 | `volumes/backend/app/controllers/api/v1` | JSON API |
 | `volumes/backend/app/services/product_monitoring` | 商品計測の取得・保存・集計・通知 |
-| `volumes/backend/app/services/crawl` | 従来のプラットフォーム別クロール |
+| `volumes/backend/app/services/crawl` | Backmarket の取得。商品モニタリングの取得は `services/product_monitoring/crawling` |
 | `volumes/backend/app/sidekiq` | ジョブの入口 |
 | `volumes/backend/app/models` | Active Record |
 | `volumes/auth-provider` | OIDC Provider |
 | `volumes/nginx` | 開発用リバースプロキシ |
 
-`features` 同士は読み込まない、という方針が `docs/frontend/index.md` にある。Backend は controller、service、model、sidekiq、serializer、finder を分けている。
+`features` 同士は読み込まない、という方針が `docs/frontend/index.md` にある。Backend は controller、service、model、sidekiq、serializer を分けている。
 
 ## 分類
 

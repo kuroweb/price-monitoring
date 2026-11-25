@@ -10,7 +10,7 @@ Next.js の画面。`volumes/frontend`。商品計測と商品モニタリング
 
 ## Backend
 
-Rails の BFF。`volumes/backend`。セッション、従来の商品・カテゴリ・Backmarket、商品計測 API を持つ。MySQL と Redis に依存する。取得の実処理は Product Monitoring へ委譲する。
+Rails の BFF。`volumes/backend`。セッション、Backmarket、商品モニタリングの API を持つ。MySQL と Redis に依存する。取得の実処理は Product Monitoring と Backmarket のクローラーが行う。
 
 ## Auth Provider
 

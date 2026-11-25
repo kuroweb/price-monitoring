@@ -39,7 +39,6 @@
 
 - 機能の通信は `features/<機能>/api/` に置く。`types.ts` に request / response の型、リソースごとのファイルに HTTP request（`lib/http-client` を使う）、`actions.ts` に server action と path revalidation を置く
 - `lib/http-client` と `lib/revalidate-paths` は全機能で共有する土台として `lib/` に置く
-- 商品とカテゴリの両方で使う `Category` 型は `lib/category.ts` に置き、カテゴリデータの取得は `app` で組み立てる
 - page や feature から直接 backend の details を広げすぎない
 
 ## 置かない責務
@@ -53,16 +52,12 @@
 
 ### route entry
 
-- `app/products/page.tsx` が category 付き一覧の入口
-- `app/products/[id]/page.tsx` が商品詳細の入口
 - `app/backmarket/page.tsx` が Backmarket 計測結果の入口
 - `app/product-monitoring/` が商品モニタリングの入口。`monitors/` にモニタリング設定、`crawl-settings/` に収集設定の一覧・詳細を置く。入口はモニタリング設定の一覧へリダイレクトする
-- `app/admin/*` が管理画面（商品・カテゴリ・Backmarket 計測など）の route を持つ
+- `app/admin/backmarket` が Backmarket 計測対象の管理画面の route を持つ
 
 ### feature 単位の UI
 
-- `features/products/` が商品一覧や詳細の UI と state を持つ
-- `features/categories/` がカテゴリ管理の UI と通信を持つ
 - `features/backmarket/` が計測対象の管理と直近取得画面の UI と通信を持つ
 - `features/product-monitoring/` が商品モニタリングの UI を持つ。各画面から設定の登録・編集モーダルを開き、保存条件と抽出条件の入力欄はそれぞれ分ける
 - page は feature を束ねる役に留める
@@ -81,10 +76,9 @@
 
 ## 管理画面の操作と状態表示
 
-- 商品の計測対象一覧は管理コードの部分一致検索、カテゴリ、計測状態を組み合わせて絞り込む。計測状態は6サイトの設定のいずれかが有効なら「計測中」、すべて無効なら「停止中」とする。実際のジョブの実行状態を表すものではない。
-- 商品・Backmarket の一覧操作は「…」にまとめ、計測設定・複製・削除を選べるようにする。
-- 商品・カテゴリ・Backmarket の削除では対象名を確認し、処理中は削除の再操作を防ぐ。作成・更新フォームも送信中の表示とボタンの無効化で再送信を防ぐ。
-- API の取得失敗はエラー画面で再試行を案内し、取得成功時の空一覧と区別する。成功時に対象がなければ追加や絞り込み変更を案内する。
+- Backmarket の計測対象は一覧から追加・更新・削除する。削除では対象名を確認し、処理中は削除の再操作を防ぐ。作成・更新フォームも送信中の表示とボタンの無効化で再送信を防ぐ。
+- 商品モニタリングの画面と操作は [外部仕様](../features/product-monitoring/external-spec.md) を参照する。
+- API の取得失敗はエラー画面で再試行を案内し、取得成功時の空一覧と区別する。成功時に対象がなければ追加を案内する。
 
 ## Lint の構成
 
@@ -116,7 +110,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 
 - Vitest の `describe`・`it`・`test` の説明文は日本語で書く。関数・コンポーネントを指す `describe` はそのまま使う。`it`・`test` は振る舞いを「〜こと」で終える
 - Vitest・React Testing Library・jsdom を使い、関数と同期 component、Client Component の振る舞いを検証する
-- テストは `tests/` 配下に、対象実装と同じディレクトリ構造で `*.test.ts` / `*.test.tsx` として置く。例: `features/products/components/CategoryNavigation.tsx` に対して `tests/features/products/components/CategoryNavigation.test.tsx`
+- テストは `tests/` 配下に、対象実装と同じディレクトリ構造で `*.test.ts` / `*.test.tsx` として置く。例: `features/product-monitoring/components/MonitorList.tsx` に対して `tests/features/product-monitoring/components/MonitorList.test.tsx`
 - `describe` / `it` / `expect` / `vi` は `vitest` から明示的に import する。`@/` エイリアスはアプリと同じ `tsconfig.json` を参照する
 - UI は role・表示文言を使って検証し、操作には `@testing-library/user-event` を使う
 - 共通 setup は `tests/setup.ts` に置き、DOM matcher の登録とテストごとの DOM cleanup を行う。Next.js API の一括モックは置かず、必要な依存だけ各テストで制御する
@@ -136,11 +130,11 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 
 ## 代表コード
 
-- [`volumes/frontend/app/products/page.tsx`](../../volumes/frontend/app/products/page.tsx)
-- [`volumes/frontend/features/products/components/CategoryNavigation.tsx`](../../volumes/frontend/features/products/components/CategoryNavigation.tsx)
+- [`volumes/frontend/app/product-monitoring/monitors/page.tsx`](../../volumes/frontend/app/product-monitoring/monitors/page.tsx)
+- [`volumes/frontend/features/product-monitoring/components/MonitorList.tsx`](../../volumes/frontend/features/product-monitoring/components/MonitorList.tsx)
 - [`volumes/frontend/lib/http-client.ts`](../../volumes/frontend/lib/http-client.ts)
-- [`volumes/frontend/features/products/api/actions.ts`](../../volumes/frontend/features/products/api/actions.ts)
-- [`volumes/frontend/features/products/api/products.ts`](../../volumes/frontend/features/products/api/products.ts)
+- [`volumes/frontend/features/product-monitoring/api/actions.ts`](../../volumes/frontend/features/product-monitoring/api/actions.ts)
+- [`volumes/frontend/features/backmarket/api/actions.ts`](../../volumes/frontend/features/backmarket/api/actions.ts)
 
 ## 更新時に確認する source of truth
 
@@ -148,5 +142,4 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 - `volumes/frontend/features/`
 - `volumes/frontend/components/layouts/`
 - `volumes/frontend/lib/http-client.ts`
-- `volumes/frontend/lib/category.ts`
 - `volumes/frontend/lib/revalidate-paths.ts`

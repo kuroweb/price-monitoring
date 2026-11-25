@@ -14,17 +14,6 @@ Layout/EmptyLinesAroundBlockBody:
   Exclude:
     - 'spec/requests/product_monitoring/crawl_settings_spec.rb'
 
-# Offense count: 12
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle, IndentationWidth.
-# SupportedStyles: aligned, indented
-Layout/LineEndStringConcatenationIndentation:
-  Exclude:
-    - 'app/services/crawl/yahoo_auction/sync_products/published/url_generator.rb'
-    - 'app/services/crawl/yahoo_auction/sync_products/unpublished/url_generator.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_products/published/url_generator.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_products/unpublished/url_generator.rb'
-
 # Offense count: 14
 # This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: Max, AllowHeredoc, AllowURI, AllowQualifiedName, URISchemes, AllowRBSInlineAnnotation, AllowCopDirectives, AllowedPatterns, SplitStrings.
@@ -42,13 +31,6 @@ Layout/LineLength:
 Layout/MultilineMethodCallIndentation:
   Exclude:
     - 'app/services/crawl/backmarket/diff_notifier.rb'
-
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: AllowInHeredoc.
-Layout/TrailingWhitespace:
-  Exclude:
-    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
 
 # Offense count: 10
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes, Max.
@@ -70,8 +52,6 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - 'app/services/crawl/backmarket/crawler.rb'
-    - 'app/services/crawl/mercari/sync_product/crawler.rb'
-    - 'app/services/crawl/mercari/sync_products/crawler.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedMethods, AllowedPatterns, Max.
@@ -92,43 +72,6 @@ Metrics/ModuleLength:
 Naming/BlockForwarding:
   Exclude:
     - 'app/sidekiq/utils/timeout_handler.rb'
-
-# Offense count: 4
-# Configuration parameters: Mode, AllowedMethods, AllowedPatterns, AllowBangMethods, WaywardPredicates.
-# AllowedMethods: call
-# WaywardPredicates: infinite?, nonzero?
-Naming/PredicateMethod:
-  Exclude:
-    - 'app/services/crawl/janpara/crawler.rb'
-    - 'app/services/crawl/mercari/sync_product/crawler.rb'
-    - 'app/services/crawl/mercari/sync_products/crawler.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
-
-# Offense count: 7
-# This cop supports safe autocorrection (--autocorrect).
-Performance/ConstantRegexp:
-  Exclude:
-    - 'app/services/crawl/mercari/sync_product/crawler.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-Performance/StringReplacement:
-  Exclude:
-    - 'app/services/crawl/pc_koubou/crawler.rb'
-    - 'app/services/crawl/used_sofmap/crawler.rb'
-
-# Offense count: 7
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Performance/ZipWithoutBlock:
-  Exclude:
-    - 'app/sidekiq/crawl/iosys/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/janpara/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/pc_koubou/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/used_sofmap/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
 
 # Offense count: 3
 RSpec/MultipleDescribes:
@@ -151,50 +94,12 @@ Rails/I18nLocaleTexts:
     - 'app/controllers/concerns/oidc_token_control.rb'
     - 'app/controllers/sessions_controller.rb'
 
-# Offense count: 7
-# This cop supports unsafe autocorrection (--autocorrect-all).
-# Configuration parameters: AllowedReceivers.
-# AllowedReceivers: ActionMailer::Preview, ActiveSupport::TimeZone
-Rails/RedundantActiveRecordAllMethod:
-  Exclude:
-    - 'app/sidekiq/crawl/iosys/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/janpara/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/pc_koubou/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/used_sofmap/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
-
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Rails/RootPathnameMethods:
   Exclude:
     - 'db/seeds.rb'
     - 'lib/tasks/seed.rake'
-
-# Offense count: 12
-# Configuration parameters: ForbiddenMethods, AllowedMethods.
-# ForbiddenMethods: decrement!, decrement_counter, increment!, increment_counter, insert, insert!, insert_all, insert_all!, toggle!, touch, touch_all, update_all, update_attribute, update_column, update_columns, update_counters, upsert, upsert_all
-Rails/SkipsModelValidations:
-  Exclude:
-    - 'app/services/crawl/iosys/syncer.rb'
-    - 'app/services/crawl/janpara/syncer.rb'
-    - 'app/services/crawl/mercari/sync_products/syncer.rb'
-    - 'app/services/crawl/pc_koubou/syncer.rb'
-    - 'app/services/crawl/used_sofmap/syncer.rb'
-    - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
-    - 'app/services/crawl/yahoo_fleamarket/sync_products/syncer.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_mercari_product.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
-
-# Offense count: 3
-# This cop supports unsafe autocorrection (--autocorrect-all).
-Rails/SquishedSQLHeredocs:
-  Exclude:
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_mercari_product.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
 
 # Offense count: 4
 # This cop supports safe autocorrection (--autocorrect).
@@ -213,29 +118,12 @@ Style/BlockComments:
   Exclude:
     - 'spec/spec_helper.rb'
 
-# Offense count: 1
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: compact, expanded
-Style/EmptyMethod:
-  Exclude:
-    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
-
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/GlobalStdStream:
   Exclude:
     - 'config/environments/integration.rb'
     - 'config/environments/production.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: braces, no_braces
-Style/HashAsLastArrayItem:
-  Exclude:
-    - 'app/controllers/api/v1/products_controller.rb'
-    - 'app/serializers/api/product_list_serializer.rb'
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
@@ -273,13 +161,6 @@ Style/RedundantLineContinuation:
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
-Style/RedundantRegexpArgument:
-  Exclude:
-    - 'app/services/crawl/pc_koubou/crawler.rb'
-    - 'app/services/crawl/used_sofmap/crawler.rb'
-
-# Offense count: 2
-# This cop supports safe autocorrection (--autocorrect).
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiteralsInInterpolation:
@@ -294,24 +175,10 @@ Style/SymbolArray:
   Exclude:
     - 'config/initializers/filter_parameter_logging.rb'
 
-# Offense count: 10
-# This cop supports unsafe autocorrection (--autocorrect-all).
-RSpec/IncludeExamples:
-  Exclude:
-    - 'spec/services/retrieve_related_products/retriever_spec.rb'
-
 # Offense count: 18
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Rails/StrongParametersExpect:
   Exclude:
     - 'app/controllers/api/v1/backmarket_watch_targets_controller.rb'
-    - 'app/controllers/api/v1/categories_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
-    - 'app/controllers/api/v1/products/iosys_crawl_settings/iosys_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products/janpara_crawl_settings/janpara_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products/mercari_crawl_settings/mercari_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products/pc_koubou_crawl_settings/pc_koubou_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products/used_sofmap_crawl_settings/used_sofmap_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products_controller.rb'

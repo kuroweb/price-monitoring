@@ -21,9 +21,9 @@
 - Frontend → Backend の `/api/v1`。開発ブラウザからは Nginx の `/api`
 - Backend のログイン → Auth Provider の OIDC。戻りは Nginx 経由
 - Sidekiq（`backend-batch-1` が `crawl_process.yml`、`backend-batch-2` が `general_process.yml`、`backend-batch-3` が `crawl_process_2.yml`）→ 同じ Backend コードと Backend の MySQL / Redis
-- Product Monitoring → `Crawling::Client` / `Crawling::Proxy` → Playwright。従来の `Crawl::*` には依存しない
+- Product Monitoring → `ProductMonitoring::Crawling::Client` / `Crawling::Proxy` → Playwright
+- Backmarket → `Crawl::CamoufoxClient` / `Crawl::DynamicProxy` → Camoufox
 - Product Monitoring のサイトの `Listing` → `UrlRouter::PLATFORMS`。個別確認の有無と一覧からの販売状態の反映は、サイトごとの `Listing::Syncer` に書く
-- 従来の `Crawl::*` は `*_products` テーブルへ書き、`product_crawl_results` とは別経路
 - Auth Provider は Backend のテーブルを参照しない
 
 ## Product Monitoring の呼び出し関係（2026-11-15 focused scan）

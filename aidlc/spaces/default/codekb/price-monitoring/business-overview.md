@@ -6,12 +6,11 @@ Web 上の商品の最安値と相場を、自宅のホームラボで調べる�
 
 ## 利用者が行うこと
 
-- 計測対象の商品と、プラットフォームごとの従来クロール条件を管理する
-- 商品計測設定に検索語とサイト、または追加の検索結果 URL を登録し、取得結果を見る
+- 商品モニタリングの収集設定に検索語とサイト、または追加の検索結果 URL を登録し、取得結果を見る
 - 商品モニタリング設定の条件で、販売中の安い出品と日次の相場を見る
 - Backmarket の監視対象を登録する
 
-商品計測の画面は `/product-crawl-results`、商品モニタリングは `/product-monitoring`。有効な商品計測設定は 10 分ごと、相場集計は毎日 0 時、モニタリング評価は 10 分ごとに Sidekiq が動かす（`volumes/backend/config/schedule.yml`）。
+商品モニタリングの画面は `/product-monitoring`、Backmarket は `/backmarket`。収集はサイトごとに 10 分または 15 分ごと、日次相場は毎日 0 時、通知評価は毎分、Sidekiq が動かす（`volumes/backend/config/schedule.yml`）。
 
 ## 販売状態
 

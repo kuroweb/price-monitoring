@@ -8,17 +8,12 @@ BFF の JSON は `/api/v1`。開発時は Nginx の `location /api` が `backend
 
 成功時の作成・更新の多くは 200 と JSON 本体。削除は 200 と `{}`。取得ジョブの投入だけ 202。
 
-## 商品と従来クロール
+## Backmarket とログイン
 
 | メソッドとパス | 役割 |
 | --- | --- |
-| `GET/POST /api/v1/products`、`GET/PUT/DELETE /api/v1/products/:id` | 計測対象 |
-| `POST/DELETE /api/v1/products/:product_id/{yahoo_auction,mercari,iosys,janpara,pc_koubou,used_sofmap}_crawl_settings/...exclude_products` | 従来クロールの除外出品 |
-| `GET/POST /api/v1/categories`、`GET/PUT/DELETE /api/v1/categories/:id` | カテゴリ |
-| `GET /api/v1/categories/structured`、`GET /api/v1/categories/:id/structured_subtree` | 木 |
 | `GET/POST /api/v1/backmarket_watch_targets`、`PUT/DELETE /api/v1/backmarket_watch_targets/:id` | Backmarket 監視 |
 | `GET /api/v1/backmarket_recents` | 直近結果 |
-| `GET /api/v1/product_prices`、`GET /api/v1/product_prices/:id` | 価格 |
 | `GET /api/v1/current_user` | ログイン中の利用者 |
 
 ## 商品計測とモニタリング

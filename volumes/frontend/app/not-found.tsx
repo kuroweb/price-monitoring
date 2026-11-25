@@ -9,7 +9,7 @@ export default function NotFound() {
         <div className='card-body'>
           <h1 className='card-title'>ページが見つかりません</h1>
           <p>URLをご確認ください。</p>
-          <Link href='/products' className='btn'>最安値一覧へ戻る</Link>
+          <Link href='/product-monitoring/monitors' className='btn'>モニタリング設定へ戻る</Link>
         </div>
       </div>
     </Layout>

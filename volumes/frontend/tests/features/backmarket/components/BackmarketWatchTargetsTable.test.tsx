@@ -11,18 +11,6 @@ const { refresh, errorToast } = vi.hoisted(() => ({ refresh: vi.fn(), errorToast
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh }) }))
 vi.mock('react-toastify', () => ({ toast: { success: vi.fn(), error: errorToast } }))
 vi.mock('@/features/backmarket/api/actions', () => ({ getBackmarketRecents: vi.fn(), getBackmarketWatchTargets: vi.fn(), createBackmarketWatchTarget: vi.fn(), updateBackmarketWatchTarget: vi.fn(), destroyBackmarketWatchTarget: vi.fn() }))
-vi.mock('@/features/categories/api/actions', () => ({ getCategories: vi.fn(), getCategoriesStructured: vi.fn(), createCategory: vi.fn(), updateCategory: vi.fn(), destroyCategory: vi.fn() }))
-vi.mock('@/features/products/api/actions', () => ({
-  destroyProduct: vi.fn(),
-  destroyCategory: vi.fn(),
-  destroyBackmarketWatchTarget: vi.fn(),
-  createProduct: vi.fn(),
-  updateProduct: vi.fn(),
-  createCategory: vi.fn(),
-  updateCategory: vi.fn(),
-  createBackmarketWatchTarget: vi.fn(),
-  updateBackmarketWatchTarget: vi.fn(),
-}))
 const target = {
   id: 1,
   name: 'MacBook',

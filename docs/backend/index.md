@@ -55,9 +55,8 @@
 ### API/BFF
 
 - `Api::V1::*Controller` が frontend からの入口
-- 商品以外にも `categories` `product_prices` `backmarket_recents` `backmarket_watch_targets` など、リソース単位で controller を分ける
-- `ProductFinder` のような finder が一覧取得条件を組み立てる
-- `Api::*Serializer` が response shape を決め、`ProductPrice*Serializer` のような read 系では取得済みデータの束ね方も持つ
+- `product_monitoring` `backmarket_recents` `backmarket_watch_targets` `current_user` など、リソース単位で controller を分ける
+- `Api::*Serializer` が Backmarket の response shape を決める。商品モニタリングの response は controller が組み立てる
 
 ### 認証
 
@@ -68,17 +67,16 @@
 
 ### 業務処理
 
-- `Products::Creator` `Products::Updater` が商品と各種 crawl setting の更新をまとめる
-- `Products::Inspector` が crawl setting 更新後の検証を持つ
-- `RetrieveRelatedProducts` が相場表示用の取得処理を持つ
-- `Crawl::*::Syncer` や `Crawler` がプラットフォームごとの同期処理を持つ
-- `Products::CalculateDailyPurchaseSummary` が日次集計の計算を持つ
+- `ProductMonitoring::CrawlSetting` `ProductMonitoring::Monitor` が収集設定とモニタリング設定の更新をまとめる
+- `ProductMonitoring::Crawling` がサイトごとの取得と保存を持つ
+- `ProductMonitoring::Search` `ProductMonitoring::Notification` `ProductMonitoring::Aggregation` が収集結果の検索、通知、日次相場の集計を持つ
+- `Crawl::Backmarket` が Backmarket の取得と差分通知を持つ
 
 ### 非同期処理
 
-- `app/sidekiq/crawl/*` は enqueue と sync の job を置く
-- `app/sidekiq/products/*` は集計など商品横断の job を置く
-- job 自体は薄く保ち、実処理は `services/crawl/*` や `services/products/*` に委譲する
+- `app/sidekiq/product_monitoring/*` は収集、通知、日次相場の job を置く
+- `app/sidekiq/crawl/backmarket/*` は Backmarket の enqueue と sync の job を置く
+- job 自体は薄く保ち、実処理は `services/product_monitoring/*` や `services/crawl/backmarket/*` に委譲する
 
 ## 避けること
 
@@ -95,11 +93,11 @@
 
 ## 代表コード
 
-- [`volumes/backend/app/controllers/api/v1/products_controller.rb`](../../volumes/backend/app/controllers/api/v1/products_controller.rb)
+- [`volumes/backend/app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb`](../../volumes/backend/app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb)
 - [`volumes/backend/app/controllers/concerns/oidc_token_control.rb`](../../volumes/backend/app/controllers/concerns/oidc_token_control.rb)
-- [`volumes/backend/app/services/products/creator/create_product.rb`](../../volumes/backend/app/services/products/creator/create_product.rb)
+- [`volumes/backend/app/services/product_monitoring/crawling/client.rb`](../../volumes/backend/app/services/product_monitoring/crawling/client.rb)
 - [`volumes/backend/app/sidekiq/crawl/backmarket/sync_job.rb`](../../volumes/backend/app/sidekiq/crawl/backmarket/sync_job.rb)
-- [`volumes/backend/app/services/retrieve_related_products/retriever.rb`](../../volumes/backend/app/services/retrieve_related_products/retriever.rb)
+- [`volumes/backend/app/services/crawl/backmarket/syncer.rb`](../../volumes/backend/app/services/crawl/backmarket/syncer.rb)
 
 ## 更新時に確認する source of truth
 
@@ -108,4 +106,3 @@
 - `volumes/backend/app/services/`
 - `volumes/backend/app/sidekiq/`
 - `volumes/backend/app/serializers/`
-- `volumes/backend/app/finders/`

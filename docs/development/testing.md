@@ -53,9 +53,9 @@ just test-frontend-coverage
 対象ファイルやテスト名を絞る場合は引数を渡す。角括弧を含むパスは、シェルの展開を避けるため引用する。
 
 ```bash
-just test-frontend CategoryNavigation.test.tsx
-just test-frontend 'tests/features/products/lib/makePlatformMask.test.ts'
-just test-frontend -t '最初のページ'
+just test-frontend platform.test.ts
+just test-frontend 'tests/features/product-monitoring/platform.test.ts'
+just test-frontend -t '検索 URL とサイトを判定すること'
 ```
 
 テストの配置と対象範囲は [Frontend のテスト方針](../frontend/index.md#テスト方針) を参照する。PR では [Frontend CI](../cicd/index.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。
