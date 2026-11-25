@@ -103,11 +103,10 @@ Performance/ConstantRegexp:
     - 'app/services/crawl/mercari/sync_product/crawler.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
 
-# Offense count: 2
+# Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Performance/StringReplacement:
   Exclude:
-    - 'app/services/crawl/pc_koubou/crawler.rb'
     - 'app/services/crawl/used_sofmap/crawler.rb'
 
 # Offense count: 7
@@ -115,7 +114,6 @@ Performance/StringReplacement:
 Performance/ZipWithoutBlock:
   Exclude:
     - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/pc_koubou/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/used_sofmap/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
@@ -148,7 +146,6 @@ Rails/I18nLocaleTexts:
 Rails/RedundantActiveRecordAllMethod:
   Exclude:
     - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
-    - 'app/sidekiq/crawl/pc_koubou/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/used_sofmap/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
@@ -166,7 +163,6 @@ Rails/RootPathnameMethods:
 Rails/SkipsModelValidations:
   Exclude:
     - 'app/services/crawl/mercari/sync_products/syncer.rb'
-    - 'app/services/crawl/pc_koubou/syncer.rb'
     - 'app/services/crawl/used_sofmap/syncer.rb'
     - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_products/syncer.rb'
@@ -249,11 +245,10 @@ Style/RedundantLineContinuation:
   Exclude:
     - 'app/services/crawl/request_blocklist.rb'
 
-# Offense count: 2
+# Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Style/RedundantRegexpArgument:
   Exclude:
-    - 'app/services/crawl/pc_koubou/crawler.rb'
     - 'app/services/crawl/used_sofmap/crawler.rb'
 
 # Offense count: 2
@@ -287,7 +282,6 @@ Rails/StrongParametersExpect:
     - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
     - 'app/controllers/api/v1/products/mercari_crawl_settings/mercari_crawl_setting_exclude_products_controller.rb'
-    - 'app/controllers/api/v1/products/pc_koubou_crawl_settings/pc_koubou_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/used_sofmap_crawl_settings/used_sofmap_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products_controller.rb'

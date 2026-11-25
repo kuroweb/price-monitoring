@@ -1,6 +1,6 @@
 module Api
   module V1
-    class ProductsController < Api::ApplicationController # rubocop:disable Metrics/ClassLength
+    class ProductsController < Api::ApplicationController
       def index
         products = ProductFinder.new(params: find_product_params).execute
         render json: Api::ProductListSerializer.new(products).as_json, status: :ok
@@ -39,7 +39,7 @@ module Api
         params.permit(product_attributes + external_attributes)
       end
 
-      def upsert_product_params # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
+      def upsert_product_params # rubocop:disable Metrics/MethodLength
         params.permit(
           product_attributes + [
             yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes + [
@@ -52,12 +52,6 @@ module Api
               {
                 mercari_crawl_setting_exclude_keywords: mercari_crawl_setting_exclude_keyword_attributes,
                 mercari_crawl_setting_required_keywords: mercari_crawl_setting_required_keyword_attributes
-              }
-            ],
-            pc_koubou_crawl_setting: pc_koubou_crawl_setting_attributes + [
-              {
-                pc_koubou_crawl_setting_exclude_keywords: pc_koubou_crawl_setting_exclude_keyword_attributes,
-                pc_koubou_crawl_setting_required_keywords: pc_koubou_crawl_setting_required_keyword_attributes
               }
             ],
             used_sofmap_crawl_setting: used_sofmap_crawl_setting_attributes + [
@@ -95,18 +89,6 @@ module Api
       end
 
       def mercari_crawl_setting_required_keyword_attributes
-        %i[keyword]
-      end
-
-      def pc_koubou_crawl_setting_attributes
-        %i[keyword min_price max_price enabled]
-      end
-
-      def pc_koubou_crawl_setting_exclude_keyword_attributes
-        %i[keyword]
-      end
-
-      def pc_koubou_crawl_setting_required_keyword_attributes
         %i[keyword]
       end
 

@@ -6,7 +6,6 @@ describe('makePlatformMask', () => {
   it.each([
     ['yahoo_auction', 'published', 'yahoo_auction.buyable'],
     ['mercari', 'unpublished', 'mercari.unpublished'],
-    ['pc_koubou', 'published', 'pc_koubou.all'],
     ['yahoo_fleamarket', 'published', 'yahoo_fleamarket.published'],
     [
       'all',
@@ -23,7 +22,7 @@ describe('makePlatformMask', () => {
     ['mercari', 'unknown'],
   ])('%s / %s では公開中の全プラットフォームを検索すること', (platform, status) => {
     expect(makePlatformMask(platform, status)).toBe(
-      'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published,pc_koubou.all',
+      'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published',
     )
   })
 })

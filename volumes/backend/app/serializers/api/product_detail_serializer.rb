@@ -17,13 +17,6 @@ module Api
               mercari_crawl_setting_exclude_products
             ]
           },
-          pc_koubou_crawl_setting: {
-            include: %i[
-              pc_koubou_crawl_setting_exclude_keywords
-              pc_koubou_crawl_setting_required_keywords
-              pc_koubou_crawl_setting_exclude_products
-            ]
-          },
           used_sofmap_crawl_setting: {
             include: %i[
               used_sofmap_crawl_setting_exclude_keywords

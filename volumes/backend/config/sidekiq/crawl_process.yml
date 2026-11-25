@@ -11,8 +11,6 @@ production:
   - ['crawl_mercari_sync_products_sync_job', 1]
   - ['crawl_backmarket_enqueue_sync_job', 1]
   - ['crawl_backmarket_sync_job', 1]
-  - ['crawl_pc_koubou_enqueue_sync_job', 1]
-  - ['crawl_pc_koubou_sync_job', 1]
   - ['crawl_used_sofmap_enqueue_sync_job', 1]
   - ['crawl_used_sofmap_sync_job', 1]
   - ['product_monitoring_enqueue_sync_job', 1]

@@ -7,7 +7,6 @@ import type { UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 const keywordFields = [
   'yahooAuctionCrawlSetting.keyword',
   'mercariCrawlSetting.keyword',
-  'pcKoubouCrawlSetting.keyword',
   'usedSofmapCrawlSetting.keyword',
 ] as const
 
@@ -25,7 +24,6 @@ export const copyKeyword = (
 const requiredKeywordFields = [
   'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
   'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
-  'pcKoubouCrawlSetting.pcKoubouCrawlSettingRequiredKeywords',
   'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
 ] as const
 
@@ -45,7 +43,6 @@ export const copyRequiredKeyword = (
 const excludeKeywordFields = [
   'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
   'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
-  'pcKoubouCrawlSetting.pcKoubouCrawlSettingExcludeKeywords',
   'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
 ] as const
 
@@ -65,7 +62,6 @@ export const copyExcludeKeyword = (
 const minPriceFields = [
   'yahooAuctionCrawlSetting.minPrice',
   'mercariCrawlSetting.minPrice',
-  'pcKoubouCrawlSetting.minPrice',
   'usedSofmapCrawlSetting.minPrice',
 ] as const
 
@@ -83,7 +79,6 @@ export const copyMinPrice = (
 const maxPriceFields = [
   'yahooAuctionCrawlSetting.maxPrice',
   'mercariCrawlSetting.maxPrice',
-  'pcKoubouCrawlSetting.maxPrice',
   'usedSofmapCrawlSetting.maxPrice',
 ] as const
 

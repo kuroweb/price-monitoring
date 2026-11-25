@@ -115,40 +115,6 @@ erDiagram
   products ||--o{ mercari_products : ""
 ```
 
-### パソコン工房
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  pc_koubou_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-  }
-  pc_koubou_crawl_setting_required_keywords {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-  }
-  pc_koubou_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-  }
-  pc_koubou_crawl_setting_exclude_products {
-    bigint id PK
-    bigint pc_koubou_crawl_setting_id FK
-  }
-  pc_koubou_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ pc_koubou_crawl_settings : ""
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_required_keywords : ""
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_keywords : ""
-  pc_koubou_crawl_settings ||--o{ pc_koubou_crawl_setting_exclude_products : ""
-  products ||--o{ pc_koubou_products : ""
-```
-
 ### リコレ
 
 ```mermaid

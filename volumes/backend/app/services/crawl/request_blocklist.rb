@@ -63,28 +63,6 @@ module Crawl
       dsb.yahoo.co.jp
     ].freeze
 
-    PC_KOUBOU_BLOCKED_LIST = %w[
-      www.pc-koubou.jp/pwa.js
-      www.pc-koubou.jp/user_data/root_alias/basestyle/js/cssrelpreload.js
-      www.pc-koubou.jp/user_data/packages/default/_asset/js/setting.js
-      www.pc-koubou.jp/user_data/packages/default/design/common/js/common_minify.js
-      www.pc-koubou.jp/user_data/packages/responsive/_asset/js/search_refine.js
-      www.pc-koubou.jp/user_data/packages/default/design/common/js/secom.js
-      www.pc-koubou.jp/user_data/packages/responsive/_asset/js/chatbot.js
-      www.pc-koubou.jp/user_data/root_alias/search/faq/js/faq.js
-      www.pc-koubou.jp/user_data/floating.php
-      www.pc-koubou.jp/api/getDate.php
-      pc-koubou.my.salesforce.com
-      pckoubou-f-s.snva.jp
-      service.force.com
-      cd.ladsp.com
-      platform.twitter.com
-      px.ladsp.com
-      um.ladsp.com
-      bvr.ast.snva.jp/beaver.js
-      rtg-endpoint.global.ssl.fastly.net/page-event/script.js
-    ].freeze
-
     USED_SOFMAP_BLOCKED_LIST = %w[
       used.sofmap.com/r/js/swiper.min.js
       used.sofmap.com/r/js/dist/babel-polyfill.js
@@ -108,7 +86,6 @@ module Crawl
         || blocked_url?(MERCARI_BLOCKED_LIST, url) \
         || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
         || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url) \
-        || blocked_url?(PC_KOUBOU_BLOCKED_LIST, url) \
         || blocked_url?(USED_SOFMAP_BLOCKED_LIST, url)
     end
 

@@ -3,7 +3,6 @@
 import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
 import * as MercariApi from './mercariCrawlSettings'
-import * as PcKoubouApi from './pcKoubouCrawlSettings'
 import * as PricesApi from './productPrices'
 import * as ProductsApi from './products'
 import * as UsedSofmapApi from './usedSofmapCrawlSettings'
@@ -56,17 +55,6 @@ export async function createMercariCrawlSettingExcludeProduct(
   data: Types.CreateMercariCrawlSettingExcludeProductData,
 ) {
   const result = await MercariApi.createMercariCrawlSettingExcludeProduct(productId, data)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
-}
-
-export async function createPcKoubouCrawlSettingExcludeProduct(
-  productId: number,
-  data: Types.CreatePcKoubouCrawlSettingExcludeProductData,
-) {
-  const result = await PcKoubouApi.createPcKoubouCrawlSettingExcludeProduct(productId, data)
   revalidateAdminPaths()
   revalidateProductsPaths()
 

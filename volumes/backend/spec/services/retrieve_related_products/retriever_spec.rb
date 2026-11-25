@@ -204,39 +204,6 @@ RSpec.describe RetrieveRelatedProducts::Retriever, type: :service do
         end
       end
 
-      context "pc_koubouを指定した場合" do
-        let!(:pc_koubou_product_a) { create(:pc_koubou_product, product:, name: "PcKoubouProduct A") }
-        let!(:pc_koubou_product_b) { create(:pc_koubou_product, product:, name: "PcKoubouProduct B") }
-
-        context "pc_koubou.allの場合" do
-          let!(:platform_mask) { "pc_koubou.all" }
-          let!(:expected_products) { [pc_koubou_product_a, pc_koubou_product_b] }
-
-          it "すべてのPcKoubouProductの値を返却すること" do
-            service = described_class.new(
-              params: {
-                product_id: product.id,
-                platform_mask:,
-                page: 1,
-                per: 10,
-                sort: "created_at",
-                order: "asc"
-              }
-            )
-            actual_array = service.call.products
-            expected_array = expected_products.map do |product|
-              product.attributes
-                     .slice(*RelatedProduct.attribute_names)
-                     .merge("platform" => "pc_koubou")
-            end
-
-            expected_array.each_with_index do |expected, index|
-              expect(actual_array[index]).to have_attributes(expected)
-            end
-          end
-        end
-      end
-
       context "used_sofmapを指定した場合" do
         let!(:used_sofmap_product_a) { create(:used_sofmap_product, product:, name: "UsedSofmapProduct A") }
         let!(:used_sofmap_product_b) { create(:used_sofmap_product, product:, name: "UsedSofmapProduct B") }
