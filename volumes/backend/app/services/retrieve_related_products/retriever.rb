@@ -9,9 +9,6 @@ module RetrieveRelatedProducts
         yahoo_fleamarket.all
         yahoo_fleamarket.published
         yahoo_fleamarket.unpublished
-        mercari.all
-        mercari.published
-        mercari.unpublished
       ].freeze
 
       SORT = %w[price bought_date created_at updated_at].freeze

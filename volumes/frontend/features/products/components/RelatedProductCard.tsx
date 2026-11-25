@@ -4,10 +4,7 @@ import NextImage from 'next/image'
 import { useRouter } from 'next/navigation'
 import { toast } from 'react-toastify'
 
-import {
-  createMercariCrawlSettingExcludeProduct,
-  createYahooAuctionCrawlSettingExcludeProduct,
-} from '@/features/products/api/actions'
+import { createYahooAuctionCrawlSettingExcludeProduct } from '@/features/products/api/actions'
 import type { RelatedProduct } from '@/features/products/api/types'
 
 import { useStatusState } from '../hooks/useStatusState'
@@ -17,19 +14,16 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
   const [status, _] = useStatusState()
 
   const serviceDomainMap: { [key: string]: string } = {
-    mercari: 'jp.mercari.com/item/',
     yahoo_auction: 'page.auctions.yahoo.co.jp/jp/auction/',
     yahoo_fleamarket: 'paypayfleamarket.yahoo.co.jp/item/',
   }
 
   const serviceNameMap: { [key: string]: string } = {
-    mercari: 'メルカリ',
     yahoo_auction: 'ヤフオク',
     yahoo_fleamarket: 'ペイペイ',
   }
 
   const serviceColorMap: { [key: string]: string } = {
-    mercari: 'bg-red-500',
     yahoo_auction: 'bg-yellow-600',
     yahoo_fleamarket: 'bg-green-600',
   }
@@ -52,7 +46,6 @@ const RelatedProductCard = ({ relatedProduct }: { relatedProduct: RelatedProduct
     } = {
       yahoo_auction: createYahooAuctionCrawlSettingExcludeProduct,
       yahoo_fleamarket: createYahooAuctionCrawlSettingExcludeProduct,
-      mercari: createMercariCrawlSettingExcludeProduct,
     }
 
     const action = platformActions[platform]

@@ -38,7 +38,7 @@ const products = [
     category: categories[0],
     yahooAuctionCrawlSetting: { enabled: false },
   },
-  { id: 3, name: 'iPhone', category: categories[1], mercariCrawlSetting: { enabled: true } },
+  { id: 3, name: 'iPhone', category: categories[1], yahooAuctionCrawlSetting: { enabled: true } },
 ] as unknown as ProductList['products']
 const renderProducts = () =>
   render(

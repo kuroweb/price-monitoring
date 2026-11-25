@@ -2,7 +2,6 @@
 
 import { revalidateAdminPaths, revalidateProductsPaths } from '@/lib/revalidate-paths'
 
-import * as MercariApi from './mercariCrawlSettings'
 import * as PricesApi from './productPrices'
 import * as ProductsApi from './products'
 import * as YahooAuctionApi from './yahooAuctionCrawlSettings'
@@ -47,17 +46,6 @@ export async function getProductPrices(params: Types.GetProductPricesParams) {
 
 export async function getProductPrice(productId: number, params: Types.GetProductPriceParams) {
   return await PricesApi.getProductPrice(productId, params)
-}
-
-export async function createMercariCrawlSettingExcludeProduct(
-  productId: number,
-  data: Types.CreateMercariCrawlSettingExcludeProductData,
-) {
-  const result = await MercariApi.createMercariCrawlSettingExcludeProduct(productId, data)
-  revalidateAdminPaths()
-  revalidateProductsPaths()
-
-  return result
 }
 
 export async function createYahooAuctionCrawlSettingExcludeProduct(

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef } from 'react'
 
 import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
@@ -14,7 +14,6 @@ import {
 } from '@/components/ui/ScrollableModalBox'
 import { createProduct } from '@/features/products/api/actions'
 import type { CreateProductData, ProductList } from '@/features/products/api/types'
-import MercariForm from '@/features/products/components/MercariForm'
 import YahooAuctionForm from '@/features/products/components/YahooAuctionForm'
 import type { Category } from '@/lib/category'
 
@@ -32,10 +31,6 @@ const CreateProductModal = ({
   const router = useRouter()
   const submittingRef = useRef(false)
 
-  type SectionTypes =
-    'ヤフオク' | 'メルカリ'
-
-  const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useCreateProductModalState()
 
   const defaultValues = {
@@ -51,17 +46,6 @@ const CreateProductModal = ({
         product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingExcludeKeywords ?? [],
       yahooAuctionCrawlSettingRequiredKeywords:
         product?.yahooAuctionCrawlSetting?.yahooAuctionCrawlSettingRequiredKeywords ?? [],
-    },
-    mercariCrawlSetting: {
-      keyword: product?.mercariCrawlSetting?.keyword ?? '',
-      categoryId: product?.mercariCrawlSetting?.categoryId ?? null,
-      minPrice: product?.mercariCrawlSetting?.minPrice ?? 0,
-      maxPrice: product?.mercariCrawlSetting?.maxPrice ?? 0,
-      enabled: product?.mercariCrawlSetting?.enabled ?? true,
-      mercariCrawlSettingExcludeKeywords:
-        product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords ?? [],
-      mercariCrawlSettingRequiredKeywords:
-        product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords ?? [],
     },
   }
 
@@ -130,39 +114,14 @@ const CreateProductModal = ({
                 </select>
               </fieldset>
               <div className='divider py-6'>計測条件</div>
-              <div className='join flex w-full flex-wrap'>
-                <input
-                  className='btn join-item btn-md w-1/2'
-                  type='radio'
-                  name='options'
-                  aria-label='ヤフオク'
-                  checked={tab === 'ヤフオク'}
-                  onChange={() => setTab('ヤフオク')}
-                />
-                <input
-                  className='btn join-item btn-md w-1/2'
-                  type='radio'
-                  name='options'
-                  aria-label='メルカリ'
-                  checked={tab === 'メルカリ'}
-                  onChange={() => setTab('メルカリ')}
-                />
-              </div>
               <div>
-                {(tab === null || tab === 'ヤフオク') && (
-                  <div className='py-4'>
-                    <YahooAuctionForm
-                      register={register}
-                      getValues={getValues}
-                      setValue={setValue}
-                    />
-                  </div>
-                )}
-                {tab === 'メルカリ' && (
-                  <div className='py-4'>
-                    <MercariForm register={register} getValues={getValues} setValue={setValue} />
-                  </div>
-                )}
+                <div className='py-4'>
+                  <YahooAuctionForm
+                    register={register}
+                    getValues={getValues}
+                    setValue={setValue}
+                  />
+                </div>
               </div>
             </ScrollableModalBody>
             <ScrollableModalFooter>

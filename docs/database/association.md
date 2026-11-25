@@ -81,40 +81,6 @@ erDiagram
   products ||--o{ yahoo_fleamarket_products : ""
 ```
 
-### メルカリ
-
-```mermaid
-erDiagram
-  products {
-    bigint id PK
-  }
-  mercari_crawl_settings {
-    bigint id PK
-    bigint product_id FK
-  }
-  mercari_crawl_setting_required_keywords {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-  }
-  mercari_crawl_setting_exclude_keywords {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-  }
-  mercari_crawl_setting_exclude_products {
-    bigint id PK
-    bigint mercari_crawl_setting_id FK
-  }
-  mercari_products {
-    bigint id PK
-    bigint product_id FK
-  }
-  products ||--o{ mercari_crawl_settings : ""
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_required_keywords : ""
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_keywords : ""
-  mercari_crawl_settings ||--o{ mercari_crawl_setting_exclude_products : ""
-  products ||--o{ mercari_products : ""
-```
-
 ## 日次相場の集計
 
 ```mermaid
@@ -130,13 +96,8 @@ erDiagram
     bigint id PK
     bigint product_id FK
   }
-  mercari_daily_purchase_summaries {
-    bigint id PK
-    bigint product_id FK
-  }
   products ||--o{ yahoo_auction_daily_purchase_summaries : ""
   products ||--o{ yahoo_fleamarket_daily_purchase_summaries : ""
-  products ||--o{ mercari_daily_purchase_summaries : ""
 ```
 
 ## Backmarket監視

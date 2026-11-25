@@ -2,14 +2,6 @@
 
 import type { CreateProductData } from '@/features/products/api/types'
 
-import {
-  copyExcludeKeyword,
-  copyKeyword,
-  copyMaxPrice,
-  copyMinPrice,
-  copyRequiredKeyword,
-} from '../lib/copyFields'
-
 import type { UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
 const YahooAuctionForm = ({
@@ -55,15 +47,6 @@ const YahooAuctionForm = ({
         <legend className='fieldset-legend'>検索キーワード</legend>
         <input {...register('yahooAuctionCrawlSetting.keyword')} className='input w-full' />
       </fieldset>
-      <div className='flex flex-row justify-end'>
-        <button
-          className='btn btn-link btn-xs'
-          type='button'
-          onClick={() => copyKeyword(getValues, setValue, 'yahooAuctionCrawlSetting.keyword')}
-        >
-          他の検索サイトにコピー
-        </button>
-      </div>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>必須キーワード</legend>
         <textarea
@@ -72,21 +55,6 @@ const YahooAuctionForm = ({
           className='textarea w-full h-32 text-base'
         />
       </fieldset>
-      <div className='flex flex-row justify-end'>
-        <button
-          className='btn btn-link btn-xs'
-          type='button'
-          onClick={() =>
-            copyRequiredKeyword(
-              getValues,
-              setValue,
-              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
-            )
-          }
-        >
-          他の検索サイトにコピー
-        </button>
-      </div>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>除外キーワード</legend>
         <textarea
@@ -95,21 +63,6 @@ const YahooAuctionForm = ({
           className='textarea w-full h-32 text-base'
         />
       </fieldset>
-      <div className='flex flex-row justify-end'>
-        <button
-          className='btn btn-link btn-xs'
-          type='button'
-          onClick={() =>
-            copyExcludeKeyword(
-              getValues,
-              setValue,
-              'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
-            )
-          }
-        >
-          他の検索サイトにコピー
-        </button>
-      </div>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>検索カテゴリ</legend>
         <input
@@ -126,15 +79,6 @@ const YahooAuctionForm = ({
           className='input w-full'
         />
       </fieldset>
-      <div className='flex flex-row justify-end'>
-        <button
-          className='btn btn-link btn-xs'
-          type='button'
-          onClick={() => copyMinPrice(getValues, setValue, 'yahooAuctionCrawlSetting.minPrice')}
-        >
-          他の検索サイトにコピー
-        </button>
-      </div>
       <fieldset className='fieldset w-full'>
         <legend className='fieldset-legend'>最高価格</legend>
         <input
@@ -142,15 +86,6 @@ const YahooAuctionForm = ({
           className='input w-full'
         />
       </fieldset>
-      <div className='flex flex-row justify-end'>
-        <button
-          className='btn btn-link btn-xs'
-          type='button'
-          onClick={() => copyMaxPrice(getValues, setValue, 'yahooAuctionCrawlSetting.maxPrice')}
-        >
-          他の検索サイトにコピー
-        </button>
-      </div>
       <label className='label cursor-pointer'>
         <span>自動計測</span>
         <input

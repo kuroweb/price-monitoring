@@ -80,7 +80,6 @@ const Page = async ({
             <AnalysisChart
               yahooAuctionData={productPriceDetail?.yahooAuctionDailyPurchaseSummaries || []}
               yahooFleamarketData={productPriceDetail?.yahooFleamarketDailyPurchaseSummaries || []}
-              mercariData={productPriceDetail?.mercariDailyPurchaseSummaries || []}
             />
           </div>
         </div>

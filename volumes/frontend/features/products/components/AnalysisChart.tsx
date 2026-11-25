@@ -11,16 +11,14 @@ import {
   ComposedChart,
 } from 'recharts'
 
-import type { MercariDailyPurchaseSummary, YahooAuctionDailyPurchaseSummary, YahooFleamarketDailyPurchaseSummary } from '@/features/products/api/types'
+import type { YahooAuctionDailyPurchaseSummary, YahooFleamarketDailyPurchaseSummary } from '@/features/products/api/types'
 
 const AnalysisChart = ({
   yahooAuctionData,
   yahooFleamarketData,
-  mercariData,
 }: {
   yahooAuctionData: YahooAuctionDailyPurchaseSummary[]
   yahooFleamarketData: YahooFleamarketDailyPurchaseSummary[]
-  mercariData: MercariDailyPurchaseSummary[]
 }) => {
   const yahooAuctionDataMap = yahooAuctionData.reduce<{
     [date: string]: { yahooAuctionAveragePurchasePrice: number }
@@ -36,18 +34,10 @@ const AnalysisChart = ({
     return acc
   }, {})
 
-  const mercariDataMap = mercariData.reduce<{
-    [date: string]: { mercariAveragePurchasePrice: number }
-  }>((acc, data) => {
-    acc[data.date] = { mercariAveragePurchasePrice: data.averagePurchasePrice! }
-    return acc
-  }, {})
-
-  const mergedData = Object.keys({ ...yahooAuctionDataMap, ...mercariDataMap }).map((date) => ({
+  const mergedData = Object.keys({ ...yahooAuctionDataMap, ...yahooFleamarketDataMap }).map((date) => ({
     date,
     ...yahooAuctionDataMap[date],
     ...yahooFleamarketDataMap[date],
-    ...mercariDataMap[date],
   }))
 
   return (
@@ -84,16 +74,6 @@ const AnalysisChart = ({
             name='ペイペイ'
             stroke='yellowgreen'
             fill='yellowgreen'
-            activeDot={{ r: 8 }}
-            animationDuration={100}
-          />
-          <Line
-            yAxisId={1}
-            type='monotone'
-            dataKey='mercariAveragePurchasePrice'
-            name='メルカリ'
-            stroke='red'
-            fill='red'
             activeDot={{ r: 8 }}
             animationDuration={100}
           />

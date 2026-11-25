@@ -39,19 +39,13 @@ module Api
         params.permit(product_attributes + external_attributes)
       end
 
-      def upsert_product_params # rubocop:disable Metrics/MethodLength
+      def upsert_product_params
         params.permit(
           product_attributes + [
             yahoo_auction_crawl_setting: yahoo_auction_crawl_setting_attributes + [
               {
                 yahoo_auction_crawl_setting_exclude_keywords: yahoo_auction_crawl_setting_exclude_keyword_attributes,
                 yahoo_auction_crawl_setting_required_keywords: yahoo_auction_crawl_setting_required_keyword_attributes
-              }
-            ],
-            mercari_crawl_setting: mercari_crawl_setting_attributes + [
-              {
-                mercari_crawl_setting_exclude_keywords: mercari_crawl_setting_exclude_keyword_attributes,
-                mercari_crawl_setting_required_keywords: mercari_crawl_setting_required_keyword_attributes
               }
             ]
           ] + [:category_id]
@@ -71,18 +65,6 @@ module Api
       end
 
       def yahoo_auction_crawl_setting_required_keyword_attributes
-        %i[keyword]
-      end
-
-      def mercari_crawl_setting_attributes
-        %i[keyword category_id min_price max_price enabled]
-      end
-
-      def mercari_crawl_setting_exclude_keyword_attributes
-        %i[keyword]
-      end
-
-      def mercari_crawl_setting_required_keyword_attributes
         %i[keyword]
       end
 

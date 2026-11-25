@@ -9,13 +9,6 @@ module Api
               yahoo_auction_crawl_setting_required_keywords
               yahoo_auction_crawl_setting_exclude_products
             ]
-          },
-          mercari_crawl_setting: {
-            include: %i[
-              mercari_crawl_setting_exclude_keywords
-              mercari_crawl_setting_required_keywords
-              mercari_crawl_setting_exclude_products
-            ]
           }
         },
         :category

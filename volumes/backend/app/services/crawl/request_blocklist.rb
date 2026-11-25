@@ -8,43 +8,6 @@ module Crawl
       doubleclick.net
     ].freeze
 
-    MERCARI_BLOCKED_LIST = %w[
-      api.mercari.jp/client_events
-      api.mercari.jp/services/master/v1/shippingMethods
-      api.mercari.jp/services/notification/v1/get_unread_count
-      api.mercari.jp/experiments/get_running_experiments_by_name
-      api.mercari.jp/services/master/v1/itemColors
-      api.mercari.jp/services/master/v1/itemSizes
-      api.mercari.jp/services/master/v1/itemConditions
-      api.mercari.jp/services/master/v1/shippingPayers
-      api.mercari.jp/services/master/v1/reactions
-      api.mercari.jp/master/v2/datasets/item_brands_for_content_page
-      api.mercari.jp/master/v2/datasets/item_brands
-      api.mercari.jp/services/item_watch/v1/ValidateText
-      api.mercari.jp/v2/tag:suggest
-      api.mercari.jp/services/seolp/v2/seoPages:search
-      common.json
-      mypage.json
-      seo.json
-      search.json
-      validation.json
-      sell.json
-      brand.json
-      user.json
-      www.google.com
-      googletagmanager.com
-      securepubads.g.doubleclick.net
-      sentry.io
-      forter.com
-      analytics.tiktok.com
-      criteo.com
-      criteo.net
-      bat.bing.com
-      eagle-insight.com
-      jp.mercari.com/gtm/
-      d1qmrxg9gbf226.cloudfront.net
-    ].freeze
-
     YAHOO_AUCTION_BLOCKED_LIST = %w[
       yads.c.yimg.jp
       yads.yjtag.yahoo.co.jp
@@ -70,7 +33,6 @@ module Crawl
 
     def blocked_request?(url)
       blocked_url?(COMMON_BLOCKED_LIST, url) \
-        || blocked_url?(MERCARI_BLOCKED_LIST, url) \
         || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
         || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url)
     end

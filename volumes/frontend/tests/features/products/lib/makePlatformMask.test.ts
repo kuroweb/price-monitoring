@@ -5,13 +5,9 @@ import { makePlatformMask } from '@/features/products/lib/makePlatformMask'
 describe('makePlatformMask', () => {
   it.each([
     ['yahoo_auction', 'published', 'yahoo_auction.buyable'],
-    ['mercari', 'unpublished', 'mercari.unpublished'],
+    ['yahoo_fleamarket', 'unpublished', 'yahoo_fleamarket.unpublished'],
     ['yahoo_fleamarket', 'published', 'yahoo_fleamarket.published'],
-    [
-      'all',
-      'unpublished',
-      'yahoo_auction.unpublished,yahoo_fleamarket.unpublished,mercari.unpublished',
-    ],
+    ['all', 'unpublished', 'yahoo_auction.unpublished,yahoo_fleamarket.unpublished'],
   ])('%s / %s に対応する検索条件を返すこと', (platform, status, expected) => {
     expect(makePlatformMask(platform, status)).toBe(expected)
   })
@@ -19,10 +15,10 @@ describe('makePlatformMask', () => {
   it.each([
     ['all', 'published'],
     ['unknown', 'published'],
-    ['mercari', 'unknown'],
+    ['yahoo_auction', 'unknown'],
   ])('%s / %s では公開中の全プラットフォームを検索すること', (platform, status) => {
     expect(makePlatformMask(platform, status)).toBe(
-      'yahoo_auction.buyable,yahoo_fleamarket.published,mercari.published',
+      'yahoo_auction.buyable,yahoo_fleamarket.published',
     )
   })
 })
