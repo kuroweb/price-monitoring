@@ -95,12 +95,7 @@ module RetrieveRelatedProducts
           ["NULL AS buyout_price", "NULL AS end_date"]
         end
 
-      columns <<
-        if shop_platform?(platform)
-          ["TRUE AS published", "NULL AS bought_date"]
-        else
-          %w[published bought_date]
-        end
+      columns << %w[published bought_date]
 
       columns.flatten
     end
@@ -114,10 +109,6 @@ module RetrieveRelatedProducts
         "(end_date <= ?) OR (buyout_price IS NOT NULL AND buyout_price <= ?)",
         Time.current.since(1.day), product.yahoo_auction_crawl_setting.max_price
       )
-    end
-
-    def shop_platform?(platform)
-      %w[used_sofmap].include?(platform)
     end
 
     def product

@@ -14,7 +14,6 @@ module Products
         InspectYahooAuctionProducts.call(product:)
         InspectYahooFleamarketProducts.call(product:)
         InspectMercariProducts.call(product:)
-        InspectUsedSofmapProducts.call(product:)
       end
 
       private

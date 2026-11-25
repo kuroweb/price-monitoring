@@ -12,7 +12,6 @@ export const platformNames: Record<string, string> = {
   yahoo_fleamarket: 'ヤフーフリマ',
   janpara: 'じゃんぱら',
   iosys: 'イオシス',
-  used_sofmap: 'リコレ',
   treasure_factory: 'トレファク',
 }
 
@@ -26,6 +25,5 @@ export const platformColors: Record<string, string> = {
   yahoo_fleamarket: 'bg-green-600',
   janpara: 'bg-blue-500',
   iosys: 'bg-blue-600',
-  used_sofmap: 'bg-green-500',
   treasure_factory: 'bg-orange-500',
 }

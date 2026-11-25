@@ -12,7 +12,6 @@ module RetrieveRelatedProducts
         mercari.all
         mercari.published
         mercari.unpublished
-        used_sofmap.all
       ].freeze
 
       SORT = %w[price bought_date created_at updated_at].freeze

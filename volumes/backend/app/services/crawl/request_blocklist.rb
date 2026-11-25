@@ -63,19 +63,6 @@ module Crawl
       dsb.yahoo.co.jp
     ].freeze
 
-    USED_SOFMAP_BLOCKED_LIST = %w[
-      used.sofmap.com/r/js/swiper.min.js
-      used.sofmap.com/r/js/dist/babel-polyfill.js
-      used.sofmap.com/r/js/common.js
-      used.sofmap.com/r/js/header_switcher.js
-      used.sofmap.com/r/js/dist/mnd.min.js
-      used.sofmap.com/r/js/dist/anchor_link.js
-      used.sofmap.com/r/js/suggest.js
-      used.sofmap.com/apis/sale-info-multi.aspx
-      www.promisejs.org
-      cdnjs.cloudflare.com
-    ].freeze
-
     USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                  "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
 
@@ -85,8 +72,7 @@ module Crawl
       blocked_url?(COMMON_BLOCKED_LIST, url) \
         || blocked_url?(MERCARI_BLOCKED_LIST, url) \
         || blocked_url?(YAHOO_AUCTION_BLOCKED_LIST, url) \
-        || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url) \
-        || blocked_url?(USED_SOFMAP_BLOCKED_LIST, url)
+        || blocked_url?(PAYPAY_FLEAMARKET_BLOCKED_LIST, url)
     end
 
     def blocked_url?(blocked_list, url)

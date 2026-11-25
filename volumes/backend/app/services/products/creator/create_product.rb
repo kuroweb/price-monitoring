@@ -16,7 +16,6 @@ module Products
           product = create_product
           create_yahoo_auction_crawl_settings(product)
           create_mercari_crawl_settings(product)
-          create_used_sofmap_crawl_settings(product)
           create_category_association(product)
 
           product
@@ -38,10 +37,6 @@ module Products
 
       def create_mercari_crawl_settings(product)
         CreateMercariCrawlSettings.call(product:, params:)
-      end
-
-      def create_used_sofmap_crawl_settings(product)
-        CreateUsedSofmapCrawlSettings.call(product:, params:)
       end
 
       def create_category_association(product)

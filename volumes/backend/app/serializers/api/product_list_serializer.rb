@@ -14,12 +14,6 @@ module Api
             mercari_crawl_setting_required_keywords
           ]
         },
-        used_sofmap_crawl_setting: {
-          include: %i[
-            used_sofmap_crawl_setting_exclude_keywords
-            used_sofmap_crawl_setting_required_keywords
-          ]
-        },
         category: {}
       ]
     }.freeze
@@ -32,10 +26,6 @@ module Api
       mercari_crawl_setting: %i[
         mercari_crawl_setting_exclude_keywords
         mercari_crawl_setting_required_keywords
-      ],
-      used_sofmap_crawl_setting: %i[
-        used_sofmap_crawl_setting_exclude_keywords
-        used_sofmap_crawl_setting_required_keywords
       ],
       category: []
     }.freeze

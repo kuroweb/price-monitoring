@@ -7,7 +7,6 @@ import type { UseFormGetValues, UseFormSetValue } from 'react-hook-form'
 const keywordFields = [
   'yahooAuctionCrawlSetting.keyword',
   'mercariCrawlSetting.keyword',
-  'usedSofmapCrawlSetting.keyword',
 ] as const
 
 export const copyKeyword = (
@@ -24,7 +23,6 @@ export const copyKeyword = (
 const requiredKeywordFields = [
   'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingRequiredKeywords',
   'mercariCrawlSetting.mercariCrawlSettingRequiredKeywords',
-  'usedSofmapCrawlSetting.usedSofmapCrawlSettingRequiredKeywords',
 ] as const
 
 export const copyRequiredKeyword = (
@@ -43,7 +41,6 @@ export const copyRequiredKeyword = (
 const excludeKeywordFields = [
   'yahooAuctionCrawlSetting.yahooAuctionCrawlSettingExcludeKeywords',
   'mercariCrawlSetting.mercariCrawlSettingExcludeKeywords',
-  'usedSofmapCrawlSetting.usedSofmapCrawlSettingExcludeKeywords',
 ] as const
 
 export const copyExcludeKeyword = (
@@ -62,7 +59,6 @@ export const copyExcludeKeyword = (
 const minPriceFields = [
   'yahooAuctionCrawlSetting.minPrice',
   'mercariCrawlSetting.minPrice',
-  'usedSofmapCrawlSetting.minPrice',
 ] as const
 
 export const copyMinPrice = (
@@ -79,7 +75,6 @@ export const copyMinPrice = (
 const maxPriceFields = [
   'yahooAuctionCrawlSetting.maxPrice',
   'mercariCrawlSetting.maxPrice',
-  'usedSofmapCrawlSetting.maxPrice',
 ] as const
 
 export const copyMaxPrice = (
