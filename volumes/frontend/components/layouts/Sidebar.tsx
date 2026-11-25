@@ -18,25 +18,6 @@ type MenuItem = {
 
 const iconClassName = 'size-6 shrink-0 text-gray-500'
 
-const trendIcon = (
-  <svg className={iconClassName} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>
-    <defs>
-      <mask id='ipSTrend0'>
-        <g fill='none' strokeLinejoin='round' strokeWidth='4'>
-          <path
-            fill='#fff'
-            stroke='#fff'
-            d='M39 6H9a3 3 0 0 0-3 3v30a3 3 0 0 0 3 3h30a3 3 0 0 0 3-3V9a3 3 0 0 0-3-3Z'
-          />
-          <path stroke='#000' strokeLinecap='round' d='m13.44 29.835l5.657-5.657l4.388 4.377L34 18' />
-          <path stroke='#000' strokeLinecap='round' d='M26 18h8v8' />
-        </g>
-      </mask>
-    </defs>
-    <path fill='currentColor' d='M0 0h48v48H0z' mask='url(#ipSTrend0)' />
-  </svg>
-)
-
 const settingsIcon = (
   <svg
     className={iconClassName}
@@ -58,15 +39,6 @@ const listIcon = (
   </svg>
 )
 
-const categoryIcon = (
-  <svg className={iconClassName} xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>
-    <path
-      fill='currentColor'
-      d='M6.5 11L12 2l5.5 9zm11 11q-1.875 0-3.187-1.312T13 17.5t1.313-3.187T17.5 13t3.188 1.313T22 17.5t-1.312 3.188T17.5 22M3 21.5v-8h8v8z'
-    />
-  </svg>
-)
-
 const menuGroups: { title: string; items: MenuItem[] }[] = [
   {
     title: '商品モニタリング',
@@ -82,17 +54,6 @@ const menuGroups: { title: string; items: MenuItem[] }[] = [
       { label: '計測結果', href: '/backmarket', icon: listIcon },
       { label: '計測対象の管理', href: '/admin/backmarket', icon: settingsIcon },
     ],
-  },
-  {
-    title: '商品',
-    items: [
-      { label: '最安値一覧', href: '/products', icon: trendIcon },
-      { label: '計測対象の管理', href: '/admin/products', icon: settingsIcon },
-    ],
-  },
-  {
-    title: 'カテゴリ',
-    items: [{ label: 'カテゴリ管理', href: '/admin/categories', icon: categoryIcon }],
   },
 ]
 

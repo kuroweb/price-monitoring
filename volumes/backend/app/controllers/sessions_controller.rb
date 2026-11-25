@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
   def failure
     error_message = params[:message] || "Unknown error"
     Rails.logger.error("Authentication failed: #{error_message}")
-    redirect_to "/products?auth_error=1"
+    redirect_to "/product-monitoring/monitors?auth_error=1"
   end
 
   def csrf_token

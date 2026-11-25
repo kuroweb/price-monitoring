@@ -10,15 +10,6 @@ import BackmarketWatchTargetFormModal from '@/features/backmarket/components/Bac
 vi.mock('next/navigation', () => ({ useRouter: () => ({ refresh: vi.fn() }) }))
 vi.mock('react-toastify', () => ({ toast: { success: vi.fn(), error: vi.fn() } }))
 vi.mock('@/features/backmarket/api/actions', () => ({ getBackmarketRecents: vi.fn(), getBackmarketWatchTargets: vi.fn(), createBackmarketWatchTarget: vi.fn(), updateBackmarketWatchTarget: vi.fn(), destroyBackmarketWatchTarget: vi.fn() }))
-vi.mock('@/features/categories/api/actions', () => ({ getCategories: vi.fn(), getCategoriesStructured: vi.fn(), createCategory: vi.fn(), updateCategory: vi.fn(), destroyCategory: vi.fn() }))
-vi.mock('@/features/products/api/actions', () => ({
-  createBackmarketWatchTarget: vi.fn(),
-  updateBackmarketWatchTarget: vi.fn(),
-  createCategory: vi.fn(),
-  updateCategory: vi.fn(),
-  createProduct: vi.fn(),
-  updateProduct: vi.fn(),
-}))
 const target = {
   id: 1,
   name: 'MacBook',

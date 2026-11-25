@@ -1,4 +1,5 @@
 import Layout from '@/components/layouts/Layout'
+import AuthenticationError from '@/features/auth/components/AuthenticationError'
 import {
   getMonitorCrawlResults,
   getMonitorSummary,
@@ -6,7 +7,12 @@ import {
 } from '@/features/product-monitoring/api/actions'
 import MonitorList from '@/features/product-monitoring/components/MonitorList'
 
-const Page = async () => {
+const Page = async ({
+  searchParams,
+}: {
+  searchParams?: Promise<{ auth_error?: string | string[] }>
+} = {}) => {
+  const resolvedSearchParams = searchParams ? await searchParams : {}
   const response = await getMonitors()
   if (!response.data) throw new Error('モニタリング設定を取得できませんでした')
 
@@ -26,6 +32,7 @@ const Page = async () => {
 
   return (
     <Layout>
+      {resolvedSearchParams.auth_error === '1' && <AuthenticationError />}
       <div className='card w-full bg-base-300'>
         <div className='card-body'>
           <MonitorList sections={sections} />

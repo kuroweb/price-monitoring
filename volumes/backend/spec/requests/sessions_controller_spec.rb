@@ -183,16 +183,16 @@ RSpec.describe SessionsController, type: :request do
   end
 
   describe "GET /auth/failure のリクエスト" do
-    it "認証失敗を示してアプリのトップ画面にリダイレクトすること" do
+    it "認証失敗を示してモニタリング設定の一覧へリダイレクトすること" do
       get "/auth/failure", params: { message: "invalid_credentials" }
 
-      expect(response).to redirect_to("/products?auth_error=1")
+      expect(response).to redirect_to("/product-monitoring/monitors?auth_error=1")
     end
 
     it "エラーメッセージがない場合も認証失敗を示すこと" do
       get "/auth/failure"
 
-      expect(response).to redirect_to("/products?auth_error=1")
+      expect(response).to redirect_to("/product-monitoring/monitors?auth_error=1")
     end
 
     it "認証失敗をログに記録すること" do

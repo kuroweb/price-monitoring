@@ -53,8 +53,8 @@ just test-frontend-coverage
 対象ファイルやテスト名を絞る場合は引数を渡す。角括弧を含むパスは、シェルの展開を避けるため引用する。
 
 ```bash
-just test-frontend CategoryNavigation.test.tsx
-just test-frontend 'tests/features/products/lib/makePlatformMask.test.ts'
+just test-frontend BackmarketWatchTargetsTable.test.tsx
+just test-frontend 'tests/features/product-monitoring/components/CrawlResultSearch.test.tsx'
 just test-frontend -t '最初のページ'
 ```
 

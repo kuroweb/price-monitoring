@@ -60,4 +60,9 @@ describe('商品モニタリング一覧ページ', () => {
     render(await Page())
     expect(screen.getByText(`crawlResults:null;summary:${JSON.stringify(summary)}`)).toBeInTheDocument()
   })
+
+  it('認証失敗のクエリではログイン失敗を表示すること', async () => {
+    render(await Page({ searchParams: Promise.resolve({ auth_error: '1' }) }))
+    expect(screen.getByRole('alert')).toHaveTextContent('ログインに失敗しました。もう一度お試しください。')
+  })
 })

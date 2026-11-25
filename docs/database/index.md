@@ -13,30 +13,22 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 
 ## 判断基準
 
-- 従来の計測対象管理では `products` が中心で、各プラットフォーム固有の収集結果は別テーブルに分ける
 - 商品モニタリングは独立したテーブル群を使う。テーブル定義と関連は[商品モニタリングの DB](../features/product-monitoring/database.md)、振る舞いは[商品モニタリングの外部仕様](../features/product-monitoring/external-spec.md)を参照する
-- 従来の計測対象管理では、クロール条件を `*_crawl_settings` と、その配下の required / exclude 系テーブルに分ける
-- カテゴリや関連付けのような横断的な概念は、プラットフォーム固有テーブルへ閉じ込めず共通テーブルで管理する
+- Backmarket の監視対象と取得結果は、商品モニタリングの収集設定とは別テーブルに分ける
 - 日次集計のような派生データは、元データと別テーブルに分けて保存する
+- `users` は商品・クロール領域と分離する
 
 ## テーブル群の見方
 
-### 計測対象管理
+### 商品モニタリング
 
-- `products` が計測対象の中心
-- `categories` `category_hierarchies` `product_category_maps` が分類の責務を持つ
-- 管理対象が増えても、商品そのものと分類情報を同じテーブルに混ぜない
-
-### クロール設定と収集結果
-
-- 多くのプラットフォームは `*_crawl_settings` で検索条件を持ち、`required` / `exclude` 系テーブルに詳細を分離する
-- `*_products` は収集済み商品データを持つ
-- クロール条件とクロール結果はライフサイクルが違うので、同じテーブルに置かない
+- 収集設定、収集結果、モニタリング設定、日次相場は商品モニタリングのテーブル群に置く
+- テーブル定義と関連は[商品モニタリングの DB](../features/product-monitoring/database.md)を参照する
 
 ### Backmarket 監視
 
 - `backmarket_watch_targets` が監視対象、`backmarket_watch_results` が取得結果を持つ
-- 他プラットフォームの `*_crawl_settings` / `*_products` とは別パターンとして扱う
+- 商品モニタリングの収集設定・収集結果とは別パターンとして扱う
 
 ### 認証
 
@@ -44,13 +36,12 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 
 ### 集計データ
 
-- `*_daily_purchase_summaries` は相場把握のための派生データ
+- 商品モニタリングの日次相場は `product_monitoring_daily_market_prices`。定義は[商品モニタリングの DB](../features/product-monitoring/database.md)を参照する
 - 元データの更新と集計の更新を分離したいので、集計結果は別テーブルにする
 
 ## 避けること
 
-- プラットフォーム固有の属性を `products` に直接足し続けない
-- required / exclude のような繰り返し条件を 1 カラムへ押し込まない
+- 商品モニタリングと Backmarket の取得結果を同じテーブルに混ぜない
 - 集計済みの値で元データを上書きしない
 
 ## 関連 docs
@@ -62,8 +53,8 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 ## 代表コード
 
 - [`volumes/backend/db/schema.rb`](../../volumes/backend/db/schema.rb)
-- [`volumes/backend/app/services/products/creator/create_product.rb`](../../volumes/backend/app/services/products/creator/create_product.rb)
-- [`volumes/backend/app/controllers/api/v1/products_controller.rb`](../../volumes/backend/app/controllers/api/v1/products_controller.rb)
+- [`volumes/backend/app/models/backmarket_watch_target.rb`](../../volumes/backend/app/models/backmarket_watch_target.rb)
+- [`volumes/backend/app/controllers/api/v1/backmarket_watch_targets_controller.rb`](../../volumes/backend/app/controllers/api/v1/backmarket_watch_targets_controller.rb)
 
 ## 更新時に確認する source of truth
 
