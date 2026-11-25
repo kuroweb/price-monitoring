@@ -70,41 +70,6 @@ export type MercariCrawlSettingExcludeProduct = {
   updatedAt: string
 }
 
-export type PcKoubouCrawlSetting = {
-  id: number
-  productId: number
-  keyword: string
-  minPrice: number
-  maxPrice: number
-  enabled: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export type PcKoubouCrawlSettingExcludeKeyword = {
-  id: number
-  pcKoubouCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type PcKoubouCrawlSettingRequiredKeyword = {
-  id: number
-  pcKoubouCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type PcKoubouCrawlSettingExcludeProduct = {
-  id: number
-  pcKoubouCrawlSettingId: number
-  externalId: string
-  createdAt: string
-  updatedAt: string
-}
-
 export type Product = {
   id: number
   name: string
@@ -198,10 +163,6 @@ export type YahooAuctionCrawlSettingExcludeProduct = {
   updatedAt: string
 }
 
-export type CreatePcKoubouCrawlSettingExcludeProductData = {
-  externalId: string
-}
-
 export type ProductPriceList = (Product & {
   relatedProducts: RelatedProduct[]
 })[]
@@ -238,10 +199,6 @@ export type ProductDetail = Product & {
     mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
     mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
   }
-  pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
-    pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
-    pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
-  }
   usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
     usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
     usedSofmapCrawlSettingRequiredKeywords: UsedSofmapCrawlSettingRequiredKeyword[]
@@ -261,10 +218,6 @@ export type ProductList = {
     mercariCrawlSetting: MercariCrawlSetting & {
       mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
       mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
-    }
-    pcKoubouCrawlSetting: PcKoubouCrawlSetting & {
-      pcKoubouCrawlSettingExcludeKeywords: PcKoubouCrawlSettingExcludeKeyword[]
-      pcKoubouCrawlSettingRequiredKeywords: PcKoubouCrawlSettingRequiredKeyword[]
     }
     usedSofmapCrawlSetting: UsedSofmapCrawlSetting & {
       usedSofmapCrawlSettingExcludeKeywords: UsedSofmapCrawlSettingExcludeKeyword[]
@@ -297,14 +250,6 @@ export type CreateProductData = {
     minPrice: number
     mercariCrawlSettingExcludeKeywords: { keyword: string }[]
     mercariCrawlSettingRequiredKeywords: { keyword: string }[]
-  }
-  pcKoubouCrawlSetting: {
-    enabled: boolean
-    keyword: string
-    maxPrice: number
-    minPrice: number
-    pcKoubouCrawlSettingExcludeKeywords: { keyword: string }[]
-    pcKoubouCrawlSettingRequiredKeywords: { keyword: string }[]
   }
   usedSofmapCrawlSetting: {
     enabled: boolean

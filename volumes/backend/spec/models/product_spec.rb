@@ -4,7 +4,6 @@ RSpec.describe Product, type: :model do
   describe "関連付け" do
     it { is_expected.to have_one(:yahoo_auction_crawl_setting).dependent(:destroy) }
     it { is_expected.to have_one(:mercari_crawl_setting).dependent(:destroy) }
-    it { is_expected.to have_one(:pc_koubou_crawl_setting).dependent(:destroy) }
     it { is_expected.to have_one(:used_sofmap_crawl_setting).dependent(:destroy) }
     it { is_expected.to have_one(:product_category_map).dependent(:destroy) }
     it { is_expected.to have_one(:category).through(:product_category_map) }
@@ -15,7 +14,6 @@ RSpec.describe Product, type: :model do
     it { is_expected.to have_many(:yahoo_fleamarket_daily_purchase_summaries).dependent(:destroy) }
     it { is_expected.to have_many(:mercari_products).dependent(:destroy) }
     it { is_expected.to have_many(:mercari_daily_purchase_summaries).dependent(:destroy) }
-    it { is_expected.to have_many(:pc_koubou_products).dependent(:destroy) }
     it { is_expected.to have_many(:used_sofmap_products).dependent(:destroy) }
   end
 

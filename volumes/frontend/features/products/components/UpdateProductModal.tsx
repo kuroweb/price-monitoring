@@ -15,7 +15,6 @@ import {
 import { updateProduct } from '@/features/products/api/actions'
 import type { ProductList, UpdateProductData } from '@/features/products/api/types'
 import MercariForm from '@/features/products/components/MercariForm'
-import PcKoubouForm from '@/features/products/components/PcKoubouForm'
 import UsedSofmapForm from '@/features/products/components/UsedSofmapForm'
 import YahooAuctionForm from '@/features/products/components/YahooAuctionForm'
 import type { Category } from '@/lib/category'
@@ -37,7 +36,7 @@ const UpdateProductModal = ({
   const submittingRef = useRef(false)
 
   type SectionTypes =
-    'ヤフオク' | 'メルカリ' | 'パソコン工房' | 'リコレ'
+    'ヤフオク' | 'メルカリ' | 'リコレ'
 
   const [tab, setTab] = useState<SectionTypes>('ヤフオク')
   const [modal, setModal] = useUpdateProductModalState()
@@ -66,16 +65,6 @@ const UpdateProductModal = ({
         product?.mercariCrawlSetting?.mercariCrawlSettingExcludeKeywords ?? [],
       mercariCrawlSettingRequiredKeywords:
         product?.mercariCrawlSetting?.mercariCrawlSettingRequiredKeywords ?? [],
-    },
-    pcKoubouCrawlSetting: {
-      keyword: product?.pcKoubouCrawlSetting?.keyword ?? '',
-      minPrice: product?.pcKoubouCrawlSetting?.minPrice ?? 0,
-      maxPrice: product?.pcKoubouCrawlSetting?.maxPrice ?? 0,
-      enabled: product?.pcKoubouCrawlSetting?.enabled ?? true,
-      pcKoubouCrawlSettingExcludeKeywords:
-        product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingExcludeKeywords ?? [],
-      pcKoubouCrawlSettingRequiredKeywords:
-        product?.pcKoubouCrawlSetting?.pcKoubouCrawlSettingRequiredKeywords ?? [],
     },
     usedSofmapCrawlSetting: {
       keyword: product?.usedSofmapCrawlSetting?.keyword ?? '',
@@ -179,14 +168,6 @@ const UpdateProductModal = ({
                   className='btn join-item btn-md w-1/3'
                   type='radio'
                   name='options'
-                  aria-label='パソコン工房'
-                  checked={tab == 'パソコン工房'}
-                  onChange={() => setTab('パソコン工房')}
-                />
-                <input
-                  className='btn join-item btn-md w-1/3'
-                  type='radio'
-                  name='options'
                   aria-label='リコレ'
                   checked={tab == 'リコレ'}
                   onChange={() => setTab('リコレ')}
@@ -205,11 +186,6 @@ const UpdateProductModal = ({
                 {tab == 'メルカリ' && (
                   <div className='py-4'>
                     <MercariForm register={register} getValues={getValues} setValue={setValue} />
-                  </div>
-                )}
-                {tab == 'パソコン工房' && (
-                  <div className='py-4'>
-                    <PcKoubouForm register={register} getValues={getValues} setValue={setValue} />
                   </div>
                 )}
                 {tab == 'リコレ' && (
