@@ -20,7 +20,6 @@ const platformOptions: Option[] = [
   { value: 'all', label: 'すべて' },
   { value: 'yahoo_auction', label: 'ヤフオク' },
   { value: 'yahoo_fleamarket', label: 'ペイペイ' },
-  { value: 'mercari', label: 'メルカリ' },
 ]
 
 const statusOptions: Option[] = [
@@ -64,7 +63,7 @@ const SearchForm = () => {
     setPer(Number(e.target.value))
   }
 
-  const showStatusField = ['all', 'yahoo_auction', 'yahoo_fleamarket', 'mercari'].includes(platform)
+  const showStatusField = ['all', 'yahoo_auction', 'yahoo_fleamarket'].includes(platform)
 
   return (
     <div className='flex flex-wrap'>

@@ -63,8 +63,6 @@ Metrics/BlockLength:
 Metrics/ClassLength:
   Exclude:
     - 'app/services/crawl/backmarket/crawler.rb'
-    - 'app/services/crawl/mercari/sync_product/crawler.rb'
-    - 'app/services/crawl/mercari/sync_products/crawler.rb'
 
 # Offense count: 6
 # Configuration parameters: AllowedMethods, AllowedPatterns, Max.
@@ -92,22 +90,18 @@ Naming/BlockForwarding:
 # WaywardPredicates: infinite?, nonzero?
 Naming/PredicateMethod:
   Exclude:
-    - 'app/services/crawl/mercari/sync_product/crawler.rb'
-    - 'app/services/crawl/mercari/sync_products/crawler.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
 
 # Offense count: 7
 # This cop supports safe autocorrection (--autocorrect).
 Performance/ConstantRegexp:
   Exclude:
-    - 'app/services/crawl/mercari/sync_product/crawler.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_product/crawler.rb'
 
 # Offense count: 7
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Performance/ZipWithoutBlock:
   Exclude:
-    - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
 
@@ -138,7 +132,6 @@ Rails/I18nLocaleTexts:
 # AllowedReceivers: ActionMailer::Preview, ActiveSupport::TimeZone
 Rails/RedundantActiveRecordAllMethod:
   Exclude:
-    - 'app/sidekiq/crawl/mercari/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_auction/sync_products/enqueue_sync_job.rb'
     - 'app/sidekiq/crawl/yahoo_fleamarket/sync_products/enqueue_sync_job.rb'
 
@@ -154,10 +147,8 @@ Rails/RootPathnameMethods:
 # ForbiddenMethods: decrement!, decrement_counter, increment!, increment_counter, insert, insert!, insert_all, insert_all!, toggle!, touch, touch_all, update_all, update_attribute, update_column, update_columns, update_counters, upsert, upsert_all
 Rails/SkipsModelValidations:
   Exclude:
-    - 'app/services/crawl/mercari/sync_products/syncer.rb'
     - 'app/services/crawl/yahoo_auction/sync_products/syncer.rb'
     - 'app/services/crawl/yahoo_fleamarket/sync_products/syncer.rb'
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_mercari_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
 
@@ -165,7 +156,6 @@ Rails/SkipsModelValidations:
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Rails/SquishedSQLHeredocs:
   Exclude:
-    - 'app/services/products/calculate_daily_purchase_summary/calculate_mercari_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_auction_product.rb'
     - 'app/services/products/calculate_daily_purchase_summary/calculate_yahoo_fleamarket_product.rb'
 
@@ -266,6 +256,5 @@ Rails/StrongParametersExpect:
     - 'app/controllers/api/v1/categories_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_results_controller.rb'
     - 'app/controllers/api/v1/product_monitoring/crawl_settings_controller.rb'
-    - 'app/controllers/api/v1/products/mercari_crawl_settings/mercari_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products/yahoo_auction_crawl_settings/yahoo_auction_crawl_setting_exclude_products_controller.rb'
     - 'app/controllers/api/v1/products_controller.rb'

@@ -52,7 +52,7 @@ describe.each([
 
 describe.each([
   { key: 'order', useState: useOrderState, initial: 'asc', selected: 'desc' },
-  { key: 'platform', useState: usePlatformState, initial: 'all', selected: 'mercari' },
+  { key: 'platform', useState: usePlatformState, initial: 'all', selected: 'yahoo_fleamarket' },
   { key: 'sort', useState: useSortState, initial: 'updated_at', selected: 'price' },
   { key: 'status', useState: useStatusState, initial: 'published', selected: 'unpublished' },
 ])('文字列の検索条件 $key', ({ key, useState, initial, selected }) => {

@@ -35,10 +35,7 @@ const ProductsTable = ({ products, categories }: Props) => {
   const [deletingId, setDeletingId] = useState<number | null>(null)
   const deletingRef = useRef(false)
   const filteredProducts = products.filter((item) => {
-    const enabled = [
-      item.yahooAuctionCrawlSetting,
-      item.mercariCrawlSetting,
-    ].some((setting) => setting?.enabled)
+    const enabled = [item.yahooAuctionCrawlSetting].some((setting) => setting?.enabled)
     return (
       item.name.toLowerCase().includes(search.toLowerCase()) &&
       (!category || String(item.category?.id) === category) &&

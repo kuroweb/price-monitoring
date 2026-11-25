@@ -11,9 +11,6 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           namespace :yahoo_auction_crawl_settings do
             resources :yahoo_auction_crawl_setting_exclude_products, only: %i[create destroy]
           end
-          namespace :mercari_crawl_settings do
-            resources :mercari_crawl_setting_exclude_products, only: %i[create destroy]
-          end
         end
       end
       resources :categories, only: %i[index show create update destroy] do

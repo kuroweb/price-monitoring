@@ -8,12 +8,6 @@ module Api
             yahoo_auction_crawl_setting_required_keywords
           ]
         },
-        mercari_crawl_setting: {
-          include: %i[
-            mercari_crawl_setting_exclude_keywords
-            mercari_crawl_setting_required_keywords
-          ]
-        },
         category: {}
       ]
     }.freeze
@@ -22,10 +16,6 @@ module Api
       yahoo_auction_crawl_setting: %i[
         yahoo_auction_crawl_setting_exclude_keywords
         yahoo_auction_crawl_setting_required_keywords
-      ],
-      mercari_crawl_setting: %i[
-        mercari_crawl_setting_exclude_keywords
-        mercari_crawl_setting_required_keywords
       ],
       category: []
     }.freeze

@@ -1,9 +1,5 @@
 import type { Category } from '@/lib/category'
 
-export type CreateMercariCrawlSettingExcludeProductData = {
-  externalId: string
-}
-
 export type YahooAuctionDailyPurchaseSummary = {
   id: number
   productId: number
@@ -20,52 +16,6 @@ export type YahooFleamarketDailyPurchaseSummary = {
   averagePurchasePrice: number
   purchaseCount: number
   date: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type MercariDailyPurchaseSummary = {
-  id: number
-  productId: number
-  averagePurchasePrice: number
-  purchaseCount: number
-  date: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type MercariCrawlSetting = {
-  id: number
-  productId: number
-  keyword: string
-  categoryId: number | null
-  minPrice: number
-  maxPrice: number
-  enabled: boolean
-  createdAt: string
-  updatedAt: string
-}
-
-export type MercariCrawlSettingExcludeKeyword = {
-  id: number
-  mercariCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type MercariCrawlSettingRequiredKeyword = {
-  id: number
-  mercariCrawlSettingId: number
-  keyword: string
-  createdAt: string
-  updatedAt: string
-}
-
-export type MercariCrawlSettingExcludeProduct = {
-  id: number
-  mercariCrawlSettingId: number
-  externalId: string
   createdAt: string
   updatedAt: string
 }
@@ -136,7 +86,6 @@ export type ProductPriceDetail = Product & {
   relatedProducts: RelatedProduct[]
   yahooAuctionDailyPurchaseSummaries: YahooAuctionDailyPurchaseSummary[]
   yahooFleamarketDailyPurchaseSummaries: YahooFleamarketDailyPurchaseSummary[]
-  mercariDailyPurchaseSummaries: MercariDailyPurchaseSummary[]
 }
 
 export type GetProductPricesParams = {
@@ -160,14 +109,9 @@ export type ProductDetail = Product & {
     yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
     yahooAuctionCrawlSettingRequiredKeywords: YahooAuctionCrawlSettingRequiredKeyword[]
   }
-  mercariCrawlSetting: MercariCrawlSetting & {
-    mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
-    mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
-  }
   category: Category
   yahoo_auction_daily_purchase_summaries: YahooAuctionDailyPurchaseSummary[]
   yahoo_fleamarket_daily_purchase_summaries: YahooFleamarketDailyPurchaseSummary[]
-  mercari_daily_purchase_summaries: MercariDailyPurchaseSummary[]
 }
 
 export type ProductList = {
@@ -175,10 +119,6 @@ export type ProductList = {
     yahooAuctionCrawlSetting: YahooAuctionCrawlSetting & {
       yahooAuctionCrawlSettingExcludeKeywords: YahooAuctionCrawlSettingExcludeKeyword[]
       yahooAuctionCrawlSettingRequiredKeywords: YahooAuctionCrawlSettingRequiredKeyword[]
-    }
-    mercariCrawlSetting: MercariCrawlSetting & {
-      mercariCrawlSettingExcludeKeywords: MercariCrawlSettingExcludeKeyword[]
-      mercariCrawlSettingRequiredKeywords: MercariCrawlSettingRequiredKeyword[]
     }
     category: Category
   })[]
@@ -198,15 +138,6 @@ export type CreateProductData = {
     minPrice: number
     yahooAuctionCrawlSettingExcludeKeywords: { keyword: string }[]
     yahooAuctionCrawlSettingRequiredKeywords: { keyword: string }[]
-  }
-  mercariCrawlSetting: {
-    categoryId: number | null
-    enabled: boolean
-    keyword: string
-    maxPrice: number
-    minPrice: number
-    mercariCrawlSettingExcludeKeywords: { keyword: string }[]
-    mercariCrawlSettingRequiredKeywords: { keyword: string }[]
   }
 }
 
