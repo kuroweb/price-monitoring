@@ -1,11 +1,8 @@
 name: Claude Code Review
 
 on:
-  # push のたびに PR 全体をレビューすると重複した指摘が増えるため、自動は最初の 1 回に絞る。
-  # 修正後の確認は issue_comment の `@claude review` で手動に呼ぶ。
   pull_request:
     types: [opened, ready_for_review, reopened]
-    # 文書だけの変更はコードレビューの対象にしない。master に required check は無いため、スキップしてもマージは止まらない。
     paths-ignore:
       - "docs/**"
       - "**/*.md"
@@ -13,13 +10,12 @@ on:
     types: [created]
 
 concurrency:
-  # PR への無関係なコメントでも workflow は起動するため、レビュー対象外の run は run_id で別グループにし、実行中のレビューを止めない。
+  # 無関係なコメントの run が実行中のレビューを止めないよう、レビュー以外は run_id で別グループにする。
   group: claude-code-review-${{ (github.event_name == 'pull_request' || startsWith(github.event.comment.body, '@claude review')) && (github.event.pull_request.number || github.event.issue.number) || github.run_id }}
   cancel-in-progress: true
 
 jobs:
   review:
-    # `@claude review` は claude.yml の汎用応答から除外しているので、ここだけが反応する。
     if: |
       (github.event_name == 'pull_request' && github.event.pull_request.draft == false && (github.actor == 'kuroweb' || github.actor == 'dependabot[bot]')) ||
       (github.event_name == 'issue_comment' && github.event.issue.pull_request && github.actor == 'kuroweb' && startsWith(github.event.comment.body, '@claude review'))
@@ -30,7 +26,7 @@ jobs:
       pull-requests: write
       id-token: write
     steps:
-      # issue_comment はデフォルトブランチで起動するため、PR の最新 head を明示して checkout する。
+      # issue_comment はデフォルトブランチで起動するので PR の head を明示する。
       - uses: actions/checkout@v7
         with:
           ref: ${{ github.event_name == 'issue_comment' && format('refs/pull/{0}/head', github.event.issue.number) || '' }}
