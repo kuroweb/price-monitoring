@@ -20,7 +20,7 @@ Orca の削除時には `orca.yaml` の `archive` が対象 worktree で `just d
 
 ## 対象環境の確認
 
-シェルで `export` した `COMPOSE_FILE` / `COMPOSE_PROJECT_NAME` / `WORKTREE_HTTPS_PORT` は `.env` より優先される。残っていると別の環境を操作するので、worktree で Docker Compose / just を実行する前に `unset` する。`docker compose -p` も付けない。認証設定の詳細は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
+シェルで `export` した `COMPOSE_FILE` / `COMPOSE_PROJECT_NAME` / `WORKTREE_HTTPS_PORT` は `.env` より優先される。残っていると別の環境を操作するので、worktree で Docker Compose / just を実行する前に `unset` する。`docker compose -p` も付けない。認証設定の詳細は [OIDC クライアント登録](auth-provider/setup.md#oidc-クライアント登録) を参照する。
 
 ## 新規 worktree の初期化
 
@@ -35,7 +35,7 @@ just ps
 
 `docker compose config --quiet` は `WORKTREE_HTTPS_PORT` が未設定なら失敗する。`just ps` では、project 名が worktree のディレクトリ名になっていることを確認する。
 
-DB はコピーされないので、[アプリの初期化と起動](setup.md#アプリの初期化と起動) の `just prepare` を実行する。コピーされた署名鍵は生成し直さない。既存 DB の認証設定を変えるときは [Provider DB の再作成](../auth-provider/setup.md#ローカル-provider-db-の再作成) を使う。
+DB はコピーされないので、[アプリの初期化と起動](setup.md#アプリの初期化と起動) の `just prepare` を実行する。コピーされた署名鍵は生成し直さない。既存 DB の認証設定を変えるときは [Provider DB の再作成](auth-provider/setup.md#ローカル-provider-db-の再作成) を使う。
 
 frontend はソースを `/app` にマウントしてイメージ内の `node_modules` を隠すので、setup がメインの `node_modules` をコピーする。ブランチの `package-lock.json` がメインと異なるときは、起動前に `docker compose run --rm frontend npm ci` を実行する。
 
@@ -51,4 +51,4 @@ docker ps -a --format '{{.Label "com.docker.compose.project"}} | {{.Label "com.d
 
 一覧で作業ディレクトリが存在することも確認する。worktree の削除・再作成と並行して実行しない。停止後は `just ps` で対象環境を確認し、起動をやり直す。
 
-複数の worktree を同時に作ると、setup が同じ `WORKTREE_HTTPS_PORT` を割り当てることがある。`just up` でポートが衝突したら、`.env` の `WORKTREE_HTTPS_PORT` を空き番号に変える。DB への反映は [ポート変更](../auth-provider/setup.md#worktreeのポート変更) に従う。
+複数の worktree を同時に作ると、setup が同じ `WORKTREE_HTTPS_PORT` を割り当てることがある。`just up` でポートが衝突したら、`.env` の `WORKTREE_HTTPS_PORT` を空き番号に変える。DB への反映は [ポート変更](auth-provider/setup.md#worktreeのポート変更) に従う。

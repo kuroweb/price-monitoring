@@ -13,7 +13,7 @@
 
 ## 手順
 
-1. **前提**: [初回セットアップ](../../development/setup.md) に従い DB / Redis / `backend` を起動して状態を確認する。
+1. **前提**: [初回セットアップ](../../setup.md) に従い DB / Redis / `backend` を起動して状態を確認する。
 2. **Gemfile**: `volumes/backend/Gemfile` の `rails` を目標バージョンに更新する。
 3. **bundle**: ホストではなくコンテナ内で更新する。
 
@@ -36,30 +36,30 @@
    docker compose run --rm backend bin/rails db:migrate
    ```
 
-7. **検証**: [共通テスト手順](../../development/testing.md) の BFF 側 RSpec と、以下の自動読み込み確認を実行する。
+7. **検証**: [共通テスト手順](../../testing.md) の BFF 側 RSpec と、以下の自動読み込み確認を実行する。
 
    ```bash
    docker compose run --rm backend bin/rails zeitwerk:check
    ```
 
-8. **ローカルへの反映**: [ローカル環境の再起動手順](../../development/operations/local-environment.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../development/setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
+8. **ローカルへの反映**: [ローカル環境の再起動手順](../../operations/local-environment.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
 
 ## 避けること
 
 - GitHub 上のテンプレートを手でコピーして `app:update` の代わりにしない（差分の取りこぼしやプロジェクト固有ファイルの欠落につながる）。
 - `app:update` の成果物だけを「範囲外」と判断して削除する（正規手順の一部である）。
-- [実行先の規約](../../../AGENTS.md#コマンドの実行場所) に反して、ホストでアプリの依存関係を操作する。
+- [実行先の規約](../../../../AGENTS.md#コマンドの実行場所) に反して、ホストでアプリの依存関係を操作する。
 
 ## 関連 docs
 
-- [プロジェクト README](../../../README.md)
+- [プロジェクト README](../../../../README.md)
 - [`../index.md`](../index.md)
 - [Upgrading Ruby on Rails](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html)（外部）
 
 ## 代表コード
 
-- [`volumes/backend/Gemfile`](../../../volumes/backend/Gemfile)
-- [`volumes/backend/config/application.rb`](../../../volumes/backend/config/application.rb)
+- [`volumes/backend/Gemfile`](../../../../volumes/backend/Gemfile)
+- [`volumes/backend/config/application.rb`](../../../../volumes/backend/config/application.rb)
 
 ## 更新時に確認する source of truth
 
