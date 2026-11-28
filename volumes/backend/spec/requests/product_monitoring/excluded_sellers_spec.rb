@@ -52,6 +52,11 @@ RSpec.describe "除外する出品者", type: :request do
       [listed, monitored, response.parsed_body.fetch("transactions").pluck("id")]
     end
 
+    # 画面は一覧の seller_id を使って出品者を除外する
+    get "/api/v1/product_monitoring/crawl_results"
+    expect(response.parsed_body.fetch("crawl_results").to_h { [it.fetch("id"), it.fetch("seller_id")] })
+      .to include(results[0].id => "Seller_1", unknown.id => nil)
+
     post path, params: { platform: "mercari", seller_id: "Seller_1" }, as: :json
     id = response.parsed_body.fetch("id")
     expect(shown.call).to all(eq([unknown.id]))
