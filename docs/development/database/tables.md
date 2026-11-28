@@ -38,7 +38,7 @@ BFF / batch のテーブルのカラム・インデックス・外部キーを�
 | id | bigint | NOT NULL | PK |
 | name | string | NOT NULL |  |
 | url | string | NOT NULL |  |
-| enabled | boolean | NOT NULL | default: true |
+| enabled | boolean | NOT NULL | default `true` |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 
@@ -59,31 +59,31 @@ BFF / batch のテーブルのカラム・インデックス・外部キーを�
 | name | string | NOT NULL |  |
 | product_url | text | NOT NULL |  |
 | thumbnail_url | text |  |  |
-| price | integer | NOT NULL | default 0 |
+| price | integer | NOT NULL | default `0` |
 | buyout_price | integer |  |  |
 | sold | boolean |  | NULL を許す |
 | sold_at | datetime |  |  |
-| recency_at | datetime |  | NULL を許す |
-| seller_id | string |  | NULL を許す。照合順序 `utf8mb4_bin` |
 | ends_at | datetime |  |  |
 | excluded_at | datetime |  | NULL を許す |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
+| recency_at | datetime |  | NULL を許す |
+| seller_id | string |  | NULL を許す。照合順序 `utf8mb4_bin` |
 
 ### インデックス
 
 | 名前 | カラム | 備考 |
 | --- | --- | --- |
-| index_product_monitoring_crawl_results_on_created_at | created_at |  |
-| index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
-| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | 降順 |
-| index_product_monitoring_crawl_results_on_price_and_id | price, id | id 降順 |
-| idx_product_monitoring_crawl_results_price_id_desc | price, id | 降順 |
-| index_product_monitoring_crawl_results_on_external_id | external_id |  |
-| idx_on_platform_seller_id_014862945a | platform, seller_id |  |
-| idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
 | index_product_monitoring_crawl_results_on_crawl_setting_id | crawl_setting_id |  |
+| index_product_monitoring_crawl_results_on_created_at | created_at |  |
+| index_product_monitoring_crawl_results_on_external_id | external_id |  |
+| idx_on_platform_seller_id_014862945a | platform, seller_id |  |
+| idx_product_monitoring_crawl_results_price_id_desc | price, id | 降順 |
+| index_product_monitoring_crawl_results_on_price_and_id | price, id | id 降順 |
+| index_product_monitoring_crawl_results_on_recency_at_and_id | recency_at, id | 降順 |
+| index_product_monitoring_crawl_results_on_recency_at | recency_at |  |
+| idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 
 ## product_monitoring_crawl_settings
 
@@ -93,7 +93,7 @@ BFF / batch のテーブルのカラム・インデックス・外部キーを�
 | --- | --- | --- | --- |
 | id | bigint | NOT NULL | PK |
 | name | string | NOT NULL |  |
-| enabled | boolean | NOT NULL | default false |
+| enabled | boolean | NOT NULL | default `false` |
 | search_keyword | string |  |  |
 | platforms | json | NOT NULL | default `[]` |
 | search_urls | json | NOT NULL | default `[]` |
@@ -117,7 +117,7 @@ BFF / batch のテーブルのカラム・インデックス・外部キーを�
 | id | bigint | NOT NULL | PK |
 | date | date | NOT NULL |  |
 | average_transaction_price | integer |  | NULL を許す |
-| transaction_count | integer | NOT NULL | default 0 |
+| transaction_count | integer | NOT NULL | default `0` |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
 | monitor_id | bigint | NOT NULL | FK → `product_monitoring_monitors.id` |
@@ -181,9 +181,9 @@ BFF / batch のテーブルのカラム・インデックス・外部キーを�
 | name | text |  |  |
 | created_at | datetime | NOT NULL |  |
 | updated_at | datetime | NOT NULL |  |
-| email | string | NOT NULL | default: "" |
-| provider_name | string | NOT NULL | default: "" |
-| provider_uid | string | NOT NULL | default: "" |
+| email | string | NOT NULL | default `""` |
+| provider_name | string | NOT NULL | default `""` |
+| provider_uid | string | NOT NULL | default `""` |
 
 ### インデックス
 
