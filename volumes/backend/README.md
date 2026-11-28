@@ -7,4 +7,5 @@
 - [ローカル開発](../../docs/development/index.md) — セットアップ・日常操作・テストの案内
 - [Seed データの投入](../../docs/development/backend/operations/seeds.md)
 - [Rails バージョンアップ](../../docs/development/backend/operations/rails-upgrade.md)
-- [文書の役割と正本](../../docs/index.md)
+- [文書の索引](../../docs/index.md)
+- [文書の役割と正本](../../docs/development/documentation-conventions.md)
