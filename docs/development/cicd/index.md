@@ -103,7 +103,7 @@ Kubernetes の全体構成は [ルート README](../../../README.md#production)�
 
 | 起動 | 条件 | 対象 |
 | --- | --- | --- |
-| 自動（1 回） | PR の作成、再オープン、Draft 解除。push（`synchronize`）では動かない。Draft 中、および `docs/**`・`**/*.md` だけの変更では実行しない | 実行者が `kuroweb` または `dependabot[bot]` |
+| 自動（1 回） | PR の作成、再オープン、Draft 解除。push（`synchronize`）では動かない。Draft 中は実行しない | 実行者が `kuroweb` または `dependabot[bot]` |
 | 手動（再レビュー） | PR のコメントを `@claude review` で始める。PR の最新 head を checkout してレビューする | 実行者が `kuroweb` |
 
 - 修正を push した後の確認は、手動の再レビューで行う。
