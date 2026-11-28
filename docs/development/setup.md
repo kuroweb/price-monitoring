@@ -72,4 +72,4 @@ just ps
 
 `just prepare` は BFF の `db:prepare`、Provider の `db:prepare db:seed`、全サービスの起動の順に実行する。既存 DB は削除しない。Provider の登録内容と、設定変更時の再作成は [OIDC クライアント登録](auth-provider/setup.md#oidc-クライアント登録) を参照する。
 
-起動したら [接続先](index.md#接続先) の URL を開く。以降の起動・停止は [日常操作](operations/index.md) を使う。
+起動したら [接続先](README.md#接続先) の URL を開く。以降の起動・停止は [日常操作](operations/README.md) を使う。

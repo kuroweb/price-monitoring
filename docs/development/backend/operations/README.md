@@ -5,4 +5,4 @@ Rails の更新では依存関係とフレームワーク設定を変更し、Se
 
 - [Rails バージョンアップ](rails-upgrade.md)
 - [Seed データの投入](seeds.md)
-- [Backend の文書一覧](../index.md)
+- [Backend の文書一覧](../README.md)

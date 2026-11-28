@@ -2,7 +2,7 @@
  
 2026-11-15 の重点再調査で確認した範囲は reverse-engineering-timestamp.md を参照。それ以外の記述は以前の調査記録であり、今回の深い検証対象外。
 
-アプリのソースは `volumes/` にあり、イメージ定義は `containers/`、開発の入口はルートの `docker-compose.yml` と `justfile` にある。文書の入口は `docs/index.md`。
+アプリのソースは `volumes/` にあり、イメージ定義は `containers/`、開発の入口はルートの `docker-compose.yml` と `justfile` にある。文書の入口は `docs/README.md`。
 
 ## ディレクトリ
 
@@ -19,7 +19,7 @@
 | `volumes/auth-provider` | OIDC Provider |
 | `volumes/nginx` | 開発用リバースプロキシ |
 
-`features` 同士は読み込まない、という方針が `docs/development/frontend/index.md` にある。Backend は controller、service、model、sidekiq、serializer、finder を分けている。
+`features` 同士は読み込まない、という方針が `docs/development/frontend/README.md` にある。Backend は controller、service、model、sidekiq、serializer、finder を分けている。
 
 ## 分類
 
@@ -49,7 +49,7 @@
 
 ## パターン
 
-- サイト追加はそのサイトの `Listing` 一式とジョブの追加、`UrlRouter::PLATFORMS` への登録、`config/sidekiq` へのキューの追加（`docs/features/product-monitoring/index.md`）
+- サイト追加はそのサイトの `Listing` 一式とジョブの追加、`UrlRouter::PLATFORMS` への登録、`config/sidekiq` へのキューの追加（`docs/features/product-monitoring/README.md`）
 - 個別確認ができるサイトだけが `<Site>::Detail::Crawler` と `<Site>::Detail::SyncJob` を持つ。その `Listing::Syncer` が詳細確認の候補を選んで詳細ジョブを積む
 - クローラーは外部に `call` だけを公開し、取得と解析はインスタンスの private メソッドに置く
 - 出品ハッシュの `sold` はクローラーが付け、保存側の `update_sold` が使う。イオシスとじゃんぱらは `Listing::Syncer` が、検索結果と取得の完全性に基づき別途調整する

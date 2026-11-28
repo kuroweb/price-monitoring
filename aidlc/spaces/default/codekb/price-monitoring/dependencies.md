@@ -14,7 +14,7 @@
 - プロキシは `Crawling::Proxy`（`DYNAMIC_PROXY_LIST_URL` の一覧を1日キャッシュ）。一覧が取れないときは接続しない、と PoC 文書にある
 - Discord は `PRODUCT_MONITORING_DISCORD_WEBHOOK_URL` があるときだけ通知に使う。値は読んでいない
 - 本番レジストリは `Makefile` の `docker-registry.kuroweb.net`。CD は GitHub Actions から別リポジトリ `k8s` を更新する
-- Dependabot は `volumes/backend`、`volumes/auth-provider`、`volumes/frontend`、GitHub Actions を週次で見る（`docs/development/cicd/index.md`）。Playwright のメジャー・マイナーはサーバーと揃えるため除外、とある
+- Dependabot は `volumes/backend`、`volumes/auth-provider`、`volumes/frontend`、GitHub Actions を週次で見る（`docs/development/cicd/README.md`）。Playwright のメジャー・マイナーはサーバーと揃えるため除外、とある
 
 ## 内部
 

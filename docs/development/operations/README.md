@@ -9,4 +9,4 @@
 | 本番障害のログ調査・MCP での接続時の確認 | [本番ログの調査](production-logs.md) |
 | Claude Code・Codex・Cursor への初回ユーザー登録 | [本番ログ調査用 MCP のセットアップ](mcp-setup.md) |
 
-初回の開発環境の準備は [初回セットアップ](../setup.md)、テストは [テスト](../testing.md)、環境の構成と接続先は [ローカル開発](../index.md) を参照する。
+初回の開発環境の準備は [初回セットアップ](../setup.md)、テストは [テスト](../testing.md)、環境の構成と接続先は [ローカル開発](../README.md) を参照する。

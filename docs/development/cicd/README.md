@@ -1,7 +1,7 @@
 # CI/CD と自動レビュー
 
 開発・運用担当者向けに、このリポジトリの GitHub Actions の実行条件とデプロイ経路をまとめる。
-実行条件の正本はリンク先の workflow。ローカル操作は [ローカル開発](../index.md) を参照する。
+実行条件の正本はリンク先の workflow。ローカル操作は [ローカル開発](../README.md) を参照する。
 
 ## 環境と実行契機
 
@@ -95,7 +95,7 @@ GitHub Actions runner を Tailscale に接続し、runner 上の make / Docker B
 この経路は再利用 CD と異なり、ビルド後に個別の push タスクを実行する。その後、対象環境の全イメージタグをまとめて更新し、k8s リポジトリへ commit / push する。
 
 ビルド・push タスクは [Makefile](../../../Makefile) を参照する。認証アプリのイメージ名は `auth-provider-backend-<environment>`、マニフェスト更新時の `IMAGE` は `auth-provider-backend`。
-Kubernetes の全体構成は [ルート README](../../../README.md#production)、認証固有の移行情報は [認証基盤](../auth-provider/index.md#cicd-と-kubernetes) を参照する。
+Kubernetes の全体構成は [ルート README](../../../README.md#production)、認証固有の移行情報は [認証基盤](../auth-provider/README.md#cicd-と-kubernetes) を参照する。
 
 ## PR の自動レビュー
 

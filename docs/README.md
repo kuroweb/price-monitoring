@@ -14,9 +14,9 @@
 
 | 文書 | 内容 |
 | --- | --- |
-| [開発](development/index.md) | 開発文書の入口、ローカル開発環境の構成・用語・接続先 |
+| [開発](development/README.md) | 開発文書の入口、ローカル開発環境の構成・用語・接続先 |
 | [初回セットアップ](development/setup.md) | 共通セットアップ、コミット前のシークレット検査、証明書・hosts、イメージ、DB の準備 |
-| [日常操作](development/operations/index.md) | 開発環境の操作・本番調査の手順一覧 |
+| [日常操作](development/operations/README.md) | 開発環境の操作・本番調査の手順一覧 |
 | [ローカル環境の起動と状態確認](development/operations/local-environment.md) | 起動・停止・ローカルログの確認 |
 | [依存関係の更新・調査](development/operations/dependencies.md) | アプリの依存関係の更新・調査 |
 | [本番ログの調査](development/operations/production-logs.md) | 本番ログの読み取り調査 |
@@ -30,25 +30,25 @@
 
 | 文書 | 内容 |
 | --- | --- |
-| [Backend](development/backend/index.md) | BFF / batch の責務分離 |
-| [Backend の運用手順](development/backend/operations/index.md) | BFF / batch の保守手順の一覧 |
+| [Backend](development/backend/README.md) | BFF / batch の責務分離 |
+| [Backend の運用手順](development/backend/operations/README.md) | BFF / batch の保守手順の一覧 |
 | [Rails バージョンアップ](development/backend/operations/rails-upgrade.md) | Rails 更新 |
 | [Seed データの投入](development/backend/operations/seeds.md) | BFF の seed 投入 |
-| [Frontend](development/frontend/index.md) | frontend の責務分離 |
-| [認証基盤](development/auth-provider/index.md) | Provider / Client の配置・境界 |
+| [Frontend](development/frontend/README.md) | frontend の責務分離 |
+| [認証基盤](development/auth-provider/README.md) | Provider / Client の配置・境界 |
 | [認証の初回セットアップ](development/auth-provider/setup.md) | 認証固有の初回準備・クライアント登録 |
 | [認証の検証](development/auth-provider/verification.md) | 認証固有のテスト準備・動作確認 |
-| [Database](development/database/index.md) | BFF / batch のデータ領域の分け方 |
+| [Database](development/database/README.md) | BFF / batch のデータ領域の分け方 |
 | [ER](development/database/er.md) | BFF / batch のカラム・インデックス |
 | [アソシエーション](development/database/association.md) | 機能文書がまだ無い領域のテーブル間関連 |
-| [CI/CD と自動レビュー](development/cicd/index.md) | CI/CD、PR 自動レビュー、全イメージの手動デプロイ |
+| [CI/CD と自動レビュー](development/cicd/README.md) | CI/CD、PR 自動レビュー、全イメージの手動デプロイ |
 
 ## 機能
 
 | 文書 | 内容 |
 | --- | --- |
-| [機能](features/index.md) | 機能文書の一覧 |
-| [商品モニタリング](features/product-monitoring/index.md) | 商品モニタリングの概要 |
+| [機能](features/README.md) | 機能文書の一覧 |
+| [商品モニタリング](features/product-monitoring/README.md) | 商品モニタリングの概要 |
 | [商品モニタリングの外部仕様](features/product-monitoring/external-spec.md) | 画面と通知から見える振る舞い |
 | [商品モニタリングの内部仕様](features/product-monitoring/internal-spec.md) | 保存・抽出・取得・ジョブの実装 |
 | [商品モニタリングの API](features/product-monitoring/api.md) | エンドポイントごとの契約 |

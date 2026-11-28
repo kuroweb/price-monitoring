@@ -1,6 +1,6 @@
 # コーディング規約
 
-Backend・Frontend・認証のコードを書く開発者と AI エージェント向けに、レイヤーに共通する書き方を定める。レイヤー固有の責務と規約は [Backend](backend/index.md)・[Frontend](frontend/index.md) を参照する。
+Backend・Frontend・認証のコードを書く開発者と AI エージェント向けに、レイヤーに共通する書き方を定める。レイヤー固有の責務と規約は [Backend](backend/README.md)・[Frontend](frontend/README.md) を参照する。
 
 ## コメント
 

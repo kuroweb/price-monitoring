@@ -5,10 +5,10 @@
 
 ## 文書の案内
 
-- [運用手順](operations/index.md) — Rails 更新・Seed 投入
-- [商品モニタリング](../../features/product-monitoring/index.md) — 入口。API は [API](../../features/product-monitoring/api.md)、取得方式は [内部仕様](../../features/product-monitoring/internal-spec.md)
-- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
-- [文書全体の索引](../../index.md)
+- [運用手順](operations/README.md) — Rails 更新・Seed 投入
+- [商品モニタリング](../../features/product-monitoring/README.md) — 入口。API は [API](../../features/product-monitoring/api.md)、取得方式は [内部仕様](../../features/product-monitoring/internal-spec.md)
+- [ローカル開発](../README.md) — セットアップ・日常操作・テストの案内
+- [文書全体の索引](../../README.md)
 
 ## 判断基準
 
@@ -60,7 +60,7 @@
 
 ### 認証
 
-- Provider / Client の配置・境界と、Provider のセットアップ・運用は [認証基盤](../auth-provider/index.md) を参照する
+- Provider / Client の配置・境界と、Provider のセットアップ・運用は [認証基盤](../auth-provider/README.md) を参照する
 
 - `SessionsController` と `OidcTokenControl` が OIDC ログイン・トークン検証の境界
 - 認可や session の扱いは controller / concern に閉じ、service へ散らさない
@@ -85,7 +85,7 @@
 ## 関連 docs
 
 - [`../../README.md`](../../../README.md)
-- [`../database/index.md`](../database/index.md)
+- [`../database/README.md`](../database/README.md)
 - [`./operations/rails-upgrade.md`](operations/rails-upgrade.md)
 - [Seed データの投入](operations/seeds.md)
 

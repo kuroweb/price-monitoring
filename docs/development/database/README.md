@@ -9,7 +9,7 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 - [テーブル間関連](association.md) — 機能文書がまだ無い領域
 - [商品モニタリング](../../features/product-monitoring/external-spec.md) — 収集結果とモニタリング・集計の振る舞い
 - [商品モニタリングの DB](../../features/product-monitoring/database.md) — この機能のテーブル定義とテーブル間の関連
-- [文書全体の索引](../../index.md)
+- [文書全体の索引](../../README.md)
 
 ## 判断基準
 

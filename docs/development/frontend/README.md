@@ -5,9 +5,9 @@
 
 ## 文書の案内
 
-- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
-- [商品モニタリング](../../features/product-monitoring/index.md) — 入口。画面の振る舞いは [外部仕様](../../features/product-monitoring/external-spec.md)、手順は [オペレーション](../../features/product-monitoring/operations.md)
-- [文書全体の索引](../../index.md)
+- [ローカル開発](../README.md) — セットアップ・日常操作・テストの案内
+- [商品モニタリング](../../features/product-monitoring/README.md) — 入口。画面の振る舞いは [外部仕様](../../features/product-monitoring/external-spec.md)、手順は [オペレーション](../../features/product-monitoring/operations.md)
+- [文書全体の索引](../../README.md)
 
 ## 判断基準
 
@@ -127,7 +127,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 ## 関連 docs
 
 - [プロジェクト README](../../../README.md)
-- [`../backend/index.md`](../backend/index.md)
+- [`../backend/README.md`](../backend/README.md)
 
 ## 代表コード
 

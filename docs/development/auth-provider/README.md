@@ -21,13 +21,13 @@
 
 - [初回セットアップ](setup.md) — 新規環境の署名鍵・DB 準備と OIDC クライアント登録
 - [認証の検証](verification.md) — テスト準備とログイン・ログアウトの確認
-- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
-- [CI/CD と自動レビュー](../cicd/index.md)
-- [文書全体の索引](../../index.md)
+- [ローカル開発](../README.md) — セットアップ・日常操作・テストの案内
+- [CI/CD と自動レビュー](../cicd/README.md)
+- [文書全体の索引](../../README.md)
 
 ## CI/CD と Kubernetes
 
-変更検出・CI・CD・全イメージの手動デプロイは [CI/CD と自動レビュー](../cicd/index.md) を参照する。
+変更検出・CI・CD・全イメージの手動デプロイは [CI/CD と自動レビュー](../cicd/README.md) を参照する。
 
 Kubernetes マニフェストは k8s リポジトリの `manifests/price-monitoring` に統合する。環境ごとの namespace と全体構成は [ルート README](../../../README.md#production) を参照する。認証用の DB・Redis・Secret は `auth-provider-*` として分離する。
 
