@@ -37,11 +37,11 @@
 
 ## Deployment
 
-- デプロイは [CI/CD](../../../../docs/development/cicd/index.md) が行う。本番は自宅の Kubernetes と ArgoCD で、AWS は使わない。
+- デプロイは [CI/CD](../../../../docs/development/cicd/pipeline.md) が行う。本番は自宅の Kubernetes と ArgoCD で、AWS は使わない。
 
 ## Code Style
 
-- 実装前に対象レイヤーの既存実装を読み、[Backend](../../../../docs/development/backend/index.md) / [Frontend](../../../../docs/development/frontend/index.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
+- 実装前に対象レイヤーの既存実装を読み、[Backend](../../../../docs/development/backend/architecture.md) / [Frontend](../../../../docs/development/frontend/architecture.md) の責務境界を守る。変更は最小スコープにし、可読性を優先する。
 
 ## Tech Stack
 

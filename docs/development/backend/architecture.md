@@ -1,14 +1,7 @@
-# Backend
+# Backend の責務分離
 
-このページは BFF / batch を変更する開発者向けに、このプロジェクトでどこに何を書くかを揃えるための設計解説です。
-実装時は「controller で受ける」「service で組み立てる」「sidekiq で非同期化する」の境界を先に確認します。
-
-## 文書の案内
-
-- [運用手順](operations/index.md) — Rails 更新・Seed 投入
-- [商品モニタリング](../../features/product-monitoring/index.md) — 入口。API は [API](../../features/product-monitoring/api.md)、取得方式は [内部仕様](../../features/product-monitoring/internal-spec.md)
-- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
-- [文書全体の索引](../../index.md)
+BFF / batch を変更する開発者向けに、このプロジェクトでどこに何を書くかを揃えるための設計解説。
+実装時は「controller で受ける」「service で組み立てる」「sidekiq で非同期化する」の境界を先に確認する。
 
 ## 判断基準
 
@@ -17,11 +10,6 @@
 - Active Record の永続化責務は `models` に寄せる
 - 非同期実行の入口は `app/sidekiq` に寄せ、実際の処理本体は service に寄せる
 - read 系のレスポンス組み立ては serializer に寄せ、 finder は取得条件の組み立てに絞る
-
-## テスト方針
-
-- RSpec の `describe`・`context`・`it`・`shared_examples` の説明文は日本語で書く。クラス・モジュール・メソッドを指す `describe` はそのまま使う。
-- `it` は振る舞いを「〜こと」で終え、`context` は「〜とき」「〜場合」で条件を表す。コード上の識別子や HTTP ステータスはそのまま使ってよい。
 
 ## 置いてよい責務
 
@@ -60,7 +48,7 @@
 
 ### 認証
 
-- Provider / Client の配置・境界と、Provider のセットアップ・運用は [認証基盤](../auth-provider/index.md) を参照する
+- Provider / Client の配置・境界と、Provider のセットアップ・運用は [認証基盤](../auth-provider/README.md) を参照する
 
 - `SessionsController` と `OidcTokenControl` が OIDC ログイン・トークン検証の境界
 - 認可や session の扱いは controller / concern に閉じ、service へ散らさない
@@ -81,13 +69,6 @@
 - 新しい API を追加するたびに controller へ業務手順を直書きする
 - クロール対象ごとの重複ロジックを job 側へ増やす
 - response shape の都合で model に presentation 寄りの責務を足す
-
-## 関連 docs
-
-- [`../../README.md`](../../../README.md)
-- [`../database/index.md`](../database/index.md)
-- [`./operations/rails-upgrade.md`](operations/rails-upgrade.md)
-- [Seed データの投入](operations/seeds.md)
 
 ## 代表コード
 

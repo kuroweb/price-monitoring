@@ -1,7 +1,7 @@
 # Rails バージョンアップ
 
 このページは、price-monitoring の Rails（BFF / batch）をメジャー・マイナー更新するときの手順をまとめた handbook です。
-責務境界は [`index.md`](../index.md) を参照する。
+責務境界は [Backend の責務分離](../architecture.md) を参照する。
 以下のシェル例はホストのリポジトリルートから実行し、アプリの処理は `backend` コンテナ内で行う。
 
 ## 判断基準
@@ -42,7 +42,7 @@
    docker compose run --rm backend bin/rails zeitwerk:check
    ```
 
-8. **ローカルへの反映**: [ローカル環境の再起動手順](../../operations/local-environment.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/index.md) を参照する。
+8. **ローカルへの反映**: [ローカル環境の再起動手順](../../operations/local-environment.md) に従い backend / batch コンテナを再起動する。イメージの再ビルドが必要なら [イメージの準備](../../setup.md#イメージの準備) から行う。Integration / Production への反映は [CI/CD](../../cicd/pipeline.md) を参照する。
 
 ## 避けること
 
@@ -53,7 +53,7 @@
 ## 関連 docs
 
 - [プロジェクト README](../../../../README.md)
-- [`../index.md`](../index.md)
+- [`../README.md`](../README.md)
 - [Upgrading Ruby on Rails](https://guides.rubyonrails.org/upgrading_ruby_on_rails.html)（外部）
 
 ## 代表コード

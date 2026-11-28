@@ -1,7 +1,7 @@
-# CI/CD と自動レビュー
+# CI/CD のパイプライン
 
 開発・運用担当者向けに、このリポジトリの GitHub Actions の実行条件とデプロイ経路をまとめる。
-実行条件の正本はリンク先の workflow。ローカル操作は [ローカル開発](../index.md) を参照する。
+実行条件の正本はリンク先の workflow。ローカル操作は [ローカル開発](../README.md) を参照する。
 
 ## 環境と実行契機
 
@@ -28,27 +28,6 @@ Frontend CI は `--no-deps` で実行し、バックエンド・DB・認証ア�
 バックエンドと認証アプリ の RuboCop と RSpec はそれぞれ別のジョブで並列実行する。RuboCop のジョブは依存サービスを起動しない。
 
 この workflow はリポジトリのシークレットを必要とせず、デプロイ処理を含まない。マージ後は「環境と実行契機」の push による CI/CD が実行される。
-
-## Dependabot による依存関係の更新
-
-[dependabot.yml](../../../.github/dependabot.yml) をデフォルトブランチの `master` に配置すると、以下の依存関係を週次で確認し、更新する Pull Request を `master` 向けに作成する。
-
-| 対象 | 依存関係ファイル |
-| --- | --- |
-| バックエンド | `volumes/backend/Gemfile` / `Gemfile.lock` |
-| 認証アプリ | `volumes/auth-provider/Gemfile` / `Gemfile.lock` |
-| Frontend | `volumes/frontend/package.json` / `package-lock.json` |
-| GitHub Actions | `.github/workflows/*.yml` |
-
-マイナー・パッチ更新は対象ごとに一つの Pull Request にまとめ、メジャー更新は個別に作成する。通常のバージョン更新で同時に開く Pull Request は、各対象で最大 5 件とする。この上限と週次スケジュールはセキュリティ更新の実行頻度・件数を制御するものではない。
-
-バックエンドと認証アプリ の更新では「Pull Request の自動テスト」に従って RuboCop と RSpec が動き、Frontend の更新では lint・型検査・Vitest が動く。ローカルでの確認は [テスト手順](../testing.md)を参照する。Dependabot の更新 PR も「PR の自動レビュー」の対象となる。
-
-Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright のクライアントとサーバーはメジャー・マイナーバージョンを揃える必要がある ([公式仕様](https://playwright.dev/docs/api/class-browsertype))。そのため `playwright-ruby-client` のメジャー・マイナー更新は Dependabot の対象から除外し、サーバーと合わせて手動で更新する。Camoufox 0.5.8 は Playwright 1.63 未満を要求するため ([依存要件](https://pypi.org/project/camoufox/0.5.8/))、更新時は `containers/backend_playwright/**` と `containers/backend_camoufox/**` の指定、および `ProductMonitoring::Crawling::Client` / `Crawl::CamoufoxClient` の接続APIを合わせて確認する。これらのイメージには独立したCIジョブがないため、各Dockerfileのビルドと両方の接続確認を行う。
-
-Frontend の `typescript` は 7 系への更新を Dependabot の対象から除外する。typescript-eslint が TypeScript 7 に対応しておらず、7 系では lint が動かないためである。typescript-eslint の peer の範囲に 7 系が入ったら除外を外して更新する。
-
-Dependabot alerts とセキュリティ更新 PR の自動作成は、GitHub のリポジトリ設定で別途有効化する。設定項目の意味は [GitHub の公式資料](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)を参照する。
 
 ## 変更検出と CI/CD
 
@@ -95,22 +74,4 @@ GitHub Actions runner を Tailscale に接続し、runner 上の make / Docker B
 この経路は再利用 CD と異なり、ビルド後に個別の push タスクを実行する。その後、対象環境の全イメージタグをまとめて更新し、k8s リポジトリへ commit / push する。
 
 ビルド・push タスクは [Makefile](../../../Makefile) を参照する。認証アプリのイメージ名は `auth-provider-backend-<environment>`、マニフェスト更新時の `IMAGE` は `auth-provider-backend`。
-Kubernetes の全体構成は [ルート README](../../../README.md#production)、認証固有の移行情報は [認証基盤](../auth-provider/index.md#cicd-と-kubernetes) を参照する。
-
-## PR の自動レビュー
-
-[claude-code-review.yml](../../../.github/workflows/claude-code-review.yml) で Claude Code による PR レビューを実行する。
-
-| 起動 | 条件 | 対象 |
-| --- | --- | --- |
-| 自動（1 回） | PR の作成、再オープン、Draft 解除。push（`synchronize`）では動かない。Draft 中は実行しない | 実行者が `kuroweb` または `dependabot[bot]` |
-| 手動（再レビュー） | PR のコメントを `@claude review` で始める。PR の最新 head を checkout してレビューする | 実行者が `kuroweb` |
-
-- 修正を push した後の確認は、手動の再レビューで行う。
-- `@claude review` で始まるコメントは [claude.yml](../../../.github/workflows/claude.yml) の汎用応答から除外し、レビューだけが動く。それ以外の `@claude` メンションは claude.yml が応答する。
-- Claude Action の `allowed_bots` でも `dependabot[bot]` を明示的に許可する。
-- `kuroweb/ai-manifest` の `gh-pr-review-ci` と `code-reviewing` スキルを runner にインストールし、Sonnet が PR の説明と差分をレビューする。
-- レビュー結果は `claude[bot]` が PR のコメントに投稿する。同じ PR で次のレビューが始まった場合、実行中のレビューをキャンセルする。
-- `issue_comment` の workflow はデフォルトブランチの定義で動く。手動の再レビューの変更は master へのマージ後に反映される。
-
-事前にリポジトリへ [Claude GitHub App](https://github.com/apps/claude) をインストールする。Action は `github_token` を渡さず、この App のインストールトークンで投稿する。ジョブの `id-token: write` はそのトークン取得に使う。Settings → Secrets and variables → Actions に `CLAUDE_CODE_OAUTH_TOKEN` を登録する。Dependabot が起動した workflow では Actions secrets を参照できないため、Settings → Secrets and variables → Dependabot にも同名のトークンを登録する。
+Kubernetes の全体構成は [ルート README](../../../README.md#production)、認証固有の移行情報は [認証基盤の CI/CD と Kubernetes](../auth-provider/kubernetes.md) を参照する。

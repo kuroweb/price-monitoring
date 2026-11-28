@@ -39,7 +39,7 @@
 | データ | MySQL | `mysql/mysql-server:8.0` | `docker-compose.yml` |
 | データ | Redis | `redis:latest` | 同。タグは latest のまま |
 | 実行 | Docker Compose / just | Compose ファイルと `justfile` | ローカル |
-| 本番 | Kubernetes / ArgoCD | クラスタ構成は README。マニフェストは別リポジトリ | `docs/development/cicd/index.md` |
+| 本番 | Kubernetes / ArgoCD | クラスタ構成は README。マニフェストは別リポジトリ | `docs/development/cicd/pipeline.md` |
 
 テストは実行していない。ここに書いた版はファイル上の指定である。
 
