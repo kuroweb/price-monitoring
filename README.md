@@ -163,6 +163,6 @@ flowchart LR
 
 - [Backend の責務分離](docs/development/backend/architecture.md)
 - [Frontend の責務分離](docs/development/frontend/architecture.md)
-- [Database 設計](docs/development/database/data-domains.md)
+- [テーブル定義](docs/development/database/tables.md)
 - [AI エージェント向け開発規約](AGENTS.md)
 - [AI-DLC での開発](docs/development/ai-dlc.md)
