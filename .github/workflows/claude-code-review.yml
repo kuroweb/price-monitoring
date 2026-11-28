@@ -3,9 +3,6 @@ name: Claude Code Review
 on:
   pull_request:
     types: [opened, ready_for_review, reopened]
-    paths-ignore:
-      - "docs/**"
-      - "**/*.md"
   issue_comment:
     types: [created]
 
