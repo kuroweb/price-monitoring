@@ -47,9 +47,7 @@
 | [認証の検証](development/auth-provider/verification.md) | 認証固有のテスト準備・動作確認 |
 | [認証基盤の CI/CD と Kubernetes](development/auth-provider/kubernetes.md) | 認証基盤の Kubernetes 上の構成と OIDC クライアント登録 |
 | [Database](development/database/README.md) | Database の文書の索引 |
-| [データ領域の分け方](development/database/data-domains.md) | BFF / batch のデータ領域の分け方 |
-| [ER](development/database/er.md) | BFF / batch のカラム・インデックス |
-| [アソシエーション](development/database/association.md) | 機能文書がまだ無い領域のテーブル間関連 |
+| [テーブル定義](development/database/tables.md) | BFF / batch のカラム・インデックス・外部キー |
 | [CI/CD と自動レビュー](development/cicd/README.md) | CI/CD の文書の索引 |
 | [CI/CD のパイプライン](development/cicd/pipeline.md) | CI/CD の実行条件、PR の自動テスト、全イメージの手動デプロイ |
 | [Dependabot による依存関係の更新](development/cicd/dependabot.md) | Dependabot の対象と除外 |
@@ -65,4 +63,4 @@
 | [商品モニタリングの内部仕様](features/product-monitoring/internal-spec.md) | 保存・抽出・取得・ジョブの実装 |
 | [商品モニタリングの API](features/product-monitoring/api.md) | エンドポイントごとの契約 |
 | [商品モニタリングのオペレーション](features/product-monitoring/operations.md) | 商品モニタリングの操作手順 |
-| [商品モニタリングの DB](features/product-monitoring/database.md) | 商品モニタリングのテーブル定義と関連 |
+| [商品モニタリングの DB](features/product-monitoring/database.md) | 商品モニタリングのテーブル間の関連（ER 図） |
