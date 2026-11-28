@@ -150,4 +150,20 @@ RSpec.describe ProductMonitoring::Search::MatchingCrawlResults do
     expect { search(monitor: setting, page: 0) }.to raise_error(ArgumentError)
     expect { search(monitor: setting, page: "next") }.to raise_error(ArgumentError)
   end
+
+  it "除外する出品者の出品を、出品者IDが不明な別の収集設定の同じ出品も含めて出さず、件数とページに数えないこと" do
+    setting = ProductMonitoring::Monitor.create!(name: "phone")
+    create(:product_monitoring_excluded_seller, platform: "yahoo_auction", seller_id: "Seller_1")
+    create(:product_monitoring_crawl_result, platform: "yahoo_auction", external_id: "a1", seller_id: "Seller_1",
+                                             sold: true, sold_at: Time.current)
+    create(:product_monitoring_crawl_result, platform: "yahoo_auction", external_id: "a1", sold: true,
+                                             sold_at: Time.current)
+    kept = Array.new(described_class::PAGE_SIZE) do |n|
+      create(:product_monitoring_crawl_result, platform: "yahoo_auction", external_id: "kept-#{n}", price: 100 + n)
+    end
+
+    page = search(monitor: setting, sort: "price_asc")
+    expect(page.listings).to eq(kept)
+    expect(page.has_more).to be(false)
+  end
 end

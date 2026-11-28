@@ -5,6 +5,9 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Crawler do
   let(:setting) { create(:product_monitoring_crawl_setting, search_urls: [url]) }
   let(:page) { instance_double(Playwright::Page, mouse: instance_double(Playwright::Mouse), url:) }
   let(:status) { 200 }
+  let(:search_api_url) { "https://api.mercari.jp/v2/entities:search" }
+  # 実際のブラウザでは goto の間に応答イベントが届くため、goto の中で受け手へ渡す
+  let(:responses) { [] }
 
   def item(id)
     <<~HTML
@@ -17,8 +20,17 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Crawler do
     '<button data-testid="pagination-next-button"></button>'
   end
 
+  def api_response(items, url: search_api_url, status: 200)
+    instance_double(Playwright::Response, url:, status:, body: { items: }.to_json)
+  end
+
   before do
-    allow(page).to receive(:goto) { instance_double(Playwright::Response, status:) }
+    listeners = []
+    allow(page).to receive(:on).with("response", anything) { |_, listener| listeners << listener }
+    allow(page).to receive(:goto) do
+      responses.each { |response| listeners.each { |listener| listener.call(response) } }
+      instance_double(Playwright::Response, status:)
+    end
     allow(page).to receive(:content).and_return(item("item-1"))
     allow(page.mouse).to receive(:wheel)
     allow(page).to receive(:evaluate).with(described_class::RENDERED_SCRIPT).and_return(false, true)
@@ -31,7 +43,7 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Crawler do
     result = described_class.call(crawl_setting: setting)
     expect(result).to eq(complete: true, listings: [
                            { platform: "mercari", external_id: "item-1", name: "Phone", price: 1200, sold: true,
-                             product_url: "https://jp.mercari.com/item/item-1",
+                             seller_id: nil, product_url: "https://jp.mercari.com/item/item-1",
                              thumbnail_url: "https://static.mercdn.net/thumb/item/webp/item-1_1.jpg" }
                          ])
     expect(page).to have_received(:goto).with(url)
@@ -95,5 +107,62 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Crawler do
   it "描画後の HTML がサイズの上限を超えたら失敗にすること" do
     allow(page).to receive(:content).and_return("a" * ((10 * 1024 * 1024) + 1))
     expect { described_class.call(crawl_setting: setting) }.to raise_error("All search URLs failed")
+  end
+
+  describe "出品者ID" do
+    def respond_on_goto
+      listener = nil
+      allow(page).to receive(:on).with("response", anything) { |_, callback| listener = callback }
+      allow(page).to receive(:goto) do |goto_url|
+        listener.call(api_response(yield(goto_url)))
+        instance_double(Playwright::Response, status:)
+      end
+    end
+
+    it "同じページの描画で受け取った検索 API の応答から、出品IDが一致する出品に出品者IDを付けること" do
+      responses << api_response([{ id: "item-1", sellerId: "Seller_1" }, { id: "other", sellerId: "2" }])
+      expect(described_class.call(crawl_setting: setting)[:listings])
+        .to contain_exactly(include(external_id: "item-1", seller_id: "Seller_1"))
+    end
+
+    it "数値の出品者IDも文字列にし、ページごとにそのページの応答から付けること" do
+      allow(page).to receive(:content).and_return("#{item('one')}#{next_button}", item("two"))
+      respond_on_goto do |goto_url|
+        goto_url.include?("page_token") ? [{ id: "two", sellerId: 222 }] : [{ id: "one", sellerId: 111 }]
+      end
+      listings = described_class.call(crawl_setting: setting)[:listings]
+      sellers = listings.to_h { |listing| listing.values_at(:external_id, :seller_id) }
+      expect(sellers).to eq("one" => "111", "two" => "222")
+    end
+
+    it "検索 API 以外の応答、成功以外の応答、形式の違う出品者IDは使わないこと" do
+      responses << api_response([{ id: "item-1", sellerId: "a" }], url: "https://api.mercari.jp/v2/other")
+      responses << api_response([{ id: "item-1", sellerId: "b" }], url: "https://evil.example/v2/entities:search")
+      responses << api_response([{ id: "item-1", sellerId: "c" }], status: 500)
+      responses << api_response([{ id: "item-1", sellerId: "bad id" }])
+      expect(described_class.call(crawl_setting: setting)[:listings]).to contain_exactly(include(seller_id: nil))
+    end
+
+    it "同じ出品IDに違う出品者IDがあるときは不明とすること" do
+      responses << api_response([{ id: "item-1", sellerId: "a" }])
+      responses << api_response([{ id: "item-1", sellerId: "b" }])
+      expect(described_class.call(crawl_setting: setting)[:listings]).to contain_exactly(include(seller_id: nil))
+    end
+
+    it "応答を読めないときは出品者IDを不明とし、一覧の取得は続けること" do
+      broken = instance_double(Playwright::Response, url: search_api_url, status: 200)
+      allow(broken).to receive(:body).and_raise(Playwright::Error.new(message: "No resource with given identifier"))
+      responses << broken
+      responses << instance_double(Playwright::Response, url: search_api_url, status: 200, body: "{")
+      responses << instance_double(Playwright::Response, url: search_api_url, status: 200, body: '{"items":"x"}')
+      result = described_class.call(crawl_setting: setting)
+      expect(result).to include(complete: true)
+      expect(result[:listings]).to contain_exactly(include(external_id: "item-1", seller_id: nil))
+      expect(Rails.logger).to have_received(:warn).with(/Mercari seller ids unavailable/).twice
+    end
+
+    it "応答が無いときは出品者IDを不明とすること" do
+      expect(described_class.call(crawl_setting: setting)[:listings]).to contain_exactly(include(seller_id: nil))
+    end
   end
 end

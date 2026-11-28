@@ -81,4 +81,14 @@ RSpec.describe ProductMonitoring::Search::NewestCrawlResults do
 
     expect(described_class.call(monitor: setting)).to eq([newer, tied, resaved])
   end
+
+  it "除外する出品者の出品を、出品者IDが不明な別の収集設定の同じ出品も含めて出さないこと" do
+    setting = ProductMonitoring::Monitor.create!(name: "phone")
+    create(:product_monitoring_excluded_seller, platform: "yahoo_fleamarket", seller_id: "p1")
+    create(:product_monitoring_crawl_result, platform: "yahoo_fleamarket", external_id: "z1", seller_id: "p1")
+    create(:product_monitoring_crawl_result, platform: "yahoo_fleamarket", external_id: "z1")
+    unknown = create(:product_monitoring_crawl_result, platform: "yahoo_fleamarket", external_id: "z2")
+
+    expect(described_class.call(monitor: setting)).to eq([unknown])
+  end
 end

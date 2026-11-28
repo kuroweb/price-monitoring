@@ -59,4 +59,21 @@ RSpec.describe ProductMonitoring::Aggregation::AggregateDailyMarketPrices do
     expect(monitor.daily_market_prices.sole.average_transaction_price).to eq(200)
     expect(other.daily_market_prices.sole.average_transaction_price).to eq(400)
   end
+
+  it "除外する出品者の取引を、出品者IDが不明な別の収集設定の同じ出品も含めて数えず、解除後の再集計で戻すこと" do
+    seller = create(:product_monitoring_excluded_seller, platform: "mercari", seller_id: "Seller_1")
+    bought(platform: "mercari", external_id: "a", name: "Phone", price: 900, seller_id: nil)
+    bought(platform: "mercari", external_id: "a", name: "Phone", price: 900, seller_id: "Seller_1")
+    bought(platform: "mercari", external_id: "b", name: "Phone", price: 200, seller_id: nil)
+    bought(platform: "mercari", external_id: "c", name: "Phone", price: 400, seller_id: "Seller_2")
+    bought(platform: "mercari", external_id: "d", name: "Phone", price: 100, seller_id: "Seller_2",
+           excluded_at: Time.current)
+
+    described_class.call(monitor:, start_date: date, end_date: date)
+    expect(monitor.daily_market_prices.sole).to have_attributes(average_transaction_price: 300, transaction_count: 2)
+
+    seller.destroy!
+    described_class.call(monitor:, start_date: date, end_date: date)
+    expect(monitor.daily_market_prices.sole).to have_attributes(average_transaction_price: 500, transaction_count: 3)
+  end
 end

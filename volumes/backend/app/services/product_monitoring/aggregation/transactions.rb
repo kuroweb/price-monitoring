@@ -16,6 +16,7 @@ module ProductMonitoring
       def call
         ProductMonitoring::CrawlResult
           .not_excluded
+          .not_excluded_seller
           .where(sold_at: start_date.in_time_zone.beginning_of_day..end_date.in_time_zone.end_of_day)
           .order(:id)
           .select { |result| Monitor::Matcher.call(monitor:, listing: result) }

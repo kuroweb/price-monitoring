@@ -8,9 +8,10 @@ module ProductMonitoring
             new(...).call
           end
 
-          def initialize(uri, page)
+          def initialize(uri, page, seller_ids = {})
             @uri = uri
             @page = page
+            @seller_ids = seller_ids
           end
 
           def call
@@ -26,7 +27,7 @@ module ProductMonitoring
 
           private
 
-          attr_reader :uri, :page
+          attr_reader :uri, :page, :seller_ids
 
           def listing_id(dom)
             href = dom.at_css("a")&.[]("href")
@@ -42,7 +43,7 @@ module ProductMonitoring
               price: price(dom.at_css("[data-testid='item-tile-price']")&.text),
               product_url: "https://#{SearchUrl::HOST}/item/#{id}",
               thumbnail_url: "https://static.mercdn.net/thumb/item/webp/#{id}_1.jpg",
-              sold: dom.at_css("img[alt$='売り切れ']").present? }
+              sold: dom.at_css("img[alt$='売り切れ']").present?, seller_id: seller_ids[id] }
           end
 
           # 「¥1,200」などの表示価格を整数にする。DBの整数の上限を超える値は価格なしとする

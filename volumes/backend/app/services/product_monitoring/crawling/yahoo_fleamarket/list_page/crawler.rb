@@ -87,7 +87,8 @@ module ProductMonitoring
             raise "Search page has no extractable listings" if results.empty?
 
             @truncated = true if results.size > MAX_RESULTS_PER_PAGE
-            results.first(MAX_RESULTS_PER_PAGE)
+            sellers = SellerIds.call(page)
+            results.first(MAX_RESULTS_PER_PAGE).map { |result| result.merge(seller_id: sellers[result[:external_id]]) }
           end
 
           def listing(link)

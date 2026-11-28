@@ -44,7 +44,11 @@ module ProductMonitoring
 
             { platform: SearchUrl::PLATFORM, external_id: id, name: title.text.strip, price: price,
               buyout_price: buyout, product_url: "https://#{SearchUrl::HOST}/jp/auction/#{id}",
-              thumbnail_url: thumbnail_url(item) }.merge(sale(item))
+              thumbnail_url: thumbnail_url(item), seller_id: seller_ids[id] }.merge(sale(item))
+          end
+
+          def seller_ids
+            @seller_ids ||= SellerIds.call(page)
           end
 
           def auction_id(title)

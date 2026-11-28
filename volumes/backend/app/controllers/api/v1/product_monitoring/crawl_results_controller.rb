@@ -58,7 +58,7 @@ module Api
           if ActiveModel::Type::Boolean.new.cast(params[:excluded])
             ::ProductMonitoring::CrawlResult.excluded
           else
-            ::ProductMonitoring::CrawlResult.not_excluded
+            ::ProductMonitoring::CrawlResult.not_excluded.not_excluded_seller
           end
         end
 

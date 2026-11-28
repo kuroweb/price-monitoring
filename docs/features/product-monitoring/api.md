@@ -468,7 +468,7 @@ id で指定した収集設定を削除する。
 
 ## `GET /api/v1/product_monitoring/crawl_results`
 
-除外されていない収集結果、または除外した収集結果だけを返す。`crawl_setting_id` が無いときは収集設定ごとに id の新しい順で最大8件と、販売状態ごとの件数を返す。あるときはその収集設定の行を id の新しい順にすべて返し、`counts` は含まれない。
+除外されていない収集結果、または除外した収集結果だけを返す。除外されていない収集結果には、除外する出品者の出品を含めない。除外した収集結果（`excluded` が真）は、収集結果ごとの除外だけで選ぶ。`crawl_setting_id` が無いときは収集設定ごとに id の新しい順で最大8件と、販売状態ごとの件数を返す。あるときはその収集設定の行を id の新しい順にすべて返し、`counts` は含まれない。
 
 | 場所 | 名前 | 型 | 必須 | 説明 |
 | --- | --- | --- | --- | --- |
@@ -502,6 +502,7 @@ id で指定した収集設定を削除する。
 | crawl_results[].created_at | string | 作成日時。ISO 8601 |
 | crawl_results[].updated_at | string | 更新日時。ISO 8601 |
 | crawl_results[].recency_at | string または null | 新着順の時刻。売れた日が無い売り切れは null |
+| crawl_results[].seller_id | string または null | サイト上の出品者ID。メルカリ・Yahoo!フリマ・ヤフオクの一覧で分かったときだけ。分からないときは null |
 | counts | array | `crawl_setting_id` が無いときだけ。販売状態ごとの件数 |
 | counts[].crawl_setting_id | integer | 収集設定の id |
 | counts[].sold | boolean または null | その件数の販売状態 |
@@ -526,7 +527,8 @@ id で指定した収集設定を削除する。
       "excluded_at": null,
       "created_at": "2026-11-20T09:00:00.000+09:00",
       "updated_at": "2026-11-20T09:00:00.000+09:00",
-      "recency_at": "2026-11-20T09:00:00.000+09:00"
+      "recency_at": "2026-11-20T09:00:00.000+09:00",
+      "seller_id": null
     }
   ],
   "counts": [
@@ -541,7 +543,7 @@ id で指定した収集設定を削除する。
 
 ## `POST /api/v1/product_monitoring/crawl_results/search`
 
-共有の保存済み収集結果から、抽出条件に一致する除外されていない出品を1ページ返す。販売状態はモニタリング設定の詳細と同じ意味で、`sold` が true のものを売り切れ、true でないもの（不明を含む）を販売中とする。収集や保存は実行しない。
+共有の保存済み収集結果から、抽出条件に一致する除外されていない出品を1ページ返す。除外する出品者の出品は含めない。販売状態はモニタリング設定の詳細と同じ意味で、`sold` が true のものを売り切れ、true でないもの（不明を含む）を販売中とする。収集や保存は実行しない。
 
 | body | 型 | 説明 |
 | --- | --- | --- |
@@ -607,6 +609,7 @@ id で指定した収集設定を削除する。
 | created_at | string | 作成日時。ISO 8601 |
 | updated_at | string | 更新日時。ISO 8601 |
 | recency_at | string または null | 新着順の時刻。売れた日が無い売り切れは null |
+| seller_id | string または null | サイト上の出品者ID。メルカリ・Yahoo!フリマ・ヤフオクの一覧で分かったときだけ。分からないときは null |
 
 ```json
 {
@@ -625,7 +628,8 @@ id で指定した収集設定を削除する。
   "excluded_at": "2026-11-20T09:00:00.000+09:00",
   "created_at": "2026-11-20T09:00:00.000+09:00",
   "updated_at": "2026-11-20T09:00:00.000+09:00",
-  "recency_at": "2026-11-20T09:00:00.000+09:00"
+  "recency_at": "2026-11-20T09:00:00.000+09:00",
+  "seller_id": null
 }
 ```
 
@@ -1027,6 +1031,7 @@ id で指定したモニタリング設定と、その日次相場を削除す�
 | crawl_results[].created_at | string | 作成日時。ISO 8601 |
 | crawl_results[].updated_at | string | 更新日時。ISO 8601 |
 | crawl_results[].recency_at | string または null | 新着順の時刻。売れた日が無い売り切れは null |
+| crawl_results[].seller_id | string または null | サイト上の出品者ID。メルカリ・Yahoo!フリマ・ヤフオクの一覧で分かったときだけ。分からないときは null |
 | page | integer | 詳細のページ。1から。一覧のときは無い |
 | per_page | integer | 詳細の1ページの件数。12。一覧のときは無い |
 | has_more | boolean | 詳細で、同じ条件の次のページがあるとき true。最終ページでは false。一覧のときは無い |
@@ -1050,7 +1055,8 @@ id で指定したモニタリング設定と、その日次相場を削除す�
       "excluded_at": null,
       "created_at": "2026-11-20T09:00:00.000+09:00",
       "updated_at": "2026-11-20T09:00:00.000+09:00",
-      "recency_at": "2026-11-20T09:00:00.000+09:00"
+      "recency_at": "2026-11-20T09:00:00.000+09:00",
+      "seller_id": null
     }
   ],
   "page": 1,
@@ -1222,6 +1228,7 @@ id で指定したモニタリング設定と、その日次相場を削除す�
 | transactions[].created_at | string | 作成日時。ISO 8601 |
 | transactions[].updated_at | string | 更新日時。ISO 8601 |
 | transactions[].recency_at | string または null | 新着順の時刻。売れた日が無い売り切れは null |
+| transactions[].seller_id | string または null | サイト上の出品者ID。メルカリ・Yahoo!フリマ・ヤフオクの一覧で分かったときだけ。分からないときは null |
 
 ```json
 {
@@ -1242,7 +1249,8 @@ id で指定したモニタリング設定と、その日次相場を削除す�
       "excluded_at": null,
       "created_at": "2026-11-20T09:00:00.000+09:00",
       "updated_at": "2026-11-20T09:00:00.000+09:00",
-      "recency_at": "2026-11-20T09:00:00.000+09:00"
+      "recency_at": "2026-11-20T09:00:00.000+09:00",
+      "seller_id": null
     }
   ]
 }
@@ -1334,5 +1342,148 @@ id で指定したモニタリング設定と、その日次相場を削除す�
       "monitor_id": 1
     }
   ]
+}
+```
+
+## `GET /api/v1/product_monitoring/excluded_sellers`
+
+計測から除外する出品者を id の新しい順に返す。
+
+リクエストボディなし。
+
+**200**
+
+| 名前 | 型 | 説明 |
+| --- | --- | --- |
+| excluded_sellers | array | 除外する出品者 |
+| excluded_sellers[].id | integer | 除外する出品者の id |
+| excluded_sellers[].platform | string | サイト。`mercari`、`yahoo_fleamarket`、`yahoo_auction` |
+| excluded_sellers[].seller_id | string | サイト上の出品者ID |
+| excluded_sellers[].created_at | string | 登録日時。ISO 8601 |
+| excluded_sellers[].updated_at | string | 更新日時。ISO 8601 |
+
+```json
+{
+  "excluded_sellers": [
+    {
+      "id": 1,
+      "platform": "yahoo_auction",
+      "seller_id": "seller-1",
+      "created_at": "2026-11-28T09:00:00.000+09:00",
+      "updated_at": "2026-11-28T09:00:00.000+09:00"
+    }
+  ]
+}
+```
+
+## `POST /api/v1/product_monitoring/excluded_sellers`
+
+サイトと出品者IDの組を、計測から除外する出品者として登録する。出品者IDは前後の空白を除き、大文字小文字を区別してそのまま保存する。
+
+| 場所 | 名前 | 型 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| body | platform | string | 必須 | `mercari`、`yahoo_fleamarket`、`yahoo_auction` のいずれか |
+| body | seller_id | string | 必須 | サイト上の出品者ID。英数字と `_`・`.`・`-` で255文字以内 |
+
+```json
+{
+  "platform": "yahoo_auction",
+  "seller_id": "seller-1"
+}
+```
+
+**200**
+
+登録した除外する出品者。項目は `GET /api/v1/product_monitoring/excluded_sellers` の `excluded_sellers[]` と同じ。
+
+```json
+{
+  "id": 1,
+  "platform": "yahoo_auction",
+  "seller_id": "seller-1",
+  "created_at": "2026-11-28T09:00:00.000+09:00",
+  "updated_at": "2026-11-28T09:00:00.000+09:00"
+}
+```
+
+**400**
+
+サイトが対象外、または出品者IDの形式が違うとき。
+
+| 名前 | 型 | 説明 |
+| --- | --- | --- |
+| error.code | integer | 400 |
+| error.message | string | `サイトの指定が不正です`、または `出品者IDは英数字と「_」「.」「-」の255文字以内で入力してください` |
+| error.details | array | 空配列 |
+
+```json
+{
+  "error": {
+    "code": 400,
+    "message": "サイトの指定が不正です",
+    "details": []
+  }
+}
+```
+
+**409**
+
+同じサイトの同じ出品者IDが登録済みのとき。
+
+| 名前 | 型 | 説明 |
+| --- | --- | --- |
+| error.code | integer | 409 |
+| error.message | string | `Conflict.` |
+| error.details | array | 空配列 |
+
+```json
+{
+  "error": {
+    "code": 409,
+    "message": "Conflict.",
+    "details": []
+  }
+}
+```
+
+## `DELETE /api/v1/product_monitoring/excluded_sellers/:id`
+
+除外する出品者の登録を解除する。収集結果は消さない。
+
+| 場所 | 名前 | 型 | 必須 | 説明 |
+| --- | --- | --- | --- | --- |
+| path | id | integer | 必須 | 除外する出品者の id |
+
+```
+/api/v1/product_monitoring/excluded_sellers/1
+```
+
+リクエストボディなし。
+
+**200**
+
+| 名前 | 型 | 説明 |
+| --- | --- | --- |
+| （ボディ） | object | 空オブジェクト |
+
+```json
+{}
+```
+
+**404**
+
+| 名前 | 型 | 説明 |
+| --- | --- | --- |
+| error.code | integer | 404 |
+| error.message | string | `Not Found.` |
+| error.details | array | 空配列 |
+
+```json
+{
+  "error": {
+    "code": 404,
+    "message": "Not Found.",
+    "details": []
+  }
 }
 ```

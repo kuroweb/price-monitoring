@@ -115,4 +115,22 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Syncer do
       expect(detail_job).to have_received(:perform_async).with("undated")
     end
   end
+
+  it "一覧で分かった出品者IDを保存し、更新日時は進めず、一覧で分からないときは既知の出品者IDを空で上書きしないこと" do
+    found = { external_id: "with-seller", price: 100, name: "Phone", sold: false,
+              product_url: "https://jp.mercari.com/item/with-seller" }
+    listings << found.merge(seller_id: "Seller_1")
+    described_class.call(crawl_setting: setting)
+    saved = setting.crawl_results.find_by!(external_id: "with-seller")
+    expect(saved.seller_id).to eq("Seller_1")
+
+    checked_at = 4.hours.ago.change(usec: 0)
+    saved.update_columns(seller_id: nil, updated_at: checked_at) # rubocop:disable Rails/SkipsModelValidations
+    described_class.call(crawl_setting: setting)
+    expect(saved.reload).to have_attributes(seller_id: "Seller_1", updated_at: checked_at)
+
+    listings[-1] = found.merge(seller_id: nil)
+    described_class.call(crawl_setting: setting)
+    expect(saved.reload.seller_id).to eq("Seller_1")
+  end
 end

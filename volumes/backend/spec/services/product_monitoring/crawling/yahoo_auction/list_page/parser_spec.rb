@@ -58,4 +58,31 @@ RSpec.describe ProductMonitoring::Crawling::YahooAuction::ListPage::Parser do
     expect { described_class.call(active_uri, Nokogiri::HTML("<div>unexpected</div>")) }
       .to raise_error("Search page has no extractable listings")
   end
+
+  describe "出品者ID" do
+    def with_items(items, body = item("現在1,200円"))
+      data = { props: { initialState: { search: { items: { listing: { items: } } } } } }
+      %(<script id="__NEXT_DATA__" type="application/json">#{data.to_json}</script>#{body})
+    end
+
+    it "埋め込まれた検索結果のデータから、出品IDが一致する出品に出品者IDを付けること" do
+      html = with_items([{ auctionId: "b999", seller: { userId: "other" } },
+                         { auctionId: "a123", seller: { userId: "Ab_9" } }])
+      expect(listing(html)).to include(external_id: "a123", seller_id: "Ab_9")
+      closed = with_items([{ auctionId: "a123", seller: { userId: "Ab_9" } }], item("落札1,500円"))
+      expect(listing(closed, uri: closed_uri)).to include(sold: true, seller_id: "Ab_9")
+    end
+
+    it "データが無い、形が違う、同じ出品IDに違う出品者IDがあるときは不明とし、出品は読み取ること" do
+      [
+        item("現在1,200円"),
+        %(<script id="__NEXT_DATA__" type="application/json">{</script>#{item('現在1,200円')}),
+        with_items("x"),
+        with_items([{ auctionId: "a123", seller: "x" }]),
+        with_items([{ auctionId: "a123", seller: { userId: "a" } }, { auctionId: "a123", seller: { userId: "b" } }])
+      ].each do |html|
+        expect(listing(html)).to include(external_id: "a123", price: 1200, seller_id: nil)
+      end
+    end
+  end
 end

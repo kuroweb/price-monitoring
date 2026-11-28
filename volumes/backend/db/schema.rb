@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_11_26_000007) do
+ActiveRecord::Schema[8.1].define(version: 2026_11_28_000002) do
   create_table "backmarket_watch_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "backmarket_watch_target_id", null: false
     t.string "name", null: false
@@ -51,10 +51,12 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_26_000007) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "recency_at"
+    t.string "seller_id", collation: "utf8mb4_bin"
     t.index ["crawl_setting_id", "external_id"], name: "idx_on_crawl_setting_id_external_id_a6fd3476b8", unique: true
     t.index ["crawl_setting_id"], name: "index_product_monitoring_crawl_results_on_crawl_setting_id"
     t.index ["created_at"], name: "index_product_monitoring_crawl_results_on_created_at"
     t.index ["external_id"], name: "index_product_monitoring_crawl_results_on_external_id"
+    t.index ["platform", "seller_id"], name: "idx_on_platform_seller_id_014862945a"
     t.index ["price", "id"], name: "idx_product_monitoring_crawl_results_price_id_desc", order: :desc
     t.index ["price", "id"], name: "index_product_monitoring_crawl_results_on_price_and_id", order: { id: :desc }
     t.index ["recency_at", "id"], name: "index_product_monitoring_crawl_results_on_recency_at_and_id", order: :desc
@@ -85,6 +87,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_11_26_000007) do
     t.bigint "monitor_id", null: false
     t.index ["monitor_id", "date"], name: "idx_on_monitor_id_date_df939332ac", unique: true
     t.index ["monitor_id"], name: "index_product_monitoring_daily_market_prices_on_monitor_id"
+  end
+
+  create_table "product_monitoring_excluded_sellers", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "platform", null: false
+    t.string "seller_id", null: false, collation: "utf8mb4_bin"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["platform", "seller_id"], name: "idx_on_platform_seller_id_cb8d72eaac", unique: true
   end
 
   create_table "product_monitoring_monitors", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

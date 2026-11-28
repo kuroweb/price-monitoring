@@ -76,6 +76,12 @@ sequenceDiagram
 - 収集結果の削除は選択した収集結果の行だけを消す。同じ出品が別の設定にあれば残り、再取得されると再登録される。保存済みの日次相場は変更せず、次回の集計で反映する。収集設定、商品モニタリング、収集結果の検索のカードから操作できる。
 - 商品モニタリングからの除外も表示元の行に適用する。同じ出品が別の収集設定に保存されている場合、その行は除外されず、商品モニタリングに再表示されることがある。取り消しは元の収集設定の更新モーダルで行う。
 
+### 出品者の除外
+
+- 除外する出品者は `product_monitoring_excluded_sellers` に `platform` と `seller_id` の組で持ち、どのモニタリング設定・収集設定にも属さない。既存の JSON の設定列（収集設定の語句・URL、モニタリング設定の語句）は設定の行ごとの所有で、計測全体で共有する設定の行がないため、独立したテーブルにした。組の一意性は一意インデックス、完全一致は `seller_id` の照合順序 `utf8mb4_bin` で DB が保証する。入力は `ExcludedSeller::Writer` が検証し、前後の空白だけを除く。
+- 照合は `CrawlResult.not_excluded_seller` にまとめ、`not_excluded` を使う読み取り（収集結果の一覧、`Search::*`、`Aggregation::Transactions`）すべてで併用する。収集結果ごとの除外（`excluded=true` の一覧）には掛けない。同じ `platform` と `external_id` の行のどれかの `seller_id` が除外する出品者に一致すれば、その出品の行をすべて外す。どの行でも `seller_id` が分からない出品は残す。行の削除・書き換えは行わない。
+- 日次相場は保存済みの値を読むので、登録・解除は次の集計（毎日0時の直近30日、または手動）で反映する。30日より古い日次相場は再集計しない限り変わらない。最安値通知の基準は登録・解除では取り直さず、次の評価で最安値の組が変われば通知する。
+
 ## 通知の評価
 
 - 定期評価は設定ごとのジョブに分割する。日次相場の集計と同じ Sidekiq プロセスを使うため、個別の通知処理中は日次相場の集計も待つ場合がある。
@@ -100,6 +106,11 @@ sequenceDiagram
 - Yahoo!フリマも一覧の sold 画像と個別ページの JSON-LD から販売状態を確認し、時計アイコンの更新日時を日単位に換算する。日時が表示されない場合は不明のままとする。個別確認の候補と間隔はメルカリと同じ。個別確認は設定ごと・サイトごとに1回最大50件。画像URLは一覧から取得する。
 - 取得元が失敗しても、売れた日が不明な出品は個別確認する。一覧から消えた出品は、そのサイトの取得元がすべて成功した場合に確認する（ページ上限による打ち切りは個別確認を妨げない）。取得はサイトごとのジョブで行うため、別サイトの失敗は影響しない。
 - ヤフオクは出品中の一覧を販売中、落札相場の一覧を売り切れとし、落札相場の終了日時を売れた日として保存する。即決価格と終了日時は一覧から取得し、個別確認は行わない。
+- 出品者IDは、メルカリ・Yahoo!フリマ・ヤフオクの一覧の取得で、既に受け取っているデータから読む。取得のためのリクエスト、個別ページへの遷移、出品者ページの取得は加えない。各サイトの `ListPage::SellerIds` が出品IDと出品者IDの組を読み、`Crawling::SellerIdMap` で形式（英数字と `_`・`.`・`-` の255文字以内）を確かめ、同じ出品IDに違う出品者IDがあれば不明とする。一覧の出品には出品IDが一致するものだけを付ける。データが無い、形が違う、読めないときは出品者IDを不明として一覧の取得を続ける。
+  - メルカリは、一覧の描画でブラウザが受け取る `https://api.mercari.jp/v2/entities:search` の応答（`items[].id` → `sellerId`）を、ページの応答イベントで集めて読む。応答を読めないときは例外の種類だけを警告ログに出す。
+  - Yahoo!フリマは一覧の `__NEXT_DATA__` の `props.initialState.searchState.search.result.items[]`（`id` → `sellerId`）を読む。
+  - ヤフオクは出品中・落札相場の一覧の `__NEXT_DATA__` の `props.initialState.search.items.listing.items[]`（`auctionId` → `seller.userId`）を読む。
+  - 保存では一覧で分かった出品者IDで上書きし、分からないときは既存の値を保つ。出品者IDの補完では更新日時を進めないので、個別確認の間隔は変わらない。一覧の取得ごとに、条件に一致した件数と出品者IDが分かった件数を `Product crawl seller ids` のログに出す。過去の収集結果は、通常の取得で再び一覧に現れたときに補う。
 
 入力URLをHTTPSの対応ホスト・検索パスに限定する。取得は全サイトとも本機能の Playwright クライアント（`Crawling::Client`）を使い、サーバーのIPから直接取得しないよう、プロキシ一覧から選んだプロキシ（`Crawling::Proxy`）を経由する。広告・計測などの通信は `Crawling::RequestBlocklist` で止める。従来の商品計測（`Crawl::*`）のクライアントは使わない。プロキシの一覧を取得できずプロキシが無いときは、接続せずに取得を失敗にする。イオシス・じゃんぱら・トレファクは JavaScript なしで一覧が描画されるので、スクリプトを遮断して取得し、遷移後の HTTPS ホストと描画後 HTML の10 MiB 上限を検証する。サイトに拒否されるプロキシがあるため、この3サイトは非2xxの応答なら接続し直して別のプロキシで最大5回試す。メルカリはJavaScriptを実行して描画し、ブラウザのリダイレクトやサブリソース通信を許可する。各ページの遷移後に最終URLがHTTPSの `jp.mercari.com` であることを確認し、描画後のHTMLが10 MiBを超えた場合は失敗とする。メルカリの応答にはストリーミングのサイズ上限を適用しない。いずれも取得したHTMLはNokogiriで解析する。
 
@@ -113,9 +124,9 @@ sequenceDiagram
 
 | サイト | 一覧（`<サイト>::ListPage::`） | 個別確認（`<サイト>::DetailPage::`） |
 | --- | --- | --- |
-| メルカリ（`Mercari`） | `SearchUrl` / `Crawler` / `Parser` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
-| Yahoo!フリマ（`YahooFleamarket`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
-| ヤフオク（`YahooAuction`） | `SearchUrl` / `Crawler` / `Parser` / `Syncer` / `SyncJob` | なし |
+| メルカリ（`Mercari`） | `SearchUrl` / `Crawler` / `Parser` / `SellerIds` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
+| Yahoo!フリマ（`YahooFleamarket`） | `SearchUrl` / `Crawler` / `SellerIds` / `Syncer` / `SyncJob` | `Crawler` / `Syncer` / `SyncJob` |
+| ヤフオク（`YahooAuction`） | `SearchUrl` / `Crawler` / `Parser` / `SellerIds` / `Syncer` / `SyncJob` | なし |
 | イオシス（`Iosys`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | なし |
 | じゃんぱら（`Janpara`） | `SearchUrl` / `Crawler` / `Parser` / `Syncer` / `SyncJob` | なし |
 | トレファク（`TreasureFactory`） | `SearchUrl` / `Crawler` / `Syncer` / `SyncJob` | なし |

@@ -55,7 +55,8 @@ module ProductMonitoring
             results = []
             Timeout.timeout(TIMEOUT_SECONDS) do
               MAX_PAGES.times do
-                page_results, uri = Parser.call(uri, Nokogiri::HTML(fetch_page(uri)))
+                html, seller_ids = fetch_page(uri)
+                page_results, uri = Parser.call(uri, Nokogiri::HTML(html), seller_ids)
                 @truncated = true if page_results.size > MAX_RESULTS_PER_PAGE
                 results.concat(page_results.first(MAX_RESULTS_PER_PAGE))
                 return results if uri.nil?
@@ -68,13 +69,14 @@ module ProductMonitoring
           # JavaScript で描画するので、描画を待ってスクロールしてから HTML を取り出す
           def fetch_page(uri)
             Client.execute do |page|
+              seller_ids = SellerIds.observe(page)
               response = page.goto(uri.to_s)
               raise "Non-success HTTP response" unless response&.status&.between?(200, 299)
 
               validate_url(page)
               Kernel.sleep(2)
               render_all(page)
-              checked_content(page)
+              [checked_content(page), seller_ids.call]
             end
           end
 
