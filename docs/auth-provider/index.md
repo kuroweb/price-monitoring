@@ -43,3 +43,4 @@ s() { kubectl -n price-monitoring-production get secret backend-secret -o jsonpa
 既存 PV の移行手順は k8s リポジトリの [auth-provider namespace 移行](https://github.com/kuroweb/k8s/blob/master/docs/operations/auth-provider-namespace.md) を参照する。実クラスタへの namespace 移行は、バックアップと手順確認後に実施する。
 
 取り込み元: `kuroweb/auth-provider` の `870262c767aef54bab2ca00a03163f5152c312ff`。アプリのコードを取り込み、Git 履歴は統合していない。
+
