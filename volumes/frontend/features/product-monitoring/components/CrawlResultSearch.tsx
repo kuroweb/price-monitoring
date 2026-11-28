@@ -160,7 +160,7 @@ export default function CrawlResultSearch() {
     )
   }, [])
 
-  const { busy, exclude, remove } = useCrawlResultActions(async () => {
+  const { busy, exclude, excludeSeller, remove } = useCrawlResultActions(async () => {
     if (!displayed) return
     const { input, saleStatus, sort } = displayed
     const results = await search(input, saleStatus, sort, displayed.results.page)
@@ -315,6 +315,7 @@ export default function CrawlResultSearch() {
                         variant='search'
                         disabled={pending}
                         onExclude={exclude}
+                        onExcludeSeller={excludeSeller}
                         onDelete={remove}
                       />
                     </li>

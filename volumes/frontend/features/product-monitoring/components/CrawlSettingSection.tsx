@@ -34,7 +34,7 @@ export default function CrawlSettingSection({
   crawlResults,
 }: Props) {
   const href = `/product-monitoring/crawl-settings/${crawlSetting.id}`
-  const { busy, exclude, remove } = useCrawlResultActions()
+  const { busy, exclude, excludeSeller, remove } = useCrawlResultActions()
   const router = useRouter()
   const [modal, setModal] = useState<{
     setting?: CrawlSetting
@@ -104,6 +104,7 @@ export default function CrawlSettingSection({
                 crawlResult={item}
                 disabled={busy}
                 onExclude={exclude}
+                onExcludeSeller={excludeSeller}
                 onDelete={remove}
               />
             </li>

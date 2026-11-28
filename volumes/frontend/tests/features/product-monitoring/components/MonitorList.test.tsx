@@ -51,6 +51,7 @@ const result: CrawlResult = {
   soldAt: null,
   endsAt: null,
   excludedAt: null,
+  sellerId: null,
 }
 
 beforeEach(() => vi.clearAllMocks())

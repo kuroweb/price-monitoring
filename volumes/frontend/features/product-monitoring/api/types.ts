@@ -24,6 +24,7 @@ export type CrawlResult = {
   soldAt: string | null
   endsAt: string | null
   excludedAt: string | null
+  sellerId: string | null
 }
 export type ExtractionCriteria = {
   requiredKeywords: string[]

@@ -23,7 +23,7 @@ function WatchSection({ monitor, crawlResults, summary }: Section) {
   const [modal, setModal] = useState<{ monitor?: Monitor; initial?: MonitorInput } | null>(null)
   const [deleting, setDeleting] = useState(false)
   const deletingRef = useRef(false)
-  const { busy, exclude, remove } = useCrawlResultActions()
+  const { busy, exclude, excludeSeller, remove } = useCrawlResultActions()
   const lowest = summary?.lowestPrice
   const average = summary?.latestAverageTransactionPrice
 
@@ -87,7 +87,7 @@ function WatchSection({ monitor, crawlResults, summary }: Section) {
           <ol aria-label='収集結果を新着順に表示' className='flex w-full snap-x gap-3 overflow-x-auto pb-2'>
             {crawlResults.map((item) => (
               <li key={item.id} className='w-40 shrink-0 snap-start sm:w-44'>
-                <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
+                <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onExcludeSeller={excludeSeller} onDelete={remove} />
               </li>
             ))}
           </ol>

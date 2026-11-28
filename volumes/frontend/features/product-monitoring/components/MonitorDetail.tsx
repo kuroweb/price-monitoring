@@ -60,7 +60,7 @@ export default function MonitorDetail({
   const [failed, setFailed] = useState(false)
   const [serverPage, setServerPage] = useState({ crawlResults, hasMore: initialHasMore })
   const requestSeqRef = useRef(0)
-  const { busy, exclude, remove } = useCrawlResultActions()
+  const { busy, exclude, excludeSeller, remove } = useCrawlResultActions()
 
   if (crawlResults !== serverPage.crawlResults || initialHasMore !== serverPage.hasMore) {
     requestSeqRef.current += 1
@@ -210,7 +210,7 @@ export default function MonitorDetail({
               <ul className='grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6'>
                 {items.map((item) => (
                   <li key={item.id} className='min-w-0'>
-                    <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onDelete={remove} />
+                    <CrawlResultCard crawlResult={item} disabled={busy} onExclude={exclude} onExcludeSeller={excludeSeller} onDelete={remove} />
                   </li>
                 ))}
               </ul>

@@ -52,7 +52,7 @@ export default function CrawlSettingDetail({
   const [sort, setSort] = useState<Sort>('newest')
   const [selectedPage, setSelectedPage] = useState(1)
   const [editing, setEditing] = useState(false)
-  const { busy, sync, exclude, remove } = useCrawlResultActions()
+  const { busy, sync, exclude, excludeSeller, remove } = useCrawlResultActions()
 
   const counts = {
     all: crawlResults.length,
@@ -137,6 +137,7 @@ export default function CrawlSettingDetail({
                   crawlResult={item}
                   disabled={busy}
                   onExclude={exclude}
+                  onExcludeSeller={excludeSeller}
                   onDelete={remove}
                 />
               ))}

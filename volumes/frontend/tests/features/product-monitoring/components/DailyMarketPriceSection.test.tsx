@@ -43,6 +43,7 @@ const purchase = (id: number, soldAt: string): CrawlResult => ({
   soldAt,
   endsAt: null,
   excludedAt: null,
+  sellerId: null,
 })
 
 beforeEach(() => vi.clearAllMocks())
