@@ -4,7 +4,7 @@
 
 ## バックエンド / 認証アプリの RSpec
 
-認証アプリのテスト DB・アセットは、先に [認証の検証準備](../auth-provider/verification.md) を行う。
+認証アプリのテスト DB・アセットは、先に [認証の検証準備](auth-provider/verification.md) を行う。
 
 ```bash
 just rspec-backend
@@ -58,4 +58,4 @@ just test-frontend 'tests/features/product-monitoring/components/CrawlResultSear
 just test-frontend -t '最初のページ'
 ```
 
-テストの配置と対象範囲は [Frontend のテスト方針](../frontend/index.md#テスト方針) を参照する。PR では [Frontend CI](../cicd/index.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。
+テストの配置と対象範囲は [Frontend のテスト方針](frontend/index.md#テスト方針) を参照する。PR では [Frontend CI](cicd/index.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。

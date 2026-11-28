@@ -1,7 +1,7 @@
 # ER
 
 BFF / batch のテーブル定義を確認する開発者向けのリファレンス。Provider の DB は対象外。
-領域の分け方は [Database](index.md)、機能文書がまだ無い領域の関連は [アソシエーション](association.md)、商品モニタリングのテーブル定義と関連は [商品モニタリングの DB](../features/product-monitoring/database.md)、現在の定義は [schema.rb](../../volumes/backend/db/schema.rb) を参照する。
+領域の分け方は [Database](index.md)、機能文書がまだ無い領域の関連は [アソシエーション](association.md)、商品モニタリングのテーブル定義と関連は [商品モニタリングの DB](../../features/product-monitoring/database.md)、現在の定義は [schema.rb](../../../volumes/backend/db/schema.rb) を参照する。
 
 ## backmarket_watch_results
 
@@ -48,19 +48,19 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 ## product_monitoring_daily_market_prices
 
-定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_daily_market_prices) を参照する。
+定義は [商品モニタリングの DB](../../features/product-monitoring/database.md#product_monitoring_daily_market_prices) を参照する。
 
 ## product_monitoring_monitors
 
-定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_monitors) を参照する。
+定義は [商品モニタリングの DB](../../features/product-monitoring/database.md#product_monitoring_monitors) を参照する。
 
 ## product_monitoring_crawl_results
 
-定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_crawl_results) を参照する。
+定義は [商品モニタリングの DB](../../features/product-monitoring/database.md#product_monitoring_crawl_results) を参照する。
 
 ## product_monitoring_crawl_settings
 
-定義は [商品モニタリングの DB](../features/product-monitoring/database.md#product_monitoring_crawl_settings) を参照する。
+定義は [商品モニタリングの DB](../../features/product-monitoring/database.md#product_monitoring_crawl_settings) を参照する。
 
 ## users
 

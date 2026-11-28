@@ -21,15 +21,15 @@
 
 - [初回セットアップ](setup.md) — 新規環境の署名鍵・DB 準備と OIDC クライアント登録
 - [認証の検証](verification.md) — テスト準備とログイン・ログアウトの確認
-- [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
+- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
 - [CI/CD と自動レビュー](../cicd/index.md)
-- [文書全体の索引](../index.md)
+- [文書全体の索引](../../index.md)
 
 ## CI/CD と Kubernetes
 
 変更検出・CI・CD・全イメージの手動デプロイは [CI/CD と自動レビュー](../cicd/index.md) を参照する。
 
-Kubernetes マニフェストは k8s リポジトリの `manifests/price-monitoring` に統合する。環境ごとの namespace と全体構成は [ルート README](../../README.md#production) を参照する。認証用の DB・Redis・Secret は `auth-provider-*` として分離する。
+Kubernetes マニフェストは k8s リポジトリの `manifests/price-monitoring` に統合する。環境ごとの namespace と全体構成は [ルート README](../../../README.md#production) を参照する。認証用の DB・Redis・Secret は `auth-provider-*` として分離する。
 
 seed は development でだけ動くため、k8s の Provider DB には OIDC クライアントを手動で登録する。DB を新しく作ったときは、k8s ホストで BFF の `backend-secret` と同じ値を登録する。登録が無いと、ログイン・会員登録の後の認可が `invalid_client` になる。シークレットがプロセスの引数に残らないよう、値は標準入力で渡す。integration では namespace を `price-monitoring-integration`、`-e` を `integration` にする。
 
