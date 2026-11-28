@@ -10,7 +10,7 @@
 
 ## 文書
 
-`docs/features/product-monitoring/README.md` に仕様、取得制約、API がある。
+`docs/features/product-monitoring/` に仕様、取得制約、API がある。
 
 ## 技術的負債
 

@@ -58,4 +58,4 @@ just test-frontend 'tests/features/product-monitoring/components/CrawlResultSear
 just test-frontend -t '最初のページ'
 ```
 
-テストの配置と対象範囲は [Frontend のテスト方針](frontend/README.md#テスト方針) を参照する。PR では [Frontend CI](cicd/README.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。
+テストの配置と対象範囲は [Frontend のテスト方針](frontend/test-conventions.md) を参照する。PR では [Frontend CI](cicd/pipeline.md#pull-request-の自動テスト) が lint・型検査・テストを実行する。
