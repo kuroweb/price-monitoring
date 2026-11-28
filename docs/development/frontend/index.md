@@ -5,9 +5,9 @@
 
 ## 文書の案内
 
-- [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
-- [商品モニタリング](../features/product-monitoring/index.md) — 入口。画面の振る舞いは [外部仕様](../features/product-monitoring/external-spec.md)、手順は [オペレーション](../features/product-monitoring/operations.md)
-- [文書全体の索引](../index.md)
+- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
+- [商品モニタリング](../../features/product-monitoring/index.md) — 入口。画面の振る舞いは [外部仕様](../../features/product-monitoring/external-spec.md)、手順は [オペレーション](../../features/product-monitoring/operations.md)
+- [文書全体の索引](../../index.md)
 
 ## 判断基準
 
@@ -78,7 +78,7 @@
 
 - Backmarket の計測対象一覧の操作は「…」にまとめ、計測設定・複製・削除を選べるようにする。
 - Backmarket の削除では対象名を確認し、処理中は削除の再操作を防ぐ。作成・更新フォームも送信中の表示とボタンの無効化で再送信を防ぐ。
-- 商品モニタリングの画面操作は [外部仕様](../features/product-monitoring/external-spec.md) を参照する。
+- 商品モニタリングの画面操作は [外部仕様](../../features/product-monitoring/external-spec.md) を参照する。
 - API の取得失敗はエラー画面で再試行を案内し、取得成功時の空一覧と区別する。成功時に対象がなければ追加や絞り込み変更を案内する。
 
 ## Lint の構成
@@ -105,7 +105,7 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 
 依存更新時は正常なコードの lint だけでなく、違反の報告と自動修正も確認する。
 `tests/tooling/eslint-config.test.ts` が実際の設定を読み込み、import、React、Hooks、Next.js、アクセシビリティ、JSX の代表入力を検証する。
-実行方法は [ローカル開発のテスト手順](../development/testing.md) を参照する。
+実行方法は [ローカル開発のテスト手順](../testing.md) を参照する。
 
 ## テスト方針
 
@@ -122,20 +122,20 @@ JSX の変数参照は ESLint 10 のスコープ解析を使い、JavaScript の
 - フォームは実際の入力・送信を通して、必須項目、送信データ、成功時の終了、失敗時の入力保持を確認する
 - 非同期 Server Component、実ブラウザー上の画面遷移、OIDC 認証はこの基盤の対象外。これらを検証する E2E 基盤は未導入
 
-実行・watch・カバレッジ計測は [ローカル開発のテスト手順](../development/testing.md)を参照する。
+実行・watch・カバレッジ計測は [ローカル開発のテスト手順](../testing.md)を参照する。
 
 ## 関連 docs
 
-- [プロジェクト README](../../README.md)
+- [プロジェクト README](../../../README.md)
 - [`../backend/index.md`](../backend/index.md)
 
 ## 代表コード
 
-- [`volumes/frontend/app/product-monitoring/monitors/page.tsx`](../../volumes/frontend/app/product-monitoring/monitors/page.tsx)
-- [`volumes/frontend/features/product-monitoring/components/MonitorList.tsx`](../../volumes/frontend/features/product-monitoring/components/MonitorList.tsx)
-- [`volumes/frontend/lib/http-client.ts`](../../volumes/frontend/lib/http-client.ts)
-- [`volumes/frontend/features/backmarket/api/actions.ts`](../../volumes/frontend/features/backmarket/api/actions.ts)
-- [`volumes/frontend/lib/revalidate-paths.ts`](../../volumes/frontend/lib/revalidate-paths.ts)
+- [`volumes/frontend/app/product-monitoring/monitors/page.tsx`](../../../volumes/frontend/app/product-monitoring/monitors/page.tsx)
+- [`volumes/frontend/features/product-monitoring/components/MonitorList.tsx`](../../../volumes/frontend/features/product-monitoring/components/MonitorList.tsx)
+- [`volumes/frontend/lib/http-client.ts`](../../../volumes/frontend/lib/http-client.ts)
+- [`volumes/frontend/features/backmarket/api/actions.ts`](../../../volumes/frontend/features/backmarket/api/actions.ts)
+- [`volumes/frontend/lib/revalidate-paths.ts`](../../../volumes/frontend/lib/revalidate-paths.ts)
 
 ## 更新時に確認する source of truth
 

@@ -2,9 +2,7 @@ module ProductMonitoring
   module Crawling
     module Janpara
       module ListPage
-        # 一覧の出品を保存し、一覧の売り切れ表示と、完全に取得できた一覧から消えた出品を販売状態に反映する
         class Syncer
-          # 一覧から消えた出品を売り切れとみなすまでの時間
           SOLD_OUT_AFTER = 3.hours
 
           def self.call(...)
@@ -30,7 +28,6 @@ module ProductMonitoring
 
           attr_reader :crawl_setting
 
-          # 条件に一致した出品を保存する。除外した出品も価格などは更新し、excluded_at は上書きしない
           def save(matched)
             priced = matched.reject { |listing| listing[:price].nil? }
             return if priced.empty?
@@ -39,7 +36,6 @@ module ProductMonitoring
             update_listed_sold(priced)
           end
 
-          # 内容が変わったときだけ更新日時を進める。売れた日は最初に記録した日を保ち、即決価格は一覧に無ければ保つ。
           # 一覧の全件を1文で書き込むので、モデルの検証は通さない
           def upsert_rows(priced)
             rows = priced.map { |listing| row(listing) }
@@ -67,7 +63,6 @@ module ProductMonitoring
               ).merge(recency_at: inserted_recency(listing))
           end
 
-          # 販売中と販売状態不明は初回保存時刻。売り切れは売れた日、売れた日が無ければ空
           def inserted_recency(listing)
             return listing[:sold_at] if listing[:sold] && listing[:sold_at]
             return nil if listing[:sold]
@@ -75,7 +70,6 @@ module ProductMonitoring
             Arel.sql("CURRENT_TIMESTAMP(6)")
           end
 
-          # 販売状態の不明な既存の出品は一覧の販売中を反映し、一覧の売り切れは常に反映する
           def update_listed_sold(priced)
             available_ids = priced.select { |listing| listing[:sold] == false }.pluck(:external_id)
             sold_ids = priced.select { |listing| listing[:sold] }.pluck(:external_id)
@@ -90,7 +84,6 @@ module ProductMonitoring
             crawl_setting.crawl_results.where(platform: SearchUrl::PLATFORM)
           end
 
-          # 価格が無くても反映する。同じ出品が両方で返るときは販売中を後に適用する
           def update_sold(results)
             sold_ids = results.select { |result| result[:sold] == true }.pluck(:external_id)
             available_ids = results.select { |result| result[:sold] == false }.pluck(:external_id)

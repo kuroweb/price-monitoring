@@ -5,7 +5,6 @@ RSpec.describe ProductMonitoring::Crawling::Iosys::ListPage::Crawler do
   let(:pages) { {} }
   let(:visited) { [] }
 
-  # 取得した URL に応じた HTML を返すページを開く
   def stub_browser(status: 200, final_url: nil)
     allow(ProductMonitoring::Crawling::Client).to receive(:execute) do |**, &block|
       page = instance_double(Playwright::Page)

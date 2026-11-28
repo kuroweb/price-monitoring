@@ -1,6 +1,5 @@
 module ProductMonitoring
   module Aggregation
-    # 抽出条件に一致する収集結果のうち、期間内に売れた取引を日ごとに集計する
     class AggregateDailyMarketPrices
       def self.call(...)
         new(...).call
@@ -15,7 +14,7 @@ module ProductMonitoring
       def call
         monitor.with_lock do
           rows = (start_date..end_date).map { |date| row(date, purchases_by_date.fetch(date, []).map(&:price)) }
-          # 期間の全日を1文で書き込む。日次相場は検証の対象になる入力ではないので、モデルの検証は通さない
+          # 日次相場は検証の対象になる入力ではないので、モデルの検証は通さない
           ProductMonitoring::DailyMarketPrice.upsert_all(rows, record_timestamps: true) # rubocop:disable Rails/SkipsModelValidations
         end
       end

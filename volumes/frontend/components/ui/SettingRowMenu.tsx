@@ -4,12 +4,10 @@ interface Props {
   name: string
   deleting: boolean
   onEdit: () => void
-  // 渡した一覧だけ「複製」を出す
   onDuplicate?: () => void
   onDestroy: () => void
 }
 
-// 設定の操作をボタンの右端に揃えた縦メニューで表示する
 export default function SettingRowMenu({ name, deleting, onEdit, onDuplicate, onDestroy }: Props) {
   return (
     <div className='dropdown dropdown-end'>

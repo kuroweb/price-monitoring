@@ -1,7 +1,5 @@
 module ProductMonitoring
   class CrawlSetting
-    # 出品のハッシュか収集結果のレコードが、収集設定の保存条件（必須語・除外語・価格帯）に一致するかを判定する。
-    # 価格帯は上下限を含み、必須語はすべて、除外語はどれか1つを含むかで判定する。
     class Matcher
       def self.call(...)
         new(...).call
@@ -42,7 +40,6 @@ module ProductMonitoring
         Array(words).map { |word| normalize_keyword(word) }.reject(&:empty?)
       end
 
-      # 全角半角・大文字小文字・空白の有無を区別せずに比べる
       def normalize_keyword(value)
         value.to_s.unicode_normalize(:nfkc).downcase.gsub(/[[:space:]]+/, "")
       end

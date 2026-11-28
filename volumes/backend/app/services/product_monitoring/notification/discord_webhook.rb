@@ -1,6 +1,5 @@
 module ProductMonitoring
   module Notification
-    # 通知先の Discord Webhook。最安値通知と新着通知が使う
     class DiscordWebhook
       def self.uri
         uri = URI.parse(ENV.fetch("PRODUCT_MONITORING_DISCORD_WEBHOOK_URL", ""))
@@ -15,7 +14,6 @@ module ProductMonitoring
         uri.present?
       end
 
-      # 送信できたら true を返す
       def self.post(content)
         uri = self.uri
         return false unless uri

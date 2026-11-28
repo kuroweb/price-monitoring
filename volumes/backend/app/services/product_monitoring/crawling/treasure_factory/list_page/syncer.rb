@@ -2,7 +2,6 @@ module ProductMonitoring
   module Crawling
     module TreasureFactory
       module ListPage
-        # 一覧の出品を保存する
         class Syncer
           def self.call(...)
             new(...).call
@@ -24,7 +23,6 @@ module ProductMonitoring
 
           attr_reader :crawl_setting
 
-          # 条件に一致した出品を保存する。除外した出品も価格などは更新し、excluded_at は上書きしない
           def save(matched)
             priced = matched.reject { |listing| listing[:price].nil? }
             return if priced.empty?
@@ -33,7 +31,6 @@ module ProductMonitoring
             update_listed_sold(priced)
           end
 
-          # 内容が変わったときだけ更新日時を進める。売れた日は最初に記録した日を保ち、即決価格は一覧に無ければ保つ。
           # 一覧の全件を1文で書き込むので、モデルの検証は通さない
           def upsert_rows(priced)
             rows = priced.map { |listing| row(listing) }
@@ -61,7 +58,6 @@ module ProductMonitoring
               ).merge(recency_at: inserted_recency(listing))
           end
 
-          # 販売中と販売状態不明は初回保存時刻。売り切れは売れた日、売れた日が無ければ空
           def inserted_recency(listing)
             return listing[:sold_at] if listing[:sold] && listing[:sold_at]
             return nil if listing[:sold]
@@ -69,7 +65,6 @@ module ProductMonitoring
             Arel.sql("CURRENT_TIMESTAMP(6)")
           end
 
-          # 販売状態の不明な既存の出品は一覧の販売中を反映し、一覧の売り切れは常に反映する
           def update_listed_sold(priced)
             available_ids = priced.select { |listing| listing[:sold] == false }.pluck(:external_id)
             sold_ids = priced.select { |listing| listing[:sold] }.pluck(:external_id)

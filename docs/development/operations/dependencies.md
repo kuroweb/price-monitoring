@@ -16,4 +16,4 @@ docker compose run --rm auth-provider bundle install
 docker compose exec auth-provider bundle show doorkeeper
 ```
 
-Rails 自体の更新は [Rails バージョンアップ](../../backend/operations/rails-upgrade.md) を参照する。
+Rails 自体の更新は [Rails バージョンアップ](../backend/operations/rails-upgrade.md) を参照する。

@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   description: 'Price Monitoring',
 }
 
-// SSG disabled
 export const dynamic = 'force-dynamic'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

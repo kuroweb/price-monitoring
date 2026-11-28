@@ -13,7 +13,6 @@ interface Props {
   onDelete?: (item: CrawlResult) => void
 }
 
-// 売れた日を優先し、オークションは終了日を出す。どちらもなければ出さない
 const dateLabel = (item: CrawlResult) => {
   if (item.soldAt) return `${formatDate(item.soldAt)} に売れた`
   if (item.endsAt) return `${formatDate(item.endsAt)} 終了`

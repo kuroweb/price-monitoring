@@ -2,7 +2,7 @@
 
 認証を変更する開発者向けの、テスト準備とログイン・ログアウトの確認手順。構成は [認証基盤](index.md) を参照する。
 
-共通の起動・状態確認・RSpec 実行方法は [ローカル開発のテスト手順](../development/testing.md) を参照する。
+共通の起動・状態確認・RSpec 実行方法は [ローカル開発のテスト手順](../testing.md) を参照する。
 
 Provider のテスト DB・アセットを初回または関連変更後に準備する。ホストのリポジトリルートから実行し、処理はテスト環境の `auth-provider` コンテナで行う。
 
@@ -25,11 +25,11 @@ docker compose logs --tail=100 auth-provider nginx
 
 アプリのヘッダーの「ログイン・新規登録」から Provider の新規登録へ進み、入力エラーの表示と、登録後にアプリのトップへ戻り、ヘッダーに登録した名前が表示されることを確認する。登録済みユーザーでもログインを確認する。ヘッダーの名前からマイページを開き、名前とメールアドレスを確認する。同じメニューのログアウトでトップへ戻り、ヘッダーにログインの入口が表示されることと、続けてログインすると Provider でパスワードを求められることを確認する。未ログインでマイページを開いた場合もログインの入口を表示する。BFF のログイン状態は https://dev.price-monitoring.com/auth/test でも確認できる。
 
-worktree では [ローカル開発ガイドの Orca の worktree](../development/worktree.md) に従い、`.env` の `WORKTREE_HTTPS_PORT` を URL に付ける（例: `https://dev.price-monitoring.com:8443/auth/test`）。メインと同じブラウザで両方にログインし、片方の BFF からログアウトしても他方はログイン状態を維持することを、両方向で確認する。Provider の「ログイン状態を保持する」を有効にしてログインした場合も、片方のログアウトが他方に影響しないことを確認する。BFF のログアウトは、ログアウトした環境の Provider のセッションも終了する。
+worktree では [ローカル開発ガイドの Orca の worktree](../worktree.md) に従い、`.env` の `WORKTREE_HTTPS_PORT` を URL に付ける（例: `https://dev.price-monitoring.com:8443/auth/test`）。メインと同じブラウザで両方にログインし、片方の BFF からログアウトしても他方はログイン状態を維持することを、両方向で確認する。Provider の「ログイン状態を保持する」を有効にしてログインした場合も、片方のログアウトが他方に影響しないことを確認する。BFF のログアウトは、ログアウトした環境の Provider のセッションも終了する。
 
 ## proxy・ポート変更後の確認
 
-[worktree の初期化と設定](../development/worktree.md) と [ポート変更とローカル DB の準備](setup.md#worktreeのポート変更) を済ませ、`just ps` で対象環境と公開ポートを確認してから行う。
+[worktree の初期化と設定](../worktree.md) と [ポート変更とローカル DB の準備](setup.md#worktreeのポート変更) を済ませ、`just ps` で対象環境と公開ポートを確認してから行う。
 
 - Provider の `/.well-known/openid-configuration` を開き、issuer と各 endpoint がその環境の URL と一致することを確認する。worktree では割り当てた HTTPS ポートが含まれることを確認する。
 - 上記のログイン・ログアウトと Cookie 分離を、変更後の構成で実行する。

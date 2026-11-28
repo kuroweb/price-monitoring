@@ -15,7 +15,6 @@ module ProductMonitoring
             @external_id = external_id
           end
 
-          # 個別ページから販売状態と売れた日を返す
           def call
             raise ArgumentError, "Invalid external ID" unless external_id.match?(/\A[a-zA-Z0-9_-]+\z/)
 
@@ -100,7 +99,6 @@ module ProductMonitoring
             checked_content(page).tap { raise "Unexpected page URL" unless page.url == url }
           end
 
-          # リダイレクトで別のホストへ移っていないことを確かめる
           def validate_url(page)
             uri = URI.parse(page.url)
             valid = uri.scheme == "https" && uri.host == ListPage::SearchUrl::HOST && uri.port == 443

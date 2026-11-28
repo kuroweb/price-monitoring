@@ -16,7 +16,6 @@ RSpec.describe ProductMonitoring::Crawling::TreasureFactory::ListPage::Crawler d
     HTML
   end
 
-  # 渡した HTML を順に返し、最後の HTML は繰り返す
   def stub_pages(*htmls)
     allow(ProductMonitoring::Crawling::Client).to receive(:execute) do |**, &block|
       block.call(browser_page(htmls.size > 1 ? htmls.shift : htmls.first))

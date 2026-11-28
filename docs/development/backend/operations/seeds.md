@@ -1,6 +1,6 @@
 # Seed データの投入
 
-BFF / batch の開発者向けの投入手順。共通セットアップと起動は [初回セットアップ](../../development/setup.md) を済ませる。
+BFF / batch の開発者向けの投入手順。共通セットアップと起動は [初回セットアップ](../../setup.md) を済ませる。
 以下はホストのリポジトリルートから実行し、処理は起動中の `backend` コンテナで行う。
 
 ## 全 Seed の投入
@@ -19,5 +19,5 @@ docker compose exec backend bundle exec rails db:seed -e development
 docker compose exec backend bundle exec rails db:seed:<seed_name> -e development
 ```
 
-全投入の入口は [db/seeds.rb](../../../volumes/backend/db/seeds.rb)、個別投入は [seed.rake](../../../volumes/backend/lib/tasks/seed.rake) に定義している。
+全投入の入口は [db/seeds.rb](../../../../volumes/backend/db/seeds.rb)、個別投入は [seed.rake](../../../../volumes/backend/lib/tasks/seed.rake) に定義している。
 対象ファイルの処理と投入先を確認して実行する。これらはローカル開発向けの例で、本番データへの投入手順ではない。

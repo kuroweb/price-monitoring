@@ -33,7 +33,6 @@ module Api
           render json: {}, status: :ok
         end
 
-        # 販売状態・並び・page があるときは詳細の1ページ。無いときは一覧の8件
         def crawl_results
           render json: (detail_request? ? detail_crawl_results : list_crawl_results), status: :ok
         end

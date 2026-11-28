@@ -62,7 +62,7 @@ docker compose build
 
 ## アプリの初期化と起動
 
-Provider の署名鍵が無い場合は、先に [認証の初回準備](../auth-provider/setup.md#初回準備) で生成する。状態を確認し、開発環境を準備する。
+Provider の署名鍵が無い場合は、先に [認証の初回準備](auth-provider/setup.md#初回準備) で生成する。状態を確認し、開発環境を準備する。
 
 ```bash
 just ps
@@ -70,6 +70,6 @@ just prepare
 just ps
 ```
 
-`just prepare` は BFF の `db:prepare`、Provider の `db:prepare db:seed`、全サービスの起動の順に実行する。既存 DB は削除しない。Provider の登録内容と、設定変更時の再作成は [OIDC クライアント登録](../auth-provider/setup.md#oidc-クライアント登録) を参照する。
+`just prepare` は BFF の `db:prepare`、Provider の `db:prepare db:seed`、全サービスの起動の順に実行する。既存 DB は削除しない。Provider の登録内容と、設定変更時の再作成は [OIDC クライアント登録](auth-provider/setup.md#oidc-クライアント登録) を参照する。
 
 起動したら [接続先](index.md#接続先) の URL を開く。以降の起動・停止は [日常操作](operations/index.md) を使う。

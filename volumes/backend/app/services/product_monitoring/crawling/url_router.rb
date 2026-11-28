@@ -1,7 +1,5 @@
 module ProductMonitoring
   module Crawling
-    # 収集設定の検索ワード・サイト・検索結果URLを検証し、プラットフォーム（ListPage と DetailPage を持つ名前空間）ごとのURLに振り分ける。
-    # 検索ワードから作ったURLのあとに、そのプラットフォームの検索結果URLを並べる
     class UrlRouter
       PLATFORMS = [Mercari, Iosys, Janpara, YahooFleamarket, YahooAuction, TreasureFactory].freeze
 
@@ -13,7 +11,6 @@ module ProductMonitoring
         @crawl_setting = crawl_setting
       end
 
-      # 検索ワードから作るURLも、サイトの条件（Yahoo!フリマの検索ワードなど）で検証する
       def call
         (generated_urls + crawl_setting.search_urls).each_with_object({}) do |url, urls_by_platform|
           (urls_by_platform[route(url)] ||= []) << url

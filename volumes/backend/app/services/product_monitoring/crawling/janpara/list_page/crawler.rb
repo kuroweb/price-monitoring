@@ -25,7 +25,6 @@ module ProductMonitoring
             @truncated = false
           end
 
-          # 設定の検索結果URLのうちじゃんぱらの分を、ページを送りながら取得する。全URLが失敗したらジョブを失敗にして再試行する。
           # 一覧から消えた出品を売り切れにするため、全URLを最後のページまで取得できたかも返す
           def call
             succeeded = UrlRouter.call(crawl_setting:).fetch(Janpara, []).map { |url| crawl(url) }
@@ -61,8 +60,7 @@ module ProductMonitoring
             results
           end
 
-          # JavaScript なしで描画されるので、スクリプトを止めて取得する。
-          # サイトに拒否されるプロキシがあるので、非 2xx なら接続し直して別のプロキシで試す
+          # JavaScript なしで描画されるのでスクリプトを止め、拒否するプロキシがあるので非 2xx なら別のプロキシで試す
           def fetch_page(uri)
             Retryable.retryable(tries: FETCH_TRIES, on: NonSuccessResponse) do
               Client.execute(block_scripts: true, user_agent: USER_AGENT) do |page|
@@ -74,7 +72,6 @@ module ProductMonitoring
             end
           end
 
-          # リダイレクトで別のホストへ移っていないことと、HTML の大きさを確かめる
           def checked_content(page)
             uri = URI.parse(page.url)
             valid = uri.scheme == "https" && uri.host == SearchUrl::HOST && uri.port == 443
