@@ -15,8 +15,7 @@ import {
 import type { DailyMarketPrice } from '@/features/product-monitoring/api/types'
 import { formatDate, formatYen } from '@/lib/format'
 
-// 価格と件数は単位が違うため、縦軸を2本にせず別のグラフに分け、日付の位置とホバーを揃える。
-// 取引がない日は曲線でつなぐ（monotone は実データを超える山を作らない）。吹き出しは価格のグラフにだけ出し、件数のグラフは位置の線だけを揃える
+// 価格と件数は単位が違うので別のグラフに分け、取引がない日は実データを超える山を作らない monotone でつなぐ
 const SERIES_COLOR = 'var(--color-primary)'
 const GRID_COLOR = 'color-mix(in oklab, var(--color-base-content) 12%, transparent)'
 const AXIS_TICK = {

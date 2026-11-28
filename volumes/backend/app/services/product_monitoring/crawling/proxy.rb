@@ -1,6 +1,5 @@
 module ProductMonitoring
   module Crawling
-    # サイトへはサーバーの IP から直接つながず、プロキシ一覧から選んだプロキシを経由する
     class Proxy
       class Unavailable < StandardError; end
 
@@ -12,7 +11,6 @@ module ProductMonitoring
         new.call
       end
 
-      # プロキシが無ければ取得を止める
       def call
         proxies.sample || raise(Unavailable, "Proxy is unavailable")
       end

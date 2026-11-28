@@ -2,7 +2,6 @@ module ProductMonitoring
   module Crawling
     module Mercari
       module DetailPage
-        # 詳細ページで確かめた販売状態を、メルカリの同じ出品IDの行すべて（設定ごとにある）に反映する
         class Syncer
           def self.call(...)
             new(...).call

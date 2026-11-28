@@ -1,6 +1,5 @@
 module ProductMonitoring
   module Crawling
-    # 保存済みの収集結果のうち、現在の保存条件に一致しないものを除外済みの行も含めて削除する
     class CrawlResultCleaner
       def self.call(...)
         new(...).call

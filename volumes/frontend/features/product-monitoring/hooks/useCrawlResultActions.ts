@@ -8,8 +8,7 @@ import { toast } from 'react-toastify'
 import { destroyCrawlResult, setCrawlResultExcluded, syncCrawlSetting } from '@/features/product-monitoring/api/actions'
 import type { CrawlResult } from '@/features/product-monitoring/api/types'
 
-// 一覧・詳細・検索で共有する「取得して保存」「除外」「削除」。実行中は二重に実行しない。
-// 成功後は onChanged を待つ。検索結果はクライアントの状態なので、画面の再読み込みではなく検索のやり直しを渡す。
+// 検索結果はクライアントの状態なので、呼び出し側は画面の再読み込みではなく検索のやり直しを onChanged に渡す
 export const useCrawlResultActions = (onChanged?: () => Promise<void> | void) => {
   const router = useRouter()
   const [busy, setBusy] = useState(false)

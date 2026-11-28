@@ -25,7 +25,6 @@ module ProductMonitoring
 
       attr_reader :monitor
 
-      # 初回は基準だけ保存する。範囲は前回の終わりより後から、今から SETTLE_DELAY 前までで、重ならない
       def evaluate
         up_to = Time.current - SETTLE_DELAY
         after = monitor.newest_notified_until

@@ -1,5 +1,4 @@
 module RequestSpecHelpers
-  # current_userをモックしてログイン状態をシミュレート
   def login_as_user(**options)
     let(:test_user) { create(:user, **options) }
 
@@ -10,7 +9,6 @@ module RequestSpecHelpers
     end
   end
 
-  # セッション全体をモックしてログイン状態をシミュレート
   def login_with_session(**options)
     let(:test_user) { create(:user, **options.slice(:email, :name, :provider_uid)) }
 
@@ -25,12 +23,10 @@ module RequestSpecHelpers
     end
   end
 
-  # トークンが期限切れ間近の状態でログイン
   def login_with_expiring_token(**)
     login_with_session(expires_at: 4.minutes.from_now.to_i, **)
   end
 
-  # トークンが期限切れの状態でログイン
   def login_with_expired_token(**)
     login_with_session(expires_at: 1.minute.ago.to_i, **)
   end

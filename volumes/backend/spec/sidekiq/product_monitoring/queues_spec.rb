@@ -1,7 +1,6 @@
 require "rails_helper"
 
-# キュー名はクラス名から Crawling・Notification・Aggregation を除いて作る（Crawling::Mercari::ListPage::SyncJob なら
-# product_monitoring_mercari_list_page_sync_job）。Sidekiq のダッシュボードで、キュー名からジョブを特定できるようにする
+# Sidekiq のダッシュボードでキュー名からジョブを特定できるようにする
 RSpec.describe "商品モニタリングのジョブのキュー" do # rubocop:disable RSpec/DescribeClass
   let(:jobs) do
     root = Rails.root.join("app/sidekiq")

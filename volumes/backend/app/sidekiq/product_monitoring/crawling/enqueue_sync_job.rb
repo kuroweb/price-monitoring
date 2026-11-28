@@ -1,6 +1,6 @@
 module ProductMonitoring
   module Crawling
-    # 指定したサイトについて、有効な収集設定ごとに一覧ジョブを積む。サイトごとに頻度を変えられるよう、スケジュールはサイト単位で登録する
+    # サイトごとに頻度を変えられるよう、スケジュールはサイト単位で登録する
     class EnqueueSyncJob
       include Sidekiq::Job
 

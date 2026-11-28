@@ -1,6 +1,5 @@
 module ProductMonitoring
   module Crawling
-    # プロキシを通したブラウザのページを開く。画像・フォントとブロックリストの URL は読み込まない
     class Client
       USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) " \
                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.75 Safari/537.36".freeze
@@ -9,7 +8,6 @@ module ProductMonitoring
         new(**).execute(&)
       end
 
-      # allow_script_host のスクリプトは、ブロックリストにあっても読み込む
       def initialize(block_scripts: false, user_agent: USER_AGENT, allow_script_host: nil, allow_images: false)
         @user_agent = user_agent
         @allow_script_host = allow_script_host

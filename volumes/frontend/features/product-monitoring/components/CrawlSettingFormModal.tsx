@@ -24,7 +24,6 @@ import { formatWords, words } from '@/features/product-monitoring/lib/words'
 
 import ExcludedCrawlResults from './ExcludedCrawlResults'
 
-
 const MAX_SEARCH_URLS = 5
 
 const empty = (): CrawlSettingInput => ({
@@ -42,11 +41,9 @@ const empty = (): CrawlSettingInput => ({
 type Props = {
   onClose: () => void
   setting?: CrawlSetting
-  // 複製では、元の設定値を入れた登録として開く
   initial?: CrawlSettingInput
 }
 
-// 開くたびに描画し直し、編集対象か複製元の値で初期化する
 export default function CrawlSettingFormModal({ onClose, setting, initial }: Props) {
   const router = useRouter()
   const source = setting ?? initial
@@ -60,7 +57,6 @@ export default function CrawlSettingFormModal({ onClose, setting, initial }: Pro
   const nextKeyRef = useRef(input.searchUrls.length)
   const [rowKeys, setRowKeys] = useState(() => input.searchUrls.map((_, i) => i))
   const [error, setError] = useState('')
-  // 更新では、保存済みの除外した収集結果を画像・名前・リンクつきで並べ、その場で取り消す
   const [excludedResults, setExcludedResults] = useState<CrawlResult[]>([])
   const [busy, setBusy] = useState(false)
   const inFlightRef = useRef(false)

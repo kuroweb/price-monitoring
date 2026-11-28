@@ -1,4 +1,3 @@
-# OIDC の RP-Initiated Logout。Client のログアウト後にブラウザを移し、Provider のセッションも終了する
 class EndSessionsController < ApplicationController
   def show
     application = application_from_id_token_hint
@@ -30,7 +29,6 @@ class EndSessionsController < ApplicationController
     nil
   end
 
-  # 戻り先は、そのクライアントに登録したリダイレクト URI と同じオリジンに限る
   def allowed_redirect_uri?(application, redirect_uri)
     return false if redirect_uri.blank?
 

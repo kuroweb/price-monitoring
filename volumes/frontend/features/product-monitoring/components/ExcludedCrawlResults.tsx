@@ -16,7 +16,6 @@ interface Props {
   onRestore: (key: string) => void
 }
 
-// 除外した収集結果を、判断できるよう画像・名前・商品ページへのリンクつきで並べる。
 // 件数が増えてもモーダルが伸びないよう、折りたたんで高さを決めてスクロールさせる
 export default function ExcludedCrawlResults({ items, disabled, onRestore }: Props) {
   if (items.length === 0) return null

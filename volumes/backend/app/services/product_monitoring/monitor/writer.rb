@@ -1,6 +1,5 @@
 module ProductMonitoring
   class Monitor
-    # モニタリング設定の入力を検証・正規化して保存する
     class Writer
       CONDITION_COLUMNS = ExtractionCriteria::FIELDS.map(&:to_s).freeze
 
@@ -39,7 +38,6 @@ module ProductMonitoring
         )
       end
 
-      # 通知の基準は条件・有効状態を変えたら取り直し、日次相場は条件を変えたら集計し直す
       def write(attributes)
         setting = monitor
         setting.assign_attributes(attributes)
