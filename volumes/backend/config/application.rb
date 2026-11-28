@@ -28,3 +28,5 @@ module PriceMonitoring
     config.middleware.use Bugsnag::Rack
   end
 end
+
+# review trigger verification (do not merge)
