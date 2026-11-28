@@ -62,6 +62,10 @@ BFF / batch のテーブル定義を確認する開発者向けのリファレ�
 
 定義は [商品モニタリングの DB](../../features/product-monitoring/database.md#product_monitoring_crawl_settings) を参照する。
 
+## product_monitoring_excluded_sellers
+
+定義は [商品モニタリングの DB](../../features/product-monitoring/database.md#product_monitoring_excluded_sellers) を参照する。
+
 ## users
 
 ### カラム
