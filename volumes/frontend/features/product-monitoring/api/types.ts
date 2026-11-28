@@ -75,6 +75,9 @@ export type GetMonitorCrawlResults = {
   perPage?: number
   hasMore?: boolean
 }
+export type ExcludedSellerInput = { platform: string; sellerId: string }
+export type ExcludedSeller = ExcludedSellerInput & { id: number; createdAt: string }
+export type GetExcludedSellers = { excludedSellers: ExcludedSeller[] }
 export type GetDailyMarketPrices = { dailyMarketPrices: DailyMarketPrice[] }
 export type GetMonitorTransactions = { transactions: CrawlResult[] }
 export type GetMonitorSummary = {

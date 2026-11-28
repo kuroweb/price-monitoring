@@ -5,6 +5,7 @@ import { revalidatePaths } from '@/lib/revalidate-paths'
 import * as CrawlResultApi from './crawlResults'
 import * as CrawlApi from './crawlSettings'
 import * as DailyMarketPriceApi from './dailyMarketPrices'
+import * as ExcludedSellerApi from './excludedSellers'
 import * as MonitorApi from './monitors'
 
 import type {
@@ -13,6 +14,7 @@ import type {
   GetCrawlResultsParams,
   SearchCrawlResultsParams,
   CrawlSettingInput,
+  ExcludedSellerInput,
   MonitorInput,
 } from './types'
 
@@ -119,6 +121,23 @@ export async function updateMonitor(id: number, input: MonitorInput) {
 
 export async function destroyMonitor(id: number) {
   const result = await MonitorApi.destroyMonitor(id)
+  if (result.status === 200) revalidatePaths([['/product-monitoring', 'layout']])
+  return result
+}
+
+export async function getExcludedSellers() {
+  return ExcludedSellerApi.getExcludedSellers()
+}
+
+// 除外する出品者は計測全体の表示・通知・集計に効くので、商品モニタリングの画面をすべて読み直す
+export async function createExcludedSeller(input: ExcludedSellerInput) {
+  const result = await ExcludedSellerApi.createExcludedSeller(input)
+  if (result.data) revalidatePaths([['/product-monitoring', 'layout']])
+  return result
+}
+
+export async function destroyExcludedSeller(id: number) {
+  const result = await ExcludedSellerApi.destroyExcludedSeller(id)
   if (result.status === 200) revalidatePaths([['/product-monitoring', 'layout']])
   return result
 }
