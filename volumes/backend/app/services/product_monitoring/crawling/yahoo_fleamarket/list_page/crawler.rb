@@ -82,12 +82,14 @@ module ProductMonitoring
             false
           end
 
+          # 出品者IDは、同じページに埋め込まれた検索結果のデータから出品IDが一致するものを付ける
           def checked_results(page)
             results = page.css('a[href^="/item/"]').filter_map { |link| listing(link) }
             raise "Search page has no extractable listings" if results.empty?
 
             @truncated = true if results.size > MAX_RESULTS_PER_PAGE
-            results.first(MAX_RESULTS_PER_PAGE)
+            sellers = SellerIds.call(page)
+            results.first(MAX_RESULTS_PER_PAGE).map { |result| result.merge(seller_id: sellers[result[:external_id]]) }
           end
 
           def listing(link)

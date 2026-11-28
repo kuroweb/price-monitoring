@@ -31,7 +31,7 @@ RSpec.describe ProductMonitoring::Crawling::YahooFleamarket::ListPage::Crawler d
     )
     result = described_class.call(crawl_setting: setting)
     expect(result[:listings]).to contain_exactly(
-      { platform: "yahoo_fleamarket", external_id: "z123", name: "iPad", price: 12_000, sold: true,
+      { platform: "yahoo_fleamarket", external_id: "z123", name: "iPad", price: 12_000, sold: true, seller_id: nil,
         product_url: "https://paypayfleamarket.yahoo.co.jp/item/z123", thumbnail_url: "https://example.com/image.jpg" },
       include(external_id: "z456")
     )
@@ -75,6 +75,37 @@ RSpec.describe ProductMonitoring::Crawling::YahooFleamarket::ListPage::Crawler d
     expect { described_class.call(crawl_setting: setting) }.to raise_error("All search URLs failed")
     allow(page).to receive_messages(url:, content: "x" * ((10 * 1024 * 1024) + 1))
     expect { described_class.call(crawl_setting: setting) }.to raise_error("All search URLs failed")
+  end
+
+  describe "出品者ID" do
+    def with_items(items)
+      data = { props: { initialState: { searchState: { search: { result: { items: } } } } } }
+      %(<script id="__NEXT_DATA__" type="application/json">#{data.to_json}</script>#{html})
+    end
+
+    it "一覧に埋め込まれた検索結果のデータから、出品IDが一致する出品に出品者IDを付けること" do
+      allow(page).to receive(:content).and_return(with_items([{ id: "other", sellerId: "p1" },
+                                                              { id: "z123", sellerId: "p32664448" }]))
+      expect(described_class.call(crawl_setting: setting)[:listings])
+        .to contain_exactly(include(external_id: "z123", seller_id: "p32664448"))
+    end
+
+    it "データが無い、形が違う、出品者IDの形式が違う、同じ出品IDに違う出品者IDがあるときは不明とし、一覧は取得すること" do
+      contents = [
+        html,
+        %(<script id="__NEXT_DATA__" type="application/json">{</script>#{html}),
+        %(<script id="__NEXT_DATA__" type="application/json">{"props":"x"}</script>#{html}),
+        with_items("x"),
+        with_items([{ id: "z123", sellerId: "has space" }]),
+        with_items([{ id: "z123", sellerId: "p1" }, { id: "z123", sellerId: "p2" }])
+      ]
+      contents.each do |content|
+        allow(page).to receive(:content).and_return(content)
+        expect(described_class.call(crawl_setting: setting)).to include(
+          complete: true, listings: [include(external_id: "z123", seller_id: nil)]
+        )
+      end
+    end
   end
 
   context "検索結果が 404 のとき" do

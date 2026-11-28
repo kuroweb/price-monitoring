@@ -30,7 +30,7 @@ module ProductMonitoring
 
       # 価格帯は SQL で先に絞る。語句は Monitor::Matcher で判定する
       def candidates
-        results = ProductMonitoring::CrawlResult.not_excluded
+        results = ProductMonitoring::CrawlResult.not_excluded.not_excluded_seller
         min_price = monitor.min_price
         max_price = monitor.max_price
         return results unless min_price || max_price

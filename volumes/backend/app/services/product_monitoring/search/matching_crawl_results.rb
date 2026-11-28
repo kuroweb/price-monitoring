@@ -100,7 +100,7 @@ module ProductMonitoring
 
       # 価格帯は SQL で先に絞る。語句は Monitor::Matcher で判定する
       def candidates
-        apply_sale_status(apply_price(ProductMonitoring::CrawlResult.not_excluded))
+        apply_sale_status(apply_price(ProductMonitoring::CrawlResult.not_excluded.not_excluded_seller))
       end
 
       def apply_price(results)

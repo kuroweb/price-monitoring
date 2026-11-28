@@ -18,6 +18,7 @@ module ProductMonitoring
           def call
             crawled = Crawler.call(crawl_setting:)
             matched = crawled[:listings].select { |listing| CrawlSetting::Matcher.call(crawl_setting:, listing:) }
+            log_seller_coverage(matched)
             # 保存すると販売状態が変わるので、一覧で初めて売り切れになった出品を先に求める
             newly_sold_ids = newly_sold_ids(matched)
             ProductMonitoring::CrawlResult.transaction do
@@ -31,6 +32,13 @@ module ProductMonitoring
 
           attr_reader :crawl_setting
 
+          # 一覧から出品者IDを読めた件数。サイトの構造が変わって読めなくなったことに気付くために出す
+          def log_seller_coverage(matched)
+            Rails.logger.info("Product crawl seller ids: setting_id=#{crawl_setting.id} " \
+                              "platform=#{SearchUrl::PLATFORM} listings=#{matched.size} " \
+                              "identified=#{matched.count { |listing| listing[:seller_id] }}")
+          end
+
           # 条件に一致した出品を保存する。除外した出品も価格などは更新し、excluded_at は上書きしない
           def save(matched)
             priced = matched.reject { |listing| listing[:price].nil? }
@@ -40,7 +48,8 @@ module ProductMonitoring
             update_listed_sold(priced)
           end
 
-          # 内容が変わったときだけ更新日時を進める。売れた日は最初に記録した日を保ち、即決価格は一覧に無ければ保つ。
+          # 内容が変わったときだけ更新日時を進める。売れた日は最初に記録した日を保ち、即決価格と出品者IDは一覧に無ければ保つ。
+          # 出品者IDの補完は個別確認の間隔に影響させないよう、更新日時を進める内容に含めない。
           # 一覧の全件を1文で書き込むので、モデルの検証は通さない
           def upsert_rows(priced)
             rows = priced.map { |listing| row(listing) }
@@ -51,7 +60,7 @@ module ProductMonitoring
                   AND ends_at <=> VALUES(ends_at) AND buyout_price <=> COALESCE(VALUES(buyout_price), buyout_price),
                   product_monitoring_crawl_results.updated_at, VALUES(updated_at)),
                 name = VALUES(name), product_url = VALUES(product_url), thumbnail_url = VALUES(thumbnail_url),
-                price = VALUES(price), ends_at = VALUES(ends_at),
+                price = VALUES(price), ends_at = VALUES(ends_at), seller_id = COALESCE(VALUES(seller_id), seller_id),
                 buyout_price = COALESCE(VALUES(buyout_price), product_monitoring_crawl_results.buyout_price),
                 sold_at = COALESCE(product_monitoring_crawl_results.sold_at, IF(VALUES(sold), VALUES(sold_at), NULL)),
                 recency_at = IF(IFNULL(VALUES(sold), 0),
@@ -62,9 +71,9 @@ module ProductMonitoring
 
           def row(listing)
             { crawl_setting_id: crawl_setting.id, thumbnail_url: nil, sold: nil, buyout_price: nil,
-              ends_at: nil, sold_at: nil }.merge(
+              ends_at: nil, sold_at: nil, seller_id: nil }.merge(
                 listing.slice(:platform, :external_id, :name, :product_url, :thumbnail_url, :price, :sold,
-                              :buyout_price, :ends_at, :sold_at)
+                              :buyout_price, :ends_at, :sold_at, :seller_id)
               ).merge(recency_at: inserted_recency(listing))
           end
 

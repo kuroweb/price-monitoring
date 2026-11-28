@@ -104,4 +104,17 @@ RSpec.describe ProductMonitoring::Notification::NewestNotifier do
 
     expect(setting.reload.newest_notified_until).to be_nil
   end
+
+  it "除外する出品者の出品は、出品者IDが不明な別の収集設定の同じ出品も含めて新着にしないこと" do
+    create(:product_monitoring_excluded_seller, platform: "mercari", seller_id: "Seller_1")
+    request = stub_request(:post, webhook).to_return(status: 204)
+    evaluate(start)
+    save_result(start + 1.minute, name: "phone excluded", platform: "mercari", external_id: "m1", seller_id: "Seller_1")
+    save_result(start + 2.minutes, name: "phone excluded", platform: "mercari", external_id: "m1")
+    save_result(start + 3.minutes, name: "phone unknown", platform: "mercari", external_id: "m2")
+    evaluate(start + 10.minutes)
+
+    expect(request.with { |req| JSON.parse(req.body)["content"].include?("新着1件") }).to have_been_requested.once
+    expect(request.with { |req| JSON.parse(req.body)["content"].include?("phone excluded") }).not_to have_been_requested
+  end
 end

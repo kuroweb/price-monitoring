@@ -2,7 +2,8 @@ module ProductMonitoring
   module Crawling
     module YahooAuction
       module ListPage
-        # 出品中・落札相場の検索結果1ページを解析し、出品と次ページのURLを返す
+        # 出品中・落札相場の検索結果1ページを解析し、出品と次ページのURLを返す。
+        # 出品者IDは、ページに埋め込まれた検索結果のデータから、出品IDが一致するものを付ける
         class Parser
           PRODUCT_SELECTOR = 'li:has(> div a[href*="jp/auction/"])'.freeze
           TITLE_SELECTOR = 'a[href*="jp/auction/"].wb_break-all'.freeze
@@ -44,7 +45,11 @@ module ProductMonitoring
 
             { platform: SearchUrl::PLATFORM, external_id: id, name: title.text.strip, price: price,
               buyout_price: buyout, product_url: "https://#{SearchUrl::HOST}/jp/auction/#{id}",
-              thumbnail_url: thumbnail_url(item) }.merge(sale(item))
+              thumbnail_url: thumbnail_url(item), seller_id: seller_ids[id] }.merge(sale(item))
+          end
+
+          def seller_ids
+            @seller_ids ||= SellerIds.call(page)
           end
 
           def auction_id(title)

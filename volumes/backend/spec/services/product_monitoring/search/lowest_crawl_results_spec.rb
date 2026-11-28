@@ -48,4 +48,15 @@ RSpec.describe ProductMonitoring::Search::LowestCrawlResults do
     setting.update!(max_price: nil)
     expect(described_class.call(monitor: setting)).to eq([paid])
   end
+
+  it "除外する出品者の出品を、出品者IDが不明な別の収集設定の同じ出品も含めて最安値から外すこと" do
+    setting = ProductMonitoring::Monitor.create!(name: "phone")
+    create(:product_monitoring_excluded_seller, platform: "mercari", seller_id: "Seller_1")
+    create(:product_monitoring_crawl_result, platform: "mercari", external_id: "a", price: 100, sold: false)
+    create(:product_monitoring_crawl_result, platform: "mercari", external_id: "a", price: 100, sold: false,
+                                             seller_id: "Seller_1")
+    unknown = create(:product_monitoring_crawl_result, platform: "mercari", external_id: "b", price: 200, sold: false)
+
+    expect(described_class.call(monitor: setting)).to eq([unknown])
+  end
 end

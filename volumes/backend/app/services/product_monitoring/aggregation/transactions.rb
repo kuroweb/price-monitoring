@@ -12,10 +12,11 @@ module ProductMonitoring
         @end_date = end_date.to_date
       end
 
-      # 除外した収集結果は対象外。複数の収集設定に同じ出品がある場合は external_id で1件にまとめる
+      # 除外した収集結果と、除外する出品者の出品は対象外。複数の収集設定に同じ出品がある場合は external_id で1件にまとめる
       def call
         ProductMonitoring::CrawlResult
           .not_excluded
+          .not_excluded_seller
           .where(sold_at: start_date.in_time_zone.beginning_of_day..end_date.in_time_zone.end_of_day)
           .order(:id)
           .select { |result| Monitor::Matcher.call(monitor:, listing: result) }

@@ -23,6 +23,7 @@ Rails.application.routes.draw do # rubocop:disable Metrics/BlockLength
           end
         end
         resources :daily_market_prices, only: %i[index]
+        resources :excluded_sellers, only: %i[index create destroy]
       end
     end
   end
