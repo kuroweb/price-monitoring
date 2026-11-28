@@ -6,4 +6,4 @@
 | [内部仕様](internal-spec.md) | 保存、抽出、取得、ジョブの仕組み |
 | [API](api.md) | エンドポイントの項目と JSON |
 | [オペレーション](operations.md) | 画面の操作手順 |
-| [DB](database.md) | この機能のテーブル定義とテーブル間の関連 |
+| [DB](database.md) | この機能のテーブル間の関連（ER 図） |

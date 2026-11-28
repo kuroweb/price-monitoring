@@ -7,7 +7,7 @@
 | [Backend](backend/README.md) | BFF / batch の責務分離・テスト方針・運用手順 |
 | [Frontend](frontend/README.md) | frontend の責務分離・Lint・テスト方針 |
 | [認証基盤](auth-provider/README.md) | Provider / Client の構成、認証固有の初回準備・検証・Kubernetes 運用 |
-| [Database](database/README.md) | BFF / batch のデータ領域の分け方、ER、アソシエーション |
+| [Database](database/README.md) | BFF / batch のテーブル定義 |
 | [CI/CD と自動レビュー](cicd/README.md) | CI/CD、Dependabot、PR 自動レビュー、全イメージの手動デプロイ |
 
 ## ローカル開発
