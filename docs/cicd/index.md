@@ -46,6 +46,8 @@ Frontend CI は `--no-deps` で実行し、バックエンド・DB・認証ア�
 
 Docker イメージと Dockerfile 内の `npm install` / `pip install` は、この設定の対象に含めない。Playwright のクライアントとサーバーはメジャー・マイナーバージョンを揃える必要がある ([公式仕様](https://playwright.dev/docs/api/class-browsertype))。そのため `playwright-ruby-client` のメジャー・マイナー更新は Dependabot の対象から除外し、サーバーと合わせて手動で更新する。Camoufox 0.5.8 は Playwright 1.63 未満を要求するため ([依存要件](https://pypi.org/project/camoufox/0.5.8/))、更新時は `containers/backend_playwright/**` と `containers/backend_camoufox/**` の指定、および `ProductMonitoring::Crawling::Client` / `Crawl::CamoufoxClient` の接続APIを合わせて確認する。これらのイメージには独立したCIジョブがないため、各Dockerfileのビルドと両方の接続確認を行う。
 
+Frontend の `typescript` は 7 系への更新を Dependabot の対象から除外する。typescript-eslint が TypeScript 7 に対応しておらず、7 系では lint が動かないためである。typescript-eslint の peer の範囲に 7 系が入ったら除外を外して更新する。
+
 Dependabot alerts とセキュリティ更新 PR の自動作成は、GitHub のリポジトリ設定で別途有効化する。設定項目の意味は [GitHub の公式資料](https://docs.github.com/en/code-security/reference/supply-chain-security/dependabot-options-reference)を参照する。
 
 ## 変更検出と CI/CD
