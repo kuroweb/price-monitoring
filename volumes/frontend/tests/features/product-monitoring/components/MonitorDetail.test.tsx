@@ -34,7 +34,7 @@ const monitor: Monitor = {
 const listing: CrawlResult = {
   id: 7, crawlSettingId: 1, platform: 'iosys', externalId: 'listing-1',
   name: 'iPad 128GB', productUrl: 'https://example.com/item', thumbnailUrl: null,
-  price: 30000, buyoutPrice: null, sold: false, soldAt: null, endsAt: null, excludedAt: null,
+  price: 30000, buyoutPrice: null, sold: false, soldAt: null, endsAt: null, excludedAt: null, sellerId: null,
 }
 
 beforeEach(() => vi.clearAllMocks())

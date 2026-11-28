@@ -10,6 +10,7 @@ interface Props {
   variant?: 'search'
   disabled?: boolean
   onExclude?: (item: CrawlResult) => void
+  onExcludeSeller?: (item: CrawlResult) => void
   onDelete?: (item: CrawlResult) => void
 }
 
@@ -25,14 +26,18 @@ export default function CrawlResultCard({
   variant,
   disabled,
   onExclude,
+  onExcludeSeller,
   onDelete,
 }: Props) {
   const date = dateLabel(item)
+  // 出品者IDが取れていない出品は出品者を照合できないので、項目を出さない
+  const excludeSeller = item.sellerId ? onExcludeSeller : undefined
   const search = variant === 'search'
 
   return (
     <article className='card h-full overflow-hidden bg-base-100 shadow-md'>
-      <figure className={`relative aspect-square ${search && !item.thumbnailUrl ? 'bg-base-300' : 'bg-white'}`}>
+      {/* 狭いカードでは「…」メニューが画像より縦に長いので、画像の枠で切らずカードの枠まで出す */}
+      <figure className={`relative aspect-square overflow-visible ${search && !item.thumbnailUrl ? 'bg-base-300' : 'bg-white'}`}>
         <a
           href={item.productUrl}
           target='_blank'
@@ -64,8 +69,8 @@ export default function CrawlResultCard({
             売り切れ
           </span>
         )}
-        {(onExclude || onDelete) && (
-          <div className='dropdown dropdown-left dropdown-start absolute top-1 right-1'>
+        {(onExclude || excludeSeller || onDelete) && (
+          <div className='dropdown dropdown-bottom dropdown-end absolute top-1 right-1'>
             <button
               type='button'
               aria-label={`${item.name}の操作`}
@@ -83,6 +88,18 @@ export default function CrawlResultCard({
                     onClick={() => onExclude(item)}
                   >
                     除外
+                  </button>
+                </li>
+              )}
+              {excludeSeller && (
+                <li>
+                  <button
+                    type='button'
+                    className='btn btn-ghost btn-sm'
+                    disabled={disabled}
+                    onClick={() => excludeSeller(item)}
+                  >
+                    出品者を除外
                   </button>
                 </li>
               )}

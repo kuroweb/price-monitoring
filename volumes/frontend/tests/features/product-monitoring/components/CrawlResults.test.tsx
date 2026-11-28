@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
+  createExcludedSeller,
   getCrawlResults,
   destroyCrawlResult,
   setCrawlResultExcluded,
@@ -27,6 +28,7 @@ vi.mock('@/features/product-monitoring/api/actions', () => ({
   syncCrawlSetting: vi.fn(),
   setCrawlResultExcluded: vi.fn(),
   getCrawlResults: vi.fn(),
+  createExcludedSeller: vi.fn(),
 }))
 
 const setting: CrawlSetting = {
@@ -55,6 +57,7 @@ const result: CrawlResult = {
   soldAt: null,
   endsAt: null,
   excludedAt: null,
+  sellerId: null,
 }
 
 beforeEach(() => {
@@ -148,6 +151,65 @@ describe('収集結果', () => {
     await user.click(screen.getByRole('button', { name: '除外' }))
     await waitFor(() => expect(setCrawlResultExcluded).toHaveBeenCalledWith(10, true))
     expect(refresh).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('出品者の除外', () => {
+  const sellerResult = { ...result, platform: 'yahoo_auction', sellerId: 'seller-1' }
+  const created = {
+    data: { id: 1, platform: 'yahoo_auction', sellerId: 'seller-1', createdAt: '2026-11-28T00:00:00Z' },
+    error: null,
+    status: 200,
+  }
+
+  it('出品者IDが分からない収集結果には項目を出さないこと', () => {
+    render(
+      <CrawlSettingDetail
+        crawlSetting={setting}
+        crawlResults={[sellerResult, { ...result, id: 11, name: '出品者不明' }]}
+      />,
+    )
+    const [identified, unknown] = screen.getAllByRole('article')
+    expect(within(identified).getByRole('button', { name: '出品者を除外' })).toBeInTheDocument()
+    expect(within(unknown).queryByRole('button', { name: '出品者を除外' })).not.toBeInTheDocument()
+    expect(within(unknown).getByRole('button', { name: '除外' })).toBeInTheDocument()
+  })
+
+  it('確認後にサイトと出品者IDを登録して画面を更新し、登録済みも成功として扱うこと', async () => {
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValueOnce(false).mockReturnValue(true)
+    vi.mocked(createExcludedSeller)
+      .mockResolvedValueOnce(created)
+      .mockResolvedValueOnce({ data: null, error: { code: 409, message: 'Conflict.', details: [] }, status: 409 })
+    const user = userEvent.setup()
+    render(<CrawlSettingDetail crawlSetting={setting} crawlResults={[sellerResult]} />)
+
+    await user.click(screen.getByRole('button', { name: '出品者を除外' }))
+    expect(confirm).toHaveBeenCalledWith('ヤフオクの出品者「seller-1」の出品をすべて除外しますか？')
+    expect(createExcludedSeller).not.toHaveBeenCalled()
+
+    await user.click(screen.getByRole('button', { name: '出品者を除外' }))
+    await waitFor(() => expect(refresh).toHaveBeenCalledTimes(1))
+    expect(createExcludedSeller).toHaveBeenCalledWith({ platform: 'yahoo_auction', sellerId: 'seller-1' })
+    expect(toast.success).toHaveBeenCalledWith('出品者を除外しました')
+
+    await user.click(screen.getByRole('button', { name: '出品者を除外' }))
+    await waitFor(() => expect(refresh).toHaveBeenCalledTimes(2))
+    expect(toast.success).toHaveBeenLastCalledWith('この出品者は除外済みです')
+    expect(toast.error).not.toHaveBeenCalled()
+    confirm.mockRestore()
+  })
+
+  it('登録に失敗したときは理由を出し、画面を更新しないこと', async () => {
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    vi.mocked(createExcludedSeller).mockResolvedValue({
+      data: null, error: { code: 400, message: 'サイトの指定が不正です', details: [] }, status: 400,
+    })
+    const user = userEvent.setup()
+    render(<CrawlSettingDetail crawlSetting={setting} crawlResults={[sellerResult]} />)
+
+    await user.click(screen.getByRole('button', { name: '出品者を除外' }))
+    await waitFor(() => expect(toast.error).toHaveBeenCalledWith('サイトの指定が不正です'))
+    expect(refresh).not.toHaveBeenCalled()
   })
 })
 

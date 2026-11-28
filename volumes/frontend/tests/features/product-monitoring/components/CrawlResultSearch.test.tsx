@@ -4,7 +4,13 @@ import { NuqsTestingAdapter } from 'nuqs/adapters/testing'
 import { toast } from 'react-toastify'
 import { beforeEach, expect, it, vi } from 'vitest'
 
-import { createMonitor, destroyCrawlResult, searchCrawlResults, setCrawlResultExcluded } from '@/features/product-monitoring/api/actions'
+import {
+  createExcludedSeller,
+  createMonitor,
+  destroyCrawlResult,
+  searchCrawlResults,
+  setCrawlResultExcluded,
+} from '@/features/product-monitoring/api/actions'
 import type { CrawlResult } from '@/features/product-monitoring/api/types'
 import CrawlResultSearch from '@/features/product-monitoring/components/CrawlResultSearch'
 
@@ -15,6 +21,7 @@ vi.mock('@/features/product-monitoring/api/actions', () => ({
   createMonitor: vi.fn(),
   setCrawlResultExcluded: vi.fn(),
   destroyCrawlResult: vi.fn(),
+  createExcludedSeller: vi.fn(),
 }))
 
 function renderSearch(searchParams = '') {
@@ -45,6 +52,7 @@ const listing: CrawlResult = {
   soldAt: null,
   endsAt: null,
   excludedAt: null,
+  sellerId: null,
 }
 
 beforeEach(() => vi.resetAllMocks())
@@ -370,6 +378,35 @@ it('除外と削除に失敗したときは検索をやり直さず、カード�
     await waitFor(() => expect(toast.error).toHaveBeenLastCalledWith('通信に失敗しました'))
     expect(searchCrawlResults).toHaveBeenCalledTimes(1)
     expect(screen.getByText('iPad Pro')).toBeInTheDocument()
+  } finally {
+    confirm.mockRestore()
+  }
+})
+
+it('確認後に出品者を除外し、検索をやり直してその出品者の出品を消す', async () => {
+  const user = userEvent.setup()
+  const confirm = vi.spyOn(window, 'confirm').mockReturnValue(true)
+  const target = { ...listing, id: 11, name: '対象の出品', platform: 'mercari', sellerId: 'Seller_1' }
+  const other = { ...listing, id: 22, name: '残る出品', platform: 'mercari', sellerId: 'other' }
+  vi.mocked(searchCrawlResults)
+    .mockResolvedValueOnce(resultPage([target, other], 1, false))
+    .mockResolvedValueOnce(resultPage([other], 1, false))
+  vi.mocked(createExcludedSeller).mockResolvedValue({
+    data: { id: 1, platform: 'mercari', sellerId: 'Seller_1', createdAt: '2026-11-28T00:00:00Z' },
+    error: null,
+    status: 200,
+  })
+  renderSearch()
+
+  try {
+    await user.click(screen.getByRole('button', { name: '検索' }))
+    await user.click(cardFor('対象の出品').getByRole('button', { name: '出品者を除外' }))
+    expect(confirm).toHaveBeenCalledWith('メルカリの出品者「Seller_1」の出品をすべて除外しますか？')
+    await waitFor(() => expect(screen.queryByText('対象の出品')).not.toBeInTheDocument())
+    expect(createExcludedSeller).toHaveBeenCalledWith({ platform: 'mercari', sellerId: 'Seller_1' })
+    expect(searchCrawlResults).toHaveBeenCalledTimes(2)
+    expect(toast.success).toHaveBeenCalledWith('出品者を除外しました')
+    expect(screen.getByText('残る出品')).toBeInTheDocument()
   } finally {
     confirm.mockRestore()
   }
