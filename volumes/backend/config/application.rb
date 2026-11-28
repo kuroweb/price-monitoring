@@ -29,4 +29,4 @@ module PriceMonitoring
   end
 end
 
-# review trigger verification (do not merge)
+# Trigger verification only. Do not merge.
