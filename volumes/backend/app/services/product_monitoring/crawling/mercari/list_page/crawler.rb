@@ -66,8 +66,7 @@ module ProductMonitoring
             results
           end
 
-          # JavaScript で描画するので、描画を待ってスクロールしてから HTML を取り出す。
-          # 描画のために受け取った検索 API の応答から、出品IDと出品者IDの組もあわせて返す
+          # JavaScript で描画するので、描画を待ってスクロールしてから HTML を取り出す
           def fetch_page(uri)
             Client.execute do |page|
               seller_ids = SellerIds.observe(page)

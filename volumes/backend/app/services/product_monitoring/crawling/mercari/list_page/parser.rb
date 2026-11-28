@@ -2,8 +2,7 @@ module ProductMonitoring
   module Crawling
     module Mercari
       module ListPage
-        # 検索結果1ページを解析し、出品と次ページのURLを返す。
-        # 出品者IDは、同じページの描画で受け取った出品IDと出品者IDの組から、出品IDが一致するものを付ける
+        # 検索結果1ページを解析し、出品と次ページのURLを返す
         class Parser
           def self.call(...)
             new(...).call

@@ -6,7 +6,7 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Crawler do
   let(:page) { instance_double(Playwright::Page, mouse: instance_double(Playwright::Mouse), url:) }
   let(:status) { 200 }
   let(:search_api_url) { "https://api.mercari.jp/v2/entities:search" }
-  # 一覧の描画中にブラウザが受け取る応答。goto の間に、登録されたイベントの受け手へ渡す
+  # 実際のブラウザでは goto の間に応答イベントが届くため、goto の中で受け手へ渡す
   let(:responses) { [] }
 
   def item(id)
@@ -110,7 +110,6 @@ RSpec.describe ProductMonitoring::Crawling::Mercari::ListPage::Crawler do
   end
 
   describe "出品者ID" do
-    # 開いた URL ごとに、描画中に受け取る検索 API の応答を変える
     def respond_on_goto
       listener = nil
       allow(page).to receive(:on).with("response", anything) { |_, callback| listener = callback }

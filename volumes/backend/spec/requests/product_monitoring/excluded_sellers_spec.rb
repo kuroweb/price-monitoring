@@ -10,7 +10,6 @@ RSpec.describe "除外する出品者", type: :request do
     id = response.parsed_body.fetch("id")
     later = create(:product_monitoring_excluded_seller, platform: "yahoo_auction", seller_id: "a")
 
-    # 新しく登録した順に返す
     get path
     expect(response.parsed_body.fetch("excluded_sellers").pluck("id")).to eq([later.id, id])
 

@@ -25,7 +25,7 @@ module ProductMonitoring
 
           attr_reader :crawl_setting
 
-          # 一覧から出品者IDを読めた件数。サイトの構造が変わって読めなくなったことに気付くために出す
+          # サイトの構造が変わって出品者IDを読めなくなったことに気付くため
           def log_seller_coverage(matched)
             Rails.logger.info("Product crawl seller ids: setting_id=#{crawl_setting.id} " \
                               "platform=#{SearchUrl::PLATFORM} listings=#{matched.size} " \
@@ -41,8 +41,8 @@ module ProductMonitoring
             update_listed_sold(priced)
           end
 
-          # 内容が変わったときだけ更新日時を進める。売れた日は最初に記録した日を保ち、即決価格と出品者IDは一覧に無ければ保つ。
-          # 出品者IDの補完は個別確認の間隔に影響させないよう、更新日時を進める内容に含めない。
+          # 内容が変わったときだけ更新日時を進める。売れた日は最初に記録した日を保ち、即決価格は一覧に無ければ保つ。
+          # 出品者IDの補完で個別確認の間隔が変わらないよう、更新日時を進める比較に seller_id を含めない
           # 一覧の全件を1文で書き込むので、モデルの検証は通さない
           def upsert_rows(priced)
             rows = priced.map { |listing| row(listing) }

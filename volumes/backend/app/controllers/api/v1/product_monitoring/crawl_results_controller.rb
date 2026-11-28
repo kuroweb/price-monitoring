@@ -1,8 +1,7 @@
 module Api
   module V1
     module ProductMonitoring
-      # 収集結果。crawl_setting_id でその収集設定の収集結果に絞り、excluded=true で除外した収集結果だけを返す。
-      # 除外する出品者の出品は通常の一覧に出さない。excluded=true は収集結果ごとの除外だけを返す
+      # 収集結果。crawl_setting_id でその収集設定の収集結果に絞り、excluded=true で除外した収集結果だけを返す
       class CrawlResultsController < Api::ApplicationController
         PREVIEW_COUNT = 8
         ExtractionCriteria = ::ProductMonitoring::Monitor::ExtractionCriteria

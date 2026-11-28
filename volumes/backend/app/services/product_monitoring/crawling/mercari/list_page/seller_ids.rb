@@ -2,13 +2,11 @@ module ProductMonitoring
   module Crawling
     module Mercari
       module ListPage
-        # 一覧の描画でブラウザが受け取った検索 API の応答から、出品IDと出品者IDの組を読む。別のリクエストは送らない
         class SellerIds
           HOST = "api.mercari.jp".freeze
           PATH = "/v2/entities:search".freeze
           MAX_RESPONSE_BYTES = 10 * 1024 * 1024
 
-          # ページが受け取る応答のうち検索 API のものを集める。
           # イベントはブラウザとの通信のスレッドで呼ばれるので、ここでは応答を選ぶだけにして本文は call で読む
           def self.observe(page)
             new.tap { |seller_ids| page.on("response", ->(response) { seller_ids.add(response) }) }
@@ -22,7 +20,6 @@ module ProductMonitoring
             @responses << response if search_api?(response)
           end
 
-          # 応答を読めない、形が違うといった場合は出品者IDを不明とし、一覧の取得は続ける
           def call
             pairs = @responses.flat_map do |response|
               items(response).filter_map { |item| [item["id"], item["sellerId"]] if item.is_a?(Hash) }

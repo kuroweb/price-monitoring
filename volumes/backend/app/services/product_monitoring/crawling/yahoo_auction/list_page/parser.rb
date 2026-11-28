@@ -2,8 +2,7 @@ module ProductMonitoring
   module Crawling
     module YahooAuction
       module ListPage
-        # 出品中・落札相場の検索結果1ページを解析し、出品と次ページのURLを返す。
-        # 出品者IDは、ページに埋め込まれた検索結果のデータから、出品IDが一致するものを付ける
+        # 出品中・落札相場の検索結果1ページを解析し、出品と次ページのURLを返す
         class Parser
           PRODUCT_SELECTOR = 'li:has(> div a[href*="jp/auction/"])'.freeze
           TITLE_SELECTOR = 'a[href*="jp/auction/"].wb_break-all'.freeze

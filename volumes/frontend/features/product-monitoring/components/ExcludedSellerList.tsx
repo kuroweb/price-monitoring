@@ -10,14 +10,13 @@ import { createExcludedSeller, destroyExcludedSeller } from '@/features/product-
 import type { ExcludedSeller } from '@/features/product-monitoring/api/types'
 import { platformName } from '@/features/product-monitoring/lib/platform'
 
-// 一覧から出品者IDを読むサイト。対象かどうかの判定はバックエンドが行う
+// 選択肢を出すだけで、対象サイトかどうかの判定はバックエンドが行う
 const PLATFORMS = ['mercari', 'yahoo_fleamarket', 'yahoo_auction']
 
 interface Props {
   excludedSellers: ExcludedSeller[]
 }
 
-// 計測から除外する出品者を、サイトと出品者IDの組で登録・解除する。実行中は二重に実行しない
 export default function ExcludedSellerList({ excludedSellers }: Props) {
   const router = useRouter()
   const [platform, setPlatform] = useState(PLATFORMS[0])

@@ -82,7 +82,6 @@ module ProductMonitoring
             false
           end
 
-          # 出品者IDは、同じページに埋め込まれた検索結果のデータから出品IDが一致するものを付ける
           def checked_results(page)
             results = page.css('a[href^="/item/"]').filter_map { |link| listing(link) }
             raise "Search page has no extractable listings" if results.empty?

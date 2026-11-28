@@ -2,7 +2,6 @@ module ProductMonitoring
   class CrawlResult < ApplicationRecord
     # price は int 列なので、これを超える表示価格は価格なしとして扱う
     MAX_PRICE = 2_147_483_647
-    # サイトの一覧から読む出品者IDと、利用者が登録する出品者IDの形式。合わない値は出品者IDとして扱わない
     SELLER_ID_FORMAT = /\A[A-Za-z0-9_.-]{1,255}\z/
 
     ## associations ##
@@ -14,7 +13,7 @@ module ProductMonitoring
     ## scopes ##
     scope :not_excluded, -> { where(excluded_at: nil) }
     scope :excluded, -> { where.not(excluded_at: nil) }
-    # 除外する出品者の出品を除く。同じ出品の別の収集設定の行で分かった出品者IDも使い、出品者IDが不明な出品は残す
+    # 同じ出品でも収集設定ごとに行が分かれ、出品者IDが分かる行と分からない行があるため、出品単位で照合する
     scope :not_excluded_seller, lambda {
       where(<<~SQL.squish)
         NOT EXISTS (

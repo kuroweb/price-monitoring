@@ -1,6 +1,5 @@
 module ProductMonitoring
   class ExcludedSeller
-    # 除外する出品者の入力を検証・正規化して登録する。同じサイトの同じ出品者IDは DB の一意制約で重ねて登録しない
     class Writer
       def self.call(...)
         new(...).call
@@ -27,7 +26,7 @@ module ProductMonitoring
         platform
       end
 
-      # 前後の空白だけを除き、大文字小文字や全角半角は変えずにサイトの表記のまま比べる
+      # サイトの表記のまま完全一致で照合するため、語句と違い大文字小文字や全角半角を正規化しない
       def seller_id
         seller_id = values[:seller_id]
         seller_id = seller_id.strip if seller_id.is_a?(String)
