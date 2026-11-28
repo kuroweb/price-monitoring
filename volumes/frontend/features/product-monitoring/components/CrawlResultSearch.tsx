@@ -253,52 +253,52 @@ export default function CrawlResultSearch() {
       </div>
       {(displayed || loading || error) && (
         <section className='space-y-3 border-t border-base-content/15 pt-4' aria-label='検索結果'>
-          <header className='grid grid-cols-[1fr_auto] items-center gap-3 sm:grid-cols-[1fr_auto_auto]'>
+          <header className='flex flex-wrap items-center justify-between gap-3'>
             <h2 className='text-lg font-semibold'>検索結果</h2>
             {displayed && (
-              <>
-                <select
-                  className='select select-sm min-h-10 w-auto'
-                  aria-label='並び順'
-                  value={displayed.sort}
-                  disabled={pending}
-                  onChange={(event) => void search(
-                    displayed.input, displayed.saleStatus, event.target.value as MonitorCrawlResultSort, 1,
-                  )}
-                >
-                  {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
-                </select>
-                <button
-                  type='button'
-                  className='btn btn-outline btn-primary col-span-2 h-auto min-h-10 w-full py-2 whitespace-normal text-base-content sm:col-span-1 sm:w-auto'
-                  disabled={pending}
-                  onClick={() => setCreatingMonitor(true)}
-                >
-                  この条件でモニタリングを作成
-                </button>
-              </>
+              <button
+                type='button'
+                className='btn btn-outline btn-primary h-auto min-h-10 py-2 whitespace-normal text-base-content'
+                disabled={pending}
+                onClick={() => setCreatingMonitor(true)}
+              >
+                この条件でモニタリングを作成
+              </button>
             )}
           </header>
           {loading && <p role='status' className='text-sm text-base-content/70'>検索中…</p>}
           {error && <p role='alert' className='text-sm text-error'>{error}</p>}
           {displayed && appliedLabels.length > 0 && <CriteriaSummary label='適用中' values={appliedLabels} />}
           {displayed && (
-            <div className='join' role='group' aria-label='販売状態'>
-              {STATUS_FILTERS.map(([value, label]) => (
-                <button
-                  key={value}
-                  type='button'
-                  className={`btn join-item btn-sm ${displayed.saleStatus === value ? 'btn-primary' : 'btn-ghost'}`}
-                  aria-pressed={displayed.saleStatus === value}
-                  disabled={pending}
-                  onClick={() => {
-                    if (value === displayed.saleStatus) return
-                    void search(displayed.input, value, displayed.sort, 1)
-                  }}
-                >
-                  {label}
-                </button>
-              ))}
+            <div className='flex flex-wrap items-center justify-between gap-2'>
+              <div className='join' role='group' aria-label='販売状態'>
+                {STATUS_FILTERS.map(([value, label]) => (
+                  <button
+                    key={value}
+                    type='button'
+                    className={`btn join-item btn-sm ${displayed.saleStatus === value ? 'btn-primary' : 'btn-ghost'}`}
+                    aria-pressed={displayed.saleStatus === value}
+                    disabled={pending}
+                    onClick={() => {
+                      if (value === displayed.saleStatus) return
+                      void search(displayed.input, value, displayed.sort, 1)
+                    }}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+              <select
+                className='select select-sm w-auto'
+                aria-label='並び順'
+                value={displayed.sort}
+                disabled={pending}
+                onChange={(event) => void search(
+                  displayed.input, displayed.saleStatus, event.target.value as MonitorCrawlResultSort, 1,
+                )}
+              >
+                {SORTS.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+              </select>
             </div>
           )}
           {displayed && (
