@@ -30,6 +30,10 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    ignore:
+      # typescript-eslint が TypeScript 7 に対応するまで 6 系に留める。
+      - dependency-name: typescript
+        versions: ["7.x"]
     groups:
       frontend-minor-and-patch:
         patterns: ["*"]
