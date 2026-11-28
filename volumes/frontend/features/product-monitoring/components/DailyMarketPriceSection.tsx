@@ -27,11 +27,9 @@ type View = 'chart' | 'table'
 interface Props {
   monitor: Monitor
   dailyMarketPrices: DailyMarketPrice[]
-  // 取得に失敗したときは null
   transactions: CrawlResult[] | null
 }
 
-// 期間内で取引があった日の件数で重み付けした平均
 const summarize = (results: DailyMarketPrice[]) => {
   const purchased = results.filter((item) => item.averageTransactionPrice != null)
   const count = purchased.reduce((sum, item) => sum + item.transactionCount, 0)

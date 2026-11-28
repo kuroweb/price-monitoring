@@ -37,7 +37,6 @@ module Api
           end
         end
 
-        # 保存済みの条件で取得し、採用した出品を収集結果に保存する
         def sync
           urls_by_platform = ::ProductMonitoring::Crawling::UrlRouter.call(crawl_setting: @crawl_setting)
           urls_by_platform.each_key { |platform| platform::ListPage::SyncJob.perform_async(@crawl_setting.id, true) }

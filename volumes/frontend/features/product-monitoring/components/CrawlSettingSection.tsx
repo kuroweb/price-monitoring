@@ -29,7 +29,6 @@ interface Props {
   crawlResults: CrawlResult[]
 }
 
-// 一覧では新着の数件だけを横に並べ、除外はここでもできる。全件・絞り込み・取得は詳細画面に任せる
 export default function CrawlSettingSection({
   crawlSetting,
   crawlResults,

@@ -8,7 +8,7 @@ const platformNames: Record<string, string> = {
 export const platformName = (platform: string | null) =>
   (platform && platformNames[platform]) || sharedPlatformName(platform)
 
-// 登録画面で検索結果URLのサイトを表示するための対応表。取得可否の判定はバックエンドが行う
+// 表示用の対応表で、取得可否の判定はバックエンドが行う
 const searchUrlHosts: Record<string, string> = {
   'jp.mercari.com': 'mercari',
   'iosys.co.jp': 'iosys',

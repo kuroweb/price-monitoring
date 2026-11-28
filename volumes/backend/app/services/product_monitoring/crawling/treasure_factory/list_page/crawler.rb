@@ -20,7 +20,6 @@ module ProductMonitoring
             @listings = {}
           end
 
-          # 設定の検索結果URLのうちトレファクの分を、ページを送りながら取得する。全URLが失敗したらジョブを失敗にして再試行する
           def call
             succeeded = UrlRouter.call(crawl_setting:).fetch(TreasureFactory, []).map { |url| crawl(url) }
             raise "All search URLs failed" if succeeded.present? && succeeded.none?
@@ -54,8 +53,7 @@ module ProductMonitoring
             results
           end
 
-          # JavaScript なしで描画されるので、スクリプトを止めて取得する。
-          # サイトに拒否されるプロキシがあるので、非 2xx なら接続し直して別のプロキシで試す
+          # JavaScript なしで描画されるのでスクリプトを止め、拒否するプロキシがあるので非 2xx なら別のプロキシで試す
           def fetch_page(uri)
             Retryable.retryable(tries: FETCH_TRIES, on: NonSuccessResponse) do
               Client.execute(block_scripts: true) do |page|
@@ -67,8 +65,7 @@ module ProductMonitoring
             end
           end
 
-          # 売り切れの出品は一覧に価格がないので、販売中の出品だけを返す。
-          # 売り切れだけのページは出品があっても結果が空になる
+          # 売り切れの出品は一覧に価格がないので、販売中の出品だけを返す
           def checked_results(page)
             results = page.css("li.pj-search_item").first(MAX_RESULTS_PER_PAGE).filter_map do |dom|
               id = listing_id(dom)
@@ -105,7 +102,7 @@ module ProductMonitoring
             image_url.present? ? URI.join("https://#{SearchUrl::HOST}", image_url).to_s : nil
           end
 
-          # 「¥1,200」などの表示価格を整数にする。DBの整数の上限を超える値は価格なしとする
+          # DB の int 列を超える値は価格なしとする
           def price(text)
             match = text.to_s.strip.match(/\A[¥￥]?\s*(\d[\d,]*)\s*(?:円)?\s*(?:\(税込\))?\z/)
             value = match && match[1].delete(",").to_i
@@ -122,7 +119,6 @@ module ProductMonitoring
             uri.dup.tap { |next_uri| next_uri.query = URI.encode_www_form(query) }
           end
 
-          # リダイレクトで別のホストへ移っていないことと、HTML の大きさを確かめる
           def checked_content(page)
             uri = URI.parse(page.url)
             valid = uri.scheme == "https" && uri.host == SearchUrl::HOST && uri.port == 443

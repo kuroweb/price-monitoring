@@ -2,7 +2,6 @@ module ProductMonitoring
   module Crawling
     module Janpara
       module ListPage
-        # 検索結果1ページを解析し、出品と次ページのURLを返す
         class Parser
           def self.call(...)
             new(...).call
@@ -27,7 +26,6 @@ module ProductMonitoring
 
           attr_reader :uri, :page
 
-          # 商品グループの SRCODE または ITMCODE を出品IDにする
           def listing_id(dom)
             link = detail_link(dom)
             return unless link
@@ -56,7 +54,7 @@ module ProductMonitoring
               sold: dom.at_css(".search_nostock").present? }
           end
 
-          # 商品グループの下限価格を価格にする。DBの整数の上限を超える値は価格なしとする
+          # DB の int 列を超える値は価格なしとする
           def price(dom)
             amounts = dom.css(".item_amount")
             return if amounts.size > 2

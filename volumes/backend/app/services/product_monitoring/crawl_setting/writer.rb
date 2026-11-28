@@ -1,6 +1,5 @@
 module ProductMonitoring
   class CrawlSetting
-    # 収集設定の入力を検証・正規化して保存する
     class Writer
       MAX_URLS = 5
       MAX_KEYWORDS = 50
@@ -23,7 +22,6 @@ module ProductMonitoring
         assign
         ProductMonitoring::CrawlSetting.transaction do
           crawl_setting.save!
-          # 条件を変えたら、新しい条件に一致しなくなった保存済みの結果をすぐに取り除く
           if crawl_setting.saved_changes.keys.intersect?(CONDITION_COLUMNS)
             Crawling::CrawlResultCleaner.call(crawl_setting:)
           end
@@ -35,7 +33,6 @@ module ProductMonitoring
 
       attr_reader :crawl_setting, :values
 
-      # 検索ワードから作るURLも、保存前にサイトの条件（Yahoo!フリマの検索ワードなど）で検証する
       def assign
         normalize
         crawl_setting.assign_attributes(
@@ -68,7 +65,6 @@ module ProductMonitoring
         raise ArgumentError, "最低価格は最高価格以下にしてください"
       end
 
-      # 未入力は価格帯の上限・下限なしとする
       def price(value)
         return if value.nil?
 

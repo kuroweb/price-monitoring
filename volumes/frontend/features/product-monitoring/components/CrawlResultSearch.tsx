@@ -119,8 +119,7 @@ export default function CrawlResultSearch() {
       const response = await searchCrawlResults({ ...extractionCriteria(submitted), saleStatus, sort, page })
       if (response.data) {
         setDisplayed({ input: submitted, saleStatus, sort, results: response.data })
-        // 成功した検索だけを残す。初期値は nuqs がクエリから外す。
-        // 待たない。待つと検索中の無効化がフォーカスを外し、失敗すると成功した検索まで失敗になる。
+        // 待つと検索中の無効化がフォーカスを外し、失敗すると成功した検索まで失敗になるので待たない
         void setQuery({
           required: submitted.required,
           excluded: submitted.excluded,
@@ -165,7 +164,7 @@ export default function CrawlResultSearch() {
     if (!displayed) return
     const { input, saleStatus, sort } = displayed
     const results = await search(input, saleStatus, sort, displayed.results.page)
-    // 空のページが残ると前のページへ戻れない。遡るのは一度だけで、1ページ目は戻らない。
+    // 空のページが残ると前のページへ戻れない
     if (results && results.crawlResults.length === 0 && results.page > 1) {
       await search(input, saleStatus, sort, results.page - 1)
     }

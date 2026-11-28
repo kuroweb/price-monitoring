@@ -21,7 +21,6 @@ module ProductMonitoring
             @listings = {}
           end
 
-          # 設定の検索結果URLのうちヤフオクの分を、ページを送りながら取得する。全URLが失敗したらジョブを失敗にして再試行する
           def call
             succeeded = UrlRouter.call(crawl_setting:).fetch(YahooAuction, []).map { |url| crawl(url) }
             raise "All search URLs failed" if succeeded.present? && succeeded.none?
@@ -55,7 +54,7 @@ module ProductMonitoring
             results
           end
 
-          # 既存クローラーと同じく、一覧表示・100件単位にし、abatch=1,2 で Yahoo!フリマの出品を除く
+          # abatch=1,2 で Yahoo!フリマの出品を除く
           def search_uri(uri)
             query = URI.decode_www_form(uri.query)
             query.reject! { |key, _| %w[mode n abatch].include?(key) }
@@ -75,7 +74,6 @@ module ProductMonitoring
             end
           end
 
-          # リダイレクトで別のホストへ移っていないことと、HTML の大きさを確かめる
           def checked_content(page)
             uri = URI.parse(page.url)
             valid = uri.scheme == "https" && uri.host == SearchUrl::HOST && uri.port == 443

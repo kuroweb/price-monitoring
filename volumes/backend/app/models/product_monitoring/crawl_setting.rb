@@ -5,14 +5,8 @@ module ProductMonitoring
       attribute name, default: -> { [] }
     end
 
-    ## associations ##
     has_many :crawl_results, dependent: :destroy
 
-    ## validations ##
     validates :name, presence: true
-
-    ## scopes ##
-
-    ## methods ##
   end
 end
