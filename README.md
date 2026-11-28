@@ -151,17 +151,18 @@ flowchart LR
 初めて開発する場合は [初回セットアップ](docs/development/setup.md) の順に、証明書・hosts・環境変数・DB・認証クライアントを準備する。
 アプリのディレクトリから読み始める場合は [backend](volumes/backend/README.md) / [frontend](volumes/frontend/README.md) / [auth-provider](volumes/auth-provider/README.md) を参照する。
 
-- [ローカル開発](docs/development/index.md) — 環境の構成と、セットアップ・日常操作・テストの案内
-- [認証固有の準備・検証](docs/development/auth-provider/index.md)
+- [ローカル開発](docs/development/README.md) — セットアップ・日常操作・テストの案内
+- [ローカル開発環境の構成](docs/development/environment.md)
+- [認証固有の準備・検証](docs/development/auth-provider/README.md)
 - [Seed データの投入](docs/development/backend/operations/seeds.md)
-- [CI/CD・PR 自動レビュー・手動デプロイ](docs/development/cicd/index.md)
+- [CI/CD・PR 自動レビュー・手動デプロイ](docs/development/cicd/README.md)
 
 ## Docs
 
-[文書ガイド・索引](docs/index.md) に、README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、話題ごとの正本、文書の更新規約・記述規約をまとめている。
+[文書の索引](docs/README.md) に、文書ごとの内容をまとめている。README・AGENTS.md・docs・アプリ別 README の読み手、書く内容、文書の更新規約・記述規約は [文書規約](docs/development/documentation-conventions.md) にまとめている。
 
-- [Backend の責務分離](docs/development/backend/index.md)
-- [Frontend の責務分離](docs/development/frontend/index.md)
-- [Database 設計](docs/development/database/index.md)
+- [Backend の責務分離](docs/development/backend/architecture.md)
+- [Frontend の責務分離](docs/development/frontend/architecture.md)
+- [Database 設計](docs/development/database/data-domains.md)
 - [AI エージェント向け開発規約](AGENTS.md)
 - [AI-DLC での開発](docs/development/ai-dlc.md)

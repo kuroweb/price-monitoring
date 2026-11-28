@@ -1,36 +1,7 @@
-# 開発
+# ローカル開発環境の構成
 
-開発参加者向けに、Backend・Frontend・認証・Database・CI/CD の各領域の文書と、ローカル開発環境の構成、セットアップ・日常操作・テストの手順を案内する。
+開発参加者向けに、ローカル開発環境の用語・接続先・API の接続経路を解説する。
 手順のシェル例は、特に書かない限りホストのリポジトリルートから実行する。アプリの言語ツールは Docker Compose / just 経由で対象コンテナ内で実行する。実行先の全一覧と AI 向けの制約は [AGENTS.md](../../AGENTS.md#コマンドの実行場所) を参照する。
-
-## 領域別の文書
-
-| 領域 | 文書 |
-| --- | --- |
-| BFF / batch の責務分離、Rails 更新、seed 投入 | [Backend](backend/index.md) |
-| frontend の責務分離 | [Frontend](frontend/index.md) |
-| Provider / Client の配置・境界、認証固有の初回準備・検証 | [認証基盤](auth-provider/index.md) |
-| BFF / batch のデータ領域の分け方、ER、アソシエーション | [Database](database/index.md) |
-| CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](cicd/index.md) |
-| レイヤーに共通するコードの書き方（コメントなど） | [コーディング規約](coding-conventions.md) |
-
-## ローカル開発の文書
-
-| 目的 | 文書 |
-| --- | --- |
-| 新しいチェックアウトで環境を準備する | [初回セットアップ](setup.md) |
-| 起動・停止、依存関係の更新、本番ログ調査、MCP の初回導入 | [日常操作](operations/index.md) |
-| RSpec・静的検証・frontend のテスト | [テスト](testing.md) |
-| Orca の worktree でメインと並行して動かす | [Orca の worktree](worktree.md) |
-| 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](remote.md) |
-| AI-DLC で機能の検討・実装を進める | [AI-DLC](ai-dlc.md) |
-
-関連する手順:
-
-- [Seed データの投入](backend/operations/seeds.md)
-- [認証基盤の準備・検証](auth-provider/index.md)
-- [CI/CD と自動レビュー](cicd/index.md)
-- [文書全体の索引](../index.md)
 
 ## 用語
 

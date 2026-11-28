@@ -26,7 +26,7 @@ analyzed:
     - volumes/backend/app/sidekiq/product_monitoring/crawl_detail_job.rb
     - volumes/backend/spec/services/product_monitoring/crawler_spec.rb
     - volumes/backend/spec/services/product_monitoring/sync_crawl_results_spec.rb
-    - docs/features/product-monitoring/index.md
+    - docs/features/product-monitoring/README.md
   components:
     - Product Monitoring
 shallow:

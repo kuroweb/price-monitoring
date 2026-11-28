@@ -1,15 +1,7 @@
-# Database
+# データ領域の分け方
 
-BFF / batch のデータ設計を変更する開発者向けに、どの単位でデータを分けているかを解説するページです。Provider の DB は対象外です。
-カラムとインデックスは [ER](er.md)、機能文書がまだ無い領域のテーブル間関連は [アソシエーション](association.md) に置きます。このページでは領域の切り方だけを扱います。商品モニタリングのテーブル定義と関連は [商品モニタリングの DB](../../features/product-monitoring/database.md) を参照します。
-
-## 文書の案内
-
-- [カラム・インデックス](er.md)
-- [テーブル間関連](association.md) — 機能文書がまだ無い領域
-- [商品モニタリング](../../features/product-monitoring/external-spec.md) — 収集結果とモニタリング・集計の振る舞い
-- [商品モニタリングの DB](../../features/product-monitoring/database.md) — この機能のテーブル定義とテーブル間の関連
-- [文書全体の索引](../../index.md)
+BFF / batch のデータ設計を変更する開発者向けに、どの単位でデータを分けているかを解説する。Provider の DB は対象外。
+カラムとインデックスは [ER](er.md)、機能文書がまだ無い領域のテーブル間関連は [アソシエーション](association.md) に置く。このページでは領域の切り方だけを扱う。商品モニタリングのテーブル定義と関連は [商品モニタリングの DB](../../features/product-monitoring/database.md) を参照する。
 
 ## 判断基準
 
@@ -43,12 +35,6 @@ BFF / batch のデータ設計を変更する開発者向けに、どの単位�
 
 - 商品モニタリングと Backmarket の取得結果を同じテーブルに混ぜない
 - 集計済みの値で元データを上書きしない
-
-## 関連 docs
-
-- [`er.md`](er.md)
-- [`association.md`](association.md)
-- [プロジェクト README](../../../README.md)
 
 ## 代表コード
 
