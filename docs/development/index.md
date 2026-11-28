@@ -1,9 +1,19 @@
-# ローカル開発
+# 開発
 
-開発参加者向けに、ローカル開発環境の構成と、セットアップ・日常操作・テストの手順を案内する。
+開発参加者向けに、Backend・Frontend・認証・Database・CI/CD の各領域の文書と、ローカル開発環境の構成、セットアップ・日常操作・テストの手順を案内する。
 手順のシェル例は、特に書かない限りホストのリポジトリルートから実行する。アプリの言語ツールは Docker Compose / just 経由で対象コンテナ内で実行する。実行先の全一覧と AI 向けの制約は [AGENTS.md](../../AGENTS.md#コマンドの実行場所) を参照する。
 
-## 文書の案内
+## 領域別の文書
+
+| 領域 | 文書 |
+| --- | --- |
+| BFF / batch の責務分離、Rails 更新、seed 投入 | [Backend](backend/index.md) |
+| frontend の責務分離 | [Frontend](frontend/index.md) |
+| Provider / Client の配置・境界、認証固有の初回準備・検証 | [認証基盤](auth-provider/index.md) |
+| BFF / batch のデータ領域の分け方、ER、アソシエーション | [Database](database/index.md) |
+| CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](cicd/index.md) |
+
+## ローカル開発の文書
 
 | 目的 | 文書 |
 | --- | --- |
@@ -16,9 +26,9 @@
 
 関連する手順:
 
-- [Seed データの投入](../backend/operations/seeds.md)
-- [認証基盤の準備・検証](../auth-provider/index.md)
-- [CI/CD と自動レビュー](../cicd/index.md)
+- [Seed データの投入](backend/operations/seeds.md)
+- [認証基盤の準備・検証](auth-provider/index.md)
+- [CI/CD と自動レビュー](cicd/index.md)
 - [文書全体の索引](../index.md)
 
 ## 用語

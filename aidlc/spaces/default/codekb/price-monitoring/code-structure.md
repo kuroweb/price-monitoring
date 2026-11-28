@@ -19,7 +19,7 @@
 | `volumes/auth-provider` | OIDC Provider |
 | `volumes/nginx` | 開発用リバースプロキシ |
 
-`features` 同士は読み込まない、という方針が `docs/frontend/index.md` にある。Backend は controller、service、model、sidekiq、serializer、finder を分けている。
+`features` 同士は読み込まない、という方針が `docs/development/frontend/index.md` にある。Backend は controller、service、model、sidekiq、serializer、finder を分けている。
 
 ## 分類
 

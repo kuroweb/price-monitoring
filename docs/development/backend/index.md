@@ -6,9 +6,9 @@
 ## 文書の案内
 
 - [運用手順](operations/index.md) — Rails 更新・Seed 投入
-- [商品モニタリング](../features/product-monitoring/index.md) — 入口。API は [API](../features/product-monitoring/api.md)、取得方式は [内部仕様](../features/product-monitoring/internal-spec.md)
-- [ローカル開発](../development/index.md) — セットアップ・日常操作・テストの案内
-- [文書全体の索引](../index.md)
+- [商品モニタリング](../../features/product-monitoring/index.md) — 入口。API は [API](../../features/product-monitoring/api.md)、取得方式は [内部仕様](../../features/product-monitoring/internal-spec.md)
+- [ローカル開発](../index.md) — セットアップ・日常操作・テストの案内
+- [文書全体の索引](../../index.md)
 
 ## 判断基準
 
@@ -68,7 +68,7 @@
 ### 業務処理
 
 - `Crawl::Backmarket::Syncer` と `Crawler` が Backmarket の同期処理を持つ
-- 商品モニタリングの取得・抽出・通知・日次相場は `ProductMonitoring::*` に置く。詳細は [内部仕様](../features/product-monitoring/internal-spec.md) を参照する
+- 商品モニタリングの取得・抽出・通知・日次相場は `ProductMonitoring::*` に置く。詳細は [内部仕様](../../features/product-monitoring/internal-spec.md) を参照する
 
 ### 非同期処理
 
@@ -84,18 +84,18 @@
 
 ## 関連 docs
 
-- [`../../README.md`](../../README.md)
+- [`../../README.md`](../../../README.md)
 - [`../database/index.md`](../database/index.md)
-- [`./operations/rails-upgrade.md`](./operations/rails-upgrade.md)
+- [`./operations/rails-upgrade.md`](operations/rails-upgrade.md)
 - [Seed データの投入](operations/seeds.md)
 
 ## 代表コード
 
-- [`volumes/backend/app/controllers/api/v1/product_monitoring/monitors_controller.rb`](../../volumes/backend/app/controllers/api/v1/product_monitoring/monitors_controller.rb)
-- [`volumes/backend/app/controllers/concerns/oidc_token_control.rb`](../../volumes/backend/app/controllers/concerns/oidc_token_control.rb)
-- [`volumes/backend/app/services/product_monitoring/monitor/writer.rb`](../../volumes/backend/app/services/product_monitoring/monitor/writer.rb)
-- [`volumes/backend/app/sidekiq/crawl/backmarket/sync_job.rb`](../../volumes/backend/app/sidekiq/crawl/backmarket/sync_job.rb)
-- [`volumes/backend/app/services/crawl/backmarket/crawler.rb`](../../volumes/backend/app/services/crawl/backmarket/crawler.rb)
+- [`volumes/backend/app/controllers/api/v1/product_monitoring/monitors_controller.rb`](../../../volumes/backend/app/controllers/api/v1/product_monitoring/monitors_controller.rb)
+- [`volumes/backend/app/controllers/concerns/oidc_token_control.rb`](../../../volumes/backend/app/controllers/concerns/oidc_token_control.rb)
+- [`volumes/backend/app/services/product_monitoring/monitor/writer.rb`](../../../volumes/backend/app/services/product_monitoring/monitor/writer.rb)
+- [`volumes/backend/app/sidekiq/crawl/backmarket/sync_job.rb`](../../../volumes/backend/app/sidekiq/crawl/backmarket/sync_job.rb)
+- [`volumes/backend/app/services/crawl/backmarket/crawler.rb`](../../../volumes/backend/app/services/crawl/backmarket/crawler.rb)
 
 ## 更新時に確認する source of truth
 

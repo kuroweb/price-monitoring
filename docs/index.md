@@ -14,13 +14,13 @@
 
 ## 領域別の入口
 
-- [ローカル開発](development/index.md)
+- [開発](development/index.md)
+  - [Backend](development/backend/index.md)
+  - [Frontend](development/frontend/index.md)
+  - [認証](development/auth-provider/index.md)
+  - [Database](development/database/index.md)
+  - [CI/CD と自動レビュー](development/cicd/index.md)
 - [機能](features/index.md)
-- [Backend](backend/index.md)
-- [Frontend](frontend/index.md)
-- [認証](auth-provider/index.md)
-- [Database](database/index.md)
-- [CI/CD と自動レビュー](cicd/index.md)
 
 ## 話題ごとの正本と索引
 
@@ -30,7 +30,7 @@
 | 商品モニタリングの用語 | [GLOSSARY.md](../GLOSSARY.md) | 用語集 |
 | AI の実行制約と作業判断 | [AGENTS.md](../AGENTS.md) | エージェント向け規約 |
 | 文書の配置・役割・更新規約・記述規約 | このファイル | 文書規約・索引 |
-| ローカル開発環境の構成・用語・接続先 | [ローカル開発](development/index.md) | 入口・解説 |
+| 開発文書の入口、ローカル開発環境の構成・用語・接続先 | [開発](development/index.md) | 入口・解説 |
 | 共通セットアップ、コミット前のシークレット検査、証明書・hosts、イメージ、DB の準備 | [初回セットアップ](development/setup.md) | ハウツー |
 | 開発環境の操作・本番調査の手順一覧 | [日常操作](development/operations/index.md) | 入口 |
 | 起動・停止・ローカルログの確認 | [ローカル環境の起動と状態確認](development/operations/local-environment.md) | ハウツー |
@@ -41,23 +41,23 @@
 | Orca の worktree の setup・初期化・ポート | [Orca の worktree](development/worktree.md) | ハウツー |
 | 開発ホストの環境を別の Mac から使う | [別の Mac から開発する](development/remote.md) | ハウツー |
 | AI-DLC の起動・再開・知識の登録・更新 | [AI-DLC](development/ai-dlc.md) | ハウツー |
-| BFF / batch の責務分離 | [Backend](backend/index.md) | 解説 |
+| BFF / batch の責務分離 | [Backend](development/backend/index.md) | 解説 |
 | 商品モニタリングの概要 | [商品モニタリング](features/product-monitoring/index.md) | 入口 |
 | 商品モニタリングの外部仕様 | [商品モニタリングの外部仕様](features/product-monitoring/external-spec.md) | 解説 |
 | 商品モニタリングの API | [商品モニタリングの API](features/product-monitoring/api.md) | リファレンス |
 | 商品モニタリングの内部仕様 | [商品モニタリングの内部仕様](features/product-monitoring/internal-spec.md) | 解説 |
 | 商品モニタリングのオペレーション | [商品モニタリングのオペレーション](features/product-monitoring/operations.md) | ハウツー |
 | 商品モニタリングの DB | [商品モニタリングの DB](features/product-monitoring/database.md) | 解説 |
-| Rails 更新 | [Rails バージョンアップ](backend/operations/rails-upgrade.md) | ハウツー |
-| BFF の seed 投入 | [Seed データの投入](backend/operations/seeds.md) | ハウツー |
-| frontend の責務分離 | [Frontend](frontend/index.md) | 解説 |
-| Provider / Client の配置・境界 | [認証基盤](auth-provider/index.md) | 解説 |
-| 認証固有の初回準備・クライアント登録 | [認証の初回セットアップ](auth-provider/setup.md) | ハウツー |
-| 認証固有のテスト準備・動作確認 | [認証の検証](auth-provider/verification.md) | ハウツー |
-| CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](cicd/index.md) | リファレンス |
-| BFF / batch のデータ領域の分け方 | [Database](database/index.md) | 解説 |
-| BFF / batch のカラム・インデックス | [ER](database/er.md) | リファレンス |
-| 機能文書がまだ無い領域のテーブル間関連 | [アソシエーション](database/association.md) | リファレンス |
+| Rails 更新 | [Rails バージョンアップ](development/backend/operations/rails-upgrade.md) | ハウツー |
+| BFF の seed 投入 | [Seed データの投入](development/backend/operations/seeds.md) | ハウツー |
+| frontend の責務分離 | [Frontend](development/frontend/index.md) | 解説 |
+| Provider / Client の配置・境界 | [認証基盤](development/auth-provider/index.md) | 解説 |
+| 認証固有の初回準備・クライアント登録 | [認証の初回セットアップ](development/auth-provider/setup.md) | ハウツー |
+| 認証固有のテスト準備・動作確認 | [認証の検証](development/auth-provider/verification.md) | ハウツー |
+| CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](development/cicd/index.md) | リファレンス |
+| BFF / batch のデータ領域の分け方 | [Database](development/database/index.md) | 解説 |
+| BFF / batch のカラム・インデックス | [ER](development/database/er.md) | リファレンス |
+| 機能文書がまだ無い領域のテーブル間関連 | [アソシエーション](development/database/association.md) | リファレンス |
 
 ## 機能文書の設計
 
@@ -69,7 +69,7 @@
 | 商品モニタリングの用語 | [GLOSSARY.md](../GLOSSARY.md) |
 | 機能の操作手順 | 機能文書内、または同じ機能配下の目的別文書。仕様を複製せず、操作に必要な注意と仕様へのリンクを書く |
 | Backend / Frontend の実装上の責務と共通規約 | 各レイヤーの文書。機能固有の振る舞いは機能文書へリンクする |
-| DB のカラム・インデックス・テーブル間の関連 | 商品モニタリングのカラム・インデックス・テーブル間関連は [商品モニタリングの DB](features/product-monitoring/database.md) が正本。それ以外のカラムとインデックスは [ER](database/er.md) が正本。機能文書がまだ無い領域の関連は [アソシエーション](database/association.md) に置く |
+| DB のカラム・インデックス・テーブル間の関連 | 商品モニタリングのカラム・インデックス・テーブル間関連は [商品モニタリングの DB](features/product-monitoring/database.md) が正本。それ以外のカラムとインデックスは [ER](development/database/er.md) が正本。機能文書がまだ無い領域の関連は [アソシエーション](development/database/association.md) に置く |
 | 個別の作業時点の要件・判断・検証記録 | AI-DLC の intent。実装後の現行仕様や手順は `docs/` に置く |
 
 コードとスキーマは実際の動作・定義の一次情報とし、現行文書と食い違う場合は実装を確認して関係する文書を更新する。図や説明中の概念上の関連は、外部キーなどの物理的な関連と区別する。
