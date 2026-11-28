@@ -14,6 +14,12 @@ erDiagram
     bigint crawl_setting_id FK
     string platform
     string external_id
+    string seller_id
+  }
+  product_monitoring_excluded_sellers {
+    bigint id PK
+    string platform
+    string seller_id
   }
   product_monitoring_monitors {
     bigint id PK
@@ -25,6 +31,7 @@ erDiagram
   product_monitoring_crawl_settings ||--o{ product_monitoring_crawl_results : "1 対 0..多"
   product_monitoring_monitors ||--o{ product_monitoring_daily_market_prices : "1 対 0..多"
   product_monitoring_monitors }o..o{ product_monitoring_crawl_results : "外部キーのない条件抽出"
+  product_monitoring_excluded_sellers }o..o{ product_monitoring_crawl_results : "外部キーのない platform と seller_id の照合"
 ```
 
 ## スキーマ
@@ -70,6 +77,7 @@ erDiagram
 | sold | boolean |  | NULL を許す |
 | sold_at | datetime |  |  |
 | recency_at | datetime |  | NULL を許す |
+| seller_id | string |  | NULL を許す。照合順序 `utf8mb4_bin` |
 | ends_at | datetime |  |  |
 | excluded_at | datetime |  | NULL を許す |
 | created_at | datetime | NOT NULL |  |
@@ -85,9 +93,28 @@ erDiagram
 | index_product_monitoring_crawl_results_on_price_and_id | price, id | id 降順 |
 | idx_product_monitoring_crawl_results_price_id_desc | price, id | 降順 |
 | index_product_monitoring_crawl_results_on_external_id | external_id |  |
+| idx_on_platform_seller_id_014862945a | platform, seller_id |  |
 | idx_monitoring_crawl_results_lowest_price | sold, excluded_at, price, id |  |
 | idx_on_crawl_setting_id_external_id_a6fd3476b8 | crawl_setting_id, external_id | unique |
 | index_product_monitoring_crawl_results_on_crawl_setting_id | crawl_setting_id |  |
+
+### product_monitoring_excluded_sellers
+
+#### カラム
+
+| カラム | 型 | NULL | 備考 |
+| --- | --- | --- | --- |
+| id | bigint | NOT NULL | PK |
+| platform | string | NOT NULL |  |
+| seller_id | string | NOT NULL | 照合順序 `utf8mb4_bin` |
+| created_at | datetime | NOT NULL |  |
+| updated_at | datetime | NOT NULL |  |
+
+#### インデックス
+
+| 名前 | カラム | 備考 |
+| --- | --- | --- |
+| idx_on_platform_seller_id_cb8d72eaac | platform, seller_id | unique |
 
 ### product_monitoring_monitors
 
