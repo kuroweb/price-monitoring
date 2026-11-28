@@ -51,6 +51,7 @@
 | Rails 更新 | [Rails バージョンアップ](development/backend/operations/rails-upgrade.md) | ハウツー |
 | BFF の seed 投入 | [Seed データの投入](development/backend/operations/seeds.md) | ハウツー |
 | frontend の責務分離 | [Frontend](development/frontend/index.md) | 解説 |
+| レイヤーに共通するコードの書き方（コメントなど） | [コーディング規約](development/coding-conventions.md) | リファレンス |
 | Provider / Client の配置・境界 | [認証基盤](development/auth-provider/index.md) | 解説 |
 | 認証固有の初回準備・クライアント登録 | [認証の初回セットアップ](development/auth-provider/setup.md) | ハウツー |
 | 認証固有のテスト準備・動作確認 | [認証の検証](development/auth-provider/verification.md) | ハウツー |
@@ -68,7 +69,7 @@
 | 機能の目的・仕様・制約、処理やデータの意味 | 機能文書。横断的な流れや、データの生成・参照・更新・削除に必要な関係を書く |
 | 商品モニタリングの用語 | [GLOSSARY.md](../GLOSSARY.md) |
 | 機能の操作手順 | 機能文書内、または同じ機能配下の目的別文書。仕様を複製せず、操作に必要な注意と仕様へのリンクを書く |
-| Backend / Frontend の実装上の責務と共通規約 | 各レイヤーの文書。機能固有の振る舞いは機能文書へリンクする |
+| Backend / Frontend の実装上の責務と共通規約 | 各レイヤーの文書。レイヤーに共通する書き方は [コーディング規約](development/coding-conventions.md)。機能固有の振る舞いは機能文書へリンクする |
 | DB のカラム・インデックス・テーブル間の関連 | 商品モニタリングのカラム・インデックス・テーブル間関連は [商品モニタリングの DB](features/product-monitoring/database.md) が正本。それ以外のカラムとインデックスは [ER](development/database/er.md) が正本。機能文書がまだ無い領域の関連は [アソシエーション](development/database/association.md) に置く |
 | 個別の作業時点の要件・判断・検証記録 | AI-DLC の intent。実装後の現行仕様や手順は `docs/` に置く |
 

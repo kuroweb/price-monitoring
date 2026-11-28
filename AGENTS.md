@@ -30,6 +30,7 @@
 - 監視・運用に影響する変更では Datadog / BugSnag への影響を確認する。
 - 操作や構成を変えたら [文書ガイド](docs/index.md) で正本を特定して更新し、`justfile` / `Makefile` / workflow との整合を保つ。
 - デプロイ用の make タスクは、ローカル開発修正だけなら原則触らない。
+- コードは [コーディング規約](docs/development/coding-conventions.md)（コメントの書き方など）に従って書く。
 
 ## 変更後チェックリスト
 

@@ -12,6 +12,7 @@
 | Provider / Client の配置・境界、認証固有の初回準備・検証 | [認証基盤](auth-provider/index.md) |
 | BFF / batch のデータ領域の分け方、ER、アソシエーション | [Database](database/index.md) |
 | CI/CD、PR 自動レビュー、全イメージの手動デプロイ | [CI/CD と自動レビュー](cicd/index.md) |
+| レイヤーに共通するコードの書き方（コメントなど） | [コーディング規約](coding-conventions.md) |
 
 ## ローカル開発の文書
 
